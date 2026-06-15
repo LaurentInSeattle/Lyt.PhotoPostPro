@@ -13,7 +13,7 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <SixLaborsLicenseFile>C:\Users\Laurent\Desktop\sixlabors.lic</SixLaborsLicenseFile>
+    <SixLaborsLicenseFile>..\..\Licences\sixlabors.lic</SixLaborsLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
