@@ -1,0 +1,117 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Avalonia">
+    <AvaloniaXamlVerboseExceptions>True</AvaloniaXamlVerboseExceptions>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Skia" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\Images\**" />
+    <AvaloniaResource Include="Assets\Languages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Theme\GridSplitterStyles.axaml" />
+    <AvaloniaXaml Remove="Assets\Theme\Sizes.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Controls\Lyt.Avalonia.Controls.csproj" />
+    <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Interfaces\Lyt.Avalonia.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Localizer\Lyt.Avalonia.Localizer.csproj" />
+    <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Mvvm\Lyt.Avalonia.Mvvm.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.FileSystem\Lyt.FileSystem.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Framework.Interfaces\Lyt.Framework.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Model\Lyt.Model.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Mvvm\Lyt.Mvvm.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Persistence\Lyt.Persistence.csproj" />
+    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Utilities\Lyt.Utilities.csproj" />
+    <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\Theme\GridSplitterStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\Theme\Sizes.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\GammaCurveImageControl.axaml.cs">
+      <DependentUpon>GammaCurveImageControl.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Panes\CurvePane\GammaCurveView.axaml.cs">
+      <DependentUpon>GammaCurveView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Folder\FolderView.axaml.cs">
+      <DependentUpon>FolderView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Folder\FolderToolboxView.axaml.cs">
+      <DependentUpon>FolderToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\DiagonalsCG.axaml.cs">
+      <DependentUpon>DiagonalsCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\GoldenDownCG.axaml.cs">
+      <DependentUpon>GoldenDownCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\GoldenUpCG.axaml.cs">
+      <DependentUpon>GoldenUpCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\HalvesCG.axaml.cs">
+      <DependentUpon>HalvesCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\FrameCG.axaml.cs">
+      <DependentUpon>FrameCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CropGridView.axaml.cs">
+      <DependentUpon>CropGridView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\ProcessToolbarView.axaml.cs">
+      <DependentUpon>ProcessToolbarView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\ProcessView.axaml.cs">
+      <DependentUpon>ProcessView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Recovery\RecoveryView.axaml.cs">
+      <DependentUpon>RecoveryView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Recovery\RecoveryToolboxView.axaml.cs">
+      <DependentUpon>RecoveryToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Straighten\GuidelineView.axaml.cs">
+      <DependentUpon>GuidelineView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\WhiteBalance\WhiteBalanceView.axaml.cs">
+      <DependentUpon>WhiteBalanceView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\WhiteBalance\WhiteBalanceToolboxView.axaml.cs">
+      <DependentUpon>WhiteBalanceToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Single\SingleView.axaml.cs">
+      <DependentUpon>SingleView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Single\SingleToolboxView.axaml.cs">
+      <DependentUpon>SingleToolboxView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

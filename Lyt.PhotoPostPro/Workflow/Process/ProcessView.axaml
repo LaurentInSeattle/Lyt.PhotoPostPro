@@ -1,0 +1,50 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.ProcessView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process"
+	x:DataType="vm:ProcessViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:hist="clr-namespace:Lyt.PhotoPostPro.Panes.HistogramPane"
+
+	Background="Transparent"
+	>
+	<Grid
+		x:Name="ProcessHost"
+		Grid.Column="1" Grid.Row="1"
+		Margin="0"
+		VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+		>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="400"/>
+		</Grid.ColumnDefinitions>
+		<Grid
+			x:Name="ProcessViewContent"
+			Grid.Column="0"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			>
+		</Grid>
+		<Rectangle
+			Fill="#A0000020"
+			Grid.Column="1" 
+			/>
+		<Grid
+			x:Name="ProcessViewToolbox"
+			Grid.Column="1"
+			VerticalAlignment="Top" HorizontalAlignment="Stretch"
+			>
+		</Grid>
+		<hist:HistogramView
+			x:Name="Histograms"
+			DataContext="{Binding HistogramViewModel}"
+			Grid.Column="1"
+			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+			/>
+	</Grid>
+</UserControl>

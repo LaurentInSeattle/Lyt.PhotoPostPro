@@ -1,0 +1,36 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Panes.HistogramPane.HistogramView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Panes.HistogramPane"
+	x:DataType="vm:HistogramViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	>
+	<StackPanel
+		Orientation="Vertical"
+		Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="9" 
+		> 
+		<controls:HistogramImageControl
+			x:Name="HistogramImageControlRed"
+			Margin="2 4 2 4"
+			/>
+		<controls:HistogramImageControl
+			x:Name="HistogramImageControlGreen"
+			Margin="2 4 2 4"
+			/>
+		<controls:HistogramImageControl
+			x:Name="HistogramImageControlBlue"
+			Margin="2 4 2 4"
+			/>
+		<controls:HistogramImageControl
+			x:Name="HistogramImageControlLuminosity"
+			Margin="2 4 2 4"
+			/>
+	</StackPanel>
+</UserControl>

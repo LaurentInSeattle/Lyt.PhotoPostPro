@@ -1,0 +1,28 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Controls.HistogramImageControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	>
+	<Grid
+		Background="{StaticResource DeepBlue_1_040}"
+		>
+		<Rectangle 
+			Stroke="{StaticResource LightAqua_1_100}"
+			StrokeThickness="1"
+			Opacity="0.5"
+			/>
+		<Viewbox
+			Margin="1"
+			> 
+			<Canvas
+				x:Name="MainCanvas"
+				ClipToBounds="False"
+				Width="1024" Height="340"
+				>
+			</Canvas>
+		</Viewbox>
+	</Grid>
+</UserControl>

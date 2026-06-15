@@ -1,0 +1,159 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Compose.CropGridView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Compose"
+	x:DataType="vm:CropGridViewModel" 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
+	xmlns:cg="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Compose.CompositionGuides"
+	>
+	<Grid
+		x:Name="CropGrid"
+		>		
+		<Grid.ColumnDefinitions> 
+			<ColumnDefinition Width="40" />
+			<ColumnDefinition Width="1" /> <!-- Line --> 
+			<ColumnDefinition Width="*" MinWidth="100"/>
+			<ColumnDefinition Width="1" /> <!-- Line --> 
+			<ColumnDefinition Width="40" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40" /> 
+			<RowDefinition Height="1" /> <!-- Line --> 
+			<RowDefinition Height="*" MinHeight="100"/> 
+			<RowDefinition Height="1" /> <!-- Line --> 
+			<RowDefinition Height="40"/> 
+		</Grid.RowDefinitions>
+		<!-- Top Row --> 
+		<Rectangle
+			Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" 
+			Fill="Black"
+			Opacity="{Binding CropOpacity}"
+			/>
+		<!-- Bottom Row --> 
+		<Rectangle
+			Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="4" 
+			Fill="Black"
+			Opacity="{Binding CropOpacity}"
+			/>
+		<!-- Left Col --> 
+		<Rectangle
+			Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" 
+			Fill="Black"
+			Opacity="{Binding CropOpacity}"
+			/>
+		<!-- Right Col --> 
+		<Rectangle
+			Grid.Column="4" Grid.Row="1" Grid.RowSpan="3"
+			Fill="Black"
+			Opacity="{Binding CropOpacity}"
+			/>
+
+		<GridSplitter
+			x:Name="VerticalLeftSplitter"
+			Classes="wide"
+			Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" 
+			IsVisible="{Binding ShowSplitters}"
+			MinWidth="1" 
+			Width="16" 
+			ResizeDirection="Columns"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{Binding LineColor}"
+			Opacity="1.0"
+			ZIndex="999"
+			/>
+		<GridSplitter
+			x:Name="VerticalRightSplitter"
+			Classes="wide"
+			Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" 
+			IsVisible="{Binding ShowSplitters}"
+			MinWidth="1" 
+			Width="16" 
+			ResizeDirection="Columns"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{Binding LineColor}"
+			Opacity="1.0"
+			ZIndex="999"
+			/>
+		<GridSplitter
+			x:Name="HorizontalTopSplitter"
+			Classes="thick"
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" 
+			IsVisible="{Binding ShowSplitters}"
+			MinHeight="1" 
+			Height="16" 
+			ResizeDirection="Rows"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{Binding LineColor}"
+			Opacity="1.0"
+			ZIndex="999"
+			/>
+		<GridSplitter
+			x:Name="HorizontalBottomSplitter"
+			Classes="thick"
+			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" 
+			IsVisible="{Binding ShowSplitters}"
+			MinHeight="1" 
+			Height="16" 
+			ResizeDirection="Rows"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{Binding LineColor}"
+			Opacity="1.0"
+			ZIndex="999"
+			/>
+		<Rectangle
+			x:Name="ZeroCG"
+			Fill="Transparent"
+			IsVisible="False"
+			/>
+		<cg:ThirdsCG
+			x:Name="ThirdsCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+		<cg:HalvesCG
+			x:Name="HalvesCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+		<cg:DiagonalsCG
+			x:Name="DiagonalsCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+		<cg:FrameCG
+			x:Name="FrameCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+		<cg:GoldenUpCG
+			x:Name="GoldenUpCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+		<cg:GoldenDownCG
+			x:Name="GoldenDownCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			/>
+	</Grid>
+</UserControl>

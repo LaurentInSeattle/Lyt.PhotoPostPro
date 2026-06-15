@@ -1,0 +1,146 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">Փակել</system:String>
+
+    <system:String x:Key="Shell.AppName">Jigsaw Puzzle</system:String>
+
+    <system:String x:Key="Shell.About">Մոտ...</system:String>
+
+    <system:String x:Key="Shell.Play">Խաղալ</system:String>
+
+    <system:String x:Key="Shell.Encoding">Կոդավորում</system:String>
+
+    <system:String x:Key="Shell.Decoding">Վերծանում</system:String>
+
+    <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
+
+    <system:String x:Key="Shell.Language">Լեզու</system:String>
+
+    <system:String x:Key="Shell.Exit">Դուրս գալ</system:String>
+
+    <system:String x:Key="Shell.Close">Փակել</system:String>
+
+    <system:String x:Key="Shell.Ready">Պատրաստ.</system:String>
+
+    <system:String x:Key="Shell.Greetings">Բարի գալուստ Jigsaw Puzzle:</system:String>
+
+    <system:String x:Key="Collection.Remove">Հեռացնել</system:String>
+
+    <system:String x:Key="Collection.SaveToDesktop">Պահել աշխատասեղանին</system:String>
+
+    <system:String x:Key="Collection.DropZone">Քաշել և թողնել գոտի</system:String>
+
+    <system:String x:Key="Collection.DropZoneHelp">Քաշեք և թողեք պատկերի ֆայլ այստեղ՝ նոր գլուխկոտրուկ նկար ստեղծելու համար:</system:String>
+
+    <system:String x:Key="Collection.BeginNew">Սկսեք այս նոր հանելուկը.</system:String>
+
+    <system:String x:Key="Collection.StartAgain">Նորից սկսեք այս հանելուկը.</system:String>
+
+    <system:String x:Key="Collection.Continue">Շարունակեք լուծել այս հանելուկը.</system:String>
+
+    <system:String x:Key="Collection.PieceCount">Կտորների քանակ.</system:String>
+
+    <system:String x:Key="Collection.Rotations">Պտտումներ:</system:String>
+
+    <system:String x:Key="Collection.SnapStrength">Կտրուկի ուժը.</system:String>
+
+    <system:String x:Key="Collection.Hints">Հուշումներ.</system:String>
+
+    <system:String x:Key="Collection.AddedContrast">Ավելացված հակադրություն.</system:String>
+
+    <system:String x:Key="Collection.None">Ոչ մեկը</system:String>
+
+    <system:String x:Key="Collection.SnapMighty">Հզոր</system:String>
+
+    <system:String x:Key="Collection.SnapStrong">Ուժեղ</system:String>
+
+    <system:String x:Key="Collection.SnapNormal">Նորմալ</system:String>
+
+    <system:String x:Key="Collection.SnapWeak">Թույլ</system:String>
+
+    <system:String x:Key="Collection.HintsInfinite">Անսահման</system:String>
+
+    <system:String x:Key="Collection.HintsThree">Երեք</system:String>
+
+    <system:String x:Key="Collection.HintsOnlyOne">Միայն Մեկը</system:String>
+
+    <system:String x:Key="Collection.ContrastExtreme">Ծայրահեղ</system:String>
+
+    <system:String x:Key="Collection.ContrastStrong">Ուժեղ</system:String>
+
+    <system:String x:Key="Collection.ContrastMedium">Միջին</system:String>
+
+    <system:String x:Key="Collection.ContrastWeak">Ընդամենը մի քիչ</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ShowOnly">Ցույց տալ միայն.</system:String>
+
+    <system:String x:Key="Collection.Thumbs.InProgress">Ընթացքի մեջ</system:String>
+
+    <system:String x:Key="Collection.Thumbs.Completed">Ավարտված է</system:String>
+
+    <system:String x:Key="Collection.Thumbs.StartedFormat">Սկսվել է՝ {0}</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ProgressFormat">Առաջընթաց՝ {0} %</system:String>
+
+    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Կտորների քանակը՝ {0}</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Dark">Մութ</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Light">Լույս</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Background">Նախապատմություն</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ShowImage">Ցույց տալ պատկերը</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Փոխարկել եզրերը</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Hint">Հուշում</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Progress">Առաջընթաց</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Zoom">Մեծացնել</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.FullScreen">Ամբողջ էկրանով</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Էսկ.  դեպի Վերադարձ</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Min">Min</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Max">Մաքս</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Rearrange">Վերադասավորել</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">Ես ընդունում եմ MIT լիցենզիայի պայմանները, շարունակել:</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">Լիցենզիայի պայմաններ</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">Այս հավելվածը տրամադրվում է ձեզ MIT լիցենզիայի պայմաններով:</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">Այս հավելվածը տրամադրվում է ձեզ MIT լիցենզիայի պայմաններով և այլ պայմանների հետ միասին չի ենթադրում որևէ երաշխիք:  Օգտագործելով այս ծրագրաշարը, դուք լիովին համաձայնում եք MIT լիցենզիայի պայմաններին:</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">Կարևոր հիշեցում</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">Ներբեռնված պատկերների մասին հիշելու մի քանի կարևոր կետ...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">Ձեզ խորհուրդ է տրվում օգտագործել ներբեռնված պատկերները միայն որպես պաստառ:  Ցանկացած այլ օգտագործման համար՝ առևտրային կամ այլ կերպ, խնդրում ենք կապվել հեղինակային իրավունքի սեփականատիրոջ հետ:</system:String>
+
+    <system:String x:Key="Language.Continue">Շարունակեք</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">Մաքրում հիմա</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">Կարևոր հիշեցում</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">Ներբեռնված պատկերների մասին հիշելու մի քանի կարևոր կետ...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">Ձեզ խորհուրդ է տրվում օգտագործել ներբեռնված պատկերները միայն որպես պաստառ:  Ցանկացած այլ օգտագործման համար՝ առևտրային կամ այլ կերպ, խնդրում ենք կապվել հեղինակային իրավունքի սեփականատիրոջ հետ:</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">Ֆայլային համակարգի սխալ:</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">Չհաջողվեց պահպանել պատկերի ֆայլը:</system:String>
+
+</ResourceDictionary>

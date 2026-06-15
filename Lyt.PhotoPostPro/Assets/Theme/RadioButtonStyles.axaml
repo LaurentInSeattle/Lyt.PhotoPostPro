@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+	<Border Padding="20">
+	  <!-- Add Controls for Previewer Here -->
+	</Border>
+  </Design.PreviewWith>
+
+	<Style Selector="RadioButton /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="FontSize" Value="16" />
+	</Style>
+
+	<Style Selector="RadioButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Foreground" Value="{StaticResource FreshGreen_2_100}" />
+	</Style>
+
+	<Style Selector="RadioButton:unchecked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Foreground" Value="{StaticResource LightAqua_1_100}" />
+	</Style>
+
+	<Style Selector="RadioButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Foreground" Value="{StaticResource OrangePeel_1_100}" />
+	</Style>
+
+	<Style Selector="RadioButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Foreground" Value="{StaticResource OrangePeel_0_100}" />
+	</Style>
+
+	<Style Selector="RadioButton:checked /template/ Ellipse#CheckOuterEllipse">
+		<Setter Property="Stroke" Value="{StaticResource FreshGreen_2_100}" />
+		<Setter Property="Fill" Value="{StaticResource FreshGreen_2_100}" />
+	</Style>
+</Styles>

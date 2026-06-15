@@ -1,0 +1,66 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Compose.CompositionGuides.ThirdsCG"
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	>
+	<Grid> 
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="1" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="1" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="1" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="1" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Rectangle
+			Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
+			ClipToBounds="False"
+			Margin="-3 0 0 0"
+			Fill="AntiqueWhite"
+			Opacity="{ReflectionBinding}"
+			Width="7" 
+			VerticalAlignment="Stretch"
+			RadiusX="2" RadiusY="2"
+			/>
+		<Rectangle
+			Grid.Column="3" Grid.Row="0" Grid.RowSpan="5"
+			ClipToBounds="False"
+			Margin="-3 0 0 0"
+			Fill="AntiqueWhite"
+			Opacity="{ReflectionBinding}"
+			Width="7" 
+			VerticalAlignment="Stretch"
+			RadiusX="2" RadiusY="2"
+			/>
+		<Rectangle
+			Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5"
+			ClipToBounds="False"
+			Margin="0 -3 0 0"
+			Fill="AntiqueWhite"
+			Opacity="{ReflectionBinding}"
+			Height="7" 
+			VerticalAlignment="Stretch"
+			RadiusX="2" RadiusY="2"
+			/>
+		<Rectangle
+			Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5"
+			ClipToBounds="False"
+			Margin="0 -3 0 0"
+			Fill="AntiqueWhite"
+			Opacity="{ReflectionBinding}"
+			Height="7" 
+			VerticalAlignment="Stretch"
+			RadiusX="2" RadiusY="2"
+			/>
+	</Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:controls="using:Avalonia.Controls"
+    >
+    <!-- Sizes as pixels , cannot be used as Grid row --> 
+    <system:Double x:Key="Dbl.Size.Spacer">8</system:Double>
+    <system:Double x:Key="Dbl.Size.Title">40</system:Double>
+    <system:Double x:Key="Dbl.Size.PromptOneLine">24</system:Double>
+    <system:Double x:Key="Dbl.Size.PromptTwoLines">48</system:Double>
+    <system:Double x:Key="Dbl.Size.PromptThreeLines">72</system:Double>
+    <system:Double x:Key="Dbl.Size.OneSlider">38</system:Double>
+    <system:Double x:Key="Dbl.Size.TwoSliders">76</system:Double>
+    <system:Double x:Key="Dbl.Size.ThreeSliders">114</system:Double>
+    <system:Double x:Key="Dbl.Size.PanelButtons">62</system:Double>
+    <system:Double x:Key="Dbl.Size.OneSmallButton">48</system:Double>
+    <system:Double x:Key="Dbl.Size.TwoSmallButtons">96</system:Double>
+    <system:Double x:Key="Dbl.Size.ThreeSmallButtons">144</system:Double>
+    <system:Double x:Key="Dbl.Size.Separator">10</system:Double>
+    <system:Double x:Key="Dbl.Size.WfNav">42</system:Double>
+    <system:Double x:Key="Dbl.Size.ComboBox">54</system:Double>
+
+    <!-- Various Grid row heights used in tool box views --> 
+    <controls:GridLength x:Key="Size.Spacer">8</controls:GridLength>
+    <controls:GridLength x:Key="Size.Title">40</controls:GridLength>
+    <controls:GridLength x:Key="Size.PromptOneLine">24</controls:GridLength>
+    <controls:GridLength x:Key="Size.PromptTwoLines">48</controls:GridLength>
+    <controls:GridLength x:Key="Size.PromptThreeLines">72</controls:GridLength>
+    <controls:GridLength x:Key="Size.OneSlider">38</controls:GridLength>
+    <controls:GridLength x:Key="Size.TwoSliders">76</controls:GridLength>
+    <controls:GridLength x:Key="Size.ThreeSliders">114</controls:GridLength>
+    <controls:GridLength x:Key="Size.PanelButtons">62</controls:GridLength>
+    <controls:GridLength x:Key="Size.OneSmallButton">48</controls:GridLength>
+    <controls:GridLength x:Key="Size.TwoSmallButtons">96</controls:GridLength>
+    <controls:GridLength x:Key="Size.ThreeSmallButtons">144</controls:GridLength>
+    <controls:GridLength x:Key="Size.Separator">10</controls:GridLength>
+    <controls:GridLength x:Key="Size.WfNav">42</controls:GridLength>
+    <controls:GridLength x:Key="Size.ComboBox">54</controls:GridLength>
+
+</ResourceDictionary>

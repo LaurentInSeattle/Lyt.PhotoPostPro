@@ -1,0 +1,105 @@
+namespace Lyt.PhotoPostPro.Workflow.Shared;
+
+using static Lyt.Avalonia.Controls.Utilities;
+
+public partial class DropView : View
+{
+    private static readonly SolidColorBrush? normalBrush;
+    private static readonly SolidColorBrush? hotBrush;
+
+    private IBrush? normalBrushBackground;
+
+    static DropView()
+    {
+        TryFindResource<SolidColorBrush>("LightAqua_0_120", out SolidColorBrush? brush);
+        if (brush is not null)
+        {
+            normalBrush = brush;
+        }
+
+        TryFindResource<SolidColorBrush>("OrangePeel_0_100", out brush);
+        if (brush is not null)
+        {
+            hotBrush = brush;
+        }
+    }
+
+    public DropView() : base ()
+    {
+        if (normalBrush is not null)
+        {
+            this.DropRectangle.Stroke = normalBrush;
+        }
+        
+        this.normalBrushBackground = this.DropRectangle.Fill;
+
+        DragDrop.SetAllowDrop(this.DropBorder, true);
+        this.DropBorder.AddHandler(DragDrop.DropEvent, this.OnDrop);
+        this.DropBorder.AddHandler(DragDrop.DragEnterEvent, this.OnDragEnter);
+        this.DropBorder.AddHandler(DragDrop.DragLeaveEvent, this.OnDragLeave);
+    }
+
+    ~DropView()
+    {
+        DragDrop.SetAllowDrop(this.DropBorder, false);
+        this.DropBorder.RemoveHandler(DragDrop.DropEvent, this.OnDrop);
+        this.DropBorder.RemoveHandler(DragDrop.DragEnterEvent, this.OnDragEnter);
+        this.DropBorder.RemoveHandler(DragDrop.DragLeaveEvent, this.OnDragLeave);
+    }
+
+    // Do nothing:  Because the data context will never ever change once set.
+    // => Trying to bind again will create troubles for nested views and vm's  
+    protected override void OnDataContextChanged(object? sender, EventArgs e) {  }
+
+    private void OnDragEnter(object? _, DragEventArgs e)
+    {
+        if (hotBrush is not null)
+        {
+            this.DropRectangle.Fill = Brushes.Transparent;
+            this.DropRectangle.Stroke = hotBrush;
+        }
+    }
+
+    private void OnDragLeave(object? _, DragEventArgs e)
+    {
+        if (normalBrush is not null)
+        {
+            this.DropRectangle.Fill = this.normalBrushBackground;
+            this.DropRectangle.Stroke = normalBrush;
+        }
+    }
+
+    private void OnDrop(object? _, DragEventArgs dragEventArgs)
+    {
+        if (normalBrush is not null)
+        {
+            this.DropRectangle.Fill = this.normalBrushBackground;
+            this.DropRectangle.Stroke = normalBrush;
+        }
+
+        IDataTransfer dataTransfer = dragEventArgs.DataTransfer;
+        var files = dataTransfer.TryGetFiles(); 
+        if (files is not null)
+        {
+            foreach (IStorageItem file in files)
+            {
+                string path = file.Path.LocalPath;
+                Debug.WriteLine("Dropped: " + path);
+                bool isDirectory = Directory.Exists(path);
+                bool isFile = File.Exists(path);
+                if (isDirectory || isFile)
+                {
+                    if (this.DataContext is DropViewModel dropViewModel)
+                    {
+                        if (dropViewModel.OnDrop(path, isDirectory))
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        dragEventArgs.Handled = true;
+    }
+}

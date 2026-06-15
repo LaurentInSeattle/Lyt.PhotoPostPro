@@ -1,0 +1,146 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">Закрити</system:String>
+
+    <system:String x:Key="Shell.AppName">Головоломка</system:String>
+
+    <system:String x:Key="Shell.About">Про...</system:String>
+
+    <system:String x:Key="Shell.Play">грати</system:String>
+
+    <system:String x:Key="Shell.Encoding">Кодування</system:String>
+
+    <system:String x:Key="Shell.Decoding">Розшифровка</system:String>
+
+    <system:String x:Key="Shell.Settings">Налаштування</system:String>
+
+    <system:String x:Key="Shell.Language">Мова</system:String>
+
+    <system:String x:Key="Shell.Exit">Вийти</system:String>
+
+    <system:String x:Key="Shell.Close">Закрити</system:String>
+
+    <system:String x:Key="Shell.Ready">Готовий.</system:String>
+
+    <system:String x:Key="Shell.Greetings">Ласкаво просимо до Jigsaw Puzzle!</system:String>
+
+    <system:String x:Key="Collection.Remove">видалити</system:String>
+
+    <system:String x:Key="Collection.SaveToDesktop">Зберегти на робочий стіл</system:String>
+
+    <system:String x:Key="Collection.DropZone">Зона перетягування</system:String>
+
+    <system:String x:Key="Collection.DropZoneHelp">Перетягніть сюди файл зображення, щоб створити нову картинку-головоломку.</system:String>
+
+    <system:String x:Key="Collection.BeginNew">Розпочніть цю нову головоломку:</system:String>
+
+    <system:String x:Key="Collection.StartAgain">Розпочніть цю головоломку знову:</system:String>
+
+    <system:String x:Key="Collection.Continue">Продовжте розгадувати цю головоломку:</system:String>
+
+    <system:String x:Key="Collection.PieceCount">Кількість штук:</system:String>
+
+    <system:String x:Key="Collection.Rotations">Обертання:</system:String>
+
+    <system:String x:Key="Collection.SnapStrength">Міцність замикання:</system:String>
+
+    <system:String x:Key="Collection.Hints">Підказки:</system:String>
+
+    <system:String x:Key="Collection.AddedContrast">Доданий контраст:</system:String>
+
+    <system:String x:Key="Collection.None">Жодного</system:String>
+
+    <system:String x:Key="Collection.SnapMighty">Могутній</system:String>
+
+    <system:String x:Key="Collection.SnapStrong">Сильний</system:String>
+
+    <system:String x:Key="Collection.SnapNormal">нормальний</system:String>
+
+    <system:String x:Key="Collection.SnapWeak">Слабкий</system:String>
+
+    <system:String x:Key="Collection.HintsInfinite">Нескінченний</system:String>
+
+    <system:String x:Key="Collection.HintsThree">три</system:String>
+
+    <system:String x:Key="Collection.HintsOnlyOne">Тільки один</system:String>
+
+    <system:String x:Key="Collection.ContrastExtreme">Екстрім</system:String>
+
+    <system:String x:Key="Collection.ContrastStrong">Сильний</system:String>
+
+    <system:String x:Key="Collection.ContrastMedium">Середній</system:String>
+
+    <system:String x:Key="Collection.ContrastWeak">Просто трохи</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ShowOnly">Показати лише:</system:String>
+
+    <system:String x:Key="Collection.Thumbs.InProgress">В роботі</system:String>
+
+    <system:String x:Key="Collection.Thumbs.Completed">Виконано</system:String>
+
+    <system:String x:Key="Collection.Thumbs.StartedFormat">Розпочато: {0}</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ProgressFormat">Перебіг: {0} %</system:String>
+
+    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Кількість штук: {0}</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Dark">Темний</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Light">світло</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Background">Фон</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ShowImage">Показати зображення</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Перемикати краї</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Hint">Підказка</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Progress">Прогрес</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Zoom">Збільшити</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.FullScreen">Повний екран</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc.  щоб повернутися</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Min">Хв</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Max">Макс</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Rearrange">Переставити</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">Я приймаю умови Ліцензії MIT, Продовжити.</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">Ліцензійні умови</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">Ця програма надається вам згідно з умовами Ліцензії MIT.</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">Ця програма надається вам згідно з умовами Ліцензії MIT і, разом з іншими умовами, не передбачає жодних гарантій.  Використовуючи це програмне забезпечення, ви повністю погоджуєтеся з умовами Ліцензії MIT.</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">Важливе нагадування</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">Деякі важливі моменти, про які слід пам’ятати про завантажені зображення...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">Рекомендується використовувати завантажені зображення лише як шпалери.  Для будь-якого іншого використання, комерційного чи іншого, будь ласка, зв’яжіться з власником авторських прав.</system:String>
+
+    <system:String x:Key="Language.Continue">Продовжити</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">Очищення зараз</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">Важливе нагадування</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">Деякі важливі моменти, про які слід пам’ятати про завантажені зображення...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">Рекомендується використовувати завантажені зображення лише як шпалери.  Для будь-якого іншого використання, комерційного чи іншого, будь ласка, зв’яжіться з власником авторських прав.</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">Помилка файлової системи.</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">Не вдалося зберегти файл зображення.</system:String>
+
+</ResourceDictionary>

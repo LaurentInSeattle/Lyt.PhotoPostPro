@@ -1,0 +1,48 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Straighten.StraightenView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Straighten"
+	x:DataType="vm:StraightenViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	Background="Transparent"
+	>
+	<Grid		
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="4" />
+		</Grid.ColumnDefinitions>
+		<Image
+			Grid.Column="1" Grid.Row="1"
+			IsVisible="{ReflectionBinding SourceImageIsVisible}"
+			Source="{ReflectionBinding SourceImage}"
+			/>
+		<Image
+			Grid.Column="1" Grid.Row="1"
+			IsVisible="{ReflectionBinding ResultImageIsVisible}"
+			Source="{ReflectionBinding ResultImage}"
+			/>
+		<!-- Guide lines must be above the image -->
+		<vm:GuidelineView
+			Grid.Column="1" Grid.Row="1"
+			DataContext="{Binding VerticalGuideLineViewModel}"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			/>			
+		<vm:GuidelineView
+			Grid.Column="1" Grid.Row="1"
+			DataContext="{Binding HorizontalGuideLineViewModel}"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			/>			
+	</Grid>
+</UserControl>

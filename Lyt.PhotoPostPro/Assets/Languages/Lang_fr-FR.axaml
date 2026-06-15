@@ -1,0 +1,146 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">Fermer</system:String>
+
+    <system:String x:Key="Shell.AppName">Générateur de QR Codes</system:String>
+
+    <system:String x:Key="Shell.About">A propos...</system:String>
+
+    <system:String x:Key="Shell.Play">Jouer!</system:String>
+
+    <system:String x:Key="Shell.Encoding">Encodage</system:String>
+
+    <system:String x:Key="Shell.Decoding">Décodage</system:String>
+
+    <system:String x:Key="Shell.Settings">Paramètres</system:String>
+
+    <system:String x:Key="Shell.Language">Langue</system:String>
+
+    <system:String x:Key="Shell.Exit">Quitter</system:String>
+
+    <system:String x:Key="Shell.Close">Fermer</system:String>
+
+    <system:String x:Key="Shell.Ready">Prêt.</system:String>
+
+    <system:String x:Key="Shell.Greetings">Bienvenue dans QR Codes!</system:String>
+
+    <system:String x:Key="Collection.Remove">Supprimer</system:String>
+
+    <system:String x:Key="Collection.SaveToDesktop">Enregistrer sur le bureau</system:String>
+
+    <system:String x:Key="Collection.DropZone">Zone de Glisser-déposer</system:String>
+
+    <system:String x:Key="Collection.DropZoneHelp">Faites glisser et déposez des fichiers image ici pour creer un nouveau puzzle.</system:String>
+
+    <system:String x:Key="Collection.BeginNew">Commencez ce nouveau puzzle :</system:String>
+
+    <system:String x:Key="Collection.StartAgain">Recommencez ce puzzle :</system:String>
+
+    <system:String x:Key="Collection.Continue">Continuez à résoudre ce puzzle :</system:String>
+
+    <system:String x:Key="Collection.PieceCount">Nombre de pièces :</system:String>
+
+    <system:String x:Key="Collection.Rotations">Rotations :</system:String>
+
+    <system:String x:Key="Collection.SnapStrength">Attraction :</system:String>
+
+    <system:String x:Key="Collection.Hints">Conseils :</system:String>
+
+    <system:String x:Key="Collection.AddedContrast">Ajout de Contraste :</system:String>
+
+    <system:String x:Key="Collection.None">Aucun</system:String>
+
+    <system:String x:Key="Collection.SnapMighty">Puissant</system:String>
+
+    <system:String x:Key="Collection.SnapStrong">Fort</system:String>
+
+    <system:String x:Key="Collection.SnapNormal">Normale</system:String>
+
+    <system:String x:Key="Collection.SnapWeak">Faible</system:String>
+
+    <system:String x:Key="Collection.HintsInfinite">Infini</system:String>
+
+    <system:String x:Key="Collection.HintsThree">Trois</system:String>
+
+    <system:String x:Key="Collection.HintsOnlyOne">Seulement Un</system:String>
+
+    <system:String x:Key="Collection.ContrastExtreme">Extrême</system:String>
+
+    <system:String x:Key="Collection.ContrastStrong">Fort</system:String>
+
+    <system:String x:Key="Collection.ContrastMedium">Moyen</system:String>
+
+    <system:String x:Key="Collection.ContrastWeak">Juste un Peu</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ShowOnly">Montrer:</system:String>
+
+    <system:String x:Key="Collection.Thumbs.InProgress">Jeux En Cours</system:String>
+
+    <system:String x:Key="Collection.Thumbs.Completed">Jeux Terminés</system:String>
+
+    <system:String x:Key="Collection.Thumbs.StartedFormat">Démarré le: {0}</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ProgressFormat">Progrès: {0} %</system:String>
+
+    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Nombre de pièces : {0}</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Dark">Sombre</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Light">Clair</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Background">Arrière-plan</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ShowImage">Afficher l'image</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Afficher les Bords</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Hint">Indice</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Progress">Progrès</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Zoom">Zoom</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.FullScreen">Plein écran</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Échap. pour Revenir</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Min">Min.</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Max">Max.</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Rearrange">Réarranger</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">J'accepte les termes de la licence MIT, Continuer.</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">Termes de la licence.</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">Cette application vous est fournie selon les termes de la licence MIT.</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">Cette application vous est fournie gratuitement selon les termes de la licence MIT et, conjointement avec d'autres conditions, n'implique aucune garantie d'aucune sorte. En utilisant ce logiciel, vous acceptez pleinement les termes et conditions de la licence MIT.</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">Un rappel important...</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">Quelques points importants à retenir concernant les images téléchargées...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">Il vous est recommandé d'utiliser les images téléchargées uniquement comme fond d'écran. Pour toute autre utilisation, commerciale ou non, veuillez contacter le détenteur des droits d'auteur.</system:String>
+
+    <system:String x:Key="Language.Continue">Continuer</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">Nettoyer maintenant</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">Un rappel important...</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">Quelques points importants à retenir concernant les images téléchargées...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">Il vous est recommandé d'utiliser les images téléchargées uniquement comme fond d'écran. Pour toute autre utilisation, commerciale ou non, veuillez contacter le détenteur des droits d'auteur.</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">Erreur du système de fichiers.</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">Impossible de sauvegarder le ficher de cette image.</system:String>
+
+</ResourceDictionary>

@@ -1,0 +1,72 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Straighten.GuidelineView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Straighten"
+	x:DataType="vm:GuidelineViewModel" 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
+	>
+	<Grid
+		IsVisible="{Binding IsVisible}"
+		>		
+		<Grid
+			x:Name="VerticalGrid"
+			IsVisible="{Binding IsVertical}"
+			>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="3" /> <!-- Line --> 
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40" /> <!-- Button   --> 
+				<RowDefinition Height="*" /> 
+				<RowDefinition Height="40" /> <!-- Button --> 
+			</Grid.RowDefinitions>
+			<GridSplitter
+				Classes="wide"
+				Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
+				MinWidth="1" 
+				Width="16" 
+				ResizeDirection="Columns"
+				ResizeBehavior="PreviousAndNext"
+				DragIncrement="1"
+				ShowsPreview="False"
+				Background="{Binding LineColor}"
+				Opacity="1.0"
+				/>
+		</Grid>
+		<Grid
+			x:Name="HorizontalGrid"
+			IsVisible="{Binding !IsVertical}"
+			>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="40" /> <!-- Button   -->
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="40" /> <!-- Button   -->
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" /> <!-- Space --> 
+				<RowDefinition Height="3" /> <!-- Line --> 
+				<RowDefinition Height="*" /> <!-- Space --> 
+			</Grid.RowDefinitions>
+			<GridSplitter
+				Classes="thick"
+				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+				MinHeight="1" 
+				Height="16" 
+				ResizeDirection="Rows"
+				ResizeBehavior="PreviousAndNext"
+				DragIncrement="1"
+				ShowsPreview="False"
+				Background="{Binding LineColor}"
+				Opacity="1.0"
+				/>
+		</Grid>
+	</Grid>
+</UserControl>

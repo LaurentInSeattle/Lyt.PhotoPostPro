@@ -1,0 +1,146 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">关闭</system:String>
+
+    <system:String x:Key="Shell.AppName">拼图游戏</system:String>
+
+    <system:String x:Key="Shell.About">关于...</system:String>
+
+    <system:String x:Key="Shell.Play">玩</system:String>
+
+    <system:String x:Key="Shell.Encoding">编码</system:String>
+
+    <system:String x:Key="Shell.Decoding">解码</system:String>
+
+    <system:String x:Key="Shell.Settings">设置</system:String>
+
+    <system:String x:Key="Shell.Language">语言</system:String>
+
+    <system:String x:Key="Shell.Exit">辞职</system:String>
+
+    <system:String x:Key="Shell.Close">关闭</system:String>
+
+    <system:String x:Key="Shell.Ready">准备好。</system:String>
+
+    <system:String x:Key="Shell.Greetings">欢迎来到拼图游戏！</system:String>
+
+    <system:String x:Key="Collection.Remove">消除</system:String>
+
+    <system:String x:Key="Collection.SaveToDesktop">保存到桌面</system:String>
+
+    <system:String x:Key="Collection.DropZone">拖放区</system:String>
+
+    <system:String x:Key="Collection.DropZoneHelp">将图像文件拖放到此处以创建新的拼图图片。</system:String>
+
+    <system:String x:Key="Collection.BeginNew">开始这个新的谜题：</system:String>
+
+    <system:String x:Key="Collection.StartAgain">重新开始这个谜题：</system:String>
+
+    <system:String x:Key="Collection.Continue">继续解决这个难题：</system:String>
+
+    <system:String x:Key="Collection.PieceCount">件数：</system:String>
+
+    <system:String x:Key="Collection.Rotations">旋转次数：</system:String>
+
+    <system:String x:Key="Collection.SnapStrength">咬合强度：</system:String>
+
+    <system:String x:Key="Collection.Hints">提示：</system:String>
+
+    <system:String x:Key="Collection.AddedContrast">添加对比度：</system:String>
+
+    <system:String x:Key="Collection.None">没有任何</system:String>
+
+    <system:String x:Key="Collection.SnapMighty">强大的</system:String>
+
+    <system:String x:Key="Collection.SnapStrong">强的</system:String>
+
+    <system:String x:Key="Collection.SnapNormal">普通的</system:String>
+
+    <system:String x:Key="Collection.SnapWeak">虚弱的</system:String>
+
+    <system:String x:Key="Collection.HintsInfinite">无限</system:String>
+
+    <system:String x:Key="Collection.HintsThree">三</system:String>
+
+    <system:String x:Key="Collection.HintsOnlyOne">只有一个</system:String>
+
+    <system:String x:Key="Collection.ContrastExtreme">极端</system:String>
+
+    <system:String x:Key="Collection.ContrastStrong">强的</system:String>
+
+    <system:String x:Key="Collection.ContrastMedium">中等的</system:String>
+
+    <system:String x:Key="Collection.ContrastWeak">一点点</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ShowOnly">仅显示：</system:String>
+
+    <system:String x:Key="Collection.Thumbs.InProgress">进行中</system:String>
+
+    <system:String x:Key="Collection.Thumbs.Completed">完全的</system:String>
+
+    <system:String x:Key="Collection.Thumbs.StartedFormat">开始时间：{0}</system:String>
+
+    <system:String x:Key="Collection.Thumbs.ProgressFormat">进度：{0} %</system:String>
+
+    <system:String x:Key="Collection.Thumbs.PuzzleFormat">件数：{0}</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Dark">黑暗的</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Light">光</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Background">背景</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ShowImage">显示图片</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">切换边缘</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Hint">暗示</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Progress">进步</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Zoom">飞涨</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.FullScreen">全屏</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc键。 返回</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Min">最小</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Max">最大限度</system:String>
+
+    <system:String x:Key="Puzzle.Toolbar.Rearrange">重新排列</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">我接受 MIT 许可证的条款，继续。</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">许可条款</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">此应用程序是根据 MIT 许可证条款向您提供的。</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">本应用程序是根据 MIT 许可证的条款向您提供的，与其他条款一起并不意味着任何形式的保证。 使用本软件即表示您完全同意 MIT 许可证的条款和条件。</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">重要提醒</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">关于下载的图像需要记住的一些重要事项...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">建议您仅使用下载的图像作为壁纸。 对于任何其他用途，无论是商业用途还是其他用途，请联系版权所有者。</system:String>
+
+    <system:String x:Key="Language.Continue">继续</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">立即清理</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">重要提醒</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">关于下载的图像需要记住的一些重要事项...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">建议您仅使用下载的图像作为壁纸。 对于任何其他用途，无论是商业用途还是其他用途，请联系版权所有者。</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">文件系统错误。</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">无法保存图像文件。</system:String>
+
+</ResourceDictionary>

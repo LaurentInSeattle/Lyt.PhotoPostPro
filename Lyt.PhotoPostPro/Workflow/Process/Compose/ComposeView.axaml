@@ -1,0 +1,55 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Compose.ComposeView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Compose"
+	x:DataType="vm:ComposeViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:cg="Lyt.PhotoPostPro.Workflow.Process.Compose.CompositionGuides"
+
+	Background="Transparent"
+	>
+	<Grid		
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="4" />
+		</Grid.ColumnDefinitions>
+		<Viewbox
+			Grid.Column="1" Grid.Row="1"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			>
+			<Canvas
+				x:Name="ImageCanvas"
+				Width="{Binding ImageWidth}"
+				Height="{Binding ImageHeight}"
+				> 
+				<Image
+					IsVisible="{ReflectionBinding SourceImageIsVisible}"
+					Source="{ReflectionBinding SourceImage}"
+					/>
+				<Image
+					IsVisible="{ReflectionBinding ResultImageIsVisible}"
+					Source="{ReflectionBinding ResultImage}"
+					/>
+				<vm:CropGridView
+					DataContext="{Binding CropGridViewModel}"
+					Width="{Binding Width, ElementName=ImageCanvas}"
+					Height="{Binding Height, ElementName=ImageCanvas}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
+			</Canvas>			
+		</Viewbox>
+	</Grid>
+</UserControl>

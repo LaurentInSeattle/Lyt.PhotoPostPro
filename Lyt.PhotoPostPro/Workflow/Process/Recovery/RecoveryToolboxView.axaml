@@ -1,0 +1,165 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Recovery.RecoveryToolboxView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Recovery"
+	x:DataType="vm:RecoveryToolboxViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:curve="clr-namespace:Lyt.PhotoPostPro.Panes.CurvePane"
+	>	
+	<Grid
+		Margin="4 0 0 0"
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.Title}" /> <!-- Title --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Recovery --> 
+			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Recovery Buttons --> 
+			<RowDefinition Height="{StaticResource Size.TwoSliders}" /> <!-- Two sliders --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Workflow Button Grid  --> 
+			<RowDefinition Height="{StaticResource Size.Separator}" /> <!-- Separator --> 
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions> 
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Row="0" Grid.ColumnSpan="3"
+			Text="{DynamicResource Workflow.Recovery.Title}"
+			Theme="{StaticResource H2}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="1" Grid.ColumnSpan="3"
+			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="2" Grid.ColumnSpan="3"
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<glyphs:GlyphButton
+				Grid.Column="0"
+				Style="{StaticResource PanelIconButton}"
+				Text="{DynamicResource Workflow.Recovery.Clear}"
+				GlyphSource="dismiss"
+				Command="{Binding OnClearRecovery}"
+				Margin="4"
+				GlyphStrokeThickness="0.05" 
+				/>
+		</Grid>
+		<Grid
+			Grid.Row="3" Grid.ColumnSpan="3"
+			> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+				<ColumnDefinition Width="4" /> <!-- Spacer -->
+			</Grid.ColumnDefinitions>
+			<!-- First Row: Highlights -->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="-0.5" Maximum="0.5"
+				Value="{Binding HighlightsSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding HighlightsString}"
+				/>
+			<!-- Second Row Shadows -->
+			<TextBlock
+				Grid.Row="1" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				/>
+			<Slider 
+				Grid.Row="1" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="-0.5" Maximum="0.5"
+				Value="{Binding ShadowsSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="1" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding ShadowsString}"
+				/>
+		</Grid>
+
+		<!-- Workflow Button Grid --> 
+		<Grid
+			Grid.Row="5" Grid.ColumnSpan="3"
+			Margin="0 0 0 0"
+			HorizontalAlignment="Stretch"
+			Height="72"
+			>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<glyphs:GlyphButton
+				Grid.Column="0"
+				Style="{StaticResource ControlIconButton}"
+				GlyphSource="next"
+				GlyphAngle="180"
+				Text="{DynamicResource Workflow.Back}"
+				Command="{ReflectionBinding OnBack}"
+	    		/>
+			<glyphs:GlyphButton
+				Grid.Column="1"
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="next"
+				Text="{DynamicResource Workflow.Next}"
+				Command="{ReflectionBinding OnNext}"
+	    		/>
+		</Grid>
+
+		<!-- Separator --> 
+		<Separator 
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="6"
+			Height="1"
+			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+			>
+			<Separator.Background>
+				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+					<GradientStop Color="Transparent" Offset="0.0" />
+					<GradientStop Color="{StaticResource LightAqua_1_040_Color}" Offset="0.5" />
+					<GradientStop Color="Transparent" Offset="1.0" />
+				</LinearGradientBrush>
+			</Separator.Background>
+		</Separator>
+	</Grid>
+</UserControl>

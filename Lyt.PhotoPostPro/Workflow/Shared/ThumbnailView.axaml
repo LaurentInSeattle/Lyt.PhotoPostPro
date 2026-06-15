@@ -1,0 +1,54 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Folder.ThumbnailView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Folder"
+	x:DataType="vm:ThumbnailViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+	>
+	<Border
+		x:Name="outerBorder"
+		Height="{Binding BorderHeight}" 
+		Background="Transparent"
+		BorderBrush="{StaticResource LightAqua_1_100}"
+		BorderThickness="1"
+		CornerRadius="4"
+		>
+		<Grid
+			Margin="4"
+			>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="32" />
+				<RowDefinition Height="200" />
+				<RowDefinition Height="28" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Row="0"
+				Text="{Binding Title}"
+				FontSize="16"
+				TextAlignment="Center"			
+				Foreground="{StaticResource PastelOrchid_0_080}"
+				VerticalAlignment="Center"
+				/>
+			<Image
+				Grid.Row="1"
+				Source="{Binding Thumbnail}"
+				Height="{Binding ImageHeight}" 
+				IsHitTestVisible="False"
+				VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2"
+				Text="{Binding Details}"
+				Margin="0 -2 0 0"
+				FontSize="12"
+				TextAlignment="Center"			
+				Foreground="{StaticResource PastelOrchid_0_080}"
+				VerticalAlignment="Center"
+				/>
+		</Grid>
+	</Border>
+</UserControl>

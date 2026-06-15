@@ -1,0 +1,69 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Compose.CompositionGuides.GoldenDownCG"
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	>
+	<Grid
+		> 
+		<!-- Proportions in golden ratio  --> 
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.382*" />
+			<ColumnDefinition Width="0.618*" />
+		</Grid.ColumnDefinitions>
+		<Grid
+			Grid.Column="0"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.382*" />
+				<RowDefinition Height="0.618*" />
+			</Grid.RowDefinitions>
+			<!-- Perpendicular up diagonal in low left corner  --> 
+			<Path 
+				Grid.Column="0" Grid.Row="1" 
+				Stroke="AntiqueWhite" 
+				Opacity="{ReflectionBinding}"
+				StrokeThickness="7" 
+				Stretch="Fill"   
+				>
+				<Path.Data>
+					<LineGeometry StartPoint="0,1" EndPoint="1,0" />
+				</Path.Data>
+			</Path>
+			<Rectangle
+				Grid.Column="0" Grid.Row="0" 
+				ClipToBounds="False"
+				Fill="AntiqueWhite"
+				Opacity="{ReflectionBinding}"
+				Height="2" 
+				VerticalAlignment="Bottom"
+				HorizontalAlignment="Stretch"
+				/>
+		</Grid> 
+		<!-- Down Diagonal --> 
+		<Path 
+			Grid.Column="0" Grid.ColumnSpan="2"
+			Stroke="AntiqueWhite" 
+			Opacity="{ReflectionBinding}"
+			StrokeThickness="7" 
+			Stretch="Fill"			   
+			>
+			<Path.Data>
+				<!-- 0,0 is Top-Left and 1,1 is Bottom-Right -->
+				<LineGeometry StartPoint="0,0" EndPoint="1,1" />
+			</Path.Data>
+		</Path>		
+		<Rectangle
+			Grid.Column="0" Grid.Row="0" 
+			ClipToBounds="False"
+			Fill="AntiqueWhite"
+			Opacity="{ReflectionBinding}"
+			Width="2" 
+			VerticalAlignment="Stretch"
+			HorizontalAlignment="Right"
+			/>
+	</Grid>
+</UserControl>
