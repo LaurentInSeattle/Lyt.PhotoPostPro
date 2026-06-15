@@ -83,11 +83,13 @@
 	<system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
 
 	<!-- Workflow White Balance -->
-	<system:String x:Key="Workflow.WhiteBalance.Title">Highlights and Shadows</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or select a preset in the combobox below.</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Clear">Reset</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.Highlights">Highlights:</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.Shadows">Shadows:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Highlights">Gray Saturation:</system:String>
+
+
+
 
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
 
