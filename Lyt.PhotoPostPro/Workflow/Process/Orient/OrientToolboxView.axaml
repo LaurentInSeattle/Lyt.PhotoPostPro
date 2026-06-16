@@ -13,38 +13,26 @@
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>	
 	<Grid
-		Margin="4 0 0 0"
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.Title}" /> <!-- Title --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Rotate --> 
 			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Rotate Buttons --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Flip --> 
 			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Flip Buttons --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Workflow Button Grid  --> 
-			<RowDefinition Height="{StaticResource Size.Separator}" /> <!-- Separator --> 
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions> 
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-
 		<TextBlock
 			Grid.Row="0" Grid.ColumnSpan="2"
-			Text="{DynamicResource Workflow.Orient.Title}"
-			Theme="{StaticResource H2}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="1" Grid.ColumnSpan="2"
 			Text="{DynamicResource Workflow.Orient.Format}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="2" Grid.Column="0"
+			Grid.Row="1" Grid.Column="0"
 			Style="{StaticResource PanelIconButton}"
 			Margin="4"
 			Text="{DynamicResource Workflow.Orient.RotateMinus}"
@@ -53,7 +41,7 @@
 			GlyphStrokeThickness="0.05" 
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="2" Grid.Column="1"
+			Grid.Row="1" Grid.Column="1"
 			Style="{StaticResource PanelIconButton}"
 			Text="{DynamicResource Workflow.Orient.RotatePlus}"
 			GlyphSource="arrow_rotate_clockwise"
@@ -62,13 +50,13 @@
 			GlyphStrokeThickness="0.05" 
 			/>
 		<TextBlock
-			Grid.Row="4" Grid.ColumnSpan="2"
+			Grid.Row="3" Grid.ColumnSpan="2"
 			Text="{DynamicResource Workflow.Orient.Flip}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="5" Grid.Column="0"
+			Grid.Row="4" Grid.Column="0"
 			Style="{StaticResource PanelIconButton}"
 			Margin="4"
 			GlyphSource="flip_horizontal"
@@ -77,7 +65,7 @@
 			GlyphStrokeThickness="0.05" 
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="5" Grid.Column="1"
+			Grid.Row="4" Grid.Column="1"
 			Style="{StaticResource PanelIconButton}"
 			Text="{DynamicResource Workflow.Orient.Reverse}"
 			GlyphSource="flip_vertical"
@@ -85,48 +73,5 @@
 			Margin="4"
 			GlyphStrokeThickness="0.05" 
 			/>
-		<!-- Workflow Button Grid --> 
-		<Grid
-			Grid.Row="7" Grid.ColumnSpan="2"
-			Margin="0 0 0 0"
-			HorizontalAlignment="Stretch"
-			Height="72"
-			>
-			<Grid.ColumnDefinitions> 
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<glyphs:GlyphButton
-				Grid.Column="0"
-				Style="{StaticResource ControlIconButton}"
-				IsDisabled="True"
-				GlyphSource="next"
-				GlyphAngle="180"
-				Text="{DynamicResource Workflow.Back}"
-				Command="{ReflectionBinding OnBack}"
-	    		/>
-			<glyphs:GlyphButton
-				Grid.Column="1"
-				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
-				GlyphSource="next"
-				Text="{DynamicResource Workflow.Next}"
-				Command="{ReflectionBinding OnNext}"
-	    		/>
-		</Grid>
-		<!-- Separator --> 
-		<Separator 
-			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="8"
-			Height="1"
-			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
-			>
-			<Separator.Background>
-				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-					<GradientStop Color="Transparent" Offset="0.0" />
-					<GradientStop Color="{StaticResource LightAqua_1_040_Color}" Offset="0.5" />
-					<GradientStop Color="Transparent" Offset="1.0" />
-				</LinearGradientBrush>
-			</Separator.Background>
-		</Separator>
 	</Grid>
 </UserControl>

@@ -2,23 +2,17 @@
 
 public partial class ToolboxViewModel<T> : ViewModel<T> where T : View, new()
 {
-    protected readonly PhotoPostProModel model; 
+    protected readonly PhotoPostProModel model;
 
     public ToolboxViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
-    
-    // ==> Important! 
-    // Commands in aXAML MUST have ReflectionBinding - and not just Binding
-    // Or else : Invalid cast exception will be thrown   :( 
 
-    [RelayCommand]
-    public void OnBack() => this.model.Workflow.GoBack();
+    public required ToolboxHostViewModel ToolboxHostViewModel { get; set; }
 
-    [RelayCommand]
-    public void OnNext()
+    public override void Activate(object? activationParameters)
     {
-        this.OnBeforeNext(); 
-        this.model.Workflow.SaveAndNext();
-    } 
+        base.Activate(activationParameters);
+        this.ToolboxHostViewModel.Title = this.Title; 
+    }
 
-    protected virtual void OnBeforeNext () {  } 
+    protected virtual string Title => " *** ? ***"; 
 }

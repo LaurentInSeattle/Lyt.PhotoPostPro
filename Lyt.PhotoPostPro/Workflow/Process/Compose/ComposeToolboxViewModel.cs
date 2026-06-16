@@ -104,8 +104,8 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
         this.AspectRatioValueString = aspectRatio.ToString("F1");
     }
 
-    protected override void OnBeforeNext() 
-        => this.model.Crop(this.x, this.y, this.dx, this.dy);
+    //protected override void OnBeforeNext() 
+    //    => this.model.Crop(this.x, this.y, this.dx, this.dy);
 
     partial void OnSelectedIndexChanged(int value)
         => this.viewModel.SelectCg(value);

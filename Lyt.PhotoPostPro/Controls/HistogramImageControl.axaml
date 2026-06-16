@@ -12,7 +12,7 @@
 		<Rectangle 
 			Stroke="{StaticResource LightAqua_1_100}"
 			StrokeThickness="1"
-			Opacity="0.5"
+			Opacity="0.4"
 			/>
 		<Viewbox
 			Margin="1"

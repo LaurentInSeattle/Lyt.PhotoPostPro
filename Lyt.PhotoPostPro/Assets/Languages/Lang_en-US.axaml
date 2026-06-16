@@ -27,8 +27,9 @@
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 
 	<!-- Workflow -->
-	<system:String x:Key="Workflow.Back">Go Back</system:String>
-	<system:String x:Key="Workflow.Next">Next Step</system:String>
+	<system:String x:Key="Workflow.Back">Back</system:String>
+	<system:String x:Key="Workflow.Reset">Reset</system:String>
+	<system:String x:Key="Workflow.Next">Next</system:String>
 
 	<!-- Workflow Orientation -->
 	<system:String x:Key="Workflow.Orient.Title">Orientation and Mirroring</system:String>

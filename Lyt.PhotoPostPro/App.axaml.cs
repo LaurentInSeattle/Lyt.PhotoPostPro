@@ -41,6 +41,8 @@ public partial class App : ApplicationBase
             typeof(ProcessViewModel),
             typeof(ProcessToolbarViewModel),
 
+            typeof(ToolboxHostViewModel),
+
             typeof(OrientViewModel),
             typeof(OrientToolboxViewModel),
 

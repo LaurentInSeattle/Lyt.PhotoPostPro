@@ -1,0 +1,93 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.ToolboxHostView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process"
+	x:DataType="vm:ToolboxHostViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid >
+		<Rectangle 
+			Stroke="{StaticResource LightAqua_1_100}"
+			StrokeThickness="1"
+			Opacity="0.4"
+			/>
+		<Grid
+			Margin="8 2 8 2"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="{StaticResource Size.Title}" /> <!-- Title --> 
+				<RowDefinition Height="Auto" /> <!-- Content --> 
+				<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+				<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Workflow Button Grid  --> 
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Row="0" 
+				Text="{Binding Title}"
+				Theme="{StaticResource H2}"
+				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+
+			<!-- Content Grid --> 
+			<Grid x:Name="ContentGrid" Grid.Row="1" /> 
+
+			<!-- Workflow Buttons Grid --> 
+			<Grid
+				Grid.Row="3" 
+				HorizontalAlignment="Stretch"
+				Height="{StaticResource Dbl.WfNav}"
+				>
+				<Grid.ColumnDefinitions> 
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<glyphs:GlyphButton
+					Grid.Column="0"
+					Style="{StaticResource ControlIconButton}"
+					IsDisabled="True"
+					GlyphSource="next"
+					GlyphAngle="180"
+					Text="{DynamicResource Workflow.Back}"
+					Command="{Binding OnBack}"
+	    			/>
+				<glyphs:GlyphButton
+					Grid.Column="1"
+					Style="{StaticResource ControlIconButton}"
+					GlyphSource="dismiss"
+					Text="{DynamicResource Workflow.Reset}"
+					Command="{Binding OnReset}"
+	    			/>
+				<glyphs:GlyphButton
+					Grid.Column="2"
+					Style="{StaticResource ControlIconButton}"
+					Layout="IconTextLeftSide"
+					GlyphSource="next"
+					Text="{DynamicResource Workflow.Next}"
+					Command="{Binding OnNext}"
+	    			/>
+			</Grid>
+			<!-- Separator --> 
+			<!-- 
+			<Separator 
+				Grid.Row="2"
+				Height="1"
+				VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+				>
+				<Separator.Background>
+					<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+						<GradientStop Color="Transparent" Offset="0.0" />
+						<GradientStop Color="{StaticResource LightAqua_1_040_Color}" Offset="0.5" />
+						<GradientStop Color="Transparent" Offset="1.0" />
+					</LinearGradientBrush>
+				</Separator.Background>
+			</Separator>
+			--> 
+		</Grid>
+	</Grid>
+</UserControl>

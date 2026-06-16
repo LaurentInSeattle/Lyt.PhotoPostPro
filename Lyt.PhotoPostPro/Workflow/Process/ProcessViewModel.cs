@@ -11,11 +11,15 @@ public sealed partial class ProcessViewModel :
     [ObservableProperty]
     public partial HistogramViewModel HistogramViewModel {  get ; set; }
 
+    [ObservableProperty]
+    public partial ToolboxHostViewModel ToolboxHostViewModel { get; set; }
+
     public ProcessViewModel(PhotoPostProModel photoPostProModel)
     {
         this.model = photoPostProModel;
         this.isFirstActivation = true;
         this.HistogramViewModel = new();
+        this.ToolboxHostViewModel = new();
         this.Subscribe<WorkflowUpdateMessage>();
     }
 
@@ -67,14 +71,14 @@ public sealed partial class ProcessViewModel :
                 ActivatedView activatedView, Control? control = null)
             where TViewModel : ViewModel<TControl>
             where TControl : Control, IView, new()
-            where TToolboxViewModel : ViewModel<TToolboxControl>
-            where TToolboxControl : Control, IView, new()
+            where TToolboxViewModel : ToolboxViewModel<TToolboxControl>
+            where TToolboxControl : View, new()
         {
             var vm = App.GetRequiredService<TViewModel>();
             vm.CreateViewAndBind();
             var vmToolbox = App.GetRequiredService<TToolboxViewModel>();
             vmToolbox.CreateViewAndBind();
-            var v = vmToolbox.View;
+            vmToolbox.ToolboxHostViewModel = this.ToolboxHostViewModel; 
             var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
             selectableViews.Add(selectable);
         }
@@ -105,7 +109,7 @@ public sealed partial class ProcessViewModel :
                 null, // no buttons 
                 selectableViews,
                 this.OnViewSelected,
-                this.View.ProcessViewToolbox);
+                this.View.ToolboxHostView.ContentGrid);
     }
 
     private void OnViewSelected(ActivatedView activatedView)

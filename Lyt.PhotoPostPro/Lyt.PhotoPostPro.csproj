@@ -100,6 +100,9 @@
     <Compile Update="Workflow\Process\Straighten\GuidelineView.axaml.cs">
       <DependentUpon>GuidelineView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Process\ToolboxHostView.axaml.cs">
+      <DependentUpon>ToolboxHostView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\WhiteBalance\WhiteBalanceView.axaml.cs">
       <DependentUpon>WhiteBalanceView.axaml</DependentUpon>
     </Compile>

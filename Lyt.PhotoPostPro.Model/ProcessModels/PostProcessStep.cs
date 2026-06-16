@@ -25,6 +25,9 @@ public class PostProcessStep(string name)
     public bool IsLastStep => this.NextStep is null;
 
     [JsonIgnore]
+    public bool IsReset { get; set; }
+
+    [JsonIgnore]
     public bool IsCurrent { get; set; }
 
     [JsonIgnore]
@@ -40,7 +43,9 @@ public class PostProcessStep(string name)
     public virtual void Initialize() { } 
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Finish() { } 
+    public virtual void Finish() { }
+
+    public virtual void Reset() { }
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Save() { }
@@ -59,4 +64,5 @@ public class PostProcessStep(string name)
             new HistogramsGeneratedMessage(histograms).Publish();
         });
     }
+
 }

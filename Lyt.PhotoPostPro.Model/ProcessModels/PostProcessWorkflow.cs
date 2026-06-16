@@ -132,5 +132,11 @@ public sealed class PostProcessWorkflow
         return false;
     }
 
+    public bool Reset ()
+    {
+        this.CurrentStep.Reset () ;
+        return true;
+    }
+
     private static void Notify() => new WorkflowUpdateMessage().Publish();
 }
