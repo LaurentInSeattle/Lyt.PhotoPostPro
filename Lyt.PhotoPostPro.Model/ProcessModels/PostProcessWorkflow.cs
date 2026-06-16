@@ -88,7 +88,7 @@ public sealed class PostProcessWorkflow
         return true;
     }
 
-    public bool SaveAndNext()
+    public bool Next()
     {
         if (this.CanMoveNext)
         {
@@ -108,7 +108,7 @@ public sealed class PostProcessWorkflow
 
             // Will only create a ResultImage if able 
             // Frame will be created when the new view gets activated 
-            _ = this.CurrentStep.Transform(withFrame: false);
+            // _ = this.CurrentStep.Transform(withFrame: false);
 
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
@@ -118,7 +118,7 @@ public sealed class PostProcessWorkflow
         return false;
     }
 
-    public bool GoBack()
+    public bool Back()
     {
         if (this.CanGoBack)
         {
@@ -141,11 +141,11 @@ public sealed class PostProcessWorkflow
         return false;
     }
 
-    public bool Reset()
+    public Frame? Reset()
     {
-        this.CurrentStep.Reset();
+        var frame = this.CurrentStep.Reset();
         this.Notify(this.CurrentStep, WorkflowUpdateKind.Reset);
-        return true;
+        return frame;
     }
 
     private void Notify(PostProcessStep? previousStep, WorkflowUpdateKind kind)

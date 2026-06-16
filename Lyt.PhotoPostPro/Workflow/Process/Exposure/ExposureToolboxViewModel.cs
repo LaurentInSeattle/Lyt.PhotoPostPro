@@ -41,11 +41,11 @@ public sealed partial class ExposureToolboxViewModel : ToolboxViewModel<Exposure
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
-        this.OnClearExposure();
+        this.OnBeforeReset();
     }
 
-    [RelayCommand]
-    public void OnClearExposure()
+    // Interface inplementation has to be public
+    public override void OnBeforeReset()
     {
         this.doNotUpdate = true;
         {
@@ -54,8 +54,6 @@ public sealed partial class ExposureToolboxViewModel : ToolboxViewModel<Exposure
             this.ShiftSliderValue = 0.0;
         }
         this.doNotUpdate = false;
-
-        this.UpdateModel();
     }
 
     partial void OnGammaSliderValueChanged(double value)
@@ -92,5 +90,5 @@ public sealed partial class ExposureToolboxViewModel : ToolboxViewModel<Exposure
         }
 
         this.model.AdjustExposure(this.gamma, this.gain, this.shift);
-    } 
+    }
 }

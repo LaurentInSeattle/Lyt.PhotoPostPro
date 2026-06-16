@@ -38,7 +38,7 @@ public sealed partial class ComposeViewModel : StepViewModel<ComposeView>
         this.ImageHeight = imageSize.Height;
     }
 
-    internal void SelectCg(int cgIndex) => this.CropGridViewModel.SelectCg(cgIndex);
+    internal void SelectCropGuidelines(int cgIndex) => this.CropGridViewModel.SelectCg(cgIndex);
 
     private void CreateCropVmIfNeeded()
     {

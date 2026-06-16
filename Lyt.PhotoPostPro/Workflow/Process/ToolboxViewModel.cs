@@ -1,6 +1,13 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process;
 
-public partial class ToolboxViewModel<T> : ViewModel<T> where T : View, new()
+public interface IToolboxViewModel
+{
+    void OnBeforeBack();
+    void OnBeforeReset();
+    void OnBeforeNext();
+}
+
+public partial class ToolboxViewModel<T> : ViewModel<T>,  IToolboxViewModel where T : View, new() 
 {
     protected readonly PhotoPostProModel model;
 
@@ -14,5 +21,12 @@ public partial class ToolboxViewModel<T> : ViewModel<T> where T : View, new()
         this.ToolboxHostViewModel.Title = this.Title; 
     }
 
-    protected virtual string Title => " *** ? ***"; 
+    protected virtual string Title => " *** ? ***";
+
+    // Interface implementation must be public, and same below twice
+    public virtual void OnBeforeBack() { }
+
+    public virtual void OnBeforeReset() { }
+
+    public virtual void OnBeforeNext() { }
 }

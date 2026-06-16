@@ -9,17 +9,10 @@ internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionSt
 
     public override void Initialize() => this.Clear() ;
 
-
-    internal Frame? ClearCrop()
+    public override Frame? Reset()
     {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        this.Clear() ;
-        this.ResultImage = this.SourceImage;
-        return this.SourceImage.ToFrame();
+        this.Clear();
+        return base.Reset () ;
     }
 
     internal Frame? Crop(int x, int y, int dx, int dy)
@@ -38,15 +31,24 @@ internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionSt
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        var cropRectangle = new Rectangle(this.x, this.y, this.dx, this.dy); 
-        bool isChanged = cropRectangle.Height != 0 || cropRectangle.Width != 0;
+        var cropRectangle = new Rectangle(this.x, this.y, this.dx, this.dy);
+        bool isChanged = 
+            ( this.dx != 0 && this.dy != 0)  && 
+            ( cropRectangle.Height != this.SourceImage.Height || cropRectangle.Width != this.SourceImage.Width ) ;
         if (isChanged)
         {
-            clone.Mutate( x=> x.Crop(cropRectangle)); 
+            var clone = this.SourceImage.Clone();
+            clone.Mutate( x=> x.Crop(cropRectangle));
+            this.ResultImage = clone;
+
+            // So that we do not crop again the cropped image when going back and forth in the workflow 
+            this.Clear();
+        }
+        else
+        {
+            this.ResultImage = this.SourceImage;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
         return withFrame ? this.ResultImage.ToFrame() : null;
     }
 

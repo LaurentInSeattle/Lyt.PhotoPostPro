@@ -11,6 +11,12 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
         this.isMirrored = false;
     }
 
+    public override Frame? Reset()
+    {
+        this.Initialize();
+        return base.Reset();
+    }
+
     internal Frame? Rotate(bool isClockwise)
     {
         int angle = isClockwise ? 90 : -90; 

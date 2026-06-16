@@ -68,6 +68,14 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public bool Reset() => 
+        this.ApiAction(() =>
+        {
+            this.LastFrame = this.Workflow.Reset();
+            return true;
+        });
+
+
     public bool Rotate(bool isClockwise) =>
         this.ApiAction(() =>
         {
@@ -86,18 +94,6 @@ public sealed partial class PhotoPostProModel : ModelBase
             if (this.Workflow.CurrentStep is OrientationStep orientationStep)
             {
                 this.LastFrame = orientationStep.Flip(isMirror);
-                return true;
-            }
-
-            return false;
-        });
-
-    public bool ClearRotate() =>
-        this.ApiAction(() =>
-        {
-            if (this.Workflow.CurrentStep is StraightenStep straightenStep)
-            {
-                this.LastFrame = straightenStep.ClearRotate();
                 return true;
             }
 

@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Compose;
 
-public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeToolboxView>
+public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeToolboxView>, IToolboxViewModel
 {
     private readonly ComposeViewModel viewModel;
 
@@ -107,11 +107,13 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
         this.AspectRatioValueString = aspectRatio.ToString("F2");
     }
 
-    //protected override void OnBeforeNext() 
-    //    => this.model.Crop(this.x, this.y, this.dx, this.dy);
+    public override void OnBeforeBack() => this.viewModel.CropGridViewModel.ClearCrop();
 
-    partial void OnSelectedIndexChanged(int value)
-        => this.viewModel.SelectCg(value);
+    public override void OnBeforeReset() => this.viewModel.CropGridViewModel.ClearCrop();
+
+    public override void OnBeforeNext() => this.model.Crop(this.x, this.y, this.dx, this.dy);
+
+    partial void OnSelectedIndexChanged(int value) => this.viewModel.SelectCropGuidelines(value);
     
     [Conditional("DEBUG")]
     private void DumpRectangle() => Debug.WriteLine($" Crop: X:{x}  Y:{y}  W: {dx}  H: {dy}");

@@ -4,21 +4,12 @@ internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStep
 {
     private float rotationAngle; // Degrees 
 
-    public override void Initialize()
-    {
-        this.rotationAngle = 0.0f;
-    }
+    public override void Initialize() => this.rotationAngle = 0.0f;
 
-    internal Frame? ClearRotate()
+    public override Frame? Reset()
     {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        this.rotationAngle = 0.0f;
-        this.ResultImage = this.SourceImage;
-        return this.SourceImage.ToFrame();
+        this.Initialize();
+        return base.Reset ();
     }
 
     internal Frame? Rotate(bool isClockwise, float angle)

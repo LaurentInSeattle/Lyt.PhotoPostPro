@@ -1,10 +1,16 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process;
 
-public sealed partial class ToolboxHostViewModel : ViewModel<ToolboxHostView>
+public sealed partial class ToolboxHostViewModel : 
+    ViewModel<ToolboxHostView>, 
+    IRecipient<WorkflowUpdateMessage>
 {
     private readonly PhotoPostProModel model;
 
-    public ToolboxHostViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
+    public ToolboxHostViewModel()
+    {
+        this.model = App.GetRequiredService<PhotoPostProModel>();
+        this.Subscribe<WorkflowUpdateMessage>(); 
+    } 
 
     [ObservableProperty]
     public partial string Title { get; set; } = " - ? ? ? -";
@@ -18,18 +24,36 @@ public sealed partial class ToolboxHostViewModel : ViewModel<ToolboxHostView>
     [ObservableProperty]
     public partial bool NextIsDisabled { get; set; }
 
-    [RelayCommand]
-    public void OnBack() => this.model.Workflow.GoBack();
+    public void Receive(WorkflowUpdateMessage message)
+    {
+        Dispatch.OnUiThread(() => 
+        {
+            this.BackIsDisabled = !this.model.Workflow.CanGoBack;
+            this.NextIsDisabled = !this.model.Workflow.CanMoveNext;
+            this.ResetIsDisabled = false;
+        }, DispatcherPriority.Background);
+    }
+
+    public IToolboxViewModel? ActiveToolboxViewModel { get; set;  }
 
     [RelayCommand]
-    public void OnReset() => this.model.Workflow.Reset();
+    public void OnBack() 
+    {
+        this.ActiveToolboxViewModel?.OnBeforeBack();
+        this.model.Workflow.Back();
+    }
+
+    [RelayCommand]
+    public void OnReset()
+    {
+        this.ActiveToolboxViewModel?.OnBeforeReset();
+        this.model.Reset();
+    } 
 
     [RelayCommand]
     public void OnNext()
     {
-        this.OnBeforeNext();
-        this.model.Workflow.SaveAndNext();
+        this.ActiveToolboxViewModel?.OnBeforeNext();
+        this.model.Workflow.Next();
     }
-
-    public  void OnBeforeNext() { }
 }

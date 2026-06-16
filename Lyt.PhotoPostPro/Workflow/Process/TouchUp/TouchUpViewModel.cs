@@ -2,12 +2,8 @@
 
 public sealed partial class TouchUpViewModel : StepViewModel<TouchUpView>
 {
-    private bool isInitializing; 
-
     public TouchUpViewModel() 
     {
-        this.isInitializing = true;
-        this.isInitializing = false;
     }
 
     public override void Activate(object? activationParameters)

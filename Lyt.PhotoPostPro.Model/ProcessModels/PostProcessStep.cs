@@ -45,7 +45,18 @@ public class PostProcessStep(string name)
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Finish() { }
 
-    public virtual void Reset() { }
+    // Default implementation restore original into result 
+    public virtual Frame? Reset()
+    {
+        if (this.SourceImage is null)
+        {
+            return null;
+        }
+
+        this.IsReset = true;
+        this.ResultImage = this.SourceImage;
+        return this.SourceImage.ToFrame();
+    }
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Save() { }

@@ -120,6 +120,12 @@ public sealed partial class ProcessViewModel :
         {
             throw new Exception("No view selector");
         }
+
+        var currentTernaryViewModel = this.viewSelector.CurrentTernaryViewModel;
+        if (currentTernaryViewModel is IToolboxViewModel toolboxViewModel)
+        {
+            this.ToolboxHostViewModel.ActiveToolboxViewModel = toolboxViewModel;
+        } 
     }
 
     private static ActivatedView FromWorkflowstepName(string workflowStepName)
