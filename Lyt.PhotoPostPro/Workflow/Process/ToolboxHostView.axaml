@@ -50,7 +50,7 @@
 				<glyphs:GlyphButton
 					Grid.Column="0"
 					Style="{StaticResource ControlIconButton}"
-					IsDisabled="True"
+					IsDisabled="{Binding BackIsDisabled}"
 					GlyphSource="next"
 					GlyphAngle="180"
 					Text="{DynamicResource Workflow.Back}"
@@ -59,6 +59,7 @@
 				<glyphs:GlyphButton
 					Grid.Column="1"
 					Style="{StaticResource ControlIconButton}"
+					IsDisabled="{Binding ResetIsDisabled}"
 					GlyphSource="dismiss"
 					Text="{DynamicResource Workflow.Reset}"
 					Command="{Binding OnReset}"
@@ -66,6 +67,7 @@
 				<glyphs:GlyphButton
 					Grid.Column="2"
 					Style="{StaticResource ControlIconButton}"
+					IsDisabled="{Binding NextIsDisabled}"
 					Layout="IconTextLeftSide"
 					GlyphSource="next"
 					Text="{DynamicResource Workflow.Next}"

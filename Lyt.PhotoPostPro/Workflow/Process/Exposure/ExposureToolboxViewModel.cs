@@ -15,6 +15,8 @@ public sealed partial class ExposureToolboxViewModel : ToolboxViewModel<Exposure
         this.GammaCurveViewModel = new();     
     }
 
+    protected override string Title => this.Localize("Workflow.Exposure.Title");
+
     [ObservableProperty]
     public partial GammaCurveViewModel GammaCurveViewModel{ get; set; }
 

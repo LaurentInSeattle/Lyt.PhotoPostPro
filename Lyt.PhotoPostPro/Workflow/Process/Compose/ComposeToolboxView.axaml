@@ -14,67 +14,33 @@
 
 	>
 	<Grid
-		Margin="4 0 0 0"
 		>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.Title}" /> <!-- Title --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Croplines --> 
-			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Croplines Buttons --> 
+			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Prompt + Croplines Button --> 
 			<RowDefinition Height="{StaticResource Size.ThreeSmallButtons}" /> <!-- Cropline Values Grid Top / Left--> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 5 : Prompt Composition Guides  --> 
-			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 6 : Guides combo --> 
-			<RowDefinition Height="0" /> <!-- GONE, was: Guides Second Row  --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Workflow Button Grid  --> 
-			<RowDefinition Height="{StaticResource Size.Separator}" /> <!-- Separator --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 3 : Prompt Composition Guides  --> 
+			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 4 : Guides combo --> 
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions> 
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
 
 		<TextBlock
-			Grid.Row="0" Grid.ColumnSpan="3"
-			Text="{DynamicResource Workflow.Compose.Title}"
-			Theme="{StaticResource H2}"
-			Margin="4 0 0 0"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="1" Grid.ColumnSpan="3"
+			Grid.Row="0" 
 			Text="{DynamicResource Workflow.Compose.Croplines}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<glyphs:GlyphButton
+			Grid.Row="0"
+			Style="{StaticResource PanelIconButton}"
+			Margin="4"
+			Text="{DynamicResource Workflow.Compose.Preview}"
+			GlyphSource="eye"
+			Command="{Binding OnTogglePreview}"
+			GlyphStrokeThickness="0.05" 
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			/>		
 		<Grid
-			Grid.Row="2" Grid.ColumnSpan="3"
-			> 
-			<Grid.ColumnDefinitions> 
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<glyphs:GlyphButton
-				Grid.Column="0"
-				Style="{StaticResource PanelIconButton}"
-				Text="{DynamicResource Workflow.Compose.Clear}"
-				GlyphSource="dismiss"
-				Command="{Binding OnClearCrop}"
-				Margin="4"
-				GlyphStrokeThickness="0.05" 
-				/>
-			<glyphs:GlyphButton
-				Grid.Column="1"
-				Style="{StaticResource PanelIconButton}"
-				Margin="4"
-				Text="{DynamicResource Workflow.Compose.Preview}"
-				GlyphSource="eye"
-				Command="{Binding OnTogglePreview}"
-				GlyphStrokeThickness="0.05" 
-				/>		
-		</Grid>
-		<Grid
-			Grid.Row="3" Grid.ColumnSpan="3"
+			Grid.Row="1" 
 			> 
 			<Grid.RowDefinitions> 
 				<RowDefinition Height="*" />
@@ -91,7 +57,6 @@
 				<ColumnDefinition Width="48" />
 				<ColumnDefinition Width="40" />
 				<ColumnDefinition Width="40" />
-				<ColumnDefinition Width="4" /> <!-- Spacer -->
 			</Grid.ColumnDefinitions>
 			<!-- First Row - Top Left -->
 			<TextBlock
@@ -264,13 +229,13 @@
 
 		<!-- Composition Guides--> 
 		<TextBlock
-			Grid.Row="5" Grid.ColumnSpan="3"
+			Grid.Row="3" 
 			Text="{DynamicResource Workflow.Compose.CompositionGuides}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Grid
-			Grid.Row="6" Grid.ColumnSpan="3"
+			Grid.Row="4" 
 			> 
 			<ComboBox
 				x:Name="ContentComboBox"
@@ -297,50 +262,6 @@
 					</DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>		
-
 		</Grid>
-
-		<!-- Workflow Button Grid --> 
-		<Grid
-			Grid.Row="9" Grid.ColumnSpan="3"
-			Margin="0 0 0 0"
-			HorizontalAlignment="Stretch"
-			Height="72"
-			>
-			<Grid.ColumnDefinitions> 
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<glyphs:GlyphButton
-				Grid.Column="0"
-				Style="{StaticResource ControlIconButton}"
-				GlyphSource="next"
-				GlyphAngle="180"
-				Text="{DynamicResource Workflow.Back}"
-				Command="{ReflectionBinding OnBack}"
-	    		/>
-			<glyphs:GlyphButton
-				Grid.Column="1"
-				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
-				GlyphSource="next"
-				Text="{DynamicResource Workflow.Next}"
-				Command="{ReflectionBinding OnNext}"
-	    		/>
-		</Grid>
-		<!-- Separator --> 
-		<Separator 
-			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="10"
-			Height="1"
-			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
-			>
-			<Separator.Background>
-				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-					<GradientStop Color="Transparent" Offset="0.0" />
-					<GradientStop Color="{StaticResource LightAqua_1_040_Color}" Offset="0.5" />
-					<GradientStop Color="Transparent" Offset="1.0" />
-				</LinearGradientBrush>
-			</Separator.Background>
-		</Separator>
 	</Grid>
 </UserControl>

@@ -9,6 +9,15 @@ public sealed partial class ToolboxHostViewModel : ViewModel<ToolboxHostView>
     [ObservableProperty]
     public partial string Title { get; set; } = " - ? ? ? -";
 
+    [ObservableProperty]
+    public partial bool BackIsDisabled { get; set; }
+
+    [ObservableProperty]
+    public partial bool ResetIsDisabled { get; set; }
+
+    [ObservableProperty]
+    public partial bool NextIsDisabled { get; set; }
+
     [RelayCommand]
     public void OnBack() => this.model.Workflow.GoBack();
 

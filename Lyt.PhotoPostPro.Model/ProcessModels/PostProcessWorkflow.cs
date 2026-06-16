@@ -1,17 +1,26 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
+public enum WorkflowUpdateKind
+{
+    Begin,
+    Finish,
+    Back,
+    Reset,
+    Next,
+}
+
 public sealed class PostProcessWorkflow
 {
     public PostProcessWorkflow()
     {
         var orientationStep = new OrientationStep();
-        var straightenStep = new StraightenStep() ;
-        var compositionStep = new CompositionStep() ;
-        var exposureStep = new ExposureStep() ;
+        var straightenStep = new StraightenStep();
+        var compositionStep = new CompositionStep();
+        var exposureStep = new ExposureStep();
         var recoveryStep = new RecoveryStep();
         var whiteBalanceStep = new WhiteBalanceStep();
 
-        this.Steps = 
+        this.Steps =
         [
             // Geometry 
             orientationStep, straightenStep, compositionStep, 
@@ -24,11 +33,11 @@ public sealed class PostProcessWorkflow
 
         int stepsCount = this.Steps.Count;
         int stepsCountMinusOne = stepsCount - 1;
-        for ( int i = 0; i < stepsCount; ++ i)
+        for (int i = 0; i < stepsCount; ++i)
         {
-            var step = this.Steps[i] ;
-            step.PreviousStep = i == 0 ? null : this.Steps[i-1] ;
-            step.NextStep = i < stepsCountMinusOne ? this.Steps[i + 1] : null ;
+            var step = this.Steps[i];
+            step.PreviousStep = i == 0 ? null : this.Steps[i - 1];
+            step.NextStep = i < stepsCountMinusOne ? this.Steps[i + 1] : null;
         }
     }
 
@@ -63,7 +72,7 @@ public sealed class PostProcessWorkflow
         this.CurrentStep.IsSkipped = false;
         this.CurrentStep.SourceImage = sourceImage;
         this.CurrentStep.ResultImage = sourceImage;
-        Notify(); 
+        this.Notify(null, WorkflowUpdateKind.Begin);
         return true;
     }
 
@@ -75,7 +84,7 @@ public sealed class PostProcessWorkflow
         }
 
         this.IsComplete = true;
-        Notify();
+        this.Notify(null, WorkflowUpdateKind.Finish);
         return true;
     }
 
@@ -99,10 +108,10 @@ public sealed class PostProcessWorkflow
 
             // Will only create a ResultImage if able 
             // Frame will be created when the new view gets activated 
-            _ = this.CurrentStep.Transform(withFrame:false);
+            _ = this.CurrentStep.Transform(withFrame: false);
 
             // Notify to change view 
-            Notify();
+            this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
             return true;
         }
 
@@ -125,18 +134,20 @@ public sealed class PostProcessWorkflow
             this.CurrentStep.IsSkipped = false;
 
             // Notify to change view 
-            Notify();
+            this.Notify(this.Steps[this.CurrentStepIndex + 1], WorkflowUpdateKind.Back);
             return true;
         }
 
         return false;
     }
 
-    public bool Reset ()
+    public bool Reset()
     {
-        this.CurrentStep.Reset () ;
+        this.CurrentStep.Reset();
+        this.Notify(this.CurrentStep, WorkflowUpdateKind.Reset);
         return true;
     }
 
-    private static void Notify() => new WorkflowUpdateMessage().Publish();
+    private void Notify(PostProcessStep? previousStep, WorkflowUpdateKind kind)
+        => new WorkflowUpdateMessage(previousStep, this.CurrentStep, kind).Publish();
 }

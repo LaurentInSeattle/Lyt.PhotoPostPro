@@ -5,6 +5,8 @@ public sealed partial class WhiteBalanceToolboxViewModel : ToolboxViewModel<Whit
     private bool doNotUpdate; 
     private float saturationThreshold;
 
+    protected override string Title => this.Localize("Workflow.WhiteBalance.Title");
+
     [ObservableProperty]
     public partial string SaturationString { get; set; } = string.Empty;
 

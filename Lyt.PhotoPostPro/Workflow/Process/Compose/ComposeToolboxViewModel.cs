@@ -20,8 +20,11 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
         this.SelectedIndex = 1;
     }
 
+    protected override string Title => this.Localize("Workflow.Compose.Title");
+
     [ObservableProperty]
     public partial List<string> SupportedGuides{ get; set; } = 
+        // TODO: Needs localization 
         [
             " -- None -- " , // => this.View.ZeroCG,
             " Rule of Thirds"  , // 1 => this.View.ThirdsCG,
@@ -101,7 +104,7 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
         this.WidthValueString = idx.ToString("D");
         this.HeightValueString = idy.ToString("D");
         float aspectRatio = idx / (float)idy; 
-        this.AspectRatioValueString = aspectRatio.ToString("F1");
+        this.AspectRatioValueString = aspectRatio.ToString("F2");
     }
 
     //protected override void OnBeforeNext() 
