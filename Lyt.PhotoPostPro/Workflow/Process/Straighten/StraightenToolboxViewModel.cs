@@ -14,6 +14,8 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
         this.Color_4 = GuidelineViewModel.Brushes[4];
     }
 
+    protected override string Title => this.Localize("Workflow.Straighten.Title");
+
     [ObservableProperty]
     public partial SolidColorBrush Color_0 {  get ; set; }
 
@@ -44,9 +46,6 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
             this.viewModel.HorizontalGuideLineViewModel.Colorize(colorIndex);
         }
     }
-
-    [RelayCommand]
-    public void OnClearRotate() => base.model.ClearRotate();
 
     [RelayCommand]
     public void OnRotateClockwiseLarge() => base.model.Rotate(isClockwise: true, 1.0f);

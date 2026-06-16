@@ -13,20 +13,13 @@
 	xmlns:controls="using:Lyt.PhotoPostPro.Controls"
 	>	
 	<Grid
-		Margin="4 0 0 0"
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.Title}" /> <!-- Title --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Guidelines --> 
 			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Guidelines Buttons --> 
 			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Guidelines Colours Buttons --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Rotates --> 
-			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Rotate Buttons +/ -1   --> 
-			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Rotate Buttons +/ -0.5 --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Workflow Button Grid  --> 
-			<RowDefinition Height="{StaticResource Size.Separator}" /> <!-- Separator --> 
+			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- Rotate Buttons --> 
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions> 
 			<ColumnDefinition Width="*" />
@@ -36,18 +29,12 @@
 
 		<TextBlock
 			Grid.Row="0" Grid.ColumnSpan="3"
-			Text="{DynamicResource Workflow.Straighten.Title}"
-			Theme="{StaticResource H2}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="1" Grid.ColumnSpan="3"
 			Text="{DynamicResource Workflow.Straighten.Guidelines}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="2" Grid.Column="0"
+			Grid.Row="1" Grid.Column="0"
 			Style="{StaticResource PanelIconButton}"
 			Margin="4"
 			Text="{DynamicResource Workflow.Straighten.VerticalGuideline}"
@@ -57,7 +44,7 @@
 			GlyphStrokeThickness="0.05" 
 			/>		
 		<glyphs:GlyphButton
-			Grid.Row="2" Grid.Column="2"
+			Grid.Row="1" Grid.Column="2"
 			Style="{StaticResource PanelIconButton}"
 			Text="{DynamicResource Workflow.Straighten.HorizontalGuideline}"
 			GlyphSource="line"
@@ -68,8 +55,7 @@
 			/>
 		<!-- Colour Buttons --> 
 		<Grid
-			Grid.Row="3" Grid.ColumnSpan="3"
-			Margin="0 0 0 0"
+			Grid.Row="2" Grid.ColumnSpan="3"
 			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 			>
 			<Grid.ColumnDefinitions> 
@@ -152,102 +138,64 @@
 			</glyphs:GlyphButton>
 		</Grid>
 
-		<!-- Rotates Buttons--> 
+		<!-- Prompt Rotate Buttons--> 
 		<TextBlock
-			Grid.Row="5" Grid.ColumnSpan="3"
+			Grid.Row="3" Grid.ColumnSpan="5"
 			Text="{DynamicResource Workflow.Straighten.Rotate}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
-		<glyphs:GlyphButton
-			Grid.Row="6" Grid.Column="0"
-			Style="{StaticResource PanelIconButton}"
-			Margin="4"
-			Text="{DynamicResource Workflow.Straighten.RotateMinusLarge}"
-			GlyphSource="arrow_rotate_counterclockwise"
-			Command="{Binding OnRotateCounterClockwiseLarge}"
-			GlyphStrokeThickness="0.05" 
-			/>
 
-		<glyphs:GlyphButton
-			Grid.Row="6" Grid.Column="1"
-			Style="{StaticResource PanelIconButton}"
-			Text="{DynamicResource Workflow.Straighten.ClearRotate}"
-			GlyphSource="dismiss"
-			Command="{Binding OnClearRotate}"
-			Margin="4"
-			GlyphStrokeThickness="0.05" 
-			/>
-		<glyphs:GlyphButton
-			Grid.Row="6" Grid.Column="2"
-			Style="{StaticResource PanelIconButton}"
-			Text="{DynamicResource Workflow.Straighten.RotatePlusLarge}"
-			GlyphSource="arrow_rotate_clockwise"
-			Command="{Binding OnRotateClockwiseLarge}"
-			Margin="4"
-			GlyphStrokeThickness="0.05" 
-			/>
-
-		<glyphs:GlyphButton
-			Grid.Row="7" Grid.Column="0"
-			Style="{StaticResource PanelIconButton}"
-			Margin="4"
-			Text="{DynamicResource Workflow.Straighten.RotateMinusSmall}"
-			GlyphSource="arrow_rotate_counterclockwise"
-			Command="{Binding OnRotateCounterClockwiseSmall}"
-			GlyphStrokeThickness="0.05" 
-			/>
-		<glyphs:GlyphButton
-			Grid.Row="7" Grid.Column="2"
-			Style="{StaticResource PanelIconButton}"
-			Text="{DynamicResource Workflow.Straighten.RotatePlusSmall}"
-			GlyphSource="arrow_rotate_clockwise"
-			Command="{Binding OnRotateClockwiseSmall}"
-			Margin="4"
-			GlyphStrokeThickness="0.05" 
-			/>
-
-		<!-- Workflow Button Grid --> 
+		<!-- Rotates Buttons--> 
 		<Grid
-			Grid.Row="9" Grid.ColumnSpan="3"
-			Margin="0 0 0 0"
-			HorizontalAlignment="Stretch"
-			Height="72"
+			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 			>
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
+
 			<glyphs:GlyphButton
-				Grid.Column="0"
-				Style="{StaticResource ControlIconButton}"
-				GlyphSource="next"
-				GlyphAngle="180"
-				Text="{DynamicResource Workflow.Back}"
-				Command="{ReflectionBinding OnBack}"
-	    		/>
+				Grid.Row="6" Grid.Column="0"
+				Style="{StaticResource PanelIconButton}"
+				Margin="4"
+				Text="{DynamicResource Workflow.Straighten.RotateMinusLarge}"
+				GlyphSource="arrow_rotate_counterclockwise"
+				Command="{Binding OnRotateCounterClockwiseLarge}"
+				GlyphStrokeThickness="0.05" 
+				/>
+
 			<glyphs:GlyphButton
-				Grid.Column="1"
-				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
-				GlyphSource="next"
-				Text="{DynamicResource Workflow.Next}"
-				Command="{ReflectionBinding OnNext}"
-	    		/>
+				Grid.Row="6" Grid.Column="1"
+				Style="{StaticResource PanelIconButton}"
+				Margin="4"
+				Text="{DynamicResource Workflow.Straighten.RotateMinusSmall}"
+				GlyphSource="arrow_rotate_counterclockwise"
+				Command="{Binding OnRotateCounterClockwiseSmall}"
+				GlyphStrokeThickness="0.05" 
+				/>
+			<glyphs:GlyphButton
+				Grid.Row="6" Grid.Column="3"
+				Style="{StaticResource PanelIconButton}"
+				Text="{DynamicResource Workflow.Straighten.RotatePlusSmall}"
+				GlyphSource="arrow_rotate_clockwise"
+				Command="{Binding OnRotateClockwiseSmall}"
+				Margin="4"
+				GlyphStrokeThickness="0.05" 
+				/>
+			<glyphs:GlyphButton
+				Grid.Row="6" Grid.Column="4"
+				Style="{StaticResource PanelIconButton}"
+				Text="{DynamicResource Workflow.Straighten.RotatePlusLarge}"
+				GlyphSource="arrow_rotate_clockwise"
+				Command="{Binding OnRotateClockwiseLarge}"
+				Margin="4"
+				GlyphStrokeThickness="0.05" 
+				/>
 		</Grid>
-		<!-- Separator --> 
-		<Separator 
-			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="10"
-			Height="1"
-			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
-			>
-			<Separator.Background>
-				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-					<GradientStop Color="Transparent" Offset="0.0" />
-					<GradientStop Color="{StaticResource LightAqua_1_040_Color}" Offset="0.5" />
-					<GradientStop Color="Transparent" Offset="1.0" />
-				</LinearGradientBrush>
-			</Separator.Background>
-		</Separator>
 	</Grid>
 </UserControl>
