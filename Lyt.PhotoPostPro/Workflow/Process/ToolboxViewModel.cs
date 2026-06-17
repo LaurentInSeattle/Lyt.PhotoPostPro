@@ -2,8 +2,6 @@
 
 public interface IToolboxViewModel
 {
-    // void OnModelStepUpdated(PostProcessStep step); 
-    
     void OnBeforeBack();
     void OnBeforeReset();
     void OnBeforeNext();
@@ -33,7 +31,12 @@ public partial class ToolboxViewModel<TView, TStep> :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        this.ToolboxHostViewModel.Title = this.Title; 
+        Dispatch.OnUiThread(() =>
+        {
+            this.ToolboxHostViewModel.Title = this.Title;
+            var step = this.ModelStep<TStep>();
+            this.OnModelStepUpdated(step);
+        }, DispatcherPriority.Background);
     }
 
     public void Receive(ModelStepUpdatedMessage message)
@@ -59,7 +62,7 @@ public partial class ToolboxViewModel<TView, TStep> :
     
     protected virtual string Title => " *** ? ***";
 
-    // Interface implementation must be public, and same below 6 times 
+    // Interface implementations must be public, and same below 6 times 
     public virtual void OnModelStepUpdated (TStep step) { }
 
     public virtual void OnBeforeBack() { }

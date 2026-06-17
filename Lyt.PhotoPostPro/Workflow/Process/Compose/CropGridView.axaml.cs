@@ -2,7 +2,7 @@ namespace Lyt.PhotoPostPro.Workflow.Process.Compose;
 
 public partial class CropGridView : View
 {
-    private bool doNotUpdate;
+    private bool doNotUpdateOnLayoutUpdated;
 
     public void Activate()
     {
@@ -19,7 +19,7 @@ public partial class CropGridView : View
             return;
         }
 
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             var zero = new GridLength(0, GridUnitType.Pixel);
             var cols = this.CropGrid.ColumnDefinitions;
@@ -36,8 +36,7 @@ public partial class CropGridView : View
             double dx = this.Bounds.Width;
             double dy = this.Bounds.Height;
             cropGridViewModel.OnCropRectangleChanged(0, 0, dx, dy);
-        }
-        this.doNotUpdate = false;
+        });
     }
 
     internal void SetCrop(int x, int y, int dx, int dy)
@@ -47,7 +46,7 @@ public partial class CropGridView : View
             return;
         }
 
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             double w = this.Bounds.Width;
             double h = this.Bounds.Height;
@@ -65,40 +64,36 @@ public partial class CropGridView : View
                 bottom.Height = new GridLength(h - y - dy, GridUnitType.Pixel); ;
 
                 cropGridViewModel.OnCropRectangleChanged(x, y, dx, dy);
-            } 
-        }
-
-        this.doNotUpdate = false;
+            }
+        });
     }
 
 
     internal void Left(int delta)
     {
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             var cols = this.CropGrid.ColumnDefinitions;
             var left = cols[0];
             GridLength width = left.Width;
             if (width.IsAbsolute)
             {
-                double newValue = width.Value + delta; 
-                if( newValue < 0.0)
+                double newValue = width.Value + delta;
+                if (newValue < 0.0)
                 {
                     newValue = 0.0;
                 }
 
                 left.Width = new GridLength(newValue, GridUnitType.Pixel);
-                this.Update();
+                this.UpdateCropRectangleChanged();
             }
-        }
-
-        this.doNotUpdate = false;
+        });
     }
 
     internal void Right(int delta)
     {
         double dx = this.Bounds.Width;
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             var cols = this.CropGrid.ColumnDefinitions;
             var right = cols[4];
@@ -117,16 +112,14 @@ public partial class CropGridView : View
                 }
 
                 right.Width = new GridLength(newValue, GridUnitType.Pixel);
-                this.Update();
+                this.UpdateCropRectangleChanged();
             }
-        }
-
-        this.doNotUpdate = false;
+        });
     }
 
     internal void Top(int delta)
     {
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             var rows = this.CropGrid.RowDefinitions;
             var top = rows[0];
@@ -140,17 +133,15 @@ public partial class CropGridView : View
                 }
 
                 top.Height = new GridLength(newValue, GridUnitType.Pixel);
-                this.Update();
+                this.UpdateCropRectangleChanged();
             }
-        }
-
-        this.doNotUpdate = false;
+        });
     }
 
     internal void Bottom(int delta)
     {
         double dy = this.Bounds.Height;
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
             var rows = this.CropGrid.RowDefinitions;
             var bottom = rows[4];
@@ -168,26 +159,24 @@ public partial class CropGridView : View
                 }
 
                 bottom.Height = new GridLength(newValue, GridUnitType.Pixel);
-                this.Update();
+                this.UpdateCropRectangleChanged();
             }
-        }
-
-        this.doNotUpdate = false;
+        });
     }
 
     private void OnLayoutUpdated(object? sender, EventArgs e)
     {
         // Debug.WriteLine(" CropGrid View: OnLayoutUpdated"); 
 
-        if (this.doNotUpdate)
+        if (this.doNotUpdateOnLayoutUpdated)
         {
             return;
         }
 
-        this.Update();
+        this.UpdateCropRectangleChanged();
     }
 
-    private void Update()
+    private void UpdateCropRectangleChanged()
     {
         if (this.DataContext is not CropGridViewModel cropGridViewModel)
         {

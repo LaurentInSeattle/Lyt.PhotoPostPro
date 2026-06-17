@@ -14,20 +14,14 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     [ObservableProperty]
     public partial double SaturationSliderValue { get; set; }
 
-    public override void OnViewLoaded()
-    {
-        base.OnViewLoaded();
-        this.OnClearWhiteBalance();
-    }
+    public override void OnModelStepUpdated(WhiteBalanceStep step) => this.UpdateSliders(step);
 
-    [RelayCommand]
-    public void OnClearWhiteBalance()
+    private void UpdateSliders(WhiteBalanceStep step)
     {
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdate, () =>
         {
-            this.SaturationSliderValue = 0.4;
-        }
-        this.doNotUpdate = false;
+            this.SaturationSliderValue = step.SaturationThreshold;
+        });
 
         this.UpdateModel();
     }

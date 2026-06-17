@@ -15,6 +15,12 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
         this.Shift = 0;
     }
 
+    public override Frame? Reset()
+    {
+        this.Initialize();
+        return base.Reset();
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
@@ -49,18 +55,5 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
         this.Gain = gain;
         this.Shift = shift;
         return this.Transform(withFrame: true);
-    }
-
-    internal Frame? Clear()
-    {
-        this.Initialize();
-
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        this.ResultImage = this.SourceImage;
-        return this.SourceImage.ToFrame();
     }
 }

@@ -53,8 +53,6 @@ public sealed partial class StraightenToolboxViewModel :
 
     public override void OnModelStepUpdated(StraightenStep step) => this.UpdateRotationString(step); 
 
-    // public override void Activate(object? _) => this.UpdateRotationString();
-
     [RelayCommand]
     public void OnRotateClockwiseLarge() => base.model.Rotate(isClockwise: true, 1.0f);
 

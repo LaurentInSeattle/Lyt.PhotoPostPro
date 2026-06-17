@@ -21,21 +21,15 @@ public sealed partial class RecoveryToolboxViewModel :
     [ObservableProperty]
     public partial double ShadowsSliderValue { get; set; }
 
-    public override void OnViewLoaded()
-    {
-        base.OnViewLoaded();
-        this.OnClearRecovery();
-    }
+    public override void OnModelStepUpdated(RecoveryStep step) => this.UpdateSliders(step);
 
-    [RelayCommand]
-    public void OnClearRecovery()
+    private void UpdateSliders(RecoveryStep step)
     {
-        this.doNotUpdate = true;
+        With.Flag(ref this.doNotUpdate, () =>
         {
-            this.HighlightsSliderValue = 0.0;
-            this.ShadowsSliderValue = 0.0;
-        }
-        this.doNotUpdate = false;
+            this.HighlightsSliderValue = step.HighlightAmount;
+            this.ShadowsSliderValue = step.ShadowAmount;
+        });
 
         this.UpdateModel();
     }
