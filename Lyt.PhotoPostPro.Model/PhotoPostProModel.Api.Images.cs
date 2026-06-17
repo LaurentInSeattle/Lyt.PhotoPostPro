@@ -138,18 +138,6 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public bool ClearExposure() =>
-        this.ApiAction(() =>
-        {
-            if (this.Workflow.CurrentStep is ExposureStep exposureStep)
-            {
-                this.LastFrame = exposureStep.Clear();
-                return true;
-            }
-
-            return false;
-        });
-
     public void AdjustExposure(double gamma, double gain, int shift) =>
         this.ApiAction(() =>
         {
