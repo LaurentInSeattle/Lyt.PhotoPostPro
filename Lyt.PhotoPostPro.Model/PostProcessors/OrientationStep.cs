@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-internal class OrientationStep() : PostProcessStep(PostProcessStep.OrientationStepName)
+public class OrientationStep() : PostProcessStep(PostProcessStep.OrientationStepName)
 {
     public int RotationAngle { get; set; } // Degrees
 

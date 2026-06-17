@@ -68,6 +68,13 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public bool Back() =>
+        this.ApiAction(() =>
+        {
+            this.Workflow.Back();
+            return false;
+        });
+
     public bool Reset() => 
         this.ApiAction(() =>
         {
@@ -75,6 +82,13 @@ public sealed partial class PhotoPostProModel : ModelBase
             return true;
         });
 
+
+    public bool Next() =>
+        this.ApiAction(() =>
+        {
+            this.Workflow.Next();
+            return false;
+        });
 
     public bool Rotate(bool isClockwise) =>
         this.ApiAction(() =>

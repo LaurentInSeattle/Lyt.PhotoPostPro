@@ -17,7 +17,7 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
     protected override string Title => this.Localize("Workflow.Straighten.Title");
 
     [ObservableProperty]
-    public partial SolidColorBrush Color_0 {  get ; set; }
+    public partial SolidColorBrush Color_0 { get; set; }
 
     [ObservableProperty]
     public partial SolidColorBrush Color_1 { get; set; }
@@ -31,6 +31,9 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
     [ObservableProperty]
     public partial SolidColorBrush Color_4 { get; set; }
 
+    [ObservableProperty]
+    public partial string RotationAngleString { get; set; } = string.Empty;
+
     [RelayCommand]
     public void OnToggleVerticalGuideline() => this.viewModel.VerticalGuideLineViewModel.ToggleVisibility();
 
@@ -40,23 +43,50 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
     [RelayCommand]
     public void OnColorSelect(string parameter)
     {
-        if ( int.TryParse(parameter, out int colorIndex) )
+        if (int.TryParse(parameter, out int colorIndex))
         {
             this.viewModel.VerticalGuideLineViewModel.Colorize(colorIndex);
             this.viewModel.HorizontalGuideLineViewModel.Colorize(colorIndex);
         }
     }
 
-    [RelayCommand]
-    public void OnRotateClockwiseLarge() => base.model.Rotate(isClockwise: true, 1.0f);
+    public override void OnAfterReset() => this.UpdateRotationString();
+
+    public override void Activate(object? _) => this.UpdateRotationString();
 
     [RelayCommand]
-    public void OnRotateCounterClockwiseLarge() => base.model.Rotate(isClockwise: false, 1.0f);
+    public void OnRotateClockwiseLarge()
+    {
+        base.model.Rotate(isClockwise: true, 1.0f);
+        this.UpdateRotationString();
+    }
 
     [RelayCommand]
-    public void OnRotateClockwiseSmall() => base.model.Rotate(isClockwise: true, 0.1f);
+    public void OnRotateCounterClockwiseLarge()
+    {
+        base.model.Rotate(isClockwise: false, 1.0f);
+        this.UpdateRotationString();
+    }
 
     [RelayCommand]
-    public void OnRotateCounterClockwiseSmall() => base.model.Rotate(isClockwise: false, 0.1f);
+    public void OnRotateClockwiseSmall()
+    {
+        base.model.Rotate(isClockwise: true, 0.1f);
+        this.UpdateRotationString();
+    }
 
+    [RelayCommand]
+    public void OnRotateCounterClockwiseSmall()
+    {
+        base.model.Rotate(isClockwise: false, 0.1f);
+        this.UpdateRotationString();
+    }
+
+    private void UpdateRotationString()
+    {
+        var step = base.ModelStep<StraightenStep>();
+        float value = step.RotationAngle;
+        string stringValue = value.ToString("+0.0;-0.0;0.0");
+        this.RotationAngleString = stringValue + " \u00B0"; // Unicode for degree symbol 
+    }
 }

@@ -120,6 +120,7 @@ global using Lyt.PhotoPostPro.Workflow.Single;
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Frames;
 global using Lyt.PhotoPostPro.Model.Messaging;
+global using Lyt.PhotoPostPro.Model.PostProcessors;
 global using Lyt.PhotoPostPro.Model.ProcessModels;
 global using Lyt.PhotoPostPro.Model.ProjectModels;
 global using Lyt.PhotoPostPro.Model.Utilities;

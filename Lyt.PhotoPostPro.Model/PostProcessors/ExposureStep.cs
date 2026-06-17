@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-internal class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
+public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
 {
     public double Gamma { get; set; }
     

@@ -6,3 +6,12 @@ Issues
 
 - Problems with Next , Back , Next  
 
+- Create constants for special UNIcode characters 
+
+- Zoom on viewer windows 
+
+- Tools to show both before / after or just after 
+
+- Floating windows 
+
+- Visual issues when hovering quickly above glyph buttons 

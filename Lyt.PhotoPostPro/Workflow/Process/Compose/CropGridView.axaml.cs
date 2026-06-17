@@ -4,6 +4,11 @@ public partial class CropGridView : View
 {
     private bool doNotUpdate;
 
+    public CropGridView()
+    {
+        Debug.WriteLine(" new CropGridView"); 
+    }
+
     public void Activate()
     {
         this.LayoutUpdated -= this.OnLayoutUpdated;
@@ -40,6 +45,38 @@ public partial class CropGridView : View
 
         this.doNotUpdate = false;
     }
+
+    internal void SetCrop(int x, int y, int dx, int dy)
+    {
+        if (this.DataContext is not CropGridViewModel cropGridViewModel)
+        {
+            return;
+        }
+
+        this.doNotUpdate = true;
+        {
+            double w = this.Bounds.Width;
+            double h = this.Bounds.Height;
+            if (w > 0.0 && h > 0.0)
+            {
+                var cols = this.CropGrid.ColumnDefinitions;
+                var left = cols[0];
+                left.Width = new GridLength(x, GridUnitType.Pixel);
+                var right = cols[4];
+                right.Width = new GridLength(w - x - dx, GridUnitType.Pixel);
+                var rows = this.CropGrid.RowDefinitions;
+                var top = rows[0];
+                top.Height = new GridLength(x, GridUnitType.Pixel);
+                var bottom = rows[4];
+                bottom.Height = new GridLength(h - y - dy, GridUnitType.Pixel); ;
+
+                cropGridViewModel.OnCropRectangleChanged(x, y, dx, dy);
+            } 
+        }
+
+        this.doNotUpdate = false;
+    }
+
 
     internal void Left(int delta)
     {

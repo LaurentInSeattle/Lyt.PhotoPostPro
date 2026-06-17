@@ -25,10 +25,11 @@ public sealed class PostProcessWorkflow
             // Geometry 
             orientationStep, straightenStep, compositionStep, 
             
-            //// Exposure 
-            exposureStep, recoveryStep, whiteBalanceStep,
+            // Exposure 
+            exposureStep, recoveryStep, 
 
             // Color 
+            whiteBalanceStep,
         ];
 
         int stepsCount = this.Steps.Count;
@@ -64,12 +65,10 @@ public sealed class PostProcessWorkflow
         {
             step.Initialize();
             step.IsCurrent = false;
-            step.IsSkipped = false;
         }
 
         this.CurrentStepIndex = 0;
         this.CurrentStep.IsCurrent = true;
-        this.CurrentStep.IsSkipped = false;
         this.CurrentStep.SourceImage = sourceImage;
         this.CurrentStep.ResultImage = sourceImage;
         this.Notify(null, WorkflowUpdateKind.Begin);
@@ -94,9 +93,8 @@ public sealed class PostProcessWorkflow
         {
             // old step 
             this.CurrentStep.IsCurrent = false;
-            this.CurrentStep.IsSkipped = false;
             var nextSourceImage = this.CurrentStep.ResultImage;
-            this.CurrentStep.Save();
+            this.CurrentStep.Deactivate(WorkflowUpdateKind.Next);
 
             // next
             this.CurrentStepIndex++;
@@ -104,11 +102,7 @@ public sealed class PostProcessWorkflow
             // new step
             this.CurrentStep.SourceImage = nextSourceImage;
             this.CurrentStep.IsCurrent = true;
-            this.CurrentStep.IsSkipped = false;
-
-            // Will only create a ResultImage if able 
-            // Frame will be created when the new view gets activated 
-            // _ = this.CurrentStep.Transform(withFrame: false);
+            this.CurrentStep.Activate(WorkflowUpdateKind.Next);
 
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
@@ -124,14 +118,14 @@ public sealed class PostProcessWorkflow
         {
             // old step 
             this.CurrentStep.IsCurrent = false;
-            this.CurrentStep.IsSkipped = false;
+            this.CurrentStep.Deactivate(WorkflowUpdateKind.Back);
 
             // previous
             this.CurrentStepIndex--;
 
             // new step
             this.CurrentStep.IsCurrent = true;
-            this.CurrentStep.IsSkipped = false;
+            this.CurrentStep.Activate(WorkflowUpdateKind.Back);
 
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex + 1], WorkflowUpdateKind.Back);

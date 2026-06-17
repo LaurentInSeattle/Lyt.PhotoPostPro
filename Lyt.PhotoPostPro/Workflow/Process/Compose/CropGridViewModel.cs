@@ -56,6 +56,8 @@ public sealed partial class CropGridViewModel(
 
     internal void ClearCrop() => this.View.ClearCrop();
 
+    internal void SetCropRectangle(int x, int y, int dx, int dy) => this.View.SetCrop(x, y, dx, dy);
+
     internal void OnCropRectangleChanged(double x, double y, double dx, double dy)
     {
         int ix = (int)Math.Round(x);

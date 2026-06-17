@@ -63,9 +63,6 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
     public void OnTogglePreview() => this.viewModel.CropGridViewModel.TogglePreview();
 
     [RelayCommand]
-    public void OnClearCrop() => this.viewModel.CropGridViewModel.ClearCrop();
-
-    [RelayCommand]
     public void OnPlusTop()=> this.viewModel.CropGridViewModel.OnPlusTop();
 
     [RelayCommand]
@@ -107,9 +104,20 @@ public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeTo
         this.AspectRatioValueString = aspectRatio.ToString("F2");
     }
 
-    public override void OnBeforeBack() => this.viewModel.CropGridViewModel.ClearCrop();
+    public override void OnAfterReset() => this.SetCropRectangle();
 
-    public override void OnBeforeReset() => this.viewModel.CropGridViewModel.ClearCrop();
+    public override void Activate(object? _) 
+        => Dispatch.OnUiThread (()=> { this.SetCropRectangle(); }, DispatcherPriority.Background);
+
+    private void SetCropRectangle()
+    {
+        var step = base.ModelStep<CompositionStep>();
+        int ix = step.X;
+        int iy = step.Y;
+        int idx = step.Dx; 
+        int idy = step.Dy;
+        this.viewModel.CropGridViewModel.SetCropRectangle ( ix, iy, idx, idy);
+    } 
 
     public override void OnBeforeNext() => this.model.Crop(this.x, this.y, this.dx, this.dy);
 

@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStepName)
+public class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStepName)
 {
     public float RotationAngle { get ; set ; } // Degrees
 

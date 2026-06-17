@@ -146,7 +146,7 @@
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 
-		<!-- Rotates Buttons--> 
+		<!-- Rotates Buttons - string value in the middle --> 
 		<Grid
 			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
 			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -158,7 +158,6 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-
 			<glyphs:GlyphButton
 				Grid.Row="6" Grid.Column="0"
 				Style="{StaticResource PanelIconButton}"
@@ -168,7 +167,6 @@
 				Command="{Binding OnRotateCounterClockwiseLarge}"
 				GlyphStrokeThickness="0.05" 
 				/>
-
 			<glyphs:GlyphButton
 				Grid.Row="6" Grid.Column="1"
 				Style="{StaticResource PanelIconButton}"
@@ -177,6 +175,12 @@
 				GlyphSource="arrow_rotate_counterclockwise"
 				Command="{Binding OnRotateCounterClockwiseSmall}"
 				GlyphStrokeThickness="0.05" 
+				/>
+			<TextBlock
+				Grid.Row="3" Grid.ColumnSpan="5"
+				Text="{Binding RotationAngleString}"
+				Theme="{StaticResource Large}"
+				TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton
 				Grid.Row="6" Grid.Column="3"

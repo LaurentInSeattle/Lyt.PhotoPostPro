@@ -31,9 +31,6 @@ public class PostProcessStep(string name)
     public bool IsCurrent { get; set; }
 
     [JsonIgnore]
-    public bool IsSkipped { get; set; }
-
-    [JsonIgnore]
     public Image<Rgb48>? SourceImage { get; set; }
 
     [JsonIgnore]
@@ -58,11 +55,10 @@ public class PostProcessStep(string name)
         return this.SourceImage.ToFrame();
     }
 
-    // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Save() { }
+    // Default implementations do nothing. Override in derived classes if needed.
+    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) { }
 
-    // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Skip() { }
+    public virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual Frame? Transform(bool withFrame = true) => null;

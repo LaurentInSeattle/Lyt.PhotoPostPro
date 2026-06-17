@@ -26,6 +26,11 @@ public sealed partial class ToolboxHostViewModel :
 
     public void Receive(WorkflowUpdateMessage message)
     {
+        if (message.Kind == WorkflowUpdateKind.Reset)
+        {
+            return;
+        } 
+
         Dispatch.OnUiThread(() => 
         {
             this.BackIsDisabled = !this.model.Workflow.CanGoBack;
@@ -40,7 +45,7 @@ public sealed partial class ToolboxHostViewModel :
     public void OnBack() 
     {
         this.ActiveToolboxViewModel?.OnBeforeBack();
-        this.model.Workflow.Back();
+        this.model.Back();
     }
 
     [RelayCommand]
@@ -54,6 +59,6 @@ public sealed partial class ToolboxHostViewModel :
     public void OnNext()
     {
         this.ActiveToolboxViewModel?.OnBeforeNext();
-        this.model.Workflow.Next();
+        this.model.Next();
     }
 }
