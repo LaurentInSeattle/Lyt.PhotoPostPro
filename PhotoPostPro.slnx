@@ -16,6 +16,7 @@
   </Folder>
   <Folder Name="/Solution Folder/">
     <File Path="Editing.txt" />
+    <File Path="Issues.txt" />
     <File Path="LICENSE" />
     <File Path="Notes.txt" />
     <File Path="README.md" />

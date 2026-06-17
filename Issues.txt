@@ -1,0 +1,8 @@
+Issues 
+
+- Size of guidelines in views 
+
+- Decoding twice the initial image 
+
+- Problems with Next , Back , Next  
+
