@@ -2,13 +2,14 @@
 
 internal class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName)
 {
-    private float shadowAmount;
-    private float highlightAmount;
+    public float ShadowAmount { get; set; }
+
+    public float HighlightAmount { get; set; }
 
     public override void Initialize()
     {
-        this.shadowAmount = 0.0f;
-        this.highlightAmount = 0.0f;
+        this.ShadowAmount = 0.0f;
+        this.HighlightAmount = 0.0f;
     }
 
     public override Frame? Transform(bool withFrame = true)
@@ -20,7 +21,7 @@ internal class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName
 
         var clone = this.SourceImage.Clone();
 
-        clone.HighlightsShadows(this.highlightAmount, this.shadowAmount); 
+        clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount); 
 
         base.RecalculateHistograms(clone);
 
@@ -47,8 +48,8 @@ internal class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName
 
     internal Frame? HighlightsShadows(float highlightAmount, float shadowAmount)
     {
-        this.highlightAmount = highlightAmount;
-        this.shadowAmount = shadowAmount;
+        this.HighlightAmount = highlightAmount;
+        this.ShadowAmount = shadowAmount;
         return this.Transform(withFrame: true);
     }
 

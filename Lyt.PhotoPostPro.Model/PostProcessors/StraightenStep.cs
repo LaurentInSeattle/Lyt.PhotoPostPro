@@ -2,9 +2,9 @@
 
 internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStepName)
 {
-    private float rotationAngle; // Degrees 
+    public float RotationAngle { get ; set ; } // Degrees
 
-    public override void Initialize() => this.rotationAngle = 0.0f;
+    public override void Initialize() => this.RotationAngle = 0.0f;
 
     public override Frame? Reset()
     {
@@ -15,7 +15,7 @@ internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStep
     internal Frame? Rotate(bool isClockwise, float angle)
     {
         float angleDelta = isClockwise ? angle : -angle;
-        this.rotationAngle += angleDelta;
+        this.RotationAngle += angleDelta;
         this.Normalize();
         return this.Transform();
     }
@@ -28,10 +28,10 @@ internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStep
         }
 
         var clone = this.SourceImage.Clone();
-        bool isChanged = Math.Abs(this.rotationAngle) > 0.05;
+        bool isChanged = Math.Abs(this.RotationAngle) > 0.05;
         if (isChanged)
         {
-            clone.Mutate(x => x.Rotate(this.rotationAngle));
+            clone.Mutate(x => x.Rotate(this.RotationAngle));
         }
 
         this.ResultImage = isChanged ? clone : this.SourceImage;
@@ -44,7 +44,7 @@ internal class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStep
         // Because of this, the result of the operation always takes the sign of the left-hand
         // operand (the dividend).
         // So... first add 360 as a preventive measure 
-        this.rotationAngle += 360.0f;
-        this.rotationAngle = ((this.rotationAngle + 180.0f) % 360.0f) - 180.0f;
+        this.RotationAngle += 360.0f;
+        this.RotationAngle = ((this.RotationAngle + 180.0f) % 360.0f) - 180.0f;
     }
 }

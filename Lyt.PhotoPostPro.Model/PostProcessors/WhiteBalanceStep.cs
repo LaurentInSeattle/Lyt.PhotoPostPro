@@ -2,18 +2,19 @@
 
 public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBalanceStepName)
 {
-    public enum Algorithm
+    public enum WhiteBalanceAlgorithm
     {
         FilteredGrayWorldAWB, 
     }
 
-    private float saturationThreshold;
-    private Algorithm algorithm;
+    public float SaturationThreshold { get ; set; }
+
+    public WhiteBalanceAlgorithm Algorithm { get; set; }
 
     public override void Initialize()
     {
-        this.algorithm = Algorithm.FilteredGrayWorldAWB;
-        this.saturationThreshold = 0.4f;
+        this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
+        this.SaturationThreshold = 0.4f;
     }
 
     public override Frame? Transform(bool withFrame = true)
@@ -25,7 +26,7 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
 
         var clone = this.SourceImage.Clone();
 
-        clone.FilteredGrayWorldAWB(this.saturationThreshold); 
+        clone.FilteredGrayWorldAWB(this.SaturationThreshold); 
         base.RecalculateHistograms(clone);
 
         bool isChanged = true ; 
@@ -50,8 +51,8 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
 
     internal Frame? FilteredGrayWorldAWB(float saturationThreshold) 
     {
-        this.algorithm = Algorithm.FilteredGrayWorldAWB;
-        this.saturationThreshold = saturationThreshold;
+        this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
+        this.SaturationThreshold = saturationThreshold;
         return this.Transform(withFrame: true);
     }
 

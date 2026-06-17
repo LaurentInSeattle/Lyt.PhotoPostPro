@@ -2,10 +2,13 @@
 
 internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStepName)
 {
-    private int x; // pixels 
-    private int y; // pixels 
-    private int dx; // pixels 
-    private int dy; // pixels 
+    public int X { get ; set ; }
+ 
+    public int Y { get; set; }
+
+    public int Dx { get; set; }
+
+    public int Dy { get; set; }
 
     public override void Initialize() => this.Clear() ;
 
@@ -17,10 +20,10 @@ internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionSt
 
     internal Frame? Crop(int x, int y, int dx, int dy)
     {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
+        this.X = x;
+        this.Y = y;
+        this.Dx = dx;
+        this.Dy = dy;
         return this.Transform();
     }
 
@@ -31,9 +34,9 @@ internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionSt
             return null;
         }
 
-        var cropRectangle = new Rectangle(this.x, this.y, this.dx, this.dy);
+        var cropRectangle = new Rectangle(this.X, this.Y, this.Dx, this.Dy);
         bool isChanged = 
-            ( this.dx != 0 && this.dy != 0)  && 
+            ( this.Dx != 0 && this.Dy != 0)  && 
             ( cropRectangle.Height != this.SourceImage.Height || cropRectangle.Width != this.SourceImage.Width ) ;
         if (isChanged)
         {
@@ -54,9 +57,9 @@ internal class CompositionStep() : PostProcessStep(PostProcessStep.CompositionSt
 
     private void Clear()
     {
-        this.x = 0;
-        this.y = 0;
-        this.dx = 0;
-        this.dy = 0;
+        this.X = 0;
+        this.Y = 0;
+        this.Dx = 0;
+        this.Dy = 0;
     }
 }

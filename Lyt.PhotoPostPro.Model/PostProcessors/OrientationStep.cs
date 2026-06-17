@@ -1,14 +1,15 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationStepName)
+internal class OrientationStep() : PostProcessStep(PostProcessStep.OrientationStepName)
 {
-    private int rotationAngle; // Degrees 
-    private bool isMirrored;
+    public int RotationAngle { get; set; } // Degrees
+
+    public bool IsMirrored { get; set; }
 
     public override void Initialize()
     {
-        this.rotationAngle = 0;
-        this.isMirrored = false;
+        this.RotationAngle = 0;
+        this.IsMirrored = false;
     }
 
     public override Frame? Reset()
@@ -19,8 +20,8 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
 
     internal Frame? Rotate(bool isClockwise)
     {
-        int angle = isClockwise ? 90 : -90; 
-        this.rotationAngle += angle;
+        int angle = isClockwise ? 90 : -90;
+        this.RotationAngle += angle;
         this.Normalize();
         return this.Transform();
     }
@@ -31,20 +32,20 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
     {
         if (isMirror)
         {
-            this.isMirrored = ! this.isMirrored;
-        } 
+            this.IsMirrored = !this.IsMirrored;
+        }
         else
         {
-            this.rotationAngle += 180; 
+            this.RotationAngle += 180;
             this.Normalize();
         }
 
         return this.Transform();
     }
 
-    public override Frame? Transform (bool withFrame = true)
+    public override Frame? Transform(bool withFrame = true)
     {
-        if ( this.SourceImage is null )
+        if (this.SourceImage is null)
         {
             return null;
         }
@@ -52,13 +53,13 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
         RotateMode rotateMode =
             !this.IsRotated ?
             RotateMode.None :
-                this.rotationAngle == -90 ?
+                this.RotationAngle == -90 ?
                     RotateMode.Rotate270 :
-                    this.rotationAngle == 90 ? RotateMode.Rotate90 : RotateMode.Rotate180;
-        FlipMode flipMode = this.isMirrored ? FlipMode.Horizontal : FlipMode.None;
+                    this.RotationAngle == 90 ? RotateMode.Rotate90 : RotateMode.Rotate180;
+        FlipMode flipMode = this.IsMirrored ? FlipMode.Horizontal : FlipMode.None;
 
         var clone = this.SourceImage.Clone();
-        bool isChanged = flipMode != FlipMode.None || rotateMode != RotateMode.None; 
+        bool isChanged = flipMode != FlipMode.None || rotateMode != RotateMode.None;
         if (isChanged)
         {
             clone.Mutate(x => x.RotateFlip(rotateMode, flipMode));
@@ -68,7 +69,7 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
         return withFrame ? clone.ToFrame() : null;
     }
 
-    private bool IsRotated => this.rotationAngle != 0 ;
+    private bool IsRotated => this.RotationAngle != 0;
 
     private void Normalize()
     {
@@ -76,7 +77,7 @@ internal class OrientationStep (): PostProcessStep (PostProcessStep.OrientationS
         // Because of this, the result of the operation always takes the sign of the left-hand
         // operand (the dividend).
         // So... first add 360 as a preventive measure 
-        this.rotationAngle += 360; 
-        this.rotationAngle = ((this.rotationAngle + 180) % 360) - 180;
+        this.RotationAngle += 360;
+        this.RotationAngle = ((this.RotationAngle + 180) % 360) - 180;
     }
 }

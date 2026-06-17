@@ -2,15 +2,17 @@
 
 internal class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
 {
-    double gamma;
-    double gain;
-    int shift;
+    public double Gamma { get; set; }
+    
+    public double Gain { get; set; }
+
+    public int Shift { get; set; }
 
     public override void Initialize()
     {
-        this.gamma = 1.0;
-        this.gain = 1.0;
-        this.shift = 0;
+        this.Gamma = 1.0;
+        this.Gain = 1.0;
+        this.Shift = 0;
     }
 
     public override Frame? Transform(bool withFrame = true)
@@ -22,12 +24,12 @@ internal class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName
 
         var clone = this.SourceImage.Clone();
         bool isChanged =
-            Math.Abs(1 - this.gamma) > 0.001 ||
-            Math.Abs(1 - this.gain) > 0.001 ||
-            this.shift != 0;
+            Math.Abs(1 - this.Gamma) > 0.001 ||
+            Math.Abs(1 - this.Gain) > 0.001 ||
+            this.Shift != 0;
         if (isChanged)
         {
-            ushort[] lut = clone.Gamma(this.gamma, this.gain, this.shift);
+            ushort[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
         }
@@ -43,9 +45,9 @@ internal class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName
 
     internal Frame? AdjustExposure(double gamma, double gain, int shift)
     {
-        this.gamma = gamma;
-        this.gain = gain;
-        this.shift = shift;
+        this.Gamma = gamma;
+        this.Gain = gain;
+        this.Shift = shift;
         return this.Transform(withFrame: true);
     }
 
