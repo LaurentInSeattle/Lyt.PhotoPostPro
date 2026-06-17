@@ -218,6 +218,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         bool success = action();
         if (success)
         {
+            new ModelStepUpdatedMessage(Step: this.Workflow.CurrentStep).Publish(); 
             if (notify)
             {
                 this.IsUpdatePending = true;

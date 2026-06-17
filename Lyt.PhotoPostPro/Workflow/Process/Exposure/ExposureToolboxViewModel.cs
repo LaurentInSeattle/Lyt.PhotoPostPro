@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Exposure;
 
-public sealed partial class ExposureToolboxViewModel : ToolboxViewModel<ExposureToolboxView>
+public sealed partial class ExposureToolboxViewModel : 
+    ToolboxViewModel<ExposureToolboxView, ExposureStep>
 {
     private bool doNotUpdate; 
     private double gamma ;

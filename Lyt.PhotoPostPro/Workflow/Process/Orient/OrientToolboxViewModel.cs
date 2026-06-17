@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Orient;
 
-public sealed partial class OrientToolboxViewModel : ToolboxViewModel<OrientToolboxView>
+public sealed partial class OrientToolboxViewModel : ToolboxViewModel<OrientToolboxView, OrientationStep>
 {
     protected override string Title => this.Localize("Workflow.Orient.Title") ;
 

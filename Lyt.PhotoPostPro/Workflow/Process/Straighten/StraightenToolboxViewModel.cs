@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Straighten;
 
-public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<StraightenToolboxView>
+public sealed partial class StraightenToolboxViewModel : 
+    ToolboxViewModel<StraightenToolboxView, StraightenStep>
 {
     private readonly StraightenViewModel viewModel;
 
@@ -50,41 +51,24 @@ public sealed partial class StraightenToolboxViewModel : ToolboxViewModel<Straig
         }
     }
 
-    public override void OnAfterReset() => this.UpdateRotationString();
+    public override void OnModelStepUpdated(StraightenStep step) => this.UpdateRotationString(step); 
 
-    public override void Activate(object? _) => this.UpdateRotationString();
-
-    [RelayCommand]
-    public void OnRotateClockwiseLarge()
-    {
-        base.model.Rotate(isClockwise: true, 1.0f);
-        this.UpdateRotationString();
-    }
+    // public override void Activate(object? _) => this.UpdateRotationString();
 
     [RelayCommand]
-    public void OnRotateCounterClockwiseLarge()
-    {
-        base.model.Rotate(isClockwise: false, 1.0f);
-        this.UpdateRotationString();
-    }
+    public void OnRotateClockwiseLarge() => base.model.Rotate(isClockwise: true, 1.0f);
 
     [RelayCommand]
-    public void OnRotateClockwiseSmall()
-    {
-        base.model.Rotate(isClockwise: true, 0.1f);
-        this.UpdateRotationString();
-    }
+    public void OnRotateCounterClockwiseLarge() =>  base.model.Rotate(isClockwise: false, 1.0f);
 
     [RelayCommand]
-    public void OnRotateCounterClockwiseSmall()
-    {
-        base.model.Rotate(isClockwise: false, 0.1f);
-        this.UpdateRotationString();
-    }
+    public void OnRotateClockwiseSmall() => base.model.Rotate(isClockwise: true, 0.1f);
 
-    private void UpdateRotationString()
+    [RelayCommand]
+    public void OnRotateCounterClockwiseSmall() => base.model.Rotate(isClockwise: false, 0.1f);
+
+    private void UpdateRotationString(StraightenStep step)
     {
-        var step = base.ModelStep<StraightenStep>();
         float value = step.RotationAngle;
         string stringValue = value.ToString("+0.0;-0.0;0.0");
         this.RotationAngleString = stringValue + " \u00B0"; // Unicode for degree symbol 

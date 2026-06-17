@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
 
-public sealed partial class WhiteBalanceToolboxViewModel : ToolboxViewModel<WhiteBalanceToolboxView>
+public sealed partial class WhiteBalanceToolboxViewModel : 
+    ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>
 {
     private bool doNotUpdate; 
     private float saturationThreshold;

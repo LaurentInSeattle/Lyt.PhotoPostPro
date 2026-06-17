@@ -4,11 +4,6 @@ public partial class CropGridView : View
 {
     private bool doNotUpdate;
 
-    public CropGridView()
-    {
-        Debug.WriteLine(" new CropGridView"); 
-    }
-
     public void Activate()
     {
         this.LayoutUpdated -= this.OnLayoutUpdated;
@@ -42,7 +37,6 @@ public partial class CropGridView : View
             double dy = this.Bounds.Height;
             cropGridViewModel.OnCropRectangleChanged(0, 0, dx, dy);
         }
-
         this.doNotUpdate = false;
     }
 

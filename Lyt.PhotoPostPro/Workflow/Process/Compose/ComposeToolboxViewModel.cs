@@ -1,6 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Compose;
 
-public sealed partial class ComposeToolboxViewModel : ToolboxViewModel<ComposeToolboxView>, IToolboxViewModel
+public sealed partial class ComposeToolboxViewModel : 
+    ToolboxViewModel<ComposeToolboxView, CompositionStep>, 
+    IToolboxViewModel
 {
     private readonly ComposeViewModel viewModel;
 

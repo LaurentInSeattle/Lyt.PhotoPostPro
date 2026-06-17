@@ -67,11 +67,12 @@ public sealed partial class ProcessViewModel :
     {
         var selectableViews = new List<SelectableView<ActivatedView>>();
 
-        void Setup<TViewModel, TControl, TToolboxViewModel, TToolboxControl>(
+        void Setup<TViewModel, TControl, TToolboxViewModel, TPostProcessStep, TToolboxControl>(
                 ActivatedView activatedView, Control? control = null)
             where TViewModel : ViewModel<TControl>
             where TControl : Control, IView, new()
-            where TToolboxViewModel : ToolboxViewModel<TToolboxControl>
+            where TToolboxViewModel : ToolboxViewModel<TToolboxControl, TPostProcessStep>
+            where TPostProcessStep : PostProcessStep
             where TToolboxControl : View, new()
         {
             var vm = App.GetRequiredService<TViewModel>();
@@ -84,12 +85,12 @@ public sealed partial class ProcessViewModel :
         }
 
         // No buttons or toolbars for all process views: 
-        Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientToolboxView>(ActivatedView.Orient);
-        Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenToolboxView>(ActivatedView.Straighten);
-        Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, ComposeToolboxView>(ActivatedView.Compose);
-        Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureToolboxView>(ActivatedView.Exposure);
-        Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryToolboxView>(ActivatedView.Recovery);
-        Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
+        Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientationStep, OrientToolboxView>(ActivatedView.Orient);
+        Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenStep, StraightenToolboxView>(ActivatedView.Straighten);
+        Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep,  ComposeToolboxView>(ActivatedView.Compose);
+        Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
+        Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep,  RecoveryToolboxView>(ActivatedView.Recovery);
+        Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
 
         //Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenToolboxView>(ActivatedView.Sharpen);
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);

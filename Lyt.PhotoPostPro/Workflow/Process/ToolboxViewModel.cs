@@ -2,6 +2,8 @@
 
 public interface IToolboxViewModel
 {
+    // void OnModelStepUpdated(PostProcessStep step); 
+    
     void OnBeforeBack();
     void OnBeforeReset();
     void OnBeforeNext();
@@ -11,11 +13,20 @@ public interface IToolboxViewModel
     void OnAfterNext();
 }
 
-public partial class ToolboxViewModel<T> : ViewModel<T>,  IToolboxViewModel where T : View, new() 
+public partial class ToolboxViewModel<TView, TStep> : 
+    ViewModel<TView>,  
+    IToolboxViewModel, 
+    IRecipient<ModelStepUpdatedMessage>
+    where TView : View, new()
+    where TStep : PostProcessStep
 {
     protected readonly PhotoPostProModel model;
 
-    public ToolboxViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
+    public ToolboxViewModel() 
+    {
+        this.model = App.GetRequiredService<PhotoPostProModel>();
+        this.Subscribe<ModelStepUpdatedMessage>();
+    } 
 
     public required ToolboxHostViewModel ToolboxHostViewModel { get; set; }
 
@@ -25,20 +36,32 @@ public partial class ToolboxViewModel<T> : ViewModel<T>,  IToolboxViewModel wher
         this.ToolboxHostViewModel.Title = this.Title; 
     }
 
-    protected TStep ModelStep<TStep>() where TStep : PostProcessStep
+    public void Receive(ModelStepUpdatedMessage message)
+    {
+        if (message.Step is not TStep step)
+        {
+            return; 
+        }
+
+        this.OnModelStepUpdated(step);
+    }
+
+    protected TAnyStep ModelStep<TAnyStep>() where TAnyStep : PostProcessStep
     {
         var step = this.model.Workflow.CurrentStep;
-        if (step is TStep tstep)
+        if (step is TAnyStep anyStep)
         {
-            return tstep; 
+            return anyStep; 
         } 
 
-        throw new InvalidCastException("Current is not expected type");
+        throw new InvalidCastException("Current Step is not expected PostProcessStep type");
     } 
     
     protected virtual string Title => " *** ? ***";
 
-    // Interface implementation must be public, and same below 5 times 
+    // Interface implementation must be public, and same below 6 times 
+    public virtual void OnModelStepUpdated (TStep step) { }
+
     public virtual void OnBeforeBack() { }
 
     public virtual void OnBeforeReset() { }
@@ -50,4 +73,5 @@ public partial class ToolboxViewModel<T> : ViewModel<T>,  IToolboxViewModel wher
     public virtual void OnAfterReset() { }
 
     public virtual void OnAfterNext() { }
+
 }

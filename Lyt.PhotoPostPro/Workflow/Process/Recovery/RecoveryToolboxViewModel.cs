@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Recovery;
 
-public sealed partial class RecoveryToolboxViewModel : ToolboxViewModel<RecoveryToolboxView>
+public sealed partial class RecoveryToolboxViewModel : 
+    ToolboxViewModel<RecoveryToolboxView, RecoveryStep>
 {
     private bool doNotUpdate; 
     private float highlights;
