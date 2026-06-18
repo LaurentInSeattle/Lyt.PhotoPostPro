@@ -179,7 +179,7 @@
 			<TextBlock
 				Grid.Row="3" Grid.ColumnSpan="5"
 				Text="{Binding RotationAngleString}"
-				Theme="{StaticResource Large}"
+				Theme="{StaticResource H3}"
 				TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton

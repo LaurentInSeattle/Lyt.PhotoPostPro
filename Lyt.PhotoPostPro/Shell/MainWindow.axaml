@@ -8,7 +8,7 @@
     mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800"
     
     Title="Photo Post Processing"
-    Width="1800" Height="1100"
+    Width="1800" Height="1200"
     MinWidth="800" MinHeight="600"
     SizeToContent="Manual"
     WindowStartupLocation="CenterScreen"

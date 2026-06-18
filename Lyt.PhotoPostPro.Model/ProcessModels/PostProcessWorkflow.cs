@@ -94,6 +94,12 @@ public sealed class PostProcessWorkflow
             // old step 
             this.CurrentStep.IsCurrent = false;
             var nextSourceImage = this.CurrentStep.ResultImage;
+            if (nextSourceImage is null)
+            {
+                // User just clicked 'Next' without doing anything 
+                nextSourceImage = this.CurrentStep.SourceImage;
+            } 
+
             this.CurrentStep.Deactivate(WorkflowUpdateKind.Next);
 
             // next

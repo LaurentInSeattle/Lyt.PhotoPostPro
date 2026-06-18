@@ -3,12 +3,18 @@
 public sealed partial class ExposureToolboxViewModel :
     ToolboxViewModel<ExposureToolboxView, ExposureStep>
 {
-    private bool doNotUpdate;
+    private bool doNotUpdateModel;
     private double gamma;
     private double gain;
     private int shift;
 
-    public ExposureToolboxViewModel() => this.GammaCurveViewModel = new();
+    public ExposureToolboxViewModel()
+    {
+        this.GammaCurveViewModel = new();
+        this.gamma = 1.0;
+        this.gain = 1.0;
+        this.shift = 0;
+    }
 
     [ObservableProperty]
     public partial GammaCurveViewModel GammaCurveViewModel { get; set; }
@@ -33,15 +39,30 @@ public sealed partial class ExposureToolboxViewModel :
 
     protected override string Title => this.Localize("Workflow.Exposure.Title");
 
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+
+        With.Flag(ref this.doNotUpdateModel, () =>
+        {
+            // Sliders initial positions and string values
+            this.GammaSliderValue = this.gamma;
+            this.GainSliderValue = this.gain;
+
+            // Enforce property changed 
+            this.ShiftSliderValue = this.shift + 0.01;
+            this.ShiftSliderValue = this.shift;
+        });
+    }
+
     public override void OnModelStepUpdated(ExposureStep step) => this.UpdateSliders(step);
 
     // Interface inplementation has to be public
     private void UpdateSliders(ExposureStep step)
     {
-        With.Flag(ref this.doNotUpdate, () =>
+        With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Here we need to undo the operations done reading the sliders 
-            Debug.WriteLine( " Gamma from, model: " + step.Gamma); 
             this.GammaSliderValue = step.Gamma - 1.0;
             this.GainSliderValue = step.Gain - 1.0;
             this.ShiftSliderValue = step.Shift / 65535.0;
@@ -76,7 +97,7 @@ public sealed partial class ExposureToolboxViewModel :
 
     private void UpdateModel()
     {
-        if (this.doNotUpdate)
+        if (this.doNotUpdateModel)
         {
             return;
         }
