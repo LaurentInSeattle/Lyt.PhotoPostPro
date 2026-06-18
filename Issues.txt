@@ -1,4 +1,5 @@
-Issues 
+Bugs 
+----
 
 - Size of guidelines in views 
 
@@ -8,10 +9,40 @@ Issues
 
 - Create constants for special UNIcode characters 
 
+- Visual issues when hovering quickly above glyph buttons 
+
+
+TODO First 
+----------
+
+- Image White Balance 
+
+- Image Contrast 
+
+- Image Sharpen 
+
+- Image Fancy Filters (LUT's) 
+
+- Image Exports
+
+
+Missing Features 
+----------------
+
+- Project Load and Save 
+
+- Camera downloads 
+
+- Folder Management 
+
+- Culling Workflow 
+
 - Zoom on viewer windows 
 
 - Tools to show both before / after or just after 
 
+- Optimal viewer layout 
+
 - Floating windows 
 
-- Visual issues when hovering quickly above glyph buttons 
+

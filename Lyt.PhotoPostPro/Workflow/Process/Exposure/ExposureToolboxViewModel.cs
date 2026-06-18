@@ -40,9 +40,11 @@ public sealed partial class ExposureToolboxViewModel :
     {
         With.Flag(ref this.doNotUpdate, () =>
         {
-            this.GammaSliderValue = step.Gamma;
-            this.GainSliderValue = step.Gain;
-            this.ShiftSliderValue = step.Shift;
+            // Here we need to undo the operations done reading the sliders 
+            Debug.WriteLine( " Gamma from, model: " + step.Gamma); 
+            this.GammaSliderValue = step.Gamma - 1.0;
+            this.GainSliderValue = step.Gain - 1.0;
+            this.ShiftSliderValue = step.Shift / 65535.0;
         });
     }
 

@@ -43,10 +43,6 @@ public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStep
             var clone = this.SourceImage.Clone();
             clone.Mutate(x => x.Crop(cropRectangle));
             this.ResultImage = clone;
-
-            // So that we do not crop again the cropped image when going back and forth in the workflow 
-            // Possibly bad 
-            // this.Clear();
         }
         else
         {

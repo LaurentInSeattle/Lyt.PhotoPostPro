@@ -27,11 +27,11 @@ public sealed partial class RecoveryToolboxViewModel :
     {
         With.Flag(ref this.doNotUpdate, () =>
         {
+            // Here we need to undo the operations done reading the sliders 
+            // No transforms for highlights and shadows amounts 
             this.HighlightsSliderValue = step.HighlightAmount;
             this.ShadowsSliderValue = step.ShadowAmount;
         });
-
-        this.UpdateModel();
     }
 
     partial void OnHighlightsSliderValueChanged(double value)

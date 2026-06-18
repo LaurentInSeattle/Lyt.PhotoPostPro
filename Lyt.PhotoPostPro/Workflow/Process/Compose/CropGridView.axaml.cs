@@ -59,7 +59,7 @@ public partial class CropGridView : View
                 right.Width = new GridLength(w - x - dx, GridUnitType.Pixel);
                 var rows = this.CropGrid.RowDefinitions;
                 var top = rows[0];
-                top.Height = new GridLength(x, GridUnitType.Pixel);
+                top.Height = new GridLength(y, GridUnitType.Pixel);
                 var bottom = rows[4];
                 bottom.Height = new GridLength(h - y - dy, GridUnitType.Pixel); ;
 

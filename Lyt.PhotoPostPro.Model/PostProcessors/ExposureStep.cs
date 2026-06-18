@@ -30,8 +30,8 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
 
         var clone = this.SourceImage.Clone();
         bool isChanged =
-            Math.Abs(1 - this.Gamma) > 0.001 ||
-            Math.Abs(1 - this.Gain) > 0.001 ||
+            Math.Abs(1.0 - this.Gamma) > 0.001 ||
+            Math.Abs(1.0 - this.Gain) > 0.001 ||
             this.Shift != 0;
         if (isChanged)
         {
