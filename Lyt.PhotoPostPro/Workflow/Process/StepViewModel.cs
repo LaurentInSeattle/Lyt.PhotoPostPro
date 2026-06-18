@@ -2,12 +2,11 @@
 
 public partial class StepViewModel<TView> :
     ViewModel<TView>,
-    IRecipient<ImageGeneratedMessage>
+    IRecipient<SourceImageGeneratedMessage>,
+    IRecipient<ResultImageGeneratedMessage>
     where TView : View, new()
 {
     protected readonly PhotoPostProModel model;
-
-    private bool isLoaded;
 
     public StepViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
 
@@ -26,37 +25,41 @@ public partial class StepViewModel<TView> :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        this.Subscribe<ImageGeneratedMessage>();
-        this.model.GetStepImage();
+        this.Subscribe<SourceImageGeneratedMessage>();
+        this.Subscribe<ResultImageGeneratedMessage>();
+        this.model.GetStepSourceImage();
     }
 
     public override void Deactivate()
     {
-        this.Unregister<ImageGeneratedMessage>();
+        this.Unregister<SourceImageGeneratedMessage>();
+        this.Unregister<ResultImageGeneratedMessage>();
         base.Deactivate();
     }
 
-    public void Receive(ImageGeneratedMessage message)
+    public void Receive(SourceImageGeneratedMessage message)
+    {
+        Dispatch.OnUiThread(() =>
+        {
+            if (this.IsActivated)
+            {
+                var bitmap = message.Frame.ToWriteableBitmap();
+                this.SourceImage = bitmap;
+                this.SourceImageIsVisible = true;
+                this.OnImageReceived(bitmap);
+            }
+        }, DispatcherPriority.ApplicationIdle);
+    }
+
+    public void Receive(ResultImageGeneratedMessage message)
     {
         Dispatch.OnUiThread(() => 
         {
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
-                if (!isLoaded)
-                {
-                    this.ResultImageIsVisible = false;
-                    this.SourceImage = bitmap;
-                    this.SourceImageIsVisible = true;
-                    this.isLoaded = true;
-                }
-                else
-                {
-                    this.ResultImage = bitmap;
-                    this.ResultImageIsVisible = true;
-                    this.SourceImageIsVisible = false;
-                }
-
+                this.ResultImage = bitmap;
+                this.ResultImageIsVisible = true;
                 this.OnImageReceived(bitmap);
             }
         }, DispatcherPriority.ApplicationIdle); 
@@ -70,8 +73,8 @@ public partial class StepViewModel<TView> :
         this.ResultImageIsVisible = false;
         this.SourceImage = null;
         this.SourceImageIsVisible = false;
-        this.isLoaded = false;
     }
 
+    // NOt used yet
     protected virtual void OnImageReceived (WriteableBitmap bitmap) { }
 }

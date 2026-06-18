@@ -22,9 +22,6 @@ public sealed partial class PhotoPostProModel : ModelBase
     #region Not serialized - No model changed event
 
     [JsonIgnore]
-    public bool IsUpdatePending { get; set; } = false;
-
-    [JsonIgnore]
     public ProjectMetadata? CurrentProjectMetadata { get; set; } = null;
 
     [JsonIgnore]
@@ -37,7 +34,35 @@ public sealed partial class PhotoPostProModel : ModelBase
     public PostProcessWorkflow? CurrentWorkflow  => this.CurrentPostProcess?.Workflow;
 
     [JsonIgnore]
-    public Frame? LastFrame { get; set; } = null;
+    public bool IsSourceImageUpdatePending { get; set; } = false;
+
+    [JsonIgnore]
+    public bool IsResultImageUpdatePending { get; set; } = false;
+
+    [JsonIgnore]
+    public Frame? LastSourceFrame 
+    { 
+        get; 
+        set
+        {
+            field = value;
+            this.IsSourceImageUpdatePending = true; 
+        }
+    } = null;
+
+    [JsonIgnore]
+    public Frame? LastResultFrame
+    {
+        get;
+        set
+        {
+            field = value;
+            this.IsResultImageUpdatePending = true;
+        }
+    } = null;
+
+    [JsonIgnore]
+    public bool IsUpdatePending => this.IsSourceImageUpdatePending || this.IsResultImageUpdatePending;
 
     [JsonIgnore]
     public PostProcessWorkflow Workflow

@@ -7,25 +7,25 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             this.CurrentPostProcess!.Begin();
-            bool success = this.GetSourceImage();
-            if (success)
-            {
-                // HACK BEGIN 
-                Task.Run(() =>
-                {
-                    // NOT Final: ONLY for testing histograms atm
-                    var sourceImage = this.CurrentPostProcess.SourceImage;
-                    Histograms histograms = new(sourceImage);
-                    new HistogramsGeneratedMessage(histograms).Publish();
-                });
-                // HACK END 
-            }
+            //bool success = this.GetSourceImage();
+            //if (success)
+            //{
+            //    // HACK BEGIN 
+            //    Task.Run(() =>
+            //    {
+            //        // NOT Final: ONLY for testing histograms atm
+            //        var sourceImage = this.CurrentPostProcess.SourceImage;
+            //        Histograms histograms = new(sourceImage);
+            //        new HistogramsGeneratedMessage(histograms).Publish();
+            //    });
+            //    // HACK END 
+            //}
 
-            return success;
+            return true;
         });
     }
 
-    public bool GetSourceImage()
+    public bool GetProcessSourceImage()
     {
         if ((this.CurrentProject is null) || (this.CurrentProjectMetadata is null) || (this.CurrentPostProcess is null))
         {
@@ -35,8 +35,8 @@ public sealed partial class PhotoPostProModel : ModelBase
         try
         {
             var sourceImage = this.CurrentPostProcess.SourceImage;
-            this.LastFrame = sourceImage.ToFrame();
-            this.IsUpdatePending = true;
+            this.LastSourceFrame = sourceImage.ToFrame();
+            this.IsSourceImageUpdatePending = true;
             return true;
         }
         catch (Exception ex)
@@ -46,19 +46,14 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    public bool GetStepImage() =>
+    public bool GetStepSourceImage() =>
         this.ApiAction(() =>
         {
             if (this.Workflow.CurrentStep is PostProcessStep step)
             {
-                if (step.ResultImage is not null)
+                if (step.SourceImage is not null)
                 {
-                    this.LastFrame = step.ResultImage.ToFrame();
-                    return true;
-                }
-                else if (step.SourceImage is not null)
-                {
-                    this.LastFrame = step.SourceImage.ToFrame();
+                    this.LastSourceFrame = step.SourceImage.ToFrame();
                     return true;
                 }
 
@@ -68,6 +63,22 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public bool GetStepResultImage() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is PostProcessStep step)
+            {
+                if (step.ResultImage is not null)
+                {
+                    this.LastResultFrame = step.ResultImage.ToFrame();
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        });
     public bool Back() =>
         this.ApiAction(() =>
         {
@@ -78,7 +89,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool Reset() => 
         this.ApiAction(() =>
         {
-            this.LastFrame = this.Workflow.Reset();
+            var frame = this.Workflow.Reset();
+            this.LastSourceFrame = frame;
+            this.LastResultFrame = frame;
             return true;
         });
 
@@ -95,7 +108,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is OrientationStep orientationStep)
             {
-                this.LastFrame = orientationStep.Rotate(isClockwise);
+                this.LastResultFrame = orientationStep.Rotate(isClockwise);
                 return true;
             }
 
@@ -107,7 +120,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is OrientationStep orientationStep)
             {
-                this.LastFrame = orientationStep.Flip(isMirror);
+                this.LastResultFrame = orientationStep.Flip(isMirror);
                 return true;
             }
 
@@ -119,7 +132,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is StraightenStep straightenStep)
             {
-                this.LastFrame = straightenStep.Rotate(isClockwise, angle);
+                this.LastResultFrame = straightenStep.Rotate(isClockwise, angle);
                 return true;
             }
 
@@ -131,7 +144,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is CompositionStep compositionStep)
             {
-                this.LastFrame = compositionStep.Crop(x, y, dx, dy);
+                this.LastResultFrame = compositionStep.Crop(x, y, dx, dy);
                 return true;
             }
 
@@ -143,7 +156,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is ExposureStep exposureStep)
             {
-                this.LastFrame = exposureStep.AdjustExposure(gamma, gain, shift);
+                this.LastResultFrame = exposureStep.AdjustExposure(gamma, gain, shift);
                 return true;
             }
 
@@ -155,7 +168,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is RecoveryStep recoveryStep)
             {
-                this.LastFrame = recoveryStep.HighlightsShadows(highlights, shadows);
+                this.LastResultFrame = recoveryStep.HighlightsShadows(highlights, shadows);
                 return true;
             }
 
@@ -167,7 +180,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
             {
-                this.LastFrame = whiteBalanceStep.FilteredGrayWorldAWB(saturationThreshold);
+                this.LastResultFrame = whiteBalanceStep.FilteredGrayWorldAWB(saturationThreshold);
                 return true;
             }
 
@@ -207,10 +220,6 @@ public sealed partial class PhotoPostProModel : ModelBase
         if (success)
         {
             new ModelStepUpdatedMessage(Step: this.Workflow.CurrentStep).Publish(); 
-            if (notify)
-            {
-                this.IsUpdatePending = true;
-            }
         }
 
         return success;

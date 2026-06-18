@@ -142,10 +142,16 @@ public sealed partial class PhotoPostProModel : ModelBase
             return;
         }
 
-        this.IsUpdatePending = false;
-        if (this.LastFrame is not null)
+        if ( this.IsSourceImageUpdatePending && this.LastSourceFrame is not null)
         {
-            new ImageGeneratedMessage(this.LastFrame).Publish();
+            this.IsSourceImageUpdatePending = false; 
+            new SourceImageGeneratedMessage(this.LastSourceFrame).Publish();
+        }
+
+        if (this.IsResultImageUpdatePending && this.LastResultFrame is not null)
+        {
+            this.IsResultImageUpdatePending = false;
+            new ResultImageGeneratedMessage(this.LastResultFrame).Publish();
         }
     }
 }
