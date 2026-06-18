@@ -70,7 +70,7 @@ public partial class StepViewModel<TView> :
         this.ResultImageIsVisible = false;
         this.SourceImage = null;
         this.SourceImageIsVisible = false;
-        this.isLoaded = true;
+        this.isLoaded = false;
     }
 
     protected virtual void OnImageReceived (WriteableBitmap bitmap) { }
