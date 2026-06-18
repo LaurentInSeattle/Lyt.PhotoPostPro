@@ -62,5 +62,16 @@ public partial class StepViewModel<TView> :
         }, DispatcherPriority.ApplicationIdle); 
     }
 
+    // Derived view models MUST call this base method 
+    // public because base is ViewModel 
+    public override void Initialize ()
+    {
+        this.ResultImage = null;
+        this.ResultImageIsVisible = false;
+        this.SourceImage = null;
+        this.SourceImageIsVisible = false;
+        this.isLoaded = true;
+    }
+
     protected virtual void OnImageReceived (WriteableBitmap bitmap) { }
 }

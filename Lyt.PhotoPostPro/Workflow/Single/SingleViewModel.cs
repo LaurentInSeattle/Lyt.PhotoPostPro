@@ -70,6 +70,18 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
             return;
         }
 
+        var project = this.model.CurrentProject; 
+        if (project is not null)
+        {
+            this.model.CloseProject(out string errorMessageClose);
+            if (!string.IsNullOrEmpty(errorMessageClose))
+            {
+                this.Logger.Warning("Failed to close project: " + errorMessageClose);
+                // TODO : Show error message to user
+                return; 
+            }
+        }
+
         this.model.NewProject(
             name: System.IO.Path.GetFileNameWithoutExtension(this.imagePath),
             folderPath: this.imagePath,

@@ -68,7 +68,6 @@ public partial class CropGridView : View
         });
     }
 
-
     internal void Left(int delta)
     {
         With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>

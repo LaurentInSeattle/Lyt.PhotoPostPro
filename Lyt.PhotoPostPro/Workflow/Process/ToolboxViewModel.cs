@@ -39,6 +39,11 @@ public partial class ToolboxViewModel<TView, TStep> :
         }, DispatcherPriority.Background);
     }
 
+    // Derived view models do NOT need to call this base method 
+    public override void Initialize()
+    {
+    }
+
     public void Receive(ModelStepUpdatedMessage message)
     {
         if (message.Step is not TStep step)

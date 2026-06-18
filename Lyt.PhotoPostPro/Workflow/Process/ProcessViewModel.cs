@@ -32,6 +32,7 @@ public sealed partial class ProcessViewModel :
             this.SetupWorkflow();
         }
 
+        this.InitializeWorkflow();
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
@@ -61,6 +62,28 @@ public sealed partial class ProcessViewModel :
             this.viewSelector.SelectView(view);
         }, DispatcherPriority.Normal);
 
+    }
+
+    public void InitializeWorkflow ()
+    {
+        foreach (var selectableView in this.viewSelector!.SelectableViews)
+        {
+            if (selectableView.PrimaryViewModel is ViewModel stepViewModel)
+            {
+                stepViewModel.Initialize();
+            }
+
+            // We dont have any toolbars for now, but maybe later we'll do 
+            if (selectableView.SecondaryViewModel is ViewModel toolbarViewModel)
+            {
+                toolbarViewModel.Initialize();
+            }
+
+            if (selectableView.TernaryViewModel is ViewModel toolboxViewModel)
+            {
+                toolboxViewModel.Initialize();
+            }
+        }
     }
 
     private void SetupWorkflow()
