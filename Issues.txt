@@ -1,9 +1,9 @@
 Bugs 
 ----
 
-- Size of guidelines in views 
+- Abandon Process 
 
-- Decoding twice the initial image 
+- Size of guidelines in views 
 
 - Create constants for special UNIcode characters 
 

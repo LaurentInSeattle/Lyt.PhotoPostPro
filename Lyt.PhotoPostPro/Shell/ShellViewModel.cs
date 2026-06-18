@@ -175,17 +175,17 @@ public sealed partial class ShellViewModel
         this.isFirstActivation = false;
     }
 
+    [RelayCommand]
+    public void OnSingle() =>this.viewSelector!.SelectView(ActivatedView.Single);
+
+    [RelayCommand]
+    public void OnFolder() => this.viewSelector!.SelectView(ActivatedView.Folder);
+
+    [RelayCommand]
+    public void OnLanguage() => this.viewSelector!.SelectView(ActivatedView.Language);
+
 #pragma warning disable IDE0079 
 #pragma warning disable CA1822 // Mark members as static
-
-    [RelayCommand]
-    public void OnSingle() => Select(ActivatedView.Single);
-
-    [RelayCommand]
-    public void OnFolder() => Select(ActivatedView.Folder);
-
-    [RelayCommand]
-    public void OnLanguage() => Select(ActivatedView.Language);
 
     [RelayCommand]
     public void OnClose() => OnExit();
@@ -195,6 +195,13 @@ public sealed partial class ShellViewModel
         var application = App.GetRequiredService<IApplicationBase>();
         await application.Shutdown();
     }
+
+    internal void EnableAndSelect(ActivatedView view)
+    {
+        this.viewSelector!.EnableView(view);
+        this.viewSelector!.SelectView(view); 
+    }
+
 #pragma warning restore CA1822
 #pragma warning restore IDE0079
 }

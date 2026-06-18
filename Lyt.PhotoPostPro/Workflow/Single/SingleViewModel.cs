@@ -85,9 +85,8 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
-
-            ViewSelector<ActivatedView>.Enable(ActivatedView.Process);
-            ApplicationMessagingExtensions.Select(ActivatedView.Process);
+            var shell = App.GetRequiredService<ShellViewModel>();
+            shell.EnableAndSelect(ActivatedView.Process);  
         }
         else
         {
