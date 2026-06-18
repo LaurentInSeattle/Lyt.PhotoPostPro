@@ -1,10 +1,16 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Single;
 
+// Do not add those ImageSharp namespaces to global using as some class definitions conflict
+// with the ones from Avalonia. (Point, Rectangle, etc.) 
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
 public sealed partial class SingleViewModel : ViewModel<SingleView>
 {
     private readonly PhotoPostProModel model;
 
     private string imagePath;
+    private Image<Rgb48>? image;
 
     [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
@@ -26,8 +32,9 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         {
             try
             {
-                var image = ImageLoader.LoadImage(path, out string errorMessage);
-                if (image is not null)
+                // TODO: Launch a spinner for big files 
+                this.image = ImageLoader.LoadImage(path, out string errorMessage);
+                if (this.image is not null)
                 {
                     var imageFrame = Model.Utilities.ImagingUtilities.ToFrame(image);
                     if (imageFrame is not null)
@@ -57,7 +64,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
 
     internal void ProcessCurrentImage()
     {
-        if (string.IsNullOrWhiteSpace(this.imagePath))
+        if (string.IsNullOrWhiteSpace(this.imagePath) || this.image is null)
         {
             this.Logger.Warning("No image to process.");
             return;
@@ -67,6 +74,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
             name: System.IO.Path.GetFileNameWithoutExtension(this.imagePath),
             folderPath: this.imagePath,
             isSingleImage: true,
+            this.image, 
             out string errorMessage);
         if (!string.IsNullOrEmpty(errorMessage))
         {

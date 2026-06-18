@@ -5,7 +5,10 @@ using static Lyt.Persistence.FileManagerModel;
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public bool NewProject(
-        string name, string folderPath, bool isSingleImage, out string errorMessage)
+        string name, string folderPath, 
+        bool isSingleImage, 
+        Image<Rgb48>? image, // Valid only for single image 
+        out string errorMessage)
     {
         errorMessage = string.Empty;
         try
@@ -86,7 +89,8 @@ public sealed partial class PhotoPostProModel : ModelBase
                     return false;
                 }
 
-                bool isImageAdded = this.AddImageToProject(imagePath, out errorMessage);
+                // If No image provided: will load it from path 
+                bool isImageAdded = this.AddImageToProject(imagePath, image, out errorMessage);
                 if (!isImageAdded)
                 {
                     errorMessage = "Failed to add image to the project.";
@@ -212,7 +216,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    public bool AddImageToProject(string imagePath, out string errorMessage)
+    public bool AddImageToProject(string imagePath, Image<Rgb48>? image, out string errorMessage)
     {
         errorMessage = string.Empty;
         try
@@ -244,13 +248,15 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             postProcess.Initialize(); 
             postProcess.SetProject(this.CurrentProject);
-            bool sourceImageLoaded = postProcess.LoadSourceImage(out errorMessage);
+
+            bool sourceImageLoaded = postProcess.LoadSourceImage(image, out errorMessage);
             if (!sourceImageLoaded)
             {
                 errorMessage = "Failed to load source image.";
                 Debug.WriteLine(errorMessage);
                 return false;
             }
+
 
             this.CurrentProject.PostProcesses.Add(postProcess);
             return true;

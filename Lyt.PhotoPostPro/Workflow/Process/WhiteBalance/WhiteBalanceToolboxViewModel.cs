@@ -3,7 +3,7 @@
 public sealed partial class WhiteBalanceToolboxViewModel : 
     ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>
 {
-    private bool doNotUpdate; 
+    private bool doNotUpdateModel; 
     private float saturationThreshold;
 
     protected override string Title => this.Localize("Workflow.WhiteBalance.Title");
@@ -14,11 +14,23 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     [ObservableProperty]
     public partial double SaturationSliderValue { get; set; }
 
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+        this.saturationThreshold = 0.4f; 
+
+        With.Flag(ref this.doNotUpdateModel, () =>
+        {
+            // Sliders initial positions and string values
+            this.SaturationSliderValue = this.saturationThreshold;
+        });
+    }
+
     public override void OnModelStepUpdated(WhiteBalanceStep step) => this.UpdateSliders(step);
 
     private void UpdateSliders(WhiteBalanceStep step)
     {
-        With.Flag(ref this.doNotUpdate, () =>
+        With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Here we need to undo the operations done reading the sliders 
             // No transform for the staturation threshold 
@@ -26,8 +38,6 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
             // More later here 
         });
-
-        this.UpdateModel();
     }
 
     partial void OnSaturationSliderValueChanged(double value)
@@ -40,7 +50,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     private void UpdateModel()
     {
-        if ( this.doNotUpdate)
+        if ( this.doNotUpdateModel)
         {
             return; 
         }

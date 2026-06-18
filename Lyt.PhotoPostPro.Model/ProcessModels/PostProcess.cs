@@ -67,21 +67,29 @@ public sealed class PostProcess
         return true;
     }
 
-    public bool LoadSourceImage(out string errorMessage)
+    public bool LoadSourceImage(Image<Rgb48>? image, out string errorMessage)
     {
         errorMessage = string.Empty;
-        try
+        if (image is null)
         {
-            Image<Rgb48>? image = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
-            bool loaded = image is not null;
+            try
+            {
+                image = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
+                bool loaded = image is not null;
+                this.MaybeSourceImage = image;
+                return loaded;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "An error occurred while loading the source image." + ex.Message;
+                Debug.WriteLine(ex);
+                return false;
+            }
+        } 
+        else
+        {
             this.MaybeSourceImage = image;
-            return loaded;
-        }
-        catch (Exception ex)
-        {
-            errorMessage = "An error occurred while loading the source image." + ex.Message;
-            Debug.WriteLine(ex);
-            return false;
+            return true;
         }
     }
 
