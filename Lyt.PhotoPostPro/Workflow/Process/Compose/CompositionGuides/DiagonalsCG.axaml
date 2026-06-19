@@ -10,6 +10,7 @@
 	<Grid> 
 		<!-- Diagonal Line -->
 		<Path 
+			x:Name="DiagonalDown"
 			Stroke="AntiqueWhite" 
 			Opacity="{ReflectionBinding}"
 			StrokeThickness="7" 
@@ -22,6 +23,7 @@
 		</Path>
 
 		<Path 
+			x:Name="DiagonalUp"
 			Stroke="AntiqueWhite" 
 			Opacity="{ReflectionBinding}"
 			StrokeThickness="7" 

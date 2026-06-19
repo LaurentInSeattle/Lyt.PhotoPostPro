@@ -202,8 +202,7 @@ public partial class CropGridView : View
 
             if (double.IsNormal(zoom))
             {
-                Debug.WriteLine("zoom:  " + zoom);
-
+                // Do not try to update if we get NaN's or infinities 
                 this.zoomFactor = zoom;
                 double lineThickness = 2.0 / zoom;
                 this.VerticalLeftSplitter.Width = lineThickness;
@@ -213,7 +212,7 @@ public partial class CropGridView : View
 
                 if (this.DataContext is CropGridViewModel cropGridViewModel)
                 {
-                    cropGridViewModel.CompositionSize = 7.0 / zoom;
+                    cropGridViewModel.CompositionSize = 1.0 / zoom;
                 }
             } 
         }

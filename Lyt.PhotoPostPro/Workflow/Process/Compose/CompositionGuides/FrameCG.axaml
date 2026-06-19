@@ -27,42 +27,34 @@
 		<Rectangle
 			Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
 			ClipToBounds="False"
-			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="{ReflectionBinding}" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="3" Grid.Row="1" Grid.RowSpan="3"
 			ClipToBounds="False"
-			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="{ReflectionBinding}" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"
 			ClipToBounds="False"
-			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="{ReflectionBinding}" 
-			HorizontalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3"
 			ClipToBounds="False"
-			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="{ReflectionBinding}" 
-			HorizontalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 	</Grid>
 </UserControl>

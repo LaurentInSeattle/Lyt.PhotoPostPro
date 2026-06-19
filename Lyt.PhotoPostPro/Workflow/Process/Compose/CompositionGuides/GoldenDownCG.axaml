@@ -23,6 +23,7 @@
 			</Grid.RowDefinitions>
 			<!-- Perpendicular up diagonal in low left corner  --> 
 			<Path 
+				x:Name="Path_1_S7"
 				Grid.Column="0" Grid.Row="1" 
 				Stroke="AntiqueWhite" 
 				Opacity="{ReflectionBinding}"
@@ -34,6 +35,7 @@
 				</Path.Data>
 			</Path>
 			<Rectangle
+				x:Name="Rectangle_H2"
 				Grid.Column="0" Grid.Row="0" 
 				ClipToBounds="False"
 				Fill="AntiqueWhite"
@@ -45,6 +47,7 @@
 		</Grid> 
 		<!-- Down Diagonal --> 
 		<Path 
+			x:Name="Path_2_S7"
 			Grid.Column="0" Grid.ColumnSpan="2"
 			Stroke="AntiqueWhite" 
 			Opacity="{ReflectionBinding}"
@@ -57,6 +60,7 @@
 			</Path.Data>
 		</Path>		
 		<Rectangle
+			x:Name="Rectangle_W2"
 			Grid.Column="0" Grid.Row="0" 
 			ClipToBounds="False"
 			Fill="AntiqueWhite"

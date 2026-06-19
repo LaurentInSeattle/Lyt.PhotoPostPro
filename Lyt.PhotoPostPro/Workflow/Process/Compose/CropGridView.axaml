@@ -117,43 +117,47 @@
 			Fill="Transparent"
 			IsVisible="False"
 			/>
-		<cg:ThirdsCG
-			x:Name="ThirdsCG"
-			Grid.Row="2" Grid.Column="2" 
-			IsVisible="False"
-			Opacity="{Binding CompositionOpacity}"
-
-			/>
-		<cg:HalvesCG
-			x:Name="HalvesCG"
-			Grid.Row="2" Grid.Column="2" 
-			IsVisible="False"
-			Opacity="{Binding CompositionOpacity}"
-			/>
 		<cg:DiagonalsCG
 			x:Name="DiagonalsCG"
 			Grid.Row="2" Grid.Column="2" 
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
-			Tag="{Binding CompositionSize}"
+			ThicknessFactor="{Binding CompositionSize}"
 			/>
 		<cg:FrameCG
 			x:Name="FrameCG"
 			Grid.Row="2" Grid.Column="2" 
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
+			/>
+		<cg:HalvesCG
+			x:Name="HalvesCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
+			/>
+		<cg:ThirdsCG
+			x:Name="ThirdsCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
 			/>
 		<cg:GoldenUpCG
 			x:Name="GoldenUpCG"
 			Grid.Row="2" Grid.Column="2" 
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
 			/>
 		<cg:GoldenDownCG
 			x:Name="GoldenDownCG"
 			Grid.Row="2" Grid.Column="2" 
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
 			/>
 	</Grid>
 </UserControl>

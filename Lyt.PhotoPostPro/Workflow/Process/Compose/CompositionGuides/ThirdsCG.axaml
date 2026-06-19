@@ -7,7 +7,9 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 	>
-	<Grid> 
+	<Grid
+		x:Name="MainGrid"
+		> 
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="1" />
@@ -25,42 +27,34 @@
 		<Rectangle
 			Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
 			ClipToBounds="False"
-			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="7" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="3" Grid.Row="0" Grid.RowSpan="5"
 			ClipToBounds="False"
-			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="7" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5"
 			ClipToBounds="False"
-			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="7" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
 			Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5"
 			ClipToBounds="False"
-			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="7" 
-			VerticalAlignment="Stretch"
-			RadiusX="2" RadiusY="2"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			RadiusX="1" RadiusY="1"
 			/>
 	</Grid>
 </UserControl>
