@@ -72,6 +72,7 @@ public sealed class PostProcessWorkflow
         this.CurrentStep.SourceImage = originalImage;
         this.CurrentStep.ResultImage = originalImage;
         this.Notify(null, WorkflowUpdateKind.Begin);
+        PostProcessStep.RecalculateHistograms(originalImage); 
         return true;
     }
 

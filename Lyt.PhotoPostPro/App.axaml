@@ -29,6 +29,8 @@
                 <ResourceInclude Source="/Assets/Theme/Buttons.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/Toggles.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/Typography.axaml"/>
+                <ResourceInclude Source="/Assets/Theme/FluentOverrides.axaml" />
+
                 <!--
                 These are loaded dynamically, when the localizer is tasked to load a language.
                 <ResourceInclude Source="/Assets/Languages/en-US.axaml" />

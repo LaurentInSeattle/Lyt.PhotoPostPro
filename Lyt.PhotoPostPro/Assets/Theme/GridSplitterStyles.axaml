@@ -63,7 +63,7 @@
 							CornerRadius="{TemplateBinding CornerRadius}"
 							Background="{TemplateBinding Background}"
 							HorizontalAlignment="Center"
-							Width="5"
+							Width="3"
 							Opacity="0.5"
 							/>
 						<Border 
@@ -94,7 +94,7 @@
 						CornerRadius="{TemplateBinding CornerRadius}"
 						Background="{TemplateBinding Background}"
 						VerticalAlignment="Center"
-						Height="5"
+						Height="3"
 						Opacity="0.5"
 						/>
 					<Border 

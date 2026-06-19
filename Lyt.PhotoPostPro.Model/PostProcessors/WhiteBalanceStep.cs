@@ -22,8 +22,8 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
 
         var clone = this.SourceImage.Clone();
 
-        clone.FilteredGrayWorldAWB(this.SaturationThreshold); 
-        base.RecalculateHistograms(clone);
+        clone.FilteredGrayWorldAWB(this.SaturationThreshold);
+        PostProcessStep.RecalculateHistograms(clone);
 
         bool isChanged = true ; 
         //        Math.Abs(1 - this.gamma) > 0.001 ||

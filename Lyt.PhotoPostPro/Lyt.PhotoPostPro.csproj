@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Theme\FluentOverrides.axaml" />
     <AvaloniaXaml Remove="Assets\Theme\GridSplitterStyles.axaml" />
     <AvaloniaXaml Remove="Assets\Theme\Sizes.axaml" />
   </ItemGroup>

@@ -28,6 +28,10 @@ TODO First
 
 - Image Fancy Filters (LUT's) 
 
+- Image Watermarking 
+
+- Image Signature / Copyright
+
 - Image Exports
 
 

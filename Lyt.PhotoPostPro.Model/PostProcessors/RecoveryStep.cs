@@ -17,9 +17,9 @@ public class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName)
 
         var clone = this.SourceImage.Clone();
 
-        clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount); 
+        clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount);
 
-        base.RecalculateHistograms(clone);
+        PostProcessStep.RecalculateHistograms(clone);
 
         bool isChanged = true; 
         //        Math.Abs(1 - this.gamma) > 0.001 ||

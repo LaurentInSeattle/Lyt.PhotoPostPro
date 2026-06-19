@@ -38,7 +38,7 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
         this.ResultImage = isChanged ? clone : this.SourceImage;
         if (isChanged)
         {
-            base.RecalculateHistograms(clone);
+            PostProcessStep.RecalculateHistograms(clone);
         }
 
         return withFrame ? clone.ToFrame() : null;

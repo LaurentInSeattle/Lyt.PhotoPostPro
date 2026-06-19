@@ -63,7 +63,7 @@ public class PostProcessStep(string name)
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual Frame? Transform(bool withFrame = true) => null;
 
-    protected void RecalculateHistograms(Image<Rgb48> image)
+    public static void RecalculateHistograms(Image<Rgb48> image)
     {
         Task.Run(() =>
         {
