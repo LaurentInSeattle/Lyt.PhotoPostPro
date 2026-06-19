@@ -28,6 +28,9 @@ public sealed partial class CropGridViewModel(
     public partial double CompositionOpacity { get; set; } = 0.4;
 
     [ObservableProperty]
+    public partial double CompositionSize { get; set; } = 7.0;
+
+    [ObservableProperty]
     public partial SolidColorBrush LineColor { get; set; } = Brushes[3];
 
     public void OnActivate() => this.View.Activate();

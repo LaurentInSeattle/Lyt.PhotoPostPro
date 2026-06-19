@@ -3,7 +3,7 @@ Bugs
 
 - Abandon Process 
 
-- Size of guidelines in views 
+- Thickness of composition guidelines in crop view
 
 - Create constants for special UNIcode characters 
 
@@ -12,6 +12,10 @@ Bugs
 - Show degree symbol on buttons of the Rotate tool box 
 
 - Disable Process button if no image 
+
+- Wait spinner when loading big images 
+
+- Correct aspect ratio when in portrait 
 
 TODO First 
 ----------

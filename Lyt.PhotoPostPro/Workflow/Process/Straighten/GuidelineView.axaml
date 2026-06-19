@@ -29,10 +29,10 @@
 				<RowDefinition Height="40" /> <!-- Button --> 
 			</Grid.RowDefinitions>
 			<GridSplitter
-				Classes="wide"
+				Classes="verywide"
 				Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
 				MinWidth="1" 
-				Width="16" 
+				Width="20" 
 				ResizeDirection="Columns"
 				ResizeBehavior="PreviousAndNext"
 				DragIncrement="1"
@@ -56,10 +56,10 @@
 				<RowDefinition Height="*" /> <!-- Space --> 
 			</Grid.RowDefinitions>
 			<GridSplitter
-				Classes="thick"
+				Classes="verythick"
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
 				MinHeight="1" 
-				Height="16" 
+				Height="20" 
 				ResizeDirection="Rows"
 				ResizeBehavior="PreviousAndNext"
 				DragIncrement="1"

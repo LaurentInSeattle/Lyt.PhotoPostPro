@@ -13,7 +13,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Width="16" 
+					Width="20" 
 					Background="Transparent" IsHitTestVisible="True">
 					<Border 
 						BorderBrush="{TemplateBinding BorderBrush}"
@@ -21,7 +21,7 @@
 						CornerRadius="{TemplateBinding CornerRadius}"
 						Background="{TemplateBinding Background}"
 						HorizontalAlignment="Center"
-						Width="1"
+						Width="{TemplateBinding Width}"
 						/>
 				</Border>
 			</ControlTemplate>
@@ -33,8 +33,70 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Height="16" 
+					Height="20" 
 					Background="Transparent" IsHitTestVisible="True">
+					<Border 
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						CornerRadius="{TemplateBinding CornerRadius}"
+						Background="{TemplateBinding Background}"
+						VerticalAlignment="Center"
+						Height="{TemplateBinding Height}"
+						/>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<!-- Use when there is no zooming factor --> 
+	<Style Selector="GridSplitter.verywide">
+		<Setter Property="ClipToBounds" Value="False"/>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border 
+					Width="20" 
+					Background="Transparent" IsHitTestVisible="True">
+					<Grid>
+						<Border 
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}"
+							Background="{TemplateBinding Background}"
+							HorizontalAlignment="Center"
+							Width="5"
+							Opacity="0.5"
+							/>
+						<Border 
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}"
+							Background="{TemplateBinding Background}"
+							HorizontalAlignment="Center"
+							Width="1"
+							/>
+					</Grid>
+				</Border>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+	<Style Selector="GridSplitter.verythick">
+		<Setter Property="ClipToBounds" Value="False"/>
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border 
+					Height="20" 
+					Background="Transparent" IsHitTestVisible="True">
+					<Grid>
+					<Border 
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						CornerRadius="{TemplateBinding CornerRadius}"
+						Background="{TemplateBinding Background}"
+						VerticalAlignment="Center"
+						Height="5"
+						Opacity="0.5"
+						/>
 					<Border 
 						BorderBrush="{TemplateBinding BorderBrush}"
 						BorderThickness="{TemplateBinding BorderThickness}"
@@ -43,9 +105,9 @@
 						VerticalAlignment="Center"
 						Height="1"
 						/>
+					</Grid>
 				</Border>
 			</ControlTemplate>
 		</Setter>
 	</Style>
-
 </Styles>

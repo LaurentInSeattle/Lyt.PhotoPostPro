@@ -30,7 +30,7 @@
 			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="7" 
+			Width="{ReflectionBinding}" 
 			VerticalAlignment="Stretch"
 			RadiusX="2" RadiusY="2"
 			/>
@@ -40,7 +40,7 @@
 			Margin="-3 0 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Width="7" 
+			Width="{ReflectionBinding}" 
 			VerticalAlignment="Stretch"
 			RadiusX="2" RadiusY="2"
 			/>
@@ -50,7 +50,7 @@
 			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="7" 
+			Height="{ReflectionBinding}" 
 			HorizontalAlignment="Stretch"
 			RadiusX="2" RadiusY="2"
 			/>
@@ -60,7 +60,7 @@
 			Margin="0 -3 0 0"
 			Fill="AntiqueWhite"
 			Opacity="{ReflectionBinding}"
-			Height="7" 
+			Height="{ReflectionBinding}" 
 			HorizontalAlignment="Stretch"
 			RadiusX="2" RadiusY="2"
 			/>
