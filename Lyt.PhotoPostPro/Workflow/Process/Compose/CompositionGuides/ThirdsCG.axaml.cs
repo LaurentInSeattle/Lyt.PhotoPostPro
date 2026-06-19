@@ -41,6 +41,37 @@ public partial class ThirdsCG : UserControl
         return value;
     }
 
+    /// <summary> Brush Styled Property </summary>
+    public static readonly StyledProperty<SolidColorBrush> BrushProperty =
+        AvaloniaProperty.Register<ThirdsCG, SolidColorBrush>(
+            nameof(Brush),
+            defaultValue: new SolidColorBrush(Colors.AntiqueWhite),
+            inherits: false,
+            defaultBindingMode: BindingMode.OneWay,
+            validate: null,
+            coerce: CoerceBrush,
+            enableDataValidation: false);
+
+    /// <summary> Gets or sets the Brush property.</summary>
+    public SolidColorBrush Brush
+    {
+        get => this.GetValue(BrushProperty);
+        set => this.SetValue(BrushProperty, value);
+    }
+
+    private static SolidColorBrush CoerceBrush(AvaloniaObject sender, SolidColorBrush value)
+    {
+        if (sender is ThirdsCG thirds)
+        {
+            thirds.Rectangle_1.Fill = value;
+            thirds.Rectangle_2.Fill = value;
+            thirds.Rectangle_3.Fill = value;
+            thirds.Rectangle_4.Fill = value;
+        }
+
+        return value;
+    }
+
     private void AdjustLayout(double value)
     {
         var cols = this.MainGrid.ColumnDefinitions;

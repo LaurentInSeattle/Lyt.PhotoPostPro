@@ -11,7 +11,15 @@ public sealed partial class ComposeToolboxViewModel :
     private int dx;
     private int dy;
 
-    public ComposeToolboxViewModel() => this.viewModel = App.GetRequiredService<ComposeViewModel>();
+    public ComposeToolboxViewModel()
+    {
+        this.viewModel = App.GetRequiredService<ComposeViewModel>();
+        this.Color_0 = GuidelineViewModel.Brushes[0];
+        this.Color_1 = GuidelineViewModel.Brushes[1];
+        this.Color_2 = GuidelineViewModel.Brushes[2];
+        this.Color_3 = GuidelineViewModel.Brushes[3];
+        this.Color_4 = GuidelineViewModel.Brushes[4];
+    }
 
     public override void OnViewLoaded()
     {
@@ -60,6 +68,30 @@ public sealed partial class ComposeToolboxViewModel :
 
     [ObservableProperty]
     public partial string AspectRatioValueString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial SolidColorBrush Color_0 { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush Color_1 { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush Color_2 { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush Color_3 { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush Color_4 { get; set; }
+
+    [RelayCommand]
+    public void OnColorSelect(string parameter)
+    {
+        if (int.TryParse(parameter, out int colorIndex))
+        {
+            this.viewModel.CropGridViewModel.Colorize(colorIndex);
+        }
+    }
 
     [RelayCommand]
     public void OnTogglePreview() => this.viewModel.CropGridViewModel.TogglePreview();

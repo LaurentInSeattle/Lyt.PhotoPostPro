@@ -33,6 +33,7 @@
 		<Rectangle
 			Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" 
 			Fill="Black"
+			Margin="-1"
 			Opacity="{Binding CropOpacity}"
 			/>
 		<!-- Bottom Row --> 
@@ -123,6 +124,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 		<cg:FrameCG
 			x:Name="FrameCG"
@@ -130,6 +132,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 		<cg:HalvesCG
 			x:Name="HalvesCG"
@@ -137,6 +140,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 		<cg:ThirdsCG
 			x:Name="ThirdsCG"
@@ -144,6 +148,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 		<cg:GoldenUpCG
 			x:Name="GoldenUpCG"
@@ -151,6 +156,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 		<cg:GoldenDownCG
 			x:Name="GoldenDownCG"
@@ -158,6 +164,7 @@
 			IsVisible="False"
 			Opacity="{Binding CompositionOpacity}"
 			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
 			/>
 	</Grid>
 </UserControl>

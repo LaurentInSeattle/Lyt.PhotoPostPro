@@ -37,4 +37,35 @@ public partial class GoldenUpCG : UserControl
 
         return value;
     }
+
+    /// <summary> Brush Styled Property </summary>
+    public static readonly StyledProperty<SolidColorBrush> BrushProperty =
+        AvaloniaProperty.Register<GoldenUpCG, SolidColorBrush>(
+            nameof(Brush),
+            defaultValue: new SolidColorBrush(Colors.AntiqueWhite),
+            inherits: false,
+            defaultBindingMode: BindingMode.OneWay,
+            validate: null,
+            coerce: CoerceBrush,
+            enableDataValidation: false);
+
+    /// <summary> Gets or sets the Brush property.</summary>
+    public SolidColorBrush Brush
+    {
+        get => this.GetValue(BrushProperty);
+        set => this.SetValue(BrushProperty, value);
+    }
+
+    private static SolidColorBrush CoerceBrush(AvaloniaObject sender, SolidColorBrush value)
+    {
+        if (sender is GoldenUpCG golden)
+        {
+            golden.Path_1_S7.Stroke = value;
+            golden.Path_2_S7.Stroke = value;
+            golden.Rectangle_H2.Fill = value;
+            golden.Rectangle_W2.Fill = value;
+        }
+
+        return value;
+    }
 }

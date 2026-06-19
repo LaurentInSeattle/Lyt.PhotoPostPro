@@ -21,6 +21,7 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Rectangle
+			x:Name="Rectangle_1"
 			Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"
@@ -29,6 +30,7 @@
 			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
+			x:Name="Rectangle_2"
 			Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"

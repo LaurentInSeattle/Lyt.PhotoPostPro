@@ -25,6 +25,7 @@
 			<RowDefinition Height="0.10*" />
 		</Grid.RowDefinitions>
 		<Rectangle
+			x:Name="Rectangle_1"
 			Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"
@@ -33,6 +34,7 @@
 			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
+			x:Name="Rectangle_2"
 			Grid.Column="3" Grid.Row="1" Grid.RowSpan="3"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"
@@ -41,6 +43,7 @@
 			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
+			x:Name="Rectangle_3"
 			Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"
@@ -49,6 +52,7 @@
 			RadiusX="1" RadiusY="1"
 			/>
 		<Rectangle
+			x:Name="Rectangle_4"
 			Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3"
 			ClipToBounds="False"
 			Fill="AntiqueWhite"

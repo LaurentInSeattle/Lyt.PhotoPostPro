@@ -25,7 +25,7 @@ public sealed partial class CropGridViewModel(
     public partial double CropOpacity { get; set; } = 0.6;
 
     [ObservableProperty]
-    public partial double CompositionOpacity { get; set; } = 0.7;
+    public partial double CompositionOpacity { get; set; } = 0.35;
 
     [ObservableProperty]
     public partial double CompositionSize { get; set; } = 7.0;

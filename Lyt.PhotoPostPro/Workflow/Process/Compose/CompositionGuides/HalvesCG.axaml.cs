@@ -50,4 +50,33 @@ public partial class HalvesCG : UserControl
         cols[1].Width = gridLengthFrame;
         rows[1].Height = gridLengthFrame;
     }
+
+    /// <summary> Brush Styled Property </summary>
+    public static readonly StyledProperty<SolidColorBrush> BrushProperty =
+        AvaloniaProperty.Register<HalvesCG, SolidColorBrush>(
+            nameof(Brush),
+            defaultValue: new SolidColorBrush(Colors.AntiqueWhite),
+            inherits: false,
+            defaultBindingMode: BindingMode.OneWay,
+            validate: null,
+            coerce: CoerceBrush,
+            enableDataValidation: false);
+
+    /// <summary> Gets or sets the Brush property.</summary>
+    public SolidColorBrush Brush
+    {
+        get => this.GetValue(BrushProperty);
+        set => this.SetValue(BrushProperty, value);
+    }
+
+    private static SolidColorBrush CoerceBrush(AvaloniaObject sender, SolidColorBrush value)
+    {
+        if (sender is HalvesCG halves)
+        {
+            halves.Rectangle_1.Fill = value;
+            halves.Rectangle_2.Fill = value;
+        }
+
+        return value;
+    }
 }

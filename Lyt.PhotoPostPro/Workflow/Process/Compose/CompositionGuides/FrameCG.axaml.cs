@@ -41,6 +41,37 @@ public partial class FrameCG : UserControl
         return value;
     }
 
+    /// <summary> Brush Styled Property </summary>
+    public static readonly StyledProperty<SolidColorBrush> BrushProperty =
+        AvaloniaProperty.Register<FrameCG, SolidColorBrush>(
+            nameof(Brush),
+            defaultValue: new SolidColorBrush(Colors.AntiqueWhite),
+            inherits: false,
+            defaultBindingMode: BindingMode.OneWay,
+            validate: null,
+            coerce: CoerceBrush,
+            enableDataValidation: false);
+
+    /// <summary> Gets or sets the Brush property.</summary>
+    public SolidColorBrush Brush
+    {
+        get => this.GetValue(BrushProperty);
+        set => this.SetValue(BrushProperty, value);
+    }
+
+    private static SolidColorBrush CoerceBrush(AvaloniaObject sender, SolidColorBrush value)
+    {
+        if (sender is FrameCG frame)
+        {
+            frame.Rectangle_1.Fill = value;
+            frame.Rectangle_2.Fill = value;
+            frame.Rectangle_3.Fill = value;
+            frame.Rectangle_4.Fill = value;
+        }
+
+        return value;
+    }
+
     private void AdjustLayout(double value)
     {
         var bounds = this.MainGrid.Bounds;

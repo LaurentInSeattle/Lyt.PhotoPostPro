@@ -11,7 +11,7 @@
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:cg="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Compose.CompositionGuides"
-
+	xmlns:controls="using:Lyt.PhotoPostPro.Controls"
 	>
 	<Grid
 		>
@@ -21,6 +21,7 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 3 : Prompt Composition Guides  --> 
 			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 4 : Guides combo --> 
+			<RowDefinition Height="{StaticResource Size.PanelButtons}" /> <!-- 5 Composition Guidelines Colours Buttons --> 
 		</Grid.RowDefinitions>
 
 		<TextBlock
@@ -263,5 +264,91 @@
 				</ComboBox.ItemTemplate>
 			</ComboBox>		
 		</Grid>
+
+		<!-- Colour Buttons --> 
+		<Grid
+			Grid.Row="5" 
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<glyphs:SelectionGroup x:Name="ColorsSelectionGroup" />
+
+			<glyphs:GlyphButton
+				Grid.Column="0"
+				Style="{StaticResource ColorIconButton}"
+				Group="{Binding ElementName=ColorsSelectionGroup}"
+				Command="{Binding OnColorSelect}"
+				CommandParameter="0"
+				>
+				<glyphs:GlyphButton.XamlContent>
+					<controls:ColoredControl
+						BorderBrush="{Binding Color_0}"
+						/>
+				</glyphs:GlyphButton.XamlContent>
+			</glyphs:GlyphButton>
+			<glyphs:GlyphButton
+				Grid.Column="1"
+				Style="{StaticResource ColorIconButton}"
+				Group="{Binding ElementName=ColorsSelectionGroup}"
+				Command="{Binding OnColorSelect}"
+				CommandParameter="1"
+				>
+				<glyphs:GlyphButton.XamlContent>
+					<controls:ColoredControl
+						BorderBrush="{Binding Color_1}"
+						/>
+				</glyphs:GlyphButton.XamlContent>
+			</glyphs:GlyphButton>
+
+			<glyphs:GlyphButton
+				Grid.Column="2"
+				Style="{StaticResource ColorIconButton}"
+				Group="{Binding ElementName=ColorsSelectionGroup}"
+				Command="{Binding OnColorSelect}"
+				CommandParameter="2"
+				>
+				<glyphs:GlyphButton.XamlContent>
+					<controls:ColoredControl
+						BorderBrush="{Binding Color_2}"
+						/>
+				</glyphs:GlyphButton.XamlContent>
+			</glyphs:GlyphButton>
+			<glyphs:GlyphButton
+				Grid.Column="3"
+				Style="{StaticResource ColorIconButton}"
+				Group="{Binding ElementName=ColorsSelectionGroup}"
+				IsSelected="True"
+				Command="{Binding OnColorSelect}"
+				CommandParameter="3"
+				>
+				<glyphs:GlyphButton.XamlContent>
+					<controls:ColoredControl
+						BorderBrush="{Binding Color_3}"
+						/>
+				</glyphs:GlyphButton.XamlContent>
+			</glyphs:GlyphButton>
+
+			<glyphs:GlyphButton
+				Grid.Column="4"
+				Style="{StaticResource ColorIconButton}"
+				Group="{Binding ElementName=ColorsSelectionGroup}"
+				Command="{Binding OnColorSelect}"
+				CommandParameter="4"
+				>
+				<glyphs:GlyphButton.XamlContent>
+					<controls:ColoredControl
+						BorderBrush="{Binding Color_4}"
+						/>
+				</glyphs:GlyphButton.XamlContent>
+			</glyphs:GlyphButton>
+		</Grid>
+
 	</Grid>
 </UserControl>

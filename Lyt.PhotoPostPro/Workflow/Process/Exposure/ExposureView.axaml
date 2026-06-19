@@ -24,7 +24,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="4" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="4" />
+				<ColumnDefinition Width="8" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
@@ -33,13 +33,25 @@
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
 				Source="{ReflectionBinding SourceImage}"
 				/>
+			<GridSplitter
+				x:Name="VerticalSplitter"
+				Classes="wide"
+				Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" 
+				Width="1"
+				ResizeDirection="Columns"
+				ResizeBehavior="PreviousAndNext"
+				DragIncrement="1"
+				ShowsPreview="False"
+				Background="{StaticResource LightAqua_0_100}"
+				Opacity="0.4"
+				ZIndex="999"
+				/>
 			<Image
 				Grid.Column="3" Grid.Row="1"
 				IsVisible="{ReflectionBinding ResultImageIsVisible}"
 				Source="{ReflectionBinding ResultImage}"
 				/>
 		</Grid>
-
 		<Grid		
 			x:Name="BeforeAfterLandscape"
 			IsVisible="{Binding !IsPortrait}"
@@ -47,7 +59,7 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="4" />
+				<RowDefinition Height="8" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
@@ -60,6 +72,19 @@
 				Grid.Column="1" Grid.Row="1"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
 				Source="{ReflectionBinding SourceImage}"
+				/>
+			<GridSplitter
+				x:Name="HorizontalSplitter"
+				Classes="thick"
+				Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" 
+				Height="1"
+				ResizeDirection="Rows"
+				ResizeBehavior="PreviousAndNext"
+				DragIncrement="1"
+				ShowsPreview="False"
+				Background="{StaticResource LightAqua_0_100}"
+				Opacity="0.4"
+				ZIndex="999"
 				/>
 			<Image
 				Grid.Column="1" Grid.Row="3"
