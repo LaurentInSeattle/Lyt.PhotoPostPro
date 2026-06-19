@@ -10,7 +10,19 @@ public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStep
 
     public int Dy { get; set; }
 
-    public override void Initialize() => this.Clear();
+    public int OriginalDx { get; set; }
+
+    public int OriginalDy { get; set; }
+
+    public override void Initialize(Image<Rgb48> originalImage)
+    {
+        this.X = 0;
+        this.Y = 0;
+        this.Dx = originalImage.Width;
+        this.Dy = originalImage.Height;
+        this.OriginalDx = originalImage.Width;
+        this.OriginalDy = originalImage.Height;
+    }
 
     public override Frame? Reset()
     {
@@ -63,13 +75,6 @@ public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStep
 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
-        if ((workflowUpdateKind == WorkflowUpdateKind.Next) &&
-            (this.Dx == 0 || this.Dy == 0) &&
-            (this.SourceImage is not null))
-        {
-            this.Clear();
-        }
-
         if (workflowUpdateKind == WorkflowUpdateKind.Back)
         {
             this.ResultImage = this.SourceImage;
@@ -80,15 +85,7 @@ public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStep
     {
         this.X = 0;
         this.Y = 0;
-        if (this.SourceImage is null)
-        {
-            this.Dx = 0;
-            this.Dy = 0;
-        }
-        else
-        {
-            this.Dx = this.SourceImage.Width;
-            this.Dy = this.SourceImage.Height;
-        }
+        this.Dx = this.OriginalDx;
+        this.Dy = this.OriginalDy;
     }
 }

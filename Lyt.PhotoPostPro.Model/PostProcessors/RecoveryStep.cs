@@ -6,11 +6,7 @@ public class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName)
 
     public float HighlightAmount { get; set; }
 
-    public override void Initialize()
-    {
-        this.ShadowAmount = 0.0f;
-        this.HighlightAmount = 0.0f;
-    }
+    public override void Initialize(Image<Rgb48> _) => this.Clear();
 
     public override Frame? Transform(bool withFrame = true)
     {
@@ -53,16 +49,22 @@ public class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName)
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? Clear()
+    //internal Frame? Clear()
+    //{
+    //    this.Initialize();
+
+    //    if (this.SourceImage is null)
+    //    {
+    //        return null;
+    //    }
+
+    //    this.ResultImage = this.SourceImage;
+    //    return this.SourceImage.ToFrame();
+    //}
+
+    private void Clear()
     {
-        this.Initialize();
-
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        this.ResultImage = this.SourceImage;
-        return this.SourceImage.ToFrame();
+        this.ShadowAmount = 0.0f;
+        this.HighlightAmount = 0.0f;
     }
 }

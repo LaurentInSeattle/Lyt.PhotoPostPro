@@ -6,15 +6,11 @@ public class OrientationStep() : PostProcessStep(PostProcessStep.OrientationStep
 
     public bool IsMirrored { get; set; }
 
-    public override void Initialize()
-    {
-        this.RotationAngle = 0;
-        this.IsMirrored = false;
-    }
+    public override void Initialize(Image<Rgb48> _) => this.Clear();
 
     public override Frame? Reset()
     {
-        this.Initialize();
+        this.Clear();
         return base.Reset();
     }
 
@@ -70,6 +66,12 @@ public class OrientationStep() : PostProcessStep(PostProcessStep.OrientationStep
     }
 
     private bool IsRotated => this.RotationAngle != 0;
+
+    private void Clear ()
+    {
+        this.RotationAngle = 0;
+        this.IsMirrored = false;
+    }
 
     private void Normalize()
     {

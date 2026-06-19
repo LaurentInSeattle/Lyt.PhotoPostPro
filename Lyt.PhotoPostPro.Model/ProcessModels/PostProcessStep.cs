@@ -37,7 +37,7 @@ public class PostProcessStep(string name)
     public Image<Rgb48>? ResultImage { get; set; }
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Initialize() { } 
+    public virtual void Initialize(Image<Rgb48> originalImage) { } 
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Finish() { }

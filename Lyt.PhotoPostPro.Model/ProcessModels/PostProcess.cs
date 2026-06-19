@@ -27,11 +27,11 @@ public sealed class PostProcess
             throw new InvalidOperationException("Project must be set before accessing it.");
 
     [JsonIgnore]
-    public Image<Rgb48>? MaybeSourceImage { get; set; }
+    public Image<Rgb48>? MaybeOriginalImage { get; set; }
 
     [JsonIgnore]
-    public Image<Rgb48> SourceImage
-        =>  this.MaybeSourceImage ??
+    public Image<Rgb48> OriginalImage
+        =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 
     public bool IsInvalid
@@ -76,7 +76,7 @@ public sealed class PostProcess
             {
                 image = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
                 bool loaded = image is not null;
-                this.MaybeSourceImage = image;
+                this.MaybeOriginalImage = image;
                 return loaded;
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ public sealed class PostProcess
         } 
         else
         {
-            this.MaybeSourceImage = image;
+            this.MaybeOriginalImage = image;
             return true;
         }
     }
@@ -99,7 +99,7 @@ public sealed class PostProcess
     {
         if (this.Workflow is not null)
         {
-            this.Workflow.Begin(this.SourceImage);
+            this.Workflow.Begin(this.OriginalImage);
         }
         else
         {

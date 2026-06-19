@@ -4,11 +4,11 @@ public class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStepNa
 {
     public float RotationAngle { get ; set ; } // Degrees
 
-    public override void Initialize() => this.RotationAngle = 0.0f;
+    public override void Initialize(Image<Rgb48> _) => this.Clear();
 
     public override Frame? Reset()
     {
-        this.Initialize();
+        this.Clear();
         return base.Reset ();
     }
 
@@ -38,6 +38,8 @@ public class StraightenStep() : PostProcessStep(PostProcessStep.StraightenStepNa
         return withFrame ? clone.ToFrame() : null;
     }
 
+    private void Clear() => this.RotationAngle = 0.0f;
+    
     private void Normalize()
     {
         // In C#, the % operator is a remainder operator, not a true mathematical modulo operator.

@@ -54,7 +54,7 @@ public sealed class PostProcessWorkflow
 
     public bool CanMoveNext => this.CurrentStepIndex < this.Steps.Count - 1;
 
-    public bool Begin(Image<Rgb48> sourceImage)
+    public bool Begin(Image<Rgb48> originalImage)
     {
         if (this.Steps.Count == 0)
         {
@@ -63,14 +63,14 @@ public sealed class PostProcessWorkflow
 
         foreach (var step in this.Steps)
         {
-            step.Initialize();
+            step.Initialize(originalImage);
             step.IsCurrent = false;
         }
 
         this.CurrentStepIndex = 0;
         this.CurrentStep.IsCurrent = true;
-        this.CurrentStep.SourceImage = sourceImage;
-        this.CurrentStep.ResultImage = sourceImage;
+        this.CurrentStep.SourceImage = originalImage;
+        this.CurrentStep.ResultImage = originalImage;
         this.Notify(null, WorkflowUpdateKind.Begin);
         return true;
     }

@@ -8,16 +8,11 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
 
     public int Shift { get; set; }
 
-    public override void Initialize()
-    {
-        this.Gamma = 1.0;
-        this.Gain = 1.0;
-        this.Shift = 0;
-    }
+    public override void Initialize(Image<Rgb48> _) => this.Clear();
 
     public override Frame? Reset()
     {
-        this.Initialize();
+        this.Clear();
         return base.Reset();
     }
 
@@ -55,5 +50,12 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
         this.Gain = gain;
         this.Shift = shift;
         return this.Transform(withFrame: true);
+    }
+
+    private void Clear ()
+    {
+        this.Gamma = 1.0;
+        this.Gain = 1.0;
+        this.Shift = 0;
     }
 }

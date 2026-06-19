@@ -34,7 +34,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
         try
         {
-            var sourceImage = this.CurrentPostProcess.SourceImage;
+            var sourceImage = this.CurrentPostProcess.OriginalImage;
             this.LastSourceFrame = sourceImage.ToFrame();
             this.IsSourceImageUpdatePending = true;
             return true;

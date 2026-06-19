@@ -11,11 +11,7 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
 
     public WhiteBalanceAlgorithm Algorithm { get; set; }
 
-    public override void Initialize()
-    {
-        this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
-        this.SaturationThreshold = 0.4f;
-    }
+    public override void Initialize(Image<Rgb48> _) => this.Clear();
 
     public override Frame? Transform(bool withFrame = true)
     {
@@ -56,16 +52,22 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? Clear()
+    private void Clear()
     {
-        this.Initialize();
-
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        this.ResultImage = this.SourceImage;
-        return this.SourceImage.ToFrame();
+        this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
+        this.SaturationThreshold = 0.4f;
     }
+
+    //internal Frame? Clear()
+    //{
+    //    this.Initialize();
+
+    //    if (this.SourceImage is null)
+    //    {
+    //        return null;
+    //    }
+
+    //    this.ResultImage = this.SourceImage;
+    //    return this.SourceImage.ToFrame();
+    //}
 }
