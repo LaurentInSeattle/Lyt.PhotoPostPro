@@ -7,7 +7,7 @@ public sealed partial class WhiteBalanceViewModel : StepViewModel<WhiteBalanceVi
     [ObservableProperty]
     public partial bool IsPortrait { get; set; }
 
-    protected override void OnImageReceived(WriteableBitmap bitmap)
+    protected override void OnSourceImageReceived(WriteableBitmap bitmap)
     {
         var size = bitmap.PixelSize; 
         this.IsPortrait = size.Height >= size.Width;

@@ -46,7 +46,7 @@ public partial class StepViewModel<TView> :
                 var bitmap = message.Frame.ToWriteableBitmap();
                 this.SourceImage = bitmap;
                 this.SourceImageIsVisible = true;
-                this.OnImageReceived(bitmap);
+                this.OnSourceImageReceived(bitmap);
             }
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -60,7 +60,7 @@ public partial class StepViewModel<TView> :
                 var bitmap = message.Frame.ToWriteableBitmap();
                 this.ResultImage = bitmap;
                 this.ResultImageIsVisible = true;
-                this.OnImageReceived(bitmap);
+                this.OnResultImageReceived(bitmap);
             }
         }, DispatcherPriority.ApplicationIdle); 
     }
@@ -75,6 +75,8 @@ public partial class StepViewModel<TView> :
         this.SourceImageIsVisible = false;
     }
 
-    // NOt used yet
-    protected virtual void OnImageReceived (WriteableBitmap bitmap) { }
+    // Used by Compose
+    protected virtual void OnSourceImageReceived (WriteableBitmap bitmap) { }
+
+    protected virtual void OnResultImageReceived(WriteableBitmap bitmap) { }
 }

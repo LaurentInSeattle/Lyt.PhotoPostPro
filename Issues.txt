@@ -11,6 +11,7 @@ Bugs
 
 - Show degree symbol on buttons of the Rotate tool box 
 
+- Disable Process button if no image 
 
 TODO First 
 ----------

@@ -45,6 +45,8 @@ public partial class CropGridView : View
         {
             return;
         }
+        try
+        {
 
         With.Flag(ref this.doNotUpdateOnLayoutUpdated, () =>
         {
@@ -52,20 +54,35 @@ public partial class CropGridView : View
             double h = this.Bounds.Height;
             if (w > 0.0 && h > 0.0)
             {
+                double rightWidth = w - x - dx; 
+                double bottomHeight = h - y - dy;
+                if ( rightWidth < 0.0 || bottomHeight < 0.0)
+                {
+                    if (Debugger.IsAttached) Debugger.Break();
+                }
+
                 var cols = this.CropGrid.ColumnDefinitions;
                 var left = cols[0];
                 left.Width = new GridLength(x, GridUnitType.Pixel);
                 var right = cols[4];
-                right.Width = new GridLength(w - x - dx, GridUnitType.Pixel);
+                right.Width = new GridLength(rightWidth, GridUnitType.Pixel);
                 var rows = this.CropGrid.RowDefinitions;
                 var top = rows[0];
                 top.Height = new GridLength(y, GridUnitType.Pixel);
                 var bottom = rows[4];
-                bottom.Height = new GridLength(h - y - dy, GridUnitType.Pixel); ;
+                bottom.Height = new GridLength(bottomHeight, GridUnitType.Pixel); ;
 
                 cropGridViewModel.OnCropRectangleChanged(x, y, dx, dy);
             }
         });
+
+
+        }
+        catch ( Exception ex) 
+        {
+            Debug.WriteLine(ex);
+            if ( Debugger.IsAttached )  Debugger.Break() ;
+        }
     }
 
     internal void Left(int delta)
@@ -192,8 +209,8 @@ public partial class CropGridView : View
         double y = top.ActualHeight;
         double imageWidth = this.Bounds.Width;
         double imageHeight = this.Bounds.Height;
-        double dx = imageWidth - right.ActualWidth - x ;
-        double dy = imageHeight-  bottom.ActualHeight - y ;
+        double dx = imageWidth - right.ActualWidth - x - 1;
+        double dy = imageHeight-  bottom.ActualHeight - y - 1;
 
         cropGridViewModel.OnCropRectangleChanged(x, y, dx, dy);
     }

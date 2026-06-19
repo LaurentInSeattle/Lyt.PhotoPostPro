@@ -40,9 +40,18 @@ public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStep
             (cropRectangle.Height != this.SourceImage.Height || cropRectangle.Width != this.SourceImage.Width);
         if (isChanged)
         {
-            var clone = this.SourceImage.Clone();
-            clone.Mutate(x => x.Crop(cropRectangle));
-            this.ResultImage = clone;
+            try
+            {
+                var clone = this.SourceImage.Clone();
+                clone.Mutate(x => x.Crop(cropRectangle));
+                this.ResultImage = clone;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                if (Debugger.IsAttached) Debugger.Break();
+                return null;
+            } 
         }
         else
         {

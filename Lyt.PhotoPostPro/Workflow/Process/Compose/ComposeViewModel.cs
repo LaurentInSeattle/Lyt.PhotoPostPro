@@ -31,13 +31,13 @@ public sealed partial class ComposeViewModel : StepViewModel<ComposeView>
         this.CropGridViewModel.OnDeactivate();
     }
 
-    protected override void OnImageReceived(WriteableBitmap bitmap) 
+    protected override void OnSourceImageReceived(WriteableBitmap bitmap) 
     {
         var imageSize = bitmap.Size;
         this.ImageWidth = imageSize.Width;
         this.ImageHeight = imageSize.Height;
         this.CreateCropVmIfNeeded();
-        this.CropGridViewModel.ClearCrop();
+        Dispatch.OnUiThread(this.CropGridViewModel.ClearCrop, DispatcherPriority.Background);         
     }
 
     internal void SelectCropGuidelines(int cgIndex) => this.CropGridViewModel.SelectCg(cgIndex);
