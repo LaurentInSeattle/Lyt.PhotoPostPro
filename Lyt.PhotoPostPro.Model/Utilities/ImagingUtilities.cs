@@ -3,6 +3,22 @@
 public static class ImagingUtilities
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float ClipF(float value)
+        => value < 0.0f ?
+            0.0f :
+            value > 1.0f ?
+                1.0f :
+                value;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static double ClipD(double value)
+        => value < 0.0 ?
+            0.0 :
+            value > 1.0 ?
+                1.0 :
+                value;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static byte Clip8(int value)
         => value < 0 ?
             (byte)0 :

@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
+using static System.Math;
 using static ImagingUtilities;
 
 public static class ImagingAlgorithms
@@ -73,77 +74,78 @@ public static class ImagingAlgorithms
             {
                 Rgb48 pixel = row[x];
 
-                // Normalize RGB to [0, 1] range
+                // Normalize RGB to [0, 1] float range
                 float r = pixel.R / 65535.0f;
                 float g = pixel.G / 65535.0f;
                 float b = pixel.B / 65535.0f;
 
                 // Calculate perceived luminance
-                float luminance = (float)Math.Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+                float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
 
-                // Compute adjustment factors
-                float h = highlightAmount * 0.05f * ((float)Math.Pow(8.0, luminance) - 1.0f);
-                float s = shadowAmount * 0.05f * ((float)Math.Pow(8.0, 1.0f - luminance) - 1.0f);
-                float hs = h + s;
+#if OLD_ALGORITHM
+				// Compute adjustment factors
+				float h = highlightAmount * 0.05f * ((float)Math.Pow(8.0, luminance) - 1.0f);
+				float s = shadowAmount * 0.05f * ((float)Math.Pow(8.0, 1.0f - luminance) - 1.0f);
+				float hs = h + s;
+
+				// Apply shifts, denormalize, clip and update pixel
+				row[x].R = DeNormalizeClip16(r + hs);
+				row[x].G = DeNormalizeClip16(g + hs);
+				row[x].B = DeNormalizeClip16(b + hs);
+#else
+                // Create shadow and highlight masks
+                float shadowMask = ClipF((0.5f - luminance) * 2.0f);
+                float highlightMask = ClipF((luminance - 0.5f) * 2.0f);
+
+                // Calculate adjustments 
+                float shadowFactor = (float)Pow(luminance, 1.0f - shadowAmount);
+                float highlightFactor = (float)Pow(luminance, 1.0f + highlightAmount);
+
+                // Combine factors with masks to apply changes
+                float adjustedLuminance = luminance;
+                adjustedLuminance += (shadowFactor - luminance) * shadowMask * shadowAmount;
+                adjustedLuminance -= (luminance - highlightFactor) * highlightMask * highlightAmount;
+
+                // Preserve chromaticity (prevent color shifting)
+                float finalFactor = adjustedLuminance / Max(luminance, 0.001f);
 
                 // Apply shifts, denormalize, clip and update pixel
-                row[x].R = DeNormalizeClip16(r + hs);
-                row[x].G = DeNormalizeClip16(g + hs);
-                row[x].B = DeNormalizeClip16(b + hs);
+                row[x].R = DeNormalizeClip16(r * finalFactor);
+                row[x].G = DeNormalizeClip16(g * finalFactor);
+                row[x].B = DeNormalizeClip16(b * finalFactor);
+#endif
             }
         });
     }
 
-    /* Shader code for H and S 
-     
-    / 1. Calculate the perceptual luminance
-    float luma = dot(color, vec3(0.299, 0.587, 0.114));
-    
-    // 2. Create shadow and highlight masks
-    float shadowMask = clamp((0.5 - luma) * 2.0, 0.0, 1.0);
-    float highlightMask = clamp((luma - 0.5) * 2.0, 0.0, 1.0);
-    
-    // 3. Calculate adjustments 
-    float shadowFactor = pow(luma, 1.0 - shadowAmount);
-    float highlightFactor = pow(luma, 1.0 + highlightAmount);
-    
-    // 4. Combine factors with masks to apply changes
-    float adjustedLuma = luma;
-    adjustedLuma += (shadowFactor - luma) * shadowMask * shadowAmount;
-    adjustedLuma -= (luma - highlightFactor) * highlightMask * highlightAmount;
-    
-    // 5. Preserve chromaticity (prevent color shifting)
-    return color * (adjustedLuma / max(luma, 0.001));
-    */
-
-    /*
-     
+/*
+ 
 public static void ApplyColorTemperature(Image image, float temperature)
 {
-    // Clamp the temperature value to a reasonable range (-100 to 100)
-    temperature = Math.Clamp(temperature, -100f, 100f);
+	// Clamp the temperature value to a reasonable range (-100 to 100)
+	temperature = Math.Clamp(temperature, -100f, 100f);
 
-    // Scale the temperature to a fractional shift
-    float tempShift = temperature / 100f;
-    float blueShift = tempShift * 0.5f;
+	// Scale the temperature to a fractional shift
+	float tempShift = temperature / 100f;
+	float blueShift = tempShift * 0.5f;
 
-    // Build the 5x5 Color Matrix
-    // Columns: R, G, B, A, Offset
-    var matrix = new SixLabors.ImageSharp.ColorMatrix(new float[]
-    {
-        1f + tempShift, 0f,             0f,             0f, 0f,
-        0f,             1f + tempShift, 0f,             0f, 0f,
-        0f,             0f,             1f - blueShift, 0f, 0f,
-        0f,             0f,             0f,             1f, 0f,
-        0f,             0f,             0f,             0f, 1f
-    });
+	// Build the 5x5 Color Matrix
+	// Columns: R, G, B, A, Offset
+	var matrix = new SixLabors.ImageSharp.ColorMatrix(new float[]
+	{
+		1f + tempShift, 0f,             0f,             0f, 0f,
+		0f,             1f + tempShift, 0f,             0f, 0f,
+		0f,             0f,             1f - blueShift, 0f, 0f,
+		0f,             0f,             0f,             1f, 0f,
+		0f,             0f,             0f,             0f, 1f
+	});
 
-    // Apply the matrix as a filter
-    image.Mutate(ctx => ctx.Filter(matrix));
+	// Apply the matrix as a filter
+	image.Mutate(ctx => ctx.Filter(matrix));
 }
 https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
-    
-    
+	
+	
 Start with a temperature, in Kelvin, somewhere between 1000 and 40000.  (Other values may work,
  but I can't make any promises about the quality of the algorithm's estimates above 40000 K.)
 Note also that the temperature and color variables need to be declared as floating-point.
@@ -191,164 +193,164 @@ Else
 	End If
 
 End If
-    
+	
 'Given a temperature (in Kelvin), estimate an RGB equivalent
 Private Sub getRGBfromTemperature(ByRef r As Long, ByRef g As Long, ByRef b As Long, ByVal tmpKelvin As Long)
 
-    Static tmpCalc As Double
+	Static tmpCalc As Double
 
-    'Temperature must fall between 1000 and 40000 degrees
-    If tmpKelvin < 1000 Then tmpKelvin = 1000
-    If tmpKelvin > 40000 Then tmpKelvin = 40000
-    
-    'All calculations require tmpKelvin \ 100, so only do the conversion once
-    tmpKelvin = tmpKelvin \ 100
-    
-    'Calculate each color in turn
-    
-    'First: red
-    If tmpKelvin <= 66 Then
-        r = 255
-    Else
-        'Note: the R-squared value for this approximation is .988
-        tmpCalc = tmpKelvin - 60
-        tmpCalc = 329.698727446 * (tmpCalc ^ -0.1332047592)
-        r = tmpCalc
-        If r < 0 Then r = 0
-        If r > 255 Then r = 255
-    End If
-    
-    'Second: green
-    If tmpKelvin <= 66 Then
-        'Note: the R-squared value for this approximation is .996
-        tmpCalc = tmpKelvin
-        tmpCalc = 99.4708025861 * Log(tmpCalc) - 161.1195681661
-        g = tmpCalc
-        If g < 0 Then g = 0
-        If g > 255 Then g = 255
-    Else
-        'Note: the R-squared value for this approximation is .987
-        tmpCalc = tmpKelvin - 60
-        tmpCalc = 288.1221695283 * (tmpCalc ^ -0.0755148492)
-        g = tmpCalc
-        If g < 0 Then g = 0
-        If g > 255 Then g = 255
-    End If
-    
-    'Third: blue
-    If tmpKelvin >= 66 Then
-        b = 255
-    ElseIf tmpKelvin <= 19 Then
-        b = 0
-    Else
-        'Note: the R-squared value for this approximation is .998
-        tmpCalc = tmpKelvin - 10
-        tmpCalc = 138.5177312231 * Log(tmpCalc) - 305.0447927307
-        
-        b = tmpCalc
-        If b < 0 Then b = 0
-        If b > 255 Then b = 255
-    End If
-    
+	'Temperature must fall between 1000 and 40000 degrees
+	If tmpKelvin < 1000 Then tmpKelvin = 1000
+	If tmpKelvin > 40000 Then tmpKelvin = 40000
+	
+	'All calculations require tmpKelvin \ 100, so only do the conversion once
+	tmpKelvin = tmpKelvin \ 100
+	
+	'Calculate each color in turn
+	
+	'First: red
+	If tmpKelvin <= 66 Then
+		r = 255
+	Else
+		'Note: the R-squared value for this approximation is .988
+		tmpCalc = tmpKelvin - 60
+		tmpCalc = 329.698727446 * (tmpCalc ^ -0.1332047592)
+		r = tmpCalc
+		If r < 0 Then r = 0
+		If r > 255 Then r = 255
+	End If
+	
+	'Second: green
+	If tmpKelvin <= 66 Then
+		'Note: the R-squared value for this approximation is .996
+		tmpCalc = tmpKelvin
+		tmpCalc = 99.4708025861 * Log(tmpCalc) - 161.1195681661
+		g = tmpCalc
+		If g < 0 Then g = 0
+		If g > 255 Then g = 255
+	Else
+		'Note: the R-squared value for this approximation is .987
+		tmpCalc = tmpKelvin - 60
+		tmpCalc = 288.1221695283 * (tmpCalc ^ -0.0755148492)
+		g = tmpCalc
+		If g < 0 Then g = 0
+		If g > 255 Then g = 255
+	End If
+	
+	'Third: blue
+	If tmpKelvin >= 66 Then
+		b = 255
+	ElseIf tmpKelvin <= 19 Then
+		b = 0
+	Else
+		'Note: the R-squared value for this approximation is .998
+		tmpCalc = tmpKelvin - 10
+		tmpCalc = 138.5177312231 * Log(tmpCalc) - 305.0447927307
+		
+		b = tmpCalc
+		If b < 0 Then b = 0
+		If b > 255 Then b = 255
+	End If
+	
 End Sub
-    
-    
-    using System;
+	
+	
+	using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 public static class ColorTemperatureFilter
 {
-    public static Bitmap AdjustTemperature(Bitmap sourceImage, float kelvin)
-    {
-        // 1. Convert Kelvin to a 0-255 scaling factor for color channels
-        float temp = kelvin / 100f;
-        float red, green, blue;
+	public static Bitmap AdjustTemperature(Bitmap sourceImage, float kelvin)
+	{
+		// 1. Convert Kelvin to a 0-255 scaling factor for color channels
+		float temp = kelvin / 100f;
+		float red, green, blue;
 
-        // Calculate Red
-        if (temp <= 66)
-        {
-            red = 255;
-        }
-        else
-        {
-            red = temp - 60f;
-            red = (float)(329.698727446 * Math.Pow(red, -0.1332047592));
-        }
+		// Calculate Red
+		if (temp <= 66)
+		{
+			red = 255;
+		}
+		else
+		{
+			red = temp - 60f;
+			red = (float)(329.698727446 * Math.Pow(red, -0.1332047592));
+		}
 
-        // Calculate Green
-        if (temp <= 66)
-        {
-            green = temp;
-            green = (float)(99.4708025861 * Math.Log(green) - 161.1195681661);
-        }
-        else
-        {
-            green = temp - 60f;
-            green = (float)(288.1221695283 * Math.Pow(green, -0.0755148492));
-        }
+		// Calculate Green
+		if (temp <= 66)
+		{
+			green = temp;
+			green = (float)(99.4708025861 * Math.Log(green) - 161.1195681661);
+		}
+		else
+		{
+			green = temp - 60f;
+			green = (float)(288.1221695283 * Math.Pow(green, -0.0755148492));
+		}
 
-        // Calculate Blue
-        if (temp >= 66)
-        {
-            blue = 255;
-        }
-        else if (temp <= 19)
-        {
-            blue = 0;
-        }
-        else
-        {
-            blue = temp - 10f;
-            blue = (float)(138.5177312231 * Math.Log(blue) - 305.0447927307);
-        }
+		// Calculate Blue
+		if (temp >= 66)
+		{
+			blue = 255;
+		}
+		else if (temp <= 19)
+		{
+			blue = 0;
+		}
+		else
+		{
+			blue = temp - 10f;
+			blue = (float)(138.5177312231 * Math.Log(blue) - 305.0447927307);
+		}
 
-        // Clamp values to [0, 255]
-        red = Math.Max(0, Math.Min(255, red));
-        green = Math.Max(0, Math.Min(255, green));
-        blue = Math.Max(0, Math.Min(255, blue));
+		// Clamp values to [0, 255]
+		red = Math.Max(0, Math.Min(255, red));
+		green = Math.Max(0, Math.Min(255, green));
+		blue = Math.Max(0, Math.Min(255, blue));
 
-        // 2. Process image with LockBits for fast pixel manipulation
-        Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-        Rectangle rect = new Rectangle(0, 0, resultImage.Width, resultImage.Height);
+		// 2. Process image with LockBits for fast pixel manipulation
+		Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+		Rectangle rect = new Rectangle(0, 0, resultImage.Width, resultImage.Height);
 
-        BitmapData srcData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-        BitmapData dstData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+		BitmapData srcData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+		BitmapData dstData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-        int bytesPerPixel = 4;
-        int stride = srcData.Stride;
-        IntPtr srcScan0 = srcData.Scan0;
-        IntPtr dstScan0 = dstData.Scan0;
+		int bytesPerPixel = 4;
+		int stride = srcData.Stride;
+		IntPtr srcScan0 = srcData.Scan0;
+		IntPtr dstScan0 = dstData.Scan0;
 
-        unsafe
-        {
-            byte* src = (byte*)(void*)srcScan0;
-            byte* dst = (byte*)(void*)dstScan0;
+		unsafe
+		{
+			byte* src = (byte*)(void*)srcScan0;
+			byte* dst = (byte*)(void*)dstScan0;
 
-            for (int y = 0; y < sourceImage.Height; y++)
-            {
-                for (int x = 0; x < sourceImage.Width; x++)
-                {
-                    int index = (y * stride) + (x * bytesPerPixel);
+			for (int y = 0; y < sourceImage.Height; y++)
+			{
+				for (int x = 0; x < sourceImage.Width; x++)
+				{
+					int index = (y * stride) + (x * bytesPerPixel);
 
-                    // src[index + 0] = Blue, [index + 1] = Green, [index + 2] = Red, [index + 3] = Alpha
+					// src[index + 0] = Blue, [index + 1] = Green, [index + 2] = Red, [index + 3] = Alpha
 
-                    // Apply the temperature scaling
-                    dst[index + 0] = (byte)Math.Min(255, src[index + 0] * (blue / 255.0));
-                    dst[index + 1] = (byte)Math.Min(255, src[index + 1] * (green / 255.0));
-                    dst[index + 2] = (byte)Math.Min(255, src[index + 2] * (red / 255.0));
-                    dst[index + 3] = src[index + 3]; // Maintain alpha
-                }
-            }
-        }
+					// Apply the temperature scaling
+					dst[index + 0] = (byte)Math.Min(255, src[index + 0] * (blue / 255.0));
+					dst[index + 1] = (byte)Math.Min(255, src[index + 1] * (green / 255.0));
+					dst[index + 2] = (byte)Math.Min(255, src[index + 2] * (red / 255.0));
+					dst[index + 3] = src[index + 3]; // Maintain alpha
+				}
+			}
+		}
 
-        sourceImage.UnlockBits(srcData);
-        resultImage.UnlockBits(dstData);
+		sourceImage.UnlockBits(srcData);
+		resultImage.UnlockBits(dstData);
 
-        return resultImage;
-    }
+		return resultImage;
+	}
 }
-    */
+	*/
 
     // By setting the saturationThreshold to 0.4, any pixel that is more than 40 % saturated gets skipped. 
     // The algorithm now looks at the neutral sidewalks, stones, gray tree trunks, or white clothing in the photo
@@ -438,6 +440,6 @@ public static class ColorTemperatureFilter
             }
         });
 
-        return true; 
+        return true;
     }
 }
