@@ -23,6 +23,10 @@
 			Margin="4"
 			DataContext="{Binding DropViewModel}"
 			/>
+		<shared:SpinView
+			Margin="4"
+			DataContext="{Binding SpinViewModel}"
+			/>
 		<glyphs:GlyphButton
 			Style="{StaticResource ViewIconButton}"
 			FontSize="24"

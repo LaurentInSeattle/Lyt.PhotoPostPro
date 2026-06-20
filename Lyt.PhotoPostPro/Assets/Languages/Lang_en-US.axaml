@@ -19,12 +19,18 @@
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Post Processing!</system:String>
 
+	<!-- Spin wait  -->
+	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
+	<system:String x:Key="Imaging.InProgressHelp">Please wait...</system:String>
+
 	<!-- Folder -->
 	<system:String x:Key="Folder.DropZone">Drag and Drop Zone</system:String>
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 
 	<!-- Single -->
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
+	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
+	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
 
 	<!-- Workflow -->
 	<system:String x:Key="Workflow.Back">Back</system:String>

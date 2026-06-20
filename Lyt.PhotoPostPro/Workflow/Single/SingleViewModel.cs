@@ -8,6 +8,7 @@ using SixLabors.ImageSharp.PixelFormats;
 public sealed partial class SingleViewModel : ViewModel<SingleView>
 {
     private readonly PhotoPostProModel model;
+    private readonly IToaster toaster; 
 
     private string imagePath;
     private Image<Rgb48>? image;
@@ -15,9 +16,10 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
     [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
 
-    public SingleViewModel(PhotoPostProModel model)
+    public SingleViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
+        this.toaster = toaster;
         this.imagePath = string.Empty;
     }
 
@@ -30,38 +32,79 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         }
         else
         {
-            try
+            // Launch a spinner for big files 
+            this.SpinWait(start: true); 
+            Task.Run(() => { this.TryLoadImage(path); } );
+        }
+    } 
+
+    private void TryLoadImage(string path) 
+    {
+        string error = string.Empty;
+        try
+        {
+            this.image = ImageLoader.LoadImage(path, out string errorMessage);
+            if (this.image is not null)
             {
-                // TODO: Launch a spinner for big files 
-                this.image = ImageLoader.LoadImage(path, out string errorMessage);
-                if (this.image is not null)
+                var imageFrame = ImagingUtilities.ToFrame(image);
+                if (imageFrame is not null)
                 {
-                    var imageFrame = ImagingUtilities.ToFrame(image);
-                    if (imageFrame is not null)
-                    {
-                        this.SourceImage = imageFrame.ToWriteableBitmap();
-                        this.imagePath = path;
-                        var toolboxViewModel = App.GetRequiredService<SingleToolboxViewModel>();
-                        toolboxViewModel.ProcessIsDisabled = false; 
-                    }
-                    else
-                    {
-                        this.Logger.Warning("Failed to load image file.");
-                        // TODO : Show error message to user
-                    }
+                    Dispatch.OnUiThread(()=>{ this.OnImageLoaded (imageFrame, path); });
                 }
                 else
                 {
-                    this.Logger.Warning("Failed to load image file: " + errorMessage);
-                    // TODO : Show error message to user
+
+                    error = "Failed to load image frame.";
                 }
             }
-            catch (Exception ex)
+            else
             {
-                this.Logger.Error("Error loading image file: " + ex.Message);
-                // TODO : Show error message to user
+                error = "Failed to load image file: " + errorMessage;
             }
         }
+        catch (Exception ex)
+        {
+            error = "Error loading image file, Exception thrown: " + ex.Message;
+        }
+        finally
+        {
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                this.Logger.Error(error);
+                Dispatch.OnUiThread(() => { this.OnImageFailed(error); });
+            }
+        }
+    }
+
+    private void OnImageFailed(string error)
+    {
+        this.SourceImage = null;
+        this.imagePath = string.Empty;
+
+        // Show error message to user
+        this.toaster.Host = this.View.ToasterHost;
+        this.toaster.Show(
+            this.Localize("Single.LoadImageFailTitle"), 
+            this.Localize("Single.LoadImageFailMessage"),
+            8_000, 
+            InformationLevel.Error);
+
+    }
+
+    private void OnImageLoaded (Frame frame, string path )
+    {
+        this.SourceImage = frame.ToWriteableBitmap();
+        this.imagePath = path;
+        this.SpinWait(start: false); 
+    }
+
+    private void SpinWait ( bool start = true )
+    {
+        var toolboxViewModel = App.GetRequiredService<SingleToolboxViewModel>();
+        toolboxViewModel.SpinViewModel.IsVisible = start;
+        toolboxViewModel.SpinViewModel.IsActive = start;
+        toolboxViewModel.DropViewModel.IsVisible = ! start;
+        toolboxViewModel.ProcessIsDisabled = start;
     }
 
     internal void ProcessCurrentImage()

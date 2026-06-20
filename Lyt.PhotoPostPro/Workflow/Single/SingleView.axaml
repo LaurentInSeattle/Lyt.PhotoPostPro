@@ -11,7 +11,8 @@
 
 	Background="Transparent"
 	>
-	<Grid		
+	<Grid	
+		x:Name="ToasterHost"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="12" />

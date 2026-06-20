@@ -3,7 +3,6 @@ Bugs
 
 - Show degree symbol on buttons of the Rotate tool box 
 
-- Wait spinner when loading big images 
 
 - Abandon Process 
 
