@@ -1,8 +1,6 @@
 Bugs 
 ----
 
-- Need to create a shared viewer 
-
 - Finish H & S 
 
 - Re-init of Compose is failing at second image 
