@@ -23,15 +23,15 @@
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="4" />
-				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" MinWidth="120"/>
 				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" MinWidth="360"/>
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
 			<Image
 				Grid.Column="1" Grid.Row="1"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
-				Source="{ReflectionBinding SourceImage}"
+				Source="{ReflectionBinding SourceImage}"				
 				/>
 			<GridSplitter
 				x:Name="VerticalSplitter"
@@ -58,9 +58,9 @@
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="*" MinHeight="120"/>
 				<RowDefinition Height="8" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="*" MinHeight="360"/>
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>

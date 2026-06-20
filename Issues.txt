@@ -3,7 +3,7 @@ Bugs
 
 - Abandon Process 
 
-- Thickness of composition guidelines in crop view
+- Re-init of Compose is failing at second image 
 
 - Create constants for special UNIcode characters 
 
