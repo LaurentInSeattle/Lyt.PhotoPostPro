@@ -134,7 +134,22 @@ public sealed partial class ComposeToolboxViewModel :
         this.WidthValueString = idx.ToString("D");
         this.HeightValueString = idy.ToString("D");
         float aspectRatio = idx / (float)idy;
-        this.AspectRatioValueString = aspectRatio.ToString("F2");
+        if (( idy < 2) || (idx < 2 ))
+        {
+            // Crazy 
+            this.AspectRatioValueString = "- * - ";
+        }
+        else if (aspectRatio > 1.0)
+        {
+            // Landscape 
+            this.AspectRatioValueString = aspectRatio.ToString("F2");
+        }
+        else
+        {
+            // Portrait
+            this.AspectRatioValueString = 
+                string.Format ("{0:F2}  (1/{1:F2})", aspectRatio, 1.0 / aspectRatio);
+        }
     }
 
     public override void OnModelStepUpdated(CompositionStep step) => this.SetCropRectangle(step);

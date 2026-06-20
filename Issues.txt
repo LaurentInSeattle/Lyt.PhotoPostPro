@@ -1,6 +1,12 @@
 Bugs 
 ----
 
+- Show degree symbol on buttons of the Rotate tool box 
+
+- Disable Process button if no image 
+
+- Wait spinner when loading big images 
+
 - Abandon Process 
 
 - Re-init of Compose is failing at second image 
@@ -9,13 +15,7 @@ Bugs
 
 - Visual issues when hovering quickly above glyph buttons 
 
-- Show degree symbol on buttons of the Rotate tool box 
-
-- Disable Process button if no image 
-
-- Wait spinner when loading big images 
-
-- Correct aspect ratio when in portrait 
+- Recognize standard aspect ratios (square, HD, 16/9, 4/3, Golden Ratio) 
 
 TODO First 
 ----------
