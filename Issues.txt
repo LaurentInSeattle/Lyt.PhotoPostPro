@@ -5,6 +5,8 @@ Bugs
 
 - Visual issues when hovering quickly above glyph buttons 
 
+- Need to create a shared viewer 
+
 
 TODO First : Single Image Process
 ---------------------------------
