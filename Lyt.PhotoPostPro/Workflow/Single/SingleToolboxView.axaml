@@ -33,6 +33,7 @@
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
 			Text="{DynamicResource Single.ProcessImage}"
+			IsDisabled="{Binding ProcessIsDisabled}"
 			Command="{Binding OnNext}"
 	    	/>
 		<TextBlock

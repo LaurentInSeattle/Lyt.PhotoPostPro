@@ -36,11 +36,13 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
                 this.image = ImageLoader.LoadImage(path, out string errorMessage);
                 if (this.image is not null)
                 {
-                    var imageFrame = Model.Utilities.ImagingUtilities.ToFrame(image);
+                    var imageFrame = ImagingUtilities.ToFrame(image);
                     if (imageFrame is not null)
                     {
                         this.SourceImage = imageFrame.ToWriteableBitmap();
                         this.imagePath = path;
+                        var toolboxViewModel = App.GetRequiredService<SingleToolboxViewModel>();
+                        toolboxViewModel.ProcessIsDisabled = false; 
                     }
                     else
                     {
