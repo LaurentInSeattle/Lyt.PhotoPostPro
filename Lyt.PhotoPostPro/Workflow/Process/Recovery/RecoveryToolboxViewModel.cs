@@ -1,9 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Recovery;
 
-public sealed partial class RecoveryToolboxViewModel : 
+public sealed partial class RecoveryToolboxViewModel :
     ToolboxViewModel<RecoveryToolboxView, RecoveryStep>
 {
-    private bool doNotUpdate; 
+    private bool doNotUpdateModel;
     private float highlights;
     private float shadows;
 
@@ -21,11 +21,26 @@ public sealed partial class RecoveryToolboxViewModel :
     [ObservableProperty]
     public partial double ShadowsSliderValue { get; set; }
 
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+
+        With.Flag(ref this.doNotUpdateModel, () =>
+        {
+            // Sliders initial positions and string values
+            // Enforce property changed 
+            this.HighlightsSliderValue = this.highlights + 0.01;
+            this.ShadowsSliderValue = this.shadows + 0.01;
+            this.HighlightsSliderValue = this.highlights;
+            this.ShadowsSliderValue = this.shadows;
+        });
+    }
+
     public override void OnModelStepUpdated(RecoveryStep step) => this.UpdateSliders(step);
 
     private void UpdateSliders(RecoveryStep step)
     {
-        With.Flag(ref this.doNotUpdate, () =>
+        With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Here we need to undo the operations done reading the sliders 
             // No transforms for highlights and shadows amounts 
@@ -52,11 +67,11 @@ public sealed partial class RecoveryToolboxViewModel :
 
     private void UpdateModel()
     {
-        if ( this.doNotUpdate)
+        if (this.doNotUpdateModel)
         {
-            return; 
+            return;
         }
 
         this.model.HighlightsShadows(this.highlights, this.shadows);
-    } 
+    }
 }

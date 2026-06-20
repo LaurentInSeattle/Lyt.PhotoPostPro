@@ -20,6 +20,7 @@
     <File Path="LICENSE" />
     <File Path="Notes.txt" />
     <File Path="README.md" />
+    <File Path="Sizes.txt" />
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
   </Folder>
   <Project Path="Lyt.PhotoPostPro.Desktop/Lyt.PhotoPostPro.Desktop.csproj" />

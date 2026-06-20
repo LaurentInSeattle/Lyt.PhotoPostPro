@@ -33,14 +33,10 @@ public class ExposureStep() : PostProcessStep(PostProcessStep.ExposureStepName)
             ushort[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
-        }
-
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        if (isChanged)
-        {
             PostProcessStep.RecalculateHistograms(clone);
         }
 
+        this.ResultImage = isChanged ? clone : this.SourceImage;
         return withFrame ? clone.ToFrame() : null;
     }
 

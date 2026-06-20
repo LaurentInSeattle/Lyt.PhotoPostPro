@@ -22,7 +22,7 @@
 				<ColumnDefinition Width="4" />
 				<ColumnDefinition Width="*" MinWidth="120"/>
 				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="*" MinWidth="360"/>
+				<ColumnDefinition Width="2*" MinWidth="360"/>
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
 			<Image
@@ -57,7 +57,7 @@
 				<RowDefinition Height="4" />
 				<RowDefinition Height="*" MinHeight="120"/>
 				<RowDefinition Height="8" />
-				<RowDefinition Height="*" MinHeight="360"/>
+				<RowDefinition Height="2*" MinHeight="360"/>
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>

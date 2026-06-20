@@ -1,0 +1,25 @@
+
+Standard photo sizes refer to both physical print dimensions and digital pixel resolutions. 
+The most universally standard print size is 4x6 inches, which perfectly matches the 3:2 aspect ratio 
+of most smartphones and digital cameras.
+A comprehensive breakdown of standard print dimensions, recommended digital pixels (at a high-quality 300 DPI), 
+and their common use cases:
+Print Size (inches)Aspect RatioApprox. Pixels (300 DPI)Common Use Case
+2 x 3      3:2 600 x 900Wallet-size photos
+4 x 6      3:2 1200 x 1800Photo albums, postcards
+
+5 x 7      3.5:2.5  1500 x 2100Desk displays, greeting cards
+
+8 x 10     5:4      2400 x 3000Professional portraits, larger frames
+16 x 20    4:5      4800 x 6000Large prints, posters, canvas art
+
+11 x 14   11:14     3300 x 4200Wall art, balanced landscapes/portraits
+
+If you are looking at digital image quality rather than physical prints, 
+standard resolutions generally include:
+
+All 16 by 9 : 
+HD (720p): 1280 × 720 pixels = 16 / 9 
+Full HD (1080p): 1920 × 1080 pixels = 16 / 9
+4K UHD: 3840 × 2160 pixels
+8K: 7680 × 4320 pixels
