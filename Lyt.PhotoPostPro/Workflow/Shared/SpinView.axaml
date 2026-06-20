@@ -27,19 +27,20 @@
 					Margin="0 24 0 0"
 					Text="{DynamicResource Imaging.InProgress}"
 					Theme="{StaticResource H1}"
-					TextAlignment="Center"
-					VerticalAlignment="Top"
+					Foreground="{StaticResource OrangePeel_1_100}"
+					TextAlignment="Center" VerticalAlignment="Top"
 					/>
 				<progress:ProgressRing
-					Width="80" Height="80"
-					VerticalAlignment="Center" HorizontalAlignment="Center"
+					Width="84" Height="84"
 					IsActive="{Binding IsActive}"
 					Foreground="{StaticResource OrangePeel_1_100}"
+					VerticalAlignment="Center" HorizontalAlignment="Center"
 					/>
 				<TextBlock
 					Margin="0 0 0 24"
 					Text="{DynamicResource Imaging.InProgressHelp}"
 					Theme="{StaticResource Large}"
+					Foreground="{StaticResource OrangePeel_1_100}"
 					VerticalAlignment="Bottom" HorizontalAlignment="Center"
 					/>
 			</Grid>

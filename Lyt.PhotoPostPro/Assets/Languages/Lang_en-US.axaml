@@ -41,8 +41,8 @@
 	<system:String x:Key="Workflow.Orient.Title">Orientation and Mirroring</system:String>
 	<system:String x:Key="Workflow.Orient.Format">Restore portrait or landscape format:</system:String>
 	<system:String x:Key="Workflow.Orient.Flip">Flip the image as needed:</system:String>
-	<system:String x:Key="Workflow.Orient.RotateMinus">- 90</system:String>
-	<system:String x:Key="Workflow.Orient.RotatePlus">+ 90</system:String>
+	<system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
+	<system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 	<system:String x:Key="Workflow.Orient.Mirror">Mirror</system:String>
 	<system:String x:Key="Workflow.Orient.Reverse">Flip</system:String>
 
@@ -53,12 +53,12 @@
 	<system:String x:Key="Workflow.Straighten.HorizontalGuideline">Horizontal</system:String>
 	<system:String x:Key="Workflow.Straighten.Rotate">Rotate to Adjust Alignment: </system:String>
 	<system:String x:Key="Workflow.Straighten.ClearRotate">Zero Rotation</system:String>	
-	<system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1</system:String>
-	<system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1</system:String>
-	<system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5</system:String>
-	<system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5</system:String>
-	<system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1 </system:String>
-	<system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1 °</system:String>
 
 	<!-- Workflow Composition -->
 	<system:String x:Key="Workflow.Compose.Title">Refining the Composition</system:String>
