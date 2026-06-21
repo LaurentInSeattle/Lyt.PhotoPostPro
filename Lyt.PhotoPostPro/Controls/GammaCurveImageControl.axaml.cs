@@ -57,8 +57,10 @@ public partial class GammaCurveImageControl : UserControl
         {
             for (int i = 0; i < values.Length; i++)
             {
-                double x = i * canvasWidth / (values.Length - 1 );
+                // CONSIDER :
+                // Compensate for the non-square frame so that we can see a significant change on the Y axis 
                 double y = canvasHeight * (1.0 - values[i]);
+                double x = i * canvasWidth / (values.Length - 1);
                 Point point = new(x, y);
 
                 if (i == 0)

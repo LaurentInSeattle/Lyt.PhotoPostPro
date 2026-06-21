@@ -18,6 +18,7 @@ global using System.Text.Json.Serialization;
 global using System.Threading.Tasks;
 
 // Image Sharp 
+global using SixLabors;
 global using SixLabors.ImageSharp  ;
 global using SixLabors.ImageSharp.Advanced;
 global using SixLabors.ImageSharp.Formats;

@@ -3,7 +3,9 @@
 public sealed partial class WhiteBalanceToolboxViewModel : 
     ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>
 {
-    private bool doNotUpdateModel; 
+    private bool doNotUpdateModel;
+    private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm ;
+    private float temperature;
     private float saturationThreshold;
 
     protected override string Title => this.Localize("Workflow.WhiteBalance.Title");
@@ -13,6 +15,12 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     [ObservableProperty]
     public partial double SaturationSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string TemperatureString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double TemperatureSliderValue { get; set; }
 
     public override void OnViewLoaded()
     {
@@ -40,9 +48,19 @@ public sealed partial class WhiteBalanceToolboxViewModel :
         });
     }
 
+    partial void OnTemperatureSliderValueChanged(double value)
+    {
+        // Slider sends -100.0 to +100.0, fine for the model  
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix;
+        this.temperature = (float)value;
+        this.TemperatureString = value.ToString("+0.0;-0.0;0.0");
+        this.UpdateModel();
+    }
+
     partial void OnSaturationSliderValueChanged(double value)
     {
         // Slider sends 0.0 to +1.0, fine for the model  
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB; 
         this.saturationThreshold = (float)value;
         this.SaturationString = value.ToString("+0.00;-0.00;0.00");
         this.UpdateModel();
@@ -55,6 +73,18 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             return; 
         }
 
-        this.model.FilteredGrayWorldAWB(this.saturationThreshold);
+        switch (this.algorithm)
+        {
+            case WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                this.model.FilteredGrayWorldAWB(this.saturationThreshold);
+                break;
+            case WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix:
+                this.model.ColorMatrixWhiteBalance(this.temperature);
+                break;
+
+            default:
+                break;
+        }
+
     } 
 }

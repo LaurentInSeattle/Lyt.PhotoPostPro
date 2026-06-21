@@ -187,6 +187,18 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void ColorMatrixWhiteBalance(float temperature) =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
+            {
+                this.LastResultFrame = whiteBalanceStep.ColorMatrixWhiteBalance(temperature);
+                return true;
+            }
+
+            return false;
+        });
+
 
     private bool ApiAction(Func<bool> action, bool notify = true)
     {

@@ -92,8 +92,10 @@
 	<!-- Workflow White Balance -->
 	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or select a preset in the combobox below.</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.Clear">Reset</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.Highlights">Gray Saturation:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manual - Basic Color Matrix (fast)</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualOffset">Offset</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
 
 
 

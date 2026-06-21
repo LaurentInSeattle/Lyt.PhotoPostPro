@@ -5,13 +5,22 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
     public enum WhiteBalanceAlgorithm
     {
         FilteredGrayWorldAWB, 
+        ColorMatrix, 
     }
 
-    public float SaturationThreshold { get ; set; }
+    public float SaturationThreshold { get; set; }
+    
+    public float Temperature { get; set; }
 
     public WhiteBalanceAlgorithm Algorithm { get; set; }
 
     public override void Initialize(Image<Rgb48> _) => this.Clear();
+
+    public override Frame? Reset()
+    {
+        this.Clear();
+        return base.Reset();
+    }
 
     public override Frame? Transform(bool withFrame = true)
     {
@@ -21,28 +30,31 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
         }
 
         var clone = this.SourceImage.Clone();
+        bool isChanged = true; // For now 
+        switch (this.Algorithm)
+        {
+            case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                clone.FilteredGrayWorldAWB(this.SaturationThreshold);
+                break;
 
-        clone.FilteredGrayWorldAWB(this.SaturationThreshold);
+            case WhiteBalanceAlgorithm.ColorMatrix:
+                clone.ApplyColorTemperature(this.Temperature);
+                break;
+
+            default:
+                throw new NotImplementedException("No such White Balance algorithm");
+        }
+
         PostProcessStep.RecalculateHistograms(clone);
-
-        bool isChanged = true ; 
-        //        Math.Abs(1 - this.gamma) > 0.001 ||
-        //        Math.Abs(1 - this.gain) > 0.001 ||
-        //        this.shift != 0;
-        //    if (isChanged)
-        //    {
-        //        ushort[] lut = clone.Gamma(this.gamma, this.gain, this.shift);
-        //Curve curve = new(lut);
-        //new GammaLutGeneratedMessage(curve).Publish();
-        //    }
-
         this.ResultImage = isChanged ? clone : this.SourceImage;
-        //    if (isChanged)
-        //    {
-        //    base.RecalculateHistograms(clone);
-        //}
-
         return withFrame ? clone.ToFrame() : null;
+    }
+
+    internal Frame? ColorMatrixWhiteBalance(float temperature)
+    {
+        this.Algorithm = WhiteBalanceAlgorithm.ColorMatrix;
+        this.Temperature = temperature;
+        return this.Transform(withFrame: true);
     }
 
     internal Frame? FilteredGrayWorldAWB(float saturationThreshold) 
@@ -57,17 +69,4 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
         this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.SaturationThreshold = 0.4f;
     }
-
-    //internal Frame? Clear()
-    //{
-    //    this.Initialize();
-
-    //    if (this.SourceImage is null)
-    //    {
-    //        return null;
-    //    }
-
-    //    this.ResultImage = this.SourceImage;
-    //    return this.SourceImage.ToFrame();
-    //}
 }
