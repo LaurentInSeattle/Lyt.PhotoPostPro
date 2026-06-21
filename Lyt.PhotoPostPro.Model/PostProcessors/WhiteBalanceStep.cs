@@ -6,11 +6,14 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
     {
         FilteredGrayWorldAWB, 
         ColorMatrix, 
+        TannerHelland, 
     }
 
     public float SaturationThreshold { get; set; }
-    
+
     public float Temperature { get; set; }
+
+    public float Kelvin { get; set; }
 
     public WhiteBalanceAlgorithm Algorithm { get; set; }
 
@@ -33,12 +36,16 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
         bool isChanged = true; // For now 
         switch (this.Algorithm)
         {
-            case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
-                clone.FilteredGrayWorldAWB(this.SaturationThreshold);
-                break;
-
             case WhiteBalanceAlgorithm.ColorMatrix:
                 clone.ApplyColorTemperature(this.Temperature);
+                break;
+
+            case WhiteBalanceAlgorithm.TannerHelland:
+                clone.AdjustColorTemperature(this.Kelvin);
+                break;
+
+            case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                clone.FilteredGrayWorldAWB(this.SaturationThreshold);
                 break;
 
             default:
@@ -48,6 +55,13 @@ public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBa
         PostProcessStep.RecalculateHistograms(clone);
         this.ResultImage = isChanged ? clone : this.SourceImage;
         return withFrame ? clone.ToFrame() : null;
+    }
+
+    internal Frame? TannerHellandWhiteBalance(float kelvin)
+    {
+        this.Algorithm = WhiteBalanceAlgorithm.TannerHelland;
+        this.Kelvin = kelvin;
+        return this.Transform(withFrame: true);
     }
 
     internal Frame? ColorMatrixWhiteBalance(float temperature)

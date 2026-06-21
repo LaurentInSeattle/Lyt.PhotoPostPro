@@ -1,15 +1,17 @@
 Bugs 
 ----
 
+- Finish White Balance with the direct temperature to color algorithm 
+
+- Create a 'fake' final export step - so that the app can loop on next 'job'
+
 - Re-init of Compose is failing at second image 
 
-- Visual issues when hovering quickly above glyph buttons 
+- Visual issues (and spurious commands) when hovering quickly above glyph buttons 
 
 
 TODO First : Single Image Process
 ---------------------------------
-
-- Image White Balance 
 
 - Image Contrast 
 
@@ -23,11 +25,19 @@ TODO First : Single Image Process
 
 - Image Exports
 
+- Cleanup unused icons 
+
+- Cleanup language strings
 
 Missing Features 
 ----------------
 
-- Project Load and Save 
+- Project : 
+	- Browse 
+	- Create ( partially done ) 
+	- Load
+	- Save 
+	- Delete
 
 - Camera downloads 
 

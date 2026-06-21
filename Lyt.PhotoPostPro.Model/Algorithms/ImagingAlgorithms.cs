@@ -140,270 +140,92 @@ public static class ImagingAlgorithms
 		image.Mutate(ctx => ctx.Filter(matrix));
 	}
 
-	//public static int[] GetRgbFromTemperature(double temperature)
-	//{
-		//// Temperature must fit between 1000 and 40000 degrees.
-		//temperature = MathUtils.Clamp(temperature, 1000, 40000);
-
-		//// All calculations require temperature / 100, so only do the conversion once.
-		//temperature /= 100;
-
-		//// Compute each color in turn.
-		//int red, green, blue;
-
-		//// First: red.
-		//if (temperature <= 66)
-		//{
-		//    red = 255;
-		//}
-		//else
-		//{
-		//    // Note: the R-squared value for this approximation is 0.988.
-		//    red = (int)(329.698727446 * (Math.Pow(temperature - 60, -0.1332047592)));
-		//    red = MathUtils.Clamp(red, 0, 255);
-		//}
-
-		//// Second: green.
-		//if (temperature <= 66)
-		//{
-		//    // Note: the R-squared value for this approximation is 0.996.
-		//    green = (int)(99.4708025861 * Math.Log(temperature) - 161.1195681661);
-		//}
-		//else
-		//{
-		//    // Note: the R-squared value for this approximation is 0.987.
-		//    green = (int)(288.1221695283 * (Math.Pow(temperature - 60, -0.0755148492)));
-		//}
-
-		//green = MathUtils.Clamp(green, 0, 255);
-
-		//// Third: blue.
-		//if (temperature >= 66)
-		//{
-		//    blue = 255;
-		//}
-		//else if (temperature <= 19)
-		//{
-		//    blue = 0;
-		//}
-		//else
-		//{
-		//    // Note: the R-squared value for this approximation is 0.998.
-		//    blue = (int)(138.5177312231 * Math.Log(temperature - 10) - 305.0447927307);
-		//    blue = MathUtils.Clamp(blue, 0, 255);
-		//}
-
-		//return new[] { red, green, blue };
-	//}
-	/*
-	https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
-
-
-	Start with a temperature, in Kelvin, somewhere between 1000 and 40000.  (Other values may work,
-	 but I can't make any promises about the quality of the algorithm's estimates above 40000 K.)
-	Note also that the temperature and color variables need to be declared as floating-point.
-
-	Set Temperature = Temperature \ 100
-
-	Calculate Red:
-
-	If Temperature <= 66 Then
-		Red = 255
-	Else
-		Red = Temperature - 60
-		Red = 329.698727446 * (Red ^ -0.1332047592)
-		If Red < 0 Then Red = 0
-		If Red > 255 Then Red = 255
-	End If
-
-	Calculate Green:
-
-	If Temperature <= 66 Then
-		Green = Temperature
-		Green = 99.4708025861 * Ln(Green) - 161.1195681661
-		If Green < 0 Then Green = 0
-		If Green > 255 Then Green = 255
-	Else
-		Green = Temperature - 60
-		Green = 288.1221695283 * (Green ^ -0.0755148492)
-		If Green < 0 Then Green = 0
-		If Green > 255 Then Green = 255
-	End If
-
-	Calculate Blue:
-
-	If Temperature >= 66 Then
-		Blue = 255
-	Else
-
-		If Temperature <= 19 Then
-			Blue = 0
-		Else
-			Blue = Temperature - 10
-			Blue = 138.5177312231 * Ln(Blue) - 305.0447927307
-			If Blue < 0 Then Blue = 0
-			If Blue > 255 Then Blue = 255
-		End If
-
-	End If
-
-	'Given a temperature (in Kelvin), estimate an RGB equivalent
-	Private Sub getRGBfromTemperature(ByRef r As Long, ByRef g As Long, ByRef b As Long, ByVal tmpKelvin As Long)
-
-		Static tmpCalc As Double
-
-		'Temperature must fall between 1000 and 40000 degrees
-		If tmpKelvin < 1000 Then tmpKelvin = 1000
-		If tmpKelvin > 40000 Then tmpKelvin = 40000
-
-		'All calculations require tmpKelvin \ 100, so only do the conversion once
-		tmpKelvin = tmpKelvin \ 100
-
-		'Calculate each color in turn
-
-		'First: red
-		If tmpKelvin <= 66 Then
-			r = 255
-		Else
-			'Note: the R-squared value for this approximation is .988
-			tmpCalc = tmpKelvin - 60
-			tmpCalc = 329.698727446 * (tmpCalc ^ -0.1332047592)
-			r = tmpCalc
-			If r < 0 Then r = 0
-			If r > 255 Then r = 255
-		End If
-
-		'Second: green
-		If tmpKelvin <= 66 Then
-			'Note: the R-squared value for this approximation is .996
-			tmpCalc = tmpKelvin
-			tmpCalc = 99.4708025861 * Log(tmpCalc) - 161.1195681661
-			g = tmpCalc
-			If g < 0 Then g = 0
-			If g > 255 Then g = 255
-		Else
-			'Note: the R-squared value for this approximation is .987
-			tmpCalc = tmpKelvin - 60
-			tmpCalc = 288.1221695283 * (tmpCalc ^ -0.0755148492)
-			g = tmpCalc
-			If g < 0 Then g = 0
-			If g > 255 Then g = 255
-		End If
-
-		'Third: blue
-		If tmpKelvin >= 66 Then
-			b = 255
-		ElseIf tmpKelvin <= 19 Then
-			b = 0
-		Else
-			'Note: the R-squared value for this approximation is .998
-			tmpCalc = tmpKelvin - 10
-			tmpCalc = 138.5177312231 * Log(tmpCalc) - 305.0447927307
-
-			b = tmpCalc
-			If b < 0 Then b = 0
-			If b > 255 Then b = 255
-		End If
-
-	End Sub
-
-
-		using System;
-	using System.Drawing;
-	using System.Drawing.Imaging;
-
-	public static class ColorTemperatureFilter
+	// Tanner Helland Algorithm 
+	// See: 	https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
+	//
+	// NOT Working so well 
+	// 
+	public static void AdjustColorTemperature(this Image<Rgb48> image, float kelvin)
 	{
-		public static Bitmap AdjustTemperature(Bitmap sourceImage, float kelvin)
+		ushort[] rgb = GetRgbFromTemperature(kelvin); 
+		ushort red = rgb[0];
+		ushort green = rgb[1];
+		ushort blue  = rgb[2];
+		
+		// Parallelize the loop over the rows
+		int height = image.Height;
+		Parallel.For(0, height, y =>
 		{
-			// 1. Convert Kelvin to a 0-255 scaling factor for color channels
-			float temp = kelvin / 100f;
-			float red, green, blue;
-
-			// Calculate Red
-			if (temp <= 66)
+			// Get a span for the current row for fast, safe access
+			Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+			for (int x = 0; x < row.Length; x++)
 			{
-				red = 255;
+				// Apply the temperature scaling
+				Rgb48 pixel = row[x];
+				row[x].R = (ushort)Math.Min(65535.0, pixel.R * (blue / 65535.0));
+				row[x].G = (ushort)Math.Min(65535.0, pixel.G * (green / 65535.0));
+				row[x].B = (ushort)Math.Min(65535.0, pixel.B * (red / 65535.0));
 			}
-			else
-			{
-				red = temp - 60f;
-				red = (float)(329.698727446 * Math.Pow(red, -0.1332047592));
-			}
-
-			// Calculate Green
-			if (temp <= 66)
-			{
-				green = temp;
-				green = (float)(99.4708025861 * Math.Log(green) - 161.1195681661);
-			}
-			else
-			{
-				green = temp - 60f;
-				green = (float)(288.1221695283 * Math.Pow(green, -0.0755148492));
-			}
-
-			// Calculate Blue
-			if (temp >= 66)
-			{
-				blue = 255;
-			}
-			else if (temp <= 19)
-			{
-				blue = 0;
-			}
-			else
-			{
-				blue = temp - 10f;
-				blue = (float)(138.5177312231 * Math.Log(blue) - 305.0447927307);
-			}
-
-			// Clamp values to [0, 255]
-			red = Math.Max(0, Math.Min(255, red));
-			green = Math.Max(0, Math.Min(255, green));
-			blue = Math.Max(0, Math.Min(255, blue));
-
-			// 2. Process image with LockBits for fast pixel manipulation
-			Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-			Rectangle rect = new Rectangle(0, 0, resultImage.Width, resultImage.Height);
-
-			BitmapData srcData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-			BitmapData dstData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-			int bytesPerPixel = 4;
-			int stride = srcData.Stride;
-			IntPtr srcScan0 = srcData.Scan0;
-			IntPtr dstScan0 = dstData.Scan0;
-
-			unsafe
-			{
-				byte* src = (byte*)(void*)srcScan0;
-				byte* dst = (byte*)(void*)dstScan0;
-
-				for (int y = 0; y < sourceImage.Height; y++)
-				{
-					for (int x = 0; x < sourceImage.Width; x++)
-					{
-						int index = (y * stride) + (x * bytesPerPixel);
-
-						// src[index + 0] = Blue, [index + 1] = Green, [index + 2] = Red, [index + 3] = Alpha
-
-						// Apply the temperature scaling
-						dst[index + 0] = (byte)Math.Min(255, src[index + 0] * (blue / 255.0));
-						dst[index + 1] = (byte)Math.Min(255, src[index + 1] * (green / 255.0));
-						dst[index + 2] = (byte)Math.Min(255, src[index + 2] * (red / 255.0));
-						dst[index + 3] = src[index + 3]; // Maintain alpha
-					}
-				}
-			}
-
-			sourceImage.UnlockBits(srcData);
-			resultImage.UnlockBits(dstData);
-
-			return resultImage;
-		}
+		});
 	}
-		*/
+
+	public static ushort[] GetRgbFromTemperature(double temperature)
+	{
+		const int pixelMax = 65535; 
+
+		// Temperature must fit between 1000 and 40000 degrees.
+		temperature = Math.Clamp(temperature, 1000, 40000);
+
+		// All calculations require temperature / 100, so only do the conversion once.
+		temperature /= 100;
+
+		// Compute each color in turn.
+		int red, green, blue;
+
+		// First: red.
+		if (temperature <= 66)
+		{
+			red = pixelMax;
+		}
+		else
+		{
+			// Note: the R-squared value for this approximation is 0.988.
+			red = (int) (255.0 * 329.698727446 * Math.Pow(temperature - 60, -0.1332047592));
+			red = Math.Clamp(red, 0, pixelMax);
+		}
+
+		// Second: green.
+		if (temperature <= 66)
+		{
+			// Note: the R-squared value for this approximation is 0.996.
+			green = (int)(255.0 * 99.4708025861 * Math.Log(temperature) - 161.1195681661);
+		}
+		else
+		{
+			// Note: the R-squared value for this approximation is 0.987.
+			green = (int)(255.0 * 288.1221695283 * (Math.Pow(temperature - 60, -0.0755148492)));
+		}
+
+		green = Math.Clamp(green, 0, pixelMax);
+
+		// Third: blue.
+		if (temperature >= 66)
+		{
+			blue = pixelMax;
+		}
+		else if (temperature <= 19)
+		{
+			blue = 0;
+		}
+		else
+		{
+			// Note: the R-squared value for this approximation is 0.998.
+			blue = (int)( 255.0 * 138.5177312231 * Math.Log(temperature - 10) - 305.0447927307);
+			blue = Math.Clamp(blue, 0, pixelMax);
+		}
+
+		return [(ushort) red, (ushort)green, (ushort)blue];
+	}
 
 	// By setting the saturationThreshold to 0.4, any pixel that is more than 40 % saturated gets skipped. 
 	// The algorithm now looks at the neutral sidewalks, stones, gray tree trunks, or white clothing in the photo

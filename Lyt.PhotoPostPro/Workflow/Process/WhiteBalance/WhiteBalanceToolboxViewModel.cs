@@ -5,6 +5,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 {
     private bool doNotUpdateModel;
     private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm ;
+    private float kelvin;
     private float temperature;
     private float saturationThreshold;
 
@@ -21,6 +22,12 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     [ObservableProperty]
     public partial double TemperatureSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string KelvinString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double KelvinSliderValue { get; set; }
 
     public override void OnViewLoaded()
     {
@@ -46,6 +53,16 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
             // More later here 
         });
+    }
+
+    partial void OnKelvinSliderValueChanged(double value)
+    {
+        // Slider sends 1000.0 to +40000.0, fine for the model  
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland;
+        this.kelvin = (float)value;
+        int intValue = (int)value; 
+        this.KelvinString = intValue.ToString("D");
+        this.UpdateModel();
     }
 
     partial void OnTemperatureSliderValueChanged(double value)
@@ -78,8 +95,13 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             case WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
                 this.model.FilteredGrayWorldAWB(this.saturationThreshold);
                 break;
+
             case WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix:
                 this.model.ColorMatrixWhiteBalance(this.temperature);
+                break;
+
+            case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
+                this.model.TannerHellandWhiteBalance(this.kelvin);
                 break;
 
             default:

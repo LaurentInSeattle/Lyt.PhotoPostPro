@@ -16,9 +16,12 @@
 	<Grid
 		>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt WB --> 
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt WB --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Manual --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Temperature slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="0" /> <!-- Hidden : Prompt Tanner Helland --> 
+			<RowDefinition Height="0" /> <!-- Hidden : Temperature slider --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Gray World--> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Auto Gray World slider --> 
@@ -29,7 +32,7 @@
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
-		<!-- First Rows: Temperature -->
+		<!-- First set of Rows: Temperature Basic -->
 		<TextBlock
 			Grid.Row="1" 
 			Text="{DynamicResource Workflow.WhiteBalance.ManualColorMatrix}"
@@ -66,15 +69,53 @@
 				Text="{Binding TemperatureString}"
 				/>
 		</Grid>
-		<!-- Second Rows Auto Gray World -->
+
+		<!-- Second set of Rows : Temperature Tanner Helland-->
 		<TextBlock
 			Grid.Row="4" 
-			Text="{DynamicResource Workflow.WhiteBalance.AutoGrayWorld}"
+			Text="{DynamicResource Workflow.WhiteBalance.ManualTannerHelland}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Grid
 			Grid.Row="5" 
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.WhiteBalance.Kelvin}"
+				/>
+			<Slider 
+				Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="5000" TickPlacement="BottomRight"
+				SmallChange="50" LargeChange="200"
+				Minimum="1000.0" Maximum="40000.0"
+				Value="{Binding KelvinSliderValue}"
+				/>
+			<TextBlock
+				Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding KelvinString}"
+				/>
+		</Grid>
+		<!-- Third set of Rows Auto Gray World -->
+		<TextBlock
+			Grid.Row="7" 
+			Text="{DynamicResource Workflow.WhiteBalance.AutoGrayWorld}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="8" 
 			> 
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />

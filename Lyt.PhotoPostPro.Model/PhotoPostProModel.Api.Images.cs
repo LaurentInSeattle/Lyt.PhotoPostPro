@@ -2,107 +2,6 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
-    public void BeginPostProcess()
-    {
-        this.ApiAction(() =>
-        {
-            this.CurrentPostProcess!.Begin();
-            //bool success = this.GetSourceImage();
-            //if (success)
-            //{
-            //    // HACK BEGIN 
-            //    Task.Run(() =>
-            //    {
-            //        // NOT Final: ONLY for testing histograms atm
-            //        var sourceImage = this.CurrentPostProcess.SourceImage;
-            //        Histograms histograms = new(sourceImage);
-            //        new HistogramsGeneratedMessage(histograms).Publish();
-            //    });
-            //    // HACK END 
-            //}
-
-            return true;
-        });
-    }
-
-    public bool GetProcessSourceImage()
-    {
-        if ((this.CurrentProject is null) || (this.CurrentProjectMetadata is null) || (this.CurrentPostProcess is null))
-        {
-            return false;
-        }
-
-        try
-        {
-            var sourceImage = this.CurrentPostProcess.OriginalImage;
-            this.LastSourceFrame = sourceImage.ToFrame();
-            this.IsSourceImageUpdatePending = true;
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex);
-            return false;
-        }
-    }
-
-    public bool GetStepSourceImage() =>
-        this.ApiAction(() =>
-        {
-            if (this.Workflow.CurrentStep is PostProcessStep step)
-            {
-                if (step.SourceImage is not null)
-                {
-                    this.LastSourceFrame = step.SourceImage.ToFrame();
-                    return true;
-                }
-
-                return false;
-            }
-
-            return false;
-        });
-
-    public bool GetStepResultImage() =>
-        this.ApiAction(() =>
-        {
-            if (this.Workflow.CurrentStep is PostProcessStep step)
-            {
-                if (step.ResultImage is not null)
-                {
-                    this.LastResultFrame = step.ResultImage.ToFrame();
-                    return true;
-                }
-
-                return false;
-            }
-
-            return false;
-        });
-    public bool Back() =>
-        this.ApiAction(() =>
-        {
-            this.Workflow.Back();
-            return false;
-        });
-
-    public bool Reset() => 
-        this.ApiAction(() =>
-        {
-            var frame = this.Workflow.Reset();
-            this.LastSourceFrame = frame;
-            this.LastResultFrame = frame;
-            return true;
-        });
-
-
-    public bool Next() =>
-        this.ApiAction(() =>
-        {
-            this.Workflow.Next();
-            return false;
-        });
-
     public bool Rotate(bool isClockwise) =>
         this.ApiAction(() =>
         {
@@ -130,6 +29,11 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool Rotate(bool isClockwise, float angle) =>
         this.ApiAction(() =>
         {
+            if ((angle < -45.0) || (angle > 45.0))
+            {
+                return false;
+            }
+
             if (this.Workflow.CurrentStep is StraightenStep straightenStep)
             {
                 this.LastResultFrame = straightenStep.Rotate(isClockwise, angle);
@@ -142,8 +46,26 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool Crop(int x, int y, int dx, int dy) =>
         this.ApiAction(() =>
         {
+            if ((x < 0) || (y < 0) || (dx <= 0) || (dy <= 0))
+            {
+                return false;
+            }
+
+            var cropRectangle = new Rectangle(x, y, dx, dy);
             if (this.Workflow.CurrentStep is CompositionStep compositionStep)
             {
+                var image = compositionStep.SourceImage;
+                if (image is null)
+                {
+                    return false;
+                }
+
+                var imageRectangle = new Rectangle(0, 0, image.Width, image.Height);
+                if (!imageRectangle.Contains(cropRectangle))
+                {
+                    return false;
+                }
+
                 this.LastResultFrame = compositionStep.Crop(x, y, dx, dy);
                 return true;
             }
@@ -178,6 +100,11 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void FilteredGrayWorldAWB(float saturationThreshold) =>
         this.ApiAction(() =>
         {
+            if ((saturationThreshold < 0.0) || (saturationThreshold > 100.0))
+            {
+                return false;
+            }
+
             if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
             {
                 this.LastResultFrame = whiteBalanceStep.FilteredGrayWorldAWB(saturationThreshold);
@@ -187,9 +114,31 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void TannerHellandWhiteBalance(float kelvin) =>
+        this.ApiAction(() =>
+        {
+            if ((kelvin < 1000.0) || (kelvin > 40000.0))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
+            {
+                this.LastResultFrame = whiteBalanceStep.TannerHellandWhiteBalance(kelvin);
+                return true;
+            }
+
+            return false;
+        });
+
     public void ColorMatrixWhiteBalance(float temperature) =>
         this.ApiAction(() =>
         {
+            if ((temperature < -100.0) || (temperature > 100.0))
+            {
+                return false;
+            }
+
             if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
             {
                 this.LastResultFrame = whiteBalanceStep.ColorMatrixWhiteBalance(temperature);
@@ -198,42 +147,4 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             return false;
         });
-
-
-    private bool ApiAction(Func<bool> action, bool notify = true)
-    {
-        if (!this.timeoutTimer.IsRunning)
-        {
-            this.timeoutTimer.Start();
-        }
-
-        if (notify)
-        {
-            this.timeoutTimer.ResetTimeout();
-        }
-
-        if ((this.CurrentProject is null) ||
-            (this.CurrentProjectMetadata is null) ||
-            (this.CurrentPostProcess is null))
-        {
-            string errorMessage = "No project is currently open.";
-            Debug.WriteLine(errorMessage);
-            return false;
-        }
-
-        if (this.Workflow is null)
-        {
-            string errorMessage = "Workflow is not setup.";
-            Debug.WriteLine(errorMessage);
-            return false;
-        }
-
-        bool success = action();
-        if (success)
-        {
-            new ModelStepUpdatedMessage(Step: this.Workflow.CurrentStep).Publish(); 
-        }
-
-        return success;
-    }
 }

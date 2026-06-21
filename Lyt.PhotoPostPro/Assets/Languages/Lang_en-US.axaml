@@ -93,10 +93,11 @@
 	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or select a preset in the combobox below.</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manual - Basic Color Matrix (fast)</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.ManualOffset">Offset</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manual - Direct Color Temperature</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
-
 
 
 
