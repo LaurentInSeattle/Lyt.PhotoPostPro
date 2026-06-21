@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class WhiteBalanceStep() : PostProcessStep(PostProcessStep.WhiteBalanceStepName)
+public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) : 
+    PostProcessStep(postProcessWorkflow, PostProcessStep.WhiteBalanceStepName)
 {
     public enum WhiteBalanceAlgorithm
     {

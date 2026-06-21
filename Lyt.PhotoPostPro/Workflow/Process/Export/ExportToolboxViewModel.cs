@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Export;
 
-public sealed partial class ExportToolboxViewModel : ViewModel<ExportToolboxView>
+public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep> 
 {
 #pragma warning disable CA1822 // Mark members as static
     // RelayCommand's cannot be static 
@@ -14,4 +14,9 @@ public sealed partial class ExportToolboxViewModel : ViewModel<ExportToolboxView
     }
 
 #pragma warning restore CA1822
+
+    public override void OnBeforeReset()
+    {
+        this.model.Export(new ExportStep.ExportParameters());  
+    }
 }

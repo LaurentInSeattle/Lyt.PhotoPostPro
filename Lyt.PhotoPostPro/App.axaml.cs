@@ -61,6 +61,9 @@ public partial class App : ApplicationBase
             typeof(WhiteBalanceViewModel),
             typeof(WhiteBalanceToolboxViewModel),
 
+            typeof(ExportViewModel),
+            typeof(ExportToolboxViewModel),
+            
             // LATER 
 
             //typeof(CleanupViewModel),
@@ -75,8 +78,6 @@ public partial class App : ApplicationBase
             //typeof(DenoiseViewModel),
             //typeof(DenoiseToolboxViewModel),
 
-            //typeof(ExportViewModel),
-            //typeof(ExportToolboxViewModel),
 
             //typeof(SharpenViewModel),
             //typeof(SharpenToolboxViewModel),

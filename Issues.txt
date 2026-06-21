@@ -1,7 +1,7 @@
 Bugs 
 ----
 
-- Finish White Balance with the direct temperature to color algorithm 
+- Showing original on first step ?  
 
 - Create a 'fake' final export step - so that the app can loop on next 'job'
 

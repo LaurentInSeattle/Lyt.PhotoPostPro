@@ -93,7 +93,7 @@ public sealed class PostProcess
         }
     }
 
-    public void Initialize() => this.Workflow = new();
+    public void Initialize() => this.Workflow = new(this);
 
     public void Begin()
     {

@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class CompositionStep() : PostProcessStep(PostProcessStep.CompositionStepName)
+public class CompositionStep(PostProcessWorkflow postProcessWorkflow) : 
+    PostProcessStep(postProcessWorkflow, PostProcessStep.CompositionStepName)
 {
     public int X { get; set; }
 

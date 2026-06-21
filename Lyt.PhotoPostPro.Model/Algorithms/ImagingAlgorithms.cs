@@ -318,3 +318,45 @@ public static class ImagingAlgorithms
 		return true;
 	}
 }
+
+/*
+
+public void ApplySCurveContrast(Image<Rgba32> image)
+{
+	// Build an S-curve Lookup Table (LUT) from 0 to 255
+	byte[] lut = CreateSCurveLut();
+
+	image.Mutate(ctx => ctx.ProcessPixelRowsAsMemory(row =>
+	{
+		for (int i = 0; i < row.Length; i++)
+		{
+			ref Rgba32 pixel = ref row.Span[i];
+			
+			// Apply the S-Curve to R, G, and B independently 
+			// but uniformly to avoid color shifts
+			pixel.R = lut[pixel.R];
+			pixel.G = lut[pixel.G];
+			pixel.B = lut[pixel.B];
+		}
+	}));
+}
+
+private byte[] CreateSCurveLut()
+{
+	byte[] lut = new byte[256];
+	for (int i = 0; i < 256; i++)
+	{
+		// Normalize the 0-255 value to a 0.0 - 1.0 range
+		double normalizedVal = i / 255.0;
+		
+		// Mathematical S-Curve (Sigmoid function)
+		// Adjust the multiplier (e.g., 2.5) to alter contrast intensity
+		double contrastMultiplier = 2.5;
+		double sCurveValue = 1.0 / (1.0 + Math.Exp(-contrastMultiplier * (normalizedVal - 0.5)));
+
+		// Denormalize back to 0-255
+		lut[i] = (byte)Math.Clamp(sCurveValue * 255, 0, 255);
+	}
+	return lut;
+}
+*/

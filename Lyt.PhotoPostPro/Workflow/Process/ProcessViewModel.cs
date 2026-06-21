@@ -115,12 +115,13 @@ public sealed partial class ProcessViewModel :
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep,  RecoveryToolboxView>(ActivatedView.Recovery);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
 
+        Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
+
         //Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenToolboxView>(ActivatedView.Sharpen);
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
         //Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastToolboxView>(ActivatedView.Contrast);
         //Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseToolboxView>(ActivatedView.Denoise);
         //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
-        //Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportToolboxView>(ActivatedView.Export);
 
         //// Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
         //Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorToolboxView>(ActivatedView.Color);
@@ -162,6 +163,7 @@ public sealed partial class ProcessViewModel :
             PostProcessStep.RecoveryStepName => ActivatedView.Recovery,
             PostProcessStep.WhiteBalanceStepName => ActivatedView.WhiteBalance,
             // TODO: Add the rest 
+            PostProcessStep.ExportStepName => ActivatedView.Export,
 
             _ => throw new NotImplementedException("Missing step name."),
         };

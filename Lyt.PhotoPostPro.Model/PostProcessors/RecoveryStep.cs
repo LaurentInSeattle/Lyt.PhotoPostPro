@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class RecoveryStep() : PostProcessStep(PostProcessStep.RecoveryStepName)
+public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) : 
+    PostProcessStep(postProcessWorkflow, PostProcessStep.RecoveryStepName)
 {
     public float ShadowAmount { get; set; }
 

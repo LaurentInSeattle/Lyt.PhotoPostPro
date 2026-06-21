@@ -11,14 +11,17 @@ public enum WorkflowUpdateKind
 
 public sealed class PostProcessWorkflow
 {
-    public PostProcessWorkflow()
+    public PostProcessWorkflow(PostProcess postProcess )
     {
-        var orientationStep = new OrientationStep();
-        var straightenStep = new StraightenStep();
-        var compositionStep = new CompositionStep();
-        var exposureStep = new ExposureStep();
-        var recoveryStep = new RecoveryStep();
-        var whiteBalanceStep = new WhiteBalanceStep();
+        this.PostProcess = postProcess;
+
+        var orientationStep = new OrientationStep(this);
+        var straightenStep = new StraightenStep(this);
+        var compositionStep = new CompositionStep(this);
+        var exposureStep = new ExposureStep(this);
+        var recoveryStep = new RecoveryStep(this);
+        var whiteBalanceStep = new WhiteBalanceStep(this);
+        var exportStep = new ExportStep(this);
 
         this.Steps =
         [
@@ -30,6 +33,9 @@ public sealed class PostProcessWorkflow
 
             // Color 
             whiteBalanceStep,
+
+            // Export
+            exportStep,
         ];
 
         int stepsCount = this.Steps.Count;
@@ -41,6 +47,8 @@ public sealed class PostProcessWorkflow
             step.NextStep = i < stepsCountMinusOne ? this.Steps[i + 1] : null;
         }
     }
+
+    public PostProcess PostProcess { get; private set; }
 
     public bool IsComplete { get; private set; }
 

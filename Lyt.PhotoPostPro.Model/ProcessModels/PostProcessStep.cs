@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-public class PostProcessStep(string name)
+public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
 {
     public const string StartStepName = "Start";
     public const string EndStepName = "End";
@@ -12,7 +12,11 @@ public class PostProcessStep(string name)
     public const string RecoveryStepName = "Recovery";
     public const string WhiteBalanceStepName = "WhiteBalance";
 
-    public string Name { get; set; } = name;
+    public const string ExportStepName = "Export";
+
+    public PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow; 
+    
+    public string Name { get; private set; } = name;
 
     [JsonIgnore]
     public PostProcessStep? PreviousStep { get; set; }
