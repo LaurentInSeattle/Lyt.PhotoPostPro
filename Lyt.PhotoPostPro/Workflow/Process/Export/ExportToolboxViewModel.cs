@@ -10,7 +10,6 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     {
         var model = App.GetRequiredService<PhotoPostProModel>();
         model.ClearFirstRun();
-        // ViewSelector<ActivatedView>.Select(ActivatedView.Encoding);
     }
 
 #pragma warning restore CA1822

@@ -1,6 +1,8 @@
 Bugs 
 ----
 
+- Fix IsPortrait property for the common viewer in all views 
+
 - Showing original on first step ?  
 
 - Create a 'fake' final export step - so that the app can loop on next 'job'
