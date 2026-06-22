@@ -61,6 +61,12 @@ public partial class App : ApplicationBase
             typeof(WhiteBalanceViewModel),
             typeof(WhiteBalanceToolboxViewModel),
 
+            typeof(ContrastViewModel),
+            typeof(ContrastToolboxViewModel),
+
+            //typeof(ColorViewModel),
+            //typeof(ColorToolboxViewModel),
+
             typeof(ExportViewModel),
             typeof(ExportToolboxViewModel),
             
@@ -69,11 +75,6 @@ public partial class App : ApplicationBase
             //typeof(CleanupViewModel),
             //typeof(CleanupToolboxViewModel),
 
-            //typeof(ColorViewModel),
-            //typeof(ColorToolboxViewModel),
-
-            //typeof(ContrastViewModel),
-            //typeof(ContrastToolboxViewModel),
 
             //typeof(DenoiseViewModel),
             //typeof(DenoiseToolboxViewModel),

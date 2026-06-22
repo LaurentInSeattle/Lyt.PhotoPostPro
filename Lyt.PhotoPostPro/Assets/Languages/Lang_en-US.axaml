@@ -99,7 +99,15 @@
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
 
+	<!-- Workflow Contrast -->
+	<system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>
+	<system:String x:Key="Workflow.Contrast.Correction">Correct contrast globally or use S-Curves on each RGB channel.</system:String>
+	<system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
+	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
 
+	<!-- Workflow Export-->
+	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>
 
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
 

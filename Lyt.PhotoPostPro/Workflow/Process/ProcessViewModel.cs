@@ -114,17 +114,18 @@ public sealed partial class ProcessViewModel :
         Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep,  RecoveryToolboxView>(ActivatedView.Recovery);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
+        Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastStep, ContrastToolboxView>(ActivatedView.Contrast);
 
+        //// Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
+        //Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
+        
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
 
         //Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenToolboxView>(ActivatedView.Sharpen);
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
-        //Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastToolboxView>(ActivatedView.Contrast);
         //Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseToolboxView>(ActivatedView.Denoise);
         //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
 
-        //// Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
-        //Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorToolboxView>(ActivatedView.Color);
 
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
         this.viewSelector =
@@ -162,6 +163,9 @@ public sealed partial class ProcessViewModel :
             PostProcessStep.ExposureStepName => ActivatedView.Exposure,
             PostProcessStep.RecoveryStepName => ActivatedView.Recovery,
             PostProcessStep.WhiteBalanceStepName => ActivatedView.WhiteBalance,
+            PostProcessStep.ContrastStepName => ActivatedView.Contrast,
+            PostProcessStep.ColorStepName => ActivatedView.Color,
+
             // TODO: Add the rest 
             PostProcessStep.ExportStepName => ActivatedView.Export,
 

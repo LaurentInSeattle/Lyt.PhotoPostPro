@@ -2,17 +2,7 @@
 
 public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep> 
 {
-#pragma warning disable CA1822 // Mark members as static
-    // RelayCommand's cannot be static 
-
-    [RelayCommand]
-    public void OnNext()
-    {
-        var model = App.GetRequiredService<PhotoPostProModel>();
-        model.ClearFirstRun();
-    }
-
-#pragma warning restore CA1822
+    protected override string Title => this.Localize("Workflow.Contrast.Title");
 
     public override void OnBeforeReset()
     {
