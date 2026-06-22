@@ -11,6 +11,9 @@ public partial class StepViewModel<TView> :
     public StepViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
 
     [ObservableProperty]
+    public partial bool IsPortrait { get; set; }
+
+    [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
 
     [ObservableProperty]
@@ -75,8 +78,12 @@ public partial class StepViewModel<TView> :
         this.SourceImageIsVisible = false;
     }
 
-    // Used by Compose
-    protected virtual void OnSourceImageReceived (WriteableBitmap bitmap) { }
+    protected virtual void OnSourceImageReceived (WriteableBitmap bitmap) 
+    {
+        var size = bitmap.PixelSize;
+        this.IsPortrait = size.Height >= size.Width;
+        this.SourceImageIsVisible = true; 
+    }
 
     protected virtual void OnResultImageReceived(WriteableBitmap bitmap) { }
 }

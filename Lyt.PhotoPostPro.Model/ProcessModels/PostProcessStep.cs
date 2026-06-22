@@ -11,6 +11,8 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
     public const string ExposureStepName = "Exposure";
     public const string RecoveryStepName = "Recovery";
     public const string WhiteBalanceStepName = "WhiteBalance";
+    public const string ContrastStepName = "Contrast";
+    public const string ColorStepName = "Color";
 
     public const string ExportStepName = "Export";
 

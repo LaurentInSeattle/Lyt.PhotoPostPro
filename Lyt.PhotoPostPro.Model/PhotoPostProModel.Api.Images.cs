@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
+using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
+
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public bool Rotate(bool isClockwise) =>
@@ -147,6 +149,58 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             return false;
         });
+
+    public void GlobalContrast(float contrastAmount, float blurAmount) =>
+        this.ApiAction(() =>
+        {
+            // contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
+            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
+            if ((contrastAmount < 1.0) || (contrastAmount > 3.0))
+            {
+                return false;
+            }
+
+            if ((blurAmount < 0.0) || (blurAmount > 1.5))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is ContrastStep contrastStep)
+            {
+                this.LastResultFrame = contrastStep.GlobalContrast(contrastAmount, blurAmount);
+                return true;
+            }
+
+            return false;
+        });
+
+    public void SCurvesContrast(float redAmount, float greenAmount, float blueAmount) =>
+        this.ApiAction(() =>
+        {
+            // TODO : Figure out the actual limits 
+            if ((redAmount < 1.0) || (redAmount > 3.0))
+            {
+                return false;
+            }
+
+            if ((greenAmount < 1.0) || (greenAmount > 3.0))
+            {
+                return false;
+            }
+
+            if ((blueAmount < 0.0) || (blueAmount > 1.5))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is ContrastStep contrastStep)
+            {
+                this.LastResultFrame = contrastStep.SCurvesContrast(redAmount, greenAmount, blueAmount);
+                return true;
+            }
+            return false;
+        });
+
 
     public void Export(ExportStep.ExportParameters exportParameters) =>
         this.ApiAction(() =>

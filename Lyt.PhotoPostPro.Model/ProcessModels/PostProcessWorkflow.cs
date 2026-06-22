@@ -1,14 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-public enum WorkflowUpdateKind
-{
-    Begin,
-    Finish,
-    Back,
-    Reset,
-    Next,
-}
-
 public sealed class PostProcessWorkflow
 {
     public PostProcessWorkflow(PostProcess postProcess )
@@ -21,6 +12,8 @@ public sealed class PostProcessWorkflow
         var exposureStep = new ExposureStep(this);
         var recoveryStep = new RecoveryStep(this);
         var whiteBalanceStep = new WhiteBalanceStep(this);
+        var contrastStep = new ContrastStep(this);
+        // var colorStep = new ColorStep(this);
         var exportStep = new ExportStep(this);
 
         this.Steps =
@@ -31,8 +24,10 @@ public sealed class PostProcessWorkflow
             // Exposure 
             exposureStep, recoveryStep, 
 
-            // Color 
+            // Constrast and Color 
             whiteBalanceStep,
+            contrastStep, 
+            // colorStep, 
 
             // Export
             exportStep,

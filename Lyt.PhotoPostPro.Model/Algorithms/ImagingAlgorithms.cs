@@ -1,7 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-using static System.Math;
+using System.Runtime.InteropServices;
+
 using static ImagingUtilities;
+using static System.Math;
 
 public static class ImagingAlgorithms
 {
@@ -117,7 +119,7 @@ public static class ImagingAlgorithms
 			}
 		});
 	}
- 
+
 	public static void ApplyColorTemperature(this Image<Rgb48> image, float temperature)
 	{
 		// Clamp the temperature value to a reasonable range (-100 to 100)
@@ -130,11 +132,11 @@ public static class ImagingAlgorithms
 		// Build the 5x4 Color Matrix
 		// Columns: R, G, B, A, Offset
 		var matrix = new SixLabors.ImageSharp.ColorMatrix(
-			1f + tempShift, 0f,             0f,             0f,
-			0f,             1f + tempShift, 0f,             0f,
-			0f,             0f,             1f - blueShift, 0f,
-			0f,             0f,             0f,             1f,
-			0f,             0f,             0f,             0f);
+			1f + tempShift, 0f, 0f, 0f,
+			0f, 1f + tempShift, 0f, 0f,
+			0f, 0f, 1f - blueShift, 0f,
+			0f, 0f, 0f, 1f,
+			0f, 0f, 0f, 0f);
 
 		// Apply the matrix as a filter
 		image.Mutate(ctx => ctx.Filter(matrix));
@@ -147,11 +149,11 @@ public static class ImagingAlgorithms
 	// 
 	public static void AdjustColorTemperature(this Image<Rgb48> image, float kelvin)
 	{
-		ushort[] rgb = GetRgbFromTemperature(kelvin); 
+		ushort[] rgb = GetRgbFromTemperature(kelvin);
 		ushort red = rgb[0];
 		ushort green = rgb[1];
-		ushort blue  = rgb[2];
-		
+		ushort blue = rgb[2];
+
 		// Parallelize the loop over the rows
 		int height = image.Height;
 		Parallel.For(0, height, y =>
@@ -171,7 +173,7 @@ public static class ImagingAlgorithms
 
 	public static ushort[] GetRgbFromTemperature(double temperature)
 	{
-		const int pixelMax = 65535; 
+		const int pixelMax = 65535;
 
 		// Temperature must fit between 1000 and 40000 degrees.
 		temperature = Math.Clamp(temperature, 1000, 40000);
@@ -190,7 +192,7 @@ public static class ImagingAlgorithms
 		else
 		{
 			// Note: the R-squared value for this approximation is 0.988.
-			red = (int) (255.0 * 329.698727446 * Math.Pow(temperature - 60, -0.1332047592));
+			red = (int)(255.0 * 329.698727446 * Math.Pow(temperature - 60, -0.1332047592));
 			red = Math.Clamp(red, 0, pixelMax);
 		}
 
@@ -220,11 +222,11 @@ public static class ImagingAlgorithms
 		else
 		{
 			// Note: the R-squared value for this approximation is 0.998.
-			blue = (int)( 255.0 * 138.5177312231 * Math.Log(temperature - 10) - 305.0447927307);
+			blue = (int)(255.0 * 138.5177312231 * Math.Log(temperature - 10) - 305.0447927307);
 			blue = Math.Clamp(blue, 0, pixelMax);
 		}
 
-		return [(ushort) red, (ushort)green, (ushort)blue];
+		return [(ushort)red, (ushort)green, (ushort)blue];
 	}
 
 	// By setting the saturationThreshold to 0.4, any pixel that is more than 40 % saturated gets skipped. 
@@ -317,7 +319,31 @@ public static class ImagingAlgorithms
 
 		return true;
 	}
+
+	// contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
+	// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
+	public static bool ApplyGlobalContrast(this Image<Rgb48> image, float contrastAmount, float blurAmount)
+	{
+		if (Math.Abs(contrastAmount - 1.0) > 0.01)
+		{
+			image.Mutate(x => x.Contrast(contrastAmount));
+		}
+
+		if (Math.Abs(blurAmount) > 0.1)
+		{
+			image.Mutate(x => x.GaussianBlur(blurAmount));
+		}
+
+		return true;
+	}
+
+	public static bool ApplySCurveContrast(this Image<Rgb48> image, float redAmount, float greenAmount, float blueAmount )
+	{
+		// PLACEHOLDER 
+		return true;
+	}
 }
+
 
 /*
 
