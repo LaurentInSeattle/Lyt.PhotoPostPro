@@ -4,6 +4,17 @@ https://imagecompression.info/test_images/
 
 --- 
 
+HIEF / HIEC Support ( iPhone images ) 
+
+
+https://github.com/0xC0000054/libheif-sharp
+
+https://github.com/hey-red/ImageSharp.Heif
+
+https://github.com/strukturag/libheif
+
+--- 
+
 Download from Camera  : 
 
 Microsoft WIA ; https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wia/-wia-startpage

@@ -1,21 +1,7 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    >
     <Thickness x:Key="SystemControlFocusVisualPrimaryThickness">1</Thickness>
     <Color x:Key="SystemControlFocusVisualPrimaryBrush">#6698e5f0</Color>
-    
-<!-- 
-    Need to try that: 
-    Define your custom visual outline here (e.g., a colored border) 
-
-<Style Selector="Control.CustomFocusableControl">
-    <Setter Property="FocusAdorner">
-        <FocusAdornerTemplate>
-            <Border BorderBrush="{DynamicResource SystemAccentColor}" 
-                    BorderThickness="2" 
-                    Margin="-2" 
-                    CornerRadius="4" />
-        </FocusAdornerTemplate>
-    </Setter>
-</Style>
---> 
-
 </ResourceDictionary>

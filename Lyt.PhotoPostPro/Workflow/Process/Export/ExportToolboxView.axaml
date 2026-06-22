@@ -12,25 +12,17 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
-	<!-- View Selector - Main toolbar - Aligned left -->
-	<StackPanel
-		Orientation="Horizontal"
-		Margin="0 0 0 0"
-		HorizontalAlignment="Left"
-		Height="72"
-		>
-		<glyphs:GlyphButton
-			Style="{StaticResource ToolbarIconButton}"
-			Behaviour="Tap"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="220" Height="56"
-			Margin="0 4 0 4"
-			GlyphSource="next"
-			ButtonBackground="BorderlessRectangle"
-			GlyphStrokeThickness="0"
-			Text="{DynamicResource Language.Continue}"
-			Command="{Binding OnNext}"
-	    	/>
-	</StackPanel>
 
+	<Grid
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" 
+			Text="{DynamicResource Workflow.Export.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+	</Grid>
 </UserControl>

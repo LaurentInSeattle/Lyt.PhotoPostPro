@@ -2,7 +2,7 @@
 
 public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep> 
 {
-    protected override string Title => this.Localize("Workflow.Contrast.Title");
+    protected override string Title => this.Localize("Workflow.Export.Title");
 
     public override void OnBeforeReset()
     {

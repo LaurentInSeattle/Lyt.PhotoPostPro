@@ -18,7 +18,7 @@
     <system:Double x:Key="Dbl.TwoSmallButtons">96</system:Double>
     <system:Double x:Key="Dbl.ThreeSmallButtons">144</system:Double>
     <system:Double x:Key="Dbl.Separator">10</system:Double>
-    <system:Double x:Key="Dbl.WfNav">42</system:Double>
+    <system:Double x:Key="Dbl.WfNav">46</system:Double>
     <system:Double x:Key="Dbl.ComboBox">54</system:Double>
 
     <!-- Various Grid row heights used in tool box views --> 
@@ -35,7 +35,7 @@
     <controls:GridLength x:Key="Size.TwoSmallButtons">96</controls:GridLength>
     <controls:GridLength x:Key="Size.ThreeSmallButtons">144</controls:GridLength>
     <controls:GridLength x:Key="Size.Separator">10</controls:GridLength>
-    <controls:GridLength x:Key="Size.WfNav">42</controls:GridLength>
+    <controls:GridLength x:Key="Size.WfNav">46</controls:GridLength>
     <controls:GridLength x:Key="Size.ComboBox">54</controls:GridLength>
 
 </ResourceDictionary>

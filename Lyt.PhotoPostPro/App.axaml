@@ -26,6 +26,7 @@
 
                 <ResourceInclude Source="/Assets/Icons/PathResourceDictionary.axaml"/>
                 <ResourceInclude Source="/Assets/Icons/FluentSvgResourceDictionary.axaml"/>
+                <ResourceInclude Source="/Assets/Theme/FocusAdorner.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/Sizes.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/Buttons.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/Toggles.axaml"/>

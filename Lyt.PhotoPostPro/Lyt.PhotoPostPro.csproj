@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <AvaloniaXaml Remove="Assets\Theme\FluentOverrides.axaml" />
+    <AvaloniaXaml Remove="Assets\Theme\FocusAdorner.axaml" />
     <AvaloniaXaml Remove="Assets\Theme\GridSplitterStyles.axaml" />
     <AvaloniaXaml Remove="Assets\Theme\Sizes.axaml" />
   </ItemGroup>
@@ -47,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Update="Assets\Theme\FocusAdorner.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
     <AvaloniaResource Update="Assets\Theme\GridSplitterStyles.axaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
