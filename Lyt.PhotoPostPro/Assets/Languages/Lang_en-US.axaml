@@ -91,13 +91,14 @@
 
 	<!-- Workflow White Balance -->
 	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
-	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or select a preset in the combobox below.</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or adjust it manually.</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manual - Basic Color Matrix (fast)</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manual - Direct Color Temperature</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Note: The 'Gray World' algorithm works well ONLY on images that have a lot of various colors.</system:String>
 
 	<!-- Workflow Contrast -->
 	<system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>
@@ -105,6 +106,12 @@
 	<system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
 	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
+
+	<!-- Workflow Color -->
+	<system:String x:Key="Workflow.Color.Title">Color Grading</system:String>
+	<system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally or use Vibrance on each RGB channel.</system:String>
+	<system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
 
 	<!-- Workflow Export-->
 	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>

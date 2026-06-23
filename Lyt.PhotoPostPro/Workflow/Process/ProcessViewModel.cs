@@ -116,8 +116,8 @@ public sealed partial class ProcessViewModel :
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
         Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastStep, ContrastToolboxView>(ActivatedView.Contrast);
 
-        //// Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
-        //Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
+        // Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
+        Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
         
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
 
@@ -125,7 +125,6 @@ public sealed partial class ProcessViewModel :
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
         //Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseToolboxView>(ActivatedView.Denoise);
         //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
-
 
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
         this.viewSelector =

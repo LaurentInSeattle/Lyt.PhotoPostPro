@@ -13,7 +13,7 @@ public sealed class PostProcessWorkflow
         var recoveryStep = new RecoveryStep(this);
         var whiteBalanceStep = new WhiteBalanceStep(this);
         var contrastStep = new ContrastStep(this);
-        // var colorStep = new ColorStep(this);
+        var colorStep = new ColorStep(this);
         var exportStep = new ExportStep(this);
 
         this.Steps =
@@ -27,7 +27,7 @@ public sealed class PostProcessWorkflow
             // Constrast and Color 
             whiteBalanceStep,
             contrastStep, 
-            // colorStep, 
+            colorStep, 
 
             // Export
             exportStep,

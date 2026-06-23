@@ -8,29 +8,63 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
-
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
-	<!-- View Selector - Main toolbar - Aligned left -->
-	<StackPanel
-		Orientation="Horizontal"
-		Margin="0 0 0 0"
-		HorizontalAlignment="Left"
-		Height="72"
+	<Grid
 		>
-		<glyphs:GlyphButton
-			Style="{StaticResource ToolbarIconButton}"
-			Behaviour="Tap"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="220" Height="56"
-			Margin="0 4 0 4"
-			GlyphSource="next"
-			ButtonBackground="BorderlessRectangle"
-			GlyphStrokeThickness="0"
-			Text="{DynamicResource Language.Continue}"
-			Command="{Binding OnNext}"
-	    	/>
-	</StackPanel>
-
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Contrast--> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Global --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Two sliders --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" 
+			Text="{DynamicResource Workflow.Color.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<!--  saturationAmount == from 0.0 to 2.5  - 1.0 -> No Change  --> 
+		<TextBlock
+			Grid.Row="2" 
+			Text="{DynamicResource Workflow.Color.Global}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="3" 
+			> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<!-- First Row: Saturation-->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Color.SaturationAmount}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.5" TickPlacement="BottomRight"
+				SmallChange="0.05" LargeChange="0.2"
+				Minimum="1" Maximum="2.5"
+				Value="{Binding SaturationSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding SaturationString}"
+				/>
+			<!-- Second Row : None for now -->
+		</Grid>
+	</Grid>
 </UserControl>

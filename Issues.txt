@@ -1,6 +1,8 @@
 Bugs 
 ----
 
+- Crop preview cancels the selected color for lines 
+
 - Add a Finish button on Export step and return to main view
 
 - Finish Image Contrast with S-Curves algorithm 

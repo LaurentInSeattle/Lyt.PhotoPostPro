@@ -25,6 +25,7 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Gray World--> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Auto Gray World slider --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Note Gray World--> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -144,5 +145,12 @@
 				Text="{Binding SaturationString}"
 				/>
 		</Grid>
+		<TextBlock
+			Grid.Row="9" 
+			Text="{DynamicResource Workflow.WhiteBalance.NoteGrayWorld}"
+			Theme="{StaticResource Large}"
+			FontStyle="Italic"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
 	</Grid>
 </UserControl>
