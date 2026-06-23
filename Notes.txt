@@ -35,13 +35,108 @@ and later versions, shifting toward the WPD API for digital cameras
 
 ==> WPD Light : https://github.com/MartinKuschnik/WPDlight
 
+------------
+
+SHARPEN 
+
+To sharpen an image using SixLabors.ImageSharp in C#, you use the GaussianSharpen extension method inside an image mutation context.Core ImplementationHere is the direct code structure required to load, sharpen, and save your image:csharpusing SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+
+// Load the source image file
+using (Image image = Image.Load("input.jpg"))
+{
+    // Mutate the image using the GaussianSharpen filter
+    // Default sigma is typically 3.0f if left empty
+    image.Mutate(ctx => ctx.GaussianSharpen(5.0f));
+
+    // Save the sharpened result
+    image.Save("sharpened_output.jpg");
+}
+
+
+------------
+
+Fancy Sharpening 
+
+Duplicate the Layer: Make a copy of your image layer so you can work non-destructively.
+
+Detect Edges: Select the duplicated layer and run a Find Edges (or Detect Edges) filter. This will isolate 
+the outlines of your subjects
+
+Convert to Black and White: Desaturate this layer and increase the contrast (using a Levels adjustment) 
+until the edges are distinct white lines against a solid black background.
+
+Soften the Mask: Apply a slight Gaussian Blur to the mask. This prevents the final sharpening from looking too harsh 
+or "crunchy".
+
+Apply Sharpening: Add a standard Unsharp Mask to your original photo. 
+
+Load the black-and-white edge mask you created as an alpha channel/mask to apply the effect only to the edges.
+
+
+------------
+
+Image Watermark
+
+
+To overlay one image on top of another with specific transparency:
+
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+
+using var baseImage = Image.Load("base.jpg");
+using var watermark = Image.Load("watermark.png");
+
+// Apply watermark at X: 50, Y: 50 with 30% opacity (0.3f)
+baseImage.Mutate(x => x.DrawImage(watermark, new Point(50, 50), 0.3f));
+
+baseImage.Save("output.jpg");
+
+------------
+
+TEXT Watermark 
+
+using var image = Image.Load("base.jpg");
+
+// Load a font (Ensure you have a .ttf file accessible)
+FontCollection fonts = new();
+FontFamily family = fonts.Add("arial.ttf");
+Font font = family.CreateFont(32, FontStyle.Regular);
+
+// Apply text watermark at bottom-right
+image.Mutate(x => x.DrawText(
+    "© My Watermark",
+    font,
+    Color.White.WithAlpha(0.5f), // 50% opacity
+    new PointF(image.Width - 160, image.Height - 40)
+));
 
 ------------
 
 
-Spikes in your color histogram after gamma correction usually indicate pixel bunching (multiple original tonal values are mapped to the same new value) or bit-depth limitations. This process compresses or expands tones non-linearly, leading to gaps and sudden jumps in the histogram that can result in visible banding or posterization.Why Gamma Spikes HappenTone Compression/Expansion: Gamma correction uses a power-law function: \(V_{out} = A \cdot V_{in}^{\gamma}\). If γ < 1, the function expands dark tones and compresses bright tones, causing low-end pixels to bunch together. If γ > 1, it does the opposite.Binning Effects: Because you are mathematically transforming floating-point values into limited discrete steps (like 256 levels in 8-bit color), consecutive pixel values may be rounded into the same integer, creating tall, vertical spikes.Bit Depth Loss: If you are working in an 8-bit color space (0-255), there simply aren't enough distinct tonal values to stretch the image without leaving gaps.
+Spikes in your color histogram after gamma correction usually indicate pixel bunching (multiple original tonal 
+values are mapped to the same new value) or bit-depth limitations. This process compresses or expands tones 
+non-linearly, leading to gaps and sudden jumps in the histogram that can result in visible banding or 
+posterization.
 
-How to Fix & Prevent the ArtifactsIncrease Bit Depth: Always edit your images in 16-bit color instead of 8-bit. This provides 65,536 tones per channel, leaving plenty of data to perform non-linear adjustments without gaps or spikes.Convert Early, Process in 32-bit: If working with digital composites or video, ensure your working space is set to a linear format, or use a 32-bit float pipeline prior to baking in color corrections.Use Adjustment Layers: In tools like Adobe Photoshop, use Adjustment Layers rather than applying filters directly to the base image. This keeps calculations dynamic and allows the software to pull from the original, uncompressed colors.Dithering: If you must output to 8-bit or lower, introduce a small amount of dither (random noise). This breaks up the solid blocks of color and tricks the eye into seeing a smooth gradient, effectively hiding the gaps in the histogram.
+Why Gamma Spikes HappenTone Compression/Expansion: Gamma correction uses a power-law function: 
+\(V_{out} = A \cdot V_{in}^{\gamma}\). 
+If γ < 1, the function expands dark tones and compresses bright tones, causing low-end pixels to bunch together. 
+If γ > 1, it does the opposite.
+Binning Effects: Because you are mathematically transforming floating-point values into limited discrete 
+steps (like 256 levels in 8-bit color), consecutive pixel values may be rounded into the same integer, 
+creating tall, vertical spikes.Bit Depth Loss: If you are working in an 8-bit color space (0-255), 
+there simply aren't enough distinct tonal values to stretch the image without leaving gaps.
+
+How to Fix & Prevent the ArtifactsIncrease Bit Depth: Always edit your images in 16-bit color instead of 8-bit. 
+This provides 65,536 tones per channel, leaving plenty of data to perform non-linear adjustments without gaps 
+or spikes.Convert Early, Process in 32-bit: If working with digital composites or video, ensure your working
+space is set to a linear format, or use a 32-bit float pipeline prior to baking in color corrections.
+Use Adjustment Layers: In tools like Adobe Photoshop, use Adjustment Layers rather than applying filters 
+directly to the base image. This keeps calculations dynamic and allows the software to pull from the original, 
+uncompressed colors.Dithering: If you must output to 8-bit or lower, introduce a small amount of dither (random noise). 
+This breaks up the solid blocks of color and tricks the eye into seeing a smooth gradient, effectively hiding 
+the gaps in the histogram.
 
 --- 
 

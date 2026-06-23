@@ -1,11 +1,11 @@
 Bugs 
 ----
 
-- Crop preview cancels the selected color for lines 
-
 - Add a Finish button on Export step and return to main view
 
-- Finish Image Contrast with S-Curves algorithm 
+- Finish Contrast Step with S-Curves algorithm 
+
+- Finish Color Step with Image Vibrance 
 
 - Re-init of Compose is failing at second image 
 
@@ -14,8 +14,6 @@ Bugs
 
 TODO First : Single Image Process
 ---------------------------------
-
-- Image Saturation and Vibrance 
 
 - Image Sharpen 
 

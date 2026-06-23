@@ -3,20 +3,22 @@
 public sealed partial class CropGridViewModel(
     ComposeViewModel composeViewModel, ComposeToolboxViewModel composeToolboxViewModel) : ViewModel<CropGridView>
 {
+    public static readonly SolidColorBrush BlackBrush = new(Colors.Black);
+
     public static readonly SolidColorBrush[] Brushes =
         [
-            new SolidColorBrush(Colors.DarkBlue),
-            new SolidColorBrush(Colors.Firebrick),
-            new SolidColorBrush(Colors.LightSeaGreen),
-            new SolidColorBrush(Colors.Goldenrod),
-            new SolidColorBrush(Colors.WhiteSmoke),
+            new (Colors.DarkBlue),
+            new (Colors.Firebrick),
+            new (Colors.LightSeaGreen),
+            new (Colors.Goldenrod),
+            new (Colors.WhiteSmoke),
         ];
 
     private readonly ComposeViewModel composeViewModel = composeViewModel;
     private readonly ComposeToolboxViewModel composeToolboxViewModel = composeToolboxViewModel;
 
     private bool preview;
-    private SolidColorBrush lastBrush = Brushes[3]; 
+    private SolidColorBrush lastBrush = Brushes[3];
 
     [ObservableProperty]
     public partial bool ShowSplitters { get; set; } = true;
@@ -25,7 +27,7 @@ public sealed partial class CropGridViewModel(
     public partial double CropOpacity { get; set; } = 0.6;
 
     [ObservableProperty]
-    public partial double CompositionOpacity { get; set; } = 0.35;
+    public partial double CompositionOpacity { get; set; } = 0.65;
 
     [ObservableProperty]
     public partial double CompositionSize { get; set; } = 7.0;
@@ -47,14 +49,19 @@ public sealed partial class CropGridViewModel(
         this.LineColor = Brushes[brushIndex];
     }
 
-    public void TogglePreview ()
+    public void TogglePreview()
     {
-        this.preview = !this.preview; 
-        this.ShowSplitters = !this.preview ;
+        if (!this.preview)
+        {
+            this.lastBrush = this.LineColor;
+        }
+
+        this.preview = !this.preview;
+        this.ShowSplitters = !this.preview;
         this.CropOpacity = this.preview ? 1.0 : 0.6;
         this.CompositionOpacity = this.preview ? 0.0 : 0.4;
-        this.LineColor = this.preview ? new SolidColorBrush(Colors.Black) : this.lastBrush;
-        this.View.InvalidateVisual(); 
+        this.LineColor = this.preview ? BlackBrush : this.lastBrush;
+        this.View.InvalidateVisual();
     }
 
     internal void ClearCrop() => this.View.ClearCrop();
@@ -87,7 +94,7 @@ public sealed partial class CropGridViewModel(
         this.View.GoldenDownCG.IsVisible = false;
         this.View.HalvesCG.IsVisible = false;
         this.View.DiagonalsCG.IsVisible = false;
-        
+
         Control control = cgIndex switch
         {
             0 => this.View.ZeroCG,

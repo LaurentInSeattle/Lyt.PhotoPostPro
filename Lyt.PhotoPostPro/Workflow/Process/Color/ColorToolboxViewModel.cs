@@ -7,7 +7,6 @@ public sealed partial class ColorToolboxViewModel :
 
     private ColorStep.ColorAlgorithm algorithm;
     private float saturation;
-    private float blur;
 
     protected override string Title => this.Localize("Workflow.Color.Title");
 
