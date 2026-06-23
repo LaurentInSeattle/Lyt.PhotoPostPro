@@ -113,6 +113,13 @@
 	<system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
 
+	<!-- Workflow Sharpen -->
+	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
+	<system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>
+	<system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+	<system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
+
 	<!-- Workflow Export-->
 	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>
 	<system:String x:Key="Workflow.Export.Prompt">Setup the export process in the main view.</system:String>

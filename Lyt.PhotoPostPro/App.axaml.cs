@@ -67,8 +67,8 @@ public partial class App : ApplicationBase
             typeof(ColorViewModel),
             typeof(ColorToolboxViewModel),
 
-            //typeof(SharpenViewModel),
-            //typeof(SharpenToolboxViewModel),
+            typeof(SharpenViewModel),
+            typeof(SharpenToolboxViewModel),
 
             typeof(ExportViewModel),
             typeof(ExportToolboxViewModel),

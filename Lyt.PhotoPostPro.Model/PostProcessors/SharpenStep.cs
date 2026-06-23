@@ -65,7 +65,6 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     private void Clear()
     {
         this.Algorithm = SharpenAlgorithm.Sharpen;
-        this.SharpenAmount = 1.0f;
+        this.SharpenAmount = 0.0f;
     }
 }
-
