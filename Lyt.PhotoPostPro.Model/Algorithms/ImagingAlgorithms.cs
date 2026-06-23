@@ -342,6 +342,20 @@ public static class ImagingAlgorithms
 		// PLACEHOLDER 
 		return true;
 	}
+
+
+	//     A value of 0 is completely un-saturated. A value of 1 leaves the input unchanged.
+	//     Other values are linear multipliers on the effect. Values of amount over 1 are
+	//     allowed, providing super-saturated results
+	public static bool ApplyGlobalSaturation(this Image<Rgb48> image, float saturationAmount)
+	{
+		if (Math.Abs(saturationAmount - 1.0) > 0.01)
+		{
+			image.Mutate(x => x.Saturate(saturationAmount));
+		}
+
+		return true;
+	}
 }
 
 

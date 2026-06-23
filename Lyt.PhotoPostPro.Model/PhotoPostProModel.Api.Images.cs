@@ -202,6 +202,24 @@ public sealed partial class PhotoPostProModel : ModelBase
         });
 
 
+    public void GlobalSaturation(float saturationAmount) =>
+        this.ApiAction(() =>
+        {
+            // saturationAmount == from 0.0 to 2.5  -- 1.0 -> No Change 
+            if ((saturationAmount < 0.0) || (saturationAmount > 2.5))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is ColorStep colorStep)
+            {
+                this.LastResultFrame = colorStep.Saturation(saturationAmount);
+                return true;
+            }
+
+            return false;
+        });
+
     public void Export(ExportStep.ExportParameters exportParameters) =>
         this.ApiAction(() =>
         {
