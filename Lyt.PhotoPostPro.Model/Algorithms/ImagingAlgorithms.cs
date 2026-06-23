@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-using System.Runtime.InteropServices;
-
 using static ImagingUtilities;
 using static System.Math;
 
@@ -329,7 +327,7 @@ public static class ImagingAlgorithms
 			image.Mutate(x => x.Contrast(contrastAmount));
 		}
 
-		if (Math.Abs(blurAmount) > 0.1)
+		if (Math.Abs(blurAmount) > 0.05)
 		{
 			image.Mutate(x => x.GaussianBlur(blurAmount));
 		}
@@ -356,6 +354,17 @@ public static class ImagingAlgorithms
 
 		return true;
 	}
+
+    //   sharpenAmoun: sigma: The 'sigma' value representing the weight of the blur.
+    public static bool ApplyGlobalSharpen(this Image<Rgb48> image, float sharpenAmount)
+    {
+        if (Math.Abs(sharpenAmount) > 0.05)
+        {
+            image.Mutate(x => x.GaussianSharpen(sharpenAmount));
+        }
+
+        return true;
+    }
 }
 
 

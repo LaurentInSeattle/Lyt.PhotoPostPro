@@ -154,12 +154,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             // contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
-            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
             if ((contrastAmount < 1.0) || (contrastAmount > 3.0))
             {
                 return false;
             }
 
+            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
             if ((blurAmount < 0.0) || (blurAmount > 1.5))
             {
                 return false;
@@ -214,6 +214,24 @@ public sealed partial class PhotoPostProModel : ModelBase
             if (this.Workflow.CurrentStep is ColorStep colorStep)
             {
                 this.LastResultFrame = colorStep.Saturation(saturationAmount);
+                return true;
+            }
+
+            return false;
+        });
+
+    public void GlobalSharpen(float sharpenAmount) =>
+        this.ApiAction(() =>
+        {
+            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
+            if ((sharpenAmount <= 0.0) || (sharpenAmount > 1.5))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is SharpenStep sharpenStep)
+            {
+                this.LastResultFrame = sharpenStep.Sharpen(sharpenAmount);
                 return true;
             }
 

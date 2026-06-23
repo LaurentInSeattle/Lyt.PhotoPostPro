@@ -32,6 +32,8 @@ TODO First : Single Image Process
 Missing Features 
 ----------------
 
+- Support HIEF / HIEC images (iPhone) 
+
 - Project : 
 	- Browse 
 	- Create ( partially done ) 
@@ -51,7 +53,7 @@ Missing Features
 
 - Optimal viewer layout 
 
-- Floating windows 
+- Floating toolbox windows 
 
 
 Cool Stuff to Consider 

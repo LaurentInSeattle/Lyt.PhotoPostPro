@@ -14,6 +14,7 @@ public sealed class PostProcessWorkflow
         var whiteBalanceStep = new WhiteBalanceStep(this);
         var contrastStep = new ContrastStep(this);
         var colorStep = new ColorStep(this);
+        var sharpenStep = new SharpenStep(this);
         var exportStep = new ExportStep(this);
 
         this.Steps =
@@ -26,8 +27,9 @@ public sealed class PostProcessWorkflow
 
             // Constrast and Color 
             whiteBalanceStep,
-            contrastStep, 
-            colorStep, 
+            contrastStep,
+            colorStep,
+            sharpenStep, 
 
             // Export
             exportStep,
