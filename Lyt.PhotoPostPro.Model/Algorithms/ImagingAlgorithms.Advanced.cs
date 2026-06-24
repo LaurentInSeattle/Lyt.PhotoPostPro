@@ -5,6 +5,8 @@ using static System.Math;
 
 public static partial class ImagingAlgorithms
 {
+	#region Brightness / Gamma 
+
 	/// <summary> Creates a 64K-byte Look-Up Table for fast gamma correction. </summary>
 	/// <param name="gamma">Gamma value (e.g., 2.2 to brighten midtones, 0.45 to darken).</param>
 	public static ushort[] CreateGammaLUT(double gamma)
@@ -54,69 +56,17 @@ public static partial class ImagingAlgorithms
 		return lut;
 	}
 
-	//  Implementing a highlights and shadows adjustment requires extracting the pixel data and running 
-	//  a non-linear luminance alteration formula. it calculates the perceived luminance of each pixel, 
-	//  then maps highlights and shadows independently using a power curve(gamma mapping).
-	// 
-	//  The formula converts the RGB values to grayscale luminance, and then applies separate adjustment variables 
-	//  h (for highlights) and s (for shadows),  constrained between -1.0 and +1.0.
-	//  Luminance is calculated using the standard perceived brightness coefficients. The shift factors h and s are then 
-	//  calculated adaptively.
-	public static void HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
+	#endregion Brightness / Gamma 
+
+
+	#region Contrast / White Balance 
+
+	public static bool ApplySCurveContrast(this Image<Rgb48> image, float redAmount, float greenAmount, float blueAmount)
 	{
-		// Parallelize the loop over the rows
-		int height = image.Height;
-		Parallel.For(0, height, y =>
-		{
-			// Get a span for the current row for fast, safe access
-			Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
-			for (int x = 0; x < row.Length; x++)
-			{
-				Rgb48 pixel = row[x];
-
-				// Normalize RGB to [0, 1] float range
-				float r = pixel.R / 65535.0f;
-				float g = pixel.G / 65535.0f;
-				float b = pixel.B / 65535.0f;
-
-				// Calculate perceived luminance
-				float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
-
-#if OLD_ALGORITHM
-				// Compute adjustment factors
-				float h = highlightAmount * 0.05f * ((float)Math.Pow(8.0, luminance) - 1.0f);
-				float s = shadowAmount * 0.05f * ((float)Math.Pow(8.0, 1.0f - luminance) - 1.0f);
-				float hs = h + s;
-
-				// Apply shifts, denormalize, clip and update pixel
-				row[x].R = DeNormalizeClip16(r + hs);
-				row[x].G = DeNormalizeClip16(g + hs);
-				row[x].B = DeNormalizeClip16(b + hs);
-#else
-				// Create shadow and highlight masks
-				float shadowMask = ClipF((0.5f - luminance) * 2.0f);
-				float highlightMask = ClipF((luminance - 0.5f) * 2.0f);
-
-				// Calculate adjustments 
-				float shadowFactor = (float)Pow(luminance, 1.0f - shadowAmount);
-				float highlightFactor = (float)Pow(luminance, 1.0f + highlightAmount);
-
-				// Combine factors with masks to apply changes
-				float adjustedLuminance = luminance;
-				adjustedLuminance += (shadowFactor - luminance) * shadowMask * shadowAmount;
-				adjustedLuminance -= (luminance - highlightFactor) * highlightMask * highlightAmount;
-
-				// Preserve chromaticity (prevent color shifting)
-				float finalFactor = adjustedLuminance / Max(luminance, 0.001f);
-
-				// Apply shifts, denormalize, clip and update pixel
-				row[x].R = DeNormalizeClip16(r * finalFactor);
-				row[x].G = DeNormalizeClip16(g * finalFactor);
-				row[x].B = DeNormalizeClip16(b * finalFactor);
-#endif
-			}
-		});
+		// PLACEHOLDER 
+		return true;
 	}
+
 
 	// Tanner Helland Algorithm 
 	// See: 	https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
@@ -296,12 +246,69 @@ public static partial class ImagingAlgorithms
 		return true;
 	}
 
-	public static bool ApplySCurveContrast(this Image<Rgb48> image, float redAmount, float greenAmount, float blueAmount )
+	#endregion  White Balance 
+
+	#region Highlights and Shadows
+
+	// To eliminate sharp edges and halos, pre-apply a Gaussian Blur to a working luminance mask before integrating
+	// the adjustments
+	
+	//  Implementing a highlights and shadows adjustment requires extracting the pixel data and running 
+	//  a non-linear luminance alteration formula. it calculates the perceived luminance of each pixel, 
+	//  then maps highlights and shadows independently using a power curve(gamma mapping).
+	// 
+	public static void HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
 	{
-		// PLACEHOLDER 
-		return true;
+		// shadowAmount and highlightAmount range from -1 to 1
+		// Convert parameters to gamma modifiers
+		float shadowGamma = 1.0f - shadowAmount;
+		float highlightGamma = 1.0f + highlightAmount;
+
+		// Parallelize the loop over the rows
+		int height = image.Height;
+		Parallel.For(0, height, y =>
+		{
+			// Get a span for the current row for fast, safe access
+			Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+			for (int x = 0; x < row.Length; x++)
+			{
+				Rgb48 pixel = row[x];
+
+				// Normalize RGB to [0, 1] float range
+				float r = pixel.R / 65535.0f;
+				float g = pixel.G / 65535.0f;
+				float b = pixel.B / 65535.0f;
+
+				// Calculate perceived luminance
+				float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+				float factor = 1.0f;
+				if (luminance < 0.5f && shadowAmount != 0)
+				{
+					// Shadow adjustment: targets dark areas (luma < 0.5)
+					factor = (float)Math.Pow(2.0f * luminance, shadowGamma) / (2.0f * luminance);
+				}
+				else if (luminance >= 0.5f && highlightAmount != 0)
+				{
+					// Highlight adjustment: targets bright areas (luma >= 0.5)
+					factor = (float)Math.Pow(2.0f * (1.0f - luminance), highlightGamma) / (2.0f * (1.0f - luminance));
+					factor = 2.0f - factor; // Invert factor for highlights
+				}
+
+				// Clip factors to prevent anomalies
+				factor = Math.Max(0.0f, Math.Min(5.0f, factor));
+
+				// Denormalize 
+				factor *= 65535.0f; 
+
+				// Apply factor selectively while preserving hues
+				row[x].R = (ushort)Math.Min(65535, r * factor); 
+				row[x].G = (ushort)Math.Min(65535, g * factor); 
+				row[x].B = (ushort)Math.Min(65535, b * factor); 
+			}
+		});
 	}
 
+#endregion Highlights and Shadows
 }
 
 

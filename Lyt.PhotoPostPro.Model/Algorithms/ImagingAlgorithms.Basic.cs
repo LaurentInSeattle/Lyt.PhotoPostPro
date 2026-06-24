@@ -12,7 +12,6 @@ public static partial class ImagingAlgorithms
 		float blueShift = tempShift * 0.5f;
 
 		// Build the 5x4 Color Matrix
-		// Columns: R, G, B, A, Offset
 		var matrix = new SixLabors.ImageSharp.ColorMatrix(
 			1f + tempShift, 0f, 0f, 0f,
 			0f, 1f + tempShift, 0f, 0f,
@@ -23,7 +22,6 @@ public static partial class ImagingAlgorithms
 		// Apply the matrix as a filter
 		image.Mutate(ctx => ctx.Filter(matrix));
 	}
-
 
 	// contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
 	// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 

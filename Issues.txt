@@ -1,25 +1,36 @@
 Bugs 
 ----
 
-- Alg : Highlights barely working 
+- Add brightness slider for adjusting contrast 
 
-- Alg : Shadows correction not effective enough 
+- Saturation and contrast sliders moving too fast from keyboard 
+
+
+
+- Moving back and then forth in workflow picks up the wrong image 
+
+- Finish Color Step with Image Vibrance 
 
 - Add a Finish button on Export step and return to main view
 
 - Finish Contrast Step with S-Curves algorithm 
 
-- Finish Color Step with Image Vibrance 
-
 - Finish Image Sharpen with a smarter algorithm 
 
 - UI : Visual issues (and spurious commands) when hovering quickly above glyph buttons 
+
+- Export should only show the final image ( and may be the original ? ) 
 
 
 TODO First : Single Image Process
 ---------------------------------
 
-- Image Fancy Filters (LUT's) 
+- Image Fancy Filters (LUT's?)
+	- Black and White 
+	- Sepia (amount) 
+	- Kodak 
+	- Lomograph (options) 
+	- Polaroid (options) 
 
 - Image Watermarking 
 
@@ -34,6 +45,8 @@ TODO First : Single Image Process
 
 Missing Features 
 ----------------
+
+- Image metadata 
 
 - Support HIEF / HIEC images (iPhone) 
 
@@ -68,3 +81,4 @@ Cool Stuff to Consider
 
 - UI : Final fix for Re-init of Compose is failing at second image 
 
+- Black or white image borders (in export step) 

@@ -37,25 +37,6 @@ and later versions, shifting toward the WPD API for digital cameras
 
 ------------
 
-SHARPEN 
-
-To sharpen an image using SixLabors.ImageSharp in C#, you use the GaussianSharpen extension method inside an image mutation context.Core ImplementationHere is the direct code structure required to load, sharpen, and save your image:csharpusing SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-
-// Load the source image file
-using (Image image = Image.Load("input.jpg"))
-{
-    // Mutate the image using the GaussianSharpen filter
-    // Default sigma is typically 3.0f if left empty
-    image.Mutate(ctx => ctx.GaussianSharpen(5.0f));
-
-    // Save the sharpened result
-    image.Save("sharpened_output.jpg");
-}
-
-
-------------
-
 Fancy Sharpening 
 
 Duplicate the Layer: Make a copy of your image layer so you can work non-destructively.
