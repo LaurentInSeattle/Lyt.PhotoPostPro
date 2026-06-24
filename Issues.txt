@@ -1,7 +1,7 @@
 Bugs 
 ----
 
-- Cannot desaturate 
+- Find a way to optionally hide notes
 
 - Re-init of Compose is failing at second image 
 

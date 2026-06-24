@@ -55,7 +55,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.5" TickPlacement="BottomRight"
 				SmallChange="0.05" LargeChange="0.2"
-				Minimum="1" Maximum="2.5"
+				Minimum="0.0" Maximum="2.5"
 				Value="{Binding SaturationSliderValue}"
 				/>
 			<TextBlock
