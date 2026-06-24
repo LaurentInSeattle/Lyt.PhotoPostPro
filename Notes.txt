@@ -194,6 +194,82 @@ public void BalanceWhite(string imagePath, Rgb24 referenceColor, Rgb24 targetNeu
 }
 
 
+-----
+To eliminate sharp edges and halos, you can pre-apply a Gaussian Blur to a working luminance mask before integrating your adjustments
+
+public class ShadowHighlightProcessor
+{
+    // shadowAmount and highlightAmount typically range from -100 to 100
+    public static Bitmap AdjustShadowsAndHighlights(Bitmap sourceImage, float shadowAmount, float highlightAmount)
+    {
+        Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+        Rectangle rect = new Rectangle(0, 0, sourceImage.Width, sourceImage.Height);
+        
+        // Lock bits for fast unsafe memory access
+        BitmapData sourceData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+        BitmapData resultData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
+        int bytesPerPixel = 4;
+        int stride = sourceData.Stride;
+        IntPtr srcScan0 = sourceData.Scan0;
+        IntPtr resScan0 = resultData.Scan0;
+
+        // Convert parameters to gamma modifiers
+        float shadowGamma = 1.0f - (shadowAmount / 100.0f);
+        float highlightGamma = 1.0f + (highlightAmount / 100.0f);
+
+        unsafe
+        {
+            byte* src = (byte*)srcScan0;
+            byte* res = (byte*)resScan0;
+
+            for (int y = 0; y < sourceImage.Height; y++)
+            {
+                for (int x = 0; x < sourceImage.Width; x++)
+                {
+                    int index = (y * stride) + (x * bytesPerPixel);
+                    
+                    byte b = src[index];     // Blue
+                    byte g = src[index + 1]; // Green
+                    byte r = src[index + 2]; // Red
+                    byte a = src[index + 3]; // Alpha
+
+                    // Calculate Luminance (Perceived brightness)
+                    float luma = (0.299f * r + 0.587f * g + 0.114f * b) / 255.0f;
+
+                    float factor = 1.0f;
+                    
+                    // Shadow adjustment: targets dark areas (luma < 0.5)
+                    if (luma < 0.5f && shadowAmount != 0)
+                    {
+                        factor = (float)Math.Pow(2.0f * luma, shadowGamma) / (2.0f * luma);
+                    }
+                    // Highlight adjustment: targets bright areas (luma >= 0.5)
+                    else if (luma >= 0.5f && highlightAmount != 0)
+                    {
+                        factor = (float)Math.Pow(2.0f * (1.0f - luma), highlightGamma) / (2.0f * (1.0f - luma));
+                        factor = 2.0f - factor; // Invert factor for highlights
+                    }
+
+                    // Clip factors to prevent anomalies
+                    factor = Math.Max(0.0f, Math.Min(5.0f, factor));
+
+                    // Apply factor selectively while preserving hues
+                    res[index] = (byte)Math.Min(255, b * factor);     // B
+                    res[index + 1] = (byte)Math.Min(255, g * factor); // G
+                    res[index + 2] = (byte)Math.Min(255, r * factor); // R
+                    res[index + 3] = a;                               // A
+                }
+            }
+        }
+
+        sourceImage.UnlockBits(sourceData);
+        resultImage.UnlockBits(resultData);
+
+        return resultImage;
+    }
+}
+
 ----------
 
 To treat high-ISO grain (luminance and chroma noise) effectively, a pure median blur 

@@ -1,13 +1,21 @@
 Bugs 
 ----
 
+- Create a IsFirstRun bool in Steps, Run the Reset method if true, then clear flag
+
+- Cannot desaturate 
+
+- Re-init of Compose is failing at second image 
+
+- Highlights barely working 
+
+- Shadows correction not effective enough 
+
 - Add a Finish button on Export step and return to main view
 
 - Finish Contrast Step with S-Curves algorithm 
 
 - Finish Color Step with Image Vibrance 
-
-- Re-init of Compose is failing at second image 
 
 - Visual issues (and spurious commands) when hovering quickly above glyph buttons 
 
@@ -61,3 +69,4 @@ Cool Stuff to Consider
 
 - Recognize standard aspect ratios (square, HD, 16/9, 4/3, Golden Ratio) 
 
+- Ability to show or hide hints and beginner tips depending an app settings 
