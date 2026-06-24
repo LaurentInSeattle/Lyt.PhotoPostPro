@@ -1,13 +1,9 @@
 Bugs 
 ----
 
-- Find a way to optionally hide notes
+- Alg : Highlights barely working 
 
-- Re-init of Compose is failing at second image 
-
-- Highlights barely working 
-
-- Shadows correction not effective enough 
+- Alg : Shadows correction not effective enough 
 
 - Add a Finish button on Export step and return to main view
 
@@ -17,7 +13,7 @@ Bugs
 
 - Finish Image Sharpen with a smarter algorithm 
 
-- Visual issues (and spurious commands) when hovering quickly above glyph buttons 
+- UI : Visual issues (and spurious commands) when hovering quickly above glyph buttons 
 
 
 TODO First : Single Image Process
@@ -69,3 +65,6 @@ Cool Stuff to Consider
 - Recognize standard aspect ratios (square, HD, 16/9, 4/3, Golden Ratio) 
 
 - Ability to show or hide hints and beginner tips depending an app settings 
+
+- UI : Final fix for Re-init of Compose is failing at second image 
+

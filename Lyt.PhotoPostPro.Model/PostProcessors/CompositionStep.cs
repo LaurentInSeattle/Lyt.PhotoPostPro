@@ -76,6 +76,8 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
+        base.Activate(workflowUpdateKind);
+
         if (workflowUpdateKind == WorkflowUpdateKind.Back)
         {
             this.ResultImage = this.SourceImage;

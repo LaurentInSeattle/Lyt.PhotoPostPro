@@ -72,7 +72,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             this.Workflow.Back();
-            return false;
+            return true;
         });
 
     public bool Reset() =>
@@ -89,7 +89,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             this.Workflow.Next();
-            return false;
+            return true;
         });
 
     private bool ApiAction(Func<bool> action, bool notify = true)

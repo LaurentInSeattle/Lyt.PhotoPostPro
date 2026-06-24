@@ -152,7 +152,15 @@ public sealed partial class ComposeToolboxViewModel :
         }
     }
 
-    public override void OnModelStepUpdated(CompositionStep step) => this.SetCropRectangle(step);
+    public override void OnModelStepUpdated(CompositionStep step) =>
+        Schedule.OnUiThread(
+            // Vicious timing problem here!
+            // Without the delay grid lines are not showing up properly 
+            // Still dont understand why this wait is needed 
+            // TODO: Fix that !
+            500, 
+            () => { this.SetCropRectangle(step); }, 
+            DispatcherPriority.ApplicationIdle); 
 
     private void SetCropRectangle(CompositionStep step)
     {

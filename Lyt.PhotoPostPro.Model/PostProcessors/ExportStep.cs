@@ -53,10 +53,6 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
-    public override void Activate(WorkflowUpdateKind workflowUpdateKind)
-    {
-    }
-
     private void Clear()
     {
     }

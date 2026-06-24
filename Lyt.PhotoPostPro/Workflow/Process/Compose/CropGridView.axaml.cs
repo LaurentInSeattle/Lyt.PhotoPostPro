@@ -71,7 +71,7 @@ public partial class CropGridView : View
                     var top = rows[0];
                     top.Height = new GridLength(y, GridUnitType.Pixel);
                     var bottom = rows[4];
-                    bottom.Height = new GridLength(bottomHeight, GridUnitType.Pixel); ;
+                    bottom.Height = new GridLength(bottomHeight, GridUnitType.Pixel);
 
                     cropGridViewModel.OnCropRectangleChanged(x, y, dx, dy);
                 }
