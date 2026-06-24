@@ -12,7 +12,7 @@
 	<Grid
 		>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Contrast--> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Color--> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Global --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Two sliders --> 
@@ -54,7 +54,7 @@
 				Margin="8 0 8 0"
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.5" TickPlacement="BottomRight"
-				SmallChange="0.05" LargeChange="0.2"
+				SmallChange="0.01" LargeChange="0.1"
 				Minimum="0.0" Maximum="2.5"
 				Value="{Binding SaturationSliderValue}"
 				/>

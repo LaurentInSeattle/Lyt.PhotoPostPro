@@ -59,7 +59,7 @@
 				Margin="8 0 8 0"
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="10" TickPlacement="BottomRight"
-				SmallChange="0.5" LargeChange="2"
+				SmallChange="0.1" LargeChange="1"
 				Minimum="-50.0" Maximum="50.0"
 				Value="{Binding TemperatureSliderValue}"
 				/>
@@ -97,7 +97,7 @@
 				Margin="8 0 8 0"
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="5000" TickPlacement="BottomRight"
-				SmallChange="50" LargeChange="200"
+				SmallChange="10" LargeChange="200"
 				Minimum="1000.0" Maximum="40000.0"
 				Value="{Binding KelvinSliderValue}"
 				/>

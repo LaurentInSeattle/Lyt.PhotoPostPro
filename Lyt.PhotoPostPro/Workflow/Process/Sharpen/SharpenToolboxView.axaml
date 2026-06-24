@@ -57,7 +57,7 @@
 				Margin="8 0 8 0"
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
-				SmallChange="0.05" LargeChange="0.2"
+				SmallChange="0.01" LargeChange="0.1"
 				Minimum="0.0" Maximum="1.5"
 				Value="{Binding BlurSliderValue}"
 				/>
