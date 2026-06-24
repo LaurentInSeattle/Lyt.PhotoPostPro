@@ -1,8 +1,6 @@
 Bugs 
 ----
 
-- Create a IsFirstRun bool in Steps, Run the Reset method if true, then clear flag
-
 - Cannot desaturate 
 
 - Re-init of Compose is failing at second image 
@@ -17,13 +15,13 @@ Bugs
 
 - Finish Color Step with Image Vibrance 
 
+- Finish Image Sharpen with a smarter algorithm 
+
 - Visual issues (and spurious commands) when hovering quickly above glyph buttons 
 
 
 TODO First : Single Image Process
 ---------------------------------
-
-- Image Sharpen 
 
 - Image Fancy Filters (LUT's) 
 
@@ -36,6 +34,7 @@ TODO First : Single Image Process
 - Cleanup unused icons 
 
 - Cleanup language strings
+
 
 Missing Features 
 ----------------

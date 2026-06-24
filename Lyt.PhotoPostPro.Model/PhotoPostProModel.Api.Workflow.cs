@@ -67,6 +67,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             return false;
         });
+
     public bool Back() =>
         this.ApiAction(() =>
         {

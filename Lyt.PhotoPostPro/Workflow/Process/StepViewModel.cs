@@ -31,6 +31,7 @@ public partial class StepViewModel<TView> :
         this.Subscribe<SourceImageGeneratedMessage>();
         this.Subscribe<ResultImageGeneratedMessage>();
         this.model.GetStepSourceImage();
+        this.model.GetStepResultImage();
     }
 
     public override void Deactivate()

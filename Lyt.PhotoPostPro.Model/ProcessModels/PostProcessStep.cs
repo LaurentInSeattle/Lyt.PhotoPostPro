@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
+public class PostProcessStep
 {
     public const string StartStepName = "Start";
     public const string EndStepName = "End";
@@ -17,9 +17,16 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
 
     public const string ExportStepName = "Export";
 
-    public PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow; 
+    public PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name) 
+    {
+        this.PostProcessWorkflow = postProcessWorkflow;
+        this.Name = name;
+        this.IsFirstRun = true;
+    }
+
+    public PostProcessWorkflow PostProcessWorkflow { get; private set; }  
     
-    public string Name { get; private set; } = name;
+    public string Name { get; private set; }
 
     [JsonIgnore]
     public PostProcessStep? PreviousStep { get; set; }
@@ -30,6 +37,9 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
     public bool IsFirstStep => this.PreviousStep is null;
 
     public bool IsLastStep => this.NextStep is null;
+
+    [JsonIgnore]
+    public bool IsFirstRun { get; set; }
 
     [JsonIgnore]
     public bool IsReset { get; set; }
@@ -62,12 +72,22 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
         return this.SourceImage.ToFrame();
     }
 
-    // Default implementations do nothing. Override in derived classes if needed.
-    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) { }
-
-    public virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
+    // Override in derived classes if needed, overrides must call the base class .
+    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) 
+    {
+        Debug.WriteLine("Activating : " + this.Name + "  " + workflowUpdateKind);
+        if (this.IsFirstRun)
+        {
+            Debug.WriteLine(this.Name + "  - First Run : " + workflowUpdateKind); 
+            this.IsFirstRun = false;
+            this.Reset() ;
+        } 
+    }
 
     // Default implementation does nothing. Override in derived classes if needed.
+    public virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
+
+    // Default implementation does nothing. Override in derived classes is needed.
     public virtual Frame? Transform(bool withFrame = true) => null;
 
     public static void RecalculateHistograms(Image<Rgb48> image)
