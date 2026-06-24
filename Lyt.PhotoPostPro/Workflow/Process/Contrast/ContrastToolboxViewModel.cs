@@ -8,6 +8,7 @@ public sealed partial class ContrastToolboxViewModel :
     private ContrastStep.ContrastAlgorithm algorithm;
     private float contrast;
     private float blur;
+    private float brightness;
 
     protected override string Title => this.Localize("Workflow.Contrast.Title");
 
@@ -23,17 +24,27 @@ public sealed partial class ContrastToolboxViewModel :
     [ObservableProperty]
     public partial double BlurSliderValue { get; set; }
 
+    [ObservableProperty]
+    public partial string BrightnessString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double BrightnessSliderValue { get; set; }
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
         this.contrast = 1.0f;
         this.blur = 0.0f;
+        this.brightness = 0.0f;
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
             this.ContrastSliderValue = this.contrast;
+            this.BlurSliderValue = 0.5; // Force Property changed
             this.BlurSliderValue = this.blur;
+            this.BrightnessSliderValue = 0.5; // Force Property changed
+            this.BrightnessSliderValue = this.brightness;
         });
     }
 
@@ -47,8 +58,9 @@ public sealed partial class ContrastToolboxViewModel :
             // No transform for the staturation threshold 
             this.ContrastSliderValue = step.ContrastAmount;
             this.BlurSliderValue = step.BlurAmount;
+            this.BrightnessSliderValue = step.BrightnessAmount;
 
-            // More later here 
+            // More later here ? 
         });
     }
 
@@ -70,6 +82,15 @@ public sealed partial class ContrastToolboxViewModel :
         this.UpdateModel();
     }
 
+    partial void OnBrightnessSliderValueChanged(double value)
+    {
+        // Slider sends 0.0 to +0.5, fine for the model  
+        this.algorithm = ContrastStep.ContrastAlgorithm.Global;
+        this.brightness = (float)value;
+        this.BrightnessString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
     private void UpdateModel()
     {
         if (this.doNotUpdateModel)
@@ -80,7 +101,7 @@ public sealed partial class ContrastToolboxViewModel :
         switch (this.algorithm)
         {
             case ContrastStep.ContrastAlgorithm.Global:
-                this.model.GlobalContrast(this.contrast, this.blur);
+                this.model.GlobalContrast(this.contrast, this.blur, this.brightness);
                 break;
 
             case ContrastStep.ContrastAlgorithm.SCurves:

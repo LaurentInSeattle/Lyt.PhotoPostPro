@@ -25,16 +25,23 @@ public static partial class ImagingAlgorithms
 
 	// contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
 	// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
-	public static bool ApplyGlobalContrast(this Image<Rgb48> image, float contrastAmount, float blurAmount)
+	// brightnessAmount comes from 0.0 to 0.5 => Add one for Img# 
+	public static bool ApplyGlobalContrast(
+		this Image<Rgb48> image, float contrastAmount, float blurAmount, float brightnessAmount )
 	{
 		if (Math.Abs(contrastAmount - 1.0) > 0.01)
 		{
 			image.Mutate(x => x.Contrast(contrastAmount));
 		}
 
-		if (Math.Abs(blurAmount) > 0.05)
+		if (Math.Abs(blurAmount) > 0.01)
 		{
 			image.Mutate(x => x.GaussianBlur(blurAmount));
+		}
+
+		if (Math.Abs(brightnessAmount) > 0.01)
+		{
+			image.Mutate(x => x.Brightness(1.0f + brightnessAmount));
 		}
 
 		return true;

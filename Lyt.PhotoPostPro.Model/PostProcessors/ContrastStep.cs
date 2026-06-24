@@ -13,6 +13,9 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float BlurAmount { get; set; }
 
+    public float BrightnessAmount { get; set; }
+
+
     public float RedAmount { get; set; }
 
     public float GreenAmount { get; set; }
@@ -41,7 +44,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         switch (this.Algorithm)
         {
             case ContrastAlgorithm.Global:
-                clone.ApplyGlobalContrast(this.ContrastAmount, this.BlurAmount);
+                clone.ApplyGlobalContrast(this.ContrastAmount, this.BlurAmount, this.BrightnessAmount);
                 break;
 
             case ContrastAlgorithm.SCurves:
@@ -57,11 +60,12 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         return withFrame ? clone.ToFrame() : null;
     }
 
-    internal Frame? GlobalContrast(float contrastAmount, float blurAmount)
+    internal Frame? GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount)
     {
         this.Algorithm = ContrastAlgorithm.Global;
         this.ContrastAmount = contrastAmount;
         this.BlurAmount = blurAmount;
+        this.BrightnessAmount = brightnessAmount;
         return this.Transform(withFrame: true);
     }
 
@@ -79,5 +83,6 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         this.Algorithm = ContrastAlgorithm.Global;
         this.ContrastAmount = 1.0f;
         this.BlurAmount = 0.0f;
+        this.BrightnessAmount = 0.0f;
     }
 }

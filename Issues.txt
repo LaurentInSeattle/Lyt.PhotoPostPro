@@ -1,10 +1,6 @@
 Bugs 
 ----
 
-- Add brightness slider for adjusting contrast 
-
-- Saturation and contrast sliders moving too fast from keyboard 
-
 - Moving back and then forth in workflow picks up the wrong image 
 
 - Finish Color Step with Image Vibrance 
