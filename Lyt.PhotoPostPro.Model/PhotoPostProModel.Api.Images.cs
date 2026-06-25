@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
-
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public bool Rotate(bool isClockwise) =>

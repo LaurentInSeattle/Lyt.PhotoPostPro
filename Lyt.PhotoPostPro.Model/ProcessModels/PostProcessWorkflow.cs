@@ -2,7 +2,7 @@
 
 public sealed class PostProcessWorkflow
 {
-    public PostProcessWorkflow(PostProcess postProcess )
+    public PostProcessWorkflow(PostProcess postProcess)
     {
         this.PostProcess = postProcess;
 
@@ -93,7 +93,7 @@ public sealed class PostProcessWorkflow
         return true;
     }
 
-    public bool Next()
+    public Frame? Next()
     {
         if (this.CanMoveNext)
         {
@@ -118,10 +118,13 @@ public sealed class PostProcessWorkflow
 
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
-            return true;
+
+            // Return current result image 
+            var resultImage = this.CurrentStep.ResultImage;
+            return resultImage?.ToFrame(); 
         }
 
-        return false;
+        return null;
     }
 
     public bool Back()

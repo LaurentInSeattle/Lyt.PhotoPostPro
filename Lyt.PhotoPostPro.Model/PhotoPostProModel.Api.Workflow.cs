@@ -88,7 +88,12 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool Next() =>
         this.ApiAction(() =>
         {
-            this.Workflow.Next();
+            var frame = this.Workflow.Next();
+            if ( frame is not null)
+            {
+                this.LastResultFrame = frame;
+            }
+
             return true;
         });
 

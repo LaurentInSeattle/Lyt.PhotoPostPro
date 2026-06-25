@@ -82,6 +82,10 @@ public class PostProcessStep
             this.IsFirstRun = false;
             this.Reset() ;
         } 
+        else
+        {
+            this.Transform(withFrame: false);
+        }
     }
 
     // Default implementation does nothing. Override in derived classes if needed.
