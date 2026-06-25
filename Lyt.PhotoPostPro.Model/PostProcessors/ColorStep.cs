@@ -11,8 +11,6 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float SaturationAmount { get; set; }
 
-    public float ColorAmount { get; set; }
-
     public float RedAmount { get; set; }
 
     public float GreenAmount { get; set; }
@@ -45,7 +43,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case ColorAlgorithm.Vibrance:
-                // clone.ApplySCurveContrast(this.RedAmount, this.GreenAmount, this.BlueAmount);
+                clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
                 break;
 
             default:

@@ -1,5 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
+using System.Drawing;
+using System.Numerics;
+using System.Runtime.InteropServices;
+
 using static ImagingUtilities;
 using static System.Math;
 
@@ -308,7 +312,71 @@ public static partial class ImagingAlgorithms
 		});
 	}
 
-#endregion Highlights and Shadows
+	#endregion Highlights and Shadows
+
+	// See:
+	// https://github.com/zachsaw/RenderScripts/blob/master/RenderScripts/ImageProcessingShaders/SweetFX/Vibrance.hlsl 
+	// 
+	// Intelligently saturates (or desaturates if you use negative values) the pixels depending on
+	// their original saturation.
+	// Vibrance intelligently boosts the saturation of pixels so pixels that had little color get a larger boost
+	// than pixels that had a lot.
+	// This avoids oversaturation of pixels that were already very saturated.
+	// 
+	// All three amounts [-1.00 to 1.00] on the UI 
+	public static void Vibrance (this Image<Rgb48> image, float redAmount, float greenAmount, float blueAmount)
+	{
+		const float scaleFactor = 3.3f; 
+		redAmount *= scaleFactor;
+		greenAmount *= scaleFactor;
+		blueAmount *= scaleFactor;
+
+		float signRed = (float)Math.Sign(redAmount);
+		float signGreen = (float)Math.Sign(greenAmount);
+		float signBlue = (float)Math.Sign(blueAmount);
+
+		// Parallelize the loop over the rows
+		int height = image.Height;
+		Parallel.For(0, height, y =>
+		{
+			// Get a span for the current row for fast, safe access
+			Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+			for (int x = 0; x < row.Length; x++)
+			{
+				Rgb48 pixel = row[x];
+
+				// Normalize RGB to [0, 1] float range
+				float r = pixel.R / 65535.0f;
+				float g = pixel.G / 65535.0f;
+				float b = pixel.B / 65535.0f;
+
+				// Calculate perceived luminance
+				float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+
+				// Find the strongest color
+				float maxColor = Max(r, Max(g, b));
+
+				//Find the weakest color
+				float minColor = Min(r, Min(g, b));
+
+				// The difference between the two is the saturation
+				float saturation = maxColor - minColor;
+
+				// Linear Interpolation between luminance and original by 1 + (1-saturation) - current
+				// (1.0 + (Vibrance_coeff * (1.0 - (sign(Vibrance_coeff) * saturation))))
+				float redCoeff = 1.0f + (redAmount * (1.0f - signRed * saturation));
+				r = float.Lerp(luminance, r, redCoeff);
+				float greenCoeff = 1.0f + (greenAmount * (1.0f - signGreen* saturation));
+				g = float.Lerp(luminance, g, greenCoeff);
+				float blueCoeff = 1.0f + (blueAmount * (1.0f - signBlue * saturation));
+				b = float.Lerp(luminance, b, blueCoeff);
+
+				row[x].R = DeNormalizeClip16(r);
+				row[x].G = DeNormalizeClip16(g); ;
+				row[x].B = DeNormalizeClip16(b); ;
+			}
+		});
+	}
 }
 
 

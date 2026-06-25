@@ -106,12 +106,17 @@
 	<system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
 	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
+	<system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness:</system:String>
 
 	<!-- Workflow Color -->
 	<system:String x:Key="Workflow.Color.Title">Color Grading</system:String>
 	<system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally or use Vibrance on each RGB channel.</system:String>
 	<system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
+	<system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+	<system:String x:Key="Workflow.Color.Red">Red:</system:String>
+	<system:String x:Key="Workflow.Color.Green">Green:</system:String>
+	<system:String x:Key="Workflow.Color.Blue">Blue:</system:String>
 
 	<!-- Workflow Sharpen -->
 	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>

@@ -224,6 +224,34 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Vibrance(float redAmount, float greenAmount, float blueAmount) =>
+        this.ApiAction(() =>
+        {
+            // All in -1 , +1 range 
+            if ((redAmount < -1.0) || (redAmount > 1.0))
+            {
+                return false;
+            }
+
+            if ((greenAmount < -1.0) || (greenAmount > 1.0))
+            {
+                return false;
+            }
+
+            if ((blueAmount < -1.0) || (blueAmount > 1.0))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is ColorStep colorStep)
+            {
+                this.LastResultFrame = colorStep.Vibrance(redAmount, greenAmount, blueAmount);
+                return true;
+            }
+
+            return false;
+        });
+
     public void GlobalSharpen(float sharpenAmount) =>
         this.ApiAction(() =>
         {

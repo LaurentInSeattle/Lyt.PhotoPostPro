@@ -1,8 +1,6 @@
 Bugs 
 ----
 
-- Finish Color Step with Image Vibrance 
-
 - Add a Finish button on Export step and return to main view
 
 - Finish Contrast Step with S-Curves algorithm 
@@ -17,7 +15,7 @@ Bugs
 TODO First : Single Image Process
 ---------------------------------
 
-- Image Fancy Filters (LUT's?)
+- Image Fancy Filters (Img # provided)
 	- Black and White 
 	- Sepia (amount) 
 	- Kodak 
@@ -74,3 +72,6 @@ Cool Stuff to Consider
 - UI : Final fix for Re-init of Compose is failing at second image 
 
 - Black or white image borders (in export step) 
+
+- Coloring with LUT's
+

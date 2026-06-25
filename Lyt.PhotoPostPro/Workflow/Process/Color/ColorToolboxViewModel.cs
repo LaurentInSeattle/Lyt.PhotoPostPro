@@ -7,6 +7,9 @@ public sealed partial class ColorToolboxViewModel :
 
     private ColorStep.ColorAlgorithm algorithm;
     private float saturation;
+    private float red ;
+    private float green;
+    private float blue;
 
     protected override string Title => this.Localize("Workflow.Color.Title");
 
@@ -16,15 +19,45 @@ public sealed partial class ColorToolboxViewModel :
     [ObservableProperty]
     public partial double SaturationSliderValue { get; set; }
 
+    [ObservableProperty]
+    public partial string RedString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double RedSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string GreenString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double GreenSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string BlueString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double BlueSliderValue { get; set; }
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
         this.saturation = 1.0f;
+        this.red = 0.0f;
+        this.green = 0.0f;
+        this.blue = 0.0f;
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
             this.SaturationSliderValue = this.saturation;
+
+            // Enforce property changed
+            this.RedSliderValue = 0.1;
+            this.GreenSliderValue = 0.1;
+            this.BlueSliderValue = 0.1;
+
+            this.RedSliderValue = this.red;
+            this.GreenSliderValue = this.green;
+            this.BlueSliderValue = this.blue;
         });
     }
 
@@ -38,7 +71,9 @@ public sealed partial class ColorToolboxViewModel :
             // No transform for the staturation threshold 
             this.SaturationSliderValue = step.SaturationAmount;
 
-            // More later here 
+            this.RedSliderValue = step.RedAmount;
+            this.GreenSliderValue = step.GreenAmount;
+            this.BlueSliderValue = step.BlueAmount;
         });
     }
 
@@ -48,6 +83,33 @@ public sealed partial class ColorToolboxViewModel :
         this.algorithm = ColorStep.ColorAlgorithm.Saturation;
         this.saturation = (float)value;
         this.SaturationString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
+    partial void OnRedSliderValueChanged(double value)
+    {
+        // Slider sends -1.0 to +1.0, fine for the model  
+        this.algorithm = ColorStep.ColorAlgorithm.Vibrance;
+        this.red = (float)value;
+        this.RedString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
+    partial void OnGreenSliderValueChanged(double value)
+    {
+        // Slider sends -1.0 to +1.0, fine for the model  
+        this.algorithm = ColorStep.ColorAlgorithm.Vibrance;
+        this.green = (float)value;
+        this.GreenString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
+    partial void OnBlueSliderValueChanged(double value)
+    {
+        // Slider sends -1.0 to +1.0, fine for the model  
+        this.algorithm = ColorStep.ColorAlgorithm.Vibrance;
+        this.blue = (float)value;
+        this.BlueString = value.ToString("+0.00;-0.00;0.00");
         this.UpdateModel();
     }
 
@@ -65,8 +127,7 @@ public sealed partial class ColorToolboxViewModel :
                 break;
 
             case ColorStep.ColorAlgorithm.Vibrance:
-                // TODO
-                // this.model.ColorMatrixWhiteBalance();
+                this.model.Vibrance(this.red, this.green, this.blue);
                 break;
 
             default:
