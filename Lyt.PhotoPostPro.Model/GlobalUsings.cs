@@ -32,6 +32,10 @@ global using SixLabors.ImageSharp.Processing;
 global using Sdcb;
 global using Sdcb.LibRaw;
 
+// Openize HEIC 
+// Conflicts with Image Sharp
+// NOPE => global using Openize.Heic.Decoder;
+
 
 // Framework 
 global using Lyt.Framework.Interfaces.Localizing;

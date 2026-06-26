@@ -68,6 +68,9 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         }
         finally
         {
+            // Error or not: stop the spinner 
+            Dispatch.OnUiThread(() => { this.SpinWait(start: false); });
+
             if (!string.IsNullOrWhiteSpace(error))
             {
                 this.Logger.Error(error);
@@ -80,7 +83,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
     {
         this.SourceImage = null;
         this.imagePath = string.Empty;
-
+        
         // Show error message to user
         this.toaster.Host = this.View.ToasterHost;
         this.toaster.Show(
@@ -88,14 +91,12 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
             this.Localize("Single.LoadImageFailMessage"),
             8_000, 
             InformationLevel.Error);
-
     }
 
     private void OnImageLoaded (Frame frame, string path )
     {
         this.SourceImage = frame.ToWriteableBitmap();
         this.imagePath = path;
-        this.SpinWait(start: false); 
     }
 
     private void SpinWait ( bool start = true )

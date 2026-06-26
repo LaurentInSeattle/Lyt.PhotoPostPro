@@ -1,7 +1,53 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Utilities;
 
+using Openize.Heic.Decoder;
+
 public static class ImageLoader
 {
+    public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
+
+    public static bool HasHiefExtension(string path) => HeifExtensions.Contains(Path.GetExtension(path).ToLower());
+
+    // https://en.wikipedia.org/wiki/Raw_image_format
+    // Many raw file formats, including IIQ (Phase One), 3FR (Hasselblad), DCR, K25, KDC (Kodak),
+    // CRW, CR2 (Canon), ERF (Epson), MEF (Mamiya), MOS (Leaf), NEF NRW (Nikon), ORF (Olympus),
+    // PEF (Pentax), RW2 (Panasonic) and ARW, SRF, SR2 (Sony), are based on TIFF, the Tag Image
+    // File Format.[2]
+    //
+    // These files may deviate from the TIFF standard in a number of ways, including the use of a
+    // non-standard file header, the inclusion of additional image tags and the encryption of some
+    // of the tag data. 
+    public static List<string> RawExtensions =
+        [
+            // Manufacturers 
+            ".iqq", // Phase One 
+            ".3fr", // Hasselblad
+            ".mos", // Leaf
+            ".mef", // Mamiya
+            ".pef", // Pentax
+            ".erf", // Epson
+            ".crw" ,".cr2" , ".cr3", // Canon 
+            ".nef" , ".nrw", // Nikon 
+            ".arw" , "srf", "sr2", // Sony 
+            ".raf" , // Fuji 
+            ".rw2" , // Leica / Panasonic 
+            ".orf" , // Olympus 
+            ".dcr", ".k25", ".kdc", // Kodak, 
+            // 
+            ".dng" , // Adobe 
+            ".raw" , // Generic 
+        ];
+
+    public static bool HasRawExtension(string path) => RawExtensions.Contains(Path.GetExtension(path).ToLower());
+
+    public static List<string> ImageSharpExtensions =
+        [
+            ".tiff", ".cur", ".png", ".pbm", ".qoi", ".tga",
+            ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".bmp", ".exr",
+        ];
+
+    public static bool HasImageSharpExtension(string path) => ImageSharpExtensions.Contains(Path.GetExtension(path).ToLower());
+
     public static Image<Rgb48>? LoadImage(string imagePath, out string errorMessage)
     {
         errorMessage = string.Empty;
@@ -13,15 +59,48 @@ public static class ImageLoader
                 return null;
             }
 
-            var image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
-            if (image is null)
+            string? extension = Path.GetExtension(imagePath);
+            Debug.WriteLine(extension);
+
+            Image<Rgb48>? image = null;
+            if (HasHiefExtension(imagePath))
             {
-                return ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                if (image is null)
+                {
+                    image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    if (image is null)
+                    {
+                        image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                    }
+                }
+            }
+            else if (HasRawExtension(imagePath))
+            {
+                image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                if (image is null)
+                {
+                    image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                    if (image is null)
+                    {
+                        image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                    }
+                }
             }
             else
             {
-                return image;
+                image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                if (image is null)
+                {
+                    image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    if (image is null)
+                    {
+                        image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                    }
+                }
             }
+
+            return image;
         }
         catch (Exception ex)
         {
@@ -65,15 +144,6 @@ public static class ImageLoader
 
     public static Image<Rgb48>? TryLoadWithLibRaw(string imagePath, out string errorMessage)
     {
-        // CRW/CR2, NEF, RAF, DNG, MOS, KDC, DCR 
-
-        //r.DcrawProcess(context =>
-        //{
-        //    context.HalfSize = false;
-        //    context.UseCameraWb = false;
-        //    context.Interpolation = true;
-        //});
-
         errorMessage = string.Empty;
         try
         {
@@ -96,8 +166,6 @@ public static class ImageLoader
                     {
                         var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
                         var image = image24.CloneAs<Rgb48>();
-
-                        // var image = ImageLoader.LoadImageExtendingDepth(pixelData, width, height);
                         if (image is null)
                         {
                             errorMessage = "Failed to load the source image with ImageSharp.";
@@ -136,33 +204,34 @@ public static class ImageLoader
         }
     }
 
-    public static unsafe Image<Rgb48> LoadImageExtendingDepth(byte* pixelData, int width, int height)
+    public static unsafe Image<Rgb48>? TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
     {
-        // Create a new Rgb48 image with the same dimensions
-        Image<Rgb48> image = new(width, height);
+        errorMessage = string.Empty;
 
-        // Supposedly paralellize access to rows 
-        image.ProcessPixelRows(accessor =>
+        try
         {
-            for (int y = 0; y < accessor.Height; ++y)
-            { 
-                byte * rowPixelData = pixelData + y * width;
-                Span<Rgb48> pixelRow = accessor.GetRowSpan(y);
+            using var fs = new FileStream(imagePath, FileMode.Open);
+            var image = HeicImage.Load(fs);
+            byte[] pixels = image.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
+            int width = (int)image.Width;
+            int height = (int)image.Height;
 
-                // Loop through all pixels to transcode 
-                for (int x = 0; x < pixelRow.Length; ++x)
-                {
-                    ref Rgb48 pixel = ref pixelRow[x];
-                    byte r = *rowPixelData++;
-                    byte g = *rowPixelData++;
-                    byte b = *rowPixelData++;
-                    pixel.R = (ushort)(r << 8);
-                    pixel.G = (ushort)(g << 8);
-                    pixel.B = (ushort)(b << 8);
-                }
+            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
+            var image48 = image24.CloneAs<Rgb48>();
+            if (image48 is null)
+            {
+                errorMessage = "Failed to load the source image with Openize.";
+                return null;
             }
-        });
 
-        return image;
+            Debug.WriteLine("HIEC Image loaded with Openize: " + imagePath);
+            return image48;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
+            Debug.WriteLine(ex);
+            return null;
+        }
     }
 }

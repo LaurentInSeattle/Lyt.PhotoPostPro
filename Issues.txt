@@ -3,8 +3,6 @@ Bugs
 
 - Add a Finish button on Export step and return to main view
 
-- Finish Image Sharpen with a smarter algorithm 
-
 - UI : Visual issues (and spurious commands) when hovering quickly above glyph buttons 
 
 - Export should only show the final image ( and may be the original ? ) 
@@ -12,6 +10,13 @@ Bugs
 
 TODO First : Single Image Process
 ---------------------------------
+
+- Image metadata 
+
+- Image Exports
+
+Missing Features 
+----------------
 
 - Image Fancy Filters (Img # provided)
 	- Black and White 
@@ -23,20 +28,6 @@ TODO First : Single Image Process
 - Image Watermarking 
 
 - Image Signature / Copyright
-
-- Image Exports
-
-- Cleanup unused icons 
-
-- Cleanup language strings
-
-
-Missing Features 
-----------------
-
-- Image metadata 
-
-- Support HIEF / HIEC images (iPhone) 
 
 - Project : 
 	- Browse 
@@ -59,11 +50,21 @@ Missing Features
 
 - Floating toolbox windows 
 
+- Support HIEF / HIEC images (iPhone) 
+
+- Cleanup unused icons 
+
+- Cleanup language strings
+
 
 Cool Stuff to Consider 
 ----------------------
 
+- Improve Image Sharpen with a smarter algorithm (with gray image mask) 
+
 - Recognize standard aspect ratios (square, HD, 16/9, 4/3, Golden Ratio) 
+
+- Crop with maintaining aspect ratio 
 
 - Ability to show or hide hints and beginner tips depending an app settings 
 

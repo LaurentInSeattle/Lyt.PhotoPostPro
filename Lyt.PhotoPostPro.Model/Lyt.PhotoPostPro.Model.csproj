@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Openize.HEIC" Version="26.5.0" />
     <PackageReference Include="Sdcb.LibRaw" Version="0.21.1.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="4.0.0" />
   </ItemGroup>
