@@ -3,8 +3,6 @@ Bugs
 
 - Add a Finish button on Export step and return to main view
 
-- Finish Contrast Step with S-Curves algorithm 
-
 - Finish Image Sharpen with a smarter algorithm 
 
 - UI : Visual issues (and spurious commands) when hovering quickly above glyph buttons 
@@ -75,3 +73,5 @@ Cool Stuff to Consider
 
 - Coloring with LUT's
 
+- Viewing mode when before and after are stacked with a slider ( or two ) in the 
+middlle to show top image or bottom image 

@@ -84,5 +84,8 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         this.ContrastAmount = 1.0f;
         this.BlurAmount = 0.0f;
         this.BrightnessAmount = 0.0f;
+        this.RedAmount = 4.5f;
+        this.GreenAmount = 4.5f;
+        this.BlueAmount = 4.5f;
     }
 }

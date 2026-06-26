@@ -9,6 +9,9 @@ public sealed partial class ContrastToolboxViewModel :
     private float contrast;
     private float blur;
     private float brightness;
+    private float red;
+    private float green;
+    private float blue;
 
     protected override string Title => this.Localize("Workflow.Contrast.Title");
 
@@ -30,12 +33,34 @@ public sealed partial class ContrastToolboxViewModel :
     [ObservableProperty]
     public partial double BrightnessSliderValue { get; set; }
 
+    [ObservableProperty]
+    public partial string RedString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double RedSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string GreenString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double GreenSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial string BlueString { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double BlueSliderValue { get; set; }
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
         this.contrast = 1.0f;
         this.blur = 0.0f;
         this.brightness = 0.0f;
+
+        this.red = 3.0f;
+        this.green = 3.0f;
+        this.blue = 3.0f;
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
@@ -45,6 +70,15 @@ public sealed partial class ContrastToolboxViewModel :
             this.BlurSliderValue = this.blur;
             this.BrightnessSliderValue = 0.5; // Force Property changed
             this.BrightnessSliderValue = this.brightness;
+
+            // Enforce property changed
+            this.RedSliderValue = 1.1;
+            this.GreenSliderValue = 1.1;
+            this.BlueSliderValue = 1.1;
+
+            this.RedSliderValue = this.red;
+            this.GreenSliderValue = this.green;
+            this.BlueSliderValue = this.blue;
         });
     }
 
@@ -60,7 +94,9 @@ public sealed partial class ContrastToolboxViewModel :
             this.BlurSliderValue = step.BlurAmount;
             this.BrightnessSliderValue = step.BrightnessAmount;
 
-            // More later here ? 
+            this.RedSliderValue = step.RedAmount;
+            this.GreenSliderValue = step.GreenAmount;
+            this.BlueSliderValue = step.BlueAmount;
         });
     }
 
@@ -91,6 +127,36 @@ public sealed partial class ContrastToolboxViewModel :
         this.UpdateModel();
     }
 
+    partial void OnRedSliderValueChanged(double value)
+    {
+        // Slider sends +2.5 to +7.0, fine for the model  
+        // Minimum = "2.5" Maximum = "7.0"
+        this.algorithm = ContrastStep.ContrastAlgorithm.SCurves;
+        this.red = (float)value;
+        this.RedString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
+    partial void OnGreenSliderValueChanged(double value)
+    {
+        // Slider sends +2.5 to +7.0, fine for the model  
+        // Minimum = "2.5" Maximum = "7.0"
+        this.algorithm = ContrastStep.ContrastAlgorithm.SCurves;
+        this.green = (float)value;
+        this.GreenString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
+    partial void OnBlueSliderValueChanged(double value)
+    {
+        // Slider sends +2.5 to +7.0, fine for the model  
+        // Minimum = "2.5" Maximum = "7.0"
+        this.algorithm = ContrastStep.ContrastAlgorithm.SCurves;
+        this.blue = (float)value;
+        this.BlueString = value.ToString("+0.00;-0.00;0.00");
+        this.UpdateModel();
+    }
+
     private void UpdateModel()
     {
         if (this.doNotUpdateModel)
@@ -105,12 +171,11 @@ public sealed partial class ContrastToolboxViewModel :
                 break;
 
             case ContrastStep.ContrastAlgorithm.SCurves:
-                // this.model.ColorMatrixWhiteBalance();
+                this.model.SCurvesContrast(this.red, this.green, this.blue);
                 break;
 
             default:
                 break;
         }
-
     }
 }

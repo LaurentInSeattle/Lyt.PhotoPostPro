@@ -24,6 +24,7 @@ public sealed partial class SharpenToolboxViewModel :
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
+            this.BlurSliderValue = 0.1; // Force property changed 
             this.BlurSliderValue = this.blur;
         });
     }

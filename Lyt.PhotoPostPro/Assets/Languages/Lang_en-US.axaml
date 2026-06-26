@@ -107,6 +107,7 @@
 	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
 	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
 	<system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness:</system:String>
+	<system:String x:Key="Workflow.Contrast.SCurves">S-Curves</system:String>
 
 	<!-- Workflow Color -->
 	<system:String x:Key="Workflow.Color.Title">Color Grading</system:String>

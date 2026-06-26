@@ -181,18 +181,17 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void SCurvesContrast(float redAmount, float greenAmount, float blueAmount) =>
         this.ApiAction(() =>
         {
-            // TODO : Figure out the actual limits 
-            if ((redAmount < 1.0) || (redAmount > 3.0))
+            if ((redAmount < 2.5) || (redAmount > 7.0))
             {
                 return false;
             }
 
-            if ((greenAmount < 1.0) || (greenAmount > 3.0))
+            if ((greenAmount < 2.5) || (greenAmount > 7.0))
             {
                 return false;
             }
 
-            if ((blueAmount < 0.0) || (blueAmount > 1.5))
+            if ((blueAmount < 2.5) || (blueAmount > 7.0))
             {
                 return false;
             }
@@ -255,8 +254,8 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void GlobalSharpen(float sharpenAmount) =>
         this.ApiAction(() =>
         {
-            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
-            if ((sharpenAmount <= 0.0) || (sharpenAmount > 1.5))
+            // blurAmount == sigma from 0.0 to 2.5 - 0.0 -> No blur 
+            if ((sharpenAmount <= 0.0) || (sharpenAmount > 2.5))
             {
                 return false;
             }

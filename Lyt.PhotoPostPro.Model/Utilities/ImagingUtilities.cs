@@ -2,6 +2,14 @@
 
 public static class ImagingUtilities
 {
+    public const ushort pixMaxU = ushort.MaxValue;
+    public const float pixMaxF = 65535.0f;
+    public const double pixMaxD = 65535.0;
+
+    public const int pixRangeI = (int) ( 1 + ushort.MaxValue) ;
+    public const float pixRangeF = 65536.0f;
+    public const double pixRangeD = 65536.0;
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static float ClipF(float value)
         => value < 0.0f ?

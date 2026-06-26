@@ -20,6 +20,8 @@
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Global --> 
 			<RowDefinition Height="{StaticResource Size.ThreeSliders}" /> <!-- Three sliders --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt S-Curves --> 
+			<RowDefinition Height="{StaticResource Size.ThreeSliders}" /> <!-- Three sliders --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -115,6 +117,93 @@
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Left"
 				Text="{Binding BrightnessString}"
+				/>
+		</Grid>
+
+		<TextBlock
+			Grid.Row="5" 
+			Text="{DynamicResource Workflow.Contrast.SCurves}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="6" 
+			> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<!-- First Row: Red -->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Color.Red}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.5" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.1"
+				Minimum="2.5" Maximum="7.0"
+				Value="{Binding RedSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding RedString}"
+				/>
+			<!-- Second Row : Green -->
+			<TextBlock
+				Grid.Row="1" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Color.Green}"
+				/>
+			<Slider 
+				Grid.Row="1" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.5" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.1"
+				Minimum="2.5" Maximum="7.0"
+				Value="{Binding GreenSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="1" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding GreenString}"
+				/>
+			<!-- Third Row : Blue -->
+			<TextBlock
+				Grid.Row="2" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Color.Blue}"
+				/>
+			<Slider 
+				Grid.Row="2" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.5" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.1"
+				Minimum="2.5" Maximum="7.0"
+				Value="{Binding BlueSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding BlueString}"
 				/>
 		</Grid>
 	</Grid>

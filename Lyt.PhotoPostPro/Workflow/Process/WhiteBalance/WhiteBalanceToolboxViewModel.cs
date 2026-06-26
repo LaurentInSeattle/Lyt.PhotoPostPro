@@ -32,11 +32,14 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+        this.temperature = 0.0f;
         this.saturationThreshold = 0.4f; 
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
+            this.TemperatureSliderValue = 0.01; // Force property changed 
+            this.TemperatureSliderValue = this.temperature;
             this.SaturationSliderValue = this.saturationThreshold;
         });
     }
