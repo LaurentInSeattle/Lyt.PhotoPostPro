@@ -13,7 +13,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Width="20" 
+					Width="42" 
 					Background="Transparent" IsHitTestVisible="True">
 					<Border 
 						BorderBrush="{TemplateBinding BorderBrush}"
@@ -33,7 +33,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Height="20" 
+					Height="42" 
 					Background="Transparent" IsHitTestVisible="True">
 					<Border 
 						BorderBrush="{TemplateBinding BorderBrush}"
@@ -54,7 +54,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Width="20" 
+					Width="24" 
 					Background="Transparent" IsHitTestVisible="True">
 					<Grid>
 						<Border 
@@ -85,7 +85,7 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border 
-					Height="20" 
+					Height="24" 
 					Background="Transparent" IsHitTestVisible="True">
 					<Grid>
 					<Border 
