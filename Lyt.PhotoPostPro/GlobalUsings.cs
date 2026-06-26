@@ -89,8 +89,6 @@ global using Lyt.Utilities.Randomizing;
 #endregion Framework 
 
 
-//global using Lyt.ImageProcessing.Algorithms.ContrastEqualization;
-
 global using Lyt.PhotoPostPro.Controls;
 global using Lyt.PhotoPostPro.Panes;
 global using Lyt.PhotoPostPro.Panes.HistogramPane;
@@ -102,14 +100,12 @@ global using Lyt.PhotoPostPro.Utilities;
 global using Lyt.PhotoPostPro.Workflow.Folder;
 global using Lyt.PhotoPostPro.Workflow.Language;
 global using Lyt.PhotoPostPro.Workflow.Process;
-global using Lyt.PhotoPostPro.Workflow.Process.Denoise;
 global using Lyt.PhotoPostPro.Workflow.Process.Orient;
 global using Lyt.PhotoPostPro.Workflow.Process.Straighten;
 global using Lyt.PhotoPostPro.Workflow.Process.Compose;
 global using Lyt.PhotoPostPro.Workflow.Process.Exposure;
 global using Lyt.PhotoPostPro.Workflow.Process.Contrast;
 global using Lyt.PhotoPostPro.Workflow.Process.Color;
-global using Lyt.PhotoPostPro.Workflow.Process.Cleanup;
 global using Lyt.PhotoPostPro.Workflow.Process.TouchUp;
 global using Lyt.PhotoPostPro.Workflow.Process.Sharpen;
 global using Lyt.PhotoPostPro.Workflow.Process.Export;
