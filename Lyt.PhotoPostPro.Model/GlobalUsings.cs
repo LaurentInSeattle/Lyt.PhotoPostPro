@@ -24,6 +24,8 @@ global using SixLabors.ImageSharp  ;
 global using SixLabors.ImageSharp.Advanced;
 global using SixLabors.ImageSharp.Formats;
 global using SixLabors.ImageSharp.Formats.Jpeg;
+global using SixLabors.ImageSharp.Metadata;
+global using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 global using SixLabors.ImageSharp.PixelFormats;
 global using SixLabors.ImageSharp.Processing;
 
@@ -31,6 +33,7 @@ global using SixLabors.ImageSharp.Processing;
 // LibRaw 
 global using Sdcb;
 global using Sdcb.LibRaw;
+
 
 // Openize HEIC 
 // Conflicts with Image Sharp
@@ -46,6 +49,7 @@ global using Lyt.Framework.Interfaces.Profiling;
 
 
 // Model Utilities 
+global using Lyt.Collections; 
 global using Lyt.Model;
 global using Lyt.Persistence;
 global using Lyt.Utilities.Parallel;

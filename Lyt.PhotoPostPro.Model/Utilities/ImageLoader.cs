@@ -1,9 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Utilities;
 
+// Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
 public static class ImageLoader
 {
+#pragma warning disable CA2211 // Non-constant fields should not be visible
     public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
 
     public static bool HasHiefExtension(string path) => HeifExtensions.Contains(Path.GetExtension(path).ToLower());
@@ -48,70 +50,75 @@ public static class ImageLoader
 
     public static bool HasImageSharpExtension(string path) => ImageSharpExtensions.Contains(Path.GetExtension(path).ToLower());
 
-    public static Image<Rgb48>? LoadImage(string imagePath, out string errorMessage)
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+
+    public static (Image<Rgb48>?, ProcessMetadata?) LoadImage(string imagePath, out string errorMessage)
     {
+        (Image<Rgb48> ?, ProcessMetadata?) fail = (null, null); 
         errorMessage = string.Empty;
         try
         {
             if (!File.Exists(imagePath))
             {
                 errorMessage = "Source image file does not exist.";
-                return null;
+                return fail;
             }
 
             string? extension = Path.GetExtension(imagePath);
             Debug.WriteLine(extension);
 
             Image<Rgb48>? image = null;
+            ProcessMetadata? processMetadata = null;
             if (HasHiefExtension(imagePath))
             {
-                image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                        (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                     }
                 }
             }
             else if (HasRawExtension(imagePath))
             {
-                image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                    (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                     }
                 }
             }
             else
             {
-                image = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    image = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        image = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                     }
                 }
             }
 
-            return image;
+            return (image, processMetadata);
         }
         catch (Exception ex)
         {
             errorMessage = "An error occurred while loading the source image." + ex.Message;
             Debug.WriteLine(ex);
-            return null;
+            return fail;
         }
     }
 
-    public static Image<Rgb48>? TryLoadWithImageSharp(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadWithImageSharp(string imagePath, out string errorMessage)
     {
+        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
         errorMessage = string.Empty;
         try
         {
@@ -120,30 +127,50 @@ public static class ImageLoader
             if (imageFormat is null)
             {
                 errorMessage = "Unsupported image format in ImageSharp.";
-                return null;
+                return fail;
             }
 
             Debug.WriteLine(imageFormat.Name);
-            var image = Image.Load<Rgb48>(imagePath);
-            if (image is null)
+            var image48 = Image.Load<Rgb48>(imagePath);
+            if (image48 is null)
             {
                 errorMessage = "Failed to load the source image with ImageSharp.";
-                return null;
+                return fail;
             }
 
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
-            return image;
+
+            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
+            ImageMetadata imageMetadata = image48.Metadata;
+            ExifProfile? exifProfile = imageMetadata.ExifProfile;
+            if (exifProfile is not null)
+            {
+                var fieldInfo = exifProfile.GetType().GetField("data", BindingFlags.Instance | BindingFlags.NonPublic); 
+                if ( fieldInfo is not null)
+                {
+                    object? fieldData = fieldInfo.GetValue(exifProfile);
+                    if (fieldData is  byte[] exifRawData )
+                    {
+                        var memoryStream = new MemoryStream(exifRawData);
+                        directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(memoryStream);
+                    }
+                }
+            }
+
+            var metadata = new ProcessMetadata(imagePath, image48.Width, image48.Height, directories);
+            return (image48, metadata);
         }
         catch (Exception ex)
         {
             errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
             Debug.WriteLine(ex);
-            return null;
+            return fail;
         }
     }
 
-    public static Image<Rgb48>? TryLoadWithLibRaw(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadWithLibRaw(string imagePath, out string errorMessage)
     {
+        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
         errorMessage = string.Empty;
         try
         {
@@ -157,60 +184,76 @@ public static class ImageLoader
             var pixelDataSpan = rawImage.AsSpan<byte>();
             nint pixelDataPtr = rawImage.DataPointer;
 
+            Image<Rgb48>? image48= null; 
             unsafe
             {
-                // Pixel data from LIBRAw in in C++ memory, need to pin it
+                // Pixel data from LIBRAw is in C++ memory, need to pin it
                 fixed (byte* pixelData = &pixelDataSpan[0])
                 {
                     if (rawImage.Bits == 8 && rawImage.Channels == 3)
                     {
                         var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        var image = image24.CloneAs<Rgb48>();
-                        if (image is null)
+                        image48 = image24.CloneAs<Rgb48>();
+                        if (image48 is null)
                         {
                             errorMessage = "Failed to load the source image with ImageSharp.";
-                            return null;
+                            return fail;
                         }
 
                         Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
-                        return image;
                     }
                     else if (rawImage.Bits == 16 && rawImage.Channels == 3)
                     {
-                        var image = Image.LoadPixelData<Rgb48>(pixelDataSpan, width, height);
-                        if (image is null)
+                        image48 = Image.LoadPixelData<Rgb48>(pixelDataSpan, width, height);
+                        if (image48 is null)
                         {
                             errorMessage = "Failed to load the source image with ImageSharp.";
-                            return null;
+                            return fail;
                         }
 
                         Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
-                        return image;
                     }
                     else
                     {
                         errorMessage = "Unsupported image format.";
-                        return null;
+                        return fail;
                     }
-
                 }
             }
+
+            var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
+            foreach (var directory in directories)
+            {
+                foreach (var tag in directory.Tags)
+                {
+                    Debug.WriteLine($"{directory.Name} - {tag.Name} = {tag.Description}");
+                }
+            }
+
+            var metadata = new ProcessMetadata(imagePath, width, height, directories );
+            return ( image48, metadata); 
         }
         catch (Exception ex)
         {
             errorMessage = "An error occurred while loading the source image with LibRaw: " + ex.Message;
             Debug.WriteLine(ex);
-            return null;
+            return fail;
         }
     }
 
-    public static unsafe Image<Rgb48>? TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
     {
+        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
         errorMessage = string.Empty;
-
         try
         {
             using var fs = new FileStream(imagePath, FileMode.Open);
+            if ( !HeicImage.CanLoad(fs))
+            {
+                errorMessage = "The source image cannot be loaded with Openize.";
+                return fail;
+            }
+
             var image = HeicImage.Load(fs);
             byte[] pixels = image.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             int width = (int)image.Width;
@@ -221,17 +264,27 @@ public static class ImageLoader
             if (image48 is null)
             {
                 errorMessage = "Failed to load the source image with Openize.";
-                return null;
+                return fail;
             }
 
             Debug.WriteLine("HIEC Image loaded with Openize: " + imagePath);
-            return image48;
+
+            IReadOnlyList<MetadataExtractor.Directory>? directories = null; 
+            ExifData? exif = image.Exif;
+            if ( exif is not null)
+            {
+                directories = exif.DirectoriesList;
+            }
+            // else // No metadata : Directories stays null 
+
+            var metadata = new ProcessMetadata(imagePath, width, height, directories);
+            return (image48, metadata);
         }
         catch (Exception ex)
         {
             errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
             Debug.WriteLine(ex);
-            return null;
+            return fail;
         }
     }
 }

@@ -1,17 +1,20 @@
 Bugs 
 ----
 
+- Improve HEIC loading : 
+		Can Load 
+		Pixel format 
+		Reject movies , gifs, etc 
+
 - Add a Finish button on Export step and return to main view
 
-- UI : Visual issues (and spurious commands) when hovering quickly above glyph buttons 
+- UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 - Export should only show the final image ( and may be the original ? ) 
 
 
 TODO First : Single Image Process
 ---------------------------------
-
-- Image metadata 
 
 - Image Exports
 
@@ -24,6 +27,9 @@ Missing Features
 	- Kodak 
 	- Lomograph (options) 
 	- Polaroid (options) 
+
+- Image Fancy Filters (NOT in Img # )
+	- Vignette 
 
 - Image Watermarking 
 

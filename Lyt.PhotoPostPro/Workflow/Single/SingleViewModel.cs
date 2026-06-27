@@ -12,6 +12,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
 
     private string imagePath;
     private Image<Rgb48>? image;
+    private ProcessMetadata? processMetadata; 
 
     [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
@@ -32,7 +33,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         }
         else
         {
-            // Launch a spinner for big files 
+            // Always launch a spinner for big or small files 
             this.SpinWait(start: true); 
             Task.Run(() => { this.TryLoadImage(path); } );
         }
@@ -43,9 +44,12 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         string error = string.Empty;
         try
         {
-            this.image = ImageLoader.LoadImage(path, out string errorMessage);
-            if (this.image is not null)
+            ( Image<Rgb48>? image, ProcessMetadata? processMetadata) = 
+                ImageLoader.LoadImage(path, out string errorMessage);
+            if (image is not null && processMetadata is not null)
             {
+                this.image = image;
+                this.processMetadata = processMetadata;
                 var imageFrame = ImagingUtilities.ToFrame(image);
                 if (imageFrame is not null)
                 {
@@ -83,6 +87,8 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
     {
         this.SourceImage = null;
         this.imagePath = string.Empty;
+        this.image = null; 
+        this.processMetadata = null;
         
         // Show error message to user
         this.toaster.Host = this.View.ToasterHost;
@@ -110,7 +116,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
 
     internal void ProcessCurrentImage()
     {
-        if (string.IsNullOrWhiteSpace(this.imagePath) || this.image is null)
+        if (string.IsNullOrWhiteSpace(this.imagePath) || this.image is null || this.processMetadata is null)
         {
             this.Logger.Warning("No image to process.");
             return;
@@ -133,6 +139,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
             folderPath: this.imagePath,
             isSingleImage: true,
             this.image, 
+            this.processMetadata,
             out string errorMessage);
         if (!string.IsNullOrEmpty(errorMessage))
         {

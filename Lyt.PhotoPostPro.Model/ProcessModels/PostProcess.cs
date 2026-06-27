@@ -34,12 +34,16 @@ public sealed class PostProcess
         =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 
+    [JsonIgnore]
+    public PostProcessWorkflow? Workflow { get; private set; }
+
+    [JsonIgnore]
+    public ProcessMetadata? ProcessMetadata { get; private set; }
+
     public bool IsInvalid
         =>
             string.IsNullOrWhiteSpace(this.Name) ||
             string.IsNullOrWhiteSpace(this.SourceFilePath);
-
-    public PostProcessWorkflow? Workflow { get; private set; }
 
     public bool Validate(out string errorMessageKey)
     {
@@ -67,16 +71,17 @@ public sealed class PostProcess
         return true;
     }
 
-    public bool LoadSourceImage(Image<Rgb48>? image, out string errorMessage)
+    public bool LoadSourceImage(Image<Rgb48>? image, ProcessMetadata? processMetadata, out string errorMessage)
     {
         errorMessage = string.Empty;
-        if (image is null)
+        if (image is null || processMetadata is null)
         {
             try
             {
-                image = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
-                bool loaded = image is not null;
+                (image, processMetadata) = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
+                bool loaded = image is not null && processMetadata is not null ;
                 this.MaybeOriginalImage = image;
+                this.ProcessMetadata = processMetadata;
                 return loaded;
             }
             catch (Exception ex)
@@ -107,7 +112,6 @@ public sealed class PostProcess
         }
     } 
     
-
     public void Finish()
     {
         if (this.Workflow is not null)
