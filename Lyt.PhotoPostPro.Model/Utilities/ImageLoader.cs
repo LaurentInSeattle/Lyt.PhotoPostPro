@@ -222,14 +222,6 @@ public static class ImageLoader
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            foreach (var directory in directories)
-            {
-                foreach (var tag in directory.Tags)
-                {
-                    Debug.WriteLine($"{directory.Name} - {tag.Name} = {tag.Description}");
-                }
-            }
-
             var metadata = new ProcessMetadata(imagePath, width, height, directories );
             return ( image48, metadata); 
         }
