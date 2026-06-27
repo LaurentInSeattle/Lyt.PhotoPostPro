@@ -1,11 +1,6 @@
 Bugs 
 ----
 
-- Improve HEIC loading : 
-		Can Load 
-		Pixel format 
-		Reject movies , gifs, etc 
-
 - Show Metadata in UI 
 
 - Add a Finish button on Export step and return to main view
@@ -84,3 +79,5 @@ Cool Stuff to Consider
 
 - Viewing mode when before and after are stacked with a slider ( or two ) in the 
 middlle to show top image or bottom image 
+
+- Show GPS location in map ( Not google ) 

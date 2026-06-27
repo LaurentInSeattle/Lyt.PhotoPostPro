@@ -247,10 +247,10 @@ public static class ImageLoader
             }
 
             var image = HeicImage.Load(fs);
-            byte[] pixels = image.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
-            int width = (int)image.Width;
-            int height = (int)image.Height;
-
+            var frame = image.DefaultFrame; 
+            int width = (int)frame.Width;
+            int height = (int)frame.Height;
+            byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
             var image48 = image24.CloneAs<Rgb48>();
             if (image48 is null)

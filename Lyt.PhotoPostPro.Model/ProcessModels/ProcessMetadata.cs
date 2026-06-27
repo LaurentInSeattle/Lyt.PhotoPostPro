@@ -14,12 +14,6 @@ public sealed class ProcessMetadata
         this.Width = width;
         this.Height = height;
 
-        if (directories is not null && directories.Count > 0)
-        {
-            this.ExifDrectories = directories;
-            this.PopulateExifMetadata(directories);
-        }
-
         FileInfo? fileInfo = new(this.FullPath);
         if (fileInfo is not null)
         {
@@ -30,8 +24,9 @@ public sealed class ProcessMetadata
                 throw new Exception("File does not exist.");
             }
 
-            this.Filename = fileInfo.Name;
-            this.Extension = fileInfo.Extension.Replace(".", "").ToUpperInvariant();
+            string extension = fileInfo.Extension;
+            this.Filename = fileInfo.Name.Replace(extension, "");
+            this.Extension = extension.Replace(".", "").ToUpperInvariant();
             float length = (float)fileInfo.Length / Megabytes;
             this.SizeMB = string.Format("{0:F1} MB", length);
             this.FileDateUTC = fileInfo.CreationTimeUtc;
@@ -41,6 +36,17 @@ public sealed class ProcessMetadata
             // Should never happen 
             if (Debugger.IsAttached) { Debugger.Break(); }
             throw new Exception("File does not exist.");
+        }
+
+        if (directories is not null && directories.Count > 0)
+        {
+            this.ExifDrectories = directories;
+            this.PopulateExifMetadata(directories);
+
+            if (this.HasLocationMetadata)
+            {
+                Debug.WriteLine("  Location:  " + this.Latitude.ToString("F6") + "," + this.Longitude.ToString("F6")); 
+            } 
         }
     }
 
@@ -62,10 +68,9 @@ public sealed class ProcessMetadata
 
     public DateTime FileDateUTC { get; private set; }
 
+    // Image properties that are possibly present when HasExifMetadata is true 
 
     public bool HasExifMetadata { get; private set; }
-
-    // Image properties that are possibly present when HasExifMetadata is true 
 
     public IReadOnlyList<MetadataExtractor.Directory>? ExifDrectories { get; private set; }
 
@@ -87,16 +92,11 @@ public sealed class ProcessMetadata
 
     public bool WithFlash { get; private set; }
 
-    public bool HasLocationMetadata
-        =>  double.IsNormal(this.Latitude) && 
-            double.IsNormal(this.Longitude) && 
-            double.IsNormal(this.Elevation); 
+    public bool HasLocationMetadata => double.IsNormal(this.Latitude) && double.IsNormal(this.Longitude) ; 
 
     public double Latitude { get; private set; } = double.NaN; 
 
     public double Longitude { get; private set; } = double.NaN;
-
-    public double Elevation { get; private set; } = double.NaN;
 
     private static readonly Dictionary<string, string> ExifToCode = new()
     {
@@ -109,9 +109,9 @@ public sealed class ProcessMetadata
         { "Exposure Time" , "Exposure" },
         { "Exposure Bias Value" , "ExposureBias" },
         { "Focal Length" , "FocalLength" },
-        //{ "" , "" },
-        //{ "" , "" },
-        //{ "" , "" },
+
+        { "GPS Latitude" , "Latitude" },
+        { "GPS Longitude" , "Longitude" },
     };
 
     private void PopulateExifMetadata(IReadOnlyList<MetadataExtractor.Directory> directories)
@@ -155,6 +155,41 @@ public sealed class ProcessMetadata
             return false; 
         }
 
+        bool TryParseExifGps(string stringValue, out double gpsLocation)
+        {
+            gpsLocation = double.NaN;
+            string[] tokens =
+                stringValue.Split(
+                    [' ', '\'', '"', '°'],
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (tokens.Length != 3)
+            {
+                return false;
+            }
+
+            if (int.TryParse(tokens[0], out int degrees))
+            {
+                if (int.TryParse(tokens[1], out int minutes))
+                {
+                    if (double.TryParse(tokens[2], out double seconds))
+                    {
+                        if (degrees > 0)
+                        {
+                            gpsLocation = degrees + minutes / 60.0 + seconds / 3600.0;
+                        } 
+                        else
+                        {
+                            gpsLocation = degrees - minutes / 60.0 - seconds / 3600.0;
+                        }
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         bool SetExifProperty(string exif, string stringValue)
         {
             try
@@ -167,12 +202,13 @@ public sealed class ProcessMetadata
                         var methodInfo = propertyInfo.GetSetMethod(nonPublic: true);
                         if (methodInfo is not null)
                         {
-                            if (propertyInfo.PropertyType == typeof(string))
+                            var propertyType = propertyInfo.PropertyType;
+                            if (propertyType == typeof(string))
                             {
                                 methodInfo.Invoke(this, [stringValue]);
                                 return true;
                             }
-                            else if (propertyInfo.PropertyType == typeof(DateTime))
+                            else if (propertyType == typeof(DateTime))
                             {
                                 if (DateTime.TryParse(stringValue, out var regularDateTime))
                                 {
@@ -181,7 +217,7 @@ public sealed class ProcessMetadata
                                 }
                                 else
                                 {
-                                    if ( TryParseExifDate (stringValue, out DateTime exifDateTime))
+                                    if (TryParseExifDate(stringValue, out DateTime exifDateTime))
                                     {
                                         methodInfo.Invoke(this, [exifDateTime]);
                                         return true;
@@ -190,6 +226,19 @@ public sealed class ProcessMetadata
                                     {
                                         Debug.WriteLine("Failed to parse date/time for property " + exif + "  " + stringValue);
                                     }
+                                }
+                            }
+                            else if (propertyType == typeof(double))
+                            {
+                                // For now , only latitude and longitude 
+                                if (TryParseExifGps(stringValue, out double exifDouble))
+                                {
+                                    methodInfo.Invoke(this, [exifDouble]);
+                                    return true;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Failed to parse latitude or longitude for property " + exif + "  " + stringValue);
                                 }
                             }
                             else
@@ -219,9 +268,10 @@ public sealed class ProcessMetadata
                 }
 
                 string name = directory.Name;
-                bool isStandardExif = 
-                    // TODO: Add GPS section 
-                    name.StartsWith("Exif IFD0") || name.StartsWith("Exif SubIFD");
+                bool isStandardExif =
+                    name.StartsWith("GPS") ||
+                    name.StartsWith("Exif IFD0") || 
+                    name.StartsWith("Exif SubIFD");
                 if ( ! isStandardExif)
                 {
                     // Ignore everything that is not standard 
