@@ -109,6 +109,7 @@ public sealed class ProcessMetadata
         { "Exposure Time" , "Exposure" },
         { "Exposure Bias Value" , "ExposureBias" },
         { "Focal Length" , "FocalLength" },
+        { "Flash" , "WithFlash" },
 
         { "GPS Latitude" , "Latitude" },
         { "GPS Longitude" , "Longitude" },
@@ -231,15 +232,32 @@ public sealed class ProcessMetadata
                             else if (propertyType == typeof(double))
                             {
                                 // For now , only latitude and longitude 
-                                if (TryParseExifGps(stringValue, out double exifDouble))
+                                if (code == "Latitude" || code == "Longitude")
                                 {
-                                    methodInfo.Invoke(this, [exifDouble]);
-                                    return true;
+                                    if (TryParseExifGps(stringValue, out double exifDouble))
+                                    {
+                                        methodInfo.Invoke(this, [exifDouble]);
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine("Failed to parse latitude or longitude for property " + exif + "  " + stringValue);
+                                    }
                                 }
-                                else
+                                // Else ignore 
+                            }
+                            else if (propertyType == typeof(bool))
+                            {
+                                // For now , only latitude and longitude 
+                                if (code == "WithFlash")
                                 {
-                                    Debug.WriteLine("Failed to parse latitude or longitude for property " + exif + "  " + stringValue);
+                                    if (stringValue.Contains("Flash fired", StringComparison.CurrentCultureIgnoreCase ))
+                                    {
+                                        methodInfo.Invoke(this, [true]);
+                                        return true;
+                                    }
                                 }
+                                // Else" ignore 
                             }
                             else
                             {
