@@ -80,8 +80,15 @@ public sealed class PostProcess
             {
                 (image, processMetadata) = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
                 bool loaded = image is not null && processMetadata is not null ;
-                this.MaybeOriginalImage = image;
-                this.ProcessMetadata = processMetadata;
+                if (loaded)
+                {
+                    this.MaybeOriginalImage = image;
+                    this.ProcessMetadata = processMetadata;
+
+                    // nullable " ! " : checked by loaded 
+                    new MetadataGeneratedMessage(processMetadata!).Publish();
+                }
+
                 return loaded;
             }
             catch (Exception ex)

@@ -66,6 +66,9 @@
     <Compile Update="Panes\CurvePane\GammaCurveView.axaml.cs">
       <DependentUpon>GammaCurveView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Panes\MetadataPane\MetadataView.axaml.cs">
+      <DependentUpon>MetadataView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Folder\FolderView.axaml.cs">
       <DependentUpon>FolderView.axaml</DependentUpon>
     </Compile>

@@ -11,13 +11,14 @@
 
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 	>	
 	<StackPanel
 		Orientation="Vertical"
 		Margin="0 0 0 0"
 		HorizontalAlignment="Left"
 		Background="#30000080"
+		Width="400"
 		>
 		<shared:DropView
 			Margin="4"
@@ -28,11 +29,12 @@
 			DataContext="{Binding SpinViewModel}"
 			/>
 		<glyphs:GlyphButton
+			x:Name="ProcessButton"
 			Style="{StaticResource ViewIconButton}"
 			FontSize="24"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
 			Width="360" Height="56"
-			Margin="0 12 0 12"
+			Margin="0 12 0 24"
 			GlyphSource="wand"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
@@ -40,11 +42,10 @@
 			IsDisabled="{Binding ProcessIsDisabled}"
 			Command="{Binding OnNext}"
 	    	/>
-		<TextBlock
-			Theme="{StaticResource Medium}"
-			TextAlignment="Center"
-			HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-			Text="TODO: File Name"
+		<meta:MetadataView
+			DataContext="{Binding MetadataViewModel}"
+			IsVisible="{Binding !IsDisabled, ElementName=ProcessButton}"
+			HorizontalAlignment="Stretch"
 			/>
 	</StackPanel>
 

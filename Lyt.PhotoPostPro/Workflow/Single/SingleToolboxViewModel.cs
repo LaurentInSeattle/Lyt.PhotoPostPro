@@ -11,8 +11,14 @@ public sealed partial class SingleToolboxViewModel : ViewModel<SingleToolboxView
     [ObservableProperty]
     public partial bool ProcessIsDisabled { get; set; } = true;
 
+    [ObservableProperty]
+    public partial MetadataViewModel MetadataViewModel { get; set; }
+    
+        
     public SingleToolboxViewModel()
     {
+        this.MetadataViewModel = new();
+
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,

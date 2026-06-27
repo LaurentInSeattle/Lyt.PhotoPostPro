@@ -53,7 +53,11 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
                 var imageFrame = ImagingUtilities.ToFrame(image);
                 if (imageFrame is not null)
                 {
-                    Dispatch.OnUiThread(()=>{ this.OnImageLoaded (imageFrame, path); });
+                    Dispatch.OnUiThread(()=>
+                    { 
+                        this.OnImageLoaded (imageFrame, path);
+                        new MetadataGeneratedMessage(processMetadata).Publish();
+                    });
                 }
                 else
                 {

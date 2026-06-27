@@ -1,0 +1,63 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Panes.MetadataPane.MetadataView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	x:DataType="vm:MetadataViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	>
+	<Grid
+		Background="{StaticResource DeepBlue_2_100}"
+		Margin="8 12 16 12"
+		MaxWidth=""
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0" />
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<TextBlock
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+			Theme="{StaticResource H3}"
+			Text="{Binding Filename}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="2" Grid.Column="0"
+			Theme="{StaticResource Large}"
+			Text="{Binding Dimensions}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="2" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding SizeMB}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+			Theme="{StaticResource Large}"
+			Text="{Binding FileDateTime}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+			Theme="{StaticResource Large}"
+			Text="{Binding FullPath}"
+			TextWrapping="Wrap"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+	</Grid>
+</UserControl>

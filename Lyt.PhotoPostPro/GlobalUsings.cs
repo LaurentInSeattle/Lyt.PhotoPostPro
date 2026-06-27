@@ -93,6 +93,7 @@ global using Lyt.PhotoPostPro.Controls;
 global using Lyt.PhotoPostPro.Panes;
 global using Lyt.PhotoPostPro.Panes.HistogramPane;
 global using Lyt.PhotoPostPro.Panes.CurvePane;
+global using Lyt.PhotoPostPro.Panes.MetadataPane;
 global using Lyt.PhotoPostPro.Interfaces;
 global using Lyt.PhotoPostPro.Messaging;
 global using Lyt.PhotoPostPro.Shell;
