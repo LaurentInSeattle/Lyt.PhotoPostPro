@@ -22,7 +22,16 @@
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Path --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" />
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Make / Model --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- DT Captured  --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Aperture / ISO   --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Exposure / Bias    --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Focal / Flash     --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" />
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Location    --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Lat / long     --> 
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
@@ -57,6 +66,78 @@
 			Theme="{StaticResource Large}"
 			Text="{Binding FullPath}"
 			TextWrapping="Wrap"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="6" Grid.Column="0"
+			Theme="{StaticResource H3}"
+			Text="{Binding Make}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="6" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding Model}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+			Theme="{StaticResource Large}"
+			Text="{Binding Captured}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="8" Grid.Column="0"
+			Theme="{StaticResource Large}"
+			Text="{Binding Aperture}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="8" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding IsoSpeed}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="9" Grid.Column="0"
+			Theme="{StaticResource Large}"
+			Text="{Binding Exposure}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="9" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding ExposureBias}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="10" Grid.Column="0"
+			Theme="{StaticResource Large}"
+			Text="{Binding FocalLength}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="10" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding WithFlash}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="12" Grid.Column="0"
+			Theme="{StaticResource H3}"
+			Text="{Binding Location}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="13" Grid.Column="0"
+			Theme="{StaticResource Large}"
+			Text="{Binding Latitude}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="13" Grid.Column="1"
+			Theme="{StaticResource Large}"
+			Text="{Binding Longitude}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 	</Grid>
