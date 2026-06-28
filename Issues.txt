@@ -1,10 +1,6 @@
 Bugs 
 ----
 
-- Show Metadata in UI 
-
-- Export should show the final image and the original 
-
 - Add a Finish button on Export step and return to main view
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
