@@ -83,8 +83,11 @@ public partial class StepViewModel<TView> :
     {
         var size = bitmap.PixelSize;
         this.IsPortrait = size.Height >= size.Width;
-        this.SourceImageIsVisible = true; 
     }
 
-    protected virtual void OnResultImageReceived(WriteableBitmap bitmap) { }
+    protected virtual void OnResultImageReceived(WriteableBitmap bitmap) 
+    {
+        var size = bitmap.PixelSize;
+        this.IsPortrait = size.Height >= size.Width;
+    }
 }
