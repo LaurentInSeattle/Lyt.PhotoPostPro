@@ -54,14 +54,21 @@ public sealed partial class ProcessViewModel :
             return;
         }
 
-        Dispatch.OnUiThread(() => 
+        if (message.Kind == WorkflowUpdateKind.Finish)
         {
-            var workflow = this.model.Workflow;
-            string stepName = workflow.CurrentStep.Name;
-            ActivatedView view = FromWorkflowstepName(stepName);
-            this.viewSelector.SelectView(view);
-        }, DispatcherPriority.Normal);
-
+            var shell = App.GetRequiredService<ShellViewModel>();
+            shell.OnSingle();
+        } 
+        else
+        { 
+            Dispatch.OnUiThread(() =>
+            {
+                var workflow = this.model.Workflow;
+                string stepName = workflow.CurrentStep.Name;
+                ActivatedView view = FromWorkflowstepName(stepName);
+                this.viewSelector.SelectView(view);
+            }, DispatcherPriority.Normal);
+        } 
     }
 
     public void InitializeWorkflow ()

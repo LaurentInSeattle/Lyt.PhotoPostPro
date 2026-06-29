@@ -269,7 +269,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void Export(ExportStep.ExportParameters exportParameters) =>
+    public void Export(ExportParameters exportParameters) =>
         this.ApiAction(() =>
         {
             if (this.Workflow.CurrentStep is ExportStep exportStep)

@@ -12,7 +12,39 @@
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
 	Background="Transparent"
 	>
-	<shared:BeforeAfterView
-		DataContext="{Binding}"
-		/>
+	<Grid > 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="*" MinWidth="320"/>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="600" MinWidth="600"/>
+			<ColumnDefinition Width="4" />
+		</Grid.ColumnDefinitions>
+		<shared:BeforeAfterView
+			Grid.Column="1" Grid.Row="1"
+			DataContext="{Binding}"
+			/>
+		<GridSplitter
+			x:Name="VerticalSplitter"
+			Classes="wide"
+			Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" 
+			Width="1"
+			ResizeDirection="Columns"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{StaticResource LightAqua_0_100}"
+			Opacity="0.4"
+			ZIndex="999"
+			/>
+		<Rectangle
+			Grid.Column="3" Grid.Row="1"
+			Fill="MidnightBlue"
+			/>
+	</Grid>
 </UserControl>

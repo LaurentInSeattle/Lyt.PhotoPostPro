@@ -3,10 +3,6 @@
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) : 
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
-    public sealed class  ExportParameters
-    {
-    }
-
     public override void Initialize(Image<Rgb48> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 

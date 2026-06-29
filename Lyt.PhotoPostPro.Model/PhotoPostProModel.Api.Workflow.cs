@@ -97,6 +97,16 @@ public sealed partial class PhotoPostProModel : ModelBase
             return true;
         });
 
+    public void Finish() =>
+        this.ApiAction(() =>
+        {
+            this.Workflow.Finish();
+            this.LastResultFrame = null;
+
+            // No workflow notification
+            return false; 
+        });
+
     private bool ApiAction(Func<bool> action, bool notify = true)
     {
         if (!this.timeoutTimer.IsRunning)

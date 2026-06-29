@@ -128,7 +128,9 @@
 
 	<!-- Workflow Export-->
 	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>
-	<system:String x:Key="Workflow.Export.Prompt">Setup the export process in the main view.</system:String>
+	<system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>
+	<system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
+	<system:String x:Key="Workflow.Export.Finish">All Done, Close</system:String>
 
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
 

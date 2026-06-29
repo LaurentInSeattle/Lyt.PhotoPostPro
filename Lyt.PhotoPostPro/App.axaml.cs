@@ -113,10 +113,10 @@ public partial class App : ApplicationBase
     public static App Instance { get; private set; }
 #pragma warning restore CS8618 
 
-    private static Tuple<Type, Type> LoggerService =>
-            Debugger.IsAttached ?
-                Service<ILogger, LogViewerWindow>() :
-                Service<ILogger, Logger>();
+    private static Tuple<Type, Type> LoggerService => Service<ILogger, Logger>();
+        //Debugger.IsAttached ?
+        //        Service<ILogger, LogViewerWindow>() :
+        //        Service<ILogger, Logger>();
 
     public bool RestartRequired { get; set; }
 
@@ -142,7 +142,7 @@ public partial class App : ApplicationBase
                 AssemblyName = App.AssemblyName,
                 Languages =
                 [
-                    // Master, See JigsawLanguages.json in Tools folder 
+                    // Master, See ****Languages.json in Tools folder 
                     "en-US", 
 
                     // Auto Translated 

@@ -6,6 +6,19 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
 
     public override void OnBeforeReset()
     {
-        this.model.Export(new ExportStep.ExportParameters());  
+    }
+
+    [RelayCommand]
+    public void OnExport()
+    {
+        // TODO: Collect parameters 
+        this.model.Export(new ExportParameters());
+    }
+
+    [RelayCommand]
+    public void OnFinish()
+    {
+        // TODO: Warn if nothing exported 
+        this.model.Finish();
     }
 }

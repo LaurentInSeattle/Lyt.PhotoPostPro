@@ -1,7 +1,11 @@
 Bugs 
 ----
 
-- Add a Finish button on Export step and return to main view
+- Sometimes not rotated image shows up in rotation step (no repro yet)
+
+- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
+
+- Fix Highlights 
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
@@ -49,8 +53,6 @@ Missing Features
 
 - Floating toolbox windows 
 
-- Support HIEF / HIEC images (iPhone) 
-
 - Cleanup unused icons 
 
 - Cleanup language strings
@@ -77,3 +79,5 @@ Cool Stuff to Consider
 middlle to show top image or bottom image 
 
 - Show GPS location in map ( Not google ) 
+
+- Rewrite Openize HEIC for speed 

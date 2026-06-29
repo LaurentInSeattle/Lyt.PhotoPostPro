@@ -12,11 +12,15 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
-
 	<Grid
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Export Button --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Finish Button --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -24,5 +28,23 @@
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<glyphs:GlyphButton
+			Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="arrow_export"
+			Text="{DynamicResource Workflow.Export.Export}"
+			Command="{Binding OnExport}"
+			HorizontalAlignment="Left" Width="320"
+	    	/>
+		<glyphs:GlyphButton
+			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="dismiss"
+			Text="{DynamicResource Workflow.Export.Finish}"
+			Command="{Binding OnFinish}"
+			HorizontalAlignment="Left" Width="320"
+	    	/>
 	</Grid>
 </UserControl>

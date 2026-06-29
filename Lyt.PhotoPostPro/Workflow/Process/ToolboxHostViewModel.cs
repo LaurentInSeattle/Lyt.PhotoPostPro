@@ -35,7 +35,9 @@ public sealed partial class ToolboxHostViewModel :
         {
             this.BackIsDisabled = !this.model.Workflow.CanGoBack;
             this.NextIsDisabled = !this.model.Workflow.CanMoveNext;
-            this.ResetIsDisabled = false;
+
+            // Cannot do reset on the last step. 
+            this.ResetIsDisabled = this.NextIsDisabled;
         }, DispatcherPriority.Background);
     }
 
