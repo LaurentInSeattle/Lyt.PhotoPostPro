@@ -251,10 +251,14 @@ public static partial class ImagingAlgorithms
     // 
     public static void HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
     {
+        const float luminanceLowThreshold = 0.35f;
+        const float luminanceHighThreshold = 0.65f;
+        const float clipFactor = 4.5f; 
+
         // shadowAmount and highlightAmount range from -1 to 1
         // Convert parameters to gamma modifiers
         float shadowGamma = 1.0f - shadowAmount;
-        float highlightGamma = 1.0f + highlightAmount;
+        float highlightGamma = 1.0f - highlightAmount;
 
         // Parallelize the loop over the rows
         int height = image.Height;
@@ -274,20 +278,24 @@ public static partial class ImagingAlgorithms
                 // Calculate perceived luminance
                 float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
                 float factor = 1.0f;
-                if (luminance < 0.5f && shadowAmount != 0)
+                if (luminance < luminanceLowThreshold && shadowAmount != 0)
                 {
                     // Shadow adjustment: targets dark areas (luma < 0.5)
                     factor = (float)Math.Pow(2.0f * luminance, shadowGamma) / (2.0f * luminance);
                 }
-                else if (luminance >= 0.5f && highlightAmount != 0)
+                else if (luminance >= luminanceHighThreshold && highlightAmount != 0)
                 {
                     // Highlight adjustment: targets bright areas (luma >= 0.5)
                     factor = (float)Math.Pow(2.0f * (1.0f - luminance), highlightGamma) / (2.0f * (1.0f - luminance));
-                    factor = 2.0f - factor; // Invert factor for highlights
+                }
+                else
+                {
+                    // No change in the midtones 
+                    continue; 
                 }
 
-                // Clip factors to prevent anomalies
-                factor = Math.Max(0.0f, Math.Min(5.0f, factor));
+                // Clip factor to prevent anomalies
+                factor = Math.Max(0.0f, Math.Min(clipFactor, factor));
 
                 // Denormalize 
                 factor *= 65535.0f;
@@ -296,6 +304,63 @@ public static partial class ImagingAlgorithms
                 row[x].R = (ushort)Math.Min(65535, r * factor);
                 row[x].G = (ushort)Math.Min(65535, g * factor);
                 row[x].B = (ushort)Math.Min(65535, b * factor);
+            }
+        });
+    }
+
+    // Does not work better than the above 
+    // Keep for now 
+    public static void ALT_HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
+    {
+        const float lightnessLowThreshold = 0.30f;
+        const float lightnessHighThreshold = 0.70f;
+
+        // Parallelize the loop over the rows
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < row.Length; x++)
+            {
+                Rgb48 pixel = row[x];
+
+                // Normalize RGB to [0, 1] float range
+                float r = pixel.R / 65535.0f;
+                float g = pixel.G / 65535.0f;
+                float b = pixel.B / 65535.0f;
+
+                // Convert normalize RGB to HSL color space
+                ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float lightness);
+
+                if (lightness <= 0.0f)
+                {
+                    Debugger.Break();
+                }
+
+                if (lightness < lightnessLowThreshold)
+                {
+                    // Scale the adjustment factor based on how dark the pixel is
+                    // Modify shadows (Lightness is low, e.g., below 40%)
+                    float shadowWeight = (lightnessLowThreshold - lightness) / lightnessLowThreshold;
+                    lightness += shadowAmount * shadowWeight;
+                }
+                else if (lightness > lightnessHighThreshold)
+                {
+                    // Modify highlights: Lightness is high: above 60%
+                    // Scale the adjustment factor based on how bright the pixel is
+                    float highlightWeight = (lightness - lightnessHighThreshold) / lightnessHighThreshold;
+                    lightness += highlightAmount * highlightWeight;
+                }
+
+                // Keep lightness bound within 0.0 to 1.0 limits
+                lightness = ClipF(lightness);
+
+                // Convert back to RGB space and update pixel 
+                ColorUtilities.HslToRgb(hue, saturation, lightness, out ushort newR, out ushort newG, out ushort newB);
+                row[x].R = newR;
+                row[x].G = newG;
+                row[x].B = newB;
             }
         });
     }

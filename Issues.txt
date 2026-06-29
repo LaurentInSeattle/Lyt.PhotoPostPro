@@ -7,6 +7,8 @@ Bugs
 
 - Fix Highlights 
 
+- White Balance from reference point 
+
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 

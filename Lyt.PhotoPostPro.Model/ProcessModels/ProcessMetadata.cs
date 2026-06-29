@@ -47,6 +47,15 @@ public sealed class ProcessMetadata
             {
                 Debug.WriteLine("  Location:  " + this.Latitude.ToString("F6") + "," + this.Longitude.ToString("F6"));
             }
+
+            if (!string.IsNullOrWhiteSpace(this.Make) && !string.IsNullOrWhiteSpace(this.Model))
+            {
+                if (this.Model.Contains(this.Make))
+                {
+                    this.Model = this.Model.Replace(this.Make, string.Empty);
+                    this.Model = this.Model.Trim();
+                }
+            }
         }
     }
 
