@@ -26,6 +26,9 @@
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Gray World--> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Auto Gray World slider --> 
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Note Gray World--> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt White Patch  --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- WB Button --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -152,5 +155,35 @@
 			FontStyle="Italic"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<!-- Next set of Rows: White Patch -->
+		<TextBlock
+			Grid.Row="11" 
+			Text="{DynamicResource Workflow.WhiteBalance.WhitePatch}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="12" 
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Rectangle
+				Margin="4"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				Fill="{Binding PatchColor}"
+				/>
+			<glyphs:GlyphButton
+				Grid.Column="1" 
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="dismiss"
+				Text="{DynamicResource Workflow.Export.Finish}"
+				Command="{Binding OnWhitePatch}"
+				HorizontalAlignment="Stretch" 
+	    		/>
+		</Grid>
+
 	</Grid>
 </UserControl>

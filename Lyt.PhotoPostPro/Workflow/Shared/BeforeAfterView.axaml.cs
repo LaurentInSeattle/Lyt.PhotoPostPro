@@ -5,15 +5,17 @@ public partial class BeforeAfterView : UserControl
     public BeforeAfterView()
     {
         this.InitializeComponent();
-        this.SourceImagePortrait.PointerPressed += OnImagePointerPressed;
-        this.SourceImageLandscape.PointerPressed += OnImagePointerPressed;
-        this.ResultImagePortrait.PointerPressed += OnImagePointerPressed;
-        this.ResultImageLandscape.PointerPressed += OnImagePointerPressed;
+        this.SourceImagePortrait.PointerPressed += this.OnImagePointerPressed;
+        this.SourceImageLandscape.PointerPressed += this.OnImagePointerPressed;
+        this.ResultImagePortrait.PointerPressed += this.OnImagePointerPressed;
+        this.ResultImageLandscape.PointerPressed += this.OnImagePointerPressed;
     }
 
     private void OnImagePointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is Image imgControl && imgControl.Source is WriteableBitmap wbm)
+        if (sender is Image imgControl && 
+            imgControl.IsVisible && 
+            imgControl.Source is WriteableBitmap wbm)
         {
             // Obtain click position relative to the visually scaled layout control
             Point relativeClick = e.GetPosition(imgControl);
@@ -50,5 +52,7 @@ public partial class BeforeAfterView : UserControl
                 new ImageClickedMessage(isSourceImage, pixelX, pixelY, wbm).Publish();
             }
         }
+
+        e.Handled = true;
     }
 }

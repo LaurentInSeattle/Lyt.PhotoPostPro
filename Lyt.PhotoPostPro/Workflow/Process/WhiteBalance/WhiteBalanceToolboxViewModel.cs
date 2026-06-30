@@ -13,7 +13,8 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     public WhiteBalanceToolboxViewModel()
     {
-        this.whitePatch = Colors.LightGray; 
+        this.whitePatch = Colors.LightGray;
+        this.PatchColor = new SolidColorBrush(Colors.Transparent);
         this.Subscribe<ImageClickedMessage>();
     }
 
@@ -37,10 +38,8 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     [ObservableProperty]
     public partial double KelvinSliderValue { get; set; }
 
-    public void Receive(ImageClickedMessage message)
-    {
-        // Calculate white patch color by averaging colors on a 3 by 3 area on the image
-    }
+    [ObservableProperty]
+    public partial SolidColorBrush PatchColor { get; set; }
 
     public override void OnViewLoaded()
     {
@@ -58,6 +57,20 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     }
 
     public override void OnModelStepUpdated(WhiteBalanceStep step) => this.UpdateSliders(step);
+
+    public void Receive(ImageClickedMessage message)
+    {
+        // Calculate white patch color by averaging colors on a 3 by 3 area on the image
+        global::Avalonia.Media.Color patchColor =
+            message.WriteableBitmap.GetColorAroundPixel(message.PixelX, message.PixelY);
+        this.PatchColor = new SolidColorBrush(patchColor);
+    }
+
+    [RelayCommand]
+    public void OnWhitePatch()
+    {
+        // TODO 
+    }
 
     private void UpdateSliders(WhiteBalanceStep step)
     {
@@ -123,6 +136,5 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             default:
                 break;
         }
-
     }
 }
