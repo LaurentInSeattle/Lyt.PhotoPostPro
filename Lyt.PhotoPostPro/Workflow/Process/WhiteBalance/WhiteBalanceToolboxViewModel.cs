@@ -1,13 +1,21 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
 
 public sealed partial class WhiteBalanceToolboxViewModel : 
-    ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>
+    ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>, 
+    IRecipient<ImageClickedMessage>
 {
     private bool doNotUpdateModel;
     private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm ;
     private float kelvin;
     private float temperature;
     private float saturationThreshold;
+    private global::Avalonia.Media.Color whitePatch; 
+
+    public WhiteBalanceToolboxViewModel()
+    {
+        this.whitePatch = Colors.LightGray; 
+        this.Subscribe<ImageClickedMessage>();
+    }
 
     protected override string Title => this.Localize("Workflow.WhiteBalance.Title");
 
@@ -28,6 +36,11 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     [ObservableProperty]
     public partial double KelvinSliderValue { get; set; }
+
+    public void Receive(ImageClickedMessage message)
+    {
+        // Calculate white patch color by averaging colors on a 3 by 3 area on the image
+    }
 
     public override void OnViewLoaded()
     {
@@ -111,5 +124,5 @@ public sealed partial class WhiteBalanceToolboxViewModel :
                 break;
         }
 
-    } 
+    }
 }

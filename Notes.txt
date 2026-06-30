@@ -86,10 +86,10 @@ Font font = family.CreateFont(32, FontStyle.Regular);
 
 // Apply text watermark at bottom-right
 image.Mutate(x => x.DrawText(
-    "© My Watermark",
-    font,
-    Color.White.WithAlpha(0.5f), // 50% opacity
-    new PointF(image.Width - 160, image.Height - 40)
+	"© My Watermark",
+	font,
+	Color.White.WithAlpha(0.5f), // 50% opacity
+	new PointF(image.Width - 160, image.Height - 40)
 ));
 
 ------------
@@ -103,15 +103,15 @@ int borderWidth = 20; // Set your desired border thickness in pixels
 
 using (var image = Image.Load("input.jpg"))
 {
-    image.Mutate(x => x.Resize(new ResizeOptions
-    {
-        // Add twice the border width to both dimensions for the final canvas size
-        Size = new Size(image.Width + (borderWidth * 2), image.Height + (borderWidth * 2)),
-        Mode = ResizeMode.Pad,
-        PadColor = Color.Black // Set the border color
-    }));
+	image.Mutate(x => x.Resize(new ResizeOptions
+	{
+		// Add twice the border width to both dimensions for the final canvas size
+		Size = new Size(image.Width + (borderWidth * 2), image.Height + (borderWidth * 2)),
+		Mode = ResizeMode.Pad,
+		PadColor = Color.Black // Set the border color
+	}));
 
-    image.Save("output_with_border.jpg");
+	image.Save("output_with_border.jpg");
 }
 
 
@@ -143,16 +143,35 @@ the gaps in the histogram.
 
 --- 
 
+White balance using a reference point (often called the White Patch Algorithm) corrects color casts by identifying 
+a neutral reference pixel and applying gain multipliers to the Red and Blue channels. The Green channel is used 
+as the baseline. 
+The multipliers are defined as:\(R_{gain} = \frac{G_{ref}}{R_{ref}}\) and
+\(B_{gain} = \frac{G_{ref}}{B_{ref}}\).
+
+Below is a highly performant C# implementation using System.Drawing.Imaging to apply these multipliers directly 
+to the raw byte data of a Bitmap.
+
+
 In SixLabors.ImageSharp, white balance is achieved by iterating through the image's pixels and applying a scaling 
 multiplier to the Red, Green, and Blue (RGB) channels. 
 This corrects color casts by forcing a targeted neutral or white reference area in the image to have 
 balanced R, G, and B values.The easiest way to perform a custom white balance is by sampling a known neutral pixel 
 in your image and calculating your multipliers using the formulas below.The Mathematics of White BalanceWhite 
 balancing scales the color channels relative to a chosen target white or neutral gray. 
-If a neutral pixel has an original RGB value of \(R_o, G_o, B_o\), and you want to balance 
-it so that it is perfectly neutral (where \(R_{wb} = G_{wb} = B_{wb}\)), the multipliers are defined as follows:
-Let the target luminance \(Y = \text{max}(R_o, G_o, B_o)\).
-The scaling coefficients are:\(A_1 = \frac{Y}{R_o}\)\(A_2 = \frac{Y}{G_o}\)\(A_3 = \frac{Y}{B_o}\)
+If a neutral pixel has an original RGB value of 
+\(R_o, G_o, B_o\), 
+
+and you want to balance it so that it is perfectly neutral (where \(R_{wb} = G_{wb} = B_{wb}\)), the multipliers
+are defined as follows: Let the target luminance 
+
+\(Y = \text{max}(R_o, G_o, B_o)\).
+
+The scaling coefficients are:
+\(A_1 = \frac{Y}{R_o}\)
+\(A_2 = \frac{Y}{G_o}\)
+\(A_3 = \frac{Y}{B_o}\)
+
 Then, for every pixel in the image, the new values are:\(R_{wb} = A_1 \times R_o\)\(G_{wb} = A_2 \times G_o\)\(B_{wb} = A_3 \times B_o\)(Note: These are usually bounded to a maximum of 255 for 8-bit images).Implementation ExampleUse ImageSharp's high-performance ProcessPixelRows API to directly mutate pixel data in C#:csharpusing SixLabors.ImageSharp;
 
 using SixLabors.ImageSharp.PixelFormats;
@@ -160,40 +179,40 @@ using SixLabors.ImageSharp.Processing;
 
 public void BalanceWhite(string imagePath, Rgb24 referenceColor, Rgb24 targetNeutral)
 {
-    // Load the image
-    using (Image<Rgb24> image = Image.Load<Rgb24>(imagePath))
-    {
-        // Calculate multipliers: e.g., target / reference
-        // (Make sure to handle division by zero in production code)
-        float rScale = (float)targetNeutral.R / referenceColor.R;
-        float gScale = (float)targetNeutral.G / referenceColor.G;
-        float bScale = (float)targetNeutral.B / referenceColor.B;
+	// Load the image
+	using (Image<Rgb24> image = Image.Load<Rgb24>(imagePath))
+	{
+		// Calculate multipliers: e.g., target / reference
+		// (Make sure to handle division by zero in production code)
+		float rScale = (float)targetNeutral.R / referenceColor.R;
+		float gScale = (float)targetNeutral.G / referenceColor.G;
+		float bScale = (float)targetNeutral.B / referenceColor.B;
 
-        // Process pixels
-        image.ProcessPixelRows(accessor =>
-        {
-            for (int y = 0; y < accessor.Height; y++)
-            {
-                Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
-                for (int x = 0; x < pixelRow.Length; x++)
-                {
-                    ref Rgb24 pixel = ref pixelRow[x];
+		// Process pixels
+		image.ProcessPixelRows(accessor =>
+		{
+			for (int y = 0; y < accessor.Height; y++)
+			{
+				Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
+				for (int x = 0; x < pixelRow.Length; x++)
+				{
+					ref Rgb24 pixel = ref pixelRow[x];
 
-                    // Scale the channels, ensuring we don't exceed 255
-                    int newR = (int)(pixel.R * rScale);
-                    int newG = (int)(pixel.G * gScale);
-                    int newB = (int)(pixel.B * bScale);
+					// Scale the channels, ensuring we don't exceed 255
+					int newR = (int)(pixel.R * rScale);
+					int newG = (int)(pixel.G * gScale);
+					int newB = (int)(pixel.B * bScale);
 
-                    pixel.R = (byte)Math.Min(newR, 255);
-                    pixel.G = (byte)Math.Min(newG, 255);
-                    pixel.B = (byte)Math.Min(newB, 255);
-                }
-            }
-        });
+					pixel.R = (byte)Math.Min(newR, 255);
+					pixel.G = (byte)Math.Min(newG, 255);
+					pixel.B = (byte)Math.Min(newB, 255);
+				}
+			}
+		});
 
-        // Save the result
-        image.Save("balanced_image.jpg");
-    }
+		// Save the result
+		image.Save("balanced_image.jpg");
+	}
 }
 
 
@@ -202,75 +221,75 @@ To eliminate sharp edges and halos, you can pre-apply a Gaussian Blur to a worki
 
 public class ShadowHighlightProcessor
 {
-    // shadowAmount and highlightAmount typically range from -100 to 100
-    public static Bitmap AdjustShadowsAndHighlights(Bitmap sourceImage, float shadowAmount, float highlightAmount)
-    {
-        Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-        Rectangle rect = new Rectangle(0, 0, sourceImage.Width, sourceImage.Height);
-        
-        // Lock bits for fast unsafe memory access
-        BitmapData sourceData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-        BitmapData resultData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+	// shadowAmount and highlightAmount typically range from -100 to 100
+	public static Bitmap AdjustShadowsAndHighlights(Bitmap sourceImage, float shadowAmount, float highlightAmount)
+	{
+		Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+		Rectangle rect = new Rectangle(0, 0, sourceImage.Width, sourceImage.Height);
+		
+		// Lock bits for fast unsafe memory access
+		BitmapData sourceData = sourceImage.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+		BitmapData resultData = resultImage.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
 
-        int bytesPerPixel = 4;
-        int stride = sourceData.Stride;
-        IntPtr srcScan0 = sourceData.Scan0;
-        IntPtr resScan0 = resultData.Scan0;
+		int bytesPerPixel = 4;
+		int stride = sourceData.Stride;
+		IntPtr srcScan0 = sourceData.Scan0;
+		IntPtr resScan0 = resultData.Scan0;
 
-        // Convert parameters to gamma modifiers
-        float shadowGamma = 1.0f - (shadowAmount / 100.0f);
-        float highlightGamma = 1.0f + (highlightAmount / 100.0f);
+		// Convert parameters to gamma modifiers
+		float shadowGamma = 1.0f - (shadowAmount / 100.0f);
+		float highlightGamma = 1.0f + (highlightAmount / 100.0f);
 
-        unsafe
-        {
-            byte* src = (byte*)srcScan0;
-            byte* res = (byte*)resScan0;
+		unsafe
+		{
+			byte* src = (byte*)srcScan0;
+			byte* res = (byte*)resScan0;
 
-            for (int y = 0; y < sourceImage.Height; y++)
-            {
-                for (int x = 0; x < sourceImage.Width; x++)
-                {
-                    int index = (y * stride) + (x * bytesPerPixel);
-                    
-                    byte b = src[index];     // Blue
-                    byte g = src[index + 1]; // Green
-                    byte r = src[index + 2]; // Red
-                    byte a = src[index + 3]; // Alpha
+			for (int y = 0; y < sourceImage.Height; y++)
+			{
+				for (int x = 0; x < sourceImage.Width; x++)
+				{
+					int index = (y * stride) + (x * bytesPerPixel);
+					
+					byte b = src[index];     // Blue
+					byte g = src[index + 1]; // Green
+					byte r = src[index + 2]; // Red
+					byte a = src[index + 3]; // Alpha
 
-                    // Calculate Luminance (Perceived brightness)
-                    float luma = (0.299f * r + 0.587f * g + 0.114f * b) / 255.0f;
+					// Calculate Luminance (Perceived brightness)
+					float luma = (0.299f * r + 0.587f * g + 0.114f * b) / 255.0f;
 
-                    float factor = 1.0f;
-                    
-                    // Shadow adjustment: targets dark areas (luma < 0.5)
-                    if (luma < 0.5f && shadowAmount != 0)
-                    {
-                        factor = (float)Math.Pow(2.0f * luma, shadowGamma) / (2.0f * luma);
-                    }
-                    // Highlight adjustment: targets bright areas (luma >= 0.5)
-                    else if (luma >= 0.5f && highlightAmount != 0)
-                    {
-                        factor = (float)Math.Pow(2.0f * (1.0f - luma), highlightGamma) / (2.0f * (1.0f - luma));
-                        factor = 2.0f - factor; // Invert factor for highlights
-                    }
+					float factor = 1.0f;
+					
+					// Shadow adjustment: targets dark areas (luma < 0.5)
+					if (luma < 0.5f && shadowAmount != 0)
+					{
+						factor = (float)Math.Pow(2.0f * luma, shadowGamma) / (2.0f * luma);
+					}
+					// Highlight adjustment: targets bright areas (luma >= 0.5)
+					else if (luma >= 0.5f && highlightAmount != 0)
+					{
+						factor = (float)Math.Pow(2.0f * (1.0f - luma), highlightGamma) / (2.0f * (1.0f - luma));
+						factor = 2.0f - factor; // Invert factor for highlights
+					}
 
-                    // Clip factors to prevent anomalies
-                    factor = Math.Max(0.0f, Math.Min(5.0f, factor));
+					// Clip factors to prevent anomalies
+					factor = Math.Max(0.0f, Math.Min(5.0f, factor));
 
-                    // Apply factor selectively while preserving hues
-                    res[index] = (byte)Math.Min(255, b * factor);     // B
-                    res[index + 1] = (byte)Math.Min(255, g * factor); // G
-                    res[index + 2] = (byte)Math.Min(255, r * factor); // R
-                    res[index + 3] = a;                               // A
-                }
-            }
-        }
+					// Apply factor selectively while preserving hues
+					res[index] = (byte)Math.Min(255, b * factor);     // B
+					res[index + 1] = (byte)Math.Min(255, g * factor); // G
+					res[index + 2] = (byte)Math.Min(255, r * factor); // R
+					res[index + 3] = a;                               // A
+				}
+			}
+		}
 
-        sourceImage.UnlockBits(sourceData);
-        resultImage.UnlockBits(resultData);
+		sourceImage.UnlockBits(sourceData);
+		resultImage.UnlockBits(resultData);
 
-        return resultImage;
-    }
+		return resultImage;
+	}
 }
 
 ----------
@@ -287,9 +306,9 @@ using SixLabors.ImageSharp.Processing;
 using var image = Image.Load<Rgba32>("high_iso_input.jpg");
 
 image.Mutate(x => {
-    // Apply a soft Gaussian blur to smooth out the grain
-    // Sigma controls the amount of smoothing (keep it low: 0.5 to 1.5)
-    x.GaussianBlur(sigma: 0.8f);
+	// Apply a soft Gaussian blur to smooth out the grain
+	// Sigma controls the amount of smoothing (keep it low: 0.5 to 1.5)
+	x.GaussianBlur(sigma: 0.8f);
 });
 
 // Save the cleaner image
@@ -321,19 +340,19 @@ If you notice the image gets too soft, I can show you how to re-sharpen the edge
 an unsharp mask right after blurring. 
 
 
-    1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables
-    (the Exposure Triangle):\(\text{Exposure} \propto \text{Aperture Area} \times \text{Shutter Speed} \times \text{ISO Sensitivity}\)
-    To change the exposure by a specific number of stops, you adjust any of these three values:
-    Aperture (f-stop): Controls the size of the lens opening. The area is proportional to 
-    \(\frac{1}{N^{2}}\) (where \(N\) is the f-number). 
-    To let in twice as much light (or add \(+1 \text{ stop}\)), you multiply the aperture denominator 
-    by \(\frac{1}{\sqrt{2}}\) (approx \(0.7\)). 
-    Common full stops include:\(f/1.4 \rightarrow f/2 \rightarrow f/2.8 \rightarrow f/4 \rightarrow f/5.6 \rightarrow f/8 \rightarrow f/11 \rightarrow f/16 \rightarrow f/22\)
-    Shutter Speed (\(t\)): Controls the duration of light exposure. 
-    Measured in fractions of a second, doubling the time (e.g., from \(\frac{1}{60}\) to \(\frac{1}{30}\)) adds \(+1 \text{ stop}\) of light.ISO (\(S\)): Controls sensor sensitivity. Doubling the ISO (e.g., \(100 \rightarrow 200\)) adds \(+1 \text{ stop}\) of exposure.2. Math for Post-Processing (Digital Editing)If you are adjusting a photo's exposure in editing software like Photoshop or Lightroom, the math scales linearly with pixel values.For an 8-bit image (where pixel values range from \(0\) to \(255\)), you apply the following formula:\(\text{New Pixel Value} = \text{Original Pixel Value} \times 2^{\Delta EV}\)Where \(\Delta EV\) is the change in Exposure Value (stops).Example: To increase the exposure by \(+1 \text{ stop}\) (\(\Delta EV = 1\)), multiply the original pixel brightness by \(2^{1}\) (\(2\)).Example: To decrease exposure by \(-1 \text{ stop}\) (\(\Delta EV = -1\)), multiply by \(2^{-1}\) (\(0.5\)).3. Exposure Value (EV) FormulaIf you want to calculate the exact mathematical Exposure Value (EV) of a scene, 
-    you use a logarithmic equation relating your settings to scene brightness:\(EV = \log_2 \left( \frac{N^2}{t} \right)\)
-    
-    Where:\(N\) is the aperture f-number\(t\) is the shutter speed in seconds
+	1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables
+	(the Exposure Triangle):\(\text{Exposure} \propto \text{Aperture Area} \times \text{Shutter Speed} \times \text{ISO Sensitivity}\)
+	To change the exposure by a specific number of stops, you adjust any of these three values:
+	Aperture (f-stop): Controls the size of the lens opening. The area is proportional to 
+	\(\frac{1}{N^{2}}\) (where \(N\) is the f-number). 
+	To let in twice as much light (or add \(+1 \text{ stop}\)), you multiply the aperture denominator 
+	by \(\frac{1}{\sqrt{2}}\) (approx \(0.7\)). 
+	Common full stops include:\(f/1.4 \rightarrow f/2 \rightarrow f/2.8 \rightarrow f/4 \rightarrow f/5.6 \rightarrow f/8 \rightarrow f/11 \rightarrow f/16 \rightarrow f/22\)
+	Shutter Speed (\(t\)): Controls the duration of light exposure. 
+	Measured in fractions of a second, doubling the time (e.g., from \(\frac{1}{60}\) to \(\frac{1}{30}\)) adds \(+1 \text{ stop}\) of light.ISO (\(S\)): Controls sensor sensitivity. Doubling the ISO (e.g., \(100 \rightarrow 200\)) adds \(+1 \text{ stop}\) of exposure.2. Math for Post-Processing (Digital Editing)If you are adjusting a photo's exposure in editing software like Photoshop or Lightroom, the math scales linearly with pixel values.For an 8-bit image (where pixel values range from \(0\) to \(255\)), you apply the following formula:\(\text{New Pixel Value} = \text{Original Pixel Value} \times 2^{\Delta EV}\)Where \(\Delta EV\) is the change in Exposure Value (stops).Example: To increase the exposure by \(+1 \text{ stop}\) (\(\Delta EV = 1\)), multiply the original pixel brightness by \(2^{1}\) (\(2\)).Example: To decrease exposure by \(-1 \text{ stop}\) (\(\Delta EV = -1\)), multiply by \(2^{-1}\) (\(0.5\)).3. Exposure Value (EV) FormulaIf you want to calculate the exact mathematical Exposure Value (EV) of a scene, 
+	you use a logarithmic equation relating your settings to scene brightness:\(EV = \log_2 \left( \frac{N^2}{t} \right)\)
+	
+	Where:\(N\) is the aperture f-number\(t\) is the shutter speed in seconds
 
 
 

@@ -6,8 +6,9 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
     public enum WhiteBalanceAlgorithm
     {
         FilteredGrayWorldAWB, 
-        ColorMatrix, 
-        TannerHelland, 
+        ColorMatrix,
+        TannerHelland,
+        WhitePatch,
     }
 
     public float SaturationThreshold { get; set; }
@@ -49,6 +50,10 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 clone.FilteredGrayWorldAWB(this.SaturationThreshold);
                 break;
 
+            case WhiteBalanceAlgorithm.WhitePatch:
+                // clone.WhitePatchWhiteBalance();
+                break;
+
             default:
                 throw new NotImplementedException("No such White Balance algorithm");
         }
@@ -76,6 +81,12 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.SaturationThreshold = saturationThreshold;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? WhitePatchWhiteBalance()
+    {
+        this.Algorithm = WhiteBalanceAlgorithm.WhitePatch;
         return this.Transform(withFrame: true);
     }
 

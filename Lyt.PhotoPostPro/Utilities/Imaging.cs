@@ -53,4 +53,50 @@ public static class Imaging
             throw new InvalidOperationException("Failed to convert pixel data to WriteableBitmap.", ex);
         }
     }
-} 
+
+    public static Color? GetPixelColor(this WriteableBitmap bitmap, int x, int y)
+    {
+        // Ensure target coordinates are within image boundaries
+        if (x < 0 || x >= bitmap.PixelSize.Width || y < 0 || y >= bitmap.PixelSize.Height)
+        {
+            return null;
+        }
+
+        // Lock the framebuffer
+        using ILockedFramebuffer framebuffer = bitmap.Lock();
+        IntPtr backBuffer = framebuffer.Address;
+        int stride = framebuffer.RowBytes;
+        PixelFormat format = framebuffer.Format;
+
+        unsafe
+        {
+            byte* ptr = (byte*)backBuffer;
+
+            // Handle specific pixel formats
+            if (format == PixelFormat.Bgra8888)
+            {
+                // 4 bytes per pixel: Blue, Green, Red, Alpha
+                int offset = (y * stride) + (x * 4);
+                byte b = ptr[offset];
+                byte g = ptr[offset + 1];
+                byte r = ptr[offset + 2];
+                byte a = ptr[offset + 3];
+
+                return Color.FromArgb(a, r, g, b);
+            }
+            else if (format == PixelFormat.Rgba8888)
+            {
+                // 4 bytes per pixel: Red, Green, Blue, Alpha
+                int offset = (y * stride) + (x * 4);
+                byte r = ptr[offset];
+                byte g = ptr[offset + 1];
+                byte b = ptr[offset + 2];
+                byte a = ptr[offset + 3];
+
+                return Color.FromArgb(a, r, g, b);
+            }
+
+            throw new NotSupportedException($"Pixel format {format} is not supported.");
+        }
+    }
+}

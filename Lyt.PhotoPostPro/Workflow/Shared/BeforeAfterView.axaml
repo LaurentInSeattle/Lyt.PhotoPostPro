@@ -26,6 +26,7 @@
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
 			<Image
+				x:Name="SourceImagePortrait"
 				Grid.Column="1" Grid.Row="1"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
 				Source="{ReflectionBinding SourceImage}"				
@@ -44,6 +45,7 @@
 				ZIndex="999"
 				/>
 			<Image
+				x:Name="ResultImagePortrait"
 				Grid.Column="3" Grid.Row="1"
 				IsVisible="{ReflectionBinding ResultImageIsVisible}"
 				Source="{ReflectionBinding ResultImage}"
@@ -66,6 +68,7 @@
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
 			<Image
+				x:Name="SourceImageLandscape"
 				Grid.Column="1" Grid.Row="1"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
 				Source="{ReflectionBinding SourceImage}"
@@ -84,6 +87,7 @@
 				ZIndex="999"
 				/>
 			<Image
+				x:Name="ResultImageLandscape"
 				Grid.Column="1" Grid.Row="3"
 				IsVisible="{ReflectionBinding ResultImageIsVisible}"
 				Source="{ReflectionBinding ResultImage}"

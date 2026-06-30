@@ -280,12 +280,12 @@ public static partial class ImagingAlgorithms
                 float factor = 1.0f;
                 if (luminance < luminanceLowThreshold && shadowAmount != 0)
                 {
-                    // Shadow adjustment: targets dark areas (luma < 0.5)
+                    // Shadow adjustment: targets dark areas 
                     factor = (float)Math.Pow(2.0f * luminance, shadowGamma) / (2.0f * luminance);
                 }
                 else if (luminance >= luminanceHighThreshold && highlightAmount != 0)
                 {
-                    // Highlight adjustment: targets bright areas (luma >= 0.5)
+                    // Highlight adjustment: targets bright areas 
                     factor = (float)Math.Pow(2.0f * (1.0f - luminance), highlightGamma) / (2.0f * (1.0f - luminance));
                 }
                 else
