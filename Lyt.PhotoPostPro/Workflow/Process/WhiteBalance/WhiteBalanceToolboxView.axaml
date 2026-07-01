@@ -25,10 +25,11 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Gray World--> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Auto Gray World slider --> 
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Note Gray World--> 
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Note Gray World--> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt White Patch  --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- WB Button --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Color sample and Button --> 
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Note White Patch --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -166,24 +167,33 @@
 			Grid.Row="12" 
 			> 
 			<Grid.ColumnDefinitions> 
-				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="80" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<Rectangle
-				Margin="4"
+				Margin="8"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 				Fill="{Binding PatchColor}"
+				Stroke="{Binding PatchColorState}"
+				StrokeThickness="2.5"
 				/>
 			<glyphs:GlyphButton
-				Grid.Column="1" 
+				Grid.Column="1" Grid.ColumnSpan="2"
 				Style="{StaticResource ControlIconButton}"
 				Layout="IconTextLeftSide"
-				GlyphSource="dismiss"
-				Text="{DynamicResource Workflow.Export.Finish}"
+				GlyphSource="arrow_export"
+				Text="{DynamicResource Workflow.WhiteBalance.RunWhitePatch}"
 				Command="{Binding OnWhitePatch}"
-				HorizontalAlignment="Stretch" 
+				IsDisabled="{Binding RunWhitePatchIsDisabled}"
+				Width="280"
 	    		/>
 		</Grid>
-
+		<TextBlock
+			Grid.Row="13" 
+			Text="{DynamicResource Workflow.WhiteBalance.NoteWhitePatch}"
+			Theme="{StaticResource Large}"
+			FontStyle="Italic"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
 	</Grid>
 </UserControl>

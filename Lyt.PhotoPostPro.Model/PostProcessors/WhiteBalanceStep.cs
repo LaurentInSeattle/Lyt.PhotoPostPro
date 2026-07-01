@@ -17,6 +17,12 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float Kelvin { get; set; }
 
+    public float Red { get; set; }
+
+    public float Green { get; set; }
+
+    public float Blue { get; set; }
+
     public WhiteBalanceAlgorithm Algorithm { get; set; }
 
     public override void Initialize(Image<Rgb48> _) => this.Clear();
@@ -51,7 +57,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case WhiteBalanceAlgorithm.WhitePatch:
-                // clone.WhitePatchWhiteBalance();
+                clone.WhitePatchWhiteBalance(this.Red, this.Green, this.Blue);
                 break;
 
             default:
@@ -84,9 +90,12 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? WhitePatchWhiteBalance()
+    internal Frame? WhitePatchWhiteBalance(float r, float g, float b)
     {
         this.Algorithm = WhiteBalanceAlgorithm.WhitePatch;
+        this.Red = r;
+        this.Green = g;
+        this.Blue = b;
         return this.Transform(withFrame: true);
     }
 

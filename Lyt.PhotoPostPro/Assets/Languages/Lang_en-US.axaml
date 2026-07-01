@@ -99,6 +99,9 @@
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Note: The 'Gray World' algorithm works well ONLY on images that have a lot of various colors.</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semi-Automatic - 'White Patch' Algorithm</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Run White Patch</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Click on an bright area on the Source image that should be white or colorless, then run the algorithm.</system:String>
 
 	<!-- Workflow Contrast -->
 	<system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>

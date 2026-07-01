@@ -238,6 +238,33 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
+    public static void WhitePatchWhiteBalance(this Image<Rgb48> image, float r, float g, float b)
+    {
+        float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+
+        float rGain = r < 0.001f ? 1.0f : luminance / r;
+        float gGain = g < 0.001f ? 1.0f : luminance / g;
+        float bGain = b < 0.001f ? 1.0f : luminance / b;
+
+        // Apply the gains to all pixels in the image
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<Rgb48> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < pixelRow.Length; x++)
+            {
+                Rgb48 pixel = pixelRow[x];
+                float r = pixel.R * rGain;
+                float g = pixel.G * gGain;
+                float b = pixel.B * bGain;
+                pixelRow[x].R = Clip16(r);
+                pixelRow[x].G = Clip16(g);
+                pixelRow[x].B = Clip16(b);
+            }
+        });
+    }
+
     #endregion  White Balance 
 
     #region Highlights and Shadows

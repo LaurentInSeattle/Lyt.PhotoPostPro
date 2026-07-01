@@ -148,6 +148,19 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void WhitePatchWhiteBalance(float r, float g, float b) =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
+            {
+                this.LastResultFrame = whiteBalanceStep.WhitePatchWhiteBalance(r, g, b);
+                return true;
+            }
+
+            return false;
+        });
+
+
     public void GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount) =>
         this.ApiAction(() =>
         {

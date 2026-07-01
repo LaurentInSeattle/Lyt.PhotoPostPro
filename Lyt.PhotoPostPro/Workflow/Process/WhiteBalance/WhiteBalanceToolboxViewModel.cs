@@ -14,7 +14,9 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public WhiteBalanceToolboxViewModel()
     {
         this.whitePatch = Colors.LightGray;
-        this.PatchColor = new SolidColorBrush(Colors.Transparent);
+        this.PatchColor = new SolidColorBrush(Colors.Black);
+        this.PatchColorState = new SolidColorBrush(Colors.Firebrick);
+        this.RunWhitePatchIsDisabled = true;
         this.Subscribe<ImageClickedMessage>();
     }
 
@@ -41,6 +43,12 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     [ObservableProperty]
     public partial SolidColorBrush PatchColor { get; set; }
 
+    [ObservableProperty]
+    public partial SolidColorBrush PatchColorState { get; set; }
+
+    [ObservableProperty]
+    public partial bool RunWhitePatchIsDisabled  { get; set; }
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
@@ -53,6 +61,9 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             this.TemperatureSliderValue = 0.01; // Force property changed 
             this.TemperatureSliderValue = this.temperature;
             this.SaturationSliderValue = this.saturationThreshold;
+
+            this.RunWhitePatchIsDisabled = true;
+            this.PatchColorState = new SolidColorBrush(Colors.Firebrick);
         });
     }
 
@@ -63,13 +74,18 @@ public sealed partial class WhiteBalanceToolboxViewModel :
         // Calculate white patch color by averaging colors on a 3 by 3 area on the image
         global::Avalonia.Media.Color patchColor =
             message.WriteableBitmap.GetColorAroundPixel(message.PixelX, message.PixelY);
+        this.whitePatch = patchColor;
         this.PatchColor = new SolidColorBrush(patchColor);
+        bool canRunWhitePatch = this.whitePatch.Luminance() >= 0.5;
+        this.RunWhitePatchIsDisabled = !canRunWhitePatch;
+        this.PatchColorState = new SolidColorBrush(canRunWhitePatch ? Colors.LightGreen: Colors.Firebrick);
     }
 
     [RelayCommand]
     public void OnWhitePatch()
     {
-        // TODO 
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch;
+        this.UpdateModel() ;
     }
 
     private void UpdateSliders(WhiteBalanceStep step)
@@ -131,6 +147,14 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
             case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
                 this.model.TannerHellandWhiteBalance(this.kelvin);
+                break;
+
+            case WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch:
+                // Model uses normalized values 
+                this.model.WhitePatchWhiteBalance(
+                    this.whitePatch.R / 255.0f, 
+                    this.whitePatch.G / 255.0f, 
+                    this.whitePatch.B / 255.0f);
                 break;
 
             default:
