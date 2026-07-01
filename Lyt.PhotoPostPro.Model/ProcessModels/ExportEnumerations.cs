@@ -2,7 +2,9 @@
 
 public enum ExportAction
 {
+    None,
     ToScale,
+    ToDimensions,
     ToFileSize,
 }
 
