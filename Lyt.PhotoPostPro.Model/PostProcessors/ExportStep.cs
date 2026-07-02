@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using static System.Net.Mime.MediaTypeNames;
+
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
@@ -75,11 +77,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         {
             try
             {
-                var encoder = imageParameters.ImageEncoder;
-                string extension = imageParameters.FileExtension;
-                string exportPath =
-                    Path.Combine(subDirectory, fileName + imageParameters.PostFix + extension);
-                Image<Rgb48> imageToExport = this.ResultImage;
+                // Resize and rescale 
+                Image<Rgb48> imageToResize = this.ResultImage.Clone();
                 switch (imageParameters.Action)
                 {
                     default:
@@ -96,26 +95,55 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
                     case ExportAction.ToDimensions:
                         int dimension = imageParameters.Dimension;
-                        imageToExport = this.ResultImage.Clone();
-                        int width = imageToExport.Width;
-                        int height = imageToExport.Height;
+                        int width = imageToResize.Width;
+                        int height = imageToResize.Height;
                         if (width > height)
                         {
-                            float scale = width / (float) dimension;
+                            float scale = width / (float)dimension;
                             int newHeight = (int)(height / scale);
-                            imageToExport.Mutate(x => x.Resize(dimension, newHeight));
+                            imageToResize.Mutate(x => x.Resize(dimension, newHeight));
                         }
                         else
                         {
-                            float scale = height / (float) dimension;
+                            float scale = height / (float)dimension;
                             int newWidth = (int)(width / scale);
-                            imageToExport.Mutate(x => x.Resize(newWidth, dimension));
+                            imageToResize.Mutate(x => x.Resize(newWidth, dimension));
                         }
 
                         break;
                 }
 
-                imageToExport.Save(exportPath, encoder);
+                // TODO: Add watermark, signature, if specified
+                //
+
+                // Add Borders, if specified
+                Image<Rgb48> imageWithBorders = imageToResize;
+                if (imageParameters.WithBorders)
+                {
+                    Color borderColor =
+                        imageParameters.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
+                    double thicknessFactor = 
+                        imageParameters.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5; 
+                    int borderWidth = (int)(thicknessFactor * imageWithBorders.Width / 100.0);
+                    int borderHeight = (int)(thicknessFactor * imageWithBorders.Height / 100.0);
+                    int border = Math.Max(borderWidth, borderHeight);
+                    // Weigthed padding would need a second pass 
+                    imageWithBorders.Mutate(x => x.Resize(
+                        new ResizeOptions
+                        {
+                            // Add twice the border width to both dimensions for the final canvas size
+                            Size = new Size(imageWithBorders.Width + border * 2, imageWithBorders.Height + border * 2),
+                            Mode = ResizeMode.BoxPad,
+                            PadColor = borderColor,
+                        }));
+                }
+
+                Image<Rgb48> finalImage = imageWithBorders;
+                var encoder = imageParameters.ImageEncoder;
+                string extension = imageParameters.FileExtension;
+                string exportPath =
+                    Path.Combine(subDirectory, fileName + imageParameters.PostFix + extension);
+                finalImage.Save(exportPath, encoder);
             }
             catch (Exception e)
             {

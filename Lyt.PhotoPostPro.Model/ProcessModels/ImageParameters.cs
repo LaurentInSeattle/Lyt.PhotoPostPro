@@ -13,7 +13,7 @@ public sealed class ImageParameters
 
     public OutputFormat OutputFormat { get; set; } = OutputFormat.Jpeg;
 
-    public int JpegQuality { get; set; } = 97;
+    public int JpegQuality { get; set; } = 95;
 
     public bool WithSignature { get; set; } = false;
 
@@ -27,10 +27,32 @@ public sealed class ImageParameters
 
     public ImageBorderStyle BorderStyle { get; set; } = ImageBorderStyle.None;
 
+    public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.None;
+
     public string BorderStyleKey { get; set; } = string.Empty;
 
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
+
+    public ImageParameters Clone()
+        =>  new()
+            {
+                Action = this.Action,
+                Dimension = this.Dimension,
+                ScaleFactor = this.ScaleFactor,
+                MegaBytes = this.MegaBytes,
+                OutputFormat = this.OutputFormat,
+                JpegQuality = this.JpegQuality,
+                WithSignature = this.WithSignature,
+                SignatureKey = this.SignatureKey,
+                WithWatermark = this.WithWatermark,
+                WatermarkKey = this.WatermarkKey,
+                WithBorders = this.WithBorders,
+                BorderStyle = this.BorderStyle,
+                BorderStyleKey = this.BorderStyleKey,
+                BorderThickness = this.BorderThickness,
+                PostFix = this.PostFix
+            };
 
     // Original size, no name change, very high JPG quality, no watermark, no signature, no borders, no postfix
     public static ImageParameters Default => new();

@@ -22,3 +22,11 @@ public enum ImageBorderStyle
     WhiteBorder,
     Custom,
 }
+
+public enum ImageBorderThickness
+{
+    None,
+    Thick,
+    Thin,
+    Custom,
+}

@@ -3,11 +3,11 @@ Bugs / WIP
 
 - Image Exports: Quick save
 
--  Image Exports: Black or white image borders
-
 - Sometimes not rotated image shows up in rotation step (no repro yet)
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
+
+- Add auto-localization tool in VS build 
 
 - Fix Highlights 
 

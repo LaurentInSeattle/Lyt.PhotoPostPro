@@ -14,5 +14,14 @@ public sealed class ExportParameters
 
         // Adds the thumbnail export
         this.Images.Add(ImageParameters.Thumbnail);
+
+        // Adds the HD sized export with black borders
+        var hdWithBlackBorders = ImageParameters.FullHd.Clone() ;
+        hdWithBlackBorders.JpegQuality = 88; 
+        hdWithBlackBorders.WithBorders = true;
+        hdWithBlackBorders.BorderStyle = ImageBorderStyle.BlackBorder;
+        hdWithBlackBorders.BorderThickness = ImageBorderThickness.Thick;
+        hdWithBlackBorders.PostFix = "_HDBB"; 
+        this.Images.Add(hdWithBlackBorders);
     }
 }
