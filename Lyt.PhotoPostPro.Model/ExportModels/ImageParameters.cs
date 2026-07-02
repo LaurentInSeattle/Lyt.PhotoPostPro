@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
+﻿namespace Lyt.PhotoPostPro.Model.ExportModels;
 
 public sealed class ImageParameters
 {
@@ -27,7 +27,7 @@ public sealed class ImageParameters
 
     public ImageBorderStyle BorderStyle { get; set; } = ImageBorderStyle.None;
 
-    public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.None;
+    public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.Thick;
 
     public string BorderStyleKey { get; set; } = string.Empty;
 

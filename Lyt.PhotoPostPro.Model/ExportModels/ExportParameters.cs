@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
+﻿namespace Lyt.PhotoPostPro.Model.ExportModels;
 
 public sealed class ExportParameters
 {
@@ -21,6 +21,8 @@ public sealed class ExportParameters
         hdWithBlackBorders.WithBorders = true;
         hdWithBlackBorders.BorderStyle = ImageBorderStyle.BlackBorder;
         hdWithBlackBorders.BorderThickness = ImageBorderThickness.Thick;
+        hdWithBlackBorders.WithSignature = true;
+        hdWithBlackBorders.SignatureKey = Signature.DefaultKey;
         hdWithBlackBorders.PostFix = "_HDBB"; 
         this.Images.Add(hdWithBlackBorders);
     }

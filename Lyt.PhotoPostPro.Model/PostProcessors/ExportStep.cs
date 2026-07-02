@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using static System.Net.Mime.MediaTypeNames;
-
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
@@ -57,10 +55,10 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             sourcePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
             FileInfo fi = new(sourcePath);
             string sourceDirectory = fi.DirectoryName!;
-            fileName = Path.GetFileNameWithoutExtension(fi.Name);
+            fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
             string ts = FileManagerModel.BriefTimestampString();
             string subDirName = fileName + "_EXP_" + ts;
-            subDirectory = Path.Combine(sourceDirectory, subDirName);
+            subDirectory = System.IO.Path.Combine(sourceDirectory, subDirName);
             if (!Directory.Exists(subDirectory))
             {
                 Directory.CreateDirectory(subDirectory);
@@ -113,8 +111,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                         break;
                 }
 
-                // TODO: Add watermark, signature, if specified
-                //
+                // TODO: Add watermark, if specified
+                PhotoPostProModel model = this.PostProcessWorkflow.PostProcess.Model;
 
                 // Add Borders, if specified
                 Image<Rgb48> imageWithBorders = imageToResize;
@@ -122,8 +120,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 {
                     Color borderColor =
                         imageParameters.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
-                    double thicknessFactor = 
-                        imageParameters.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5; 
+                    double thicknessFactor =
+                        imageParameters.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5;
                     int borderWidth = (int)(thicknessFactor * imageWithBorders.Width / 100.0);
                     int borderHeight = (int)(thicknessFactor * imageWithBorders.Height / 100.0);
                     int border = Math.Max(borderWidth, borderHeight);
@@ -138,11 +136,62 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                         }));
                 }
 
-                Image<Rgb48> finalImage = imageWithBorders;
+                // Add signature, if specified
+                Image<Rgb48> imageWithSignature = imageWithBorders;
+                if (imageParameters.WithSignature)
+                {
+                    Signature? signature = model.Signatures.FromKey(imageParameters.SignatureKey);
+                    if (signature is not null)
+                    {
+                        // Adding signature : Placement 
+                        int fontSpace = (int)(signature.FontSize * 1.0);
+                        HorizontalAlignment horizontalAlignment = HorizontalAlignment.Right;
+                        PointF origin = new();
+                        switch (signature.Location)
+                        {
+                            default:
+                            case SignatureLocation.BottomRight:
+                                origin = new PointF(imageWithBorders.Width - fontSpace, imageWithBorders.Height - fontSpace);
+                                horizontalAlignment = HorizontalAlignment.Right;
+                                break;
+
+                            case SignatureLocation.TopLeft:
+                                horizontalAlignment = HorizontalAlignment.Left;
+                                origin = new PointF(fontSpace, fontSpace);
+                                break;
+
+                            case SignatureLocation.TopRight:
+                                horizontalAlignment = HorizontalAlignment.Right;
+                                origin = new PointF(imageWithBorders.Width - fontSpace, fontSpace);
+                                break;
+
+                            case SignatureLocation.BottomLeft:
+                                horizontalAlignment = HorizontalAlignment.Left;
+                                origin = new PointF(fontSpace, imageWithBorders.Height - fontSpace);
+                                break;
+                        }
+
+                        // Adding signature : Drawing
+                        Font font = SystemFonts.CreateFont(signature.FontFamily, signature.FontSize, signature.FontStyle);
+                        var textOptions = new RichTextOptions(font)
+                        {
+                            HorizontalAlignment = horizontalAlignment,
+                            Origin = origin,
+                        };
+
+                        imageWithSignature.Mutate(x => x.Paint(canvas =>
+                        {
+                            canvas.DrawText(textOptions, signature.Text, Brushes.Solid(signature.Color), pen: null);
+                        }));
+                    }
+                }
+
+                // Saving export formatted image: pick encoder and file extension  
+                Image<Rgb48> finalImage = imageWithSignature;
                 var encoder = imageParameters.ImageEncoder;
                 string extension = imageParameters.FileExtension;
                 string exportPath =
-                    Path.Combine(subDirectory, fileName + imageParameters.PostFix + extension);
+                    System.IO.Path.Combine(subDirectory, fileName + imageParameters.PostFix + extension);
                 finalImage.Save(exportPath, encoder);
             }
             catch (Exception e)

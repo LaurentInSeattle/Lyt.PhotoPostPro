@@ -40,7 +40,7 @@ public sealed partial class PhotoPostProModel : ModelBase
                     return false;
                 }
 
-                folderPath = Path.GetDirectoryName(imagePath) ?? string.Empty;
+                folderPath = System.IO.Path.GetDirectoryName(imagePath) ?? string.Empty;
             }
             else
             {
@@ -242,14 +242,14 @@ public sealed partial class PhotoPostProModel : ModelBase
             {
                 ProjectId = this.CurrentProjectMetadata.Id,
                 ProcessId = FilenamesMgr.NewShortId(),
-                Name = Path.GetFileName(imagePath),
+                Name = System.IO.Path.GetFileName(imagePath),
                 SourceFilePath = imagePath,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
             };
 
             postProcess.Initialize(); 
-            postProcess.SetProject(this.CurrentProject);
+            postProcess.SetModelAndProject(this, this.CurrentProject);
 
             bool sourceImageLoaded = postProcess.LoadSourceImage(image, processMetadata, out errorMessage);
             if (!sourceImageLoaded)

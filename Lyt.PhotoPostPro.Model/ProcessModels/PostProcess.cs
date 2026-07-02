@@ -16,7 +16,19 @@ public sealed class PostProcess
 
     public required string SourceFilePath { get; set; } = string.Empty;
 
-    public void SetProject(Project project) => this.MaybeProject = project;
+    public void SetModelAndProject(PhotoPostProModel model, Project project)
+    {
+        this.MaybeModel = model;
+        this.MaybeProject = project;
+    }
+
+    [JsonIgnore]
+    public PhotoPostProModel? MaybeModel { get; set; }
+
+    [JsonIgnore]
+    public PhotoPostProModel Model
+        =>  this.MaybeModel ??
+            throw new InvalidOperationException("Model must be set before accessing it.");
 
     [JsonIgnore]
     public Project? MaybeProject { get; set; }
@@ -41,9 +53,8 @@ public sealed class PostProcess
     public ProcessMetadata? ProcessMetadata { get; private set; }
 
     public bool IsInvalid
-        =>
-            string.IsNullOrWhiteSpace(this.Name) ||
-            string.IsNullOrWhiteSpace(this.SourceFilePath);
+        => string.IsNullOrWhiteSpace(this.Name) ||
+           string.IsNullOrWhiteSpace(this.SourceFilePath);
 
     public bool Validate(out string errorMessageKey)
     {
@@ -60,7 +71,7 @@ public sealed class PostProcess
             return false;
         }
 
-        FileInfo fileInfo = new(Path.Combine(this.Project.Metadata.SourceFolderPath, this.SourceFilePath));
+        FileInfo fileInfo = new(System.IO.Path.Combine(this.Project.Metadata.SourceFolderPath, this.SourceFilePath));
         if (!fileInfo.Exists)
         {
             errorMessageKey = "Model.Project.SourceFile";

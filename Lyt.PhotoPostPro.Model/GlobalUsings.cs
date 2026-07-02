@@ -20,9 +20,14 @@ global using System.Threading.Tasks;
 
 
 // Image Sharp 
+//
 global using SixLabors;
-global using SixLabors.ImageSharp  ;
+global using SixLabors.Fonts;
+global using SixLabors.ImageSharp;
 global using SixLabors.ImageSharp.Advanced;
+global using SixLabors.ImageSharp.Drawing;
+global using SixLabors.ImageSharp.Drawing.Processing;
+global using SixLabors.ImageSharp.Drawing.Text;
 global using SixLabors.ImageSharp.Formats;
 global using SixLabors.ImageSharp.Formats.Bmp;
 global using SixLabors.ImageSharp.Formats.Jpeg;
@@ -34,6 +39,7 @@ global using SixLabors.ImageSharp.Processing;
 
 
 // LibRaw 
+//
 global using Sdcb;
 global using Sdcb.LibRaw;
 
@@ -44,6 +50,7 @@ global using Sdcb.LibRaw;
 
 
 // Framework 
+//
 global using Lyt.Framework.Interfaces.Localizing;
 global using Lyt.Framework.Interfaces.Logging;
 global using Lyt.Framework.Interfaces.Modeling;
@@ -52,7 +59,8 @@ global using Lyt.Framework.Interfaces.Profiling;
 
 
 // Model Utilities 
-global using Lyt.Collections; 
+//
+global using Lyt.Collections;
 global using Lyt.Model;
 global using Lyt.Persistence;
 global using Lyt.Utilities.Parallel;
@@ -61,8 +69,10 @@ global using Lyt.Utilities.Randomizing;
 
 
 // Application Model 
+//
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Algorithms;
+global using Lyt.PhotoPostPro.Model.ExportModels;
 global using Lyt.PhotoPostPro.Model.Frames;
 global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.PostProcessors;

@@ -3,12 +3,14 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
+
 public static class ImageLoader
 {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
     public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
 
-    public static bool HasHiefExtension(string path) => HeifExtensions.Contains(Path.GetExtension(path).ToLower());
+    public static bool HasHiefExtension(string path) 
+        => HeifExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
     // https://en.wikipedia.org/wiki/Raw_image_format
     // Many raw file formats, including IIQ (Phase One), 3FR (Hasselblad), DCR, K25, KDC (Kodak),
@@ -40,7 +42,8 @@ public static class ImageLoader
             ".raw" , // Generic 
         ];
 
-    public static bool HasRawExtension(string path) => RawExtensions.Contains(Path.GetExtension(path).ToLower());
+    public static bool HasRawExtension(string path) 
+        => RawExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
     public static List<string> ImageSharpExtensions =
         [
@@ -48,7 +51,8 @@ public static class ImageLoader
             ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".bmp", ".exr",
         ];
 
-    public static bool HasImageSharpExtension(string path) => ImageSharpExtensions.Contains(Path.GetExtension(path).ToLower());
+    public static bool HasImageSharpExtension(string path) 
+        => ImageSharpExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
@@ -64,7 +68,7 @@ public static class ImageLoader
                 return fail;
             }
 
-            string? extension = Path.GetExtension(imagePath);
+            string? extension = System.IO.Path.GetExtension(imagePath);
             Debug.WriteLine(extension);
 
             Image<Rgb48>? image = null;

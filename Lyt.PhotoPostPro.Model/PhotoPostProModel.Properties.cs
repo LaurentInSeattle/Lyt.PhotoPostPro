@@ -15,6 +15,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool IsFirstRun { get; set; } = false;
 
     [JsonRequired]
+    public Signatures Signatures { get; set; } = new();
+
+    [JsonRequired]
     public Dictionary<string, ProjectMetadata> Projects { get; set; } = new(8);
 
     #endregion Serialized -  No model changed event

@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
+﻿namespace Lyt.PhotoPostPro.Model.ExportModels;
 
 public enum ExportAction
 {
@@ -25,8 +25,15 @@ public enum ImageBorderStyle
 
 public enum ImageBorderThickness
 {
-    None,
     Thick,
     Thin,
     Custom,
+}
+
+public enum SignatureLocation
+{
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
 }
