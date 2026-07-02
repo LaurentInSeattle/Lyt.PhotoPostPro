@@ -144,14 +144,14 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                     if (signature is not null)
                     {
                         // Adding signature : Placement 
-                        int fontSpace = (int)(signature.FontSize * 1.0);
+                        int fontSpace = (int)(signature.FontSize * 0.7);
                         HorizontalAlignment horizontalAlignment = HorizontalAlignment.Right;
                         PointF origin = new();
                         switch (signature.Location)
                         {
                             default:
                             case SignatureLocation.BottomRight:
-                                origin = new PointF(imageWithBorders.Width - fontSpace, imageWithBorders.Height - fontSpace);
+                                origin = new PointF(imageWithBorders.Width - fontSpace, imageWithBorders.Height - 2 * fontSpace);
                                 horizontalAlignment = HorizontalAlignment.Right;
                                 break;
 
@@ -167,7 +167,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
                             case SignatureLocation.BottomLeft:
                                 horizontalAlignment = HorizontalAlignment.Left;
-                                origin = new PointF(fontSpace, imageWithBorders.Height - fontSpace);
+                                origin = new PointF(fontSpace, imageWithBorders.Height - 2 * fontSpace);
                                 break;
                         }
 

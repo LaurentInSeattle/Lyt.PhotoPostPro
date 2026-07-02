@@ -196,12 +196,42 @@ public sealed partial class ShellViewModel
         await application.Shutdown();
     }
 
+#pragma warning restore CA1822
+#pragma warning restore IDE0079
+
     internal void EnableAndSelect(ActivatedView view)
     {
         this.viewSelector!.EnableView(view);
         this.viewSelector!.SelectView(view); 
     }
 
-#pragma warning restore CA1822
-#pragma warning restore IDE0079
+    internal void HandleShortcut(Key key)
+    {
+        switch (key)
+        {
+            default:
+            case Key.None:
+                break;
+
+            case Key.PageUp:
+                this.photoPostProModel.Back();
+                break;
+
+            case Key.PageDown:
+                this.photoPostProModel.Next();
+                break;
+
+            case Key.Home:
+                this.photoPostProModel.Back();
+                break;
+
+            case Key.End:
+                this.photoPostProModel.Next();
+                break;
+
+            case Key.Pause:
+                this.photoPostProModel.Reset();
+                break;
+        }
+    }
 }

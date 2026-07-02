@@ -16,4 +16,5 @@
     ExtendClientAreaToDecorationsHint="False"
     Icon="\Assets\Images\ppp.ico"
     Background="Black"
-    />
+    >
+</Window>

@@ -13,7 +13,7 @@
 
 	Background="Transparent"
 	>
-	<Border
+    <Border
 		BorderBrush="#80000020"
 		BorderThickness="1"
 		>

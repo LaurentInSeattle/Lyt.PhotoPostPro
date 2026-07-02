@@ -56,6 +56,13 @@ Load the black-and-white edge mask you created as an alpha channel/mask to apply
 
 
 ------------
+<Window.KeyBindings>
+        <!-- Triggers NewCommand in your ViewModel when Ctrl+N is pressed -->
+        <KeyBinding Gesture="Ctrl+N" Command="{Binding NewCommand}" />
+        <KeyBinding Gesture="Delete" Command="{Binding DeleteCommand}" />
+    </Window.KeyBindings>
+
+------------
 
 Image Watermark
 

@@ -5,8 +5,6 @@ Bugs / WIP
 
 - Sometimes not rotated image shows up in rotation step (no repro yet)
 
-- Add kbd shortcuts for Back , Next and Reset 
-
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - Add auto-localization tool in VS build 

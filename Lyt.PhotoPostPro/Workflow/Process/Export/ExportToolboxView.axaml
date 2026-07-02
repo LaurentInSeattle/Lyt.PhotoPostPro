@@ -35,7 +35,7 @@
 			GlyphSource="arrow_export"
 			Text="{DynamicResource Workflow.Export.Export}"
 			Command="{Binding OnExport}"
-			HorizontalAlignment="Left" Width="320"
+			HorizontalAlignment="Right" Width="320"
 	    	/>
 		<glyphs:GlyphButton
 			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
@@ -44,7 +44,7 @@
 			GlyphSource="dismiss"
 			Text="{DynamicResource Workflow.Export.Finish}"
 			Command="{Binding OnFinish}"
-			HorizontalAlignment="Left" Width="320"
+			HorizontalAlignment="Right" Width="320"
 	    	/>
-	</Grid>
+	</Grid>	
 </UserControl>
