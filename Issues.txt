@@ -3,19 +3,29 @@ Bugs / WIP
 
 - Image Exports: Quick save
 
-- Sometimes not rotated image shows up in rotation step (no repro yet)
+- Watermarks with transparency 
+
+- Gamma curve should reset on new image load
+
+- Vibrance sliders do not go back to zero on Reset 
+
+- Need a spin wait for exporting images 
+
+- Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - Add auto-localization tool in VS build 
-
-- Fix Highlights 
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 TODO First : Single Image Process
 ---------------------------------
+
+- UI to pick up exports parameters 
+
+- UI to define signature and watermark
 
 - Image Fancy Filters (Img # provided)
 	- Black and White 
@@ -29,10 +39,6 @@ TODO First : Single Image Process
 
 Missing Features 
 ----------------
-
-- Image Watermarking 
-
-- Image Signature / Copyright
 
 - Project : 
 	- Browse 

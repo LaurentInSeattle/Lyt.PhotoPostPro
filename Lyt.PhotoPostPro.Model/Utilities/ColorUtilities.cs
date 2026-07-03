@@ -1,8 +1,24 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Utilities;
 
-using static ImagingUtilities; 
+using static ImagingUtilities;
+using static Math;
+
 public static class ColorUtilities
 {
+    public static void RgbToYiq(float r, float g, float b, out float y, out float i, out float q)
+    {
+        y = 0.229f * r + 0.587f * g + 0.114f * b;
+        i = 0.595716f * r - 0.274453f * g - 0.321263f * b;
+        q = 0.211456f * r - 0.522591f * g + 0.311135f * b;
+    }
+
+    public static void YiqToRgb(float y, float i, float q, out float r, out float g, out float b)
+    {
+        r = y + 0.9563f * i + 0.6210f * q;
+        g = y - 0.2721f * i - 0.6474f * q;
+        b = y - 1.1070f * i + 1.7046f * q;
+    }
+
     public static void RgbToHsl(float r, float g, float b , out float h, out float s, out float l)
     {
         float max = Math.Max(r, Math.Max(g, b));

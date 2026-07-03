@@ -90,6 +90,17 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void HighlightsShadows(float highlights, float shadows) =>
         this.ApiAction(() =>
         {
+            // All in -1 , +1 range 
+            if ((highlights < -1.0) || (highlights > 1.0))
+            {
+                return false;
+            }
+
+            if ((shadows < -1.0) || (shadows > 1.0))
+            {
+                return false;
+            }
+
             if (this.Workflow.CurrentStep is RecoveryStep recoveryStep)
             {
                 this.LastResultFrame = recoveryStep.HighlightsShadows(highlights, shadows);

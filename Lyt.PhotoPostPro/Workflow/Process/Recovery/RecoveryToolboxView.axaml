@@ -50,7 +50,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.7" Maximum="0.7"
+				Minimum="-1.0" Maximum="1.0"
 				Value="{Binding HighlightsSliderValue}"
 				/>
 			<TextBlock
@@ -72,7 +72,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.7" Maximum="0.7"
+				Minimum="-1.0" Maximum="1.0"
 				Value="{Binding ShadowsSliderValue}"
 				/>
 			<TextBlock

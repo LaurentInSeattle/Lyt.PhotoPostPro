@@ -12,11 +12,11 @@ public sealed class Signature
 
     public string FontFamily { get; set; } = "Segoe Script";
 
-    public int FontSize { get; set; } = 34;
+    public int FontSize { get; set; } = 36;
 
     public FontStyle FontStyle { get; set; } = FontStyle.Italic;
 
-    public string Text { get; set; } = "This image was edited with Lyt.PhotoPostPro";
+    public string Text { get; set; } = "Edited with Lyt.PhotoPostPro";
 
     public SignatureLocation Location { get; set; } = SignatureLocation.BottomRight;
 

@@ -51,7 +51,7 @@ public sealed partial class RecoveryToolboxViewModel :
 
     partial void OnHighlightsSliderValueChanged(double value)
     {
-        // Slider sends -0.7 to +0.7 
+        // Slider sends -1 to +1
         this.highlights = (float)value;
         this.HighlightsString = value.ToString("+0.00;-0.00;0.00") + " %";
         this.UpdateModel();
@@ -59,7 +59,7 @@ public sealed partial class RecoveryToolboxViewModel :
 
     partial void OnShadowsSliderValueChanged(double value)
     {
-        // Slider sends -0.7 to +0.7 
+        // Slider sends -1 to +1
         this.shadows = (float)value;
         this.ShadowsString = value.ToString("+0.00;-0.00;0.00") + " %";
         this.UpdateModel();

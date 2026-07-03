@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
 using static ImagingUtilities;
-using static System.Math;
+using static System.MathF;
 
 public static partial class ImagingAlgorithms
 {
@@ -240,7 +240,7 @@ public static partial class ImagingAlgorithms
 
     public static void WhitePatchWhiteBalance(this Image<Rgb48> image, float r, float g, float b)
     {
-        float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+        float luminance = (float)MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
 
         float rGain = r < 0.001f ? 1.0f : luminance / r;
         float gGain = g < 0.001f ? 1.0f : luminance / g;
@@ -269,6 +269,127 @@ public static partial class ImagingAlgorithms
 
     #region Highlights and Shadows
 
+    public static void HighlightsShadows(this Image<Rgb48> image, float highlight, float shadow)
+    {
+        const float compress = 0.5f;
+        const float low_approximation = 0.01f;
+        const float shadowColor = 1.0f;
+        const float highlightColor = 1.0f;
+
+        float highlights_sign_negated = MathF.CopySign(1.0f, -highlight);
+        float shadows_sign = MathF.CopySign(1.0f, shadow);
+
+        // Parallelize the loop over the rows
+        int height = image.Height;
+        Parallel.For(0, height, rowIndex =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<Rgb48> row = image.DangerousGetPixelRowMemory(rowIndex).Span;
+            for (int x = 0; x < row.Length; x++)
+            {
+                Rgb48 pixel = row[x];
+                bool pixelChanged = false;
+
+                // Normalize RGB to [0, 1] float range
+                float r = pixel.R / 65535.0f;
+                float g = pixel.G / 65535.0f;
+                float b = pixel.B / 65535.0f;
+                ColorUtilities.RgbToYiq(r, g, b, out float y, out float i, out float q);
+
+                // No blur yet , use same for now 
+                float yBlur = y;
+                float iBlur = i;
+                float qBlur = q;
+
+                float tb0 = 1.0f - yBlur;
+                if (tb0 < 1.0f - compress)
+                {
+                    float highlights2 = highlight * highlight;
+                    float highlights_xform = Math.Min(1.0f - tb0 / (1.0f - compress), 1.0f);
+
+                    while (highlights2 > 0.0f)
+                    {
+                        float la = y;
+                        float la_abs = Math.Abs(la);
+                        float la_inverted = 1.0f - la;
+                        float la_inverted_abs = Math.Abs(la_inverted);
+                        float lb = (tb0 - 0.5f) * highlights_sign_negated * Math.Sign(la_inverted) + 0.5f;
+
+                        float lref = MathF.CopySign(
+                            la_abs > low_approximation ?
+                                1.0f / la_abs :
+                                1.0f / low_approximation, la);
+                        float href = MathF.CopySign(
+                            la_inverted_abs > low_approximation ? 1.0f / la_inverted_abs : 1.0f / low_approximation,
+                            la_inverted);
+
+                        float chunk = highlights2 > 1.0f ? 1.0f : highlights2;
+                        float optrans = chunk * highlights_xform;
+                        highlights2 -= 1.0f;
+
+                        y = la * (1.0f - optrans) + (la > 0.5f ?
+                                1.0f - (1.0f - 2.0f * (la - 0.5f)) * (1.0f - lb) :
+                                2.0f * la * lb) * optrans;
+
+                        i = i * (1.0f - optrans) +
+                            i * (y * lref * (1.0f - highlightColor) + (1.0f - y) * href * highlightColor) * optrans;
+
+                        q = q * (1.0f - optrans) +
+                            q * (y * lref * (1.0f - highlightColor) + (1.0f - y) * href * highlightColor) * optrans;
+
+                        pixelChanged = true;
+                    }
+                }
+
+                if (tb0 > compress)
+                {
+                    float shadows2 = shadow * shadow;
+                    float shadows_xform = Math.Min(tb0 / (1.0f - compress) - compress / (1.0f - compress), 1.0f);
+
+                    while (shadows2 > 0.0f)
+                    {
+                        float la = y;
+                        float la_abs = Math.Abs(la);
+                        float la_inverted = 1.0f - la;
+                        float la_inverted_abs = Math.Abs(la_inverted);
+                        float lb = (tb0 - 0.5f) * shadows_sign * Math.Sign(la_inverted) + 0.5f;
+
+                        float lref = MathF.CopySign(
+                            la_abs > low_approximation ? 1.0f / la_abs : 1.0f / low_approximation,  la);
+                        float href = MathF.CopySign(
+                            la_inverted_abs > low_approximation ? 1.0f / la_inverted_abs : 1.0f / low_approximation,
+                            la_inverted);
+
+                        float chunk = shadows2 > 1.0f ? 1.0f : shadows2;
+                        float optrans = chunk * shadows_xform;
+                        
+                        shadows2 -= 1.0f;
+                        
+                        y = la * (1.0f - optrans) + (la > 0.5f ?
+                                1.0f - (1.0f - 2.0f * (la - 0.5f)) * (1.0f - lb) :
+                                2.0f * la * lb) * optrans;
+                        
+                        i = i * (1.0f - optrans) +
+                            i * (y * lref * (1.0f - shadowColor) + (1.0f - y) * href * shadowColor) * optrans;
+                        
+                        q = q * (1.0f - optrans) +
+                            q * (y * lref * (1.0f - shadowColor) + (1.0f - y) * href * shadowColor) * optrans;
+
+                        pixelChanged = true;
+                    }
+                }
+
+                if (pixelChanged)
+                {
+                    ColorUtilities.YiqToRgb(y, i, q, out r, out g, out b);
+                    row[x].R = DeNormalizeClip16(r);
+                    row[x].G = DeNormalizeClip16(g);
+                    row[x].B = DeNormalizeClip16(b);
+                } 
+            }
+        });
+    }
+
     // To eliminate sharp edges and halos, pre-apply a Gaussian Blur to a working luminance mask before integrating
     // the adjustments
 
@@ -276,11 +397,11 @@ public static partial class ImagingAlgorithms
     //  a non-linear luminance alteration formula. it calculates the perceived luminance of each pixel, 
     //  then maps highlights and shadows independently using a power curve(gamma mapping).
     // 
-    public static void HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
+    public static void BAD_HighlightsShadows(this Image<Rgb48> image, float highlightAmount, float shadowAmount)
     {
         const float luminanceLowThreshold = 0.35f;
         const float luminanceHighThreshold = 0.65f;
-        const float clipFactor = 4.5f; 
+        const float clipFactor = 4.5f;
 
         // shadowAmount and highlightAmount range from -1 to 1
         // Convert parameters to gamma modifiers
@@ -303,22 +424,22 @@ public static partial class ImagingAlgorithms
                 float b = pixel.B / 65535.0f;
 
                 // Calculate perceived luminance
-                float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+                float luminance = (float)MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
                 float factor = 1.0f;
                 if (luminance < luminanceLowThreshold && shadowAmount != 0)
                 {
                     // Shadow adjustment: targets dark areas 
-                    factor = (float)Math.Pow(2.0f * luminance, shadowGamma) / (2.0f * luminance);
+                    factor = (float)MathF.Pow(2.0f * luminance, shadowGamma) / (2.0f * luminance);
                 }
                 else if (luminance >= luminanceHighThreshold && highlightAmount != 0)
                 {
                     // Highlight adjustment: targets bright areas 
-                    factor = (float)Math.Pow(2.0f * (1.0f - luminance), highlightGamma) / (2.0f * (1.0f - luminance));
+                    factor = (float)MathF.Pow(2.0f * (1.0f - luminance), highlightGamma) / (2.0f * (1.0f - luminance));
                 }
                 else
                 {
                     // No change in the midtones 
-                    continue; 
+                    continue;
                 }
 
                 // Clip factor to prevent anomalies
@@ -433,13 +554,13 @@ public static partial class ImagingAlgorithms
                 float b = pixel.B / 65535.0f;
 
                 // Calculate perceived luminance
-                float luminance = (float)Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+                float luminance = (float)MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
 
                 // Find the strongest color
-                float maxColor = Max(r, Max(g, b));
+                float maxColor = MathF.Max(r, MathF.Max(g, b));
 
                 //Find the weakest color
-                float minColor = Min(r, Min(g, b));
+                float minColor = MathF.Min(r, MathF.Min(g, b));
 
                 // The difference between the two is the saturation
                 float saturation = maxColor - minColor;
