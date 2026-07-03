@@ -23,6 +23,8 @@ public sealed class ExportParameters
         hdWithBlackBorders.BorderThickness = ImageBorderThickness.Thick;
         hdWithBlackBorders.WithSignature = true;
         hdWithBlackBorders.SignatureKey = Signature.DefaultKey;
+        hdWithBlackBorders.WithWatermark = true;
+        hdWithBlackBorders.WatermarkKey = Watermark.DefaultKey;
         hdWithBlackBorders.PostFix = "_HDBB"; 
         this.Images.Add(hdWithBlackBorders);
     }

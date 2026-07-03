@@ -14,6 +14,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             IsFirstRun = true,
             Projects = new Dictionary<string, ProjectMetadata>(8),
             Signatures = new Signatures(),
+            Watermarks = new Watermarks(),
         }; 
 
     private readonly FileManagerModel fileManager;

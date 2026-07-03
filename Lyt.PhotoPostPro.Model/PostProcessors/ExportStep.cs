@@ -111,11 +111,40 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                         break;
                 }
 
-                // TODO: Add watermark, if specified
+                // Add watermark, if specified
                 PhotoPostProModel model = this.PostProcessWorkflow.PostProcess.Model;
+                Image<Rgb48> imageWithWatermark = imageToResize;
+                if (imageParameters.WithWatermark)
+                {
+                    Watermark? watermark = model.Watermarks.FromKey(imageParameters.WatermarkKey);
+                    if (watermark is not null)
+                    {
+                        // Adding watermark : Placement 
+                        int fontSpace = (int)(watermark.FontSize * 0.7);
+                        PointF origin = new(imageWithWatermark.Width / 2, 0.8f * imageWithWatermark.Height / 2 );
+
+                        // Adding watermark : Drawing
+                        Font font = SystemFonts.CreateFont(watermark.FontFamily, watermark.FontSize, watermark.FontStyle);
+                        var textOptions = new RichTextOptions(font)
+                        {
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            TextAlignment = TextAlignment.Center,
+                            Origin = origin,
+                            LayoutMode =  LayoutMode.HorizontalTopBottom,
+                            MaxLines = 20, 
+                            WordBreaking = WordBreaking.Standard,       
+                            WrappingLength = imageWithWatermark.Width * 0.9f, // Wrap text to 90% of image width
+                        };
+
+                        imageWithWatermark.Mutate(x => x.Paint(canvas =>
+                        {
+                            canvas.DrawText(textOptions, watermark.Text, Brushes.Solid(watermark.Color), pen: null);
+                        }));
+                    }
+                }
 
                 // Add Borders, if specified
-                Image<Rgb48> imageWithBorders = imageToResize;
+                Image<Rgb48> imageWithBorders = imageWithWatermark;
                 if (imageParameters.WithBorders)
                 {
                     Color borderColor =
