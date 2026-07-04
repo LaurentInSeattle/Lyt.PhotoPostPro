@@ -280,8 +280,8 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void GlobalSharpen(float sharpenAmount) =>
         this.ApiAction(() =>
         {
-            // blurAmount == sigma from 0.0 to 2.5 - 0.0 -> No blur 
-            if ((sharpenAmount <= 0.0) || (sharpenAmount > 2.5))
+            // blurAmount == sigma from 0.0 to 4.0 - 0.0 -> No sharpening 
+            if ((sharpenAmount <= 0.0) || (sharpenAmount > 4.0))
             {
                 return false;
             }

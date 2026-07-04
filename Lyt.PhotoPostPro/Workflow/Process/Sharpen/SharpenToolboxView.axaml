@@ -58,7 +58,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.1"
-				Minimum="0.0" Maximum="2.5"
+				Minimum="0.0" Maximum="4.0"
 				Value="{Binding BlurSliderValue}"
 				/>
 			<TextBlock

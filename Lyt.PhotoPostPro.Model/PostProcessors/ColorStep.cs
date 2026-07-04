@@ -75,6 +75,11 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = ColorAlgorithm.Saturation;
         this.SaturationAmount = 1.0f;
+
+        // Clear all properties so that the UI sliders are also reset to zero on Reset 
+        this.RedAmount = 0.0f;
+        this.GreenAmount = 0.0f;
+        this.BlueAmount = 0.0f;
     }
 }
 

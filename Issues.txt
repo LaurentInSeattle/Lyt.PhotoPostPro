@@ -3,10 +3,6 @@ Bugs / WIP
 
 - Image Exports: Quick save
 
-- Gamma curve should reset on new image load
-
-- Vibrance sliders do not go back to zero on Reset 
-
 - Need a spin wait for exporting images 
 
 - Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???

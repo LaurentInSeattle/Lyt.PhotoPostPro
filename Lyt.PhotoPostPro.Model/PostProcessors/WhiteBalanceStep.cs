@@ -103,5 +103,12 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.SaturationThreshold = 0.4f;
+
+        // Clear all properties so that the UI sliders are also reset to default on Reset 
+        this.Temperature = 0.0f;
+        this.Kelvin = 1000.0f; // This one hidden for now 
+        this.Red = 0.0f;
+        this.Green = 0.0f;
+        this.Blue = 0.0f;
     }
 }

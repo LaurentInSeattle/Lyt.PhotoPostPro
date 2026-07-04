@@ -45,7 +45,7 @@ public sealed partial class SharpenToolboxViewModel :
 
     partial void OnBlurSliderValueChanged(double value)
     {
-        // Slider sends 0.0 to +2.5, fine for the model  
+        // Slider sends 0.0 to +4.0, fine for the model  
         this.algorithm = SharpenStep.SharpenAlgorithm.Sharpen;
         this.blur = (float)value;
         this.BlurString = value.ToString("+0.00;-0.00;0.00");
