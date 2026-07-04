@@ -14,7 +14,8 @@ public class PostProcessStep
     public const string ContrastStepName = "Contrast";
     public const string ColorStepName = "Color";
     public const string SharpenStepName = "Sharpen";
-
+    public const string VignetteStepName = "Vignette";
+    public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
     public PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name) 

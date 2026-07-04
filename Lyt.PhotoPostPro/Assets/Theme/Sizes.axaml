@@ -13,6 +13,7 @@
     <system:Double x:Key="Dbl.OneSlider">38</system:Double>
     <system:Double x:Key="Dbl.TwoSliders">76</system:Double>
     <system:Double x:Key="Dbl.ThreeSliders">114</system:Double>
+    <system:Double x:Key="Dbl.FourSliders">152</system:Double>
     <system:Double x:Key="Dbl.PanelButtons">62</system:Double>
     <system:Double x:Key="Dbl.OneSmallButton">48</system:Double>
     <system:Double x:Key="Dbl.TwoSmallButtons">96</system:Double>
@@ -30,6 +31,7 @@
     <controls:GridLength x:Key="Size.OneSlider">38</controls:GridLength>
     <controls:GridLength x:Key="Size.TwoSliders">76</controls:GridLength>
     <controls:GridLength x:Key="Size.ThreeSliders">114</controls:GridLength>
+    <controls:GridLength x:Key="Size.FourSliders">152</controls:GridLength>
     <controls:GridLength x:Key="Size.PanelButtons">62</controls:GridLength>
     <controls:GridLength x:Key="Size.OneSmallButton">48</controls:GridLength>
     <controls:GridLength x:Key="Size.TwoSmallButtons">96</controls:GridLength>

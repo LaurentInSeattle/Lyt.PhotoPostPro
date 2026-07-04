@@ -82,7 +82,7 @@
 	<system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
 
 	<!-- Workflow Exposure -->
-	<system:String x:Key="Workflow.Exposure.Title">Brightness Correction</system:String>
+	<system:String x:Key="Workflow.Exposure.Title">Exposure</system:String>
 	<system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
 	<system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
 	<system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
@@ -135,6 +135,9 @@
 	<system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
 	<system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
+
+	<!-- Workflow Vignette -->
+	<system:String x:Key="Workflow.Vignette.Title">Vignette</system:String>
 
 	<!-- Workflow Export-->
 	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>

@@ -297,9 +297,11 @@ public static partial class ImagingAlgorithms
                 ColorUtilities.RgbToYiq(r, g, b, out float y, out float i, out float q);
 
                 // No blur yet , use same for now 
+                //
+                // The highlight and shadow adjustments are applied to the luminance (Y) channel of the original image.
+                // The original algorithm uses a blurred image.
+                // 
                 float yBlur = y;
-                float iBlur = i;
-                float qBlur = q;
 
                 float tb0 = 1.0f - yBlur;
                 if (tb0 < 1.0f - compress)
@@ -355,23 +357,23 @@ public static partial class ImagingAlgorithms
                         float lb = (tb0 - 0.5f) * shadows_sign * Math.Sign(la_inverted) + 0.5f;
 
                         float lref = MathF.CopySign(
-                            la_abs > low_approximation ? 1.0f / la_abs : 1.0f / low_approximation,  la);
+                            la_abs > low_approximation ? 1.0f / la_abs : 1.0f / low_approximation, la);
                         float href = MathF.CopySign(
                             la_inverted_abs > low_approximation ? 1.0f / la_inverted_abs : 1.0f / low_approximation,
                             la_inverted);
 
                         float chunk = shadows2 > 1.0f ? 1.0f : shadows2;
                         float optrans = chunk * shadows_xform;
-                        
+
                         shadows2 -= 1.0f;
-                        
+
                         y = la * (1.0f - optrans) + (la > 0.5f ?
                                 1.0f - (1.0f - 2.0f * (la - 0.5f)) * (1.0f - lb) :
                                 2.0f * la * lb) * optrans;
-                        
+
                         i = i * (1.0f - optrans) +
                             i * (y * lref * (1.0f - shadowColor) + (1.0f - y) * href * shadowColor) * optrans;
-                        
+
                         q = q * (1.0f - optrans) +
                             q * (y * lref * (1.0f - shadowColor) + (1.0f - y) * href * shadowColor) * optrans;
 
@@ -385,7 +387,7 @@ public static partial class ImagingAlgorithms
                     row[x].R = DeNormalizeClip16(r);
                     row[x].G = DeNormalizeClip16(g);
                     row[x].B = DeNormalizeClip16(b);
-                } 
+                }
             }
         });
     }
@@ -629,4 +631,31 @@ public static partial class ImagingAlgorithms
     }
 
     #endregion SCurves Contrast
+
+    #region Vignette
+
+    public static void Vignette(
+        this Image<Rgb48> image, float top, float bottom, float left, float right, float lightness)
+    {
+        // Parallelize the loop over the rows
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < row.Length; x++)
+            {
+                Rgb48 pixel = row[x];
+
+                // Do nothing for now, just a placeholder for future vignette implementation
+                //
+                //row[x].R = redLut[pixel.R];
+                //row[x].G = greenLut[pixel.G];
+                //row[x].B = blueLut[pixel.B];
+            }
+        });
+    }
+
+    #endregion Vignette
+
 }

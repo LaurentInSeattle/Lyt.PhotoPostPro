@@ -1,0 +1,178 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Vignette.VignetteToolboxView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Vignette"
+	x:DataType="vm:VignetteToolboxViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	>	
+	<Grid
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Vignette --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Sides --> 
+			<RowDefinition Height="{StaticResource Size.FourSliders}" /> <!-- Four sliders, one per side --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Lightness --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Lightness --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" 
+			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="2" 
+			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="3" 
+			> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<!-- First Row: Top -->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="0.0" Maximum="0.25"
+				Value="{Binding TopSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding TopString}"
+				/>
+			<!-- Second Row Bottom -->
+			<TextBlock
+				Grid.Row="1" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				/>
+			<Slider 
+				Grid.Row="1" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="0.0" Maximum="0.25"
+				Value="{Binding BottomSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="1" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding BottomString}"
+				/>
+			<!-- Third Row: Left -->
+			<TextBlock
+				Grid.Row="2" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				/>
+			<Slider 
+				Grid.Row="2" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="0.0" Maximum="0.25"
+				Value="{Binding LeftSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding LeftString}"
+				/>
+			<!-- Fourth Row Right-->
+			<TextBlock
+				Grid.Row="3" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				/>
+			<Slider 
+				Grid.Row="3" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="0.0" Maximum="0.25"
+				Value="{Binding RightSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="3" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding RightString}"
+				/>
+		</Grid>
+		<TextBlock
+			Grid.Row="4" 
+			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="5" 
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<!-- Single Row: Lightness -->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="-0.5" Maximum="0.5"
+				Value="{Binding LightnessSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding LightnessString}"
+				/>
+		</Grid>
+	</Grid>
+</UserControl>

@@ -1,19 +1,26 @@
-Bugs / WIP
-----------
+Bugs 
+----
 
-- Image Exports: Quick save
-
-- Need a spin wait for exporting images 
+- Tool boxes titles will not localise when language changes 
 
 - Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
-- Watermarks with transparency 
+- UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
+
+WIP
+---
+
+- Vignette Fancy Filter
+
+- Image Exports: Quick save
+
+- Need a spin wait for exporting images 
+
+- Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
 
 - Add auto-localization tool in VS build 
-
-- UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 TODO First : Single Image Process
@@ -30,8 +37,6 @@ TODO First : Single Image Process
 	- Lomograph (options) 
 	- Polaroid (options) 
 
-- Image Fancy Filters (NOT in Img # )
-	- Vignette 
 
 Missing Features 
 ----------------

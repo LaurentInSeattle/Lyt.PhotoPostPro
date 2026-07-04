@@ -111,6 +111,12 @@
     <Compile Update="Workflow\Process\ToolboxHostView.axaml.cs">
       <DependentUpon>ToolboxHostView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Process\Vignette\VignetteView.axaml.cs">
+      <DependentUpon>VignetteView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Vignette\VignetteToolboxView.axaml.cs">
+      <DependentUpon>VignetteToolboxView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\WhiteBalance\WhiteBalanceView.axaml.cs">
       <DependentUpon>WhiteBalanceView.axaml</DependentUpon>
     </Compile>

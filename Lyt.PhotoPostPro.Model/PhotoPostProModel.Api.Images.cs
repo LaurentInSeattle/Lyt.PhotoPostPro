@@ -281,7 +281,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             // blurAmount == sigma from 0.0 to 4.0 - 0.0 -> No sharpening 
-            if ((sharpenAmount <= 0.0) || (sharpenAmount > 4.0))
+            if ((sharpenAmount < 0.0) || (sharpenAmount > 4.0))
             {
                 return false;
             }
@@ -289,6 +289,43 @@ public sealed partial class PhotoPostProModel : ModelBase
             if (this.Workflow.CurrentStep is SharpenStep sharpenStep)
             {
                 this.LastResultFrame = sharpenStep.Sharpen(sharpenAmount);
+                return true;
+            }
+
+            return false;
+        });
+
+    public void Vignette(float top, float bottom, float left, float right, float lightness) =>
+        this.ApiAction(() =>
+        {
+            if ((top < 0.0f) || (top > 0.3f))
+            {
+                return false;
+            }
+
+            if ((bottom < 0.0f) || (bottom > 0.3f))
+            {
+                return false;
+            }
+
+            if ((left < 0.0f) || (left > 0.3f))
+            {
+                return false;
+            }
+
+            if ((right < 0.0f) || (right > 0.3f))
+            {
+                return false;
+            }
+
+            if ((lightness < -0.5f) || (lightness > 0.5f))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is VignetteStep vignetteStep)
+            {
+                this.LastResultFrame = vignetteStep.Vignette(top, bottom, left, right, lightness);
                 return true;
             }
 

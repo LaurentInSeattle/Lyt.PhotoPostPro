@@ -126,6 +126,7 @@ public sealed partial class ProcessViewModel :
         // Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
         Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
         Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenStep, SharpenToolboxView>(ActivatedView.Sharpen);
+        Setup<VignetteViewModel, VignetteView, VignetteToolboxViewModel, VignetteStep, VignetteToolboxView>(ActivatedView.Vignette);
 
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
 
@@ -172,6 +173,8 @@ public sealed partial class ProcessViewModel :
             PostProcessStep.ContrastStepName => ActivatedView.Contrast,
             PostProcessStep.ColorStepName => ActivatedView.Color,
             PostProcessStep.SharpenStepName => ActivatedView.Sharpen,
+            PostProcessStep.VignetteStepName => ActivatedView.Vignette,
+            PostProcessStep.FiltersStepName => ActivatedView.Filters,
 
             // TODO: Add the rest 
             PostProcessStep.ExportStepName => ActivatedView.Export,

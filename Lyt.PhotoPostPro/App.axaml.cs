@@ -70,6 +70,9 @@ public partial class App : ApplicationBase
             typeof(SharpenViewModel),
             typeof(SharpenToolboxViewModel),
 
+            typeof(VignetteViewModel),
+            typeof(VignetteToolboxViewModel),
+
             typeof(ExportViewModel),
             typeof(ExportToolboxViewModel),
             

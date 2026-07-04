@@ -26,4 +26,6 @@ public enum ActivatedView : int
     TouchUp,
     Recovery,
     WhiteBalance,
+    Vignette,
+    Filters,
 }
