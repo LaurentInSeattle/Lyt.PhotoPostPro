@@ -2,6 +2,7 @@
 
 public sealed partial class ComposeToolboxViewModel :
     ToolboxViewModel<ComposeToolboxView, CompositionStep>,
+    IRecipient<LanguageChangedMessage>,
     IToolboxViewModel
 {
     private readonly ComposeViewModel viewModel;
@@ -19,6 +20,7 @@ public sealed partial class ComposeToolboxViewModel :
         this.Color_2 = GuidelineViewModel.Brushes[2];
         this.Color_3 = GuidelineViewModel.Brushes[3];
         this.Color_4 = GuidelineViewModel.Brushes[4];
+        this.Subscribe<LanguageChangedMessage>();
     }
 
     public override void OnViewLoaded()
@@ -28,13 +30,27 @@ public sealed partial class ComposeToolboxViewModel :
         // Enforce property changed 
         this.SelectedIndex = 0;
         this.SelectedIndex = 1;
+
+        // Localize the guideline types 
+        this.Localize();
     }
 
     protected override string Title => this.Localize("Workflow.Compose.Title");
 
+    private static List<string> supportedGuidesKeys =
+        [
+            "Workflow.Compose.CG.None" , // => this.View.ZeroCG,
+            "Workflow.Compose.CG.Thirds"  , // 1 => this.View.ThirdsCG,
+            "Workflow.Compose.CG.Frame"  , // 2 => this.View.FrameCG,
+            "Workflow.Compose.CG.Halves"  , // 3 => this.View.HalvesCG,
+            "Workflow.Compose.CG.Diagonals"  , // 4 => this.View.DiagonalsCG,
+            "Workflow.Compose.CG.GoldenUp"  , // 5 => this.View.GoldenUpCG,
+            "Workflow.Compose.CG.GoldenDown"  , // 6 => this.View.GoldenDownCG,
+        ];
+
     [ObservableProperty]
     public partial List<string> SupportedGuides { get; set; } =
-        // TODO: Needs localization 
+        // Needs localization : these are default
         [
             " -- None -- " , // => this.View.ZeroCG,
             " Rule of Thirds"  , // 1 => this.View.ThirdsCG,
@@ -44,6 +60,7 @@ public sealed partial class ComposeToolboxViewModel :
             " Golden Triangle Up "  , // 5 => this.View.GoldenUpCG,
             " Golden Triangle Down "  , // 6 => this.View.GoldenDownCG,
         ];
+
 
     [ObservableProperty]
     public partial int SelectedIndex { get; set; }
@@ -119,6 +136,20 @@ public sealed partial class ComposeToolboxViewModel :
 
     [RelayCommand]
     public void OnMinusRight() => this.viewModel.CropGridViewModel.OnMinusRight();
+
+    public void Receive(LanguageChangedMessage _) => this.Localize();
+
+    private void Localize()
+    {
+        List<string> localized = new(supportedGuidesKeys.Count);
+        for (int i = 0; i < supportedGuidesKeys.Count; ++i)
+        {
+            localized.Add(this.Localize(supportedGuidesKeys[i]));
+        }
+
+        // Enforce property changed by providing a new list instance
+        this.SupportedGuides = localized;
+    }
 
     internal void OnCropRectangleChanged(int ix, int iy, int idx, int idy)
     {

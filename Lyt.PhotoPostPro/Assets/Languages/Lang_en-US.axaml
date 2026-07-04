@@ -73,6 +73,13 @@
 	<system:String x:Key="Workflow.Compose.Height">Height:</system:String>
 	<system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio:</system:String>
 	<system:String x:Key="Workflow.Compose.CompositionGuides">Select a composition guide:</system:String>
+	<system:String x:Key="Workflow.Compose.CG.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Thirds"> Rule of Thirds</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Frame"> Frame </system:String>
+	<system:String x:Key="Workflow.Compose.CG.Halves"> Middle Lines</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Diagonals"> Diagonals</system:String>
+	<system:String x:Key="Workflow.Compose.CG.GoldenUp"> Golden Triangles Up</system:String>
+	<system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
 
 	<!-- Workflow Exposure -->
 	<system:String x:Key="Workflow.Exposure.Title">Brightness Correction</system:String>
