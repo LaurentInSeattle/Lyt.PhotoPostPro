@@ -3,6 +3,8 @@ Bugs / WIP
 
 - Image Exports: Quick save
 
+- Crop does not reset 
+
 - Watermarks with transparency 
 
 - Gamma curve should reset on new image load

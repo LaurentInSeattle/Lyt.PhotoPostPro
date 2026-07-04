@@ -171,6 +171,19 @@ public sealed partial class ComposeToolboxViewModel :
         this.viewModel.CropGridViewModel.SetCropRectangle(ix, iy, idx, idy);
     }
 
+    public override void OnBeforeReset()
+    {
+        var step = base.ModelStep<CompositionStep>();
+        this.x = 0;
+        this.y = 0;
+        if (step.SourceImage is SixLabors.ImageSharp.Image sourceImage)
+        {
+            this.dx = sourceImage.Width;
+            this.dy = sourceImage.Height;
+            this.viewModel.CropGridViewModel.SetCropRectangle(this.x, this.y, this.dx, this.dy);
+        }
+    }
+
     public override void OnBeforeNext() => this.model.Crop(this.x, this.y, this.dx, this.dy);
 
     partial void OnSelectedIndexChanged(int value) => this.viewModel.SelectCropGuidelines(value);
