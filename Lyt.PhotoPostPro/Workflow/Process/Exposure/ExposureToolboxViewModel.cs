@@ -55,6 +55,11 @@ public sealed partial class ExposureToolboxViewModel :
         });
     }
 
+    public override void Activate(object? activationParameters)
+    {
+        base.Activate(activationParameters);
+    } 
+
     public override void OnModelStepUpdated(ExposureStep step) => this.UpdateSliders(step);
 
     // Interface inplementation has to be public

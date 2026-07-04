@@ -54,5 +54,6 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         this.Gamma = 1.0;
         this.Gain = 1.0;
         this.Shift = 0;
+        new GammaLutClearMessage().Publish();
     }
 }

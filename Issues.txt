@@ -3,10 +3,6 @@ Bugs / WIP
 
 - Image Exports: Quick save
 
-- Crop does not reset 
-
-- Watermarks with transparency 
-
 - Gamma curve should reset on new image load
 
 - Vibrance sliders do not go back to zero on Reset 
@@ -16,6 +12,8 @@ Bugs / WIP
 - Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
+
+- Watermarks with transparency 
 
 - Add auto-localization tool in VS build 
 

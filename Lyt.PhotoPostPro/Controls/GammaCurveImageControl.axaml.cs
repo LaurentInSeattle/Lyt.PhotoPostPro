@@ -2,6 +2,9 @@ namespace Lyt.PhotoPostPro.Controls;
 
 public partial class GammaCurveImageControl : UserControl
 {
+    private const double canvasHeight = 256.0;
+    private double canvasWidth = 512.0;
+
     public enum BrushColor { Red, Green, Blue, Luminosity }
 
     private readonly SolidColorBrush brushRedDark = new(Colors.DarkRed);
@@ -16,45 +19,22 @@ public partial class GammaCurveImageControl : UserControl
 
     public GammaCurveImageControl() => this.InitializeComponent();
 
+    public void Clear()
+    {
+        this.MainCanvas.Children.Clear();
+        this.DrawDiagonal(brushGray);
+    }
+
     public void Load(Curve curve)
     {
-        float[] values = curve.Points;
-        const double canvasHeight = 256.0;
-        const double canvasWidth = 512.0;
-
         this.MainCanvas.Children.Clear();
-
-
-        // Draw the diagonal 
-        PathGeometry geometryDiagonal = new();
-        using (var context = geometryDiagonal.Open())
-        {
-            // Geometry is not filled 
-            Point start = new(0.0, canvasHeight);
-            context.BeginFigure(start, isFilled: false);
-
-            // Add last point at top right and do NOT close the figure 
-            Point end = new(canvasWidth, 0.0);
-            context.LineTo(end);
-
-            // Figure is not closed
-            context.EndFigure(isClosed: false);
-        }
-
-        var diagonalPath = new global::Avalonia.Controls.Shapes.Path
-        {
-            Stroke = brushRed,
-            StrokeThickness = 2,
-            Data = geometryDiagonal,
-            Opacity = 0.7,
-        };
-
-        this.MainCanvas.Children.Add(diagonalPath);
+        this.DrawDiagonal(brushRed);
 
         // Curve path to show the curve points : Geometry is not filled 
         PathGeometry geometryCurve = new();
         using (var context = geometryCurve.Open())
         {
+            float[] values = curve.Points;
             for (int i = 0; i < values.Length; i++)
             {
                 // CONSIDER :
@@ -92,5 +72,34 @@ public partial class GammaCurveImageControl : UserControl
         };
 
         this.MainCanvas.Children.Add(curvePath);
+    }
+
+    private void DrawDiagonal (SolidColorBrush brush)
+    {
+        // Draw the diagonal 
+        PathGeometry geometryDiagonal = new();
+        using (var context = geometryDiagonal.Open())
+        {
+            // Geometry is not filled 
+            Point start = new(0.0, canvasHeight);
+            context.BeginFigure(start, isFilled: false);
+
+            // Add last point at top right and do NOT close the figure 
+            Point end = new(canvasWidth, 0.0);
+            context.LineTo(end);
+
+            // Figure is not closed
+            context.EndFigure(isClosed: false);
+        }
+
+        var diagonalPath = new global::Avalonia.Controls.Shapes.Path
+        {
+            Stroke = brush,
+            StrokeThickness = 2,
+            Data = geometryDiagonal,
+            Opacity = 0.7,
+        };
+
+        this.MainCanvas.Children.Add(diagonalPath);
     }
 }
