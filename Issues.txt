@@ -1,6 +1,8 @@
 Bugs 
 ----
 
+- Review all process steps to ensure that the source image is not unnecessarily cloned.
+
 - Tool boxes titles will not localise when language changes 
 
 - Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???

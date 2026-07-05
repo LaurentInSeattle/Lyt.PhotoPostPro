@@ -56,7 +56,7 @@ public static class ColorUtilities
     {
         if (s == 0f)
         {
-            r = g = b = (byte)Math.Round(l * pixMaxF );
+            r = g = b = (ushort)Math.Round(l * pixMaxF );
         }
         else
         {

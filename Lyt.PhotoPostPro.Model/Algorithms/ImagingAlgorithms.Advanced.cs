@@ -637,23 +637,95 @@ public static partial class ImagingAlgorithms
     public static void Vignette(
         this Image<Rgb48> image, float top, float bottom, float left, float right, float lightness)
     {
+        int topRow = (int)(image.Height * top);
+        int bottomRow = (int)(image.Height * (1.0f - bottom));
+        int leftCol = (int)(image.Width * left);
+        int rightCol = (int)(image.Width * (1.0f - right));
+        bool darkVignette = lightness < 0.0f;
+        float lightnessFactor = MathF.Abs(lightness);
+
         // Parallelize the loop over the rows
         int height = image.Height;
-        Parallel.For(0, height, y =>
+        Parallel.For(0, height, row =>
+        // for (int row = 0; row < height; row++)
         {
             // Get a span for the current row for fast, safe access
-            Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
-            for (int x = 0; x < row.Length; x++)
+            Span<Rgb48> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
+            for (int col = 0; col < rowSpan.Length; col++)
             {
-                Rgb48 pixel = row[x];
+                Rgb48 pixel = rowSpan[col];
+                if (row > topRow && row < bottomRow && col > leftCol && col < rightCol)
+                {
+                    // Outside the vignette area, do nothing 
+                    continue;
+                }
 
-                // Do nothing for now, just a placeholder for future vignette implementation
-                //
-                //row[x].R = redLut[pixel.R];
-                //row[x].G = greenLut[pixel.G];
-                //row[x].B = blueLut[pixel.B];
+                // Inside the vignette area 
+
+                float topFactor = 0.0f;
+                float deltaTop = topRow - row;
+                if (deltaTop > 0)
+                {
+                    // Inside the top vignette area, calculate the factor based on distance from the top edge
+                    topFactor = deltaTop / topRow;
+                }
+
+                float bottomFactor = 0.0f;
+                float deltaBottom = row - bottomRow;
+                if (deltaBottom > 0)
+                {
+                    // Inside the bottom vignette area, calculate the factor based on distance from the bottom edge
+                    bottomFactor = deltaBottom / (image.Height - bottomRow);
+                }
+
+                float leftFactor = 0.0f;
+                float deltaLeft = leftCol - col;
+                if (deltaLeft > 0)
+                {
+                    // Inside the left vignette area, calculate the factor based on distance from the left edge
+                    leftFactor = deltaLeft / leftCol;
+                }
+
+                float rightFactor = 0.0f;
+                float deltaRight = col - rightCol;
+                if (deltaRight > 0)
+                {
+                    // Inside the right vignette area, calculate the factor based on distance from the right edge
+                    rightFactor = deltaRight / (image.Width - rightCol);
+                }
+
+                // Normalize RGB to [0, 1] float range
+                float r = pixel.R / pixMaxF;
+                float g = pixel.G / pixMaxF;
+                float b = pixel.B / pixMaxF;
+
+                // Convert to HSL
+                ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float pixelLightness);
+
+                if (darkVignette)
+                {
+                    // Darken the pixel based on the lightness factor and the distance from the vignette edges
+                    float vignetteFactor = MathF.Max(topFactor, MathF.Max(bottomFactor, MathF.Max(leftFactor, rightFactor)));
+                    pixelLightness -= vignetteFactor * lightnessFactor;
+                }
+                else
+                {
+                    // Lighten the pixel based on the lightness factor and the distance from the vignette edges
+                    float vignetteFactor = MathF.Max(topFactor, MathF.Max(bottomFactor, MathF.Max(leftFactor, rightFactor)));
+                    pixelLightness += vignetteFactor * lightnessFactor;
+                }
+
+                pixelLightness = ClipF(pixelLightness);
+
+                // Convert back to RGB 48 
+                ColorUtilities.HslToRgb(hue, saturation, pixelLightness, out ushort ur, out ushort ug, out ushort ub);
+
+                rowSpan[col].R = Clip16(ur);
+                rowSpan[col].G = Clip16(ug);
+                rowSpan[col].B = Clip16(ub);
             }
-        });
+        // } // 'classic' for
+        }); // Parallel For 
     }
 
     #endregion Vignette
