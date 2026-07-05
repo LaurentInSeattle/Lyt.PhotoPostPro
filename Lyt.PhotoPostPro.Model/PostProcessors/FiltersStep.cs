@@ -29,8 +29,8 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        // Image is unchanged if the amount is 1.0, for all filters.
-        bool isChanged = Math.Abs(1.0 - this.Amount) > 0.001 ;
+        // Image is unchanged if the amount is 0.0, for all filters.
+        bool isChanged = this.Amount > 0.001 ;
         var clone = this.SourceImage.Clone();
         if (isChanged)
         {

@@ -4,22 +4,15 @@ public sealed partial class FiltersToolboxViewModel :
     ToolboxViewModel<FiltersToolboxView, FiltersStep>
 {
     private bool doNotUpdateModel;
-    private float grayscale ;
-    private float sepia;
-
-    public FiltersToolboxViewModel()
-    {
-        this.grayscale = 0.0f;
-        this.sepia = 0.0f;
-    }
+    private float amount ;
 
     protected override string Title => this.Localize("Workflow.Filters.Title");
 
     [ObservableProperty]
-    public partial string GrayscaleString { get; set; } = string.Empty;
+    public partial string AmountString { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial double GrayscaleSliderValue { get; set; }
+    public partial double AmountSliderValue { get; set; }
 
     public override void OnViewLoaded()
     {
@@ -29,8 +22,8 @@ public sealed partial class FiltersToolboxViewModel :
         {
             // Sliders initial positions and string values
             // Enforce property changed 
-            this.GrayscaleSliderValue = this.grayscale + 0.01;
-            this.GrayscaleSliderValue = this.grayscale;
+            this.AmountSliderValue = this.amount + 0.01;
+            this.AmountSliderValue = this.amount;
         });
     }
 
@@ -42,16 +35,16 @@ public sealed partial class FiltersToolboxViewModel :
         {
             // Here we need to undo the operations done reading the sliders 
             // No transforms for highlights and shadows amounts 
-            this.GrayscaleSliderValue = step.Amount;
+            this.AmountSliderValue = step.Amount;
         });
     }
 
-    partial void OnGrayscaleSliderValueChanged  (double value)
+    partial void OnAmountSliderValueChanged  (double value)
     {
         // Slider sends 0 to +1
-        this.grayscale = (float)value;
+        this.amount = (float)value;
         int intValue = (int)(value * 100.0 + 0.5); 
-        this.GrayscaleString = intValue.ToString("D") + " %";
+        this.AmountString = intValue.ToString("D") + " %";
         this.UpdateModel();
     }
 
@@ -63,7 +56,7 @@ public sealed partial class FiltersToolboxViewModel :
             return;
         }
 
-        // this.model.Grayscale(this.grayscale);
-        this.model.Sepia(this.grayscale);
+        // this.model.Grayscale(this.amount);
+        this.model.Sepia(this.amount);
     }
 }

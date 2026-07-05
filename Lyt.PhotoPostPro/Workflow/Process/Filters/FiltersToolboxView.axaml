@@ -16,7 +16,8 @@
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Filters --> 
-			<RowDefinition Height="{StaticResource Size.TwoSliders}" /> <!-- Two sliders --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Amount --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -27,21 +28,17 @@
 		<Grid
 			Grid.Row="3" 
 			> 
-			<Grid.RowDefinitions> 
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="70" />
 			</Grid.ColumnDefinitions>
-			<!-- First Row: Grayscale Amount -->	
+			<!-- Single Row: Effect  Amount -->	
 			<TextBlock
 				Grid.Row="0" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				Text="{DynamicResource Workflow.Filters.Amount}"
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
@@ -50,13 +47,13 @@
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="1.0"
-				Value="{Binding GrayscaleSliderValue}"
+				Value="{Binding AmountSliderValue}"
 				/>
 			<TextBlock
 				Grid.Row="0" Grid.Column="2" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Left"
-				Text="{Binding GrayscaleString}"
+				Text="{Binding AmountString}"
 				/>
 		</Grid>
 	</Grid>
