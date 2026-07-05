@@ -63,7 +63,7 @@ public static partial class ImagingAlgorithms
 	//   sharpenAmount: sigma: The 'sigma' value representing the weight of the blur.
 	public static bool ApplyGlobalSharpen(this Image<Rgb48> image, float sharpenAmount)
 	{
-		if (Math.Abs(sharpenAmount) > 0.05)
+		if (Math.Abs(sharpenAmount) > 0.01)
 		{
 			image.Mutate(x => x.GaussianSharpen(sharpenAmount));
 		}

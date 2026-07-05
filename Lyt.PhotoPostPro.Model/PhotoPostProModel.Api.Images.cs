@@ -332,6 +332,42 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Grayscale(float grayscaleAmount) =>
+        this.ApiAction(() =>
+        {
+            // grayscaleAmount == from 0.0 to 1.0  -- 0.0 -> No Change 
+            if ((grayscaleAmount < 0.0) || (grayscaleAmount > 1.0))
+            {
+                return false;
+            }
+            
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Grayscale(grayscaleAmount);
+                return true;
+            }
+
+            return false;
+        });
+
+    public void Sepia(float sepiaAmount) =>
+        this.ApiAction(() =>
+        {
+            // sepiaAmount == from 0.0 to 1.0  -- 0.0 -> No Change 
+            if ((sepiaAmount < 0.0) || (sepiaAmount > 1.0))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Sepia(sepiaAmount);
+                return true;
+            }
+
+            return false;
+        });
+
     public void Export(ExportParameters exportParameters) =>
         this.ApiAction(() =>
         {

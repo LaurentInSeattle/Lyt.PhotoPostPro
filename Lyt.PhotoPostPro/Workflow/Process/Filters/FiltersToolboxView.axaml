@@ -11,7 +11,6 @@
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
-	xmlns:curve="clr-namespace:Lyt.PhotoPostPro.Panes.CurvePane"
 	>	
 	<Grid
 		>
@@ -37,7 +36,7 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="70" />
 			</Grid.ColumnDefinitions>
-			<!-- First Row: Highlights -->
+			<!-- First Row: Grayscale Amount -->	
 			<TextBlock
 				Grid.Row="0" Grid.Column="0" 
 				Theme="{StaticResource Large}"
@@ -50,36 +49,14 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-1.0" Maximum="1.0"
-				Value="{Binding HighlightsSliderValue}"
+				Minimum="0.0" Maximum="1.0"
+				Value="{Binding GrayscaleSliderValue}"
 				/>
 			<TextBlock
 				Grid.Row="0" Grid.Column="2" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Left"
-				Text="{Binding HighlightsString}"
-				/>
-			<!-- Second Row Shadows -->
-			<TextBlock
-				Grid.Row="1" Grid.Column="0" 
-				Theme="{StaticResource Large}"
-				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Shadows}"
-				/>
-			<Slider 
-				Grid.Row="1" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
-				TickFrequency="0.1" TickPlacement="BottomRight"
-				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-1.0" Maximum="1.0"
-				Value="{Binding ShadowsSliderValue}"
-				/>
-			<TextBlock
-				Grid.Row="1" Grid.Column="2" 
-				Theme="{StaticResource Large}"
-				HorizontalAlignment="Left"
-				Text="{Binding ShadowsString}"
+				Text="{Binding GrayscaleString}"
 				/>
 		</Grid>
 	</Grid>
