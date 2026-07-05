@@ -17,6 +17,7 @@ public sealed partial class ProcessViewModel :
         { PostProcessStep.SharpenStepName, ActivatedView.Sharpen },
         { PostProcessStep.VignetteStepName, ActivatedView.Vignette },
         { PostProcessStep.FiltersStepName, ActivatedView.Filters },
+        { PostProcessStep.ExportStepName, ActivatedView.Export },
     };
 
     private readonly PhotoPostProModel model;
@@ -186,6 +187,6 @@ public sealed partial class ProcessViewModel :
             return view;
         }
 
-        throw new NotImplementedException("Missing step name.");
+        throw new NotImplementedException("Missing step name: " + workflowStepName);
     }
 }

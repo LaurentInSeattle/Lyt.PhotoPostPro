@@ -12,7 +12,7 @@ public sealed class Signature
 
     public string FontFamily { get; set; } = "Segoe Script";
 
-    public int FontSize { get; set; } = 36;
+    public int FontSize { get; set; } = 32;
 
     public FontStyle FontStyle { get; set; } = FontStyle.Italic;
 
