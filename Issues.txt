@@ -70,6 +70,9 @@ Missing Features
 Cool Stuff to Consider 
 ----------------------
 
+- Auto Run full screen as soon we start processing an image, return to windowed mode when done (or on user request)
+Refer to Jigsaw code 
+
 - Improve Image Sharpen with a smarter algorithm (with gray image mask) 
 
 - Recognize standard sizes and aspect ratios (square, HD, 16/9, 4/3, Golden Ratio) 

@@ -16,6 +16,7 @@ public sealed class PostProcessWorkflow
         var colorStep = new ColorStep(this);
         var sharpenStep = new SharpenStep(this);
         var vignetteStep = new VignetteStep(this);
+        var filtersStep = new FiltersStep(this);
         var exportStep = new ExportStep(this);
 
         this.Steps =
@@ -27,13 +28,10 @@ public sealed class PostProcessWorkflow
             exposureStep, recoveryStep, 
 
             // Constrast and Color 
-            whiteBalanceStep,
-            contrastStep,
-            colorStep,
-            sharpenStep, 
+            whiteBalanceStep, contrastStep, colorStep, sharpenStep, 
 
-            // Filters
-            vignetteStep,
+            // Final Filters
+            vignetteStep, filtersStep,
 
             // Export
             exportStep,

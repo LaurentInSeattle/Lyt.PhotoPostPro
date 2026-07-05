@@ -1,0 +1,86 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Filters.FiltersToolboxView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Filters"
+	x:DataType="vm:FiltersToolboxViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:curve="clr-namespace:Lyt.PhotoPostPro.Panes.CurvePane"
+	>	
+	<Grid
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Filters --> 
+			<RowDefinition Height="{StaticResource Size.TwoSliders}" /> <!-- Two sliders --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" 
+			Text="{DynamicResource Workflow.Filters.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="3" 
+			> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<!-- First Row: Highlights -->
+			<TextBlock
+				Grid.Row="0" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				/>
+			<Slider 
+				Grid.Row="0" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="-1.0" Maximum="1.0"
+				Value="{Binding HighlightsSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding HighlightsString}"
+				/>
+			<!-- Second Row Shadows -->
+			<TextBlock
+				Grid.Row="1" Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				/>
+			<Slider 
+				Grid.Row="1" Grid.Column="1" 
+				Margin="8 0 8 0"
+				VerticalAlignment="Center" HorizontalAlignment="Stretch"
+				TickFrequency="0.1" TickPlacement="BottomRight"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="-1.0" Maximum="1.0"
+				Value="{Binding ShadowsSliderValue}"
+				/>
+			<TextBlock
+				Grid.Row="1" Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding ShadowsString}"
+				/>
+		</Grid>
+	</Grid>
+</UserControl>

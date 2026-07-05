@@ -73,6 +73,9 @@ public partial class App : ApplicationBase
             typeof(VignetteViewModel),
             typeof(VignetteToolboxViewModel),
 
+            typeof(FiltersViewModel),
+            typeof(FiltersToolboxViewModel),
+
             typeof(ExportViewModel),
             typeof(ExportToolboxViewModel),
             

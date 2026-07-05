@@ -112,6 +112,7 @@ global using Lyt.PhotoPostPro.Workflow.Process.Sharpen;
 global using Lyt.PhotoPostPro.Workflow.Process.Export;
 global using Lyt.PhotoPostPro.Workflow.Process.Recovery;
 global using Lyt.PhotoPostPro.Workflow.Process.Vignette;
+global using Lyt.PhotoPostPro.Workflow.Process.Filters;
 global using Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
 global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Single;

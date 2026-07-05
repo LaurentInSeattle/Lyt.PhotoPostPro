@@ -93,6 +93,12 @@
     <Compile Update="Workflow\Process\Compose\CropGridView.axaml.cs">
       <DependentUpon>CropGridView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Process\Filters\FiltersToolboxView.axaml.cs">
+      <DependentUpon>FiltersToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Filters\FiltersView.axaml.cs">
+      <DependentUpon>FiltersView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\ProcessToolbarView.axaml.cs">
       <DependentUpon>ProcessToolbarView.axaml</DependentUpon>
     </Compile>

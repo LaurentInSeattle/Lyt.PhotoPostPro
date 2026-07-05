@@ -4,12 +4,27 @@ public sealed partial class ProcessViewModel :
     ViewModel<ProcessView>,
     IRecipient<WorkflowUpdateMessage>
 {
+    private static readonly Dictionary<string, ActivatedView> WorkflowstepNameToView = new()
+    {
+        { PostProcessStep.OrientationStepName, ActivatedView.Orient },
+        { PostProcessStep.StraightenStepName, ActivatedView.Straighten },
+        { PostProcessStep.CompositionStepName, ActivatedView.Compose },
+        { PostProcessStep.ExposureStepName, ActivatedView.Exposure },
+        { PostProcessStep.RecoveryStepName, ActivatedView.Recovery },
+        { PostProcessStep.WhiteBalanceStepName, ActivatedView.WhiteBalance },
+        { PostProcessStep.ContrastStepName, ActivatedView.Contrast },
+        { PostProcessStep.ColorStepName, ActivatedView.Color },
+        { PostProcessStep.SharpenStepName, ActivatedView.Sharpen },
+        { PostProcessStep.VignetteStepName, ActivatedView.Vignette },
+        { PostProcessStep.FiltersStepName, ActivatedView.Filters },
+    };
+
     private readonly PhotoPostProModel model;
     private ViewSelector<ActivatedView>? viewSelector;
     private bool isFirstActivation;
 
     [ObservableProperty]
-    public partial HistogramViewModel HistogramViewModel {  get ; set; }
+    public partial HistogramViewModel HistogramViewModel { get; set; }
 
     [ObservableProperty]
     public partial ToolboxHostViewModel ToolboxHostViewModel { get; set; }
@@ -36,7 +51,7 @@ public sealed partial class ProcessViewModel :
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
-            this.model.BeginPostProcess(); 
+            this.model.BeginPostProcess();
         }
     }
 
@@ -58,9 +73,9 @@ public sealed partial class ProcessViewModel :
         {
             var shell = App.GetRequiredService<ShellViewModel>();
             shell.OnSingle();
-        } 
+        }
         else
-        { 
+        {
             Dispatch.OnUiThread(() =>
             {
                 var workflow = this.model.Workflow;
@@ -68,10 +83,10 @@ public sealed partial class ProcessViewModel :
                 ActivatedView view = FromWorkflowstepName(stepName);
                 this.viewSelector.SelectView(view);
             }, DispatcherPriority.Normal);
-        } 
+        }
     }
 
-    public void InitializeWorkflow ()
+    public void InitializeWorkflow()
     {
         foreach (var selectableView in this.viewSelector!.SelectableViews)
         {
@@ -109,7 +124,7 @@ public sealed partial class ProcessViewModel :
             vm.CreateViewAndBind();
             var vmToolbox = App.GetRequiredService<TToolboxViewModel>();
             vmToolbox.CreateViewAndBind();
-            vmToolbox.ToolboxHostViewModel = this.ToolboxHostViewModel; 
+            vmToolbox.ToolboxHostViewModel = this.ToolboxHostViewModel;
             var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
             selectableViews.Add(selectable);
         }
@@ -117,19 +132,22 @@ public sealed partial class ProcessViewModel :
         // No buttons or toolbars for all process views: 
         Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientationStep, OrientToolboxView>(ActivatedView.Orient);
         Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenStep, StraightenToolboxView>(ActivatedView.Straighten);
-        Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep,  ComposeToolboxView>(ActivatedView.Compose);
+        Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep, ComposeToolboxView>(ActivatedView.Compose);
         Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
-        Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep,  RecoveryToolboxView>(ActivatedView.Recovery);
+        Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep, RecoveryToolboxView>(ActivatedView.Recovery);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
         Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastStep, ContrastToolboxView>(ActivatedView.Contrast);
 
         // Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
         Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
+
         Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenStep, SharpenToolboxView>(ActivatedView.Sharpen);
         Setup<VignetteViewModel, VignetteView, VignetteToolboxViewModel, VignetteStep, VignetteToolboxView>(ActivatedView.Vignette);
+        Setup<FiltersViewModel, FiltersView, FiltersToolboxViewModel, FiltersStep, FiltersToolboxView>(ActivatedView.Filters);
 
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
 
+        // Maybe later...
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
         //Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseToolboxView>(ActivatedView.Denoise);
         //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
@@ -158,27 +176,16 @@ public sealed partial class ProcessViewModel :
         if (currentTernaryViewModel is IToolboxViewModel toolboxViewModel)
         {
             this.ToolboxHostViewModel.ActiveToolboxViewModel = toolboxViewModel;
-        } 
+        }
     }
 
     private static ActivatedView FromWorkflowstepName(string workflowStepName)
-        => workflowStepName switch
+    {
+        if (WorkflowstepNameToView.TryGetValue(workflowStepName, out var view))
         {
-            PostProcessStep.OrientationStepName => ActivatedView.Orient,
-            PostProcessStep.StraightenStepName => ActivatedView.Straighten,
-            PostProcessStep.CompositionStepName => ActivatedView.Compose,
-            PostProcessStep.ExposureStepName => ActivatedView.Exposure,
-            PostProcessStep.RecoveryStepName => ActivatedView.Recovery,
-            PostProcessStep.WhiteBalanceStepName => ActivatedView.WhiteBalance,
-            PostProcessStep.ContrastStepName => ActivatedView.Contrast,
-            PostProcessStep.ColorStepName => ActivatedView.Color,
-            PostProcessStep.SharpenStepName => ActivatedView.Sharpen,
-            PostProcessStep.VignetteStepName => ActivatedView.Vignette,
-            PostProcessStep.FiltersStepName => ActivatedView.Filters,
+            return view;
+        }
 
-            // TODO: Add the rest 
-            PostProcessStep.ExportStepName => ActivatedView.Export,
-
-            _ => throw new NotImplementedException("Missing step name."),
-        };
+        throw new NotImplementedException("Missing step name.");
+    }
 }
