@@ -138,9 +138,20 @@
 
 	<!-- Workflow Vignette -->
 	<system:String x:Key="Workflow.Vignette.Title">Vignette</system:String>
+	<system:String x:Key="Workflow.Vignette.Correction">Apply a lightness correction to selected sides of the image.</system:String>
+	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
+	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
+	<system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
+	<system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
+	<system:String x:Key="Workflow.Vignette.Right">Right</system:String>
+	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Vignette:</system:String>
+	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
 
+	<!-- Workflow Filters -->
+	<system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>
+	
 	<!-- Workflow Export-->
-	<system:String x:Key="Workflow.Export.Title">Exporting Images</system:String>
+	<system:String x:Key="Workflow.Export.Title">Exports</system:String>
 	<system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>
 	<system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
 	<system:String x:Key="Workflow.Export.Finish">All Done, Close</system:String>
@@ -213,7 +224,6 @@
 
 	<!-- Settings  -->
 	<system:String x:Key="Settings.CleanupNow">Cleanup Now</system:String>
-
 
 	<system:String x:Key="Settings.ReminderTitle">Important Reminder</system:String>
 	<system:String x:Key="Settings.ReminderSubtitle">An important point to remember about downloaded images...</system:String>

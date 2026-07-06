@@ -14,8 +14,6 @@ Bugs
 WIP
 ---
 
-- Vignette Fancy Filter
-
 - Image Exports: Quick save
 
 - Need a spin wait for exporting images 

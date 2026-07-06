@@ -19,18 +19,19 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Sides --> 
 			<RowDefinition Height="{StaticResource Size.FourSliders}" /> <!-- Four sliders, one per side --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Lightness --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Lightness --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
-			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Text="{DynamicResource Workflow.Vignette.Correction}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
 			Grid.Row="2" 
-			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Text="{DynamicResource Workflow.Vignette.Sides}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
@@ -53,7 +54,7 @@
 				Grid.Row="0" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				Text="{DynamicResource Workflow.Vignette.Top}"
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
@@ -61,7 +62,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.25"
+				Minimum="0.0" Maximum="0.45"
 				Value="{Binding TopSliderValue}"
 				/>
 			<TextBlock
@@ -75,7 +76,7 @@
 				Grid.Row="1" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				Text="{DynamicResource Workflow.Vignette.Bottom}"
 				/>
 			<Slider 
 				Grid.Row="1" Grid.Column="1" 
@@ -83,7 +84,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.25"
+				Minimum="0.0" Maximum="0.45"
 				Value="{Binding BottomSliderValue}"
 				/>
 			<TextBlock
@@ -97,7 +98,7 @@
 				Grid.Row="2" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				Text="{DynamicResource Workflow.Vignette.Left}"
 				/>
 			<Slider 
 				Grid.Row="2" Grid.Column="1" 
@@ -105,7 +106,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.25"
+				Minimum="0.0" Maximum="0.45"
 				Value="{Binding LeftSliderValue}"
 				/>
 			<TextBlock
@@ -119,7 +120,7 @@
 				Grid.Row="3" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Shadows}"
+				Text="{DynamicResource Workflow.Vignette.Right}"
 				/>
 			<Slider 
 				Grid.Row="3" Grid.Column="1" 
@@ -127,7 +128,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.25"
+				Minimum="0.0" Maximum="0.45"
 				Value="{Binding RightSliderValue}"
 				/>
 			<TextBlock
@@ -138,13 +139,13 @@
 				/>
 		</Grid>
 		<TextBlock
-			Grid.Row="4" 
-			Text="{DynamicResource Workflow.Recovery.Correction}"
+			Grid.Row="5" 
+			Text="{DynamicResource Workflow.Vignette.Style}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Grid
-			Grid.Row="5" 
+			Grid.Row="6" 
 			> 
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />
@@ -156,7 +157,7 @@
 				Grid.Row="0" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Recovery.Highlights}"
+				Text="{DynamicResource Workflow.Vignette.Strength}"
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
@@ -164,7 +165,7 @@
 				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.5" Maximum="0.5"
+				Minimum="-0.75" Maximum="0.75"
 				Value="{Binding LightnessSliderValue}"
 				/>
 			<TextBlock

@@ -649,6 +649,23 @@ public static partial class ImagingAlgorithms
         Parallel.For(0, height, row =>
         // for (int row = 0; row < height; row++)
         {
+            // Inside the vignette area 
+            float topFactor = 0.0f;
+            float deltaTop = topRow - row;
+            if (deltaTop > 0)
+            {
+                // Inside the top vignette area, calculate the factor based on distance from the top edge
+                topFactor = deltaTop / topRow;
+            }
+
+            float bottomFactor = 0.0f;
+            float deltaBottom = row - bottomRow;
+            if (deltaBottom > 0)
+            {
+                // Inside the bottom vignette area, calculate the factor based on distance from the bottom edge
+                bottomFactor = deltaBottom / (image.Height - bottomRow);
+            }
+
             // Get a span for the current row for fast, safe access
             Span<Rgb48> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
             for (int col = 0; col < rowSpan.Length; col++)
@@ -658,24 +675,6 @@ public static partial class ImagingAlgorithms
                 {
                     // Outside the vignette area, do nothing 
                     continue;
-                }
-
-                // Inside the vignette area 
-
-                float topFactor = 0.0f;
-                float deltaTop = topRow - row;
-                if (deltaTop > 0)
-                {
-                    // Inside the top vignette area, calculate the factor based on distance from the top edge
-                    topFactor = deltaTop / topRow;
-                }
-
-                float bottomFactor = 0.0f;
-                float deltaBottom = row - bottomRow;
-                if (deltaBottom > 0)
-                {
-                    // Inside the bottom vignette area, calculate the factor based on distance from the bottom edge
-                    bottomFactor = deltaBottom / (image.Height - bottomRow);
                 }
 
                 float leftFactor = 0.0f;
@@ -698,31 +697,35 @@ public static partial class ImagingAlgorithms
                 float r = pixel.R / pixMaxF;
                 float g = pixel.G / pixMaxF;
                 float b = pixel.B / pixMaxF;
-
-                // Convert to HSL
-                ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float pixelLightness);
-
+                
+                float vignetteFactor = MathF.Max(MathF.Max(topFactor, bottomFactor), MathF.Max(leftFactor, rightFactor));
                 if (darkVignette)
                 {
-                    // Darken the pixel based on the lightness factor and the distance from the vignette edges
-                    float vignetteFactor = MathF.Max(topFactor, MathF.Max(bottomFactor, MathF.Max(leftFactor, rightFactor)));
+                    // Convert to HSL
+                    ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float pixelLightness);
+
+                    // Darken the pixel based on the lightness factor and the vignette factor
                     pixelLightness -= vignetteFactor * lightnessFactor;
+                    pixelLightness = ClipF(pixelLightness);
+
+                    // Convert back to RGB 48 
+                    ColorUtilities.HslToRgb(hue, saturation, pixelLightness, out ushort ur, out ushort ug, out ushort ub);
+                    rowSpan[col].R = Clip16(ur);
+                    rowSpan[col].G = Clip16(ug);
+                    rowSpan[col].B = Clip16(ub);
                 }
                 else
                 {
-                    // Lighten the pixel based on the lightness factor and the distance from the vignette edges
-                    float vignetteFactor = MathF.Max(topFactor, MathF.Max(bottomFactor, MathF.Max(leftFactor, rightFactor)));
-                    pixelLightness += vignetteFactor * lightnessFactor;
+                    // Lighten the pixel based on the lightness factor and the vignette factor
+                    // Do NOT convert to HSL, just scale the RGB values directly to avoid color shifts
+                    float scale = 1.0f + vignetteFactor * lightnessFactor;
+                    r *= scale;
+                    g *= scale;
+                    b *= scale;
+                    rowSpan[col].R = DeNormalizeClip16(r);
+                    rowSpan[col].G = DeNormalizeClip16(g);
+                    rowSpan[col].B = DeNormalizeClip16(b);
                 }
-
-                pixelLightness = ClipF(pixelLightness);
-
-                // Convert back to RGB 48 
-                ColorUtilities.HslToRgb(hue, saturation, pixelLightness, out ushort ur, out ushort ug, out ushort ub);
-
-                rowSpan[col].R = Clip16(ur);
-                rowSpan[col].G = Clip16(ug);
-                rowSpan[col].B = Clip16(ub);
             }
         // } // 'classic' for
         }); // Parallel For 

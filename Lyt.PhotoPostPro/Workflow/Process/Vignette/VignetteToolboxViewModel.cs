@@ -84,7 +84,7 @@ public sealed partial class VignetteToolboxViewModel :
 
     partial void OnTopSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.3
+        // Slider sends 0 to 0.45
         this.top = (float)value;
         int intValue = (int)(this.top * 100);
         this.TopString = intValue.ToString("D") + " %";
@@ -93,7 +93,7 @@ public sealed partial class VignetteToolboxViewModel :
 
     partial void OnBottomSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.3
+        // Slider sends 0 to 0.45
         this.bottom = (float)value;
         int intValue = (int)(this.bottom * 100);
         this.BottomString = intValue.ToString("D") + " %";
@@ -102,7 +102,7 @@ public sealed partial class VignetteToolboxViewModel :
 
     partial void OnLeftSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.3
+        // Slider sends 0 to 0.45
         this.left = (float)value;
         int intValue = (int)(this.left * 100);
         this.LeftString = intValue.ToString("D") + " %";
@@ -111,7 +111,7 @@ public sealed partial class VignetteToolboxViewModel :
 
     partial void OnRightSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.3
+        // Slider sends 0 to 0.45
         this.right = (float)value;
         int intValue = (int)(this.right * 100);
         this.RightString = intValue.ToString("D") + " %";
@@ -120,7 +120,7 @@ public sealed partial class VignetteToolboxViewModel :
 
     partial void OnLightnessSliderValueChanged(double value)
     {
-        // Slider sends -0.5 to +0.5
+        // Slider sends -0.75 to +0.75
         this.lightness = (float)value;
         this.LightnessString = value.ToString("+0.00;-0.00;0.00") + " %"; 
         this.UpdateModel();

@@ -298,27 +298,27 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void Vignette(float top, float bottom, float left, float right, float lightness) =>
         this.ApiAction(() =>
         {
-            if ((top < 0.0f) || (top > 0.3f))
+            if ((top < 0.0f) || (top > 0.45f))
             {
                 return false;
             }
 
-            if ((bottom < 0.0f) || (bottom > 0.3f))
+            if ((bottom < 0.0f) || (bottom > 0.45f))
             {
                 return false;
             }
 
-            if ((left < 0.0f) || (left > 0.3f))
+            if ((left < 0.0f) || (left > 0.45f))
             {
                 return false;
             }
 
-            if ((right < 0.0f) || (right > 0.3f))
+            if ((right < 0.0f) || (right > 0.45f))
             {
                 return false;
             }
 
-            if ((lightness < -0.5f) || (lightness > 0.5f))
+            if ((lightness < -0.75f) || (lightness > 0.75f))
             {
                 return false;
             }
