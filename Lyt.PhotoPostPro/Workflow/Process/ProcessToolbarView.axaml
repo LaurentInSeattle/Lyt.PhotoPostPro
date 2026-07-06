@@ -14,9 +14,9 @@
 	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
 	<StackPanel
-		Orientation="Vertical"
+		Orientation="Horizontal"
 		Margin="0 0 0 0"
-		HorizontalAlignment="Left"
+		HorizontalAlignment="Right"
 		Background="#30000080"
 		>
 

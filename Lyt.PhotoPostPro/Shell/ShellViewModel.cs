@@ -209,34 +209,4 @@ public sealed partial class ShellViewModel
         this.viewSelector!.EnableView(view);
         this.viewSelector!.SelectView(view); 
     }
-
-    internal void HandleShortcut(Key key)
-    {
-        switch (key)
-        {
-            default:
-            case Key.None:
-                break;
-
-            case Key.PageUp:
-                this.photoPostProModel.Back();
-                break;
-
-            case Key.PageDown:
-                this.photoPostProModel.Next();
-                break;
-
-            case Key.Home:
-                this.photoPostProModel.Back();
-                break;
-
-            case Key.End:
-                this.photoPostProModel.Next();
-                break;
-
-            case Key.Pause:
-                this.photoPostProModel.Reset();
-                break;
-        }
-    }
 }

@@ -40,14 +40,6 @@
 			VerticalAlignment="Top" HorizontalAlignment="Stretch"
 			DataContext="{Binding ToolboxHostViewModel}"
 			/>
-		<!-- 
-		<Grid
-			x:Name="ProcessViewToolbox"
-			Grid.Column="1"
-			VerticalAlignment="Top" HorizontalAlignment="Stretch"
-			>
-		</Grid>
-		--> 
 		<hist:HistogramView
 			x:Name="Histograms"
 			DataContext="{Binding HistogramViewModel}"

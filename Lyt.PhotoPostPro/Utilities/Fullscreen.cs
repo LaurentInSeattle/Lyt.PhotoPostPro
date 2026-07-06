@@ -60,7 +60,6 @@ public sealed class Fullscreen(Window mainWindow)
         this.mainWindow.ShowInTaskbar = false;
         this.IsFullscreen = true;
 
-        
         var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
         if (topLevel is not null)
         {
@@ -71,6 +70,17 @@ public sealed class Fullscreen(Window mainWindow)
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)
     {
+        if (!this.IsFullscreen)
+        {
+            return;
+        }
+
+        if (this.fullscreenWindow is null || this.fullscreenView is null || this.parentPanel is null)
+        {
+            // This should never happen, but if it does, we can just ignore it and return.
+            return;
+        }
+
         if (e.Key == Key.Escape)
         {
             this.ReturnToWindowed();
@@ -87,7 +97,8 @@ public sealed class Fullscreen(Window mainWindow)
 
         if (this.fullscreenWindow is null || this.fullscreenView is null || this.parentPanel is null)
         {
-            throw new InvalidOperationException("No fullscreen data");
+            // This should never happen, but if it does, we can just ignore it and return.
+            return;
         }
 
         var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);

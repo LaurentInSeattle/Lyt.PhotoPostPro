@@ -87,6 +87,36 @@ public sealed partial class ProcessViewModel :
         }
     }
 
+    internal void HandleShortcut(Key key)
+    {
+        switch (key)
+        {
+            default:
+            case Key.None:
+                break;
+
+            case Key.PageUp:
+                this.model.Back();
+                break;
+
+            case Key.PageDown:
+                this.model.Next();
+                break;
+
+            case Key.Home:
+                this.model.Back();
+                break;
+
+            case Key.End:
+                this.model.Next();
+                break;
+
+            case Key.Pause:
+                this.model.Reset();
+                break;
+        }
+    }
+
     public void InitializeWorkflow()
     {
         foreach (var selectableView in this.viewSelector!.SelectableViews)
