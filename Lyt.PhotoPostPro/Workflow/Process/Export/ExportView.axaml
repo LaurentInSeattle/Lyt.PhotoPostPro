@@ -20,9 +20,9 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="4" />
-			<ColumnDefinition Width="*" MinWidth="320"/>
+			<ColumnDefinition Width="*" MinWidth="150"/>
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="600" MinWidth="320"/>
+			<ColumnDefinition Width="600" MinWidth="150"/>
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<shared:BeforeAfterView

@@ -16,8 +16,10 @@
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Filters --> 
+			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 1 : Filter combo --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
-			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Amount --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 3 : Explain Amount  --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- 4Amount --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -26,7 +28,42 @@
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Grid
+			Grid.Row="1" 
+			> 
+			<ComboBox
+				x:Name="ContentComboBox"
+				Margin="12 0 0 0"
+				Padding="1"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
+				ItemsSource="{Binding SupportedFilters}"
+				SelectedIndex="{Binding SelectedIndex}"
+				Width="300" Height="44" MaxDropDownHeight="340"
+				>
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Vertical"/>
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock 
+							Theme="{StaticResource Large}"
+							Foreground="{StaticResource Secondary.TextColor}"
+							Margin ="16 0 0 0" 
+							Text="{Binding}"
+							/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>		
+		</Grid>
+		<TextBlock
 			Grid.Row="3" 
+			Text="{DynamicResource Workflow.Filters.ExplainAmount}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="4" 
 			> 
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />

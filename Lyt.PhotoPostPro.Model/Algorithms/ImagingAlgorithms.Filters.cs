@@ -23,4 +23,22 @@ public static partial class ImagingAlgorithms
 
         return true;
     }
+
+    public static bool Lomograph(this Image<Rgb48> image)
+    {
+        image.Mutate(x => x.Lomograph());
+        return true;
+    }
+
+    public static bool Kodachrome(this Image<Rgb48> image)
+    {
+        image.Mutate(x => x.Kodachrome());
+        return true;
+    }
+
+    public static bool Polaroid(this Image<Rgb48> image)
+    {
+        image.Mutate(x => x.Polaroid());
+        return true;
+    }
 }

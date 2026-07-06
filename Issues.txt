@@ -1,6 +1,8 @@
 Bugs 
 ----
 
+- Relocate Vignette to exposure control 
+
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Tool boxes titles will not localise when language changes 
@@ -30,13 +32,6 @@ TODO First : Single Image Process
 
 - UI to define signature and watermark
 
-- Image Fancy Filters (Img # provided)
-	- Black and White 
-	- Sepia (amount) 
-	- Kodak 
-	- Lomograph (options) 
-	- Polaroid (options) 
-
 
 Missing Features 
 ----------------
@@ -62,7 +57,7 @@ Missing Features
 
 - Floating toolbox windows 
 
-- Cleanup unused icons 
+- Cleanup unused icons for faster loading 
 
 - Cleanup language strings
 

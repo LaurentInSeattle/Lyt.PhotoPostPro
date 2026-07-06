@@ -73,6 +73,7 @@
 	<system:String x:Key="Workflow.Compose.Height">Height:</system:String>
 	<system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio:</system:String>
 	<system:String x:Key="Workflow.Compose.CompositionGuides">Select a composition guide:</system:String>
+	<!-- Composition Guides Combobox -->
 	<system:String x:Key="Workflow.Compose.CG.None"> - - None - -</system:String>
 	<system:String x:Key="Workflow.Compose.CG.Thirds"> Rule of Thirds</system:String>
 	<system:String x:Key="Workflow.Compose.CG.Frame"> Frame </system:String>
@@ -149,7 +150,16 @@
 
 	<!-- Workflow Filters -->
 	<system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>
-	
+	<system:String x:Key="Workflow.Filters.Correction">Apply special effects to the image.</system:String>
+	<system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale or Sepia:</system:String>
+	<system:String x:Key="Workflow.Filters.Amount">Amount:</system:String>
+	<!-- Filters Combobox -->
+	<system:String x:Key="Workflow.Filters.Grayscale">Grayscale</system:String>
+	<system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
+	<system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+	<system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
+	<system:String x:Key="Workflow.Filters.Lomograph">Lomograph</system:String>
+
 	<!-- Workflow Export-->
 	<system:String x:Key="Workflow.Export.Title">Exports</system:String>
 	<system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>

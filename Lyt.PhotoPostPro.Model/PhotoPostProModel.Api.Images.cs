@@ -368,6 +368,42 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Kodachrome() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Kodachrome();
+                return true;
+            }
+
+            return false;
+        });
+
+    public void Lomograph() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Lomograph();
+                return true;
+            }
+
+            return false;
+        });
+
+    public void Polaroid() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Polaroid();
+                return true;
+            }
+
+            return false;
+        });
+
     public void Export(ExportParameters exportParameters) =>
         this.ApiAction(() =>
         {

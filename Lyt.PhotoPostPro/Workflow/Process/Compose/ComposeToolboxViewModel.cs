@@ -61,7 +61,6 @@ public sealed partial class ComposeToolboxViewModel :
             " Golden Triangle Down "  , // 6 => this.View.GoldenDownCG,
         ];
 
-
     [ObservableProperty]
     public partial int SelectedIndex { get; set; }
 

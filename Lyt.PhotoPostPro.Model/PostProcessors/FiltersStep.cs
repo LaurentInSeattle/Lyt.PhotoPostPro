@@ -1,12 +1,15 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class FiltersStep(PostProcessWorkflow postProcessWorkflow) : 
+public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.FiltersStepName)
 {
     public enum Filter
     {
         Grayscale,
         Sepia,
+        Kodachrome,
+        Lomograph,
+        Polaroid,
     }
 
     public Filter SelectedFilter { get; set; }
@@ -29,27 +32,36 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        // Image is unchanged if the amount is 0.0, for all filters.
-        bool isChanged = this.Amount > 0.001 ;
+        // Image is unchanged if the amount is 0.0, for Grayscale and Sepia
+        // Other filters are always applied without parameter 
         var clone = this.SourceImage.Clone();
-        if (isChanged)
+        switch (this.SelectedFilter)
         {
-            switch (this.SelectedFilter)
-            {
-                default:
-                case Filter.Grayscale:
-                    clone.Grayscale(this.Amount);
-                    break;
+            default:
+            case Filter.Grayscale:
+                clone.Grayscale(this.Amount);
+                break;
 
-                case Filter.Sepia:
-                    clone.Sepia(this.Amount);
-                    break;
-            }
+            case Filter.Sepia:
+                clone.Sepia(this.Amount);
+                break;
 
-            PostProcessStep.RecalculateHistograms(clone);
+            case Filter.Kodachrome:
+                clone.Kodachrome();
+                break;
+
+            case Filter.Lomograph:
+                clone.Lomograph();
+                break;
+
+            case Filter.Polaroid:
+                clone.Polaroid();
+                break;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
+        PostProcessStep.RecalculateHistograms(clone);
+
+        this.ResultImage = clone;
         return withFrame ? clone.ToFrame() : null;
     }
 
@@ -64,6 +76,27 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Sepia;
         this.Amount = sepiaAmount;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? Kodachrome()
+    {
+        this.SelectedFilter = Filter.Kodachrome;
+        this.Amount = 0.0f;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? Lomograph()
+    {
+        this.SelectedFilter = Filter.Lomograph;
+        this.Amount = 0.0f;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? Polaroid()
+    {
+        this.SelectedFilter = Filter.Polaroid;
+        this.Amount = 0.0f;
         return this.Transform(withFrame: true);
     }
 
