@@ -2,7 +2,8 @@
 
 public sealed partial class ProcessViewModel :
     ViewModel<ProcessView>,
-    IRecipient<WorkflowUpdateMessage>
+    IRecipient<WorkflowUpdateMessage>,
+    IRecipient<HotKeyMessage>
 {
     private static readonly Dictionary<string, ActivatedView> WorkflowstepNameToView = new()
     {
@@ -37,6 +38,7 @@ public sealed partial class ProcessViewModel :
         this.HistogramViewModel = new();
         this.ToolboxHostViewModel = new();
         this.Subscribe<WorkflowUpdateMessage>();
+        this.Subscribe<HotKeyMessage>();
     }
 
     public override void Activate(object? activationParameters)
@@ -87,32 +89,28 @@ public sealed partial class ProcessViewModel :
         }
     }
 
-    internal void HandleShortcut(Key key)
+    public void Receive(HotKeyMessage message)
     {
-        switch (key)
+        switch (message.Key)
         {
-            default:
-            case Key.None:
-                break;
-
             case Key.PageUp:
-                this.model.Back();
+                this.model.Workflow.Back();
                 break;
-
+            
             case Key.PageDown:
-                this.model.Next();
+                this.model.Workflow.Next();
                 break;
-
+            
             case Key.Home:
-                this.model.Back();
+                this.model.Workflow.Back();
                 break;
-
+            
             case Key.End:
-                this.model.Next();
+                this.model.Workflow.Next();
                 break;
 
             case Key.Pause:
-                this.model.Reset();
+                this.model.Workflow.Reset();
                 break;
         }
     }

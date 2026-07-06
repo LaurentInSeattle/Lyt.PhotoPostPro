@@ -12,60 +12,89 @@ public sealed class Fullscreen(Window mainWindow)
 
     public void GoFullscreen(Panel parentPanel, View view)
     {
-        if (!parentPanel.Children.Remove(view))
+        try
         {
-            throw new InvalidOperationException("Failed to remove view");
+            // Unhook the main window's key down event to prevent it
+            // from handling keys while in fullscreen
+            HotKeys.Instance.Clear(parentPanel);
+
+            if (!parentPanel.Children.Remove(view))
+            {
+                throw new InvalidOperationException("Failed to remove view");
+            }
+
+            // Let avalonia handle the layout pas now that the view is now detached 
+            // Waiting two frames to ensure the layout is updated before creating the fullscreen window
+            Schedule.OnUiThread(
+                130,
+                () => { this.GoFullscreenContinued(parentPanel, view); },
+                DispatcherPriority.Background);
         }
-
-        this.parentPanel = parentPanel;
-        this.fullscreenView = view;
-
-        // Get the screen that the main window is currently on BEFORE we hide it.
-        var screens = this.mainWindow.Screens;
-        var currentScreen = screens.ScreenFromWindow(this.mainWindow);
-
-        this.fullscreenWindow = new Window()
+        catch (Exception ex)
         {
-            // Make sure the fullscreen window is focusable so that the content view can receive
-            // keyboard input, most notably for the esc key used to return to normal.
-            Focusable = true,
-            CanMaximize = true,
-            Content = view,
-            // ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome,
-            ShowActivated = true,
-            ShowInTaskbar = false,
-            WindowDecorations = WindowDecorations.None,
-            Topmost = true,
-            // Provide an icon for the fullscreen window, reuse the main window icon if available.
-            Icon = this.mainWindow.Icon,
-            // We need to set the position before going fullscreen to ensure it appears
-            // on the correct screen.
-            // LATER => WindowState = WindowState.FullScreen,
-        };
-
-        this.mainWindow.Hide();
-
-        if (currentScreen is not null)
-        {
-            var screenBounds = currentScreen.WorkingArea;
-            this.fullscreenWindow.Position = new PixelPoint(screenBounds.X, screenBounds.Y);
+            Debug.WriteLine("Failed to go fullscreen: " + ex);
         }
+    }
 
-        this.fullscreenWindow.WindowState = WindowState.FullScreen;
-        this.fullscreenWindow.Show();
-        this.fullscreenWindow.Focus();
-        this.fullscreenWindow.ShowInTaskbar = true;
-
-        // Needs to be done after showing the fullscreen window or else we'll have two taskbar entries.
-        this.mainWindow.ShowInTaskbar = false;
-        this.IsFullscreen = true;
-
-        var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
-        if (topLevel is not null)
+    private void GoFullscreenContinued(Panel parentPanel, View view)
+    {
+        try
         {
-            topLevel.KeyDown += this.OnTopLevelKeyDown;
-        }
+            this.parentPanel = parentPanel;
+            this.fullscreenView = view;
 
+            // Get the screen that the main window is currently on BEFORE we hide it.
+            var screens = this.mainWindow.Screens;
+            var currentScreen = screens.ScreenFromWindow(this.mainWindow);
+
+            this.fullscreenWindow = new Window()
+            {
+                // Make sure the fullscreen window is focusable so that the content view can receive
+                // keyboard input, most notably for the esc key used to return to normal.
+                Focusable = true,
+                CanMaximize = true,
+                Content = view,
+                // ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome,
+                ShowActivated = true,
+                ShowInTaskbar = false,
+                WindowDecorations = WindowDecorations.None,
+                Topmost = true,
+                // Provide an icon for the fullscreen window, reuse the main window icon if available.
+                Icon = this.mainWindow.Icon,
+                // We need to set the position before going fullscreen to ensure it appears
+                // on the correct screen.
+                // LATER => WindowState = WindowState.FullScreen,
+            };
+
+            this.mainWindow.Hide();
+
+            if (currentScreen is not null)
+            {
+                var screenBounds = currentScreen.WorkingArea;
+                this.fullscreenWindow.Position = new PixelPoint(screenBounds.X, screenBounds.Y);
+            }
+
+            this.fullscreenWindow.WindowState = WindowState.FullScreen;
+            this.fullscreenWindow.Show();
+            this.fullscreenWindow.Focus();
+            this.fullscreenWindow.ShowInTaskbar = true;
+
+            // Needs to be done after showing the fullscreen window or else we'll have two taskbar entries.
+            this.mainWindow.ShowInTaskbar = false;
+            this.IsFullscreen = true;
+
+            var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
+            if (topLevel is not null)
+            {
+                topLevel.KeyDown += this.OnTopLevelKeyDown;
+            }
+
+            HotKeys.Instance.Set(view);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Failed to go fullscreen: " + ex);
+        }
     }
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)
@@ -90,33 +119,46 @@ public sealed class Fullscreen(Window mainWindow)
 
     public void ReturnToWindowed()
     {
-        if (!this.IsFullscreen)
+        try
         {
-            return;
-        }
+            if (!this.IsFullscreen)
+            {
+                return;
+            }
 
-        if (this.fullscreenWindow is null || this.fullscreenView is null || this.parentPanel is null)
+            if (this.fullscreenWindow is null || this.fullscreenView is null || this.parentPanel is null)
+            {
+                // This should never happen, but if it does, we can just ignore it and return.
+                return;
+            }
+
+            // Unhook the key down event from the fullscreen window
+            HotKeys.Instance.Clear(this.fullscreenView);
+
+            var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
+            if (topLevel is not null)
+            {
+                topLevel.KeyDown -= this.OnTopLevelKeyDown;
+            }
+
+            this.fullscreenWindow.Content = null;
+            this.fullscreenWindow.Close();
+            this.fullscreenWindow = null;
+
+            this.parentPanel.Children.Add(this.fullscreenView);
+            this.mainWindow.ShowInTaskbar = true;
+            this.mainWindow.Show();
+            this.IsFullscreen = false;
+
+            // Re- hook the key down event from the main windowed window
+            HotKeys.Instance.Set(this.fullscreenView);
+
+            this.fullscreenView = null;
+            this.parentPanel = null;
+        }
+        catch (Exception ex)
         {
-            // This should never happen, but if it does, we can just ignore it and return.
-            return;
+            Debug.WriteLine("Failed to return to windowed mode: " + ex);
         }
-
-        var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
-        if (topLevel is not null)
-        {
-            topLevel.KeyDown -= this.OnTopLevelKeyDown;
-        }
-
-        this.fullscreenWindow.Content = null;
-        this.fullscreenWindow.Close();
-        this.fullscreenWindow = null;
-
-        this.parentPanel.Children.Add(this.fullscreenView);
-        this.mainWindow.ShowInTaskbar = true;
-        this.mainWindow.Show();
-        this.IsFullscreen = false;
-
-        this.fullscreenView = null;
-        this.parentPanel = null;
     }
 }

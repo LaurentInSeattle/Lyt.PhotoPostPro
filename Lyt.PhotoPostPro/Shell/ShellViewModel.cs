@@ -77,6 +77,8 @@ public sealed partial class ShellViewModel
         // Select(this.photoPostProModel.IsFirstRun ? ActivatedView.Language : ActivatedView.Encoding);
         Select(ActivatedView.Single);
 
+        HotKeys.Instance.Set(this.View); 
+
         this.Logger.Debug("OnViewLoaded complete");
     }
 

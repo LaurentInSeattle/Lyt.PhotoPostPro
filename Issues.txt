@@ -57,10 +57,11 @@ Missing Features
 
 - Floating toolbox windows 
 
+- On Demand Workflow steps
+
 - Cleanup unused icons for faster loading 
 
 - Cleanup language strings
-
 
 Cool Stuff to Consider 
 ----------------------

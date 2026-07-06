@@ -19,6 +19,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public void OnFinish()
     {
         // TODO: Warn if nothing exported 
+        new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.BackToWindowed).Publish();
         this.model.Finish();
     }
 }
