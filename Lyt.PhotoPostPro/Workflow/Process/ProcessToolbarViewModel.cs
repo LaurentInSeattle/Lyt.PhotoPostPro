@@ -13,5 +13,9 @@ public sealed partial class ProcessToolbarViewModel : ViewModel<ProcessToolbarVi
         ViewSelector<ActivatedView>.Select(ActivatedView.Folder);
     }
 
+    [RelayCommand]
+    public void OnFullscreen() =>
+        new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.GoFullscreen).Publish();
+
 #pragma warning restore CA1822
 }

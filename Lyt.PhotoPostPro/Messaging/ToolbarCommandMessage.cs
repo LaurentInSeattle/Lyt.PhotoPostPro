@@ -15,7 +15,7 @@ public sealed record class ToolbarCommandMessage(
         Close,
 
         // Play toolbar
-        PlayFullscreen,
+        GoFullscreen,
 
         // Collection toolbars 
         Play,
@@ -24,7 +24,7 @@ public sealed record class ToolbarCommandMessage(
 
         // Settings toolbars 
         Cleanup,
-        PlayWindowed,
+        BackToWindowed,
         Rearrange,
     }
 }

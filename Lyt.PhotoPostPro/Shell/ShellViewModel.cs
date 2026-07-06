@@ -8,6 +8,7 @@ public sealed partial class ShellViewModel
     IRecipient<LanguageChangedMessage>
 {
     private readonly PhotoPostProModel photoPostProModel;
+    private readonly Fullscreen fullscreen;
     private readonly IToaster toaster;
 
     [ObservableProperty]
@@ -20,6 +21,7 @@ public sealed partial class ShellViewModel
     {
         this.photoPostProModel = photoPostProModel;
         this.toaster = toaster;
+        this.fullscreen = new Fullscreen(App.MainWindow);
 
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
@@ -31,11 +33,14 @@ public sealed partial class ShellViewModel
 
     public void Receive(ToolbarCommandMessage message)
     {
-        if (message.Command == ToolbarCommandMessage.ToolbarCommand.PlayFullscreen)
+        if (message.Command == ToolbarCommandMessage.ToolbarCommand.GoFullscreen)
         {
+            var vm = App.GetRequiredService<ProcessViewModel>();
+            this.fullscreen.GoFullscreen(this.View.ShellViewContent, vm.View);
         }
-        else if (message.Command == ToolbarCommandMessage.ToolbarCommand.PlayWindowed)
+        else if (message.Command == ToolbarCommandMessage.ToolbarCommand.BackToWindowed)
         {
+            this.fullscreen.ReturnToWindowed();
         }
     }
 

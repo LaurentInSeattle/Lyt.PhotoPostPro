@@ -19,7 +19,21 @@
 		HorizontalAlignment="Left"
 		Background="#30000080"
 		>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="full_screen_maximize"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Puzzle.Toolbar.FullScreen}"  
+			Command="{Binding OnFullscreen}"
+			/>
 		<!-- TODO 
+		<controls:ExtendedTextBlock
+			Grid.Column="13" Grid.ColumnSpan="2" Grid.Row="1"
+			Text="{DynamicResource Puzzle.Toolbar.EscToReturn}"  
+			Typography="{StaticResource Medium}"
+			Foreground="{StaticResource PastelOrchid_0_080}"
+			/>
 
 		<glyphs:GlyphButton
 			Style="{StaticResource ToolbarIconButton}"

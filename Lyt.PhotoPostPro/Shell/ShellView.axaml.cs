@@ -18,7 +18,6 @@ public partial class ShellView : UserControl, IView
                 topLevel.KeyDown += this.OnTopLevelKeyDown;
             }
         };
-
     }
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)
