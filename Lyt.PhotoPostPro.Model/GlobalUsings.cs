@@ -74,6 +74,7 @@ global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Algorithms;
 global using Lyt.PhotoPostPro.Model.ExportModels;
 global using Lyt.PhotoPostPro.Model.Frames;
+global using Lyt.PhotoPostPro.Model.LookUp;
 global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.PostProcessors;
 global using Lyt.PhotoPostPro.Model.ProcessModels;

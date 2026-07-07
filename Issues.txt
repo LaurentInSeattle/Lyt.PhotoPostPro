@@ -1,7 +1,11 @@
 Bugs 
 ----
 
-- Relocate and rename Vignette to exposure controls 
+- Full Screen Process view has no background 
+
+- Add 'None' for Special Effects (will do a reset)  
+
+- Relocate and rename Vignette to exposure controls, use Vignette built-in effect 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -17,10 +21,10 @@ WIP
 ---
 
 - Other built-in effects to consider:  
-        // HistogramEqualization
-        // OilPaint (intensity, brush size
-        // Pixelate (size) 
-        // Vignette (Color , radius ) 
+		// HistogramEqualization
+		// OilPaint (intensity, brush size
+		// Pixelate (size) 
+		// Vignette (Color , radius ) 
 
 - Image Exports: Quick save
 
