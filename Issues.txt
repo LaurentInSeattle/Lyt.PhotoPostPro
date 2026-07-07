@@ -1,7 +1,7 @@
 Bugs 
 ----
 
-- Relocate Vignette to exposure control 
+- Relocate and rename Vignette to exposure controls 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -15,6 +15,12 @@ Bugs
 
 WIP
 ---
+
+- Other built-in effects to consider:  
+        // HistogramEqualization
+        // OilPaint (intensity, brush size
+        // Pixelate (size) 
+        // Vignette (Color , radius ) 
 
 - Image Exports: Quick save
 

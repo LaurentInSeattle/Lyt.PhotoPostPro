@@ -24,6 +24,17 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
+    public static bool Pixelate(this Image<Rgb48> image, float pixelationAmount)
+    {
+        int amount = (int) ( 0.5f + 100.0f * pixelationAmount);
+        if ( amount > 0)
+        {
+            image.Mutate(x => x.Pixelate(amount));
+        }
+
+        return true;
+    }
+
     public static bool Lomograph(this Image<Rgb48> image)
     {
         image.Mutate(x => x.Lomograph());
@@ -39,6 +50,18 @@ public static partial class ImagingAlgorithms
     public static bool Polaroid(this Image<Rgb48> image)
     {
         image.Mutate(x => x.Polaroid());
+        return true;
+    }
+
+    public static bool BlackWhite(this Image<Rgb48> image)
+    {
+        image.Mutate(x => x.BlackWhite());
+        return true;
+    }
+
+    public static bool Vignette(this Image<Rgb48> image)
+    {
+        image.Mutate(x => x.Vignette(Color.Black));
         return true;
     }
 }

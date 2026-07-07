@@ -36,6 +36,12 @@ public sealed partial class SingleToolboxViewModel : ViewModel<SingleToolboxView
     [RelayCommand]
     public void OnNext()
     {
+        var mainWindow = App.MainWindow;
+        if (mainWindow.CanMaximize)
+        {
+            mainWindow.WindowState = WindowState.Maximized;
+        } 
+
         var viewModel = App.GetRequiredService<SingleViewModel>();
         viewModel.ProcessCurrentImage();
     }

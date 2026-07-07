@@ -28,6 +28,8 @@
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 
 	<!-- Single -->
+	<system:String x:Key="Single.DropZone">Drag and Drop Zone</system:String>
+	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image files here to begin.</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
