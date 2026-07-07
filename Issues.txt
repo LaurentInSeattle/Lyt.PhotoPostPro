@@ -20,6 +20,10 @@ Bugs
 WIP
 ---
 
+- Color grading with LUT's
+
+- Compress Built-in LUT 
+
 - Other built-in effects to consider:  
 		// HistogramEqualization
 		// OilPaint (intensity, brush size
@@ -34,6 +38,10 @@ WIP
 
 - Add auto-localization tool in VS build 
 
+- Cleanup unused icons for faster loading 
+
+- Cleanup language strings
+
 
 TODO First : Single Image Process
 ---------------------------------
@@ -46,6 +54,8 @@ TODO First : Single Image Process
 Missing Features 
 ----------------
 
+--- Essential --- 
+
 - Project : 
 	- Browse 
 	- Create ( partially done ) 
@@ -53,25 +63,26 @@ Missing Features
 	- Save 
 	- Delete
 
+- Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
+
 - Camera downloads 
 
 - Folder Management 
 
 - Culling Workflow 
 
+--- Important ---
+
 - Zoom on viewer windows 
 
 - Tools to show both before / after or just after 
+
+--- Nice to Have ---
 
 - Optimal viewer layout 
 
 - Floating toolbox windows 
 
-- On Demand Workflow steps
-
-- Cleanup unused icons for faster loading 
-
-- Cleanup language strings
 
 Cool Stuff to Consider 
 ----------------------
@@ -88,8 +99,6 @@ Refer to Jigsaw code
 - Ability to show or hide hints and beginner tips depending an app settings 
 
 - UI : Final fix for Re-init of Compose is failing at second image 
-
-- Coloring with LUT's
 
 - Viewing mode when before and after are stacked with a slider ( or two ) in the 
 middlle to show top image or bottom image 

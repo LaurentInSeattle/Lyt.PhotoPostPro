@@ -167,7 +167,7 @@ public sealed class Lut
     /// <summary> Creates a new Lut from the array of string lines a .Cube file </summary>
     /// <param name="lines"> The file Content</param>
     /// <returns>A LUT object</returns>
-    public static Lut FromCube(string[] lines)
+    public static Lut FromCubeLines(string[] lines)
     {
         var lut = new Lut();
 
