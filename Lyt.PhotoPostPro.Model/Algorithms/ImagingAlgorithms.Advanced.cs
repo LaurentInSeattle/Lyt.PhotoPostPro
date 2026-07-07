@@ -697,7 +697,7 @@ public static partial class ImagingAlgorithms
                 float r = pixel.R / pixMaxF;
                 float g = pixel.G / pixMaxF;
                 float b = pixel.B / pixMaxF;
-                
+
                 float vignetteFactor = MathF.Max(MathF.Max(topFactor, bottomFactor), MathF.Max(leftFactor, rightFactor));
                 if (darkVignette)
                 {
@@ -727,10 +727,46 @@ public static partial class ImagingAlgorithms
                     rowSpan[col].B = DeNormalizeClip16(b);
                 }
             }
-        // } // 'classic' for
+            // } // 'classic' for
         }); // Parallel For 
     }
 
     #endregion Vignette
 
+    #region LUT 
+
+    public static void Lut(this Image<Rgb48> image, LutMetadata lutMetadata)
+    {
+        if (!LutsManager.TryLoadLut(lutMetadata, out Lut? lut))
+        {
+            // Failed to load LUT ? 
+            if ( Debugger.IsAttached ) { Debugger.Break(); }
+            return;
+        }
+
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<Rgb48> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < pixelRow.Length; x++)
+            {
+                Rgb48 pixel = pixelRow[x];
+
+                // Normalize RGB to [0, 1] float range
+                float r = pixel.R / 65535.0f;
+                float g = pixel.G / 65535.0f;
+                float b = pixel.B / 65535.0f;
+
+                var lutColor = LutColor.FromRgbFloat(r, g, b);
+                var transformed = lut.Lookup(lutColor, LutAlgorithm.Tetrahedral); 
+
+                pixelRow[x].R = DeNormalizeClip16(transformed.R);
+                pixelRow[x].G = DeNormalizeClip16(transformed.G);
+                pixelRow[x].B = DeNormalizeClip16(transformed.B); 
+            }
+        });
+    }
+
+    #endregion LUT 
 }

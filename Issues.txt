@@ -56,6 +56,8 @@ Missing Features
 
 --- Essential --- 
 
+- Drop RGB 48 and move on to 4xHalf
+
 - Project : 
 	- Browse 
 	- Create ( partially done ) 

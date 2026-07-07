@@ -28,6 +28,18 @@ internal static class LutsManager
         return list; 
     }
 
+    public static bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    {
+        if (lutMetadata.IsEmbedded)
+        {
+            return TryLoadBuiltInLut(lutMetadata, out lut); 
+        }
+        else
+        {
+            throw new  NotImplementedException("later..."); 
+        } 
+    }
+
     public static bool TryLoadBuiltInLut (LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null; 

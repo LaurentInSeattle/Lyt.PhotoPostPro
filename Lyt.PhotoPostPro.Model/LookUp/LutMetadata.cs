@@ -2,8 +2,13 @@
 
 public enum LutFormat
 {
-    Cube, 
-    ThreeDL, 
+    None = 0,
+    Cube,
+    ThreeDL,
 }
 
-internal sealed record class LutMetadata(string FriendlyName, string Path, LutFormat LutFormat, bool IsEmbedded); 
+public sealed record class LutMetadata(string FriendlyName, string Path, LutFormat LutFormat, bool IsEmbedded)
+{
+    public static readonly LutMetadata Empty =
+        new(string.Empty, string.Empty, LutFormat: LutFormat.None, IsEmbedded: false);
+}
