@@ -277,6 +277,18 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Lut(LutMetadata lutMetadata) =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is ColorStep colorStep)
+            {
+                this.LastResultFrame = colorStep.Lut(lutMetadata);
+                return true;
+            }
+
+            return false;
+        });
+
     public void GlobalSharpen(float sharpenAmount) =>
         this.ApiAction(() =>
         {

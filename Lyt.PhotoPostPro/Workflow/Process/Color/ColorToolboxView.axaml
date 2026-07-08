@@ -20,6 +20,9 @@
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Vibrance  --> 
 			<RowDefinition Height="{StaticResource Size.ThreeSliders}" /> <!-- Three sliders R G B --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt LUT --> 
+			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!--  : LUT combo --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
@@ -156,6 +159,41 @@
 				HorizontalAlignment="Left"
 				Text="{Binding BlueString}"
 				/>
+		</Grid>
+		<TextBlock
+			Grid.Row="8" 
+			Text="{DynamicResource Workflow.Color.UseLut}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="9" 
+			> 
+			<ComboBox
+				x:Name="ContentComboBox"
+				Margin="12 0 0 0"
+				Padding="1"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
+				ItemsSource="{Binding AvailableLutNames}"
+				SelectedIndex="{Binding SelectedIndex}"
+				Width="300" Height="44" MaxDropDownHeight="340"
+				>
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Vertical"/>
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock 
+							Theme="{StaticResource Large}"
+							Foreground="{StaticResource Secondary.TextColor}"
+							Margin ="16 0 0 0" 
+							Text="{Binding}"
+							/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>		
 		</Grid>
 	</Grid>
 </UserControl>

@@ -7,9 +7,11 @@ public sealed partial class ColorToolboxViewModel :
 
     private ColorStep.ColorAlgorithm algorithm;
     private float saturation;
-    private float red ;
+    private float red;
     private float green;
     private float blue;
+    private LutMetadata lutMetadata = LutMetadata.Empty;
+
 
     protected override string Title => this.Localize("Workflow.Color.Title");
 
@@ -37,6 +39,14 @@ public sealed partial class ColorToolboxViewModel :
     [ObservableProperty]
     public partial double BlueSliderValue { get; set; }
 
+    [ObservableProperty]
+    public partial List<string> AvailableLutNames { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedIndex { get; set; }
+
+    public List<LutMetadata> AvailableLuts { get; set; } = [];
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
@@ -58,6 +68,26 @@ public sealed partial class ColorToolboxViewModel :
             this.RedSliderValue = this.red;
             this.GreenSliderValue = this.green;
             this.BlueSliderValue = this.blue;
+
+            var metaLuts = LutsManager.BuiltInLuts();
+            List<string> list = new(1 + metaLuts.Count)
+            { 
+               this.Localize("Workflow.Color.None"),
+            };
+
+            this.AvailableLuts.Add(LutMetadata.Empty);
+
+            foreach (var metaLut in metaLuts)
+            {
+                this.AvailableLuts.Add(metaLut);
+                list.Add(metaLut.FriendlyName);
+            }
+
+            this.AvailableLutNames = list;
+
+            // Enforce property changed 
+            this.SelectedIndex = 1;
+            this.SelectedIndex = 0;
         });
     }
 
@@ -113,6 +143,24 @@ public sealed partial class ColorToolboxViewModel :
         this.UpdateModel();
     }
 
+    partial void OnSelectedIndexChanged(int value)
+    {
+        if (value >= 0 && value < this.AvailableLutNames.Count)
+        {
+            // Wait one frame before launching the image color lookup process
+            // If we dont, the app randomly freezes, with no exceptions thrown.
+            // Possible Avalonia Bug ? Need to test with latest 12.0.5
+            // Debug Output shows:
+            // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
+            Schedule.OnUiThread(66, () =>
+                {
+                    this.algorithm = ColorStep.ColorAlgorithm.Lut;
+                    this.lutMetadata = this.AvailableLuts[value];
+                    this.UpdateModel();
+                }, DispatcherPriority.Background); 
+        }
+    }
+
     private void UpdateModel()
     {
         if (this.doNotUpdateModel)
@@ -128,6 +176,18 @@ public sealed partial class ColorToolboxViewModel :
 
             case ColorStep.ColorAlgorithm.Vibrance:
                 this.model.Vibrance(this.red, this.green, this.blue);
+                break;
+
+            case ColorStep.ColorAlgorithm.Lut:
+                if (this.lutMetadata.LutFormat == LutFormat.None)
+                {
+                    this.model.Workflow.Reset(); 
+                }
+                else
+                {
+                    this.model.Lut(this.lutMetadata);
+                }
+
                 break;
 
             default:

@@ -120,8 +120,16 @@ public sealed partial class FiltersToolboxViewModel :
     {
         if (value >= 0 && value < this.SupportedFilters.Count)
         {
-            this.selectedFilter = filters[value];
-            this.UpdateModel();
+            // Wait one frame before launching the image color lookup process
+            // If we dont, the app randomly freezes, with no exceptions thrown.
+            // Possible Avalonia Bug ? Need to test with latest 12.0.5
+            // Debug Output shows:
+            // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
+            Schedule.OnUiThread(66, () =>
+            {
+                this.selectedFilter = filters[value];
+                this.UpdateModel();
+            }, DispatcherPriority.Background);
         }
     } 
 

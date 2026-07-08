@@ -85,7 +85,7 @@
 	<system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
 
 	<!-- Workflow Exposure -->
-	<system:String x:Key="Workflow.Exposure.Title">Exposure</system:String>
+	<system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
 	<system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
 	<system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
 	<system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
@@ -100,7 +100,7 @@
 	<system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
 
 	<!-- Workflow Vignette -->
-	<system:String x:Key="Workflow.Vignette.Title">Vignette</system:String>
+	<system:String x:Key="Workflow.Vignette.Title">Selective Exposure Correction</system:String>
 	<system:String x:Key="Workflow.Vignette.Correction">Apply an exposure correction to selected sides of the image.</system:String>
 	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
 	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
@@ -135,14 +135,16 @@
 
 	<!-- Workflow Color -->
 	<system:String x:Key="Workflow.Color.Title">Color Grading</system:String>
-	<system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally or use Vibrance on each RGB channel.</system:String>
+	<system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally, use Vibrance on each RGB channel or use a Lookup Table..</system:String>
 	<system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
 	<system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
 	<system:String x:Key="Workflow.Color.Red">Red:</system:String>
 	<system:String x:Key="Workflow.Color.Green">Green:</system:String>
 	<system:String x:Key="Workflow.Color.Blue">Blue:</system:String>
-
+	<system:String x:Key="Workflow.Color.UseLut">Choose a lookup table:</system:String>
+	<system:String x:Key="Workflow.Color.None"> - - None - -</system:String>
+	
 	<!-- Workflow Sharpen -->
 	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
 	<system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>

@@ -2,7 +2,7 @@
 
 using static ResourcesUtilities;
 
-internal static class LutsManager
+public static class LutsManager
 {
     private const string Cube = ".cube";
     private const string ThreeDL = ".3dl";
@@ -16,10 +16,12 @@ internal static class LutsManager
             List<string> resources = EnumerateEmbeddedResourceNames(extension);
             foreach (string resource in resources)
             {
-                string friendly = resource.Replace(extension, string.Empty);
+                string trimmed = resource.Replace(extension, string.Empty);
+                string[] tokens = trimmed.Split('.', StringSplitOptions.RemoveEmptyEntries);
+                string friendly = tokens[^1];
                 friendly = StringExtensions.Wordify(friendly);
-                var meta = new LutMetadata(friendly, resource, lutFormat, IsEmbedded: true);
-                list.Add(meta);
+                var lutMetadata = new LutMetadata(friendly, resource, lutFormat, IsEmbedded: true);
+                list.Add(lutMetadata);
             }
         }
 
