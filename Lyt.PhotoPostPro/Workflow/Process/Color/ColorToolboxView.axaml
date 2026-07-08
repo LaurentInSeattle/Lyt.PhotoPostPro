@@ -8,6 +8,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	>	
 	<Grid
 		>
@@ -22,6 +24,9 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt LUT --> 
 			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!--  : LUT combo --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Drop LUT --> 
+			<RowDefinition Height="{StaticResource Size.DropBox}" /> <!--  : Drop   --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
 		<TextBlock
@@ -195,5 +200,16 @@
 				</ComboBox.ItemTemplate>
 			</ComboBox>		
 		</Grid>
+		<TextBlock
+			Grid.Row="11" 
+			Text="DynamicResource Workflow.Color.DropLut}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<shared:DropView
+			Grid.Row="12" 
+			Margin="4"
+			DataContext="{Binding DropViewModel}"
+			/>
 	</Grid>
 </UserControl>

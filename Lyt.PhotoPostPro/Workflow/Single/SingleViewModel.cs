@@ -5,7 +5,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class SingleViewModel : ViewModel<SingleView>
+public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHandler
 {
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster; 
@@ -24,7 +24,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>
         this.imagePath = string.Empty;
     }
 
-    internal void OnDropPath(string path, bool isDirectory)
+    public void OnDropPath(string path, bool isDirectory)
     {
         if (isDirectory)
         {

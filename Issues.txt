@@ -16,9 +16,9 @@ Bugs
 WIP
 ---
 
-- Color grading with LUT's
-
 - Compress Built-in LUT 
+
+- Cache the LUTs in a dictionary 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization
@@ -26,7 +26,7 @@ WIP
 
 - Image Exports: Quick save
 
-- Need a spin wait for exporting images 
+- Need a spin wait for exporting images or any other long operation
 
 - Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
 

@@ -21,6 +21,7 @@
     <system:Double x:Key="Dbl.Separator">10</system:Double>
     <system:Double x:Key="Dbl.WfNav">46</system:Double>
     <system:Double x:Key="Dbl.ComboBox">54</system:Double>
+    <system:Double x:Key="Dbl.DropBox">160</system:Double>
 
     <!-- Various Grid row heights used in tool box views --> 
     <controls:GridLength x:Key="Size.Spacer">8</controls:GridLength>
@@ -39,5 +40,6 @@
     <controls:GridLength x:Key="Size.Separator">10</controls:GridLength>
     <controls:GridLength x:Key="Size.WfNav">46</controls:GridLength>
     <controls:GridLength x:Key="Size.ComboBox">54</controls:GridLength>
+    <controls:GridLength x:Key="Size.DropBox">160</controls:GridLength>
 
 </ResourceDictionary>

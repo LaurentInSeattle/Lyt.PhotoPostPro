@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Color;
 
 public sealed partial class ColorToolboxViewModel :
-    ToolboxViewModel<ColorToolboxView, ColorStep>
+    ToolboxViewModel<ColorToolboxView, ColorStep>, IDropPathHandler
 {
     private bool doNotUpdateModel;
 
@@ -12,8 +12,18 @@ public sealed partial class ColorToolboxViewModel :
     private float blue;
     private LutMetadata lutMetadata = LutMetadata.Empty;
 
+    public ColorToolboxViewModel()
+    {
+        this.DropViewModel = new DropViewModel(this)
+        {
+            IsVisible = true
+        };
+    }
 
     protected override string Title => this.Localize("Workflow.Color.Title");
+
+    [ObservableProperty]
+    public partial DropViewModel DropViewModel { get; set; }
 
     [ObservableProperty]
     public partial string SaturationString { get; set; } = string.Empty;
@@ -46,6 +56,18 @@ public sealed partial class ColorToolboxViewModel :
     public partial int SelectedIndex { get; set; }
 
     public List<LutMetadata> AvailableLuts { get; set; } = [];
+
+    public void OnDropPath(string path, bool isDirectory)
+    {
+        if ( isDirectory)
+        {
+            return; 
+        }
+
+        this.lutMetadata = new ("New Lut", path, LutFormat.Unknown , IsEmbedded: false) ;
+        this.algorithm = ColorStep.ColorAlgorithm.Lut; 
+        this.UpdateModel();
+    }
 
     public override void OnViewLoaded()
     {

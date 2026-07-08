@@ -2,29 +2,19 @@
 
 public sealed partial class DropViewModel : ViewModel<DropView>
 {
+    private readonly IDropPathHandler dropPathHandler; 
+
+    public DropViewModel(IDropPathHandler dropPathHandler) => this.dropPathHandler = dropPathHandler;
+
     [ObservableProperty]
     public partial bool IsVisible { get; set; }
 
-    /// <summary> Returns true if the path is a valid directory path ora valid file. </summary>
     internal bool OnDrop(string path, bool isDirectory)
     {
         try
         {
-            var folderViewModel = App.GetRequiredService<FolderViewModel>();            
-            if (folderViewModel.IsActivated)
-            {
-                folderViewModel.OnDropPath(path, isDirectory);
-                return true;
-            }
- 
-            var singleViewModel = App.GetRequiredService<SingleViewModel>();
-            if (singleViewModel.IsActivated)
-            {
-                singleViewModel.OnDropPath(path, isDirectory);
-                return true;
-            }
-
-            return false;
+            this.dropPathHandler.OnDropPath(path, isDirectory); 
+            return true;
         }
         catch (Exception ex)
         {

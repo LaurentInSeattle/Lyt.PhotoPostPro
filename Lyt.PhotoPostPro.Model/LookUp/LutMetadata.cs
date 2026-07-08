@@ -2,7 +2,13 @@
 
 public enum LutFormat
 {
+    // Use to clear embedded LUT == No LUT 
     None = 0,
+
+    // Uses when a file path is provided and the LUT type is still unknown 
+    Unknown = 1,
+
+    // For Embedded LUTs or successfully decoded LUTs 
     Cube,
     ThreeDL,
 }

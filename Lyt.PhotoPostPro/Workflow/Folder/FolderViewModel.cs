@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Folder;
 
-public sealed partial class FolderViewModel : ViewModel<FolderView>
+public sealed partial class FolderViewModel : ViewModel<FolderView>, IDropPathHandler
 {
     private readonly PhotoPostProModel photoPostProModel;
 
@@ -14,7 +14,7 @@ public sealed partial class FolderViewModel : ViewModel<FolderView>
         base.Activate(activationParameters);
     }
 
-    internal void OnDropPath(string path, bool isDirectory)
+    public void OnDropPath(string path, bool isDirectory)
     {
     }
 }

@@ -38,7 +38,7 @@ public static class LutsManager
         }
         else
         {
-            throw new  NotImplementedException("later..."); 
+            return TryLoadLutFromFile (lutMetadata, out lut);
         } 
     }
 
@@ -69,6 +69,37 @@ public static class LutsManager
             {
                 throw new NotSupportedException("LUT format not supported");
             } 
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false;
+        }
+    }
+
+    public static bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    {
+        lut = null;
+        try
+        {
+            string path = lutMetadata.Path; 
+            FileInfo fileInfo = new (path);
+            string[] lines = File.ReadAllLines(path);
+            string extension = fileInfo.Extension.ToLowerInvariant();
+            if ( extension == Cube)
+            {
+                lut = Lut.FromCubeLines(lines);
+            }
+            else if (extension == ThreeDL)
+            {
+                lut = Lut.From3dlLines(lines);
+            }
+            else
+            {
+                throw new NotSupportedException("LUT format not supported");
+            }
+
+            return true;
         }
         catch (Exception ex)
         {

@@ -2,10 +2,12 @@
 
 using Lyt.PhotoPostPro.Workflow.Shared;
 
-public sealed partial class FolderToolboxViewModel : ViewModel<FolderToolboxView>
+public sealed partial class FolderToolboxViewModel : ViewModel<FolderToolboxView>, IDropPathHandler
 {
     [ObservableProperty]
-    public partial DropViewModel DropViewModel { get; set; } = new DropViewModel();
+    public partial DropViewModel? DropViewModel { get; set; } 
+
+    public void OnDropPath(string path, bool isDirectory) => throw new NotImplementedException();
 
 #pragma warning disable CA1822 // Mark members as static
     // RelayCommand's cannot be static 

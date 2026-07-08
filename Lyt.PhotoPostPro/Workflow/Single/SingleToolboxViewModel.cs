@@ -25,11 +25,12 @@ public sealed partial class SingleToolboxViewModel : ViewModel<SingleToolboxView
             IsActive = false,
         };
 
-        this.DropViewModel = new DropViewModel
+        this.DropViewModel = new DropViewModel(App.GetRequiredService<SingleViewModel>())
         {
             IsVisible = true
         };
     }
+
 #pragma warning disable CA1822 // Mark members as static
     // RelayCommand's cannot be static 
 
