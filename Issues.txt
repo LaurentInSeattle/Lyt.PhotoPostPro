@@ -1,13 +1,6 @@
 Bugs 
 ----
 
-- Full Screen Process view has no background 
-
--
-- Add 'None' for Special Effects (will do a reset)  
-
-- Relocate and rename Vignette to exposure controls, use Vignette built-in effect 
-
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Tool boxes titles will not localise when language changes 

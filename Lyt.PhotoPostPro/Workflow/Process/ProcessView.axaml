@@ -24,6 +24,13 @@
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="400"/>
 		</Grid.ColumnDefinitions>
+		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
+		<Image
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.RowSpan="999"
+			Stretch="UniformToFill"
+			Source="\Assets\Images\sky.jpg"
+			Opacity="0.7"
+			/>
 		<Grid
 			x:Name="ProcessViewContent"
 			Grid.Column="0"

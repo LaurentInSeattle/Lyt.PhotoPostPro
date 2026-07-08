@@ -99,6 +99,17 @@
 	<system:String x:Key="Workflow.Recovery.Highlights">Highlights:</system:String>
 	<system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
 
+	<!-- Workflow Vignette -->
+	<system:String x:Key="Workflow.Vignette.Title">Vignette</system:String>
+	<system:String x:Key="Workflow.Vignette.Correction">Apply an exposure correction to selected sides of the image.</system:String>
+	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
+	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
+	<system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
+	<system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
+	<system:String x:Key="Workflow.Vignette.Right">Right</system:String>
+	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction:</system:String>
+	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
+
 	<!-- Workflow White Balance -->
 	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or adjust it manually.</system:String>
@@ -138,17 +149,6 @@
 	<system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
 	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
 	<system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
-
-	<!-- Workflow Vignette -->
-	<system:String x:Key="Workflow.Vignette.Title">Vignette</system:String>
-	<system:String x:Key="Workflow.Vignette.Correction">Apply a lightness correction to selected sides of the image.</system:String>
-	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
-	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
-	<system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
-	<system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
-	<system:String x:Key="Workflow.Vignette.Right">Right</system:String>
-	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Vignette:</system:String>
-	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
 
 	<!-- Workflow Filters -->
 	<system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>

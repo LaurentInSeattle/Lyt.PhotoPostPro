@@ -27,13 +27,13 @@ public sealed class PostProcessWorkflow
             orientationStep, straightenStep, compositionStep, 
             
             // Exposure 
-            exposureStep, recoveryStep, 
+            exposureStep, recoveryStep, vignetteStep, 
 
             // Constrast and Color 
             whiteBalanceStep, contrastStep, colorStep, sharpenStep, 
 
             // Final Filters
-            vignetteStep, filtersStep,
+            filtersStep,
 
             // Export
             exportStep,
