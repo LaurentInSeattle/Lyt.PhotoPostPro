@@ -183,13 +183,13 @@ public sealed partial class ShellViewModel
     }
 
     [RelayCommand]
-    public void OnSingle() =>this.viewSelector!.SelectView(ActivatedView.Single);
+    public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
 
     [RelayCommand]
-    public void OnFolder() => this.viewSelector!.SelectView(ActivatedView.Folder);
+    public void OnFolder() => this.viewSelector?.SelectView(ActivatedView.Folder);
 
     [RelayCommand]
-    public void OnLanguage() => this.viewSelector!.SelectView(ActivatedView.Language);
+    public void OnLanguage() => this.viewSelector?.SelectView(ActivatedView.Language);
 
 #pragma warning disable IDE0079 
 #pragma warning disable CA1822 // Mark members as static
@@ -208,7 +208,7 @@ public sealed partial class ShellViewModel
 
     internal void EnableAndSelect(ActivatedView view)
     {
-        this.viewSelector!.EnableView(view);
-        this.viewSelector!.SelectView(view); 
+        this.viewSelector?.EnableView(view);
+        this.viewSelector?.SelectView(view); 
     }
 }

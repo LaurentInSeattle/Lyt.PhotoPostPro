@@ -96,7 +96,7 @@ public sealed class PostProcess
                     this.MaybeOriginalImage = image;
                     this.ProcessMetadata = processMetadata;
 
-                    // nullable " ! " : checked by loaded 
+                    // ! nullable : checked by loaded 
                     new MetadataGeneratedMessage(processMetadata!).Publish();
                 }
 

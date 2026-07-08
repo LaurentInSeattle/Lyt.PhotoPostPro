@@ -6,7 +6,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         this.ApiAction(() =>
         {
-            // CurrentPostProcess checked not null by ApiAction wrapper 
+            // ! CurrentPostProcess is checked for being not null by ApiAction wrapper 
             this.CurrentPostProcess!.Begin();
             return true;
         });

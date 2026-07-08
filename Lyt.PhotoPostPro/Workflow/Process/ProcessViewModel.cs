@@ -117,7 +117,12 @@ public sealed partial class ProcessViewModel :
 
     public void InitializeWorkflow()
     {
-        foreach (var selectableView in this.viewSelector!.SelectableViews)
+        if ( this.viewSelector is null)
+        {
+            return; 
+        }
+
+        foreach (var selectableView in this.viewSelector.SelectableViews)
         {
             if (selectableView.PrimaryViewModel is ViewModel stepViewModel)
             {

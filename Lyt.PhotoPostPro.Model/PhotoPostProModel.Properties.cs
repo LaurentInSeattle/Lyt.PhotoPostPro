@@ -8,7 +8,23 @@ public sealed partial class PhotoPostProModel : ModelBase
     #region Serialized -  No model changed event
 
     [JsonRequired]
-    public string Language { get => this.Get<string>()!; set => this.Set(value); }
+    public string Language
+    {
+        get
+        {
+            string? language = this.Get<string>();
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                return PhotoPostProModel.DefaultLanguage;
+            }
+            else
+            {
+                return language;
+            }
+        }
+
+        set => this.Set(value);
+    }
 
     /// <summary> This should stay true, ==> But... Just FOR NOW !  </summary>
     [JsonRequired]
@@ -37,7 +53,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     public PostProcess? CurrentPostProcess { get; set; } = null;
 
     [JsonIgnore]
-    public PostProcessWorkflow? CurrentWorkflow  => this.CurrentPostProcess?.Workflow;
+    public PostProcessWorkflow? CurrentWorkflow => this.CurrentPostProcess?.Workflow;
 
     [JsonIgnore]
     public bool IsSourceImageUpdatePending { get; set; } = false;
@@ -46,13 +62,13 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool IsResultImageUpdatePending { get; set; } = false;
 
     [JsonIgnore]
-    public Frame? LastSourceFrame 
-    { 
-        get; 
+    public Frame? LastSourceFrame
+    {
+        get;
         set
         {
             field = value;
-            this.IsSourceImageUpdatePending = true; 
+            this.IsSourceImageUpdatePending = true;
         }
     } = null;
 
@@ -75,12 +91,12 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         // For when we are 100 % sure that nothing should be null
         // Danger Zone... 
-        get             
+        get
         {
             if (this.CurrentPostProcess is null)
             {
-                if ( Debugger.IsAttached ) {  Debugger.Break(); }
-                throw new InvalidOperationException(); 
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                throw new InvalidOperationException();
             }
 
             if (this.CurrentPostProcess.Workflow is null)

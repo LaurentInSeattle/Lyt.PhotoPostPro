@@ -54,7 +54,12 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         {
             sourcePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
             FileInfo fi = new(sourcePath);
-            string sourceDirectory = fi.DirectoryName!;
+            string? sourceDirectory = fi.DirectoryName;
+            if (string.IsNullOrWhiteSpace(sourceDirectory))
+            {
+                throw new Exception("No directory"); 
+            } 
+
             fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
             string ts = FileManagerModel.BriefTimestampString();
             string subDirName = fileName + "_EXP_" + ts;
