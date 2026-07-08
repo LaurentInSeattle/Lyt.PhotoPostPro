@@ -109,7 +109,7 @@
 					<glyphs:GlyphButton
 						x:Name="SingleButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="photo_filter"
+						GlyphSource="wallpaper"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Single}"
 						Command="{Binding OnSingle}"
