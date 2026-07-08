@@ -759,11 +759,11 @@ public static partial class ImagingAlgorithms
                 float b = pixel.B / 65535.0f;
 
                 var lutColor = LutColor.FromRgbFloat(r, g, b);
-                var transformed = lut.Lookup(lutColor, LutAlgorithm.Tetrahedral); 
+                var transformed = lut.Lookup(lutColor); 
 
-                pixelRow[x].R = DeNormalizeClip16(transformed.R);
+                pixelRow[x].R = DeNormalizeClip16(transformed.B);
                 pixelRow[x].G = DeNormalizeClip16(transformed.G);
-                pixelRow[x].B = DeNormalizeClip16(transformed.B); 
+                pixelRow[x].B = DeNormalizeClip16(transformed.R); 
             }
         });
     }

@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model; 
+﻿namespace Lyt.PhotoPostPro.Model;
 
 /// <summary> A class that represents a 3D LUT with a 3D multidimensional array.  </summary>
 public sealed class Lut
@@ -258,9 +258,11 @@ public sealed class Lut
         }
 
         lut.Validate();
-        Debug.WriteLine("CUBE Lut loaded, {0} colors, size {1}", rawIndex / 3, lut.Dimension );
+        Debug.WriteLine("CUBE Lut loaded, {0} colors, size {1}", rawIndex / 3, lut.Dimension);
         return lut;
     }
+
+    public LutAlgorithm Algorithm { get; private set; } = LutAlgorithm.Tetrahedral;
 
     public int Dimension { get; private set; }
 
@@ -270,13 +272,13 @@ public sealed class Lut
 
     public LutColor[,,] Table { get; private set; } = new LutColor[0, 0, 0];
 
-    public LutColor Lookup(LutColor color, LutAlgorithm algorithm)
+    public LutColor Lookup(LutColor color)
     {
         color.Validate();
 
         LutColor lutColor;
         int cubeSizeMinusOne = this.Dimension - 1;
-        switch (algorithm)
+        switch (this.Algorithm)
         {
             default:
             case LutAlgorithm.Swizzle:
