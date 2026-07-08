@@ -3,6 +3,7 @@ Bugs
 
 - Full Screen Process view has no background 
 
+-
 - Add 'None' for Special Effects (will do a reset)  
 
 - Relocate and rename Vignette to exposure controls, use Vignette built-in effect 
@@ -26,7 +27,6 @@ WIP
 
 - Other built-in effects to consider:  
 		// HistogramEqualization
-		// OilPaint (intensity, brush size
 		// Pixelate (size) 
 		// Vignette (Color , radius ) 
 

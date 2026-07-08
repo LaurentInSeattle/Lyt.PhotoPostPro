@@ -156,8 +156,11 @@
 	<system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale or Sepia:</system:String>
 	<system:String x:Key="Workflow.Filters.Amount">Amount:</system:String>
 	<!-- Filters Combobox -->
+	<system:String x:Key="Workflow.Filters.None"> - - None - -</system:String>
 	<system:String x:Key="Workflow.Filters.Grayscale">Grayscale</system:String>
 	<system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
+	<system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
+	<system:String x:Key="Workflow.Filters.BlackWhite">Black and White</system:String>
 	<system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
 	<system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
 	<system:String x:Key="Workflow.Filters.Lomograph">Lomograph</system:String>

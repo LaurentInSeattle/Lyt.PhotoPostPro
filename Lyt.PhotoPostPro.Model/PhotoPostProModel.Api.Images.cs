@@ -368,6 +368,30 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Vignette() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.Vignette();
+                return true;
+            }
+
+            return false;
+        });
+
+    public void BlackWhite() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.BlackWhite();
+                return true;
+            }
+
+            return false;
+        });
+
     public void Kodachrome() =>
         this.ApiAction(() =>
         {

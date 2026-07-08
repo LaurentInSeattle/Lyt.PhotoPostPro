@@ -20,31 +20,43 @@ public sealed partial class FiltersToolboxViewModel :
 
     private static readonly List<string> supportedFiltersKeys =
         [
-            "Workflow.Filters.Grayscale" , 
-            "Workflow.Filters.Sepia"  , 
-            "Workflow.Filters.Kodachrome"  ,
-            "Workflow.Filters.Polaroid"  , 
-            "Workflow.Filters.Lomograph"  , 
+            "Workflow.Filters.None" ,
+            "Workflow.Filters.Grayscale" ,
+            "Workflow.Filters.Sepia"  ,
+            "Workflow.Filters.Vignette"  ,
+            "Workflow.Filters.BlackWhite"  , 
+
+            // Image Sharp randomly crashes with these 
+            //
+            //"Workflow.Filters.Kodachrome"  ,
+            //"Workflow.Filters.Polaroid"  , 
+            //"Workflow.Filters.Lomograph"  , 
         ];
 
     private static readonly List<FiltersStep.Filter> filters =
         [
+            FiltersStep.Filter.None,
             FiltersStep.Filter.Grayscale,
             FiltersStep.Filter.Sepia,
-            FiltersStep.Filter.Kodachrome,
-            FiltersStep.Filter.Polaroid,
-            FiltersStep.Filter.Lomograph,
+            FiltersStep.Filter.Vignette,
+            FiltersStep.Filter.BlackWhite,
+            //FiltersStep.Filter.Kodachrome,
+            //FiltersStep.Filter.Polaroid,
+            //FiltersStep.Filter.Lomograph,
         ];
 
     [ObservableProperty]
     public partial List<string> SupportedFilters { get; set; } =
         // Needs localization : these are default
         [
+            "None" ,
             "Grayscale" ,
             "Sepia"  ,
-            "Kodachrome"  ,
-            "Polaroid"  ,
-            "Lomograph"  ,
+            "Vignette"  ,
+            "Black and White"  ,
+            //"Kodachrome"  ,
+            //"Polaroid"  ,
+            //"Lomograph"  ,
         ];
 
     [ObservableProperty]
@@ -123,12 +135,24 @@ public sealed partial class FiltersToolboxViewModel :
         switch (this.selectedFilter)
         {
             default:
+            case FiltersStep.Filter.None:
+                this.model.Workflow.Reset();
+                break;
+
             case FiltersStep.Filter.Grayscale:
                 this.model.Grayscale(this.amount);
                 break;
 
             case FiltersStep.Filter.Sepia:
                 this.model.Sepia(this.amount);
+                break;
+
+            case FiltersStep.Filter.Vignette:
+                this.model.Vignette();
+                break;
+
+            case FiltersStep.Filter.BlackWhite:
+                this.model.BlackWhite();
                 break;
 
             case FiltersStep.Filter.Kodachrome:

@@ -5,8 +5,11 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
 {
     public enum Filter
     {
+        None,
         Grayscale,
         Sepia,
+        Vignette,
+        BlackWhite,
         Kodachrome,
         Lomograph,
         Polaroid,
@@ -38,12 +41,23 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         switch (this.SelectedFilter)
         {
             default:
+            case Filter.None:
+                break; 
+
             case Filter.Grayscale:
                 clone.Grayscale(this.Amount);
                 break;
 
             case Filter.Sepia:
                 clone.Sepia(this.Amount);
+                break;
+
+            case Filter.Vignette:
+                clone.Vignette();
+                break;
+
+            case Filter.BlackWhite:
+                clone.BlackWhite();
                 break;
 
             case Filter.Kodachrome:
@@ -76,6 +90,20 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Sepia;
         this.Amount = sepiaAmount;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? Vignette()
+    {
+        this.SelectedFilter = Filter.Vignette;
+        this.Amount = 0.0f;
+        return this.Transform(withFrame: true);
+    }
+
+    internal Frame? BlackWhite()
+    {
+        this.SelectedFilter = Filter.BlackWhite;
+        this.Amount = 0.0f;
         return this.Transform(withFrame: true);
     }
 

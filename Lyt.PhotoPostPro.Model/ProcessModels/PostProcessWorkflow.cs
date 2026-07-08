@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
+using System.Runtime.InteropServices;
+
 public sealed class PostProcessWorkflow
 {
     public PostProcessWorkflow(PostProcess postProcess)
@@ -155,6 +157,12 @@ public sealed class PostProcessWorkflow
     public Frame? Reset()
     {
         var frame = this.CurrentStep.Reset();
+        var sourceImage = this.CurrentStep.SourceImage;
+        if (sourceImage is not null)
+        {
+            PostProcessStep.RecalculateHistograms(sourceImage);
+        } 
+
         this.Notify(this.CurrentStep, WorkflowUpdateKind.Reset);
         return frame;
     }
