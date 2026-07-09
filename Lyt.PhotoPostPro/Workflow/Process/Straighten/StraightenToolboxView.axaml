@@ -172,7 +172,7 @@
 				Style="{StaticResource PanelIconButton}"
 				Margin="4"
 				Text="{DynamicResource Workflow.Straighten.RotateMinusSmall}"
-				GlyphSource="arrow_rotate_counterclockwise"
+				GlyphSource="rotate_left"
 				Command="{Binding OnRotateCounterClockwiseSmall}"
 				GlyphStrokeThickness="0.05" 
 				/>
@@ -186,7 +186,7 @@
 				Grid.Row="6" Grid.Column="3"
 				Style="{StaticResource PanelIconButton}"
 				Text="{DynamicResource Workflow.Straighten.RotatePlusSmall}"
-				GlyphSource="arrow_rotate_clockwise"
+				GlyphSource="rotate_right"
 				Command="{Binding OnRotateClockwiseSmall}"
 				Margin="4"
 				GlyphStrokeThickness="0.05" 
