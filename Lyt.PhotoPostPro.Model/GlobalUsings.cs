@@ -74,6 +74,7 @@ global using Lyt.Utilities.Randomizing;
 //
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Algorithms;
+global using Lyt.PhotoPostPro.Model.CameraModels;
 global using Lyt.PhotoPostPro.Model.ExportModels;
 global using Lyt.PhotoPostPro.Model.Frames;
 global using Lyt.PhotoPostPro.Model.LookUp;
