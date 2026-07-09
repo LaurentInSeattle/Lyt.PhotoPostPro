@@ -98,6 +98,7 @@ global using Lyt.PhotoPostPro.Interfaces;
 global using Lyt.PhotoPostPro.Messaging;
 global using Lyt.PhotoPostPro.Shell;
 global using Lyt.PhotoPostPro.Utilities;
+global using Lyt.PhotoPostPro.Workflow.Camera;
 global using Lyt.PhotoPostPro.Workflow.Folder;
 global using Lyt.PhotoPostPro.Workflow.Language;
 global using Lyt.PhotoPostPro.Workflow.Process;

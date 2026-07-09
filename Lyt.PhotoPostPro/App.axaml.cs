@@ -27,6 +27,9 @@ public partial class App : ApplicationBase
             typeof(SingleViewModel),
             typeof(SingleToolboxViewModel),
 
+            typeof(CameraViewModel),
+            // typeof(CameraToolboxViewModel),
+
             typeof(FolderViewModel),
             typeof(FolderToolboxViewModel),
 

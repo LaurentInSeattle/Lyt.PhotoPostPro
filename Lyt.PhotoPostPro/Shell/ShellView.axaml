@@ -107,6 +107,15 @@
 					>
 					<glyphs:SelectionGroup x:Name="SelectionGroup" />
 					<glyphs:GlyphButton
+						x:Name="CameraButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="camera"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Camera}"
+						Command="{Binding OnCamera}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="SingleButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="wallpaper"

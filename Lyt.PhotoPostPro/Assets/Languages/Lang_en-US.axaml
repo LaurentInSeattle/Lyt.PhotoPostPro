@@ -10,14 +10,17 @@
 	<system:String x:Key="Shell.AppName">Photo Post Processing</system:String>
 	<system:String x:Key="Shell.About">About...</system:String>
 	<system:String x:Key="Shell.Play">Play</system:String>
-	<system:String x:Key="Shell.Single">Image</system:String>
-	<system:String x:Key="Shell.Folder">Folder</system:String>
-	<system:String x:Key="Shell.Settings">Settings</system:String>
-	<system:String x:Key="Shell.Language">Language</system:String>
 	<system:String x:Key="Shell.Exit">Quit</system:String>
 	<system:String x:Key="Shell.Close">Close</system:String>
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Post Processing!</system:String>
+
+	<!-- Shell - Nav' Bar -->
+	<system:String x:Key="Shell.Camera">Camera</system:String>
+	<system:String x:Key="Shell.Single">Image</system:String>
+	<system:String x:Key="Shell.Folder">Folder</system:String>
+	<system:String x:Key="Shell.Settings">Settings</system:String>
+	<system:String x:Key="Shell.Language">Language</system:String>
 
 	<!-- Spin wait  -->
 	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
@@ -29,7 +32,7 @@
 
 	<!-- Single -->
 	<system:String x:Key="Single.DropZone">Drag and Drop Zone</system:String>
-	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image files here to begin.</system:String>
+	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image file here to begin.</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>

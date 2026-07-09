@@ -106,15 +106,15 @@ public sealed partial class ShellViewModel
                 new SelectableView<ActivatedView>(activatedView, vm, control, vmToolbar));
         }
 
-        //void SetupNoToolbar<TViewModel, TControl>(
-        //        ActivatedView activatedView, Control control)
-        //    where TViewModel : ViewModel<TControl>
-        //    where TControl : Control, IView, new()
-        //{
-        //    var vm = App.GetRequiredService<TViewModel>();
-        //    vm.CreateViewAndBind();
-        //    selectableViews.Add(new SelectableView<ActivatedView>(activatedView, vm, control));
-        //}
+        void SetupNoToolbar<TViewModel, TControl>(
+                ActivatedView activatedView, Control control)
+            where TViewModel : ViewModel<TControl>
+            where TControl : Control, IView, new()
+        {
+            var vm = App.GetRequiredService<TViewModel>();
+            vm.CreateViewAndBind();
+            selectableViews.Add(new SelectableView<ActivatedView>(activatedView, vm, control));
+        }
 
         void SetupToolboxNoToolbar<TViewModel, TControl, TToolboxViewModel, TToolboxControl>(
                 ActivatedView activatedView, Control? control)
@@ -131,6 +131,8 @@ public sealed partial class ShellViewModel
             var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
             selectableViews.Add(selectable);
         }
+
+        SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
 
         SetupToolboxNoToolbar<SingleViewModel, SingleView, SingleToolboxViewModel, SingleToolboxView>(
             ActivatedView.Single, view.SingleButton);
@@ -181,6 +183,9 @@ public sealed partial class ShellViewModel
 
         this.isFirstActivation = false;
     }
+
+    [RelayCommand]
+    public void OnCamera() => this.viewSelector?.SelectView(ActivatedView.Camera);
 
     [RelayCommand]
     public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);

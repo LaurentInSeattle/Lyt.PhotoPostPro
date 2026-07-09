@@ -28,4 +28,5 @@ public enum ActivatedView : int
     WhiteBalance,
     Vignette,
     Filters,
+    Camera,
 }
