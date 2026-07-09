@@ -42,8 +42,13 @@ public sealed partial class StraightenToolboxViewModel :
     public void OnToggleHorizontalGuideline() => this.viewModel.HorizontalGuideLineViewModel.ToggleVisibility();
 
     [RelayCommand]
-    public void OnColorSelect(string parameter)
+    public void OnColorSelect(object? parameterObject)
     {
+        if ( parameterObject is not string parameter )
+        {
+            return; 
+        }
+
         if (int.TryParse(parameter, out int colorIndex))
         {
             this.viewModel.VerticalGuideLineViewModel.Colorize(colorIndex);

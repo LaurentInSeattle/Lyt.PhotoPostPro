@@ -101,8 +101,13 @@ public sealed partial class ComposeToolboxViewModel :
     public partial SolidColorBrush Color_4 { get; set; }
 
     [RelayCommand]
-    public void OnColorSelect(string parameter)
+    public void OnColorSelect(object? parameterObject)
     {
+        if (parameterObject is not string parameter)
+        {
+            return;
+        }
+
         if (int.TryParse(parameter, out int colorIndex))
         {
             this.viewModel.CropGridViewModel.Colorize(colorIndex);
@@ -164,7 +169,7 @@ public sealed partial class ComposeToolboxViewModel :
         this.WidthValueString = idx.ToString("D");
         this.HeightValueString = idy.ToString("D");
         float aspectRatio = idx / (float)idy;
-        if (( idy < 2) || (idx < 2 ))
+        if ((idy < 2) || (idx < 2))
         {
             // Crazy 
             this.AspectRatioValueString = "- * - ";
@@ -177,8 +182,8 @@ public sealed partial class ComposeToolboxViewModel :
         else
         {
             // Portrait
-            this.AspectRatioValueString = 
-                string.Format ("{0:F2}  (1/{1:F2})", aspectRatio, 1.0 / aspectRatio);
+            this.AspectRatioValueString =
+                string.Format("{0:F2}  (1/{1:F2})", aspectRatio, 1.0 / aspectRatio);
         }
     }
 
@@ -188,9 +193,9 @@ public sealed partial class ComposeToolboxViewModel :
             // Without the delay grid lines are not showing up properly 
             // Still dont understand why this wait is needed 
             // TODO: Fix that !
-            500, 
-            () => { this.SetCropRectangle(step); }, 
-            DispatcherPriority.ApplicationIdle); 
+            500,
+            () => { this.SetCropRectangle(step); },
+            DispatcherPriority.ApplicationIdle);
 
     private void SetCropRectangle(CompositionStep step)
     {

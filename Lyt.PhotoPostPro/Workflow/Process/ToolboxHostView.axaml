@@ -51,8 +51,7 @@
 					Grid.Column="0"
 					Style="{StaticResource ControlIconButton}"
 					IsDisabled="{Binding BackIsDisabled}"
-					GlyphSource="next"
-					GlyphAngle="180"
+					GlyphSource="chevron_left"
 					Text="{DynamicResource Workflow.Back}"
 					Command="{Binding OnBack}"
 	    			/>
@@ -69,7 +68,7 @@
 					Style="{StaticResource ControlIconButton}"
 					IsDisabled="{Binding NextIsDisabled}"
 					Layout="IconTextLeftSide"
-					GlyphSource="next"
+					GlyphSource="chevron_right"
 					Text="{DynamicResource Workflow.Next}"
 					Command="{Binding OnNext}"
 	    			/>
