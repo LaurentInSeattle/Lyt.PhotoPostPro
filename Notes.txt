@@ -5,24 +5,6 @@ https://imagecompression.info/test_images/
 
 --- 
 
-Download from Camera  : 
-
-Microsoft WIA ; https://learn.microsoft.com/en-us/previous-versions/windows/desktop/wia/-wia-startpage
-
-Media Devices : https://github.com/Bassman2/MediaDevices
-
-Cyan Fish    https://github.com/cyanfish/naps2-wia
-
-Old :  https://github.com/geersch/WIA
-
-PTP/MTP Protocols: Almost all modern digital cameras (including DSLRs from Canon, Nikon, and Sony) support 
-standard PTP (Picture Transfer Protocol) or MTP. 
-When you plug the camera into a Windows PC via USB, it automatically connects as a storage device, 
-allowing you to copy files using standard WIA/WPD file transfers.
-
-Operating System Changes: Microsoft officially removed direct camera support from WIA in Windows Vista 
-and later versions, shifting toward the WPD API for digital cameras
-
 ==> WPD Light : https://github.com/MartinKuschnik/WPDlight
 
 ------------

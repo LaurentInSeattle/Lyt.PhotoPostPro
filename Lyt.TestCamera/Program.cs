@@ -3,6 +3,8 @@
 using System.Diagnostics;
 using WPDlight;
 
+// ==> WPD Light : https://github.com/MartinKuschnik/WPDlight
+ 
 internal class Program
 {
     static async Task Main(string[] args)
@@ -95,8 +97,10 @@ internal class Program
         PrintLabelValue("Type:", device.Type.ToString());
         PrintLabelValue("Protocol:", device.Protocol);
         PrintLabelValue("Transport:", device.Transport.ToString());
-        PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
-        PrintLabelValue("Non-consumable:", device.SupportsNonConsumable.HasValue ? device.SupportsNonConsumable.Value.ToString() : "Unknown");
+        // Not supported on iPhone 
+        // PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
+        // Not supported on iPhone 
+        // PrintLabelValue("Non-consumable:", device.SupportsNonConsumable.HasValue ? device.SupportsNonConsumable.Value.ToString() : "Unknown");
 
         Console.WriteLine();
     }
