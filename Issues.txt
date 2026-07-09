@@ -65,7 +65,7 @@ Missing Features
 
 - Camera downloads 
 
-- Folder Management 
+- Masters Folder Management 
 
 - Culling Workflow 
 

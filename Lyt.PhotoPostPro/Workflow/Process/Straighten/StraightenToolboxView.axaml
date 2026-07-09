@@ -172,21 +172,21 @@
 				Style="{StaticResource PanelIconButton}"
 				Margin="4"
 				Text="{DynamicResource Workflow.Straighten.RotateMinusSmall}"
-				GlyphSource="rotate_left"
+				GlyphSource="arrow_counterclockwise_dashes"
 				Command="{Binding OnRotateCounterClockwiseSmall}"
 				GlyphStrokeThickness="0.05" 
 				/>
 			<TextBlock
 				Grid.Row="3" Grid.ColumnSpan="5"
 				Text="{Binding RotationAngleString}"
-				Theme="{StaticResource H3}"
+				Theme="{StaticResource H2}"
 				TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton
 				Grid.Row="6" Grid.Column="3"
 				Style="{StaticResource PanelIconButton}"
 				Text="{DynamicResource Workflow.Straighten.RotatePlusSmall}"
-				GlyphSource="rotate_right"
+				GlyphSource="arrow_clockwise_dashes"
 				Command="{Binding OnRotateClockwiseSmall}"
 				Margin="4"
 				GlyphStrokeThickness="0.05" 

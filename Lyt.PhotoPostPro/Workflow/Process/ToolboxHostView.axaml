@@ -59,7 +59,7 @@
 					Grid.Column="1"
 					Style="{StaticResource ControlIconButton}"
 					IsDisabled="{Binding ResetIsDisabled}"
-					GlyphSource="dismiss"
+					GlyphSource="arrow_undo"
 					Text="{DynamicResource Workflow.Reset}"
 					Command="{Binding OnReset}"
 	    			/>
