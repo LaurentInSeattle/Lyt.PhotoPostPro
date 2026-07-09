@@ -5,7 +5,7 @@ using WPDlight;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         try
         {
@@ -28,7 +28,11 @@ internal class Program
                         try
                         {
                             PrintDeviceInfo(device);
-                            PrintTopLevelEntries(device);
+                            var files  = ShowAllFiles(device);
+                            foreach (string file in files)
+                            {
+                                await DownloadFile(device, file);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -50,6 +54,23 @@ internal class Program
 
         Console.Write("Press Any Key To Exit...");
         Console.ReadKey();
+    }
+
+    private async static Task DownloadFile (PortableDevice device, string file )
+    {
+        try
+        {
+            MemoryStream memoryStream = new();
+            await device.DownloadFileAsync(file, memoryStream);
+            string[] fileTokens = file.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
+            string fileName = fileTokens[^1];
+            string target = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+            File.WriteAllBytes(target, memoryStream.ToArray());
+        } 
+        catch (Exception ex)
+        {
+            Console.Write("Exception thrown: " + ex);
+        }
     }
 
     private static void PrintDeviceInfo(PortableDevice device)
@@ -80,19 +101,42 @@ internal class Program
         Console.WriteLine();
     }
 
-    private static void PrintTopLevelEntries(PortableDevice device)
+    private static List<string> ShowAllFiles(PortableDevice device)
     {
+        List<string> allFiles = [] ; 
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Top-level entries:");
         Console.ResetColor();
+
+        void ShowFiles (string currentDir)
+        {
+            var files = device.EnumerateFiles(currentDir, "*", System.IO.SearchOption.TopDirectoryOnly).ToList();
+            foreach (string file in files)
+            {
+                Console.WriteLine("  " + file);
+                allFiles.Add(file);
+            }
+        }
 
         foreach (string entry in device.EnumerateFileSystemEntries(Path.DirectorySeparatorChar.ToString(), "*", System.IO.SearchOption.TopDirectoryOnly))
         {
             Debug.Assert(device.DirectoryExists(entry));
 
             Console.WriteLine("  " + entry);
+            ShowFiles(entry);
+
+            var directories = device.EnumerateDirectories(entry, "*", System.IO.SearchOption.AllDirectories).ToList();
+
+            foreach (string directory in directories )
+            {
+                Console.WriteLine("  " + directory);
+                ShowFiles(directory);
+            }
+
         }
 
         Console.WriteLine();
+        return allFiles; 
     }
 }
