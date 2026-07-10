@@ -1,5 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Model.CameraModels;
 
+
+#pragma warning disable CA1416
+
+// Here to block both Path from Avalonia ans ImageSharp 
+using System.IO; 
+
 public class CameraManager
 {
     private const int FastCameraMonitoringTime_ms = 2_500;
@@ -7,7 +13,7 @@ public class CameraManager
 
     private CancellationTokenSource? cts;
     private bool isMonitoring;
-    private OpenedCamera? lastConnectedCamera;
+    //private OpenedCamera? lastConnectedCamera;
 
     public bool IsCameraConnected { get; private set; }
 
@@ -50,8 +56,9 @@ public class CameraManager
         Debug.WriteLine(" Checking Camera Connection");
         try
         {
-            string[] deviceIds = PortableDeviceManager.EnumerateDevices(true);
-            if (deviceIds.Length == 0)
+            var devices = MediaDevice.GetDevices().ToList();
+            int deviceCount = devices.Count;
+            if (deviceCount == 0)
             {
                 Debug.WriteLine(" No devices found");
                 // Publish an empty list 
@@ -59,29 +66,32 @@ public class CameraManager
             }
             else
             {
-                List<ConnectedDevice> connectedDevices = new(deviceIds.Length);
-                foreach (string deviceId in deviceIds)
+                List<ConnectedDevice> connectedDevices = new(deviceCount);
+                foreach (MediaDevice device in devices)
                 {
-                    // Basic device info from manager (not strictly required here but kept for potential use)
-                    string deviceFriendlyName = PortableDeviceManager.GetDeviceFriendlyName(deviceId);
-                    string deviceManufacturer = PortableDeviceManager.GetDeviceManufacturer(deviceId);
-                    string deviceDescription = PortableDeviceManager.GetDeviceDescription(deviceId);
+                    // Basic device info 
                     var connectedDevice =
-                        new ConnectedDevice(deviceId, deviceFriendlyName, deviceManufacturer, deviceDescription);
+                        new ConnectedDevice(device.DeviceId, device.FriendlyName, device.Manufacturer, device.Description);
                     connectedDevices.Add(connectedDevice);
                 }
 
                 new DevicesConnectedMessage(connectedDevices).Publish();
 
-                if (deviceIds.Length == 1)
+                if (deviceCount == 1)
                 {
-                    // Single device: try to open it 
-                    string deviceId = deviceIds[0];
+                    // Single device: try to connect to it  
+                    MediaDevice device = devices[0];
                     try
                     {
-                        using var device = PortableDevice.Open(deviceId);
-                        //PrintDeviceInfo(device);
-                        //var files = ShowAllFiles(device);
+                        Console.WriteLine("One device found: " + device.Description);
+                        device.Connect();
+                        if (device.IsConnected)
+                        {
+                            PrintDeviceInfo(device);
+                            var files = AllFiles(device);
+                            Debug.WriteLine("Found files: " + files.Count);
+                        }
+
                         //foreach (string file in files)
                         //{
                         //    await DownloadFile(device, file);
@@ -89,7 +99,7 @@ public class CameraManager
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($" Error while inspecting device {deviceId}: {ex.Message}");
+                        Debug.WriteLine($" Error while inspecting device {device.FriendlyName}: {ex.Message}");
                     }
                 }
                 else //  (deviceIds.Length > 1)
@@ -104,14 +114,72 @@ public class CameraManager
         }
     }
 
-    public bool OpenDevice(string deviceId)
+    private static void PrintDeviceInfo(MediaDevice device)
     {
-        return true;
+        Debug.WriteLine(new string('=', 60));
+
+        void PrintLabelValue(string label, string value)
+        {
+            Debug.Write(label.PadRight(22));
+            Debug.WriteLine(value);
+        }
+
+        PrintLabelValue("Id:", device.DeviceId);
+        PrintLabelValue("Name:", device.FriendlyName);
+        PrintLabelValue("Manufacturer:", device.Manufacturer);
+        PrintLabelValue("Model:", device.Model);
+        PrintLabelValue("Serial Number:", string.IsNullOrEmpty(device.SerialNumber) ? "(none)" : device.SerialNumber);
+        PrintLabelValue("Firmware:", string.IsNullOrEmpty(device.FirmwareVersion) ? "(unknown)" : device.FirmwareVersion);
+        PrintLabelValue("Type:", device.DeviceType.ToString());
+        PrintLabelValue("Protocol:", device.Protocol);
+        PrintLabelValue("Transport:", device.Transport.ToString());
+        PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
+
+        Debug.WriteLine("");
     }
 
-    public List<string> Files(string deviceId)
+    private static bool DownloadFile(MediaDevice device, string file)
     {
-        List<string> files = [];
-        return files;
+        try
+        {
+            MemoryStream memoryStream = new();
+            device.DownloadFile(file, memoryStream);
+            string[] fileTokens = file.Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
+            string fileName = fileTokens[^1];
+            string target = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+            byte[] bytes = memoryStream.ToArray();
+            int length = bytes.Length;
+            File.WriteAllBytes(target, bytes);
+            if (File.Exists(target))
+            {
+                FileInfo fi = new(target);
+                if (fi.Length == length)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Exception thrown: " + ex);
+            return false;
+        }
+    }
+
+    private static HashSet<string> AllFiles(MediaDevice device)
+    {
+        HashSet<string> allFiles = [];
+
+        string[] files = 
+            device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
+        foreach (string file in files)
+        {
+            Debug.WriteLine("      File: " + file);
+            allFiles.Add(file);
+        }
+
+        return allFiles;
     }
 }

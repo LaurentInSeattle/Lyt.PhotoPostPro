@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediaDevices" Version="1.10.0" />
     <PackageReference Include="WPDlight" Version="1.1.1" />
   </ItemGroup>
 

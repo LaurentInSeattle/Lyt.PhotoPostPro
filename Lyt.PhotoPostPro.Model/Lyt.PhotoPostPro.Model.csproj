@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediaDevices" Version="1.10.0" />
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.15.6581">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,7 +31,6 @@
     <PackageReference Include="Sdcb.LibRaw" Version="0.21.1.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="4.0.0" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="3.0.0" />
-    <PackageReference Include="WPDlight" Version="1.1.1" />
   </ItemGroup>
   
   <PropertyGroup>
