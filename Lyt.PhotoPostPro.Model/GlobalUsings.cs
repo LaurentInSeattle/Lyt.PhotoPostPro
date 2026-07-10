@@ -45,6 +45,11 @@ global using Sdcb;
 global using Sdcb.LibRaw;
 
 
+// WPDlight;
+//
+global using WPDlight;
+
+
 // Openize HEIC 
 // Conflicts with Image Sharp
 // NOPE => global using Openize.Heic.Decoder;

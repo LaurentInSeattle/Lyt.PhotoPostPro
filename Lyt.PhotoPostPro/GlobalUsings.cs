@@ -119,6 +119,7 @@ global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Single;
 
 global using Lyt.PhotoPostPro.Model;
+global using Lyt.PhotoPostPro.Model.CameraModels;
 global using Lyt.PhotoPostPro.Model.ExportModels;
 global using Lyt.PhotoPostPro.Model.Frames;
 global using Lyt.PhotoPostPro.Model.Messaging;
