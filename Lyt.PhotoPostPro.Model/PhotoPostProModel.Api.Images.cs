@@ -280,9 +280,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void Lut(LutMetadata lutMetadata) =>
         this.ApiAction(() =>
         {
-            if (this.Workflow.CurrentStep is ColorStep colorStep)
+            if (this.Workflow.CurrentStep is LutStep lutStep)
             {
-                this.LastResultFrame = colorStep.Lut(lutMetadata);
+                this.LastResultFrame = lutStep.Lut(lutMetadata);
                 return true;
             }
 

@@ -44,4 +44,13 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Workflow\Process\Lut\LutView.axaml.cs">
+      <DependentUpon>LutView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Lut\LutToolboxView.axaml.cs">
+      <DependentUpon>LutToolboxView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

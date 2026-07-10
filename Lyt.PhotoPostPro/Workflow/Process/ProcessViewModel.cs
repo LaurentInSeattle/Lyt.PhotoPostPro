@@ -14,6 +14,7 @@ public sealed partial class ProcessViewModel :
         { PostProcessStep.RecoveryStepName, ActivatedView.Recovery },
         { PostProcessStep.WhiteBalanceStepName, ActivatedView.WhiteBalance },
         { PostProcessStep.ContrastStepName, ActivatedView.Contrast },
+        { PostProcessStep.LutStepName, ActivatedView.Lut },
         { PostProcessStep.ColorStepName, ActivatedView.Color },
         { PostProcessStep.SharpenStepName, ActivatedView.Sharpen },
         { PostProcessStep.VignetteStepName, ActivatedView.Vignette },
@@ -171,6 +172,7 @@ public sealed partial class ProcessViewModel :
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep, RecoveryToolboxView>(ActivatedView.Recovery);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
         Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastStep, ContrastToolboxView>(ActivatedView.Contrast);
+        Setup<LutViewModel, LutView, LutToolboxViewModel, LutStep, LutToolboxView>(ActivatedView.Lut);
 
         // Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
         Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);

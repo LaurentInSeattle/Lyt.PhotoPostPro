@@ -737,10 +737,15 @@ public static partial class ImagingAlgorithms
 
     public static void Lut(this Image<Rgb48> image, LutMetadata lutMetadata)
     {
+        if (lutMetadata == LutMetadata.Empty)
+        {
+            return;
+        }
+
         if (!LutsManager.TryLoadLut(lutMetadata, out Lut? lut))
         {
             // Failed to load LUT ? 
-            if ( Debugger.IsAttached ) { Debugger.Break(); }
+            if (Debugger.IsAttached) { Debugger.Break(); }
             return;
         }
 
@@ -759,11 +764,11 @@ public static partial class ImagingAlgorithms
                 float b = pixel.B / 65535.0f;
 
                 var lutColor = LutColor.FromRgbFloat(r, g, b);
-                var transformed = lut.Lookup(lutColor); 
+                var transformed = lut.Lookup(lutColor);
 
                 pixelRow[x].R = DeNormalizeClip16(transformed.B);
                 pixelRow[x].G = DeNormalizeClip16(transformed.G);
-                pixelRow[x].B = DeNormalizeClip16(transformed.R); 
+                pixelRow[x].B = DeNormalizeClip16(transformed.R);
             }
         });
     }

@@ -1,0 +1,18 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Lut.LutView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Lut"
+	x:DataType="vm:LutViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
+	Background="Transparent"
+	>
+	<shared:BeforeAfterView
+		DataContext="{Binding}"
+		/>
+</UserControl>

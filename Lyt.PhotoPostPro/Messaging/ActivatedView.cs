@@ -29,4 +29,5 @@ public enum ActivatedView : int
     Vignette,
     Filters,
     Camera,
+    Lut,
 }

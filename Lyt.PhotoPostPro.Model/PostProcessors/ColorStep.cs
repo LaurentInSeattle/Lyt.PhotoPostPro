@@ -7,7 +7,6 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     {
         Saturation,
         Vibrance,
-        Lut,
     }
 
     public float SaturationAmount { get; set; }
@@ -17,8 +16,6 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     public float GreenAmount { get; set; }
 
     public float BlueAmount { get; set; }
-
-    public LutMetadata LutMetadata { get; set; } = LutMetadata.Empty;
 
     public ColorAlgorithm Algorithm { get; set; }
 
@@ -49,10 +46,6 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
                 clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
                 break;
 
-            case ColorAlgorithm.Lut:
-                clone.Lut(this.LutMetadata);
-                break;
-
             default:
                 throw new NotImplementedException("No such Color algorithm");
         }
@@ -78,20 +71,12 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? Lut(LutMetadata lutMetadata)
-    {
-        this.Algorithm = ColorAlgorithm.Lut;
-        this.LutMetadata= lutMetadata;
-        return this.Transform(withFrame: true);
-    }
-
     private void Clear()
     {
         this.Algorithm = ColorAlgorithm.Saturation;
         this.SaturationAmount = 1.0f;
 
         // Clear all properties so that the UI sliders are also reset to zero on Reset 
-        this.LutMetadata = LutMetadata.Empty; 
         this.RedAmount = 0.0f;
         this.GreenAmount = 0.0f;
         this.BlueAmount = 0.0f;

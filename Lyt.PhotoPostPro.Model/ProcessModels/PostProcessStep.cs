@@ -12,6 +12,7 @@ public class PostProcessStep
     public const string RecoveryStepName = "Recovery";
     public const string WhiteBalanceStepName = "WhiteBalance";
     public const string ContrastStepName = "Contrast";
+    public const string LutStepName = "Lut";
     public const string ColorStepName = "Color";
     public const string SharpenStepName = "Sharpen";
     public const string VignetteStepName = "Vignette";

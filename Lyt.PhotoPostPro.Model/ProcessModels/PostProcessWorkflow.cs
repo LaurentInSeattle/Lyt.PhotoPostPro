@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-using System.Runtime.InteropServices;
-
 public sealed class PostProcessWorkflow
 {
     public PostProcessWorkflow(PostProcess postProcess)
@@ -15,6 +13,7 @@ public sealed class PostProcessWorkflow
         var recoveryStep = new RecoveryStep(this);
         var whiteBalanceStep = new WhiteBalanceStep(this);
         var contrastStep = new ContrastStep(this);
+        var lutStep = new LutStep(this);
         var colorStep = new ColorStep(this);
         var sharpenStep = new SharpenStep(this);
         var vignetteStep = new VignetteStep(this);
@@ -30,7 +29,7 @@ public sealed class PostProcessWorkflow
             exposureStep, recoveryStep, vignetteStep, 
 
             // Constrast and Color 
-            whiteBalanceStep, contrastStep, colorStep, sharpenStep, 
+            whiteBalanceStep, contrastStep, lutStep, colorStep, sharpenStep, 
 
             // Final Filters
             filtersStep,

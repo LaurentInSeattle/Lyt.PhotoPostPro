@@ -67,6 +67,9 @@ public partial class App : ApplicationBase
             typeof(ContrastViewModel),
             typeof(ContrastToolboxViewModel),
 
+            typeof(LutViewModel),
+            typeof(LutToolboxViewModel),
+
             typeof(ColorViewModel),
             typeof(ColorToolboxViewModel),
 
