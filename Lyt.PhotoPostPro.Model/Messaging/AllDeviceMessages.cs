@@ -6,4 +6,4 @@ public sealed record class DeviceStatusMessage(bool IsConnected, FoundDevice Dev
 
 public sealed record class DeviceFileListMessage(FoundDevice Device, List<string> Files);
 
-public sealed record class DeviceFileDownloadedMessage(FoundDevice Device, string File, string Path);
+public sealed record class DeviceFileDownloadedMessage(bool IsSuccess, FoundDevice Device, string File, string Path);

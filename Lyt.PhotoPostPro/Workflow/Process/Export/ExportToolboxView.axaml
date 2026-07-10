@@ -10,7 +10,6 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
 	<Grid
 		>

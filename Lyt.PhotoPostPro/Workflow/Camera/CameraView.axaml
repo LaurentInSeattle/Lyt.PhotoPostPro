@@ -9,24 +9,56 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+
 	Background="Transparent"
 	>
 	<Grid		
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="60" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="8" />
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Button --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Button --> 
 			<RowDefinition Height="*" />
+			<RowDefinition Height="8" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
-		<Rectangle		
-			Grid.Column="1" Grid.Row="1"
-			Fill="DodgerBlue"
-			Margin="40"
+		<TextBlock
+			Grid.Row="1" Grid.Column="1"
+			Text="{Binding DevicesFound}"
+			Theme="{StaticResource H3}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="1" Grid.Column="1" Margin="250 0 0 0"
+			Text="{Binding DeviceStatus}"
+			Theme="{StaticResource H3}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="1" Grid.Column="1" Margin="500 0 0 0"
+			Text="{Binding FileCount}"
+			Theme="{StaticResource H3}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<glyphs:GlyphButton
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="arrow_export"
+			Text="{DynamicResource Workflow.Export.Export}"
+			Command="{Binding OnDownload}"
+			HorizontalAlignment="Right" Width="300"
+	    	/>
+		<TextBlock
+			Grid.Row="2" Grid.Column="1"
+			Text="{Binding FileDownloaded}"
+			Theme="{StaticResource H3}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 	</Grid>
 </UserControl>

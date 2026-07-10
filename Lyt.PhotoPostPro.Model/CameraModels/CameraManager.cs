@@ -7,12 +7,14 @@ using System.IO;
 
 public class CameraManager
 {
-    private const int FastCameraMonitoringTime_ms = 2_500;
-    private const int SlowCameraMonitoringTime_ms = 5_000;
+    public const int UiResponseDelayTime_ms = 180;
+    public const int FastCameraMonitoringTime_ms = 2_500;
+    public const int SlowCameraMonitoringTime_ms = 5_000;
 
-    private string downloadFolderPath;
+    private readonly string downloadFolderPath;
 
-    private CancellationTokenSource? cts;
+    private CancellationTokenSource? ctsMonitoring;
+    private CancellationTokenSource? ctsDownloading;
 
     public CameraManager()
     {
@@ -26,15 +28,20 @@ public class CameraManager
 
     public bool IsMonitoring { get; private set; }
 
+    public bool IsDownloading { get; private set; }
+
     public void BeginMonitoringCameraConnexion()
     {
-        this.cts = new CancellationTokenSource();
-        Task.Run(async () => { this.MonitorCameraConnexion(this.cts.Token); });
+        // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
+        typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
+
+        this.ctsMonitoring = new CancellationTokenSource();
+        Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
     }
 
     public void EndMonitoringCameraConnexion()
     {
-        this.cts?.Cancel();
+        this.ctsMonitoring?.Cancel();
         this.IsMonitoring = false;
     }
 
@@ -105,6 +112,19 @@ public class CameraManager
         }
     }
 
+    public void DisposeDevice (FoundDevice foundDevice)
+    {
+        var devices = MediaDevice.GetDevices().ToList();
+        MediaDevice? device =
+            (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+            .FirstOrDefault();
+        if (device is not null)
+        {
+            device.Dispose() ;
+            return;
+        }
+    }
+
     public void ConnectTo(FoundDevice foundDevice)
     {
         var devices = MediaDevice.GetDevices().ToList();
@@ -120,30 +140,71 @@ public class CameraManager
         this.TryConnectTo(foundDevice, device);
     }
 
-    public void DownloadFiles(FoundDevice foundDevice, List<string> selectedFiles)
+    public void BeginDownloadingFiles(FoundDevice foundDevice, List<string> selectedFiles)
     {
-        var devices = MediaDevice.GetDevices().ToList();
-        MediaDevice? device =
-            (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
-            .FirstOrDefault();
-        if (device is null)
-        {
-            new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
-            return;
-        }
+        this.ctsDownloading = new CancellationTokenSource();
+        Task.Run(async () => 
+        { 
+            this.DownloadFiles(foundDevice, selectedFiles, this.ctsDownloading.Token); 
+        });
+    }
 
-        if (!device.IsConnected)
-        {
-            this.TryConnectTo(foundDevice, device);
-        }
+    public void EndDownloadingFiles()
+    {
+        this.ctsDownloading?.Cancel();
+        this.IsDownloading = false;
+    }
 
-        foreach (string file in selectedFiles)
+    private async void DownloadFiles(FoundDevice foundDevice, List<string> selectedFiles, CancellationToken token)
+    {
+        try
         {
-            if (!DownloadFile(foundDevice, device, file))
+            var devices = MediaDevice.GetDevices().ToList();
+            MediaDevice? device =
+                (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+                .FirstOrDefault();
+            if (device is null)
             {
                 new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
-                break;
+                return;
             }
+
+            if (!device.IsConnected)
+            {
+                this.TryConnectTo(foundDevice, device);
+            }
+
+            if (!device.IsConnected)
+            {
+                // Still not connected 
+                new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+                return;
+            }
+
+            this.IsDownloading= true;
+            foreach (string file in selectedFiles) 
+            {
+                if (token.IsCancellationRequested || ! this.IsDownloading)
+                {
+                    break; 
+                }
+
+                if (!this.DownloadFile(foundDevice, device, file))
+                {
+                    Debug.WriteLine("Download error");
+                }
+
+                await Task.Delay(UiResponseDelayTime_ms, token);
+            }
+        }
+        catch (TaskCanceledException tce)
+        {
+            Debug.WriteLine($" Task Canceled Exception : {tce.Message}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
+            new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
         }
     }
 
@@ -190,16 +251,18 @@ public class CameraManager
                 FileInfo fi = new(targetPath);
                 if (fi.Length == length)
                 {
-                    new DeviceFileDownloadedMessage(foundDevice, file, targetPath).Publish();
+                    new DeviceFileDownloadedMessage(IsSuccess: true, foundDevice, file, targetPath).Publish();
                     return true;
                 }
             }
 
+            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No exception").Publish();
             return false;
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Exception thrown: " + ex);
+            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "Exception thrown: " + ex).Publish();
             return false;
         }
     }
