@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Camera;
 
 public sealed partial class CameraViewModel :
-    ViewModel<CameraView>, IRecipient<DevicesConnectedMessage>
+    ViewModel<CameraView>, IRecipient<DevicesFoundMessage>
 {
     private readonly PhotoPostProModel model;
     private readonly CameraManager cameraMgr;
@@ -10,7 +10,7 @@ public sealed partial class CameraViewModel :
     {
         this.model = photoPostProModel;
         this.cameraMgr = this.model.CameraManager;
-        this.Subscribe<DevicesConnectedMessage>();
+        this.Subscribe<DevicesFoundMessage>();
     }
 
     public override void Activate(object? activationParameters)
@@ -25,10 +25,10 @@ public sealed partial class CameraViewModel :
         this.cameraMgr.EndMonitoringCameraConnexion();
     }
 
-    public void Receive(DevicesConnectedMessage message)
+    public void Receive(DevicesFoundMessage message)
         => Dispatch.OnUiThread(() => { this.OnDevicesConnected(message); }, DispatcherPriority.Background);
 
-    private void OnDevicesConnected(DevicesConnectedMessage message)
+    private void OnDevicesConnected(DevicesFoundMessage message)
     {
         var list = message.Devices; 
         if ( list.Count == 0)
