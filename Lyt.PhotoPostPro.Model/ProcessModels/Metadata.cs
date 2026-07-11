@@ -1,10 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-public sealed class ProcessMetadata
+public sealed class Metadata
 {
     private const float Megabytes = 1024.0f * 1024.0f;
 
-    public ProcessMetadata(
+    public Metadata(
         string fullPath,
         int width,
         int height,

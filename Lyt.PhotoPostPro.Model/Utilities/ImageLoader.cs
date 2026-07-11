@@ -56,9 +56,9 @@ public static class ImageLoader
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-    public static (Image<Rgb48>?, ProcessMetadata?) LoadImage(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, Metadata?) LoadImage(string imagePath, out string errorMessage)
     {
-        (Image<Rgb48> ?, ProcessMetadata?) fail = (null, null); 
+        (Image<Rgb48> ?, Metadata?) fail = (null, null); 
         errorMessage = string.Empty;
         try
         {
@@ -72,45 +72,45 @@ public static class ImageLoader
             Debug.WriteLine(extension);
 
             Image<Rgb48>? image = null;
-            ProcessMetadata? processMetadata = null;
+            Metadata? metadata = null;
             if (HasHiefExtension(imagePath))
             {
-                (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                        (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                     }
                 }
             }
             else if (HasRawExtension(imagePath))
             {
-                (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                    (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                     }
                 }
             }
             else
             {
-                (image, processMetadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
                 if (image is null)
                 {
-                    (image, processMetadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
+                    (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
                     if (image is null)
                     {
-                        (image, processMetadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
                     }
                 }
             }
 
-            return (image, processMetadata);
+            return (image, metadata);
         }
         catch (Exception ex)
         {
@@ -120,9 +120,9 @@ public static class ImageLoader
         }
     }
 
-    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadWithImageSharp(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, Metadata?) TryLoadWithImageSharp(string imagePath, out string errorMessage)
     {
-        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
+        (Image<Rgb48>?, Metadata?) fail = (null, null);
         errorMessage = string.Empty;
         try
         {
@@ -161,7 +161,7 @@ public static class ImageLoader
                 }
             }
 
-            var metadata = new ProcessMetadata(imagePath, image48.Width, image48.Height, directories);
+            var metadata = new Metadata(imagePath, image48.Width, image48.Height, directories);
             return (image48, metadata);
         }
         catch (Exception ex)
@@ -172,9 +172,9 @@ public static class ImageLoader
         }
     }
 
-    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadWithLibRaw(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, Metadata?) TryLoadWithLibRaw(string imagePath, out string errorMessage)
     {
-        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
+        (Image<Rgb48>?, Metadata?) fail = (null, null);
         errorMessage = string.Empty;
         try
         {
@@ -226,7 +226,7 @@ public static class ImageLoader
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            var metadata = new ProcessMetadata(imagePath, width, height, directories );
+            var metadata = new Metadata(imagePath, width, height, directories );
             return ( image48, metadata); 
         }
         catch (Exception ex)
@@ -237,9 +237,9 @@ public static class ImageLoader
         }
     }
 
-    public static (Image<Rgb48>?, ProcessMetadata?) TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, Metadata?) TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
     {
-        (Image<Rgb48>?, ProcessMetadata?) fail = (null, null);
+        (Image<Rgb48>?, Metadata?) fail = (null, null);
         errorMessage = string.Empty;
         try
         {
@@ -273,7 +273,7 @@ public static class ImageLoader
             }
             // else // No metadata : Directories stays null 
 
-            var metadata = new ProcessMetadata(imagePath, width, height, directories);
+            var metadata = new Metadata(imagePath, width, height, directories);
             return (image48, metadata);
         }
         catch (Exception ex)

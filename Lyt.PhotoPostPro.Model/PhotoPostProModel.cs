@@ -5,7 +5,8 @@ using static Lyt.Persistence.FileManagerModel;
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public const string DefaultLanguage = "en-US";
-    private const string PhotoPostProFilename = "PhotoPostProData";
+    public const string PhotoPostProAppName = "PhotoPostPro";
+    public const string PhotoPostProFilename = "PhotoPostProData";
 
     private static readonly PhotoPostProModel DefaultData =
         new()

@@ -61,41 +61,53 @@ public sealed partial class MetadataViewModel :
     {
         Dispatch.OnUiThread(() =>
         {
-            this.Update(message.ProcessMetadata); 
+            this.Update(message.Metadata); 
         }, DispatcherPriority.ApplicationIdle);
     }
 
-    private void Update(ProcessMetadata meta)
+    private void Update(Metadata metadata)
     {
-        this.Filename = string.Format("{0} : {1}", meta.Extension, meta.Filename);
-        this.SizeMB = meta.SizeMB + " on disk";
-        this.Dimensions = meta.Dimensions + " pixels";
+        this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
+        this.SizeMB = metadata.SizeMB + " on disk";
+        this.Dimensions = metadata.Dimensions + " pixels";
         string sep = new(System.IO.Path.DirectorySeparatorChar, 1);
         string sepSpace = " " + sep + " "; 
-        this.FullPath = meta.FullPath.Replace(sep, sepSpace);
-        var localDT = meta.FileDateUTC.ToLocalTime();
+        this.FullPath = metadata.FullPath.Replace(sep, sepSpace);
+        var localDT = metadata.FileDateUTC.ToLocalTime();
         this.FileDateTime =
             string.Format("File created: {0} at {1}", localDT.ToLongDateString(), localDT.ToLongTimeString()); 
 
-        if (meta.HasExifMetadata)
+        if (metadata.HasExifMetadata)
         {
-            this.Make = meta.Make;
-            this.Model = meta.Model;
+            this.Make = metadata.Make;
+            this.Model = metadata.Model;
             this.Captured =
-                string.Format("Shot: {0} at {1}", meta.Captured.ToLongDateString(), meta.Captured.ToLongTimeString());
-            this.Aperture = "Aperture: " + meta.Aperture;
-            this.IsoSpeed = "ISO Speed: " + meta.IsoSpeed;
-            this.Exposure = "Exposure: " + meta.Exposure;
-            this.ExposureBias = "Bias: " + meta.ExposureBias;
-            this.FocalLength = "Focal: " + meta.FocalLength;
-            this.WithFlash = meta.WithFlash ? "With Flash" : "No Flash"; 
+                string.Format("Shot: {0} at {1}", metadata.Captured.ToLongDateString(), metadata.Captured.ToLongTimeString());
+            this.Aperture = "Aperture: " + metadata.Aperture;
+            this.IsoSpeed = "ISO Speed: " + metadata.IsoSpeed;
+            this.Exposure = "Exposure: " + metadata.Exposure;
+            this.ExposureBias = "Bias: " + metadata.ExposureBias;
+            this.FocalLength = "Focal: " + metadata.FocalLength;
+            this.WithFlash = metadata.WithFlash ? "With Flash" : "No Flash"; 
+        }
+        else
+        {
+            this.Make = string.Empty;
+            this.Model = string.Empty;
+            this.Captured = string.Empty;
+            this.Aperture = string.Empty;
+            this.IsoSpeed = string.Empty;
+            this.Exposure = string.Empty;
+            this.ExposureBias = string.Empty;
+            this.FocalLength = string.Empty;
+            this.WithFlash = string.Empty;
         }
 
-        if (meta.HasLocationMetadata)
+        if (metadata.HasLocationMetadata)
         {
             this.Location = "Location"; 
-            this.Latitude = "Lat.: " + meta.LatitudeString;
-            this.Longitude = "Long.: " + meta.LongitudeString;
+            this.Latitude = "Lat.: " + metadata.LatitudeString;
+            this.Longitude = "Long.: " + metadata.LongitudeString;
         } 
         else
         {

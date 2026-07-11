@@ -50,7 +50,7 @@ public sealed class PostProcess
     public PostProcessWorkflow? Workflow { get; private set; }
 
     [JsonIgnore]
-    public ProcessMetadata? ProcessMetadata { get; private set; }
+    public Metadata? Metadata { get; private set; }
 
     public bool IsInvalid
         => string.IsNullOrWhiteSpace(this.Name) ||
@@ -82,22 +82,22 @@ public sealed class PostProcess
         return true;
     }
 
-    public bool LoadSourceImage(Image<Rgb48>? image, ProcessMetadata? processMetadata, out string errorMessage)
+    public bool LoadSourceImage(Image<Rgb48>? image, Metadata? metadata, out string errorMessage)
     {
         errorMessage = string.Empty;
-        if (image is null || processMetadata is null)
+        if (image is null || metadata is null)
         {
             try
             {
-                (image, processMetadata) = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
-                bool loaded = image is not null && processMetadata is not null ;
+                (image, metadata) = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
+                bool loaded = image is not null && metadata is not null ;
                 if (loaded)
                 {
                     this.MaybeOriginalImage = image;
-                    this.ProcessMetadata = processMetadata;
+                    this.Metadata = metadata;
 
                     // ! nullable : checked by loaded 
-                    new MetadataGeneratedMessage(processMetadata!).Publish();
+                    new MetadataGeneratedMessage(metadata!).Publish();
                 }
 
                 return loaded;

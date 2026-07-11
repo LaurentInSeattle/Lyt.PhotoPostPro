@@ -16,9 +16,9 @@ Bugs
 WIP
 ---
 
-- Compress Built-in LUT 
+- Camera downloads 
 
-- Cache the LUTs in a dictionary 
+- Masters Folder Management 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization
@@ -61,10 +61,6 @@ Missing Features
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
-- Camera downloads 
-
-- Masters Folder Management 
-
 - Culling Workflow 
 
 --- Important ---
@@ -82,6 +78,10 @@ Missing Features
 
 Cool Stuff to Consider 
 ----------------------
+
+- Compress Built-in LUT 
+
+- Cache the LUTs in a dictionary 
 
 - Auto Run full screen as soon we start processing an image, return to windowed mode when done (or on user request)
 Refer to Jigsaw code 

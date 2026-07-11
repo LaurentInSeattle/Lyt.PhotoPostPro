@@ -12,17 +12,24 @@ public class CameraManager
     public const int SlowCameraMonitoringTime_ms = 5_000;
 
     private readonly string downloadFolderPath;
+    private readonly string libraryFolderPath;
 
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
 
     public CameraManager()
     {
-        string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        this.downloadFolderPath = Path.Combine(desktop, "CameraDownloads");
-        if (!Directory.Exists(downloadFolderPath))
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        this.downloadFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
+        if (!Directory.Exists(this.downloadFolderPath))
         {
-            Directory.CreateDirectory(downloadFolderPath);
+            Directory.CreateDirectory(this.downloadFolderPath);
+        }
+
+        this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "Library");
+        if (!Directory.Exists(this.libraryFolderPath))
+        {
+            Directory.CreateDirectory(this.libraryFolderPath);
         }
     }
 
@@ -249,15 +256,15 @@ public class CameraManager
             if (File.Exists(targetPath))
             {
                 FileInfo fi = new(targetPath);
-                if (fi.Length == length)
+                if (fi.Length != length)
                 {
-                    new DeviceFileDownloadedMessage(IsSuccess: true, foundDevice, file, targetPath).Publish();
-                    return true;
+                    new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No exception").Publish();
+                    return false;
                 }
             }
 
-            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No exception").Publish();
-            return false;
+            new DeviceFileDownloadedMessage(IsSuccess: true, foundDevice, file, targetPath).Publish();
+            return true;
         }
         catch (Exception ex)
         {

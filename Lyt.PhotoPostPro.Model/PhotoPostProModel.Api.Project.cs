@@ -8,7 +8,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         string name, string folderPath, 
         bool isSingleImage, 
         Image<Rgb48>? image, // Valid only for single image 
-        ProcessMetadata? processMetadata, // Valid only for single image 
+        Metadata? metadata, // Valid only for single image 
         out string errorMessage)
     {
         errorMessage = string.Empty;
@@ -91,7 +91,7 @@ public sealed partial class PhotoPostProModel : ModelBase
                 }
 
                 // If No image provided: will load it from path 
-                bool isImageAdded = this.AddImageToProject(imagePath, image, processMetadata, out errorMessage);
+                bool isImageAdded = this.AddImageToProject(imagePath, image, metadata, out errorMessage);
                 if (!isImageAdded)
                 {
                     errorMessage = "Failed to add image to the project.";
@@ -218,7 +218,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     }
 
     public bool AddImageToProject(
-        string imagePath, Image<Rgb48>? image, ProcessMetadata? processMetadata, out string errorMessage)
+        string imagePath, Image<Rgb48>? image, Metadata? metadata, out string errorMessage)
     {
         errorMessage = string.Empty;
         try
@@ -251,7 +251,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             postProcess.Initialize(); 
             postProcess.SetModelAndProject(this, this.CurrentProject);
 
-            bool sourceImageLoaded = postProcess.LoadSourceImage(image, processMetadata, out errorMessage);
+            bool sourceImageLoaded = postProcess.LoadSourceImage(image, metadata, out errorMessage);
             if (!sourceImageLoaded)
             {
                 errorMessage = "Failed to load source image.";
