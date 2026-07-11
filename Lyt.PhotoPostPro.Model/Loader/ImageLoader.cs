@@ -15,7 +15,7 @@ public static class ImageLoader
 
     public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
 
-    public static bool HasHiefExtension(string path) 
+    public static bool HasHiefExtension(string path)
         => HeifExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
     // https://en.wikipedia.org/wiki/Raw_image_format
@@ -48,7 +48,7 @@ public static class ImageLoader
             ".raw" , // Generic 
         ];
 
-    public static bool HasRawExtension(string path) 
+    public static bool HasRawExtension(string path)
         => RawExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
     public static List<string> ImageSharpExtensions =
@@ -57,102 +57,153 @@ public static class ImageLoader
             ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".bmp", ".exr",
         ];
 
-    public static bool HasImageSharpExtension(string path) 
+    public static bool HasImageSharpExtension(string path)
         => ImageSharpExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-    public static (Image<Rgb48>?, Metadata?) LoadImage(
-        string imagePath, out string errorMessage)
+    public static LoadedImage LoadImage(string imagePath)
     {
-        (Image<Rgb48> ?, Metadata?) fail = (null, null); 
-        errorMessage = string.Empty;
         try
         {
             if (!File.Exists(imagePath))
             {
-                errorMessage = "Source file does not exist.";
-                return fail;
+                // "Source file does not exist."
+                return LoadedImage.Fail("Model.Loader.NotExisting");
             }
 
             if (HasMovieExtension(imagePath))
             {
-                errorMessage = "Source file is likely a movie.";
-                return fail;
+                // "Source file is likely a movie.";
+                return LoadedImage.Fail("Model.Loader.MaybeMovie");
             }
 
             string? extension = System.IO.Path.GetExtension(imagePath);
             Debug.WriteLine(extension);
 
-            Image<Rgb48>? image = null;
-            Metadata? metadata = null;
+            LoadedImage? loadedImage = null;
             if (HasHiefExtension(imagePath))
             {
-                (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
-                if (image is null)
+                loadedImage = ImageLoader.TryLoadHiecWithOpenize(imagePath);
+                if (!loadedImage.IsSuccess)
                 {
-                    (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
-                    if (image is null)
+                    loadedImage = ImageLoader.TryLoadWithLibRaw(imagePath);
+                    if (!loadedImage.IsSuccess)
                     {
-                        (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
+                        loadedImage = ImageLoader.TryLoadWithImageSharp(imagePath);
                     }
                 }
             }
             else if (HasRawExtension(imagePath))
             {
-                (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
-                if (image is null)
+                loadedImage = ImageLoader.TryLoadWithLibRaw(imagePath);
+                if (!loadedImage.IsSuccess)
                 {
-                    (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
-                    if (image is null)
+                    loadedImage = ImageLoader.TryLoadWithImageSharp(imagePath);
+                    if (!loadedImage.IsSuccess)
                     {
-                        (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        loadedImage = ImageLoader.TryLoadHiecWithOpenize(imagePath);
                     }
                 }
             }
             else
             {
-                (image, metadata) = ImageLoader.TryLoadWithImageSharp(imagePath, out errorMessage);
-                if (image is null)
+                loadedImage = ImageLoader.TryLoadWithImageSharp(imagePath);
+                if (!loadedImage.IsSuccess)
                 {
-                    (image, metadata) = ImageLoader.TryLoadWithLibRaw(imagePath, out errorMessage);
-                    if (image is null)
+                    loadedImage = ImageLoader.TryLoadWithLibRaw(imagePath);
+                    if (!loadedImage.IsSuccess)
                     {
-                        (image, metadata) = ImageLoader.TryLoadHiecWithOpenize(imagePath, out errorMessage);
+                        loadedImage = ImageLoader.TryLoadHiecWithOpenize(imagePath);
                     }
                 }
             }
 
-            return (image, metadata);
+            if (loadedImage is null)
+            {
+                return LoadedImage.Fail("Model.Loader.NoImage");
+            }
+            else
+            {
+                if (loadedImage.IsSuccess)
+                {
+                    Debug.WriteLine(" Image loaded");
+                }
+
+                return loadedImage;
+            }
         }
         catch (Exception ex)
         {
-            errorMessage = "An error occurred while loading the source image." + ex.Message;
+            // errorMessage = "An error occurred while loading the source image." + ex.Message;
             Debug.WriteLine(ex);
-            return fail;
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
         }
     }
 
-    public static (Image<Rgb48>?, Metadata?) TryLoadWithImageSharp(string imagePath, out string errorMessage)
+    public static LoadedImage TryLoadHiecWithOpenize(string imagePath)
     {
-        (Image<Rgb48>?, Metadata?) fail = (null, null);
-        errorMessage = string.Empty;
+        try
+        {
+            using var fs = new FileStream(imagePath, FileMode.Open);
+            if (!HeicImage.CanLoad(fs))
+            {
+                // errorMessage = "The source image cannot be loaded with Openize.";
+                return LoadedImage.Fail("Model.Loader.OpenizeCantLoad");
+            }
+
+            var image = HeicImage.Load(fs);
+            var frame = image.DefaultFrame;
+            int width = (int)frame.Width;
+            int height = (int)frame.Height;
+            byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
+            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
+            var image48 = image24.CloneAs<Rgb48>();
+            if (image48 is null)
+            {
+                // errorMessage = "Failed to load the source image with Openize.";
+                return LoadedImage.Fail("Model.Loader.OpenizeFailedLoad");
+            }
+
+            Debug.WriteLine("HIEC Image loaded with Openize: " + imagePath);
+
+            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
+            ExifData? exif = image.Exif;
+            if (exif is not null)
+            {
+                directories = exif.DirectoriesList;
+            }
+            // else // No metadata : Directories stays null 
+
+            var metadata = new Metadata(imagePath, width, height, directories);
+            return LoadedImage.FullyLoaded(image48, metadata);
+        }
+        catch (Exception ex)
+        {
+            // errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
+            Debug.WriteLine(ex);
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+        }
+    }
+
+    public static LoadedImage TryLoadWithImageSharp(string imagePath)
+    {
         try
         {
             // Load the image file into memory 
             var imageFormat = Image.DetectFormat(imagePath);
             if (imageFormat is null)
             {
-                errorMessage = "Unsupported image format in ImageSharp.";
-                return fail;
+                // errorMessage = "Unsupported image format in ImageSharp.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpNotDetected");
             }
 
             Debug.WriteLine(imageFormat.Name);
             var image48 = Image.Load<Rgb48>(imagePath);
             if (image48 is null)
             {
-                errorMessage = "Failed to load the source image with ImageSharp.";
-                return fail;
+                // errorMessage = "Failed to load the source image with ImageSharp.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
             }
 
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
@@ -162,11 +213,11 @@ public static class ImageLoader
             ExifProfile? exifProfile = imageMetadata.ExifProfile;
             if (exifProfile is not null)
             {
-                var fieldInfo = exifProfile.GetType().GetField("data", BindingFlags.Instance | BindingFlags.NonPublic); 
-                if ( fieldInfo is not null)
+                var fieldInfo = exifProfile.GetType().GetField("data", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (fieldInfo is not null)
                 {
                     object? fieldData = fieldInfo.GetValue(exifProfile);
-                    if (fieldData is  byte[] exifRawData )
+                    if (fieldData is byte[] exifRawData)
                     {
                         var memoryStream = new MemoryStream(exifRawData);
                         directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(memoryStream);
@@ -175,23 +226,21 @@ public static class ImageLoader
             }
 
             var metadata = new Metadata(imagePath, image48.Width, image48.Height, directories);
-            return (image48, metadata);
+            return LoadedImage.FullyLoaded(image48, metadata);
         }
         catch (Exception ex)
         {
-            errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
+            // errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
             Debug.WriteLine(ex);
-            return fail;
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
         }
     }
 
-    public static (Image<Rgb48>?, Metadata?) TryLoadWithLibRaw(string imagePath, out string errorMessage)
+    public static LoadedImage TryLoadWithLibRaw(string imagePath)
     {
-        (Image<Rgb48>?, Metadata?) fail = (null, null);
-        errorMessage = string.Empty;
         try
         {
-            using RawContext r = RawContext.OpenFile(imagePath);
+            using var r = RawContext.OpenFile(imagePath);
             r.Unpack();
             r.DcrawProcess();
             using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
@@ -201,7 +250,7 @@ public static class ImageLoader
             var pixelDataSpan = rawImage.AsSpan<byte>();
             nint pixelDataPtr = rawImage.DataPointer;
 
-            Image<Rgb48>? image48= null; 
+            Image<Rgb48>? image48 = null;
             unsafe
             {
                 // Pixel data from LIBRAw is in C++ memory, need to pin it
@@ -213,8 +262,8 @@ public static class ImageLoader
                         image48 = image24.CloneAs<Rgb48>();
                         if (image48 is null)
                         {
-                            errorMessage = "Failed to load the source image with ImageSharp.";
-                            return fail;
+                            // errorMessage = "Failed to load the source image with ImageSharp.";
+                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert24to48");
                         }
 
                         Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
@@ -224,76 +273,29 @@ public static class ImageLoader
                         image48 = Image.LoadPixelData<Rgb48>(pixelDataSpan, width, height);
                         if (image48 is null)
                         {
-                            errorMessage = "Failed to load the source image with ImageSharp.";
-                            return fail;
+                            // errorMessage = "Failed to load the source image with ImageSharp.";
+                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert48to48");
                         }
 
                         Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
                     }
                     else
                     {
-                        errorMessage = "Unsupported image format.";
-                        return fail;
+                        // errorMessage = "Unsupported image format.";
+                        return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
                     }
                 }
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            var metadata = new Metadata(imagePath, width, height, directories );
-            return ( image48, metadata); 
-        }
-        catch (Exception ex)
-        {
-            errorMessage = "An error occurred while loading the source image with LibRaw: " + ex.Message;
-            Debug.WriteLine(ex);
-            return fail;
-        }
-    }
-
-    public static (Image<Rgb48>?, Metadata?) TryLoadHiecWithOpenize(string imagePath, out string errorMessage)
-    {
-        (Image<Rgb48>?, Metadata?) fail = (null, null);
-        errorMessage = string.Empty;
-        try
-        {
-            using var fs = new FileStream(imagePath, FileMode.Open);
-            if ( !HeicImage.CanLoad(fs))
-            {
-                errorMessage = "The source image cannot be loaded with Openize.";
-                return fail;
-            }
-
-            var image = HeicImage.Load(fs);
-            var frame = image.DefaultFrame; 
-            int width = (int)frame.Width;
-            int height = (int)frame.Height;
-            byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
-            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-            var image48 = image24.CloneAs<Rgb48>();
-            if (image48 is null)
-            {
-                errorMessage = "Failed to load the source image with Openize.";
-                return fail;
-            }
-
-            Debug.WriteLine("HIEC Image loaded with Openize: " + imagePath);
-
-            IReadOnlyList<MetadataExtractor.Directory>? directories = null; 
-            ExifData? exif = image.Exif;
-            if ( exif is not null)
-            {
-                directories = exif.DirectoriesList;
-            }
-            // else // No metadata : Directories stays null 
-
             var metadata = new Metadata(imagePath, width, height, directories);
-            return (image48, metadata);
+            return LoadedImage.FullyLoaded(image48, metadata);
         }
         catch (Exception ex)
         {
-            errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
+            // errorMessage = "An error occurred while loading the source image with LibRaw: " + ex.Message;
             Debug.WriteLine(ex);
-            return fail;
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
         }
     }
 }

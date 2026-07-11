@@ -46,19 +46,20 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         string error = string.Empty;
         try
         {
-            ( Image<Rgb48>? image, Metadata? metadata) = 
-                ImageLoader.LoadImage(path, out string errorMessage);
-            if (image is not null && metadata is not null)
+            LoadedImage loadedImage = ImageLoader.LoadImage(path);
+            if (loadedImage.IsSuccess && loadedImage.IsFullyLoaded)
             {
-                this.image = image;
-                this.metadata = metadata;
-                var imageFrame = ImagingUtilities.ToFrame(image);
+                this.image = loadedImage.Image;
+                this.metadata = loadedImage.Metadata;
+                // ! Verified by loadedImage.IsFullyLoaded
+                var imageFrame = ImagingUtilities.ToFrame(this.image!);
                 if (imageFrame is not null)
                 {
                     Dispatch.OnUiThread(()=>
                     { 
                         this.OnImageLoaded (imageFrame, path);
-                        new MetadataGeneratedMessage(metadata).Publish();
+                        // ! Verified by loadedImage.IsFullyLoaded
+                        new MetadataGeneratedMessage(this.metadata!).Publish();
                     });
                 }
                 else
@@ -69,7 +70,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
             }
             else
             {
-                error = "Failed to load image file: " + errorMessage;
+                error = "Failed to load image file: " + loadedImage.ErrorMessage;
             }
         }
         catch (Exception ex)

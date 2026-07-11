@@ -6,17 +6,24 @@ public sealed class LoadedImage
 
     public string ErrorMessage { get; set; } = string.Empty;
 
+    public string Exception { get; set; } = string.Empty;
+
     public Image<Rgb48>? Image { get; set; }
 
     public Metadata? Metadata { get; set; }
 
     public byte[]? JpgThumbnail { get; set; }
 
-    public static LoadedImage Fail(string message) => new() { ErrorMessage = message };
+    public bool IsFullyLoaded => this.IsSuccess && this.Image is not null && this.Metadata is not null ;
 
-    public static LoadedImage Loaded(Image<Rgb48>? image, Metadata? metadata) 
-        => new() { Image = image, Metadata = metadata };
+    public bool IsPreLoaded => this.IsSuccess && this.JpgThumbnail is not null && this.Metadata is not null;
+
+    public static LoadedImage Fail(string message, string exception = "" ) 
+        => new() { ErrorMessage = message, Exception = exception };
+
+    public static LoadedImage FullyLoaded(Image<Rgb48>? image, Metadata? metadata) 
+        => new() { IsSuccess = true, Image = image, Metadata = metadata };
 
     public static LoadedImage PreLoaded(Metadata? metadata, byte[] jpgThumbnail)
-        => new() { Metadata = metadata, JpgThumbnail = jpgThumbnail };
+        => new() { IsSuccess = true, Metadata = metadata, JpgThumbnail = jpgThumbnail };
 }

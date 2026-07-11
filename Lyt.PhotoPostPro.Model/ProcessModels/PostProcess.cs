@@ -91,7 +91,8 @@ public sealed class PostProcess
         {
             try
             {
-                (image, metadata) = ImageLoader.LoadImage(this.SourceFilePath, out errorMessage);
+                LoadedImage loadedImage = ImageLoader.LoadImage(this.SourceFilePath);
+                errorMessage = loadedImage.ErrorMessage; 
                 bool loaded = image is not null && metadata is not null ;
                 if (loaded)
                 {
