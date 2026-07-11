@@ -18,17 +18,14 @@ public sealed partial class SingleToolboxViewModel : ViewModel<SingleToolboxView
     public SingleToolboxViewModel()
     {
         this.MetadataViewModel = new();
-
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,
             IsActive = false,
         };
 
-        this.DropViewModel = new DropViewModel(App.GetRequiredService<SingleViewModel>())
-        {
-            IsVisible = true
-        };
+        this.DropViewModel = 
+            new DropViewModel(App.GetRequiredService<SingleViewModel>(), "Single.DropZoneHelp") { IsVisible = true };
     }
 
 #pragma warning disable CA1822 // Mark members as static

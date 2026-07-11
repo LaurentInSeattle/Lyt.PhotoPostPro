@@ -8,7 +8,7 @@ public sealed partial class LutToolboxViewModel :
 
     public LutToolboxViewModel()
     {
-        this.DropViewModel = new DropViewModel(this)
+        this.DropViewModel = new DropViewModel(this, "Workflow.Lut.DragDropHelp")
         {
             IsVisible = true
         };

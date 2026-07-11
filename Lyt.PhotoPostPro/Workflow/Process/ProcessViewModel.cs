@@ -92,6 +92,12 @@ public sealed partial class ProcessViewModel :
 
     public void Receive(HotKeyMessage message)
     {
+        if( !this.IsActivated)
+        {
+            // Ignore all hot keys when not active 
+            return; 
+        }
+
         switch (message.Key)
         {
             case Key.PageUp:

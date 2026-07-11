@@ -26,12 +26,13 @@
 	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
 	<system:String x:Key="Imaging.InProgressHelp">Please wait...</system:String>
 
+	<!-- Drag and Drop -->
+	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
+
 	<!-- Folder -->
-	<system:String x:Key="Folder.DropZone">Drag and Drop Zone</system:String>
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 
 	<!-- Single -->
-	<system:String x:Key="Single.DropZone">Drag and Drop Zone</system:String>
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image file here to begin.</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
@@ -139,9 +140,10 @@
 	<!-- Workflow Lut -->
 	<system:String x:Key="Workflow.Lut.Title">Lookup Table Color Grading</system:String>
 	<system:String x:Key="Workflow.Lut.Correction">Use a Lookup Table to adjust colours and add some special 'vibe' to the image.</system:String>
-	<system:String x:Key="Workflow.Lut.UseLut">Choose a lookup table:</system:String>
+	<system:String x:Key="Workflow.Lut.UseLut">Choose a predefined lookup table:</system:String>
 	<system:String x:Key="Workflow.Lut.None"> - - None - -</system:String>
-	<system:String x:Key="Workflow.Lut.DropLut">Drag and drop a .cube file here!</system:String>
+	<system:String x:Key="Workflow.Lut.DropLut">Or... Use your .cube or 3DL file: </system:String>
+	<system:String x:Key="Workflow.Lut.DragDropHelp">Drag and drop here a .cube or 3dl file!</system:String>
 	
 	<!-- Workflow Color -->
 	<system:String x:Key="Workflow.Color.Title">Manual Color Grading</system:String>
