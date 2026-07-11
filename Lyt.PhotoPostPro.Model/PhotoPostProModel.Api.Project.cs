@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
+using Lyt.PhotoPostPro.Model.Loader;
+
 using static Lyt.Persistence.FileManagerModel;
 
 public sealed partial class PhotoPostProModel : ModelBase

@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
+using Lyt.PhotoPostPro.Model.Loader;
+
 public sealed class PostProcess
 {
     public PostProcess() { /* Required for serialization */ }

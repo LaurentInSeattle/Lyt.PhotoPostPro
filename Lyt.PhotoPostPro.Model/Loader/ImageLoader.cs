@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.Utilities;
+﻿namespace Lyt.PhotoPostPro.Model.Loader;
 
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
@@ -7,6 +7,12 @@ using Openize.Heic.Decoder;
 public static class ImageLoader
 {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
+
+    public static List<string> MovieExtensions = [".mp4", ".mov", ".mkv", ".avi", ".webm"];
+
+    public static bool HasMovieExtension(string path)
+        => MovieExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+
     public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
 
     public static bool HasHiefExtension(string path) 
@@ -56,7 +62,8 @@ public static class ImageLoader
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-    public static (Image<Rgb48>?, Metadata?) LoadImage(string imagePath, out string errorMessage)
+    public static (Image<Rgb48>?, Metadata?) LoadImage(
+        string imagePath, out string errorMessage)
     {
         (Image<Rgb48> ?, Metadata?) fail = (null, null); 
         errorMessage = string.Empty;
@@ -64,7 +71,13 @@ public static class ImageLoader
         {
             if (!File.Exists(imagePath))
             {
-                errorMessage = "Source image file does not exist.";
+                errorMessage = "Source file does not exist.";
+                return fail;
+            }
+
+            if (HasMovieExtension(imagePath))
+            {
+                errorMessage = "Source file is likely a movie.";
                 return fail;
             }
 

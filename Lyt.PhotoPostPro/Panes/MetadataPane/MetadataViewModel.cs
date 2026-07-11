@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
+using Lyt.PhotoPostPro.Model.Loader;
+
 public sealed partial class MetadataViewModel : 
     ViewModel<MetadataView>, 
     IRecipient<MetadataGeneratedMessage>

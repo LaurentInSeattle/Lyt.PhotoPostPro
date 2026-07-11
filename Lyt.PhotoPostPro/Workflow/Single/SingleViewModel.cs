@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Single;
 
+using Lyt.PhotoPostPro.Model.Loader;
+
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 using SixLabors.ImageSharp;

@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
+﻿namespace Lyt.PhotoPostPro.Model.Loader;
 
 public sealed class Metadata
 {
