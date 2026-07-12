@@ -11,5 +11,6 @@ public sealed record class DeviceFileDownloadedMessage(
     FoundDevice Device, 
     string File, 
     string Path, 
+    Metadata? Metadata = null,
     byte[]? ThumbnailBytes = null, 
     string ThumbnailPath = "");

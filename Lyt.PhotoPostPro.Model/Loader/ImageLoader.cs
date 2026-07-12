@@ -467,6 +467,10 @@ public static class ImageLoader
                 return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
             }
 
+            // Save original image dimensions 
+            int width = image24.Width; 
+            int height = image24.Height; 
+            
             Debug.WriteLine("Image 24 loaded with ImageSharp: " + imagePath);
 
             IReadOnlyList<MetadataExtractor.Directory>? directories = null;
@@ -486,9 +490,9 @@ public static class ImageLoader
                 }
             }
 
-            // Create thumbnail and metadata
+            // Create thumbnail and metadata, image24 mutates! 
             byte[] jpgEncoded = GenerateJpgThumbnail(image24);
-            var metadata = new Metadata(imagePath, image24.Width, image24.Height, directories);
+            var metadata = new Metadata(imagePath, width, height, directories);
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
         catch (Exception ex)

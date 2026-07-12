@@ -13,9 +13,7 @@
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>
 	<Grid
-		Background="{StaticResource DeepBlue_2_100}"
-		Margin="8 12 16 12"
-		MaxWidth=""
+		Background="Transparent"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="0" />
@@ -69,15 +67,9 @@
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="6" Grid.Column="0"
+			Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
 			Theme="{StaticResource H3}"
-			Text="{Binding Make}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="6" Grid.Column="1"
-			Theme="{StaticResource Large}"
-			Text="{Binding Model}"
+			Text="{Binding MakeModel}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock

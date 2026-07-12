@@ -18,7 +18,7 @@
 		CornerRadius="4"
 		>
 		<Grid
-			Margin="4"
+			Margin="12 4 12 8"
 			>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="32" />
@@ -28,10 +28,7 @@
 			<TextBlock
 				Grid.Row="0"
 				Text="{Binding Title}"
-				FontSize="16"
-				TextAlignment="Center"			
-				Foreground="{StaticResource PastelOrchid_0_080}"
-				VerticalAlignment="Center"
+				Theme="{StaticResource Large}"
 				/>
 			<Image
 				Grid.Row="1"
@@ -43,11 +40,7 @@
 			<TextBlock
 				Grid.Row="2"
 				Text="{Binding Details}"
-				Margin="0 -2 0 0"
-				FontSize="12"
-				TextAlignment="Center"			
-				Foreground="{StaticResource PastelOrchid_0_080}"
-				VerticalAlignment="Center"
+				Theme="{StaticResource Medium}"
 				/>
 		</Grid>
 	</Border>

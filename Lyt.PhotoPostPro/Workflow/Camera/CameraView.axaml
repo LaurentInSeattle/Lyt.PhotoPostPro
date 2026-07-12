@@ -10,6 +10,7 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -25,7 +26,8 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="400"/>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="480"/>
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 		<TextBlock
@@ -54,7 +56,7 @@
 			Text="{DynamicResource Workflow.Export.Export}"
 			Command="{Binding OnDownload}"
 			HorizontalAlignment="Right" Width="300"
-	    	/>
+			/>
 		<TextBlock
 			Grid.Row="2" Grid.Column="1"
 			Text="{Binding FileDownloaded}"
@@ -65,5 +67,22 @@
 			Grid.Row="3" Grid.Column="1"
 			DataContext="{Binding ThumbnailsPanelViewModel}"
 			/>
+		<StackPanel
+			Grid.Row="3" Grid.Column="3"
+			>
+			<Image
+				Source="{Binding SelectedThumbnail}"
+				Margin="0 0 0 12"
+				IsHitTestVisible="False"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480"
+				MaxHeight="600"
+				/>
+			<metadatapane:MetadataView
+				DataContext="{Binding SelectedThumnailMetadataViewModel}"
+				Margin="0 0 0 12"
+				/>
+		</StackPanel>
+
 	</Grid>
 </UserControl>

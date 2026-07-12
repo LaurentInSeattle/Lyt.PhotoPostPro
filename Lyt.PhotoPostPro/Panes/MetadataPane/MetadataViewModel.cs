@@ -22,10 +22,7 @@ public sealed partial class MetadataViewModel :
     public partial string FileDateTime { get; private set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string Make { get; private set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial string Model { get; private set; } = string.Empty;
+    public partial string MakeModel { get; private set; } = string.Empty;
 
     [ObservableProperty]
     public partial string Captured { get; private set; } = string.Empty;
@@ -59,6 +56,8 @@ public sealed partial class MetadataViewModel :
 
     public MetadataViewModel() => this.Subscribe<MetadataGeneratedMessage>();
 
+    public MetadataViewModel(Metadata metadata) => this.Update(metadata); 
+
     public void Receive(MetadataGeneratedMessage message)
     {
         Dispatch.OnUiThread(() =>
@@ -67,7 +66,7 @@ public sealed partial class MetadataViewModel :
         }, DispatcherPriority.ApplicationIdle);
     }
 
-    private void Update(Metadata metadata)
+    public void Update(Metadata metadata)
     {
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
         this.SizeMB = metadata.SizeMB + " on disk";
@@ -81,8 +80,7 @@ public sealed partial class MetadataViewModel :
 
         if (metadata.HasExifMetadata)
         {
-            this.Make = metadata.Make;
-            this.Model = metadata.Model;
+            this.MakeModel = metadata.Make + " " + metadata.Model;
             this.Captured =
                 string.Format("Shot: {0} at {1}", metadata.Captured.ToLongDateString(), metadata.Captured.ToLongTimeString());
             this.Aperture = "Aperture: " + metadata.Aperture;
@@ -94,8 +92,7 @@ public sealed partial class MetadataViewModel :
         }
         else
         {
-            this.Make = string.Empty;
-            this.Model = string.Empty;
+            this.MakeModel = string.Empty;
             this.Captured = string.Empty;
             this.Aperture = string.Empty;
             this.IsoSpeed = string.Empty;

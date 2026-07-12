@@ -8,9 +8,7 @@ public sealed partial class CameraThumbnailViewModel :
     public const double LargeImageHeight = 200;
     public const int LargeThumbnailWidth = 360;
 
-    // public readonly Model.GameObjects.Game Game;
-
-    public readonly byte[] ImageBytes;
+    public readonly Metadata Metadata;
 
     private readonly ISelectListener parent;
 
@@ -30,17 +28,17 @@ public sealed partial class CameraThumbnailViewModel :
     public partial WriteableBitmap Thumbnail { get; set; }
 
     /// <summary>  Creates a thumbnail view model </summary>
-    public CameraThumbnailViewModel(ISelectListener parent, /* Model.GameObjects.Game game, */ byte[] imageBytes)
+    public CameraThumbnailViewModel(ISelectListener parent, Metadata metadata, byte[] imageBytes)
     {
         this.parent = parent;
-        // this.Game = game;
-        this.ImageBytes = imageBytes;
+        this.Metadata = metadata;
         this.BorderHeight = LargeBorderHeight;
         this.ImageHeight = LargeImageHeight;
-        this.Title = string.Empty;
-        this.Details = string.Empty;
-        this.SetThumbnailStrings();
         this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
+
+        this.Title = string.Empty; 
+        this.Details = string.Empty;
+        this.SetThumbnailStrings(); 
         this.Subscribe<LanguageChangedMessage>();
     }
 
@@ -77,6 +75,17 @@ public sealed partial class CameraThumbnailViewModel :
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(currentLanguage);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentLanguage);
+        }
+
+        this.Title =
+            string.Format(
+                "{0} - {1} - {2}",
+                this.Metadata.Filename, this.Metadata.Extension, this.Metadata.Dimensions);
+        
+        if (this.Metadata.HasExifMetadata)
+        {
+            var captured = this.Metadata.Captured; 
+            this.Details = captured.ToLongDateString() + " " + captured.ToShortTimeString();
         }
 
         //string dateString =
