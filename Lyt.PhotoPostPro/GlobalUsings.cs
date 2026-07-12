@@ -6,6 +6,7 @@ global using System.Collections;
 global using System.Collections.Concurrent;
 global using System.Collections.Generic;
 global using System.Collections.ObjectModel;
+global using System.Collections.Specialized;
 global using System.ComponentModel;
 global using System.Diagnostics;
 global using System.Globalization;
@@ -48,6 +49,8 @@ global using Avalonia.Media.Immutable;
 global using Avalonia.Platform;
 global using Avalonia.Platform.Storage;
 global using Avalonia.Threading;
+global using Avalonia.Controls.Generators;
+global using Avalonia.Layout;
 
 #endregion Avalonia 
 

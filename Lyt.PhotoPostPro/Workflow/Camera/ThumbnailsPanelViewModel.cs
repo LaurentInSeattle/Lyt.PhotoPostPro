@@ -1,0 +1,152 @@
+﻿namespace Lyt.PhotoPostPro.Workflow.Camera;
+
+// using static Lyt.Persistence.FileManagerModel;
+
+public sealed partial class ThumbnailsPanelViewModel :
+    ViewModel<ThumbnailsPanelView>,
+    ISelectListener,
+    IRecipient<LanguageChangedMessage>
+{
+    private readonly PhotoPostProModel photoPostProModel;
+    private readonly CameraViewModel cameraViewModel;
+
+    [ObservableProperty]
+    public partial bool ShowInProgress { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<CameraThumbnailViewModel> Thumbnails { get; set; }
+
+    [ObservableProperty]
+    public partial int ProvidersSelectedIndex { get; set; }
+
+    [ObservableProperty]
+    public partial string EmptyMessage { get; set; }
+
+    private CameraThumbnailViewModel? selectedThumbnail;
+    //private Model.GameObjects.Game? selectedGame;
+    private List<CameraThumbnailViewModel>? allThumbnails;
+    private List<CameraThumbnailViewModel>? filteredThumbnails;
+
+    public ThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, CameraViewModel collectionViewModel)
+    {
+        this.photoPostProModel = photoPostProModel; 
+        this.cameraViewModel = collectionViewModel;
+        this.Thumbnails = [];
+        // this.ShowInProgress = this.jigsawModel.ShowInProgress;
+        this.EmptyMessage = string.Empty;
+        this.Subscribe<LanguageChangedMessage>();
+    }
+
+    public void Receive(LanguageChangedMessage _) { } //  => this.PopulateComboBox();
+
+    internal void LoadThumnails()
+    {
+        var fileManagerModel = App.GetRequiredService<FileManagerModel>();
+
+        // var games = this.jigsawModel.SavedGames.Values;
+        //var sortedGames = (from game in games orderby game.Started descending select game).ToList();
+        //this.allThumbnails = new(sortedGames.Count);
+        //foreach (var game in sortedGames)
+        //{
+        //    byte[] ? thumbnailBytes = this.jigsawModel.GetThumbnail(game.Name);
+        //    if (thumbnailBytes is null || thumbnailBytes.Length == 0)
+        //    {
+        //        continue;
+        //    }
+
+        //    // Make sure the game image is still present on disk, if not skip
+        //    var fileIdImage = new FileId(Area.User, Kind.Binary, game.ImageName);
+        //    if (!fileManagerModel.Exists(fileIdImage))
+        //    {
+        //        continue;
+        //    }
+
+        //    this.allThumbnails.Add(new ThumbnailViewModel(this, game, thumbnailBytes));
+        //}
+
+        this.Filter();
+        Schedule.OnUiThread(66, () => { this.UpdateVisualSelection(); }, DispatcherPriority.Background);
+    }
+
+    public CameraThumbnailViewModel? SelectedThumbnail => this.selectedThumbnail;
+
+    public void OnSelect(object selectedObject)
+    {
+        //if (selectedObject is ThumbnailViewModel thumbnailViewModel)
+        //{
+        //    this.selectedThumbnail = thumbnailViewModel;
+        //    var game = thumbnailViewModel.Game;
+        //    if (this.selectedGame is null || this.selectedGame.Name != game.Name)
+        //    {
+        //        this.selectedGame = game;
+        //        this.collectionViewModel.Select(game);
+        //    }
+
+        //    this.UpdateVisualSelection();
+        //}
+    }
+
+    internal void UpdateVisualSelection()
+    {
+        //if (this.selectedGame is not null)
+        //{
+        //    foreach (ThumbnailViewModel thumbnailViewModel in this.Thumbnails)
+        //    {
+        //        if (thumbnailViewModel.Game == this.selectedGame)
+        //        {
+        //            thumbnailViewModel.ShowSelected();
+        //        }
+        //        else
+        //        {
+        //            thumbnailViewModel.ShowDeselected(this.selectedGame);
+        //        }
+        //    }
+        //}
+    }
+
+    private void Filter()
+    {
+        //if ((this.allThumbnails is not null) && (this.allThumbnails.Count > 0))
+        //{
+        //    this.filteredThumbnails =
+        //        [.. (from thumbnail in this.allThumbnails
+        //             where thumbnail.Game.IsCompleted == !this.ShowInProgress
+        //             select thumbnail)];
+        //}
+        //else
+        //{
+        //    this.filteredThumbnails = null;
+        //}
+
+        //if (this.filteredThumbnails is not null && this.filteredThumbnails.Count > 0)
+        //{
+        //    this.EmptyMessage = string.Empty;
+        //    this.Thumbnails = [.. this.filteredThumbnails];
+
+        //    // Clear selection: the selected game is not in the filtered list
+        //    // Force select on the first one so that it will show up in the main area
+        //    this.selectedGame = null;
+        //    this.OnSelect(this.Thumbnails[0]);
+        //}
+        //else
+        //{
+        //    // Null or empty list, Clear selection in main area too
+        //    this.Thumbnails = [];
+        //    this.selectedGame = null;
+        //    this.collectionViewModel.ClearSelection();
+
+        //    // TODO : Localize this message
+        //    this.EmptyMessage =
+        //        this.ShowInProgress ?
+        //            "There are no games in progress." :
+        //            "There are no completed games yet.";
+        //}
+    }
+
+    partial void OnShowInProgressChanged(bool value)
+    {
+        // this.jigsawModel.ShowInProgress = value;
+        this.Filter();
+        Schedule.OnUiThread(66, () => { this.UpdateVisualSelection(); }, DispatcherPriority.Background);
+    }
+}

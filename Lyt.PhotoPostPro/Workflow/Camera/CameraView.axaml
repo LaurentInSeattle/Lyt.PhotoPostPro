@@ -60,5 +60,9 @@
 			Theme="{StaticResource H3}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<vm:ThumbnailsPanelView
+			Grid.Row="3" Grid.Column="1"
+			DataContext="{Binding ThumbnailsPanelViewModel}"
+			/>
 	</Grid>
 </UserControl>

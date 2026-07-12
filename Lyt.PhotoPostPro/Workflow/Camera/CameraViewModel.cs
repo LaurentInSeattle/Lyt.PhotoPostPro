@@ -2,6 +2,7 @@
 
 public sealed partial class CameraViewModel :
     ViewModel<CameraView>,
+    ISelectListener,
     IRecipient<DevicesFoundMessage>,
     IRecipient<DeviceStatusMessage>,
     IRecipient<DeviceFileListMessage>,
@@ -20,13 +21,17 @@ public sealed partial class CameraViewModel :
         this.cameraMgr = this.model.CameraManager;
         this.selectedFiles = [];
         this.downloadedFiles = [];
-
+        this.ThumbnailsPanelViewModel = new(this.model, this);
+        
         this.Subscribe<DevicesFoundMessage>();
         this.Subscribe<DeviceStatusMessage>();
         this.Subscribe<DeviceFileListMessage>();
         this.Subscribe<DeviceFileDownloadedMessage>();
     }
 
+    [ObservableProperty]
+    public partial ThumbnailsPanelViewModel ThumbnailsPanelViewModel { get; set; } 
+ 
     [ObservableProperty]
     public partial string DevicesFound { get; set; } = string.Empty;
 
@@ -154,6 +159,11 @@ public sealed partial class CameraViewModel :
             this.downloadedFiles.Add(message.File);
             this.FileDownloaded =
                 message.Device.FriendlyName + ":  " + message.File + "  downloaded to: " + message.Path;
+            if (message.ThumbnailBytes is not null)
+            {
+                var thumbnail = new CameraThumbnailViewModel(this, message.ThumbnailBytes);
+                this.ThumbnailsPanelViewModel.Thumbnails.Add(thumbnail); 
+            } 
         } 
         else
         {
@@ -172,4 +182,6 @@ public sealed partial class CameraViewModel :
 
         this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
     }
+
+    public void OnSelect(object selectedObject) { } 
 }

@@ -1,84 +1,86 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Folder;
 
-public sealed partial class ThumbnailViewModel : ViewModel<ThumbnailView>, IRecipient<LanguageChangedMessage>
-{
-    public const double LargeBorderHeight = 260;
-    public const double LargeImageHeight = 200;
-    public const int LargeThumbnailWidth = 360;
+public sealed partial class ThumbnailViewModel : ViewModel<ThumbnailView> { } 
 
-    public readonly byte[] ImageBytes;
+//public sealed partial class ThumbnailViewModel : ViewModel<ThumbnailView>, IRecipient<LanguageChangedMessage>
+//{
+//    public const double LargeBorderHeight = 260;
+//    public const double LargeImageHeight = 200;
+//    public const int LargeThumbnailWidth = 360;
 
-    private readonly ISelectListener parent;
+//    public readonly byte[] ImageBytes;
 
-    [ObservableProperty]
-    public partial double BorderHeight { get; set; }
+//    private readonly ISelectListener parent;
 
-    [ObservableProperty]
-    public partial double ImageHeight { get; set; }
+//    [ObservableProperty]
+//    public partial double BorderHeight { get; set; }
 
-    [ObservableProperty]
-    public partial string Title { get; set; }
+//    [ObservableProperty]
+//    public partial double ImageHeight { get; set; }
 
-    [ObservableProperty]
-    public partial string Details { get; set; }
+//    [ObservableProperty]
+//    public partial string Title { get; set; }
 
-    [ObservableProperty]
-    public partial WriteableBitmap Thumbnail { get; set; }
+//    [ObservableProperty]
+//    public partial string Details { get; set; }
 
-    /// <summary>  Creates a thumbnail view model </summary>
-    public ThumbnailViewModel(ISelectListener parent, byte[] imageBytes)
-    {
-        this.parent = parent;
-        this.ImageBytes = imageBytes;
-        this.BorderHeight = LargeBorderHeight;
-        this.ImageHeight = LargeImageHeight;
-        this.Title = string.Empty;
-        this.Details = string.Empty;
-        this.SetThumbnailStrings();
-        this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
-        this.Subscribe<LanguageChangedMessage>();
-    }
+//    [ObservableProperty]
+//    public partial WriteableBitmap Thumbnail { get; set; }
 
-    // We need to reload the thumbnail view title, so that it will be properly localized
-    public void Receive(LanguageChangedMessage _) => this.SetThumbnailStrings();
+//    /// <summary>  Creates a thumbnail view model </summary>
+//    public ThumbnailViewModel(ISelectListener parent, byte[] imageBytes)
+//    {
+//        this.parent = parent;
+//        this.ImageBytes = imageBytes;
+//        this.BorderHeight = LargeBorderHeight;
+//        this.ImageHeight = LargeImageHeight;
+//        this.Title = string.Empty;
+//        this.Details = string.Empty;
+//        this.SetThumbnailStrings();
+//        this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
+//        this.Subscribe<LanguageChangedMessage>();
+//    }
 
-    internal void OnSelect() => this.parent.OnSelect(this);
+//    // We need to reload the thumbnail view title, so that it will be properly localized
+//    public void Receive(LanguageChangedMessage _) => this.SetThumbnailStrings();
 
-    internal void ShowDeselected()
-    {
-        if (this.IsBound)
-        {
-            this.View.Deselect();
-        }
-    }
+//    internal void OnSelect() => this.parent.OnSelect(this);
 
-    internal void ShowSelected()
-    {
-        if (this.IsBound)
-        {
-            this.View.Select();
-        }
-    }
+//    internal void ShowDeselected()
+//    {
+//        if (this.IsBound)
+//        {
+//            this.View.Deselect();
+//        }
+//    }
 
-    private void SetThumbnailStrings()
-    {
-        string? currentLanguage = this.Localizer.CurrentLanguage;
-        if (!string.IsNullOrEmpty(currentLanguage))
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(currentLanguage);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentLanguage);
-        }
+//    internal void ShowSelected()
+//    {
+//        if (this.IsBound)
+//        {
+//            this.View.Select();
+//        }
+//    }
 
-        //string dateString =
-        //    string.Format(this.Localize("Collection.Thumbs.StartedFormat"), this.Game.Started.Date.ToShortDateString());
-        //string progressString =
-        //    this.Game.IsCompleted ?
-        //        string.Empty :
-        //        string.Format(this.Localize("Collection.Thumbs.ProgressFormat"), this.Game.Progress);
-        //this.Title =
-        //    this.Game.IsCompleted ?
-        //        dateString :
-        //        string.Concat(dateString, " - ", progressString);
-        //this.Details = string.Format(this.Localize("Collection.Thumbs.PuzzleFormat"), this.Game.PieceCount);
-    }
-}
+//    private void SetThumbnailStrings()
+//    {
+//        string? currentLanguage = this.Localizer.CurrentLanguage;
+//        if (!string.IsNullOrEmpty(currentLanguage))
+//        {
+//            Thread.CurrentThread.CurrentCulture = new CultureInfo(currentLanguage);
+//            Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentLanguage);
+//        }
+
+//        //string dateString =
+//        //    string.Format(this.Localize("Collection.Thumbs.StartedFormat"), this.Game.Started.Date.ToShortDateString());
+//        //string progressString =
+//        //    this.Game.IsCompleted ?
+//        //        string.Empty :
+//        //        string.Format(this.Localize("Collection.Thumbs.ProgressFormat"), this.Game.Progress);
+//        //this.Title =
+//        //    this.Game.IsCompleted ?
+//        //        dateString :
+//        //        string.Concat(dateString, " - ", progressString);
+//        //this.Details = string.Format(this.Localize("Collection.Thumbs.PuzzleFormat"), this.Game.PieceCount);
+//    }
+//}
