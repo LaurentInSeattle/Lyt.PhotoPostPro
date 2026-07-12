@@ -40,7 +40,7 @@ public class CameraManager
     public void BeginMonitoringCameraConnexion()
     {
         // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
-        typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
+        // typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
 
         this.ctsMonitoring = new CancellationTokenSource();
         Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
@@ -82,9 +82,9 @@ public class CameraManager
             int deviceCount = devices.Count;
             if (deviceCount == 0)
             {
-                Debug.WriteLine(" No devices found");
                 // Publish an empty list 
                 new DevicesFoundMessage([]).Publish();
+                Debug.WriteLine(" No devices found");
             }
             else
             {
@@ -227,7 +227,7 @@ public class CameraManager
                 var files = AllFiles(device);
                 Debug.WriteLine("Found files: " + files.Count);
                 new DeviceFileListMessage(foundDevice, files).Publish();
-                IsMonitoring = false;
+                this.IsMonitoring = false;
             }
             else
             {
@@ -263,8 +263,23 @@ public class CameraManager
                 }
             }
 
-            new DeviceFileDownloadedMessage(IsSuccess: true, foundDevice, file, targetPath).Publish();
-            return true;
+            LoadedImage loadedImage = ImageLoader.PreLoadImage(targetPath);
+            if (loadedImage.IsSuccess && loadedImage.IsPreLoaded)
+            {
+                string trimmed = Path.GetFileNameWithoutExtension(fileName);
+                string thumbnailName = trimmed + "_THUMB.jpg"; 
+                string thumbnailPath = Path.Combine(this.downloadFolderPath, thumbnailName);
+
+                // ! Verified by loadedImage.IsPreLoaded
+                byte[] thumbnailBytes = loadedImage.JpgThumbnail!; 
+                File.WriteAllBytes(thumbnailPath, thumbnailBytes);
+                new DeviceFileDownloadedMessage(
+                    IsSuccess: true, foundDevice, file, targetPath, thumbnailBytes, thumbnailPath).Publish();
+                return true;
+            }
+
+            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No thumnail").Publish();
+            return false;
         }
         catch (Exception ex)
         {
@@ -278,12 +293,25 @@ public class CameraManager
     {
         HashSet<string> allFiles = [];
 
-        string[] files =
-            device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
-        foreach (string file in files)
+        int retries = 3;
+        while ( retries > 0)
         {
-            Debug.WriteLine("      File: " + file);
-            allFiles.Add(file);
+            allFiles.Clear(); 
+            string[] files =
+                device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
+            foreach (string file in files)
+            {
+                Debug.WriteLine("      File: " + file);
+                allFiles.Add(file);
+            }
+
+            if ( allFiles.Count > 0)
+            {
+                break; 
+            }
+
+            -- retries;
+            Task.Delay(UiResponseDelayTime_ms).Wait();
         }
 
         return allFiles.ToList();
@@ -294,7 +322,7 @@ public class CameraManager
     {
         Debug.WriteLine(new string('=', 60));
 
-        void PrintLabelValue(string label, string value)
+        static void PrintLabelValue(string label, string value)
         {
             Debug.Write(label.PadRight(22));
             Debug.WriteLine(value);

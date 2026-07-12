@@ -3,10 +3,9 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
-
 public static class ImageLoader
 {
-    public const int ThumbnailLargestDimension = 420;
+    public const int ThumbnailLargestDimension = 480;
 
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
@@ -75,28 +74,14 @@ public static class ImageLoader
     {
         try
         {
-            if (!File.Exists(imagePath))
+            LoadedImage? loadedImage = Guard(imagePath);
+            if ( loadedImage is not null)
             {
-                // "Source file does not exist."
-                return LoadedImage.Fail("Model.Loader.NotExisting");
-            }
-
-            if (HasExcludedExtension(imagePath))
-            {
-                // "Source file is likely a movie.";
-                return LoadedImage.Fail("Model.Loader.ExcludedNotImage");
-            }
-
-            if (HasMovieExtension(imagePath))
-            {
-                // "Source file is likely a movie.";
-                return LoadedImage.Fail("Model.Loader.MaybeMovie");
+                return loadedImage;
             }
 
             string? extension = System.IO.Path.GetExtension(imagePath);
             Debug.WriteLine(extension);
-
-            LoadedImage? loadedImage = null;
             if (HasHiefExtension(imagePath))
             {
                 loadedImage = ImageLoader.TryLoadHiecWithOpenize(imagePath);
@@ -322,28 +307,14 @@ public static class ImageLoader
     {
         try
         {
-            if (!File.Exists(imagePath))
+            LoadedImage? loadedImage = Guard(imagePath);
+            if (loadedImage is not null)
             {
-                // "Source file does not exist."
-                return LoadedImage.Fail("Model.Loader.NotExisting");
-            }
-
-            if (HasExcludedExtension(imagePath))
-            {
-                // "Source file is likely a movie.";
-                return LoadedImage.Fail("Model.Loader.ExcludedNotImage");
-            }
-
-            if (HasMovieExtension(imagePath))
-            {
-                // "Source file is likely a movie.";
-                return LoadedImage.Fail("Model.Loader.MaybeMovie");
+                return loadedImage;
             }
 
             string? extension = System.IO.Path.GetExtension(imagePath);
             Debug.WriteLine(extension);
-
-            LoadedImage? loadedImage = null;
             if (HasHiefExtension(imagePath))
             {
                 loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath);
@@ -415,19 +386,46 @@ public static class ImageLoader
             }
 
             var image = HeicImage.Load(fs);
+            var frames = image.Frames;
+            if (frames is null || frames.Count == 0)
+            {
+                // errorMessage = "The source image cannot be loaded with Openize.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
+            }
+
             var frame = image.DefaultFrame;
             int width = (int)frame.Width;
             int height = (int)frame.Height;
-            byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
-            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-            var image48 = image24.CloneAs<Rgb48>();
-            if (image48 is null)
+
+            byte[] pixels; 
+            var thumbnailFrame = 
+                ( from f in frames.Values where f.Width <  width select f).FirstOrDefault();
+            if (thumbnailFrame is not null)
             {
-                // errorMessage = "Failed to load the source image with Openize.";
-                return LoadedImage.Fail("Model.Loader.OpenizeFailedLoad");
+                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
+                width = (int)thumbnailFrame.Width;
+                height = (int)thumbnailFrame.Height;
+            }
+            else
+            {
+                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             }
 
-            Debug.WriteLine("HIEC Image loaded with Openize: " + imagePath);
+            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
+
+            // Create thumbnail 
+            image24.Mutate(x => x.Resize(
+                new ResizeOptions
+                {
+                    Size = ThumbnailSize(image24.Width, image24.Height),
+                    Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                    Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+                }));
+
+            var saveMemoryStream = new MemoryStream();
+            image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
+            byte[] jpgEncoded = saveMemoryStream.ToArray();
+            Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
 
             IReadOnlyList<MetadataExtractor.Directory>? directories = null;
             ExifData? exif = image.Exif;
@@ -438,7 +436,7 @@ public static class ImageLoader
             // else // No metadata : Directories stays null 
 
             var metadata = new Metadata(imagePath, width, height, directories);
-            return LoadedImage.FullyLoaded(image48, metadata);
+            return LoadedImage.PreLoaded( metadata, jpgEncoded);
         }
         catch (Exception ex)
         {
@@ -488,20 +486,9 @@ public static class ImageLoader
                 }
             }
 
+            // Create thumbnail and metadata
+            byte[] jpgEncoded = GenerateJpgThumbnail(image24);
             var metadata = new Metadata(imagePath, image24.Width, image24.Height, directories);
-
-            // Create thumbnail 
-            image24.Mutate(x => x.Resize(
-                new ResizeOptions
-                {
-                    Size = ThumbnailSize(image24.Width, image24.Height),
-                    Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
-                    Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
-                }));
-
-            var saveMemoryStream = new MemoryStream();
-            image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() {  Quality = 80 }); 
-            byte[] jpgEncoded = saveMemoryStream.ToArray();
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
         catch (Exception ex)
@@ -518,42 +505,37 @@ public static class ImageLoader
         {
             using var r = RawContext.OpenFile(imagePath);
             r.Unpack();
-            r.DcrawProcess();
-            using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
+            int width = r.Width;
+            int height = r.Height;
+            var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
+            var metadata = new Metadata(imagePath, width, height, directories);
+            ProcessedImage thumbnail = r.ExportThumbnail();
 
-            int width = rawImage.Width;
-            int height = rawImage.Height;
-            var pixelDataSpan = rawImage.AsSpan<byte>();
-            nint pixelDataPtr = rawImage.DataPointer;
+            byte[]? jpgEncoded; 
+            var pixelDataSpan = thumbnail.AsSpan<byte>();
+            if (pixelDataSpan.Length == 0)
+            {
+                // TODO: Replace thumb with placeholder image 
+                return LoadedImage.Fail("Model.Loader.LibRawNoThumnail");
+            }
 
-            Image<Rgb48>? image48 = null;
+            nint pixelDataPtr = thumbnail.DataPointer;
+
             unsafe
             {
-                // Pixel data from LIBRAw is in C++ memory, need to pin it
+                // Pixel data from LIB-Raw is in C++ memory, need to pin it
                 fixed (byte* pixelData = &pixelDataSpan[0])
                 {
-                    if (rawImage.Bits == 8 && rawImage.Channels == 3)
+                    if (thumbnail.Bits == 8 && thumbnail.Channels == 3)
                     {
                         var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        image48 = image24.CloneAs<Rgb48>();
-                        if (image48 is null)
-                        {
-                            // errorMessage = "Failed to load the source image with ImageSharp.";
-                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert24to48");
-                        }
-
+                        jpgEncoded = GenerateJpgThumbnail(image24);
                         Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
                     }
-                    else if (rawImage.Bits == 16 && rawImage.Channels == 3)
+                    else if (thumbnail.Bits == 16 && thumbnail.Channels == 3)
                     {
-                        image48 = Image.LoadPixelData<Rgb48>(pixelDataSpan, width, height);
-                        if (image48 is null)
-                        {
-                            // errorMessage = "Failed to load the source image with ImageSharp.";
-                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert48to48");
-                        }
-
-                        Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
+                        // WTF ? 48 bits for thumbs? 
+                        return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
                     }
                     else
                     {
@@ -563,9 +545,12 @@ public static class ImageLoader
                 }
             }
 
-            var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            var metadata = new Metadata(imagePath, width, height, directories);
-            return LoadedImage.FullyLoaded(image48, metadata);
+            if (jpgEncoded is not null)
+            {
+                return LoadedImage.PreLoaded(metadata, jpgEncoded);
+            }
+
+            return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
         }
         catch (Exception ex)
         {
@@ -576,6 +561,23 @@ public static class ImageLoader
     }
 
     #endregion Pre Loading 
+
+    private static byte[] GenerateJpgThumbnail (Image<Rgb24> image24)
+    {
+        // Create thumbnail 
+        image24.Mutate(x => x.Resize(
+            new ResizeOptions
+            {
+                Size = ThumbnailSize(image24.Width, image24.Height),
+                Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+            }));
+
+        var saveMemoryStream = new MemoryStream();
+        image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
+        byte[] jpgEncoded = saveMemoryStream.ToArray();
+        return jpgEncoded;
+    }
 
     public static Size ThumbnailSize(int width, int height)
     {
@@ -595,5 +597,35 @@ public static class ImageLoader
         }
 
         return new Size(newWidth, newHeight);
+    }
+
+    /// <summary> Returns null if OK ! </summary>
+    private static LoadedImage? Guard (string imagePath)
+    {
+        if (string.IsNullOrWhiteSpace(imagePath))
+        {
+            return LoadedImage.Fail("Model.Loader.InvalidPath");
+        }
+
+        if (!File.Exists(imagePath))
+        {
+            // "Source file does not exist."
+            return LoadedImage.Fail("Model.Loader.NotExisting");
+        }
+
+        if (HasExcludedExtension(imagePath))
+        {
+            // "Source file has a know extension for something that is def' not an image.";
+            // Play safe with user documents 
+            return LoadedImage.Fail("Model.Loader.ExcludedNotImage");
+        }
+
+        if (HasMovieExtension(imagePath))
+        {
+            // "Source file is likely a movie.";
+            return LoadedImage.Fail("Model.Loader.MaybeMovie");
+        }
+
+        return null; 
     }
 }
