@@ -68,6 +68,7 @@ public sealed partial class CameraViewModel :
         this.NullifyDevice();
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
+        this.ThumbnailsPanelViewModel.Thumbnails.Clear();
         this.cameraMgr.EndMonitoringCameraConnexion();
         this.cameraMgr.EndDownloadingFiles();
     }

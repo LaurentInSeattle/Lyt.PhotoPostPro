@@ -7,7 +7,8 @@ using System.IO;
 
 public class CameraManager
 {
-    public const int UiResponseDelayTime_ms = 180;
+    public const int UiResponseDelayTime_ms = 66;
+    public const int ReQueryDelayTime_ms = 1_000;
     public const int FastCameraMonitoringTime_ms = 2_500;
     public const int SlowCameraMonitoringTime_ms = 5_000;
 
@@ -311,7 +312,7 @@ public class CameraManager
             }
 
             -- retries;
-            Task.Delay(UiResponseDelayTime_ms).Wait();
+            Task.Delay(ReQueryDelayTime_ms).Wait();
         }
 
         return allFiles.ToList();
