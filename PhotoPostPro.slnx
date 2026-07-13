@@ -26,5 +26,4 @@
   <Project Path="Lyt.PhotoPostPro.Desktop/Lyt.PhotoPostPro.Desktop.csproj" />
   <Project Path="Lyt.PhotoPostPro.Model/Lyt.PhotoPostPro.Model.csproj" />
   <Project Path="Lyt.PhotoPostPro/Lyt.PhotoPostPro.csproj" />
-  <Project Path="Lyt.TestCamera/Lyt.TestCamera.csproj" Id="72b7d67c-1738-45ed-84c5-ac7fe7401216" />
 </Solution>
