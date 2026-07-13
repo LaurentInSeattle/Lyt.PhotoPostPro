@@ -188,6 +188,9 @@ public class CameraManager
 
     private async void DownloadFiles(FoundDevice foundDevice, List<string> selectedFiles, CancellationToken token)
     {
+        bool completed = false;
+        int errors = 0;
+        int downloads = 0;
         try
         {
             var devices = MediaDevice.GetDevices().ToList();
@@ -222,11 +225,18 @@ public class CameraManager
 
                 if (!this.DownloadFile(foundDevice, device, file))
                 {
+                    ++ errors;
                     Debug.WriteLine("Download error");
+                }
+                else
+                {
+                    ++downloads; 
                 }
 
                 await Task.Delay(UiResponseDelayTime_ms, token);
             }
+
+            completed = true;
         }
         catch (TaskCanceledException tce)
         {
@@ -236,6 +246,10 @@ public class CameraManager
         {
             Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
             new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+        }
+        finally
+        {
+            new DeviceDownloadCompleteMessage(foundDevice, completed, selectedFiles.Count, downloads, errors).Publish();
         }
     }
 

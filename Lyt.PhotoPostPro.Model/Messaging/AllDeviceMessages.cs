@@ -14,3 +14,17 @@ public sealed record class DeviceFileDownloadedMessage(
     Metadata? Metadata = null,
     byte[]? ThumbnailBytes = null, 
     string ThumbnailPath = "");
+
+public sealed record class DeviceDownloadCompleteMessage(
+    FoundDevice Device,
+    bool Completed,
+    int FileCount,
+    int DownloadedCount,
+    int ErrorCount);
+
+public sealed record class DeviceDeleteCompleteMessage(
+    FoundDevice Device,
+    bool Completed,
+    int FileCount,
+    int DeletedCount,
+    int ErrorCount);

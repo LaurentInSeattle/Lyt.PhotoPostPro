@@ -6,7 +6,8 @@ public sealed partial class CameraViewModel :
     IRecipient<DevicesFoundMessage>,
     IRecipient<DeviceStatusMessage>,
     IRecipient<DeviceFileListMessage>,
-    IRecipient<DeviceFileDownloadedMessage>
+    IRecipient<DeviceFileDownloadedMessage>, 
+    IRecipient<DeviceDownloadCompleteMessage>
 {
     private readonly PhotoPostProModel model;
     private readonly CameraManager cameraMgr;
@@ -27,6 +28,7 @@ public sealed partial class CameraViewModel :
         this.Subscribe<DeviceStatusMessage>();
         this.Subscribe<DeviceFileListMessage>();
         this.Subscribe<DeviceFileDownloadedMessage>();
+        this.Subscribe<DeviceDownloadCompleteMessage>();
     }
 
     [ObservableProperty]
@@ -91,6 +93,9 @@ public sealed partial class CameraViewModel :
 
     public void Receive(DeviceFileDownloadedMessage message)
         => Dispatch.OnUiThread(() => { this.OnDeviceFileDownloaded(message); }, DispatcherPriority.Background);
+
+    public void Receive(DeviceDownloadCompleteMessage message)
+        => Dispatch.OnUiThread(() => { this.OnDeviceDownloadComplete(message); }, DispatcherPriority.Background);
 
     private void NullifyDevice()
     {
@@ -204,6 +209,18 @@ public sealed partial class CameraViewModel :
         }
     }
 
+    private void OnDeviceDownloadComplete(DeviceDownloadCompleteMessage message)
+    {
+        if (!this.IsActivated)
+        {
+            // ignore messages if we just moved away 
+            return;
+        }
+
+        // Update UI 
+        // Sort thumbnails by date ascending 
+    }
+    
     [RelayCommand]
     public void OnDownload()
     {
