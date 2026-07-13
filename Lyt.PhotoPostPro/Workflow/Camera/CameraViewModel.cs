@@ -15,6 +15,7 @@ public sealed partial class CameraViewModel :
     private readonly List<string> downloadedFiles;
 
     private FoundDevice? foundDevice;
+    private bool isDownloading ;
 
     public CameraViewModel(PhotoPostProModel photoPostProModel)
     {
@@ -47,13 +48,13 @@ public sealed partial class CameraViewModel :
     public partial string DeviceStatus { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string FileCount { get; set; } = string.Empty;
+    public partial string DownloadButtonText { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool DownloadButtonIsDisabled { get; set; } = true;
 
     [ObservableProperty]
     public partial string FileDownloaded { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial string FileError { get; set; } = string.Empty;
 
     public override void Activate(object? activationParameters)
     {
@@ -63,10 +64,13 @@ public sealed partial class CameraViewModel :
         this.downloadedFiles.Clear();
 
         this.DeviceStatus = string.Empty;
-        this.FileCount = string.Empty;
         this.FileDownloaded = string.Empty;
-        this.FileError = string.Empty;
 
+        // Enforce property changed 
+        this.DownloadButtonIsDisabled = false;
+        this.DownloadButtonIsDisabled = true;
+        this.DownloadButtonText = "Begin Transfer";
+        this.isDownloading = false;
         this.cameraMgr.BeginMonitoringCameraConnexion();
     }
 
@@ -152,7 +156,6 @@ public sealed partial class CameraViewModel :
         this.DeviceStatus =
             message.Device.Description + ": " +
             (message.IsConnected ? "Connected" : "Not responding.");
-        this.FileCount = string.Empty;
         this.FileDownloaded = string.Empty;
     }
 
@@ -165,18 +168,20 @@ public sealed partial class CameraViewModel :
         }
 
         // TODO: localize
+        this.FileDownloaded = string.Empty;
+        this.DeviceStatus = message.Device.Description + ": " + "Connected" ;
+
         if (message.Files.Count == 0)
         {
-            this.FileCount = message.Device.Description + ": No files on device.";
-            this.FileDownloaded = string.Empty;
+            this.DeviceStatus = message.Device.Description + ": No files on device.";
             this.selectedFiles.Clear();
             this.NullifyDevice();
         }
         else
         {
             this.foundDevice = message.Device;
-            this.FileCount =
-                message.Device.Description + ": " + message.Files.Count + " files ready to download.";
+            this.DeviceStatus = message.Files.Count + " files ready to transfer.";
+            this.DownloadButtonIsDisabled = false; 
             this.selectedFiles.Clear();
             this.selectedFiles.AddRange(message.Files);
             this.downloadedFiles.Clear();
@@ -195,7 +200,7 @@ public sealed partial class CameraViewModel :
         {
             this.downloadedFiles.Add(message.File);
             this.FileDownloaded =
-                message.Device.FriendlyName + ":  " + message.File + "  downloaded to: " + message.Path;
+                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
             if (message.ThumbnailBytes is not null && message.Metadata is not null)
             {
                 var thumbnail = new CameraThumbnailViewModel(this, message.Metadata, message.ThumbnailBytes);
@@ -204,8 +209,7 @@ public sealed partial class CameraViewModel :
         }
         else
         {
-            this.FileError =
-                message.Device.FriendlyName + ":  " + message.File + "  download error.";
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
         }
     }
 
@@ -218,9 +222,23 @@ public sealed partial class CameraViewModel :
         }
 
         // Update UI 
+        this.DownloadButtonText = "Begin Transfer";
+        if ( message.Completed )
+        {
+            this.FileDownloaded =
+                string.Format(
+                    "Transfer complete: {0} images transfered, other files or errors: {1} ", 
+                    message.DownloadedCount, message.ErrorCount); 
+        }
+        else
+        {
+            this.FileDownloaded = "Transfer Aborted."; 
+        }
+
         // Sort thumbnails by date ascending 
+        this.ThumbnailsPanelViewModel.Sort(); 
     }
-    
+
     [RelayCommand]
     public void OnDownload()
     {
@@ -229,7 +247,21 @@ public sealed partial class CameraViewModel :
             return;
         }
 
-        this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
+        if (this.isDownloading)
+        {
+            this.cameraMgr.EndDownloadingFiles();
+            this.DownloadButtonText = "Begin Transfer";
+        }
+        else
+        {
+            this.FileDownloaded = string.Empty;
+            this.downloadedFiles.Clear();
+            this.ThumbnailsPanelViewModel.Thumbnails.Clear();
+            this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
+            this.DownloadButtonText = "Cancel Transfer"; 
+        }
+
+        this.isDownloading = !this.isDownloading;
     }
 
     public void OnSelect(object selectedObject)

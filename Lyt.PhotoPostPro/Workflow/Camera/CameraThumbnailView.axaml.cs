@@ -16,7 +16,10 @@ public partial class CameraThumbnailView : View
     {
         insideBrush = FindResource<SolidColorBrush>("OrangePeel_0_100");
         pressedBrush = FindResource<SolidColorBrush>("OrangePeel_1_100");
-        selectedBrush = FindResource<SolidColorBrush>("FreshGreen_0_080");
+
+        // FOR NOW 
+        selectedBrush = new SolidColorBrush(Colors.Transparent);
+            // FindResource<SolidColorBrush>("FreshGreen_0_080");
     }
 
     public CameraThumbnailView() : base () 

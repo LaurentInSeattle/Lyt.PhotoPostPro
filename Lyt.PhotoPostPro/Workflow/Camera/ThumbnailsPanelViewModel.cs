@@ -11,7 +11,7 @@ public sealed partial class ThumbnailsPanelViewModel :
     private readonly CameraViewModel cameraViewModel;
 
     [ObservableProperty]
-    public partial bool ShowInProgress { get; set; }
+    public partial bool SortOrder { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<CameraThumbnailViewModel> Thumbnails { get; set; }
@@ -22,14 +22,9 @@ public sealed partial class ThumbnailsPanelViewModel :
     [ObservableProperty]
     public partial string EmptyMessage { get; set; }
 
-    private CameraThumbnailViewModel? selectedThumbnail;
-    //private Model.GameObjects.Game? selectedGame;
-    private List<CameraThumbnailViewModel>? allThumbnails;
-    private List<CameraThumbnailViewModel>? filteredThumbnails;
-
     public ThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, CameraViewModel collectionViewModel)
     {
-        this.photoPostProModel = photoPostProModel; 
+        this.photoPostProModel = photoPostProModel;
         this.cameraViewModel = collectionViewModel;
         this.Thumbnails = [];
         // this.ShowInProgress = this.jigsawModel.ShowInProgress;
@@ -39,36 +34,30 @@ public sealed partial class ThumbnailsPanelViewModel :
 
     public void Receive(LanguageChangedMessage _) { } //  => this.PopulateComboBox();
 
-    internal void LoadThumnails()
+    public void Sort(bool ascending = true)
     {
-        var fileManagerModel = App.GetRequiredService<FileManagerModel>();
+        if (this.Thumbnails.Count == 0)
+        {
+            return;
+        }
 
-        // var games = this.jigsawModel.SavedGames.Values;
-        //var sortedGames = (from game in games orderby game.Started descending select game).ToList();
-        //this.allThumbnails = new(sortedGames.Count);
-        //foreach (var game in sortedGames)
-        //{
-        //    byte[] ? thumbnailBytes = this.jigsawModel.GetThumbnail(game.Name);
-        //    if (thumbnailBytes is null || thumbnailBytes.Length == 0)
-        //    {
-        //        continue;
-        //    }
-
-        //    // Make sure the game image is still present on disk, if not skip
-        //    var fileIdImage = new FileId(Area.User, Kind.Binary, game.ImageName);
-        //    if (!fileManagerModel.Exists(fileIdImage))
-        //    {
-        //        continue;
-        //    }
-
-        //    this.allThumbnails.Add(new ThumbnailViewModel(this, game, thumbnailBytes));
-        //}
-
-        this.Filter();
-        Schedule.OnUiThread(66, () => { this.UpdateVisualSelection(); }, DispatcherPriority.Background);
+        if (ascending)
+        {
+            var sorted =
+                (from thumb in this.Thumbnails
+                 orderby thumb.Metadata.Captured ascending
+                 select thumb).ToList();
+            this.Thumbnails = new(sorted);
+        }
+        else
+        {
+            var sorted =
+                (from thumb in this.Thumbnails
+                 orderby thumb.Metadata.Captured descending
+                 select thumb).ToList();
+            this.Thumbnails = new(sorted);
+        }
     }
-
-    public CameraThumbnailViewModel? SelectedThumbnail => this.selectedThumbnail;
 
     public void OnSelect(object selectedObject)
     {
@@ -104,49 +93,24 @@ public sealed partial class ThumbnailsPanelViewModel :
         //}
     }
 
-    private void Filter()
+    partial void OnSortOrderChanged(bool value) => this.Sort(ascending: value); 
+
+    [RelayCommand]
+    public void OnMarkAllToAddToLibrary()
     {
-        //if ((this.allThumbnails is not null) && (this.allThumbnails.Count > 0))
-        //{
-        //    this.filteredThumbnails =
-        //        [.. (from thumbnail in this.allThumbnails
-        //             where thumbnail.Game.IsCompleted == !this.ShowInProgress
-        //             select thumbnail)];
-        //}
-        //else
-        //{
-        //    this.filteredThumbnails = null;
-        //}
-
-        //if (this.filteredThumbnails is not null && this.filteredThumbnails.Count > 0)
-        //{
-        //    this.EmptyMessage = string.Empty;
-        //    this.Thumbnails = [.. this.filteredThumbnails];
-
-        //    // Clear selection: the selected game is not in the filtered list
-        //    // Force select on the first one so that it will show up in the main area
-        //    this.selectedGame = null;
-        //    this.OnSelect(this.Thumbnails[0]);
-        //}
-        //else
-        //{
-        //    // Null or empty list, Clear selection in main area too
-        //    this.Thumbnails = [];
-        //    this.selectedGame = null;
-        //    this.collectionViewModel.ClearSelection();
-
-        //    // TODO : Localize this message
-        //    this.EmptyMessage =
-        //        this.ShowInProgress ?
-        //            "There are no games in progress." :
-        //            "There are no completed games yet.";
-        //}
+        foreach (var thumbnailViewModel in this.Thumbnails)
+        {
+            thumbnailViewModel.IsToAddToLibrary = true;
+        }
     }
 
-    partial void OnShowInProgressChanged(bool value)
+    [RelayCommand]
+    public void OnMarkAllToRemoveFromCamera()
     {
-        // this.jigsawModel.ShowInProgress = value;
-        this.Filter();
-        Schedule.OnUiThread(66, () => { this.UpdateVisualSelection(); }, DispatcherPriority.Background);
+        foreach (var thumbnailViewModel in this.Thumbnails)
+        {
+            thumbnailViewModel.IsToRemoveFromCamera = true;
+        }
     }
+
 }

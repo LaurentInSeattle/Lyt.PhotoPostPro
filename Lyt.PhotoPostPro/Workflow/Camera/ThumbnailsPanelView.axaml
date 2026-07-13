@@ -41,11 +41,25 @@
 				x:Name="ShowInProgressSwitch"
 				Margin="4 0 8 0"
 				Style="{StaticResource StandardToggleSwitch}"
-				TrueText="{DynamicResource Collection.Thumbs.InProgress}"
-				FalseText="{DynamicResource Collection.Thumbs.Completed}"
+				TrueText="Oldest First"
+				FalseText="Recent on Top"
 				Height="30" Width="340"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Value="{Binding ShowInProgress}"
+				Value="{Binding SortOrder}"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource ControlIconButton}"
+				Layout="TextOnly"
+				Text="Mark All: Add to Library"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				Margin="40 0 0 0" Width="260" 
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource ControlIconButton}"
+				Layout="TextOnly"
+				Text="Mark All: Remove from Camera"
+				Command="{Binding OnMarkAllToRemoveFromCamera}"
+				Margin="40 0 0 0" Width="260" 
 				/>
 		</StackPanel>
 		<TextBlock

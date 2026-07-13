@@ -18,8 +18,8 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="8" />
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Button --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Button --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Download Button --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Messages --> 
 			<RowDefinition Height="*" />
 			<RowDefinition Height="8" />
 		</Grid.RowDefinitions>
@@ -42,20 +42,15 @@
 			Theme="{StaticResource H3}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
-		<TextBlock
-			Grid.Row="1" Grid.Column="1" Margin="500 0 0 0"
-			Text="{Binding FileCount}"
-			Theme="{StaticResource H3}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
 		<glyphs:GlyphButton
 			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export"
-			Text="{DynamicResource Workflow.Export.Export}"
+			Text="{Binding DownloadButtonText}"
 			Command="{Binding OnDownload}"
-			HorizontalAlignment="Right" Width="300"
+			IsDisabled="{Binding DownloadButtonIsDisabled}"
+			HorizontalAlignment="Right" Width="240" Margin="0 0 12 0"
 			/>
 		<TextBlock
 			Grid.Row="2" Grid.Column="1"
