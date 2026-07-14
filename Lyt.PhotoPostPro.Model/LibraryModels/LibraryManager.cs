@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
 
-using System.Diagnostics.Eventing.Reader;
-
 // To avoid namespace conflicts for 'Path' 
 using System.IO;
 
@@ -20,7 +18,13 @@ public sealed class LibraryManager
         }
     }
 
-    public void Initialize(FileManagerModel fileManagerModel) => this.fileManager = fileManagerModel;
+    public FolderTree? FolderTree { get; private set; }
+
+    public void Initialize(FileManagerModel fileManagerModel)
+    {
+        this.fileManager = fileManagerModel;
+        this.GenerateFolderTree();
+    } 
 
     public bool AddDownloadedFiles(List<Metadata> files)
     {
@@ -172,5 +176,24 @@ public sealed class LibraryManager
             Debug.WriteLine(ex);
             return false;
         }
+    }
+
+    public void GenerateFolderTree()
+    {
+        Task.Run(() =>
+        {
+            try
+            {
+                // wait a bit so that we dont delay app starting up 
+                Task.Delay(2_000).Wait();
+                var folderTree = FolderTree.Generate(this.libraryFolderPath);
+                this.FolderTree = folderTree;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                if (Debugger.IsAttached) { Debugger.Break(); }
+            }
+        });
     }
 }
