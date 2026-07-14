@@ -40,7 +40,7 @@
 			GlyphStrokeThickness="0"
 			Text="{DynamicResource Single.ProcessImage}"
 			IsDisabled="{Binding ProcessIsDisabled}"
-			Command="{Binding OnNext}"
+			Command="{Binding OnProcess}"
 	    	/>
 		<meta:MetadataView
 			DataContext="{Binding MetadataViewModel}"

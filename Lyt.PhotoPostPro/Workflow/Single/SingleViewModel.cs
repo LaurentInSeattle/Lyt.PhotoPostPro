@@ -14,7 +14,8 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
 
     private string imagePath;
     private Image<Rgb48>? image;
-    private Metadata? metadata; 
+    private Metadata? metadata;
+    private byte[]? thumbnail;
 
     [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
@@ -24,6 +25,8 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         this.model = model;
         this.toaster = toaster;
         this.imagePath = string.Empty;
+        this.metadata = null; 
+        this.thumbnail = null;
     }
 
     public void OnDropPath(string path, bool isDirectory)
@@ -47,10 +50,12 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         try
         {
             LoadedImage loadedImage = ImageLoader.LoadImage(path);
-            if (loadedImage.IsSuccess && loadedImage.IsFullyLoaded)
+            loadedImage.CreateThumbnail(); 
+            if (loadedImage.IsSuccess && loadedImage.IsFullyLoadedWithThumbnail)
             {
                 this.image = loadedImage.Image;
                 this.metadata = loadedImage.Metadata;
+                this.thumbnail = loadedImage.JpgThumbnail; 
                 // ! Verified by loadedImage.IsFullyLoaded
                 var imageFrame = ImagingUtilities.ToFrame(this.image!);
                 if (imageFrame is not null)
@@ -96,6 +101,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         this.imagePath = string.Empty;
         this.image = null; 
         this.metadata = null;
+        this.thumbnail = null; 
         
         // Show error message to user
         this.toaster.Host = this.View.ToasterHost;
@@ -123,11 +129,16 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
 
     internal void ProcessCurrentImage()
     {
-        if (string.IsNullOrWhiteSpace(this.imagePath) || this.image is null || this.metadata is null)
+        if (string.IsNullOrWhiteSpace(this.imagePath) || 
+            this.image is null || 
+            this.metadata is null || 
+            this.thumbnail is null)
         {
             this.Logger.Warning("No image to process.");
             return;
         }
+
+        this.model.LibraryManager.AddDroppedFile(this.metadata, this.thumbnail); 
 
         var project = this.model.CurrentProject; 
         if (project is not null)

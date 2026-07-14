@@ -32,7 +32,7 @@ public sealed partial class SingleToolboxViewModel : ViewModel<SingleToolboxView
     // RelayCommand's cannot be static 
 
     [RelayCommand]
-    public void OnNext()
+    public void OnProcess()
     {
         var mainWindow = App.MainWindow;
         if (mainWindow.CanMaximize)

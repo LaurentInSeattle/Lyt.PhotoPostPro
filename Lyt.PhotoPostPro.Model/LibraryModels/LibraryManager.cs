@@ -115,8 +115,13 @@ public sealed class LibraryManager
         return errors == 0;
     }
 
-    public bool AddDroppedFile(Metadata file)
+    public bool AddDroppedFile(Metadata file, byte[] thumbnail)
     {
+        if (this.fileManager is null)
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
         try
         {
             if (!File.Exists(file.FullPath))
@@ -128,17 +133,43 @@ public sealed class LibraryManager
             MetadataFolders metadataFolders = new(file);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
+            // Copy main file - NOT Move 
+            string targetFilename = Path.GetFileName(file.FullPath);
+            string targetPath = Path.Combine(targetFolder, targetFilename);
+            File.Copy(file.FullPath, targetPath, overwrite: true);
+
+            // Create thumbnail file 
+            string filenameThumbnail = file.Filename + "_THUMB.jpg";
+            string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
+            File.WriteAllBytes(targetPathThumbnail, thumbnail);
+
+            // Verify main file 
+            FileInfo fileInfo = new(targetPath);
+            if (!fileInfo.Exists)
+            {
+                throw new Exception("Failed to copy file" + file.FullPath);
+            }
+
+            if (fileInfo.Length != file.Length)
+            {
+                throw new Exception("Failed to verify file copy" + file.FullPath);
+            }
+
+            // update metadata 
+            file.HasMovedTo(targetPath);
+
+            // Finally serialize and save metadata 
+            string filenameMetadata = file.Filename + "_META.json";
+            string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
+            string serialized = this.fileManager.Serialize<Metadata>(file);
+            File.WriteAllText(targetPathMetadata, serialized);
+
+            // All good 
             return true;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
-            //lock (exceptions)
-            //{
-            //    ++errors;
-            //    exceptions.Add(ex);
-            //}
-
             return false;
         }
     }

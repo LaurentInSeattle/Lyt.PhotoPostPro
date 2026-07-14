@@ -14,9 +14,14 @@ public sealed class LoadedImage
 
     public byte[]? JpgThumbnail { get; set; }
 
-    public bool IsFullyLoaded => this.IsSuccess && this.Image is not null && this.Metadata is not null ;
+    public bool IsFullyLoaded 
+        => this.IsSuccess && this.Image is not null && this.Metadata is not null;
 
-    public bool IsPreLoaded => this.IsSuccess && this.JpgThumbnail is not null && this.Metadata is not null;
+    public bool IsFullyLoadedWithThumbnail 
+        => this.IsSuccess && this.Image is not null && this.JpgThumbnail is not null && this.Metadata is not null;
+
+    public bool IsPreLoaded 
+        => this.IsSuccess && this.JpgThumbnail is not null && this.Metadata is not null;
 
     public static LoadedImage Fail(string message, string exception = "" ) 
         => new() { ErrorMessage = message, Exception = exception };
@@ -26,4 +31,12 @@ public sealed class LoadedImage
 
     public static LoadedImage PreLoaded(Metadata? metadata, byte[] jpgThumbnail)
         => new() { IsSuccess = true, Metadata = metadata, JpgThumbnail = jpgThumbnail };
+
+    public void CreateThumbnail ()
+    {
+        if (this.Image != null)
+        {
+            this.JpgThumbnail = ImageLoader.GenerateJpgThumbnailWithClone(this.Image);
+        } 
+    }
 }

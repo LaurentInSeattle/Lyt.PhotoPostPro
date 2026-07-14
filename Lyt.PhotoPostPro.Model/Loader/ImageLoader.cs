@@ -5,7 +5,7 @@ using Openize.Heic.Decoder;
 
 public static class ImageLoader
 {
-    public const int ThumbnailLargestDimension = 480;
+    public const int ThumbnailLargestDimension = 420;
 
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
@@ -491,7 +491,7 @@ public static class ImageLoader
             }
 
             // Create thumbnail and metadata, image24 mutates! 
-            byte[] jpgEncoded = GenerateJpgThumbnail(image24);
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24);
             var metadata = new Metadata(imagePath, width, height, directories);
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
@@ -533,7 +533,7 @@ public static class ImageLoader
                     if (thumbnail.Bits == 8 && thumbnail.Channels == 3)
                     {
                         var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        jpgEncoded = GenerateJpgThumbnail(image24);
+                        jpgEncoded = GenerateJpgThumbnailWithMutate(image24);
                         Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
                     }
                     else if (thumbnail.Bits == 16 && thumbnail.Channels == 3)
@@ -566,7 +566,7 @@ public static class ImageLoader
 
     #endregion Pre Loading 
 
-    private static byte[] GenerateJpgThumbnail (Image<Rgb24> image24)
+    public static byte[] GenerateJpgThumbnailWithMutate(Image<Rgb24> image24)
     {
         // Create thumbnail 
         image24.Mutate(x => x.Resize(
@@ -579,6 +579,24 @@ public static class ImageLoader
 
         var saveMemoryStream = new MemoryStream();
         image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
+        byte[] jpgEncoded = saveMemoryStream.ToArray();
+        return jpgEncoded;
+    }
+
+    public static byte[] GenerateJpgThumbnailWithClone(Image<Rgb48> image48)
+    {
+        // Create thumbnail with cloning 
+        var clone = image48.Clone();
+        clone.Mutate(x => x.Resize(
+            new ResizeOptions
+            {
+                Size = ThumbnailSize(image48.Width, image48.Height),
+                Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+            }));
+
+        var saveMemoryStream = new MemoryStream();
+        clone.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
         byte[] jpgEncoded = saveMemoryStream.ToArray();
         return jpgEncoded;
     }
