@@ -57,12 +57,44 @@ public sealed class FolderTree
             }
         }
 
+        tree.Sort(); 
         return tree;
+    }
+
+    public int FileCount()
+    {
+        int fileCount = 0;
+        foreach(YearFolder year in this.YearFolders)
+        {
+            foreach (MonthFolder month in year.MonthFolders)
+            {
+                foreach(DayFolder day in month.DayFolders)
+                {
+                    fileCount += day.MetadataFiles.Count;  
+                }
+            }
+        }
+
+        return fileCount;
     }
 
     public void Sort()
     {
-        // TODO
+        var sortedYears = 
+            (from  year in this.YearFolders orderby year.Year ascending select year).ToList();
+        this.YearFolders = sortedYears;
+        foreach (YearFolder year in this.YearFolders)
+        {
+            var sortedMonths = 
+                (from month in year.MonthFolders orderby month.Month select month ).ToList();
+            year.MonthFolders = sortedMonths;
+            foreach (MonthFolder month in year.MonthFolders)
+            {
+                var sortedDays = 
+                    ( from day in month.DayFolders orderby day.Day  select day ).ToList();
+                month.DayFolders = sortedDays;
+            }
+        } 
     }
 
     public void UpdateOnFileAdded() 
@@ -74,41 +106,4 @@ public sealed class FolderTree
     public void UpdateOnFileRemoved()
     {
     }
-}
-
-public sealed class YearFolder
-{
-    public int Year { get; set; }
-
-    public string Path { get; set; } = string.Empty;
-
-    public List<MonthFolder> MonthFolders { get; set; } = [];
-
-}
-
-public sealed class MonthFolder
-{
-    public int Year { get; set; }
-
-    public int Month { get; set; }
-
-    public string Path { get; set; } = string.Empty;
-
-    public List<DayFolder> DayFolders { get; set; } = [];
-
-}
-
-public sealed class DayFolder
-{
-    public int Year { get; set; }
-
-    public int Month { get; set; }
-
-    public int Day { get; set; }
-
-    public int DayOfWeek { get; set; }
-
-    public string Path { get; set; } = string.Empty;
-
-    public List<string> MetadataFiles { get; set; } = [];
 }

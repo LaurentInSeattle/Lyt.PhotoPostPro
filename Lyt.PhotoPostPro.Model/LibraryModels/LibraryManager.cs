@@ -5,25 +5,40 @@ using System.IO;
 
 public sealed class LibraryManager
 {
+    public const string LibraryFolderName = "Library";
+    public const string ExportsFolderName = "Exports";
+
     private readonly string libraryFolderPath;
+    private readonly string exportsFolderPath;
+
     private FileManagerModel? fileManager;
 
     public LibraryManager()
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "Library");
+        this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LibraryFolderName);
         if (!Directory.Exists(this.libraryFolderPath))
         {
             Directory.CreateDirectory(this.libraryFolderPath);
+        }
+
+        this.exportsFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, ExportsFolderName);
+        if (!Directory.Exists(this.exportsFolderPath))
+        {
+            Directory.CreateDirectory(this.exportsFolderPath);
         }
     }
 
     public FolderTree? FolderTree { get; private set; }
 
+    public string LibraryFolderPath => this.libraryFolderPath ;
+
+    public string ExportsFolderPath => this.exportsFolderPath;
+
     public void Initialize(FileManagerModel fileManagerModel)
     {
         this.fileManager = fileManagerModel;
-        this.GenerateFolderTree();
+        this.GenerateInitialFolderTree();
     } 
 
     public bool AddDownloadedFiles(List<Metadata> files)
@@ -180,20 +195,25 @@ public sealed class LibraryManager
 
     public void GenerateFolderTree()
     {
+        try
+        {
+            var folderTree = FolderTree.Generate(this.libraryFolderPath);
+            this.FolderTree = folderTree;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (Debugger.IsAttached) { Debugger.Break(); }
+        }
+    }
+
+    public void GenerateInitialFolderTree()
+    {
         Task.Run(() =>
         {
-            try
-            {
-                // wait a bit so that we dont delay app starting up 
-                Task.Delay(2_000).Wait();
-                var folderTree = FolderTree.Generate(this.libraryFolderPath);
-                this.FolderTree = folderTree;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                if (Debugger.IsAttached) { Debugger.Break(); }
-            }
+            // wait a bit so that we dont delay app starting up 
+            Task.Delay(2_000).Wait();
+            this.GenerateFolderTree(); 
         });
     }
 }

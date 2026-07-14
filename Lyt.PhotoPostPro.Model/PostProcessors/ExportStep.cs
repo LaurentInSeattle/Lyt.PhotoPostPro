@@ -3,6 +3,8 @@
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
+    public const string ExportTag = "EXP_"; 
+
     public override void Initialize(Image<Rgb48> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 
@@ -47,13 +49,14 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         // Create subdirectory for exported images
-        string sourcePath;
+        string sourceImagePath;
         string fileName;
         string subDirectory;
         try
         {
-            sourcePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
-            FileInfo fi = new(sourcePath);
+            string exportFolderPath = this.PostProcessWorkflow.PostProcess.Model.LibraryManager.ExportsFolderPath;
+            sourceImagePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
+            FileInfo fi = new(sourceImagePath);
             string? sourceDirectory = fi.DirectoryName;
             if (string.IsNullOrWhiteSpace(sourceDirectory))
             {
@@ -61,9 +64,9 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             } 
 
             fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
-            string ts = FileManagerModel.BriefTimestampString();
-            string subDirName = fileName + "_EXP_" + ts;
-            subDirectory = System.IO.Path.Combine(sourceDirectory, subDirName);
+            string timestamp = FileManagerModel.BriefTimestampString();
+            string subDirName = ExportTag + fileName + "_" + timestamp;
+            subDirectory = System.IO.Path.Combine(exportFolderPath, subDirName);
             if (!Directory.Exists(subDirectory))
             {
                 Directory.CreateDirectory(subDirectory);
@@ -72,7 +75,11 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         catch (Exception e)
         {
             Debug.WriteLine(e);
-            if (Debugger.IsAttached) Debugger.Break();
+            if (Debugger.IsAttached)
+            {
+                Debugger.Break();
+            }
+
             return null;
         }
 
