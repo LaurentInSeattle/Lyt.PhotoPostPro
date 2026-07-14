@@ -4,6 +4,9 @@ public sealed class Metadata
 {
     private const float Megabytes = 1024.0f * 1024.0f;
 
+    // Property setters are made public for JSON serialization 
+    public Metadata() {  /* Default CTOR required for deserialization */ }
+
     public Metadata(
         string fullPath,
         int width,
@@ -62,59 +65,59 @@ public sealed class Metadata
 
     // Basic properties that should always be present 
 
-    public string FullPath { get; private set; }
+    public string FullPath { get; set; } = string.Empty;
 
     /// <summary> File name WITHOUT extension  </summary>
-    public string Filename { get; private set; }
+    public string Filename { get; set; } = string.Empty;
 
     /// <summary> File name extension - no DOT </summary>
-    public string Extension { get; private set; }
+    public string Extension { get; set; } = string.Empty;
 
-    public string SizeMB { get; private set; }
+    public string SizeMB { get; set; } = string.Empty;
 
-    public long Length { get; private set; }
+    public long Length { get; set; }
 
-    public int Width { get; private set; }
+    public int Width { get; set; }
 
-    public int Height { get; private set; }
+    public int Height { get; set; }
 
     public string Dimensions => string.Format("{0:D} x {1:D}", this.Width, this.Height);
 
-    public DateTime FileDateUTC { get; private set; }
+    public DateTime FileDateUTC { get; set; }
 
     // Image properties that are possibly present when HasExifMetadata is true 
+    public bool HasExifMetadata { get; set; }
 
-    public bool HasExifMetadata { get; private set; }
+    [JsonIgnore]
+    public IReadOnlyList<MetadataExtractor.Directory>? ExifDrectories { get; set; }
 
-    public IReadOnlyList<MetadataExtractor.Directory>? ExifDrectories { get; private set; }
+    public string Make { get; set; } = string.Empty;
 
-    public string Make { get; private set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
 
-    public string Model { get; private set; } = string.Empty;
+    public DateTime Captured { get; set; }
 
-    public DateTime Captured { get; private set; }
+    public string Aperture { get; set; } = string.Empty;
 
-    public string Aperture { get; private set; } = string.Empty;
+    public string Exposure { get; set; } = string.Empty;
 
-    public string Exposure { get; private set; } = string.Empty;
+    public string ExposureBias { get; set; } = string.Empty;
 
-    public string ExposureBias { get; private set; } = string.Empty;
+    public string IsoSpeed { get; set; } = string.Empty;
 
-    public string IsoSpeed { get; private set; } = string.Empty;
+    public string FocalLength { get; set; } = string.Empty;
 
-    public string FocalLength { get; private set; } = string.Empty;
+    public bool WithFlash { get; set; }
 
-    public bool WithFlash { get; private set; }
+    public double Latitude { get; set; } = double.NaN;
+
+    public double Longitude { get; set; } = double.NaN;
+
+    public string LatitudeString { get; set; } = string.Empty;
+
+    public string LongitudeString { get; set; } = string.Empty;
 
     public bool HasLocationMetadata => double.IsNormal(this.Latitude) && double.IsNormal(this.Longitude);
-
-    public double Latitude { get; private set; } = double.NaN;
-
-    public double Longitude { get; private set; } = double.NaN;
-
-    public string LatitudeString { get; private set; } = string.Empty;
-
-    public string LongitudeString { get; private set; } = string.Empty;
 
     // Folder change ONLY, name and extension do stay the same
     public void HasMovedTo ( string fullPath ) => this.FullPath = fullPath;

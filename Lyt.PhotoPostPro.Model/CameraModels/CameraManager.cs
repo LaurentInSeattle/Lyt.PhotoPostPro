@@ -44,15 +44,63 @@ public class CameraManager
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.downloadFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
-        if (!Directory.Exists(this.downloadFolderPath))
-        {
-            Directory.CreateDirectory(this.downloadFolderPath);
-        }
+        this.ClearDownloadFolder(); 
     }
 
     public bool IsMonitoring { get; private set; }
 
     public bool IsDownloading { get; private set; }
+
+    public void ClearDownloadFolder()
+    {
+        try
+        {
+            // Dont care about permissions or any attributes such as creation date
+            // There should be no read-only or delete protected or system files in there 
+            // so we try to nuke everything 
+            if (Directory.Exists(this.downloadFolderPath))
+            {
+                Directory.Delete(this.downloadFolderPath, true); // Deletes directory and all contents
+                Directory.CreateDirectory(this.downloadFolderPath); // Recreates the empty root directory
+            }
+        }
+        catch (Exception ex)
+        {
+            // But... Shit 
+            // Most possible case is that user is editing / locking one downloaded file 
+            Debug.WriteLine(ex);
+
+            // Delete as much stuff as we can 
+            foreach (string filePath in Directory.GetFiles(this.downloadFolderPath))
+            {
+                // Reset attributes in case a file is marked as Read-Only
+                File.SetAttributes(filePath, FileAttributes.Normal);
+                File.Delete(filePath);
+            }
+
+            // Delete all subdirectories recursively
+            foreach (string subdirectory in Directory.GetDirectories(this.downloadFolderPath))
+            {
+                Directory.Delete(subdirectory, recursive: true); 
+            }
+        } 
+
+        try
+        {
+            if (!Directory.Exists(this.downloadFolderPath))
+            {
+                // Creates the empty root directory
+                Directory.CreateDirectory(this.downloadFolderPath); 
+            }
+        }
+        catch (Exception ex)
+        {
+            // But... Shit 
+            Debug.WriteLine(ex);
+
+            // We are in potential trouble now 
+        }
+    }
 
     public void BeginMonitoringCameraConnexion()
     {

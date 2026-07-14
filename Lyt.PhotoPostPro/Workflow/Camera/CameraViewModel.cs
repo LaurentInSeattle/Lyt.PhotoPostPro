@@ -69,6 +69,7 @@ public sealed partial class CameraViewModel :
         this.NullifyDevice();
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
+        this.model.CameraManager.ClearDownloadFolder();
 
         this.DeviceStatus = string.Empty;
         this.FileDownloaded = string.Empty;
@@ -95,6 +96,9 @@ public sealed partial class CameraViewModel :
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
         this.ThumbnailsPanelViewModel.Thumbnails.Clear();
+
+        // Do not clear the download folder in case we need or want to recover
+        // any file left in there
     }
 
     public void Receive(DevicesFoundMessage message)

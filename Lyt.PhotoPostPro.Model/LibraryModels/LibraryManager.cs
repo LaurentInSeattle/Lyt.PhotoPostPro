@@ -1,12 +1,14 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
 
+using System.Diagnostics.Eventing.Reader;
+
 // To avoid namespace conflicts for 'Path' 
 using System.IO;
 
 public sealed class LibraryManager
 {
     private readonly string libraryFolderPath;
-    private FileManagerModel? fileManager; 
+    private FileManagerModel? fileManager;
 
     public LibraryManager()
     {
@@ -18,7 +20,7 @@ public sealed class LibraryManager
         }
     }
 
-    public void Initialize(FileManagerModel fileManagerModel) => this.fileManager = fileManagerModel; 
+    public void Initialize(FileManagerModel fileManagerModel) => this.fileManager = fileManagerModel;
 
     public bool AddDownloadedFiles(List<Metadata> files)
     {
@@ -33,19 +35,19 @@ public sealed class LibraryManager
         {
             try
             {
-                // Create target folder if needed 
-                MetadataFolders metadataFolders = new(file);
-                string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
-
                 if (!File.Exists(file.FullPath))
                 {
                     throw new Exception("No such file: " + file.FullPath);
                 }
 
+                // Create target folder if needed 
+                MetadataFolders metadataFolders = new(file);
+                string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
+
                 // Move main file 
                 string targetFilename = Path.GetFileName(file.FullPath);
                 string targetPath = Path.Combine(targetFolder, targetFilename);
-                File.Move(file.FullPath, targetPath);
+                File.Move(file.FullPath, targetPath, overwrite: true);
 
                 // Move thumbnail file 
                 string? sourceFolder = Path.GetDirectoryName(file.FullPath);
@@ -57,11 +59,11 @@ public sealed class LibraryManager
                 string filenameThumbnail = file.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
-                File.Move(sourcePathThumbnail, targetPathThumbnail);
+                File.Move(sourcePathThumbnail, targetPathThumbnail, overwrite: true);
 
                 // Verify main file 
                 FileInfo fileInfo = new(targetPath);
-                if (fileInfo.Exists)
+                if (!fileInfo.Exists)
                 {
                     throw new Exception("Failed to move file" + file.FullPath);
                 }
@@ -78,7 +80,7 @@ public sealed class LibraryManager
                 string filenameMetadata = file.Filename + "_META.json";
                 string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
                 string serialized = this.fileManager.Serialize<Metadata>(file);
-                File.WriteAllText(targetPathMetadata, serialized); 
+                File.WriteAllText(targetPathMetadata, serialized);
 
                 return true;
             }
@@ -95,12 +97,49 @@ public sealed class LibraryManager
             }
         }
 
+#if DEBUG 
+        foreach (var file in files)
+        {
+            AddDownloadedFile(file);
+        }
+#else
         Parallel.For(0, files.Count, index =>
         {
             AddDownloadedFile(files[index]);
         });
 
+#endif
+
+
         // TODO: Return more details 
         return errors == 0;
+    }
+
+    public bool AddDroppedFile(Metadata file)
+    {
+        try
+        {
+            if (!File.Exists(file.FullPath))
+            {
+                throw new Exception("No such file: " + file.FullPath);
+            }
+
+            // Create target folder if needed 
+            MetadataFolders metadataFolders = new(file);
+            string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            //lock (exceptions)
+            //{
+            //    ++errors;
+            //    exceptions.Add(ex);
+            //}
+
+            return false;
+        }
     }
 }
