@@ -112,6 +112,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     [JsonIgnore]
     public CameraManager CameraManager { get; private set; } = new();
 
+    [JsonIgnore]
+    public LibraryManager LibraryManager { get; private set; } = new();
+
     #endregion Not serialized - No model changed event
 
     #region NOT serialized - WITH model changed event

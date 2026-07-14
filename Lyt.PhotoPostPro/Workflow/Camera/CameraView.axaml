@@ -18,7 +18,7 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="8" />
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Download Button --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Buttons --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Messages --> 
 			<RowDefinition Height="*" />
 			<RowDefinition Height="8" />
@@ -30,28 +30,51 @@
 			<ColumnDefinition Width="480"/>
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
-		<TextBlock
-			Grid.Row="1" Grid.Column="1"
-			Text="{Binding DevicesFound}"
-			Theme="{StaticResource H3}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="1" Grid.Column="1" Margin="250 0 0 0"
-			Text="{Binding DeviceStatus}"
-			Theme="{StaticResource H3}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<glyphs:GlyphButton
-			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-			Style="{StaticResource ControlIconButton}"
-			Layout="IconTextLeftSide"
-			GlyphSource="arrow_export"
-			Text="{Binding DownloadButtonText}"
-			Command="{Binding OnDownload}"
-			IsDisabled="{Binding DownloadButtonIsDisabled}"
-			HorizontalAlignment="Right" Width="240" Margin="0 0 12 0"
-			/>
+		<StackPanel
+			Orientation="Horizontal"
+			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+			HorizontalAlignment="Left" 
+			>
+			<TextBlock
+				Text="{Binding DevicesFound}"
+				Theme="{StaticResource H3}"
+				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Margin="12 0 0 0"
+				MinWidth="260"
+				Text="{Binding DeviceStatus}"
+				Theme="{StaticResource H3}"
+				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="arrow_export"
+				Text="{Binding DownloadButtonText}"
+				Command="{Binding OnDownload}"
+				IsDisabled="{Binding DownloadButtonIsDisabled}"
+				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="arrow_export"
+				Text="Add to Library"
+				Command="{Binding OnAddToLibrary}"
+				IsDisabled="{Binding AddToLibraryButtonIsDisabled}"
+				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="arrow_export"
+				Text="Remove from Camera"
+				Command="{Binding OnRemoveFromCamera}"
+				IsDisabled="{Binding RemoveFromCameraButtonIsDisabled}"
+				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
+				/>
+		</StackPanel>
 		<TextBlock
 			Grid.Row="2" Grid.Column="1"
 			Text="{Binding FileDownloaded}"

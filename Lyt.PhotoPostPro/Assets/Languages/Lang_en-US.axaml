@@ -18,7 +18,7 @@
 	<!-- Shell - Nav' Bar -->
 	<system:String x:Key="Shell.Camera">Camera</system:String>
 	<system:String x:Key="Shell.Single">Image</system:String>
-	<system:String x:Key="Shell.Folder">Folder</system:String>
+	<system:String x:Key="Shell.Folder">Library</system:String>
 	<system:String x:Key="Shell.Settings">Settings</system:String>
 	<system:String x:Key="Shell.Language">Language</system:String>
 

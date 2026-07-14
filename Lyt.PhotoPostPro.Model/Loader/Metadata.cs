@@ -27,8 +27,9 @@ public sealed class Metadata
             string extension = fileInfo.Extension;
             this.Filename = fileInfo.Name.Replace(extension, "");
             this.Extension = extension.Replace(".", "").ToUpperInvariant();
-            float length = (float)fileInfo.Length / Megabytes;
+            float length = fileInfo.Length / Megabytes;
             this.SizeMB = string.Format("{0:F1} MB", length);
+            this.Length = fileInfo.Length; 
             this.FileDateUTC = fileInfo.CreationTimeUtc;
         }
         else
@@ -63,11 +64,15 @@ public sealed class Metadata
 
     public string FullPath { get; private set; }
 
+    /// <summary> File name WITHOUT extension  </summary>
     public string Filename { get; private set; }
 
+    /// <summary> File name extension - no DOT </summary>
     public string Extension { get; private set; }
 
     public string SizeMB { get; private set; }
+
+    public long Length { get; private set; }
 
     public int Width { get; private set; }
 
@@ -111,6 +116,10 @@ public sealed class Metadata
 
     public string LongitudeString { get; private set; } = string.Empty;
 
+    // Folder change ONLY, name and extension do stay the same
+    public void HasMovedTo ( string fullPath ) => this.FullPath = fullPath;
+
+    // DO NOT simplify collection ?
     private static readonly List<Tuple<string, string>> ExifToCode = new()
     {
         new( "Make" , "Make" ),

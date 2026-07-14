@@ -6,7 +6,7 @@ public sealed partial class CameraViewModel :
     IRecipient<DevicesFoundMessage>,
     IRecipient<DeviceStatusMessage>,
     IRecipient<DeviceFileListMessage>,
-    IRecipient<DeviceFileDownloadedMessage>, 
+    IRecipient<DeviceFileDownloadedMessage>,
     IRecipient<DeviceDownloadCompleteMessage>
 {
     private readonly PhotoPostProModel model;
@@ -15,7 +15,8 @@ public sealed partial class CameraViewModel :
     private readonly List<string> downloadedFiles;
 
     private FoundDevice? foundDevice;
-    private bool isDownloading ;
+    private bool nothingSaved;
+    private bool isDownloading;
 
     public CameraViewModel(PhotoPostProModel photoPostProModel)
     {
@@ -56,6 +57,12 @@ public sealed partial class CameraViewModel :
     [ObservableProperty]
     public partial string FileDownloaded { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial bool AddToLibraryButtonIsDisabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool RemoveFromCameraButtonIsDisabled { get; set; } = true;
+
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
@@ -70,7 +77,11 @@ public sealed partial class CameraViewModel :
         this.DownloadButtonIsDisabled = false;
         this.DownloadButtonIsDisabled = true;
         this.DownloadButtonText = "Begin Transfer";
+
+        this.AddToLibraryButtonIsDisabled = true;
+        this.RemoveFromCameraButtonIsDisabled = true;
         this.isDownloading = false;
+        this.nothingSaved = true; 
         this.cameraMgr.BeginMonitoringCameraConnexion();
     }
 
@@ -169,7 +180,7 @@ public sealed partial class CameraViewModel :
 
         // TODO: localize
         this.FileDownloaded = string.Empty;
-        this.DeviceStatus = message.Device.Description + ": " + "Connected" ;
+        this.DeviceStatus = message.Device.Description + ": " + "Connected";
 
         if (message.Files.Count == 0)
         {
@@ -181,7 +192,7 @@ public sealed partial class CameraViewModel :
         {
             this.foundDevice = message.Device;
             this.DeviceStatus = message.Files.Count + " files ready to transfer.";
-            this.DownloadButtonIsDisabled = false; 
+            this.DownloadButtonIsDisabled = false;
             this.selectedFiles.Clear();
             this.selectedFiles.AddRange(message.Files);
             this.downloadedFiles.Clear();
@@ -190,10 +201,10 @@ public sealed partial class CameraViewModel :
 
     private void OnDeviceFileDownloaded(DeviceFileDownloadedMessage message)
     {
-        if ( !this.IsActivated)
+        if (!this.IsActivated)
         {
             // ignore messages if we just moved away 
-            return; 
+            return;
         }
 
         if (message.IsSuccess)
@@ -223,20 +234,35 @@ public sealed partial class CameraViewModel :
 
         // Update UI 
         this.DownloadButtonText = "Begin Transfer";
-        if ( message.Completed )
+        if (message.Completed)
         {
             this.FileDownloaded =
                 string.Format(
-                    "Transfer complete: {0} images transfered, other files or errors: {1} ", 
-                    message.DownloadedCount, message.ErrorCount); 
+                    "Transfer complete: {0} images transfered, other files or errors: {1} ",
+                    message.DownloadedCount, message.ErrorCount);
         }
         else
         {
-            this.FileDownloaded = "Transfer Aborted."; 
+            this.FileDownloaded = "Transfer Aborted.";
         }
 
         // Sort thumbnails by date ascending 
-        this.ThumbnailsPanelViewModel.Sort(); 
+        this.ThumbnailsPanelViewModel.Sort(ascending: true);
+
+        // Update visibility of action buttons
+        var thumbs = this.ThumbnailsPanelViewModel.Thumbnails; 
+        bool anyToAddToLibrary =
+            (from thumb in thumbs where thumb.IsToAddToLibrary select thumb).Any();
+        if (anyToAddToLibrary)
+        {
+            this.AddToLibraryButtonIsDisabled = false; 
+        }
+
+        bool anyToRemoveFromCamera = (from thumb in thumbs where thumb.IsToRemoveFromCamera select thumb).Any();
+        if (anyToRemoveFromCamera)
+        {
+            this.RemoveFromCameraButtonIsDisabled = false;
+        }
     }
 
     [RelayCommand]
@@ -258,10 +284,40 @@ public sealed partial class CameraViewModel :
             this.downloadedFiles.Clear();
             this.ThumbnailsPanelViewModel.Thumbnails.Clear();
             this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
-            this.DownloadButtonText = "Cancel Transfer"; 
+            this.DownloadButtonText = "Cancel Transfer";
         }
 
         this.isDownloading = !this.isDownloading;
+    }
+
+    [RelayCommand]
+    public void OnAddToLibrary()
+    {
+        // TODO: Later: avoid making that copy 
+        var toAddToLibrary =
+            (from thumb in this.ThumbnailsPanelViewModel.Thumbnails
+             where thumb.IsToAddToLibrary
+             select thumb.Metadata).ToList();
+        if (toAddToLibrary.Count == 0)
+        {
+            return;
+        }
+
+        bool success = this.model.LibraryManager.AddDownloadedFiles(toAddToLibrary);
+        if (success)
+        {
+            this.nothingSaved = false;
+        } 
+    }
+
+    [RelayCommand]
+    public void OnRemoveFromCamera()
+    {
+        if ( this.nothingSaved )
+        {
+            // TODO : Message User 
+            return; 
+        }
     }
 
     public void OnSelect(object selectedObject)

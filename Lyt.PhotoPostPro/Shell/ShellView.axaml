@@ -13,7 +13,7 @@
 
 	Background="Transparent"
 	>
-    <Border
+	<Border
 		BorderBrush="#80000020"
 		BorderThickness="1"
 		>
@@ -107,6 +107,15 @@
 					>
 					<glyphs:SelectionGroup x:Name="SelectionGroup" />
 					<glyphs:GlyphButton
+						x:Name="FolderButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="folder"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Folder}"
+						Command="{Binding OnFolder}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="CameraButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="camera"
@@ -122,15 +131,6 @@
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Single}"
 						Command="{Binding OnSingle}"
-						Group="{Binding ElementName=SelectionGroup}"
-						/>
-					<glyphs:GlyphButton
-						x:Name="FolderButton"
-						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="folder"
-						GlyphStrokeThickness="0"
-						Text="{DynamicResource Shell.Folder}"
-						Command="{Binding OnFolder}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton

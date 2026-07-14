@@ -36,7 +36,6 @@ public class CameraManager
     public const int SlowCameraMonitoringTime_ms = 5_000;
 
     private readonly string downloadFolderPath;
-    private readonly string libraryFolderPath;
 
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
@@ -48,12 +47,6 @@ public class CameraManager
         if (!Directory.Exists(this.downloadFolderPath))
         {
             Directory.CreateDirectory(this.downloadFolderPath);
-        }
-
-        this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "Library");
-        if (!Directory.Exists(this.libraryFolderPath))
-        {
-            Directory.CreateDirectory(this.libraryFolderPath);
         }
     }
 
