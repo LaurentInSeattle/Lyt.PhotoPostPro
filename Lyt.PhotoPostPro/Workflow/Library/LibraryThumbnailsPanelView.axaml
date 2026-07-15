@@ -34,7 +34,7 @@
 			<TextBlock
 				Grid.Row="1"
 				Margin="6 0 0 0"
-				Text="{DynamicResource Collection.Thumbs.ShowOnly}"
+				Text="{DynamicResource Workflow.Camera.Thumbs.Show}"
 				Theme="{StaticResource H3}"
 				/>
 			<toggle:ToggleSwitch

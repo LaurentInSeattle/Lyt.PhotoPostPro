@@ -178,6 +178,17 @@ public sealed partial class LibraryViewModel :
             }
 
             this.LibraryThumbnailsPanelViewModel.Thumbnails = new(list);
+
+            var thumbnails = this.LibraryThumbnailsPanelViewModel.Thumbnails;
+            if (thumbnails.Count == 0)
+            {
+                // The logic of the folder system should prevent an empty list 
+                if ( Debugger.IsAttached) { Debugger.Break(); }
+            } 
+            else
+            { 
+                this.OnSelect(thumbnails[0]);
+            }
         }
 
         if (this.selectedDay is not null)
@@ -199,5 +210,32 @@ public sealed partial class LibraryViewModel :
     {
     }
 
-    public void OnSelect(object selectedObject) { }
+    public void OnSelect(object selectedObject)
+    {
+        if (selectedObject is LibraryThumbnailViewModel libraryThumbnailViewModel)
+        {
+            this.SelectedThumbnail = libraryThumbnailViewModel.Thumbnail;
+            if (this.SelectedThumnailMetadataViewModel is null)
+            {
+                this.SelectedThumnailMetadataViewModel = new MetadataViewModel(libraryThumbnailViewModel.Metadata);
+            }
+            else
+            {
+                this.SelectedThumnailMetadataViewModel.Update(libraryThumbnailViewModel.Metadata);
+            }
+        }
+    }
+
+    [RelayCommand]
+    public void OnProcess()
+    {
+        var mainWindow = App.MainWindow;
+        if (mainWindow.CanMaximize)
+        {
+            mainWindow.WindowState = WindowState.Maximized;
+        }
+
+        //var viewModel = App.GetRequiredService<SingleViewModel>();
+        //viewModel.ProcessCurrentImage();
+    }
 }

@@ -107,7 +107,7 @@
 					>
 					<glyphs:SelectionGroup x:Name="SelectionGroup" />
 					<glyphs:GlyphButton
-						x:Name="FolderButton"
+						x:Name="LibraryButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="folder"
 						GlyphStrokeThickness="0"

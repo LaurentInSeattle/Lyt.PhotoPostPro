@@ -219,8 +219,10 @@ public sealed class LibraryManager
                             Debug.WriteLine(" Loaded Thumbnail: " + path);
                         }
 
-                        // Throttle the process; Wait approximately a bit
-                        Task.Delay(10).Wait();
+                        // NEEDED ? 
+                        //
+                        // Throttle the process; Wait a bit
+                        // Task.Delay(10).Wait();
                     }
                 }
             }

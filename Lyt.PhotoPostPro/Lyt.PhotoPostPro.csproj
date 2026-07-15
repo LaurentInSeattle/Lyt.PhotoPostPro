@@ -51,9 +51,6 @@
     <Compile Update="Workflow\Library\LibraryThumbnailView.axaml.cs">
       <DependentUpon>LibraryThumbnailView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Workflow\Library\LibrayToolboxView.axaml.cs">
-      <DependentUpon>LibrayToolboxView.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Workflow\Library\LibraryView.axaml.cs">
       <DependentUpon>LibraryView.axaml</DependentUpon>
     </Compile>

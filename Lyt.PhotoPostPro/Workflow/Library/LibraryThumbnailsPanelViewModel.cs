@@ -28,6 +28,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         this.cameraViewModel = collectionViewModel;
         this.Thumbnails = [];
         this.EmptyMessage = string.Empty;
+        this.SortOrder = true; 
         this.Subscribe<LanguageChangedMessage>();
     }
 

@@ -183,60 +183,19 @@
 	<system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
 	<system:String x:Key="Workflow.Export.Finish">All Done, Close</system:String>
 
+	<!-- Camera -->
+	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
+
+	<!-- Library -->
+	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
-
-	<system:String x:Key="Collection.Remove">Remove</system:String>
-	<system:String x:Key="Collection.SaveToDesktop">Save to Desktop</system:String>
-
-	<system:String x:Key="Collection.BeginNew">Begin this new puzzle:</system:String>
-	<system:String x:Key="Collection.StartAgain">Start again this puzzle:</system:String>
-	<system:String x:Key="Collection.Continue">Continue solving this puzzle:</system:String>
-
-	<system:String x:Key="Collection.PieceCount">Piece Count:</system:String>
-	<system:String x:Key="Collection.Rotations">Rotations:</system:String>
-	<system:String x:Key="Collection.SnapStrength">Snap Strength:</system:String>
-	<system:String x:Key="Collection.Hints">Hints:</system:String>
-	<system:String x:Key="Collection.AddedContrast">Added Contrast:</system:String>
-
-	<system:String x:Key="Collection.None">None</system:String>
-	
-	<system:String x:Key="Collection.SnapMighty">Mighty</system:String>
-	<system:String x:Key="Collection.SnapStrong">Strong</system:String>
-	<system:String x:Key="Collection.SnapNormal">Normal</system:String>
-	<system:String x:Key="Collection.SnapWeak">Weak</system:String>
-
-	<system:String x:Key="Collection.HintsInfinite">Infinite</system:String>
-	<system:String x:Key="Collection.HintsThree">Three</system:String>
-	<system:String x:Key="Collection.HintsOnlyOne">Only One</system:String>
-	<system:String x:Key="Collection.ContrastExtreme">Extreme</system:String>
-	<system:String x:Key="Collection.ContrastStrong">Strong</system:String>
-	<system:String x:Key="Collection.ContrastMedium">Medium</system:String>
-	<system:String x:Key="Collection.ContrastWeak">Just a Bit</system:String>
-
-	<!-- Thumbs -->
-	<system:String x:Key="Collection.Thumbs.ShowOnly">Show Only:</system:String>
-	<system:String x:Key="Collection.Thumbs.InProgress">In Progress</system:String>
-	<system:String x:Key="Collection.Thumbs.Completed">Completed</system:String>
-
-	<system:String x:Key="Collection.Thumbs.StartedFormat">Started: {0}</system:String>
-	<system:String x:Key="Collection.Thumbs.ProgressFormat">Progress: {0} %</system:String>
-	<system:String x:Key="Collection.Thumbs.PuzzleFormat">Piece Count: {0}</system:String>
-	
-	<!-- Game Toolbar -->
-	<system:String x:Key="Puzzle.Toolbar.Dark">Dark</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Light">Light</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Background">Background</system:String>
-	<system:String x:Key="Puzzle.Toolbar.ShowImage">Show Image</system:String>
-	<system:String x:Key="Puzzle.Toolbar.ToggleEdges">Toggle Edges</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Hint">Hint</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Progress">Progress</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Zoom">Zoom</system:String>
 	<system:String x:Key="Puzzle.Toolbar.FullScreen">Full Screen</system:String>
 	<system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc. to Return</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Min">Min</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Max">Max</system:String>
-	<system:String x:Key="Puzzle.Toolbar.Rearrange">Rearrange</system:String>
-
+	<system:String x:Key="Collection.Remove">Remove</system:String>
+	<system:String x:Key="Collection.SaveToDesktop">Save to Desktop</system:String>
+	<system:String x:Key="Collection.None">None</system:String>
+	
 	<!-- Intro  -->
 	<system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
 	<system:String x:Key="Intro.LicenseTitle">License Terms</system:String>
@@ -251,7 +210,6 @@
 
 	<!-- Settings  -->
 	<system:String x:Key="Settings.CleanupNow">Cleanup Now</system:String>
-
 	<system:String x:Key="Settings.ReminderTitle">Important Reminder</system:String>
 	<system:String x:Key="Settings.ReminderSubtitle">An important point to remember about downloaded images...</system:String>
 	<system:String x:Key="Settings.ReminderText">You are advised to use downloaded images only as puzzle images. For any other use, commercial or otherwise, please contact the copyright holder.</system:String>

@@ -137,8 +137,7 @@ public sealed partial class ShellViewModel
         SetupToolboxNoToolbar<SingleViewModel, SingleView, SingleToolboxViewModel, SingleToolboxView>(
             ActivatedView.Single, view.SingleButton);
 
-        SetupToolboxNoToolbar<LibraryViewModel, LibraryView, LibraryToolboxViewModel, LibraryToolboxView>(
-            ActivatedView.Library, view.FolderButton);
+        SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
 
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);

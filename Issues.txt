@@ -1,6 +1,10 @@
 Bugs 
 ----
 
+- Redesign Project / Process stuff , then refactor.
+
+- Last edited LRU
+
 - App freeze when using combo box ??? 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
@@ -78,6 +82,8 @@ Missing Features
 
 Cool Stuff to Consider 
 ----------------------
+
+- Implement a MDViewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
 - Compress Built-in LUT 
 

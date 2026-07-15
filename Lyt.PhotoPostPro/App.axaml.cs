@@ -28,10 +28,8 @@ public partial class App : ApplicationBase
             typeof(SingleToolboxViewModel),
 
             typeof(CameraViewModel),
-            // typeof(CameraToolboxViewModel),
 
             typeof(LibraryViewModel),
-            typeof(LibraryToolboxViewModel),
 
             typeof(LanguageViewModel),
             typeof(LanguageToolbarViewModel),
