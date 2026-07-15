@@ -10,6 +10,7 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -20,23 +21,49 @@
 			<RowDefinition Height="60" />
 			<RowDefinition Height="60" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="480"/>
+			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 
 		<controls:SelectorControl
-			Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="999"
+			Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
 			SelectorButtons="{Binding Years}"
 			/> 
 		<controls:SelectorControl
-			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
+			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
 			SelectorButtons="{Binding Months}"
 			/> 
 		<controls:SelectorControl
-			Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="999"
+			Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
 			SelectorButtons="{Binding Days}"
 			/> 
+
+		<vm:LibraryThumbnailsPanelView
+			Grid.Row="3" Grid.Column="1"
+			DataContext="{Binding LibraryThumbnailsPanelViewModel}"
+			/>
+		<StackPanel
+			Grid.Row="3" Grid.Column="3"
+			>
+			<Image
+				Source="{Binding SelectedThumbnail}"
+				Margin="0 0 0 12"
+				IsHitTestVisible="False"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480"
+				MaxHeight="600"
+				/>
+			<metadatapane:MetadataView
+				DataContext="{Binding SelectedThumnailMetadataViewModel}"
+				Margin="0 0 0 12"
+				/>
+		</StackPanel>
 
 	</Grid>
 </UserControl>

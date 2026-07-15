@@ -1,6 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
-public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPathHandler
+public sealed partial class LibraryViewModel :
+    ViewModel<LibraryView>,
+    IDropPathHandler,
+    ISelectListener
 {
     private const double YearButtonWidth = 90.0;
     private const double MonthButtonWidth = 110.0;
@@ -43,9 +46,10 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
     private MonthFolder? selectedMonth;
     private DayFolder? selectedDay;
 
-    public LibraryViewModel(PhotoPostProModel photoPostProModel) 
+    public LibraryViewModel(PhotoPostProModel photoPostProModel)
     {
         this.model = photoPostProModel;
+        this.LibraryThumbnailsPanelViewModel = new(this.model, this);
     }
 
     public override void Activate(object? activationParameters)
@@ -55,19 +59,28 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
         var folderTree = this.model.LibraryManager.FolderTree;
         if (folderTree is null)
         {
-            return ;
+            return;
         }
 
         List<SelectorButtonViewModel> listYears = [];
         foreach (var year in folderTree.YearFolders)
         {
             var vm = new SelectorButtonViewModel(year.Year.ToString(), YearButtonWidth, this.OnSelectYear, year);
-            listYears.Add(vm); 
-        } 
+            listYears.Add(vm);
+        }
 
         this.Years = listYears;
-        Schedule.OnUiThread(66, this.ActivateUi, DispatcherPriority.Background); 
+        Schedule.OnUiThread(66, this.ActivateUi, DispatcherPriority.Background);
     }
+
+    [ObservableProperty]
+    public partial WriteableBitmap? SelectedThumbnail { get; set; }
+
+    [ObservableProperty]
+    public partial MetadataViewModel? SelectedThumnailMetadataViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial LibraryThumbnailsPanelViewModel LibraryThumbnailsPanelViewModel { get; set; }
 
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Years { get; set; } = [];
@@ -78,11 +91,11 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Days { get; set; } = [];
 
-    private void OnSelectYear(object? tag )
+    private void OnSelectYear(object? tag)
     {
-        if ( tag is not YearFolder year )
+        if (tag is not YearFolder year)
         {
-            return; 
+            return;
         }
 
         this.selectedYear = year;
@@ -92,13 +105,15 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
         List<SelectorButtonViewModel> listMonths = [];
         foreach (var month in year.MonthFolders)
         {
-            string monthString = MonthString[month.Month-1]; 
+            string monthString = MonthString[month.Month - 1];
             var vm = new SelectorButtonViewModel(monthString, MonthButtonWidth, this.OnSelectMonth, month);
             listMonths.Add(vm);
         }
 
         this.Months = listMonths;
         this.Days = [];
+
+        this.LoadImages();
     }
 
     private void OnSelectMonth(object? tag)
@@ -120,6 +135,8 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
         }
 
         this.Days = listDays;
+
+        this.LoadImages();
     }
 
     private void OnSelectDay(object? tag)
@@ -131,20 +148,49 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
 
         this.selectedDay = day;
 
-        this.LoadImages ();
-    } 
+        this.LoadImages();
+    }
 
-    private void ActivateUi ()
+    private void ActivateUi()
     {
         this.Years[0].Select();
     }
 
     private void LoadImages()
     {
-        if ( this.selectedYear is null || this.selectedYear is null || this.selectedYear is null)
+        if (this.selectedYear is null)
         {
             Debug.WriteLine(" No selection");
-            return; 
+            return;
+        }
+
+        void AddFiles(List<string> files)
+        {
+            List<LibraryThumbnailViewModel> list = [];
+            foreach (string path in files)
+            {
+                if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
+                {
+                    LibraryThumbnailViewModel libraryThumbnailViewModel =
+                        new(this, thumbnail.Metadata, thumbnail.ImageBytes);
+                    list.Add(libraryThumbnailViewModel);
+                }
+            }
+
+            this.LibraryThumbnailsPanelViewModel.Thumbnails = new(list);
+        }
+
+        if (this.selectedDay is not null)
+        {
+            AddFiles(this.selectedDay.MetadataFiles);
+        }
+        else if (this.selectedMonth is not null)
+        {
+            AddFiles(this.selectedMonth.MetadataFiles());
+        }
+        else if (this.selectedYear is not null)
+        {
+            AddFiles(this.selectedYear.MetadataFiles());
         }
     }
 
@@ -152,4 +198,6 @@ public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPath
     public void OnDropPath(string path, bool isDirectory)
     {
     }
+
+    public void OnSelect(object selectedObject) { }
 }

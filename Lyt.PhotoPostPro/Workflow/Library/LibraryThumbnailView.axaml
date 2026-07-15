@@ -1,0 +1,55 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Library.LibraryThumbnailView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Library"
+	x:DataType="vm:LibraryThumbnailViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+	>
+	<UserControl.Styles>
+		<Style Selector="CheckBox.noContent /template/ ContentPresenter#ContentPresenter">
+			<Setter Property="IsVisible" Value="False"/>
+		</Style>
+	</UserControl.Styles>
+	<Border
+		x:Name="outerBorder"
+		Height="{Binding BorderHeight}" 
+		Background="Transparent"
+		BorderBrush="{StaticResource LightAqua_1_100}"
+		BorderThickness="1"
+		CornerRadius="4"
+		>
+		<Grid
+			Margin="8"
+			>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="32" />
+				<RowDefinition Height="200" />
+				<RowDefinition Height="32" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Row="0" Grid.ColumnSpan="2"
+				Text="{Binding Title}"
+				Theme="{StaticResource Large}"
+				/>
+			<Image
+				Grid.Row="1"
+				Source="{Binding Thumbnail}"
+				Height="{Binding ImageHeight}" 
+				IsHitTestVisible="False"
+				VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.ColumnSpan="2"
+				Text="{Binding Details}"
+				Theme="{StaticResource Medium}"
+				/>
+		</Grid>
+	</Border>
+</UserControl>

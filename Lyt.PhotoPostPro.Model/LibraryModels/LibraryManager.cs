@@ -27,11 +27,15 @@ public sealed class LibraryManager
         {
             Directory.CreateDirectory(this.exportsFolderPath);
         }
+
+        this.LoadedThumbnails = [];
     }
+
+    public Dictionary<string, LoadedThumbnail> LoadedThumbnails { get; private set; }
 
     public FolderTree? FolderTree { get; private set; }
 
-    public string LibraryFolderPath => this.libraryFolderPath ;
+    public string LibraryFolderPath => this.libraryFolderPath;
 
     public string ExportsFolderPath => this.exportsFolderPath;
 
@@ -39,7 +43,7 @@ public sealed class LibraryManager
     {
         this.fileManager = fileManagerModel;
         this.GenerateInitialFolderTree();
-    } 
+    }
 
     public bool AddDownloadedFiles(List<Metadata> files)
     {
@@ -193,6 +197,66 @@ public sealed class LibraryManager
         }
     }
 
+    public void LoadThumbnails()
+    {
+        if ( this.FolderTree is null)
+        {
+            return; 
+        }
+
+        foreach(var year in this.FolderTree.YearFolders)
+        {
+            foreach (var month in year.MonthFolders)
+            {
+                foreach (var day in month.DayFolders)
+                {
+                    foreach (string path in day.MetadataFiles)
+                    {
+                        var thumbnail = this.LoadThumbnail(path);
+                        if (thumbnail is not null)
+                        {
+                            this.LoadedThumbnails.Add(path, thumbnail);
+                            Debug.WriteLine(" Loaded Thumbnail: " + path);
+                        }
+
+                        // Throttle the process; Wait approximately a bit
+                        Task.Delay(10).Wait();
+                    }
+                }
+            }
+        }
+    }
+
+    private LoadedThumbnail? LoadThumbnail(string metadataFilePath)
+    {
+        try
+        {
+            string serialized = File.ReadAllText(metadataFilePath);
+            // ! Checked before calling 
+            Metadata? maybe = this.fileManager!.Deserialize<Metadata>(serialized);
+            if (maybe is not Metadata metadata)
+            {
+                throw new Exception("Failed to load metadata: " + metadataFilePath);
+            }
+
+            string? folderPath = Path.GetDirectoryName(metadataFilePath);
+            if (string.IsNullOrWhiteSpace(folderPath))
+            {
+                throw new Exception("Inavlid path: " + folderPath);
+            }
+
+            string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
+            string pathThumbnail = Path.Combine(folderPath, filenameThumbnail);
+            byte[] imageBytes = File.ReadAllBytes(pathThumbnail);
+            return new LoadedThumbnail(metadata, imageBytes);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return null;
+        }
+    }
+
     public void GenerateFolderTree()
     {
         try
@@ -213,7 +277,29 @@ public sealed class LibraryManager
         {
             // wait a bit so that we dont delay app starting up 
             Task.Delay(2_000).Wait();
-            this.GenerateFolderTree(); 
+            this.GenerateFolderTree();
+            Task.Delay(200).Wait();
+            this.GenerateThumbnailCache(); 
         });
     }
+
+    public static void StaticLoadThumbnails(object? data)
+    {
+        if (data is not LibraryManager libraryManager)
+        {
+            return;
+        }
+
+        libraryManager.LoadThumbnails();
+    }
+
+    public void GenerateThumbnailCache()
+    {
+        // Explicit background low priority background thread
+        var start = new ParameterizedThreadStart(StaticLoadThumbnails); 
+        Thread lowPriorityThread = new(start);
+        lowPriorityThread.Priority = ThreadPriority.Lowest;
+        lowPriorityThread.IsBackground = true;
+        lowPriorityThread.Start(this);
+    } 
 }
