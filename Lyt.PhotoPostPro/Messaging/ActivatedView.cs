@@ -6,7 +6,7 @@ public enum ActivatedView : int
     Exit,
 
     // Main selector views
-    Folder,
+    Library,
     Language,
     Single,
     Process,

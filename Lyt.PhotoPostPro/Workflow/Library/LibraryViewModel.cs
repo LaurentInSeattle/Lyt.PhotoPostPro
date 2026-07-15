@@ -1,8 +1,6 @@
-﻿namespace Lyt.PhotoPostPro.Workflow.Folder;
+﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
-using Lyt.PhotoPostPro.Model.LibraryModels;
-
-public sealed partial class FolderViewModel : ViewModel<FolderView>, IDropPathHandler
+public sealed partial class LibraryViewModel : ViewModel<LibraryView>, IDropPathHandler
 {
     private const double YearButtonWidth = 90.0;
     private const double MonthButtonWidth = 110.0;
@@ -45,7 +43,7 @@ public sealed partial class FolderViewModel : ViewModel<FolderView>, IDropPathHa
     private MonthFolder? selectedMonth;
     private DayFolder? selectedDay;
 
-    public FolderViewModel(PhotoPostProModel photoPostProModel) 
+    public LibraryViewModel(PhotoPostProModel photoPostProModel) 
     {
         this.model = photoPostProModel;
     }

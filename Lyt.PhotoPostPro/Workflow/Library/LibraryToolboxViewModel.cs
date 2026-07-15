@@ -1,8 +1,6 @@
-﻿namespace Lyt.PhotoPostPro.Workflow.Folder;
+﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
-using Lyt.PhotoPostPro.Workflow.Shared;
-
-public sealed partial class FolderToolboxViewModel : ViewModel<FolderToolboxView>, IDropPathHandler
+public sealed partial class LibraryToolboxViewModel : ViewModel<LibraryToolboxView>, IDropPathHandler
 {
     [ObservableProperty]
     public partial DropViewModel? DropViewModel { get; set; } 
@@ -17,7 +15,7 @@ public sealed partial class FolderToolboxViewModel : ViewModel<FolderToolboxView
     {
         var model = App.GetRequiredService<PhotoPostProModel>();
         model.ClearFirstRun();
-        ViewSelector<ActivatedView>.Select(ActivatedView.Folder);
+        ViewSelector<ActivatedView>.Select(ActivatedView.Library);
     }
 
 #pragma warning restore CA1822

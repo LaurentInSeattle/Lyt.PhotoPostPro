@@ -137,8 +137,8 @@ public sealed partial class ShellViewModel
         SetupToolboxNoToolbar<SingleViewModel, SingleView, SingleToolboxViewModel, SingleToolboxView>(
             ActivatedView.Single, view.SingleButton);
 
-        SetupToolboxNoToolbar<FolderViewModel, FolderView, FolderToolboxViewModel, FolderToolboxView>(
-            ActivatedView.Folder, view.FolderButton);
+        SetupToolboxNoToolbar<LibraryViewModel, LibraryView, LibraryToolboxViewModel, LibraryToolboxView>(
+            ActivatedView.Library, view.FolderButton);
 
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
@@ -191,7 +191,7 @@ public sealed partial class ShellViewModel
     public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
 
     [RelayCommand]
-    public void OnFolder() => this.viewSelector?.SelectView(ActivatedView.Folder);
+    public void OnFolder() => this.viewSelector?.SelectView(ActivatedView.Library);
 
     [RelayCommand]
     public void OnLanguage() => this.viewSelector?.SelectView(ActivatedView.Language);

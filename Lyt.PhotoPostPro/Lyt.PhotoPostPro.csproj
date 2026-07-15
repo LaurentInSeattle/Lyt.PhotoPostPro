@@ -48,6 +48,12 @@
     <Compile Update="Workflow\Camera\CameraThumbnailView.axaml.cs">
       <DependentUpon>CameraThumbnailView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Library\LibrayToolboxView.axaml.cs">
+      <DependentUpon>LibrayToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Library\LibraryView.axaml.cs">
+      <DependentUpon>LibraryView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Lut\LutView.axaml.cs">
       <DependentUpon>LutView.axaml</DependentUpon>
     </Compile>

@@ -10,7 +10,7 @@ public sealed partial class ProcessToolbarViewModel : ViewModel<ProcessToolbarVi
     {
         var model = App.GetRequiredService<PhotoPostProModel>();
         model.ClearFirstRun();
-        ViewSelector<ActivatedView>.Select(ActivatedView.Folder);
+        ViewSelector<ActivatedView>.Select(ActivatedView.Library);
     }
 
     [RelayCommand]

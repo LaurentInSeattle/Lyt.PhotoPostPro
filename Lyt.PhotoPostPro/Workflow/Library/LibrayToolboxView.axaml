@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Folder.FolderToolboxView"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Folder"
-	x:DataType="vm:FolderToolboxViewModel" 
+	x:Class="Lyt.PhotoPostPro.Workflow.Library.LibraryToolboxView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Library"
+	x:DataType="vm:LibraryToolboxViewModel" 
 
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

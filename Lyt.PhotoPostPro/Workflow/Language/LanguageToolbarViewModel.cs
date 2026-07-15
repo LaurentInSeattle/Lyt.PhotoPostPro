@@ -10,7 +10,7 @@ public sealed partial class LanguageToolbarViewModel : ViewModel<LanguageToolbar
     {
         var model = App.GetRequiredService<PhotoPostProModel>();
         model.ClearFirstRun();
-        ViewSelector<ActivatedView>.Select(ActivatedView.Folder);
+        ViewSelector<ActivatedView>.Select(ActivatedView.Library);
     }
 
 #pragma warning restore CA1822

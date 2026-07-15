@@ -1,6 +1,6 @@
-namespace Lyt.PhotoPostPro.Workflow.Folder;
+namespace Lyt.PhotoPostPro.Workflow.Library;
 
-public partial class FolderView : View
+public partial class LibraryView : View
 {
     protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 }
