@@ -1,0 +1,39 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Controls.SelectorButtonView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Controls"
+	x:DataType="vm:SelectorButtonViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid		
+		Height="52"
+		>
+		<Grid.RowDefinitions> 
+			<RowDefinition Height="48" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<glyphs:GlyphButton
+			x:Name="NavigationButton"
+			Style="{StaticResource NavigationButton}"
+			Text="{Binding ButtonText}"
+			Command="{Binding OnSelect}" 
+			Width="{Binding ButtonWidth}"
+			/>
+		<Rectangle
+			x:Name="NavigationIndicator"
+			IsVisible="False"
+			Grid.Row="1"
+			Margin="2 0 2 0"
+			Height="2" 
+			HorizontalAlignment="Stretch" VerticalAlignment="Center"
+			Fill="{StaticResource FreshGreen_2_100}"
+			/>
+	</Grid>
+
+</UserControl>

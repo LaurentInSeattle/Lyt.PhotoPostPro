@@ -9,24 +9,34 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+
 	Background="Transparent"
 	>
 	<Grid		
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="60" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Rectangle		
-			Grid.Column="1" Grid.Row="1"
-			Fill="DodgerBlue"
-			Margin="40"
-			/>
+
+		<controls:SelectorControl
+			Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="999"
+			SelectorButtons="{Binding Years}"
+			/> 
+		<controls:SelectorControl
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
+			SelectorButtons="{Binding Months}"
+			/> 
+		<controls:SelectorControl
+			Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="999"
+			SelectorButtons="{Binding Days}"
+			/> 
+
 	</Grid>
 </UserControl>
