@@ -7,7 +7,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.CurrentPostProcess = null;
         if (loadedImage.Metadata is null)
         {
-            return false ;
+            return false;
         }
 
         try
@@ -26,11 +26,11 @@ public sealed partial class PhotoPostProModel : ModelBase
                     // ! because is now Fully Loaded 
                     postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
                 }
-            } 
+            }
 
-            if ( postProcess is null)
+            if (postProcess is null)
             {
-                return false ;
+                return false;
             }
 
             this.CurrentPostProcess = postProcess;
@@ -134,6 +134,14 @@ public sealed partial class PhotoPostProModel : ModelBase
             {
                 this.LastResultFrame = frame;
             }
+
+            var steps = this.Workflow.Steps;
+            var castSteps = (from step in steps select step as object).ToList();
+            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string serialized = this.fileManager.Serialize<List<object>>(castSteps);
+            string testPath =
+                System.IO.Path.Combine(desktop, "test.json");
+            File.WriteAllText(testPath, serialized);
 
             return true;
         });

@@ -15,7 +15,6 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float BrightnessAmount { get; set; }
 
-
     public float RedAmount { get; set; }
 
     public float GreenAmount { get; set; }
