@@ -15,33 +15,24 @@ public sealed partial class PhotoPostProModel : ModelBase
             PostProcess? postProcess = null;
             if (loadedImage.IsFullyLoaded)
             {
-                postProcess = new PostProcess
-                {
-                    Metadata = loadedImage.Metadata,
-                    MaybeOriginalImage = loadedImage.Image,
-                    Created = DateTime.Now,
-                    LastUpdated = DateTime.Now,
-                };
-
+                // ! because is Fully Loaded 
+                postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
             }
             else if (loadedImage.IsPreLoaded)
             {
                 LoadedImage fullyLoadedImage = ImageLoader.LoadImage(loadedImage.Metadata.FullPath);
-                postProcess = new PostProcess
+                if (loadedImage.IsFullyLoaded)
                 {
-                    Metadata = loadedImage.Metadata,
-                    MaybeOriginalImage = fullyLoadedImage.Image,
-                    Created = DateTime.Now,
-                    LastUpdated = DateTime.Now,
-                };
-            }
-            else
+                    // ! because is now Fully Loaded 
+                    postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
+                }
+            } 
+
+            if ( postProcess is null)
             {
                 return false ;
             }
 
-            postProcess.Initialize();
-            postProcess.SetModel(this);
             this.CurrentPostProcess = postProcess;
             return true;
         }

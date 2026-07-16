@@ -26,33 +26,22 @@ public class PostProcessStep
         this.IsFirstRun = true;
     }
 
+    public PostProcessStep? PreviousStep { get; set; }
+
+    public PostProcessStep? NextStep { get; set; }
+
     public PostProcessWorkflow PostProcessWorkflow { get; private set; }  
     
     public string Name { get; private set; }
-
-    [JsonIgnore]
-    public PostProcessStep? PreviousStep { get; set; }
-
-    [JsonIgnore]
-    public PostProcessStep? NextStep { get; set; } 
 
     public bool IsFirstStep => this.PreviousStep is null;
 
     public bool IsLastStep => this.NextStep is null;
 
-    [JsonIgnore]
     public bool IsFirstRun { get; set; }
 
-    [JsonIgnore]
-    public bool IsReset { get; set; }
-
-    [JsonIgnore]
-    public bool IsCurrent { get; set; }
-
-    [JsonIgnore]
     public Image<Rgb48>? SourceImage { get; set; }
 
-    [JsonIgnore]
     public Image<Rgb48>? ResultImage { get; set; }
 
     // Default implementation does nothing. Override in derived classes if needed.
@@ -69,7 +58,6 @@ public class PostProcessStep
             return null;
         }
 
-        this.IsReset = true;
         this.ResultImage = this.SourceImage;
         return this.SourceImage.ToFrame();
     }

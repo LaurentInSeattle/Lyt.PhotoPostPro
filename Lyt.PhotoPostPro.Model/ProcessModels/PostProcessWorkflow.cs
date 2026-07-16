@@ -48,11 +48,12 @@ public sealed class PostProcessWorkflow
         }
     }
 
+    /// <summary> Steps of the process, should be the only property we need to serialize.  </summary>
+    public List<PostProcessStep> Steps { get; private set; }
+
     public PostProcess PostProcess { get; private set; }
 
     public bool IsComplete { get; private set; }
-
-    public List<PostProcessStep> Steps { get; private set; }
 
     public int CurrentStepIndex { get; set; }
 
@@ -72,11 +73,9 @@ public sealed class PostProcessWorkflow
         foreach (var step in this.Steps)
         {
             step.Initialize(originalImage);
-            step.IsCurrent = false;
         }
 
         this.CurrentStepIndex = 0;
-        this.CurrentStep.IsCurrent = true;
         this.CurrentStep.SourceImage = originalImage;
         this.CurrentStep.ResultImage = originalImage;
         this.Notify(null, WorkflowUpdateKind.Begin);
@@ -101,7 +100,6 @@ public sealed class PostProcessWorkflow
         if (this.CanMoveNext)
         {
             // old step 
-            this.CurrentStep.IsCurrent = false;
             var nextSourceImage = this.CurrentStep.ResultImage;
             if (nextSourceImage is null)
             {
@@ -116,7 +114,6 @@ public sealed class PostProcessWorkflow
 
             // new step
             this.CurrentStep.SourceImage = nextSourceImage;
-            this.CurrentStep.IsCurrent = true;
             this.CurrentStep.Activate(WorkflowUpdateKind.Next);
 
             // Notify to change view 
@@ -135,14 +132,12 @@ public sealed class PostProcessWorkflow
         if (this.CanGoBack)
         {
             // old step 
-            this.CurrentStep.IsCurrent = false;
             this.CurrentStep.Deactivate(WorkflowUpdateKind.Back);
 
             // previous
             this.CurrentStepIndex--;
 
             // new step
-            this.CurrentStep.IsCurrent = true;
             this.CurrentStep.Activate(WorkflowUpdateKind.Back);
 
             // Notify to change view 

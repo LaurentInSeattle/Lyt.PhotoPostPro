@@ -48,13 +48,15 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             exportParameters.Images.Add(ImageParameters.Default);
         }
 
+        PhotoPostProModel model = this.PostProcessWorkflow.PostProcess.Model;
+
         // Create subdirectory for exported images
         string sourceImagePath;
         string fileName;
         string subDirectory;
         try
         {
-            string exportFolderPath = this.PostProcessWorkflow.PostProcess.Model.LibraryManager.ExportsFolderPath;
+            string exportFolderPath = model.LibraryManager.ExportsFolderPath;
             sourceImagePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
             FileInfo fi = new(sourceImagePath);
             string? sourceDirectory = fi.DirectoryName;
@@ -124,7 +126,6 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add watermark, if specified
-                PhotoPostProModel model = this.PostProcessWorkflow.PostProcess.Model;
                 Image<Rgb48> imageWithWatermark = imageToResize;
                 if (imageParameters.WithWatermark)
                 {
