@@ -5,10 +5,9 @@ public sealed partial class LibraryViewModel :
     IDropPathHandler,
     ISelectListener
 {
-    private const double YearButtonWidth = 90.0;
+    private const double YearButtonWidth = 80.0;
     private const double MonthButtonWidth = 110.0;
-    private const double DayButtonWidth = 134.0;
-
+    private const double DayButtonWidth = 140.0;
 
     private readonly PhotoPostProModel model;
 
