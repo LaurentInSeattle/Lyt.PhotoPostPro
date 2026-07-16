@@ -122,6 +122,15 @@ public sealed class Metadata
     // Folder change ONLY, name and extension do stay the same
     public void HasMovedTo ( string fullPath ) => this.FullPath = fullPath;
 
+    public void GetLibraryFolders(out int year, out int month, out int day, out int dayOfWeek)
+    {
+        DateTime date = this.Captured != DateTime.MinValue ? this.Captured : this.FileDateUTC; 
+        year = date.Year;
+        month = date.Month;
+        day = date.Day;
+        dayOfWeek = (int) date.DayOfWeek;
+    }
+
     // DO NOT simplify collection ?
     private static readonly List<Tuple<string, string>> ExifToCode = new()
     {

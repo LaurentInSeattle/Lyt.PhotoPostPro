@@ -2,6 +2,56 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
+    public bool ProcessLoadedImage(LoadedImage loadedImage)
+    {
+        this.CurrentPostProcess = null;
+        if (loadedImage.Metadata is null)
+        {
+            return false ;
+        }
+
+        try
+        {
+            PostProcess? postProcess = null;
+            if (loadedImage.IsFullyLoaded)
+            {
+                postProcess = new PostProcess
+                {
+                    Metadata = loadedImage.Metadata,
+                    MaybeOriginalImage = loadedImage.Image,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                };
+
+            }
+            else if (loadedImage.IsPreLoaded)
+            {
+                LoadedImage fullyLoadedImage = ImageLoader.LoadImage(loadedImage.Metadata.FullPath);
+                postProcess = new PostProcess
+                {
+                    Metadata = loadedImage.Metadata,
+                    MaybeOriginalImage = fullyLoadedImage.Image,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                };
+            }
+            else
+            {
+                return false ;
+            }
+
+            postProcess.Initialize();
+            postProcess.SetModel(this);
+            this.CurrentPostProcess = postProcess;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false;
+        }
+    }
+
     public void BeginPostProcess()
     {
         this.ApiAction(() =>
@@ -15,7 +65,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool GetProcessOriginalImage()
     {
         // NOT an ApiAction wrapper : MUST check for nulls 
-        if ((this.CurrentProject is null) || (this.CurrentProjectMetadata is null) || (this.CurrentPostProcess is null))
+        if (this.CurrentPostProcess is null)
         {
             return false;
         }
@@ -89,7 +139,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             var frame = this.Workflow.Next();
-            if ( frame is not null)
+            if (frame is not null)
             {
                 this.LastResultFrame = frame;
             }
@@ -104,7 +154,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             this.LastResultFrame = null;
 
             // No workflow notification
-            return false; 
+            return false;
         });
 
     private bool ApiAction(Func<bool> action, bool notify = true)
@@ -119,11 +169,11 @@ public sealed partial class PhotoPostProModel : ModelBase
             this.timeoutTimer.ResetTimeout();
         }
 
-        if ((this.CurrentProject is null) ||
-            (this.CurrentProjectMetadata is null) ||
-            (this.CurrentPostProcess is null))
+        //if ((this.CurrentProject is null) ||
+        //    (this.CurrentProjectMetadata is null) ||
+        if (this.CurrentPostProcess is null)
         {
-            string errorMessage = "No project is currently open.";
+            string errorMessage = "No post process is currently active.";
             Debug.WriteLine(errorMessage);
             return false;
         }

@@ -13,7 +13,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             Language = DefaultLanguage,
             IsFirstRun = true,
-            Projects = new Dictionary<string, ProjectMetadata>(8),
+            // Projects = new Dictionary<string, ProjectMetadata>(8),
             Signatures = new Signatures(),
             Watermarks = new Watermarks(),
         }; 

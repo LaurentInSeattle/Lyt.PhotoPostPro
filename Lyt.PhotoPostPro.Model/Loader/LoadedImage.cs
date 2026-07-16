@@ -14,12 +14,15 @@ public sealed class LoadedImage
 
     public byte[]? JpgThumbnail { get; set; }
 
+    /// <summary> Image is ready and metadata is present, thumbnail may be present or not  </summary>
     public bool IsFullyLoaded 
         => this.IsSuccess && this.Image is not null && this.Metadata is not null;
 
+    /// <summary> Image is ready and metadata is present, thumbnail is also present </summary>
     public bool IsFullyLoadedWithThumbnail 
         => this.IsSuccess && this.Image is not null && this.JpgThumbnail is not null && this.Metadata is not null;
 
+    /// <summary> Image is not ready but metadata is present and the thumbnail is also present </summary>
     public bool IsPreLoaded 
         => this.IsSuccess && this.JpgThumbnail is not null && this.Metadata is not null;
 

@@ -17,7 +17,7 @@ public sealed class FolderTree
         {
             if (MetadataFolders.IsYearFolder(directoryYear, out int year))
             {
-                YearFolder yearFolder = new() { Year = year, Path = directoryYear };
+                YearFolder yearFolder = new() { Year = year };
                 tree.YearFolders.Add(yearFolder);
 
                 var directoryMonths = Directory.EnumerateDirectories(directoryYear);
@@ -25,7 +25,7 @@ public sealed class FolderTree
                 {
                     if (MetadataFolders.IsMonthFolder(directoryMonth, out int month))
                     {
-                        MonthFolder monthFolder = new() { Year = year, Month = month, Path = directoryMonth };
+                        MonthFolder monthFolder = new() { Year = year, Month = month };
                         yearFolder.MonthFolders.Add(monthFolder);
 
                         var directoryDays = Directory.EnumerateDirectories(directoryMonth);
@@ -39,7 +39,6 @@ public sealed class FolderTree
                                     Month = month,
                                     Day = day,
                                     DayOfWeek = dayOfWeek,
-                                    Path = directoryDay
                                 };
 
                                 monthFolder.DayFolders.Add(dayFolder);
@@ -57,20 +56,20 @@ public sealed class FolderTree
             }
         }
 
-        tree.Sort(); 
+        tree.Sort();
         return tree;
     }
 
     public int FileCount()
     {
         int fileCount = 0;
-        foreach(YearFolder year in this.YearFolders)
+        foreach (YearFolder year in this.YearFolders)
         {
             foreach (MonthFolder month in year.MonthFolders)
             {
-                foreach(DayFolder day in month.DayFolders)
+                foreach (DayFolder day in month.DayFolders)
                 {
-                    fileCount += day.MetadataFiles.Count;  
+                    fileCount += day.MetadataFiles.Count;
                 }
             }
         }
@@ -80,26 +79,55 @@ public sealed class FolderTree
 
     public void Sort()
     {
-        var sortedYears = 
-            (from  year in this.YearFolders orderby year.Year ascending select year).ToList();
+        var sortedYears =
+            (from year in this.YearFolders orderby year.Year ascending select year).ToList();
         this.YearFolders = sortedYears;
         foreach (YearFolder year in this.YearFolders)
         {
-            var sortedMonths = 
-                (from month in year.MonthFolders orderby month.Month select month ).ToList();
+            var sortedMonths =
+                (from month in year.MonthFolders orderby month.Month select month).ToList();
             year.MonthFolders = sortedMonths;
             foreach (MonthFolder month in year.MonthFolders)
             {
-                var sortedDays = 
-                    ( from day in month.DayFolders orderby day.Day  select day ).ToList();
+                var sortedDays =
+                    (from day in month.DayFolders orderby day.Day select day).ToList();
                 month.DayFolders = sortedDays;
             }
-        } 
+        }
     }
 
-    public void UpdateOnFileAdded() 
+    public void UpdateOnFileAdded(Metadata metadata, string metadataFilePath)
     {
-        // TODO
+        metadata.GetLibraryFolders(out int year, out int month, out int day, out int dayOfWeek);
+        var yearFolder =
+            (from folder in this.YearFolders where folder.Year == year select folder)
+            .FirstOrDefault();
+        if (yearFolder is null)
+        {
+            yearFolder = new YearFolder() { Year = year };
+            this.YearFolders.Add(yearFolder);
+        }
+
+        var monthFolder =
+            (from folder in yearFolder.MonthFolders where folder.Month == month select folder)
+            .FirstOrDefault();
+        if (monthFolder is null)
+        {
+            monthFolder = new MonthFolder() { Month = month, Year = year };
+            yearFolder.MonthFolders.Add(monthFolder);
+        }
+
+        var dayFolder =
+            (from folder in monthFolder.DayFolders where folder.Day == day select folder)
+            .FirstOrDefault();
+        if (dayFolder is null)
+        {
+            dayFolder = new DayFolder() { Day = day, DayOfWeek = dayOfWeek, Month = month, Year = year };
+            monthFolder.DayFolders.Add(dayFolder);
+        }
+
+        dayFolder.MetadataFiles.Add(metadataFilePath); 
+
         this.Sort();
     }
 

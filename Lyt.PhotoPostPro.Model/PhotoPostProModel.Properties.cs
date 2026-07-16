@@ -36,18 +36,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     [JsonRequired]
     public Watermarks Watermarks { get; set; } = new();
 
-    [JsonRequired]
-    public Dictionary<string, ProjectMetadata> Projects { get; set; } = new(8);
-
     #endregion Serialized -  No model changed event
 
     #region Not serialized - No model changed event
-
-    [JsonIgnore]
-    public ProjectMetadata? CurrentProjectMetadata { get; set; } = null;
-
-    [JsonIgnore]
-    public Project? CurrentProject { get; set; } = null;
 
     [JsonIgnore]
     public PostProcess? CurrentPostProcess { get; set; } = null;

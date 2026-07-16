@@ -138,31 +138,42 @@ public sealed class LibraryManager
         return errors == 0;
     }
 
-    public bool AddDroppedFile(Metadata file, byte[] thumbnail)
+    public bool AddDroppedFile(LoadedImage loadedImage)
     {
-        if (this.fileManager is null)
+        if ((this.fileManager is null) || (this.FolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
 
         try
         {
-            if (!File.Exists(file.FullPath))
+            if (!loadedImage.IsPreLoaded)
             {
-                throw new Exception("No such file: " + file.FullPath);
+                throw new Exception("Image is not preloaded.");
+            }
+
+            // ! Checked by loadedImage.IsPreLoaded
+            Metadata metadata = loadedImage.Metadata!;
+
+            // ! Checked by loadedImage.IsPreLoaded
+            byte[] thumbnail = loadedImage.JpgThumbnail!;
+
+            if (!File.Exists(metadata.FullPath))
+            {
+                throw new Exception("No such file: " + metadata.FullPath);
             }
 
             // Create target folder if needed 
-            MetadataFolders metadataFolders = new(file);
+            MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
             // Copy main file - NOT Move 
-            string targetFilename = Path.GetFileName(file.FullPath);
+            string targetFilename = Path.GetFileName(metadata.FullPath);
             string targetPath = Path.Combine(targetFolder, targetFilename);
-            File.Copy(file.FullPath, targetPath, overwrite: true);
+            File.Copy(metadata.FullPath, targetPath, overwrite: true);
 
             // Create thumbnail file 
-            string filenameThumbnail = file.Filename + "_THUMB.jpg";
+            string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
             string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
             File.WriteAllBytes(targetPathThumbnail, thumbnail);
 
@@ -170,22 +181,30 @@ public sealed class LibraryManager
             FileInfo fileInfo = new(targetPath);
             if (!fileInfo.Exists)
             {
-                throw new Exception("Failed to copy file" + file.FullPath);
+                throw new Exception("Failed to copy file" + metadata.FullPath);
             }
 
-            if (fileInfo.Length != file.Length)
+            if (fileInfo.Length != metadata.Length)
             {
-                throw new Exception("Failed to verify file copy" + file.FullPath);
+                throw new Exception("Failed to verify file copy" + metadata.FullPath);
             }
 
             // update metadata 
-            file.HasMovedTo(targetPath);
+            metadata.HasMovedTo(targetPath);
 
             // Finally serialize and save metadata 
-            string filenameMetadata = file.Filename + "_META.json";
+            string filenameMetadata = metadata.Filename + "_META.json";
             string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
-            string serialized = this.fileManager.Serialize<Metadata>(file);
+            string serialized = this.fileManager.Serialize<Metadata>(metadata);
             File.WriteAllText(targetPathMetadata, serialized);
+
+            // Now update in memory data structures 
+            // Add thumbnail to cache 
+            LoadedThumbnail loadedThumbnail = new(Metadata: metadata, ImageBytes: thumbnail);
+            this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
+
+            // Update folder tree 
+            this.FolderTree.UpdateOnFileAdded(metadata, targetPathMetadata);
 
             // All good 
             return true;
@@ -199,12 +218,12 @@ public sealed class LibraryManager
 
     public void LoadThumbnails()
     {
-        if ( this.FolderTree is null)
+        if (this.FolderTree is null)
         {
-            return; 
+            return;
         }
 
-        foreach(var year in this.FolderTree.YearFolders)
+        foreach (var year in this.FolderTree.YearFolders)
         {
             foreach (var month in year.MonthFolders)
             {
@@ -281,7 +300,7 @@ public sealed class LibraryManager
             Task.Delay(2_000).Wait();
             this.GenerateFolderTree();
             Task.Delay(200).Wait();
-            this.GenerateThumbnailCache(); 
+            this.GenerateThumbnailCache();
         });
     }
 
@@ -298,10 +317,10 @@ public sealed class LibraryManager
     public void GenerateThumbnailCache()
     {
         // Explicit background low priority background thread
-        var start = new ParameterizedThreadStart(StaticLoadThumbnails); 
+        var start = new ParameterizedThreadStart(StaticLoadThumbnails);
         Thread lowPriorityThread = new(start);
         lowPriorityThread.Priority = ThreadPriority.Lowest;
         lowPriorityThread.IsBackground = true;
         lowPriorityThread.Start(this);
-    } 
+    }
 }

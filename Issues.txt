@@ -1,8 +1,6 @@
 Bugs 
 ----
 
-- Redesign Project / Process stuff , then refactor.
-
 - Last edited LRU
 
 - App freeze when using combo box ??? 
@@ -19,10 +17,6 @@ Bugs
 
 WIP
 ---
-
-- Camera downloads 
-
-- Masters Folder Management 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization
@@ -56,22 +50,17 @@ Missing Features
 
 - Drop RGB 48 and move on to 4xHalf
 
-- Project : 
-	- Browse 
-	- Create ( partially done ) 
-	- Load
-	- Save 
-	- Delete
-
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Culling Workflow 
+
 
 --- Important ---
 
 - Zoom on viewer windows 
 
 - Tools to show both before / after or just after 
+
 
 --- Nice to Have ---
 

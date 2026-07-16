@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
 
-public sealed class YearFolder : FolderBase
+public sealed class YearFolder 
 {
     public int Year { get; set; }
 
@@ -18,7 +18,7 @@ public sealed class YearFolder : FolderBase
     }
 }
 
-public sealed class MonthFolder : FolderBase
+public sealed class MonthFolder 
 {
     public int Year { get; set; }
 
@@ -38,7 +38,7 @@ public sealed class MonthFolder : FolderBase
     }
 }
 
-public sealed class DayFolder : FolderBase
+public sealed class DayFolder 
 {
     public int Year { get; set; }
 
@@ -49,9 +49,4 @@ public sealed class DayFolder : FolderBase
     public int DayOfWeek { get; set; }
 
     public List<string> MetadataFiles { get; set; } = [];
-}
-
-public class FolderBase
-{
-    public string Path { get; set; } = string.Empty;
 }
