@@ -44,6 +44,7 @@ public sealed partial class LibraryViewModel :
     private YearFolder? selectedYear;
     private MonthFolder? selectedMonth;
     private DayFolder? selectedDay;
+    private LibraryThumbnailViewModel? selectedLibraryThumbnailViewModel;
 
     public LibraryViewModel(PhotoPostProModel photoPostProModel)
     {
@@ -182,10 +183,10 @@ public sealed partial class LibraryViewModel :
             if (thumbnails.Count == 0)
             {
                 // The logic of the folder system should prevent an empty list 
-                if ( Debugger.IsAttached) { Debugger.Break(); }
-            } 
+                if (Debugger.IsAttached) { Debugger.Break(); }
+            }
             else
-            { 
+            {
                 this.OnSelect(thumbnails[0]);
             }
         }
@@ -213,6 +214,7 @@ public sealed partial class LibraryViewModel :
     {
         if (selectedObject is LibraryThumbnailViewModel libraryThumbnailViewModel)
         {
+            this.selectedLibraryThumbnailViewModel = libraryThumbnailViewModel;
             this.SelectedThumbnail = libraryThumbnailViewModel.Thumbnail;
             if (this.SelectedThumnailMetadataViewModel is null)
             {
@@ -228,13 +230,31 @@ public sealed partial class LibraryViewModel :
     [RelayCommand]
     public void OnProcess()
     {
+        if (this.selectedLibraryThumbnailViewModel is null || 
+            this.selectedLibraryThumbnailViewModel.Metadata is null)
+        {
+            return;
+        }
+
+        var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
+        this.model.ProcessImageFromMetadata(metadata);
+
+        var postProcess = this.model.CurrentPostProcess;
+        if (postProcess is not null)
+        {
+            var shell = App.GetRequiredService<ShellViewModel>();
+            shell.EnableAndSelect(ActivatedView.Process);
+        }
+        else
+        {
+            this.Logger.Warning("Failed to create post process from dropped file: ");
+            // TODO : Show error message to user
+        }
+
         var mainWindow = App.MainWindow;
         if (mainWindow.CanMaximize)
         {
             mainWindow.WindowState = WindowState.Maximized;
         }
-
-        //var viewModel = App.GetRequiredService<SingleViewModel>();
-        //viewModel.ProcessCurrentImage();
     }
 }

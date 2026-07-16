@@ -2,6 +2,7 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
+    /// <summary> Start post processing with a LoadedImage </summary>
     public bool ProcessLoadedImage(LoadedImage loadedImage)
     {
         this.CurrentPostProcess = null;
@@ -26,6 +27,36 @@ public sealed partial class PhotoPostProModel : ModelBase
                     // ! because is now Fully Loaded 
                     postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
                 }
+            }
+
+            if (postProcess is null)
+            {
+                return false;
+            }
+
+            this.CurrentPostProcess = postProcess;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false;
+        }
+    }
+
+    /// <summary> Start post processing with Metadata </summary>
+    public bool ProcessImageFromMetadata(Metadata metadata)
+    {
+        this.CurrentPostProcess = null;
+
+        try
+        {
+            PostProcess? postProcess = null;
+            LoadedImage loadedImage = ImageLoader.LoadImage(metadata.FullPath);
+            if (loadedImage.IsFullyLoaded)
+            {
+                // ! because is now Fully Loaded 
+                postProcess = new PostProcess(this, metadata, loadedImage.Image!);
             }
 
             if (postProcess is null)
