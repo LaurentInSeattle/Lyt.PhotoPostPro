@@ -142,7 +142,7 @@ public partial class App : ApplicationBase
         await fileManager.Configure(
             new FileManagerConfiguration(
                 App.Organization, App.Application, App.RootNamespace, App.AssemblyName, App.AssetsFolder,
-                userFolders: ["Projects"]));
+                userFolders: []));
 
         // The localizer needs the File Manager, do not change the order.
         var localizer = App.GetRequiredService<ILocalizer>();

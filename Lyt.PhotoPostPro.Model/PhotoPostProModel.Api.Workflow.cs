@@ -166,13 +166,17 @@ public sealed partial class PhotoPostProModel : ModelBase
                 this.LastResultFrame = frame;
             }
 
-            var steps = this.Workflow.Steps;
-            var castSteps = (from step in steps select step as object).ToList();
+
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string serialized = this.fileManager.Serialize<List<object>>(castSteps);
-            string testPath =
-                System.IO.Path.Combine(desktop, "test.json");
+            var stepsParameters = PostProcessParameters.FromPostProcessWorkflow(this.Workflow); 
+            string serialized = this.fileManager.Serialize<PostProcessParameters>(stepsParameters);
+            string testPath = System.IO.Path.Combine(desktop, "test.json");
             File.WriteAllText(testPath, serialized);
+            var desteps = this.fileManager.Deserialize<PostProcessParameters>(serialized);
+            if ( desteps is PostProcessParameters parameters)
+            {
+                Debug.WriteLine(desteps);
+            }
 
             return true;
         });

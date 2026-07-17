@@ -153,7 +153,12 @@ public sealed partial class LibraryViewModel :
 
     private void ActivateUi()
     {
-        this.Years[0].Select();
+        if (this.Years.Count > 0)
+        {
+            this.Years[0].Select();
+
+            // Toast: Your library is empty 
+        }
     }
 
     private void LoadImages()

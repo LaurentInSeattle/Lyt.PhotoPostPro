@@ -2,8 +2,6 @@
 
 internal static class FilenamesMgr
 {
-    public static readonly string ProjectsFolder = "Projects";
-
     // URL-Safe Base64
     public static string NewShortId()
         => Convert

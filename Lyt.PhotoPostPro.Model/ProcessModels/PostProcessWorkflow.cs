@@ -63,6 +63,19 @@ public sealed class PostProcessWorkflow
 
     public bool CanMoveNext => this.CurrentStepIndex < this.Steps.Count - 1;
 
+    public T Get<T>() where T : PostProcessStep
+    {
+        var step = 
+            (from stp in this.Steps where stp is T stepOfT select (T) stp )
+            .FirstOrDefault();
+        if ( step is null)
+        {
+            throw new Exception("Invalid step type");
+        }
+
+        return step; 
+    }
+
     public bool Begin(Image<Rgb48> originalImage)
     {
         if (this.Steps.Count == 0)
