@@ -264,8 +264,11 @@ public sealed partial class CameraViewModel :
 
         // Sort thumbnails by date ascending 
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
+    }
 
-        // Update visibility of action buttons
+    private void UpdateVisibilityOfActionButtons()
+    {
+        // Update visibility of action buttons depending of checkboxes states 
         var thumbs = this.ThumbnailsPanelViewModel.Thumbnails;
         bool anyToAddToLibrary =
             (from thumb in thumbs where thumb.IsToAddToLibrary select thumb).Any();
@@ -292,16 +295,22 @@ public sealed partial class CameraViewModel :
         if (message.IsSuccess)
         {
             this.downloadedFiles.Add(message.File);
-            this.FileDownloaded =
-                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  deleted from camera.";
 
-            // TODO : Remove thumb from panel 
-                //var thumbnail = new CameraThumbnailViewModel(this, message.Metadata, message.ThumbnailBytes);
-                //this.ThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
+            // Remove thumb from panel 
+            var thumbViewModel = 
+                (from vm in this.ThumbnailsPanelViewModel.Thumbnails
+                 where vm.Metadata.CameraFullPath == message.File
+                 select vm )
+                 .FirstOrDefault();
+            if (thumbViewModel is not null)
+            {
+                this.ThumbnailsPanelViewModel.Thumbnails.Remove(thumbViewModel);
+            }
         }
         else
         {
-            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + " Delete error.";
         }
     }
 
