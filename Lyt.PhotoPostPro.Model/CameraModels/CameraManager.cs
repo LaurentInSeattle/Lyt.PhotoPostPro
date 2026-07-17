@@ -332,6 +332,7 @@ public class CameraManager
                 }
                 else
                 {
+                    Debug.WriteLine("Deleted: " + file);
                     ++deleted;
                 }
 
@@ -351,6 +352,7 @@ public class CameraManager
         }
         finally
         {
+            Debug.WriteLine("Deleted: Files " + deleted + "  Errors: " + errors );
             new DeviceDeleteCompleteMessage(foundDevice, completed, toDelete.Count, deleted, errors).Publish();
         }
     }

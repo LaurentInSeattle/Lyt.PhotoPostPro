@@ -55,18 +55,20 @@
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="folder"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Check"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				Margin="12 0 0 0"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="camera"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Check"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				Margin="12 0 0 0"
 				/>
 			<TextBlock
@@ -78,18 +80,20 @@
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="folder"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Clear"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				Margin="12 0 0 0"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="camera"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Clear"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				Margin="12 0 0 0"
 				/>
 			<TextBlock
@@ -101,17 +105,19 @@
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="folder"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Toggle"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
 				GlyphSource="camera"
+				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Toggle"
-				Width="42" Height="42" 
+				Width="40" Height="40" 
 				Margin="12 0 0 0"
 				/>
 		</StackPanel>
