@@ -27,10 +27,9 @@ Just flagging it so it doesn't surprise you later.
 
 */
 
-
 public class CameraManager
 {
-    public const int UiResponseDelayTime_ms = 66;
+    public const int UiResponseDelayTime_ms = 66; // About one frame
     public const int ReQueryDelayTime_ms = 1_000;
     public const int FastCameraMonitoringTime_ms = 2_500;
     public const int SlowCameraMonitoringTime_ms = 5_000;
@@ -44,12 +43,14 @@ public class CameraManager
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.downloadFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
-        this.ClearDownloadFolder(); 
+        this.ClearDownloadFolder();
     }
 
     public bool IsMonitoring { get; private set; }
 
     public bool IsDownloading { get; private set; }
+
+    public bool IsDeleting { get; private set; }
 
     public void ClearDownloadFolder()
     {
@@ -81,16 +82,16 @@ public class CameraManager
             // Delete all subdirectories recursively
             foreach (string subdirectory in Directory.GetDirectories(this.downloadFolderPath))
             {
-                Directory.Delete(subdirectory, recursive: true); 
+                Directory.Delete(subdirectory, recursive: true);
             }
-        } 
+        }
 
         try
         {
             if (!Directory.Exists(this.downloadFolderPath))
             {
                 // Creates the empty root directory
-                Directory.CreateDirectory(this.downloadFolderPath); 
+                Directory.CreateDirectory(this.downloadFolderPath);
             }
         }
         catch (Exception ex)
@@ -102,10 +103,12 @@ public class CameraManager
         }
     }
 
+    #region Connection 
+
     public void BeginMonitoringCameraConnexion()
     {
         // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
-        // typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
+        typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
 
         this.ctsMonitoring = new CancellationTokenSource();
         Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
@@ -115,6 +118,32 @@ public class CameraManager
     {
         this.ctsMonitoring?.Cancel();
         this.IsMonitoring = false;
+    }
+
+    private void TryConnectTo(FoundDevice foundDevice, MediaDevice device)
+    {
+        try
+        {
+            device.Connect();
+            if (device.IsConnected)
+            {
+                new DeviceStatusMessage(IsConnected: true, foundDevice).Publish();
+                DebugPrintDeviceInfo(device);
+                var files = AllFiles(device);
+                Debug.WriteLine("Found files: " + files.Count);
+                new DeviceFileListMessage(foundDevice, files).Publish();
+                this.IsMonitoring = false;
+            }
+            else
+            {
+                new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+            }
+        }
+        catch (Exception ex)
+        {
+            new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+            Debug.WriteLine($" Error while inspecting device {device.FriendlyName}: {ex.Message}");
+        }
     }
 
     private async void MonitorCameraConnexion(CancellationToken token)
@@ -174,7 +203,7 @@ public class CameraManager
                 }
                 else //  (deviceIds.Length > 1)
                 {
-                    IsMonitoring = false;
+                    this.IsMonitoring = false;
                 }
             }
         }
@@ -184,7 +213,7 @@ public class CameraManager
         }
     }
 
-    public void DisposeDevice (FoundDevice foundDevice)
+    public void DisposeDevice(FoundDevice foundDevice)
     {
         var devices = MediaDevice.GetDevices().ToList();
         MediaDevice? device =
@@ -192,7 +221,7 @@ public class CameraManager
             .FirstOrDefault();
         if (device is not null)
         {
-            device.Dispose() ;
+            device.Dispose();
             return;
         }
     }
@@ -212,12 +241,146 @@ public class CameraManager
         this.TryConnectTo(foundDevice, device);
     }
 
+    private static List<string> AllFiles(MediaDevice device)
+    {
+        HashSet<string> allFiles = [];
+
+        int retries = 3;
+        while (retries > 0)
+        {
+            allFiles.Clear();
+            string[] files =
+                device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
+            foreach (string file in files)
+            {
+                Debug.WriteLine("      File: " + file);
+                allFiles.Add(file);
+            }
+
+            if (allFiles.Count > 0)
+            {
+                break;
+            }
+
+            --retries;
+            Task.Delay(ReQueryDelayTime_ms).Wait();
+        }
+
+        return allFiles.ToList();
+    }
+
+    #endregion Connection 
+
+    #region Deleting Files 
+
+    public void BeginDeletingFiles(FoundDevice foundDevice, List<string> selectedFiles)
+    {
+        this.ctsDownloading = new CancellationTokenSource();
+        Task.Run(async () =>
+        {
+            this.DeleteFiles(foundDevice, selectedFiles, this.ctsDownloading.Token);
+        });
+    }
+
+    public void EndDeletingFiles()
+    {
+        this.ctsDownloading?.Cancel();
+        this.IsDeleting = false;
+    }
+
+    public async void DeleteFiles(FoundDevice foundDevice, List<string> toDelete, CancellationToken token)
+    {
+        bool completed = false;
+        int errors = 0;
+        int deleted = 0;
+        try
+        {
+            var devices = MediaDevice.GetDevices().ToList();
+            MediaDevice? device =
+                (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+                .FirstOrDefault();
+            if (device is null)
+            {
+                new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+                return;
+            }
+
+            if (!device.IsConnected)
+            {
+                this.TryConnectTo(foundDevice, device);
+            }
+
+            if (!device.IsConnected)
+            {
+                // Still not connected 
+                new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+                return;
+            }
+
+            this.IsDeleting = true;
+            foreach (string file in toDelete)
+            {
+                if (token.IsCancellationRequested || !this.IsDeleting)
+                {
+                    break;
+                }
+
+                if (!this.DeleteFile(foundDevice, device, file))
+                {
+                    ++errors;
+                    Debug.WriteLine("Delete error");
+                }
+                else
+                {
+                    ++deleted;
+                }
+
+                await Task.Delay(UiResponseDelayTime_ms, token);
+            }
+
+            completed = true;
+        }
+        catch (TaskCanceledException tce)
+        {
+            Debug.WriteLine($" Task Canceled Exception : {tce.Message}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
+            new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+        }
+        finally
+        {
+            new DeviceDeleteCompleteMessage(foundDevice, completed, toDelete.Count, deleted, errors).Publish();
+        }
+    }
+
+    private bool DeleteFile(FoundDevice foundDevice, MediaDevice device, string file)
+    {
+        try
+        {
+            device.DeleteFile(file);
+            new DeviceFileDeletedMessage(IsSuccess: true, foundDevice, file, "").Publish();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Exception thrown: " + ex);
+            new DeviceFileDeletedMessage(IsSuccess: false, foundDevice, file, "Exception thrown: " + ex).Publish();
+            return false;
+        }
+    }
+
+    #endregion Deleting Files 
+
+    #region Downloading Files 
+
     public void BeginDownloadingFiles(FoundDevice foundDevice, List<string> selectedFiles)
     {
         this.ctsDownloading = new CancellationTokenSource();
-        Task.Run(async () => 
-        { 
-            this.DownloadFiles(foundDevice, selectedFiles, this.ctsDownloading.Token); 
+        Task.Run(async () =>
+        {
+            this.DownloadFiles(foundDevice, selectedFiles, this.ctsDownloading.Token);
         });
     }
 
@@ -256,22 +419,22 @@ public class CameraManager
                 return;
             }
 
-            this.IsDownloading= true;
-            foreach (string file in selectedFiles) 
+            this.IsDownloading = true;
+            foreach (string file in selectedFiles)
             {
-                if (token.IsCancellationRequested || ! this.IsDownloading)
+                if (token.IsCancellationRequested || !this.IsDownloading)
                 {
-                    break; 
+                    break;
                 }
 
                 if (!this.DownloadFile(foundDevice, device, file))
                 {
-                    ++ errors;
+                    ++errors;
                     Debug.WriteLine("Download error");
                 }
                 else
                 {
-                    ++downloads; 
+                    ++downloads;
                 }
 
                 await Task.Delay(UiResponseDelayTime_ms, token);
@@ -291,32 +454,6 @@ public class CameraManager
         finally
         {
             new DeviceDownloadCompleteMessage(foundDevice, completed, selectedFiles.Count, downloads, errors).Publish();
-        }
-    }
-
-    private void TryConnectTo(FoundDevice foundDevice, MediaDevice device)
-    {
-        try
-        {
-            device.Connect();
-            if (device.IsConnected)
-            {
-                new DeviceStatusMessage(IsConnected: true, foundDevice).Publish();
-                DebugPrintDeviceInfo(device);
-                var files = AllFiles(device);
-                Debug.WriteLine("Found files: " + files.Count);
-                new DeviceFileListMessage(foundDevice, files).Publish();
-                this.IsMonitoring = false;
-            }
-            else
-            {
-                new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
-            }
-        }
-        catch (Exception ex)
-        {
-            new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
-            Debug.WriteLine($" Error while inspecting device {device.FriendlyName}: {ex.Message}");
         }
     }
 
@@ -345,16 +482,18 @@ public class CameraManager
             LoadedImage loadedImage = ImageLoader.PreLoadImage(targetPath);
             if (loadedImage.IsSuccess && loadedImage.IsPreLoaded)
             {
+                // ! Verified by loadedImage.IsPreLoaded
+                loadedImage.Metadata!.CameraFullPath = file;
                 string trimmed = Path.GetFileNameWithoutExtension(fileName);
-                string thumbnailName = trimmed + "_THUMB.jpg"; 
+                string thumbnailName = trimmed + "_THUMB.jpg";
                 string thumbnailPath = Path.Combine(this.downloadFolderPath, thumbnailName);
 
                 // ! Verified by loadedImage.IsPreLoaded
-                byte[] thumbnailBytes = loadedImage.JpgThumbnail!; 
+                byte[] thumbnailBytes = loadedImage.JpgThumbnail!;
                 File.WriteAllBytes(thumbnailPath, thumbnailBytes);
                 new DeviceFileDownloadedMessage(
-                    IsSuccess: true, foundDevice, file, targetPath, 
-                    loadedImage.Metadata, 
+                    IsSuccess: true, foundDevice, file, targetPath,
+                    loadedImage.Metadata,
                     thumbnailBytes, thumbnailPath).Publish();
                 return true;
             }
@@ -370,33 +509,7 @@ public class CameraManager
         }
     }
 
-    private static List<string> AllFiles(MediaDevice device)
-    {
-        HashSet<string> allFiles = [];
-
-        int retries = 3;
-        while ( retries > 0)
-        {
-            allFiles.Clear(); 
-            string[] files =
-                device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
-            foreach (string file in files)
-            {
-                Debug.WriteLine("      File: " + file);
-                allFiles.Add(file);
-            }
-
-            if ( allFiles.Count > 0)
-            {
-                break; 
-            }
-
-            -- retries;
-            Task.Delay(ReQueryDelayTime_ms).Wait();
-        }
-
-        return allFiles.ToList();
-    }
+    #endregion Downloading Files 
 
     [Conditional("DEBUG")]
     private static void DebugPrintDeviceInfo(MediaDevice device)
@@ -422,5 +535,4 @@ public class CameraManager
 
         Debug.WriteLine("");
     }
-
 }

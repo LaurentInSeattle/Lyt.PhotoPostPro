@@ -11,7 +11,6 @@
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
-	xmlns:panels="clr-namespace:Lyt.Avalonia.Controls.Panels;assembly=Lyt.Avalonia.Controls"
 	xmlns:virt="clr-namespace:Lyt.PhotoPostPro.Controls.Panels"
 	>
 	<Grid
@@ -47,19 +46,73 @@
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Value="{Binding SortOrder}"
 				/>
-			<glyphs:GlyphButton
-				Style="{StaticResource ControlIconButton}"
-				Layout="TextOnly"
-				Text="Mark All: Add to Library"
-				Command="{Binding OnMarkAllToAddToLibrary}"
-				Margin="40 0 0 0" Width="260" 
+			<TextBlock
+				Margin="12 0 0 0"
+				Text="Check All : "
+				Theme="{StaticResource H3}"
 				/>
 			<glyphs:GlyphButton
-				Style="{StaticResource ControlIconButton}"
-				Layout="TextOnly"
-				Text="Mark All: Remove from Camera"
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="folder"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				CommandParameter="Check"
+				Width="42" Height="42" 
+				Margin="12 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="camera"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
-				Margin="40 0 0 0" Width="260" 
+				CommandParameter="Check"
+				Width="42" Height="42" 
+				Margin="12 0 0 0"
+				/>
+			<TextBlock
+				Margin="24 0 0 0"
+				Text="Clear All : "
+				Theme="{StaticResource H3}"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="folder"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				CommandParameter="Clear"
+				Width="42" Height="42" 
+				Margin="12 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="camera"
+				Command="{Binding OnMarkAllToRemoveFromCamera}"
+				CommandParameter="Clear"
+				Width="42" Height="42" 
+				Margin="12 0 0 0"
+				/>
+			<TextBlock
+				Margin="24 0 0 0"
+				Text="Toggle All : "
+				Theme="{StaticResource H3}"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="folder"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				CommandParameter="Toggle"
+				Width="42" Height="42" 
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="camera"
+				Command="{Binding OnMarkAllToRemoveFromCamera}"
+				CommandParameter="Toggle"
+				Width="42" Height="42" 
+				Margin="12 0 0 0"
 				/>
 		</StackPanel>
 		<TextBlock

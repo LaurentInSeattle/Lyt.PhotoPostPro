@@ -7,10 +7,13 @@ public sealed partial class CameraViewModel :
     IRecipient<DeviceStatusMessage>,
     IRecipient<DeviceFileListMessage>,
     IRecipient<DeviceFileDownloadedMessage>,
-    IRecipient<DeviceDownloadCompleteMessage>
+    IRecipient<DeviceDownloadCompleteMessage>,
+    IRecipient<DeviceFileDeletedMessage>,
+    IRecipient<DeviceDeleteCompleteMessage>
 {
     private readonly PhotoPostProModel model;
     private readonly CameraManager cameraMgr;
+    private readonly LibraryManager libraryMgr;
     private readonly List<string> selectedFiles;
     private readonly List<string> downloadedFiles;
 
@@ -22,6 +25,7 @@ public sealed partial class CameraViewModel :
     {
         this.model = photoPostProModel;
         this.cameraMgr = this.model.CameraManager;
+        this.libraryMgr = this.model.LibraryManager;
         this.selectedFiles = [];
         this.downloadedFiles = [];
         this.ThumbnailsPanelViewModel = new(this.model, this);
@@ -31,6 +35,8 @@ public sealed partial class CameraViewModel :
         this.Subscribe<DeviceFileListMessage>();
         this.Subscribe<DeviceFileDownloadedMessage>();
         this.Subscribe<DeviceDownloadCompleteMessage>();
+        this.Subscribe<DeviceFileDeletedMessage>();
+        this.Subscribe<DeviceDeleteCompleteMessage>();
     }
 
     [ObservableProperty]
@@ -82,7 +88,7 @@ public sealed partial class CameraViewModel :
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
         this.isDownloading = false;
-        this.nothingSaved = true; 
+        this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
     }
 
@@ -115,6 +121,12 @@ public sealed partial class CameraViewModel :
 
     public void Receive(DeviceDownloadCompleteMessage message)
         => Dispatch.OnUiThread(() => { this.OnDeviceDownloadComplete(message); }, DispatcherPriority.Background);
+
+    public void Receive(DeviceFileDeletedMessage message)
+        => Dispatch.OnUiThread(() => { this.OnDeviceFileDeleted(message); }, DispatcherPriority.Background);
+
+    public void Receive(DeviceDeleteCompleteMessage message)
+        => Dispatch.OnUiThread(() => { this.OnDeviceDeleteComplete(message); }, DispatcherPriority.Background);
 
     private void NullifyDevice()
     {
@@ -254,12 +266,12 @@ public sealed partial class CameraViewModel :
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
 
         // Update visibility of action buttons
-        var thumbs = this.ThumbnailsPanelViewModel.Thumbnails; 
+        var thumbs = this.ThumbnailsPanelViewModel.Thumbnails;
         bool anyToAddToLibrary =
             (from thumb in thumbs where thumb.IsToAddToLibrary select thumb).Any();
         if (anyToAddToLibrary)
         {
-            this.AddToLibraryButtonIsDisabled = false; 
+            this.AddToLibraryButtonIsDisabled = false;
         }
 
         bool anyToRemoveFromCamera = (from thumb in thumbs where thumb.IsToRemoveFromCamera select thumb).Any();
@@ -267,6 +279,71 @@ public sealed partial class CameraViewModel :
         {
             this.RemoveFromCameraButtonIsDisabled = false;
         }
+    }
+
+    private void OnDeviceFileDeleted(DeviceFileDeletedMessage message)
+    {
+        if (!this.IsActivated)
+        {
+            // ignore messages if we just moved away 
+            return;
+        }
+
+        if (message.IsSuccess)
+        {
+            this.downloadedFiles.Add(message.File);
+            this.FileDownloaded =
+                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
+
+            // TODO : Remove thumb from panel 
+                //var thumbnail = new CameraThumbnailViewModel(this, message.Metadata, message.ThumbnailBytes);
+                //this.ThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
+        }
+        else
+        {
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
+        }
+    }
+
+    private void OnDeviceDeleteComplete(DeviceDeleteCompleteMessage message)
+    {
+        if (!this.IsActivated)
+        {
+            // ignore messages if we just moved away 
+            return;
+        }
+
+        // Update UI 
+        this.DownloadButtonText = "Begin Transfer";
+        if (message.Completed)
+        {
+            this.FileDownloaded =
+                string.Format(
+                    "Transfer complete: {0} images transfered, other files or errors: {1} ",
+                    message.DeletedCount, message.ErrorCount);
+        }
+        else
+        {
+            this.FileDownloaded = "Deletion Aborted.";
+        }
+
+        // Sort thumbnails by date ascending 
+        this.ThumbnailsPanelViewModel.Sort(ascending: true);
+
+        // Update visibility of action buttons
+        //var thumbs = this.ThumbnailsPanelViewModel.Thumbnails;
+        //bool anyToAddToLibrary =
+        //    (from thumb in thumbs where thumb.IsToAddToLibrary select thumb).Any();
+        //if (anyToAddToLibrary)
+        //{
+        //    this.AddToLibraryButtonIsDisabled = false;
+        //}
+
+        //bool anyToRemoveFromCamera = (from thumb in thumbs where thumb.IsToRemoveFromCamera select thumb).Any();
+        //if (anyToRemoveFromCamera)
+        //{
+        //    this.RemoveFromCameraButtonIsDisabled = false;
+        //}
     }
 
     [RelayCommand]
@@ -304,24 +381,50 @@ public sealed partial class CameraViewModel :
              select thumb.Metadata).ToList();
         if (toAddToLibrary.Count == 0)
         {
+            // TODO : Message User 
             return;
         }
 
-        bool success = this.model.LibraryManager.AddDownloadedFiles(toAddToLibrary);
+        bool success = this.libraryMgr.AddDownloadedFiles(toAddToLibrary);
+        // TODO : Message User about file count 
         if (success)
         {
             this.nothingSaved = false;
-        } 
+        }
     }
 
     [RelayCommand]
     public void OnRemoveFromCamera()
     {
-        if ( this.nothingSaved )
+        if (this.foundDevice is null)
+        {
+            return;
+        }
+
+        if (this.ThumbnailsPanelViewModel.Thumbnails.Count == 0)
+        {
+            return;
+        }
+
+        // LATER 
+        //if ( this.nothingSaved )
+        //{
+        //    // TODO : Message User 
+        //    return; 
+        //}
+
+        // TODO: Later: avoid making that copy 
+        var toRemoveFromCamera =
+            (from thumb in this.ThumbnailsPanelViewModel.Thumbnails
+             where (thumb.IsToRemoveFromCamera) && !string.IsNullOrWhiteSpace(thumb.Metadata.CameraFullPath)
+             select thumb.Metadata.CameraFullPath).ToList();
+        if (toRemoveFromCamera.Count == 0)
         {
             // TODO : Message User 
-            return; 
+            return;
         }
+
+        this.cameraMgr.BeginDeletingFiles(this.foundDevice, toRemoveFromCamera);
     }
 
     public void OnSelect(object selectedObject)

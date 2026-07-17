@@ -15,6 +15,12 @@ public sealed record class DeviceFileDownloadedMessage(
     byte[]? ThumbnailBytes = null, 
     string ThumbnailPath = "");
 
+public sealed record class DeviceFileDeletedMessage(
+    bool IsSuccess,
+    FoundDevice Device,
+    string File,
+    string Path);
+
 public sealed record class DeviceDownloadCompleteMessage(
     FoundDevice Device,
     bool Completed,

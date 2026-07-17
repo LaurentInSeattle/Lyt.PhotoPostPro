@@ -96,20 +96,54 @@ public sealed partial class ThumbnailsPanelViewModel :
     partial void OnSortOrderChanged(bool value) => this.Sort(ascending: value); 
 
     [RelayCommand]
-    public void OnMarkAllToAddToLibrary()
+    public void OnMarkAllToAddToLibrary(object? parameter)
     {
+        if ( parameter is not string operation)
+        {
+            return; 
+        }
+
         foreach (var thumbnailViewModel in this.Thumbnails)
         {
-            thumbnailViewModel.IsToAddToLibrary = true;
+            if (operation == "Check")
+            {
+                thumbnailViewModel.IsToAddToLibrary = true;
+            }
+            else if (operation == "Clear")
+            {
+                thumbnailViewModel.IsToAddToLibrary = false;
+            }
+            else if (operation == "Toggle")
+            {
+                thumbnailViewModel.IsToAddToLibrary = !thumbnailViewModel.IsToAddToLibrary;
+            }
+            // else: nothing 
+
         }
     }
 
     [RelayCommand]
-    public void OnMarkAllToRemoveFromCamera()
+    public void OnMarkAllToRemoveFromCamera(object? parameter)
     {
+        if (parameter is not string operation)
+        {
+            return;
+        }
+
         foreach (var thumbnailViewModel in this.Thumbnails)
         {
-            thumbnailViewModel.IsToRemoveFromCamera = true;
+            if (operation == "Check")
+            {
+                thumbnailViewModel.IsToRemoveFromCamera = true;
+            }
+            else if (operation == "Clear")
+            {
+                thumbnailViewModel.IsToRemoveFromCamera = false;
+            }
+            else if (operation == "Toggle")
+            {
+                thumbnailViewModel.IsToRemoveFromCamera = !thumbnailViewModel.IsToRemoveFromCamera;
+            }
         }
     }
 

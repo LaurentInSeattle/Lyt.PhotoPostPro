@@ -63,6 +63,9 @@ public sealed class Metadata
         }
     }
 
+    /// <summary> Not empty when this image was downloaded from a camera or device.</summary>
+    public string CameraFullPath { get; set; } = string.Empty;
+
     // Basic properties that should always be present 
 
     public string FullPath { get; set; } = string.Empty;

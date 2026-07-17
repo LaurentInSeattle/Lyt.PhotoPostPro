@@ -116,51 +116,51 @@ using System.Xml.Linq;
 
 class Program
 {
-    static void Main()
-    {
-        // 1. Define namespaces
-        XNamespace x = "adobe:ns:meta/";
-        XNamespace rdf = "http://w3.org";
-        XNamespace dc = "http://purl.org";
-        XNamespace xmp = "http://adobe.com";
+	static void Main()
+	{
+		// 1. Define namespaces
+		XNamespace x = "adobe:ns:meta/";
+		XNamespace rdf = "http://w3.org";
+		XNamespace dc = "http://purl.org";
+		XNamespace xmp = "http://adobe.com";
 
-        // 2. Build the XMP RDF structure
-        XDocument xmpDoc = new XDocument(
-            new XElement(x + "xmpmeta",
-                new XAttribute(XNamespace.Xmlns + "x", x),
-                new XElement(rdf + "RDF",
-                    new XAttribute(XNamespace.Xmlns + "rdf", rdf),
-                    new XElement(rdf + "Description",
-                        new XAttribute(rdf + "about", ""),
-                        new XAttribute(XNamespace.Xmlns + "dc", dc),
-                        new XAttribute(XNamespace.Xmlns + "xmp", xmp),
-                        
-                        // Example 1: Simple string property (XMP Rating)
-                        new XElement(xmp + "Rating", "5"),
+		// 2. Build the XMP RDF structure
+		XDocument xmpDoc = new XDocument(
+			new XElement(x + "xmpmeta",
+				new XAttribute(XNamespace.Xmlns + "x", x),
+				new XElement(rdf + "RDF",
+					new XAttribute(XNamespace.Xmlns + "rdf", rdf),
+					new XElement(rdf + "Description",
+						new XAttribute(rdf + "about", ""),
+						new XAttribute(XNamespace.Xmlns + "dc", dc),
+						new XAttribute(XNamespace.Xmlns + "xmp", xmp),
+						
+						// Example 1: Simple string property (XMP Rating)
+						new XElement(xmp + "Rating", "5"),
 
-                        // Example 2: Array property (Dublin Core Creator list)
-                        new XElement(dc + "creator",
-                            new XElement(rdf + "Seq",
-                                new XElement(rdf + "li", "John Doe")
-                            )
-                        ),
+						// Example 2: Array property (Dublin Core Creator list)
+						new XElement(dc + "creator",
+							new XElement(rdf + "Seq",
+								new XElement(rdf + "li", "John Doe")
+							)
+						),
 
-                        // Example 3: Alternative array property (Dublin Core Title description)
-                        new XElement(dc + "title",
-                            new XElement(rdf + "Alt",
-                                new XElement(rdf + "li", "Sunset Over Mountains", 
-                                    new XAttribute(XNamespace.Xml + "lang", "x-default"))
-                            )
-                        )
-                    )
-                )
-            )
-        );
+						// Example 3: Alternative array property (Dublin Core Title description)
+						new XElement(dc + "title",
+							new XElement(rdf + "Alt",
+								new XElement(rdf + "li", "Sunset Over Mountains", 
+									new XAttribute(XNamespace.Xml + "lang", "x-default"))
+							)
+						)
+					)
+				)
+			)
+		);
 
-        // 3. Save as a sidecar file
-        string filePath = "photo.xmp";
-        xmpDoc.Save(filePath);
-        
-        Console.WriteLine($"XMP file successfully created at: {Path.GetFullPath(filePath)}");
-    }
+		// 3. Save as a sidecar file
+		string filePath = "photo.xmp";
+		xmpDoc.Save(filePath);
+		
+		Console.WriteLine($"XMP file successfully created at: {Path.GetFullPath(filePath)}");
+	}
 }
