@@ -1,7 +1,7 @@
 Bugs 
 ----
 
-- Last edited LRU
+- Clone Drawing images 
 
 - App freeze when using combo box ??? 
 
@@ -52,10 +52,12 @@ Missing Features
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
-- Culling Workflow 
+- Culling Workflow and Rating system 
 
 
 --- Important ---
+
+- Last edited LRU
 
 - Zoom on viewer windows 
 
