@@ -69,14 +69,25 @@ public sealed class ImageParameters
         };
 
     // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
-    public static ImageParameters Thumbnail =>
+    public static ImageParameters ThumbnailLibrary =>
         new()
         {
-            PostFix = "_THUMB",
+            PostFix = "_THUMB_EDIT",
             Action = ExportAction.ToDimensions,
             Dimension = 480,
             OutputFormat = OutputFormat.Jpeg,
-            JpegQuality = 86,
+            JpegQuality = 85,
+        };
+
+    // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
+    public static ImageParameters Thumbnail =>
+        new()
+        {
+            PostFix = "_THUMB_EDIT",
+            Action = ExportAction.ToDimensions,
+            Dimension = 480,
+            OutputFormat = OutputFormat.Jpeg,
+            JpegQuality = 85,
         };
 
     public string FileExtension

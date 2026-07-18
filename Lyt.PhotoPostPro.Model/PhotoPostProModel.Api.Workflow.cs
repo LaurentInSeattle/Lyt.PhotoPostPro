@@ -166,19 +166,8 @@ public sealed partial class PhotoPostProModel : ModelBase
                 this.LastResultFrame = frame;
             }
 
-
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var stepsParameters = PostProcessParameters.FromPostProcessWorkflow(this.Workflow); 
-            string serialized = this.fileManager.Serialize<PostProcessParameters>(stepsParameters);
-            string testPath = System.IO.Path.Combine(desktop, "test.json");
-            File.WriteAllText(testPath, serialized);
-            var desteps = this.fileManager.Deserialize<PostProcessParameters>(serialized);
-            if ( desteps is PostProcessParameters parameters)
-            {
-                Debug.WriteLine(desteps);
-            }
-
-            return true;
+            // ! Verified by ApiAction
+            return this.LibraryManager.SaveEdits(this.CurrentPostProcess!.Metadata, this.Workflow); 
         });
 
     public void Finish() =>

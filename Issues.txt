@@ -1,7 +1,7 @@
 Bugs 
 ----
 
-- Clone Drawing images 
+- Read EXIF Camera orientation and auto rotate as needed
 
 - App freeze when using combo box ??? 
 

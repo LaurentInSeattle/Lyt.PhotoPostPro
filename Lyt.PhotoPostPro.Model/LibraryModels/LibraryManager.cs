@@ -54,32 +54,32 @@ public sealed class LibraryManager
             throw new Exception("Library Manager is not initialized.");
         }
 
-        bool AddDownloadedFile(Metadata file)
+        bool AddDownloadedFile(Metadata metadata)
         {
             try
             {
-                if (!File.Exists(file.FullPath))
+                if (!File.Exists(metadata.FullPath))
                 {
-                    throw new Exception("No such file: " + file.FullPath);
+                    throw new Exception("No such file: " + metadata.FullPath);
                 }
 
                 // Create target folder if needed 
-                MetadataFolders metadataFolders = new(file);
+                MetadataFolders metadataFolders = new(metadata);
                 string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
                 // Move main file 
-                string targetFilename = Path.GetFileName(file.FullPath);
+                string targetFilename = Path.GetFileName(metadata.FullPath);
                 string targetPath = Path.Combine(targetFolder, targetFilename);
-                File.Move(file.FullPath, targetPath, overwrite: true);
+                File.Move(metadata.FullPath, targetPath, overwrite: true);
 
                 // Move thumbnail file 
-                string? sourceFolder = Path.GetDirectoryName(file.FullPath);
+                string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
                 if (sourceFolder is null)
                 {
-                    throw new Exception("No source folder for: " + file.FullPath);
+                    throw new Exception("No source folder for: " + metadata.FullPath);
                 }
 
-                string filenameThumbnail = file.Filename + "_THUMB.jpg";
+                string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
                 File.Move(sourcePathThumbnail, targetPathThumbnail, overwrite: true);
@@ -88,21 +88,21 @@ public sealed class LibraryManager
                 FileInfo fileInfo = new(targetPath);
                 if (!fileInfo.Exists)
                 {
-                    throw new Exception("Failed to move file" + file.FullPath);
+                    throw new Exception("Failed to move file" + metadata.FullPath);
                 }
 
-                if (fileInfo.Length != file.Length)
+                if (fileInfo.Length != metadata.Length)
                 {
-                    throw new Exception("Failed to verify file move" + file.FullPath);
+                    throw new Exception("Failed to verify file move" + metadata.FullPath);
                 }
 
                 // update metadata 
-                file.HasMovedTo(targetPath);
+                metadata.HasMovedTo(targetPath);
 
                 // Finally serialize and save metadata 
-                string filenameMetadata = file.Filename + "_META.json";
+                string filenameMetadata = metadata.Filename + "_META.json";
                 string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
-                string serialized = this.fileManager.Serialize<Metadata>(file);
+                string serialized = this.fileManager.Serialize<Metadata>(metadata);
                 File.WriteAllText(targetPathMetadata, serialized);
 
                 return true;
@@ -248,6 +248,38 @@ public sealed class LibraryManager
         }
     }
 
+    public void UpdateThumbnailCache(Metadata metadata, string pathThumbnail)
+    {
+        try
+        {
+            byte[] imageBytes = File.ReadAllBytes(pathThumbnail);
+            LoadedThumbnail loadedThumbnail = new(metadata, imageBytes);
+
+            // Kinda hackish !
+            string endsWith = "_THUMB_EDIT.jpg";
+            if ( !pathThumbnail.EndsWith(endsWith))
+            {
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                return; 
+            }
+
+            string key = pathThumbnail.Replace(endsWith, "_META.json");
+
+#if DEBUG
+            if (!this.LoadedThumbnails.ContainsKey(key))
+            {
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                throw new Exception("No folder key");
+            }
+#endif 
+            this.LoadedThumbnails[key] = loadedThumbnail;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
+    }
+
     private LoadedThumbnail? LoadThumbnail(string metadataFilePath)
     {
         try
@@ -266,8 +298,14 @@ public sealed class LibraryManager
                 throw new Exception("Inavlid path: " + folderPath);
             }
 
-            string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
-            string pathThumbnail = Path.Combine(folderPath, filenameThumbnail);
+            string filenameThumbnailEdit = metadata.Filename + "_THUMB_EDIT.jpg";
+            string pathThumbnail = Path.Combine(folderPath, filenameThumbnailEdit);
+            if (!File.Exists(pathThumbnail))
+            {
+                string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
+                pathThumbnail = Path.Combine(folderPath, filenameThumbnail);
+            }
+
             byte[] imageBytes = File.ReadAllBytes(pathThumbnail);
             return new LoadedThumbnail(metadata, imageBytes);
         }
@@ -318,9 +356,45 @@ public sealed class LibraryManager
     {
         // Explicit background low priority background thread
         var start = new ParameterizedThreadStart(StaticLoadThumbnails);
-        Thread lowPriorityThread = new(start);
-        lowPriorityThread.Priority = ThreadPriority.Lowest;
-        lowPriorityThread.IsBackground = true;
+        Thread lowPriorityThread = new(start)
+        {
+            Priority = ThreadPriority.Lowest,
+            IsBackground = true
+        };
         lowPriorityThread.Start(this);
+    }
+
+    public bool SaveEdits(Metadata metadata, PostProcessWorkflow workflow)
+    {
+        if (this.fileManager is null)
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
+            // Create target folder if needed 
+            MetadataFolders metadataFolders = new(metadata);
+            string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
+            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
+            if (sourceFolder is null)
+            {
+                throw new Exception("No source folder for: " + metadata.FullPath);
+            }
+
+            string filenameEdit = metadata.Filename + "_EDIT.json";
+            string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
+            var stepsParameters = PostProcessParameters.FromPostProcessWorkflow(workflow);
+            string serialized = this.fileManager.Serialize<PostProcessParameters>(stepsParameters);
+            File.WriteAllText(targetPathEdit, serialized);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return false;
+        }
     }
 }

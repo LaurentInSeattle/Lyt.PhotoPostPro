@@ -53,7 +53,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         // Create subdirectory for exported images
         string sourceImagePath;
         string fileName;
-        string subDirectory;
+        string subDirectoryExport;
         try
         {
             string exportFolderPath = model.LibraryManager.ExportsFolderPath;
@@ -68,10 +68,10 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
             string timestamp = FileManagerModel.BriefTimestampString();
             string subDirName = ExportTag + fileName + "_" + timestamp;
-            subDirectory = System.IO.Path.Combine(exportFolderPath, subDirName);
-            if (!Directory.Exists(subDirectory))
+            subDirectoryExport = System.IO.Path.Combine(exportFolderPath, subDirName);
+            if (!Directory.Exists(subDirectoryExport))
             {
-                Directory.CreateDirectory(subDirectory);
+                Directory.CreateDirectory(subDirectoryExport);
             }
         }
         catch (Exception e)
@@ -85,12 +85,13 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        foreach (var imageParameters in exportParameters.Images)
+        string ExportImage (ImageParameters imageParameters, string folderPath)
         {
             try
             {
                 // Resize and rescale 
-                Image<Rgb48> imageToResize = this.ResultImage.Clone();
+                // ! Compiler fail ? Verified at begin of method 
+                Image<Rgb48> imageToResize = this.ResultImage!.Clone();
                 switch (imageParameters.Action)
                 {
                     default:
@@ -134,7 +135,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                     {
                         // Adding watermark : Placement 
                         int fontSpace = (int)(watermark.FontSize * 0.7);
-                        PointF origin = new(imageWithWatermark.Width / 2, 0.8f * imageWithWatermark.Height / 2 );
+                        PointF origin = new(imageWithWatermark.Width / 2, 0.8f * imageWithWatermark.Height / 2);
 
                         // Adding watermark : Drawing
                         Font font = SystemFonts.CreateFont(watermark.FontFamily, watermark.FontSize, watermark.FontStyle);
@@ -143,9 +144,9 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                             HorizontalAlignment = HorizontalAlignment.Center,
                             TextAlignment = TextAlignment.Center,
                             Origin = origin,
-                            LayoutMode =  LayoutMode.HorizontalTopBottom,
-                            MaxLines = 20, 
-                            WordBreaking = WordBreaking.Standard,       
+                            LayoutMode = LayoutMode.HorizontalTopBottom,
+                            MaxLines = 20,
+                            WordBreaking = WordBreaking.Standard,
                             WrappingLength = imageWithWatermark.Width * 0.9f, // Wrap text to 90% of image width
                         };
 
@@ -233,18 +234,40 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 var encoder = imageParameters.ImageEncoder;
                 string extension = imageParameters.FileExtension;
                 string exportPath =
-                    System.IO.Path.Combine(subDirectory, fileName + imageParameters.PostFix + extension);
+                    System.IO.Path.Combine(folderPath, fileName + imageParameters.PostFix + extension);
                 finalImage.Save(exportPath, encoder);
+                return exportPath; 
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
                 if (Debugger.IsAttached) Debugger.Break();
-                return null;
+                return string.Empty;
             }
-
         }
 
+        // Create target folder if needed 
+        var postProcess = this.PostProcessWorkflow.PostProcess; 
+        var libraryManager = postProcess.Model.LibraryManager; 
+        var metadata = postProcess.Metadata; 
+        MetadataFolders metadataFolders = new(metadata);
+        string libraryFolderPath = libraryManager.LibraryFolderPath; 
+        string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(libraryFolderPath);
+        string? imageLibraryFolderPath = System.IO.Path.GetDirectoryName(metadata.FullPath);
+        if (imageLibraryFolderPath is null)
+        {
+            throw new Exception("No source folder for: " + metadata.FullPath);
+        }
+
+        string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
+        libraryManager.UpdateThumbnailCache(metadata, thumbnailPath); 
+
+        foreach (var imageParameters in exportParameters.Images)
+        {
+            _ = ExportImage(imageParameters, subDirectoryExport);
+        }
+
+        // Must return Frame? for base class override compliance 
         return null;
     }
 }
