@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Assets\Luts\BlueArchitecture.cube" />
     <None Remove="Assets\Luts\CrispAutumn.cube" />
+    <None Remove="Assets\Luts\GrainyFilm.cube" />
+    <None Remove="Assets\Luts\Kodachrome200.cube" />
     <None Remove="Assets\Luts\LongBeachMorning.cube" />
     <None Remove="Assets\Luts\MagicHour.cube" />
   </ItemGroup>
@@ -17,6 +19,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\Luts\BlueArchitecture.cube" />
     <EmbeddedResource Include="Assets\Luts\CrispAutumn.cube" />
+    <EmbeddedResource Include="Assets\Luts\GrainyFilm.cube" />
+    <EmbeddedResource Include="Assets\Luts\Kodachrome200.cube" />
     <EmbeddedResource Include="Assets\Luts\LongBeachMorning.cube" />
     <EmbeddedResource Include="Assets\Luts\MagicHour.cube" />
   </ItemGroup>
