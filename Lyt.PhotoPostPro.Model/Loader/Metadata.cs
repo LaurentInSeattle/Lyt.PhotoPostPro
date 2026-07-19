@@ -4,6 +4,14 @@ public sealed class Metadata
 {
     private const float Megabytes = 1024.0f * 1024.0f;
 
+    public enum OrientationAction
+    {
+        None,
+        Rotate90Cw,
+        Rotate90Ccw,
+        Rotate180,
+    }
+
     // Property setters are made public for JSON serialization 
     public Metadata() {  /* Default CTOR required for deserialization */ }
 
@@ -32,7 +40,7 @@ public sealed class Metadata
             this.Extension = extension.Replace(".", "").ToUpperInvariant();
             float length = fileInfo.Length / Megabytes;
             this.SizeMB = string.Format("{0:F1} MB", length);
-            this.Length = fileInfo.Length; 
+            this.Length = fileInfo.Length;
             this.FileDateUTC = fileInfo.CreationTimeUtc;
         }
         else
@@ -62,6 +70,10 @@ public sealed class Metadata
             }
         }
     }
+
+    public bool IsOrientationActionRequired =>  this.OrientationActionRequired != OrientationAction.None;
+
+    public OrientationAction OrientationActionRequired { get; set; } = OrientationAction.None;
 
     /// <summary> Not empty when this image was downloaded from a camera or device.</summary>
     public string CameraFullPath { get; set; } = string.Empty;
@@ -123,15 +135,15 @@ public sealed class Metadata
     public bool HasLocationMetadata => double.IsNormal(this.Latitude) && double.IsNormal(this.Longitude);
 
     // Folder change ONLY, name and extension do stay the same
-    public void HasMovedTo ( string fullPath ) => this.FullPath = fullPath;
+    public void HasMovedTo(string fullPath) => this.FullPath = fullPath;
 
     public void GetLibraryFolders(out int year, out int month, out int day, out int dayOfWeek)
     {
-        DateTime date = this.Captured != DateTime.MinValue ? this.Captured : this.FileDateUTC; 
+        DateTime date = this.Captured != DateTime.MinValue ? this.Captured : this.FileDateUTC;
         year = date.Year;
         month = date.Month;
         day = date.Day;
-        dayOfWeek = (int) date.DayOfWeek;
+        dayOfWeek = (int)date.DayOfWeek;
     }
 
     // DO NOT simplify collection ?
@@ -371,12 +383,37 @@ public sealed class Metadata
                     {
                         this.HasExifMetadata = true;
                     }
+
+                    if (tagName == "Orientation")
+                    {
+                        this.ManageOrientation(description);
+                    }
                 }
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.ToString());
+        }
+    }
+
+    private void ManageOrientation(string description)
+    {
+        if (description.Contains("Rotate 90 CW"))
+        {
+            this.OrientationActionRequired = OrientationAction.Rotate90Cw;
+        }
+        else if (description.Contains("Rotate 270 CW"))
+        {
+            this.OrientationActionRequired = OrientationAction.Rotate90Ccw;
+        }
+        else if (description.Contains("Rotate 180"))
+        {
+            this.OrientationActionRequired = OrientationAction.Rotate180;
+        }
+        else
+        {
+            this.OrientationActionRequired = OrientationAction.None; 
         }
     }
 }

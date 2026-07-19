@@ -1,4 +1,20 @@
 
+To programmatically rotate an image based on its EXIF data, you must read the EXIF Orientation tag (tag ID 0x0112), 
+apply the corresponding geometric rotation/flip, and reset the EXIF tag to 1 (Normal) so that other applications 
+do not rotate the image a second time.
+The chart below lists how the 8 standard EXIF values map to their required physical adjustments:
+
+1 Horizontal (Normal)None
+2 Mirror horizontal Flip horizontally
+3 Rotated 180° Rotate 180°
+4 Mirror vertical Flip vertically
+5 Mirror horizontal + Rotate 270° CW  Flip horizontally + Rotate 270° CW
+6 Rotated 90° CW   Rotate 90° CW
+7 Mirror horizontal + Rotate 90° CW  Flip horizontally + Rotate 90° CW
+8 Rotated 270° CW  Rotate 270° CW
+
+
+
 --- 
 
 https://imagecompression.info/test_images/  
