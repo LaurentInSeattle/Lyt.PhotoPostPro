@@ -10,6 +10,7 @@ public sealed partial class LibraryViewModel :
     private const double DayButtonWidth = 140.0;
 
     private readonly PhotoPostProModel model;
+    private readonly LibraryManager libraryMgr;
 
     // Will NEED to localize
     private static readonly string[] MonthString =
@@ -49,27 +50,13 @@ public sealed partial class LibraryViewModel :
     public LibraryViewModel(PhotoPostProModel photoPostProModel)
     {
         this.model = photoPostProModel;
+        this.libraryMgr = photoPostProModel.LibraryManager;
         this.LibraryThumbnailsPanelViewModel = new(this.model, this);
     }
 
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-
-        var folderTree = this.model.LibraryManager.FolderTree;
-        if (folderTree is null)
-        {
-            return;
-        }
-
-        List<SelectorButtonViewModel> listYears = [];
-        foreach (var year in folderTree.YearFolders)
-        {
-            var vm = new SelectorButtonViewModel(year.Year.ToString(), YearButtonWidth, this.OnSelectYear, year);
-            listYears.Add(vm);
-        }
-
-        this.Years = listYears;
         Schedule.OnUiThread(66, this.ActivateUi, DispatcherPriority.Background);
     }
 
@@ -90,6 +77,51 @@ public sealed partial class LibraryViewModel :
 
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Days { get; set; } = [];
+
+    private void ActivateUi()
+    {
+        // TODO
+        // Show some wait spinner 
+
+        // Five seconds to load all thumbs 
+        int retries = 50;
+        while (this.libraryMgr.IsLoading && retries > 0)
+        {
+            Task.Delay(100).Wait();
+            --retries;
+        }
+
+        Debug.WriteLine(" Startup Retry count: " + retries);
+
+        var folderTree = this.libraryMgr.FolderTree;
+        if (folderTree is null)
+        {
+            return;
+        }
+
+        List<SelectorButtonViewModel> listYears = [];
+        foreach (var year in folderTree.YearFolders)
+        {
+            var vm = new SelectorButtonViewModel(year.Year.ToString(), YearButtonWidth, this.OnSelectYear, year);
+            listYears.Add(vm);
+        }
+
+        this.Years = listYears;
+
+        if (this.Years.Count > 0)
+        {
+            // Need to schedule so that the view is bound 
+            Schedule.OnUiThread(
+                66, 
+                ()=> { this.Years[0].Select(); } , 
+                DispatcherPriority.Background);            
+        }
+        else
+        {
+            // TODO 
+            // Toast: Your library is empty 
+        }
+    }
 
     private void OnSelectYear(object? tag)
     {
@@ -149,16 +181,6 @@ public sealed partial class LibraryViewModel :
         this.selectedDay = day;
 
         this.LoadImages();
-    }
-
-    private void ActivateUi()
-    {
-        if (this.Years.Count > 0)
-        {
-            this.Years[0].Select();
-
-            // Toast: Your library is empty 
-        }
     }
 
     private void LoadImages()

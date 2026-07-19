@@ -35,6 +35,8 @@ public sealed class LibraryManager
 
     public FolderTree? FolderTree { get; private set; }
 
+    public bool IsLoading { get; private set; }
+
     public string LibraryFolderPath => this.libraryFolderPath;
 
     public string ExportsFolderPath => this.exportsFolderPath;
@@ -42,6 +44,7 @@ public sealed class LibraryManager
     public void Initialize(FileManagerModel fileManagerModel)
     {
         this.fileManager = fileManagerModel;
+        this.IsLoading = true;
         this.GenerateInitialFolderTree();
     }
 
@@ -104,6 +107,15 @@ public sealed class LibraryManager
                 string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
                 string serialized = this.fileManager.Serialize<Metadata>(metadata);
                 File.WriteAllText(targetPathMetadata, serialized);
+
+                // Now update in memory data structures 
+                // Add thumbnail to cache 
+                byte[] thumbnail = File.ReadAllBytes(targetPathThumbnail);
+                LoadedThumbnail loadedThumbnail = new(Metadata: metadata, ImageBytes: thumbnail);
+                this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
+
+                // Update folder tree 
+                this.FolderTree?.UpdateOnFileAdded(metadata, targetPathMetadata);
 
                 return true;
             }
@@ -246,6 +258,8 @@ public sealed class LibraryManager
                 }
             }
         }
+
+        this.IsLoading = false;
     }
 
     public void UpdateThumbnailCache(Metadata metadata, string pathThumbnail)
@@ -257,10 +271,10 @@ public sealed class LibraryManager
 
             // Kinda hackish !
             string endsWith = "_THUMB_EDIT.jpg";
-            if ( !pathThumbnail.EndsWith(endsWith))
+            if (!pathThumbnail.EndsWith(endsWith))
             {
                 if (Debugger.IsAttached) { Debugger.Break(); }
-                return; 
+                return;
             }
 
             string key = pathThumbnail.Replace(endsWith, "_META.json");

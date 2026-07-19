@@ -3,7 +3,9 @@ Bugs
 
 - Read EXIF Camera orientation and auto rotate as needed
 
-- App freeze when using combo box ??? 
+- Adding files to library from camera view does not update the thumbs
+
+- App freeze when using combo box ??? Avalonia issue
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -41,6 +43,8 @@ TODO First : Single Image Process
 - UI to pick up exports parameters 
 
 - UI to define signature and watermark
+
+- Save color grading as a LUT 
 
 
 Missing Features 

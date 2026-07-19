@@ -170,256 +170,256 @@ class Program
 
 public class LutGenerator
 {
-    // Generates a 32x32x32 Identity LUT
-    public static Color[,,] CreateIdentityLut(int size = 32)
-    {
-        Color[,,] lut = new Color[size, size, size];
-        for (int b = 0; b < size; b++)
-        {
-            for (int g = 0; g < size; g++)
-            {
-                for (int r = 0; r < size; r++)
-                {
-                    int rValue = (r * 255) / (size - 1);
-                    int gValue = (g * 255) / (size - 1);
-                    int bValue = (b * 255) / (size - 1);
-                    lut[r, g, b] = Color.FromArgb(rValue, gValue, bValue);
-                }
-            }
-        }
-        return lut;
-    }
+	// Generates a 32x32x32 Identity LUT
+	public static Color[,,] CreateIdentityLut(int size = 32)
+	{
+		Color[,,] lut = new Color[size, size, size];
+		for (int b = 0; b < size; b++)
+		{
+			for (int g = 0; g < size; g++)
+			{
+				for (int r = 0; r < size; r++)
+				{
+					int rValue = (r * 255) / (size - 1);
+					int gValue = (g * 255) / (size - 1);
+					int bValue = (b * 255) / (size - 1);
+					lut[r, g, b] = Color.FromArgb(rValue, gValue, bValue);
+				}
+			}
+		}
+		return lut;
+	}
 
-    // Applies a basic color-matching algorithm (e.g., Simple Gain/Offset)
-    public static Color[,,] ApplyColorMatching(Color[,,] identityLut, Bitmap sourceImage, Bitmap targetImage)
-    {
-        int size = identityLut.GetLength(0);
-        Color[,,] transformedLut = new Color[size, size, size];
+	// Applies a basic color-matching algorithm (e.g., Simple Gain/Offset)
+	public static Color[,,] ApplyColorMatching(Color[,,] identityLut, Bitmap sourceImage, Bitmap targetImage)
+	{
+		int size = identityLut.GetLength(0);
+		Color[,,] transformedLut = new Color[size, size, size];
 
-        // 1. Calculate color statistics for source and target (mean/variance)
-        // (Insert your statistical color transfer algorithm here, e.g., Reinhard algorithm)
-        // 2. Map those transformations onto the colors of the identityLut.
+		// 1. Calculate color statistics for source and target (mean/variance)
+		// (Insert your statistical color transfer algorithm here, e.g., Reinhard algorithm)
+		// 2. Map those transformations onto the colors of the identityLut.
 
-        // Example mock transformation mapping
-        for (int b = 0; b < size; b++)
-        {
-            for (int g = 0; g < size; g++)
-            {
-                for (int r = 0; r < size; r++)
-                {
-                    Color originalColor = identityLut[r, g, b];
-                    
-                    // Apply your mathematical color correction here
-                    // e.g., shift hues, increase saturation based on two images
-                    int newR = Math.Min(255, originalColor.R + 10); 
-                    int newG = Math.Min(255, originalColor.G);
-                    int newB = Math.Min(255, originalColor.B - 15);
+		// Example mock transformation mapping
+		for (int b = 0; b < size; b++)
+		{
+			for (int g = 0; g < size; g++)
+			{
+				for (int r = 0; r < size; r++)
+				{
+					Color originalColor = identityLut[r, g, b];
+					
+					// Apply your mathematical color correction here
+					// e.g., shift hues, increase saturation based on two images
+					int newR = Math.Min(255, originalColor.R + 10); 
+					int newG = Math.Min(255, originalColor.G);
+					int newB = Math.Min(255, originalColor.B - 15);
 
-                    transformedLut[r, g, b] = Color.FromArgb(newR, newG, newB);
-                }
-            }
-        }
-        return transformedLut;
-    }
+					transformedLut[r, g, b] = Color.FromArgb(newR, newG, newB);
+				}
+			}
+		}
+		return transformedLut;
+	}
 
-    // Exports the 3D LUT to .cube format
-    public static void ExportToCube(Color[,,] lut, string filePath)
-    {
-        int size = lut.GetLength(0);
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            writer.WriteLine("LUT_3D_SIZE " + size);
-            writer.WriteLine("");
+	// Exports the 3D LUT to .cube format
+	public static void ExportToCube(Color[,,] lut, string filePath)
+	{
+		int size = lut.GetLength(0);
+		using (StreamWriter writer = new StreamWriter(filePath))
+		{
+			writer.WriteLine("LUT_3D_SIZE " + size);
+			writer.WriteLine("");
 
-            for (int b = 0; b < size; b++)
-            {
-                for (int g = 0; g < size; g++)
-                {
-                    for (int r = 0; r < size; r++)
-                    {
-                        Color c = lut[r, g, b];
-                        writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
-                    }
-                }
-            }
-        }
-    }
+			for (int b = 0; b < size; b++)
+			{
+				for (int g = 0; g < size; g++)
+				{
+					for (int r = 0; r < size; r++)
+					{
+						Color c = lut[r, g, b];
+						writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
+					}
+				}
+			}
+		}
+	}
 }
 
 public class ReinhardLutGenerator
 {
-    // High-performance struct to hold statistical data for the 3 channels
-    public struct ImageStats
-    {
-        public double MeanL, MeanA, MeanB;
-        public double StdL, StdA, StdB;
-    }
+	// High-performance struct to hold statistical data for the 3 channels
+	public struct ImageStats
+	{
+		public double MeanL, MeanA, MeanB;
+		public double StdL, StdA, StdB;
+	}
 
-    // Main entry method to generate and save the LUT
-    public static void GenerateReinhardLut(string sourcePath, string targetPath, string outputCubePath, int lutSize = 32)
-    {
-        using Image<Rgb24> source = Image.Load<Rgb24>(sourcePath);
-        using Image<Rgb24> target = Image.Load<Rgb24>(targetPath);
+	// Main entry method to generate and save the LUT
+	public static void GenerateReinhardLut(string sourcePath, string targetPath, string outputCubePath, int lutSize = 32)
+	{
+		using Image<Rgb24> source = Image.Load<Rgb24>(sourcePath);
+		using Image<Rgb24> target = Image.Load<Rgb24>(targetPath);
 
-        // 1. Calculate color statistics for both images in lab space
-        ImageStats sourceStats = CalculateImageStats(source);
-        ImageStats targetStats = CalculateImageStats(target);
+		// 1. Calculate color statistics for both images in lab space
+		ImageStats sourceStats = CalculateImageStats(source);
+		ImageStats targetStats = CalculateImageStats(target);
 
-        // 2. Generate the Identity LUT matrix
-        Rgb24[,,] identityLut = CreateIdentityLut(lutSize);
-        Rgb24[,,] transformedLut = new Rgb24[lutSize, lutSize, lutSize];
+		// 2. Generate the Identity LUT matrix
+		Rgb24[,,] identityLut = CreateIdentityLut(lutSize);
+		Rgb24[,,] transformedLut = new Rgb24[lutSize, lutSize, lutSize];
 
-        // 3. Map Reinhard color transfer onto the LUT grid points
-        for (int b = 0; b  img)
-    {
-        int count = img.Width * img.Height;
-        double sumL = 0, sumA = 0, sumB = 0;
-        double[,] labPixels = new double[count, 3];
+		// 3. Map Reinhard color transfer onto the LUT grid points
+		for (int b = 0; b  img)
+	{
+		int count = img.Width * img.Height;
+		double sumL = 0, sumA = 0, sumB = 0;
+		double[,] labPixels = new double[count, 3];
 
-        int idx = 0;
-        img.ProcessPixelRows(accessor =>
-        {
-            for (int y = 0; y < accessor.Height; y++)
-            {
-                var row = accessor.GetRowSpan(y);
-                for (int x = 0; x < accessor.Width; x++)
-                {
-                    var lab = RgbToLab(row[x]);
-                    labPixels[idx, 0] = lab.L;
-                    labPixels[idx, 1] = lab.A;
-                    labPixels[idx, 2] = lab.B;
+		int idx = 0;
+		img.ProcessPixelRows(accessor =>
+		{
+			for (int y = 0; y < accessor.Height; y++)
+			{
+				var row = accessor.GetRowSpan(y);
+				for (int x = 0; x < accessor.Width; x++)
+				{
+					var lab = RgbToLab(row[x]);
+					labPixels[idx, 0] = lab.L;
+					labPixels[idx, 1] = lab.A;
+					labPixels[idx, 2] = lab.B;
 
-                    sumL += lab.L;
-                    sumA += lab.A;
-                    sumB += lab.B;
-                    idx++;
-                }
-            }
-        });
+					sumL += lab.L;
+					sumA += lab.A;
+					sumB += lab.B;
+					idx++;
+				}
+			}
+		});
 
-        ImageStats stats = new ImageStats
-        {
-            MeanL = sumL / count,
-            MeanA = sumA / count,
-            MeanB = sumB / count
-        };
+		ImageStats stats = new ImageStats
+		{
+			MeanL = sumL / count,
+			MeanA = sumA / count,
+			MeanB = sumB / count
+		};
 
-        double varL = 0, varA = 0, varB = 0;
-        for (int i = 0; i < count; i++)
-        {
-            varL += Math.Pow(labPixels[i, 0] - stats.MeanL, 2);
-            varA += Math.Pow(labPixels[i, 1] - stats.MeanA, 2);
-            varB += Math.Pow(labPixels[i, 2] - stats.MeanB, 2);
-        }
+		double varL = 0, varA = 0, varB = 0;
+		for (int i = 0; i < count; i++)
+		{
+			varL += Math.Pow(labPixels[i, 0] - stats.MeanL, 2);
+			varA += Math.Pow(labPixels[i, 1] - stats.MeanA, 2);
+			varB += Math.Pow(labPixels[i, 2] - stats.MeanB, 2);
+		}
 
-        // Guard against division by zero on flat/solid color images
-        stats.StdL = Math.Max(0.0001, Math.Sqrt(varL / count));
-        stats.StdA = Math.Max(0.0001, Math.Sqrt(varA / count));
-        stats.StdB = Math.Max(0.0001, Math.Sqrt(varB / count));
+		// Guard against division by zero on flat/solid color images
+		stats.StdL = Math.Max(0.0001, Math.Sqrt(varL / count));
+		stats.StdA = Math.Max(0.0001, Math.Sqrt(varA / count));
+		stats.StdB = Math.Max(0.0001, Math.Sqrt(varB / count));
 
-        return stats;
-    }
+		return stats;
+	}
 
-    private static Rgb24 MatchColor(Rgb24 srcColor, ImageStats src, ImageStats tgt)
-    {
-        // Convert input grid point color to Lab
-        var (l, a, b) = RgbToLab(srcColor);
+	private static Rgb24 MatchColor(Rgb24 srcColor, ImageStats src, ImageStats tgt)
+	{
+		// Convert input grid point color to Lab
+		var (l, a, b) = RgbToLab(srcColor);
 
-        // Scale and shift based on standard deviation ratios and means
-        l = ((l - src.MeanL) * (tgt.StdL / src.StdL)) + tgt.MeanL;
-        a = ((a - src.MeanA) * (tgt.StdA / src.StdA)) + tgt.MeanA;
-        b = ((b - src.MeanB) * (tgt.StdB / src.StdB)) + tgt.MeanB;
+		// Scale and shift based on standard deviation ratios and means
+		l = ((l - src.MeanL) * (tgt.StdL / src.StdL)) + tgt.MeanL;
+		a = ((a - src.MeanA) * (tgt.StdA / src.StdA)) + tgt.MeanA;
+		b = ((b - src.MeanB) * (tgt.StdB / src.StdB)) + tgt.MeanB;
 
-        return LabToRgb(l, a, b);
-    }
+		return LabToRgb(l, a, b);
+	}
 
-    // Color conversion pipeline: RGB -> XYZ -> LMS -> log10(LMS) -> lab
-    private static (double L, double A, double B) RgbToLab(Rgb24 rgb)
-    {
-        double r = rgb.R / 255.0;
-        double g = rgb.G / 255.0;
-        double b = rgb.B / 255.0;
+	// Color conversion pipeline: RGB -> XYZ -> LMS -> log10(LMS) -> lab
+	private static (double L, double A, double B) RgbToLab(Rgb24 rgb)
+	{
+		double r = rgb.R / 255.0;
+		double g = rgb.G / 255.0;
+		double b = rgb.B / 255.0;
 
-        // RGB to LMS matrix multiplication
-        double L = (0.3811 * r) + (0.5783 * g) + (0.0402 * b);
-        double M = (0.1967 * r) + (0.7244 * g) + (0.0789 * b);
-        double S = (0.0241 * r) + (0.1288 * g) + (0.8444 * b);
+		// RGB to LMS matrix multiplication
+		double L = (0.3811 * r) + (0.5783 * g) + (0.0402 * b);
+		double M = (0.1967 * r) + (0.7244 * g) + (0.0789 * b);
+		double S = (0.0241 * r) + (0.1288 * g) + (0.8444 * b);
 
-        // Log space transform (handle zeros gracefully)
-        L = L > 0 ? Math.Log10(L) : -5.0;
-        M = M > 0 ? Math.Log10(M) : -5.0;
-        S = S > 0 ? Math.Log10(S) : -5.0;
+		// Log space transform (handle zeros gracefully)
+		L = L > 0 ? Math.Log10(L) : -5.0;
+		M = M > 0 ? Math.Log10(M) : -5.0;
+		S = S > 0 ? Math.Log10(S) : -5.0;
 
-        // LMS to Ruderman lab space matrix multiplication
-        double labL = (L + M + S) / Math.Sqrt(3);
-        double labA = (L + M - (2 * S)) / Math.Sqrt(6);
-        double labB = (L - (2 * M)) / Math.Sqrt(2);
+		// LMS to Ruderman lab space matrix multiplication
+		double labL = (L + M + S) / Math.Sqrt(3);
+		double labA = (L + M - (2 * S)) / Math.Sqrt(6);
+		double labB = (L - (2 * M)) / Math.Sqrt(2);
 
-        return (labL, labA, labB);
-    }
+		return (labL, labA, labB);
+	}
 
-    // Color conversion pipeline: lab -> log10(LMS) -> LMS -> XYZ -> RGB
-    private static Rgb24 LabToRgb(double labL, double labA, double labB)
-    {
-        // Inverse Ruderman matrix multiplication
-        double L = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) + (labB / Math.Sqrt(2));
-        double M = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) - (labB / Math.Sqrt(2));
-        double S = (labL / Math.Sqrt(3)) - (2 * labA / Math.Sqrt(6));
+	// Color conversion pipeline: lab -> log10(LMS) -> LMS -> XYZ -> RGB
+	private static Rgb24 LabToRgb(double labL, double labA, double labB)
+	{
+		// Inverse Ruderman matrix multiplication
+		double L = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) + (labB / Math.Sqrt(2));
+		double M = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) - (labB / Math.Sqrt(2));
+		double S = (labL / Math.Sqrt(3)) - (2 * labA / Math.Sqrt(6));
 
-        // Inverse Log transform
-        L = Math.Pow(10, L);
-        M = Math.Pow(10, M);
-        S = Math.Pow(10, S);
+		// Inverse Log transform
+		L = Math.Pow(10, L);
+		M = Math.Pow(10, M);
+		S = Math.Pow(10, S);
 
-        // LMS to RGB matrix multiplication
-        double r = (4.4679 * L) - (3.5873 * M) + (0.1193 * S);
-        double g = (-1.2186 * L) + (2.3809 * M) - (0.1624 * S);
-        double b = (0.0497 * L) - (0.2439 * M) + (1.2045 * S);
+		// LMS to RGB matrix multiplication
+		double r = (4.4679 * L) - (3.5873 * M) + (0.1193 * S);
+		double g = (-1.2186 * L) + (2.3809 * M) - (0.1624 * S);
+		double b = (0.0497 * L) - (0.2439 * M) + (1.2045 * S);
 
-        // Clamp values safely into valid byte boundaries
-        byte resR = (byte)Math.Clamp(r * 255.0, 0, 255);
-        byte resG = (byte)Math.Clamp(g * 255.0, 0, 255);
-        byte resB = (byte)Math.Clamp(b * 255.0, 0, 255);
+		// Clamp values safely into valid byte boundaries
+		byte resR = (byte)Math.Clamp(r * 255.0, 0, 255);
+		byte resG = (byte)Math.Clamp(g * 255.0, 0, 255);
+		byte resB = (byte)Math.Clamp(b * 255.0, 0, 255);
 
-        return new Rgb24(resR, resG, resB);
-    }
+		return new Rgb24(resR, resG, resB);
+	}
 
-    private static Rgb24[,,] CreateIdentityLut(int size)
-    {
-        Rgb24[,,] lut = new Rgb24[size, size, size];
-        for (int b = 0; b < size; b++)
-        {
-            for (int g = 0; g < size; g++)
-            {
-                for (int r = 0; r < size; r++)
-                {
-                    byte rVal = (byte)((r * 255) / (size - 1));
-                    byte gVal = (byte)((g * 255) / (size - 1));
-                    byte bVal = (byte)((b * 255) / (size - 1));
-                    lut[r, g, b] = new Rgb24(rVal, gVal, bVal);
-                }
-            }
-        }
-        return lut;
-    }
+	private static Rgb24[,,] CreateIdentityLut(int size)
+	{
+		Rgb24[,,] lut = new Rgb24[size, size, size];
+		for (int b = 0; b < size; b++)
+		{
+			for (int g = 0; g < size; g++)
+			{
+				for (int r = 0; r < size; r++)
+				{
+					byte rVal = (byte)((r * 255) / (size - 1));
+					byte gVal = (byte)((g * 255) / (size - 1));
+					byte bVal = (byte)((b * 255) / (size - 1));
+					lut[r, g, b] = new Rgb24(rVal, gVal, bVal);
+				}
+			}
+		}
+		return lut;
+	}
 
-    private static void ExportToCube(Rgb24[,,] lut, string filePath)
-    {
-        int size = lut.GetLength(0);
-        using StreamWriter writer = new StreamWriter(filePath);
-        writer.WriteLine("LUT_3D_SIZE " + size);
-        writer.WriteLine("");
+	private static void ExportToCube(Rgb24[,,] lut, string filePath)
+	{
+		int size = lut.GetLength(0);
+		using StreamWriter writer = new StreamWriter(filePath);
+		writer.WriteLine("LUT_3D_SIZE " + size);
+		writer.WriteLine("");
 
-        for (int b = 0; b < size; b++)
-        {
-            for (int g = 0; g < size; g++)
-            {
-                for (int r = 0; r < size; r++)
-                {
-                    Rgb24 c = lut[r, g, b];
-                    writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
-                }
-            }
-        }
-    }
+		for (int b = 0; b < size; b++)
+		{
+			for (int g = 0; g < size; g++)
+			{
+				for (int r = 0; r < size; r++)
+				{
+					Rgb24 c = lut[r, g, b];
+					writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
+				}
+			}
+		}
+	}
 }

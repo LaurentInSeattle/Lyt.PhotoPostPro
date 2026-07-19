@@ -74,9 +74,9 @@ public sealed partial class ShellViewModel
             5_000, InformationLevel.Info);
 
         this.isFirstActivation = true;
-        // Select(this.photoPostProModel.IsFirstRun ? ActivatedView.Language : ActivatedView.Encoding);
-        Select(ActivatedView.Single);
 
+        // ! viewSelector is Always there
+        this.viewSelector!.SelectView(this.photoPostProModel.IsFirstRun ? ActivatedView.Language : ActivatedView.Library);
         HotKeys.Instance.Set(this.View); 
 
         this.Logger.Debug("OnViewLoaded complete");
@@ -212,7 +212,9 @@ public sealed partial class ShellViewModel
 
     internal void EnableAndSelect(ActivatedView view)
     {
-        this.viewSelector?.EnableView(view);
-        this.viewSelector?.SelectView(view); 
+        // ! viewSelector is Always there
+        this.viewSelector!.EnableView(view);
+        // ! viewSelector is Always there
+        this.viewSelector!.SelectView(view); 
     }
 }

@@ -12,6 +12,7 @@ public sealed class MetadataFolders
     // Will not localize to ensure portability across sysems 
     private static readonly string[] MonthPostfixes =
     [
+        "_XXX", // Month in date / time starts at 1 
         "_Jan",
         "_Feb",
         "_Mar",
@@ -169,7 +170,6 @@ public sealed class MetadataFolders
             return false;
         }
 
-        month = index;
         name = name.Substring(0, 2);
         if (!int.TryParse(name, out month))
         {

@@ -264,6 +264,9 @@ public sealed partial class CameraViewModel :
 
         // Sort thumbnails by date ascending 
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
+
+        // Update visibility of action buttons
+        this.UpdateVisibilityOfActionButtons();
     }
 
     private void UpdateVisibilityOfActionButtons()
@@ -340,19 +343,7 @@ public sealed partial class CameraViewModel :
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
 
         // Update visibility of action buttons
-        //var thumbs = this.ThumbnailsPanelViewModel.Thumbnails;
-        //bool anyToAddToLibrary =
-        //    (from thumb in thumbs where thumb.IsToAddToLibrary select thumb).Any();
-        //if (anyToAddToLibrary)
-        //{
-        //    this.AddToLibraryButtonIsDisabled = false;
-        //}
-
-        //bool anyToRemoveFromCamera = (from thumb in thumbs where thumb.IsToRemoveFromCamera select thumb).Any();
-        //if (anyToRemoveFromCamera)
-        //{
-        //    this.RemoveFromCameraButtonIsDisabled = false;
-        //}
+        this.UpdateVisibilityOfActionButtons(); 
     }
 
     [RelayCommand]
