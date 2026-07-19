@@ -42,7 +42,7 @@ public sealed partial class CameraThumbnailViewModel :
 		this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
 
 		this.IsToAddToLibrary = true;
-		this.IsToRemoveFromCamera = true;
+		this.IsToRemoveFromCamera = false;
 		this.Title = string.Empty; 
 		this.Details = string.Empty;
 		this.SetThumbnailStrings(); 

@@ -86,7 +86,7 @@
 			DataContext="{Binding ThumbnailsPanelViewModel}"
 			/>
 		<StackPanel
-			Grid.Row="3" Grid.Column="3"
+			Grid.Row="1" Grid.Column="3"
 			>
 			<Image
 				Source="{Binding SelectedThumbnail}"
@@ -94,7 +94,7 @@
 				IsHitTestVisible="False"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="480"
-				MaxHeight="600"
+				MaxHeight="500"
 				/>
 			<metadatapane:MetadataView
 				DataContext="{Binding SelectedThumnailMetadataViewModel}"

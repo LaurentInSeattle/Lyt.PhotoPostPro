@@ -68,7 +68,7 @@ public static class ImageLoader
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-    #region Pre Loading 
+    #region Loading 
 
     public static LoadedImage LoadImage(string imagePath)
     {
@@ -385,15 +385,15 @@ public static class ImageLoader
                 return LoadedImage.Fail("Model.Loader.OpenizeCantLoad");
             }
 
-            var image = HeicImage.Load(fs);
-            var frames = image.Frames;
+            var heicImage = HeicImage.Load(fs);
+            var frames = heicImage.Frames;
             if (frames is null || frames.Count == 0)
             {
                 // errorMessage = "The source image cannot be loaded with Openize.";
                 return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
             }
 
-            var frame = image.DefaultFrame;
+            var frame = heicImage.DefaultFrame;
             int width = (int)frame.Width;
             int height = (int)frame.Height;
 
@@ -411,24 +411,8 @@ public static class ImageLoader
                 pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             }
 
-            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-
-            // Create thumbnail 
-            image24.Mutate(x => x.Resize(
-                new ResizeOptions
-                {
-                    Size = ThumbnailSize(image24.Width, image24.Height),
-                    Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
-                    Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
-                }));
-
-            var saveMemoryStream = new MemoryStream();
-            image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
-            byte[] jpgEncoded = saveMemoryStream.ToArray();
-            Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
-
             IReadOnlyList<MetadataExtractor.Directory>? directories = null;
-            ExifData? exif = image.Exif;
+            ExifData? exif = heicImage.Exif;
             if (exif is not null)
             {
                 directories = exif.DirectoriesList;
@@ -436,6 +420,12 @@ public static class ImageLoader
             // else // No metadata : Directories stays null 
 
             var metadata = new Metadata(imagePath, width, height, directories);
+            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
+
+            // Create thumbnail 
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
+            Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
+
             return LoadedImage.PreLoaded( metadata, jpgEncoded);
         }
         catch (Exception ex)
@@ -491,8 +481,8 @@ public static class ImageLoader
             }
 
             // Create thumbnail and metadata, image24 mutates! 
-            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24);
             var metadata = new Metadata(imagePath, width, height, directories);
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
         catch (Exception ex)
@@ -533,7 +523,7 @@ public static class ImageLoader
                     if (thumbnail.Bits == 8 && thumbnail.Channels == 3)
                     {
                         var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        jpgEncoded = GenerateJpgThumbnailWithMutate(image24);
+                        jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
                         Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
                     }
                     else if (thumbnail.Bits == 16 && thumbnail.Channels == 3)
@@ -566,7 +556,8 @@ public static class ImageLoader
 
     #endregion Pre Loading 
 
-    public static byte[] GenerateJpgThumbnailWithMutate(Image<Rgb24> image24)
+    /// <summary> Generates rotated thumnail from image, original is lost </summary>
+    public static byte[] GenerateJpgThumbnailWithMutate(Image<Rgb24> image24, Metadata metadata)
     {
         // Create thumbnail 
         image24.Mutate(x => x.Resize(
@@ -577,6 +568,23 @@ public static class ImageLoader
                 Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
             }));
 
+        // Rotate if metadata says so
+        if ( metadata.IsOrientationActionRequired)
+        {
+            RotateMode rotateMode = RotateMode.Rotate180; 
+            if ( metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Cw)
+            {
+                rotateMode = RotateMode.Rotate90; 
+            }
+            else if (metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Ccw)
+            {
+                rotateMode = RotateMode.Rotate270;
+            }
+
+            image24.Mutate(x => x.Rotate(rotateMode ));
+        }
+
+        // Save as JPG 
         var saveMemoryStream = new MemoryStream();
         image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
         byte[] jpgEncoded = saveMemoryStream.ToArray();
