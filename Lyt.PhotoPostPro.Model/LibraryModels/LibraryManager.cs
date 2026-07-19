@@ -13,6 +13,10 @@ public sealed class LibraryManager
 
     private FileManagerModel? fileManager;
 
+    private int imageLoadedCount = 0;
+    private int errorLoadingCount = 0;
+
+
     public LibraryManager()
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -45,7 +49,7 @@ public sealed class LibraryManager
     {
         this.fileManager = fileManagerModel;
         this.IsLoading = true;
-        this.GenerateInitialFolderTree();
+        this.InitialLibraryLoad();
     }
 
     public bool AddDownloadedFiles(List<Metadata> files)
@@ -230,6 +234,9 @@ public sealed class LibraryManager
 
     public void LoadThumbnails()
     {
+        this.imageLoadedCount = 0;
+        this.errorLoadingCount = 0;
+
         if (this.FolderTree is null)
         {
             return;
@@ -259,6 +266,7 @@ public sealed class LibraryManager
             }
         }
 
+        new LibraryLoadedMessage(ImageCount: this.imageLoadedCount, ErrorCount: this.errorLoadingCount).Publish();
         this.IsLoading = false;
     }
 
@@ -320,12 +328,22 @@ public sealed class LibraryManager
                 pathThumbnail = Path.Combine(folderPath, filenameThumbnail);
             }
 
-            byte[] imageBytes = File.ReadAllBytes(pathThumbnail);
-            return new LoadedThumbnail(metadata, imageBytes);
+            if (File.Exists(pathThumbnail))
+            {
+                byte[] imageBytes = File.ReadAllBytes(pathThumbnail);
+                ++this.imageLoadedCount;
+                return new LoadedThumbnail(metadata, imageBytes);
+            }
+            else
+            {
+                if ( Debugger.IsAttached ) Debugger.Break();
+                throw new Exception("Inavlid path: " + pathThumbnail);
+            }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            ++this.errorLoadingCount; 
             return null;
         }
     }
@@ -344,12 +362,12 @@ public sealed class LibraryManager
         }
     }
 
-    public void GenerateInitialFolderTree()
+    public void InitialLibraryLoad()
     {
         Task.Run(() =>
         {
             // wait a bit so that we dont delay app starting up 
-            Task.Delay(2_000).Wait();
+            Task.Delay(1_000).Wait();
             this.GenerateFolderTree();
             Task.Delay(200).Wait();
             this.GenerateThumbnailCache();

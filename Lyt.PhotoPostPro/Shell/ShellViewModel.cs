@@ -190,7 +190,7 @@ public sealed partial class ShellViewModel
     public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
 
     [RelayCommand]
-    public void OnFolder() => this.viewSelector?.SelectView(ActivatedView.Library);
+    public void OnLibrary() => this.viewSelector?.SelectView(ActivatedView.Library);
 
     [RelayCommand]
     public void OnLanguage() => this.viewSelector?.SelectView(ActivatedView.Language);

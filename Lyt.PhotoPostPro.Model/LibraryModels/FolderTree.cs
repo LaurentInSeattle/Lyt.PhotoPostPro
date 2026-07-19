@@ -44,9 +44,10 @@ public sealed class FolderTree
                                 monthFolder.DayFolders.Add(dayFolder);
 
                                 // Enumerate metadata files 
-                                var files = Directory.EnumerateFiles(directoryDay, "*.json");
+                                // Bring the '_META' filter because we also have the _EDIT.json files containing edits 
+                                var files = Directory.EnumerateFiles(directoryDay, "*_META.json");
                                 foreach (string file in files)
-                                {
+                                {                                    
                                     dayFolder.MetadataFiles.Add(file);
                                 }
                             }

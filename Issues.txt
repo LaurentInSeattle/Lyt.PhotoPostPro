@@ -1,11 +1,9 @@
-Bugs 
-----
+Bugs ~ Major Issues 
+-------------------
 
 - Read EXIF Camera orientation and auto rotate as needed
 
 - Adding files to library from camera view does not update the thumbs
-
-- App freeze when using combo box ??? Avalonia issue
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -21,7 +19,7 @@ WIP
 ---
 
 - Other built-in effects to consider:  
-		// HistogramEqualization
+		// HistogramEqualization (CLAHE) 
 		// Pixelate (size) 
 
 - Image Exports: Quick save
@@ -74,11 +72,18 @@ Missing Features
 
 - Floating toolbox windows 
 
+Avalonia Related Problems 
+-------------------------
+
+- App freeze when using combo box ??? Avalonia issue
+
 
 Cool Stuff to Consider 
 ----------------------
 
 - Implement a MDViewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
+
+- Optionally Generate LUT in the Export step 
 
 - Compress Built-in LUT 
 

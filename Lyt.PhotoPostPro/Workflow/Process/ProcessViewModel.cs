@@ -76,7 +76,7 @@ public sealed partial class ProcessViewModel :
         if (message.Kind == WorkflowUpdateKind.Finish)
         {
             var shell = App.GetRequiredService<ShellViewModel>();
-            shell.OnSingle();
+            shell.OnLibrary();
         }
         else
         {

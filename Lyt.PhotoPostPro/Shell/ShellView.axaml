@@ -112,7 +112,7 @@
 						GlyphSource="folder"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Folder}"
-						Command="{Binding OnFolder}"
+						Command="{Binding OnLibrary}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton

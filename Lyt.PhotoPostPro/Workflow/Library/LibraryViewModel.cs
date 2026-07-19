@@ -2,6 +2,7 @@
 
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
+    IRecipient<LibraryLoadedMessage>,
     IDropPathHandler,
     ISelectListener
 {
@@ -47,19 +48,6 @@ public sealed partial class LibraryViewModel :
     private DayFolder? selectedDay;
     private LibraryThumbnailViewModel? selectedLibraryThumbnailViewModel;
 
-    public LibraryViewModel(PhotoPostProModel photoPostProModel)
-    {
-        this.model = photoPostProModel;
-        this.libraryMgr = photoPostProModel.LibraryManager;
-        this.LibraryThumbnailsPanelViewModel = new(this.model, this);
-    }
-
-    public override void Activate(object? activationParameters)
-    {
-        base.Activate(activationParameters);
-        Schedule.OnUiThread(66, this.ActivateUi, DispatcherPriority.Background);
-    }
-
     [ObservableProperty]
     public partial WriteableBitmap? SelectedThumbnail { get; set; }
 
@@ -78,25 +66,32 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Days { get; set; } = [];
 
-    private void ActivateUi()
+    public LibraryViewModel(PhotoPostProModel photoPostProModel)
+    {
+        this.model = photoPostProModel;
+        this.libraryMgr = photoPostProModel.LibraryManager;
+        this.LibraryThumbnailsPanelViewModel = new(this.model, this);
+        this.Subscribe<LibraryLoadedMessage>(); 
+    }
+
+    public void Receive(LibraryLoadedMessage message)
     {
         // TODO
         // Show some wait spinner 
 
-        // Five seconds to load all thumbs 
-        int retries = 50;
-        while (this.libraryMgr.IsLoading && retries > 0)
-        {
-            Task.Delay(100).Wait();
-            --retries;
-        }
-
-        Debug.WriteLine(" Startup Retry count: " + retries);
+        Debug.WriteLine(" Loaded: " + message.ImageCount + "  - Errors: " + message.ErrorCount);
 
         var folderTree = this.libraryMgr.FolderTree;
         if (folderTree is null)
         {
             return;
+        }
+
+        if ( message.ImageCount == 0 )
+        {
+            // TODO 
+            // Toast: Your library is empty 
+            return; 
         }
 
         List<SelectorButtonViewModel> listYears = [];
@@ -115,11 +110,6 @@ public sealed partial class LibraryViewModel :
                 66, 
                 ()=> { this.Years[0].Select(); } , 
                 DispatcherPriority.Background);            
-        }
-        else
-        {
-            // TODO 
-            // Toast: Your library is empty 
         }
     }
 
