@@ -54,11 +54,11 @@
 			>
 			<Image
 				Source="{Binding SelectedThumbnail}"
-				Margin="0 72 0 12"
+				Margin="0 0 0 12"
 				IsHitTestVisible="False"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="480"
-				MaxHeight="600"
+				MaxHeight="500"
 				/>
 			<glyphs:GlyphButton
 				x:Name="ProcessButton"

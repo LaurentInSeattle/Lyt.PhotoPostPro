@@ -127,6 +127,7 @@ public static class ImageLoader
             {
                 if (loadedImage.IsSuccess)
                 {
+                    loadedImage.RotateIfNeeded();   
                     Debug.WriteLine(" Image loaded");
                 }
 
