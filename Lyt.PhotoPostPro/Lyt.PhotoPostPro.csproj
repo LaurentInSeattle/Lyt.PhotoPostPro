@@ -45,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Workflow\Camera\CameraFileView.axaml.cs">
+      <DependentUpon>CameraFileView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Camera\CameraThumbnailView.axaml.cs">
       <DependentUpon>CameraThumbnailView.axaml</DependentUpon>
     </Compile>

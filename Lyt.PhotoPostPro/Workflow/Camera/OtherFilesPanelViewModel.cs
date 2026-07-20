@@ -9,13 +9,14 @@ public sealed partial class OtherFilesPanelViewModel :
     private readonly PhotoPostProModel photoPostProModel;
     private readonly CameraViewModel cameraViewModel;
 
-    //[ObservableProperty]
-    //public partial ObservableCollection<CameraThumbnailViewModel> Thumbnails { get; set; }
+    [ObservableProperty]
+    public partial ObservableCollection<CameraFileViewModel> Files { get; set; }
 
-    public OtherFilesPanelViewModel(PhotoPostProModel photoPostProModel, CameraViewModel collectionViewModel)
+    public OtherFilesPanelViewModel(PhotoPostProModel photoPostProModel, CameraViewModel cameraViewModel)
     {
         this.photoPostProModel = photoPostProModel;
-        this.cameraViewModel = collectionViewModel;
+        this.cameraViewModel = cameraViewModel;
+        this.Files = [];
         this.Subscribe<LanguageChangedMessage>();
     }
 

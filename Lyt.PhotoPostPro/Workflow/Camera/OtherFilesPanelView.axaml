@@ -37,9 +37,8 @@
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			>
-			<!-- 
 			<ItemsControl 
-				ItemsSource="{Binding Thumbnails}"
+				ItemsSource="{Binding Files}"
 				Margin="0 0 24 0"
 				>
 				<ItemsControl.ItemsPanel>
@@ -49,11 +48,10 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<vm:CameraThumbnailView Margin="12" />
+						<vm:CameraFileView Margin="12" />
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-			--> 
 		</ScrollViewer>
 
 	</Grid>

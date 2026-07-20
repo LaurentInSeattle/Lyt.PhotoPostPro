@@ -19,7 +19,7 @@ public sealed class ExportParameters
 
         // Adds the HD sized export with black borders
         var hdWithBlackBorders = ImageParameters.FullHd.Clone() ;
-        hdWithBlackBorders.JpegQuality = 85; 
+        hdWithBlackBorders.JpegQuality = 80; 
         hdWithBlackBorders.WithBorders = true;
         hdWithBlackBorders.BorderStyle = ImageBorderStyle.BlackBorder;
         hdWithBlackBorders.BorderThickness = ImageBorderThickness.Thin;

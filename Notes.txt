@@ -21,6 +21,8 @@ https://imagecompression.info/test_images/
 
 --- 
 
+==> Lib MTP :  https://github.com/shaosss/libMtpSharp 
+
 ==> WPD Light : https://github.com/MartinKuschnik/WPDlight
 
 ------------

@@ -29,6 +29,7 @@ public sealed partial class CameraViewModel :
         this.selectedFiles = [];
         this.downloadedFiles = [];
         this.ThumbnailsPanelViewModel = new(this.model, this);
+        this.OtherFilesPanelViewModel = new(this.model, this);
 
         this.Subscribe<DevicesFoundMessage>();
         this.Subscribe<DeviceStatusMessage>();
@@ -231,8 +232,15 @@ public sealed partial class CameraViewModel :
                 this.ThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
             }
         }
-        else
+        else if ( message.IsDownloaded)
         {
+            this.FileDownloaded =
+                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
+            var cameraFile = new CameraFileViewModel(this, message);
+            this.OtherFilesPanelViewModel.Files.Add(cameraFile);
+        }
+        else
+                {
             this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
         }
     }
