@@ -8,6 +8,7 @@ public sealed record class DeviceFileListMessage(FoundDevice Device, List<string
 
 public sealed record class DeviceFileDownloadedMessage(
     bool IsSuccess, 
+    bool IsDownloaded,
     FoundDevice Device, 
     string File, 
     string Path, 

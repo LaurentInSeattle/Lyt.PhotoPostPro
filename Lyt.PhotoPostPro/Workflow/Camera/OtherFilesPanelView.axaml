@@ -1,0 +1,60 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Camera.OtherFilesPanelView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Camera"
+	x:DataType="vm:OtherFilesPanelViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid
+		Background="Transparent"
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="72" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<StackPanel
+			Orientation="Horizontal"
+			Margin="0 0 0 0"
+			HorizontalAlignment="Left"
+			Height="72"
+			>
+			<Rectangle
+				Fill="#70000020"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
+		</StackPanel>
+		<ScrollViewer
+			Grid.Row="1"
+			Background="Transparent"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			>
+			<!-- 
+			<ItemsControl 
+				ItemsSource="{Binding Thumbnails}"
+				Margin="0 0 24 0"
+				>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<vm:CameraThumbnailView Margin="12" />
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+			--> 
+		</ScrollViewer>
+
+	</Grid>
+</UserControl>

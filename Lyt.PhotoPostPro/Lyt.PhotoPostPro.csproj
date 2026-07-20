@@ -48,6 +48,9 @@
     <Compile Update="Workflow\Camera\CameraThumbnailView.axaml.cs">
       <DependentUpon>CameraThumbnailView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Camera\OtherFilesPanelView.axaml.cs">
+      <DependentUpon>OtherFilesPanelView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Library\LibraryThumbnailView.axaml.cs">
       <DependentUpon>LibraryThumbnailView.axaml</DependentUpon>
     </Compile>

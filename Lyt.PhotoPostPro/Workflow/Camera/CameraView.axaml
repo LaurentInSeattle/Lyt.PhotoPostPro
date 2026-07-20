@@ -10,6 +10,7 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
 	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
@@ -44,30 +45,40 @@
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
+				Layout="TextOnly"
+				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="{Binding DownloadButtonText}"
 				Command="{Binding OnDownload}"
 				IsDisabled="{Binding DownloadButtonIsDisabled}"
-				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
+				Layout="TextOnly"
+				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="Add to Library"
 				Command="{Binding OnAddToLibrary}"
 				IsDisabled="{Binding AddToLibraryButtonIsDisabled}"
-				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="IconTextLeftSide"
+				Layout="TextOnly"
+				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="Remove from Camera"
 				Command="{Binding OnRemoveFromCamera}"
 				IsDisabled="{Binding RemoveFromCameraButtonIsDisabled}"
-				HorizontalAlignment="Left" Width="240" Margin="12 0 0 0"
+				/>
+			<toggle:ToggleSwitch
+				x:Name="ShowImagesSwitch"
+				Margin="4 0 8 0"
+				Style="{StaticResource StandardToggleSwitch}"
+				TrueText="Photos - Images"
+				FalseText="Movies -  Others"
+				Height="30" Width="400"
+				VerticalAlignment="Center"
+				Value="{Binding ShowImages}"
 				/>
 		</StackPanel>
 		<TextBlock
@@ -76,12 +87,28 @@
 			Theme="{StaticResource H3}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
-		<vm:ThumbnailsPanelView
-			Grid.Row="3" Grid.Column="1"
-			DataContext="{Binding ThumbnailsPanelViewModel}"
-			/>
 		<StackPanel
-			Grid.Row="1" Grid.Column="3"
+			Grid.Row="2" Grid.Column="1"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			>
+		</StackPanel>
+
+		<!-- Creating grid so that we can use databinding without interfering with the panel VM --> 
+		<Grid 
+			Grid.Row="3" Grid.Column="1"
+			IsVisible="{Binding !ShowImages}"
+			> 
+			<vm:OtherFilesPanelView DataContext="{Binding OtherFilesPanelViewModel}"/>
+		</Grid>
+		<Grid 
+			Grid.Row="3" Grid.Column="1"
+			IsVisible="{Binding ShowImages}"
+			> 
+			<vm:ThumbnailsPanelView DataContext="{Binding ThumbnailsPanelViewModel}"/>
+		</Grid>
+		<StackPanel
+			Grid.Row="3" Grid.Column="3"
+			IsVisible="{Binding ShowImages}"
 			>
 			<Image
 				Source="{Binding SelectedThumbnail}"
@@ -96,6 +123,5 @@
 				Margin="0 0 0 12"
 				/>
 		</StackPanel>
-
 	</Grid>
 </UserControl>

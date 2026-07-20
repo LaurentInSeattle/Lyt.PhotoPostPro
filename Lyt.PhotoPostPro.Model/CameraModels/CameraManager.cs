@@ -477,7 +477,8 @@ public class CameraManager
                 FileInfo fi = new(targetPath);
                 if (fi.Length != length)
                 {
-                    new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No exception").Publish();
+                    new DeviceFileDownloadedMessage(
+                        IsSuccess: false, IsDownloaded: false, foundDevice, file, "No exception").Publish();
                     return false;
                 }
             }
@@ -495,19 +496,23 @@ public class CameraManager
                 byte[] thumbnailBytes = loadedImage.JpgThumbnail!;
                 File.WriteAllBytes(thumbnailPath, thumbnailBytes);
                 new DeviceFileDownloadedMessage(
-                    IsSuccess: true, foundDevice, file, targetPath,
+                    IsSuccess: true, IsDownloaded: true,
+                    foundDevice, file, targetPath,
                     loadedImage.Metadata,
                     thumbnailBytes, thumbnailPath).Publish();
                 return true;
             }
 
-            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "No thumnail").Publish();
+            new DeviceFileDownloadedMessage(
+                IsSuccess: false, IsDownloaded: true, 
+                foundDevice, file, "No thumnail").Publish();
             return false;
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Exception thrown: " + ex);
-            new DeviceFileDownloadedMessage(IsSuccess: false, foundDevice, file, "Exception thrown: " + ex).Publish();
+            new DeviceFileDownloadedMessage(
+                IsSuccess: false, IsDownloaded: false, foundDevice, file, "Exception thrown: " + ex).Publish();
             return false;
         }
     }

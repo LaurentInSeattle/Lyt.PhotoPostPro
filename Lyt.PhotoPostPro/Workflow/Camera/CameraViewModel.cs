@@ -40,6 +40,12 @@ public sealed partial class CameraViewModel :
     }
 
     [ObservableProperty]
+    public partial bool ShowImages { get; set; } = true;
+
+    [ObservableProperty]
+    public partial OtherFilesPanelViewModel OtherFilesPanelViewModel { get; set; }
+
+    [ObservableProperty]
     public partial WriteableBitmap? SelectedThumbnail { get; set; }
 
     [ObservableProperty]
@@ -84,6 +90,7 @@ public sealed partial class CameraViewModel :
 
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
+        this.ShowImages = true; 
         this.isDownloading = false;
         // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
