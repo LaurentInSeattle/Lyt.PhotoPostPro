@@ -57,8 +57,8 @@ public sealed partial class CameraThumbnailViewModel :
 	[RelayCommand]
 	public void OnIsToAddToLibraryChanged()
 	{
-
 	}
+
 	[RelayCommand]
 	public void OnIsToRemoveFromCameraChanged()
 	{

@@ -127,6 +127,7 @@ public class CameraManager
             device.Connect();
             if (device.IsConnected)
             {
+                foundDevice.Update(device.FriendlyName, device.Manufacturer, device.Description); 
                 new DeviceStatusMessage(IsConnected: true, foundDevice).Publish();
                 DebugPrintDeviceInfo(device);
                 var files = AllFiles(device);

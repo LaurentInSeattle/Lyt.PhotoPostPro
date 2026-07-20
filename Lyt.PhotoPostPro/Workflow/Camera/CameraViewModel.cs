@@ -49,9 +49,6 @@ public sealed partial class CameraViewModel :
     public partial ThumbnailsPanelViewModel ThumbnailsPanelViewModel { get; set; }
 
     [ObservableProperty]
-    public partial string DevicesFound { get; set; } = string.Empty;
-
-    [ObservableProperty]
     public partial string DeviceStatus { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -149,25 +146,19 @@ public sealed partial class CameraViewModel :
         if (list.Count == 0)
         {
             // TODO: localize
-            this.DevicesFound = "No camera or device found...";
+            this.DeviceStatus = "No camera or device found...";
 
             this.NullifyDevice();
             Schedule.OnUiThread(
                 CameraManager.FastCameraMonitoringTime_ms / 2,
-                () => { this.DevicesFound = string.Empty; },
+                () => { this.DeviceStatus = string.Empty; },
                 DispatcherPriority.ApplicationIdle);
         }
         else
         {
             // TODO: localize
-            string detected = "Detected: ";
-            foreach (var device in message.Devices)
-            {
-                Debug.WriteLine(" Detected: " + device.FriendlyName + "  " + device.Description);
-                detected = detected + device.Description + "  ";
-            }
-
-            this.DevicesFound = detected;
+            // Friendly name not available yet
+            this.DeviceStatus = "Device or Camera detected.";
         }
     }
 
@@ -181,7 +172,7 @@ public sealed partial class CameraViewModel :
 
         // TODO: localize
         this.DeviceStatus =
-            message.Device.Description + ": " +
+            message.Device.FriendlyName + ": " +
             (message.IsConnected ? "Connected" : "Not responding.");
         this.FileDownloaded = string.Empty;
     }
@@ -196,18 +187,17 @@ public sealed partial class CameraViewModel :
 
         // TODO: localize
         this.FileDownloaded = string.Empty;
-        this.DeviceStatus = message.Device.Description + ": " + "Connected";
-
+        var device = message.Device;
         if (message.Files.Count == 0)
         {
-            this.DeviceStatus = message.Device.Description + ": No files on device.";
+            this.DeviceStatus = device.FriendlyName + ": No files on device.";
             this.selectedFiles.Clear();
             this.NullifyDevice();
         }
         else
         {
-            this.foundDevice = message.Device;
-            this.DeviceStatus = message.Files.Count + " files ready to transfer.";
+            this.foundDevice = device;
+            this.DeviceStatus = device.FriendlyName + ": " + message.Files.Count + " files ready to transfer.";
             this.DownloadButtonIsDisabled = false;
             this.selectedFiles.Clear();
             this.selectedFiles.AddRange(message.Files);
@@ -265,8 +255,11 @@ public sealed partial class CameraViewModel :
         // Sort thumbnails by date ascending 
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
 
-        // Update visibility of action buttons
-        this.UpdateVisibilityOfActionButtons();
+        // Update visibility of action buttons:  Enable buttons
+        this.AddToLibraryButtonIsDisabled = false;
+        this.RemoveFromCameraButtonIsDisabled = false;
+
+        // this.UpdateVisibilityOfActionButtons();
     }
 
     private void UpdateVisibilityOfActionButtons()
@@ -331,7 +324,7 @@ public sealed partial class CameraViewModel :
         {
             this.FileDownloaded =
                 string.Format(
-                    "Transfer complete: {0} images transfered, other files or errors: {1} ",
+                    "Deletion complete: {0} images deleted, errors: {1} ",
                     message.DeletedCount, message.ErrorCount);
         }
         else
@@ -342,8 +335,9 @@ public sealed partial class CameraViewModel :
         // Sort thumbnails by date ascending 
         this.ThumbnailsPanelViewModel.Sort(ascending: true);
 
-        // Update visibility of action buttons
-        this.UpdateVisibilityOfActionButtons(); 
+        // Update visibility of action buttons: Enable buttons 
+        this.AddToLibraryButtonIsDisabled = false;
+        this.RemoveFromCameraButtonIsDisabled = false;
     }
 
     [RelayCommand]
@@ -369,6 +363,10 @@ public sealed partial class CameraViewModel :
         }
 
         this.isDownloading = !this.isDownloading;
+
+        // Disable buttons while transfering 
+        this.AddToLibraryButtonIsDisabled = true;
+        this.RemoveFromCameraButtonIsDisabled = true;
     }
 
     [RelayCommand]
@@ -425,6 +423,11 @@ public sealed partial class CameraViewModel :
             return;
         }
 
+        // Disable buttons while deleting 
+        this.AddToLibraryButtonIsDisabled = true;
+        this.RemoveFromCameraButtonIsDisabled = true;
+
+        // Delete 
         this.cameraMgr.BeginDeletingFiles(this.foundDevice, toRemoveFromCamera);
     }
 
