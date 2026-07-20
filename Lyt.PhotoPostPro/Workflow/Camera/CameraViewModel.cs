@@ -18,7 +18,7 @@ public sealed partial class CameraViewModel :
     private readonly List<string> downloadedFiles;
 
     private FoundDevice? foundDevice;
-    private bool nothingSaved;
+    // private bool nothingSaved;
     private bool isDownloading;
 
     public CameraViewModel(PhotoPostProModel photoPostProModel)
@@ -88,7 +88,7 @@ public sealed partial class CameraViewModel :
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
         this.isDownloading = false;
-        this.nothingSaved = true;
+        // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
     }
 
@@ -386,11 +386,12 @@ public sealed partial class CameraViewModel :
         }
 
         bool success = this.libraryMgr.AddDownloadedFiles(toAddToLibrary);
+
         // TODO : Message User about file count 
-        if (success)
-        {
-            this.nothingSaved = false;
-        }
+        //if (success)
+        //{
+        //    this.nothingSaved = false;
+        //}
     }
 
     [RelayCommand]

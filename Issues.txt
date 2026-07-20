@@ -1,7 +1,7 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Read EXIF Camera orientation and auto rotate as needed
+- Camera view: Add and Remove buttons not in sync' with checkboxes - Cant delete 
 
 - Adding files to library from camera view does not update the thumbs
 
