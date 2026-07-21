@@ -93,6 +93,7 @@ global using Lyt.Utilities.Randomizing;
 
 
 global using Lyt.PhotoPostPro.Controls;
+global using Lyt.PhotoPostPro.Dialogs;
 global using Lyt.PhotoPostPro.Panes;
 global using Lyt.PhotoPostPro.Panes.HistogramPane;
 global using Lyt.PhotoPostPro.Panes.CurvePane;

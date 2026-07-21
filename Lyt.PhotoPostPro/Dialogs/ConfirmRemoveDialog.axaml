@@ -1,0 +1,121 @@
+<UserControl
+	x:Class="Lyt.PhotoPostPro.Dialogs.ConfirmRemoveDialog"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Dialogs"
+	x:DataType="vm:ConfirmRemoveDialogModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
+	xmlns:progress="clr-namespace:Lyt.Avalonia.Controls.Progress;assembly=Lyt.Avalonia.Controls"
+	xmlns:countdown="clr-namespace:Lyt.Avalonia.Controls.Countdown;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid
+		Width="600" Height="300"
+		Background="Transparent"
+		>
+		<Rectangle
+			Fill="#C0000020"
+			Grid.ColumnSpan="999" Grid.RowSpan="999"
+			RadiusX="4" RadiusY="4"
+			Margin="1"
+			/>
+		<Border
+			Margin ="1"
+			BorderThickness="1.0"
+			BorderBrush="{StaticResource ResourceKey= LightAqua_2_100}"
+			Background="Transparent"
+			>
+			<Grid
+				>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="4"/>
+					<RowDefinition Height="64"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Rectangle
+					Grid.Row="0"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					Fill="{StaticResource ResourceKey= OrangePeel_2_080}"
+					/>
+				<Rectangle
+					Grid.Row="1"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					Fill="#60202040"
+					/>
+				<Rectangle
+					Grid.Row="1"
+					Height="1"
+					VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+					Fill="#F0302070"
+					/>
+				<TextBlock
+					Grid.Row="1" Grid.Column="0"
+					Text="{Binding Title}"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					Margin="20 -8 0 0"
+					FontSize="26"
+					Foreground="{StaticResource LightAqua_0_080}"
+					TextWrapping="Wrap"
+					/>
+				<!--Toolbar -->
+				<Grid
+					Grid.Row="1"
+					HorizontalAlignment="Right" VerticalAlignment="Center"
+					Margin="0 0 12 0"
+					>
+					<Grid.ColumnDefinitions>
+						<!-- Ring  -->
+						<ColumnDefinition Width="72" />
+						<!-- Spacer -->
+						<ColumnDefinition Width="40" />
+						<!-- Dismiss -->
+						<ColumnDefinition Width="80" />
+					</Grid.ColumnDefinitions>
+					<glyphs:GlyphButton
+						Grid.Column="2"
+						Style="{StaticResource AppToolbarIconButton}"
+						Margin="2"
+						GlyphSource="dismiss"
+						GlyphStrokeThickness="0"
+						Text="Cancel"
+						Command="{Binding OnCancel}"
+						/>
+				</Grid>
+
+				<!--Content -->
+				<Grid
+					x:Name="InnerGrid"
+					Grid.Row="2"
+					ShowGridLines="False"
+					>
+					<TextBlock
+						Text="{Binding Message}"
+						HorizontalAlignment="Left" VerticalAlignment="Top"
+						Margin="20 20 0 0"
+						Foreground="{StaticResource LightAqua_0_080}"
+						FontSize="20"
+						TextWrapping="Wrap"
+						/>
+					<glyphs:GlyphButton
+						x:Name="RemoveButton"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Right" VerticalAlignment="Bottom"
+						Width="300" Height="54"
+						Margin="0 0 20 20"
+						GlyphSource="delete"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Library.RemoveImage}"
+						Command="{Binding OnRemove}"
+	    				/>
+				</Grid>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

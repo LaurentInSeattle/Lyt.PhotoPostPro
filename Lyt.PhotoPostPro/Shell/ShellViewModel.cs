@@ -27,6 +27,8 @@ public sealed partial class ShellViewModel
         this.Subscribe<LanguageChangedMessage>();
     }
 
+    public Panel ModalHost => this.View.ToasterHost; 
+
     public void Receive(LanguageChangedMessage _)
     {
     }

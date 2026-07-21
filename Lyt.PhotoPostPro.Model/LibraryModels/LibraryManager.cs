@@ -254,7 +254,7 @@ public sealed class LibraryManager
                         if (thumbnail is not null)
                         {
                             this.LoadedThumbnails.Add(path, thumbnail);
-                            Debug.WriteLine(" Loaded Thumbnail: " + path);
+                            // Debug.WriteLine(" Loaded Thumbnail: " + path);
                         }
 
                         // NEEDED ? 
@@ -336,14 +336,14 @@ public sealed class LibraryManager
             }
             else
             {
-                if ( Debugger.IsAttached ) Debugger.Break();
+                if (Debugger.IsAttached) Debugger.Break();
                 throw new Exception("Inavlid path: " + pathThumbnail);
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
-            ++this.errorLoadingCount; 
+            ++this.errorLoadingCount;
             return null;
         }
     }
@@ -420,6 +420,26 @@ public sealed class LibraryManager
             string serialized = this.fileManager.Serialize<PostProcessParameters>(stepsParameters);
             File.WriteAllText(targetPathEdit, serialized);
 
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return false;
+        }
+    }
+
+    public bool Remove(Metadata metadata)
+    {
+        // TODO 
+        if (this.fileManager is null)
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
             return true;
         }
         catch (Exception ex)

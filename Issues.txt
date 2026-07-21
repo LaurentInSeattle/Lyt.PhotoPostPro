@@ -1,9 +1,7 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Camera view: Add and Remove buttons not in sync' with checkboxes - Cant delete 
-
-- Adding files to library from camera view does not update the thumbs
+- Missing localization on Camera view 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -17,6 +15,12 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
+- Open Folder 
+
+- Delete from Library 
+
+- Drop RGB 48 and move on to 4xHalf
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 
@@ -49,8 +53,6 @@ Missing Features
 ----------------
 
 --- Essential --- 
-
-- Drop RGB 48 and move on to 4xHalf
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 

@@ -10,9 +10,6 @@ public sealed partial class LibraryViewModel :
     private const double MonthButtonWidth = 110.0;
     private const double DayButtonWidth = 140.0;
 
-    private readonly PhotoPostProModel model;
-    private readonly LibraryManager libraryMgr;
-
     // Will NEED to localize
     private static readonly string[] MonthString =
     [
@@ -43,6 +40,11 @@ public sealed partial class LibraryViewModel :
         "Saturday",
     ];
 
+    private readonly PhotoPostProModel model;
+    private readonly IDialogService dialogService;
+    private readonly ShellViewModel shellViewModel;
+    private readonly LibraryManager libraryMgr;
+
     private YearFolder? selectedYear;
     private MonthFolder? selectedMonth;
     private DayFolder? selectedDay;
@@ -66,12 +68,17 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Days { get; set; } = [];
 
-    public LibraryViewModel(PhotoPostProModel photoPostProModel)
+    public LibraryViewModel(
+        PhotoPostProModel photoPostProModel,
+        IDialogService dialogService,
+        ShellViewModel shellViewModel)
     {
         this.model = photoPostProModel;
         this.libraryMgr = photoPostProModel.LibraryManager;
+        this.dialogService = dialogService;
+        this.shellViewModel = shellViewModel;
         this.LibraryThumbnailsPanelViewModel = new(this.model, this);
-        this.Subscribe<LibraryLoadedMessage>(); 
+        this.Subscribe<LibraryLoadedMessage>();
     }
 
     public void Receive(LibraryLoadedMessage message)
@@ -87,11 +94,11 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        if ( message.ImageCount == 0 )
+        if (message.ImageCount == 0)
         {
             // TODO 
             // Toast: Your library is empty 
-            return; 
+            return;
         }
 
         List<SelectorButtonViewModel> listYears = [];
@@ -107,9 +114,9 @@ public sealed partial class LibraryViewModel :
         {
             // Need to schedule so that the view is bound 
             Schedule.OnUiThread(
-                66, 
-                ()=> { this.Years[0].Select(); } , 
-                DispatcherPriority.Background);            
+                66,
+                () => { this.Years[0].Select(); },
+                DispatcherPriority.Background);
         }
     }
 
@@ -247,7 +254,7 @@ public sealed partial class LibraryViewModel :
     [RelayCommand]
     public void OnProcess()
     {
-        if (this.selectedLibraryThumbnailViewModel is null || 
+        if (this.selectedLibraryThumbnailViewModel is null ||
             this.selectedLibraryThumbnailViewModel.Metadata is null)
         {
             return;
@@ -272,6 +279,37 @@ public sealed partial class LibraryViewModel :
         if (mainWindow.CanMaximize)
         {
             mainWindow.WindowState = WindowState.Maximized;
+        }
+    }
+
+    [RelayCommand]
+    public void OnRemove()
+    {
+        if (this.selectedLibraryThumbnailViewModel is null ||
+            this.selectedLibraryThumbnailViewModel.Metadata is null)
+        {
+            return;
+        }
+
+        if (this.dialogService is DialogService modalService)
+        {
+            modalService.RunViewModelModal(
+                this.shellViewModel.ModalHost, new ConfirmRemoveDialogModel(), this.OnRemoveConfirmed);
+        }
+    }
+
+    private void OnRemoveConfirmed(object? obj, bool isValid)
+    {
+        if (isValid && obj is ConfirmRemoveDialogModel confirmRemoveDialogModel)
+        {
+            if (this.selectedLibraryThumbnailViewModel is null ||
+                this.selectedLibraryThumbnailViewModel.Metadata is null)
+            {
+                return;
+            }
+
+            var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
+            this.libraryMgr.Remove(metadata);
         }
     }
 }

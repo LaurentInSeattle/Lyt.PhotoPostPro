@@ -188,8 +188,11 @@
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
+	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
 
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
+
 	<system:String x:Key="Puzzle.Toolbar.FullScreen">Full Screen</system:String>
 	<system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc. to Return</system:String>
 	<system:String x:Key="Collection.Remove">Remove</system:String>
