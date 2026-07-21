@@ -1,20 +1,12 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Camera;
 
-public sealed partial class CameraFileViewModel : 
-	ViewModel<CameraFileView>, 
-	IRecipient<LanguageChangedMessage>
+using System.IO; 
+
+public sealed partial class CameraFileViewModel : ViewModel<CameraFileView> 
 {
-	public const double LargeBorderHeight = 280;
-	public const double LargeImageHeight = 200;
-
-	private readonly ISelectListener parent;
-	private readonly DeviceFileDownloadedMessage message; 
-
-	[ObservableProperty]
-	public partial double BorderHeight { get; set; }
-
-	[ObservableProperty]
-	public partial double ImageHeight { get; set; }
+	private readonly CameraViewModel parent;
+	private readonly string path;	// file on disk 
+	private readonly string file;	// file on camera 
 
 	[ObservableProperty]
 	public partial string Title { get; set; }
@@ -23,59 +15,42 @@ public sealed partial class CameraFileViewModel :
 	public partial string Details { get; set; }
 
 	[ObservableProperty]
-	public partial WriteableBitmap Thumbnail { get; set; }
-
-	[ObservableProperty]
-	public partial bool IsToAddToLibrary { get; set; }
-					
-	[ObservableProperty]
-	public partial bool IsToRemoveFromCamera { get; set; }
+	public partial string Glyph { get; set; }
 
 	/// <summary>  Creates a thumbnail view model </summary>
-	public CameraFileViewModel(ISelectListener parent, DeviceFileDownloadedMessage message)
+	public CameraFileViewModel(CameraViewModel parent, DeviceFileDownloadedMessage message)
 	{
 		this.parent = parent;
-		this.message = message;
-		this.BorderHeight = LargeBorderHeight;
-		this.ImageHeight = LargeImageHeight;
-
-		this.IsToAddToLibrary = true;
-		this.IsToRemoveFromCamera = false;
-		this.Title = string.Empty; 
-		this.Details = string.Empty;
-		this.SetThumbnailStrings(); 
-		this.Subscribe<LanguageChangedMessage>();
-	}
-
-	// We need to reload the thumbnail view title, so that it will be properly localized
-	public void Receive(LanguageChangedMessage _) => this.SetThumbnailStrings();
-
-	internal void OnSelect() => this.parent.OnSelect(this);
-
-	[RelayCommand]
-	public void OnIsToAddToLibraryChanged()
-	{
+		this.path = message.Path;
+		this.file = message.File;
+		this.Glyph = this.file.EndsWith(".MOV", StringComparison.InvariantCultureIgnoreCase) ? "movies_and_tv" : "document"; 
+		FileInfo fi = new(this.path);
+		const float megaBytes = 1024.0f * 1024.0f;
+		float sizeMB = fi.Length / megaBytes;
+		this.Details = string.Format("{0:F2} MB", sizeMB);
+		this.Title = this.file;
 	}
 
 	[RelayCommand]
-	public void OnIsToRemoveFromCameraChanged()
+	public void OnSave()
 	{
-
-	}
-	
-	private void SetThumbnailStrings()
-	{
-		string? currentLanguage = this.Localizer.CurrentLanguage;
-		if (!string.IsNullOrEmpty(currentLanguage))
+		try
 		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo(currentLanguage);
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentLanguage);
+			// Move file at path to desktop 
+			string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+			string targetFilename = Path.GetFileName(this.path);
+			string targetPath = Path.Combine(desktopPath, targetFilename);
+			File.Move(this.path, targetPath, overwrite: true);
 		}
-
-		this.Title = message.File; 
-			//string.Format(
-			//	"{0} - {1} - {2}",
-			//	this.Metadata.Filename, this.Metadata.Extension, this.Metadata.Dimensions);
-		
+		catch (Exception ex)
+		{ 
+			Debug.WriteLine(ex);
+			// TODO : Message user 
+		}
 	}
+
+	[RelayCommand]
+	public void OnDelete() =>
+		// Invoke parent to delete file on camera and to have this VM removed from the list
+		this.parent.RemoveFromCamera(this, this.file);
 }

@@ -8,6 +8,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	
 	<UserControl.Styles>
@@ -18,7 +20,7 @@
 
 	<Border
 		x:Name="outerBorder"
-		Height="{Binding BorderHeight}" 
+		Height="140" 
 		Background="Transparent"
 		BorderBrush="{StaticResource LightAqua_1_100}"
 		BorderThickness="1"
@@ -29,59 +31,67 @@
 			>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="32" />
+				<ColumnDefinition Width="48" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="32" />
-				<RowDefinition Height="200" />
-				<RowDefinition Height="32" />
+				<RowDefinition Height="40" />
+				<RowDefinition Height="40" />
+				<RowDefinition Height="40" />
 			</Grid.RowDefinitions>
 			<TextBlock
 				Grid.Row="0" Grid.ColumnSpan="2"
 				Text="{Binding Title}"
 				Theme="{StaticResource Large}"
 				/>
-			<Image
-				Grid.Row="1"
-				Source="{Binding Thumbnail}"
-				Height="{Binding ImageHeight}" 
+			<glyphs:SvgIcon
+				Grid.Row="1" Grid.Column="0"
+				Source="{Binding Glyph}"
 				IsHitTestVisible="False"
-				VerticalAlignment="Center"
+				Width="36" Height="36"
+				Foreground="{StaticResource LightAqua_0_080}"
+				StrokeThickness="0.1"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
 				/>
 			<TextBlock
 				Grid.Row="2" Grid.ColumnSpan="2"
 				Text="{Binding Details}"
 				Theme="{StaticResource Medium}"
 				/>
-			<Grid
+			<TextBlock
+				x:Name="SaveTextBlock"
+				Grid.Row="1" Grid.Column="0"
+				Theme="{StaticResource Small}"
+				Text="Save to Desktop"
+				VerticalAlignment="Center" HorizontalAlignment="Right"
+				/>
+			<glyphs:GlyphButton
+				x:Name="SaveButton"
 				Grid.Row="1" Grid.Column="1"
-				> 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="30" />
-					<RowDefinition Height="30" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="30" />
-					<RowDefinition Height="30" />
-				</Grid.RowDefinitions>
-				<CheckBox
-					Classes="noContent"
-					Grid.Row="0"
-					Padding="0"
-					VerticalAlignment="Top" HorizontalAlignment="Center"
-					IsThreeState="False"
-					IsChecked="{Binding IsToAddToLibrary, Mode=TwoWay}"
-					Command="{Binding OnIsToAddToLibraryChanged}"
-					/>
-				<CheckBox
-					Classes="noContent"
-					Grid.Row="4"
-					Padding="0"
-					VerticalAlignment="Bottom" HorizontalAlignment="Center"
-					IsThreeState="False"
-					IsChecked="{Binding IsToRemoveFromCamera, Mode=TwoWay}"
-					Command="{Binding OnIsToRemoveFromCameraChanged}"
-					/>
-			</Grid>
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="save"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnSave}"
+				Width="36" Height="36" 
+				/>
+			<TextBlock
+				x:Name="RemoveTextBlock"
+				Grid.Row="2" Grid.Column="0"
+				Theme="{StaticResource Small}"
+				Text="Remove from Camera"
+				VerticalAlignment="Center" HorizontalAlignment="Right"
+				/>
+			<glyphs:GlyphButton
+				x:Name="RemoveButton"
+				Grid.Row="2" Grid.Column="1"
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="delete"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnDelete}"
+				CommandParameter="Check"
+				Width="36" Height="36" 
+				/>
 		</Grid>
 	</Border>
 </UserControl>

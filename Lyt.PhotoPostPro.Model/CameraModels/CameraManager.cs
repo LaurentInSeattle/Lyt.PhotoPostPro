@@ -505,7 +505,7 @@ public class CameraManager
 
             new DeviceFileDownloadedMessage(
                 IsSuccess: false, IsDownloaded: true, 
-                foundDevice, file, "No thumnail").Publish();
+                foundDevice, file, targetPath).Publish();
             return false;
         }
         catch (Exception ex)
@@ -531,7 +531,7 @@ public class CameraManager
         }
 
         PrintLabelValue("Id:", device.DeviceId);
-        PrintLabelValue("Name:", device.FriendlyName);
+        PrintLabelValue("Friendly Name:", device.FriendlyName);
         PrintLabelValue("Manufacturer:", device.Manufacturer);
         PrintLabelValue("Model:", device.Model);
         PrintLabelValue("Serial Number:", string.IsNullOrEmpty(device.SerialNumber) ? "(none)" : device.SerialNumber);

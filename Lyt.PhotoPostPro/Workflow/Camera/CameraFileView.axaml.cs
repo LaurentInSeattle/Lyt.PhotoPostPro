@@ -40,22 +40,6 @@ public partial class CameraFileView : View
         this.PointerReleased -= this.OnPointerReleased;
     }
 
-    public void Select()
-    {
-        this.isPressed = false;
-        this.isInside = false;
-        this.isSelected = true;
-        this.SetVisualState();
-    }
-
-    public void Deselect()
-    {
-        this.isPressed = false;
-        this.isInside = false;
-        this.isSelected = false;
-        this.SetVisualState();
-    }
-
     private void OnPointerEnter(object? sender, PointerEventArgs args)
     {
         if ((sender is CameraFileView view) && (this == view))
@@ -120,5 +104,9 @@ public partial class CameraFileView : View
                 this.isSelected ? selectedBrush : insideBrush;
         this.outerBorder.Background =
             this.isSelected ? new SolidColorBrush(0x80_000000) : Brushes.Transparent;
+        this.SaveTextBlock.IsVisible = this.isInside;
+        this.RemoveTextBlock.IsVisible = this.isInside;
+        this.SaveButton.IsVisible = this.isInside;
+        this.RemoveButton.IsVisible = this.isInside;
     }
 }

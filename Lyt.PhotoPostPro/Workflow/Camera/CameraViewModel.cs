@@ -461,4 +461,23 @@ public sealed partial class CameraViewModel :
             }
         }
     }
+
+    internal void RemoveFromCamera(CameraFileViewModel cameraFileViewModel, string file)
+    {
+        if (this.foundDevice is null)
+        {
+            return;
+        }
+
+        // Disable buttons while deleting 
+        this.AddToLibraryButtonIsDisabled = true;
+        this.RemoveFromCameraButtonIsDisabled = true;
+
+        // Delete 
+        this.cameraMgr.BeginDeletingFiles(this.foundDevice, [file]);
+
+        // Remove entry in UI list 
+        this.OtherFilesPanelViewModel.Files.Remove(cameraFileViewModel);
+
+    }
 }
