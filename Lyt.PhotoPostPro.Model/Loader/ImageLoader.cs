@@ -242,9 +242,63 @@ public static class ImageLoader
         try
         {
             using var r = RawContext.OpenFile(imagePath);
+            r.OutputBitsPerSample = 16; 
             r.Unpack();
             r.DcrawProcess();
+
+            //r.DcrawProcess(c =>
+            //{
+            //    // c.UseCameraWb = true;       // Use camera white balance
+            //    c.Interpolation = true;     // Perform demosaic (debayer)
+            //    c.OutputBps = 16;           // Set output bit depth to 16 bits per channel
+            //    c.OutputTiff = true;       // Set to false to work directly with memory
+            //});
+
+            /*
+             * 
+
+             // 1. Open the RAW file
+            using RawContext r = RawContext.OpenFile(@"C:\your_path\image.NEF");
+
+            // 2. Process the RAW file with 16-bit output settings
+            r.DcrawProcess(c =>
+            {
+                c.UseCameraWb = true;       // Use camera white balance
+                c.Interpolation = true;     // Perform demosaic (debayer)
+                c.OutputBps = 16;           // Set output bit depth to 16 bits per channel
+                c.OutputTiff = false;       // Set to false to work directly with memory
+            });
+
+            // 3. Extract the processed 16-bit RGB data
+            using ProcessedImage rgbImage = r.MakeDcrawMemoryImage();
+
+            // Verify the bit depth is 16
+            if (rgbImage.BitsPerSample == 16)
+            {
+                // Access the 16-bit data array (stored as ushorts)
+                // Note: The array layout usually follows BGR or RGB depending on settings
+                Span<ushort> pixelData = rgbImage.GetData<ushort>();
+                int width = rgbImage.Width;
+                int height = rgbImage.Height;
+
+                // TODO: Process or save your 16-bit ushort array here
+            }
+            
+             * 
+             */
+
+
             using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
+            if (rawImage.Bits == 16)
+            {
+                // Access the 16-bit data array (stored as ushorts)
+                // Note: The array layout usually follows BGR or RGB depending on settings
+                Span<ushort> pixelData = rawImage.AsSpan<ushort>(); // .GetData<ushort>();
+                //int width = rawImage.Width;
+                //int height = rawImage.Height;
+
+                // TODO: Process or save your 16-bit ushort array here
+            }
 
             int width = rawImage.Width;
             int height = rawImage.Height;
