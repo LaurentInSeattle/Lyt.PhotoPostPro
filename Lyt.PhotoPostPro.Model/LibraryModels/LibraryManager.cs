@@ -432,7 +432,6 @@ public sealed class LibraryManager
 
     public bool Remove(Metadata metadata)
     {
-        // TODO 
         if (this.fileManager is null)
         {
             throw new Exception("Library Manager is not initialized.");
@@ -440,6 +439,33 @@ public sealed class LibraryManager
 
         try
         {
+            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
+            if (sourceFolder is null)
+            {
+                throw new Exception("No source folder for: " + metadata.FullPath);
+            }
+
+            // TODO : Remove ToList()
+            string searchPattern = string.Concat(metadata.Filename, "*.*"); 
+            var files = Directory.EnumerateFiles(
+                sourceFolder, 
+                searchPattern,
+                new EnumerationOptions() 
+                {  
+                    IgnoreInaccessible = true , 
+                    MatchCasing = MatchCasing.PlatformDefault, 
+                }).ToList();
+            foreach (string  file in files)
+            {
+                CrossPlatformRecycle.SendToRecycleBin(file); 
+            } 
+
+            // Remove thumbnail from cache 
+            if ( this.LoadedThumbnails.ContainsKey(metadata.FullPath))
+            {
+                this.LoadedThumbnails.Remove(metadata.FullPath);
+            }
+
             return true;
         }
         catch (Exception ex)

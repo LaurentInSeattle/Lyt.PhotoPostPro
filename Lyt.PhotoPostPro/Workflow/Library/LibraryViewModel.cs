@@ -68,6 +68,9 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Days { get; set; } = [];
 
+    [ObservableProperty]
+    public partial bool HasSelection { get; set; }
+
     public LibraryViewModel(
         PhotoPostProModel photoPostProModel,
         IDialogService dialogService,
@@ -78,6 +81,7 @@ public sealed partial class LibraryViewModel :
         this.dialogService = dialogService;
         this.shellViewModel = shellViewModel;
         this.LibraryThumbnailsPanelViewModel = new(this.model, this);
+        this.HasSelection = false; 
         this.Subscribe<LibraryLoadedMessage>();
     }
 
@@ -238,6 +242,7 @@ public sealed partial class LibraryViewModel :
     {
         if (selectedObject is LibraryThumbnailViewModel libraryThumbnailViewModel)
         {
+            this.HasSelection = true; 
             this.selectedLibraryThumbnailViewModel = libraryThumbnailViewModel;
             this.SelectedThumbnail = libraryThumbnailViewModel.Thumbnail;
             if (this.SelectedThumnailMetadataViewModel is null)
@@ -309,7 +314,23 @@ public sealed partial class LibraryViewModel :
             }
 
             var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
-            this.libraryMgr.Remove(metadata);
+            if (!this.libraryMgr.Remove(metadata))
+            {
+                // Failed:
+                // TODO : Message user 
+                return; 
+            } 
+
+            // Clear this view 
+            this.SelectedThumbnail = null;
+            this.SelectedThumnailMetadataViewModel = null;
+
+            // Clear the list 
+            this.LibraryThumbnailsPanelViewModel.Thumbnails.Remove(this.selectedLibraryThumbnailViewModel);
+
+            // Clear selection 
+            this.selectedLibraryThumbnailViewModel = null;
+            this.HasSelection = false;
         }
     }
 }

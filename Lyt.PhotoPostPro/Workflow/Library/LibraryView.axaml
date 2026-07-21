@@ -62,6 +62,7 @@
 				/>
 			<glyphs:GlyphButton
 				x:Name="ProcessButton"
+				IsVisible="{Binding HasSelection}"
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -75,6 +76,7 @@
 	    		/>
 			<glyphs:GlyphButton
 				x:Name="RemoveButton"
+				IsVisible="{Binding HasSelection}"
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
