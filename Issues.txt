@@ -7,8 +7,6 @@ Bugs ~ Major Issues
 
 - Tool boxes titles will not localise when language changes 
 
-- Sometimes not rotated image shows up in rotation step (no repro yet) - After Mirror ???
-
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 

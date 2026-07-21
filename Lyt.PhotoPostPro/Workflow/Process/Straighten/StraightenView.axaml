@@ -25,11 +25,6 @@
 		</Grid.ColumnDefinitions>
 		<Image
 			Grid.Column="1" Grid.Row="1"
-			IsVisible="{ReflectionBinding SourceImageIsVisible}"
-			Source="{ReflectionBinding SourceImage}"
-			/>
-		<Image
-			Grid.Column="1" Grid.Row="1"
 			IsVisible="{ReflectionBinding ResultImageIsVisible}"
 			Source="{ReflectionBinding ResultImage}"
 			/>
