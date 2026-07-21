@@ -33,6 +33,17 @@ public sealed class FolderTree
                         {
                             if (MetadataFolders.IsDayFolder(directoryDay, out int day, out int dayOfWeek))
                             {
+
+                                // Enumerate metadata files 
+                                // Bring the '_META' filter because we also have the _EDIT.json files containing edits 
+                                var files = Directory.EnumerateFiles(directoryDay, "*_META.json");
+                                if (!files.Any())
+                                {
+                                    // No files, possibly deleted, no need to delete the folder 
+                                    continue;
+                                }
+
+                                // Create a DayFolder only if we have files 
                                 DayFolder dayFolder = new()
                                 {
                                     Year = year,
@@ -43,9 +54,6 @@ public sealed class FolderTree
 
                                 monthFolder.DayFolders.Add(dayFolder);
 
-                                // Enumerate metadata files 
-                                // Bring the '_META' filter because we also have the _EDIT.json files containing edits 
-                                var files = Directory.EnumerateFiles(directoryDay, "*_META.json");
                                 foreach (string file in files)
                                 {                                    
                                     dayFolder.MetadataFiles.Add(file);

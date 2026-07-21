@@ -16,8 +16,6 @@ WIP
 
 - Open Folder 
 
-- Delete from Library 
-
 - Drop RGB 48 and move on to 4xHalf
 
 - Other built-in effects to consider:  
