@@ -3,7 +3,7 @@
 public sealed class PostProcess
 {
     /// <summary> CTOR to be used when starting a new process from scratch  </summary>
-    public PostProcess(PhotoPostProModel model, Metadata metadata, Image<Rgb48> originalImage)
+    public PostProcess(PhotoPostProModel model, Metadata metadata, Image<HalfVector4> originalImage)
     {
         this.MaybeModel = model;
         this.Metadata = metadata;
@@ -35,10 +35,10 @@ public sealed class PostProcess
             throw new InvalidOperationException("Model must be set before accessing it.");
 
     [JsonIgnore]
-    public Image<Rgb48>? MaybeOriginalImage { get; set; }
+    public Image<HalfVector4>? MaybeOriginalImage { get; set; }
 
     [JsonIgnore]
-    public Image<Rgb48> OriginalImage
+    public Image<HalfVector4> OriginalImage
         =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 

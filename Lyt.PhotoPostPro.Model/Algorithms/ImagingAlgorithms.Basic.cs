@@ -2,7 +2,7 @@
 
 public static partial class ImagingAlgorithms
 {
-	public static void ApplyColorTemperature(this Image<Rgb48> image, float temperature)
+	public static void ApplyColorTemperature(this Image<HalfVector4> image, float temperature)
 	{
 		// Clamp the temperature value to a reasonable range (-100 to 100)
 		temperature = Math.Clamp(temperature, -100f, 100f);
@@ -27,7 +27,7 @@ public static partial class ImagingAlgorithms
 	// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
 	// brightnessAmount comes from 0.0 to 0.5 => Add one for Img# 
 	public static bool ApplyGlobalContrast(
-		this Image<Rgb48> image, float contrastAmount, float blurAmount, float brightnessAmount )
+		this Image<HalfVector4> image, float contrastAmount, float blurAmount, float brightnessAmount )
 	{
 		if (Math.Abs(contrastAmount - 1.0) > 0.01)
 		{
@@ -50,7 +50,7 @@ public static partial class ImagingAlgorithms
 	//     A value of 0 is completely un-saturated. A value of 1 leaves the input unchanged.
 	//     Other values are linear multipliers on the effect. Values of amount over 1 are
 	//     allowed, providing super-saturated results
-	public static bool ApplyGlobalSaturation(this Image<Rgb48> image, float saturationAmount)
+	public static bool ApplyGlobalSaturation(this Image<HalfVector4> image, float saturationAmount)
 	{
 		if (Math.Abs(saturationAmount - 1.0) > 0.01)
 		{
@@ -61,7 +61,7 @@ public static partial class ImagingAlgorithms
 	}
 
 	//   sharpenAmount: sigma: The 'sigma' value representing the weight of the blur.
-	public static bool ApplyGlobalSharpen(this Image<Rgb48> image, float sharpenAmount)
+	public static bool ApplyGlobalSharpen(this Image<HalfVector4> image, float sharpenAmount)
 	{
 		if (Math.Abs(sharpenAmount) > 0.01)
 		{

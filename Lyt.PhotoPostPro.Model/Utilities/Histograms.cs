@@ -10,7 +10,7 @@ public sealed class Histograms
 
     public Histogram Luminosity { get; private set; }
 
-    public Histograms(Image<Rgb48> image)
+    public Histograms(Image<HalfVector4> image)
     {
         // Initialize histograms for 256 possible intensity levels (0-255)
         // No point to display 65356 points 
@@ -26,36 +26,32 @@ public sealed class Histograms
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<Rgb48> row = image.DangerousGetPixelRowMemory(y).Span;
+            Span<HalfVector4> row = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 ++pixelCount;
 
                 // Increment the bin for each color channel
-                Rgb48 pixel = row[x];
-                int pixelR = pixel.R >> 8;
-                int pixelG = pixel.G >> 8;
-                int pixelB = pixel.B >> 8;
-                redHistogram[pixelR]++;
-                greenHistogram[pixelG]++;
-                blueHistogram[pixelB]++;
+                Rgba32 pixel = row[x].ToRgba32();
+                redHistogram[pixel.R]++;
+                greenHistogram[pixel.G]++;
+                blueHistogram[pixel.B]++;
 
                 // Calculate human perceived luminosity and increment the gray bin
                 // Calculate perceived luminance: Simplified formula, linear  
                 int gray1000 = 299 * pixel.R + 587 * pixel.G + 114 * pixel.B;
                 int gray = (gray1000 + 500) / 1000;
-                if (gray == 65536)
+                if (gray == 256)
                 {
                     // Possible because of rounding 
-                    gray = 65535;
+                    gray = 255;
                 }
 
-                if (gray > 65535)
+                if (gray > 255)
                 {
                     if (Debugger.IsAttached) { Debugger.Break(); }
                 }
 
-                gray = gray >> 8;
                 grayHistogram[gray]++;
             }
         });

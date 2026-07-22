@@ -104,17 +104,20 @@ public static class ImagingUtilities
         }
     }
 
-    public static Frame ToFrame(this Image<Rgb48> image)
+    public static Frame ToFrame(this Image<HalfVector4> image)
     {
         try
         {
+            // Check bit per pixel !
+            if ( Debugger.IsAttached ) { Debugger.Break(); }
+
             PixelTypeInfo pixelTypeInfo = image.PixelType;
             if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 48))
             {
-                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected Rgb48.");
+                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected HalfVector4.");
             }
 
-            if (image is Image<Rgb48> rgb48)
+            if (image is Image<HalfVector4> rgbFp)
             {
                 var frame = new Frame(image.Width, image.Height);
                 if (frame.Data is null)
@@ -122,7 +125,7 @@ public static class ImagingUtilities
                     throw new OutOfMemoryException("Failed to allocate buffer for a new frame.");
                 }
 
-                rgb48.PixelRgbaBuffer(frame.Data);
+                rgbFp.PixelRgbaBuffer(frame.Data);
                 return frame;
             }
 
@@ -134,7 +137,7 @@ public static class ImagingUtilities
         }
     }
 
-    public static void PixelRgbaBuffer(this Image<Rgb48> image, byte[] rgbaData)
+    public static void PixelRgbaBuffer(this Image<HalfVector4> image, byte[] rgbaData)
     {
         try
         {
@@ -145,13 +148,13 @@ public static class ImagingUtilities
                 for (int y = 0; y < accessor.Height; y++)
                 {
                     var row = accessor.GetRowSpan(y);
-                    foreach (ref Rgb48 pixel in row)
+                    foreach (ref HalfVector4 pixelVector in row)
                     {
-                        // Rgb48 stores 16-bit values: Scale them to 8-bit (0-255) by shifting >> 8.
-                        rgbaData[offset++] = (byte)(pixel.R >> 8);
-                        rgbaData[offset++] = (byte)(pixel.G >> 8);
-                        rgbaData[offset++] = (byte)(pixel.B >> 8);
-                        rgbaData[offset++] = 255; // Alpha channel (fully opaque)
+                        Rgba32 pixel = pixelVector.ToRgba32(); 
+                        rgbaData[offset++] = pixel.R ;
+                        rgbaData[offset++] = pixel.G ;
+                        rgbaData[offset++] = pixel.B ;
+                        rgbaData[offset++] = pixel.A ; 
                     }
                 }
             });

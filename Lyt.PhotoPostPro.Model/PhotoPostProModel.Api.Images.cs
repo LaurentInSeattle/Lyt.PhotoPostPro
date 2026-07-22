@@ -75,7 +75,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void AdjustExposure(double gamma, double gain, int shift) =>
+    public void AdjustExposure(float gamma, float gain, float shift) =>
         this.ApiAction(() =>
         {
             if (this.Workflow.CurrentStep is ExposureStep exposureStep)

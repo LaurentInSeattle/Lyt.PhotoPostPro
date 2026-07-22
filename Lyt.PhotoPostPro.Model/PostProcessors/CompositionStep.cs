@@ -15,7 +15,7 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
 
     public int OriginalDy { get; set; }
 
-    public override void Initialize(Image<Rgb48> originalImage)
+    public override void Initialize(Image<HalfVector4> originalImage)
     {
         this.X = 0;
         this.Y = 0;

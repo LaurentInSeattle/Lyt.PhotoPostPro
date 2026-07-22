@@ -5,7 +5,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 {
     public const string ExportTag = "EXP_"; 
 
-    public override void Initialize(Image<Rgb48> originalImage) { }
+    public override void Initialize(Image<HalfVector4> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
@@ -91,7 +91,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             {
                 // Resize and rescale 
                 // ! Compiler fail ? Verified at begin of method 
-                Image<Rgb48> imageToResize = this.ResultImage!.Clone();
+                Image<HalfVector4> imageToResize = this.ResultImage!.Clone();
                 switch (imageParameters.Action)
                 {
                     default:
@@ -127,7 +127,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add watermark, if specified
-                Image<Rgb48> imageWithWatermark = imageToResize;
+                Image<HalfVector4> imageWithWatermark = imageToResize;
                 if (imageParameters.WithWatermark)
                 {
                     Watermark? watermark = model.Watermarks.FromKey(imageParameters.WatermarkKey);
@@ -158,7 +158,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add Borders, if specified
-                Image<Rgb48> imageWithBorders = imageWithWatermark;
+                Image<HalfVector4> imageWithBorders = imageWithWatermark;
                 if (imageParameters.WithBorders)
                 {
                     Color borderColor =
@@ -180,7 +180,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add signature, if specified
-                Image<Rgb48> imageWithSignature = imageWithBorders;
+                Image<HalfVector4> imageWithSignature = imageWithBorders;
                 if (imageParameters.WithSignature)
                 {
                     Signature? signature = model.Signatures.FromKey(imageParameters.SignatureKey);
@@ -230,7 +230,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Saving export formatted image: pick encoder and file extension  
-                Image<Rgb48> finalImage = imageWithSignature;
+                Image<HalfVector4> finalImage = imageWithSignature;
                 var encoder = imageParameters.ImageEncoder;
                 string extension = imageParameters.FileExtension;
                 string exportPath =

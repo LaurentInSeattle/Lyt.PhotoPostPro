@@ -76,7 +76,7 @@ public sealed class PostProcessWorkflow
         return step; 
     }
 
-    public bool Begin(Image<Rgb48> originalImage)
+    public bool Begin(Image<HalfVector4> originalImage)
     {
         if (this.Steps.Count == 0)
         {

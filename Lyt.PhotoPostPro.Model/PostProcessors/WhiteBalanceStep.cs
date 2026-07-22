@@ -25,7 +25,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
 
     public WhiteBalanceAlgorithm Algorithm { get; set; }
 
-    public override void Initialize(Image<Rgb48> _) => this.Clear();
+    public override void Initialize(Image<HalfVector4> _) => this.Clear();
 
     public override Frame? Reset()
     {

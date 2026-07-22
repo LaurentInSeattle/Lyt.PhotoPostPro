@@ -3,13 +3,13 @@
 public class ExposureStep(PostProcessWorkflow postProcessWorkflow) : 
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExposureStepName)
 {
-    public double Gamma { get; set; }
+    public float Gamma { get; set; }
     
-    public double Gain { get; set; }
+    public float Gain { get; set; }
 
-    public int Shift { get; set; }
+    public float Shift { get; set; }
 
-    public override void Initialize(Image<Rgb48> _) => this.Clear();
+    public override void Initialize(Image<HalfVector4> _) => this.Clear();
 
     public override Frame? Reset()
     {
@@ -31,7 +31,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
             this.Shift != 0;
         if (isChanged)
         {
-            ushort[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
+            float[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
             PostProcessStep.RecalculateHistograms(clone);
@@ -41,7 +41,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         return withFrame ? clone.ToFrame() : null;
     }
 
-    internal Frame? AdjustExposure(double gamma, double gain, int shift)
+    internal Frame? AdjustExposure(float gamma, float gain, float shift)
     {
         this.Gamma = gamma;
         this.Gain = gain;
@@ -51,9 +51,9 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
 
     private void Clear ()
     {
-        this.Gamma = 1.0;
-        this.Gain = 1.0;
-        this.Shift = 0;
+        this.Gamma = 1.0f;
+        this.Gain = 1.0f;
+        this.Shift = 0.0f;
         new GammaLutClearMessage().Publish();
     }
 }

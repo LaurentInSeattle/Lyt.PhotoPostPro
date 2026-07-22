@@ -3,10 +3,9 @@
 public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.LutStepName)
 {
-    [JsonIgnore]
     public LutMetadata LutMetadata { get; set; } = LutMetadata.Empty;
 
-    public override void Initialize(Image<Rgb48> _) => this.Clear();
+    public override void Initialize(Image<HalfVector4> _) => this.Clear();
 
     public override Frame? Reset()
     {

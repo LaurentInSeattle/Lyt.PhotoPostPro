@@ -26,11 +26,11 @@ public sealed class PostProcessParameters
 
     public int CompositionOriginalDy { get; set; }
 
-    public double ExposureGamma { get; set; }
+    public float ExposureGamma { get; set; }
 
-    public double ExposureGain { get; set; }
+    public float ExposureGain { get; set; }
 
-    public int ExposureShift { get; set; }
+    public float ExposureShift { get; set; }
 
     public float RecoveryShadowAmount { get; set; }
 

@@ -8,7 +8,7 @@ public sealed class LoadedImage
 
     public string Exception { get; set; } = string.Empty;
 
-    public Image<Rgb48>? Image { get; set; }
+    public Image<HalfVector4>? Image { get; set; }
 
     public Metadata? Metadata { get; set; }
 
@@ -29,7 +29,7 @@ public sealed class LoadedImage
     public static LoadedImage Fail(string message, string exception = "")
         => new() { ErrorMessage = message, Exception = exception };
 
-    public static LoadedImage FullyLoaded(Image<Rgb48>? image, Metadata? metadata)
+    public static LoadedImage FullyLoaded(Image<HalfVector4>? image, Metadata? metadata)
         => new() { IsSuccess = true, Image = image, Metadata = metadata };
 
     public static LoadedImage PreLoaded(Metadata? metadata, byte[] jpgThumbnail)

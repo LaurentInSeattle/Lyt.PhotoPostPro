@@ -159,8 +159,8 @@ public static class ImageLoader
             int height = (int)frame.Height;
             byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-            var image48 = image24.CloneAs<Rgb48>();
-            if (image48 is null)
+            var imageFp = image24.CloneAs<HalfVector4>();
+            if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with Openize.";
                 return LoadedImage.Fail("Model.Loader.OpenizeFailedLoad");
@@ -177,7 +177,7 @@ public static class ImageLoader
             // else // No metadata : Directories stays null 
 
             var metadata = new Metadata(imagePath, width, height, directories);
-            return LoadedImage.FullyLoaded(image48, metadata);
+            return LoadedImage.FullyLoaded(imageFp, metadata);
         }
         catch (Exception ex)
         {
@@ -245,59 +245,12 @@ public static class ImageLoader
             r.OutputBitsPerSample = 16; 
             r.Unpack();
             r.DcrawProcess();
-
-            //r.DcrawProcess(c =>
-            //{
-            //    // c.UseCameraWb = true;       // Use camera white balance
-            //    c.Interpolation = true;     // Perform demosaic (debayer)
-            //    c.OutputBps = 16;           // Set output bit depth to 16 bits per channel
-            //    c.OutputTiff = true;       // Set to false to work directly with memory
-            //});
-
-            /*
-             * 
-
-             // 1. Open the RAW file
-            using RawContext r = RawContext.OpenFile(@"C:\your_path\image.NEF");
-
-            // 2. Process the RAW file with 16-bit output settings
-            r.DcrawProcess(c =>
-            {
-                c.UseCameraWb = true;       // Use camera white balance
-                c.Interpolation = true;     // Perform demosaic (debayer)
-                c.OutputBps = 16;           // Set output bit depth to 16 bits per channel
-                c.OutputTiff = false;       // Set to false to work directly with memory
-            });
-
-            // 3. Extract the processed 16-bit RGB data
-            using ProcessedImage rgbImage = r.MakeDcrawMemoryImage();
-
-            // Verify the bit depth is 16
-            if (rgbImage.BitsPerSample == 16)
-            {
-                // Access the 16-bit data array (stored as ushorts)
-                // Note: The array layout usually follows BGR or RGB depending on settings
-                Span<ushort> pixelData = rgbImage.GetData<ushort>();
-                int width = rgbImage.Width;
-                int height = rgbImage.Height;
-
-                // TODO: Process or save your 16-bit ushort array here
-            }
-            
-             * 
-             */
-
-
             using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
             if (rawImage.Bits == 16)
             {
                 // Access the 16-bit data array (stored as ushorts)
                 // Note: The array layout usually follows BGR or RGB depending on settings
                 Span<ushort> pixelData = rawImage.AsSpan<ushort>(); // .GetData<ushort>();
-                //int width = rawImage.Width;
-                //int height = rawImage.Height;
-
-                // TODO: Process or save your 16-bit ushort array here
             }
 
             int width = rawImage.Width;
@@ -646,7 +599,7 @@ public static class ImageLoader
         return jpgEncoded;
     }
 
-    public static byte[] GenerateJpgThumbnailWithClone(Image<Rgb48> image48)
+    public static byte[] GenerateJpgThumbnailWithClone(Image<HalfVector4> image48)
     {
         // Create thumbnail with cloning 
         var clone = image48.Clone();
