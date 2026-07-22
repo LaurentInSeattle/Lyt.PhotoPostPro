@@ -74,8 +74,14 @@ public sealed class PostProcessParameters
 
     public float ContrastBlueAmount { get; set; }
 
-    // LUT ??? 
+    // LUT 
+    public string LutFriendlyName { get; set; } = string.Empty;
 
+    public string LutPath { get; set; } = string.Empty;
+        
+    public bool LutIsEmbedded { get; set; }
+
+    // Color 
     public ColorAlgorithm ColorAlgorithm { get; set; }
 
     public float ColorSaturationAmount { get; set; }
@@ -146,8 +152,10 @@ public sealed class PostProcessParameters
         p.ContrastGreenAmount = contrastStep.GreenAmount;
         p.ContrastBlueAmount = contrastStep.BlueAmount;
 
-        // ?
-        // var lutStep = workflow.Get<LutStep> ();
+        var lutStep = workflow.Get<LutStep> ();
+        p.LutFriendlyName = lutStep.LutMetadata.FriendlyName;
+        p.LutPath= lutStep.LutMetadata.Path;
+        p.LutIsEmbedded = lutStep.LutMetadata.IsEmbedded;
 
         var colorStep = workflow.Get<ColorStep> ();
         p.ColorAlgorithm = colorStep.Algorithm;
@@ -218,8 +226,9 @@ public sealed class PostProcessParameters
         contrastStep.GreenAmount = this.ContrastGreenAmount;
         contrastStep.BlueAmount = this.ContrastBlueAmount;
 
-        // ?
-        // var lutStep = workflow.Get<LutStep> ();
+        var lutStep = workflow.Get<LutStep>();
+        LutMetadata lutMetadata = new(this.LutFriendlyName, this.LutPath, LutFormat.Unknown, this.LutIsEmbedded);
+        lutStep.LutMetadata = lutMetadata;
 
         var colorStep = workflow.Get<ColorStep>();
         colorStep.Algorithm = this.ColorAlgorithm;

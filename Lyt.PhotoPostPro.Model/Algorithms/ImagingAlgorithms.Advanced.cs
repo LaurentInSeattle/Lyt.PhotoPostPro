@@ -7,9 +7,9 @@ public static partial class ImagingAlgorithms
 {
     #region Brightness / Gamma 
 
-    public const int LutSize = 2048;
+    public const int LutSize = 1024;
 
-    /// <summary> Creates a 64K-byte Look-Up Table for fast gamma correction. </summary>
+    /// <summary> Creates a Look-Up Table for fast gamma correction. </summary>
     /// <param name="gamma">Gamma value (e.g., 2.2 to brighten midtones, 0.45 to darken).</param>
     public static float[] CreateGammaLUT(float gamma)
     {
@@ -36,7 +36,7 @@ public static partial class ImagingAlgorithms
 
     public static float LutLookup(float[] lut, float value)
     {
-        int low = (int)Math.Floor(value / LutSize);
+        int low = (int)Math.Floor(value * LutSize);
         int high = low + 1;
         if ((low < 0) || (high >= LutSize))
         {
@@ -56,7 +56,8 @@ public static partial class ImagingAlgorithms
 
         // Parallelize the loop over the rows
         int height = image.Height;
-        Parallel.For(0, height, y =>
+        // Parallel.For(0, height, y =>
+        for (int y = 0; y < height; y++)
         {
             // Get a span for the current row for fast, safe access
             Span<HalfVector4> row = image.DangerousGetPixelRowMemory(y).Span;
@@ -71,8 +72,8 @@ public static partial class ImagingAlgorithms
                 pixel.Y = ClipF(gain * (g + shift));
                 pixel.Z = ClipF(gain * (b + shift));
             }
-        });
-
+            // });
+        } 
         return lut;
     }
 

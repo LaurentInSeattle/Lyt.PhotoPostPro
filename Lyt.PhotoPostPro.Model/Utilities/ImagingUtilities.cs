@@ -108,11 +108,8 @@ public static class ImagingUtilities
     {
         try
         {
-            // Check bit per pixel !
-            if ( Debugger.IsAttached ) { Debugger.Break(); }
-
             PixelTypeInfo pixelTypeInfo = image.PixelType;
-            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 48))
+            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 64))
             {
                 throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected HalfVector4.");
             }
@@ -129,7 +126,7 @@ public static class ImagingUtilities
                 return frame;
             }
 
-            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected Rgb48.");
+            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected HalfVector4.");
         }
         catch (Exception ex)
         {
