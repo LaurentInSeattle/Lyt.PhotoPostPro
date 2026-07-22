@@ -272,6 +272,15 @@ public sealed class Lut
 
     public LutColor[,,] Table { get; private set; } = new LutColor[0, 0, 0];
 
+    // Simplified API that should improve pref' just a bit 
+    public LutColor LookupTetrahedral(float r, float g, float b)
+    {
+        int cubeSizeMinusOne = this.Dimension - 1;
+        return
+            this.TetrahedralInterpolate(r * cubeSizeMinusOne, g * cubeSizeMinusOne, b * cubeSizeMinusOne);
+    }
+
+#if DEBUG
     public LutColor Lookup(LutColor color)
     {
         color.Validate();
@@ -436,6 +445,9 @@ public sealed class Lut
 
         return c;
     }
+
+#endif 
+
 
     private static int Clamp(int value, int min, int max)
     {

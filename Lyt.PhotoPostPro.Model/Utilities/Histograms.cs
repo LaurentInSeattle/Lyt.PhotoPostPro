@@ -10,7 +10,7 @@ public sealed class Histograms
 
     public Histogram Luminosity { get; private set; }
 
-    public Histograms(Image<HalfVector4> image)
+    public Histograms(Image<RgbaVector> image)
     {
         // Initialize histograms for 256 possible intensity levels (0-255)
         // No point to display 65356 points 
@@ -26,7 +26,7 @@ public sealed class Histograms
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<HalfVector4> row = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 ++pixelCount;

@@ -7,7 +7,7 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
 
     public bool IsMirrored { get; set; }
 
-    public override void Initialize(Image<HalfVector4> _) => this.Clear();
+    public override void Initialize(Image<RgbaVector> _) => this.Clear();
 
     public override Frame? Reset()
     {

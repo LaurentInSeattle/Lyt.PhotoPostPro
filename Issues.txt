@@ -1,6 +1,10 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Gamma Curve broken 
+
+- Gamma interpolation broken 
+
 - Missing localization on Camera view 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
@@ -14,9 +18,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Open Folder 
-
-- Drop RGB 48 and move on to 4xHalf
+- Open Folder (partially - No UI )
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 

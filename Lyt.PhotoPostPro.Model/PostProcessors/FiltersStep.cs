@@ -20,7 +20,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     // All filter have a single amount parameter, we can use a single property for all of them.
     public float Amount { get; set; }
 
-    public override void Initialize(Image<HalfVector4> _) => this.Clear();
+    public override void Initialize(Image<RgbaVector> _) => this.Clear();
 
     public override Frame? Reset()
     {

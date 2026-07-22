@@ -159,7 +159,7 @@ public static class ImageLoader
             int height = (int)frame.Height;
             byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-            var imageFp = image24.CloneAs<HalfVector4>();
+            var imageFp = image24.CloneAs<RgbaVector>();
             if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with Openize.";
@@ -200,7 +200,7 @@ public static class ImageLoader
             }
 
             Debug.WriteLine(imageFormat.Name);
-            var imageFp = Image.Load<HalfVector4>(imagePath);
+            var imageFp = Image.Load<RgbaVector>(imagePath);
             if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -249,7 +249,7 @@ public static class ImageLoader
             int width = rawImage.Width;
             int height = rawImage.Height;
 
-            Image<HalfVector4>? imageFp = null;
+            Image<RgbaVector>? imageFp = null;
             if (rawImage.Bits == 8 && rawImage.Channels == 3)
             {
                 var pixelDataByteSpan = rawImage.AsSpan<byte>();
@@ -258,7 +258,7 @@ public static class ImageLoader
                 fixed (byte* pixelData = &pixelDataByteSpan[0])
                 {
                     var image24 = Image.LoadPixelData<Rgb24>(pixelDataByteSpan, width, height);
-                    imageFp = image24.CloneAs<HalfVector4>();
+                    imageFp = image24.CloneAs<RgbaVector>();
                     if (imageFp is null)
                     {
                         // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -276,7 +276,7 @@ public static class ImageLoader
                 {
                     Span<byte> byteSpan = MemoryMarshal.AsBytes(pixelDataUshortSpan);
                     var image48 = Image.LoadPixelData<Rgb48>(byteSpan, width, height);
-                    imageFp = image48.CloneAs<HalfVector4>();
+                    imageFp = image48.CloneAs<RgbaVector>();
                     if (imageFp is null)
                     {
                         // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -596,14 +596,14 @@ public static class ImageLoader
         return jpgEncoded;
     }
 
-    public static byte[] GenerateJpgThumbnailWithClone(Image<HalfVector4> image48)
+    public static byte[] GenerateJpgThumbnailWithClone(Image<RgbaVector> imageFp)
     {
         // Create thumbnail with cloning 
-        var clone = image48.Clone();
+        var clone = imageFp.Clone();
         clone.Mutate(x => x.Resize(
             new ResizeOptions
             {
-                Size = ThumbnailSize(image48.Width, image48.Height),
+                Size = ThumbnailSize(imageFp.Width, imageFp.Height),
                 Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
                 Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
             }));

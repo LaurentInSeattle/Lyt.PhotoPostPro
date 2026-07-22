@@ -104,17 +104,17 @@ public static class ImagingUtilities
         }
     }
 
-    public static Frame ToFrame(this Image<HalfVector4> image)
+    public static Frame ToFrame(this Image<RgbaVector> image)
     {
         try
         {
             PixelTypeInfo pixelTypeInfo = image.PixelType;
-            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 64))
+            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 128))
             {
-                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected HalfVector4.");
+                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaVector.");
             }
 
-            if (image is Image<HalfVector4> rgbFp)
+            if (image is Image<RgbaVector> rgbFp)
             {
                 var frame = new Frame(image.Width, image.Height);
                 if (frame.Data is null)
@@ -126,7 +126,7 @@ public static class ImagingUtilities
                 return frame;
             }
 
-            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected HalfVector4.");
+            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaVector.");
         }
         catch (Exception ex)
         {
@@ -134,7 +134,7 @@ public static class ImagingUtilities
         }
     }
 
-    public static void PixelRgbaBuffer(this Image<HalfVector4> image, byte[] rgbaData)
+    public static void PixelRgbaBuffer(this Image<RgbaVector> image, byte[] rgbaData)
     {
         try
         {
@@ -145,7 +145,7 @@ public static class ImagingUtilities
                 for (int y = 0; y < accessor.Height; y++)
                 {
                     var row = accessor.GetRowSpan(y);
-                    foreach (ref HalfVector4 pixelVector in row)
+                    foreach (ref RgbaVector pixelVector in row)
                     {
                         Rgba32 pixel = pixelVector.ToRgba32(); 
                         rgbaData[offset++] = pixel.R ;

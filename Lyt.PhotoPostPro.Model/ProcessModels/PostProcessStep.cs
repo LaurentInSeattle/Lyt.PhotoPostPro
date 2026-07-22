@@ -41,17 +41,17 @@ public class PostProcessStep
     public bool IsFirstRun { get; set; }
 
     [JsonIgnore]
-    public Image<HalfVector4>? SourceImage { get; set; }
+    public Image<RgbaVector>? SourceImage { get; set; }
 
     [JsonIgnore]
-    public Image<HalfVector4>? ResultImage { get; set; }
+    public Image<RgbaVector>? ResultImage { get; set; }
 
     public bool IsFirstStep => this.PreviousStep is null;
 
     public bool IsLastStep => this.NextStep is null;
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Initialize(Image<HalfVector4> originalImage) { } 
+    public virtual void Initialize(Image<RgbaVector> originalImage) { } 
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Finish() { }
@@ -90,7 +90,7 @@ public class PostProcessStep
     // Default implementation does nothing. Override in derived classes is needed.
     public virtual Frame? Transform(bool withFrame = true) => null;
 
-    public static void RecalculateHistograms(Image<HalfVector4> image)
+    public static void RecalculateHistograms(Image<RgbaVector> image)
     {
         Task.Run(() =>
         {
