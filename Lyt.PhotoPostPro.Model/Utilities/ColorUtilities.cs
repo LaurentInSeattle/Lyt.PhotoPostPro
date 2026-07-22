@@ -69,6 +69,23 @@ public static class ColorUtilities
         }
     }
 
+    public static void HslToRgb(float h, float s, float l, out float r, out float g, out float b)
+    {
+        if (s == 0.0f)
+        {
+            // gray : all get luma 
+            r = g = b = l ;
+        }
+        else
+        {
+            float q = l < 0.5f ? l * (1f + s) : l + s - l * s;
+            float p = 2f * l - q;
+            r = HueToRgb(p, q, h + 1.0f / 3.0f);
+            g = HueToRgb(p, q, h);
+            b = HueToRgb(p, q, h - 1.0f / 3.0f);
+        }
+    }
+
     private static float HueToRgb(float p, float q, float t)
     {
         if (t < 0f) t += 1f;

@@ -75,7 +75,7 @@ public static class ImageLoader
         try
         {
             LoadedImage? loadedImage = Guard(imagePath);
-            if ( loadedImage is not null)
+            if (loadedImage is not null)
             {
                 return loadedImage;
             }
@@ -127,7 +127,7 @@ public static class ImageLoader
             {
                 if (loadedImage.IsSuccess)
                 {
-                    loadedImage.RotateIfNeeded();   
+                    loadedImage.RotateIfNeeded();
                     Debug.WriteLine(" Image loaded");
                 }
 
@@ -200,8 +200,8 @@ public static class ImageLoader
             }
 
             Debug.WriteLine(imageFormat.Name);
-            var image48 = Image.Load<Rgb48>(imagePath);
-            if (image48 is null)
+            var imageFp = Image.Load<HalfVector4>(imagePath);
+            if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with ImageSharp.";
                 return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
@@ -210,7 +210,7 @@ public static class ImageLoader
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
 
             IReadOnlyList<MetadataExtractor.Directory>? directories = null;
-            ImageMetadata imageMetadata = image48.Metadata;
+            ImageMetadata imageMetadata = imageFp.Metadata;
             ExifProfile? exifProfile = imageMetadata.ExifProfile;
             if (exifProfile is not null)
             {
@@ -226,8 +226,8 @@ public static class ImageLoader
                 }
             }
 
-            var metadata = new Metadata(imagePath, image48.Width, image48.Height, directories);
-            return LoadedImage.FullyLoaded(image48, metadata);
+            var metadata = new Metadata(imagePath, imageFp.Width, imageFp.Height, directories);
+            return LoadedImage.FullyLoaded(imageFp, metadata);
         }
         catch (Exception ex)
         {
@@ -237,67 +237,64 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryLoadWithLibRaw(string imagePath)
+    public static unsafe LoadedImage TryLoadWithLibRaw(string imagePath)
     {
         try
         {
             using var r = RawContext.OpenFile(imagePath);
-            r.OutputBitsPerSample = 16; 
+            r.OutputBitsPerSample = 16;
             r.Unpack();
             r.DcrawProcess();
             using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
-            if (rawImage.Bits == 16)
-            {
-                // Access the 16-bit data array (stored as ushorts)
-                // Note: The array layout usually follows BGR or RGB depending on settings
-                Span<ushort> pixelData = rawImage.AsSpan<ushort>(); // .GetData<ushort>();
-            }
-
             int width = rawImage.Width;
             int height = rawImage.Height;
-            var pixelDataSpan = rawImage.AsSpan<byte>();
-            nint pixelDataPtr = rawImage.DataPointer;
 
-            Image<Rgb48>? image48 = null;
-            unsafe
+            Image<HalfVector4>? imageFp = null;
+            if (rawImage.Bits == 8 && rawImage.Channels == 3)
             {
+                var pixelDataByteSpan = rawImage.AsSpan<byte>();
+
                 // Pixel data from LIBRAw is in C++ memory, need to pin it
-                fixed (byte* pixelData = &pixelDataSpan[0])
+                fixed (byte* pixelData = &pixelDataByteSpan[0])
                 {
-                    if (rawImage.Bits == 8 && rawImage.Channels == 3)
+                    var image24 = Image.LoadPixelData<Rgb24>(pixelDataByteSpan, width, height);
+                    imageFp = image24.CloneAs<HalfVector4>();
+                    if (imageFp is null)
                     {
-                        var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        image48 = image24.CloneAs<Rgb48>();
-                        if (image48 is null)
-                        {
-                            // errorMessage = "Failed to load the source image with ImageSharp.";
-                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert24to48");
-                        }
-
-                        Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
-                    }
-                    else if (rawImage.Bits == 16 && rawImage.Channels == 3)
-                    {
-                        image48 = Image.LoadPixelData<Rgb48>(pixelDataSpan, width, height);
-                        if (image48 is null)
-                        {
-                            // errorMessage = "Failed to load the source image with ImageSharp.";
-                            return LoadedImage.Fail("Model.Loader.LibRawFailToConvert48to48");
-                        }
-
-                        Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
-                    }
-                    else
-                    {
-                        // errorMessage = "Unsupported image format.";
-                        return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
+                        // errorMessage = "Failed to load the source image with ImageSharp.";
+                        return LoadedImage.Fail("Model.Loader.LibRawFailToConvert24to48");
                     }
                 }
+
+                Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
+            }
+            else if (rawImage.Bits == 16 && rawImage.Channels == 3)
+            {
+                Span<ushort> pixelDataUshortSpan = rawImage.AsSpan<ushort>();
+                // Pixel data from LIBRAw is in C++ memory, need to pin it
+                fixed (ushort* pixelData = &pixelDataUshortSpan[0])
+                {
+                    Span<byte> byteSpan = MemoryMarshal.AsBytes(pixelDataUshortSpan);
+                    var image48 = Image.LoadPixelData<Rgb48>(byteSpan, width, height);
+                    imageFp = image48.CloneAs<HalfVector4>();
+                    if (imageFp is null)
+                    {
+                        // errorMessage = "Failed to load the source image with ImageSharp.";
+                        return LoadedImage.Fail("Model.Loader.LibRawFailToConvert48to48");
+                    }
+
+                    Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
+                }
+            }
+            else
+            {
+                // errorMessage = "Unsupported image format.";
+                return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
             var metadata = new Metadata(imagePath, width, height, directories);
-            return LoadedImage.FullyLoaded(image48, metadata);
+            return LoadedImage.FullyLoaded(imageFp, metadata);
         }
         catch (Exception ex)
         {
@@ -405,9 +402,9 @@ public static class ImageLoader
             int width = (int)frame.Width;
             int height = (int)frame.Height;
 
-            byte[] pixels; 
-            var thumbnailFrame = 
-                ( from f in frames.Values where f.Width <  width select f).FirstOrDefault();
+            byte[] pixels;
+            var thumbnailFrame =
+                (from f in frames.Values where f.Width < width select f).FirstOrDefault();
             if (thumbnailFrame is not null)
             {
                 pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
@@ -434,7 +431,7 @@ public static class ImageLoader
             byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
             Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
 
-            return LoadedImage.PreLoaded( metadata, jpgEncoded);
+            return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
         catch (Exception ex)
         {
@@ -466,9 +463,9 @@ public static class ImageLoader
             }
 
             // Save original image dimensions 
-            int width = image24.Width; 
-            int height = image24.Height; 
-            
+            int width = image24.Width;
+            int height = image24.Height;
+
             Debug.WriteLine("Image 24 loaded with ImageSharp: " + imagePath);
 
             IReadOnlyList<MetadataExtractor.Directory>? directories = null;
@@ -513,7 +510,7 @@ public static class ImageLoader
             var metadata = new Metadata(imagePath, width, height, directories);
             ProcessedImage thumbnail = r.ExportThumbnail();
 
-            byte[]? jpgEncoded; 
+            byte[]? jpgEncoded;
             var pixelDataSpan = thumbnail.AsSpan<byte>();
             if (pixelDataSpan.Length == 0)
             {
@@ -577,19 +574,19 @@ public static class ImageLoader
             }));
 
         // Rotate if metadata says so
-        if ( metadata.IsOrientationActionRequired)
+        if (metadata.IsOrientationActionRequired)
         {
-            RotateMode rotateMode = RotateMode.Rotate180; 
-            if ( metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Cw)
+            RotateMode rotateMode = RotateMode.Rotate180;
+            if (metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Cw)
             {
-                rotateMode = RotateMode.Rotate90; 
+                rotateMode = RotateMode.Rotate90;
             }
             else if (metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Ccw)
             {
                 rotateMode = RotateMode.Rotate270;
             }
 
-            image24.Mutate(x => x.Rotate(rotateMode ));
+            image24.Mutate(x => x.Rotate(rotateMode));
         }
 
         // Save as JPG 
@@ -638,7 +635,7 @@ public static class ImageLoader
     }
 
     /// <summary> Returns null if OK ! </summary>
-    private static LoadedImage? Guard (string imagePath)
+    private static LoadedImage? Guard(string imagePath)
     {
         if (string.IsNullOrWhiteSpace(imagePath))
         {
@@ -664,6 +661,6 @@ public static class ImageLoader
             return LoadedImage.Fail("Model.Loader.MaybeMovie");
         }
 
-        return null; 
+        return null;
     }
 }

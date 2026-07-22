@@ -4,16 +4,16 @@ public sealed partial class ExposureToolboxViewModel :
     ToolboxViewModel<ExposureToolboxView, ExposureStep>
 {
     private bool doNotUpdateModel;
-    private double gamma;
-    private double gain;
-    private int shift;
+    private float gamma;
+    private float gain;
+    private float shift;
 
     public ExposureToolboxViewModel()
     {
         this.GammaCurveViewModel = new();
-        this.gamma = 1.0;
-        this.gain = 1.0;
-        this.shift = 0;
+        this.gamma = 1.0f;
+        this.gain = 1.0f;
+        this.shift = 0.0f;
     }
 
     [ObservableProperty]
@@ -93,8 +93,8 @@ public sealed partial class ExposureToolboxViewModel :
 
     partial void OnShiftSliderValueChanged(double value)
     {
-        // Slider sends -0.5 to +0.5, scale up 
-        this.shift = (int)(value * 65535);
+        // Slider sends -0.5 to +0.5, fine
+        this.shift = (float)value ;
         string stringValue = value.ToString("+0.00;-0.00;0.00");
         this.ShiftString = stringValue + " %";
         this.UpdateModel();

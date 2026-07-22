@@ -11,6 +11,7 @@ global using System.Linq;
 global using System.Net;
 global using System.Net.NetworkInformation;
 global using System.Reflection;
+global using System.Runtime.InteropServices;
 global using System.Runtime.CompilerServices;
 global using System.Runtime.Versioning;
 global using System.Net.Sockets;

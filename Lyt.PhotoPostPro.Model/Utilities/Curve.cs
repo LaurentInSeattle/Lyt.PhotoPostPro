@@ -18,7 +18,7 @@ public sealed class Curve
     public Curve(float[] gammaLut)
     {
         this.Kind = CurveKind.GammaLut;
-        if (gammaLut.Length != ImagingAlgorithms.GammaLutSize)
+        if (gammaLut.Length != ImagingAlgorithms.LutSize)
         {
             throw new ArgumentException("Not a gamma LUT.");
         }
