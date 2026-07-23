@@ -1,5 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  arrow_export_up  -->
+<DrawingGroup x:Key = "arrow_export_upDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M12.2803,2.2197C11.9874,1.9268,11.5126,1.9268,11.2197,2.2197L6.2197,7.2197C5.9268,7.5126 5.9268,7.9874 6.2197,8.2803 6.5126,8.5732 6.9874,8.5732 7.2803,8.2803L11,4.5607 11,18.25C11,18.6642 11.3358,19 11.75,19 12.1642,19 12.5,18.6642 12.5,18.25L12.5,4.5607 16.2197,8.2803C16.5126,8.5732 16.9874,8.5732 17.2803,8.2803 17.5732,7.9874 17.5732,7.5126 17.2803,7.2197L12.2803,2.2197z M5.25,20.5C4.8358,20.5 4.5,20.8358 4.5,21.25 4.5,21.6642 4.8358,22 5.25,22L18.25,22C18.6642,22 19,21.6642 19,21.25 19,20.8358 18.6642,20.5 18.25,20.5L5.25,20.5z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="arrow_export_up" Drawing="{StaticResource arrow_export_upDrawingGroup}" />
+
 <!--  info  -->
 <DrawingGroup x:Key = "infoDrawingGroup">
 <DrawingGroup>

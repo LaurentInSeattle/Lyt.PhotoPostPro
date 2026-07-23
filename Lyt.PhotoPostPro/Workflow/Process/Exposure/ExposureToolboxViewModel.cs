@@ -55,11 +55,6 @@ public sealed partial class ExposureToolboxViewModel :
         });
     }
 
-    public override void Activate(object? activationParameters)
-    {
-        base.Activate(activationParameters);
-    } 
-
     public override void OnModelStepUpdated(ExposureStep step) => this.UpdateSliders(step);
 
     // Interface inplementation has to be public
@@ -70,7 +65,7 @@ public sealed partial class ExposureToolboxViewModel :
             // Here we need to undo the operations done reading the sliders 
             this.GammaSliderValue = step.Gamma - 1.0;
             this.GainSliderValue = step.Gain - 1.0;
-            this.ShiftSliderValue = step.Shift / 65535.0;
+            this.ShiftSliderValue = step.Shift;
         });
     }
 
@@ -96,7 +91,7 @@ public sealed partial class ExposureToolboxViewModel :
         // Slider sends -0.5 to +0.5, fine
         this.shift = (float)value ;
         string stringValue = value.ToString("+0.00;-0.00;0.00");
-        this.ShiftString = stringValue + " %";
+        this.ShiftString = stringValue;
         this.UpdateModel();
     }
 

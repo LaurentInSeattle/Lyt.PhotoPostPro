@@ -5,7 +5,7 @@ using System.IO;
 
 public static class CrossPlatformFileExplorer
 {
-    public static void OpenInExplorer(string folderPath)
+    public static void OpenInExplorer(this string folderPath)
     {
         if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
         {

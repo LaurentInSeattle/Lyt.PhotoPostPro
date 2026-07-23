@@ -3,7 +3,9 @@
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
-    public const string ExportTag = "EXP_"; 
+    public const string ExportTag = "EXP_";
+
+    private string currentDirectoryExport = string.Empty;
 
     public override void Initialize(Image<RgbaVector> originalImage) { }
 
@@ -62,8 +64,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             string? sourceDirectory = fi.DirectoryName;
             if (string.IsNullOrWhiteSpace(sourceDirectory))
             {
-                throw new Exception("No directory"); 
-            } 
+                throw new Exception("No directory");
+            }
 
             fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
             string timestamp = FileManagerModel.BriefTimestampString();
@@ -73,6 +75,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             {
                 Directory.CreateDirectory(subDirectoryExport);
             }
+
+            this.currentDirectoryExport = subDirectoryExport;
         }
         catch (Exception e)
         {
@@ -85,7 +89,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        string ExportImage (ImageParameters imageParameters, string folderPath)
+        string ExportImage(ImageParameters imageParameters, string folderPath)
         {
             try
             {
@@ -236,7 +240,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 string exportPath =
                     System.IO.Path.Combine(folderPath, fileName + imageParameters.PostFix + extension);
                 finalImage.Save(exportPath, encoder);
-                return exportPath; 
+                return exportPath;
             }
             catch (Exception e)
             {
@@ -247,11 +251,11 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         // Create target folder if needed 
-        var postProcess = this.PostProcessWorkflow.PostProcess; 
-        var libraryManager = postProcess.Model.LibraryManager; 
-        var metadata = postProcess.Metadata; 
+        var postProcess = this.PostProcessWorkflow.PostProcess;
+        var libraryManager = postProcess.Model.LibraryManager;
+        var metadata = postProcess.Metadata;
         MetadataFolders metadataFolders = new(metadata);
-        string libraryFolderPath = libraryManager.LibraryFolderPath; 
+        string libraryFolderPath = libraryManager.LibraryFolderPath;
         string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(libraryFolderPath);
         string? imageLibraryFolderPath = System.IO.Path.GetDirectoryName(metadata.FullPath);
         if (imageLibraryFolderPath is null)
@@ -260,7 +264,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
-        libraryManager.UpdateThumbnailCache(metadata, thumbnailPath); 
+        libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 
         foreach (var imageParameters in exportParameters.Images)
         {
@@ -269,5 +273,17 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
         // Must return Frame? for base class override compliance 
         return null;
+    }
+
+    internal bool NavigateToExport()
+    {
+        // Navigate to subdirectory for exported images
+        if (string.IsNullOrWhiteSpace(this.currentDirectoryExport))
+        {
+            return false;
+        }
+
+        this.currentDirectoryExport.OpenInExplorer();
+        return true;
     }
 }

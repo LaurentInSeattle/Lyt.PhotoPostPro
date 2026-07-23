@@ -181,6 +181,7 @@
 	<system:String x:Key="Workflow.Export.Title">Exports</system:String>
 	<system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>
 	<system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
+	<system:String x:Key="Workflow.Export.Navigate">Navigate to Folder</system:String>
 	<system:String x:Key="Workflow.Export.Finish">All Done, Close</system:String>
 
 	<!-- Camera -->

@@ -4,15 +4,17 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
 {
     protected override string Title => this.Localize("Workflow.Export.Title");
 
-    public override void OnBeforeReset()
-    {
-    }
-
     [RelayCommand]
     public void OnExport()
     {
         // TODO: Collect parameters 
         this.model.Export(new ExportParameters());
+    }
+
+    [RelayCommand]
+    public void OnNavigate()
+    {
+        this.model.NavigateToExport();
     }
 
     [RelayCommand]

@@ -18,6 +18,8 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Export Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Navigate Button --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Finish Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 		</Grid.RowDefinitions>
@@ -38,6 +40,15 @@
 	    	/>
 		<glyphs:GlyphButton
 			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="arrow_export_up"
+			Text="{DynamicResource Workflow.Export.Navigate}"
+			Command="{Binding OnNavigate}"
+			HorizontalAlignment="Right" Width="320"
+	    	/>
+		<glyphs:GlyphButton
+			Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="dismiss"

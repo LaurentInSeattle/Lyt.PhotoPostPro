@@ -211,7 +211,8 @@ public sealed partial class LibraryViewModel :
             if (thumbnails.Count == 0)
             {
                 // The logic of the folder system should prevent an empty list 
-                if (Debugger.IsAttached) { Debugger.Break(); }
+                // but removing files from the library does not remove its directory 
+                // therefore there could be empty slots 
             }
             else
             {

@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Exposure step : Shift slider does not 'behave' 
-
 - No thumbnail updated after edit without export 
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
@@ -20,8 +18,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Open Folder (partially - No UI )
-
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 
 		// Pixelate (size) 
@@ -33,6 +29,8 @@ WIP
 - Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
 
 - Add auto-localization tool in VS build 
+
+- Cleanup public vs internal about everywhere 
 
 - Cleanup unused icons for faster loading 
 
