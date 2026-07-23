@@ -27,7 +27,8 @@ public sealed class Curve
         for (int i = 0; i < CurveSize; ++i)
         {
             float x = ( float ) i / ( CurveSize - 1);
-            this.Points[i] = ImagingAlgorithms.LutLookup(gammaLut, x);
+            float y = ImagingAlgorithms.LutLookup(gammaLut, x);
+            this.Points[i] = y;
         }
     }
 }

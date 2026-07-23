@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
+using System.Security.Cryptography;
+
 using static ImagingUtilities;
 using static System.MathF;
 
@@ -37,6 +39,7 @@ public static partial class ImagingAlgorithms
     public static float LutLookup(float[] lut, float value)
     {
         int low = (int)Math.Floor(value * LutSize);
+        float mid = value * LutSize; 
         int high = low + 1;
         if ((low < 0) || (high >= LutSize))
         {
@@ -45,19 +48,24 @@ public static partial class ImagingAlgorithms
 
         float vLow = lut[low];
         float vHigh = lut[high];
-        float weight = (value - vLow) / (vHigh - vLow);
-        return float.Lerp(vLow, vHigh, weight);
+        float alpha = 1.0f - ( mid - low ) / (high - low);
+        alpha = ClipF(alpha); 
+        float lerp =  ( 1.0f - alpha ) * vLow + alpha * vHigh;
+
+        return lerp ;
     }
 
     public static float[] Gamma(this Image<RgbaVector> image, float gamma, float gain, float shift)
     {
+        // TODO : Optimize if gamma is zero 
+
         // Will return the LUT for use in the UI 
         float[] lut = ImagingAlgorithms.CreateGammaLUT(gamma);
 
         // Parallelize the loop over the rows
         int height = image.Height;
-        // Parallel.For(0, height, y =>
-        for (int y = 0; y < height; y++)
+        Parallel.For(0, height, y =>
+        // for (int y = 0; y < height; y++)
         {
             // Get a span for the current row for fast access
             Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
@@ -73,8 +81,8 @@ public static partial class ImagingAlgorithms
                 b = ClipF(gain * (b + shift));
                 row[x] = new RgbaVector(r, g, b, 1.0f);
             }
-            // });
-        }
+        //} // classic for 
+        });
         return lut;
     }
 
