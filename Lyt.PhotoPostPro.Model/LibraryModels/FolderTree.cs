@@ -65,6 +65,7 @@ public sealed class FolderTree
             }
         }
 
+        tree.Cleanup(); 
         tree.Sort();
         return tree;
     }
@@ -101,6 +102,42 @@ public sealed class FolderTree
                 var sortedDays =
                     (from day in month.DayFolders orderby day.Day select day).ToList();
                 month.DayFolders = sortedDays;
+            }
+        }
+    }
+
+    public void Cleanup ()
+    {
+        // Remove years 
+        var yearsToRemove = new List<YearFolder>();
+        foreach (YearFolder year in this.YearFolders)
+        {
+            if (year.MetadataFiles().Count == 0)
+            {
+                yearsToRemove.Add(year);
+            }
+        }
+
+        foreach(YearFolder year in yearsToRemove)
+        {
+            this.YearFolders.Remove(year);
+        }
+
+        // Remove months on all remaining years 
+        foreach (YearFolder year in this.YearFolders)
+        {
+            var monthsToRemove = new List<MonthFolder>();
+            foreach (MonthFolder month in year.MonthFolders)
+            {
+                if (month.MetadataFiles().Count == 0)
+                {
+                    monthsToRemove.Add(month);
+                }
+            }
+
+            foreach(MonthFolder month in monthsToRemove)
+            {
+                year.MonthFolders.Remove(month);                    
             }
         }
     }
@@ -142,5 +179,6 @@ public sealed class FolderTree
 
     public void UpdateOnFileRemoved()
     {
+        this.Cleanup(); 
     }
 }

@@ -44,7 +44,8 @@ TODO First : Single Image Process
 
 - UI to define signature and watermark
 
-- Save color grading as a LUT 
+- Save color grading as a LUT : Option to Generate LUT in the Export step 
+
 
 
 Missing Features 
@@ -83,9 +84,7 @@ Avalonia Related Problems
 Cool Stuff to Consider 
 ----------------------
 
-- Implement a MDViewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
-
-- Option to Generate LUT in the Export step 
+- Implement a MD-Viewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
 - Compress Built-in LUT 
 
