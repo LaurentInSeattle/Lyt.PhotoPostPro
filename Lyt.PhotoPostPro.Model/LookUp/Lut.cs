@@ -348,6 +348,8 @@ public sealed class Lut
         return LutColor.Lerp(C0, C1, 1.0f - (upperGreenPoint - greenPoint));
     }
 
+#endif 
+
     // Tetrahedral interpolation. Based on code found in Truelight Software Library paper.
     // http://www.filmlight.ltd.uk/pdf/whitepapers/FL-TL-TN-0057-SoftwareLib.pdf
     private LutColor TetrahedralInterpolate(float redPoint, float greenPoint, float bluePoint)
@@ -445,9 +447,6 @@ public sealed class Lut
 
         return c;
     }
-
-#endif 
-
 
     private static int Clamp(int value, int min, int max)
     {

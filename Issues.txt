@@ -1,9 +1,11 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Gamma Curve broken 
+- Exposure step : Shift slider does not 'behave' 
 
-- Gamma interpolation broken 
+- No thumbnail updated after edit without export 
+
+- After editing the library thumbnail panel does not update, you have to "reload" it 
 
 - Missing localization on Camera view 
 
@@ -52,6 +54,8 @@ Missing Features
 
 --- Essential --- 
 
+- Continue editing 
+
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Culling Workflow and Rating system 
@@ -83,7 +87,7 @@ Cool Stuff to Consider
 
 - Implement a MDViewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
-- Optionally Generate LUT in the Export step 
+- Option to Generate LUT in the Export step 
 
 - Compress Built-in LUT 
 
