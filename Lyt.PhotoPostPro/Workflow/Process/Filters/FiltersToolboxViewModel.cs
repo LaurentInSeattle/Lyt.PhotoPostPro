@@ -28,9 +28,9 @@ public sealed partial class FiltersToolboxViewModel :
 
             // Image Sharp randomly crashes with these 
             //
-            //"Workflow.Filters.Kodachrome"  ,
-            //"Workflow.Filters.Polaroid"  , 
-            //"Workflow.Filters.Lomograph"  , 
+            "Workflow.Filters.Kodachrome"  ,
+            "Workflow.Filters.Polaroid"  ,
+            "Workflow.Filters.Lomograph"  ,
         ];
 
     private static readonly List<FiltersStep.Filter> filters =
@@ -40,9 +40,9 @@ public sealed partial class FiltersToolboxViewModel :
             FiltersStep.Filter.Sepia,
             FiltersStep.Filter.Vignette,
             FiltersStep.Filter.BlackWhite,
-            //FiltersStep.Filter.Kodachrome,
-            //FiltersStep.Filter.Polaroid,
-            //FiltersStep.Filter.Lomograph,
+            FiltersStep.Filter.Kodachrome,
+            FiltersStep.Filter.Polaroid,
+            FiltersStep.Filter.Lomograph,
         ];
 
     [ObservableProperty]
@@ -54,9 +54,9 @@ public sealed partial class FiltersToolboxViewModel :
             "Sepia"  ,
             "Vignette"  ,
             "Black and White"  ,
-            //"Kodachrome"  ,
-            //"Polaroid"  ,
-            //"Lomograph"  ,
+            "Kodachrome"  ,
+            "Polaroid"  ,
+            "Lomograph"  ,
         ];
 
     [ObservableProperty]

@@ -24,7 +24,7 @@ WIP
 
 - Image Exports: Quick save
 
-- Need a spin wait for exporting images or any other long operation
+- Need a spin wait for exporting images or any other long operations
 
 - Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
 

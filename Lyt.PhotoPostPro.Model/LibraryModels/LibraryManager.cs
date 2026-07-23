@@ -398,6 +398,7 @@ public sealed class LibraryManager
 
     public bool SaveEdits(Metadata metadata, PostProcessWorkflow workflow)
     {
+        // As of today, we can handle only one edit 
         if (this.fileManager is null)
         {
             throw new Exception("Library Manager is not initialized.");
@@ -416,8 +417,19 @@ public sealed class LibraryManager
 
             string filenameEdit = metadata.Filename + "_EDIT.json";
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
-            var stepsParameters = PostProcessParameters.FromPostProcessWorkflow(workflow);
-            string serialized = this.fileManager.Serialize<PostProcessParameters>(stepsParameters);
+            PostProcessParameters postProcessParameters; 
+            if (File.Exists(targetPathEdit))
+            {
+                string read = File.ReadAllText(targetPathEdit);
+                postProcessParameters = this.fileManager.Deserialize<PostProcessParameters>(read);
+                postProcessParameters.Update(workflow);
+            }
+            else
+            {
+                postProcessParameters = new PostProcessParameters(workflow);
+            } 
+
+            string serialized = this.fileManager.Serialize<PostProcessParameters>(postProcessParameters);
             File.WriteAllText(targetPathEdit, serialized);
 
             return true;

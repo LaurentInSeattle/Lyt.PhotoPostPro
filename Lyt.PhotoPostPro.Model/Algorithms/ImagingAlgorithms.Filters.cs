@@ -24,10 +24,22 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
+    public static bool BlackWhite(this Image<RgbaVector> image)
+    {
+        image.Mutate(x => x.BlackWhite());
+        return true;
+    }
+
+    public static bool Vignette(this Image<RgbaVector> image)
+    {
+        image.Mutate(x => x.Vignette(Color.Black));
+        return true;
+    }
+
     public static bool Pixelate(this Image<RgbaVector> image, float pixelationAmount)
     {
-        int amount = (int) ( 0.5f + 100.0f * pixelationAmount);
-        if ( amount > 0)
+        int amount = (int)(0.5f + 100.0f * pixelationAmount);
+        if (amount > 0)
         {
             image.Mutate(x => x.Pixelate(amount));
         }
@@ -53,15 +65,4 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool BlackWhite(this Image<RgbaVector> image)
-    {
-        image.Mutate(x => x.BlackWhite());
-        return true;
-    }
-
-    public static bool Vignette(this Image<RgbaVector> image)
-    {
-        image.Mutate(x => x.Vignette(Color.Black));
-        return true;
-    }
 }

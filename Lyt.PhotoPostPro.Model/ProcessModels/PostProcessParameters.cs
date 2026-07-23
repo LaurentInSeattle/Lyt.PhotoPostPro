@@ -8,6 +8,12 @@ using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
 
 public sealed class PostProcessParameters
 {
+    public PostProcessParameters(/* required for deserialization */ ) { }
+
+    public DateTime Created { get; set; }
+
+    public DateTime Updated { get; set; }
+
     public int OrientationRotationAngle { get; set; } // Degrees
 
     public bool OrientationIsMirrored { get; set; }
@@ -100,79 +106,84 @@ public sealed class PostProcessParameters
 
     public float FilterAmount { get; set; }
 
-    public static PostProcessParameters FromPostProcessWorkflow (PostProcessWorkflow workflow)
+    public PostProcessParameters (PostProcessWorkflow workflow)
     {
-        var p = new PostProcessParameters ();
+        this.Created = DateTime.Now;
+        this.Updated = DateTime.Now;
+        this.Update(workflow); 
+    }
+
+    public void Update(PostProcessWorkflow workflow)
+    {
+        this.Updated = DateTime.Now;
         var orientationStep = workflow.Get<OrientationStep>();
-        p.OrientationRotationAngle = orientationStep.RotationAngle;
-        p.OrientationIsMirrored = orientationStep.IsMirrored;
+        this.OrientationRotationAngle = orientationStep.RotationAngle;
+        this.OrientationIsMirrored = orientationStep.IsMirrored;
 
-        var straightenStep = workflow.Get<StraightenStep> ();
-        p.StraightenRotationAngle = straightenStep.RotationAngle;
+        var straightenStep = workflow.Get<StraightenStep>();
+        this.StraightenRotationAngle = straightenStep.RotationAngle;
 
-        var compositionStep = workflow.Get<CompositionStep> ();
-        p.CompositionX = compositionStep.X;
-        p.CompositionY = compositionStep.Y;
-        p.CompositionDx = compositionStep.Dx;
-        p.CompositionDy = compositionStep.Dy;
-        p.CompositionOriginalDx = compositionStep.OriginalDx;
-        p.CompositionOriginalDy = compositionStep.OriginalDy;
+        var compositionStep = workflow.Get<CompositionStep>();
+        this.CompositionX = compositionStep.X;
+        this.CompositionY = compositionStep.Y;
+        this.CompositionDx = compositionStep.Dx;
+        this.CompositionDy = compositionStep.Dy;
+        this.CompositionOriginalDx = compositionStep.OriginalDx;
+        this.CompositionOriginalDy = compositionStep.OriginalDy;
 
-        var exposureStep = workflow.Get<ExposureStep> ();
-        p.ExposureGain = exposureStep.Gain;
-        p.ExposureGamma = exposureStep.Gamma;
-        p.ExposureShift = exposureStep.Shift;
+        var exposureStep = workflow.Get<ExposureStep>();
+        this.ExposureGain = exposureStep.Gain;
+        this.ExposureGamma = exposureStep.Gamma;
+        this.ExposureShift = exposureStep.Shift;
 
-        var recoveryStep = workflow.Get<RecoveryStep> ();
-        p.RecoveryHighlightAmount = recoveryStep.HighlightAmount;
-        p.RecoveryShadowAmount = recoveryStep.ShadowAmount;
+        var recoveryStep = workflow.Get<RecoveryStep>();
+        this.RecoveryHighlightAmount = recoveryStep.HighlightAmount;
+        this.RecoveryShadowAmount = recoveryStep.ShadowAmount;
 
         var vignetteStep = workflow.Get<VignetteStep>();
-        p.VignetteTop = vignetteStep.Top;
-        p.VignetteBottom = vignetteStep.Bottom;
-        p.VignetteLeft = vignetteStep.Left;
-        p.VignetteRight = vignetteStep.Right;
-        p.VignetteLightness = vignetteStep.Lightness;
+        this.VignetteTop = vignetteStep.Top;
+        this.VignetteBottom = vignetteStep.Bottom;
+        this.VignetteLeft = vignetteStep.Left;
+        this.VignetteRight = vignetteStep.Right;
+        this.VignetteLightness = vignetteStep.Lightness;
 
-        var whiteBalanceStep = workflow.Get<WhiteBalanceStep> ();
-        p.WhiteBalanceAlgorithm = whiteBalanceStep.Algorithm;
-        p.WhiteBalanceSaturationThreshold = whiteBalanceStep.SaturationThreshold;
-        p.WhiteBalanceKelvin = whiteBalanceStep.Kelvin;
-        p.WhiteBalanceTemperature = whiteBalanceStep.Temperature;
-        p.WhiteBalanceRed = whiteBalanceStep.Red;
-        p.WhiteBalanceGreen = whiteBalanceStep.Green;
-        p.WhiteBalanceBlue = whiteBalanceStep.Blue;
+        var whiteBalanceStep = workflow.Get<WhiteBalanceStep>();
+        this.WhiteBalanceAlgorithm = whiteBalanceStep.Algorithm;
+        this.WhiteBalanceSaturationThreshold = whiteBalanceStep.SaturationThreshold;
+        this.WhiteBalanceKelvin = whiteBalanceStep.Kelvin;
+        this.WhiteBalanceTemperature = whiteBalanceStep.Temperature;
+        this.WhiteBalanceRed = whiteBalanceStep.Red;
+        this.WhiteBalanceGreen = whiteBalanceStep.Green;
+        this.WhiteBalanceBlue = whiteBalanceStep.Blue;
 
-        var contrastStep = workflow.Get<ContrastStep> ();
-        p.ContrastAlgorithm = contrastStep.Algorithm;
-        p.ContrastContrastAmount = contrastStep.ContrastAmount;
-        p.ContrastBlurAmount = contrastStep.BlurAmount;
-        p.ContrastBrightnessAmount = contrastStep.BrightnessAmount;
-        p.ContrastRedAmount = contrastStep.RedAmount;
-        p.ContrastGreenAmount = contrastStep.GreenAmount;
-        p.ContrastBlueAmount = contrastStep.BlueAmount;
+        var contrastStep = workflow.Get<ContrastStep>();
+        this.ContrastAlgorithm = contrastStep.Algorithm;
+        this.ContrastContrastAmount = contrastStep.ContrastAmount;
+        this.ContrastBlurAmount = contrastStep.BlurAmount;
+        this.ContrastBrightnessAmount = contrastStep.BrightnessAmount;
+        this.ContrastRedAmount = contrastStep.RedAmount;
+        this.ContrastGreenAmount = contrastStep.GreenAmount;
+        this.ContrastBlueAmount = contrastStep.BlueAmount;
 
-        var lutStep = workflow.Get<LutStep> ();
-        p.LutFriendlyName = lutStep.LutMetadata.FriendlyName;
-        p.LutPath= lutStep.LutMetadata.Path;
-        p.LutIsEmbedded = lutStep.LutMetadata.IsEmbedded;
+        var lutStep = workflow.Get<LutStep>();
+        this.LutFriendlyName = lutStep.LutMetadata.FriendlyName;
+        this.LutPath = lutStep.LutMetadata.Path;
+        this.LutIsEmbedded = lutStep.LutMetadata.IsEmbedded;
 
-        var colorStep = workflow.Get<ColorStep> ();
-        p.ColorAlgorithm = colorStep.Algorithm;
-        p.ColorRedAmount = colorStep.RedAmount;
-        p.ColorGreenAmount = colorStep.GreenAmount;
-        p.ColorBlueAmount = colorStep.BlueAmount;
-        p.ColorSaturationAmount = colorStep.SaturationAmount;
+        var colorStep = workflow.Get<ColorStep>();
+        this.ColorAlgorithm = colorStep.Algorithm;
+        this.ColorRedAmount = colorStep.RedAmount;
+        this.ColorGreenAmount = colorStep.GreenAmount;
+        this.ColorBlueAmount = colorStep.BlueAmount;
+        this.ColorSaturationAmount = colorStep.SaturationAmount;
 
-        var sharpenStep = workflow.Get<SharpenStep> ();
-        p.SharpenAlgorithm = sharpenStep.Algorithm;
-        p.SharpenSharpenAmount = sharpenStep.SharpenAmount;
+        var sharpenStep = workflow.Get<SharpenStep>();
+        this.SharpenAlgorithm = sharpenStep.Algorithm;
+        this.SharpenSharpenAmount = sharpenStep.SharpenAmount;
 
-        var filtersStep = workflow.Get<FiltersStep> ();
-        p.FilterSelectedFilter = filtersStep.SelectedFilter; 
-        p.FilterAmount= filtersStep.Amount;
-
-        return p;
+        var filtersStep = workflow.Get<FiltersStep>();
+        this.FilterSelectedFilter = filtersStep.SelectedFilter;
+        this.FilterAmount = filtersStep.Amount;
     }
 
     public void ToPostProcessWorkflow(PostProcessWorkflow workflow)
