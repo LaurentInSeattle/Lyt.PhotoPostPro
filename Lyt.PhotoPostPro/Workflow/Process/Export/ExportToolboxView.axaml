@@ -16,11 +16,14 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Export Button --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Export Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Navigate Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Finish Button --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Navigate Button --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Finish Button --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 		</Grid.RowDefinitions>
 		<TextBlock
@@ -36,25 +39,28 @@
 			GlyphSource="arrow_export"
 			Text="{DynamicResource Workflow.Export.Export}"
 			Command="{Binding OnExport}"
-			HorizontalAlignment="Right" Width="320"
+			Width="380" Height="44"
+			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<glyphs:GlyphButton
-			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export_up"
 			Text="{DynamicResource Workflow.Export.Navigate}"
 			Command="{Binding OnNavigate}"
-			HorizontalAlignment="Right" Width="320"
+			Width="380" Height="44"
+			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<glyphs:GlyphButton
-			Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="dismiss"
 			Text="{DynamicResource Workflow.Export.Finish}"
 			Command="{Binding OnFinish}"
-			HorizontalAlignment="Right" Width="320"
+			Width="380" Height="44"
+			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 	</Grid>	
 </UserControl>

@@ -20,6 +20,7 @@
     <system:Double x:Key="Dbl.ThreeSmallButtons">144</system:Double>
     <system:Double x:Key="Dbl.Separator">10</system:Double>
     <system:Double x:Key="Dbl.WfNav">46</system:Double>
+    <system:Double x:Key="Dbl.WideButtons">52</system:Double>
     <system:Double x:Key="Dbl.ComboBox">54</system:Double>
     <system:Double x:Key="Dbl.DropBox">300</system:Double>
 
@@ -39,6 +40,7 @@
     <controls:GridLength x:Key="Size.ThreeSmallButtons">144</controls:GridLength>
     <controls:GridLength x:Key="Size.Separator">10</controls:GridLength>
     <controls:GridLength x:Key="Size.WfNav">46</controls:GridLength>
+    <controls:GridLength x:Key="Size.WideButtons">52</controls:GridLength>
     <controls:GridLength x:Key="Size.ComboBox">54</controls:GridLength>
     <controls:GridLength x:Key="Size.DropBox">300</controls:GridLength>
 
