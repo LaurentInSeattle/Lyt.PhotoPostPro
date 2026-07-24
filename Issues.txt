@@ -54,6 +54,10 @@ Missing Features
 
 --- Essential --- 
 
+- Root Location of Library 
+
+- Root Location of Exports 
+
 - Importing photos into library 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
