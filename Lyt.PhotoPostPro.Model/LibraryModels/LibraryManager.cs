@@ -11,7 +11,7 @@ public sealed class LibraryManager
     private readonly string libraryFolderPath;
     private readonly string exportsFolderPath;
 
-    private PhotoPostProModel? model; 
+    private PhotoPostProModel? model;
     private FileManagerModel? fileManager;
 
     private int imageLoadedCount = 0;
@@ -46,7 +46,7 @@ public sealed class LibraryManager
 
     public string ExportsFolderPath => this.exportsFolderPath;
 
-    public void Initialize(PhotoPostProModel model,  FileManagerModel fileManagerModel)
+    public void Initialize(PhotoPostProModel model, FileManagerModel fileManagerModel)
     {
         this.model = model;
         this.fileManager = fileManagerModel;
@@ -398,6 +398,52 @@ public sealed class LibraryManager
         lowPriorityThread.Start(this);
     }
 
+    public bool Remove(Metadata metadata)
+    {
+        if (this.fileManager is null)
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
+            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
+            if (sourceFolder is null)
+            {
+                throw new Exception("No source folder for: " + metadata.FullPath);
+            }
+
+            // TODO : Remove ToList()
+            string searchPattern = string.Concat(metadata.Filename, "*.*");
+            var files = Directory.EnumerateFiles(
+                sourceFolder,
+                searchPattern,
+                new EnumerationOptions()
+                {
+                    IgnoreInaccessible = true,
+                    MatchCasing = MatchCasing.PlatformDefault,
+                }).ToList();
+            foreach (string file in files)
+            {
+                CrossPlatformRecycle.SendToRecycleBin(file);
+            }
+
+            // Remove thumbnail from cache 
+            if (this.LoadedThumbnails.ContainsKey(metadata.FullPath))
+            {
+                this.LoadedThumbnails.Remove(metadata.FullPath);
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return false;
+        }
+    }
+
     public bool SaveEdits(Metadata metadata, PostProcessWorkflow workflow)
     {
         // As of today, we can handle only one edit 
@@ -417,10 +463,10 @@ public sealed class LibraryManager
                 throw new Exception("No source folder for: " + metadata.FullPath);
             }
 
-            string fileId = this.model.FileUidString;
-            string filenameEdit = metadata.Filename + "_EDIT.json";
+            string fileId = workflow.PostProcess.FileUidString;
+            string filenameEdit = string.Concat(metadata.Filename, "_EDIT", fileId, ".json");
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
-            PostProcessParameters postProcessParameters; 
+            PostProcessParameters postProcessParameters;
             if (File.Exists(targetPathEdit))
             {
                 string read = File.ReadAllText(targetPathEdit);
@@ -430,7 +476,7 @@ public sealed class LibraryManager
             else
             {
                 postProcessParameters = new PostProcessParameters(workflow);
-            } 
+            }
 
             string serialized = this.fileManager.Serialize<PostProcessParameters>(postProcessParameters);
             File.WriteAllText(targetPathEdit, serialized);
@@ -445,49 +491,48 @@ public sealed class LibraryManager
         }
     }
 
-    public bool Remove(Metadata metadata)
+    public List<PostProcessParameters> EnumerateExistingParameters(Metadata metadata)
     {
-        if (this.fileManager is null)
+        if (this.fileManager is null || this.model is null)
         {
             throw new Exception("Library Manager is not initialized.");
         }
 
-        try
+        List<PostProcessParameters> list = [];
+        string? targetFolder = Path.GetDirectoryName(metadata.FullPath);
+        if (targetFolder is null)
         {
-            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
-            if (sourceFolder is null)
-            {
-                throw new Exception("No source folder for: " + metadata.FullPath);
-            }
+            return list;
+            // throw new Exception("No source folder for: " + metadata.FullPath);
+        }
 
-            // TODO : Remove ToList()
-            string searchPattern = string.Concat(metadata.Filename, "*.*"); 
-            var files = Directory.EnumerateFiles(
-                sourceFolder, 
-                searchPattern,
-                new EnumerationOptions() 
-                {  
-                    IgnoreInaccessible = true , 
-                    MatchCasing = MatchCasing.PlatformDefault, 
-                }).ToList();
-            foreach (string  file in files)
+        string filenameEditPattern = string.Concat(metadata.Filename, "_EDIT", "*", ".json");
+        var editFiles = Directory.EnumerateFiles(
+            targetFolder,
+            filenameEditPattern,
+            new EnumerationOptions()
             {
-                CrossPlatformRecycle.SendToRecycleBin(file); 
+                IgnoreInaccessible = true,
+                MatchCasing = MatchCasing.PlatformDefault,
+                RecurseSubdirectories = false
+            });
+        
+        foreach (var editFile in editFiles)
+        {
+            try
+            {
+                string read = File.ReadAllText(editFile);
+                var postProcessParameters = this.fileManager.Deserialize<PostProcessParameters>(read);
+                list.Add(postProcessParameters);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+
+                // Swallow : Do nothing 
             } 
-
-            // Remove thumbnail from cache 
-            if ( this.LoadedThumbnails.ContainsKey(metadata.FullPath))
-            {
-                this.LoadedThumbnails.Remove(metadata.FullPath);
-            }
-
-            return true;
         }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex);
-            if (Debugger.IsAttached) { Debugger.Break(); }
-            return false;
-        }
+
+        return list;
     }
 }

@@ -44,13 +44,13 @@ public sealed class PostProcess
 
     public string SourceFilePath => this.Metadata.FullPath;
 
-    public string FileIdString { get; private set; } = string.Empty;
+    public string FileUidString { get; private set; } = string.Empty;
 
     public void Begin(bool isNew, string fileIdString)
     {
         if (this.Workflow is not null)
         {
-            this.FileIdString = fileIdString;
+            this.FileUidString = fileIdString;
             this.Workflow.Begin(this.OriginalImage, isNew);
         }
         else

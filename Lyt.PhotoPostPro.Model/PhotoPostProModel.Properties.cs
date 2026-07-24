@@ -51,7 +51,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             lock (this.lockObject)
             {
                 ++ this.FileUid; 
-                return string.Format("_{0:D5}", this.FileUid);
+                return string.Format("_{0:X5}", this.FileUid);
             } 
         }
     }
