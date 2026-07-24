@@ -512,7 +512,7 @@ public static class ImageLoader
 
             // Extract the raw byte span containing the JPEG data
             ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
-            if (jpgEncoded.Length > 0 )
+            if (jpgEncoded.Length > 0)
             {
                 return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
             }

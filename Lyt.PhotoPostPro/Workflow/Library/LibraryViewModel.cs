@@ -268,7 +268,7 @@ public sealed partial class LibraryViewModel :
         }
 
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
-        var parameters = this.model.LibraryManager.EnumerateExistingParameters(metadata);
+        List<ExistingPostProcessParameters> parameters = this.model.LibraryManager.EnumerateExistingParameters(metadata);
 
         // Launch dialogs if needed 
         if (parameters.Count == 0)
@@ -283,18 +283,48 @@ public sealed partial class LibraryViewModel :
             // Launch dialog for new processing
             if (this.dialogService is DialogService modalService)
             {
-                //modalService.RunViewModelModal(
-                //    this.shellViewModel.ModalHost, new SelectEditDialogModel(), this.OnEditSelected);
+                modalService.RunViewModelModal(
+                    this.shellViewModel.ModalHost, new SelectEditDialogModel(parameters), this.OnEditSelected);
             }
         }
     }
 
-    private void OnEditSelectConfirmed(object? obj, bool isValid)
+    private void OnEditSelected(object? obj, bool isValid)
     {
-        //if (isValid && obj is SelectEditDialogModel selectEditDialogModel)
-        //{
-        //}
-    } 
+        if (!isValid || obj is not SelectEditDialogModel selectEditDialogModel)
+        {
+            return;
+        } 
+
+        if (this.selectedLibraryThumbnailViewModel is null ||
+            this.selectedLibraryThumbnailViewModel.Metadata is null)
+        {
+            return;
+        }
+
+        var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
+        if (selectEditDialogModel.IsStartOver)
+        {
+            // New processing 
+            this.model.ProcessImageFromMetadata(
+                metadata, isNew: true, this.model.FileUidString, new PostProcessParameters());
+        }
+        else
+        {
+            // Grab info from dialog
+            PostProcessParameters? parameters = selectEditDialogModel.PostProcessParameters; 
+            string fileUid = this.model.FileUidString;
+            if (parameters is null || string.IsNullOrWhiteSpace(fileUid))
+            {
+                return;
+            } 
+            
+            // Continued process
+            this.model.ProcessImageFromMetadata(metadata, isNew: false, this.model.FileUidString, parameters);            
+        }
+
+        this.LaunchProcessing();
+    }
 
     private void LaunchProcessing ()
     {

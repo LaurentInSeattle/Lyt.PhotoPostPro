@@ -45,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Workflow\Library\Dialogs\SelectEditDialog.axaml.cs">
+      <DependentUpon>SelectEditDialog.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Library\Dialogs\ConfirmRemoveDialog.axaml.cs">
       <DependentUpon>ConfirmRemoveDialog.axaml</DependentUpon>
     </Compile>

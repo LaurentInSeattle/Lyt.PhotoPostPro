@@ -6,6 +6,9 @@ using static Lyt.PhotoPostPro.Model.PostProcessors.FiltersStep;
 using static Lyt.PhotoPostPro.Model.PostProcessors.SharpenStep;
 using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
 
+public sealed record class ExistingPostProcessParameters(
+    string FileUidString, PostProcessParameters PostProcessParameters);
+
 public sealed class PostProcessParameters
 {
     public PostProcessParameters(/* required for deserialization */ ) { }

@@ -191,7 +191,8 @@
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
 	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
-
+	<system:String x:Key="Library.StartOver">Start Over</system:String>
+	<system:String x:Key="Library.ContinueEdit">Continue Editing</system:String>
 
 	<system:String x:Key="Library.Month.January">January</system:String>
 	<system:String x:Key="Library.Month.February">February</system:String>

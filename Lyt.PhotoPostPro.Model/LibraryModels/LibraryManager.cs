@@ -498,14 +498,14 @@ public sealed class LibraryManager
         }
     }
 
-    public List<PostProcessParameters> EnumerateExistingParameters(Metadata metadata)
+    public List<ExistingPostProcessParameters> EnumerateExistingParameters(Metadata metadata)
     {
         if (this.fileManager is null || this.model is null)
         {
             throw new Exception("Library Manager is not initialized.");
         }
 
-        List<PostProcessParameters> list = [];
+        List<ExistingPostProcessParameters> list = [];
         string? targetFolder = Path.GetDirectoryName(metadata.FullPath);
         if (targetFolder is null)
         {
@@ -523,21 +523,26 @@ public sealed class LibraryManager
                 MatchCasing = MatchCasing.PlatformDefault,
                 RecurseSubdirectories = false
             });
-        
+
         foreach (var editFile in editFiles)
         {
             try
             {
+                string fileUid = editFile.Replace(metadata.Filename, string.Empty);
+                fileUid = fileUid.Replace("_EDIT", string.Empty);
+                fileUid = fileUid.Replace(".json", string.Empty);
+                Debug.WriteLine(" " + editFile + " " + fileUid);
                 string read = File.ReadAllText(editFile);
                 var postProcessParameters = this.fileManager.Deserialize<PostProcessParameters>(read);
-                list.Add(postProcessParameters);
+                ExistingPostProcessParameters existingPostProcessParameters = new(fileUid, postProcessParameters);
+                list.Add(existingPostProcessParameters);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
 
                 // Swallow : Do nothing 
-            } 
+            }
         }
 
         return list;
