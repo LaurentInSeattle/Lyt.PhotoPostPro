@@ -13,31 +13,31 @@ public sealed partial class LibraryViewModel :
     // Will NEED to localize
     private static readonly string[] MonthString =
     [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Library.Month.January",
+        "Library.Month.February",
+        "Library.Month.March",
+        "Library.Month.April",
+        "Library.Month.May",
+        "Library.Month.June",
+        "Library.Month.July",
+        "Library.Month.August",
+        "Library.Month.September",
+        "Library.Month.October",
+        "Library.Month.November",
+        "Library.Month.December",
     ];
 
     // Will NEED to localize
     private static readonly string[] DayString =
     [
         // Order MUST match the DayOfWeek enumeration, so Sunday comes first 
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
+        "Library.Day.Sunday",
+        "Library.Day.Monday",
+        "Library.Day.Tuesday",
+        "Library.Day.Wednesday",
+        "Library.Day.Thursday",
+        "Library.Day.Friday",
+        "Library.Day.Saturday",
     ];
 
     private readonly PhotoPostProModel model;
@@ -138,7 +138,7 @@ public sealed partial class LibraryViewModel :
         List<SelectorButtonViewModel> listMonths = [];
         foreach (var month in year.MonthFolders)
         {
-            string monthString = MonthString[month.Month - 1];
+            string monthString = this.Localize(MonthString[month.Month - 1]);
             var vm = new SelectorButtonViewModel(monthString, MonthButtonWidth, this.OnSelectMonth, month);
             listMonths.Add(vm);
         }
@@ -162,7 +162,8 @@ public sealed partial class LibraryViewModel :
         List<SelectorButtonViewModel> listDays = [];
         foreach (var day in month.DayFolders)
         {
-            string dayString = DayString[day.DayOfWeek] + " " + day.Day.ToString();
+            string dayOfWeek = this.Localize(DayString[day.DayOfWeek]);
+            string dayString = dayOfWeek + " " + day.Day.ToString();
             var vm = new SelectorButtonViewModel(dayString, DayButtonWidth, this.OnSelectDay, day);
             listDays.Add(vm);
         }

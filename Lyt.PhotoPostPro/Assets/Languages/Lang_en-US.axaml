@@ -192,6 +192,29 @@
 	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
 
+
+	<system:String x:Key="Library.Month.January">January</system:String>
+	<system:String x:Key="Library.Month.February">February</system:String>
+	<system:String x:Key="Library.Month.March">March</system:String>       
+	<system:String x:Key="Library.Month.April">April</system:String>
+	<system:String x:Key="Library.Month.May">May</system:String>        
+	<system:String x:Key="Library.Month.June">June</system:String>        
+	<system:String x:Key="Library.Month.July">July</system:String>
+	<system:String x:Key="Library.Month.August">August</system:String>
+	<system:String x:Key="Library.Month.September">September</system:String>
+	<system:String x:Key="Library.Month.October">October</system:String>
+	<system:String x:Key="Library.Month.November">November</system:String>        
+	<system:String x:Key="Library.Month.December">December</system:String>
+
+	<system:String x:Key="Library.Day.Sunday">Sunday</system:String>
+	<system:String x:Key="Library.Day.Monday">Monday</system:String>        
+	<system:String x:Key="Library.Day.Tuesday">Tuesday</system:String>        
+	<system:String x:Key="Library.Day.Wednesday">Wednesday</system:String>        
+	<system:String x:Key="Library.Day.Thursday">Thursday</system:String>
+	<system:String x:Key="Library.Day.Friday">Friday</system:String>        
+	<system:String x:Key="Library.Day.Saturday">Saturday</system:String>
+		
+
 	<!-- Next below => Possibly never used  => TODO Cleanup -->
 
 	<system:String x:Key="Puzzle.Toolbar.FullScreen">Full Screen</system:String>
