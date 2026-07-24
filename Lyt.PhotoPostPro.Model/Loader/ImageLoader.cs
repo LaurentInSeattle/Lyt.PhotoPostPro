@@ -510,43 +510,11 @@ public static class ImageLoader
             var metadata = new Metadata(imagePath, width, height, directories);
             ProcessedImage thumbnail = r.ExportThumbnail();
 
-            byte[]? jpgEncoded;
-            var pixelDataSpan = thumbnail.AsSpan<byte>();
-            if (pixelDataSpan.Length == 0)
+            // Extract the raw byte span containing the JPEG data
+            ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
+            if (jpgEncoded.Length > 0 )
             {
-                // TODO: Replace thumb with placeholder image 
-                return LoadedImage.Fail("Model.Loader.LibRawNoThumnail");
-            }
-
-            nint pixelDataPtr = thumbnail.DataPointer;
-
-            unsafe
-            {
-                // Pixel data from LIB-Raw is in C++ memory, need to pin it
-                fixed (byte* pixelData = &pixelDataSpan[0])
-                {
-                    if (thumbnail.Bits == 8 && thumbnail.Channels == 3)
-                    {
-                        var image24 = Image.LoadPixelData<Rgb24>(pixelDataSpan, width, height);
-                        jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
-                        Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
-                    }
-                    else if (thumbnail.Bits == 16 && thumbnail.Channels == 3)
-                    {
-                        // WTF ? 48 bits for thumbs? 
-                        return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
-                    }
-                    else
-                    {
-                        // errorMessage = "Unsupported image format.";
-                        return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
-                    }
-                }
-            }
-
-            if (jpgEncoded is not null)
-            {
-                return LoadedImage.PreLoaded(metadata, jpgEncoded);
+                return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
             }
 
             return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
