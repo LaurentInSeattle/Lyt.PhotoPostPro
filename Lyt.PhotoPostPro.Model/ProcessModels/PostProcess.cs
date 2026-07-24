@@ -21,10 +21,10 @@ public sealed class PostProcess
 
     public DateTime LastUpdated { get; set; } = DateTime.Now;
 
-    public void SetModel(PhotoPostProModel model)
-    {
-        this.MaybeModel = model;
-    }
+    //public void SetModel(PhotoPostProModel model)
+    //{
+    //    this.MaybeModel = model;
+    //}
 
     [JsonIgnore]
     public PhotoPostProModel? MaybeModel { get; set; }
@@ -42,13 +42,16 @@ public sealed class PostProcess
         =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 
-    public string SourceFilePath => this.Metadata.FullPath; 
+    public string SourceFilePath => this.Metadata.FullPath;
 
-    public void Begin()
+    public string FileIdString { get; private set; } = string.Empty;
+
+    public void Begin(bool isNew, string fileIdString)
     {
         if (this.Workflow is not null)
         {
-            this.Workflow.Begin(this.OriginalImage);
+            this.FileIdString = fileIdString;
+            this.Workflow.Begin(this.OriginalImage, isNew);
         }
         else
         {

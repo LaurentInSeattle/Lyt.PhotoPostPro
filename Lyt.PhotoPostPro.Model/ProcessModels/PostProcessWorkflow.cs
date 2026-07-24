@@ -76,7 +76,7 @@ public sealed class PostProcessWorkflow
         return step; 
     }
 
-    public bool Begin(Image<RgbaVector> originalImage)
+    public bool Begin(Image<RgbaVector> originalImage, bool isNew)
     {
         if (this.Steps.Count == 0)
         {
@@ -92,8 +92,15 @@ public sealed class PostProcessWorkflow
         this.CurrentStep.SourceImage = originalImage;
         this.CurrentStep.ResultImage = originalImage;
         this.Notify(null, WorkflowUpdateKind.Begin);
-        PostProcessStep.RecalculateHistograms(originalImage); 
-        return true;
+        PostProcessStep.RecalculateHistograms(originalImage);
+
+        if (isNew)
+        {
+            return true;
+        }
+
+        // TODO : Setup and Run the workflow 
+        return true; 
     }
 
     public bool Finish()

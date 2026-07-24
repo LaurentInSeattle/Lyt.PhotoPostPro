@@ -74,12 +74,17 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    public void BeginPostProcess()
+    public void BeginPostProcess(bool isNew, string fileIdString)
     {
         this.ApiAction(() =>
         {
+            if ( string.IsNullOrWhiteSpace(fileIdString) )
+            {
+                return false; 
+            }
+
             // ! CurrentPostProcess is checked for being not null by ApiAction wrapper 
-            this.CurrentPostProcess!.Begin();
+            this.CurrentPostProcess!.Begin(isNew, fileIdString);
             return true;
         });
     }

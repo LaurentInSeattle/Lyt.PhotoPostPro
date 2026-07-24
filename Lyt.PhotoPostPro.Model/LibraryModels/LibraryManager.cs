@@ -11,6 +11,7 @@ public sealed class LibraryManager
     private readonly string libraryFolderPath;
     private readonly string exportsFolderPath;
 
+    private PhotoPostProModel? model; 
     private FileManagerModel? fileManager;
 
     private int imageLoadedCount = 0;
@@ -45,8 +46,9 @@ public sealed class LibraryManager
 
     public string ExportsFolderPath => this.exportsFolderPath;
 
-    public void Initialize(FileManagerModel fileManagerModel)
+    public void Initialize(PhotoPostProModel model,  FileManagerModel fileManagerModel)
     {
+        this.model = model;
         this.fileManager = fileManagerModel;
         this.IsLoading = true;
         this.InitialLibraryLoad();
@@ -399,7 +401,7 @@ public sealed class LibraryManager
     public bool SaveEdits(Metadata metadata, PostProcessWorkflow workflow)
     {
         // As of today, we can handle only one edit 
-        if (this.fileManager is null)
+        if (this.fileManager is null || this.model is null)
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -415,6 +417,7 @@ public sealed class LibraryManager
                 throw new Exception("No source folder for: " + metadata.FullPath);
             }
 
+            string fileId = this.model.FileUidString;
             string filenameEdit = metadata.Filename + "_EDIT.json";
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
             PostProcessParameters postProcessParameters; 

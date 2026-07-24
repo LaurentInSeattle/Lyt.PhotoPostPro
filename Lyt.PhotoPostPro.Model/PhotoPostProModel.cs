@@ -12,10 +12,13 @@ public sealed partial class PhotoPostProModel : ModelBase
         new()
         {
             Language = DefaultLanguage,
+            FileUid = 0, 
             IsFirstRun = true,
             Signatures = new Signatures(),
             Watermarks = new Watermarks(),
-        }; 
+        };
+
+    private readonly object lockObject = new();
 
     private readonly FileManagerModel fileManager;
     private readonly ILocalizer localizer;
@@ -44,7 +47,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.fileManager = fileManager;
         this.localizer = localizer;
         this.profiler = profiler;
-        this.LibraryManager.Initialize(fileManager); 
+        this.LibraryManager.Initialize(this, fileManager); 
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
         this.timeoutTimer = new TimeoutTimer(this.OnModelUpdate, timeoutMilliseconds: 250);
         this.ShouldAutoSave = true;

@@ -18,9 +18,10 @@ Bugs ~ Major Issues
 WIP
 ---
 
+- Continue editing 
+
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 
-		// Pixelate (size) 
 
 - Image Exports: Quick save
 
@@ -53,7 +54,7 @@ Missing Features
 
 --- Essential --- 
 
-- Continue editing 
+- Importing photos into library 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 

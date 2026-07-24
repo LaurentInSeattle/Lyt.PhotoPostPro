@@ -55,7 +55,7 @@ public sealed partial class ProcessViewModel :
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
-            this.model.BeginPostProcess();
+            this.model.BeginPostProcess(isNew: true, "_00001");
         }
     }
 

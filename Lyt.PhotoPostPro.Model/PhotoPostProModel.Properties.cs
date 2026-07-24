@@ -26,9 +26,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         set => this.Set(value);
     }
 
-    /// <summary> This should stay true, ==> But... Just FOR NOW !  </summary>
+    // A unique number used to uniquely identify files 
     [JsonRequired]
-    public bool IsFirstRun { get; set; } = false;
+    public int FileUid { get; set; }
+
+    [JsonRequired]
+    public bool IsFirstRun { get; set; }
 
     [JsonRequired]
     public Signatures Signatures { get; set; } = new();
@@ -39,6 +42,19 @@ public sealed partial class PhotoPostProModel : ModelBase
     #endregion Serialized -  No model changed event
 
     #region Not serialized - No model changed event
+
+    [JsonIgnore]
+    public string FileUidString
+    {
+        get
+        {
+            lock (this.lockObject)
+            {
+                ++ this.FileUid; 
+                return string.Format("_{0:D5}", this.FileUid);
+            } 
+        }
+    }
 
     [JsonIgnore]
     public PostProcess? CurrentPostProcess { get; set; } = null;
