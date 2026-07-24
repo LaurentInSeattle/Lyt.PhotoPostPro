@@ -93,7 +93,6 @@ global using Lyt.Utilities.Randomizing;
 
 
 global using Lyt.PhotoPostPro.Controls;
-global using Lyt.PhotoPostPro.Dialogs;
 global using Lyt.PhotoPostPro.Panes;
 global using Lyt.PhotoPostPro.Panes.HistogramPane;
 global using Lyt.PhotoPostPro.Panes.CurvePane;
@@ -104,6 +103,7 @@ global using Lyt.PhotoPostPro.Shell;
 global using Lyt.PhotoPostPro.Utilities;
 global using Lyt.PhotoPostPro.Workflow.Camera;
 global using Lyt.PhotoPostPro.Workflow.Library;
+global using Lyt.PhotoPostPro.Workflow.Library.Dialogs;
 global using Lyt.PhotoPostPro.Workflow.Language;
 global using Lyt.PhotoPostPro.Workflow.Process;
 global using Lyt.PhotoPostPro.Workflow.Process.Orient;

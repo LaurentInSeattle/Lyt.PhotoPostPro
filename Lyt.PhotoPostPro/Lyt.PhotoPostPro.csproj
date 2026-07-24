@@ -45,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Dialogs\ConfirmRemoveDialog.axaml.cs">
+    <Compile Update="Workflow\Library\Dialogs\ConfirmRemoveDialog.axaml.cs">
       <DependentUpon>ConfirmRemoveDialog.axaml</DependentUpon>
     </Compile>
     <Compile Update="Workflow\Camera\CameraFileView.axaml.cs">

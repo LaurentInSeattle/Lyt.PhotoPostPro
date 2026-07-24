@@ -1,6 +1,6 @@
 <UserControl
-	x:Class="Lyt.PhotoPostPro.Dialogs.ConfirmRemoveDialog"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Dialogs"
+	x:Class="Lyt.PhotoPostPro.Workflow.Library.Dialogs.ConfirmRemoveDialog"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Library.Dialogs"
 	x:DataType="vm:ConfirmRemoveDialogModel" 
 
 	xmlns="https://github.com/avaloniaui"
@@ -15,7 +15,7 @@
 	xmlns:countdown="clr-namespace:Lyt.Avalonia.Controls.Countdown;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="600" Height="300"
+		Width="600" Height="340"
 		Background="Transparent"
 		>
 		<Rectangle

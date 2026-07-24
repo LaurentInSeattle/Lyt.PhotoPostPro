@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Dialogs;
+﻿namespace Lyt.PhotoPostPro.Workflow.Library.Dialogs;
 
 public sealed partial class ConfirmRemoveDialogModel :  DialogViewModel<ConfirmRemoveDialog, object>
 {
@@ -13,7 +13,10 @@ public sealed partial class ConfirmRemoveDialogModel :  DialogViewModel<ConfirmR
         this.Title = "Remove from Library ?";
         this.CanEnter = false;
         this.CanEscape = true;
-        this.Message = "This master image and all its attached data such as thumbnails and edit logs will be deleted. This operation cannot be undone.";
+        this.Message = 
+            "This master image and all its attached data such as thumbnails and edit logs will be deleted. " + 
+            "\n\nAll files will be moved to the Recycle Bin." +
+            "\n\nThis operation cannot be undone.";
     }
 
     [RelayCommand]

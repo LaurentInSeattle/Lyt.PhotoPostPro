@@ -2,56 +2,52 @@
 
 public sealed class PostProcess
 {
-    /// <summary> CTOR to be used when starting a new process from scratch  </summary>
-    public PostProcess(PhotoPostProModel model, Metadata metadata, Image<RgbaVector> originalImage)
+    public PostProcess(
+        PhotoPostProModel model, 
+        Metadata metadata, 
+        Image<RgbaVector> originalImage,
+        bool isNew, 
+        string fileUidString,
+        PostProcessParameters postProcessParameters)
     {
         this.MaybeModel = model;
         this.Metadata = metadata;
         this.MaybeOriginalImage = originalImage;
-        this.Created = DateTime.Now;
-        this.LastUpdated = DateTime.Now;
+        this.IsNew = isNew;
+        this.FileUidString = fileUidString;
+        this.PostProcessParameters = postProcessParameters;
         this.Workflow = new PostProcessWorkflow(this); 
     }
 
-    public PostProcessWorkflow Workflow { get; set; }
-
-    public Metadata Metadata { get; set; } 
-
-    public DateTime Created { get; set; } = DateTime.Now;
-
-    public DateTime LastUpdated { get; set; } = DateTime.Now;
-
-    //public void SetModel(PhotoPostProModel model)
-    //{
-    //    this.MaybeModel = model;
-    //}
-
-    [JsonIgnore]
     public PhotoPostProModel? MaybeModel { get; set; }
 
-    [JsonIgnore]
     public PhotoPostProModel Model
         =>  this.MaybeModel ??
             throw new InvalidOperationException("Model must be set before accessing it.");
 
-    [JsonIgnore]
     public Image<RgbaVector>? MaybeOriginalImage { get; set; }
 
-    [JsonIgnore]
     public Image<RgbaVector> OriginalImage
         =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 
-    public string SourceFilePath => this.Metadata.FullPath;
+    public PostProcessWorkflow Workflow { get; set; }
+
+    public Metadata Metadata { get; set; }
+
+    public bool IsNew { get; private set; }
 
     public string FileUidString { get; private set; } = string.Empty;
 
-    public void Begin(bool isNew, string fileIdString)
+    public PostProcessParameters PostProcessParameters { get; private set; }
+
+    public string SourceFilePath => this.Metadata.FullPath;
+
+    public void Begin()
     {
         if (this.Workflow is not null)
         {
-            this.FileUidString = fileIdString;
-            this.Workflow.Begin(this.OriginalImage, isNew);
+            this.Workflow.Begin(this.OriginalImage);
         }
         else
         {

@@ -267,8 +267,36 @@ public sealed partial class LibraryViewModel :
         }
 
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
-        this.model.ProcessImageFromMetadata(metadata);
+        var parameters = this.model.LibraryManager.EnumerateExistingParameters(metadata);
 
+        // Launch dialogs if needed 
+        if (parameters.Count == 0)
+        {
+            // New processing : no dialog 
+            this.model.ProcessImageFromMetadata(
+                metadata, isNew: true, this.model.FileUidString, new PostProcessParameters());
+            this.LaunchProcessing();
+        }
+        else
+        {
+            // Launch dialog for new processing
+            if (this.dialogService is DialogService modalService)
+            {
+                //modalService.RunViewModelModal(
+                //    this.shellViewModel.ModalHost, new SelectEditDialogModel(), this.OnEditSelected);
+            }
+        }
+    }
+
+    private void OnEditSelectConfirmed(object? obj, bool isValid)
+    {
+        //if (isValid && obj is SelectEditDialogModel selectEditDialogModel)
+        //{
+        //}
+    } 
+
+    private void LaunchProcessing ()
+    {
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {

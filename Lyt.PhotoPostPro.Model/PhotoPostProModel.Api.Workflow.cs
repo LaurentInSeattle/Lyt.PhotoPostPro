@@ -13,27 +13,35 @@ public sealed partial class PhotoPostProModel : ModelBase
 
         try
         {
-            PostProcess? postProcess = null;
+            LoadedImage? fullyLoadedImage = null; 
             if (loadedImage.IsFullyLoaded)
             {
-                // ! because is Fully Loaded 
-                postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
+                fullyLoadedImage = loadedImage;
             }
             else if (loadedImage.IsPreLoaded)
             {
-                LoadedImage fullyLoadedImage = ImageLoader.LoadImage(loadedImage.Metadata.FullPath);
-                if (loadedImage.IsFullyLoaded)
+                LoadedImage reLoadedImage = ImageLoader.LoadImage(loadedImage.Metadata.FullPath);
+                if (reLoadedImage.IsFullyLoaded)
                 {
                     // ! because is now Fully Loaded 
-                    postProcess = new PostProcess(this, loadedImage.Metadata, loadedImage.Image!);
+                    fullyLoadedImage = reLoadedImage;
                 }
             }
 
-            if (postProcess is null)
+            if (fullyLoadedImage is null || !fullyLoadedImage.IsFullyLoaded)
             {
                 return false;
             }
 
+            // ! because fullyLoadedImage is Fully Loaded 
+            PostProcess postProcess =
+                new (
+                    this,
+                    fullyLoadedImage.Metadata!,
+                    fullyLoadedImage.Image!,
+                    isNew: true,
+                    this.FileUidString,
+                    new PostProcessParameters());
             this.CurrentPostProcess = postProcess;
             return true;
         }
@@ -45,7 +53,11 @@ public sealed partial class PhotoPostProModel : ModelBase
     }
 
     /// <summary> Start post processing with Metadata </summary>
-    public bool ProcessImageFromMetadata(Metadata metadata)
+    public bool ProcessImageFromMetadata(
+        Metadata metadata, 
+        bool isNew, 
+        string fileUidString,
+        PostProcessParameters postProcessParameters)
     {
         this.CurrentPostProcess = null;
 
@@ -56,7 +68,8 @@ public sealed partial class PhotoPostProModel : ModelBase
             if (loadedImage.IsFullyLoaded)
             {
                 // ! because is now Fully Loaded 
-                postProcess = new PostProcess(this, metadata, loadedImage.Image!);
+                postProcess = 
+                    new PostProcess(this, metadata, loadedImage.Image!, isNew, fileUidString, postProcessParameters);
             }
 
             if (postProcess is null)
@@ -74,17 +87,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    public void BeginPostProcess(bool isNew, string fileIdString)
+    public void BeginPostProcess()
     {
         this.ApiAction(() =>
         {
-            if ( string.IsNullOrWhiteSpace(fileIdString) )
-            {
-                return false; 
-            }
-
             // ! CurrentPostProcess is checked for being not null by ApiAction wrapper 
-            this.CurrentPostProcess!.Begin(isNew, fileIdString);
+            this.CurrentPostProcess!.Begin();
             return true;
         });
     }

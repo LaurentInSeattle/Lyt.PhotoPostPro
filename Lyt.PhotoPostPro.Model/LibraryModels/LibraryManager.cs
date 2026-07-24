@@ -429,9 +429,16 @@ public sealed class LibraryManager
             }
 
             // Remove thumbnail from cache 
-            if (this.LoadedThumbnails.ContainsKey(metadata.FullPath))
+            string filename = string.Concat(metadata.Filename, "_META.json");
+            string thumbnailKey = Path.Combine(sourceFolder, filename);
+            if (this.LoadedThumbnails.ContainsKey(thumbnailKey))
             {
-                this.LoadedThumbnails.Remove(metadata.FullPath);
+                this.LoadedThumbnails.Remove(thumbnailKey);
+            }
+            else
+            {
+                // No thumbnail ? 
+                if (Debugger.IsAttached) { Debugger.Break(); }
             }
 
             return true;
