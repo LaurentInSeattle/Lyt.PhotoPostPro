@@ -60,7 +60,7 @@ public static class ImageLoader
     public static List<string> ImageSharpExtensions =
         [
             ".tiff", ".cur", ".png", ".pbm", ".qoi", ".tga",
-            ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".bmp", ".exr",
+            ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".jfif" , ".bmp", ".exr",
         ];
 
     public static bool HasImageSharpExtension(string path)
