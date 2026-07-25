@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
+
 public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) : 
     PostProcessStep(postProcessWorkflow, PostProcessStep.ContrastStepName)
 {
@@ -29,6 +31,34 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Clear();
         return base.Reset();
+    }
+
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        /*
+         * Check changed 
+        this.ContrastAmount = 1.0f;
+        this.BlurAmount = 0.0f;
+        this.BrightnessAmount = 0.0f;
+
+        // Clear all properties so that the UI sliders are also reset to zero on Reset 
+        this.RedAmount = 4.5f;
+        this.GreenAmount = 4.5f;
+        this.BlueAmount = 4.5f;
+         */
+        switch (ppp.ContrastAlgorithm)
+        {
+            default:
+                break;
+
+            case ContrastAlgorithm.Global:
+                this.GlobalContrast(ppp.ContrastContrastAmount, ppp.ContrastBlurAmount, ppp.ContrastBrightnessAmount); 
+                break;
+
+            case ContrastAlgorithm.SCurves:
+                this.SCurvesContrast(ppp.ContrastRedAmount, ppp.ContrastGreenAmount, ppp.ContrastBlueAmount);
+                break;
+        }
     }
 
     public override Frame? Transform(bool withFrame = true)

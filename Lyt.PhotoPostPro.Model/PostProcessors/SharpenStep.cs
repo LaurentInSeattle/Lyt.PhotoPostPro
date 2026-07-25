@@ -21,6 +21,16 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        // Ignore Edge Mask for now 
+        float amount = ppp.SharpenSharpenAmount;
+        if (amount > 0.000_1f)
+        {
+            this.Sharpen(amount);
+        }
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)

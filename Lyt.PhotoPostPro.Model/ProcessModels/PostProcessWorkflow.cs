@@ -65,15 +65,15 @@ public sealed class PostProcessWorkflow
 
     public T Get<T>() where T : PostProcessStep
     {
-        var step = 
-            (from stp in this.Steps where stp is T stepOfT select (T) stp )
+        var step =
+            (from stp in this.Steps where stp is T stepOfT select (T)stp)
             .FirstOrDefault();
-        if ( step is null)
+        if (step is null)
         {
             throw new Exception("Invalid step type");
         }
 
-        return step; 
+        return step;
     }
 
     public bool Begin(Image<RgbaVector> originalImage)
@@ -99,8 +99,17 @@ public sealed class PostProcessWorkflow
             return true;
         }
 
-        // TODO : Setup and Run the workflow 
-        return true; 
+        // We have parameters to continue editing
+        foreach (var step in this.Steps)
+        {
+            // this will trigger an automatic edit using the PostProcess parameters...
+            step.InitialRunNeeded = true;
+        }
+
+        // Do it here for the very first step
+        this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
+
+        return true;
     }
 
     public bool Finish()
@@ -125,7 +134,7 @@ public sealed class PostProcessWorkflow
             {
                 // User just clicked 'Next' without doing anything 
                 nextSourceImage = this.CurrentStep.SourceImage;
-            } 
+            }
 
             this.CurrentStep.Deactivate(WorkflowUpdateKind.Next);
 
@@ -136,12 +145,18 @@ public sealed class PostProcessWorkflow
             this.CurrentStep.SourceImage = nextSourceImage;
             this.CurrentStep.Activate(WorkflowUpdateKind.Next);
 
+            if (this.CurrentStep.InitialRunNeeded)
+            {
+                this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
+                this.CurrentStep.InitialRunNeeded = false;
+            }
+
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
 
             // Return current result image 
             var resultImage = this.CurrentStep.ResultImage;
-            return resultImage?.ToFrame(); 
+            return resultImage?.ToFrame();
         }
 
         return null;
@@ -175,7 +190,7 @@ public sealed class PostProcessWorkflow
         if (sourceImage is not null)
         {
             PostProcessStep.RecalculateHistograms(sourceImage);
-        } 
+        }
 
         this.Notify(this.CurrentStep, WorkflowUpdateKind.Reset);
         return frame;

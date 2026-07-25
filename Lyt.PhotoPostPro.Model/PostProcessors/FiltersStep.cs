@@ -28,6 +28,50 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        switch (ppp.FilterSelectedFilter)
+        {
+            default:
+                break;
+
+            case Filter.Grayscale:
+                if ( ppp.FilterAmount > 0.001)
+                {
+                    this.Grayscale(ppp.FilterAmount);
+                }
+                break;
+
+            case Filter.Sepia:
+                if (ppp.FilterAmount > 0.001)
+                {
+                    this.Sepia(ppp.FilterAmount); ;
+                }
+                
+                break;
+
+            case Filter.Vignette:
+                this.Vignette();
+                break;
+
+            case Filter.BlackWhite:
+                this.BlackWhite();
+                break;
+
+            case Filter.Kodachrome:
+                this.Kodachrome();
+                break;
+
+            case Filter.Lomograph:
+                this.Lomograph();
+                break;
+
+            case Filter.Polaroid:
+                this.Polaroid();
+                break;
+        }
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)

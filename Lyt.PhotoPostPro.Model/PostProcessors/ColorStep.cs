@@ -27,6 +27,34 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        switch (ppp.ColorAlgorithm)
+        {
+            default:
+                break;
+
+            case ColorAlgorithm.Saturation:
+                // Check changed 
+                if (MathF.Abs(ppp.ColorSaturationAmount - 1.0f) > 0.001f)
+                {
+                    this.Saturation(ppp.ColorSaturationAmount);
+                }
+
+                break;
+
+            case ColorAlgorithm.Vibrance:
+                // Check changed 
+                if ((MathF.Abs(ppp.ColorRedAmount) > 0.001f) ||
+                    (MathF.Abs(ppp.ColorGreenAmount) > 0.001f) ||
+                    (MathF.Abs(ppp.ColorBlueAmount) > 0.001f))
+                {
+                    this.Vibrance(ppp.ColorRedAmount, ppp.ColorGreenAmount, ppp.ColorBlueAmount);
+                }
+                break;
+        }
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)

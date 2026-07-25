@@ -13,6 +13,16 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset ();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        float angle = ppp.StraightenRotationAngle;
+        float absAngle = MathF.Abs(angle);
+        if (absAngle > 0.000_1f)
+        {
+            this.Rotate(isClockwise: angle > 0, absAngle);
+        }
+    }
+
     internal Frame? Rotate(bool isClockwise, float angle)
     {
         float angleDelta = isClockwise ? angle : -angle;

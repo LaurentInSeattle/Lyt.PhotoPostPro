@@ -28,22 +28,18 @@ public class PostProcessStep
 
     public string Name { get; set; }
 
-    [JsonIgnore]
     public PostProcessStep? PreviousStep { get; set; }
 
-    [JsonIgnore]
     public PostProcessStep? NextStep { get; set; }
 
-    [JsonIgnore]
     public PostProcessWorkflow PostProcessWorkflow { get; private set; }
 
-    [JsonIgnore]
+    public bool InitialRunNeeded { get; set; }
+
     public bool IsFirstRun { get; set; }
 
-    [JsonIgnore]
     public Image<RgbaVector>? SourceImage { get; set; }
 
-    [JsonIgnore]
     public Image<RgbaVector>? ResultImage { get; set; }
 
     public bool IsFirstStep => this.PreviousStep is null;
@@ -67,6 +63,9 @@ public class PostProcessStep
         this.ResultImage = this.SourceImage;
         return this.SourceImage.ToFrame();
     }
+
+    // Performs actions provided in parameters 
+    public virtual void PerformStep(PostProcessParameters postProcessParameters) { }
 
     // Override in derived classes if needed, overrides must call the base class .
     public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) 

@@ -1,13 +1,13 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class VignetteStep(PostProcessWorkflow postProcessWorkflow) : 
+public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.VignetteStepName)
 {
     public float Top { get; set; }
 
     public float Bottom { get; set; }
 
-    public float Left { get ; set; }
+    public float Left { get; set; }
 
     public float Right { get; set; }
 
@@ -19,6 +19,21 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Clear();
         return base.Reset();
+    }
+
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        bool isChanged =
+            Math.Abs(ppp.VignetteTop) > 0.001 ||
+            Math.Abs(ppp.VignetteBottom) > 0.001 ||
+            Math.Abs(ppp.VignetteLeft) > 0.001 ||
+            Math.Abs(ppp.VignetteRight) > 0.001 ||
+            Math.Abs(ppp.VignetteLightness) > 0.001;
+        if (isChanged)
+        {
+            this.Vignette(
+                ppp.VignetteTop, ppp.VignetteBottom, ppp.VignetteLeft, ppp.VignetteRight, ppp.VignetteLightness);
+        }
     }
 
     public override Frame? Transform(bool withFrame = true)
@@ -33,7 +48,7 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
             Math.Abs(this.Bottom) > 0.001 ||
             Math.Abs(this.Left) > 0.001 ||
             Math.Abs(this.Right) > 0.001 ||
-            Math.Abs(this.Lightness) > 0.001 ;
+            Math.Abs(this.Lightness) > 0.001;
         var clone = this.SourceImage.Clone();
         if (isChanged)
         {

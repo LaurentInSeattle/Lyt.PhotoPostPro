@@ -1,10 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class ExposureStep(PostProcessWorkflow postProcessWorkflow) : 
+public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExposureStepName)
 {
     public float Gamma { get; set; }
-    
+
     public float Gain { get; set; }
 
     public float Shift { get; set; }
@@ -15,6 +15,20 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Clear();
         return base.Reset();
+    }
+
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        bool changed =
+            MathF.Abs(ppp.ExposureGamma - 1.0f) > 0.000_1f ||
+            MathF.Abs(ppp.ExposureGain - 1.0f) > 0.000_1f ||
+            MathF.Abs(ppp.ExposureShift) > 0.000_1f;
+
+        if (changed)
+        {
+            this.AdjustExposure(
+                ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift);
+        }
     }
 
     public override Frame? Transform(bool withFrame = true)
@@ -49,7 +63,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    private void Clear ()
+    private void Clear()
     {
         this.Gamma = 1.0f;
         this.Gain = 1.0f;

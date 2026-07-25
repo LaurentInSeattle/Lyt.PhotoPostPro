@@ -33,6 +33,31 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        switch (ppp.WhiteBalanceAlgorithm)
+        {
+            default:
+                break; 
+
+            case WhiteBalanceAlgorithm.ColorMatrix:
+                this.ColorMatrixWhiteBalance(ppp.WhiteBalanceTemperature); 
+                break;
+
+            case WhiteBalanceAlgorithm.TannerHelland:
+                this.TannerHellandWhiteBalance(ppp.WhiteBalanceKelvin);
+                break;
+
+            case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                this.FilteredGrayWorldAWB( ppp.WhiteBalanceSaturationThreshold);
+                break;
+
+            case WhiteBalanceAlgorithm.WhitePatch:
+                this.WhitePatchWhiteBalance(ppp.WhiteBalanceRed, ppp.WhiteBalanceGreen, ppp.WhiteBalanceBlue); 
+                break;
+        }
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)

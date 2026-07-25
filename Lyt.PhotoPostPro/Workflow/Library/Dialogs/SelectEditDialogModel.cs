@@ -11,7 +11,7 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
     public partial string? Title { get; set; }
 
     [ObservableProperty]
-    public partial List<string> ParametersStrings { get; set; }
+    public partial List<string> ParametersStrings { get; set; } = [];
 
     public List<ExistingPostProcessParameters> PostProcessParametersList { get; private set; }
 
@@ -47,6 +47,11 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
             {
                 this.ParametersStrings = strings;
                 this.SelectedParametersIndex = 0;
+
+                // Pickup first by default 
+                var eppp = this.PostProcessParametersList[0];
+                this.FileUidString = eppp.FileUidString;
+                this.PostProcessParameters = eppp.PostProcessParameters;
             }); 
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class OrientationStep(PostProcessWorkflow postProcessWorkflow) : 
+public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.OrientationStepName)
 {
     public int RotationAngle { get; set; } // Degrees
@@ -13,6 +13,20 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Clear();
         return base.Reset();
+    }
+
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        if (ppp.OrientationIsMirrored)
+        {
+            this.Flip(isMirror: true);
+        }
+
+        int angle = ppp.OrientationRotationAngle; 
+        if (angle != 0)
+        {
+            this.Rotate(isClockwise: angle > 0);
+        }
     }
 
     internal Frame? Rotate(bool isClockwise)
@@ -68,7 +82,7 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
 
     private bool IsRotated => this.RotationAngle != 0;
 
-    private void Clear ()
+    private void Clear()
     {
         this.RotationAngle = 0;
         this.IsMirrored = false;

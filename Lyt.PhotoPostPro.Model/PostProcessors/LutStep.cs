@@ -13,6 +13,16 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        LutMetadata lutMetadata =
+            new(ppp.LutFriendlyName, ppp.LutPath, LutFormat.Unknown, ppp.LutIsEmbedded);
+        if (!lutMetadata.IsEmpty)
+        {
+            this.Lut(lutMetadata);
+        }
+    }
+
     public override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
@@ -29,9 +39,9 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
 
     internal Frame? Lut(LutMetadata lutMetadata)
     {
-        this.LutMetadata= lutMetadata;
+        this.LutMetadata = lutMetadata;
         return this.Transform(withFrame: true);
     }
 
-    private void Clear() => this.LutMetadata = LutMetadata.Empty;     
+    private void Clear() => this.LutMetadata = LutMetadata.Empty;
 }

@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) : 
+public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.RecoveryStepName)
 {
     public float ShadowAmount { get; set; }
@@ -8,6 +8,17 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     public float HighlightAmount { get; set; }
 
     public override void Initialize(Image<RgbaVector> _) => this.Clear();
+
+    public override void PerformStep(PostProcessParameters ppp)
+    {
+        bool changed =
+            MathF.Abs(ppp.RecoveryHighlightAmount) > 0.000_1f ||
+            MathF.Abs(ppp.RecoveryShadowAmount) > 0.000_1f;
+        if (changed)
+        {
+            this.HighlightsShadows(ppp.RecoveryHighlightAmount, ppp.RecoveryShadowAmount);
+        }
+    }
 
     public override Frame? Reset()
     {
@@ -23,8 +34,8 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         bool isChanged =
-            Math.Abs(1.0 - this.ShadowAmount) > 0.001 ||
-            Math.Abs(1.0 - this.HighlightAmount) > 0.001 ;
+            Math.Abs(this.ShadowAmount) > 0.001 ||
+            Math.Abs(this.HighlightAmount) > 0.001;
         var clone = this.SourceImage.Clone();
         if (isChanged)
         {

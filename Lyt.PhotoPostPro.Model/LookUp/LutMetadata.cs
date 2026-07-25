@@ -17,4 +17,9 @@ public sealed record class LutMetadata(string FriendlyName, string Path, LutForm
 {
     public static readonly LutMetadata Empty =
         new(string.Empty, string.Empty, LutFormat: LutFormat.None, IsEmbedded: false);
+
+    public bool IsEmpty 
+        =>
+        this.LutFormat == LutFormat.None ||
+        ( string.IsNullOrWhiteSpace(this.FriendlyName) && string.IsNullOrWhiteSpace(this.Path)); 
 }

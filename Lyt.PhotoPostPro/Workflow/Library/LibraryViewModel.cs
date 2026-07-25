@@ -6,9 +6,9 @@ public sealed partial class LibraryViewModel :
     IDropPathHandler,
     ISelectListener
 {
-    private const double YearButtonWidth = 80.0;
-    private const double MonthButtonWidth = 110.0;
-    private const double DayButtonWidth = 140.0;
+    private const double YearButtonWidth = 76.0;
+    private const double MonthButtonWidth = 120.0;
+    private const double DayButtonWidth = 160.0;
 
     // Will NEED to localize
     private static readonly string[] MonthString =
