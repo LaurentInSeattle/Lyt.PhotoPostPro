@@ -91,24 +91,23 @@ public sealed class PostProcessWorkflow
         this.CurrentStepIndex = 0;
         this.CurrentStep.SourceImage = originalImage;
         this.CurrentStep.ResultImage = originalImage;
+
+        if (!this.PostProcess.IsNew)
+        {
+            // We have parameters to continue editing
+            foreach (var step in this.Steps)
+            {
+                // this will trigger an automatic edit using the PostProcess parameters...
+                step.InitialRunNeeded = true;
+            }
+
+            // Do it here for the very first step
+            this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
+            this.CurrentStep.InitialRunNeeded = false;
+        }
+
         this.Notify(null, WorkflowUpdateKind.Begin);
         PostProcessStep.RecalculateHistograms(originalImage);
-
-        if (this.PostProcess.IsNew)
-        {
-            return true;
-        }
-
-        // We have parameters to continue editing
-        foreach (var step in this.Steps)
-        {
-            // this will trigger an automatic edit using the PostProcess parameters...
-            step.InitialRunNeeded = true;
-        }
-
-        // Do it here for the very first step
-        this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
-
         return true;
     }
 
@@ -145,15 +144,23 @@ public sealed class PostProcessWorkflow
             this.CurrentStep.SourceImage = nextSourceImage;
             this.CurrentStep.Activate(WorkflowUpdateKind.Next);
 
+            bool hasPerformedStep = false;
             if (this.CurrentStep.InitialRunNeeded)
             {
                 this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
                 this.CurrentStep.InitialRunNeeded = false;
+                hasPerformedStep = true;
             }
 
             // Notify to change view 
             this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
 
+            // Notify to tell the UI to update 
+            if (hasPerformedStep)
+            {
+                new ModelStepUpdatedMessage(Step: this.CurrentStep).Publish();
+            }
+            
             // Return current result image 
             var resultImage = this.CurrentStep.ResultImage;
             return resultImage?.ToFrame();

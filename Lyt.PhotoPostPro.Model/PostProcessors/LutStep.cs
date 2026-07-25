@@ -15,12 +15,26 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void PerformStep(PostProcessParameters ppp)
     {
-        LutMetadata lutMetadata =
+        LutMetadata lutMetadataMaybe =
             new(ppp.LutFriendlyName, ppp.LutPath, LutFormat.Unknown, ppp.LutIsEmbedded);
-        if (!lutMetadata.IsEmpty)
+        if (lutMetadataMaybe.IsEmpty)
         {
-            this.Lut(lutMetadata);
+            return;
         }
+
+        LutFormat lutFormat = LutFormat.Unknown;
+        if (ppp.LutPath.EndsWith("cube", StringComparison.InvariantCultureIgnoreCase))
+        {
+            lutFormat = LutFormat.Cube;
+        }
+        else if (ppp.LutPath.EndsWith("3dl", StringComparison.InvariantCultureIgnoreCase))
+        {
+            lutFormat = LutFormat.ThreeDL;
+        }
+
+        LutMetadata lutMetadata =
+            new(ppp.LutFriendlyName, ppp.LutPath, lutFormat, ppp.LutIsEmbedded);
+        this.Lut(lutMetadata);
     }
 
     public override Frame? Transform(bool withFrame = true)

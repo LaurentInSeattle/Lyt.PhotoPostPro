@@ -51,7 +51,10 @@ public partial class ToolboxViewModel<TView, TStep> :
             return; 
         }
 
-        this.OnModelStepUpdated(step);
+        Dispatch.OnUiThread(() =>
+        {
+            this.OnModelStepUpdated(step);
+        }, DispatcherPriority.Background);
     }
 
     protected TAnyStep ModelStep<TAnyStep>() where TAnyStep : PostProcessStep
