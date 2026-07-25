@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Launching editing needs a spinner 
+
 - No thumbnail updated after edit without export 
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
