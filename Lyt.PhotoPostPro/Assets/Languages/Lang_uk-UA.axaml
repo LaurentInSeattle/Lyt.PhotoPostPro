@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Готово, назад до бібліотеки</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Почати передачу</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Скасувати переказ</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Передачу перервано</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Не знайдено жодної камери чи пристрою...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Виявлено пристрій або камеру.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Підключено</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Не відповідає.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">На пристрої немає файлів.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">файлів, готових до передачі.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Показати:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Спочатку найстаріший</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Останні зверху</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Позначте все:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Очистити все:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Перемкнути все:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Зберегти на робочий стіл</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Видалити з камери</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Додати до бібліотеки</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Фотографії - Зображення</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Фільми - Інше</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
 

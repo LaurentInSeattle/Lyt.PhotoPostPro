@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">सब कुछ हो गया, लाइब्रेरी में वापस</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">स्थानांतरण प्रारंभ करें</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">स्थानांतरण रद्द करें</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">स्थानांतरण निरस्त किया गया</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">कोई कैमरा या उपकरण नहीं मिला...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">डिवाइस या कैमरे का पता चला.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">जुड़े हुए</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">जवाब नहीं दे रहे।</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">डिवाइस पर कोई फ़ाइल नहीं.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">फ़ाइलें स्थानांतरण के लिए तैयार हैं.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">दिखाओ:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">सबसे पुराना पहले</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">हाल ही में शीर्ष पर</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">सभी चेक करें:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">सभी साफ करें:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">सारे टॉगल:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">डेस्कटॉप पर सहेजें</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">कैमरे से हटाएँ</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">लाइब्रेरी में जोड़ें</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">तस्वीरें - छवियाँ</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">फ़िल्में - अन्य</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">दिखाओ:</system:String>
 

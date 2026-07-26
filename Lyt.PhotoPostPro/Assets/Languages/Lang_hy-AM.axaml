@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Ամեն ինչ ավարտված է, Վերադառնալ գրադարան</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Սկսեք փոխանցումը</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Չեղարկել փոխանցումը</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Փոխանցումը ընդհատվեց</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Տեսախցիկ կամ սարք չի գտնվել...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Հայտնաբերվել է սարք կամ տեսախցիկ:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Միացված է</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Չարձագանքելով.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Սարքի վրա ֆայլեր չկան:</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">ֆայլեր, որոնք պատրաստ են փոխանցման:</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Ցույց տալ՝</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Ամենահին Առաջինը</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Վերջերս Վերևում</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Ստուգեք բոլորը՝</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Մաքրել բոլորը՝</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Փոխարկել բոլորը՝</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Պահել աշխատասեղանին</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Հեռացնել տեսախցիկից</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Ավելացնել գրադարան</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Լուսանկարներ - Պատկերներ</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Ֆիլմեր - Ուրիշներ</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Ցույց տալ՝</system:String>
 

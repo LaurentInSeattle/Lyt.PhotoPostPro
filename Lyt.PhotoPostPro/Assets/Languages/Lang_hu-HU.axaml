@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Minden kész, vissza a könyvtárba</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Indítsa el az átvitelt</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Az átvitel megszakítása</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Átvitel megszakítva</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Nem található kamera vagy eszköz...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Eszköz vagy kamera észlelve.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Csatlakozva</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Nem válaszol.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Nincsenek fájlok az eszközön.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">fájlok átvitelre készen.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Megmutat:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">A legrégebbi első</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Legutóbbi Felül</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Minden ellenőrzése:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Összes törlése:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Összes váltása:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Mentés az asztalra</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Eltávolítás a kamerából</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Hozzáadás a könyvtárhoz</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Fényképek - Képek</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Filmek – Egyebek</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Megmutat:</system:String>
 

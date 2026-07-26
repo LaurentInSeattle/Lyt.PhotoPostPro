@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Όλα έγιναν, Επιστροφή στη Βιβλιοθήκη</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Έναρξη Μεταφοράς</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Ακύρωση μεταφοράς</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Η μεταφορά ματαιώθηκε</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Δεν βρέθηκε κάμερα ή συσκευή...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Εντοπίστηκε συσκευή ή κάμερα.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Συνδεδεμένος</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Δεν ανταποκρίνεται.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Δεν υπάρχουν αρχεία στη συσκευή.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">αρχεία έτοιμα για μεταφορά.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Επίδειξη:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Πρώτος παλαιότερος</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Πρόσφατα στην κορυφή</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Ελέγξτε όλα:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Διαγραφή όλων:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Εναλλαγή όλων:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Αποθήκευση στην επιφάνεια εργασίας</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Αφαίρεση από την κάμερα</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Προσθήκη στη Βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Φωτογραφίες - Εικόνες</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Ταινίες - Άλλοι</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Επίδειξη:</system:String>
 

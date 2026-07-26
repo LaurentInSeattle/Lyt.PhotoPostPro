@@ -15,11 +15,7 @@ Bugs ~ Major Issues
 
 - Missing localization in all dialogs
 
-- Missing localization in Library view for switch
-
 - Missing localization in Camera view 
-
-- Missing localization in Metadata panel 
 
 - 'None' not localized for special filters 
 

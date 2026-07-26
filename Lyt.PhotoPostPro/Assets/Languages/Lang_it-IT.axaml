@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Tutto finito, torniamo alla libreria</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Inizia il trasferimento</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Annulla trasferimento</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Trasferimento interrotto</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Nessuna fotocamera o dispositivo trovato...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Dispositivo o fotocamera rilevati.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Collegato</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Non rispondere.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Nessun file sul dispositivo.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">file pronti per il trasferimento.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Mostra:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Prima il più vecchio</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recenti in alto</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Controlla tutto:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Cancella tutto:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Attiva/disattiva tutto:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Salva sul desktop</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Rimuovi dalla fotocamera</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Aggiungi alla libreria</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Foto - Immagini</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Film - Altri</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Mostra:</system:String>
 

@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Alles erledigt, zurück zur Bibliothek</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Beginnen Sie mit der Übertragung</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Übertragung abbrechen</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Übertragung abgebrochen</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Keine Kamera oder kein Gerät gefunden...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Gerät oder Kamera erkannt.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Verbunden</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Keine Reaktion.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Keine Dateien auf dem Gerät.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">Dateien zur Übertragung bereit.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Zeigen:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Älteste zuerst</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Neu oben</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Alle ankreuzen:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Alles löschen:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Alle umschalten:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Auf dem Desktop speichern</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Von der Kamera entfernen</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Zur Bibliothek hinzufügen</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Fotos - Bilder</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Filme – Andere</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Zeigen:</system:String>
 

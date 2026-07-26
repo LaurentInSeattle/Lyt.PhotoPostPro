@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Готово, обратно към библиотеката</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Започнете прехвърлянето</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Отказ от прехвърляне</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Прехвърлянето е прекъснато</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Няма намерена камера или устройство...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Открито е устройство или камера.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Свързан</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Не реагира.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Няма файлове на устройството.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">готови за прехвърляне файлове.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Покажи:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Първо най-старите</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Скорошни отгоре</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Проверете всички:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Изчистване на всички:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Превключване на всички:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Запазване на работния плот</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Премахване от камерата</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Добавяне към библиотеката</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Снимки - Изображения</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Филми - Други</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Покажи:</system:String>
 

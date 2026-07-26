@@ -11,6 +11,17 @@ public sealed partial class CameraViewModel :
     IRecipient<DeviceFileDeletedMessage>,
     IRecipient<DeviceDeleteCompleteMessage>
 {
+    private const string BeginTransferLocKey = "Workflow.Camera.BeginTransfer";
+    private const string CancelTransferLocKey = "Workflow.Camera.CancelTransfer";
+    private const string TransferAbortedLocKey = "Workflow.Camera.TransferAborted";
+    private const string NoDeviceLocKey = "Workflow.Camera.NoDevice"; // "No camera or device found...";
+    private const string DetectedLocKey = "Workflow.Camera.DetectedLocKey"; // "Device or Camera detected.";
+    private const string ConnectedLocKey = "Workflow.Camera.Connected"; // "Connected";
+    private const string NotRespondingLocKey = "Workflow.Camera.NotResponding"; // "Not responding.";
+    private const string NoFilesLocKey = "Workflow.Camera.NoFiles"; // "No files on device.";
+    private const string FilesReadyLocKey = "Workflow.Camera.FilesReady"; // " files ready to transfer.";
+
+
     private readonly PhotoPostProModel model;
     private readonly CameraManager cameraMgr;
     private readonly LibraryManager libraryMgr;
@@ -87,11 +98,11 @@ public sealed partial class CameraViewModel :
         // Enforce property changed 
         this.DownloadButtonIsDisabled = false;
         this.DownloadButtonIsDisabled = true;
-        this.DownloadButtonText = "Begin Transfer";
+        this.DownloadButtonText = this.Localize(BeginTransferLocKey);
 
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
-        this.ShowImages = true; 
+        this.ShowImages = true;
         this.isDownloading = false;
         // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
@@ -153,9 +164,7 @@ public sealed partial class CameraViewModel :
         var list = message.Devices;
         if (list.Count == 0)
         {
-            // TODO: localize
-            this.DeviceStatus = "No camera or device found...";
-
+            this.DeviceStatus = this.Localize(NoDeviceLocKey); // "No camera or device found...";
             this.NullifyDevice();
             Schedule.OnUiThread(
                 CameraManager.FastCameraMonitoringTime_ms / 2,
@@ -164,9 +173,8 @@ public sealed partial class CameraViewModel :
         }
         else
         {
-            // TODO: localize
             // Friendly name not available yet
-            this.DeviceStatus = "Device or Camera detected.";
+            this.DeviceStatus = this.Localize(DetectedLocKey); // "Device or Camera detected.";
         }
     }
 
@@ -178,10 +186,11 @@ public sealed partial class CameraViewModel :
             return;
         }
 
-        // TODO: localize
         this.DeviceStatus =
             message.Device.FriendlyName + ": " +
-            (message.IsConnected ? "Connected" : "Not responding.");
+            (message.IsConnected ?
+                this.Localize(ConnectedLocKey) : //  "Connected" :
+                this.Localize(NotRespondingLocKey)); //  "Not responding.");
         this.FileDownloaded = string.Empty;
     }
 
@@ -198,14 +207,16 @@ public sealed partial class CameraViewModel :
         var device = message.Device;
         if (message.Files.Count == 0)
         {
-            this.DeviceStatus = device.FriendlyName + ": No files on device.";
+            this.DeviceStatus =
+                device.FriendlyName + ": " + this.Localize(NoFilesLocKey); // No files on device.";
             this.selectedFiles.Clear();
             this.NullifyDevice();
         }
         else
         {
             this.foundDevice = device;
-            this.DeviceStatus = device.FriendlyName + ": " + message.Files.Count + " files ready to transfer.";
+            this.DeviceStatus =
+                device.FriendlyName + ": " + message.Files.Count + " " + this.Localize(FilesReadyLocKey); // files ready to transfer.";
             this.DownloadButtonIsDisabled = false;
             this.selectedFiles.Clear();
             this.selectedFiles.AddRange(message.Files);
@@ -232,7 +243,7 @@ public sealed partial class CameraViewModel :
                 this.ThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
             }
         }
-        else if ( message.IsDownloaded)
+        else if (message.IsDownloaded)
         {
             this.FileDownloaded =
                 message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
@@ -240,7 +251,7 @@ public sealed partial class CameraViewModel :
             this.OtherFilesPanelViewModel.Files.Add(cameraFile);
         }
         else
-                {
+        {
             this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
         }
     }
@@ -254,7 +265,7 @@ public sealed partial class CameraViewModel :
         }
 
         // Update UI 
-        this.DownloadButtonText = "Begin Transfer";
+        this.DownloadButtonText = this.Localize(BeginTransferLocKey);
         if (message.Completed)
         {
             this.FileDownloaded =
@@ -264,7 +275,7 @@ public sealed partial class CameraViewModel :
         }
         else
         {
-            this.FileDownloaded = "Transfer Aborted.";
+            this.FileDownloaded = this.Localize(TransferAbortedLocKey); //"Transfer Aborted.";
         }
 
         // Sort thumbnails by date ascending 
@@ -309,10 +320,10 @@ public sealed partial class CameraViewModel :
             this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  deleted from camera.";
 
             // Remove thumb from panel 
-            var thumbViewModel = 
+            var thumbViewModel =
                 (from vm in this.ThumbnailsPanelViewModel.Thumbnails
                  where vm.Metadata.CameraFullPath == message.File
-                 select vm )
+                 select vm)
                  .FirstOrDefault();
             if (thumbViewModel is not null)
             {
@@ -334,7 +345,7 @@ public sealed partial class CameraViewModel :
         }
 
         // Update UI 
-        this.DownloadButtonText = "Begin Transfer";
+        this.DownloadButtonText = this.Localize( BeginTransferLocKey);
         if (message.Completed)
         {
             this.FileDownloaded =
@@ -366,7 +377,7 @@ public sealed partial class CameraViewModel :
         if (this.isDownloading)
         {
             this.cameraMgr.EndDownloadingFiles();
-            this.DownloadButtonText = "Begin Transfer";
+            this.DownloadButtonText = this.Localize(BeginTransferLocKey);
         }
         else
         {
@@ -374,7 +385,7 @@ public sealed partial class CameraViewModel :
             this.downloadedFiles.Clear();
             this.ThumbnailsPanelViewModel.Thumbnails.Clear();
             this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
-            this.DownloadButtonText = "Cancel Transfer";
+            this.DownloadButtonText = this.Localize(CancelTransferLocKey);
         }
 
         this.isDownloading = !this.isDownloading;

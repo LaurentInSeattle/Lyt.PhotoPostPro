@@ -202,10 +202,30 @@
 	<system:String x:Key="Workflow.Export.Finish">All Done, Back to Library</system:String>
 
 	<!-- Camera -->
+	<system:String x:Key="Workflow.Camera.BeginTransfer">Begin Transfer</system:String>
+	<system:String x:Key="Workflow.Camera.CancelTransfer">Cancel Transfer</system:String>
+	<system:String x:Key="Workflow.Camera.TransferAborted">Transfer Aborted</system:String>
+	<system:String x:Key="Workflow.Camera.NoDevice">No camera or device found...</system:String>
+	<system:String x:Key="Workflow.Camera.Detected">Device or Camera detected.</system:String>
+	<system:String x:Key="Workflow.Camera.Connected">Connected</system:String>
+	<system:String x:Key="Workflow.Camera.NotResponding">Not responding.</system:String>
+	<system:String x:Key="Workflow.Camera.NoFiles">No files on device.</system:String>
+	<system:String x:Key="Workflow.Camera.FilesReady">files ready to transfer.</system:String>
+
 	<!-- THese three are resused in Library -->
 	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
+
+	<system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Check All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Clear All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Toggle All:</system:String>
+
+	<system:String x:Key="Workflow.Camera.File.SaveDesktop">Save to Desktop</system:String>
+	<system:String x:Key="Workflow.Camera.File.RemoveCamera">Remove from Camera</system:String>
+	<system:String x:Key="Workflow.Camera.File.AddLibrary">Add to Library</system:String>
+	<system:String x:Key="Workflow.Camera.PhotosImages">Photos - Images</system:String>
+	<system:String x:Key="Workflow.Camera.MoviesOthers">Movies -  Others</system:String>
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>

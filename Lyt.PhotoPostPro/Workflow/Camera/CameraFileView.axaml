@@ -61,7 +61,7 @@
 				x:Name="SaveTextBlock"
 				Grid.Row="1" Grid.Column="0"
 				Theme="{StaticResource Small}"
-				Text="Save to Desktop"
+				Text="{DynamicResource Workflow.Camera.File.SaveDesktop}"
 				VerticalAlignment="Center" HorizontalAlignment="Right"
 				/>
 			<glyphs:GlyphButton
@@ -78,7 +78,7 @@
 				x:Name="RemoveTextBlock"
 				Grid.Row="2" Grid.Column="0"
 				Theme="{StaticResource Small}"
-				Text="Remove from Camera"
+				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				VerticalAlignment="Center" HorizontalAlignment="Right"
 				/>
 			<glyphs:GlyphButton

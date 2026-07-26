@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">一切完成，返回图书馆</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">开始传输</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">取消转账</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">传输中止</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">找不到相机或设备...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">检测到设备或相机。</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">已连接</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">没有回应。</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">设备上没有文件。</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">准备传输的文件。</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">展示：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">最旧的在前</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">最近在顶部</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">检查全部：</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">全部清除：</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">全部切换：</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">保存到桌面</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">从相机中删除</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">添加到库</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">照片 - 图片</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">电影 - 其他</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">展示：</system:String>
 

@@ -38,8 +38,8 @@
 				x:Name="ShowInProgressSwitch"
 				Margin="4 0 8 0"
 				Style="{StaticResource StandardToggleSwitch}"
-				TrueText="Oldest First"
-				FalseText="Recent on Top"
+				TrueText="{DynamicResource Workflow.Camera.Thumbs.OldestFirst}"
+				FalseText="{DynamicResource Workflow.Camera.Thumbs.RecentOnTop}"
 				Height="30" Width="300"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Value="{Binding SortOrder}"
@@ -47,7 +47,7 @@
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
-				Text="Check All :"
+				Text="{DynamicResource Workflow.Camera.Thumbs.CheckAll}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
@@ -72,7 +72,7 @@
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
-				Text="Clear All :"
+				Text="{DynamicResource Workflow.Camera.Thumbs.ClearAll}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
@@ -97,7 +97,7 @@
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
-				Text="Toggle All :"
+				Text="{DynamicResource Workflow.Camera.Thumbs.ToggleAll}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"

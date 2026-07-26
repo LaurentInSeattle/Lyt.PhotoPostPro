@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">모두 완료되었습니다. 라이브러리로 돌아가기</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">전송 시작</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">전송 취소</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">전송이 중단되었습니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">카메라나 장치를 찾을 수 없습니다...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">장치 또는 카메라가 감지되었습니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">연결됨</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">응답하지 않습니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">장치에 파일이 없습니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">파일을 전송할 준비가 되었습니다.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">보여주다:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">오래된 것부터</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">최근 항목 상단</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">모두 확인:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">모두 지우기:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">모두 전환:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">데스크탑에 저장</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">카메라에서 제거</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">라이브러리에 추가</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">사진 - 이미지</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">영화 - 기타</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">보여주다:</system:String>
 

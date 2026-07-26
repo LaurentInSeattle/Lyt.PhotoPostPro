@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">Terminé, Retour à la bibliothèque</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Commencer le transfert</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Annuler le transfert</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Transfert interrompu</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Aucune caméra ou appareil trouvé...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Appareil ou caméra détecté.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Connecté</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Ne répond pas.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Aucun fichier sur l'appareil.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">fichiers prêts à être transférés.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Anciens</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Récents</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Vérifiez tout :</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Tout effacer :</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Tout basculer :</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Enregistrer sur le bureau</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Supprimer de l'appareil photo</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Ajouter à la bibliothèque</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Photos - Images</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Films - Autres</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
 

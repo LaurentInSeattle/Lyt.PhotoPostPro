@@ -307,11 +307,45 @@
 
     <system:String x:Key="Workflow.Export.Finish">すべて完了、ライブラリに戻る</system:String>
 
+    <system:String x:Key="Workflow.Camera.BeginTransfer">転送の開始</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">転送のキャンセル</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">転送が中止されました</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">カメラまたはデバイスが見つかりません...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">デバイスまたはカメラが検出されました。</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">接続済み</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">応答がありません。</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">デバイス上にファイルがありません。</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">ファイルを転送する準備ができています。</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">見せる：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">古い順</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">最近のトップ</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">すべてチェックしてください:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">すべてクリア:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">すべてを切り替える:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">デスクトップに保存</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">カメラから削除</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">ライブラリに追加</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">写真 - 画像</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">映画 - その他</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
 

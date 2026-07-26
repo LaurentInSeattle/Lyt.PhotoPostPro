@@ -57,7 +57,7 @@
 				Layout="TextOnly"
 				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
-				Text="Add to Library"
+				Text="{DynamicResource Workflow.Camera.File.AddLibrary}"
 				Command="{Binding OnAddToLibrary}"
 				IsDisabled="{Binding AddToLibraryButtonIsDisabled}"
 				/>
@@ -66,7 +66,7 @@
 				Layout="TextOnly"
 				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
-				Text="Remove from Camera"
+				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				Command="{Binding OnRemoveFromCamera}"
 				IsDisabled="{Binding RemoveFromCameraButtonIsDisabled}"
 				/>
@@ -74,9 +74,9 @@
 				x:Name="ShowImagesSwitch"
 				Margin="4 0 8 0"
 				Style="{StaticResource StandardToggleSwitch}"
-				TrueText="Photos - Images"
-				FalseText="Movies -  Others"
-				Height="30" Width="400"
+				TrueText="{DynamicResource Workflow.Camera.PhotosImages}"
+				FalseText="{DynamicResource Workflow.Camera.MoviesOthers}"
+				Height="30" Width="460"
 				VerticalAlignment="Center"
 				Value="{Binding ShowImages}"
 				/>
