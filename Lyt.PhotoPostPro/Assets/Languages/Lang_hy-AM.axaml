@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">Խաղալ</system:String>
 
-    <system:String x:Key="Shell.Encoding">Կոդավորում</system:String>
-
-    <system:String x:Key="Shell.Decoding">Վերծանում</system:String>
-
-    <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
-
-    <system:String x:Key="Shell.Language">Լեզու</system:String>
-
     <system:String x:Key="Shell.Exit">Դուրս գալ</system:String>
 
     <system:String x:Key="Shell.Close">Փակել</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">Բարի գալուստ Jigsaw Puzzle:</system:String>
 
-    <system:String x:Key="Collection.Remove">Հեռացնել</system:String>
+    <system:String x:Key="Shell.Camera">Տեսախցիկ</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">Պահել աշխատասեղանին</system:String>
+    <system:String x:Key="Shell.Single">Պատկեր</system:String>
 
-    <system:String x:Key="Collection.DropZone">Քաշել և թողնել գոտի</system:String>
+    <system:String x:Key="Shell.Folder">Գրադարան</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">Քաշեք և թողեք պատկերի ֆայլ այստեղ՝ նոր գլուխկոտրուկ նկար ստեղծելու համար:</system:String>
+    <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
 
-    <system:String x:Key="Collection.BeginNew">Սկսեք այս նոր հանելուկը.</system:String>
+    <system:String x:Key="Shell.Language">Լեզու</system:String>
 
-    <system:String x:Key="Collection.StartAgain">Նորից սկսեք այս հանելուկը.</system:String>
+    <system:String x:Key="Imaging.InProgress">Ընթացքի մեջ</system:String>
 
-    <system:String x:Key="Collection.Continue">Շարունակեք լուծել այս հանելուկը.</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">Խնդրում ենք սպասել...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">Կտորների քանակ.</system:String>
+    <system:String x:Key="DragDrop.DropZone">Քաշեք և թողեք գոտի</system:String>
 
-    <system:String x:Key="Collection.Rotations">Պտտումներ:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">Քաշեք և գցեք պատկերային ֆայլեր պարունակող թղթապանակն այստեղ՝ նոր նախագիծ ստեղծելու համար:</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">Կտրուկի ուժը.</system:String>
+    <system:String x:Key="Single.DropZoneHelp">Սկսելու համար քաշեք և թողեք պատկերի ֆայլը այստեղ:</system:String>
 
-    <system:String x:Key="Collection.Hints">Հուշումներ.</system:String>
+    <system:String x:Key="Single.ProcessImage">Մշակել այս պատկերը</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">Ավելացված հակադրություն.</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">Բեռնումը ձախողվեց</system:String>
 
-    <system:String x:Key="Collection.None">Ոչ մեկը</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">Այս պատկերը չհաջողվեց բեռնել:</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">Հզոր</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">Ամբողջ էկրանով</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">Ուժեղ</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Էսկ.  դեպի Վերադարձ</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">Նորմալ</system:String>
+    <system:String x:Key="Workflow.Back">Ետ</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">Թույլ</system:String>
+    <system:String x:Key="Workflow.Reset">Վերականգնել</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">Անսահման</system:String>
+    <system:String x:Key="Workflow.Next">Հաջորդը</system:String>
 
-    <system:String x:Key="Collection.HintsThree">Երեք</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Կողմնորոշում և հայելապատում</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">Միայն Մեկը</system:String>
+    <system:String x:Key="Workflow.Orient.Format">Վերականգնել դիմանկարի կամ լանդշաֆտի ձևաչափը.</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">Ծայրահեղ</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">Շրջեք պատկերը ըստ անհրաժեշտության.</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">Ուժեղ</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">Միջին</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">Ընդամենը մի քիչ</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Հայելի</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">Ցույց տալ միայն.</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Շրջել</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">Ընթացքի մեջ</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">Պատկերի ուղղում</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">Ավարտված է</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">Ցույց տալ կամ թաքցնել հավասարեցման ուղեցույցները.</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">Սկսվել է՝ {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Ուղղահայաց</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">Առաջընթաց՝ {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Հորիզոնական</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Կտորների քանակը՝ {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">Պտտել՝ կարգավորելու հավասարեցումը.</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">Մութ</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Զրո ռոտացիա</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">Լույս</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">Նախապատմություն</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">Ցույց տալ պատկերը</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Փոխարկել եզրերը</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">Հուշում</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">Առաջընթաց</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">Մեծացնել</system:String>
+    <system:String x:Key="Workflow.Compose.Title">Կազմի ճշգրտում</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">Ամբողջ էկրանով</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Բերքի գծեր.</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Էսկ.  դեպի Վերադարձ</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">Վերականգնել</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">Min</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">Նախադիտում</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">Մաքս</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Վերև:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">Վերադասավորել</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Ստորին:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Ձախ՝</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">Աջ:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Լայնությունը:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Բարձրությունը:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Հարաբերակցությունը:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Ընտրեք կոմպոզիցիայի ուղեցույց.</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - Ոչ - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Երրորդների կանոն</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">Շրջանակ</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Միջին գծեր</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Անկյունագծեր</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Ոսկե եռանկյունիներ վեր</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Ոսկե եռանկյունիներ ներքև</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Համաշխարհային բացահայտում</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Դուք կարող եք շտկել ցանկացած կամ բոլոր երեք մեթոդներով համակցված՝ գամմա ուղղում, բազմապատկիչ աճ կամ հավելյալ պայծառության հերթափոխ:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Վերականգնել</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">Գամմա:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">Շահույթ:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Shift:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Առանձնահատկություններ և ստվերներ</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Լուսավորության ոչ գծային ալգորիթմ՝ պատկերի մանրամասները բացահայտելու և վերականգնելու համար:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Վերականգնել</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Առանձնահատկություններ.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Ստվերներ:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Ընտրովի ազդեցության ուղղում</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Կիրառեք լուսարձակման ուղղում պատկերի ընտրված կողմերին:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Կողմերը:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Վերև:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Ստորին:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Ձախ՝</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">Ճիշտ է</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Մութ կամ թեթև ուղղում.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Ուժ:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Սպիտակ հավասարակշռություն</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">Ուղղեք գույնի ջերմաստիճանը ավտոմատ կերպով կամ կարգավորեք այն ձեռքով:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Ձեռնարկ - Հիմնական գունային մատրիցա (արագ)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Օֆսեթ:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Ձեռնարկ - ուղղակի գույնի ջերմաստիճան</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Ավտոմատ - «Գորշ աշխարհ» ալգորիթմ</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Հագեցվածություն:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Նշում. «Գորշ աշխարհ» ալգորիթմը լավ է աշխատում ՄԻԱՅՆ պատկերների վրա, որոնք ունեն շատ տարբեր գույներ:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Կիսաավտոմատ - «Սպիտակ կարկատան» ալգորիթմ</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Գործարկել White Patch-ը</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Կտտացրեք Աղբյուրի պատկերի պայծառ տարածքի վրա, որը պետք է լինի սպիտակ կամ անգույն, ապա գործարկեք ալգորիթմը:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Կոնտրաստի ճշգրտում</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Ուղղեք գլոբալ հակադրությունը կամ օգտագործեք S-Curves յուրաքանչյուր RGB ալիքի վրա:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Համաշխարհային ճշգրտում</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Հակադրություն:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Պայծառություն:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S-կորեր</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Որոնման աղյուսակի գույների դասակարգում</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Օգտագործեք Փնտրման աղյուսակը՝ գույները կարգավորելու և պատկերին հատուկ «վիբ» ավելացնելու համար:</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Ընտրեք նախապես սահմանված որոնման աղյուսակ.</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - Ոչ - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Կամ... Օգտագործեք ձեր .cube կամ 3DL ֆայլը՝</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Քաշեք և թողեք այստեղ .cube կամ 3dl ֆայլ:</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Ձեռքով գույնի դասակարգում</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Վերափոխեք գույնի ինտենսիվությունը ամբողջ աշխարհում կամ օգտագործեք Vibrance-ը յուրաքանչյուր RGB ալիքում:</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Համաշխարհային ճշգրտում</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">Հագեցվածություն:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Կենսունակություն</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Կարմիր:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Կանաչ:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Կապույտ:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Սրել</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Բարձրացնում է տեղային հակադրությունը պատկերի առարկաների եզրերի երկայնքով:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Համաշխարհային ճշգրտում</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Սիգմա:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Նշում. չափից ավելի սրումը կարող է վնասակար լինել:  Այն կարող է ներկայացնել տեսանելի «հալոսներ» եզրերի երկայնքով և ուժեղացնել թվային աղմուկը:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Հատուկ զտիչներ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Կիրառեք հատուկ էֆեկտներ պատկերի վրա:</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Մոխրագույն սանդղակի կամ սեպիայի համար.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">Գումարը:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - Ոչ - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Մոխրագույն սանդղակ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">Սեպիա</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Վինյետ</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Սև և սպիտակ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Պոլարոիդ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Լոմոգրաֆ</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Արտահանումներ</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Կարգավորեք արտահանման գործընթացը հիմնական տեսքով:</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Արտահանել պատկեր(ներ)</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Նավարկեք դեպի Արտահանման թղթապանակ</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Ամեն ինչ ավարտված է, Վերադառնալ գրադարան</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Ցույց տալ՝</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Ցույց տալ՝</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Մշակել այս պատկերը</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Հեռացնել գրադարանից</system:String>
+
+    <system:String x:Key="Library.StartOver">Սկսեք նորից</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Շարունակել խմբագրումը</system:String>
+
+    <system:String x:Key="Library.Month.January">հունվար</system:String>
+
+    <system:String x:Key="Library.Month.February">փետրվար</system:String>
+
+    <system:String x:Key="Library.Month.March">մարտ</system:String>
+
+    <system:String x:Key="Library.Month.April">ապրիլ</system:String>
+
+    <system:String x:Key="Library.Month.May">մայիս</system:String>
+
+    <system:String x:Key="Library.Month.June">հունիս</system:String>
+
+    <system:String x:Key="Library.Month.July">հուլիս</system:String>
+
+    <system:String x:Key="Library.Month.August">օգոստոս</system:String>
+
+    <system:String x:Key="Library.Month.September">սեպտեմբեր</system:String>
+
+    <system:String x:Key="Library.Month.October">հոկտեմբեր</system:String>
+
+    <system:String x:Key="Library.Month.November">նոյեմբեր</system:String>
+
+    <system:String x:Key="Library.Month.December">դեկտեմբեր</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">Կիրակի</system:String>
+
+    <system:String x:Key="Library.Day.Monday">Երկուշաբթի</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">Երեքշաբթի</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">չորեքշաբթի</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">հինգշաբթի</system:String>
+
+    <system:String x:Key="Library.Day.Friday">Ուրբաթ</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">շաբաթ օրը</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Ես ընդունում եմ MIT լիցենզիայի պայմանները, շարունակել:</system:String>
 

@@ -28,13 +28,13 @@ public sealed partial class LanguageViewModel : ViewModel<LanguageView>
         new LanguageInfoViewModel("hu-HU", "Magyar" , "Hungary.png" , string.Empty ) ,
     ];
 
-    // private readonly JigsawModel JigsawModel;
+    private readonly PhotoPostProModel model;
 
     private bool isInitializing; 
 
-    public LanguageViewModel() // JigsawModel paletteDesignerModel)
+    public LanguageViewModel(PhotoPostProModel photoPostProModel) 
     {
-        // this.JigsawModel = paletteDesignerModel;
+        this.model = photoPostProModel;
         this.isInitializing = true;
         this.Languages = [.. SupportedLanguages];
         this.isInitializing = false;
@@ -56,22 +56,22 @@ public sealed partial class LanguageViewModel : ViewModel<LanguageView>
 
         string languageKey = this.Languages[value].Key; 
         Debug.WriteLine("Selected language: " + languageKey);
-        // this.JigsawModel.SelectLanguage (languageKey);
+        this.model.SelectLanguage (languageKey);
     }
 
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        // string key = this.JigsawModel.Language;
+        string key = this.model.Language;
         int index = 0;
-        //for (int i = 0; i < this.Languages.Count; ++i)
-        //{
-        //    if (key == this.Languages[i].Key)
-        //    {
-        //        index = i;
-        //        break;
-        //    } 
-        //}
+        for (int i = 0; i < this.Languages.Count; ++i)
+        {
+            if (key == this.Languages[i].Key)
+            {
+                index = i;
+                break;
+            }
+        }
 
         this.isInitializing = true;
         this.SelectedLanguageIndex = index;

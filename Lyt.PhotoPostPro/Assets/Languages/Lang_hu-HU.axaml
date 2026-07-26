@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">Játék</system:String>
 
-    <system:String x:Key="Shell.Encoding">Kódolás</system:String>
-
-    <system:String x:Key="Shell.Decoding">Dekódolás</system:String>
-
-    <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
-
-    <system:String x:Key="Shell.Language">Nyelv</system:String>
-
     <system:String x:Key="Shell.Exit">Kilép</system:String>
 
     <system:String x:Key="Shell.Close">Közeli</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">Üdvözöljük a Jigsaw Puzzle!</system:String>
 
-    <system:String x:Key="Collection.Remove">Távolítsa el</system:String>
+    <system:String x:Key="Shell.Camera">Kamera</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">Mentés az asztalra</system:String>
+    <system:String x:Key="Shell.Single">Kép</system:String>
 
-    <system:String x:Key="Collection.DropZone">Drag and Drop Zone</system:String>
+    <system:String x:Key="Shell.Folder">Könyvtár</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">Húzzon ide egy képfájlt új rejtvénykép létrehozásához.</system:String>
+    <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 
-    <system:String x:Key="Collection.BeginNew">Kezdje el ezt az új rejtvényt:</system:String>
+    <system:String x:Key="Shell.Language">Nyelv</system:String>
 
-    <system:String x:Key="Collection.StartAgain">Kezdje újra ezt a rejtvényt:</system:String>
+    <system:String x:Key="Imaging.InProgress">Folyamatban van</system:String>
 
-    <system:String x:Key="Collection.Continue">Folytasd a rejtvény megfejtését:</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">Kérem, várjon...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">Darabszám:</system:String>
+    <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
-    <system:String x:Key="Collection.Rotations">Forgatások:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">Új projekt létrehozásához húzzon ide egy képfájlokat tartalmazó mappát.</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">Kapcsolóerő:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 
-    <system:String x:Key="Collection.Hints">Tippek:</system:String>
+    <system:String x:Key="Single.ProcessImage">A kép feldolgozása</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">Hozzáadott kontraszt:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">Betöltés sikertelen</system:String>
 
-    <system:String x:Key="Collection.None">Egyik sem</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">Ezt a képet nem sikerült betölteni.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">Hatalmas</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">Teljes képernyő</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">Erős</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  hogy Visszatérjen</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">Normál</system:String>
+    <system:String x:Key="Workflow.Back">Vissza</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">Gyenge</system:String>
+    <system:String x:Key="Workflow.Reset">Reset</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">Végtelen</system:String>
+    <system:String x:Key="Workflow.Next">Következő</system:String>
 
-    <system:String x:Key="Collection.HintsThree">Három</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Tájékozódás és tükrözés</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">Csak Egy</system:String>
+    <system:String x:Key="Workflow.Orient.Format">Álló vagy fekvő formátum visszaállítása:</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">Szélső</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">Szükség szerint fordítsa meg a képet:</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">Erős</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">-90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">Közepes</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">Csak egy kicsit</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Tükör</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">Csak megjelenítés:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Flip</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">Folyamatban van</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">A kép kiegyenesítése</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">Befejezve</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">Az igazítási segédvonalak megjelenítése vagy elrejtése:</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">Kezdve: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Függőleges</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">Haladás: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Vízszintes</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Darabszám: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">Forgatás az igazítás beállításához:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">Sötét</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Nulla forgás</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">Fény</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">Háttér</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">Kép megjelenítése</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Élek váltása</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">Célzás</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">Előrehalad</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">Zoomolás</system:String>
+    <system:String x:Key="Workflow.Compose.Title">A kompozíció finomítása</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">Teljes képernyő</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Vágósorok:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc.  hogy Visszatérjen</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">Reset</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">Min</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">Előnézet</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">Max</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Felső:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">Rendezzük át</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Alsó:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Balra:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">Jobbra:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Szélesség:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Magasság:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Képarány:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Válasszon összeállítási útmutatót:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">-------</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Harmadik szabálya</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">Keret</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Középső vonalak</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Átlósok</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Arany háromszögek felfelé</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Arany háromszögek lefelé</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Globális expozíció</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Korrekciót végezhet bármelyik vagy mindhárom módszerrel kombinálva: Gamma-korrekció, Multiplikatív erősítés vagy Additív fényerő-eltolás.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">Nyereség:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Váltás:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Fénypontok és árnyékok</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Nem lineáris fénysűrűségi algoritmus a kép részleteinek feltárására és helyreállítására.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Fénypontok:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Árnyékok:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Szelektív expozíciókorrekció</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Alkalmazzon expozíciókorrekciót a kép kiválasztott oldalaira.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Oldalak:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Felső:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Alsó:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Balra:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">Jobbra</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Sötét vagy világos korrekció:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Erő:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Fehéregyensúly</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">A színhőmérséklet automatikus javítása vagy manuális beállítása.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Kézikönyv – Basic Color Matrix (gyors)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. eltolás:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Kézi - Közvetlen színhőmérséklet</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatikus – „Szürke világ” algoritmus</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Telítettség:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Megjegyzés: A „Szürke világ” algoritmus CSAK olyan képeken működik jól, amelyek sokféle színnel rendelkeznek.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Félautomata – „White Patch” algoritmus</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Futtassa a White Patch-et</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Kattintson a Forrás képen egy világos területre, amelynek fehérnek vagy színtelennek kell lennie, majd futtassa az algoritmust.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Kontraszt beállítása</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Korrigálja a kontrasztot globálisan, vagy használjon S-görbéket minden RGB csatornán.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Globális kiigazítás</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Kontraszt:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Sigma elmosódása:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Fényesség:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S-görbék</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Lookup Table Color Grading</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Használjon keresési táblázatot a színek beállításához, és adjon hozzá különleges „hangulatot” a képhez.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Válasszon egy előre meghatározott keresési táblázatot:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">-------</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Vagy... Használja a .cube vagy 3DL fájlt:</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Húzzon ide egy .cube vagy 3dl fájlt!</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Kézi színbesorolás</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Globálisan módosítsa a színintenzitást, vagy használja a Vibrance funkciót minden RGB-csatornán.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Globális kiigazítás</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">Telítettség:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Piros:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Zöld:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Kék:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Élesítés</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Növeli a helyi kontrasztot a képen látható objektumok szélei mentén.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Globális kiigazítás</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Szigma:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Megjegyzés: A túlélezés káros lehet.  Látható "glóriákat" hozhat létre az élek mentén, és felerősítheti a digitális zajt.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Speciális szűrők</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Alkalmazzon speciális effektusokat a képre.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Szürkeárnyalatos vagy szépia esetén:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">Összeg:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">-------</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Szürkeárnyalatos</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">Szépia</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Vignetta</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Fekete-fehér</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">polaroid</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Lomográf</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Export</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Állítsa be az exportálási folyamatot a fő nézetben.</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Kép(ek) exportálása</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Lépjen a Mappa exportálása elemre</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Minden kész, vissza a könyvtárba</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Megmutat:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Megmutat:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">A kép feldolgozása</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Eltávolítás a könyvtárból</system:String>
+
+    <system:String x:Key="Library.StartOver">Kezdje újra</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Szerkesztés folytatása</system:String>
+
+    <system:String x:Key="Library.Month.January">január</system:String>
+
+    <system:String x:Key="Library.Month.February">február</system:String>
+
+    <system:String x:Key="Library.Month.March">március</system:String>
+
+    <system:String x:Key="Library.Month.April">április</system:String>
+
+    <system:String x:Key="Library.Month.May">május</system:String>
+
+    <system:String x:Key="Library.Month.June">június</system:String>
+
+    <system:String x:Key="Library.Month.July">július</system:String>
+
+    <system:String x:Key="Library.Month.August">augusztus</system:String>
+
+    <system:String x:Key="Library.Month.September">szeptember</system:String>
+
+    <system:String x:Key="Library.Month.October">október</system:String>
+
+    <system:String x:Key="Library.Month.November">november</system:String>
+
+    <system:String x:Key="Library.Month.December">december</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">vasárnap</system:String>
+
+    <system:String x:Key="Library.Day.Monday">hétfő</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">kedd</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">szerda</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">csütörtök</system:String>
+
+    <system:String x:Key="Library.Day.Friday">péntek</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">szombat</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Elfogadom az MIT Licenc feltételeit, Folytatás.</system:String>
 

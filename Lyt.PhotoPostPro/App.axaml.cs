@@ -152,7 +152,7 @@ public partial class App : ApplicationBase
                 AssemblyName = App.AssemblyName,
                 Languages =
                 [
-                    // Master, See ****Languages.json in Tools folder 
+                    // Master, See PppLanguages.json in Tools folder 
                     "en-US", 
 
                     // Auto Translated 

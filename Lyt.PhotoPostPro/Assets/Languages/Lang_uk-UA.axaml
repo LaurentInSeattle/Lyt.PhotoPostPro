@@ -7,19 +7,11 @@
 
     <system:String x:Key="Toast.Dismiss">Закрити</system:String>
 
-    <system:String x:Key="Shell.AppName">Головоломка</system:String>
+    <system:String x:Key="Shell.AppName">Постобробка фотографій</system:String>
 
     <system:String x:Key="Shell.About">Про...</system:String>
 
     <system:String x:Key="Shell.Play">грати</system:String>
-
-    <system:String x:Key="Shell.Encoding">Кодування</system:String>
-
-    <system:String x:Key="Shell.Decoding">Розшифровка</system:String>
-
-    <system:String x:Key="Shell.Settings">Налаштування</system:String>
-
-    <system:String x:Key="Shell.Language">Мова</system:String>
 
     <system:String x:Key="Shell.Exit">Вийти</system:String>
 
@@ -27,93 +19,319 @@
 
     <system:String x:Key="Shell.Ready">Готовий.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Ласкаво просимо до Jigsaw Puzzle!</system:String>
+    <system:String x:Key="Shell.Greetings">Ласкаво просимо до постобробки фотографій!</system:String>
 
-    <system:String x:Key="Collection.Remove">видалити</system:String>
+    <system:String x:Key="Shell.Camera">Камера</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">Зберегти на робочий стіл</system:String>
+    <system:String x:Key="Shell.Single">Зображення</system:String>
 
-    <system:String x:Key="Collection.DropZone">Зона перетягування</system:String>
+    <system:String x:Key="Shell.Folder">Бібліотека</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">Перетягніть сюди файл зображення, щоб створити нову картинку-головоломку.</system:String>
+    <system:String x:Key="Shell.Settings">Налаштування</system:String>
 
-    <system:String x:Key="Collection.BeginNew">Розпочніть цю нову головоломку:</system:String>
+    <system:String x:Key="Shell.Language">Мова</system:String>
 
-    <system:String x:Key="Collection.StartAgain">Розпочніть цю головоломку знову:</system:String>
+    <system:String x:Key="Imaging.InProgress">В роботі</system:String>
 
-    <system:String x:Key="Collection.Continue">Продовжте розгадувати цю головоломку:</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">Будь ласка, зачекайте...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">Кількість штук:</system:String>
+    <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
 
-    <system:String x:Key="Collection.Rotations">Обертання:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">Перетягніть сюди папку з файлами зображень, щоб створити новий проект.</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">Міцність замикання:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 
-    <system:String x:Key="Collection.Hints">Підказки:</system:String>
+    <system:String x:Key="Single.ProcessImage">Обробити це зображення</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">Доданий контраст:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">Помилка завантаження</system:String>
 
-    <system:String x:Key="Collection.None">Жодного</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">Не вдалося завантажити це зображення.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">Могутній</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">Повний екран</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">Сильний</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  щоб повернутися</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">нормальний</system:String>
+    <system:String x:Key="Workflow.Back">Назад</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">Слабкий</system:String>
+    <system:String x:Key="Workflow.Reset">Скинути</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">Нескінченний</system:String>
+    <system:String x:Key="Workflow.Next">Далі</system:String>
 
-    <system:String x:Key="Collection.HintsThree">три</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Орієнтація та дзеркальне відображення</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">Тільки один</system:String>
+    <system:String x:Key="Workflow.Orient.Format">Відновити портретний або альбомний формат:</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">Екстрім</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">Переверніть зображення за потреби:</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">Сильний</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">Середній</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">Просто трохи</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Дзеркало</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">Показати лише:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Перевернути</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">В роботі</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">Вирівнювання зображення</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">Виконано</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">Показати або приховати напрямні вирівнювання:</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">Розпочато: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Вертикальний</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">Перебіг: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Горизонтальний</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Кількість штук: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">Поверніть, щоб налаштувати вирівнювання:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">Темний</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Нульове обертання</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">світло</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">Фон</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">Показати зображення</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Перемикати краї</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0,5 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">Підказка</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">Прогрес</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">Збільшити</system:String>
+    <system:String x:Key="Workflow.Compose.Title">Уточнення композиції</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">Повний екран</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Лінії кадрування:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc.  щоб повернутися</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">Скинути</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">Хв</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">Попередній перегляд</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">Макс</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Вгорі:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">Переставити</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Внизу:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Ліворуч:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">праворуч:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Ширина:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Висота:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Співвідношення сторін:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Виберіть керівництво по композиції:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - Жодного - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Правило третин</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">рамка</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Середні лінії</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Діагоналі</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Золоті трикутники вгору</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Золоті трикутники вниз</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Глобальна експозиція</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Ви можете коригувати будь-яким або всіма трьома методами разом: гамма-корекція, мультиплікативне посилення або адитивне зміщення яскравості.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Скинути</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">гамма:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">посилення:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Shift:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Відблиски і тіні</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Нелінійний алгоритм яскравості для виявлення та відновлення деталей зображення.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Скинути</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Основні моменти:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Тіні:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Вибіркова корекція експозиції</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Застосуйте корекцію експозиції до вибраних сторін зображення.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Сторони:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Вгорі:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Внизу:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Ліворуч:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">правильно</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Темна або світла корекція:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Міцність:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Баланс білого</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">Відкоригуйте колірну температуру автоматично або налаштуйте її вручну.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Вручну - базова кольорова матриця (швидко)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Інструкція - пряма колірна температура</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">Т. Кельвін:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Автоматично - Алгоритм «Сірий світ».</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">насиченість:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Примітка. Алгоритм «Сірий світ» добре працює ТІЛЬКИ на зображеннях, які мають багато різноманітних кольорів.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Напівавтоматичний - Алгоритм «білої плями».</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Запустіть White Patch</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Клацніть на яскравій ділянці на вихідному зображенні, яка має бути білою або безбарвною, а потім запустіть алгоритм.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Регулювання контрастності</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Виправте контраст глобально або використовуйте S-криві на кожному каналі RGB.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Глобальне коригування</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Контраст:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Сигма розмиття:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Яскравість:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S-криві</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Таблиця пошуку за кольором</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Використовуйте таблицю пошуку, щоб налаштувати кольори та додати особливу «атмосферу» до зображення.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Виберіть попередньо визначену таблицю пошуку:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - Жодного - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Або... Використовуйте файл .cube або 3DL:</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Перетягніть сюди файл .cube або 3dl!</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Ручна градація кольорів</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Змініть інтенсивність кольору глобально або використовуйте Vibrance на кожному каналі RGB.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Глобальне коригування</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">насиченість:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Жвавість</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Червоний:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Зелений:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Синій:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Гостріти</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Підсилює локальний контраст по краях об’єктів на зображенні.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Глобальне коригування</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Сигма:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Примітка: надмірне загострення може бути шкідливим.  Він може створювати видимі «ореоли» по краях і посилювати цифровий шум.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Спеціальні фільтри</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Застосування спеціальних ефектів до зображення.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Для відтінків сірого або сепії:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">сума:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - Жодного - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Відтінки сірого</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">сепія</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Віньєтка</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Чорно-біле</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Полароїд</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Ломограф</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Експорт</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Налаштуйте процес експорту в головному вікні.</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Експорт зображень</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Перейдіть до папки експорту</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Готово, назад до бібліотеки</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Показати:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Обробити це зображення</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Видалити з бібліотеки</system:String>
+
+    <system:String x:Key="Library.StartOver">Почніть спочатку</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Продовжити редагування</system:String>
+
+    <system:String x:Key="Library.Month.January">січня</system:String>
+
+    <system:String x:Key="Library.Month.February">Лютий</system:String>
+
+    <system:String x:Key="Library.Month.March">березень</system:String>
+
+    <system:String x:Key="Library.Month.April">квітень</system:String>
+
+    <system:String x:Key="Library.Month.May">травня</system:String>
+
+    <system:String x:Key="Library.Month.June">червень</system:String>
+
+    <system:String x:Key="Library.Month.July">липень</system:String>
+
+    <system:String x:Key="Library.Month.August">серпень</system:String>
+
+    <system:String x:Key="Library.Month.September">вересень</system:String>
+
+    <system:String x:Key="Library.Month.October">жовтень</system:String>
+
+    <system:String x:Key="Library.Month.November">Листопад</system:String>
+
+    <system:String x:Key="Library.Month.December">грудень</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">неділя</system:String>
+
+    <system:String x:Key="Library.Day.Monday">понеділок</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">вівторок</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">Середа</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">четвер</system:String>
+
+    <system:String x:Key="Library.Day.Friday">П'ятниця</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">Субота</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Я приймаю умови Ліцензії MIT, Продовжити.</system:String>
 

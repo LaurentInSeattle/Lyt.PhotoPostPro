@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">Παιχνίδι</system:String>
 
-    <system:String x:Key="Shell.Encoding">Κωδικοποίηση</system:String>
-
-    <system:String x:Key="Shell.Decoding">Αποκρυπτογράφηση</system:String>
-
-    <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
-
-    <system:String x:Key="Shell.Language">Γλώσσα</system:String>
-
     <system:String x:Key="Shell.Exit">Εγκαταλείπω</system:String>
 
     <system:String x:Key="Shell.Close">Κοντά</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο Jigsaw Puzzle!</system:String>
 
-    <system:String x:Key="Collection.Remove">Αφαιρώ</system:String>
+    <system:String x:Key="Shell.Camera">Κάμερα</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">Αποθήκευση στην επιφάνεια εργασίας</system:String>
+    <system:String x:Key="Shell.Single">Εικών</system:String>
 
-    <system:String x:Key="Collection.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
+    <system:String x:Key="Shell.Folder">Βιβλιοθήκη</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να δημιουργήσετε μια νέα εικόνα παζλ.</system:String>
+    <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
 
-    <system:String x:Key="Collection.BeginNew">Ξεκινήστε αυτό το νέο παζλ:</system:String>
+    <system:String x:Key="Shell.Language">Γλώσσα</system:String>
 
-    <system:String x:Key="Collection.StartAgain">Ξεκινήστε ξανά αυτό το παζλ:</system:String>
+    <system:String x:Key="Imaging.InProgress">Σε εξέλιξη</system:String>
 
-    <system:String x:Key="Collection.Continue">Συνεχίστε να λύνετε αυτό το παζλ:</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">Παρακαλώ περιμένετε...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">Πλήθος τεμαχίων:</system:String>
+    <system:String x:Key="DragDrop.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
 
-    <system:String x:Key="Collection.Rotations">Περιστροφές:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">Σύρετε και αποθέστε έναν φάκελο που περιέχει αρχεία εικόνας εδώ για να δημιουργήσετε ένα νέο έργο.</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">Δύναμη κουμπώματος:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>
 
-    <system:String x:Key="Collection.Hints">Συμβουλές:</system:String>
+    <system:String x:Key="Single.ProcessImage">Επεξεργαστείτε αυτήν την εικόνα</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">Προστέθηκε αντίθεση:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">Η φόρτωση απέτυχε</system:String>
 
-    <system:String x:Key="Collection.None">Κανένας</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">Δεν ήταν δυνατή η φόρτωση αυτής της εικόνας.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">Ισχυρός</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">Πλήρης οθόνη</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">Ισχυρός</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  προς Επιστροφή</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">Κανονικός</system:String>
+    <system:String x:Key="Workflow.Back">Πίσω</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">Αδύναμος</system:String>
+    <system:String x:Key="Workflow.Reset">Επαναφορά</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">Απειρος</system:String>
+    <system:String x:Key="Workflow.Next">Επόμενος</system:String>
 
-    <system:String x:Key="Collection.HintsThree">Τρία</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Προσανατολισμός και Κατοπτρισμός</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">Μόνο Ένα</system:String>
+    <system:String x:Key="Workflow.Orient.Format">Επαναφορά μορφής κατακόρυφου ή οριζόντιου προσανατολισμού:</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">Ακρο</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">Γυρίστε την εικόνα όπως χρειάζεται:</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">Ισχυρός</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">Μέσον</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">Μόνο λίγο</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Καθρέπτης</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">Εμφάνιση μόνο:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Αναρρίπτω</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">Σε εξέλιξη</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">Ισιώνοντας την εικόνα</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">Ολοκληρώθηκε το</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">Εμφάνιση ή απόκρυψη των οδηγών ευθυγράμμισης:</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">Ξεκίνησε: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Κατακόρυφος</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">Πρόοδος: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Οριζόντιος</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Πλήθος τεμαχίων: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">Περιστροφή για να προσαρμόσετε την ευθυγράμμιση:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">Σκοτάδι</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Μηδενική περιστροφή</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">Φως</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">Φόντο</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">Εμφάνιση εικόνας</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Εναλλαγή άκρων</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0,5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">Υπαινιγμός</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">Πρόοδος</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">Ανίπταμαι διαγωνίως</system:String>
+    <system:String x:Key="Workflow.Compose.Title">Καθαρισμός της σύνθεσης</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">Πλήρης οθόνη</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Γραμμές περικοπής:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc.  προς Επιστροφή</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">Επαναφορά</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">Ελάχ</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">Πρεμιέρα</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">Μέγ</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Κορυφή:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">Τακτοποιώ</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Κάτω μέρος:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Αριστερά:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">Δικαίωμα:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Πλάτος:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Υψος:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Αναλογία διαστάσεων:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Επιλέξτε έναν οδηγό σύνθεσης:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">-- -- Κανένα --</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Κανόνας των τρίτων</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">Πλαίσιο</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Μεσαίες Γραμμές</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Διαγώνιες</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Χρυσά Τρίγωνα επάνω</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Χρυσά Τρίγωνα Κάτω</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Παγκόσμια Έκθεση</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Μπορείτε να διορθώσετε με οποιαδήποτε ή και τις τρεις μεθόδους συνδυαστικά: διόρθωση γάμμα, πολλαπλασιαστικό κέρδος ή πρόσθετη μετατόπιση φωτεινότητας.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Επαναφορά</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">Γάμμα:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">Κέρδος:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Αλλαγή:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Στιγμιότυπα και σκιές</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Ένας μη γραμμικός αλγόριθμος φωτεινότητας για την αποκάλυψη και την ανάκτηση λεπτομερειών στην εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Επαναφορά</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Ανταύγειες:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Σκιές:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Επιλεκτική διόρθωση έκθεσης</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Εφαρμόστε διόρθωση έκθεσης σε επιλεγμένες πλευρές της εικόνας.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Πλευρές:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Κορυφή:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Κάτω μέρος:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Αριστερά:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">Δικαίωμα</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Διόρθωση σκούρου ή φωτός:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Δύναμη:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Ισορροπία λευκού</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">Διορθώστε τη θερμοκρασία χρώματος αυτόματα ή προσαρμόστε τη χειροκίνητα.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Εγχειρίδιο - Basic Color Matrix (γρήγορο)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Εγχειρίδιο - Άμεση θερμοκρασία χρώματος</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">Τ. Κέλβιν:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Αυτόματος - Αλγόριθμος «Γκρι Κόσμος».</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Κορεσμός:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Σημείωση: Ο αλγόριθμος "Gray World" λειτουργεί καλά ΜΟΝΟ σε εικόνες που έχουν πολλά διαφορετικά χρώματα.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Ημιαυτόματο - Αλγόριθμος «Λευκό μπαλώματα».</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Εκτελέστε το White Patch</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Κάντε κλικ σε μια φωτεινή περιοχή στην εικόνα Πηγή που πρέπει να είναι λευκή ή άχρωμη και, στη συνέχεια, εκτελέστε τον αλγόριθμο.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Προσαρμογή αντίθεσης</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Διορθώστε την αντίθεση καθολικά ή χρησιμοποιήστε S-Curves σε κάθε κανάλι RGB.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Παγκόσμια προσαρμογή</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Αντίθεση:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Λάμψη:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S-Curves</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Διαβάθμιση χρώματος πίνακα αναζήτησης</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Χρησιμοποιήστε έναν Πίνακα αναζήτησης για να προσαρμόσετε τα χρώματα και να προσθέσετε κάποιο ιδιαίτερο «vibe» στην εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Επιλέξτε έναν προκαθορισμένο πίνακα αναζήτησης:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">-- -- Κανένα --</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Ή... Χρησιμοποιήστε το αρχείο .cube ή 3DL:</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Σύρετε και αποθέστε εδώ ένα αρχείο .cube ή 3dl!</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Χειροκίνητη ταξινόμηση χρωμάτων</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Αναβαθμίστε την ένταση χρώματος παγκοσμίως ή χρησιμοποιήστε το Vibrance σε κάθε κανάλι RGB.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Παγκόσμια προσαρμογή</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">Κορεσμός:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Δόνηση</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Κόκκινος:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Πράσινος:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Μπλε:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Ακονίζω</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Ενισχύει την τοπική αντίθεση κατά μήκος των άκρων των αντικειμένων στην εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Παγκόσμια προσαρμογή</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Σημείωση: Το υπερβολικό ακόνισμα μπορεί να είναι επιζήμιο.  Μπορεί να εισάγει ορατά "φωτοστέφανα" κατά μήκος των άκρων και να ενισχύσει τον ψηφιακό θόρυβο.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Ειδικά φίλτρα</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Εφαρμόστε ειδικά εφέ στην εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Για κλίμακα του γκρι ή σέπια:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">Ποσό:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">-- -- Κανένα --</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Κλίμακα του γκρι</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">Καστανόχρους</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Βινιέτα</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Γραπτώς</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Λωμογράφος</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Εξαγωγές</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Ρυθμίστε τη διαδικασία εξαγωγής στην κύρια προβολή.</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Εξαγωγή εικόνων</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Μεταβείτε στον φάκελο Εξαγωγή</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Όλα έγιναν, Επιστροφή στη Βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Επίδειξη:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Επίδειξη:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Επεξεργαστείτε αυτήν την εικόνα</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Κατάργηση από τη Βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Library.StartOver">Ξεκινήστε από την αρχή</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Συνέχεια Επεξεργασίας</system:String>
+
+    <system:String x:Key="Library.Month.January">Ιανουάριος</system:String>
+
+    <system:String x:Key="Library.Month.February">Φεβρουάριος</system:String>
+
+    <system:String x:Key="Library.Month.March">Πορεία</system:String>
+
+    <system:String x:Key="Library.Month.April">Απρίλιος</system:String>
+
+    <system:String x:Key="Library.Month.May">Μάιος</system:String>
+
+    <system:String x:Key="Library.Month.June">Ιούνιος</system:String>
+
+    <system:String x:Key="Library.Month.July">Ιούλιος</system:String>
+
+    <system:String x:Key="Library.Month.August">Αύγουστος</system:String>
+
+    <system:String x:Key="Library.Month.September">Σεπτέμβριος</system:String>
+
+    <system:String x:Key="Library.Month.October">Οκτώβριος</system:String>
+
+    <system:String x:Key="Library.Month.November">Νοέμβριος</system:String>
+
+    <system:String x:Key="Library.Month.December">Δεκέμβριος</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">Κυριακή</system:String>
+
+    <system:String x:Key="Library.Day.Monday">Δευτέρα</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">Τρίτη</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">Τετάρτη</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">Πέμπτη</system:String>
+
+    <system:String x:Key="Library.Day.Friday">Παρασκευή</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">Σάββατο</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Αποδέχομαι τους όρους της άδειας MIT, Συνέχεια.</system:String>
 

@@ -24,7 +24,7 @@
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="full_screen_maximize"
 			GlyphStrokeThickness="0.1"
-			Text="{DynamicResource Puzzle.Toolbar.FullScreen}"  
+			Text="{DynamicResource Process.Toolbar.FullScreen}"  
 			Command="{Binding OnFullscreen}"
 			/>
 		<!-- TODO 

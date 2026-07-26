@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">खेल</system:String>
 
-    <system:String x:Key="Shell.Encoding">एन्कोडिंग</system:String>
-
-    <system:String x:Key="Shell.Decoding">डिकोडिंग</system:String>
-
-    <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
-
-    <system:String x:Key="Shell.Language">भाषा</system:String>
-
     <system:String x:Key="Shell.Exit">छोड़ना</system:String>
 
     <system:String x:Key="Shell.Close">बंद करना</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">जिग्सॉ पहेली में आपका स्वागत है!</system:String>
 
-    <system:String x:Key="Collection.Remove">निकालना</system:String>
+    <system:String x:Key="Shell.Camera">कैमरा</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">डेस्कटॉप पर सहेजें</system:String>
+    <system:String x:Key="Shell.Single">छवि</system:String>
 
-    <system:String x:Key="Collection.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
+    <system:String x:Key="Shell.Folder">पुस्तकालय</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">एक नया पहेली चित्र बनाने के लिए एक छवि फ़ाइल को यहाँ खींचें और छोड़ें।</system:String>
+    <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
 
-    <system:String x:Key="Collection.BeginNew">इस नई पहेली को शुरू करें:</system:String>
+    <system:String x:Key="Shell.Language">भाषा</system:String>
 
-    <system:String x:Key="Collection.StartAgain">इस पहेली को फिर से शुरू करें:</system:String>
+    <system:String x:Key="Imaging.InProgress">प्रगति पर है</system:String>
 
-    <system:String x:Key="Collection.Continue">इस पहेली को हल करना जारी रखें:</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">कृपया प्रतीक्षा करें...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">टुकड़ा गिनती:</system:String>
+    <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
 
-    <system:String x:Key="Collection.Rotations">घूर्णन:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">नया प्रोजेक्ट बनाने के लिए छवि फ़ाइलों वाले फ़ोल्डर को यहां खींचें और छोड़ें।</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">स्नैप ताकत:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">आरंभ करने के लिए एक छवि फ़ाइल को यहां खींचें और छोड़ें।</system:String>
 
-    <system:String x:Key="Collection.Hints">संकेत:</system:String>
+    <system:String x:Key="Single.ProcessImage">इस छवि को संसाधित करें</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">जोड़ा गया कंट्रास्ट:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">लोड विफल हो गया</system:String>
 
-    <system:String x:Key="Collection.None">कोई नहीं</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">यह छवि लोड नहीं की जा सकी.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">ताकतवर</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">पूर्ण स्क्रीन</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">मज़बूत</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">ईएससी।  लौटने के लिये</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">सामान्य</system:String>
+    <system:String x:Key="Workflow.Back">पीछे</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">कमज़ोर</system:String>
+    <system:String x:Key="Workflow.Reset">रीसेट करें</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">अनंत</system:String>
+    <system:String x:Key="Workflow.Next">अगला</system:String>
 
-    <system:String x:Key="Collection.HintsThree">तीन</system:String>
+    <system:String x:Key="Workflow.Orient.Title">ओरिएंटेशन और मिररिंग</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">केवल एक</system:String>
+    <system:String x:Key="Workflow.Orient.Format">पोर्ट्रेट या लैंडस्केप प्रारूप पुनर्स्थापित करें:</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">चरम</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">आवश्यकतानुसार छवि को पलटें:</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">मज़बूत</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">मध्यम</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+90°</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">बस थोड़ा सा</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">आईना</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">केवल इतना ही दिखाना:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">पलटना</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">प्रगति पर है</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">छवि को सीधा करना</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">पुरा होना।</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">संरेखण मार्गदर्शिकाएँ दिखाएँ या छिपाएँ:</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">प्रारंभ: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">खड़ा</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">प्रगति: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">क्षैतिज</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">टुकड़ा गिनती: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">संरेखण समायोजित करने के लिए घुमाएँ:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">अँधेरा</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">शून्य घूर्णन</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">रोशनी</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">पृष्ठभूमि</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">छवि दिखाएँ</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">किनारों को टॉगल करें</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">संकेत देना</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">प्रगति</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">ज़ूम</system:String>
+    <system:String x:Key="Workflow.Compose.Title">रचना को परिष्कृत करना</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">पूर्ण स्क्रीन</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">फसल रेखाएँ:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">ईएससी।  लौटने के लिये</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">रीसेट करें</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">मिन</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">पूर्व दर्शन</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">अधिकतम</system:String>
+    <system:String x:Key="Workflow.Compose.Top">शीर्ष:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">को पुनर्व्यवस्थित</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">तल:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">बाएं:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">सही:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">चौड़ाई:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">ऊंचाई:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">आस्पेक्ट अनुपात:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">एक रचना मार्गदर्शिका चुनें:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - कोई नहीं - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">तिहाई का नियम</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">चौखटा</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">मध्य रेखाएँ</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">विकर्णों</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">स्वर्ण त्रिभुज ऊपर</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">नीचे सुनहरे त्रिकोण</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">वैश्विक एक्सपोजर</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">आप किसी एक या तीनों संयुक्त तरीकों से सही कर सकते हैं: गामा सुधार, गुणक लाभ या योगात्मक चमक शिफ्ट।</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">रीसेट करें</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">गामा:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">पाना:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">बदलाव:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">हाइलाइट्स और छायाएँ</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">छवि में विवरण प्रकट करने और पुनर्प्राप्त करने के लिए एक गैर रेखीय ल्यूमिनेंस एल्गोरिदम।</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">रीसेट करें</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">मुख्य विशेषताएं:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">छैया छैया:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">चयनात्मक एक्सपोज़र सुधार</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">छवि के चयनित पक्षों पर एक्सपोज़र सुधार लागू करें।</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">पक्ष:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">शीर्ष:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">तल:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">बाएं:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">सही</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">अंधेरा या हल्का सुधार:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">ताकत:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">श्वेत संतुलन</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">रंग तापमान को स्वचालित रूप से ठीक करें या इसे मैन्युअल रूप से समायोजित करें।</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">मैनुअल - मूल रंग मैट्रिक्स (तेज)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">टी. ऑफसेट:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">मैनुअल - प्रत्यक्ष रंग तापमान</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">टी. केल्विन:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">स्वचालित - 'ग्रे वर्ल्ड' एल्गोरिथम</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">संतृप्ति:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">ध्यान दें: 'ग्रे वर्ल्ड' एल्गोरिदम केवल उन छवियों पर अच्छा काम करता है जिनमें बहुत सारे विभिन्न रंग होते हैं।</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">अर्ध-स्वचालित - 'व्हाइट पैच' एल्गोरिथम</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">सफ़ेद पैच चलाएँ</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">स्रोत छवि पर एक उज्ज्वल क्षेत्र पर क्लिक करें जो सफेद या रंगहीन होना चाहिए, फिर एल्गोरिदम चलाएँ।</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">कंट्रास्ट समायोजन</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">विश्व स्तर पर कंट्रास्ट को ठीक करें या प्रत्येक आरजीबी चैनल पर एस-कर्व का उपयोग करें।</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">वैश्विक समायोजन</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">अंतर:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">धुंधला सिग्मा:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">चमक:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">एस घटता</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">लुकअप टेबल रंग ग्रेडिंग</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">रंगों को समायोजित करने और छवि में कुछ विशेष 'वाइब' जोड़ने के लिए लुकअप टेबल का उपयोग करें।</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">एक पूर्वनिर्धारित लुकअप तालिका चुनें:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - कोई नहीं - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">या... अपनी .cube या 3DL फ़ाइल का उपयोग करें:</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">एक .cube या 3dl फ़ाइल को यहाँ खींचें और छोड़ें!</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">मैन्युअल रंग ग्रेडिंग</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">विश्व स्तर पर रंग की तीव्रता को पुनः ग्रेड करें, या, प्रत्येक आरजीबी चैनल पर वाइब्रेंस का उपयोग करें।</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">वैश्विक समायोजन</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">संतृप्ति:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">वाइब्रैंस</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">लाल:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">हरा:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">नीला:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">पैना</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">छवि में ऑब्जेक्ट के किनारों पर स्थानीय कंट्रास्ट को बढ़ाता है।</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">वैश्विक समायोजन</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">सिग्मा:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">ध्यान दें: अधिक धार लगाना हानिकारक हो सकता है।  यह किनारों पर दृश्यमान "प्रभामंडल" पेश कर सकता है और डिजिटल शोर को बढ़ा सकता है।</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">विशेष फिल्टर</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">छवि पर विशेष प्रभाव लागू करें.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">ग्रेस्केल या सेपिया के लिए:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">मात्रा:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - कोई नहीं - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">स्केल</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">एक प्रकार की मछली</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">विनेट</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">काला और सफ़ेद</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">कोडाक्रोम</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">लोमोग्राफ़</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">निर्यात</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">निर्यात प्रक्रिया को मुख्य दृश्य में सेटअप करें।</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">छवि निर्यात करें</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">निर्यात फ़ोल्डर पर नेविगेट करें</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">सब कुछ हो गया, लाइब्रेरी में वापस</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">दिखाओ:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">दिखाओ:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">इस छवि को संसाधित करें</system:String>
+
+    <system:String x:Key="Library.RemoveImage">लाइब्रेरी से हटाएँ</system:String>
+
+    <system:String x:Key="Library.StartOver">प्रारंभ करें</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">संपादन जारी रखें</system:String>
+
+    <system:String x:Key="Library.Month.January">जनवरी</system:String>
+
+    <system:String x:Key="Library.Month.February">फ़रवरी</system:String>
+
+    <system:String x:Key="Library.Month.March">मार्च</system:String>
+
+    <system:String x:Key="Library.Month.April">अप्रैल</system:String>
+
+    <system:String x:Key="Library.Month.May">मई</system:String>
+
+    <system:String x:Key="Library.Month.June">जून</system:String>
+
+    <system:String x:Key="Library.Month.July">जुलाई</system:String>
+
+    <system:String x:Key="Library.Month.August">अगस्त</system:String>
+
+    <system:String x:Key="Library.Month.September">सितम्बर</system:String>
+
+    <system:String x:Key="Library.Month.October">अक्टूबर</system:String>
+
+    <system:String x:Key="Library.Month.November">नवंबर</system:String>
+
+    <system:String x:Key="Library.Month.December">दिसंबर</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">रविवार</system:String>
+
+    <system:String x:Key="Library.Day.Monday">सोमवार</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">मंगलवार</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">बुधवार</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">गुरुवार</system:String>
+
+    <system:String x:Key="Library.Day.Friday">शुक्रवार</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">शनिवार</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">मैं एमआईटी लाइसेंस की शर्तों को स्वीकार करता हूं, जारी रखें।</system:String>
 

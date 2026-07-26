@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">玩</system:String>
 
-    <system:String x:Key="Shell.Encoding">编码</system:String>
-
-    <system:String x:Key="Shell.Decoding">解码</system:String>
-
-    <system:String x:Key="Shell.Settings">设置</system:String>
-
-    <system:String x:Key="Shell.Language">语言</system:String>
-
     <system:String x:Key="Shell.Exit">辞职</system:String>
 
     <system:String x:Key="Shell.Close">关闭</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">欢迎来到拼图游戏！</system:String>
 
-    <system:String x:Key="Collection.Remove">消除</system:String>
+    <system:String x:Key="Shell.Camera">相机</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">保存到桌面</system:String>
+    <system:String x:Key="Shell.Single">图像</system:String>
 
-    <system:String x:Key="Collection.DropZone">拖放区</system:String>
+    <system:String x:Key="Shell.Folder">图书馆</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">将图像文件拖放到此处以创建新的拼图图片。</system:String>
+    <system:String x:Key="Shell.Settings">设置</system:String>
 
-    <system:String x:Key="Collection.BeginNew">开始这个新的谜题：</system:String>
+    <system:String x:Key="Shell.Language">语言</system:String>
 
-    <system:String x:Key="Collection.StartAgain">重新开始这个谜题：</system:String>
+    <system:String x:Key="Imaging.InProgress">进行中</system:String>
 
-    <system:String x:Key="Collection.Continue">继续解决这个难题：</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">请稍等...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">件数：</system:String>
+    <system:String x:Key="DragDrop.DropZone">拖放区</system:String>
 
-    <system:String x:Key="Collection.Rotations">旋转次数：</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">将包含图像文件的文件夹拖放到此处以创建新项目。</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">咬合强度：</system:String>
+    <system:String x:Key="Single.DropZoneHelp">将图像文件拖放到此处即可开始。</system:String>
 
-    <system:String x:Key="Collection.Hints">提示：</system:String>
+    <system:String x:Key="Single.ProcessImage">处理该图像</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">添加对比度：</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">加载失败</system:String>
 
-    <system:String x:Key="Collection.None">没有任何</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">无法加载该图像。</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">强大的</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">全屏</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">强的</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc键。 返回</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">普通的</system:String>
+    <system:String x:Key="Workflow.Back">后退</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">虚弱的</system:String>
+    <system:String x:Key="Workflow.Reset">重置</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">无限</system:String>
+    <system:String x:Key="Workflow.Next">下一个</system:String>
 
-    <system:String x:Key="Collection.HintsThree">三</system:String>
+    <system:String x:Key="Workflow.Orient.Title">方向和镜像</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">只有一个</system:String>
+    <system:String x:Key="Workflow.Orient.Format">恢复纵向或横向格式：</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">极端</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">根据需要翻转图像：</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">强的</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">中等的</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">一点点</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">镜子</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">仅显示：</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">翻动</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">进行中</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">矫正图像</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">完全的</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">显示或隐藏对齐参考线：</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">开始时间：{0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">垂直的</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">进度：{0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">水平的</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">件数：{0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">旋转以调整对齐方式：</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">黑暗的</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">零旋转</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">光</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">背景</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">显示图片</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">切换边缘</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">暗示</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">进步</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">飞涨</system:String>
+    <system:String x:Key="Workflow.Compose.Title">精炼成分</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">全屏</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">作物线：</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc键。 返回</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">重置</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">最小</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">预览</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">最大限度</system:String>
+    <system:String x:Key="Workflow.Compose.Top">顶部：</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">重新排列</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">底部：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">左边：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">正确的：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">宽度：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">高度：</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">长宽比：</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">选择构图指南：</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - 没有任何 - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">三分法则</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">框架</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">中线</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">对角线</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">金三角向上</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">金三角向下</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">全球曝光</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">您可以结合使用任何或所有三种方法进行校正：伽马校正、乘法增益或加法亮度偏移。</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">重置</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">伽玛：</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">获得：</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">转移：</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">高光和阴影</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">一种非线性亮度算法，用于显示和恢复图像中的细节。</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">重置</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">亮点：</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">阴影：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">选择性曝光校正</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">对图像的选定侧面应用曝光校正。</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">双方：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">顶部：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">底部：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">左边：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">正确的</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">深色或浅色校正：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">力量：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">白平衡</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">自动校正色温或手动调节。</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">手册 - 基本颜色矩阵（快速）</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. 偏移：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">手册 - 直接色温</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T·开尔文：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">自动 - “灰色世界”算法</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">饱和：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">注意：“灰色世界”算法仅适用于具有多种颜色的图像。</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">半自动 - “白斑”算法</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">跑白补丁</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">单击源图像上应为白色或无色的明亮区域，然后运行算法。</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">对比度调整</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">全局校正对比度或在每个 RGB 通道上使用 S 曲线。</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">全球调整</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">对比：</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">模糊西格玛：</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">亮度：</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S曲线</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">查找表颜色分级</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">使用查找表调整颜色并向图像添加一些特殊的“氛围”。</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">选择预定义的查找表：</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - 没有任何 - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">或者...使用您的 .cube 或 3DL 文件：</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">将 .cube 或 3dl 文件拖放到此处！</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">手动颜色分级</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">全局重新调整颜色强度，或者在每个 RGB 通道上使用 Vibrance。</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">全球调整</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">饱和：</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">活力</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">红色的：</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">绿色的：</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">蓝色的：</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">锐化</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">增强图像中对象边缘的局部对比度。</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">全球调整</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">西格玛：</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">注意：过度锐化可能是有害的。 它会沿边缘引入可见的“光晕”并放大数字噪声。</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">特殊过滤器</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">对图像应用特殊效果。</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">对于灰度或棕褐色：</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">数量：</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - 没有任何 - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">灰度</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">棕褐色</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">小插图</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">黑与白</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">柯达彩色</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">宝丽来</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">洛莫夫</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">出口</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">在主视图中设置导出过程。</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">导出图像</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">导航至导出文件夹</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">一切完成，返回图书馆</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">展示：</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">展示：</system:String>
+
+    <system:String x:Key="Library.ProcessImage">处理该图像</system:String>
+
+    <system:String x:Key="Library.RemoveImage">从库中删除</system:String>
+
+    <system:String x:Key="Library.StartOver">重新开始</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">继续编辑</system:String>
+
+    <system:String x:Key="Library.Month.January">一月</system:String>
+
+    <system:String x:Key="Library.Month.February">二月</system:String>
+
+    <system:String x:Key="Library.Month.March">行进</system:String>
+
+    <system:String x:Key="Library.Month.April">四月</system:String>
+
+    <system:String x:Key="Library.Month.May">可能</system:String>
+
+    <system:String x:Key="Library.Month.June">六月</system:String>
+
+    <system:String x:Key="Library.Month.July">七月</system:String>
+
+    <system:String x:Key="Library.Month.August">八月</system:String>
+
+    <system:String x:Key="Library.Month.September">九月</system:String>
+
+    <system:String x:Key="Library.Month.October">十月</system:String>
+
+    <system:String x:Key="Library.Month.November">十一月</system:String>
+
+    <system:String x:Key="Library.Month.December">十二月</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">星期日</system:String>
+
+    <system:String x:Key="Library.Day.Monday">周一</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">周二</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">周三</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">周四</system:String>
+
+    <system:String x:Key="Library.Day.Friday">星期五</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">周六</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">我接受 MIT 许可证的条款，继续。</system:String>
 

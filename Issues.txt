@@ -1,13 +1,21 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Need a spin wait for exporting images or any other long operations
+
 - Launching editing needs a spinner 
 
 - No thumbnail updated after edit without export 
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
 
-- Missing localization on Camera view 
+- Missing localization in Library view for switch
+
+- Missing localization in Camera view 
+
+- Missing localization in Metadata panel 
+
+- 'None' not localized for special filters 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -20,18 +28,9 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Continue editing 
-
-- Other built-in effects to consider:  
-		// HistogramEqualization (CLAHE) 
-
 - Image Exports: Quick save
 
-- Need a spin wait for exporting images or any other long operations
-
 - Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
-
-- Add auto-localization tool in VS build 
 
 - Cleanup public vs internal about everywhere 
 
@@ -50,7 +49,6 @@ TODO First : Single Image Process
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
 
-
 Missing Features 
 ----------------
 
@@ -60,7 +58,7 @@ Missing Features
 
 - Root Location of Exports 
 
-- Importing photos into library 
+- Bulk Import of photos into library 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
@@ -91,6 +89,9 @@ Avalonia Related Problems
 Cool Stuff to Consider 
 ----------------------
 
+- Other built-in effects to consider:  
+		// HistogramEqualization (CLAHE) 
+
 - Implement a MD-Viewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
 - Compress Built-in LUT 
@@ -115,4 +116,4 @@ middlle to show top image or bottom image
 
 - Show GPS location in map ( Not google ) 
 
-- Rewrite Openize HEIC for speed 
+- Maybe silly: Rewrite Openize HEIC for speed 

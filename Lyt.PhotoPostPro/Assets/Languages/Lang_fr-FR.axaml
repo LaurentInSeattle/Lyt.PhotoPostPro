@@ -7,19 +7,11 @@
 
     <system:String x:Key="Toast.Dismiss">Fermer</system:String>
 
-    <system:String x:Key="Shell.AppName">Générateur de QR Codes</system:String>
+    <system:String x:Key="Shell.AppName">Post-traitement des photos</system:String>
 
     <system:String x:Key="Shell.About">A propos...</system:String>
 
     <system:String x:Key="Shell.Play">Jouer!</system:String>
-
-    <system:String x:Key="Shell.Encoding">Encodage</system:String>
-
-    <system:String x:Key="Shell.Decoding">Décodage</system:String>
-
-    <system:String x:Key="Shell.Settings">Paramètres</system:String>
-
-    <system:String x:Key="Shell.Language">Langue</system:String>
 
     <system:String x:Key="Shell.Exit">Quitter</system:String>
 
@@ -27,93 +19,319 @@
 
     <system:String x:Key="Shell.Ready">Prêt.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Bienvenue dans QR Codes!</system:String>
+    <system:String x:Key="Shell.Greetings">Bienvenue dans le post-traitement photo !</system:String>
 
-    <system:String x:Key="Collection.Remove">Supprimer</system:String>
+    <system:String x:Key="Shell.Camera">Caméra</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">Enregistrer sur le bureau</system:String>
+    <system:String x:Key="Shell.Single">Image</system:String>
 
-    <system:String x:Key="Collection.DropZone">Zone de Glisser-déposer</system:String>
+    <system:String x:Key="Shell.Folder">Bibliothèque</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">Faites glisser et déposez des fichiers image ici pour creer un nouveau puzzle.</system:String>
+    <system:String x:Key="Shell.Settings">Paramètres</system:String>
 
-    <system:String x:Key="Collection.BeginNew">Commencez ce nouveau puzzle :</system:String>
+    <system:String x:Key="Shell.Language">Langue</system:String>
 
-    <system:String x:Key="Collection.StartAgain">Recommencez ce puzzle :</system:String>
+    <system:String x:Key="Imaging.InProgress">En cours</system:String>
 
-    <system:String x:Key="Collection.Continue">Continuez à résoudre ce puzzle :</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">S'il vous plaît, attendez...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">Nombre de pièces :</system:String>
+    <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
 
-    <system:String x:Key="Collection.Rotations">Rotations :</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">Faites glisser et déposez ici un dossier contenant des fichiers image pour créer un nouveau projet.</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">Attraction :</system:String>
+    <system:String x:Key="Single.DropZoneHelp">Faites glisser et déposez un fichier image ici pour commencer.</system:String>
 
-    <system:String x:Key="Collection.Hints">Conseils :</system:String>
+    <system:String x:Key="Single.ProcessImage">Traiter cette image</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">Ajout de Contraste :</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">Échec du chargement</system:String>
 
-    <system:String x:Key="Collection.None">Aucun</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">Cette image n'a pas pu être chargée.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">Puissant</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">Plein écran</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">Fort</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Échap.  revenir</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">Normale</system:String>
+    <system:String x:Key="Workflow.Back">Dos</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">Faible</system:String>
+    <system:String x:Key="Workflow.Reset">Réinitialiser</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">Infini</system:String>
+    <system:String x:Key="Workflow.Next">Suivant</system:String>
 
-    <system:String x:Key="Collection.HintsThree">Trois</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Orientation et mise en miroir</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">Seulement Un</system:String>
+    <system:String x:Key="Workflow.Orient.Format">Restaurer le format portrait ou paysage :</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">Extrême</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">Retournez l'image si nécessaire :</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">Fort</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">Moyen</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+90°</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">Juste un Peu</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Miroir</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">Montrer:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Retourner</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">Jeux En Cours</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">Redresser l'image</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">Jeux Terminés</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">Afficher ou masquer les guides d'alignement :</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">Démarré le: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Verticale</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">Progrès: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Horizontal</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">Nombre de pièces : {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">Faites pivoter pour ajuster l'alignement :</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">Sombre</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Rotation zéro</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">Clair</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">Arrière-plan</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">Afficher l'image</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">Afficher les Bords</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+0,5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">Indice</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">Progrès</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">Zoom</system:String>
+    <system:String x:Key="Workflow.Compose.Title">Affiner la composition</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">Plein écran</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Lignes de coupe :</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Échap. pour Revenir</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">Réinitialiser</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">Min.</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">Aperçu</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">Max.</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Haut:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">Réarranger</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Bas:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Gauche:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">Droite:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Largeur:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Hauteur:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Rapport hauteur/largeur :</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Sélectionnez un guide de composition :</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - Aucun - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Règle des tiers</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">Cadre</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Lignes médianes</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Diagonales</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Triangles d'or vers le haut</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangles d'or vers le bas</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Exposition mondiale</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Vous pouvez corriger avec l'une ou les trois méthodes combinées : correction gamma, gain multiplicatif ou changement de luminosité additif.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Réinitialiser</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">Gagner:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Changement:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Faits saillants et ombres</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Un algorithme de luminance non linéaire pour révéler et récupérer les détails de l'image.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Réinitialiser</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Points forts:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Ombres :</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Correction d'exposition sélective</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Appliquez une correction d’exposition aux côtés sélectionnés de l’image.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Côtés :</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Haut:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Bas:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Gauche:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">Droite</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Correction sombre ou claire :</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Force:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Balance des blancs</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">Corrigez automatiquement la température de couleur ou ajustez-la manuellement.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuel - Matrice de couleurs de base (rapide)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Décalage :</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manuel - Température de couleur directe</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin :</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatique - Algorithme « Monde Gris »</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Remarque : L'algorithme « Monde gris » fonctionne bien UNIQUEMENT sur les images comportant de nombreuses couleurs différentes.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semi-automatique - Algorithme 'White Patch'</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Exécuter le patch blanc</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Cliquez sur une zone lumineuse de l'image source qui doit être blanche ou incolore, puis exécutez l'algorithme.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Réglage du contraste</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Corrigez le contraste globalement ou utilisez des courbes en S sur chaque canal RVB.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Ajustement global</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Contraste:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Flou Sigma :</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Luminosité:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">Courbes en S</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Classement des couleurs de la table de recherche</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Utilisez une table de recherche pour ajuster les couleurs et ajouter une « ambiance » spéciale à l’image.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Choisissez une table de recherche prédéfinie :</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - Aucun - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Ou... Utilisez votre fichier .cube ou 3DL :</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Glissez et déposez ici un fichier .cube ou 3dl !</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Étalonnage manuel des couleurs</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Regradez l’intensité des couleurs globalement ou utilisez Vibrance sur chaque canal RVB.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Ajustement global</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Rouge:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Vert:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Bleu:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Aiguiser</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Augmente le contraste local le long des bords des objets dans l'image.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Ajustement global</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma :</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Remarque : un affûtage excessif peut être préjudiciable.  Il peut introduire des « halos » visibles le long des bords et amplifier le bruit numérique.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Filtres spéciaux</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Appliquez des effets spéciaux à l'image.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Pour les niveaux de gris ou sépia :</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">Montant:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - Aucun - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Niveaux de gris</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">Sépia</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Noir et blanc</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Polaroïd</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Lomographe</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Exportations</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Configurez le processus d'exportation dans la vue principale.</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Exporter des images</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Accédez au dossier d'exportation</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Tout est fait, retour à la bibliothèque</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Montrer:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Montrer:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Traiter cette image</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Supprimer de la bibliothèque</system:String>
+
+    <system:String x:Key="Library.StartOver">Recommencer</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Continuer la modification</system:String>
+
+    <system:String x:Key="Library.Month.January">Janvier</system:String>
+
+    <system:String x:Key="Library.Month.February">Février</system:String>
+
+    <system:String x:Key="Library.Month.March">Mars</system:String>
+
+    <system:String x:Key="Library.Month.April">Avril</system:String>
+
+    <system:String x:Key="Library.Month.May">Peut</system:String>
+
+    <system:String x:Key="Library.Month.June">Juin</system:String>
+
+    <system:String x:Key="Library.Month.July">Juillet</system:String>
+
+    <system:String x:Key="Library.Month.August">Août</system:String>
+
+    <system:String x:Key="Library.Month.September">Septembre</system:String>
+
+    <system:String x:Key="Library.Month.October">Octobre</system:String>
+
+    <system:String x:Key="Library.Month.November">Novembre</system:String>
+
+    <system:String x:Key="Library.Month.December">Décembre</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">Dimanche</system:String>
+
+    <system:String x:Key="Library.Day.Monday">Lundi</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">Mardi</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">Mercredi</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">Jeudi</system:String>
+
+    <system:String x:Key="Library.Day.Friday">Vendredi</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">Samedi</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">J'accepte les termes de la licence MIT, Continuer.</system:String>
 

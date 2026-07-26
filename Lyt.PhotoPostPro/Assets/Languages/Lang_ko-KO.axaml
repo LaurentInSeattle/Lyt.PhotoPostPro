@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">놀다</system:String>
 
-    <system:String x:Key="Shell.Encoding">부호화</system:String>
-
-    <system:String x:Key="Shell.Decoding">디코딩</system:String>
-
-    <system:String x:Key="Shell.Settings">설정</system:String>
-
-    <system:String x:Key="Shell.Language">언어</system:String>
-
     <system:String x:Key="Shell.Exit">그만두다</system:String>
 
     <system:String x:Key="Shell.Close">닫다</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">직소 퍼즐에 오신 것을 환영합니다!</system:String>
 
-    <system:String x:Key="Collection.Remove">제거하다</system:String>
+    <system:String x:Key="Shell.Camera">카메라</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">데스크탑에 저장</system:String>
+    <system:String x:Key="Shell.Single">영상</system:String>
 
-    <system:String x:Key="Collection.DropZone">드래그 앤 드롭 영역</system:String>
+    <system:String x:Key="Shell.Folder">도서관</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">새로운 퍼즐 그림을 만들려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
+    <system:String x:Key="Shell.Settings">설정</system:String>
 
-    <system:String x:Key="Collection.BeginNew">이 새로운 퍼즐을 시작해보세요:</system:String>
+    <system:String x:Key="Shell.Language">언어</system:String>
 
-    <system:String x:Key="Collection.StartAgain">이 퍼즐을 다시 시작하세요.</system:String>
+    <system:String x:Key="Imaging.InProgress">진행 중</system:String>
 
-    <system:String x:Key="Collection.Continue">계속해서 이 퍼즐을 풀어보세요.</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">기다리세요...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">개수:</system:String>
+    <system:String x:Key="DragDrop.DropZone">드래그 앤 드롭 영역</system:String>
 
-    <system:String x:Key="Collection.Rotations">회전:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">이미지 파일이 포함된 폴더를 여기에 끌어다 놓아 새 프로젝트를 만듭니다.</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">스냅 강도:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
 
-    <system:String x:Key="Collection.Hints">힌트:</system:String>
+    <system:String x:Key="Single.ProcessImage">이 이미지 처리</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">추가된 대비:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">로드 실패</system:String>
 
-    <system:String x:Key="Collection.None">없음</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">이 이미지를 로드할 수 없습니다.</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">거대한</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">전체 화면</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">강한</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  돌아오다</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">정상</system:String>
+    <system:String x:Key="Workflow.Back">뒤쪽에</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">약한</system:String>
+    <system:String x:Key="Workflow.Reset">다시 놓기</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">무한</system:String>
+    <system:String x:Key="Workflow.Next">다음</system:String>
 
-    <system:String x:Key="Collection.HintsThree">삼</system:String>
+    <system:String x:Key="Workflow.Orient.Title">오리엔테이션 및 미러링</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">오직 하나</system:String>
+    <system:String x:Key="Workflow.Orient.Format">세로 또는 가로 형식을 복원합니다.</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">극심한</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">필요에 따라 이미지를 뒤집습니다.</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">강한</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">중간</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">조금만</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">거울</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">표시만:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">튀기다</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">진행 중</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">이미지 직선화</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">완전한</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">정렬 안내선 표시 또는 숨기기:</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">시작됨: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">수직의</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">진행률: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">수평의</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">부품 수: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">회전하여 정렬 조정:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">어두운</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">제로 회전</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">빛</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">배경</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">이미지 표시</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">가장자리 전환</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">힌트</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">진전</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">줌</system:String>
+    <system:String x:Key="Workflow.Compose.Title">구성 개선</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">전체 화면</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">절단선:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc.  돌아오다</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">다시 놓기</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">최소</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">시사</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">맥스</system:String>
+    <system:String x:Key="Workflow.Compose.Top">맨 위:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">재배열</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">맨 아래:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">왼쪽:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">오른쪽:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">너비:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">키:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">종횡비:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">구성 가이드를 선택하세요:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - 없음 - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">삼등분의 법칙</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">액자</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">중간선</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">대각선</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">골든 트라이앵글 업</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">골든 트라이앵글 다운</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">글로벌 노출</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">감마 보정, 곱셈 이득 또는 추가 밝기 이동의 세 가지 방법 중 하나 또는 모두를 결합하여 수정할 수 있습니다.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">다시 놓기</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">감마:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">얻다:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">옮기다:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">하이라이트와 그림자</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">이미지의 세부 사항을 표시하고 복구하는 비선형 휘도 알고리즘입니다.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">다시 놓기</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">하이라이트:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">그림자:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">선택적 노출 보정</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">이미지의 선택한 면에 노출 보정을 적용합니다.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">측면:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">맨 위:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">맨 아래:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">왼쪽:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">오른쪽</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">어둡거나 밝은 교정:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">힘:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">화이트 밸런스</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">색온도를 자동으로 보정하거나 수동으로 조정합니다.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">매뉴얼 - 기본 컬러 매트릭스(빠름)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. 오프셋:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">수동 - 직접 색온도</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. 켈빈:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">자동 - '회색 세계' 알고리즘</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">포화:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">참고: '회색 세계' 알고리즘은 다양한 색상이 많이 포함된 이미지에서만 잘 작동합니다.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">반자동 - '화이트 패치' 알고리즘</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">화이트 패치 실행</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">흰색이거나 무색이어야 하는 소스 이미지의 밝은 영역을 클릭한 다음 알고리즘을 실행합니다.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">대비 조정</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">전체적으로 대비를 수정하거나 각 RGB 채널에서 S-곡선을 사용합니다.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">전역 조정</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">차이:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">블러 시그마:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">명도:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S-곡선</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">조회 테이블 색상 등급</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">색상을 조정하고 이미지에 특별한 '분위기'를 추가하려면 조회 테이블을 사용하세요.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">사전 정의된 조회 테이블을 선택하세요.</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - 없음 - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">또는... .cube 또는 3DL 파일을 사용하세요.</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">.cube 또는 3dl 파일을 여기에 드래그 앤 드롭하세요!</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">수동 컬러 그레이딩</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">색상 강도를 전체적으로 재조정하거나 각 RGB 채널에서 Vibrance를 사용하세요.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">전역 조정</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">포화:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">활기</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">빨간색:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">녹색:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">파란색:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">갈다</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">이미지의 개체 가장자리를 따라 로컬 대비를 높입니다.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">전역 조정</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">시그마:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">참고: 지나치게 선명하게 하면 해로울 수 있습니다.  가장자리를 따라 눈에 띄는 "후광"이 나타나고 디지털 노이즈가 증폭될 수 있습니다.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">특수 필터</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">이미지에 특수 효과를 적용합니다.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">회색조 또는 세피아의 경우:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">양:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - 없음 - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">그레이스케일</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">세피아</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">삽화</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">흑백</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">코다크롬</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">폴라로이드</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">로모그래프</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">수출</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">기본 보기에서 내보내기 프로세스를 설정합니다.</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">이미지 내보내기</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">내보내기 폴더로 이동</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">모두 완료되었습니다. 라이브러리로 돌아가기</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">보여주다:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">보여주다:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">이 이미지 처리</system:String>
+
+    <system:String x:Key="Library.RemoveImage">라이브러리에서 제거</system:String>
+
+    <system:String x:Key="Library.StartOver">다시 시작</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">계속 편집</system:String>
+
+    <system:String x:Key="Library.Month.January">1월</system:String>
+
+    <system:String x:Key="Library.Month.February">2월</system:String>
+
+    <system:String x:Key="Library.Month.March">3월</system:String>
+
+    <system:String x:Key="Library.Month.April">4월</system:String>
+
+    <system:String x:Key="Library.Month.May">5월</system:String>
+
+    <system:String x:Key="Library.Month.June">6월</system:String>
+
+    <system:String x:Key="Library.Month.July">칠월</system:String>
+
+    <system:String x:Key="Library.Month.August">팔월</system:String>
+
+    <system:String x:Key="Library.Month.September">구월</system:String>
+
+    <system:String x:Key="Library.Month.October">십월</system:String>
+
+    <system:String x:Key="Library.Month.November">십일월</system:String>
+
+    <system:String x:Key="Library.Month.December">12월</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">일요일</system:String>
+
+    <system:String x:Key="Library.Day.Monday">월요일</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">화요일</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">수요일</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">목요일</system:String>
+
+    <system:String x:Key="Library.Day.Friday">금요일</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">토요일</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT 라이선스 조건에 동의합니다. 계속하세요.</system:String>
 

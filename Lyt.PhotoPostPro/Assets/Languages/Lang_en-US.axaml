@@ -39,6 +39,9 @@
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
 
 	<!-- Workflow -->
+	<system:String x:Key="Process.Toolbar.FullScreen">Full Screen</system:String>
+	<system:String x:Key="Process.Toolbar.EscToReturn">Esc. to Return</system:String>
+
 	<system:String x:Key="Workflow.Back">Back</system:String>
 	<system:String x:Key="Workflow.Reset">Reset</system:String>
 	<system:String x:Key="Workflow.Next">Next</system:String>
@@ -215,15 +218,6 @@
 	<system:String x:Key="Library.Day.Friday">Friday</system:String>        
 	<system:String x:Key="Library.Day.Saturday">Saturday</system:String>
 		
-
-	<!-- Next below => Possibly never used  => TODO Cleanup -->
-
-	<system:String x:Key="Puzzle.Toolbar.FullScreen">Full Screen</system:String>
-	<system:String x:Key="Puzzle.Toolbar.EscToReturn">Esc. to Return</system:String>
-	<system:String x:Key="Collection.Remove">Remove</system:String>
-	<system:String x:Key="Collection.SaveToDesktop">Save to Desktop</system:String>
-	<system:String x:Key="Collection.None">None</system:String>
-	
 	<!-- Intro  -->
 	<system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
 	<system:String x:Key="Intro.LicenseTitle">License Terms</system:String>

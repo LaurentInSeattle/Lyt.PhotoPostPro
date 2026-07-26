@@ -23,6 +23,11 @@
     <File Path="Sizes.txt" />
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
   </Folder>
+  <Folder Name="/Tools/">
+    <File Path="Tools/Lyt.Translator.Cli.exe" />
+    <File Path="Tools/PppLanguages.json" />
+    <File Path="Tools/prebuild.bat" />
+  </Folder>
   <Project Path="Lyt.PhotoPostPro.Desktop/Lyt.PhotoPostPro.Desktop.csproj" />
   <Project Path="Lyt.PhotoPostPro.Model/Lyt.PhotoPostPro.Model.csproj" />
   <Project Path="Lyt.PhotoPostPro/Lyt.PhotoPostPro.csproj" />

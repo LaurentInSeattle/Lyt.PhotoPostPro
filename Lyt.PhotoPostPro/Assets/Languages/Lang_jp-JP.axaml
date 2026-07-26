@@ -13,14 +13,6 @@
 
     <system:String x:Key="Shell.Play">遊ぶ</system:String>
 
-    <system:String x:Key="Shell.Encoding">エンコーディング</system:String>
-
-    <system:String x:Key="Shell.Decoding">デコード</system:String>
-
-    <system:String x:Key="Shell.Settings">設定</system:String>
-
-    <system:String x:Key="Shell.Language">言語</system:String>
-
     <system:String x:Key="Shell.Exit">やめる</system:String>
 
     <system:String x:Key="Shell.Close">近い</system:String>
@@ -29,91 +21,317 @@
 
     <system:String x:Key="Shell.Greetings">ジグソーパズルへようこそ！</system:String>
 
-    <system:String x:Key="Collection.Remove">取り除く</system:String>
+    <system:String x:Key="Shell.Camera">カメラ</system:String>
 
-    <system:String x:Key="Collection.SaveToDesktop">デスクトップに保存</system:String>
+    <system:String x:Key="Shell.Single">画像</system:String>
 
-    <system:String x:Key="Collection.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
+    <system:String x:Key="Shell.Folder">図書館</system:String>
 
-    <system:String x:Key="Collection.DropZoneHelp">ここに画像ファイルをドラッグ＆ドロップして、新しいパズル絵を作成します。</system:String>
+    <system:String x:Key="Shell.Settings">設定</system:String>
 
-    <system:String x:Key="Collection.BeginNew">この新しいパズルを始めましょう:</system:String>
+    <system:String x:Key="Shell.Language">言語</system:String>
 
-    <system:String x:Key="Collection.StartAgain">このパズルをもう一度やり直します。</system:String>
+    <system:String x:Key="Imaging.InProgress">進行中</system:String>
 
-    <system:String x:Key="Collection.Continue">このパズルを解き続けてください。</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">お待ちください...</system:String>
 
-    <system:String x:Key="Collection.PieceCount">個数:</system:String>
+    <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
 
-    <system:String x:Key="Collection.Rotations">回転:</system:String>
+    <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
-    <system:String x:Key="Collection.SnapStrength">スナップ強度:</system:String>
+    <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
 
-    <system:String x:Key="Collection.Hints">ヒント:</system:String>
+    <system:String x:Key="Single.ProcessImage">この画像を処理する</system:String>
 
-    <system:String x:Key="Collection.AddedContrast">コントラストを追加:</system:String>
+    <system:String x:Key="Single.LoadImageFailTitle">ロードに失敗しました</system:String>
 
-    <system:String x:Key="Collection.None">なし</system:String>
+    <system:String x:Key="Single.LoadImageFailMessage">この画像は読み込めませんでした。</system:String>
 
-    <system:String x:Key="Collection.SnapMighty">マイティ</system:String>
+    <system:String x:Key="Process.Toolbar.FullScreen">全画面表示</system:String>
 
-    <system:String x:Key="Collection.SnapStrong">強い</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">ESC。 戻る</system:String>
 
-    <system:String x:Key="Collection.SnapNormal">普通</system:String>
+    <system:String x:Key="Workflow.Back">戻る</system:String>
 
-    <system:String x:Key="Collection.SnapWeak">弱い</system:String>
+    <system:String x:Key="Workflow.Reset">リセット</system:String>
 
-    <system:String x:Key="Collection.HintsInfinite">無限</system:String>
+    <system:String x:Key="Workflow.Next">次</system:String>
 
-    <system:String x:Key="Collection.HintsThree">三つ</system:String>
+    <system:String x:Key="Workflow.Orient.Title">方向とミラーリング</system:String>
 
-    <system:String x:Key="Collection.HintsOnlyOne">唯一</system:String>
+    <system:String x:Key="Workflow.Orient.Format">縦向きまたは横向きの形式を復元します。</system:String>
 
-    <system:String x:Key="Collection.ContrastExtreme">過激</system:String>
+    <system:String x:Key="Workflow.Orient.Flip">必要に応じて画像を反転します。</system:String>
 
-    <system:String x:Key="Collection.ContrastStrong">強い</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">-90°</system:String>
 
-    <system:String x:Key="Collection.ContrastMedium">中くらい</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+90°</system:String>
 
-    <system:String x:Key="Collection.ContrastWeak">ちょっとだけ</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">鏡</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ShowOnly">表示のみ:</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">フリップ</system:String>
 
-    <system:String x:Key="Collection.Thumbs.InProgress">進行中</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">画像の傾きを補正する</system:String>
 
-    <system:String x:Key="Collection.Thumbs.Completed">完了</system:String>
+    <system:String x:Key="Workflow.Straighten.Guidelines">位置合わせガイドを表示または非表示にします。</system:String>
 
-    <system:String x:Key="Collection.Thumbs.StartedFormat">開始しました: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">垂直</system:String>
 
-    <system:String x:Key="Collection.Thumbs.ProgressFormat">進行状況: {0} %</system:String>
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">水平</system:String>
 
-    <system:String x:Key="Collection.Thumbs.PuzzleFormat">個数: {0}</system:String>
+    <system:String x:Key="Workflow.Straighten.Rotate">回転して位置合わせを調整します:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Dark">暗い</system:String>
+    <system:String x:Key="Workflow.Straighten.ClearRotate">ゼロ回転</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Light">ライト</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">-1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Background">背景</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ShowImage">画像を表示</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">-0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.ToggleEdges">エッジの切り替え</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+0.5°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Hint">ヒント</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">-0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Progress">進捗</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+0.1°</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Zoom">ズーム</system:String>
+    <system:String x:Key="Workflow.Compose.Title">構成を洗練する</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.FullScreen">全画面表示</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">トリミングライン:</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.EscToReturn">ESC。 戻る</system:String>
+    <system:String x:Key="Workflow.Compose.Clear">リセット</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Min">分</system:String>
+    <system:String x:Key="Workflow.Compose.Preview">プレビュー</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Max">マックス</system:String>
+    <system:String x:Key="Workflow.Compose.Top">トップ：</system:String>
 
-    <system:String x:Key="Puzzle.Toolbar.Rearrange">並べ替える</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">底：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">左：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">右：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">幅：</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">身長：</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">アスペクト比:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">構成ガイドを選択します。</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- - なし - -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">三分割法</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">フレーム</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">中央の線</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">対角線</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">ゴールデン トライアングルズ アップ</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">ゴールデン トライアングルズ ダウン</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">世界的な暴露</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">ガンマ補正、乗算ゲイン、または加算輝度シフトの 3 つの方法のいずれかまたはすべてを組み合わせて補正できます。</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">リセット</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">ガンマ：</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">得：</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">シフト：</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">ハイライトとシャドウ</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">画像の詳細を明らかにして復元するための非線形輝度アルゴリズム。</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">リセット</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">ハイライト:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">影:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">部分的な露出補正</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">画像の選択した側面に露出補正を適用します。</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">側面:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">トップ：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">底：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">左：</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">右</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">暗いまたは明るい補正:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">強さ：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">ホワイトバランス</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">色温度を自動的に補正するか、手動で調整します。</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">マニュアル - 基本カラーマトリックス (高速)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T.オフセット:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">マニュアル - 直接色温度</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T・ケルビン:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">自動 - 「灰色の世界」アルゴリズム</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">飽和：</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">注: 「灰色の世界」アルゴリズムは、さまざまな色が多数含まれる画像でのみ適切に機能します。</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">半自動 - 「ホワイトパッチ」アルゴリズム</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">ランホワイトパッチ</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">ソース画像上の白または無色の明るい領域をクリックし、アルゴリズムを実行します。</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">コントラスト調整</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">コントラストを全体的に修正するか、各 RGB チャネルで S カーブを使用します。</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">グローバル調整</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">対比：</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">ブラーシグマ:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">輝度：</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">S カーブ</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">ルックアップテーブルのカラーグレーディング</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">ルックアップ テーブルを使用して色を調整し、画像に特別な「雰囲気」を追加します。</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">事前定義されたルックアップ テーブルを選択します。</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- - なし - -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">または... .cube または 3DL ファイルを使用します。</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">ここに .cube または 3dl ファイルをドラッグ アンド ドロップします。</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">手動カラーグレーディング</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">色の強度をグローバルに再グレードするか、各 RGB チャネルで Vibrance を使用します。</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">グローバル調整</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">飽和：</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">活気</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">赤：</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">緑：</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">青：</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">研ぐ</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">画像内のオブジェクトのエッジに沿った局所的なコントラストを高めます。</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">グローバル調整</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">シグマ：</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">注: 削りすぎると有害になる可能性があります。 エッジに沿って目に見える「ハロー」が発生し、デジタル ノイズが増幅される可能性があります。</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">特殊フィルター</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">画像に特殊効果を適用します。</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">グレースケールまたはセピアの場合:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">額：</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- - なし - -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">グレースケール</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">セピア</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">ビネット</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">黒と白</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">コダクローム</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">ポラロイド</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">ロモグラフ</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">輸出</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">メインビューでエクスポートプロセスを設定します。</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">画像のエクスポート</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">エクスポートフォルダーに移動します</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">すべて完了、ライブラリに戻る</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">見せる：</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
+
+    <system:String x:Key="Library.ProcessImage">この画像を処理する</system:String>
+
+    <system:String x:Key="Library.RemoveImage">ライブラリから削除</system:String>
+
+    <system:String x:Key="Library.StartOver">最初からやり直す</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">編集を続ける</system:String>
+
+    <system:String x:Key="Library.Month.January">1月</system:String>
+
+    <system:String x:Key="Library.Month.February">2月</system:String>
+
+    <system:String x:Key="Library.Month.March">行進</system:String>
+
+    <system:String x:Key="Library.Month.April">4月</system:String>
+
+    <system:String x:Key="Library.Month.May">5月</system:String>
+
+    <system:String x:Key="Library.Month.June">6月</system:String>
+
+    <system:String x:Key="Library.Month.July">7月</system:String>
+
+    <system:String x:Key="Library.Month.August">8月</system:String>
+
+    <system:String x:Key="Library.Month.September">9月</system:String>
+
+    <system:String x:Key="Library.Month.October">10月</system:String>
+
+    <system:String x:Key="Library.Month.November">11月</system:String>
+
+    <system:String x:Key="Library.Month.December">12月</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">日曜日</system:String>
+
+    <system:String x:Key="Library.Day.Monday">月曜日</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">火曜日</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">水曜日</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">木曜日</system:String>
+
+    <system:String x:Key="Library.Day.Friday">金曜日</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">土曜日</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT ライセンスの条項に同意します。続行します。</system:String>
 

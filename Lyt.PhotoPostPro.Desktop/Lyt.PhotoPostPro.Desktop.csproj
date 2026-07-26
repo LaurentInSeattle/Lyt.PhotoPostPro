@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro\Lyt.PhotoPostPro.csproj" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="start /WAIT ..\Tools\prebuild.bat&#xD;&#xA;" />
+  </Target>
+
 </Project>
