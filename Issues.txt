@@ -2,6 +2,9 @@ Bugs ~ Major Issues
 -------------------
 
 - Parsing values with Try Parse when using a Euro language 
+Use for LUT's and maybe elsewhere 
+	if (float.TryParse(numberString, NumberStyles.Float, CultureInfo.InvariantCulture, out float result))
+ 
 
 - Need a spin wait for exporting images or any other long operations
 
