@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
+using System.Globalization;
+
 /// <summary> A class that represents a 3D LUT with a 3D multidimensional array.  </summary>
 public sealed class Lut
 {
@@ -210,17 +212,20 @@ public sealed class Lut
                 continue;
             }
 
-            if (!float.TryParse(dataTokens[0], out float redValue))
+            // Make sure that parsing will still work in all languages
+            if (!float.TryParse(dataTokens[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float redValue))
             {
                 continue;
             }
 
-            if (!float.TryParse(dataTokens[1], out float greValue))
+            // idem supra
+            if (!float.TryParse(dataTokens[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float greValue))
             {
                 continue;
             }
 
-            if (!float.TryParse(dataTokens[2], out float bluValue))
+            // idem supra
+            if (!float.TryParse(dataTokens[2], NumberStyles.Float, CultureInfo.InvariantCulture, out float bluValue))
             {
                 continue;
             }
