@@ -1,4 +1,3 @@
-
 <ResourceDictionary 
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -221,7 +220,7 @@
 
     <system:String x:Key="Workflow.Lut.DropLut">Oder... Verwenden Sie Ihre .cube- oder 3DL-Datei:</system:String>
 
-    <system:String x:Key="Workflow.Lut.DragDropHelp">Ziehen Sie hier eine .cube- oder 3dl-Datei per Drag & Drop!</system:String>
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Ziehen Sie hier eine .cube- oder 3dl-Datei per Drag Drop!</system:String>
 
     <system:String x:Key="Workflow.Color.Title">Manuelle Farbkorrektur</system:String>
 
