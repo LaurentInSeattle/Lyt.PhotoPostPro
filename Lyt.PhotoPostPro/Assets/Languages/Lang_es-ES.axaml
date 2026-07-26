@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Esta imagen no se pudo cargar.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Archivo creado: {0} en {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Capturado: {0} en {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Abertura:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Velocidad ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Exposición:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Sesgo de exposición:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Longitud focal:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Con flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Sin flash</system:String>
+
+    <system:String x:Key="Metadata.Location">Ubicación</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Latitud:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Longitud:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Pantalla completa</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  para regresar</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Todo listo, volver a la biblioteca</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Espectáculo:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">El más viejo primero</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Reciente en la parte superior</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Espectáculo:</system:String>
 

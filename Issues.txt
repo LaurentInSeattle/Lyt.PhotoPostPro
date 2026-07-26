@@ -3,6 +3,8 @@ Bugs ~ Major Issues
 
 - Add rating in Image Metadata 
 
+- UI for rating Images
+
 - Need a spin wait for exporting images or any other long operations
 
 - Launching editing needs a spinner 
@@ -92,6 +94,10 @@ Avalonia Related Problems
 
 Cool Stuff to Consider 
 ----------------------
+
+- Keep highly rated edited images in a special gallery folder 
+
+- Browse the gallery 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 

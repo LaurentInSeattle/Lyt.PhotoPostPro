@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Ezt a képet nem sikerült betölteni.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Fájl létrehozva: {0}, {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Rögzítés: {0}, {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Nyílás:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO sebesség:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Kitettség:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Expozíciós torzítás:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Gyújtótávolság:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Flash-el</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Nincs Flash</system:String>
+
+    <system:String x:Key="Metadata.Location">Elhelyezkedés</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Szélesség:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Hosszúság:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Teljes képernyő</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  hogy Visszatérjen</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Minden kész, vissza a könyvtárba</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Megmutat:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">A legrégebbi első</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Legutóbbi Felül</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Megmutat:</system:String>
 

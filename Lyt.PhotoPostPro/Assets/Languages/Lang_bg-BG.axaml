@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Това изображение не можа да бъде заредено.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Файлът е създаден: {0} на {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Заснето: {0} в {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Апертура:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO скорост:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Излагане:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Отклонение на експозицията:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Фокусно разстояние:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">С Flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Без светкавица</system:String>
+
+    <system:String x:Key="Metadata.Location">Местоположение</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Географска ширина:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">географска дължина:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Цял екран</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  за връщане</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Готово, обратно към библиотеката</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Покажи:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Първо най-старите</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Скорошни отгоре</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Покажи:</system:String>
 

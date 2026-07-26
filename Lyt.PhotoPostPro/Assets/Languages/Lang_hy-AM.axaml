@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Այս պատկերը չհաջողվեց բեռնել:</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Ստեղծված ֆայլ՝ {0} ժամը {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Նկարված՝ {0} ժամը {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">բացվածք:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO արագություն.</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Ազդեցության ենթարկում:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Մերկացման կողմնակալություն.</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Կիզակետային երկարություն.</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Flash-ով</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Ֆլեշ չկա</system:String>
+
+    <system:String x:Key="Metadata.Location">Գտնվելու վայրը</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Լայնություն:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">, Երկայնություն:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Ամբողջ էկրանով</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Էսկ.  դեպի Վերադարձ</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Ամեն ինչ ավարտված է, Վերադառնալ գրադարան</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Ցույց տալ՝</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Ամենահին Առաջինը</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Վերջերս Վերևում</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Ցույց տալ՝</system:String>
 

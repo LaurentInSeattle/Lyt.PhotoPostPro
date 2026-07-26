@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">এই ছবি লোড করা যাবে না.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">ফাইল তৈরি করা হয়েছে: {1} এ {0}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">ক্যাপচার করা হয়েছে: {1} এ {0}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">ছিদ্র:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO গতি:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">প্রকাশ:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">এক্সপোজার পক্ষপাত:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">ফোকাল দৈর্ঘ্য:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">ফ্ল্যাশ দিয়ে</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">ফ্ল্যাশ নেই</system:String>
+
+    <system:String x:Key="Metadata.Location">অবস্থান</system:String>
+
+    <system:String x:Key="Metadata.Latitude">অক্ষাংশ:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">দ্রাঘিমাংশ:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">পূর্ণ পর্দা</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  ফিরে আসা</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">সব শেষ, লাইব্রেরিতে ফিরে যান</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">দেখান:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">প্রাচীনতম প্রথম</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">উপরে সাম্প্রতিক</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">দেখান:</system:String>
 

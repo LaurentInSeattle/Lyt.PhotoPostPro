@@ -1,3 +1,4 @@
+
 <ResourceDictionary 
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -45,6 +46,30 @@
     <system:String x:Key="Single.LoadImageFailTitle">Laden fehlgeschlagen</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Dieses Bild konnte nicht geladen werden.</system:String>
+
+    <system:String x:Key="Metadata.FileCreatedFmt">Datei erstellt: {0} um {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Erfasst: {0} um {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Öffnung:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO-Geschwindigkeit:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Belichtung:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Belichtungsfehler:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Brennweite:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Mit Blitz</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Kein Blitz</system:String>
+
+    <system:String x:Key="Metadata.Location">Standort</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Breite:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Länge:</system:String>
 
     <system:String x:Key="Process.Toolbar.FullScreen">Vollbild</system:String>
 
@@ -283,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Alles erledigt, zurück zur Bibliothek</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Zeigen:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Älteste zuerst</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Neu oben</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Zeigen:</system:String>
 

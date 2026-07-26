@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">이 이미지를 로드할 수 없습니다.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">생성된 파일: {1}에 {0}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">캡처됨: {1}에 {0}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">구멍:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO 속도:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">노출:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">노출 편향:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">초점 거리:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">플래시 포함</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">플래시 없음</system:String>
+
+    <system:String x:Key="Metadata.Location">위치</system:String>
+
+    <system:String x:Key="Metadata.Latitude">위도:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">경도:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">전체 화면</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  돌아오다</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">모두 완료되었습니다. 라이브러리로 돌아가기</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">보여주다:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">오래된 것부터</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">최근 항목 상단</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">보여주다:</system:String>
 

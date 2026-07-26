@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Cette image n'a pas pu être chargée.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Fichier créé : {0} à {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Capturé : {0} à {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Ouverture:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Vitesse ISO :</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Exposition:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Biais d'exposition :</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Distance focale:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Avec Flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Pas de flash</system:String>
+
+    <system:String x:Key="Metadata.Location">Emplacement</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Latitude:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Longitude:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Plein écran</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Échap.  revenir</system:String>
@@ -281,15 +305,19 @@
 
     <system:String x:Key="Workflow.Export.Navigate">Accédez au dossier d'exportation</system:String>
 
-    <system:String x:Key="Workflow.Export.Finish">Tout est fait, retour à la bibliothèque</system:String>
+    <system:String x:Key="Workflow.Export.Finish">Terminé, Retour à la bibliothèque</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.Show">Montrer:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier:</system:String>
 
-    <system:String x:Key="Workflow.Library.Thumbs.Show">Montrer:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Anciens</system:String>
 
-    <system:String x:Key="Library.ProcessImage">Traiter cette image</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Récents</system:String>
 
-    <system:String x:Key="Library.RemoveImage">Supprimer de la bibliothèque</system:String>
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Traiter cette Image</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Supprimer de la Bibliothèque</system:String>
 
     <system:String x:Key="Library.StartOver">Recommencer</system:String>
 
@@ -303,7 +331,7 @@
 
     <system:String x:Key="Library.Month.April">Avril</system:String>
 
-    <system:String x:Key="Library.Month.May">Peut</system:String>
+    <system:String x:Key="Library.Month.May">Mai</system:String>
 
     <system:String x:Key="Library.Month.June">Juin</system:String>
 

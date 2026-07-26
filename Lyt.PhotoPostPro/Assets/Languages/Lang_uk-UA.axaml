@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Не вдалося завантажити це зображення.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Файл створено: {0} о {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Знято: {0} о {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Діафрагма:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Швидкість ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Контакт:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Зміщення експозиції:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Фокусна відстань:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">З Flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Без спалаху</system:String>
+
+    <system:String x:Key="Metadata.Location">Розташування</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Широта:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Довгота:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Повний екран</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  щоб повернутися</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Готово, назад до бібліотеки</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Показати:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Спочатку найстаріший</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Останні зверху</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
 

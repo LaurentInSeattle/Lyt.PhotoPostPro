@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">無法載入該圖片。</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">檔案已建立：{0}，時間：{1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">拍攝時間：{0}，{1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">光圈：</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO 速度：</system:String>
+
+    <system:String x:Key="Metadata.Exposure">曝露:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">曝光偏差：</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">焦距：</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">附閃光燈</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">無閃光燈</system:String>
+
+    <system:String x:Key="Metadata.Location">地點</system:String>
+
+    <system:String x:Key="Metadata.Latitude">緯度：</system:String>
+
+    <system:String x:Key="Metadata.Longitude">經度：</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">全螢幕</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc鍵。返回</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">一切完成，返回圖書館</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">展示：</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">最舊的在前</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">最近在頂部</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">展示：</system:String>
 

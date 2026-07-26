@@ -38,6 +38,20 @@
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
 
+	<!-- Metadata -->
+	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
+	<system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
+	<system:String x:Key="Metadata.Aperture">Aperture:</system:String>
+	<system:String x:Key="Metadata.ISOSpeed">ISO Speed:</system:String>
+	<system:String x:Key="Metadata.Exposure">Exposure:</system:String>
+	<system:String x:Key="Metadata.ExposureBias">Exposure Bias:</system:String>
+	<system:String x:Key="Metadata.FocalLength">Focal Length:</system:String>
+	<system:String x:Key="Metadata.WithFlash">With Flash</system:String>
+	<system:String x:Key="Metadata.NoFlash">No Flash</system:String>
+	<system:String x:Key="Metadata.Location">Location</system:String>
+	<system:String x:Key="Metadata.Latitude">Latitude: </system:String>
+	<system:String x:Key="Metadata.Longitude">Longitude:</system:String>
+
 	<!-- Workflow -->
 	<system:String x:Key="Process.Toolbar.FullScreen">Full Screen</system:String>
 	<system:String x:Key="Process.Toolbar.EscToReturn">Esc. to Return</system:String>
@@ -188,7 +202,10 @@
 	<system:String x:Key="Workflow.Export.Finish">All Done, Back to Library</system:String>
 
 	<!-- Camera -->
+	<!-- THese three are resused in Library -->
 	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>

@@ -1,9 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
-using Lyt.PhotoPostPro.Model.Loader;
-
 public sealed partial class MetadataViewModel : 
-    ViewModel<MetadataView>, 
+    ViewModel<MetadataView>,
+    IRecipient<LanguageChangedMessage>,
     IRecipient<MetadataGeneratedMessage>
 {
     [ObservableProperty]
@@ -54,41 +53,77 @@ public sealed partial class MetadataViewModel :
     [ObservableProperty]
     public partial string Longitude { get; private set; } = string.Empty;
 
-    public MetadataViewModel() => this.Subscribe<MetadataGeneratedMessage>();
+    private Metadata? metadata;
 
-    public MetadataViewModel(Metadata metadata) => this.Update(metadata); 
+    public MetadataViewModel()
+    {
+        this.Subscribe<MetadataGeneratedMessage>();
+        this.Subscribe<LanguageChangedMessage>();
+    }
+
+    public MetadataViewModel(Metadata metadata) : this()
+    {
+        this.metadata = metadata;
+        this.Update(metadata);
+    }
 
     public void Receive(MetadataGeneratedMessage message)
     {
         Dispatch.OnUiThread(() =>
         {
-            this.Update(message.Metadata); 
+            this.metadata = message.Metadata;
+            this.Update(this.metadata); 
+        }, DispatcherPriority.ApplicationIdle);
+    }
+
+    public void Receive(LanguageChangedMessage message)
+    {
+        if ( this.metadata is null)
+        {
+            return; 
+        }
+
+        Dispatch.OnUiThread(() =>
+        {
+            this.Update(this.metadata);
         }, DispatcherPriority.ApplicationIdle);
     }
 
     public void Update(Metadata metadata)
     {
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
-        this.SizeMB = metadata.SizeMB + " on disk";
-        this.Dimensions = metadata.Dimensions + " pixels";
+        this.SizeMB = metadata.SizeMB;
+        this.Dimensions = metadata.Dimensions;
         string sep = new(System.IO.Path.DirectorySeparatorChar, 1);
         string sepSpace = " " + sep + " "; 
         this.FullPath = metadata.FullPath.Replace(sep, sepSpace);
         var localDT = metadata.FileDateUTC.ToLocalTime();
+
+        string fileCreatedFmt = this.Localize("Metadata.FileCreatedFmt"); 
         this.FileDateTime =
-            string.Format("File created: {0} at {1}", localDT.ToLongDateString(), localDT.ToLongTimeString()); 
+            string.Format(fileCreatedFmt, localDT.ToLongDateString(), localDT.ToLongTimeString()); 
 
         if (metadata.HasExifMetadata)
         {
             this.MakeModel = metadata.Make + " " + metadata.Model;
+
+            string fileCapturedFmt = this.Localize("Metadata.FileCapturedFmt");
             this.Captured =
-                string.Format("Shot: {0} at {1}", metadata.Captured.ToLongDateString(), metadata.Captured.ToLongTimeString());
-            this.Aperture = "Aperture: " + metadata.Aperture;
-            this.IsoSpeed = "ISO Speed: " + metadata.IsoSpeed;
-            this.Exposure = "Exposure: " + metadata.Exposure;
-            this.ExposureBias = "Bias: " + metadata.ExposureBias;
-            this.FocalLength = "Focal: " + metadata.FocalLength;
-            this.WithFlash = metadata.WithFlash ? "With Flash" : "No Flash"; 
+                string.Format(fileCapturedFmt, metadata.Captured.ToLongDateString(), metadata.Captured.ToLongTimeString());
+            string aperture = this.Localize("Metadata.Aperture");
+            this.Aperture = aperture + " " + metadata.Aperture;
+            string isoSpeed = this.Localize("Metadata.ISOSpeed");
+            this.IsoSpeed = isoSpeed + " " + metadata.IsoSpeed;
+            string exposure = this.Localize("Metadata.Exposure");
+            this.Exposure = exposure + " " + metadata.Exposure;
+            string exposureBias = this.Localize("Metadata.ExposureBias");
+            this.ExposureBias = exposureBias + " " + metadata.ExposureBias;
+            string focalLength = this.Localize("Metadata.FocalLength");
+            this.FocalLength = focalLength + " " + metadata.FocalLength;
+            this.WithFlash = 
+                metadata.WithFlash ?
+                    this.Localize("Metadata.WithFlash") :
+                    this.Localize("Metadata.NoFlash"); 
         }
         else
         {
@@ -104,9 +139,11 @@ public sealed partial class MetadataViewModel :
 
         if (metadata.HasLocationMetadata)
         {
-            this.Location = "Location"; 
-            this.Latitude = "Lat.: " + metadata.LatitudeString;
-            this.Longitude = "Long.: " + metadata.LongitudeString;
+            this.Location = this.Localize("Metadata.Location");
+            string latitude = this.Localize("Metadata.Latitude");
+            this.Latitude = latitude + " " + metadata.LatitudeString;
+            string longitude = this.Localize("Metadata.Longitude");
+            this.Longitude = longitude + " " + metadata.LongitudeString;
         } 
         else
         {

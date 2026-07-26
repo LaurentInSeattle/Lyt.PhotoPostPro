@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">Δεν ήταν δυνατή η φόρτωση αυτής της εικόνας.</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">Δημιουργήθηκε αρχείο: {0} στις {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Λήφθηκε: {0} στις {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Ανοιγμα:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Ταχύτητα ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Εκθεση:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Προκατάληψη έκθεσης:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Εστιακό μήκος:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Με Flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Χωρίς Flash</system:String>
+
+    <system:String x:Key="Metadata.Location">Τοποθεσία</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Γεωγραφικό πλάτος:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Γεωγραφικό μήκος:</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">Πλήρης οθόνη</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  προς Επιστροφή</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">Όλα έγιναν, Επιστροφή στη Βιβλιοθήκη</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Επίδειξη:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Πρώτος παλαιότερος</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Πρόσφατα στην κορυφή</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Επίδειξη:</system:String>
 

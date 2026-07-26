@@ -100,6 +100,9 @@ public sealed class Metadata
 
     public DateTime FileDateUTC { get; set; }
 
+    // Star count from 0 (unrated) , then 1 to 5 (best)
+    public int Rating { get; set; }
+
     // Image properties that are possibly present when HasExifMetadata is true 
     public bool HasExifMetadata { get; set; }
 

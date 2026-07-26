@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Chiudi</system:String>
 
-    <system:String x:Key="Shell.AppName">Post-elaborazione delle foto</system:String>
+    <system:String x:Key="Shell.AppName">Post-Produzione Fotografica</system:String>
 
     <system:String x:Key="Shell.About">Altro su...</system:String>
 
@@ -19,13 +19,13 @@
 
     <system:String x:Key="Shell.Ready">Pronto.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Benvenuti nella post-elaborazione delle foto!</system:String>
+    <system:String x:Key="Shell.Greetings">Benvenuti nella Post-Produzione Fotografica!</system:String>
 
-    <system:String x:Key="Shell.Camera">Telecamera</system:String>
+    <system:String x:Key="Shell.Camera">Fotocamera</system:String>
 
     <system:String x:Key="Shell.Single">Immagine</system:String>
 
-    <system:String x:Key="Shell.Folder">Biblioteca</system:String>
+    <system:String x:Key="Shell.Folder">Raccolta</system:String>
 
     <system:String x:Key="Shell.Settings">Impostazioni</system:String>
 
@@ -46,6 +46,30 @@
     <system:String x:Key="Single.LoadImageFailTitle">Caricamento non riuscito</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Impossibile caricare questa immagine.</system:String>
+
+    <system:String x:Key="Metadata.FileCreatedFmt">File creato: {0} alle {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Catturato: {0} alle {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Apertura:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Velocità ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Esposizione:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Distorsione dell'esposizione:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Lunghezza focale:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Con Flash</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Nessun flash</system:String>
+
+    <system:String x:Key="Metadata.Location">Posizione</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Latitudine:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Longitudine:</system:String>
 
     <system:String x:Key="Process.Toolbar.FullScreen">A schermo intero</system:String>
 
@@ -283,13 +307,17 @@
 
     <system:String x:Key="Workflow.Export.Finish">Tutto finito, torniamo alla libreria</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.Show">Spettacolo:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Mostra:</system:String>
 
-    <system:String x:Key="Workflow.Library.Thumbs.Show">Spettacolo:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Prima il più vecchio</system:String>
 
-    <system:String x:Key="Library.ProcessImage">Elabora questa immagine</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recenti in alto</system:String>
 
-    <system:String x:Key="Library.RemoveImage">Rimuovi dalla libreria</system:String>
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Mostra:</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Elabora questa Immagine</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Rimuovi dalla Raccolta</system:String>
 
     <system:String x:Key="Library.StartOver">Ricominciare</system:String>
 
@@ -301,7 +329,7 @@
 
     <system:String x:Key="Library.Month.March">Marzo</system:String>
 
-    <system:String x:Key="Library.Month.April">aprile</system:String>
+    <system:String x:Key="Library.Month.April">Aprile</system:String>
 
     <system:String x:Key="Library.Month.May">Maggio</system:String>
 
@@ -309,13 +337,13 @@
 
     <system:String x:Key="Library.Month.July">Luglio</system:String>
 
-    <system:String x:Key="Library.Month.August">agosto</system:String>
+    <system:String x:Key="Library.Month.August">Agosto</system:String>
 
-    <system:String x:Key="Library.Month.September">settembre</system:String>
+    <system:String x:Key="Library.Month.September">Settembre</system:String>
 
-    <system:String x:Key="Library.Month.October">ottobre</system:String>
+    <system:String x:Key="Library.Month.October">Ottobre</system:String>
 
-    <system:String x:Key="Library.Month.November">novembre</system:String>
+    <system:String x:Key="Library.Month.November">Novembre</system:String>
 
     <system:String x:Key="Library.Month.December">Dicembre</system:String>
 

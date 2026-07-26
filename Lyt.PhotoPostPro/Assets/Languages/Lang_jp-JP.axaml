@@ -47,6 +47,30 @@
 
     <system:String x:Key="Single.LoadImageFailMessage">この画像は読み込めませんでした。</system:String>
 
+    <system:String x:Key="Metadata.FileCreatedFmt">ファイルが作成されました: {0}、{1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">捕獲: {0}、{1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">絞り:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ISO 速度:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">暴露：</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">露出バイアス:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">焦点距離:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">フラッシュあり</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">フラッシュ禁止</system:String>
+
+    <system:String x:Key="Metadata.Location">位置</system:String>
+
+    <system:String x:Key="Metadata.Latitude">緯度：</system:String>
+
+    <system:String x:Key="Metadata.Longitude">経度：</system:String>
+
     <system:String x:Key="Process.Toolbar.FullScreen">全画面表示</system:String>
 
     <system:String x:Key="Process.Toolbar.EscToReturn">ESC。 戻る</system:String>
@@ -284,6 +308,10 @@
     <system:String x:Key="Workflow.Export.Finish">すべて完了、ライブラリに戻る</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.Show">見せる：</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">古い順</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">最近のトップ</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
 
