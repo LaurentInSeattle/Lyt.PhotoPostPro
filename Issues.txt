@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Parsing values with Try Parse when using a Euro language 
+
 - Need a spin wait for exporting images or any other long operations
 
 - Launching editing needs a spinner 
@@ -8,6 +10,8 @@ Bugs ~ Major Issues
 - No thumbnail updated after edit without export 
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
+
+- Missing localization in all dialogs
 
 - Missing localization in Library view for switch
 
