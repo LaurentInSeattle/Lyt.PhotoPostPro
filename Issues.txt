@@ -82,6 +82,8 @@ Missing Features
 
 --- Nice to Have ---
 
+- Ability to minimize metadata panel 
+
 - Optimal viewer layout 
 
 - Floating toolbox windows 
