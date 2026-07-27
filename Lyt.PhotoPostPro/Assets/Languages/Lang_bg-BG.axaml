@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">Премахване от библиотеката</system:String>
 
+    <system:String x:Key="Library.Navigate">Отидете до папката на библиотеката</system:String>
+
     <system:String x:Key="Library.StartOver">Започнете отначало</system:String>
 
     <system:String x:Key="Library.ContinueEdit">Продължете с редактирането</system:String>

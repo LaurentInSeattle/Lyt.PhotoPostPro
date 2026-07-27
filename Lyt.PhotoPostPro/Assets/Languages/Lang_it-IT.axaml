@@ -107,6 +107,8 @@
 
     <system:String x:Key="Workflow.Straighten.Rotate">Ruota per regolare l'allineamento:</system:String>
 
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Rotazione zero</system:String>
+
     <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
     <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
@@ -122,6 +124,8 @@
     <system:String x:Key="Workflow.Compose.Title">Composizione</system:String>
 
     <system:String x:Key="Workflow.Compose.Croplines">Linee di Ritaglio:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Clear">Reset</system:String>
 
     <system:String x:Key="Workflow.Compose.Preview">Anteprima</system:String>
 
@@ -159,6 +163,8 @@
 
     <system:String x:Key="Workflow.Exposure.Correction">È possibile correggere con uno qualsiasi o tutti e tre i metodi combinati: correzione gamma, guadagno moltiplicativo o spostamento additivo della luminosità.</system:String>
 
+    <system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
+
     <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
 
     <system:String x:Key="Workflow.Exposure.Gain">Guadagno:</system:String>
@@ -168,6 +174,8 @@
     <system:String x:Key="Workflow.Recovery.Title">Ombre e Luci</system:String>
 
     <system:String x:Key="Workflow.Recovery.Correction">Un algoritmo di luminanza non lineare per rivelare e recuperare i dettagli nell'immagine.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
 
     <system:String x:Key="Workflow.Recovery.Highlights">Luci:</system:String>
 
@@ -360,6 +368,8 @@
     <system:String x:Key="Library.ProcessImage">Elabora questa Immagine</system:String>
 
     <system:String x:Key="Library.RemoveImage">Rimuovi dalla Raccolta</system:String>
+
+    <system:String x:Key="Library.Navigate">Passare alla cartella Libreria</system:String>
 
     <system:String x:Key="Library.StartOver">Ricominciare</system:String>
 

@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">Eltávolítás a könyvtárból</system:String>
 
+    <system:String x:Key="Library.Navigate">Lépjen a Könyvtár mappába</system:String>
+
     <system:String x:Key="Library.StartOver">Kezdje újra</system:String>
 
     <system:String x:Key="Library.ContinueEdit">Szerkesztés folytatása</system:String>

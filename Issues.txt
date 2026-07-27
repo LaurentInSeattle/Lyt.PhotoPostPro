@@ -1,13 +1,10 @@
 Bugs ~ Major Issues 
 -------------------
-
-- White patch color not showing up when re-editing 
-
-- Composition guides not showing up in combo when re-editing 
-
-- LUT not showing up in combo when re-editing 
-
 - Filter not showing up in combo when re-editing 
+- Composition guides not showing up in combo when re-editing 
+- White patch color not showing up when re-editing 
+- LUT name not showing up in combo when re-editing 
+
 
 - Composition toolbox : Width display (use IT) 
 
@@ -24,8 +21,6 @@ Bugs ~ Major Issues
 - No thumbnail updated after edit without export 
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
-
-- 'None' not localized for special filters 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 

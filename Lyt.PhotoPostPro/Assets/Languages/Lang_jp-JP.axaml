@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">ライブラリから削除</system:String>
 
+    <system:String x:Key="Library.Navigate">ライブラリフォルダーに移動します</system:String>
+
     <system:String x:Key="Library.StartOver">最初からやり直す</system:String>
 
     <system:String x:Key="Library.ContinueEdit">編集を続ける</system:String>

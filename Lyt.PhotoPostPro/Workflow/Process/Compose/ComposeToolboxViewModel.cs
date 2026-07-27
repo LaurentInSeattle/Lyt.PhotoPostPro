@@ -194,7 +194,15 @@ public sealed partial class ComposeToolboxViewModel :
             // Still dont understand why this wait is needed 
             // TODO: Fix that !
             500,
-            () => { this.SetCropRectangle(step); },
+            () => 
+            {
+                this.SelectedIndex = 1;
+
+                // Force appearance even when there is no property changed 
+                this.viewModel.SelectCropGuidelines(1);
+
+                this.SetCropRectangle(step); 
+            },
             DispatcherPriority.ApplicationIdle);
 
     private void SetCropRectangle(CompositionStep step)

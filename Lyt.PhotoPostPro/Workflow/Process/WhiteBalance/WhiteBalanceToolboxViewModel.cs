@@ -74,11 +74,16 @@ public sealed partial class WhiteBalanceToolboxViewModel :
         // Calculate white patch color by averaging colors on a 3 by 3 area on the image
         global::Avalonia.Media.Color patchColor =
             message.WriteableBitmap.GetColorAroundPixel(message.PixelX, message.PixelY);
+        this.SetWhitePatch(patchColor);
+    }
+
+    private void SetWhitePatch(global::Avalonia.Media.Color patchColor)
+    {
         this.whitePatch = patchColor;
         this.PatchColor = new SolidColorBrush(patchColor);
         bool canRunWhitePatch = this.whitePatch.Luminance() >= 0.5;
         this.RunWhitePatchIsDisabled = !canRunWhitePatch;
-        this.PatchColorState = new SolidColorBrush(canRunWhitePatch ? Colors.LightGreen: Colors.Firebrick);
+        this.PatchColorState = new SolidColorBrush(canRunWhitePatch ? Colors.LightGreen : Colors.Firebrick);
     }
 
     [RelayCommand]
@@ -95,8 +100,13 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             // Here we need to undo the operations done reading the sliders 
             // No transform for the staturation threshold 
             this.SaturationSliderValue = step.SaturationThreshold;
+            this.TemperatureSliderValue = step.Temperature;
 
-            // More later here 
+            byte r = (byte)MathF.Floor(255.0f * step.Red);
+            byte g = (byte)MathF.Floor(255.0f * step.Green);
+            byte b = (byte)MathF.Floor(255.0f * step.Blue);
+            var color = new global::Avalonia.Media.Color(255, r, g, b);
+            this.SetWhitePatch(color);
         });
     }
 

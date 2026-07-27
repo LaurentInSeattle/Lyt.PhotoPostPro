@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">從庫中刪除</system:String>
 
+    <system:String x:Key="Library.Navigate">導航到庫資料夾</system:String>
+
     <system:String x:Key="Library.StartOver">重新開始</system:String>
 
     <system:String x:Key="Library.ContinueEdit">繼續編輯</system:String>

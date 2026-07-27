@@ -88,6 +88,10 @@ public sealed partial class FiltersToolboxViewModel :
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
+            // Enforce property changed 
+            this.SelectedIndex = 1;
+            this.SelectedIndex = 0;
+
             // Sliders initial positions and string values
             // Enforce property changed 
             this.AmountSliderValue = this.amount + 0.01;
@@ -101,6 +105,8 @@ public sealed partial class FiltersToolboxViewModel :
     {
         With.Flag(ref this.doNotUpdateModel, () =>
         {
+            this.SelectedIndex = (int) step.SelectedFilter;
+
             // Here we need to undo the operations done reading the sliders 
             // No transforms for highlights and shadows amounts 
             this.AmountSliderValue = step.Amount;

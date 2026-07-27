@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">从库中删除</system:String>
 
+    <system:String x:Key="Library.Navigate">导航到库文件夹</system:String>
+
     <system:String x:Key="Library.StartOver">重新开始</system:String>
 
     <system:String x:Key="Library.ContinueEdit">继续编辑</system:String>

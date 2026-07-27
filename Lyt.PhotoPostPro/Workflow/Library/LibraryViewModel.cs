@@ -348,6 +348,18 @@ public sealed partial class LibraryViewModel :
     }
 
     [RelayCommand]
+    public void OnNavigate()
+    {
+        if (this.selectedLibraryThumbnailViewModel is null ||
+            this.selectedLibraryThumbnailViewModel.Metadata is null)
+        {
+            return;
+        }
+
+        PhotoPostProModel.NavigateToImageFolder(this.selectedLibraryThumbnailViewModel.Metadata);
+    }
+
+    [RelayCommand]
     public void OnRemove()
     {
         if (this.selectedLibraryThumbnailViewModel is null ||

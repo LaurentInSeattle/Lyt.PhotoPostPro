@@ -2,6 +2,19 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
+    public static void NavigateToImageFolder(Metadata metadata)
+    {
+        // Navigate to subdirectory for specified image
+        string? directoryPath = System.IO.Path.GetDirectoryName(metadata.FullPath);
+        if (!string.IsNullOrWhiteSpace(directoryPath))
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                directoryPath.OpenInExplorer();
+            }
+        }
+    }
+
     /// <summary> Start post processing with a LoadedImage </summary>
     public bool ProcessLoadedImage(LoadedImage loadedImage)
     {
@@ -13,7 +26,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
         try
         {
-            LoadedImage? fullyLoadedImage = null; 
+            LoadedImage? fullyLoadedImage = null;
             if (loadedImage.IsFullyLoaded)
             {
                 fullyLoadedImage = loadedImage;
@@ -35,7 +48,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             // ! because fullyLoadedImage is Fully Loaded 
             PostProcess postProcess =
-                new (
+                new(
                     this,
                     fullyLoadedImage.Metadata!,
                     fullyLoadedImage.Image!,
@@ -54,8 +67,8 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     /// <summary> Start post processing with Metadata </summary>
     public bool ProcessImageFromMetadata(
-        Metadata metadata, 
-        bool isNew, 
+        Metadata metadata,
+        bool isNew,
         string fileUidString,
         PostProcessParameters postProcessParameters)
     {
@@ -68,7 +81,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             if (loadedImage.IsFullyLoaded)
             {
                 // ! because is now Fully Loaded 
-                postProcess = 
+                postProcess =
                     new PostProcess(this, metadata, loadedImage.Image!, isNew, fileUidString, postProcessParameters);
             }
 
@@ -180,7 +193,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             // ! Verified by ApiAction
-            return this.LibraryManager.SaveEdits(this.CurrentPostProcess!.Metadata, this.Workflow); 
+            return this.LibraryManager.SaveEdits(this.CurrentPostProcess!.Metadata, this.Workflow);
         });
 
     public void Finish() =>

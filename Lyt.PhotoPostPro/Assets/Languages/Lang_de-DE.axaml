@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">Aus der Bibliothek entfernen</system:String>
 
+    <system:String x:Key="Library.Navigate">Navigieren Sie zum Bibliotheksordner</system:String>
+
     <system:String x:Key="Library.StartOver">Beginnen Sie von vorne</system:String>
 
     <system:String x:Key="Library.ContinueEdit">Bearbeiten Sie weiter</system:String>

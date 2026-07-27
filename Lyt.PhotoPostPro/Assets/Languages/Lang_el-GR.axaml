@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">Κατάργηση από τη Βιβλιοθήκη</system:String>
 
+    <system:String x:Key="Library.Navigate">Πλοηγηθείτε στον Φάκελο της Βιβλιοθήκης</system:String>
+
     <system:String x:Key="Library.StartOver">Ξεκινήστε από την αρχή</system:String>
 
     <system:String x:Key="Library.ContinueEdit">Συνέχεια Επεξεργασίας</system:String>

@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">Հեռացնել գրադարանից</system:String>
 
+    <system:String x:Key="Library.Navigate">Նավարկեք գրադարանի թղթապանակ</system:String>
+
     <system:String x:Key="Library.StartOver">Սկսեք նորից</system:String>
 
     <system:String x:Key="Library.ContinueEdit">Շարունակել խմբագրումը</system:String>

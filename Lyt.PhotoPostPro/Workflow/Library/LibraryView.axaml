@@ -92,6 +92,19 @@
 				DataContext="{Binding SelectedThumnailMetadataViewModel}"
 				Margin="0 0 0 12"
 				/>
+			<glyphs:GlyphButton
+				IsVisible="{Binding HasSelection}"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480" Height="56"
+				Margin="0 0 0 12"
+				GlyphSource="arrow_export_up"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Library.Navigate}"
+				Command="{Binding OnNavigate}"
+	    	/>
 		</StackPanel>
 
 	</Grid>

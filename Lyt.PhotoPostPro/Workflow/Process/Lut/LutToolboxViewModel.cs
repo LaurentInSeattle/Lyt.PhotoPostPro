@@ -67,13 +67,31 @@ public sealed partial class LutToolboxViewModel :
         });
     }
 
-    public override void OnModelStepUpdated(LutStep step) => this.UpdateSliders(step);
+    public override void OnModelStepUpdated(LutStep step) => this.UpdateUI(step);
 
-    private void UpdateSliders(LutStep step)
+    private void UpdateUI(LutStep step)
     {
         With.Flag(ref this.doNotUpdateModel, () =>
         {
-            // Nothing for now
+            var lutMetadata = step.LutMetadata; 
+            if ( !lutMetadata.IsEmpty)
+            {
+                if ( lutMetadata.IsEmbedded)
+                {
+                    int index = 0; 
+                    string lutName = lutMetadata.FriendlyName; 
+                    foreach (string name in this.AvailableLutNames)
+                    {
+                        if ( name.Equals(lutName, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            this.SelectedIndex = index;
+                            break; 
+                        }
+
+                        ++index; 
+                    }
+                }
+            }
         });
     }
 
@@ -86,7 +104,7 @@ public sealed partial class LutToolboxViewModel :
             // Possible Avalonia Bug ? Need to test with latest 12.0.5
             // Debug Output shows:
             // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
-            Schedule.OnUiThread(66, () =>
+            Schedule.OnUiThread(128, () =>
                 {
                     this.lutMetadata = this.AvailableLuts[value];
                     this.UpdateModel();

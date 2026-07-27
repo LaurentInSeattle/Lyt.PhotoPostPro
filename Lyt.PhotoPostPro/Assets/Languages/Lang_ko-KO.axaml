@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">라이브러리에서 제거</system:String>
 
+    <system:String x:Key="Library.Navigate">라이브러리 폴더로 이동</system:String>
+
     <system:String x:Key="Library.StartOver">다시 시작</system:String>
 
     <system:String x:Key="Library.ContinueEdit">계속 편집</system:String>

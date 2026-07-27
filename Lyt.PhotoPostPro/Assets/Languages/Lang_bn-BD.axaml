@@ -369,6 +369,8 @@
 
     <system:String x:Key="Library.RemoveImage">লাইব্রেরি থেকে সরান</system:String>
 
+    <system:String x:Key="Library.Navigate">লাইব্রেরি ফোল্ডারে নেভিগেট করুন</system:String>
+
     <system:String x:Key="Library.StartOver">ওভার শুরু করুন</system:String>
 
     <system:String x:Key="Library.ContinueEdit">সম্পাদনা চালিয়ে যান</system:String>
