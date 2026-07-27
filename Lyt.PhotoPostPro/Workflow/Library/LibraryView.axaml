@@ -9,6 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
@@ -52,6 +53,10 @@
 		<StackPanel
 			Grid.Row="3" Grid.Column="3"
 			>
+			<shared:SpinView
+				Margin="4"
+				DataContext="{Binding SpinViewModel}"
+				/>
 			<Image
 				Source="{Binding SelectedThumbnail}"
 				Margin="0 0 0 12"

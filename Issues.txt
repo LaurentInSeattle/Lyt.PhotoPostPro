@@ -1,25 +1,17 @@
 Bugs ~ Major Issues 
 -------------------
 
-- No thumbnail updated after edit without export 
+- No thumbnail updated after edit without export --- By Design ? 
 
 - Need a spin wait for exporting images or any other long operations
-- Re-Launching editing needs a spinner 
-
-
 
 - Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
-- Switching language while processing cancels the current process
-- Tool boxes titles will not localise when language changes 
-- Library buttons text for months and days do not update on Language change 
-
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
-
 - UI : Final fix for Re-init of Compose is failing at second image 
 
 
@@ -92,6 +84,17 @@ Avalonia Related Problems
 -------------------------
 
 - App freeze when using combo box ??? Avalonia issue
+
+
+Minor Issues (Low priority)
+---------------------------
+
+- Library selector buttons text for months and days do not update on Language change 
+
+- Switching language while processing cancels the current process
+
+- Tool boxes titles will not localise when language changes 
+
 
 
 Cool Stuff to Consider 

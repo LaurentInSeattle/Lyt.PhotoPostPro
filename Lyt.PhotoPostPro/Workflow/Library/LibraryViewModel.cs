@@ -54,6 +54,9 @@ public sealed partial class LibraryViewModel :
     private LibraryThumbnailViewModel? selectedLibraryThumbnailViewModel;
 
     [ObservableProperty]
+    public partial SpinViewModel SpinViewModel { get; set; }
+
+    [ObservableProperty]
     public partial WriteableBitmap? SelectedThumbnail { get; set; }
 
     [ObservableProperty]
@@ -84,6 +87,12 @@ public sealed partial class LibraryViewModel :
         this.dialogService = dialogService;
         this.shellViewModel = shellViewModel;
         this.LibraryThumbnailsPanelViewModel = new(this.model, this);
+        this.SpinViewModel = new SpinViewModel()
+        {
+            IsVisible = false,
+            IsActive = false,
+        };
+
         this.HasSelection = false;
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
@@ -288,6 +297,13 @@ public sealed partial class LibraryViewModel :
         }
     }
 
+    private void SpinWait(bool start = true)
+    {
+        this.SpinViewModel.IsVisible = start;
+        this.SpinViewModel.IsActive = start;
+    }
+
+
     [RelayCommand]
     public void OnProcess()
     {
@@ -304,9 +320,7 @@ public sealed partial class LibraryViewModel :
         if (parameters.Count == 0)
         {
             // New processing : no dialog 
-            this.model.ProcessImageFromMetadata(
-                metadata, isNew: true, this.model.FileUidString, new PostProcessParameters());
-            this.LaunchProcessing();
+            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters());
         }
         else
         {
@@ -335,9 +349,7 @@ public sealed partial class LibraryViewModel :
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
         if (selectEditDialogModel.IsStartOver)
         {
-            // New processing 
-            this.model.ProcessImageFromMetadata(
-                metadata, isNew: true, this.model.FileUidString, new PostProcessParameters());
+            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters()); 
         }
         else
         {
@@ -347,16 +359,34 @@ public sealed partial class LibraryViewModel :
             if (parameters is null || string.IsNullOrWhiteSpace(fileUid))
             {
                 return;
-            } 
-            
-            // Continued process
-            this.model.ProcessImageFromMetadata(metadata, isNew: false, this.model.FileUidString, parameters);            
-        }
+            }
 
-        this.LaunchProcessing();
+            selectEditDialogModel.Cancel(); 
+
+            // Continued process: isNew is false, recycled parameters 
+            this.LaunchSpinProcessing(isNew: false, metadata, parameters);
+        }
     }
 
-    private void LaunchProcessing ()
+    private void LaunchSpinProcessing(bool isNew, Metadata metadata, PostProcessParameters parameters)
+    {
+        // Always launch a spinner for big or small files 
+        this.SpinWait(start: true);
+        Task.Run(() =>
+        {
+            // New processing 
+            this.model.ProcessImageFromMetadata(
+                metadata, isNew, this.model.FileUidString, parameters);
+            Dispatch.OnUiThread(
+                () =>
+                {
+                    this.LaunchProcessing();
+                    this.SpinWait(start: false);
+                },
+                DispatcherPriority.ApplicationIdle);
+        });
+    }
+    private void LaunchProcessing()
     {
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)

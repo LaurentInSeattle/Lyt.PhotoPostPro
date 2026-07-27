@@ -15,10 +15,12 @@
 	>
 	<Grid
 		Background="Transparent"
-		Width="360" Height="260"
+		Height="260"
+		HorizontalAlignment="Stretch"
+		Margin="2"
 		>
 		<Border
-			Background="#20404080"
+			Background="#40404080"
 			BorderThickness="0"
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			>
