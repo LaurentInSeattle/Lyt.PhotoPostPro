@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Camera;
 
-// using static Lyt.Persistence.FileManagerModel;
-
 public sealed partial class ThumbnailsPanelViewModel :
     ViewModel<ThumbnailsPanelView>,
     ISelectListener,
@@ -15,9 +13,6 @@ public sealed partial class ThumbnailsPanelViewModel :
 
     [ObservableProperty]
     public partial ObservableCollection<CameraThumbnailViewModel> Thumbnails { get; set; }
-
-    [ObservableProperty]
-    public partial int ProvidersSelectedIndex { get; set; }
 
     [ObservableProperty]
     public partial string EmptyMessage { get; set; }

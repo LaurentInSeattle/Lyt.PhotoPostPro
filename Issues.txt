@@ -1,23 +1,20 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
-
-- Switching language while processing cancels the current process
-
-- Library buttons text for months and days do not update on Language change 
-
-- Need a spin wait for exporting images or any other long operations
-
-- Re-Launching editing needs a spinner 
-
 - No thumbnail updated after edit without export 
 
-- After editing the library thumbnail panel does not update, you have to "reload" it 
+- Need a spin wait for exporting images or any other long operations
+- Re-Launching editing needs a spinner 
+
+
+
+- Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
+- Switching language while processing cancels the current process
+- Tool boxes titles will not localise when language changes 
+- Library buttons text for months and days do not update on Language change 
+
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
-
-- Tool boxes titles will not localise when language changes 
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 

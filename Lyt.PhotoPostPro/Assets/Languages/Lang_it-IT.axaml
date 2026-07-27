@@ -43,7 +43,7 @@
 
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>
 
-    <system:String x:Key="Single.ProcessImage">Elabora questa immagine</system:String>
+    <system:String x:Key="Single.ProcessImage">Edita questa Immagine</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Caricamento non riuscito</system:String>
 
@@ -369,7 +369,7 @@
 
     <system:String x:Key="Library.RemoveImage">Rimuovi dalla Raccolta</system:String>
 
-    <system:String x:Key="Library.Navigate">Passare alla cartella Libreria</system:String>
+    <system:String x:Key="Library.Navigate">Navigare alla cartella Libreria</system:String>
 
     <system:String x:Key="Library.StartOver">Ricominciare</system:String>
 

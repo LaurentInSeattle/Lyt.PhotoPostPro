@@ -287,16 +287,17 @@ public sealed class LibraryManager
                 return;
             }
 
-            string key = pathThumbnail.Replace(endsWith, "_META.json");
+            string path = pathThumbnail.Replace(endsWith, "_META.json");
 
 #if DEBUG
-            if (!this.LoadedThumbnails.ContainsKey(key))
+            if (!this.LoadedThumbnails.ContainsKey(path))
             {
                 if (Debugger.IsAttached) { Debugger.Break(); }
                 throw new Exception("No folder key");
             }
 #endif 
-            this.LoadedThumbnails[key] = loadedThumbnail;
+            this.LoadedThumbnails[path] = loadedThumbnail;
+            new ThumbnailUpdatedMessage(path).Publish();
         }
         catch (Exception ex)
         {

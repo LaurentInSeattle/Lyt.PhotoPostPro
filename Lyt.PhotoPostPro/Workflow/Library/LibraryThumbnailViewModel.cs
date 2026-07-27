@@ -8,6 +8,7 @@ public sealed partial class LibraryThumbnailViewModel :
     public const double LargeImageHeight = 200;
 
     public readonly Metadata Metadata;
+    public readonly string Path ;
 
     private readonly ISelectListener parent;
 
@@ -27,9 +28,10 @@ public sealed partial class LibraryThumbnailViewModel :
     public partial WriteableBitmap Thumbnail { get; set; }
 
     /// <summary>  Creates a thumbnail view model </summary>
-    public LibraryThumbnailViewModel(ISelectListener parent, Metadata metadata, byte[] imageBytes)
+    public LibraryThumbnailViewModel(ISelectListener parent, string path, Metadata metadata, byte[] imageBytes)
     {
         this.parent = parent;
+        this.Path = path;
         this.Metadata = metadata;
         this.BorderHeight = LargeBorderHeight;
         this.ImageHeight = LargeImageHeight;

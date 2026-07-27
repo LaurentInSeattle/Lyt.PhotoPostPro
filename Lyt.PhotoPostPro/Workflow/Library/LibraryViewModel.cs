@@ -1,8 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
+using SixLabors.ImageSharp.Drawing;
+
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LibraryLoadedMessage>,
+    IRecipient<ThumbnailUpdatedMessage>,
     IDropPathHandler,
     ISelectListener
 {
@@ -81,8 +84,35 @@ public sealed partial class LibraryViewModel :
         this.dialogService = dialogService;
         this.shellViewModel = shellViewModel;
         this.LibraryThumbnailsPanelViewModel = new(this.model, this);
-        this.HasSelection = false; 
+        this.HasSelection = false;
         this.Subscribe<LibraryLoadedMessage>();
+        this.Subscribe<ThumbnailUpdatedMessage>();
+    }
+
+    public void Receive(ThumbnailUpdatedMessage message)
+    {
+        string path = message.Path; 
+        var list = this.LibraryThumbnailsPanelViewModel.Thumbnails; 
+
+        // Find old View model and remove it 
+        var oldVm = (from vm in list where vm.Path == path select vm).FirstOrDefault();
+        if ( oldVm is null)
+        {
+            return; 
+        }
+
+        list.Remove(oldVm);
+
+        // Bring in the new one 
+        if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
+        {
+            LibraryThumbnailViewModel libraryThumbnailViewModel =
+                new(this, path, thumbnail.Metadata, thumbnail.ImageBytes);
+            list.Add(libraryThumbnailViewModel);
+        }
+
+        // Adjust order 
+        this.LibraryThumbnailsPanelViewModel.Sort(); 
     }
 
     public void Receive(LibraryLoadedMessage message)
@@ -201,7 +231,7 @@ public sealed partial class LibraryViewModel :
                 if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
                 {
                     LibraryThumbnailViewModel libraryThumbnailViewModel =
-                        new(this, thumbnail.Metadata, thumbnail.ImageBytes);
+                        new(this, path, thumbnail.Metadata, thumbnail.ImageBytes);
                     list.Add(libraryThumbnailViewModel);
                 }
             }
