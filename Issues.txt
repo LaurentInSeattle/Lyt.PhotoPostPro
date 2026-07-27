@@ -1,12 +1,5 @@
 Bugs ~ Major Issues 
 -------------------
-- Filter not showing up in combo when re-editing 
-- Composition guides not showing up in combo when re-editing 
-- White patch color not showing up when re-editing 
-- LUT name not showing up in combo when re-editing 
-
-
-- Composition toolbox : Width display (use IT) 
 
 - Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
 

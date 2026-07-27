@@ -200,13 +200,13 @@
 				TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Center"
 				/>
 			<TextBlock
-				Grid.Row="2" Grid.Column="4"
+				Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2"
 				Theme="{StaticResource Large}"
 				Text="{DynamicResource Workflow.Compose.Width}"
 				TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Center"
 				/>
 			<TextBlock
-				Grid.Row="2" Grid.Column="5"
+				Grid.Row="2" Grid.Column="5" 
 				Theme="{StaticResource Large}"
 				Text="{Binding WidthValueString}"
 				Margin="0 0 4 0"

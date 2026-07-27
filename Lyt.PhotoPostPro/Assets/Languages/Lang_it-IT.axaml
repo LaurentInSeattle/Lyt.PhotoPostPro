@@ -365,7 +365,7 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Mostra:</system:String>
 
-    <system:String x:Key="Library.ProcessImage">Elabora questa Immagine</system:String>
+    <system:String x:Key="Library.ProcessImage">Edita questa Immagine</system:String>
 
     <system:String x:Key="Library.RemoveImage">Rimuovi dalla Raccolta</system:String>
 
