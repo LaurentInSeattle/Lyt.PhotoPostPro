@@ -1,7 +1,7 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Add rating in Image Metadata 
+- Library buttons text for months and days do not update on Language change 
 
 - UI for rating Images
 
@@ -13,10 +13,6 @@ Bugs ~ Major Issues
 
 - After editing the library thumbnail panel does not update, you have to "reload" it 
 
-- Missing localization in all dialogs
-
-- Missing localization in Camera view 
-
 - 'None' not localized for special filters 
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
@@ -26,6 +22,9 @@ Bugs ~ Major Issues
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
+
+- UI : Final fix for Re-init of Compose is failing at second image 
+
 
 WIP
 ---
@@ -56,18 +55,24 @@ Missing Features
 
 --- Essential --- 
 
-- Root Location of Library 
+- Parametrize Root Location of Library 
 
-- Root Location of Exports 
+- Parametrize Root Location of Exports 
 
 - Bulk Import of photos into library 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
-- Culling Workflow and Rating system 
+- Culling Workflow 
+
+- Rating system 
 
 
 --- Important ---
+
+- Ability to flag images to insert in a photobook or collection 
+
+- Library backup 
 
 - Last edited LRU
 
@@ -116,8 +121,6 @@ Refer to Jigsaw code
 - Crop with maintaining aspect ratio 
 
 - Ability to show or hide hints and beginner tips depending an app settings 
-
-- UI : Final fix for Re-init of Compose is failing at second image 
 
 - Viewing mode when before and after are stacked with a slider ( or two ) in the 
 middlle to show top image or bottom image 

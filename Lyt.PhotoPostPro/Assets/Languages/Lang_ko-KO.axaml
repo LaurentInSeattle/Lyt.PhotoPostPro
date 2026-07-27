@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">그만두다</system:String>
 
+    <system:String x:Key="Shell.Cancel">취소</system:String>
+
     <system:String x:Key="Shell.Close">닫다</system:String>
 
     <system:String x:Key="Shell.Ready">준비가 된.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">파일을 전송할 준비가 되었습니다.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">이전 대상:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">전송 오류!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">전송 완료: {0} 이미지 전송됨, 기타 파일 또는 오류: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">삭제 완료: 이미지 {0}개 삭제됨, 오류: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">삭제가 중단되었습니다!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">삭제 오류!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">카메라에서 삭제됨</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">보여주다:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">오래된 것부터</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">금요일</system:String>
 
     <system:String x:Key="Library.Day.Saturday">토요일</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">라이브러리에서 제거하시겠습니까?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">이 마스터 이미지와 썸네일, 편집 로그 등 첨부된 모든 데이터가 삭제됩니다. 
+
+ 모든 파일은 휴지통으로 이동됩니다.
+
+ 이 작업은 취소할 수 없습니다.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">다시 시작할 것인가, 아니면 계속할 것인가?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">이 이미지는 이미 편집되었습니다.  다시 시작하시겠습니까, 아니면 이전 설정을 사용하시겠습니까?
+
+ 그렇다면 아래 '콤보 상자에서 이전에 업데이트된 설정을 선택하고 '계속'을 클릭하세요.
+
+ 그렇지 않은 경우 '다시 시작'을 클릭하세요.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">마지막 업데이트: {0} 시간: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT 라이선스 조건에 동의합니다. 계속하세요.</system:String>
 

@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Откажете се</system:String>
 
+    <system:String x:Key="Shell.Cancel">Отказ</system:String>
+
     <system:String x:Key="Shell.Close">затвори</system:String>
 
     <system:String x:Key="Shell.Ready">Готови.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">готови за прехвърляне файлове.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Прехвърлено на:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Грешка при прехвърляне!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Прехвърлянето завърши: {0} прехвърлени изображения, други файлове или грешки: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Изтриването завърши: {0} изтрити изображения, грешки: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Прекъснато изтриване!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Грешка при изтриване!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Изтрито от камерата</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Покажи:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Първо най-старите</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">петък</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Събота</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Премахване от библиотеката?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Това основно изображение и всички прикачени към него данни, като миниатюри и журнали за редактиране, ще бъдат изтрити. 
+
+ Всички файлове ще бъдат преместени в кошчето.
+
+ Тази операция не може да бъде отменена.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Да започнем отначало или да продължим?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Това изображение вече е редактирано.  Искате ли да започнете отначало или да използвате предишни настройки?
+
+ Ако е така, изберете предишни актуализирани настройки в „комбинираното поле по-долу и щракнете върху „Продължи“.
+
+ Ако не, просто щракнете върху „Започни отначало“.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Последна актуализация: {0} на: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Приемам условията на лиценза на MIT, продължете.</system:String>
 

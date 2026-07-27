@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">छोड़ना</system:String>
 
+    <system:String x:Key="Shell.Cancel">रद्द करना</system:String>
+
     <system:String x:Key="Shell.Close">बंद करना</system:String>
 
     <system:String x:Key="Shell.Ready">तैयार।</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">फ़ाइलें स्थानांतरण के लिए तैयार हैं.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">को हस्तांतरित:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">स्थानांतरण त्रुटि!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">स्थानांतरण पूर्ण: {0} स्थानांतरित छवियाँ, अन्य फ़ाइलें या त्रुटियाँ: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">विलोपन पूर्ण: {0} छवियाँ हटाई गईं, त्रुटियाँ: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">हटाएँ निरस्त!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">त्रुटि हटाएँ!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">कैमरे से हटा दिया गया</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">दिखाओ:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">सबसे पुराना पहले</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">शुक्रवार</system:String>
 
     <system:String x:Key="Library.Day.Saturday">शनिवार</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">लाइब्रेरी से हटाएँ?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">यह मास्टर छवि और इसके सभी संलग्न डेटा जैसे थंबनेल और संपादन लॉग हटा दिए जाएंगे। 
+
+ सभी फ़ाइलें रीसायकल बिन में ले जाई जाएंगी.
+
+ यह कार्रवाई पूर्ववत नहीं की जा सकती.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">फिर से शुरू करें या जारी रखें?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">यह छवि पहले ही संपादित की जा चुकी है.  क्या आप दोबारा शुरू करना चाहते हैं या पिछली सेटिंग्स का उपयोग करना चाहते हैं?
+
+ यदि ऐसा है, तो नीचे दिए गए 'कॉम्बो-बॉक्स' में पहले से अपडेट की गई सेटिंग्स का चयन करें और 'जारी रखें' पर क्लिक करें।
+
+ यदि नहीं, तो बस 'स्टार्ट ओवर' पर क्लिक करें।</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">अंतिम अद्यतन: {0} बजे: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">मैं एमआईटी लाइसेंस की शर्तों को स्वीकार करता हूं, जारी रखें।</system:String>
 

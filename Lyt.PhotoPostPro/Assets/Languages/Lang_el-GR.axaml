@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Εγκαταλείπω</system:String>
 
+    <system:String x:Key="Shell.Cancel">Ματαίωση</system:String>
+
     <system:String x:Key="Shell.Close">Κοντά</system:String>
 
     <system:String x:Key="Shell.Ready">Ετοιμος.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">αρχεία έτοιμα για μεταφορά.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Μεταφέρθηκε σε:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Σφάλμα μεταφοράς!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Η μεταφορά ολοκληρώθηκε: {0} μεταφέρθηκαν εικόνες, άλλα αρχεία ή σφάλματα: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Η διαγραφή ολοκληρώθηκε: {0} εικόνες διαγράφηκαν, σφάλματα: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Διαγραφή Ματαιώθηκε!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Διαγραφή σφάλματος!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Διαγράφηκε από την κάμερα</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Επίδειξη:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Πρώτος παλαιότερος</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">Παρασκευή</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Σάββατο</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Κατάργηση από τη Βιβλιοθήκη;</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Αυτή η κύρια εικόνα και όλα τα συνημμένα δεδομένα της, όπως μικρογραφίες και αρχεία καταγραφής επεξεργασίας, θα διαγραφούν. 
+
+ Όλα τα αρχεία θα μετακινηθούν στον Κάδο Ανακύκλωσης.
+
+ Αυτή η λειτουργία δεν μπορεί να αναιρεθεί.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Έναρξη από την αρχή ή συνέχεια;</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Αυτή η εικόνα έχει ήδη επεξεργαστεί.  Θέλετε να ξεκινήσετε από την αρχή ή να χρησιμοποιήσετε προηγούμενες ρυθμίσεις;
+
+ Εάν ναι, επιλέξτε τις ρυθμίσεις που έχουν ενημερωθεί προηγουμένως στο «σύνθετο πλαίσιο παρακάτω και κάντε κλικ στο «Συνέχεια».
+
+ Εάν όχι, απλώς κάντε κλικ στο «Έναρξη από την αρχή».</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Τελευταία ενημέρωση: {0} σε: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Αποδέχομαι τους όρους της άδειας MIT, Συνέχεια.</system:String>
 

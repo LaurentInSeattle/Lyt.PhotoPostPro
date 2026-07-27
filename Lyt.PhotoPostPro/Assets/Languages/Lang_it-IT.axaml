@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Esci</system:String>
 
+    <system:String x:Key="Shell.Cancel">Cancellare</system:String>
+
     <system:String x:Key="Shell.Close">Chiudi</system:String>
 
     <system:String x:Key="Shell.Ready">Pronto.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">file pronti per il trasferimento.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Trasferito a:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Errore di trasferimento!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Trasferimento completato: {0} immagini trasferite, altri file o errori: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Eliminazione completata: {0} immagini eliminate, errori: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Eliminazione interrotta!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Elimina errore!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Eliminato dalla fotocamera</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Mostra:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Prima il più vecchio</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">Venerdì</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Sabato</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Rimuovere dalla Raccolta ?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Questa immagine master e tutti i dati allegati, come miniature e registri delle modifiche, verranno eliminati. 
+
+ Tutti i file verranno spostati nel Cestino.
+
+ Questa operazione non può essere annullata.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Ricominciare o continuare?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Questa immagine è già stata modificata.  Vuoi ricominciare da capo o utilizzare le impostazioni precedenti?
+
+ In tal caso, seleziona le impostazioni aggiornate in precedenza nella casella combinata in basso e fai clic su "Continua".
+
+ In caso contrario, fai semplicemente clic su "Ricomincia".</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Ultimo aggiornamento: {0} alle: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Accetto i termini della licenza MIT, Continua.</system:String>
 

@@ -20,7 +20,13 @@ public sealed partial class CameraViewModel :
     private const string NotRespondingLocKey = "Workflow.Camera.NotResponding"; // "Not responding.";
     private const string NoFilesLocKey = "Workflow.Camera.NoFiles"; // "No files on device.";
     private const string FilesReadyLocKey = "Workflow.Camera.FilesReady"; // " files ready to transfer.";
-
+    private const string TransferedToLocKey = "Workflow.Camera.TransferedTo";
+    private const string TransferErrorLocKey = "Workflow.Camera.TransferError";
+    private const string TransferCompleteFmtLocKey = "Workflow.Camera.TransferComplete"; //"Transfer complete: {0} images transfered, other files or errors: {1} ",
+    private const string DeleteCompleteFmtLocKey = "Workflow.Camera.DeleteCompleteFmt"; // "Deletion complete: {0} images deleted, errors: {1} ",
+    private const string DeleteAbortedLocKey = "Workflow.Camera.DeleteAborted";
+    private const string DeleteErrorLocKey = "Workflow.Camera.DeleteError";
+    private const string DeletedFomCameraLocKey = "Workflow.Camera.DeleteFromCamera";
 
     private readonly PhotoPostProModel model;
     private readonly CameraManager cameraMgr;
@@ -232,11 +238,13 @@ public sealed partial class CameraViewModel :
             return;
         }
 
+        string transferedTo = this.Localize(TransferedToLocKey);
+        string transferError = this.Localize(TransferErrorLocKey);
         if (message.IsSuccess)
         {
             this.downloadedFiles.Add(message.File);
             this.FileDownloaded =
-                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
+                message.Device.FriendlyName + ":  " + message.File + "  " + transferedTo + ": " + message.Path;
             if (message.ThumbnailBytes is not null && message.Metadata is not null)
             {
                 var thumbnail = new CameraThumbnailViewModel(this, message.Metadata, message.ThumbnailBytes);
@@ -246,13 +254,13 @@ public sealed partial class CameraViewModel :
         else if (message.IsDownloaded)
         {
             this.FileDownloaded =
-                message.Device.FriendlyName + ":  " + message.File + "  transfer to: " + message.Path;
+                message.Device.FriendlyName + ":  " + message.File + "  " + transferedTo + ": " + message.Path;
             var cameraFile = new CameraFileViewModel(this, message);
             this.OtherFilesPanelViewModel.Files.Add(cameraFile);
         }
         else
         {
-            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  transfer error.";
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  " + transferError;
         }
     }
 
@@ -268,10 +276,11 @@ public sealed partial class CameraViewModel :
         this.DownloadButtonText = this.Localize(BeginTransferLocKey);
         if (message.Completed)
         {
+            string format = this.Localize(TransferCompleteFmtLocKey);
             this.FileDownloaded =
-                string.Format(
-                    "Transfer complete: {0} images transfered, other files or errors: {1} ",
-                    message.DownloadedCount, message.ErrorCount);
+            string.Format(
+                format, // "Transfer complete: {0} images transfered, other files or errors: {1} ",
+                message.DownloadedCount, message.ErrorCount);
         }
         else
         {
@@ -316,8 +325,9 @@ public sealed partial class CameraViewModel :
 
         if (message.IsSuccess)
         {
+            string deleted = this.Localize(DeletedFomCameraLocKey);
             this.downloadedFiles.Add(message.File);
-            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  deleted from camera.";
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + ":  " + deleted;
 
             // Remove thumb from panel 
             var thumbViewModel =
@@ -332,7 +342,8 @@ public sealed partial class CameraViewModel :
         }
         else
         {
-            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + " Delete error.";
+            string deleteError = this.Localize(DeleteErrorLocKey);
+            this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + " " + deleteError;
         }
     }
 
@@ -345,17 +356,19 @@ public sealed partial class CameraViewModel :
         }
 
         // Update UI 
-        this.DownloadButtonText = this.Localize( BeginTransferLocKey);
+        this.DownloadButtonText = this.Localize(BeginTransferLocKey);
         if (message.Completed)
         {
+            string deleteCompleteFmt = this.Localize(DeleteCompleteFmtLocKey);
             this.FileDownloaded =
                 string.Format(
-                    "Deletion complete: {0} images deleted, errors: {1} ",
+                    deleteCompleteFmt, // "Deletion complete: {0} images deleted, errors: {1} ",
                     message.DeletedCount, message.ErrorCount);
         }
         else
         {
-            this.FileDownloaded = "Deletion Aborted.";
+            string deleteAborted = this.Localize(DeleteAbortedLocKey);
+            this.FileDownloaded = deleteAborted;
         }
 
         // Sort thumbnails by date ascending 

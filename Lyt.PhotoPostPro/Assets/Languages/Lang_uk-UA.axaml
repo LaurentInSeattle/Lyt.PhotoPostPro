@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Вийти</system:String>
 
+    <system:String x:Key="Shell.Cancel">Скасувати</system:String>
+
     <system:String x:Key="Shell.Close">Закрити</system:String>
 
     <system:String x:Key="Shell.Ready">Готовий.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">файлів, готових до передачі.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Передано:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Помилка передачі!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Передачу завершено: передано зображень: {0}, інших файлів або помилок: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Видалення завершено: видалено зображень: {0}, помилок: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Видалення скасовано!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Помилка видалення!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Видалено з камери</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Показати:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Спочатку найстаріший</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">П'ятниця</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Субота</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Видалити з бібліотеки?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Це головне зображення та всі прикріплені до нього дані, такі як мініатюри та журнали редагування, буде видалено. 
+
+ Усі файли буде переміщено до кошика.
+
+ Цю операцію не можна скасувати.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Почати спочатку чи продовжити?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Це зображення вже відредаговано.  Бажаєте почати спочатку чи використати попередні налаштування?
+
+ Якщо так, виберіть попередньо оновлені параметри у списку нижче та натисніть «Продовжити».
+
+ Якщо ні, просто натисніть «Почати спочатку».</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Останнє оновлення: {0} о: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Я приймаю умови Ліцензії MIT, Продовжити.</system:String>
 

@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">辭職</system:String>
 
+    <system:String x:Key="Shell.Cancel">取消</system:String>
+
     <system:String x:Key="Shell.Close">關閉</system:String>
 
     <system:String x:Key="Shell.Ready">準備好。</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">準備傳輸的檔案。</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">轉移至：</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">傳輸錯誤！</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">傳輸完成：{0} 影像已傳輸，其他檔案或錯誤：{1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">刪除完成：已刪除 {0} 個影像，錯誤：{1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">刪除已中止！</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">刪除錯誤！</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">已從相機中刪除</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">展示：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">最舊的在前</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">星期五</system:String>
 
     <system:String x:Key="Library.Day.Saturday">週六</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">從庫中刪除？</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">該主圖像及其所有附加資料（例如縮圖和編輯日誌）都將被刪除。 
+
+所有文件都將移至回收站。
+
+此操作無法撤銷。</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">重新開始還是繼續？</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">該圖像已經被編輯過。您想重新開始還是使用先前的設定？
+
+如果是這樣，請在下面的「組合框中選擇先前更新的設置，然後按一下「繼續」。
+
+如果沒有，只需單擊“重新開始”。</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">上次更新時間：{0}，地點：{1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">我接受 MIT 許可證的條款，繼續。</system:String>
 

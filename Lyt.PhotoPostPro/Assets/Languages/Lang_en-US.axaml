@@ -11,6 +11,7 @@
 	<system:String x:Key="Shell.About">About...</system:String>
 	<system:String x:Key="Shell.Play">Play</system:String>
 	<system:String x:Key="Shell.Exit">Quit</system:String>
+	<system:String x:Key="Shell.Cancel">Cancel</system:String>
 	<system:String x:Key="Shell.Close">Close</system:String>
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Post Processing!</system:String>
@@ -211,8 +212,15 @@
 	<system:String x:Key="Workflow.Camera.NotResponding">Not responding.</system:String>
 	<system:String x:Key="Workflow.Camera.NoFiles">No files on device.</system:String>
 	<system:String x:Key="Workflow.Camera.FilesReady">files ready to transfer.</system:String>
+	<system:String x:Key="Workflow.Camera.TransferedTo">Transfered To: </system:String>
+	<system:String x:Key="Workflow.Camera.TransferError">Transfer Error!</system:String>
+	<system:String x:Key="Workflow.Camera.TransferComplete">Transfer complete: {0} images transfered, other files or errors: {1}</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Deletion complete: {0} images deleted, errors: {1} </system:String>
+	<system:String x:Key="Workflow.Camera.DeleteAborted">Delete Aborted!</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteError">Delete Error!</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteFromCamera">Deleted from Camera</system:String>
 
-	<!-- THese three are resused in Library -->
+	<!-- These three are resused in Library -->
 	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
@@ -255,6 +263,14 @@
 	<system:String x:Key="Library.Day.Friday">Friday</system:String>        
 	<system:String x:Key="Library.Day.Saturday">Saturday</system:String>
 		
+	<!-- Library Dialogs -->
+	<system:String x:Key="Dialog.ConfirmRemove.Title">Remove from Library ?</system:String>
+	<system:String x:Key="Dialog.ConfirmRemove.Message">This master image and all its attached data such as thumbnails and edit logs will be deleted. &#xD;&#xA;&#xD;&#xA;All files will be moved to the Recycle Bin.&#xD;&#xA;&#xD;&#xA;This operation cannot be undone.</system:String>
+
+	<system:String x:Key="Dialog.SelectEdit.Title">Start Over or Continue ?</system:String>
+	<system:String x:Key="Dialog.SelectEdit.Message">This image has already been edited. Do you want to start over or use previous settings?&#xD;&#xA;&#xD;&#xA;If so, select previously updated settings in the 'combo-box below and click 'Continue'.&#xD;&#xA;&#xD;&#xA;If not, just click 'Start Over'.</system:String>
+	<system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Last Updated:  {0}  at:  {1}</system:String>
+
 	<!-- Intro  -->
 	<system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
 	<system:String x:Key="Intro.LicenseTitle">License Terms</system:String>

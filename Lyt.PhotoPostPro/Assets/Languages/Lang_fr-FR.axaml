@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Quitter</system:String>
 
+    <system:String x:Key="Shell.Cancel">Annuler</system:String>
+
     <system:String x:Key="Shell.Close">Fermer</system:String>
 
     <system:String x:Key="Shell.Ready">Prêt.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">fichiers prêts à être transférés.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Transféré à :</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Erreur de transfert !</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Transfert terminé : {0} images transférées, autres fichiers ou erreurs : {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Suppression terminée : {0} images supprimées, erreurs : {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Supprimer abandonné !</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Supprimer l'erreur !</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Supprimé de l'appareil photo</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Anciens</system:String>
@@ -355,7 +371,7 @@
 
     <system:String x:Key="Library.StartOver">Recommencer</system:String>
 
-    <system:String x:Key="Library.ContinueEdit">Continuer la modification</system:String>
+    <system:String x:Key="Library.ContinueEdit">Continuer</system:String>
 
     <system:String x:Key="Library.Month.January">Janvier</system:String>
 
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">Vendredi</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Samedi</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Supprimer de la bibliothèque ?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Cette image principale et toutes ses données jointes telles que les vignettes et les journaux d'édition seront supprimées. 
+
+ Tous les fichiers seront déplacés vers la corbeille.
+
+ Cette opération ne peut pas être annulée.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Recommencer ou continuer ?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Cette image a déjà été modifiée.  Voulez-vous tout recommencer ou utiliser les paramètres précédents ?
+
+ Si tel est le cas, sélectionnez les paramètres précédemment mis à jour dans la liste déroulante ci-dessous et cliquez sur « Continuer ».
+
+ Sinon, cliquez simplement sur « Recommencer ».</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Dernière mise à jour : {0} à : {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">J'accepte les termes de la licence MIT, Continuer.</system:String>
 

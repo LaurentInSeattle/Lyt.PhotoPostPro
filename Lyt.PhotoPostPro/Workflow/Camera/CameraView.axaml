@@ -46,7 +46,7 @@
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
 				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="{Binding DownloadButtonText}"
 				Command="{Binding OnDownload}"
@@ -55,7 +55,7 @@
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
 				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="{DynamicResource Workflow.Camera.File.AddLibrary}"
 				Command="{Binding OnAddToLibrary}"
@@ -64,7 +64,7 @@
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
 				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="200" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
 				GlyphSource="arrow_export"
 				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				Command="{Binding OnRemoveFromCamera}"

@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Դուրս գալ</system:String>
 
+    <system:String x:Key="Shell.Cancel">Չեղարկել</system:String>
+
     <system:String x:Key="Shell.Close">Փակել</system:String>
 
     <system:String x:Key="Shell.Ready">Պատրաստ.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">ֆայլեր, որոնք պատրաստ են փոխանցման:</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Տեղափոխվել է.</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Փոխանցման սխալ</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Փոխանցումն ավարտված է՝ {0} փոխանցված պատկերներ, այլ ֆայլեր կամ սխալներ՝ {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Ջնջումն ավարտված է՝ {0} պատկեր ջնջված է, սխալներ՝ {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Ջնջել ընդհատված:</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Ջնջել սխալը:</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Ջնջված է տեսախցիկից</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Ցույց տալ՝</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Ամենահին Առաջինը</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">Ուրբաթ</system:String>
 
     <system:String x:Key="Library.Day.Saturday">շաբաթ օրը</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Հեռացնե՞լ գրադարանից:</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Այս հիմնական պատկերը և կցված բոլոր տվյալները, ինչպիսիք են մանրապատկերները և խմբագրման մատյանները, կջնջվեն: 
+
+ Բոլոր ֆայլերը կտեղափոխվեն թափոնարկղ:
+
+ Այս գործողությունը հնարավոր չէ հետարկել:</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Սկսե՞լ նորից, թե՞ շարունակել:</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Այս պատկերն արդեն խմբագրվել է։  Ցանկանու՞մ եք նորից սկսել, թե՞ օգտագործել նախորդ կարգավորումները:
+
+ Եթե ​​այո, ընտրեք նախկինում թարմացված կարգավորումները «ներքևի համակցված վանդակում» և սեղմեք «Շարունակել»:
+
+ Եթե ​​ոչ, պարզապես սեղմեք «Սկսել նորից»:</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Վերջին թարմացումը՝ {0} ժամը՝ {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Ես ընդունում եմ MIT լիցենզիայի պայմանները, շարունակել:</system:String>
 

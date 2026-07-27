@@ -15,7 +15,7 @@
 	xmlns:countdown="clr-namespace:Lyt.Avalonia.Controls.Countdown;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="600" Height="340"
+		Width="640" Height="380"
 		Background="Transparent"
 		>
 		<Rectangle
@@ -82,7 +82,7 @@
 						Margin="2"
 						GlyphSource="dismiss"
 						GlyphStrokeThickness="0"
-						Text="Cancel"
+						Text="{DynamicResource Shell.Cancel}"
 						Command="{Binding OnCancel}"
 						/>
 				</Grid>
@@ -106,7 +106,7 @@
 						Style="{StaticResource ViewIconButton}"
 						FontSize="24"
 						HorizontalAlignment="Right" VerticalAlignment="Bottom"
-						Width="300" Height="54"
+						Width="380" Height="54"
 						Margin="0 0 20 20"
 						GlyphSource="delete"
 						ButtonBackground="BorderlessRectangle"

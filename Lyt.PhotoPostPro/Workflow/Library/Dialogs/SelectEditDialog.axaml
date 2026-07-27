@@ -15,7 +15,7 @@
 	xmlns:countdown="clr-namespace:Lyt.Avalonia.Controls.Countdown;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="680" Height="480"
+		Width="720" Height="500"
 		Background="Transparent"
 		>
 		<Rectangle
@@ -82,7 +82,7 @@
 						Margin="2"
 						GlyphSource="dismiss"
 						GlyphStrokeThickness="0"
-						Text="Cancel"
+						Text="{DynamicResource Shell.Cancel}"
 						Command="{Binding OnCancel}"
 						/>
 				</Grid>
@@ -109,10 +109,10 @@
 					<ComboBox
 						Grid.Column="0" Grid.ColumnSpan="2"
 						VerticalAlignment="Center" HorizontalAlignment="Left"
-						Margin="20 80 0 0"
+						Margin="20 100 0 0"
 						ItemsSource="{Binding ParametersStrings}"
 						SelectedIndex="{Binding SelectedParametersIndex, Mode=TwoWay}"
-						Width="640" Height="54" MaxDropDownHeight="480"
+						Width="680" Height="54" MaxDropDownHeight="480"
 						>
 						<ComboBox.ItemsPanel>
 							<ItemsPanelTemplate>

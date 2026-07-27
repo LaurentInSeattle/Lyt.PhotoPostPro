@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">やめる</system:String>
 
+    <system:String x:Key="Shell.Cancel">キャンセル</system:String>
+
     <system:String x:Key="Shell.Close">近い</system:String>
 
     <system:String x:Key="Shell.Ready">準備ができて。</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">ファイルを転送する準備ができています。</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">転送先:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">転送エラー!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">転送完了: {0} 個の画像が転送されました。その他のファイルまたはエラー: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">削除完了: {0} 個の画像が削除されました、エラー: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">削除は中止されました!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">削除エラー!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">カメラから削除されました</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">見せる：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">古い順</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">金曜日</system:String>
 
     <system:String x:Key="Library.Day.Saturday">土曜日</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">ライブラリから削除しますか?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">このマスターイメージと、それに添付されているサムネイルや編集ログなどのデータはすべて削除されます。 
+
+ すべてのファイルはごみ箱に移動されます。
+
+ この操作は元に戻すことができません。</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">やり直すか続行しますか?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">この画像はすでに編集されています。 やり直しますか、それとも以前の設定を使用しますか?
+
+ その場合は、下のコンボボックスで以前に更新された設定を選択し、「続行」をクリックします。
+
+ そうでない場合は、「やり直す」をクリックしてください。</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">最終更新日: {0}、時刻: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT ライセンスの条項に同意します。続行します。</system:String>
 

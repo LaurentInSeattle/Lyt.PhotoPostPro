@@ -15,6 +15,8 @@
 
     <system:String x:Key="Shell.Exit">Aufhören</system:String>
 
+    <system:String x:Key="Shell.Cancel">Stornieren</system:String>
+
     <system:String x:Key="Shell.Close">Schließen</system:String>
 
     <system:String x:Key="Shell.Ready">Bereit.</system:String>
@@ -325,6 +327,20 @@
 
     <system:String x:Key="Workflow.Camera.FilesReady">Dateien zur Übertragung bereit.</system:String>
 
+    <system:String x:Key="Workflow.Camera.TransferedTo">Übertragen an:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Übertragungsfehler!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Übertragung abgeschlossen: {0} Bilder übertragen, andere Dateien oder Fehler: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Löschvorgang abgeschlossen: {0} Bilder gelöscht, Fehler: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Löschen abgebrochen!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Fehler löschen!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Von der Kamera gelöscht</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Zeigen:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Älteste zuerst</system:String>
@@ -394,6 +410,24 @@
     <system:String x:Key="Library.Day.Friday">Freitag</system:String>
 
     <system:String x:Key="Library.Day.Saturday">Samstag</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Aus Bibliothek entfernen?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Dieses Masterbild und alle damit verbundenen Daten wie Miniaturansichten und Bearbeitungsprotokolle werden gelöscht. 
+
+ Alle Dateien werden in den Papierkorb verschoben.
+
+ Dieser Vorgang kann nicht rückgängig gemacht werden.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Von vorne beginnen oder weitermachen?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Dieses Bild wurde bereits bearbeitet.  Möchten Sie von vorne beginnen oder die vorherigen Einstellungen verwenden?
+
+ Wenn ja, wählen Sie im untenstehenden Kombinationsfeld die zuvor aktualisierten Einstellungen aus und klicken Sie auf „Weiter“.
+
+ Wenn nicht, klicken Sie einfach auf „Von vorne beginnen“.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Zuletzt aktualisiert: {0} um: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Ich akzeptiere die Bedingungen der MIT-Lizenz. Fahren Sie fort.</system:String>
 
