@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">बंद करना</system:String>
 
-    <system:String x:Key="Shell.AppName">आरा पहेली</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - फोटो पोस्ट प्रोसेसिंग</system:String>
 
     <system:String x:Key="Shell.About">के बारे में...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">तैयार।</system:String>
 
-    <system:String x:Key="Shell.Greetings">जिग्सॉ पहेली में आपका स्वागत है!</system:String>
+    <system:String x:Key="Shell.Greetings">PhotoRebel में आपका स्वागत है!</system:String>
 
     <system:String x:Key="Shell.Camera">कैमरा</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">लाइब्रेरी से हटाएँ?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">यह मास्टर छवि और इसके सभी संलग्न डेटा जैसे थंबनेल और संपादन लॉग हटा दिए जाएंगे। 
-
- सभी फ़ाइलें रीसायकल बिन में ले जाई जाएंगी.
-
- यह कार्रवाई पूर्ववत नहीं की जा सकती.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">यह मास्टर छवि और इसके सभी संलग्न डेटा जैसे थंबनेल और संपादन लॉग हटा दिए जाएंगे।&#xD;&#xA;&#xD;&#xA;सभी फ़ाइलें रीसायकल बिन में ले जाई जाएंगी.&#xD;&#xA;&#xD;&#xA;यह कार्रवाई पूर्ववत नहीं की जा सकती.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">फिर से शुरू करें या जारी रखें?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">यह छवि पहले ही संपादित की जा चुकी है.  क्या आप दोबारा शुरू करना चाहते हैं या पिछली सेटिंग्स का उपयोग करना चाहते हैं?
-
- यदि ऐसा है, तो नीचे दिए गए 'कॉम्बो-बॉक्स' में पहले से अपडेट की गई सेटिंग्स का चयन करें और 'जारी रखें' पर क्लिक करें।
-
- यदि नहीं, तो बस 'स्टार्ट ओवर' पर क्लिक करें।</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">यह छवि पहले ही संपादित की जा चुकी है.  क्या आप दोबारा शुरू करना चाहते हैं या पिछली सेटिंग्स का उपयोग करना चाहते हैं?&#xD;&#xA;&#xD;&#xA;यदि ऐसा है, तो नीचे दिए गए 'कॉम्बो-बॉक्स' में पहले से अपडेट की गई सेटिंग्स का चयन करें और 'जारी रखें' पर क्लिक करें।&#xD;&#xA;&#xD;&#xA;यदि नहीं, तो बस 'स्टार्ट ओवर' पर क्लिक करें।</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">अंतिम अद्यतन: {0} बजे: {1}</system:String>
 

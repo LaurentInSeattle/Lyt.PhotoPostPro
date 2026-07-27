@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Cerca</system:String>
 
-    <system:String x:Key="Shell.AppName">Postprocesamiento de fotografías</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Postprocesamiento de fotografías</system:String>
 
     <system:String x:Key="Shell.About">Acerca de...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Listo.</system:String>
 
-    <system:String x:Key="Shell.Greetings">¡Bienvenido al posprocesamiento de fotografías!</system:String>
+    <system:String x:Key="Shell.Greetings">¡Bienvenido a FotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Cámara</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">¿Quitar de la biblioteca?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Esta imagen maestra y todos los datos adjuntos, como miniaturas y registros de edición, se eliminarán. 
-
- Todos los archivos se moverán a la Papelera de reciclaje.
-
- Esta operación no se puede deshacer.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Esta imagen maestra y todos los datos adjuntos, como miniaturas y registros de edición, se eliminarán.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Todos los archivos se moverán a la Papelera de reciclaje.&#xD;&#xA;&#xD;&#xA;Esta operación no se puede deshacer.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">¿Empezar de nuevo o continuar?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Esta imagen ya ha sido editada.  ¿Quieres empezar de nuevo o utilizar la configuración anterior?
-
- Si es así, seleccione la configuración actualizada previamente en el 'cuadro combinado a continuación y haga clic en 'Continuar'.
-
- De lo contrario, simplemente haga clic en "Comenzar de nuevo".</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Esta imagen ya ha sido editada.  ¿Quieres empezar de nuevo o utilizar la configuración anterior?&#xD;&#xA;&#xD;&#xA;Si es así, seleccione la configuración actualizada previamente en el 'cuadro combinado a continuación y haga clic en 'Continuar'.&#xD;&#xA;&#xD;&#xA;De lo contrario, simplemente haga clic en "Comenzar de nuevo".</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Última actualización: {0} en: {1}</system:String>
 

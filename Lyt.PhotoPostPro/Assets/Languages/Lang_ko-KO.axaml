@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">닫다</system:String>
 
-    <system:String x:Key="Shell.AppName">직소 퍼즐</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - 사진 후처리</system:String>
 
     <system:String x:Key="Shell.About">에 대한...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">준비가 된.</system:String>
 
-    <system:String x:Key="Shell.Greetings">직소 퍼즐에 오신 것을 환영합니다!</system:String>
+    <system:String x:Key="Shell.Greetings">PhotoRebel에 오신 것을 환영합니다!</system:String>
 
     <system:String x:Key="Shell.Camera">카메라</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">라이브러리에서 제거하시겠습니까?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">이 마스터 이미지와 썸네일, 편집 로그 등 첨부된 모든 데이터가 삭제됩니다. 
-
- 모든 파일은 휴지통으로 이동됩니다.
-
- 이 작업은 취소할 수 없습니다.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">이 마스터 이미지와 썸네일, 편집 로그 등 첨부된 모든 데이터가 삭제됩니다.&#xD;&#xA;&#xD;&#xA;모든 파일은 휴지통으로 이동됩니다.&#xD;&#xA;&#xD;&#xA;이 작업은 취소할 수 없습니다.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">다시 시작할 것인가, 아니면 계속할 것인가?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">이 이미지는 이미 편집되었습니다.  다시 시작하시겠습니까, 아니면 이전 설정을 사용하시겠습니까?
-
- 그렇다면 아래 '콤보 상자에서 이전에 업데이트된 설정을 선택하고 '계속'을 클릭하세요.
-
- 그렇지 않은 경우 '다시 시작'을 클릭하세요.</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">이 이미지는 이미 편집되었습니다.  다시 시작하시겠습니까, 아니면 이전 설정을 사용하시겠습니까?&#xD;&#xA;&#xD;&#xA;그렇다면 아래 '콤보 상자에서 이전에 업데이트된 설정을 선택하고 '계속'을 클릭하세요.&#xD;&#xA;&#xD;&#xA;그렇지 않은 경우 '다시 시작'을 클릭하세요.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">마지막 업데이트: {0} 시간: {1}</system:String>
 

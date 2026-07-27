@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Közeli</system:String>
 
-    <system:String x:Key="Shell.AppName">Jigsaw Puzzle</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Photo Post Processing</system:String>
 
     <system:String x:Key="Shell.About">Körülbelül...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Kész.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Üdvözöljük a Jigsaw Puzzle!</system:String>
+    <system:String x:Key="Shell.Greetings">Üdvözli a PhotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Kamera</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Eltávolítja a könyvtárból?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Ez a főkép és az összes csatolt adat, például a miniatűrök és a szerkesztési naplók törlődnek. 
-
- Minden fájl a Lomtárba kerül.
-
- Ez a művelet nem vonható vissza.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Ez a főkép és az összes csatolt adat, például a miniatűrök és a szerkesztési naplók törlődnek.&#xD;&#xA;&#xD;&#xA;Minden fájl a Lomtárba kerül.&#xD;&#xA;&#xD;&#xA;Ez a művelet nem vonható vissza.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Újrakezdeni vagy folytatni?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Ezt a képet már szerkesztették.  Újra szeretné kezdeni, vagy a korábbi beállításokat szeretné használni?
-
- Ha igen, válassza ki a korábban frissített beállításokat az alábbi „kombinációs mezőben”, majd kattintson a „Folytatás” gombra.
-
- Ha nem, kattintson az „Újrakezdés” gombra.</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Ezt a képet már szerkesztették.  Újra szeretné kezdeni, vagy a korábbi beállításokat szeretné használni?&#xD;&#xA;&#xD;&#xA;Ha igen, válassza ki a korábban frissített beállításokat az alábbi „kombinációs mezőben”, majd kattintson a „Folytatás” gombra.&#xD;&#xA;&#xD;&#xA;Ha nem, kattintson az „Újrakezdés” gombra.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Utolsó frissítés: {0}, időpont: {1}</system:String>
 

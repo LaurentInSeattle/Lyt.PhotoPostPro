@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Փակել</system:String>
 
-    <system:String x:Key="Shell.AppName">Jigsaw Puzzle</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Լուսանկարների գրառումների մշակում</system:String>
 
     <system:String x:Key="Shell.About">Մոտ...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Պատրաստ.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Բարի գալուստ Jigsaw Puzzle:</system:String>
+    <system:String x:Key="Shell.Greetings">Բարի գալուստ PhotoRebel:</system:String>
 
     <system:String x:Key="Shell.Camera">Տեսախցիկ</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Հեռացնե՞լ գրադարանից:</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Այս հիմնական պատկերը և կցված բոլոր տվյալները, ինչպիսիք են մանրապատկերները և խմբագրման մատյանները, կջնջվեն: 
-
- Բոլոր ֆայլերը կտեղափոխվեն թափոնարկղ:
-
- Այս գործողությունը հնարավոր չէ հետարկել:</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Այս հիմնական պատկերը և կցված բոլոր տվյալները, ինչպիսիք են մանրապատկերները և խմբագրման մատյանները, կջնջվեն:&#xD;&#xA;&#xD;&#xA;Բոլոր ֆայլերը կտեղափոխվեն թափոնարկղ:&#xD;&#xA;&#xD;&#xA;Այս գործողությունը հնարավոր չէ հետարկել:</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Սկսե՞լ նորից, թե՞ շարունակել:</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Այս պատկերն արդեն խմբագրվել է։  Ցանկանու՞մ եք նորից սկսել, թե՞ օգտագործել նախորդ կարգավորումները:
-
- Եթե ​​այո, ընտրեք նախկինում թարմացված կարգավորումները «ներքևի համակցված վանդակում» և սեղմեք «Շարունակել»:
-
- Եթե ​​ոչ, պարզապես սեղմեք «Սկսել նորից»:</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Այս պատկերն արդեն խմբագրվել է։  Ցանկանու՞մ եք նորից սկսել, թե՞ օգտագործել նախորդ կարգավորումները:&#xD;&#xA;&#xD;&#xA;Եթե ​​այո, ընտրեք նախկինում թարմացված կարգավորումները «ներքևի համակցված վանդակում» և սեղմեք «Շարունակել»:&#xD;&#xA;&#xD;&#xA;Եթե ​​ոչ, պարզապես սեղմեք «Սկսել նորից»:</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Վերջին թարմացումը՝ {0} ժամը՝ {1}</system:String>
 

@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">關閉</system:String>
 
-    <system:String x:Key="Shell.AppName">拼圖遊戲</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - 照片後製</system:String>
 
     <system:String x:Key="Shell.About">關於...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">準備好。</system:String>
 
-    <system:String x:Key="Shell.Greetings">歡迎來到拼圖遊戲！</system:String>
+    <system:String x:Key="Shell.Greetings">歡迎來到照片反叛者！</system:String>
 
     <system:String x:Key="Shell.Camera">相機</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">從庫中刪除？</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">該主圖像及其所有附加資料（例如縮圖和編輯日誌）都將被刪除。 
-
-所有文件都將移至回收站。
-
-此操作無法撤銷。</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">該主圖像及其所有附加資料（例如縮圖和編輯日誌）都將被刪除。&#xD;&#xA;&#xD;&#xA;所有文件都將移至回收站。&#xD;&#xA;&#xD;&#xA;此操作無法撤銷。</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">重新開始還是繼續？</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">該圖像已經被編輯過。您想重新開始還是使用先前的設定？
-
-如果是這樣，請在下面的「組合框中選擇先前更新的設置，然後按一下「繼續」。
-
-如果沒有，只需單擊“重新開始”。</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">該圖像已經被編輯過。您想重新開始還是使用先前的設定？&#xD;&#xA;&#xD;&#xA;如果是這樣，請在下面的「組合框中選擇先前更新的設置，然後按一下「繼續」。&#xD;&#xA;&#xD;&#xA;如果沒有，只需單擊“重新開始”。</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">上次更新時間：{0}，地點：{1}</system:String>
 

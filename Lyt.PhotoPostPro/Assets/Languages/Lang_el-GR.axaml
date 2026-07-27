@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Κοντά</system:String>
 
-    <system:String x:Key="Shell.AppName">Παζλ</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Επεξεργασία ανάρτησης φωτογραφιών</system:String>
 
     <system:String x:Key="Shell.About">Για...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Ετοιμος.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο Jigsaw Puzzle!</system:String>
+    <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο PhotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Κάμερα</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Κατάργηση από τη Βιβλιοθήκη;</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Αυτή η κύρια εικόνα και όλα τα συνημμένα δεδομένα της, όπως μικρογραφίες και αρχεία καταγραφής επεξεργασίας, θα διαγραφούν. 
-
- Όλα τα αρχεία θα μετακινηθούν στον Κάδο Ανακύκλωσης.
-
- Αυτή η λειτουργία δεν μπορεί να αναιρεθεί.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Αυτή η κύρια εικόνα και όλα τα συνημμένα δεδομένα της, όπως μικρογραφίες και αρχεία καταγραφής επεξεργασίας, θα διαγραφούν.&#xD;&#xA;&#xD;&#xA;Όλα τα αρχεία θα μετακινηθούν στον Κάδο Ανακύκλωσης.&#xD;&#xA;&#xD;&#xA;Αυτή η λειτουργία δεν μπορεί να αναιρεθεί.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Έναρξη από την αρχή ή συνέχεια;</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Αυτή η εικόνα έχει ήδη επεξεργαστεί.  Θέλετε να ξεκινήσετε από την αρχή ή να χρησιμοποιήσετε προηγούμενες ρυθμίσεις;
-
- Εάν ναι, επιλέξτε τις ρυθμίσεις που έχουν ενημερωθεί προηγουμένως στο «σύνθετο πλαίσιο παρακάτω και κάντε κλικ στο «Συνέχεια».
-
- Εάν όχι, απλώς κάντε κλικ στο «Έναρξη από την αρχή».</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Αυτή η εικόνα έχει ήδη επεξεργαστεί.  Θέλετε να ξεκινήσετε από την αρχή ή να χρησιμοποιήσετε προηγούμενες ρυθμίσεις;&#xD;&#xA;&#xD;&#xA;Εάν ναι, επιλέξτε τις ρυθμίσεις που έχουν ενημερωθεί προηγουμένως στο «σύνθετο πλαίσιο παρακάτω και κάντε κλικ στο «Συνέχεια».&#xD;&#xA;&#xD;&#xA;Εάν όχι, απλώς κάντε κλικ στο «Έναρξη από την αρχή».</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Τελευταία ενημέρωση: {0} σε: {1}</system:String>
 

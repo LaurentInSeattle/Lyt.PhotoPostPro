@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">近い</system:String>
 
-    <system:String x:Key="Shell.AppName">ジグソーパズル</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - 写真の後処理</system:String>
 
     <system:String x:Key="Shell.About">について...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">準備ができて。</system:String>
 
-    <system:String x:Key="Shell.Greetings">ジグソーパズルへようこそ！</system:String>
+    <system:String x:Key="Shell.Greetings">フォトレベルへようこそ！</system:String>
 
     <system:String x:Key="Shell.Camera">カメラ</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">ライブラリから削除しますか?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">このマスターイメージと、それに添付されているサムネイルや編集ログなどのデータはすべて削除されます。 
-
- すべてのファイルはごみ箱に移動されます。
-
- この操作は元に戻すことができません。</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">このマスターイメージと、それに添付されているサムネイルや編集ログなどのデータはすべて削除されます。 &#xD;&#xA;&#xD;&#xA;すべてのファイルはごみ箱に移動されます。&#xD;&#xA;&#xD;&#xA;この操作は元に戻すことができません。</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">やり直すか続行しますか?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">この画像はすでに編集されています。 やり直しますか、それとも以前の設定を使用しますか?
-
- その場合は、下のコンボボックスで以前に更新された設定を選択し、「続行」をクリックします。
-
- そうでない場合は、「やり直す」をクリックしてください。</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">この画像はすでに編集されています。 やり直しますか、それとも以前の設定を使用しますか?&#xD;&#xA;&#xD;&#xA;その場合は、下のコンボボックスで以前に更新された設定を選択し、「続行」をクリックします。&#xD;&#xA;&#xD;&#xA;そうでない場合は、「やり直す」をクリックしてください。</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">最終更新日: {0}、時刻: {1}</system:String>
 

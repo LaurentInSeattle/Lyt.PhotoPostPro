@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">বন্ধ</system:String>
 
-    <system:String x:Key="Shell.AppName">জিগস পাজল</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - ফটো পোস্ট প্রসেসিং</system:String>
 
     <system:String x:Key="Shell.About">সম্পর্কে...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">প্রস্তুত.</system:String>
 
-    <system:String x:Key="Shell.Greetings">জিগস পাজলে স্বাগতম!</system:String>
+    <system:String x:Key="Shell.Greetings">PhotoRebel স্বাগতম!</system:String>
 
     <system:String x:Key="Shell.Camera">ক্যামেরা</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">লাইব্রেরি থেকে সরান?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">এই মাস্টার ইমেজ এবং এর সমস্ত সংযুক্ত ডেটা যেমন থাম্বনেল এবং সম্পাদনা লগ মুছে ফেলা হবে। 
-
- সমস্ত ফাইল রিসাইকেল বিনে সরানো হবে।
-
- এই অপারেশন পূর্বাবস্থায় ফেরানো যাবে না.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">এই মাস্টার ইমেজ এবং এর সমস্ত সংযুক্ত ডেটা যেমন থাম্বনেল এবং সম্পাদনা লগ মুছে ফেলা হবে। &#xD;&#xA;&#xD;&#xA;সমস্ত ফাইল রিসাইকেল বিনে সরানো হবে।&#xD;&#xA;&#xD;&#xA;এই অপারেশন পূর্বাবস্থায় ফেরানো যাবে না.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">আবার শুরু করবেন নাকি চালিয়ে যাবেন?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">এই ছবিটি ইতিমধ্যে সম্পাদনা করা হয়েছে.  আপনি কি আবার শুরু করতে চান নাকি আগের সেটিংস ব্যবহার করতে চান?
-
- যদি তাই হয়, 'নীচের কম্বো-বক্সে পূর্বে আপডেট করা সেটিংস নির্বাচন করুন এবং 'চালিয়ে যান' এ ক্লিক করুন।
-
- যদি না হয়, শুধু 'স্টার্ট ওভার' ক্লিক করুন।</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">এই ছবিটি ইতিমধ্যে সম্পাদনা করা হয়েছে.  আপনি কি আবার শুরু করতে চান নাকি আগের সেটিংস ব্যবহার করতে চান?&#xD;&#xA;&#xD;&#xA;যদি তাই হয়, 'নীচের কম্বো-বক্সে পূর্বে আপডেট করা সেটিংস নির্বাচন করুন এবং 'চালিয়ে যান' এ ক্লিক করুন।&#xD;&#xA;&#xD;&#xA;যদি না হয়, শুধু 'স্টার্ট ওভার' ক্লিক করুন।</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">সর্বশেষ আপডেট করা হয়েছে: {0} এ: {1}</system:String>
 

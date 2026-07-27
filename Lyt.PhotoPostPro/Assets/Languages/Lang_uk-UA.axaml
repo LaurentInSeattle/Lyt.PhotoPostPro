@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Закрити</system:String>
 
-    <system:String x:Key="Shell.AppName">Постобробка фотографій</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Постобробка фотографій</system:String>
 
     <system:String x:Key="Shell.About">Про...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Готовий.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Ласкаво просимо до постобробки фотографій!</system:String>
+    <system:String x:Key="Shell.Greetings">Ласкаво просимо до PhotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Камера</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Видалити з бібліотеки?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Це головне зображення та всі прикріплені до нього дані, такі як мініатюри та журнали редагування, буде видалено. 
-
- Усі файли буде переміщено до кошика.
-
- Цю операцію не можна скасувати.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Це головне зображення та всі прикріплені до нього дані, такі як мініатюри та журнали редагування, буде видалено.&#xD;&#xA;&#xD;&#xA;Усі файли буде переміщено до кошика.&#xD;&#xA;&#xD;&#xA;Цю операцію не можна скасувати.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Почати спочатку чи продовжити?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Це зображення вже відредаговано.  Бажаєте почати спочатку чи використати попередні налаштування?
-
- Якщо так, виберіть попередньо оновлені параметри у списку нижче та натисніть «Продовжити».
-
- Якщо ні, просто натисніть «Почати спочатку».</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Це зображення вже відредаговано.  Бажаєте почати спочатку чи використати попередні налаштування?&#xD;&#xA;&#xD;&#xA;Якщо так, виберіть попередньо оновлені параметри у списку нижче та натисніть «Продовжити».&#xD;&#xA;&#xD;&#xA;Якщо ні, просто натисніть «Почати спочатку».</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Останнє оновлення: {0} о: {1}</system:String>
 

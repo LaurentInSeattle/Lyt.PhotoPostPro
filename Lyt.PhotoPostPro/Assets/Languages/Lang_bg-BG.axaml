@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">затвори</system:String>
 
-    <system:String x:Key="Shell.AppName">Пъзел</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel - Постобработка на снимки</system:String>
 
     <system:String x:Key="Shell.About">Относно...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Готови.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Добре дошли в Jigsaw Puzzle!</system:String>
+    <system:String x:Key="Shell.Greetings">Добре дошли във PhotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Камера</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Премахване от библиотеката?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Това основно изображение и всички прикачени към него данни, като миниатюри и журнали за редактиране, ще бъдат изтрити. 
-
- Всички файлове ще бъдат преместени в кошчето.
-
- Тази операция не може да бъде отменена.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Това основно изображение и всички прикачени към него данни, като миниатюри и журнали за редактиране, ще бъдат изтрити.&#xD;&#xA;&#xD;&#xA;Всички файлове ще бъдат преместени в кошчето.&#xD;&#xA;&#xD;&#xA;Тази операция не може да бъде отменена.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Да започнем отначало или да продължим?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Това изображение вече е редактирано.  Искате ли да започнете отначало или да използвате предишни настройки?
-
- Ако е така, изберете предишни актуализирани настройки в „комбинираното поле по-долу и щракнете върху „Продължи“.
-
- Ако не, просто щракнете върху „Започни отначало“.</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Това изображение вече е редактирано.  Искате ли да започнете отначало или да използвате предишни настройки?&#xD;&#xA;&#xD;&#xA;Ако е така, изберете предишни актуализирани настройки в „комбинираното поле по-долу и щракнете върху „Продължи“.&#xD;&#xA;&#xD;&#xA;Ако не, просто щракнете върху „Започни отначало“.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Последна актуализация: {0} на: {1}</system:String>
 

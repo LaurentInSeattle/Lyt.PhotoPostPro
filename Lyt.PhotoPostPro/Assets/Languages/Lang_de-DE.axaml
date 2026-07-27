@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Schließen</system:String>
 
-    <system:String x:Key="Shell.AppName">Puzzle</system:String>
+    <system:String x:Key="Shell.AppName">PhotoRebel – Fotonachbearbeitung</system:String>
 
     <system:String x:Key="Shell.About">Um...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Bereit.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Willkommen bei Jigsaw Puzzle!</system:String>
+    <system:String x:Key="Shell.Greetings">Willkommen bei PhotoRebel!</system:String>
 
     <system:String x:Key="Shell.Camera">Kamera</system:String>
 
@@ -415,19 +415,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Aus Bibliothek entfernen?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Dieses Masterbild und alle damit verbundenen Daten wie Miniaturansichten und Bearbeitungsprotokolle werden gelöscht. 
-
- Alle Dateien werden in den Papierkorb verschoben.
-
- Dieser Vorgang kann nicht rückgängig gemacht werden.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Dieses Masterbild und alle damit verbundenen Daten wie Miniaturansichten und Bearbeitungsprotokolle werden gelöscht. &#xD;&#xA;&#xD;&#xA;Alle Dateien werden in den Papierkorb verschoben.&#xD;&#xA;&#xD;&#xA;Dieser Vorgang kann nicht rückgängig gemacht werden.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Von vorne beginnen oder weitermachen?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Dieses Bild wurde bereits bearbeitet.  Möchten Sie von vorne beginnen oder die vorherigen Einstellungen verwenden?
-
- Wenn ja, wählen Sie im untenstehenden Kombinationsfeld die zuvor aktualisierten Einstellungen aus und klicken Sie auf „Weiter“.
-
- Wenn nicht, klicken Sie einfach auf „Von vorne beginnen“.</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Dieses Bild wurde bereits bearbeitet.  Möchten Sie von vorne beginnen oder die vorherigen Einstellungen verwenden?&#xD;&#xA;&#xD;&#xA;Wenn ja, wählen Sie im untenstehenden Kombinationsfeld die zuvor aktualisierten Einstellungen aus und klicken Sie auf „Weiter“.&#xD;&#xA;&#xD;&#xA;Wenn nicht, klicken Sie einfach auf „Von vorne beginnen“.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Zuletzt aktualisiert: {0} um: {1}</system:String>
 
