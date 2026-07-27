@@ -20,8 +20,7 @@
 		Height="72"
 		>
 		<glyphs:GlyphButton
-			Style="{StaticResource ToolbarIconButton}"
-			Behaviour="Tap"
+			Style="{StaticResource AppToolbarIconButton}"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
 			Width="220" Height="56"
 			Margin="0 4 0 4"

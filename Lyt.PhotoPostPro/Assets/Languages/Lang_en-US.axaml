@@ -7,14 +7,14 @@
 	<system:String x:Key="Toast.Dismiss">Close</system:String>
 
 	<!-- Shell -->
-	<system:String x:Key="Shell.AppName">Photo Post Processing</system:String>
+	<system:String x:Key="Shell.AppName">PhotoRebel - Photo Post Processing</system:String>
 	<system:String x:Key="Shell.About">About...</system:String>
 	<system:String x:Key="Shell.Play">Play</system:String>
 	<system:String x:Key="Shell.Exit">Quit</system:String>
 	<system:String x:Key="Shell.Cancel">Cancel</system:String>
 	<system:String x:Key="Shell.Close">Close</system:String>
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
-	<system:String x:Key="Shell.Greetings">Welcome to Photo Post Processing!</system:String>
+	<system:String x:Key="Shell.Greetings">Welcome to PhotoRebel !</system:String>
 
 	<!-- Shell - Nav' Bar -->
 	<system:String x:Key="Shell.Camera">Camera</system:String>

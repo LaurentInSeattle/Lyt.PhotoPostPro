@@ -22,7 +22,7 @@
 		>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="400"/>
+			<ColumnDefinition Width="420"/>
 		</Grid.ColumnDefinitions>
 		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
 		<Image

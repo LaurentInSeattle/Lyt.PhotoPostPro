@@ -1,15 +1,25 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Figure out why the Translator does not see 'Completion' and restarts translating 
+- White patch color not showing up when re-editing 
+
+- Composition guides not showing up in combo when re-editing 
+
+- LUT not showing up in combo when re-editing 
+
+- Filter not showing up in combo when re-editing 
+
+- Composition toolbox : Width display (use IT) 
+
+- Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
+
+- Switching language while processing cancels the current process
 
 - Library buttons text for months and days do not update on Language change 
 
-- UI for rating Images
-
 - Need a spin wait for exporting images or any other long operations
 
-- Launching editing needs a spinner 
+- Re-Launching editing needs a spinner 
 
 - No thumbnail updated after edit without export 
 
@@ -30,6 +40,8 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
+- UI for rating Images
 
 - Image Exports: Quick save
 
@@ -63,8 +75,6 @@ Missing Features
 
 - Bulk Import of photos into library 
 
-- Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
-
 - Culling Workflow 
 
 - Rating system 
@@ -84,6 +94,8 @@ Missing Features
 
 
 --- Nice to Have ---
+
+- Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Ability to minimize metadata panel 
 

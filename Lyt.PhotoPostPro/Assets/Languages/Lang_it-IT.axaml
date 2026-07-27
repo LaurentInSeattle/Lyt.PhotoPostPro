@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Chiudi</system:String>
 
-    <system:String x:Key="Shell.AppName">Post-Produzione Fotografica</system:String>
+    <system:String x:Key="Shell.AppName">FotoRebel - Post-Produzione Fotografica</system:String>
 
     <system:String x:Key="Shell.About">Altro su...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Pronto.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Benvenuti nella Post-Produzione Fotografica!</system:String>
+    <system:String x:Key="Shell.Greetings">Benvenuti a FotoRebel !</system:String>
 
     <system:String x:Key="Shell.Camera">Fotocamera</system:String>
 
@@ -59,7 +59,7 @@
 
     <system:String x:Key="Metadata.Exposure">Esposizione:</system:String>
 
-    <system:String x:Key="Metadata.ExposureBias">Distorsione dell'esposizione:</system:String>
+    <system:String x:Key="Metadata.ExposureBias">Esposizione 'Bias':</system:String>
 
     <system:String x:Key="Metadata.FocalLength">Lunghezza focale:</system:String>
 
@@ -79,25 +79,25 @@
 
     <system:String x:Key="Workflow.Back">Indietro</system:String>
 
-    <system:String x:Key="Workflow.Reset">Reset</system:String>
+    <system:String x:Key="Workflow.Reset">Resettare</system:String>
 
-    <system:String x:Key="Workflow.Next">Prossimo</system:String>
+    <system:String x:Key="Workflow.Next">Avanti</system:String>
 
-    <system:String x:Key="Workflow.Orient.Title">Orientamento e Mirroring</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Orientamento e Rifletti</system:String>
 
     <system:String x:Key="Workflow.Orient.Format">Ripristina il formato verticale o orizzontale:</system:String>
 
     <system:String x:Key="Workflow.Orient.Flip">Capovolgi l'immagine secondo necessità:</system:String>
 
-    <system:String x:Key="Workflow.Orient.RotateMinus">-90°</system:String>
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90°</system:String>
 
-    <system:String x:Key="Workflow.Orient.RotatePlus">+90°</system:String>
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90°</system:String>
 
-    <system:String x:Key="Workflow.Orient.Mirror">Specchio</system:String>
+    <system:String x:Key="Workflow.Orient.Mirror">Riflettare</system:String>
 
-    <system:String x:Key="Workflow.Orient.Reverse">Capovolgi</system:String>
+    <system:String x:Key="Workflow.Orient.Reverse">Ribaltare</system:String>
 
-    <system:String x:Key="Workflow.Straighten.Title">Raddrizzamento dell'immagine</system:String>
+    <system:String x:Key="Workflow.Straighten.Title">Raddrizzamento</system:String>
 
     <system:String x:Key="Workflow.Straighten.Guidelines">Mostra o nascondi le guide di allineamento:</system:String>
 
@@ -107,35 +107,31 @@
 
     <system:String x:Key="Workflow.Straighten.Rotate">Ruota per regolare l'allineamento:</system:String>
 
-    <system:String x:Key="Workflow.Straighten.ClearRotate">Rotazione zero</system:String>
-
     <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1°</system:String>
 
-    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+1°</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
 
-    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">-0,5°</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0,5°</system:String>
 
-    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+0,5°</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0,5°</system:String>
 
-    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">-0,1°</system:String>
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0,1°</system:String>
 
-    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+0,1°</system:String>
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0,1°</system:String>
 
-    <system:String x:Key="Workflow.Compose.Title">Perfezionamento della composizione</system:String>
+    <system:String x:Key="Workflow.Compose.Title">Composizione</system:String>
 
-    <system:String x:Key="Workflow.Compose.Croplines">Linee di ritaglio:</system:String>
-
-    <system:String x:Key="Workflow.Compose.Clear">Reset</system:String>
+    <system:String x:Key="Workflow.Compose.Croplines">Linee di Ritaglio:</system:String>
 
     <system:String x:Key="Workflow.Compose.Preview">Anteprima</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Superiore:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Bottom">Metter il fondo a:</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Inferiore:</system:String>
 
     <system:String x:Key="Workflow.Compose.Left">Sinistra:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Right">Giusto:</system:String>
+    <system:String x:Key="Workflow.Compose.Right">Destra:</system:String>
 
     <system:String x:Key="Workflow.Compose.Width">Larghezza:</system:String>
 
@@ -149,7 +145,7 @@
 
     <system:String x:Key="Workflow.Compose.CG.Thirds">Regola dei terzi</system:String>
 
-    <system:String x:Key="Workflow.Compose.CG.Frame">Telaio</system:String>
+    <system:String x:Key="Workflow.Compose.CG.Frame">Inquadratura</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.Halves">Linee di mezzo</system:String>
 
@@ -159,11 +155,9 @@
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangoli d'oro in basso</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Title">Esposizione globale</system:String>
+    <system:String x:Key="Workflow.Exposure.Title">Esposizione Globale</system:String>
 
     <system:String x:Key="Workflow.Exposure.Correction">È possibile correggere con uno qualsiasi o tutti e tre i metodi combinati: correzione gamma, guadagno moltiplicativo o spostamento additivo della luminosità.</system:String>
-
-    <system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
 
     <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
 
@@ -171,17 +165,15 @@
 
     <system:String x:Key="Workflow.Exposure.Shift">Spostare:</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Title">Alte luci e ombre</system:String>
+    <system:String x:Key="Workflow.Recovery.Title">Ombre e Luci</system:String>
 
     <system:String x:Key="Workflow.Recovery.Correction">Un algoritmo di luminanza non lineare per rivelare e recuperare i dettagli nell'immagine.</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
-
-    <system:String x:Key="Workflow.Recovery.Highlights">Punti salienti:</system:String>
+    <system:String x:Key="Workflow.Recovery.Highlights">Luci:</system:String>
 
     <system:String x:Key="Workflow.Recovery.Shadows">Ombre:</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Title">Correzione selettiva dell'esposizione</system:String>
+    <system:String x:Key="Workflow.Vignette.Title">Correzione selettiva</system:String>
 
     <system:String x:Key="Workflow.Vignette.Correction">Applicare una correzione dell'esposizione ai lati selezionati dell'immagine.</system:String>
 
@@ -189,21 +181,21 @@
 
     <system:String x:Key="Workflow.Vignette.Top">Superiore:</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Bottom">Metter il fondo a:</system:String>
+    <system:String x:Key="Workflow.Vignette.Bottom">Inferiore:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Left">Sinistra:</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Right">Giusto</system:String>
+    <system:String x:Key="Workflow.Vignette.Right">Destra:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Style">Correzione del buio o della luce:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Forza:</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.Title">Bilanciamento del bianco</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.Title">Bilanciamento del Bianco</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Correction">Correggere automaticamente la temperatura del colore o regolarla manualmente.</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuale - Matrice colori di base (veloce)</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuale - Matrice colori di base</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.ManualOffset">Scostamento T.:</system:String>
 
@@ -211,11 +203,11 @@
 
     <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatico: algoritmo "Mondo grigio".</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatico: Algoritmo "Mondo Grigio".</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturazione:</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Nota: l'algoritmo 'Grey World' funziona bene SOLO su immagini che contengono molti colori diversi.</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Nota: l'algoritmo 'Mondo Grigio' funziona bene SOLO su immagini che contengono molti colori diversi.</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semiautomatico: algoritmo "White Patch".</system:String>
 
@@ -223,11 +215,11 @@
 
     <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Fare clic su un'area luminosa dell'immagine sorgente che dovrebbe essere bianca o incolore, quindi eseguire l'algoritmo.</system:String>
 
-    <system:String x:Key="Workflow.Contrast.Title">Regolazione del contrasto</system:String>
+    <system:String x:Key="Workflow.Contrast.Title">Contrasto</system:String>
 
     <system:String x:Key="Workflow.Contrast.Correction">Correggere il contrasto a livello globale o utilizzare le curve a S su ciascun canale RGB.</system:String>
 
-    <system:String x:Key="Workflow.Contrast.Global">Aggiustamento globale</system:String>
+    <system:String x:Key="Workflow.Contrast.Global">Aggiustamento Globale</system:String>
 
     <system:String x:Key="Workflow.Contrast.ContrastAmount">Contrasto:</system:String>
 
@@ -237,9 +229,9 @@
 
     <system:String x:Key="Workflow.Contrast.SCurves">Curve a S</system:String>
 
-    <system:String x:Key="Workflow.Lut.Title">Classificazione del colore della tabella di ricerca</system:String>
+    <system:String x:Key="Workflow.Lut.Title">Gradazione dei colori</system:String>
 
-    <system:String x:Key="Workflow.Lut.Correction">Utilizza una tabella di ricerca per regolare i colori e aggiungere un'atmosfera speciale all'immagine.</system:String>
+    <system:String x:Key="Workflow.Lut.Correction">Utilizza una tabella di ricerca per gradare i colori e aggiungere un'atmosfera speciale all'immagine.</system:String>
 
     <system:String x:Key="Workflow.Lut.UseLut">Scegli una tabella di ricerca predefinita:</system:String>
 
@@ -249,11 +241,11 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Trascina e rilascia qui un file .cube o 3dl!</system:String>
 
-    <system:String x:Key="Workflow.Color.Title">Gradazione del colore manuale</system:String>
+    <system:String x:Key="Workflow.Color.Title">Gradazione dei colori manuale</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Migliora l'intensità del colore a livello globale oppure utilizza Vividezza su ciascun canale RGB.</system:String>
 
-    <system:String x:Key="Workflow.Color.Global">Aggiustamento globale</system:String>
+    <system:String x:Key="Workflow.Color.Global">Aggiustamento Globale</system:String>
 
     <system:String x:Key="Workflow.Color.SaturationAmount">Saturazione:</system:String>
 
@@ -265,33 +257,33 @@
 
     <system:String x:Key="Workflow.Color.Blue">Blu:</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Title">Affilare</system:String>
+    <system:String x:Key="Workflow.Sharpen.Title">Nitidezza</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Correction">Aumenta il contrasto locale lungo i bordi degli oggetti nell'immagine.</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Global">Aggiustamento globale</system:String>
+    <system:String x:Key="Workflow.Sharpen.Global">Aggiustamento Globale</system:String>
 
     <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Note">Nota: una nitidezza eccessiva può essere dannosa.  Può introdurre "aloni" visibili lungo i bordi e amplificare il rumore digitale.</system:String>
+    <system:String x:Key="Workflow.Sharpen.Note">Nota: una nitidezza eccessiva può essere dannosa. Può introdurre "aloni" visibili lungo i bordi e amplificare il rumore digitale.</system:String>
 
     <system:String x:Key="Workflow.Filters.Title">Filtri speciali</system:String>
 
     <system:String x:Key="Workflow.Filters.Correction">Applicare effetti speciali all'immagine.</system:String>
 
-    <system:String x:Key="Workflow.Filters.ExplainAmount">Per Scala di grigi o Seppia:</system:String>
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Solo per 'Scala di grigi' o 'Seppia':</system:String>
 
     <system:String x:Key="Workflow.Filters.Amount">Quantità:</system:String>
 
     <system:String x:Key="Workflow.Filters.None">- - Nessuno - -</system:String>
 
-    <system:String x:Key="Workflow.Filters.Grayscale">Scala di grigi</system:String>
+    <system:String x:Key="Workflow.Filters.Grayscale">Scala di Grigi</system:String>
 
     <system:String x:Key="Workflow.Filters.Sepia">Seppia</system:String>
 
     <system:String x:Key="Workflow.Filters.Vignette">Vignetta</system:String>
 
-    <system:String x:Key="Workflow.Filters.BlackWhite">In bianco e nero</system:String>
+    <system:String x:Key="Workflow.Filters.BlackWhite">In bianco e Nero</system:String>
 
     <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
 
@@ -305,9 +297,9 @@
 
     <system:String x:Key="Workflow.Export.Export">Esporta immagini</system:String>
 
-    <system:String x:Key="Workflow.Export.Navigate">Passare alla cartella di esportazione</system:String>
+    <system:String x:Key="Workflow.Export.Navigate">Navigare alla cartella di esportazione</system:String>
 
-    <system:String x:Key="Workflow.Export.Finish">Tutto finito, torniamo alla libreria</system:String>
+    <system:String x:Key="Workflow.Export.Finish">Tutto finito, tornare alla libreria</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Inizia il trasferimento</system:String>
 
@@ -361,7 +353,7 @@
 
     <system:String x:Key="Workflow.Camera.PhotosImages">Foto - Immagini</system:String>
 
-    <system:String x:Key="Workflow.Camera.MoviesOthers">Film - Altri</system:String>
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Video - Altri</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Mostra:</system:String>
 
@@ -371,7 +363,7 @@
 
     <system:String x:Key="Library.StartOver">Ricominciare</system:String>
 
-    <system:String x:Key="Library.ContinueEdit">Continua a modificare</system:String>
+    <system:String x:Key="Library.ContinueEdit">Continua a Editare</system:String>
 
     <system:String x:Key="Library.Month.January">Gennaio</system:String>
 
@@ -413,19 +405,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Rimuovere dalla Raccolta ?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Questa immagine master e tutti i dati allegati, come miniature e registri delle modifiche, verranno eliminati. 
-
- Tutti i file verranno spostati nel Cestino.
-
- Questa operazione non può essere annullata.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Questa immagine master e tutti i dati allegati, come miniature e registri delle modifiche, verranno eliminati.&#xD;&#xA;&#xD;&#xA;Tutti i file verranno spostati nel Cestino.&#xD;&#xA;&#xD;&#xA;Questa operazione non può essere annullata.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Ricominciare o continuare?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Questa immagine è già stata modificata.  Vuoi ricominciare da capo o utilizzare le impostazioni precedenti?
-
- In tal caso, seleziona le impostazioni aggiornate in precedenza nella casella combinata in basso e fai clic su "Continua".
-
- In caso contrario, fai semplicemente clic su "Ricomincia".</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Questa immagine è già stata modificata.  Vuoi ricominciare da capo o utilizzare le impostazioni precedenti?&#xD;&#xA;&#xD;&#xA;In tal caso, seleziona le impostazioni aggiornate in precedenza nella casella combinata in basso e fai clic su "Continua".&#xD;&#xA;&#xD;&#xA;In caso contrario, fai semplicemente clic su "Ricomincia".</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Ultimo aggiornamento: {0} alle: {1}</system:String>
 

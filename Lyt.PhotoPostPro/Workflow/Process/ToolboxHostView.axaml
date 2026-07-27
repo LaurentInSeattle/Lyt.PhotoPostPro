@@ -15,7 +15,7 @@
 		<Rectangle 
 			Stroke="{StaticResource LightAqua_1_100}"
 			StrokeThickness="1"
-			Opacity="0.4"
+			Opacity="0.3"
 			/>
 		<Grid
 			Margin="6 2 6 2"

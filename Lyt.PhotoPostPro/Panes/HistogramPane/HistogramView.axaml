@@ -18,19 +18,19 @@
 		> 
 		<controls:HistogramImageControl
 			x:Name="HistogramImageControlRed"
-			Margin="2 4 2 4"
+			Margin="2"
 			/>
 		<controls:HistogramImageControl
 			x:Name="HistogramImageControlGreen"
-			Margin="2 4 2 4"
+			Margin="2"
 			/>
 		<controls:HistogramImageControl
 			x:Name="HistogramImageControlBlue"
-			Margin="2 4 2 4"
+			Margin="2"
 			/>
 		<controls:HistogramImageControl
 			x:Name="HistogramImageControlLuminosity"
-			Margin="2 4 2 4"
+			Margin="2"
 			/>
 	</StackPanel>
 </UserControl>

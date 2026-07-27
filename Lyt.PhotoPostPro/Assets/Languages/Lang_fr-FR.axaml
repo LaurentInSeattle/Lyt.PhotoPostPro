@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Fermer</system:String>
 
-    <system:String x:Key="Shell.AppName">Post-traitement des photos</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebellion - Post-Traitement Photo</system:String>
 
     <system:String x:Key="Shell.About">A propos...</system:String>
 
@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Prêt.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Bienvenue dans le post-traitement photo !</system:String>
+    <system:String x:Key="Shell.Greetings">Bienvenue dans Photo Rebellion !</system:String>
 
     <system:String x:Key="Shell.Camera">Caméra</system:String>
 
@@ -67,7 +67,7 @@
 
     <system:String x:Key="Metadata.NoFlash">Pas de flash</system:String>
 
-    <system:String x:Key="Metadata.Location">Emplacement</system:String>
+    <system:String x:Key="Metadata.Location">Position</system:String>
 
     <system:String x:Key="Metadata.Latitude">Latitude:</system:String>
 
@@ -161,23 +161,23 @@
 
     <system:String x:Key="Workflow.Exposure.Title">Exposition Globale</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Correction">Vous pouvez corriger avec l'une ou les trois méthodes combinées : correction gamma, gain multiplicatif ou changement de luminosité additif.</system:String>
+    <system:String x:Key="Workflow.Exposure.Correction">Vous pouvez corriger avec l'une ou les trois méthodes combinées : correction gamma, gain multiplicatif ou décalage de luminosité additif.</system:String>
 
     <system:String x:Key="Workflow.Exposure.Clear">Réinitialiser</system:String>
 
     <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Gain">Gagner:</system:String>
+    <system:String x:Key="Workflow.Exposure.Gain">Gain:</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Shift">Changement:</system:String>
+    <system:String x:Key="Workflow.Exposure.Shift">Décalage:</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Title">Ombres et Lumieres</system:String>
+    <system:String x:Key="Workflow.Recovery.Title">Ombres et Lumières</system:String>
 
     <system:String x:Key="Workflow.Recovery.Correction">Un algorithme de luminance non linéaire pour révéler et récupérer les détails de l'image.</system:String>
 
     <system:String x:Key="Workflow.Recovery.Clear">Réinitialiser</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Highlights">Lumieres:</system:String>
+    <system:String x:Key="Workflow.Recovery.Highlights">Lumières:</system:String>
 
     <system:String x:Key="Workflow.Recovery.Shadows">Ombres :</system:String>
 
@@ -237,7 +237,7 @@
 
     <system:String x:Key="Workflow.Contrast.SCurves">Courbes en S</system:String>
 
-    <system:String x:Key="Workflow.Lut.Title">Classement des couleurs de la table de recherche</system:String>
+    <system:String x:Key="Workflow.Lut.Title">Étalonnage des couleurs</system:String>
 
     <system:String x:Key="Workflow.Lut.Correction">Utilisez une table de recherche pour ajuster les couleurs et ajouter une « ambiance » spéciale à l’image.</system:String>
 
@@ -251,7 +251,7 @@
 
     <system:String x:Key="Workflow.Color.Title">Étalonnage manuel des couleurs</system:String>
 
-    <system:String x:Key="Workflow.Color.Correction">Regradez l’intensité des couleurs globalement ou utilisez Vibrance sur chaque canal RVB.</system:String>
+    <system:String x:Key="Workflow.Color.Correction">Ajustez l’intensité des couleurs globalement ou utilisez Vibrance sur chaque canal RVB.</system:String>
 
     <system:String x:Key="Workflow.Color.Global">Ajustement global</system:String>
 
@@ -413,19 +413,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Supprimer de la bibliothèque ?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Cette image principale et toutes ses données jointes telles que les vignettes et les journaux d'édition seront supprimées. 
-
- Tous les fichiers seront déplacés vers la corbeille.
-
- Cette opération ne peut pas être annulée.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Cette image principale et toutes ses données jointes telles que les vignettes et les journaux d'édition seront supprimées.&#xD;&#xA;&#xD;&#xA;Tous les fichiers seront déplacés vers la corbeille.&#xD;&#xA;&#xD;&#xA;Cette opération ne peut pas être annulée.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Recommencer ou continuer ?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">Cette image a déjà été modifiée.  Voulez-vous tout recommencer ou utiliser les paramètres précédents ?
-
- Si tel est le cas, sélectionnez les paramètres précédemment mis à jour dans la liste déroulante ci-dessous et cliquez sur « Continuer ».
-
- Sinon, cliquez simplement sur « Recommencer ».</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">Cette image a déjà été modifiée. Voulez-vous tout recommencer ou utiliser les paramètres précédents ?&#xD;&#xA;&#xD;&#xA;Si tel est le cas, sélectionnez les paramètres précédemment mis à jour dans la liste déroulante ci-dessous et cliquez sur « Continuer ».&#xD;&#xA;&#xD;&#xA;Sinon, cliquez simplement sur « Recommencer ».</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Dernière mise à jour : {0} à : {1}</system:String>
 
