@@ -77,9 +77,9 @@
 
     <system:String x:Key="Process.Toolbar.EscToReturn">Échap.  revenir</system:String>
 
-    <system:String x:Key="Workflow.Back">Dos</system:String>
+    <system:String x:Key="Workflow.Back">Retour</system:String>
 
-    <system:String x:Key="Workflow.Reset">Réinitialiser</system:String>
+    <system:String x:Key="Workflow.Reset">Réinit.</system:String>
 
     <system:String x:Key="Workflow.Next">Suivant</system:String>
 
@@ -159,7 +159,7 @@
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangles d'or vers le bas</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Title">Exposition mondiale</system:String>
+    <system:String x:Key="Workflow.Exposure.Title">Exposition Globale</system:String>
 
     <system:String x:Key="Workflow.Exposure.Correction">Vous pouvez corriger avec l'une ou les trois méthodes combinées : correction gamma, gain multiplicatif ou changement de luminosité additif.</system:String>
 
@@ -171,13 +171,13 @@
 
     <system:String x:Key="Workflow.Exposure.Shift">Changement:</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Title">Faits saillants et ombres</system:String>
+    <system:String x:Key="Workflow.Recovery.Title">Ombres et Lumieres</system:String>
 
     <system:String x:Key="Workflow.Recovery.Correction">Un algorithme de luminance non linéaire pour révéler et récupérer les détails de l'image.</system:String>
 
     <system:String x:Key="Workflow.Recovery.Clear">Réinitialiser</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Highlights">Points forts:</system:String>
+    <system:String x:Key="Workflow.Recovery.Highlights">Lumieres:</system:String>
 
     <system:String x:Key="Workflow.Recovery.Shadows">Ombres :</system:String>
 
@@ -203,7 +203,7 @@
 
     <system:String x:Key="Workflow.WhiteBalance.Correction">Corrigez automatiquement la température de couleur ou ajustez-la manuellement.</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuel - Matrice de couleurs de base (rapide)</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuel - Matrice de couleurs</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Décalage :</system:String>
 
@@ -219,7 +219,7 @@
 
     <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semi-automatique - Algorithme 'White Patch'</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Exécuter le patch blanc</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Exécuter le 'White Patch'</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Cliquez sur une zone lumineuse de l'image source qui doit être blanche ou incolore, puis exécutez l'algorithme.</system:String>
 
@@ -291,7 +291,7 @@
 
     <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
 
-    <system:String x:Key="Workflow.Filters.BlackWhite">Noir et blanc</system:String>
+    <system:String x:Key="Workflow.Filters.BlackWhite">Noir et Blanc</system:String>
 
     <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
 

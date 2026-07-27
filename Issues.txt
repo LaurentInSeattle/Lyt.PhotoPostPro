@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Figure out why the Translator does not see 'Completion' and restarts translating 
+
 - Library buttons text for months and days do not update on Language change 
 
 - UI for rating Images
