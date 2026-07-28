@@ -9,24 +9,37 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+
 	Background="Transparent"
 	>
 	<Grid	
 		x:Name="ToasterHost"
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="12" />
+			<RowDefinition Height="8" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="12" />
+			<RowDefinition Height="8" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="12" />
+			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="12" />
+			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+		<images:ZoomableImage
+			x:Name="ZoomableImage"
+			Grid.Column="1" Grid.Row="1"
+			Image="{Binding SourceImage}"
+			ZoomWithMouseWheelBehaviour="ZoomLevelsAltNative"
+			AutoZoomToFit="True"
+			ConstrainZoomOutToFitLevel="True"
+			/>
+
+		<!-- 
 		<Image
 			Grid.Column="1" Grid.Row="1"
 			Source="{Binding SourceImage}"
 			/>
+		--> 
 	</Grid>
 </UserControl>
