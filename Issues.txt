@@ -5,13 +5,12 @@ Bugs ~ Major Issues
 
 - Need a spin wait for exporting images or any other long operations
 
-- Figure out why the Translator does not see 'Completion' and restarts translating (multi-lines) 
-
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
+
 - UI : Final fix for Re-init of Compose is failing at second image 
 
 
@@ -22,7 +21,7 @@ WIP
 
 - Image Exports: Quick save
 
-- Watermarks with transparency ( Need to create a new image with alpha channel, then draw the watermark on it, then save)
+- Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
 
 - Cleanup public vs internal about everywhere 
 

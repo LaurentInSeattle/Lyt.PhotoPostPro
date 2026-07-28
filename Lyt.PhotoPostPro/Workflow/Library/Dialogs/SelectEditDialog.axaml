@@ -141,7 +141,7 @@
 						ButtonBackground="BorderlessRectangle"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Library.StartOver}"
-						Command="{Binding OnContinue}"
+						Command="{Binding OnStartOver}"
 	    				/>
 					<glyphs:GlyphButton
 						x:Name="ContinueButton"

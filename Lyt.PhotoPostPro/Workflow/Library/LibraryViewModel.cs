@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
-using SixLabors.ImageSharp.Drawing;
-
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LibraryLoadedMessage>,
@@ -115,9 +113,13 @@ public sealed partial class LibraryViewModel :
         // Bring in the new one 
         if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
         {
+            // Add to list 
             LibraryThumbnailViewModel libraryThumbnailViewModel =
                 new(this, path, thumbnail.Metadata, thumbnail.ImageBytes);
             list.Add(libraryThumbnailViewModel);
+
+            // make it the current selection 
+            this.OnSelect(libraryThumbnailViewModel); 
         }
 
         // Adjust order 
@@ -303,7 +305,6 @@ public sealed partial class LibraryViewModel :
         this.SpinViewModel.IsActive = start;
     }
 
-
     [RelayCommand]
     public void OnProcess()
     {
@@ -360,8 +361,6 @@ public sealed partial class LibraryViewModel :
             {
                 return;
             }
-
-            selectEditDialogModel.Cancel(); 
 
             // Continued process: isNew is false, recycled parameters 
             this.LaunchSpinProcessing(isNew: false, metadata, parameters);
