@@ -441,3 +441,235 @@ public class ReinhardLutGenerator
 		}
 	}
 }
+
+
+-------------
+
+
+To implement blemish removal in pure C# without native libraries, you must use an Iterative Texture Inpainting algorithm. 
+This method searches for clean texture pixels outside the blemish area and blends them into the target pixels using a 
+distance-weighted average.
+Implementation StepsSet Target Mask: Identify the bounding box of the blemish area to minimize CPU pixel loops.
+Scan Boundaries: Trace from the outer boundary of the spot toward the center to fill pixels progressively.
+Calculate Weights: Compute an average color of surrounding non-blemish pixels based on their inverse distance.
+Blend Pixels: Assign the weighted color to the target pixel and mark it as resolved.
+
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+public class PureCSharpBlemishRemover
+{
+	public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
+	{
+		using (Bitmap bmp = new Bitmap(imagePath))
+		{
+			BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+			int bytesPerPixel = 4;
+			byte* scan0 = (byte*)data.Scan0;
+
+			// Define bounding box around the blemish
+			int startX = Math.Max(0, center.X - radius);
+			int endX = Math.Min(bmp.Width - 1, center.X + radius);
+			int startY = Math.Max(0, center.Y - radius);
+			int endY = Math.Min(bmp.Height - 1, center.Y + radius);
+
+			int radiusSq = radius * radius;
+
+			// Pass 1: Inpaint pixels from outer boundary inward
+			for (int y = startY; y <= endY; y++)
+			{
+				for (int x = startX; x <= endX; x++)
+				{
+					int dx = x - center.X;
+					int dy = y - center.Y;
+
+					// Check if pixel is inside the circular blemish area
+					if ((dx * dx) + (dy * dy) <= radiusSq)
+					{
+						double totalWeight = 0;
+						double rSum = 0, gSum = 0, bSum = 0;
+
+						// Sample a 7x7 neighborhood for clean pixels
+						for (int ny = -3; ny <= 3; ny++)
+						{
+							int sampleY = y + ny;
+							if (sampleY < 0 || sampleY >= bmp.Height) continue;
+
+							for (int nx = -3; nx <= 3; nx++)
+							{
+								int sampleX = x + nx;
+								if (sampleX < 0 || sampleX >= bmp.Width) continue;
+
+								// Ignore sample if it falls inside the dirty blemish zone
+								int sdx = sampleX - center.X;
+								int sdy = sampleY - center.Y;
+								if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
+
+								double distance = Math.Sqrt((nx * nx) + (ny * ny));
+								if (distance == 0) continue;
+
+								double weight = 1.0 / distance;
+								byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
+
+								bSum += samplePtr[0] * weight;
+								gSum += samplePtr[1] * weight;
+								rSum += samplePtr[2] * weight;
+								totalWeight += weight;
+							}
+						}
+
+						// Apply the weighted average color to the blemish pixel
+						if (totalWeight > 0)
+						{
+							byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+							targetPtr[0] = (byte)(bSum / totalWeight); // Blue
+							targetPtr[1] = (byte)(gSum / totalWeight); // Green
+							targetPtr[2] = (byte)(rSum / totalWeight); // Red
+						}
+					}
+				}
+			}
+
+			bmp.UnlockBits(data);
+			bmp.Save(outputPath, ImageFormat.Png);
+		}
+	}
+}
+
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+public class PureCSharpBlemishRemover
+{
+	public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
+	{
+		using (Bitmap bmp = new Bitmap(imagePath))
+		{
+			BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+			int bytesPerPixel = 4;
+			byte* scan0 = (byte*)data.Scan0;
+
+			int startX = Math.Max(0, center.X - radius - 3);
+			int endX = Math.Min(bmp.Width - 1, center.X + radius + 3);
+			int startY = Math.Max(0, center.Y - radius - 3);
+			int endY = Math.Min(bmp.Height - 1, center.Y + radius + 3);
+
+			int radiusSq = radius * radius;
+
+			// Pass 1: Distance-weighted Inpainting
+			for (int y = startY; y <= endY; y++)
+			{
+				for (int x = startX; x <= endX; x++)
+				{
+					int dx = x - center.X;
+					int dy = y - center.Y;
+
+					if ((dx * dx) + (dy * dy) <= radiusSq)
+					{
+						double totalWeight = 0;
+						double rSum = 0, gSum = 0, bSum = 0;
+
+						for (int ny = -3; ny <= 3; ny++)
+						{
+							int sampleY = y + ny;
+							if (sampleY < startY || sampleY > endY) continue;
+
+							for (int nx = -3; nx <= 3; nx++)
+							{
+								int sampleX = x + nx;
+								if (sampleX < startX || sampleX > endX) continue;
+
+								int sdx = sampleX - center.X;
+								int sdy = sampleY - center.Y;
+								if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
+
+								double distance = Math.Sqrt((nx * nx) + (ny * ny));
+								if (distance == 0) continue;
+
+								double weight = 1.0 / distance;
+								byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
+
+								bSum += samplePtr[0] * weight;
+								gSum += samplePtr[1] * weight;
+								rSum += samplePtr[2] * weight;
+								totalWeight += weight;
+							}
+						}
+
+						if (totalWeight > 0)
+						{
+							byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+							targetPtr[0] = (byte)(bSum / totalWeight);
+							targetPtr[1] = (byte)(gSum / totalWeight);
+							targetPtr[2] = (byte)(rSum / totalWeight);
+						}
+					}
+				}
+			}
+
+			// Pass 2: Selective Gaussian Blur on the patch boundaries
+			// Create a local backup buffer for the patch area to pull clean source values
+			int bufferWidth = endX - startX + 1;
+			int bufferHeight = endY - startY + 1;
+			byte[] localBuffer = new byte[bufferWidth * bufferHeight * bytesPerPixel];
+
+			for (int y = startY; y <= endY; y++)
+			{
+				for (int x = startX; x <= endX; x++)
+				{
+					int localIdx = ((y - startY) * bufferWidth + (x - startX)) * bytesPerPixel;
+					byte* srcPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+					localBuffer[localIdx] = srcPtr[0];
+					localBuffer[localIdx + 1] = srcPtr[1];
+					localBuffer[localIdx + 2] = srcPtr[2];
+				}
+			}
+
+			// 3x3 Gaussian Kernel configuration Matrix
+			double[] kernel = { 1/16d, 2/16d, 1/16d, 2/16d, 4/16d, 2/16d, 1/16d, 2/16d, 1/16d };
+
+			// Blur the perimeter to remove harsh patch seams
+			for (int y = startY; y <= endY; y++)
+			{
+				for (int x = startX; x <= endX; x++)
+				{
+					int dx = x - center.X;
+					int dy = y - center.Y;
+					double dist = Math.Sqrt((dx * dx) + (dy * dy));
+
+					// Target the edge border region of the blemish circle
+					if (dist >= radius - 2 && dist <= radius + 2)
+					{
+						double bSum = 0, gSum = 0, rSum = 0;
+						int kIdx = 0;
+
+						for (int ky = -1; ky <= 1; ky++)
+						{
+							int sampleY = Math.Clamp(y + ky, startY, endY);
+							for (int kx = -1; kx <= 1; kx++)
+							{
+								int sampleX = Math.Clamp(x + kx, startX, endX);
+								int bufIdx = ((sampleY - startY) * bufferWidth + (sampleX - startX)) * bytesPerPixel;
+								double weight = kernel[kIdx++];
+
+								bSum += localBuffer[bufIdx] * weight;
+								gSum += localBuffer[bufIdx + 1] * weight;
+								rSum += localBuffer[bufIdx + 2] * weight;
+							}
+						}
+
+						byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+						targetPtr[0] = (byte)bSum;
+						targetPtr[1] = (byte)gSum;
+						targetPtr[2] = (byte)rSum;
+					}
+				}
+			}
+
+			bmp.UnlockBits(data);
+			bmp.Save(outputPath, ImageFormat.Png);
+		}
+	}
+}

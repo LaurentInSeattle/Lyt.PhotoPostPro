@@ -6,6 +6,7 @@
     >
     <!-- Sizes as pixels , cannot be used as Grid row --> 
     <system:Double x:Key="Dbl.Spacer">8</system:Double>
+    <system:Double x:Key="Dbl.TallSpacer">32</system:Double>
     <system:Double x:Key="Dbl.Title">40</system:Double>
     <system:Double x:Key="Dbl.PromptOneLine">24</system:Double>
     <system:Double x:Key="Dbl.PromptTwoLines">48</system:Double>
@@ -26,6 +27,7 @@
 
     <!-- Various Grid row heights used in tool box views --> 
     <controls:GridLength x:Key="Size.Spacer">8</controls:GridLength>
+    <controls:GridLength x:Key="Size.TallSpacer">32</controls:GridLength>
     <controls:GridLength x:Key="Size.Title">40</controls:GridLength>
     <controls:GridLength x:Key="Size.PromptOneLine">24</controls:GridLength>
     <controls:GridLength x:Key="Size.PromptTwoLines">48</controls:GridLength>

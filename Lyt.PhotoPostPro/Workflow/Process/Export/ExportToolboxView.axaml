@@ -9,6 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
 
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>	
 	<Grid
@@ -16,13 +17,15 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Export Button --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 3 :  Export Button --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 7 : Navigate Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Navigate Button --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- Finish Button --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 10 : Finish Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 		</Grid.RowDefinitions>
@@ -33,7 +36,7 @@
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<glyphs:GlyphButton
-			Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="3" Grid.Column="0" 
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export"
@@ -42,8 +45,13 @@
 			Width="380" Height="44"
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
+		<shared:SpinView
+			Grid.Row="1" Grid.RowSpan="6"
+			DataContext="{Binding SpinViewModel}"
+			/>
+
 		<glyphs:GlyphButton
-			Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export_up"
@@ -53,7 +61,7 @@
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<glyphs:GlyphButton
-			Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="dismiss"

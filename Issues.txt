@@ -1,10 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- No thumbnail updated after edit without export --- By Design ? 
-
-- Need a spin wait for exporting images or any other long operations
-
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
@@ -32,6 +28,8 @@ WIP
 
 TODO First : Single Image Process
 ---------------------------------
+
+- Touch up / Blemish (after geometry) 
 
 - UI to pick up exports parameters 
 
@@ -94,6 +92,7 @@ Minor Issues (Low priority)
 
 - Tool boxes titles will not localise when language changes 
 
+- No thumbnail updated after edit without export --- By Design ? 
 
 
 Cool Stuff to Consider 
