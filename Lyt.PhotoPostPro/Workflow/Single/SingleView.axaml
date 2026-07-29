@@ -30,7 +30,7 @@
 			x:Name="ZoomableImage"
 			Grid.Column="1" Grid.Row="1"
 			Image="{Binding SourceImage}"
-			ZoomWithMouseWheelBehaviour="ZoomLevelsAltNative"
+			ZoomWithMouseWheelBehaviour="ZoomNative"
 			AutoZoomToFit="True"
 			ConstrainZoomOutToFitLevel="True"
 			/>
