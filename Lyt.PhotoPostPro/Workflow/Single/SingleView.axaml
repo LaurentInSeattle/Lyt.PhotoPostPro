@@ -17,14 +17,14 @@
 		x:Name="ToasterHost"
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="8" />
+			<RowDefinition Height="4" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="8" />
+			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<images:ZoomableImage
 			x:Name="ZoomableImage"

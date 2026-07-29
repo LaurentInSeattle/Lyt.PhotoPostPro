@@ -9,6 +9,20 @@ public partial class BeforeAfterView : UserControl
         this.SourceImageLandscape.PointerPressed += this.OnImagePointerPressed;
         this.ResultImagePortrait.PointerPressed += this.OnImagePointerPressed;
         this.ResultImageLandscape.PointerPressed += this.OnImagePointerPressed;
+        this.VerticalSplitter.DragCompleted += this.OnVerticalSplitterDragCompleted;
+        this.HorizontalSplitter.DragCompleted += this.OnHorizontalSplitterDragCompleted;
+    }
+
+    private void OnVerticalSplitterDragCompleted(object? sender, VectorEventArgs e)
+    {
+        this.SourceImagePortrait.ZoomToFit();
+        this.ResultImagePortrait.ZoomToFit();
+    }
+
+    private void OnHorizontalSplitterDragCompleted(object? sender, VectorEventArgs e)
+    {
+        this.SourceImageLandscape.ZoomToFit();
+        this.ResultImageLandscape.ZoomToFit();
     }
 
     private void OnImagePointerPressed(object? sender, PointerPressedEventArgs e)

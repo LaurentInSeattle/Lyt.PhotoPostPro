@@ -7,6 +7,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid> 
 		<Grid		
@@ -25,11 +27,15 @@
 				<ColumnDefinition Width="2*" MinWidth="360"/>
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
-			<Image
+			<images:ZoomableImage
 				x:Name="SourceImagePortrait"
 				Grid.Column="1" Grid.Row="1"
+				Image="{ReflectionBinding SourceImage}"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
-				Source="{ReflectionBinding SourceImage}"				
+				ZoomWithMouseWheelBehaviour="ZoomNative"
+				AutoZoomToFit="True"
+				ConstrainZoomOutToFitLevel="True"
+				SelectionMode="None"
 				/>
 			<GridSplitter
 				x:Name="VerticalSplitter"
@@ -44,11 +50,15 @@
 				Opacity="0.4"
 				ZIndex="999"
 				/>
-			<Image
+			<images:ZoomableImage
 				x:Name="ResultImagePortrait"
 				Grid.Column="3" Grid.Row="1"
+				Image="{ReflectionBinding ResultImage}"
 				IsVisible="{ReflectionBinding ResultImageIsVisible}"
-				Source="{ReflectionBinding ResultImage}"
+				ZoomWithMouseWheelBehaviour="ZoomNative"
+				AutoZoomToFit="True"
+				ConstrainZoomOutToFitLevel="True"
+				SelectionMode="None"
 				/>
 		</Grid>
 		<Grid		
@@ -67,11 +77,15 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
-			<Image
+			<images:ZoomableImage
 				x:Name="SourceImageLandscape"
 				Grid.Column="1" Grid.Row="1"
+				Image="{ReflectionBinding SourceImage}"
 				IsVisible="{ReflectionBinding SourceImageIsVisible}"
-				Source="{ReflectionBinding SourceImage}"
+				ZoomWithMouseWheelBehaviour="ZoomNative"
+				AutoZoomToFit="True"
+				ConstrainZoomOutToFitLevel="True"
+				SelectionMode="None"
 				/>
 			<GridSplitter
 				x:Name="HorizontalSplitter"
@@ -86,11 +100,15 @@
 				Opacity="0.4"
 				ZIndex="999"
 				/>
-			<Image
+			<images:ZoomableImage
 				x:Name="ResultImageLandscape"
 				Grid.Column="1" Grid.Row="3"
+				Image="{ReflectionBinding ResultImage}"
 				IsVisible="{ReflectionBinding ResultImageIsVisible}"
-				Source="{ReflectionBinding ResultImage}"
+				ZoomWithMouseWheelBehaviour="ZoomNative"
+				AutoZoomToFit="True"
+				ConstrainZoomOutToFitLevel="True"
+				SelectionMode="None"
 				/>
 		</Grid>
 	</Grid>
