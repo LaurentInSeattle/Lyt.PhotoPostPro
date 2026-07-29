@@ -33,13 +33,7 @@
 			ZoomWithMouseWheelBehaviour="ZoomNative"
 			AutoZoomToFit="True"
 			ConstrainZoomOutToFitLevel="True"
+			SelectionMode="None"
 			/>
-
-		<!-- 
-		<Image
-			Grid.Column="1" Grid.Row="1"
-			Source="{Binding SourceImage}"
-			/>
-		--> 
 	</Grid>
 </UserControl>
