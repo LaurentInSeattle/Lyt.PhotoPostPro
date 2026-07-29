@@ -97,6 +97,11 @@ public sealed partial class LibraryViewModel :
     }
 
     public void Receive(ThumbnailUpdatedMessage message)
+        => Dispatch.OnUiThread(
+                () => { this.ReceiveOnUiThread(message); },
+                DispatcherPriority.Background);
+
+    public void ReceiveOnUiThread(ThumbnailUpdatedMessage message)
     {
         string path = message.Path; 
         var list = this.LibraryThumbnailsPanelViewModel.Thumbnails; 
