@@ -1,22 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Ex
-13:45:05:658	Exception thrown: 'System.InvalidOperationException' in Avalonia.Base.dll
-13:45:05:658	System.InvalidOperationException: The calling thread cannot access this object because a different thread owns it.
-13:45:05:658	   at Avalonia.Threading.Dispatcher.<VerifyAccess>g__ThrowVerifyAccess|17_0()
-13:45:05:658	   at Avalonia.Application.get_ActualThemeVariant()
-13:45:05:658	   at Lyt.Avalonia.Localizer.LocalizerModel.Lookup(String localizationKey, Boolean failSilently) in C:\Users\Laurent\source\repos\Lyt.Avalonia\Lyt.Avalonia.Localizer\LocalizerModel.cs:line 121
-13:45:05:658	   at Lyt.Mvvm.ViewModel.Localize(String message, Boolean failSilently) in C:\Users\Laurent\source\repos\Lyt.Framework\Lyt.Mvvm\ViewModel.cs:line 248
-13:45:05:658	   at Lyt.PhotoPostPro.Panes.MetadataPane.MetadataViewModel.Update(Metadata metadata) in C:\Users\Laurent\source\repos\Lyt.PhotoPostPro\Lyt.PhotoPostPro\Panes\MetadataPane\MetadataViewModel.cs:line 102
-13:45:05:658	   at Lyt.PhotoPostPro.Workflow.Library.LibraryViewModel.OnSelect(Object selectedObject) in C:\Users\Laurent\source\repos\Lyt.PhotoPostPro\Lyt.PhotoPostPro\Workflow\Library\LibraryViewModel.cs:line 297
-13:45:05:658	   at Lyt.PhotoPostPro.Workflow.Library.LibraryViewModel.Receive(ThumbnailUpdatedMessage message) in C:\Users\Laurent\source\repos\Lyt.PhotoPostPro\Lyt.PhotoPostPro\Workflow\Library\LibraryViewModel.cs:line 122
-13:45:05:658	   at CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger.SendAll[TMessage](ReadOnlySpan`1 pairs, Int32 i, TMessage message) in /_/src/CommunityToolkit.Mvvm/Messaging/WeakReferenceMessenger.cs:line 409
-13:45:05:658	   at CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger.Send[TMessage,TToken](TMessage message, TToken token) in /_/src/CommunityToolkit.Mvvm/Messaging/WeakReferenceMessenger.cs:line 343
-13:45:05:658	   at Lyt.Framework.Interfaces.Messaging.MessagingExtensions.Publish[TMessage](TMessage message) in C:\Users\Laurent\source\repos\Lyt.Framework\Lyt.Framework.Interfaces\Messaging\MessagingExtensions.cs:line 17
-13:45:05:658	   at Lyt.PhotoPostPro.Model.LibraryModels.LibraryManager.UpdateThumbnailCache(Metadata metadata, String pathThumbnail) in C:\Users\Laurent\source\repos\Lyt.PhotoPostPro\Lyt.PhotoPostPro.Model\LibraryModels\LibraryManager.cs:line 300
-
-
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)

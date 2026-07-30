@@ -9,27 +9,21 @@ public partial class BeforeAfterView : UserControl
         this.SourceImageLandscape.PointerPressed += this.OnImagePointerPressed;
         this.ResultImagePortrait.PointerPressed += this.OnImagePointerPressed;
         this.ResultImageLandscape.PointerPressed += this.OnImagePointerPressed;
-        this.VerticalSplitter.DragCompleted += this.OnVerticalSplitterDragCompleted;
-        this.HorizontalSplitter.DragCompleted += this.OnHorizontalSplitterDragCompleted;
+        this.VerticalSplitter.DragCompleted += this.OnDrag;
+        this.VerticalSplitter.DragDelta += this.OnDrag;
+        this.HorizontalSplitter.DragCompleted += this.OnDrag;
+        this.HorizontalSplitter.DragDelta += this.OnDrag;
     }
 
     public void ZoomToFit()
     {
-        if (this.BeforeAfterPortrait.IsVisible)
-        {
-            this.SourceImagePortrait.ZoomToFit();
-            this.SourceImagePortrait.ZoomToFit();
-        }
-        else
-        {
-            this.SourceImageLandscape.ZoomToFit();
-            this.ResultImageLandscape.ZoomToFit();
-        }
+        this.SourceImagePortrait.ZoomToFit();
+        this.ResultImagePortrait.ZoomToFit();
+        this.SourceImageLandscape.ZoomToFit();
+        this.ResultImageLandscape.ZoomToFit();
     }
 
-    private void OnVerticalSplitterDragCompleted(object? _, VectorEventArgs e) => this.ZoomToFit();
-
-    private void OnHorizontalSplitterDragCompleted(object? _, VectorEventArgs e) => this.ZoomToFit();
+    private void OnDrag(object? _, VectorEventArgs e) => this.ZoomToFit();
 
     private void OnImagePointerPressed(object? sender, PointerPressedEventArgs e)
     {

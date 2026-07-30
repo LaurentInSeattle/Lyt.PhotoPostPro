@@ -51,8 +51,8 @@ public partial class StepViewModel<TView> :
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
                 this.SourceImage = bitmap;
-                this.SourceImageIsVisible = true;
                 this.OnSourceImageReceived(bitmap);
+                this.SourceImageIsVisible = true;
             }
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -65,8 +65,8 @@ public partial class StepViewModel<TView> :
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
                 this.ResultImage = bitmap;
-                this.ResultImageIsVisible = true;
                 this.OnResultImageReceived(bitmap);
+                this.ResultImageIsVisible = true;
             }
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -100,13 +100,14 @@ public partial class StepViewModel<TView> :
         var baBiew = this.View.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
         if (baBiew is not null)
         {
-            Dispatch.OnUiThread(() =>
-            {
-                if (this.IsActivated)
-                {
-                    baBiew.ZoomToFit();
-                }
-            }, DispatcherPriority.ApplicationIdle);
+            baBiew.ZoomToFit();
+            //Dispatch.OnUiThread(() =>
+            //{
+            //    if (this.IsActivated)
+            //    {
+            //        baBiew.ZoomToFit();
+            //    }
+            //}, DispatcherPriority.ApplicationIdle);
         }
     }
 }
