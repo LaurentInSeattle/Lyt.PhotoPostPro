@@ -92,7 +92,14 @@ public partial class StepViewModel<TView> :
     {
         var size = bitmap.PixelSize;
         this.IsPortrait = size.Height >= size.Width;
-        this.ZoomToFit(); 
+        this.ZoomToFit();
+        Dispatch.OnUiThread(() =>
+        {
+            if (this.IsActivated)
+            {
+                this.ZoomToFit();
+            }
+        }, DispatcherPriority.ApplicationIdle);
     }
 
     private void ZoomToFit()
@@ -101,13 +108,6 @@ public partial class StepViewModel<TView> :
         if (baBiew is not null)
         {
             baBiew.ZoomToFit();
-            //Dispatch.OnUiThread(() =>
-            //{
-            //    if (this.IsActivated)
-            //    {
-            //        baBiew.ZoomToFit();
-            //    }
-            //}, DispatcherPriority.ApplicationIdle);
         }
     }
 }
