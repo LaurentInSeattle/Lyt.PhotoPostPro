@@ -13,60 +13,74 @@ public partial class BeforeAfterView : UserControl
         this.HorizontalSplitter.DragCompleted += this.OnHorizontalSplitterDragCompleted;
     }
 
-    private void OnVerticalSplitterDragCompleted(object? sender, VectorEventArgs e)
+    public void ZoomToFit()
     {
-        this.SourceImagePortrait.ZoomToFit();
-        this.ResultImagePortrait.ZoomToFit();
+        if (this.BeforeAfterPortrait.IsVisible)
+        {
+            this.SourceImagePortrait.ZoomToFit();
+            this.SourceImagePortrait.ZoomToFit();
+        }
+        else
+        {
+            this.SourceImageLandscape.ZoomToFit();
+            this.ResultImageLandscape.ZoomToFit();
+        }
     }
 
-    private void OnHorizontalSplitterDragCompleted(object? sender, VectorEventArgs e)
-    {
-        this.SourceImageLandscape.ZoomToFit();
-        this.ResultImageLandscape.ZoomToFit();
-    }
+    private void OnVerticalSplitterDragCompleted(object? _, VectorEventArgs e) => this.ZoomToFit();
+
+    private void OnHorizontalSplitterDragCompleted(object? _, VectorEventArgs e) => this.ZoomToFit();
 
     private void OnImagePointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is Image imgControl && 
-            imgControl.IsVisible && 
-            imgControl.Source is WriteableBitmap wbm)
+        if (sender is not ZoomableImage imgControl || !imgControl.IsVisible || imgControl.Image is not WriteableBitmap wbm)
         {
-            // Obtain click position relative to the visually scaled layout control
-            Point relativeClick = e.GetPosition(imgControl);
-
-            // Translate layout points to matching underlying bitmap pixel indices
-            int width = wbm.PixelSize.Width;
-            int pixelX = (int)(relativeClick.X * (width / imgControl.Bounds.Width));
-            int height = wbm.PixelSize.Height;
-            int pixelY = (int)(relativeClick.Y * (height / imgControl.Bounds.Height));
-
-            // Stay away from the border by one pixel 
-            if (pixelX == 0)
-            {
-                pixelX = 1;
-            }
-            else if (pixelX == width - 1)
-            {
-                pixelX = width - 2;
-            }
-
-            if (pixelY == 0)
-            {
-                pixelY = 1;
-            }
-            else if (pixelY == height - 1)
-            {
-                pixelY = height - 2;
-            }
-
-            string? name = imgControl.Name;
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                bool isSourceImage = name.StartsWith("Source");
-                new ImageClickedMessage(isSourceImage, pixelX, pixelY, wbm).Publish();
-            }
+            return;
         }
 
+        string? name = imgControl.Name;
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return; 
+        }
+
+        // Obtain click position relative to the control
+        Point relativeClick = e.GetPosition(imgControl);
+
+        // Translate to image coordinates 
+        Point pixel = imgControl.PointToImage(relativeClick);
+        int pixelX = (int)pixel.X;
+        int pixelY = (int)pixel.Y;
+        if (pixelX == 0 && pixelY == 0)
+        {
+            // Out of bounds, by design of PointToImage above 
+            return; 
+        }
+
+        // Stay away from the border by one pixel, because later we will average pixel colors
+        // in a 3x3 square around this center pixel 
+        int width = wbm.PixelSize.Width;
+        int height = wbm.PixelSize.Height;
+        if (pixelX == 0)
+        {
+            pixelX = 1;
+        }
+        else if (pixelX == width - 1)
+        {
+            pixelX = width - 2;
+        }
+
+        if (pixelY == 0)
+        {
+            pixelY = 1;
+        }
+        else if (pixelY == height - 1)
+        {
+            pixelY = height - 2;
+        }
+
+        bool isSourceImage = name.StartsWith("Source");
+        new ImageClickedMessage(isSourceImage, pixelX, pixelY, wbm).Publish();
         e.Handled = true;
     }
 }

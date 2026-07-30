@@ -68,6 +68,7 @@ global using Lyt.Framework.Interfaces.Dispatching;
 
 global using Lyt.Avalonia.Interfaces.UserInterface;
 global using Lyt.Avalonia.Controls;
+global using Lyt.Avalonia.Controls.Images;
 global using Lyt.Avalonia.Controls.Glyphs;
 
 global using Lyt.Avalonia.Mvvm;
@@ -120,8 +121,10 @@ global using Lyt.PhotoPostPro.Workflow.Process.Recovery;
 global using Lyt.PhotoPostPro.Workflow.Process.Vignette;
 global using Lyt.PhotoPostPro.Workflow.Process.Filters;
 global using Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
+global using Lyt.PhotoPostPro.Workflow.Process.Shared;
 global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Single;
+
 
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.CameraModels;

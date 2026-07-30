@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process;
 
+using global::Avalonia.LogicalTree;
+
 public partial class StepViewModel<TView> :
     ViewModel<TView>,
     IRecipient<SourceImageGeneratedMessage>,
@@ -57,7 +59,7 @@ public partial class StepViewModel<TView> :
 
     public void Receive(ResultImageGeneratedMessage message)
     {
-        Dispatch.OnUiThread(() => 
+        Dispatch.OnUiThread(() =>
         {
             if (this.IsActivated)
             {
@@ -66,12 +68,12 @@ public partial class StepViewModel<TView> :
                 this.ResultImageIsVisible = true;
                 this.OnResultImageReceived(bitmap);
             }
-        }, DispatcherPriority.ApplicationIdle); 
+        }, DispatcherPriority.ApplicationIdle);
     }
 
     // Derived view models MUST call this base method 
     // public because base is ViewModel 
-    public override void Initialize ()
+    public override void Initialize()
     {
         this.ResultImage = null;
         this.ResultImageIsVisible = false;
@@ -79,15 +81,32 @@ public partial class StepViewModel<TView> :
         this.SourceImageIsVisible = false;
     }
 
-    protected virtual void OnSourceImageReceived (WriteableBitmap bitmap) 
+    protected virtual void OnSourceImageReceived(WriteableBitmap bitmap)
     {
         var size = bitmap.PixelSize;
         this.IsPortrait = size.Height >= size.Width;
+        this.ZoomToFit();
     }
 
-    protected virtual void OnResultImageReceived(WriteableBitmap bitmap) 
+    protected virtual void OnResultImageReceived(WriteableBitmap bitmap)
     {
         var size = bitmap.PixelSize;
         this.IsPortrait = size.Height >= size.Width;
+        this.ZoomToFit(); 
+    }
+
+    private void ZoomToFit()
+    {
+        var baBiew = this.View.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
+        if (baBiew is not null)
+        {
+            Dispatch.OnUiThread(() =>
+            {
+                if (this.IsActivated)
+                {
+                    baBiew.ZoomToFit();
+                }
+            }, DispatcherPriority.ApplicationIdle);
+        }
     }
 }
