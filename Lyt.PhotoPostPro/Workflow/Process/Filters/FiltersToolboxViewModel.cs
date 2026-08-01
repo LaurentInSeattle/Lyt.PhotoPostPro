@@ -146,40 +146,58 @@ public sealed partial class FiltersToolboxViewModel :
             return;
         }
 
-        switch (this.selectedFilter)
+        if (( this.selectedFilter == FiltersStep.Filter.Grayscale) || (this.selectedFilter == FiltersStep.Filter.Sepia))
         {
-            default:
-            case FiltersStep.Filter.None:
-                this.model.Workflow.Reset();
-                break;
+            this.ThrottleModelUpdate(() =>
+            {
+                // Throttle to avoid freezing the UI when moving the slider
+                // Only for filters that require an amount value, like Grayscale and Sepia
+                switch (this.selectedFilter)
+                {
+                    default:
+                        break;
 
-            case FiltersStep.Filter.Grayscale:
-                this.model.Grayscale(this.amount);
-                break;
+                    case FiltersStep.Filter.Grayscale:
+                        this.model.Grayscale(this.amount);
+                        break;
 
-            case FiltersStep.Filter.Sepia:
-                this.model.Sepia(this.amount);
-                break;
+                    case FiltersStep.Filter.Sepia:
+                        this.model.Sepia(this.amount);
+                        break;
+                }
+            });
+        }
+        else
+        {
+            // All other filters do not require an amount value 
+            // So we can update the model immediately
+            switch (this.selectedFilter)
+            {
+                default:
+                case FiltersStep.Filter.None:
+                    this.model.Workflow.Reset();
+                    break;
 
-            case FiltersStep.Filter.Vignette:
-                this.model.Vignette();
-                break;
+                case FiltersStep.Filter.Vignette:
+                    this.model.Vignette();
+                    break;
 
-            case FiltersStep.Filter.BlackWhite:
-                this.model.BlackWhite();
-                break;
+                case FiltersStep.Filter.BlackWhite:
+                    this.model.BlackWhite();
+                    break;
 
-            case FiltersStep.Filter.Kodachrome:
-                this.model.Kodachrome();
-                break;
+                case FiltersStep.Filter.Kodachrome:
+                    this.model.Kodachrome();
+                    break;
 
-            case FiltersStep.Filter.Lomograph:
-                this.model.Lomograph();
-                break;
+                case FiltersStep.Filter.Lomograph:
+                    this.model.Lomograph();
+                    break;
 
-            case FiltersStep.Filter.Polaroid:
-                this.model.Polaroid();
-                break;
+                case FiltersStep.Filter.Polaroid:
+                    this.model.Polaroid();
+                    break;
+            }
         }
     }
 }

@@ -133,6 +133,9 @@ public sealed partial class VignetteToolboxViewModel :
             return;
         }
 
-        this.model.Vignette(this.top, this.bottom, this.left, this.right, this.lightness);
+        this.ThrottleModelUpdate(() =>
+        {
+            this.model.Vignette(this.top, this.bottom, this.left, this.right, this.lightness);
+        });
     }
 }

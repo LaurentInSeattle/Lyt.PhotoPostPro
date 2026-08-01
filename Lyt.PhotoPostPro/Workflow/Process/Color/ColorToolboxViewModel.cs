@@ -121,19 +121,21 @@ public sealed partial class ColorToolboxViewModel :
             return;
         }
 
-        switch (this.algorithm)
+        this.ThrottleModelUpdate(() =>
         {
-            case ColorStep.ColorAlgorithm.Saturation:
-                this.model.GlobalSaturation(this.saturation);
-                break;
+            switch (this.algorithm)
+            {
+                case ColorStep.ColorAlgorithm.Saturation:
+                    this.model.GlobalSaturation(this.saturation);
+                    break;
 
-            case ColorStep.ColorAlgorithm.Vibrance:
-                this.model.Vibrance(this.red, this.green, this.blue);
-                break;
+                case ColorStep.ColorAlgorithm.Vibrance:
+                    this.model.Vibrance(this.red, this.green, this.blue);
+                    break;
 
-            default:
-                break;
-        }
-
+                default:
+                    break;
+            }
+        });
     }
 }

@@ -72,6 +72,9 @@ public sealed partial class RecoveryToolboxViewModel :
             return;
         }
 
-        this.model.HighlightsShadows(this.highlights, this.shadows);
+        this.ThrottleModelUpdate(() =>
+        {
+            this.model.HighlightsShadows(this.highlights, this.shadows);
+        });
     }
 }

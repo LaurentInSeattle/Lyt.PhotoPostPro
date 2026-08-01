@@ -164,18 +164,21 @@ public sealed partial class ContrastToolboxViewModel :
             return;
         }
 
-        switch (this.algorithm)
+        this.ThrottleModelUpdate(() =>
         {
-            case ContrastStep.ContrastAlgorithm.Global:
-                this.model.GlobalContrast(this.contrast, this.blur, this.brightness);
-                break;
+            switch (this.algorithm)
+            {
+                case ContrastStep.ContrastAlgorithm.Global:
+                    this.model.GlobalContrast(this.contrast, this.blur, this.brightness);
+                    break;
 
-            case ContrastStep.ContrastAlgorithm.SCurves:
-                this.model.SCurvesContrast(this.red, this.green, this.blue);
-                break;
+                case ContrastStep.ContrastAlgorithm.SCurves:
+                    this.model.SCurvesContrast(this.red, this.green, this.blue);
+                    break;
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
+        });
     }
 }

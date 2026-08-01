@@ -1,15 +1,15 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
 
-public sealed partial class WhiteBalanceToolboxViewModel : 
-    ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>, 
+public sealed partial class WhiteBalanceToolboxViewModel :
+    ToolboxViewModel<WhiteBalanceToolboxView, WhiteBalanceStep>,
     IRecipient<ImageClickedMessage>
 {
     private bool doNotUpdateModel;
-    private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm ;
+    private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm;
     private float kelvin;
     private float temperature;
     private float saturationThreshold;
-    private global::Avalonia.Media.Color whitePatch; 
+    private global::Avalonia.Media.Color whitePatch;
 
     public WhiteBalanceToolboxViewModel()
     {
@@ -47,13 +47,13 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public partial SolidColorBrush PatchColorState { get; set; }
 
     [ObservableProperty]
-    public partial bool RunWhitePatchIsDisabled  { get; set; }
+    public partial bool RunWhitePatchIsDisabled { get; set; }
 
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
         this.temperature = 0.0f;
-        this.saturationThreshold = 0.4f; 
+        this.saturationThreshold = 0.4f;
 
         With.Flag(ref this.doNotUpdateModel, () =>
         {
@@ -90,7 +90,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public void OnWhitePatch()
     {
         this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch;
-        this.UpdateModel() ;
+        this.UpdateModel();
     }
 
     private void UpdateSliders(WhiteBalanceStep step)
@@ -115,7 +115,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
         // Slider sends 1000.0 to +40000.0, fine for the model  
         this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland;
         this.kelvin = (float)value;
-        int intValue = (int)value; 
+        int intValue = (int)value;
         this.KelvinString = intValue.ToString("D");
         this.UpdateModel();
     }
@@ -132,7 +132,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     partial void OnSaturationSliderValueChanged(double value)
     {
         // Slider sends 0.0 to +1.0, fine for the model  
-        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB; 
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.saturationThreshold = (float)value;
         this.SaturationString = value.ToString("+0.00;-0.00;0.00");
         this.UpdateModel();
@@ -140,35 +140,41 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     private void UpdateModel()
     {
-        if ( this.doNotUpdateModel)
+        if (this.doNotUpdateModel)
         {
-            return; 
+            return;
         }
 
-        switch (this.algorithm)
+        if (this.algorithm == WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch)
         {
-            case WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
-                this.model.FilteredGrayWorldAWB(this.saturationThreshold);
-                break;
+            // Model uses normalized values 
+            this.model.WhitePatchWhiteBalance(
+                this.whitePatch.R / 255.0f, this.whitePatch.G / 255.0f, this.whitePatch.B / 255.0f);
+        }
+        else
+        {
+            this.ThrottleModelUpdate(() =>
+            {
+                switch (this.algorithm)
+                {
+                    default:
+                    case WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch:
+                        // Already done above
+                        break;
+                    case WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                        this.model.FilteredGrayWorldAWB(this.saturationThreshold);
+                        break;
 
-            case WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix:
-                this.model.ColorMatrixWhiteBalance(this.temperature);
-                break;
+                    case WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix:
+                        this.model.ColorMatrixWhiteBalance(this.temperature);
+                        break;
 
-            case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
-                this.model.TannerHellandWhiteBalance(this.kelvin);
-                break;
+                    case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
+                        this.model.TannerHellandWhiteBalance(this.kelvin);
+                        break;
 
-            case WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch:
-                // Model uses normalized values 
-                this.model.WhitePatchWhiteBalance(
-                    this.whitePatch.R / 255.0f, 
-                    this.whitePatch.G / 255.0f, 
-                    this.whitePatch.B / 255.0f);
-                break;
-
-            default:
-                break;
+                }
+            });
         }
     }
 }

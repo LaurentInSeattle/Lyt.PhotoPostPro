@@ -5,7 +5,7 @@ public sealed partial class SharpenToolboxViewModel :
 {
     private bool doNotUpdateModel;
 
-    private SharpenStep.SharpenAlgorithm  algorithm;
+    private SharpenStep.SharpenAlgorithm algorithm;
     private float blur;
 
     protected override string Title => this.Localize("Workflow.Sharpen.Title");
@@ -59,18 +59,21 @@ public sealed partial class SharpenToolboxViewModel :
             return;
         }
 
-        switch (this.algorithm)
+        this.ThrottleModelUpdate(() =>
         {
-            case SharpenStep.SharpenAlgorithm.Sharpen:
-                this.model.GlobalSharpen(this.blur);
-                break;
+            switch (this.algorithm)
+            {
+                case SharpenStep.SharpenAlgorithm.Sharpen:
+                    this.model.GlobalSharpen(this.blur);
+                    break;
 
-            case SharpenStep.SharpenAlgorithm.EdgesMask:
-                // this.model.ColorMatrixWhiteBalance();
-                break;
+                case SharpenStep.SharpenAlgorithm.EdgesMask:
+                    // this.model.ColorMatrixWhiteBalance();
+                    break;
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
+        });
     }
 }
