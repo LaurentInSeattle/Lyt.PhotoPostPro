@@ -42,6 +42,11 @@ public sealed partial class LutToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
@@ -65,6 +70,8 @@ public sealed partial class LutToolboxViewModel :
             this.SelectedIndex = 1;
             this.SelectedIndex = 0;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(LutStep step) => this.UpdateUI(step);

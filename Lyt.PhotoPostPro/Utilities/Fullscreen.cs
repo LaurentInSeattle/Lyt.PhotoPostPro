@@ -10,6 +10,8 @@ public sealed class Fullscreen(Window mainWindow)
 
     public bool IsFullscreen { get; private set; }
 
+    public Window? FullScreenWindow => this.fullscreenWindow;
+
     public void GoFullscreen(Panel parentPanel, View view)
     {
         try

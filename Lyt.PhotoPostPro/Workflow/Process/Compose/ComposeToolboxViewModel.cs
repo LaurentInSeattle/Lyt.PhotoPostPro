@@ -27,12 +27,19 @@ public sealed partial class ComposeToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         // Enforce property changed 
         this.SelectedIndex = 0;
         this.SelectedIndex = 1;
 
         // Localize the guideline types 
         this.Localize();
+
+        this.isFirstLoad = false;
     }
 
     protected override string Title => this.Localize("Workflow.Compose.Title");

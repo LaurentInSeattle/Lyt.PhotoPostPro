@@ -41,6 +41,12 @@ public sealed partial class ColorToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+
+        if (!this.isFirstLoad)
+        {
+            return; 
+        }
+
         this.saturation = 1.0f;
         this.red = 0.0f;
         this.green = 0.0f;
@@ -60,6 +66,8 @@ public sealed partial class ColorToolboxViewModel :
             this.GreenSliderValue = this.green;
             this.BlueSliderValue = this.blue;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(ColorStep step) => this.UpdateSliders(step);

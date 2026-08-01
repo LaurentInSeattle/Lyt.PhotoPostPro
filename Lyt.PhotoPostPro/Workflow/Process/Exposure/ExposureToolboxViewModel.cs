@@ -43,6 +43,11 @@ public sealed partial class ExposureToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
@@ -53,6 +58,8 @@ public sealed partial class ExposureToolboxViewModel :
             this.ShiftSliderValue = this.shift + 0.01;
             this.ShiftSliderValue = this.shift;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(ExposureStep step) => this.UpdateSliders(step);

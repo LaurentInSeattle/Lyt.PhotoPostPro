@@ -47,6 +47,11 @@ public sealed partial class VignetteToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
@@ -64,6 +69,8 @@ public sealed partial class VignetteToolboxViewModel :
             this.RightSliderValue = this.right;
             this.LightnessSliderValue = this.lightness;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(VignetteStep step) => this.UpdateSliders(step);

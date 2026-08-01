@@ -43,10 +43,18 @@ public sealed partial class ShellViewModel
         {
             var vm = App.GetRequiredService<ProcessViewModel>();
             this.fullscreen.GoFullscreen(this.View.ShellViewContent, vm.View);
+            if (this.fullscreen.FullScreenWindow is Window fullscreenWindow)
+            {
+                // Monitor mouse movement in the fullscreen window 
+                this.MouseMonitor = new Mouse();
+                this.MouseMonitor.Start(fullscreenWindow);
+            } 
         }
         else if (message.Command == ToolbarCommandMessage.ToolbarCommand.BackToWindowed)
         {
             this.fullscreen.ReturnToWindowed();
+            this.MouseMonitor = new Mouse();
+            this.MouseMonitor.Start(App.MainWindow);
         }
     }
 

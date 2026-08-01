@@ -86,6 +86,11 @@ public sealed partial class FiltersToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Enforce property changed 
@@ -97,6 +102,8 @@ public sealed partial class FiltersToolboxViewModel :
             this.AmountSliderValue = this.amount + 0.01;
             this.AmountSliderValue = this.amount;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(FiltersStep step) => this.UpdateSliders(step);

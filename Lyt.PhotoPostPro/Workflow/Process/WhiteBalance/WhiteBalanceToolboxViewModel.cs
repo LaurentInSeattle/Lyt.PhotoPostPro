@@ -52,6 +52,12 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         this.temperature = 0.0f;
         this.saturationThreshold = 0.4f;
 
@@ -65,6 +71,8 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             this.RunWhitePatchIsDisabled = true;
             this.PatchColorState = new SolidColorBrush(Colors.Firebrick);
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(WhiteBalanceStep step) => this.UpdateSliders(step);

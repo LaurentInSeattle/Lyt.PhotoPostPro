@@ -21,10 +21,18 @@ public partial class ToolboxViewModel<TView, TStep> :
     protected readonly PhotoPostProModel model;
     protected readonly ShellViewModel shell;
 
+    // When we return from fullscreen, the view will be loaded again, and the sliders will be reset to their default values.
+    // We need to ignore these load events to avoid reinitializing the UI.  
+    protected bool isFirstLoad;
+
+    // the action we need to throttle when moving the sliders. May be null!
+    private Action? pendingAction;
+
     public ToolboxViewModel()
     {
         this.model = App.GetRequiredService<PhotoPostProModel>();
         this.shell = App.GetRequiredService<ShellViewModel>();
+        this.isFirstLoad = true;
         this.Subscribe<ModelStepUpdatedMessage>();
     }
 
@@ -50,11 +58,9 @@ public partial class ToolboxViewModel<TView, TStep> :
     {
     }
 
-    private Action? pendingAction;
-
     protected void ThrottleModelUpdate(Action action)
     {
-        Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
+        // Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
         if (pendingAction is not null)
         {
             return;
@@ -74,7 +80,6 @@ public partial class ToolboxViewModel<TView, TStep> :
     protected void ModelUpdate()
     {
         // Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
-
         if (this.IsLeftButtonPressed)
         {
             Schedule.OnUiThread(80, this.ModelUpdate, DispatcherPriority.Background);

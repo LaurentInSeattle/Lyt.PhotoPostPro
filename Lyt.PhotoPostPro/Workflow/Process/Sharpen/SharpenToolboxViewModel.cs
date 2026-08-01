@@ -19,6 +19,12 @@ public sealed partial class SharpenToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         this.blur = 0.0f;
 
         With.Flag(ref this.doNotUpdateModel, () =>
@@ -27,6 +33,8 @@ public sealed partial class SharpenToolboxViewModel :
             this.BlurSliderValue = 0.1; // Force property changed 
             this.BlurSliderValue = this.blur;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(SharpenStep step) => this.UpdateSliders(step);

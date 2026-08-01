@@ -25,6 +25,11 @@ public sealed partial class RecoveryToolboxViewModel :
     {
         base.OnViewLoaded();
 
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
@@ -34,6 +39,8 @@ public sealed partial class RecoveryToolboxViewModel :
             this.HighlightsSliderValue = this.highlights;
             this.ShadowsSliderValue = this.shadows;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(RecoveryStep step) => this.UpdateSliders(step);

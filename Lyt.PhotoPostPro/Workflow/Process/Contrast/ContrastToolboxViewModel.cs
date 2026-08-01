@@ -54,6 +54,12 @@ public sealed partial class ContrastToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+
+        if (!this.isFirstLoad)
+        {
+            return;
+        }
+
         this.contrast = 1.0f;
         this.blur = 0.0f;
         this.brightness = 0.0f;
@@ -80,6 +86,8 @@ public sealed partial class ContrastToolboxViewModel :
             this.GreenSliderValue = this.green;
             this.BlueSliderValue = this.blue;
         });
+
+        this.isFirstLoad = false;
     }
 
     public override void OnModelStepUpdated(ContrastStep step) => this.UpdateSliders(step);
