@@ -1,7 +1,11 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Usability issues with sliders 
+- Update Added / Edited / Rated in metadata when appropriate
+
+- Regression : Export screen does not show the rotated / cropped image anymore 
+
+- Collapse unused space in Metadata view 
 
 - Result image does load in 'Fit' mode in Release build 
 
@@ -62,13 +66,13 @@ Missing Features
 
 - LUT 'Explorer': Pich an image and apply all LUTs so that it becomes easy to pick one
 
+- Ability to navigate the library by Date Added, Date Edited, Rating, Keywords, etc.
+
 - Ability to flag images to insert in a photobook or collection 
 
 - Library backup 
 
 - Last edited LRU
-
-- Zoom on viewer windows 
 
 - Tools to show both before / after or just after 
 

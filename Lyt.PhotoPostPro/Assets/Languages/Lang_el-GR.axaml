@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">Συνέχεια Επεξεργασίας</system:String>
 
+    <system:String x:Key="Library.Option.Captured">συλληφθεί</system:String>
+
+    <system:String x:Key="Library.Option.Added">Προστέθηκε</system:String>
+
+    <system:String x:Key="Library.Option.Edited">Επεξεργάστηκε</system:String>
+
     <system:String x:Key="Library.Month.January">Ιανουάριος</system:String>
 
     <system:String x:Key="Library.Month.February">Φεβρουάριος</system:String>

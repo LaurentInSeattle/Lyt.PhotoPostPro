@@ -1,9 +1,9 @@
 namespace Lyt.PhotoPostPro.Controls;
 
-public partial class SelectorControl : UserControl
+public partial class VSelectorControl : UserControl
 {
     public static readonly StyledProperty<List<SelectorButtonViewModel>> SelectorButtonsProperty =
-            AvaloniaProperty.Register<SelectorControl, List<SelectorButtonViewModel>>(
+            AvaloniaProperty.Register<VSelectorControl, List<SelectorButtonViewModel>>(
                 nameof(SelectorButtons),
                 defaultValue: [],
                 inherits: false,
@@ -26,9 +26,9 @@ public partial class SelectorControl : UserControl
     private static List<SelectorButtonViewModel> CoerceSelectorButtons(
         AvaloniaObject sender, List<SelectorButtonViewModel> value)
     {
-        if (sender is SelectorControl selectorControl)
+        if (sender is VSelectorControl vSelectorControl)
         {
-            selectorControl.SelectorItemsControl.ItemsSource = value;
+            vSelectorControl.SelectorItemsControl.ItemsSource = value;
             if( value is not null && value.Count > 1 )
             {
                 var first = value[0];
@@ -41,7 +41,7 @@ public partial class SelectorControl : UserControl
         return value!;
     }
 
-    public SelectorControl()
+    public VSelectorControl()
     {
         this.InitializeComponent();
     }

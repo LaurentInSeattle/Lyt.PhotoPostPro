@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">Продовжити редагування</system:String>
 
+    <system:String x:Key="Library.Option.Captured">захоплений</system:String>
+
+    <system:String x:Key="Library.Option.Added">Додано</system:String>
+
+    <system:String x:Key="Library.Option.Edited">Відредаговано</system:String>
+
     <system:String x:Key="Library.Month.January">січня</system:String>
 
     <system:String x:Key="Library.Month.February">Лютий</system:String>

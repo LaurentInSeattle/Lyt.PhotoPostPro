@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">繼續編輯</system:String>
 
+    <system:String x:Key="Library.Option.Captured">被捕獲</system:String>
+
+    <system:String x:Key="Library.Option.Added">額外</system:String>
+
+    <system:String x:Key="Library.Option.Edited">已編輯</system:String>
+
     <system:String x:Key="Library.Month.January">一月</system:String>
 
     <system:String x:Key="Library.Month.February">二月</system:String>

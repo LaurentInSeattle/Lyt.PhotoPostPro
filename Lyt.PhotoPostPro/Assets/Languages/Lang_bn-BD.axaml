@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">সম্পাদনা চালিয়ে যান</system:String>
 
+    <system:String x:Key="Library.Option.Captured">বন্দী</system:String>
+
+    <system:String x:Key="Library.Option.Added">যোগ করা হয়েছে</system:String>
+
+    <system:String x:Key="Library.Option.Edited">সম্পাদিত</system:String>
+
     <system:String x:Key="Library.Month.January">জানুয়ারি</system:String>
 
     <system:String x:Key="Library.Month.February">ফেব্রুয়ারি</system:String>

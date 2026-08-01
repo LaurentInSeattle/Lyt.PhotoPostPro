@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">編集を続ける</system:String>
 
+    <system:String x:Key="Library.Option.Captured">捕らえられた</system:String>
+
+    <system:String x:Key="Library.Option.Added">追加した</system:String>
+
+    <system:String x:Key="Library.Option.Edited">編集済み</system:String>
+
     <system:String x:Key="Library.Month.January">1月</system:String>
 
     <system:String x:Key="Library.Month.February">2月</system:String>

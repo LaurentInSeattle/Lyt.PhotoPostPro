@@ -7,7 +7,7 @@ public sealed class FolderTree
 {
     public List<YearFolder> YearFolders { get; set; } = [];
 
-    public static FolderTree Generate(string rootPath)
+    public static FolderTree GenerateFromFilesOnDisk(string rootPath)
     {
         FolderTree tree = new();
 
@@ -55,7 +55,7 @@ public sealed class FolderTree
                                 monthFolder.DayFolders.Add(dayFolder);
 
                                 foreach (string file in files)
-                                {                                    
+                                {
                                     dayFolder.MetadataFiles.Add(file);
                                 }
                             }
@@ -65,7 +65,42 @@ public sealed class FolderTree
             }
         }
 
-        tree.Cleanup(); 
+        tree.Cleanup();
+        tree.Sort();
+        return tree;
+    }
+
+    public static FolderTree GenerateFromDate(Dictionary<string, LoadedThumbnail> metadataDictionary, bool forDateAdded)
+    {
+        FolderTree tree = new();
+        foreach (var item in metadataDictionary)
+        {
+            string filePath = item.Key;
+            Metadata metadata = item.Value.Metadata;
+            var date = forDateAdded ? metadata.AddedToLibraryUTC.ToLocalTime() : metadata.LastEditedUTC.ToLocalTime();
+            if (!forDateAdded && (date == DateTime.MinValue))
+            {
+                // Never edited, skip it
+                continue;
+            }
+
+            if (forDateAdded && (date == DateTime.MinValue))
+            {
+                // Use the file creation time as a fallback for date added
+                date = metadata.FileDateUTC.ToLocalTime();
+            }
+
+            int year = date.Year;
+            int month = date.Month;
+            int day = date.Day;
+            int dayOfWeek = (int)date.DayOfWeek;
+
+            YearFolder yearFolder = tree.AddYearIfNeeded(year);
+            MonthFolder monthFolder = yearFolder.AddMonthIfNeeded(month);
+            DayFolder dayFolder = monthFolder.AddDayIfNeeded(day, dayOfWeek);
+            dayFolder.MetadataFiles.Add(filePath);
+        }
+
         tree.Sort();
         return tree;
     }
@@ -106,7 +141,7 @@ public sealed class FolderTree
         }
     }
 
-    public void Cleanup ()
+    public void Cleanup()
     {
         // Remove years 
         var yearsToRemove = new List<YearFolder>();
@@ -118,7 +153,7 @@ public sealed class FolderTree
             }
         }
 
-        foreach(YearFolder year in yearsToRemove)
+        foreach (YearFolder year in yearsToRemove)
         {
             this.YearFolders.Remove(year);
         }
@@ -135,9 +170,9 @@ public sealed class FolderTree
                 }
             }
 
-            foreach(MonthFolder month in monthsToRemove)
+            foreach (MonthFolder month in monthsToRemove)
             {
-                year.MonthFolders.Remove(month);                    
+                year.MonthFolders.Remove(month);
             }
         }
     }
@@ -172,13 +207,26 @@ public sealed class FolderTree
             monthFolder.DayFolders.Add(dayFolder);
         }
 
-        dayFolder.MetadataFiles.Add(metadataFilePath); 
+        dayFolder.MetadataFiles.Add(metadataFilePath);
 
         this.Sort();
     }
 
     public void UpdateOnFileRemoved()
     {
-        this.Cleanup(); 
+        this.Cleanup();
+    }
+
+    public YearFolder AddYearIfNeeded(int year)
+    {
+        YearFolder? yearFolder = this.YearFolders.FirstOrDefault(f => f.Year == year);
+        if (yearFolder is null)
+        {
+            var newFolder = new YearFolder() { Year = year };
+            this.YearFolders.Add(newFolder);
+            return newFolder;
+        }
+
+        return yearFolder;
     }
 }

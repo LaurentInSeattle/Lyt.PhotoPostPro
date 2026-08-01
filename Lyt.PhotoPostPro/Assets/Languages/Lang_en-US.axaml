@@ -243,6 +243,10 @@
 	<system:String x:Key="Library.StartOver">Start Over</system:String>
 	<system:String x:Key="Library.ContinueEdit">Continue Editing</system:String>
 
+	<system:String x:Key="Library.Option.Captured">Captured</system:String>
+	<system:String x:Key="Library.Option.Added">Added</system:String>
+	<system:String x:Key="Library.Option.Edited">Edited</system:String>
+
 	<system:String x:Key="Library.Month.January">January</system:String>
 	<system:String x:Key="Library.Month.February">February</system:String>
 	<system:String x:Key="Library.Month.March">March</system:String>       

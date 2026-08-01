@@ -1,5 +1,5 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Controls.SelectorControl"
+	x:Class="Lyt.PhotoPostPro.Controls.VSelectorControl"
 
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,8 +15,8 @@
 			Margin="0"
 			Background="Transparent"
 			VerticalAlignment="Stretch" HorizontalAlignment="Center"
-			ScrollViewer.HorizontalScrollBarVisibility="Auto"
-			ScrollViewer.VerticalScrollBarVisibility="Disabled"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			> 
 			<ItemsControl 
 				x:Name="SelectorItemsControl"
@@ -24,12 +24,12 @@
 				>
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal"/>
+						<StackPanel Orientation="Vertical"/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<local:SelectorButtonView Margin="4 0 4 0"/>
+						<local:SelectorButtonView Margin="0 4 0 4"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>

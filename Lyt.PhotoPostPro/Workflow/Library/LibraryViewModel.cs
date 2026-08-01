@@ -10,6 +10,7 @@ public sealed partial class LibraryViewModel :
     private const double YearButtonWidth = 76.0;
     private const double MonthButtonWidth = 120.0;
     private const double DayButtonWidth = 160.0;
+    private const double OptionButtonWidth = 160.0;
 
     // Will NEED to localize
     private static readonly string[] MonthString =
@@ -62,6 +63,9 @@ public sealed partial class LibraryViewModel :
 
     [ObservableProperty]
     public partial LibraryThumbnailsPanelViewModel LibraryThumbnailsPanelViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial List<SelectorButtonViewModel> Options { get; set; } = [];
 
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Years { get; set; } = [];
@@ -132,17 +136,23 @@ public sealed partial class LibraryViewModel :
     }
 
     public void Receive(LibraryLoadedMessage message)
-    {
-        // TODO
-        // Show some wait spinner 
+        => Dispatch.OnUiThread( () => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
 
+    public void ReceiveOnUiThread(LibraryLoadedMessage message)
+    {
         Debug.WriteLine(" Loaded: " + message.ImageCount + "  - Errors: " + message.ErrorCount);
 
-        var folderTree = this.libraryMgr.FolderTree;
-        if (folderTree is null)
-        {
-            return;
-        }
+        List<SelectorButtonViewModel> listOptions = [];
+        string captured = this.Localize("Library.Option.Captured");
+        var vm1 = new SelectorButtonViewModel(captured, OptionButtonWidth, this.OnSelectOption, "Captured");
+        listOptions.Add(vm1);
+        string added = this.Localize("Library.Option.Added");
+        var vm2 = new SelectorButtonViewModel(added, OptionButtonWidth, this.OnSelectOption, "Added");
+        listOptions.Add(vm2);
+        string edited = this.Localize("Library.Option.Edited");
+        var vm3 = new SelectorButtonViewModel(edited, OptionButtonWidth, this.OnSelectOption, "Edited");
+        listOptions.Add(vm3);
+        this.Options = listOptions;
 
         if (message.ImageCount == 0)
         {
@@ -151,6 +161,27 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
+        var folderTree = this.libraryMgr.CapturedFolderTree;
+        if (folderTree is null)
+        {
+            return;
+        }
+
+        this.BuildCalendarButtons(folderTree);
+
+        // Need to schedule so that the view is bound 
+        Schedule.OnUiThread(
+            66,
+            () =>
+            {
+                // Select the 'Captured' option
+                this.Options[0].Select();
+            },
+            DispatcherPriority.Background);
+    }
+
+    private void BuildCalendarButtons(FolderTree folderTree)
+    {
         List<SelectorButtonViewModel> listYears = [];
         foreach (var year in folderTree.YearFolders)
         {
@@ -159,13 +190,56 @@ public sealed partial class LibraryViewModel :
         }
 
         this.Years = listYears;
+        this.Months = [];
+        this.Days = [];
+    }
+
+    private void OnSelectOption(object? tag)
+    {
+        if (tag is not string optionKey || string.IsNullOrEmpty(optionKey))
+        {
+            return;
+        }
+
+        FolderTree? folderTree; 
+        if (optionKey == "Captured")
+        {
+            folderTree = this.libraryMgr.CapturedFolderTree;
+        }
+        else if (optionKey == "Added")
+        {
+            folderTree = this.libraryMgr.AddedFolderTree;
+        }
+        else if (optionKey == "Edited")
+        {
+            folderTree = this.libraryMgr.EditedFolderTree;
+        }
+        else
+        {
+            throw new InvalidOperationException($"Unknown option key: {optionKey}");
+        }
+
+        if (folderTree is null)
+        {
+            // No folder tree should be null 
+            Debugger.Break();
+            return;
+        }
+
+        this.BuildCalendarButtons(folderTree);
 
         if (this.Years.Count > 0)
         {
             // Need to schedule so that the view is bound 
             Schedule.OnUiThread(
                 66,
-                () => { this.Years[0].Select(); },
+                () =>
+                {
+                    // Select the first year
+                    // TODO 
+                    // Check if we can use : this.selectedYear and select it ;
+                    this.Years[0].Select();
+                },
                 DispatcherPriority.Background);
         }
     }

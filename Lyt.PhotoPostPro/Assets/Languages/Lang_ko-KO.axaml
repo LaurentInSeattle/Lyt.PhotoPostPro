@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">계속 편집</system:String>
 
+    <system:String x:Key="Library.Option.Captured">캡처됨</system:String>
+
+    <system:String x:Key="Library.Option.Added">추가됨</system:String>
+
+    <system:String x:Key="Library.Option.Edited">편집됨</system:String>
+
     <system:String x:Key="Library.Month.January">1월</system:String>
 
     <system:String x:Key="Library.Month.February">2월</system:String>

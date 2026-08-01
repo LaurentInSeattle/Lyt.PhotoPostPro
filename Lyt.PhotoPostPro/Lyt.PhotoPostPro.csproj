@@ -44,4 +44,13 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Controls\HSelectorControl.axaml.cs">
+      <DependentUpon>HSelectorControl.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\VSelectorControl.axaml.cs">
+      <DependentUpon>VSelectorControl.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

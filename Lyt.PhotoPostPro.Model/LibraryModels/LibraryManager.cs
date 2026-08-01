@@ -17,7 +17,6 @@ public sealed class LibraryManager
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
 
-
     public LibraryManager()
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -38,7 +37,11 @@ public sealed class LibraryManager
 
     public Dictionary<string, LoadedThumbnail> LoadedThumbnails { get; private set; }
 
-    public FolderTree? FolderTree { get; private set; }
+    public FolderTree? CapturedFolderTree { get; private set; }
+
+    public FolderTree? AddedFolderTree { get; private set; }
+
+    public FolderTree? EditedFolderTree { get; private set; }
 
     public bool IsLoading { get; private set; }
 
@@ -121,7 +124,7 @@ public sealed class LibraryManager
                 this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
 
                 // Update folder tree 
-                this.FolderTree?.UpdateOnFileAdded(metadata, targetPathMetadata);
+                this.CapturedFolderTree?.UpdateOnFileAdded(metadata, targetPathMetadata);
 
                 return true;
             }
@@ -158,7 +161,7 @@ public sealed class LibraryManager
 
     public bool AddDroppedFile(LoadedImage loadedImage)
     {
-        if ((this.fileManager is null) || (this.FolderTree is null))
+        if ((this.fileManager is null) || (this.CapturedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -222,7 +225,7 @@ public sealed class LibraryManager
             this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
 
             // Update folder tree 
-            this.FolderTree.UpdateOnFileAdded(metadata, targetPathMetadata);
+            this.CapturedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata);
 
             // All good 
             return true;
@@ -239,12 +242,16 @@ public sealed class LibraryManager
         this.imageLoadedCount = 0;
         this.errorLoadingCount = 0;
 
-        if (this.FolderTree is null)
+        if (this.CapturedFolderTree is null)
         {
             return;
         }
 
-        foreach (var year in this.FolderTree.YearFolders)
+        // ! We have a model 
+        var profiler = this.model!.Profiler;
+        profiler.StartTiming();
+
+        foreach (var year in this.CapturedFolderTree.YearFolders)
         {
             foreach (var month in year.MonthFolders)
             {
@@ -252,21 +259,21 @@ public sealed class LibraryManager
                 {
                     foreach (string path in day.MetadataFiles)
                     {
-                        var thumbnail = this.LoadThumbnail(path);
+                        LoadedThumbnail? thumbnail = this.LoadThumbnail(path);
                         if (thumbnail is not null)
                         {
-                            this.LoadedThumbnails.Add(path, thumbnail);
                             // Debug.WriteLine(" Loaded Thumbnail: " + path);
+                            this.LoadedThumbnails.Add(path, thumbnail);
                         }
-
-                        // NEEDED ? 
-                        //
-                        // Throttle the process; Wait a bit
-                        // Task.Delay(10).Wait();
                     }
                 }
             }
         }
+
+        profiler.EndTiming(" Loaded Thumbnails: " + this.LoadedThumbnails.Count);
+
+        this.AddedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateAdded: true);
+        this.EditedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateAdded: false);
 
         new LibraryLoadedMessage(ImageCount: this.imageLoadedCount, ErrorCount: this.errorLoadingCount).Publish();
         this.IsLoading = false;
@@ -355,8 +362,8 @@ public sealed class LibraryManager
     {
         try
         {
-            var folderTree = FolderTree.Generate(this.libraryFolderPath);
-            this.FolderTree = folderTree;
+            var folderTree = FolderTree.GenerateFromFilesOnDisk(this.libraryFolderPath);
+            this.CapturedFolderTree = folderTree;
         }
         catch (Exception ex)
         {

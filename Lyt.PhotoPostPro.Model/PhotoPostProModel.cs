@@ -61,6 +61,8 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.IsDirty = false;
     }
 
+    public IProfiler Profiler => this.profiler;
+
     // Force a save on shutdown 
     public override async Task Shutdown() => await this.Save();
 

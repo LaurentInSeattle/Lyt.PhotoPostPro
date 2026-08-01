@@ -375,6 +375,12 @@
 
     <system:String x:Key="Library.ContinueEdit">Continua a Editare</system:String>
 
+    <system:String x:Key="Library.Option.Captured">Catturato</system:String>
+
+    <system:String x:Key="Library.Option.Added">Aggiunto</system:String>
+
+    <system:String x:Key="Library.Option.Edited">Modificato</system:String>
+
     <system:String x:Key="Library.Month.January">Gennaio</system:String>
 
     <system:String x:Key="Library.Month.February">Febbraio</system:String>
