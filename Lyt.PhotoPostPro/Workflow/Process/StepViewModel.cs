@@ -50,9 +50,9 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                this.SourceImageIsVisible = true;
                 this.SourceImage = bitmap;
                 this.OnSourceImageReceived(bitmap);
-                this.SourceImageIsVisible = true;
             }
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -64,9 +64,9 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                this.ResultImageIsVisible = true;
                 this.ResultImage = bitmap;
                 this.OnResultImageReceived(bitmap);
-                this.ResultImageIsVisible = true;
             }
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -93,13 +93,6 @@ public partial class StepViewModel<TView> :
         var size = bitmap.PixelSize;
         this.IsPortrait = size.Height >= size.Width;
         this.ZoomToFit();
-        Dispatch.OnUiThread(() =>
-        {
-            if (this.IsActivated)
-            {
-                this.ZoomToFit();
-            }
-        }, DispatcherPriority.ApplicationIdle);
     }
 
     private void ZoomToFit()

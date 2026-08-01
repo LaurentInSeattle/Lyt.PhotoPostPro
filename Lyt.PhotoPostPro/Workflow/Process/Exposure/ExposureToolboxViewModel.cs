@@ -89,7 +89,7 @@ public sealed partial class ExposureToolboxViewModel :
     partial void OnShiftSliderValueChanged(double value)
     {
         // Slider sends -0.5 to +0.5, fine
-        this.shift = (float)value ;
+        this.shift = (float)value;
         string stringValue = value.ToString("+0.00;-0.00;0.00");
         this.ShiftString = stringValue;
         this.UpdateModel();
@@ -102,6 +102,6 @@ public sealed partial class ExposureToolboxViewModel :
             return;
         }
 
-        this.model.AdjustExposure(this.gamma, this.gain, this.shift);
+        this.ThrottleModelUpdate(() => { this.model.AdjustExposure(this.gamma, this.gain, this.shift); });
     }
 }

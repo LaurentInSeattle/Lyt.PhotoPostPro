@@ -76,6 +76,7 @@ global using Lyt.Avalonia.Mvvm.Animations;
 global using Lyt.Avalonia.Mvvm.Behaviors.DragMove;
 global using Lyt.Avalonia.Mvvm.Behaviors.Visual;
 global using Lyt.Avalonia.Mvvm.Dialogs;
+global using Lyt.Avalonia.Mvvm.Input;
 global using Lyt.Avalonia.Mvvm.Logging;
 global using Lyt.Avalonia.Mvvm.Selector;
 global using Lyt.Avalonia.Mvvm.Toasting;

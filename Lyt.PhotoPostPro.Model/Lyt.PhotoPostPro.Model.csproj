@@ -8,17 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Luts\BlueArchitecture.cube" />
-    <None Remove="Assets\Luts\ColdChrome.cube" />
-    <None Remove="Assets\Luts\CrispAutumn.cube" />
-    <None Remove="Assets\Luts\DarkAndSomber.cube" />
-    <None Remove="Assets\Luts\GrainyFilm.cube" />
-    <None Remove="Assets\Luts\LongBeachMorning.cube" />
-    <None Remove="Assets\Luts\MagicHour.cube" />
-    <None Remove="Assets\Luts\Waves.cube" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Assets\Luts\BlueArchitecture.cube" />
     <EmbeddedResource Include="Assets\Luts\ColdChrome.cube" />
     <EmbeddedResource Include="Assets\Luts\CrispAutumn.cube" />

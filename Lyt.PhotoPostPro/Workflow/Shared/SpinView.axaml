@@ -15,7 +15,7 @@
 	>
 	<Grid
 		Background="Transparent"
-		Height="260"
+		Height="180"
 		HorizontalAlignment="Stretch"
 		Margin="2"
 		>
@@ -26,20 +26,20 @@
 			>
 			<Grid>
 				<TextBlock
-					Margin="0 24 0 0"
+					Margin="0 8 0 0"
 					Text="{DynamicResource Imaging.InProgress}"
 					Theme="{StaticResource H1}"
 					Foreground="{StaticResource OrangePeel_1_100}"
 					TextAlignment="Center" VerticalAlignment="Top"
 					/>
 				<progress:ProgressRing
-					Width="84" Height="84"
+					Width="50" Height="50"
 					IsActive="{Binding IsActive}"
 					Foreground="{StaticResource OrangePeel_1_100}"
 					VerticalAlignment="Center" HorizontalAlignment="Center"
 					/>
 				<TextBlock
-					Margin="0 0 0 24"
+					Margin="0 0 0 16"
 					Text="{DynamicResource Imaging.InProgressHelp}"
 					Theme="{StaticResource Large}"
 					Foreground="{StaticResource OrangePeel_1_100}"

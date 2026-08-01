@@ -3,10 +3,10 @@
   <Design.PreviewWith>
 	<Border Padding="20">
 		<Slider
-			Width="140" Height="56"
+			Width="450" Height="56"
 			Minimum="1" Maximum="12"
 			Value="5"
-			Orientation="Vertical"
+			Orientation="Horizontal"
 			IsSnapToTickEnabled="True"
 			TickFrequency="1" TickPlacement="BottomRight"
 			SmallChange="1" LargeChange="2"
@@ -16,19 +16,39 @@
 	</Border>
   </Design.PreviewWith>
 
+	<!-- Slider: horizontal --> 
+	<Style Selector="Slider:horizontal">
+		<Setter Property="Margin" Value="8 -4 8 0" />
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Style Selector="^ Track">
+			<Setter Property="DeferThumbDrag" Value="True" />
+		</Style>
+	</Style>
+	
 	<Style Selector="Slider:horizontal /template/ Thumb">
-		<Setter Property="Width" Value="14"/>
-		<Setter Property="Height" Value="14"/>
+		<Setter Property="Width" Value="20"/>
+		<Setter Property="Height" Value="20"/>
 		<Setter Property="Foreground" Value="{StaticResource LightAqua_1_100}" />
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Border
 					Background="{StaticResource LightAqua_1_100}"
-					CornerRadius="7"
+					CornerRadius="10"
 					/>
 			</ControlTemplate>
 		</Setter>
 	</Style>
+ 
+	<Style Selector="Slider:horizontal /template/ RepeatButton#PART_IncreaseButton">
+		<Setter Property="Height" Value="5" />
+	</Style>
+
+	<Style Selector="Slider:horizontal  /template/ RepeatButton#PART_DecreaseButton">
+		<Setter Property="Height" Value="7" />
+		<Setter Property="Background" Value="{StaticResource LightAqua_1_080}" />
+	</Style>
+
 	<Style Selector="Slider:horizontal:pointerover">
 		<Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
 			<Setter Property="Background" Value="{StaticResource OrangePeel_0_100}" />
@@ -37,6 +57,7 @@
 			<Setter Property="Background" Value="{StaticResource OrangePeel_0_100}" />
 		</Style>
 	</Style>
+
 	<Style Selector="Slider:horizontal:pressed">
 		<Style Selector="^ /template/ RepeatButton#PART_IncreaseButton">
 			<Setter Property="Background" Value="{StaticResource OrangePeel_1_100}" />
@@ -46,6 +67,7 @@
 		</Style>
 	</Style>
 	
+	<!-- Slider:vertical --> 
 	<Style Selector="Slider:vertical /template/ Thumb">
 		<Setter Property="Width" Value="14"/>
 		<Setter Property="Height" Value="14"/>

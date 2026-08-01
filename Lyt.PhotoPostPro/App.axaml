@@ -23,7 +23,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude  Source="avares://Lyt.Avalonia.Controls/Images/ZoomableImage.axaml"/>        
+                <ResourceInclude Source="avares://Lyt.Avalonia.Controls/StarRating/RatingControlTheme.axaml"/>        
+                <ResourceInclude Source="avares://Lyt.Avalonia.Controls/Images/ZoomableImage.axaml"/>        
                 <ResourceInclude Source="/Assets/Icons/PathResourceDictionary.axaml"/>
                 <ResourceInclude Source="/Assets/Icons/FluentSvgResourceDictionary.axaml"/>
                 <ResourceInclude Source="/Assets/Theme/FocusAdorner.axaml"/>

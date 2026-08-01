@@ -58,8 +58,6 @@
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="0.45"
@@ -80,8 +78,6 @@
 				/>
 			<Slider 
 				Grid.Row="1" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="0.45"
@@ -102,8 +98,6 @@
 				/>
 			<Slider 
 				Grid.Row="2" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="0.45"
@@ -124,8 +118,6 @@
 				/>
 			<Slider 
 				Grid.Row="3" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="0.45"
@@ -161,8 +153,6 @@
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
-				Margin="8 0 8 0"
-				VerticalAlignment="Center" HorizontalAlignment="Stretch"
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="-0.75" Maximum="0.75"

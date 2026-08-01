@@ -11,22 +11,28 @@ public interface IToolboxViewModel
     void OnAfterNext();
 }
 
-public partial class ToolboxViewModel<TView, TStep> : 
-    ViewModel<TView>,  
-    IToolboxViewModel, 
+public partial class ToolboxViewModel<TView, TStep> :
+    ViewModel<TView>,
+    IToolboxViewModel,
     IRecipient<ModelStepUpdatedMessage>
     where TView : View, new()
     where TStep : PostProcessStep
 {
     protected readonly PhotoPostProModel model;
+    protected readonly ShellViewModel shell;
 
-    public ToolboxViewModel() 
+    public ToolboxViewModel()
     {
         this.model = App.GetRequiredService<PhotoPostProModel>();
+        this.shell = App.GetRequiredService<ShellViewModel>();
         this.Subscribe<ModelStepUpdatedMessage>();
-    } 
+    }
 
     public required ToolboxHostViewModel ToolboxHostViewModel { get; set; }
+
+    public bool IsLeftButtonPressed => this.shell.MouseMonitor.IsLeftButtonPressed;
+
+    public bool IsRightButtonPressed => this.shell.MouseMonitor.IsRightButtonPressed;
 
     public override void Activate(object? activationParameters)
     {
@@ -44,11 +50,47 @@ public partial class ToolboxViewModel<TView, TStep> :
     {
     }
 
+    private Action? pendingAction;
+
+    protected void ThrottleModelUpdate(Action action)
+    {
+        Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
+        if (pendingAction is not null)
+        {
+            return;
+        }
+
+        if (this.IsLeftButtonPressed)
+        {
+            this.pendingAction = action;
+            Schedule.OnUiThread(80, this.ModelUpdate, DispatcherPriority.Background);
+        }
+        else
+        {
+            action();
+        }
+    }
+
+    protected void ModelUpdate()
+    {
+        // Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
+
+        if (this.IsLeftButtonPressed)
+        {
+            Schedule.OnUiThread(80, this.ModelUpdate, DispatcherPriority.Background);
+        }
+        else
+        {
+            this.pendingAction?.Invoke();
+            this.pendingAction = null;
+        }
+    }
+
     public void Receive(ModelStepUpdatedMessage message)
     {
         if (message.Step is not TStep step)
         {
-            return; 
+            return;
         }
 
         Dispatch.OnUiThread(() =>
@@ -62,16 +104,16 @@ public partial class ToolboxViewModel<TView, TStep> :
         var step = this.model.Workflow.CurrentStep;
         if (step is TAnyStep anyStep)
         {
-            return anyStep; 
-        } 
+            return anyStep;
+        }
 
         throw new InvalidCastException("Current Step is not expected PostProcessStep type");
-    } 
-    
+    }
+
     protected virtual string Title => " *** ? ***";
 
     // Interface implementations must be public, and same below 6 times 
-    public virtual void OnModelStepUpdated (TStep step) { }
+    public virtual void OnModelStepUpdated(TStep step) { }
 
     public virtual void OnBeforeBack() { }
 

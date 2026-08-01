@@ -1,6 +1,12 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Usability issues with sliders 
+
+- Result image does load in 'Fit' mode in Release build 
+
+- UI for rating Images
+
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
@@ -12,8 +18,6 @@ Bugs ~ Major Issues
 
 WIP
 ---
-
-- UI for rating Images
 
 - Image Exports: Quick save
 

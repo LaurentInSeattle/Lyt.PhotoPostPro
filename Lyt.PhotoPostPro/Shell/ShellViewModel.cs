@@ -14,6 +14,8 @@ public sealed partial class ShellViewModel
     [ObservableProperty]
     public partial bool MainToolbarIsVisible { get; set; }
 
+    public Mouse MouseMonitor { get; private set;  }
+
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
 
@@ -22,6 +24,8 @@ public sealed partial class ShellViewModel
         this.photoPostProModel = photoPostProModel;
         this.toaster = toaster;
         this.fullscreen = new Fullscreen(App.MainWindow);
+        this.MouseMonitor = new Mouse();
+        this.MouseMonitor.Start(App.MainWindow);
 
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();

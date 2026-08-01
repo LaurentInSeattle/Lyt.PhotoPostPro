@@ -44,37 +44,4 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Workflow\Library\Dialogs\SelectEditDialog.axaml.cs">
-      <DependentUpon>SelectEditDialog.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\Dialogs\ConfirmRemoveDialog.axaml.cs">
-      <DependentUpon>ConfirmRemoveDialog.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Camera\CameraFileView.axaml.cs">
-      <DependentUpon>CameraFileView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Camera\CameraThumbnailView.axaml.cs">
-      <DependentUpon>CameraThumbnailView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Camera\OtherFilesPanelView.axaml.cs">
-      <DependentUpon>OtherFilesPanelView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\LibraryThumbnailView.axaml.cs">
-      <DependentUpon>LibraryThumbnailView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\LibraryView.axaml.cs">
-      <DependentUpon>LibraryView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\LibraryThumbnailsPanelView.axaml.cs">
-      <DependentUpon>LibraryThumbnailsPanelView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Lut\LutView.axaml.cs">
-      <DependentUpon>LutView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Lut\LutToolboxView.axaml.cs">
-      <DependentUpon>LutToolboxView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>

@@ -35,7 +35,7 @@ public partial class BeforeAfterView : UserControl
         string? name = imgControl.Name;
         if (string.IsNullOrWhiteSpace(name))
         {
-            return; 
+            return;
         }
 
         // Obtain click position relative to the control
@@ -48,7 +48,7 @@ public partial class BeforeAfterView : UserControl
         if (pixelX == 0 && pixelY == 0)
         {
             // Out of bounds, by design of PointToImage above 
-            return; 
+            return;
         }
 
         // Stay away from the border by one pixel, because later we will average pixel colors
