@@ -100,6 +100,10 @@ public sealed class Metadata
 
     public DateTime FileDateUTC { get; set; }
 
+    public DateTime LastEditedUTC { get; set; } = DateTime.MinValue;
+
+    public DateTime AddedToLibraryUTC { get; set; } = DateTime.MinValue;
+
     // Star count from 0 (unrated) , then 1 to 5 (best)
     public int Rating { get; set; }
 
