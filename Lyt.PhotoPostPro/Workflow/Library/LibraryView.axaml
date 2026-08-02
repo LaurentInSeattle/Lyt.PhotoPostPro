@@ -65,21 +65,20 @@
 				/>
 			<Image
 				Source="{Binding SelectedThumbnail}"
-				Margin="0 0 0 4"
+				Margin="0"
 				IsHitTestVisible="False"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="480"
-				MaxHeight="500"
+				MaxHeight="400"
 				/>
-
 			<stars:RatingControl
+				IsVisible="{Binding HasSelection}"
 				Width="200" Height="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Margin="0 4 0 4"
 				RatingValue="4"
 				IsReadOnly="True"
 				/>
-
 			<glyphs:GlyphButton
 				x:Name="ProcessButton"
 				IsVisible="{Binding HasSelection}"
@@ -127,6 +126,5 @@
 				Command="{Binding OnNavigate}"
 	    	/>
 		</StackPanel>
-
 	</Grid>
 </UserControl>

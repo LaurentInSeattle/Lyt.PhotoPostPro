@@ -4,9 +4,15 @@ public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LibraryLoadedMessage>,
     IRecipient<ThumbnailUpdatedMessage>,
-    IDropPathHandler,
     ISelectListener
 {
+    public enum Viewing
+    {
+        Captured,
+        Added,
+        Edited,
+    }
+
     private const double YearButtonWidth = 76.0;
     private const double MonthButtonWidth = 120.0;
     private const double DayButtonWidth = 160.0;
@@ -47,6 +53,7 @@ public sealed partial class LibraryViewModel :
     private readonly ShellViewModel shellViewModel;
     private readonly LibraryManager libraryMgr;
 
+    private Viewing selectedViewing;
     private YearFolder? selectedYear;
     private MonthFolder? selectedMonth;
     private DayFolder? selectedDay;
@@ -96,6 +103,7 @@ public sealed partial class LibraryViewModel :
         };
 
         this.HasSelection = false;
+        this.selectedViewing = Viewing.Captured;
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
     }
@@ -107,14 +115,14 @@ public sealed partial class LibraryViewModel :
 
     public void ReceiveOnUiThread(ThumbnailUpdatedMessage message)
     {
-        string path = message.Path; 
-        var list = this.LibraryThumbnailsPanelViewModel.Thumbnails; 
+        string path = message.Path;
+        var list = this.LibraryThumbnailsPanelViewModel.Thumbnails;
 
         // Find old View model and remove it 
         var oldVm = (from vm in list where vm.Path == path select vm).FirstOrDefault();
-        if ( oldVm is null)
+        if (oldVm is null)
         {
-            return; 
+            return;
         }
 
         list.Remove(oldVm);
@@ -128,15 +136,15 @@ public sealed partial class LibraryViewModel :
             list.Add(libraryThumbnailViewModel);
 
             // make it the current selection 
-            this.OnSelect(libraryThumbnailViewModel); 
+            this.OnSelect(libraryThumbnailViewModel);
         }
 
         // Adjust order 
-        this.LibraryThumbnailsPanelViewModel.Sort(); 
+        this.LibraryThumbnailsPanelViewModel.Sort();
     }
 
     public void Receive(LibraryLoadedMessage message)
-        => Dispatch.OnUiThread( () => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
+        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
 
     public void ReceiveOnUiThread(LibraryLoadedMessage message)
     {
@@ -201,17 +209,20 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        FolderTree? folderTree; 
+        FolderTree? folderTree;
         if (optionKey == "Captured")
         {
+            this.selectedViewing = Viewing.Captured;
             folderTree = this.libraryMgr.CapturedFolderTree;
         }
         else if (optionKey == "Added")
         {
+            this.selectedViewing = Viewing.Added;
             folderTree = this.libraryMgr.AddedFolderTree;
         }
         else if (optionKey == "Edited")
         {
+            this.selectedViewing = Viewing.Edited;
             folderTree = this.libraryMgr.EditedFolderTree;
         }
         else
@@ -238,7 +249,7 @@ public sealed partial class LibraryViewModel :
                     // Select the first year
                     // TODO 
                     // Check if we can use : this.selectedYear and select it ;
-                    this.Years[0].Select();
+                    this.Years[^1].Select();
                 },
                 DispatcherPriority.Background);
         }
@@ -341,30 +352,77 @@ public sealed partial class LibraryViewModel :
             }
         }
 
-        if (this.selectedDay is not null)
+        if (this.selectedViewing == Viewing.Captured)
         {
-            AddFiles(this.selectedDay.MetadataFiles);
+            if (this.selectedDay is not null)
+            {
+                AddFiles(this.selectedDay.MetadataFiles);
+            }
+            else if (this.selectedMonth is not null)
+            {
+                AddFiles(this.selectedMonth.MetadataFiles());
+            }
+            else if (this.selectedYear is not null)
+            {
+                AddFiles(this.selectedYear.MetadataFiles());
+            }
         }
-        else if (this.selectedMonth is not null)
+        else
         {
-            AddFiles(this.selectedMonth.MetadataFiles());
-        }
-        else if (this.selectedYear is not null)
-        {
-            AddFiles(this.selectedYear.MetadataFiles());
+            bool forAdded = this.selectedViewing == Viewing.Added;
+            var files = this.FindFilesAddedOrEdited(this.selectedDay, this.selectedMonth, this.selectedYear, forAdded);
+            AddFiles(files);
         }
     }
 
-
-    public void OnDropPath(string path, bool isDirectory)
+    private List<string> FindFilesAddedOrEdited(
+        DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear, bool forAdded)
     {
+        var thumbnails = this.model.LibraryManager.LoadedThumbnails;
+        List<string> list = new(thumbnails.Count);
+
+        bool checkDay = selectedDay is not null;
+        // ! Checked by check day 
+        int sDay = checkDay ? selectedDay!.Day : -1;
+
+        bool checkMonth = selectedMonth is not null;
+        // ! Checked by check month
+        int sMonth = checkMonth ? selectedMonth!.Month : -1;
+        int sYear = selectedYear.Year;
+
+        foreach (var thumbnail in thumbnails)
+        {
+            Metadata metadata = thumbnail.Value.Metadata;
+            DateTime date =
+                forAdded ?
+                    metadata.AddedToLibraryUTC.ToLocalTime().Date :
+                    metadata.LastEditedUTC.ToLocalTime().Date;
+            if (date.Year != sYear)
+            {
+                continue;
+            }
+
+            if (checkMonth && date.Month != sMonth)
+            {
+                continue;
+            }
+
+            if (checkDay && date.Day != sDay)
+            {
+                continue;
+            }
+
+            list.Add(thumbnail.Key);
+        }
+
+        return list;
     }
 
     public void OnSelect(object selectedObject)
     {
         if (selectedObject is LibraryThumbnailViewModel libraryThumbnailViewModel)
         {
-            this.HasSelection = true; 
+            this.HasSelection = true;
             this.selectedLibraryThumbnailViewModel = libraryThumbnailViewModel;
             this.SelectedThumbnail = libraryThumbnailViewModel.Thumbnail;
             if (this.SelectedThumnailMetadataViewModel is null)
@@ -418,7 +476,7 @@ public sealed partial class LibraryViewModel :
         if (!isValid || obj is not SelectEditDialogModel selectEditDialogModel)
         {
             return;
-        } 
+        }
 
         if (this.selectedLibraryThumbnailViewModel is null ||
             this.selectedLibraryThumbnailViewModel.Metadata is null)
@@ -429,12 +487,12 @@ public sealed partial class LibraryViewModel :
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
         if (selectEditDialogModel.IsStartOver)
         {
-            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters()); 
+            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters());
         }
         else
         {
             // Grab info from dialog
-            PostProcessParameters? parameters = selectEditDialogModel.PostProcessParameters; 
+            PostProcessParameters? parameters = selectEditDialogModel.PostProcessParameters;
             string fileUid = this.model.FileUidString;
             if (parameters is null || string.IsNullOrWhiteSpace(fileUid))
             {
@@ -528,8 +586,8 @@ public sealed partial class LibraryViewModel :
             {
                 // Failed:
                 // TODO : Message user 
-                return; 
-            } 
+                return;
+            }
 
             // Clear this view 
             this.SelectedThumbnail = null;

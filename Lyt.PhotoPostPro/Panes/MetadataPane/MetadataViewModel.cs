@@ -21,6 +21,9 @@ public sealed partial class MetadataViewModel :
     public partial string FileDateTime { get; private set; } = string.Empty;
 
     [ObservableProperty]
+    public partial bool HasExif { get; private set; }
+
+    [ObservableProperty]
     public partial string MakeModel { get; private set; } = string.Empty;
 
     [ObservableProperty]
@@ -43,6 +46,9 @@ public sealed partial class MetadataViewModel :
 
     [ObservableProperty]
     public partial string WithFlash { get; private set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool HasLocation { get; private set; }
 
     [ObservableProperty]
     public partial string Location { get; private set; } = string.Empty;
@@ -101,9 +107,10 @@ public sealed partial class MetadataViewModel :
 
         string fileCreatedFmt = this.Localize("Metadata.FileCreatedFmt"); 
         this.FileDateTime =
-            string.Format(fileCreatedFmt, localDT.ToLongDateString(), localDT.ToLongTimeString()); 
+            string.Format(fileCreatedFmt, localDT.ToLongDateString(), localDT.ToLongTimeString());
 
-        if (metadata.HasExifMetadata)
+        this.HasExif = metadata.HasExifMetadata; 
+        if (this.HasExif)
         {
             this.MakeModel = metadata.Make + " " + metadata.Model;
 
@@ -137,7 +144,8 @@ public sealed partial class MetadataViewModel :
             this.WithFlash = string.Empty;
         }
 
-        if (metadata.HasLocationMetadata)
+        this.HasLocation = metadata.HasLocationMetadata;
+        if (this.HasLocation)
         {
             this.Location = this.Localize("Metadata.Location");
             string latitude = this.Localize("Metadata.Latitude");

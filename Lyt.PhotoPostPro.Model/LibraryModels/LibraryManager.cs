@@ -110,6 +110,7 @@ public sealed class LibraryManager
 
                 // update metadata 
                 metadata.HasMovedTo(targetPath);
+                metadata.AddedToLibraryUTC = DateTime.UtcNow;
 
                 // Finally serialize and save metadata 
                 string filenameMetadata = metadata.Filename + "_META.json";
@@ -212,6 +213,7 @@ public sealed class LibraryManager
 
             // update metadata 
             metadata.HasMovedTo(targetPath);
+            metadata.AddedToLibraryUTC = DateTime.UtcNow;
 
             // Finally serialize and save metadata 
             string filenameMetadata = metadata.Filename + "_META.json";
@@ -555,4 +557,28 @@ public sealed class LibraryManager
 
         return list;
     }
+
+    public void SaveMetadata(Metadata metadata)
+    {
+        if (this.fileManager is null || this.model is null)
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
+            MetadataFolders metadataFolders = new(metadata);
+            string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
+            string filenameMetadata = metadata.Filename + "_META.json";
+            string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
+            string serialized = this.fileManager.Serialize<Metadata>(metadata);
+            File.WriteAllText(targetPathMetadata, serialized);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            if (Debugger.IsAttached) { Debugger.Break(); }
+        }
+    }
+
 }

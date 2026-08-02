@@ -673,3 +673,16 @@ public class PureCSharpBlemishRemover
 		}
 	}
 }
+
+-----------
+
+
+Visual Studio Find & Replace (Regex)This is the fastest native method to strip regions across your active file or entire solution 
+without installing anything.
+Press Ctrl + Shift + H to open the Replace in Files dialog.
+Click the Use Regular Expressions button (the .* icon).
+Input the following configurations exactly:Find what: ^[ \t]*\#[ \t]*(region|endregion).*(\r?\n)?
+Replace with: (Leave this completely blank)
+Look in: 
+Select Current Document or Entire Solution.
+Click Replace All.

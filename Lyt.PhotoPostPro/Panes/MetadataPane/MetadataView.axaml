@@ -12,125 +12,153 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>
-	<Grid
-		Background="Transparent"
-		> 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="0" />
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Path --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" />
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Make / Model --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- DT Captured  --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Aperture / ISO   --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Exposure / Bias    --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Focal / Flash     --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" />
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Location    --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Lat / long     --> 
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+	<StackPanel>		
+		<Grid
+			Background="Transparent"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0" />
+				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Path --> 
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+				Theme="{StaticResource H3}"
+				Text="{Binding Filename}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="0"
+				Theme="{StaticResource Large}"
+				Text="{Binding Dimensions}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="1"
+				Theme="{StaticResource Large}"
+				Text="{Binding SizeMB}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+				Theme="{StaticResource Large}"
+				Text="{Binding FileDateTime}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+				Theme="{StaticResource Large}"
+				Text="{Binding FullPath}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+		</Grid>
+
+		<!-- Exif -->
+		<Grid
+			Background="Transparent"
+			IsVisible="{Binding HasExif}"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="{StaticResource Size.Spacer}" />
+				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Make / Model --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- DT Captured  --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Aperture / ISO   --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Exposure / Bias    --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Focal / Flash     --> 
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 		<TextBlock
 			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-			Theme="{StaticResource H3}"
-			Text="{Binding Filename}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="2" Grid.Column="0"
-			Theme="{StaticResource Large}"
-			Text="{Binding Dimensions}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="2" Grid.Column="1"
-			Theme="{StaticResource Large}"
-			Text="{Binding SizeMB}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-			Theme="{StaticResource Large}"
-			Text="{Binding FileDateTime}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-			Theme="{StaticResource Large}"
-			Text="{Binding FullPath}"
-			TextWrapping="Wrap"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
 			Theme="{StaticResource H3}"
 			Text="{Binding MakeModel}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+			Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
 			Theme="{StaticResource Large}"
 			Text="{Binding Captured}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="8" Grid.Column="0"
+			Grid.Row="3" Grid.Column="0"
 			Theme="{StaticResource Large}"
 			Text="{Binding Aperture}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="8" Grid.Column="1"
+			Grid.Row="3" Grid.Column="1"
 			Theme="{StaticResource Large}"
 			Text="{Binding IsoSpeed}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="9" Grid.Column="0"
+			Grid.Row="4" Grid.Column="0"
 			Theme="{StaticResource Large}"
 			Text="{Binding Exposure}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="9" Grid.Column="1"
+			Grid.Row="4" Grid.Column="1"
 			Theme="{StaticResource Large}"
 			Text="{Binding ExposureBias}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="10" Grid.Column="0"
+			Grid.Row="5" Grid.Column="0"
 			Theme="{StaticResource Large}"
 			Text="{Binding FocalLength}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<TextBlock
-			Grid.Row="10" Grid.Column="1"
+			Grid.Row="5" Grid.Column="1"
 			Theme="{StaticResource Large}"
 			Text="{Binding WithFlash}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
-		<TextBlock
-			Grid.Row="12" Grid.Column="0"
-			Theme="{StaticResource H3}"
-			Text="{Binding Location}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="13" Grid.Column="0"
-			Theme="{StaticResource Large}"
-			Text="{Binding Latitude}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<TextBlock
-			Grid.Row="13" Grid.Column="1"
-			Theme="{StaticResource Large}"
-			Text="{Binding Longitude}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-	</Grid>
+		</Grid>
+
+		<!-- Location -->
+		<Grid
+			Background="Transparent"
+			IsVisible="{Binding HasLocation}"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="{StaticResource Size.Spacer}" />
+				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Location    --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Lat / long     --> 
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Row="1" Grid.Column="0"
+				Theme="{StaticResource H3}"
+				Text="{Binding Location}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="0"
+				Theme="{StaticResource Large}"
+				Text="{Binding Latitude}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="1"
+				Theme="{StaticResource Large}"
+				Text="{Binding Longitude}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+		</Grid>
+	</StackPanel>
 </UserControl>

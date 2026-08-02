@@ -47,6 +47,9 @@ public sealed class PostProcess
     {
         if (this.Workflow is not null)
         {
+            this.Metadata.LastEditedUTC = DateTime.UtcNow;
+            this.Model.LibraryManager.SaveMetadata(this.Metadata);
+
             this.Workflow.Begin(this.OriginalImage);
         }
         else

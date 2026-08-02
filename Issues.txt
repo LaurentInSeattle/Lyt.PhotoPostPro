@@ -1,11 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Update Added / Edited / Rated in metadata when appropriate
-
 - Regression : Export screen does not show the rotated / cropped image anymore 
 
-- Collapse unused space in Metadata view 
+- Hide buttons when exporting 
 
 - Result image does load in 'Fit' mode in Release build 
 
@@ -51,15 +49,11 @@ Missing Features
 
 --- Essential --- 
 
-- Parametrize Root Location of Library 
-
-- Parametrize Root Location of Exports 
+- Parametrize Root Location of Library and Root Location of Exports 
 
 - Bulk Import of photos into library 
 
-- Culling Workflow 
-
-- Rating system 
+- Culling Workflow and  Rating system 
 
 
 --- Important ---
@@ -102,11 +96,15 @@ Minor Issues (Low priority)
 
 - Tool boxes titles will not localise when language changes 
 
+- Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
+
 - No thumbnail updated after edit without export --- By Design ? 
 
 
 Cool Stuff to Consider 
 ----------------------
+
+- Show rating stars on the thumbnail in the library view 
 
 - Keep highly rated edited images in a special gallery folder 
 
