@@ -42,6 +42,7 @@
 			GlyphSource="arrow_export"
 			Text="{DynamicResource Workflow.Export.Export}"
 			Command="{Binding OnExport}"
+			IsDisabled="{Binding IsExporting}"
 			Width="380" Height="44"
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
@@ -57,6 +58,7 @@
 			GlyphSource="arrow_export_up"
 			Text="{DynamicResource Workflow.Export.Navigate}"
 			Command="{Binding OnNavigate}"
+			IsDisabled="{Binding IsExporting}"
 			Width="380" Height="44"
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
@@ -67,6 +69,7 @@
 			GlyphSource="dismiss"
 			Text="{DynamicResource Workflow.Export.Finish}"
 			Command="{Binding OnFinish}"
+			IsDisabled="{Binding IsExporting}"
 			Width="380" Height="44"
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>

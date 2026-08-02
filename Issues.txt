@@ -5,7 +5,7 @@ Bugs ~ Major Issues
 
 - Hide buttons when exporting 
 
-- Result image does load in 'Fit' mode in Release build 
+- Result image does load in 'Fit' mode in Release build - Now in both Debug and Release builds
 
 - UI for rating Images
 

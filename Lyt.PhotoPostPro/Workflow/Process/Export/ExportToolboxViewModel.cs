@@ -14,6 +14,9 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     protected override string Title => this.Localize("Workflow.Export.Title");
 
     [ObservableProperty]
+    public partial bool IsExporting { get; set; }
+
+    [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
 
     private void SpinWait(bool start = true)
@@ -29,7 +32,9 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         ExportParameters exportParameters = new();
 
         // Always launch a spinner for big or small files 
+        this.IsExporting = true;
         this.SpinWait(start: true);
+
         Task.Run(() => 
         {
             try
@@ -42,8 +47,12 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
             } 
             finally
             {
-                // Error or not: stop the spinner 
-                Dispatch.OnUiThread(() => { this.SpinWait(start: false); });
+                // Error or not: stop the spinner and enable the buttons again
+                Dispatch.OnUiThread(() => 
+                { 
+                    this.SpinWait(start: false); 
+                    this.IsExporting = false; 
+                });
             }
         });
     }
