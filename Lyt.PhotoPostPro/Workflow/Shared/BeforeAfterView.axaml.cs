@@ -17,10 +17,25 @@ public partial class BeforeAfterView : UserControl
 
     public void ZoomToFit()
     {
-        this.SourceImagePortrait.ZoomToFit();
-        this.ResultImagePortrait.ZoomToFit();
-        this.SourceImageLandscape.ZoomToFit();
-        this.ResultImageLandscape.ZoomToFit();
+        if (this.SourceImagePortrait.IsVisible)
+        {
+            this.SourceImagePortrait.ZoomToFit();
+        }
+
+        if (this.ResultImagePortrait.IsVisible)
+        {
+            this.ResultImagePortrait.ZoomToFit();
+        }
+
+        if (this.SourceImageLandscape.IsVisible)
+        {
+            this.SourceImageLandscape.ZoomToFit();
+        }
+
+        if (this.ResultImageLandscape.IsVisible)
+        {
+            this.ResultImageLandscape.ZoomToFit();
+        }
     }
 
     private void OnDrag(object? _, VectorEventArgs e) => this.ZoomToFit();

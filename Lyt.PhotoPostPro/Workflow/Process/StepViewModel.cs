@@ -50,8 +50,11 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                var size = bitmap.PixelSize;
+                this.IsPortrait = size.Height >= size.Width;
                 this.SourceImageIsVisible = true;
                 this.SourceImage = bitmap;
+                this.ZoomToFit();
                 this.OnSourceImageReceived(bitmap);
             }
         }, DispatcherPriority.ApplicationIdle);
@@ -64,8 +67,11 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                var size = bitmap.PixelSize;
+                this.IsPortrait = size.Height >= size.Width;
                 this.ResultImageIsVisible = true;
                 this.ResultImage = bitmap;
+                this.ZoomToFit();
                 this.OnResultImageReceived(bitmap);
             }
         }, DispatcherPriority.ApplicationIdle);
@@ -81,26 +87,19 @@ public partial class StepViewModel<TView> :
         this.SourceImageIsVisible = false;
     }
 
-    protected virtual void OnSourceImageReceived(WriteableBitmap bitmap)
-    {
-        var size = bitmap.PixelSize;
-        this.IsPortrait = size.Height >= size.Width;
-        this.ZoomToFit();
-    }
+    protected virtual void OnSourceImageReceived(WriteableBitmap bitmap) { }
 
-    protected virtual void OnResultImageReceived(WriteableBitmap bitmap)
-    {
-        var size = bitmap.PixelSize;
-        this.IsPortrait = size.Height >= size.Width;
-        this.ZoomToFit();
-    }
+    protected virtual void OnResultImageReceived(WriteableBitmap bitmap) { }
 
     private void ZoomToFit()
     {
-        var baBiew = this.View.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
-        if (baBiew is not null)
+        Schedule.OnUiThread(66, () =>
         {
-            baBiew.ZoomToFit();
-        }
+            if (this.IsActivated)
+            {
+                var baBiew = this.View.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
+                baBiew?.ZoomToFit();
+            }
+        }, DispatcherPriority.Background);
     }
 }

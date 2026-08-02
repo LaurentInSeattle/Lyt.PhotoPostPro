@@ -1,7 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Result image does load in 'Fit' mode in Release build - Now in both Debug and Release builds
+- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
+(Maybe a "Reprocess" button in the library view)
 
 - UI for rating Images
 
