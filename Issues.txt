@@ -1,10 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Regression : Export screen does not show the rotated / cropped image anymore 
-
-- Hide buttons when exporting 
-
 - Result image does load in 'Fit' mode in Release build - Now in both Debug and Release builds
 
 - UI for rating Images
@@ -70,6 +66,8 @@ Missing Features
 
 - Tools to show both before / after or just after 
 
+- Setup logging for trace to disk 
+
 
 --- Nice to Have ---
 
@@ -103,6 +101,10 @@ Minor Issues (Low priority)
 
 Cool Stuff to Consider 
 ----------------------
+
+- Share: email, text, post
+
+- Set as Desktop Background 
 
 - Show rating stars on the thumbnail in the library view 
 

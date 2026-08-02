@@ -69,7 +69,7 @@
 				IsHitTestVisible="False"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="480"
-				MaxHeight="400"
+				MaxHeight="380"
 				/>
 			<stars:RatingControl
 				IsVisible="{Binding HasSelection}"

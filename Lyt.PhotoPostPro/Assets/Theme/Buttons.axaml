@@ -13,6 +13,8 @@
 		</Border>
 	</Design.PreviewWith>
 
+	<SolidColorBrush x:Key="RatingControlSelectedBrush" Color="{StaticResource OrangePeel_0_100_Color}"/>
+
 	<ControlTheme x:Key="GlyphButtonTypography" TargetType="TextBlock">
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="{StaticResource LightAqua_0_100}"/>

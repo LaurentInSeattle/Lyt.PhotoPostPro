@@ -249,10 +249,11 @@ public sealed class LibraryManager
             return;
         }
 
-        // ! We have a model 
+        // ! We MUST have a model 
         var profiler = this.model!.Profiler;
         profiler.StartTiming();
 
+        List<string> paths = new(1024);
         foreach (var year in this.CapturedFolderTree.YearFolders)
         {
             foreach (var month in year.MonthFolders)
@@ -261,16 +262,25 @@ public sealed class LibraryManager
                 {
                     foreach (string path in day.MetadataFiles)
                     {
-                        LoadedThumbnail? thumbnail = this.LoadThumbnail(path);
-                        if (thumbnail is not null)
-                        {
-                            // Debug.WriteLine(" Loaded Thumbnail: " + path);
-                            this.LoadedThumbnails.Add(path, thumbnail);
-                        }
+                        paths.Add(path); 
                     }
                 }
             }
         }
+
+        Parallel.For(0, paths.Count, index => 
+        {
+            string path = paths[index];
+            LoadedThumbnail? thumbnail = this.LoadThumbnail(path);
+            if (thumbnail is not null)
+            {
+                lock(this.LoadedThumbnails)
+                {
+                    // Debug.WriteLine(" Loaded Thumbnail: " + path);
+                    this.LoadedThumbnails.Add(path, thumbnail);
+                }
+            }
+        });
 
         profiler.EndTiming(" Loaded Thumbnails: " + this.LoadedThumbnails.Count);
 
