@@ -10,6 +10,9 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -22,9 +25,10 @@
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="480"/>
+			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 		<images:ZoomableImage
 			x:Name="ZoomableImage"
@@ -35,5 +39,40 @@
 			ConstrainZoomOutToFitLevel="True"
 			SelectionMode="None"
 			/>
+		<StackPanel
+			Grid.Row="1" Grid.Column="2"
+			>
+		<shared:DropView
+			Margin="4"
+			DataContext="{Binding DropViewModel}"
+			Width="380" 
+			HorizontalAlignment="Center"
+			/>
+		<shared:SpinView
+			Margin="4"
+			Width="380" 
+			HorizontalAlignment="Center"
+			DataContext="{Binding SpinViewModel}"
+			/>
+		<glyphs:GlyphButton
+			x:Name="ProcessButton"
+			Style="{StaticResource ViewIconButton}"
+			FontSize="24"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			Width="380" Height="56"
+			Margin="0 12 0 12"
+			GlyphSource="wand"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Text="{DynamicResource Single.ProcessImage}"
+			IsDisabled="{Binding ProcessIsDisabled}"
+			Command="{Binding OnProcess}"
+	    	/>
+		<meta:MetadataView
+			DataContext="{Binding MetadataViewModel}"
+			IsVisible="{Binding !IsDisabled, ElementName=ProcessButton}"
+			HorizontalAlignment="Stretch"
+			/>
+		</StackPanel>
 	</Grid>
 </UserControl>

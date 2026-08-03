@@ -23,17 +23,12 @@ public partial class App : ApplicationBase
             // Singletons
             typeof(ShellViewModel),
 
-            // Views and ViewModels from view selector            
+            // Views and ViewModels from the main view selector            
             typeof(SingleViewModel),
-            typeof(SingleToolboxViewModel),
-
             typeof(CameraViewModel),
-
             typeof(LibraryViewModel),
-
             typeof(LanguageViewModel),
             typeof(LanguageToolbarViewModel),
-
             //typeof(SettingsViewModel),
             //typeof(SettingsToolboxViewModel),
 

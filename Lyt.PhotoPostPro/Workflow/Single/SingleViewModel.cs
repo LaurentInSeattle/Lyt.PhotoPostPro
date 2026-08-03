@@ -4,8 +4,8 @@ using Lyt.PhotoPostPro.Model.Loader;
 
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+//using SixLabors.ImageSharp;
+//using SixLabors.ImageSharp.PixelFormats;
 
 public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHandler
 {
@@ -17,12 +17,49 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
     [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
 
+    [ObservableProperty]
+    public partial DropViewModel DropViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial SpinViewModel SpinViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial bool ProcessIsDisabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial MetadataViewModel MetadataViewModel { get; set; }
+
     public SingleViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
+        this.MetadataViewModel = new();
+        this.SpinViewModel = new SpinViewModel()
+        {
+            IsVisible = false,
+            IsActive = false,
+        };
+
+        this.DropViewModel = new DropViewModel(this, "Single.DropZoneHelp") { IsVisible = true };
     }
 
+#pragma warning disable CA1822 // Mark members as static
+    // RelayCommand's cannot be static 
+
+    [RelayCommand]
+    public void OnProcess()
+    {
+        var mainWindow = App.MainWindow;
+        if (mainWindow.CanMaximize)
+        {
+            mainWindow.WindowState = WindowState.Maximized;
+        }
+
+        var viewModel = App.GetRequiredService<SingleViewModel>();
+        viewModel.ProcessCurrentImage();
+    }
+
+#pragma warning restore CA1822
     public void OnDropPath(string path, bool isDirectory)
     {
         if (isDirectory)
@@ -102,13 +139,12 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
 
     private void OnImageLoaded(Frame frame) =>this.SourceImage = frame.ToWriteableBitmap();
 
-    private static void SpinWait(bool start = true)
+    private void SpinWait(bool start = true)
     {
-        var toolboxViewModel = App.GetRequiredService<SingleToolboxViewModel>();
-        toolboxViewModel.SpinViewModel.IsVisible = start;
-        toolboxViewModel.SpinViewModel.IsActive = start;
-        toolboxViewModel.DropViewModel.IsVisible = !start;
-        toolboxViewModel.ProcessIsDisabled = start;
+        this.SpinViewModel.IsVisible = start;
+        this.SpinViewModel.IsActive = start;
+        this.DropViewModel.IsVisible = !start;
+        this.ProcessIsDisabled = start;
     }
 
     internal void ProcessCurrentImage()

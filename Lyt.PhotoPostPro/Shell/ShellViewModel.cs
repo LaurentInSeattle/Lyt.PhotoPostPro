@@ -135,29 +135,26 @@ public sealed partial class ShellViewModel
             selectableViews.Add(new SelectableView<ActivatedView>(activatedView, vm, control));
         }
 
-        void SetupToolboxNoToolbar<TViewModel, TControl, TToolboxViewModel, TToolboxControl>(
-                ActivatedView activatedView, Control? control)
-            where TViewModel : ViewModel<TControl>
-            where TControl : Control, IView, new()
-            where TToolboxViewModel : ViewModel<TToolboxControl>
-            where TToolboxControl : Control, IView, new()
-        {
-            var vm = App.GetRequiredService<TViewModel>();
-            vm.CreateViewAndBind();
-            var vmToolbox = App.GetRequiredService<TToolboxViewModel>();
-            vmToolbox.CreateViewAndBind();
-            var v = vmToolbox.View; 
-            var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
-            selectableViews.Add(selectable);
-        }
+        // Unused for now 
+        //void SetupToolboxNoToolbar<TViewModel, TControl, TToolboxViewModel, TToolboxControl>(
+        //        ActivatedView activatedView, Control? control)
+        //    where TViewModel : ViewModel<TControl>
+        //    where TControl : Control, IView, new()
+        //    where TToolboxViewModel : ViewModel<TToolboxControl>
+        //    where TToolboxControl : Control, IView, new()
+        //{
+        //    var vm = App.GetRequiredService<TViewModel>();
+        //    vm.CreateViewAndBind();
+        //    var vmToolbox = App.GetRequiredService<TToolboxViewModel>();
+        //    vmToolbox.CreateViewAndBind();
+        //    var v = vmToolbox.View; 
+        //    var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
+        //    selectableViews.Add(selectable);
+        //}
 
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
-
-        SetupToolboxNoToolbar<SingleViewModel, SingleView, SingleToolboxViewModel, SingleToolboxView>(
-            ActivatedView.Single, view.SingleButton);
-
+        SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
-
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
 

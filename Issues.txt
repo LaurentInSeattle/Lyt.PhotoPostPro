@@ -1,6 +1,11 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Recent Sony image fails to load 
+Check with:
+https://github.com/laheller/SharpLibraw  
+https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
+
 - Animate view transitions when navigating between pages. Currently, the transitions are abrupt.
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
