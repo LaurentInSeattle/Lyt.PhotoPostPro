@@ -326,7 +326,7 @@ public class CameraManager
                     break;
                 }
 
-                if (!this.DeleteFile(foundDevice, device, file))
+                if (!DeleteFile(foundDevice, device, file))
                 {
                     ++errors;
                     Debug.WriteLine("Delete error");
@@ -358,7 +358,7 @@ public class CameraManager
         }
     }
 
-    private bool DeleteFile(FoundDevice foundDevice, MediaDevice device, string file)
+    private static bool DeleteFile(FoundDevice foundDevice, MediaDevice device, string file)
     {
         try
         {

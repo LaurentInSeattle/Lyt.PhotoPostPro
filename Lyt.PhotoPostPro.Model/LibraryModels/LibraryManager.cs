@@ -540,7 +540,7 @@ public sealed class LibraryManager
                 RecurseSubdirectories = false
             });
 
-        foreach (var editFile in editFiles)
+        foreach (string editFile in editFiles)
         {
             try
             {

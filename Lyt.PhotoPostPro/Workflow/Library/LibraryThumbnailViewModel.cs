@@ -48,16 +48,22 @@ public sealed partial class LibraryThumbnailViewModel :
 
     internal void OnSelect() => this.parent.OnSelect(this);
 
+#pragma warning disable CA1822 // Mark members as static
+    // Relay commands cannot be static 
+
     [RelayCommand]
     public void OnIsToAddToLibraryChanged()
     {
 
     }
+
     [RelayCommand]
     public void OnIsToRemoveFromCameraChanged()
     {
 
     }
+
+#pragma warning restore CA1822 // Mark members as static
 
     private void SetThumbnailStrings()
     {
