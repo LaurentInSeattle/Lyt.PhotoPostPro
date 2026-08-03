@@ -428,11 +428,9 @@ public sealed class LibraryManager
 
         try
         {
-            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
-            if (sourceFolder is null)
-            {
+            string? sourceFolder = 
+                Path.GetDirectoryName(metadata.FullPath) ?? 
                 throw new Exception("No source folder for: " + metadata.FullPath);
-            }
 
             // TODO : Remove ToList()
             string searchPattern = string.Concat(metadata.Filename, "*.*");

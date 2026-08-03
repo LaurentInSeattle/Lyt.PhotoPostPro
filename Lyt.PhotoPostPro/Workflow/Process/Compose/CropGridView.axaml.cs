@@ -80,7 +80,10 @@ public partial class CropGridView : View
         catch ( Exception ex) 
         {
             Debug.WriteLine(ex);
-            if ( Debugger.IsAttached )  Debugger.Break() ;
+            if ( Debugger.IsAttached )
+            {
+                Debugger.Break() ;
+            }
         }
     }
 

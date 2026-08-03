@@ -78,7 +78,7 @@ public sealed class Lut
                 continue;
             }
 
-            var dataTokens = dataLine.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
+            string[] dataTokens = dataLine.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
             if (dataTokens.GetLength(0) != 3)
             {
                 continue;
@@ -89,14 +89,12 @@ public sealed class Lut
                 continue;
             }
 
-            int greValue = 0;
-            if (!int.TryParse(dataTokens[1], out greValue))
+            if (!int.TryParse(dataTokens[1], out int greValue))
             {
                 continue;
             }
 
-            int bluValue = 0;
-            if (!int.TryParse(dataTokens[2], out bluValue))
+            if (!int.TryParse(dataTokens[2], out int bluValue))
             {
                 continue;
             }

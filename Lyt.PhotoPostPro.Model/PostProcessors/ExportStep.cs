@@ -255,12 +255,9 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         MetadataFolders metadataFolders = new(metadata);
         string libraryFolderPath = libraryManager.LibraryFolderPath;
         string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(libraryFolderPath);
-        string? imageLibraryFolderPath = System.IO.Path.GetDirectoryName(metadata.FullPath);
-        if (imageLibraryFolderPath is null)
-        {
+        string? imageLibraryFolderPath = 
+            System.IO.Path.GetDirectoryName(metadata.FullPath) ?? 
             throw new Exception("No source folder for: " + metadata.FullPath);
-        }
-
         string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
         libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 

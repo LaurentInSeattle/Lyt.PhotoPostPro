@@ -267,7 +267,7 @@ public class CameraManager
             Task.Delay(ReQueryDelayTime_ms).Wait();
         }
 
-        return allFiles.ToList();
+        return [.. allFiles];
     }
 
     #endregion Connection 
