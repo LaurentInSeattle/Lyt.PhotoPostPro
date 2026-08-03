@@ -113,7 +113,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         finally
         {
             // Error or not: stop the spinner 
-            Dispatch.OnUiThread(() => { SpinWait(start: false); });
+            Dispatch.OnUiThread(() => { this.SpinWait(start: false); });
 
             if (!string.IsNullOrWhiteSpace(error))
             {
@@ -137,7 +137,11 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
             InformationLevel.Error);
     }
 
-    private void OnImageLoaded(Frame frame) =>this.SourceImage = frame.ToWriteableBitmap();
+    private void OnImageLoaded(Frame frame)
+    {
+        this.SourceImage = frame.ToWriteableBitmap();
+        Dispatch.OnUiThread(this.View.ZoomableImage.ZoomToFit );
+    }
 
     private void SpinWait(bool start = true)
     {

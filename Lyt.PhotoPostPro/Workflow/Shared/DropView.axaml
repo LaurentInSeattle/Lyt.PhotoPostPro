@@ -16,11 +16,10 @@
 		>
 		<Border
 			x:Name="DropBorder"
-			Margin="8"
 			Background="#20808080"
-			Width="360" Height="260"
+			Height="260"
 			BorderThickness="0"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Stretch"
 			DragDrop.AllowDrop="True"
 			>
 			<Grid>
