@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Controls;
 
 public sealed partial class SelectorButtonViewModel(
-    string buttonText, double buttonWidth, Action<object?> onSelect, object? tag = null) : 
+    string buttonText, double buttonWidth, Action<object?> onSelect, object? tag = null) :
     ViewModel<SelectorButtonView>
 {
     private readonly Action<object?> onSelect = onSelect;
@@ -16,7 +16,7 @@ public sealed partial class SelectorButtonViewModel(
                 return false;
             }
 
-            return this.View.IsSelected; 
+            return this.View.IsSelected;
         }
     }
 
@@ -29,14 +29,14 @@ public sealed partial class SelectorButtonViewModel(
     [RelayCommand]
     public void OnSelect()
     {
-        if ( !this.IsBound)
+        if (!this.IsBound)
         {
-            return; 
+            return;
         }
 
-        if ( this.View.IsSelected )
+        if (this.View.IsSelected)
         {
-            return; 
+            return;
         }
 
         this.Select();
@@ -44,6 +44,11 @@ public sealed partial class SelectorButtonViewModel(
 
     public void Select()
     {
+        if (!this.IsBound)
+        {
+            return;
+        }
+
         this.View.OnSelect();
         this.onSelect(this.tag);
     }

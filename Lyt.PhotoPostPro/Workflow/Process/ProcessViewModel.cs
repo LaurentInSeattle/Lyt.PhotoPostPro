@@ -195,6 +195,7 @@ public sealed partial class ProcessViewModel :
         //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
 
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
+        var animationService = App.GetRequiredService<IAnimationService>();
         this.viewSelector =
             new ViewSelector<ActivatedView>(
                 this.View.ProcessViewContent,
@@ -202,7 +203,9 @@ public sealed partial class ProcessViewModel :
                 null, // no buttons 
                 selectableViews,
                 this.OnViewSelected,
-                this.View.ToolboxHostView.ContentGrid);
+                this.View.ToolboxHostView.ContentGrid,
+                animationService, 
+                animationDuration: 0.25);
     }
 
     private void OnViewSelected(ActivatedView activatedView)

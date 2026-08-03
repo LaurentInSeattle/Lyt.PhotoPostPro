@@ -179,7 +179,7 @@ public sealed partial class LibraryViewModel :
 
         // Need to schedule so that the view is bound 
         Schedule.OnUiThread(
-            66,
+            120,
             () =>
             {
                 // Select the 'Captured' option
@@ -243,7 +243,7 @@ public sealed partial class LibraryViewModel :
         {
             // Need to schedule so that the view is bound 
             Schedule.OnUiThread(
-                66,
+                120,
                 () =>
                 {
                     // Select the first year

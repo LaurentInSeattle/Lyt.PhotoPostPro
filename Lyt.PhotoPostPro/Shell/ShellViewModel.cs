@@ -7,11 +7,12 @@ public sealed partial class ShellViewModel
     IRecipient<ToolbarCommandMessage>,
     IRecipient<LanguageChangedMessage>
 {
-    private readonly PhotoPostProModel photoPostProModel;
+    private readonly PhotoPostProModel model;
     private readonly Fullscreen fullscreen;
     private readonly IToaster toaster;
+    private readonly IAnimationService animationService; 
 
-    [ObservableProperty]
+        [ObservableProperty]
     public partial bool MainToolbarIsVisible { get; set; }
 
     public Mouse MouseMonitor { get; private set;  }
@@ -19,10 +20,12 @@ public sealed partial class ShellViewModel
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
 
-    public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster)
+    public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster, IAnimationService animationService)
     {
-        this.photoPostProModel = photoPostProModel;
+        this.model = photoPostProModel;
         this.toaster = toaster;
+        this.animationService = animationService;
+
         this.fullscreen = new Fullscreen(App.MainWindow);
         this.MouseMonitor = new Mouse();
         this.MouseMonitor.Start(App.MainWindow);
@@ -45,7 +48,7 @@ public sealed partial class ShellViewModel
             this.fullscreen.GoFullscreen(this.View.ShellViewContent, vm.View);
             if (this.fullscreen.FullScreenWindow is Window fullscreenWindow)
             {
-                // Monitor mouse movement in the fullscreen window 
+                // Monitor mouse button states in the fullscreen window 
                 this.MouseMonitor = new Mouse();
                 this.MouseMonitor.Start(fullscreenWindow);
             } 
@@ -53,6 +56,8 @@ public sealed partial class ShellViewModel
         else if (message.Command == ToolbarCommandMessage.ToolbarCommand.BackToWindowed)
         {
             this.fullscreen.ReturnToWindowed();
+
+            // Now, back to monitoring mouse button states in the app main window 
             this.MouseMonitor = new Mouse();
             this.MouseMonitor.Start(App.MainWindow);
         }
@@ -69,7 +74,7 @@ public sealed partial class ShellViewModel
         }
 
         // Select default language 
-        string preferredLanguage = this.photoPostProModel.Language;
+        string preferredLanguage = this.model.Language;
         this.Logger.Debug("Language: " + preferredLanguage);
         this.Localizer.SelectLanguage(preferredLanguage);
         Thread.CurrentThread.CurrentCulture = new CultureInfo(preferredLanguage);
@@ -90,7 +95,7 @@ public sealed partial class ShellViewModel
         this.isFirstActivation = true;
 
         // ! viewSelector is Always there
-        this.viewSelector!.SelectView(this.photoPostProModel.IsFirstRun ? ActivatedView.Language : ActivatedView.Library);
+        this.viewSelector!.SelectView(this.model.IsFirstRun ? ActivatedView.Language : ActivatedView.Library);
         HotKeys.Instance.Set(this.View); 
 
         this.Logger.Debug("OnViewLoaded complete");
@@ -168,7 +173,8 @@ public sealed partial class ShellViewModel
                 this.View.SelectionGroup,
                 selectableViews,
                 this.OnViewSelected,
-                this.View.ShellViewToolbox);
+                this.View.ShellViewToolbox,
+                this.animationService);
 
         // Process view is only activated from single or folder view, so disable it by default
         ViewSelector<ActivatedView>.Disable(ActivatedView.Process);
