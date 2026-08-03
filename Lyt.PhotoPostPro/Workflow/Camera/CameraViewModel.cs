@@ -154,7 +154,7 @@ public sealed partial class CameraViewModel :
     {
         if (this.foundDevice is not null)
         {
-            this.model.CameraManager.DisposeDevice(this.foundDevice);
+            CameraManager.DisposeDevice(this.foundDevice);
             this.foundDevice = null;
         }
     }

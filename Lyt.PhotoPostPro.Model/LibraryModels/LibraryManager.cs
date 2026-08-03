@@ -85,12 +85,9 @@ public sealed class LibraryManager
                 File.Move(metadata.FullPath, targetPath, overwrite: true);
 
                 // Move thumbnail file 
-                string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
-                if (sourceFolder is null)
-                {
+                string? sourceFolder = 
+                    Path.GetDirectoryName(metadata.FullPath) ?? 
                     throw new Exception("No source folder for: " + metadata.FullPath);
-                }
-
                 string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
@@ -358,7 +355,11 @@ public sealed class LibraryManager
             }
             else
             {
-                if (Debugger.IsAttached) Debugger.Break();
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+
                 throw new Exception("Inavlid path: " + pathThumbnail);
             }
         }
@@ -484,12 +485,9 @@ public sealed class LibraryManager
             // Create target folder if needed 
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
-            string? sourceFolder = Path.GetDirectoryName(metadata.FullPath);
-            if (sourceFolder is null)
-            {
+            string? sourceFolder = 
+                Path.GetDirectoryName(metadata.FullPath) ?? 
                 throw new Exception("No source folder for: " + metadata.FullPath);
-            }
-
             string fileId = workflow.PostProcess.FileUidString;
             string filenameEdit = string.Concat(metadata.Filename, "_EDIT", fileId, ".json");
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);

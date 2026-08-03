@@ -33,7 +33,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         else
         {
             // Always launch a spinner for big or small files 
-            this.SpinWait(start: true);
+            SpinWait(start: true);
             Task.Run(() => { this.TryLoadImage(path); });
         }
     }
@@ -76,7 +76,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         finally
         {
             // Error or not: stop the spinner 
-            Dispatch.OnUiThread(() => { this.SpinWait(start: false); });
+            Dispatch.OnUiThread(() => { SpinWait(start: false); });
 
             if (!string.IsNullOrWhiteSpace(error))
             {
@@ -86,7 +86,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         }
     }
 
-    private void OnImageFailed(string error)
+    private void OnImageFailed(string _)
     {
         this.SourceImage = null;
         this.loadedImage = null;
@@ -100,12 +100,9 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
             InformationLevel.Error);
     }
 
-    private void OnImageLoaded(Frame frame)
-    {
-        this.SourceImage = frame.ToWriteableBitmap();
-    }
+    private void OnImageLoaded(Frame frame) =>this.SourceImage = frame.ToWriteableBitmap();
 
-    private void SpinWait(bool start = true)
+    private static void SpinWait(bool start = true)
     {
         var toolboxViewModel = App.GetRequiredService<SingleToolboxViewModel>();
         toolboxViewModel.SpinViewModel.IsVisible = start;

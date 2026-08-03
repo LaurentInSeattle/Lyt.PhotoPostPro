@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
 
-public class PostProcessStep
+public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
 {
     public const string StartStepName = "Start";
     public const string EndStepName = "End";
@@ -19,24 +19,17 @@ public class PostProcessStep
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
-    public PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name) 
-    {
-        this.PostProcessWorkflow = postProcessWorkflow;
-        this.Name = name;
-        this.IsFirstRun = true;
-    }
-
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 
     public PostProcessStep? PreviousStep { get; set; }
 
     public PostProcessStep? NextStep { get; set; }
 
-    public PostProcessWorkflow PostProcessWorkflow { get; private set; }
+    public PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow;
 
     public bool InitialRunNeeded { get; set; }
 
-    public bool IsFirstRun { get; set; }
+    public bool IsFirstRun { get; set; } = true;
 
     public Image<RgbaVector>? SourceImage { get; set; }
 

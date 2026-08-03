@@ -68,12 +68,7 @@ public sealed class PostProcessWorkflow
         var step =
             (from stp in this.Steps where stp is T stepOfT select (T)stp)
             .FirstOrDefault();
-        if (step is null)
-        {
-            throw new Exception("Invalid step type");
-        }
-
-        return step;
+        return step is null ? throw new Exception("Invalid step type") : step;
     }
 
     public bool Begin(Image<RgbaVector> originalImage)
@@ -128,13 +123,8 @@ public sealed class PostProcessWorkflow
         if (this.CanMoveNext)
         {
             // old step 
-            var nextSourceImage = this.CurrentStep.ResultImage;
-            if (nextSourceImage is null)
-            {
-                // User just clicked 'Next' without doing anything 
-                nextSourceImage = this.CurrentStep.SourceImage;
-            }
-
+            // User just clicked 'Next' without doing anything 
+            var nextSourceImage = this.CurrentStep.ResultImage ?? this.CurrentStep.SourceImage;
             this.CurrentStep.Deactivate(WorkflowUpdateKind.Next);
 
             // next

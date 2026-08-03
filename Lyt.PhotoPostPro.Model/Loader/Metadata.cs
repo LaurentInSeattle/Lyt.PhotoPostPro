@@ -154,8 +154,8 @@ public sealed class Metadata
     }
 
     // DO NOT simplify collection ?
-    private static readonly List<Tuple<string, string>> ExifToCode = new()
-    {
+    private static readonly List<Tuple<string, string>> ExifToCode =
+    [
         new( "Make" , "Make" ),
         new( "Model" , "Model" ),
         new( "Date/Time Original" , "Captured" ),
@@ -171,7 +171,7 @@ public sealed class Metadata
         new( "GPS Longitude" , "Longitude" ),
         new( "GPS Latitude" , "LatitudeString" ),
         new( "GPS Longitude" , "LongitudeString" ),
-    };
+    ];
 
     private void PopulateExifMetadata(IReadOnlyList<MetadataExtractor.Directory> directories)
     {

@@ -18,7 +18,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             Watermarks = new Watermarks(),
         };
 
-    private readonly object lockObject = new();
+    private readonly Lock lockObject = new();
 
     private readonly FileManagerModel fileManager;
     private readonly ILocalizer localizer;

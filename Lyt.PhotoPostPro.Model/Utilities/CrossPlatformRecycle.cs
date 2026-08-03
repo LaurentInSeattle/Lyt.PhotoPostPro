@@ -71,7 +71,10 @@ public static  class CrossPlatformRecycle
             using var process = Process.Start(psi);
             process?.WaitForExit();
 
-            if (process?.ExitCode == 0) return;
+            if (process?.ExitCode == 0)
+            {
+                return;
+            }
         }
         catch { /* Fallback to manual if xdg-trash is missing */ }
 

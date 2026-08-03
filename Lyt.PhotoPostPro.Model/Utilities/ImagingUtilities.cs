@@ -147,7 +147,7 @@ public static class ImagingUtilities
                     var row = accessor.GetRowSpan(y);
                     foreach (ref RgbaVector pixelVector in row)
                     {
-                        Rgba32 pixel = pixelVector.ToRgba32(); 
+                        var pixel = pixelVector.ToRgba32(); 
                         rgbaData[offset++] = pixel.R ;
                         rgbaData[offset++] = pixel.G ;
                         rgbaData[offset++] = pixel.B ;

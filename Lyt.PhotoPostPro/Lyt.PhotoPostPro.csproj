@@ -31,6 +31,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\Panels\SVirtualizingPanel.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingStackPanel.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingUniformGrid.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingWrapPanel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Controls\Lyt.Avalonia.Controls.csproj" />
     <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Interfaces\Lyt.Avalonia.Interfaces.csproj" />
     <ProjectReference Include="..\..\Lyt.Avalonia\Lyt.Avalonia.Localizer\Lyt.Avalonia.Localizer.csproj" />
@@ -45,12 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\HSelectorControl.axaml.cs">
-      <DependentUpon>HSelectorControl.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Controls\VSelectorControl.axaml.cs">
-      <DependentUpon>VSelectorControl.axaml</DependentUpon>
-    </Compile>
+    <Folder Include="Controls\Panels\" />
   </ItemGroup>
 
 </Project>

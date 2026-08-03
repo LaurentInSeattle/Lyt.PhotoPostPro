@@ -4,9 +4,9 @@ public sealed class Signature
 {
     public const string DefaultKey = "Default";
 
-    private static Signature defaultSignature => new() { Key = DefaultKey };
+    private static Signature DefaultSignature => new() { Key = DefaultKey };
 
-    public static Signature Default => defaultSignature;
+    public static Signature Default => DefaultSignature;
 
     public string Key { get; set; } = string.Empty;
 

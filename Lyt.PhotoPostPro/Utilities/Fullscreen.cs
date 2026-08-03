@@ -86,10 +86,7 @@ public sealed class Fullscreen(Window mainWindow)
             this.IsFullscreen = true;
 
             var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
-            if (topLevel is not null)
-            {
-                topLevel.KeyDown += this.OnTopLevelKeyDown;
-            }
+            topLevel?.KeyDown += this.OnTopLevelKeyDown;
 
             HotKeys.Instance.Set(view);
         }
@@ -138,10 +135,7 @@ public sealed class Fullscreen(Window mainWindow)
             HotKeys.Instance.Clear(this.fullscreenView);
 
             var topLevel = TopLevel.GetTopLevel(this.fullscreenWindow);
-            if (topLevel is not null)
-            {
-                topLevel.KeyDown -= this.OnTopLevelKeyDown;
-            }
+            topLevel?.KeyDown -= this.OnTopLevelKeyDown;
 
             this.fullscreenWindow.Content = null;
             this.fullscreenWindow.Close();

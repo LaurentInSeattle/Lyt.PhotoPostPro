@@ -7,19 +7,13 @@ internal sealed class HotKeys
     public void Set(Control control)
     {
         var topLevel = TopLevel.GetTopLevel(control);
-        if (topLevel is not null)
-        {
-            topLevel.KeyDown += this.OnTopLevelKeyDown;
-        }
+        topLevel?.KeyDown += this.OnTopLevelKeyDown;
     }
 
     public void Clear(Control control)
     {
         var topLevel = TopLevel.GetTopLevel(control);
-        if (topLevel is not null)
-        {
-            topLevel.KeyDown -= this.OnTopLevelKeyDown;
-        }
+        topLevel?.KeyDown -= this.OnTopLevelKeyDown;
     }
 
     private void OnTopLevelKeyDown(object? sender, KeyEventArgs e)

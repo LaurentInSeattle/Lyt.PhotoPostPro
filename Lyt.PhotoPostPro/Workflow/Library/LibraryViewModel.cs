@@ -573,7 +573,7 @@ public sealed partial class LibraryViewModel :
 
     private void OnRemoveConfirmed(object? obj, bool isValid)
     {
-        if (isValid && obj is ConfirmRemoveDialogModel confirmRemoveDialogModel)
+        if (isValid && obj is ConfirmRemoveDialogModel)
         {
             if (this.selectedLibraryThumbnailViewModel is null ||
                 this.selectedLibraryThumbnailViewModel.Metadata is null)

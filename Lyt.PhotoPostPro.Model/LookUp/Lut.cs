@@ -1,11 +1,11 @@
-﻿namespace Lyt.PhotoPostPro.Model;
+﻿namespace Lyt.PhotoPostPro.Model.LookUp;
 
 using System.Globalization;
 
 /// <summary> A class that represents a 3D LUT with a 3D multidimensional array.  </summary>
 public sealed class Lut
 {
-    private static readonly string[] Separators = { " " };
+    private static readonly string[] Separators = [" "];
 
     /// <summary> Creates a new Lut from the array of string lines a 3DL file </summary>
     /// <param name="lines"> The file Content</param>
@@ -36,15 +36,14 @@ public sealed class Lut
         }
 
         // Now we are on the line containing the slices
-        var tokens = line.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
+        string[] tokens = line.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
 
         // All tokens should parse as ints and be in increasing order
         int cubeSize = tokens.GetLength(0);
         lut.Slices = new List<int>(cubeSize);
         for (int k = 0; k < cubeSize; ++k)
         {
-            int value = 0;
-            if (int.TryParse(tokens[k], out value))
+            if (int.TryParse(tokens[k], out int value))
             {
                 lut.Slices.Add(value);
                 if (k > 0)

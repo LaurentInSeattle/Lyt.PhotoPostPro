@@ -118,7 +118,7 @@ public sealed class MetadataFolders
             return false;
         }
 
-        name = name.Substring(YearPrefix.Length);
+        name = name[YearPrefix.Length..];
         if (!int.TryParse(name, out year))
         {
             return false;
@@ -170,7 +170,7 @@ public sealed class MetadataFolders
             return false;
         }
 
-        name = name.Substring(0, 2);
+        name = name[..2];
         if (!int.TryParse(name, out month))
         {
             return false;
@@ -224,7 +224,7 @@ public sealed class MetadataFolders
         }
 
         dayOfWeek = index;
-        name = name.Substring(0, 2);
+        name = name[..2];
         if (!int.TryParse(name, out day))
         {
             return false;

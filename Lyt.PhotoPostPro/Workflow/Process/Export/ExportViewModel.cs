@@ -6,8 +6,8 @@ public sealed partial class ExportViewModel : StepViewModel<ExportView>
     {
     }
 
-    public override void Activate(object? activationParameters)
-    {
-        base.Activate(activationParameters);
-    }
+    //public override void Activate(object? activationParameters)
+    //{
+    //    base.Activate(activationParameters);
+    //}
 }

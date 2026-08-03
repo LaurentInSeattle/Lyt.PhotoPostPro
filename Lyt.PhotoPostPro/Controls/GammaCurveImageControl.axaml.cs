@@ -3,7 +3,7 @@ namespace Lyt.PhotoPostPro.Controls;
 public partial class GammaCurveImageControl : UserControl
 {
     private const double canvasHeight = 256.0;
-    private double canvasWidth = 512.0;
+    private const double canvasWidth = 512.0;
 
     public enum BrushColor { Red, Green, Blue, Luminosity }
 

@@ -186,7 +186,7 @@ public partial class CropGridView : View
         {
             double imageWidth = this.Bounds.Width;
             double imageHeight = this.Bounds.Height;
-            double zoom = 1.0; 
+            double zoom ; 
             if ( imageWidth > imageHeight )
             {
                 // Landscape: use width for zoom factor 

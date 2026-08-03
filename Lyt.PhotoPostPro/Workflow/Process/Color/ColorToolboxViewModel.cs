@@ -10,7 +10,6 @@ public sealed partial class ColorToolboxViewModel :
     private float red;
     private float green;
     private float blue;
-    private LutMetadata lutMetadata = LutMetadata.Empty;
 
     protected override string Title => this.Localize("Workflow.Color.Title");
 

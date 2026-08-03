@@ -77,7 +77,11 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                if (Debugger.IsAttached) Debugger.Break();
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+
                 return null;
             }
         }

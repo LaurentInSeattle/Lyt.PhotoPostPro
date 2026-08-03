@@ -212,10 +212,7 @@ public sealed class FolderTree
         this.Sort();
     }
 
-    public void UpdateOnFileRemoved()
-    {
-        this.Cleanup();
-    }
+    public void UpdateOnFileRemoved() => this.Cleanup();
 
     public YearFolder AddYearIfNeeded(int year)
     {

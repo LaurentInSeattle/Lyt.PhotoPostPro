@@ -17,7 +17,7 @@ public sealed partial class DropViewModel : ViewModel<DropView>, IRecipient<Lang
     public partial bool IsVisible { get; set; }
 
     [ObservableProperty]
-    public partial string DropZoneHelp { get; set; }
+    public partial string DropZoneHelp { get; set; } = string.Empty; 
 
     public void Receive(LanguageChangedMessage message) => this.Localize();
 

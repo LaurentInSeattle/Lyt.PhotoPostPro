@@ -14,14 +14,8 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override Frame? Transform(bool withFrame = true) => this.Reset();
 
-    private void Clear()
-    {
-    }
-
     public override Frame? Reset()
     {
-        this.Clear();
-
         if (this.SourceImage is null)
         {
             return null;
@@ -245,7 +239,11 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                if (Debugger.IsAttached) Debugger.Break();
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+
                 return string.Empty;
             }
         }

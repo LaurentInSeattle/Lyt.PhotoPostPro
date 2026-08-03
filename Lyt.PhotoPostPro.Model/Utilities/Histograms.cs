@@ -32,7 +32,7 @@ public sealed class Histograms
                 ++pixelCount;
 
                 // Increment the bin for each color channel
-                Rgba32 pixel = row[x].ToRgba32();
+                var pixel = row[x].ToRgba32();
                 redHistogram[pixel.R]++;
                 greenHistogram[pixel.G]++;
                 blueHistogram[pixel.B]++;

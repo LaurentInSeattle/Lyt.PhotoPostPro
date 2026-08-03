@@ -7,7 +7,7 @@ public partial class DropView : View
     private static readonly SolidColorBrush? normalBrush;
     private static readonly SolidColorBrush? hotBrush;
 
-    private IBrush? normalBrushBackground;
+    private readonly IBrush? normalBrushBackground;
 
     static DropView()
     {

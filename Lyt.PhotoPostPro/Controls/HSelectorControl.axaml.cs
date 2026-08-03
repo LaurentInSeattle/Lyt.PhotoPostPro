@@ -41,8 +41,5 @@ public partial class HSelectorControl : UserControl
         return value!;
     }
 
-    public HSelectorControl()
-    {
-        this.InitializeComponent();
-    }
+    public HSelectorControl() => this.InitializeComponent();
 }

@@ -44,7 +44,7 @@ public sealed partial class ComposeToolboxViewModel :
 
     protected override string Title => this.Localize("Workflow.Compose.Title");
 
-    private static List<string> supportedGuidesKeys =
+    private static readonly List<string> supportedGuidesKeys =
         [
             "Workflow.Compose.CG.None" , // => this.View.ZeroCG,
             "Workflow.Compose.CG.Thirds"  , // 1 => this.View.ThirdsCG,

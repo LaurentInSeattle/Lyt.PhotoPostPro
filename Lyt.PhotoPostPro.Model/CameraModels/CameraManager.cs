@@ -214,7 +214,7 @@ public class CameraManager
         }
     }
 
-    public void DisposeDevice(FoundDevice foundDevice)
+    public static void DisposeDevice(FoundDevice foundDevice)
     {
         var devices = MediaDevice.GetDevices().ToList();
         MediaDevice? device =

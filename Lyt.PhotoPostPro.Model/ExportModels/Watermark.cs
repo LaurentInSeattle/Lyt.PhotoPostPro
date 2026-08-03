@@ -4,9 +4,9 @@ public sealed class Watermark
 {
     public const string DefaultKey = "Default";
 
-    private static Watermark defaultWatermark => new() { Key = DefaultKey };
+    private static Watermark DefaultWatermark => new() { Key = DefaultKey };
 
-    public static Watermark Default => defaultWatermark;
+    public static Watermark Default => DefaultWatermark;
 
     public string Key { get; set; } = string.Empty;
 

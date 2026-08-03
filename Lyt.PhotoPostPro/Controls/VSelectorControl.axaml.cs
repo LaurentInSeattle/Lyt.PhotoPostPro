@@ -41,8 +41,5 @@ public partial class VSelectorControl : UserControl
         return value!;
     }
 
-    public VSelectorControl()
-    {
-        this.InitializeComponent();
-    }
+    public VSelectorControl() => this.InitializeComponent();
 }
