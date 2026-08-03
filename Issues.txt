@@ -1,12 +1,17 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Recent Sony image fails to load 
+- Edits are not showing up in the library view after processing an image. 
+They do show up in the library view after restarting the app. 
+
+- Export the editing JSON file along with the images.
+
+- Recent Sony A7V image fails to load 
 Check with:
 https://github.com/laheller/SharpLibraw  
 https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
-- Animate view transitions when navigating between pages. Currently, the transitions are abrupt.
+- View transitions when navigating between Process steps causes the toolbox to hide.
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)

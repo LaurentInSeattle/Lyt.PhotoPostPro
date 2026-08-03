@@ -511,17 +511,18 @@ public sealed partial class LibraryViewModel :
         Task.Run(() =>
         {
             // New processing 
-            this.model.ProcessImageFromMetadata(
-                metadata, isNew, this.model.FileUidString, parameters);
+            this.model.ProcessImageFromMetadata(metadata, isNew, this.model.FileUidString, parameters);
             Dispatch.OnUiThread(
                 () =>
                 {
+                    this.libraryMgr.UpdateEditedFile(metadata);
                     this.LaunchProcessing();
                     this.SpinWait(start: false);
                 },
                 DispatcherPriority.ApplicationIdle);
         });
     }
+    
     private void LaunchProcessing()
     {
         var postProcess = this.model.CurrentPostProcess;

@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Loader;
 
+using System.IO;
+
 public sealed class Metadata
 {
     private const float Megabytes = 1024.0f * 1024.0f;
@@ -103,6 +105,18 @@ public sealed class Metadata
     public DateTime LastEditedUTC { get; set; } = DateTime.MinValue;
 
     public DateTime AddedToLibraryUTC { get; set; } = DateTime.MinValue;
+
+    public string MetadataFullPath ()
+    {
+        string? directoryPath = Path.GetDirectoryName(this.FullPath); 
+        if (string.IsNullOrWhiteSpace(directoryPath))
+        {
+            throw new ArgumentException("Invalid file path.", nameof(this.FullPath));
+        }
+
+        return Path.Combine(directoryPath, this.Filename + "_META.json");
+    }
+
 
     // Star count from 0 (unrated) , then 1 to 5 (best)
     public int Rating { get; set; }

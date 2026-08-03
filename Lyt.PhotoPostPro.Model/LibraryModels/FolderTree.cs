@@ -226,4 +226,21 @@ public sealed class FolderTree
 
         return yearFolder;
     }
+
+    internal void Remove(string metadataFilePath)
+    {
+        foreach (var year in this.YearFolders)
+        {
+            foreach (var month in year.MonthFolders)
+            {
+                foreach (var day in month.DayFolders)
+                {
+                    if (day.MetadataFiles.Remove(metadataFilePath))
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }

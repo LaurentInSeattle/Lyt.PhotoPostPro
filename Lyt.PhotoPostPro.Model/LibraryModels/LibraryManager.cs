@@ -236,6 +236,27 @@ public sealed class LibraryManager
         }
     }
 
+    public void UpdateEditedFile(Metadata metadata)
+    {
+        // Check if library manager is initialized
+        if ((this.fileManager is null) || (this.EditedFolderTree is null))
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
+            // Update folder tree 
+            string metadataFilePath = metadata.MetadataFullPath(); 
+            this.EditedFolderTree.Remove(metadataFilePath);
+            this.EditedFolderTree.UpdateOnFileAdded(metadata, metadataFilePath);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
+    }
+
     public void LoadThumbnails()
     {
         this.imageLoadedCount = 0;
