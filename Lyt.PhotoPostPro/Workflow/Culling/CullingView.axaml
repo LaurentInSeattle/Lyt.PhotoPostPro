@@ -12,7 +12,8 @@
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
+	xmlns:stars="clr-namespace:Lyt.Avalonia.Controls.StarRating;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
 	>
@@ -26,10 +27,113 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="220" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="480"/>
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
+		<Image
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.RowSpan="999"
+			Stretch="UniformToFill"
+			Source="\Assets\Images\sky.jpg"
+			Opacity="0.7"
+			/>
+		<ListBox
+			Grid.Row="1" Grid.Column="1"
+			ItemsSource="{Binding ImageThumbnails}"
+			SelectedItems="{Binding SelectedThumbnails}"
+			SelectionMode="Multiple"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			> 
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<VirtualizingStackPanel 
+						Background="Transparent"
+						Orientation="Vertical" 
+						/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Image 
+						Source="{Binding Bitmap}" 
+						Width="200" MaxHeight="160"
+						/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel
+			Grid.Row="1" Grid.Column="4"
+			Background="Black"
+			Opacity="0.4"
+			>
+			<Image
+				Source="{Binding SelectedThumbnail}"
+				Margin="0"
+				IsHitTestVisible="False"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480"
+				MaxHeight="380"
+				/>
+			<stars:RatingControl
+				IsVisible="{Binding HasSelection}"
+				Width="200" Height="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Margin="0 4 0 4"
+				RatingValue="4"
+				IsReadOnly="True"
+				/>
+			<!--
+
+			<glyphs:GlyphButton
+				x:Name="ProcessButton"
+				IsVisible="{Binding HasSelection}"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480" Height="56"
+				Margin="0 4 0 12"
+				GlyphSource="wand"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Library.ProcessImage}"
+				Command="{Binding OnProcess}"
+	    		/>
+			<glyphs:GlyphButton
+				x:Name="RemoveButton"
+				IsVisible="{Binding HasSelection}"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480" Height="56"
+				Margin="0 0 0 4"
+				GlyphSource="delete"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Library.RemoveImage}"
+				Command="{Binding OnRemove}"
+	    		/>
+			<metadatapane:MetadataView
+				DataContext="{Binding SelectedThumnailMetadataViewModel}"
+				HorizontalAlignment="Stretch" 
+				Margin="0 0 0 4"
+				/>
+			<glyphs:GlyphButton
+				IsVisible="{Binding HasSelection}"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="480" Height="56"
+				Margin="0 0 0 12"
+				GlyphSource="arrow_export_up"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Library.Navigate}"
+				Command="{Binding OnNavigate}"
+		    	/>
+			-->
+		</StackPanel>
 	</Grid>
 </UserControl>

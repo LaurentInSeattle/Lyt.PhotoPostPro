@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Culling Workflow and  Rating system 
+
 - Export (copy) the editing JSON file along with the images.
 
 - Recent Sony A7V image fails to load 
@@ -8,7 +10,7 @@ Check with:
 https://github.com/laheller/SharpLibraw  
 https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
-- View transitions when navigating between Process steps causes the toolbox to hide.
+- View transitions when navigating between Process steps sometimes causes the toolboxes to hide.
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
@@ -56,8 +58,6 @@ Missing Features
 - Parametrize Root Location of Library and Root Location of Exports 
 
 - Bulk Import of photos into library 
-
-- Culling Workflow and  Rating system 
 
 
 --- Important ---

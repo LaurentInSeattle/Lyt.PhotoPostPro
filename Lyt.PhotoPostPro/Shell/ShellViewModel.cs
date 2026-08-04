@@ -42,10 +42,28 @@ public sealed partial class ShellViewModel
 
     public void Receive(ToolbarCommandMessage message)
     {
+        if (this.viewSelector is null)
+        {
+            return;
+        }
+
         if (message.Command == ToolbarCommandMessage.ToolbarCommand.GoFullscreen)
         {
-            var vm = App.GetRequiredService<ProcessViewModel>();
-            this.fullscreen.GoFullscreen(this.View.ShellViewContent, vm.View);
+            View view; 
+            if ( this.viewSelector.CurrentPrimaryViewModel is ProcessViewModel)
+            {
+                view = App.GetRequiredService<ProcessViewModel>().View;
+            }
+            else if (this.viewSelector.CurrentPrimaryViewModel is CullingViewModel)
+            {
+                view = App.GetRequiredService<CullingViewModel>().View;
+            }
+            else
+            {
+                return;
+            }
+
+            this.fullscreen.GoFullscreen(this.View.ShellViewContent, view);
             if (this.fullscreen.FullScreenWindow is Window fullscreenWindow)
             {
                 // Monitor mouse button states in the fullscreen window 

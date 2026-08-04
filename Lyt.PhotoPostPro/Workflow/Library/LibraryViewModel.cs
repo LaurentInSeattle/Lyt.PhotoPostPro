@@ -640,6 +640,11 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
+        var files = 
+            this.LibraryThumbnailsPanelViewModel.Thumbnails.Select(t => t.Path).ToList();
+        var rateAndCull = App.GetRequiredService<CullingViewModel>();
+        rateAndCull.Initialize(files);
+
         // Launch the Rate and Cull view
         var shell = App.GetRequiredService<ShellViewModel>();
         shell.EnableAndSelect(ActivatedView.Culling);
