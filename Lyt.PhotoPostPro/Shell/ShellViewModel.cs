@@ -111,7 +111,7 @@ public sealed partial class ShellViewModel
         var selectableViews = new List<SelectableView<ActivatedView>>();
 
         void Setup<TViewModel, TControl, TToolbarViewModel, TToolbarControl>(
-                ActivatedView activatedView, Control? control)
+                ActivatedView activatedView, Control? control = null)
             where TViewModel : ViewModel<TControl>
             where TControl : Control, IView, new()
             where TToolbarViewModel : ViewModel<TToolbarControl>
@@ -135,6 +135,16 @@ public sealed partial class ShellViewModel
             selectableViews.Add(new SelectableView<ActivatedView>(activatedView, vm, control));
         }
 
+        #region  Unused for now 
+        //void SetupNoToolbarNoButton<TViewModel, TControl>(ActivatedView activatedView)
+        //    where TViewModel : ViewModel<TControl>
+        //    where TControl : Control, IView, new()
+        //{
+        //    var vm = App.GetRequiredService<TViewModel>();
+        //    vm.CreateViewAndBind();
+        //    selectableViews.Add(new SelectableView<ActivatedView>(activatedView, vm, null));
+        //}
+
         // Unused for now 
         //void SetupToolboxNoToolbar<TViewModel, TControl, TToolboxViewModel, TToolboxControl>(
         //        ActivatedView activatedView, Control? control)
@@ -151,7 +161,9 @@ public sealed partial class ShellViewModel
         //    var selectable = new SelectableView<ActivatedView>(activatedView, vm, control, null, vmToolbox);
         //    selectableViews.Add(selectable);
         //}
+        #endregion  Unused for now 
 
+        // Views present in the main selector on the left  
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
         SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
@@ -161,8 +173,10 @@ public sealed partial class ShellViewModel
             ActivatedView.Language, view.FlagButton);
 
         // No button for process view, as it is only used as a secondary view (from single or folder)
-        Setup<ProcessViewModel, ProcessView, ProcessToolbarViewModel, ProcessToolbarView>(
-            ActivatedView.Process, null);
+        Setup<ProcessViewModel, ProcessView, ProcessToolbarViewModel, ProcessToolbarView>(ActivatedView.Process);
+
+        // No toolbar and no button for the culling view, as it is only used as a secondary view (from the Library view)
+        Setup<CullingViewModel, CullingView, CullingToolbarViewModel, CullingToolbarView>(ActivatedView.Culling);
 
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
         this.viewSelector =

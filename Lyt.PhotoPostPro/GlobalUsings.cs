@@ -93,7 +93,8 @@ global using Lyt.Utilities.Randomizing;
 
 #endregion Framework 
 
-
+// Main App library namespaces (Avalonia dependent)
+//
 global using Lyt.PhotoPostPro.Controls;
 global using Lyt.PhotoPostPro.Panes;
 global using Lyt.PhotoPostPro.Panes.HistogramPane;
@@ -130,6 +131,8 @@ global using Lyt.PhotoPostPro.Workflow.Single;
 global using Lyt.PhotoPostPro.Workflow.Tools;
 
 
+// Model library namespaces
+//
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.CameraModels;
 global using Lyt.PhotoPostPro.Model.ExportModels;

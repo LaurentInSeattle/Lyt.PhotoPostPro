@@ -59,6 +59,9 @@
     <Compile Update="Workflow\Culling\CullingView.axaml.cs">
       <DependentUpon>CullingView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Culling\CullingToolbarView.axaml.cs">
+      <DependentUpon>CullingToolbarView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Settings\SettingsView.axaml.cs">
       <DependentUpon>SettingsView.axaml</DependentUpon>
     </Compile>

@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Оцініть і відберіть цей набір</system:String>
+
     <system:String x:Key="Library.ProcessImage">Обробити це зображення</system:String>
 
     <system:String x:Key="Library.RemoveImage">Видалити з бібліотеки</system:String>

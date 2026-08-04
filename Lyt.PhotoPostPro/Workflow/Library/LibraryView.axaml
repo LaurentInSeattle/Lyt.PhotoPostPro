@@ -56,6 +56,21 @@
 			Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
 			DataContext="{Binding LibraryThumbnailsPanelViewModel}"
 			/>
+		<glyphs:GlyphButton
+			x:Name="CullButton"
+			Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+			IsVisible="{Binding IsAddedSelected}"
+			Style="{StaticResource ViewIconButton}"
+			FontSize="24"
+			HorizontalAlignment="Right" VerticalAlignment="Top"
+			Width="480" Height="56"
+			Margin="0 8 12 0"
+			GlyphSource="star"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Text="{DynamicResource Library.RateAndCull}"
+			Command="{Binding OnRateAndCull}"
+	    	/>
 		<StackPanel
 			Grid.Row="3" Grid.Column="4"
 			>

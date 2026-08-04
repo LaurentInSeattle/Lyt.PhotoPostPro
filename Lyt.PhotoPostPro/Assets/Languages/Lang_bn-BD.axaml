@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">দেখান:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">এই সেটটি রেট করুন এবং কাটুন</system:String>
+
     <system:String x:Key="Library.ProcessImage">এই চিত্রটি প্রক্রিয়া করুন</system:String>
 
     <system:String x:Key="Library.RemoveImage">লাইব্রেরি থেকে সরান</system:String>

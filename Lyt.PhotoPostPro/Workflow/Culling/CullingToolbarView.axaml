@@ -1,0 +1,34 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Culling.CullingToolbarView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Culling"
+	x:DataType="vm:CullingToolbarViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
+	>	
+	<StackPanel
+		Orientation="Horizontal"
+		Margin="0 0 0 0"
+		HorizontalAlignment="Right"
+		Background="#30000080"
+		>
+		<!-- TODO 
+			More stuff here ? 
+		-->
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="full_screen_maximize"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Process.Toolbar.FullScreen}"  
+			Command="{Binding OnFullscreen}"
+			/>
+	</StackPanel>
+
+</UserControl>

@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Évaluez et triez ce groupe</system:String>
+
     <system:String x:Key="Library.ProcessImage">Traiter cette Image</system:String>
 
     <system:String x:Key="Library.RemoveImage">Supprimer de la Bibliothèque</system:String>

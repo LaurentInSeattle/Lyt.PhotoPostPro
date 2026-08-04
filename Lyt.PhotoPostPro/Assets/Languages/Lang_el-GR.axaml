@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Επίδειξη:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Βαθμολογήστε και αποσπάστε αυτό το σετ</system:String>
+
     <system:String x:Key="Library.ProcessImage">Επεξεργαστείτε αυτήν την εικόνα</system:String>
 
     <system:String x:Key="Library.RemoveImage">Κατάργηση από τη Βιβλιοθήκη</system:String>

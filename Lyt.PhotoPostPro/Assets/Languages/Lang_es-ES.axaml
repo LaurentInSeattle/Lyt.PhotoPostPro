@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Espectáculo:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Califica y selecciona este conjunto</system:String>
+
     <system:String x:Key="Library.ProcessImage">Procesar esta imagen</system:String>
 
     <system:String x:Key="Library.RemoveImage">Eliminar de la biblioteca</system:String>

@@ -87,6 +87,9 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial bool HasSelection { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsAddedSelected { get; set; }
+
     public LibraryViewModel(
         PhotoPostProModel photoPostProModel,
         IDialogService dialogService,
@@ -236,16 +239,19 @@ public sealed partial class LibraryViewModel :
         {
             this.selectedViewing = Viewing.Captured;
             folderTree = this.libraryMgr.CapturedFolderTree;
+            this.IsAddedSelected = false;
         }
         else if (optionKey == "Added")
         {
             this.selectedViewing = Viewing.Added;
             folderTree = this.libraryMgr.AddedFolderTree;
+            this.IsAddedSelected = true;
         }
         else if (optionKey == "Edited")
         {
             this.selectedViewing = Viewing.Edited;
             folderTree = this.libraryMgr.EditedFolderTree;
+            this.IsAddedSelected = false;
         }
         else
         {
@@ -623,5 +629,19 @@ public sealed partial class LibraryViewModel :
             this.selectedLibraryThumbnailViewModel = null;
             this.HasSelection = false;
         }
+    }
+
+    [RelayCommand]
+    public void OnRateAndCull()
+    {
+        if (this.LibraryThumbnailsPanelViewModel.Thumbnails.Count == 0)
+        {
+            // no images to process
+            return;
+        }
+
+        // Launch the Rate and Cull view
+        var shell = App.GetRequiredService<ShellViewModel>();
+        shell.EnableAndSelect(ActivatedView.Culling);
     }
 }

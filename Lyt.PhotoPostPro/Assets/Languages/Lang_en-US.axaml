@@ -238,6 +238,7 @@
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+	<system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
 	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
 	<system:String x:Key="Library.Navigate">Navigate to Library Folder</system:String>

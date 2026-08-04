@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Zeigen:</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Bewerten und aussortieren Sie dieses Set</system:String>
+
     <system:String x:Key="Library.ProcessImage">Verarbeiten Sie dieses Bild</system:String>
 
     <system:String x:Key="Library.RemoveImage">Aus der Bibliothek entfernen</system:String>

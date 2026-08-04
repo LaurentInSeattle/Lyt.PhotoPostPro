@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
 
+    <system:String x:Key="Library.RateAndCull">このセットを評価して選別する</system:String>
+
     <system:String x:Key="Library.ProcessImage">この画像を処理する</system:String>
 
     <system:String x:Key="Library.RemoveImage">ライブラリから削除</system:String>

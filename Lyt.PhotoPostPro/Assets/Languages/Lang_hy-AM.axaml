@@ -367,6 +367,8 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Ցույց տալ՝</system:String>
 
+    <system:String x:Key="Library.RateAndCull">Գնահատեք և հանեք այս հավաքածուն</system:String>
+
     <system:String x:Key="Library.ProcessImage">Մշակել այս պատկերը</system:String>
 
     <system:String x:Key="Library.RemoveImage">Հեռացնել գրադարանից</system:String>

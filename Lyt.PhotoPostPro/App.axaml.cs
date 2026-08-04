@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro;
 
-using Lyt.PhotoPostPro.Workflow.Culling;
-
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
@@ -34,9 +32,10 @@ public partial class App : ApplicationBase
             typeof(LanguageViewModel),
             typeof(LanguageToolbarViewModel),
 
-            // Culling ViewModels and Toolbox ViewModels
+            // Culling ViewModel and Toolbar ViewModel
             // 
             typeof(CullingViewModel),
+            typeof(CullingToolbarViewModel),
 
             // Process ViewModels and Toolbox ViewModels, in Workflow order for convenience.
             // 
