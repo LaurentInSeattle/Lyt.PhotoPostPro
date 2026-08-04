@@ -55,4 +55,16 @@
     <Folder Include="Controls\Panels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Workflow\Culling\CullingView.axaml.cs">
+      <DependentUpon>CullingView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Settings\SettingsView.axaml.cs">
+      <DependentUpon>SettingsView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\ToolsView.axaml.cs">
+      <DependentUpon>ToolsView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">Paramètres</system:String>
 
+    <system:String x:Key="Shell.Tools">Outils</system:String>
+
     <system:String x:Key="Shell.Language">Langue</system:String>
 
     <system:String x:Key="Imaging.InProgress">En cours</system:String>

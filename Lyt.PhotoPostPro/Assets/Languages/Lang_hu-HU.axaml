@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 
+    <system:String x:Key="Shell.Tools">Eszközök</system:String>
+
     <system:String x:Key="Shell.Language">Nyelv</system:String>
 
     <system:String x:Key="Imaging.InProgress">Folyamatban van</system:String>

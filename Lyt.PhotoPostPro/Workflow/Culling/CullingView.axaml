@@ -1,0 +1,35 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Culling.CullingView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Culling"
+	x:DataType="vm:CullingViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+
+	Background="Transparent"
+	>
+	<Grid	
+		x:Name="ToasterHost"
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="480"/>
+			<ColumnDefinition Width="8" />
+		</Grid.ColumnDefinitions>
+	</Grid>
+</UserControl>

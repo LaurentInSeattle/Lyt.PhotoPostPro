@@ -155,6 +155,8 @@ public sealed partial class ShellViewModel
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
         SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
+        SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
+        SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
 
@@ -210,7 +212,13 @@ public sealed partial class ShellViewModel
     public void OnLibrary() => this.viewSelector?.SelectView(ActivatedView.Library);
 
     [RelayCommand]
+    public void OnSettings() => this.viewSelector?.SelectView(ActivatedView.Settings);
+
+    [RelayCommand]
     public void OnLanguage() => this.viewSelector?.SelectView(ActivatedView.Language);
+
+    [RelayCommand]
+    public void OnTools() => this.viewSelector?.SelectView(ActivatedView.Tools);
 
 #pragma warning disable IDE0079 
 #pragma warning disable CA1822 // Mark members as static

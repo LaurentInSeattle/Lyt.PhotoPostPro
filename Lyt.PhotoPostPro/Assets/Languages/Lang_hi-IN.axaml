@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
 
+    <system:String x:Key="Shell.Tools">औजार</system:String>
+
     <system:String x:Key="Shell.Language">भाषा</system:String>
 
     <system:String x:Key="Imaging.InProgress">प्रगति पर है</system:String>

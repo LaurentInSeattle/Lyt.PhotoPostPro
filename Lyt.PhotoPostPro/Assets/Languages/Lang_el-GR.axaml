@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
 
+    <system:String x:Key="Shell.Tools">Εργαλεία</system:String>
+
     <system:String x:Key="Shell.Language">Γλώσσα</system:String>
 
     <system:String x:Key="Imaging.InProgress">Σε εξέλιξη</system:String>

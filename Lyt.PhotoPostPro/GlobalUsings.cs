@@ -104,6 +104,7 @@ global using Lyt.PhotoPostPro.Messaging;
 global using Lyt.PhotoPostPro.Shell;
 global using Lyt.PhotoPostPro.Utilities;
 global using Lyt.PhotoPostPro.Workflow.Camera;
+global using Lyt.PhotoPostPro.Workflow.Culling;
 global using Lyt.PhotoPostPro.Workflow.Library;
 global using Lyt.PhotoPostPro.Workflow.Library.Dialogs;
 global using Lyt.PhotoPostPro.Workflow.Language;
@@ -123,8 +124,10 @@ global using Lyt.PhotoPostPro.Workflow.Process.Vignette;
 global using Lyt.PhotoPostPro.Workflow.Process.Filters;
 global using Lyt.PhotoPostPro.Workflow.Process.WhiteBalance;
 global using Lyt.PhotoPostPro.Workflow.Process.Shared;
+global using Lyt.PhotoPostPro.Workflow.Settings;
 global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Single;
+global using Lyt.PhotoPostPro.Workflow.Tools;
 
 
 global using Lyt.PhotoPostPro.Model;

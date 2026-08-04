@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">Настройки</system:String>
 
+    <system:String x:Key="Shell.Tools">Инструменти</system:String>
+
     <system:String x:Key="Shell.Language">език</system:String>
 
     <system:String x:Key="Imaging.InProgress">В ход</system:String>

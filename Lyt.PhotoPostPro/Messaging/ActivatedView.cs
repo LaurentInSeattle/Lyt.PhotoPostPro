@@ -7,9 +7,15 @@ public enum ActivatedView : int
 
     // Main selector views
     Library,
+    Camera,
     Language,
     Single,
+    Settings,
+    Tools,
+
+    // Hidden views, not directly accessible from the main selector
     Process,
+    Culling,
 
     // Secondary views (activated from ProcessView) 
     // In alphabetical order, not the workflow order, which is determined elsewhere.
@@ -28,6 +34,5 @@ public enum ActivatedView : int
     WhiteBalance,
     Vignette,
     Filters,
-    Camera,
     Lut,
 }

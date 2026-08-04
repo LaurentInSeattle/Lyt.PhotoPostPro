@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
 
+    <system:String x:Key="Shell.Tools">Գործիքներ</system:String>
+
     <system:String x:Key="Shell.Language">Լեզու</system:String>
 
     <system:String x:Key="Imaging.InProgress">Ընթացքի մեջ</system:String>

@@ -31,6 +31,8 @@
 
     <system:String x:Key="Shell.Settings">설정</system:String>
 
+    <system:String x:Key="Shell.Tools">도구</system:String>
+
     <system:String x:Key="Shell.Language">언어</system:String>
 
     <system:String x:Key="Imaging.InProgress">진행 중</system:String>

@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- White Balance needs a zero algorithm 
-
 - Export (copy) the editing JSON file along with the images.
 
 - Recent Sony A7V image fails to load 
@@ -14,8 +12,6 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
-
-- UI for rating Images
 
 - Review all process steps to ensure that the source image is not unnecessarily cloned.
 
@@ -120,9 +116,7 @@ Cool Stuff to Consider
 
 - Show rating stars on the thumbnail in the library view 
 
-- Keep highly rated edited images in a special gallery folder 
-
-- Browse the gallery 
+- Keep highly rated edited images in a special gallery folder, ability to browse this gallery 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 

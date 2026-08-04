@@ -134,6 +134,24 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton
+						x:Name="SettingsButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="settings"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Settings}"
+						Command="{Binding OnSettings}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
+						x:Name="ToolsButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="toolbox"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Tools}"
+						Command="{Binding OnTools}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="FlagButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="flag"
