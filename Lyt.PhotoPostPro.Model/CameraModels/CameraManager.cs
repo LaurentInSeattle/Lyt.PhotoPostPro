@@ -30,8 +30,8 @@ Just flagging it so it doesn't surprise you later.
 public class CameraManager
 {
     public const int UiResponseDelayTime_ms = 66; // About one frame
-    public const int ReQueryDelayTime_ms = 1_000;
-    public const int FastCameraMonitoringTime_ms = 2_500;
+    public const int ReQueryDelayTime_ms = 900;
+    public const int FastCameraMonitoringTime_ms = 3_500;
     public const int SlowCameraMonitoringTime_ms = 5_000;
 
     private readonly string downloadFolderPath;
@@ -246,7 +246,7 @@ public class CameraManager
     {
         HashSet<string> allFiles = [];
 
-        int retries = 3;
+        int retries = 7;
         while (retries > 0)
         {
             allFiles.Clear();

@@ -1,10 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Edits are not showing up in the library view after processing an image. 
-They do show up in the library view after restarting the app. 
+- White Balance needs a zero algorithm 
 
-- Export the editing JSON file along with the images.
+- Export (copy) the editing JSON file along with the images.
 
 - Recent Sony A7V image fails to load 
 Check with:

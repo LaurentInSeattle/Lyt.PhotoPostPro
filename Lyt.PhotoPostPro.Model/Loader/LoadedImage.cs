@@ -4,6 +4,8 @@ public sealed class LoadedImage
 {
     public bool IsSuccess { get; set; }
 
+    public string LoadedFrom { get; set; } = string.Empty;
+
     public string ErrorMessage { get; set; } = string.Empty;
 
     public string Exception { get; set; } = string.Empty;

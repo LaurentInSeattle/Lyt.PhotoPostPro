@@ -58,6 +58,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             return;
         }
 
+        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.None;
         this.temperature = 0.0f;
         this.saturationThreshold = 0.4f;
 
@@ -105,8 +106,10 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     {
         With.Flag(ref this.doNotUpdateModel, () =>
         {
+            this.algorithm = step.Algorithm;
+
             // Here we need to undo the operations done reading the sliders 
-            // No transform for the staturation threshold 
+            // No transform for the saturation threshold 
             this.SaturationSliderValue = step.SaturationThreshold;
             this.TemperatureSliderValue = step.Temperature;
 
@@ -169,6 +172,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
                     case WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch:
                         // Already done above
                         break;
+
                     case WhiteBalanceStep.WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
                         this.model.FilteredGrayWorldAWB(this.saturationThreshold);
                         break;

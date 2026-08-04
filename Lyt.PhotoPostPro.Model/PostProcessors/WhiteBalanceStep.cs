@@ -1,11 +1,12 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) : 
+public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.WhiteBalanceStepName)
 {
     public enum WhiteBalanceAlgorithm
     {
-        FilteredGrayWorldAWB, 
+        None,
+        FilteredGrayWorldAWB,
         ColorMatrix,
         TannerHelland,
         WhitePatch,
@@ -38,10 +39,11 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         switch (ppp.WhiteBalanceAlgorithm)
         {
             default:
-                break; 
+            case WhiteBalanceAlgorithm.None:
+                break;
 
             case WhiteBalanceAlgorithm.ColorMatrix:
-                this.ColorMatrixWhiteBalance(ppp.WhiteBalanceTemperature); 
+                this.ColorMatrixWhiteBalance(ppp.WhiteBalanceTemperature);
                 break;
 
             case WhiteBalanceAlgorithm.TannerHelland:
@@ -49,11 +51,11 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
-                this.FilteredGrayWorldAWB( ppp.WhiteBalanceSaturationThreshold);
+                this.FilteredGrayWorldAWB(ppp.WhiteBalanceSaturationThreshold);
                 break;
 
             case WhiteBalanceAlgorithm.WhitePatch:
-                this.WhitePatchWhiteBalance(ppp.WhiteBalanceRed, ppp.WhiteBalanceGreen, ppp.WhiteBalanceBlue); 
+                this.WhitePatchWhiteBalance(ppp.WhiteBalanceRed, ppp.WhiteBalanceGreen, ppp.WhiteBalanceBlue);
                 break;
         }
     }
@@ -65,32 +67,39 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged = true; // For now 
-        switch (this.Algorithm)
+        Image<RgbaVector> clone;
+        if (this.Algorithm == WhiteBalanceAlgorithm.None)
         {
-            case WhiteBalanceAlgorithm.ColorMatrix:
-                clone.ApplyColorTemperature(this.Temperature);
-                break;
+            clone = this.SourceImage;
+        }
+        else
+        {
+            clone = this.SourceImage.Clone();
+            switch (this.Algorithm)
+            {
+                case WhiteBalanceAlgorithm.ColorMatrix:
+                    clone.ApplyColorTemperature(this.Temperature);
+                    break;
 
-            case WhiteBalanceAlgorithm.TannerHelland:
-                clone.AdjustColorTemperature(this.Kelvin);
-                break;
+                case WhiteBalanceAlgorithm.TannerHelland:
+                    clone.AdjustColorTemperature(this.Kelvin);
+                    break;
 
-            case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
-                clone.FilteredGrayWorldAWB(this.SaturationThreshold);
-                break;
+                case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
+                    clone.FilteredGrayWorldAWB(this.SaturationThreshold);
+                    break;
 
-            case WhiteBalanceAlgorithm.WhitePatch:
-                clone.WhitePatchWhiteBalance(this.Red, this.Green, this.Blue);
-                break;
+                case WhiteBalanceAlgorithm.WhitePatch:
+                    clone.WhitePatchWhiteBalance(this.Red, this.Green, this.Blue);
+                    break;
 
-            default:
-                throw new NotImplementedException("No such White Balance algorithm");
+                default:
+                    throw new NotImplementedException("No such White Balance algorithm");
+            }
         }
 
         PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = isChanged ? clone : this.SourceImage;
+        this.ResultImage = clone;
         return withFrame ? clone.ToFrame() : null;
     }
 
@@ -108,7 +117,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? FilteredGrayWorldAWB(float saturationThreshold) 
+    internal Frame? FilteredGrayWorldAWB(float saturationThreshold)
     {
         this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.SaturationThreshold = saturationThreshold;
@@ -126,11 +135,11 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
 
     private void Clear()
     {
-        this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
-        this.SaturationThreshold = 0.4f;
+        this.Algorithm = WhiteBalanceAlgorithm.None;
 
         // Clear all properties so that the UI sliders are also reset to default on Reset 
         this.Temperature = 0.0f;
+        this.SaturationThreshold = 0.4f;
         this.Kelvin = 1000.0f; // This one hidden for now 
         this.Red = 0.0f;
         this.Green = 0.0f;

@@ -159,7 +159,18 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
             return;
         }
 
-        this.model.LibraryManager.AddDroppedFile(this.loadedImage);
+        var libraryManager = this.model.LibraryManager; 
+        libraryManager.AddDroppedFile(this.loadedImage);
+        if (this.loadedImage.Metadata is Metadata metadata)
+        {
+            libraryManager.UpdateEditedFile(metadata);
+        }
+        else
+        {
+            this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
+            // No need to show error message to user
+        }
+
         this.model.ProcessLoadedImage(this.loadedImage);
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
@@ -169,7 +180,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
         }
         else
         {
-            this.Logger.Warning("Failed to create post process from dropped file: ");
+            this.Logger.Warning("Failed to create post process from dropped file: " + this.loadedImage.LoadedFrom);
             // TODO : Show error message to user
         }
     }

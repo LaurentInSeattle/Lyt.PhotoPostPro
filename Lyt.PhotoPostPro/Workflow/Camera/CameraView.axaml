@@ -82,7 +82,7 @@
 				/>
 		</StackPanel>
 		<TextBlock
-			Grid.Row="2" Grid.Column="1"
+			Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
 			Text="{Binding FileDownloaded}"
 			Theme="{StaticResource H3}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"

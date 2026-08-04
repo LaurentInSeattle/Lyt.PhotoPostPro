@@ -249,7 +249,10 @@ public sealed class LibraryManager
             // Update folder tree 
             string metadataFilePath = metadata.MetadataFullPath(); 
             this.EditedFolderTree.Remove(metadataFilePath);
-            this.EditedFolderTree.UpdateOnFileAdded(metadata, metadataFilePath);
+            var dayFolder = this.EditedFolderTree.UpdateOnFileAdded(metadata, metadataFilePath);
+
+            // Notify UI 
+            new FolderTreeUpdatedMessage(FolderTreeKind.Edited, dayFolder).Publish();
         }
         catch (Exception ex)
         {

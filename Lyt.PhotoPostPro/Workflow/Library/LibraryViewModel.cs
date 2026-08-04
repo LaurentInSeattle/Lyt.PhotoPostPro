@@ -4,6 +4,7 @@ public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LibraryLoadedMessage>,
     IRecipient<ThumbnailUpdatedMessage>,
+    IRecipient<FolderTreeUpdatedMessage>,
     ISelectListener
 {
     public enum Viewing
@@ -106,12 +107,33 @@ public sealed partial class LibraryViewModel :
         this.selectedViewing = Viewing.Captured;
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
+        this.Subscribe<FolderTreeUpdatedMessage>();
     }
+
+    public void Receive(FolderTreeUpdatedMessage message)
+        => Dispatch.OnUiThread(
+                () => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
+
+    public void ReceiveOnUiThread(FolderTreeUpdatedMessage message)
+    {
+        switch (message.FolderTreeKind)
+        {
+            default:
+            case FolderTreeKind.Captured:
+                break;
+
+            case FolderTreeKind.Added:
+                break;
+
+            case FolderTreeKind.Edited:
+                this.Options[^1].Select();
+                break;
+        }
+    } 
 
     public void Receive(ThumbnailUpdatedMessage message)
         => Dispatch.OnUiThread(
-                () => { this.ReceiveOnUiThread(message); },
-                DispatcherPriority.Background);
+                () => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
 
     public void ReceiveOnUiThread(ThumbnailUpdatedMessage message)
     {

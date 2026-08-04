@@ -125,6 +125,7 @@ public static class ImageLoader
             }
             else
             {
+                loadedImage.LoadedFrom = imagePath;
                 if (loadedImage.IsSuccess)
                 {
                     loadedImage.RotateIfNeeded();
@@ -142,7 +143,7 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryLoadHiecWithOpenize(string imagePath)
+    private static LoadedImage TryLoadHiecWithOpenize(string imagePath)
     {
         try
         {
@@ -187,7 +188,7 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryLoadWithImageSharp(string imagePath)
+    private static LoadedImage TryLoadWithImageSharp(string imagePath)
     {
         try
         {
@@ -237,7 +238,7 @@ public static class ImageLoader
         }
     }
 
-    public static unsafe LoadedImage TryLoadWithLibRaw(string imagePath)
+    private static unsafe LoadedImage TryLoadWithLibRaw(string imagePath)
     {
         try
         {
@@ -379,7 +380,7 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryPreLoadHiecWithOpenize(string imagePath)
+    private static LoadedImage TryPreLoadHiecWithOpenize(string imagePath)
     {
         try
         {
@@ -441,7 +442,7 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryPreLoadWithImageSharp(string imagePath)
+    private static LoadedImage TryPreLoadWithImageSharp(string imagePath)
     {
         try
         {
@@ -498,7 +499,7 @@ public static class ImageLoader
         }
     }
 
-    public static LoadedImage TryPreLoadWithLibRaw(string imagePath)
+    private static LoadedImage TryPreLoadWithLibRaw(string imagePath)
     {
         try
         {
