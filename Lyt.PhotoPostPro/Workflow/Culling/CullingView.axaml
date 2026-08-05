@@ -59,6 +59,7 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Image 
+						Margin="4 0 24 0"
 						Source="{Binding Bitmap}" 
 						Width="190" MaxHeight="150"
 						/>
@@ -66,10 +67,8 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<Viewbox
-			Grid.Row="1" Grid.Column="2"
-			> 
 			<ItemsControl 
+			Grid.Row="1" Grid.Column="2"
 				ItemsSource="{Binding SelectedImages}"
 				>
 			  <ItemsControl.ItemsPanel>
@@ -92,7 +91,6 @@
 				</DataTemplate>
 			  </ItemsControl.ItemTemplate>
 			</ItemsControl>
-		</Viewbox>
 		<StackPanel
 			Grid.Row="1" Grid.Column="4"
 			Background="Black"
