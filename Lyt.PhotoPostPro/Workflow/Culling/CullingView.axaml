@@ -27,7 +27,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="220" />
+			<ColumnDefinition Width="240" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="480"/>
@@ -41,9 +41,10 @@
 			Opacity="0.7"
 			/>
 		<ListBox
+			x:Name="StripListBox"
 			Grid.Row="1" Grid.Column="1"
 			ItemsSource="{Binding ImageThumbnails}"
-			SelectedItems="{Binding SelectedThumbnails}"
+			SelectedItems="{Binding SelectedThumbnails, Mode=TwoWay}"
 			SelectionMode="Multiple"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			> 
@@ -59,11 +60,39 @@
 				<DataTemplate>
 					<Image 
 						Source="{Binding Bitmap}" 
-						Width="200" MaxHeight="160"
+						Width="190" MaxHeight="150"
 						/>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
+
+		<Viewbox
+			Grid.Row="1" Grid.Column="2"
+			> 
+			<ItemsControl 
+				ItemsSource="{Binding SelectedImages}"
+				>
+			  <ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+				  <UniformGrid
+					  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					  />
+				</ItemsPanelTemplate>
+			  </ItemsControl.ItemsPanel>
+	  
+			  <ItemsControl.ItemTemplate>
+				<DataTemplate >
+					<Image 
+						Margin="8"
+						Source="{Binding Bitmap}" 
+						Stretch="Uniform" 
+						HorizontalAlignment="Center"  VerticalAlignment="Center"
+						RenderOptions.BitmapInterpolationMode="HighQuality"
+						/>
+				</DataTemplate>
+			  </ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Viewbox>
 		<StackPanel
 			Grid.Row="1" Grid.Column="4"
 			Background="Black"
@@ -100,7 +129,7 @@
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Library.ProcessImage}"
 				Command="{Binding OnProcess}"
-	    		/>
+				/>
 			<glyphs:GlyphButton
 				x:Name="RemoveButton"
 				IsVisible="{Binding HasSelection}"
@@ -114,7 +143,7 @@
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Library.RemoveImage}"
 				Command="{Binding OnRemove}"
-	    		/>
+				/>
 			<metadatapane:MetadataView
 				DataContext="{Binding SelectedThumnailMetadataViewModel}"
 				HorizontalAlignment="Stretch" 
@@ -132,7 +161,7 @@
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Library.Navigate}"
 				Command="{Binding OnNavigate}"
-		    	/>
+				/>
 			-->
 		</StackPanel>
 	</Grid>

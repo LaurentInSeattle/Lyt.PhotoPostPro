@@ -6,15 +6,9 @@
         </Border>
     </Design.PreviewWith>
 
-	<!--
 	<Style Selector="ListBox">
-		<Setter Property="Foreground" Value="{StaticResource LightAqua_0_120}"/>
-		<Setter Property="Background" Value="Blue"/>
-		<Setter Property="BorderBrush" Value="{StaticResource OrangePeel_0_040}"/>
-		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="IsEnabled" Value="True"/>
+		<Setter Property="Background" Value="{StaticResource DeepBlue_2_020}"/>
 	</Style>
-    -->
 </Styles>
 
 <!--

@@ -18,6 +18,8 @@
         <StyleInclude Source="/Assets/Theme/RadioButtonStyles.axaml"/>
         <StyleInclude Source="/Assets/Theme/PickerStyles.axaml"/>
         <StyleInclude Source="/Assets/Theme/GridSplitterStyles.axaml" />
+        <StyleInclude Source="/Assets/Theme/ListBoxStyles.axaml"/>
+        <StyleInclude Source="/Assets/Theme/ListBoxItemStyles.axaml"/>
     </Application.Styles>
 
     <Application.Resources>

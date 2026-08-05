@@ -31,6 +31,9 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public partial List<UiThumbnail> ImageThumbnails { get; set; } = [];
 
     [ObservableProperty]
+    public partial List<UiThumbnail> SelectedImages { get; set; } = [];    
+
+    [ObservableProperty]
     public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
 
     public CullingViewModel(PhotoPostProModel model, IToaster toaster)
@@ -38,17 +41,17 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         this.model = model;
         this.libraryManager = model.LibraryManager;
         this.toaster = toaster;
-
-        this.SelectedThumbnails.CollectionChanged += (s, e) => this.OnSelectedThumbnailsChanged(e);
     }
 
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+        this.View.StripListBox.SelectionChanged += this.OnSelectedThumbnailsChanged;
     }
 
     public override void Deactivate()
     {
+        this.View.StripListBox.SelectionChanged -= this.OnSelectedThumbnailsChanged;
         this.allThumbnails.Clear();
         this.ImageThumbnails.Clear();
         this.SelectedThumbnails.Clear();
@@ -71,21 +74,13 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         this.ImageThumbnails = list;
     }
 
-    private void OnSelectedThumbnailsChanged(NotifyCollectionChangedEventArgs e)
+    private void OnSelectedThumbnailsChanged( object? sender, SelectionChangedEventArgs e)
     {
-        if (!this.IsActivated)
+        if (!this.IsActivated || sender is null)
         {
             return;
         }
 
-        if (e.NewItems is not null)
-        {
-            Debug.WriteLine(" OnSelectedThumbnailsChanged: New: " + e.NewItems.Count);
-        }
-
-        if (e.OldItems is not null)
-        {
-            Debug.WriteLine(" OnSelectedThumbnailsChanged: Old: " + e.OldItems.Count);
-        }
+        this.SelectedImages = this.SelectedThumbnails.ToList(); 
     }
 }
