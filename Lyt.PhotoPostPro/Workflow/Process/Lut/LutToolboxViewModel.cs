@@ -111,7 +111,7 @@ public sealed partial class LutToolboxViewModel :
             // Possible Avalonia Bug ? Need to test with latest 12.0.5
             // Debug Output shows:
             // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
-            Schedule.OnUiThread(128, () =>
+            Schedule.OnUiThread(150, () =>
                 {
                     this.lutMetadata = this.AvailableLuts[value];
                     this.UpdateModel();

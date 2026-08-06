@@ -382,125 +382,6 @@ public static class ImageLoader
         }
     }
 
-    private static LoadedImage TryPreLoadHiecWithOpenize(string imagePath, bool isHd)
-    {
-        try
-        {
-            using var fs = new FileStream(imagePath, FileMode.Open);
-            if (!HeicImage.CanLoad(fs))
-            {
-                // errorMessage = "The source image cannot be loaded with Openize.";
-                return LoadedImage.Fail("Model.Loader.OpenizeCantLoad");
-            }
-
-            var heicImage = HeicImage.Load(fs);
-            var frames = heicImage.Frames;
-            if (frames is null || frames.Count == 0)
-            {
-                // errorMessage = "The source image cannot be loaded with Openize.";
-                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
-            }
-
-            var frame = heicImage.DefaultFrame;
-            int width = (int)frame.Width;
-            int height = (int)frame.Height;
-
-            byte[] pixels;
-            var thumbnailFrame =
-                (from f in frames.Values where f.Width < width select f).FirstOrDefault();
-            if (thumbnailFrame is not null)
-            {
-                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
-                width = (int)thumbnailFrame.Width;
-                height = (int)thumbnailFrame.Height;
-            }
-            else
-            {
-                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
-            }
-
-            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
-            ExifData? exif = heicImage.Exif;
-            if (exif is not null)
-            {
-                directories = exif.DirectoriesList;
-            }
-            // else // No metadata : Directories stays null 
-
-            var metadata = new Metadata(imagePath, width, height, directories);
-            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-
-            // Create thumbnail 
-            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
-            Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
-
-            return LoadedImage.PreLoaded(metadata, jpgEncoded);
-        }
-        catch (Exception ex)
-        {
-            // errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
-            Debug.WriteLine(ex);
-            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
-        }
-    }
-
-    private static LoadedImage TryPreLoadWithImageSharp(string imagePath, bool isHd)
-    {
-        try
-        {
-            // Load the image file into memory 
-            var imageFormat = Image.DetectFormat(imagePath);
-            if (imageFormat is null)
-            {
-                // errorMessage = "Unsupported image format in ImageSharp.";
-                return LoadedImage.Fail("Model.Loader.ImageSharpNotDetected");
-            }
-
-            Debug.WriteLine(imageFormat.Name);
-
-            var image24 = Image.Load<Rgb24>(imagePath);
-            if (image24 is null)
-            {
-                // errorMessage = "Failed to load the source image with ImageSharp.";
-                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
-            }
-
-            // Save original image dimensions 
-            int width = image24.Width;
-            int height = image24.Height;
-
-            Debug.WriteLine("Image 24 loaded with ImageSharp: " + imagePath);
-
-            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
-            ImageMetadata imageMetadata = image24.Metadata;
-            ExifProfile? exifProfile = imageMetadata.ExifProfile;
-            if (exifProfile is not null)
-            {
-                var fieldInfo = exifProfile.GetType().GetField("data", BindingFlags.Instance | BindingFlags.NonPublic);
-                if (fieldInfo is not null)
-                {
-                    object? fieldData = fieldInfo.GetValue(exifProfile);
-                    if (fieldData is byte[] exifRawData)
-                    {
-                        var memoryStream = new MemoryStream(exifRawData);
-                        directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(memoryStream);
-                    }
-                }
-            }
-
-            // Create thumbnail and metadata, image24 mutates! 
-            var metadata = new Metadata(imagePath, width, height, directories);
-            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
-            return LoadedImage.PreLoaded(metadata, jpgEncoded);
-        }
-        catch (Exception ex)
-        {
-            // errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
-            Debug.WriteLine(ex);
-            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
-        }
-    }
-
     private static LoadedImage TryPreLoadWithLibRaw(string imagePath)
     {
         try
@@ -661,6 +542,161 @@ public static class ImageLoader
 
     #endregion Loading HD Size Images
 
+    #region Shared
+
+    private static LoadedImage TryPreLoadHiecWithOpenize(string imagePath, bool isHd)
+    {
+        try
+        {
+            using var fs = new FileStream(imagePath, FileMode.Open);
+            if (!HeicImage.CanLoad(fs))
+            {
+                // errorMessage = "The source image cannot be loaded with Openize.";
+                return LoadedImage.Fail("Model.Loader.OpenizeCantLoad");
+            }
+
+            var heicImage = HeicImage.Load(fs);
+            var frames = heicImage.Frames;
+            if (frames is null || frames.Count == 0)
+            {
+                // errorMessage = "The source image cannot be loaded with Openize.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
+            }
+
+            var frame = heicImage.DefaultFrame;
+            int width = (int)frame.Width;
+            int height = (int)frame.Height;
+
+            byte[] pixels;
+            var thumbnailFrame =
+                (from f in frames.Values where f.Width < width select f).FirstOrDefault();
+            if (thumbnailFrame is not null)
+            {
+                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
+                width = (int)thumbnailFrame.Width;
+                height = (int)thumbnailFrame.Height;
+            }
+            else
+            {
+                pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
+            }
+
+            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
+            ExifData? exif = heicImage.Exif;
+            if (exif is not null)
+            {
+                directories = exif.DirectoriesList;
+            }
+            // else // No metadata : Directories stays null 
+
+            var metadata = new Metadata(imagePath, width, height, directories);
+            var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
+
+            // Create thumbnail 
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
+            Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
+
+            return LoadedImage.PreLoaded(metadata, jpgEncoded);
+        }
+        catch (Exception ex)
+        {
+            // errorMessage = "An error occurred while loading the HIEC image with Openize." + ex.Message;
+            Debug.WriteLine(ex);
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+        }
+    }
+
+    private static LoadedImage TryPreLoadWithImageSharp(string imagePath, bool isHd)
+    {
+        try
+        {
+            // Load the image file into memory 
+            var imageFormat = Image.DetectFormat(imagePath);
+            if (imageFormat is null)
+            {
+                // errorMessage = "Unsupported image format in ImageSharp.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpNotDetected");
+            }
+
+            Debug.WriteLine(imageFormat.Name);
+
+            var image24 = Image.Load<Rgb24>(imagePath);
+            if (image24 is null)
+            {
+                // errorMessage = "Failed to load the source image with ImageSharp.";
+                return LoadedImage.Fail("Model.Loader.ImageSharpFailedLoad");
+            }
+
+            // Save original image dimensions 
+            int width = image24.Width;
+            int height = image24.Height;
+
+            Debug.WriteLine("Image 24 loaded with ImageSharp: " + imagePath);
+
+            IReadOnlyList<MetadataExtractor.Directory>? directories = null;
+            ImageMetadata imageMetadata = image24.Metadata;
+            ExifProfile? exifProfile = imageMetadata.ExifProfile;
+            if (exifProfile is not null)
+            {
+                var fieldInfo = exifProfile.GetType().GetField("data", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (fieldInfo is not null)
+                {
+                    object? fieldData = fieldInfo.GetValue(exifProfile);
+                    if (fieldData is byte[] exifRawData)
+                    {
+                        var memoryStream = new MemoryStream(exifRawData);
+                        directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(memoryStream);
+                    }
+                }
+            }
+
+            // Create thumbnail and metadata, image24 mutates! 
+            var metadata = new Metadata(imagePath, width, height, directories);
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
+            return LoadedImage.PreLoaded(metadata, jpgEncoded);
+        }
+        catch (Exception ex)
+        {
+            // errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
+            Debug.WriteLine(ex);
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+        }
+    }
+
+    /// <summary> Returns null if OK ! </summary>
+    private static LoadedImage? Guard(string imagePath)
+    {
+        if (string.IsNullOrWhiteSpace(imagePath))
+        {
+            return LoadedImage.Fail("Model.Loader.InvalidPath");
+        }
+
+        if (!File.Exists(imagePath))
+        {
+            // "Source file does not exist."
+            return LoadedImage.Fail("Model.Loader.NotExisting");
+        }
+
+        if (HasExcludedExtension(imagePath))
+        {
+            // "Source file has a know extension for something that is def' not an image.";
+            // Play safe with user documents 
+            return LoadedImage.Fail("Model.Loader.ExcludedNotImage");
+        }
+
+        if (HasMovieExtension(imagePath))
+        {
+            // "Source file is likely a movie.";
+            return LoadedImage.Fail("Model.Loader.MaybeMovie");
+        }
+
+        return null;
+    }
+
+    #endregion Shared
+
+    #region Thumnails
+
     /// <summary> Generates rotated thumnail from image, original is lost </summary>
     /// <remarks> Returns a higher definition and better quality JPEG, if isHD is true . </remarks>
     public static byte[] GenerateJpgThumbnailWithMutate<TPixel>(Image<TPixel> image, Metadata metadata, bool isHd)
@@ -756,33 +792,5 @@ public static class ImageLoader
         return new Size(newWidth, newHeight);
     }
 
-    /// <summary> Returns null if OK ! </summary>
-    private static LoadedImage? Guard(string imagePath)
-    {
-        if (string.IsNullOrWhiteSpace(imagePath))
-        {
-            return LoadedImage.Fail("Model.Loader.InvalidPath");
-        }
-
-        if (!File.Exists(imagePath))
-        {
-            // "Source file does not exist."
-            return LoadedImage.Fail("Model.Loader.NotExisting");
-        }
-
-        if (HasExcludedExtension(imagePath))
-        {
-            // "Source file has a know extension for something that is def' not an image.";
-            // Play safe with user documents 
-            return LoadedImage.Fail("Model.Loader.ExcludedNotImage");
-        }
-
-        if (HasMovieExtension(imagePath))
-        {
-            // "Source file is likely a movie.";
-            return LoadedImage.Fail("Model.Loader.MaybeMovie");
-        }
-
-        return null;
-    }
+    #endregion Thumnails
 }

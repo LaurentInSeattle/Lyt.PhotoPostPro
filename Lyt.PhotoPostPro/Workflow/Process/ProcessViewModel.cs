@@ -73,6 +73,12 @@ public sealed partial class ProcessViewModel :
             return;
         }
 
+        if (message.Kind == WorkflowUpdateKind.Reset)
+        {
+            // Stay on same page, nothing to do
+            return; 
+        }
+
         if (message.Kind == WorkflowUpdateKind.Finish)
         {
             var shell = App.GetRequiredService<ShellViewModel>();

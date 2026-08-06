@@ -5,9 +5,9 @@ public sealed partial class FiltersToolboxViewModel :
     IRecipient<LanguageChangedMessage>
 {
     private bool doNotUpdateModel;
-    private FiltersStep.Filter selectedFilter; 
+    private FiltersStep.Filter selectedFilter;
 
-    private float amount ;
+    private float amount;
 
     public FiltersToolboxViewModel()
     {
@@ -20,6 +20,7 @@ public sealed partial class FiltersToolboxViewModel :
 
     private static readonly List<string> supportedFiltersKeys =
         [
+            // Must match the order of the Filter enum defined in FilterStep
             "Workflow.Filters.None" ,
             "Workflow.Filters.Grayscale" ,
             "Workflow.Filters.Sepia"  ,
@@ -29,25 +30,14 @@ public sealed partial class FiltersToolboxViewModel :
             // Image Sharp randomly crashes with these 
             //
             "Workflow.Filters.Kodachrome"  ,
-            "Workflow.Filters.Polaroid"  ,
             "Workflow.Filters.Lomograph"  ,
-        ];
-
-    private static readonly List<FiltersStep.Filter> filters =
-        [
-            FiltersStep.Filter.None,
-            FiltersStep.Filter.Grayscale,
-            FiltersStep.Filter.Sepia,
-            FiltersStep.Filter.Vignette,
-            FiltersStep.Filter.BlackWhite,
-            FiltersStep.Filter.Kodachrome,
-            FiltersStep.Filter.Polaroid,
-            FiltersStep.Filter.Lomograph,
+            "Workflow.Filters.Polaroid"  ,
         ];
 
     [ObservableProperty]
     public partial List<string> SupportedFilters { get; set; } =
         // Needs localization : these are default
+        // Must match the order of the Filter enum defined in FilterStep
         [
             "None" ,
             "Grayscale" ,
@@ -55,8 +45,8 @@ public sealed partial class FiltersToolboxViewModel :
             "Vignette"  ,
             "Black and White"  ,
             "Kodachrome"  ,
-            "Polaroid"  ,
             "Lomograph"  ,
+            "Polaroid"  ,
         ];
 
     [ObservableProperty]
@@ -108,11 +98,11 @@ public sealed partial class FiltersToolboxViewModel :
 
     public override void OnModelStepUpdated(FiltersStep step) => this.UpdateSliders(step);
 
-    private void UpdateSliders(FiltersStep  step)
+    private void UpdateSliders(FiltersStep step)
     {
         With.Flag(ref this.doNotUpdateModel, () =>
         {
-            this.SelectedIndex = (int) step.SelectedFilter;
+            this.SelectedIndex = (int)step.SelectedFilter;
 
             // Here we need to undo the operations done reading the sliders 
             // No transforms for highlights and shadows amounts 
@@ -120,11 +110,11 @@ public sealed partial class FiltersToolboxViewModel :
         });
     }
 
-    partial void OnAmountSliderValueChanged  (double value)
+    partial void OnAmountSliderValueChanged(double value)
     {
         // Slider sends 0 to +1
         this.amount = (float)value;
-        int intValue = (int)(value * 100.0 + 0.5); 
+        int intValue = (int)(value * 100.0 + 0.5);
         this.AmountString = intValue.ToString("D") + " %";
         this.UpdateModel();
     }
@@ -138,13 +128,16 @@ public sealed partial class FiltersToolboxViewModel :
             // Possible Avalonia Bug ? Need to test with latest 12.0.5
             // Debug Output shows:
             // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
-            Schedule.OnUiThread(66, () =>
+            if (Enum.IsDefined(typeof(FiltersStep.Filter), value))
             {
-                this.selectedFilter = filters[value];
-                this.UpdateModel();
-            }, DispatcherPriority.Background);
+                Schedule.OnUiThread(150, () =>
+                {
+                    this.selectedFilter = (FiltersStep.Filter)value;
+                    this.UpdateModel();
+                }, DispatcherPriority.Background);
+            }
         }
-    } 
+    }
 
     private void UpdateModel()
     {
@@ -153,7 +146,7 @@ public sealed partial class FiltersToolboxViewModel :
             return;
         }
 
-        if (( this.selectedFilter == FiltersStep.Filter.Grayscale) || (this.selectedFilter == FiltersStep.Filter.Sepia))
+        if ((this.selectedFilter == FiltersStep.Filter.Grayscale) || (this.selectedFilter == FiltersStep.Filter.Sepia))
         {
             this.ThrottleModelUpdate(() =>
             {

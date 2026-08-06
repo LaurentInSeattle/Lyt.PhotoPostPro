@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- View transitions when navigating between Process steps sometimes causes the toolboxes to hide.
+
 - Culling Workflow and  Rating system 
 
 - Export (copy) the editing JSON file along with the images.
@@ -9,8 +11,6 @@ Bugs ~ Major Issues
 Check with:
 https://github.com/laheller/SharpLibraw  
 https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
-
-- View transitions when navigating between Process steps sometimes causes the toolboxes to hide.
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)

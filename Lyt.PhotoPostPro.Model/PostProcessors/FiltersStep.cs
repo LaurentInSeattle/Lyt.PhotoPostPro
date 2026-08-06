@@ -36,7 +36,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case Filter.Grayscale:
-                if ( ppp.FilterAmount > 0.001)
+                if (ppp.FilterAmount > 0.001)
                 {
                     this.Grayscale(ppp.FilterAmount);
                 }
@@ -47,7 +47,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
                 {
                     this.Sepia(ppp.FilterAmount); ;
                 }
-                
+
                 break;
 
             case Filter.Vignette:
@@ -80,13 +80,19 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         // Image is unchanged if the amount is 0.0, for Grayscale and Sepia
-        // Other filters are always applied without parameter 
+        if ((this.SelectedFilter == Filter.None) ||
+            ((this.SelectedFilter == Filter.Grayscale) && (this.Amount < 0.001)) ||
+            ((this.SelectedFilter == Filter.Sepia) && (this.Amount < 0.001)))
+        {
+            return withFrame ? this.SourceImage.ToFrame() : null;
+        }
+
         var clone = this.SourceImage.Clone();
         switch (this.SelectedFilter)
         {
             default:
             case Filter.None:
-                break; 
+                break;
 
             case Filter.Grayscale:
                 clone.Grayscale(this.Amount);
@@ -96,6 +102,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
                 clone.Sepia(this.Amount);
                 break;
 
+            // All other filters are always applied without parameter 
             case Filter.Vignette:
                 clone.Vignette();
                 break;
