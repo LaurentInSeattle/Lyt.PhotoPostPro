@@ -640,8 +640,11 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        var files = 
-            this.LibraryThumbnailsPanelViewModel.Thumbnails.Select(t => t.Path).ToList();
+        // Reorder files by Date Captured 
+        var files = (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
+                 orderby thumb.Metadata.Captured ascending
+                 select thumb.Path)
+                 .ToList(); 
         var rateAndCull = App.GetRequiredService<CullingViewModel>();
         rateAndCull.Initialize(files);
 

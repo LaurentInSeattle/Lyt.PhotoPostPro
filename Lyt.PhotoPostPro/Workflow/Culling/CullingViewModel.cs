@@ -7,19 +7,13 @@
 
 public sealed partial class CullingViewModel : ViewModel<CullingView>
 {
-    public sealed class UiThumbnail(string key, WriteableBitmap bitmap)
-    {
-        public string Key { get; } = key;
-
-        public WriteableBitmap Bitmap { get; } = bitmap;
-    }
-
+    public sealed record class UiThumbnail(string Key, WriteableBitmap Bitmap); 
 
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
     private readonly IToaster toaster;
 
-    private readonly List<LoadedThumbnail> allThumbnails = [];
+    private readonly Dictionary<string, UiThumbnail> allHdImages = [];
 
     [ObservableProperty]
     public partial UiThumbnail? SelectedThumbnail { get; set; }
@@ -31,10 +25,10 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public partial List<UiThumbnail> ImageThumbnails { get; set; } = [];
 
     [ObservableProperty]
-    public partial List<UiThumbnail> SelectedImages { get; set; } = [];    
+    public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
 
     [ObservableProperty]
-    public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
+    public partial ObservableCollection<UiThumbnail> SelectedImages { get; set; } = [];
 
     public CullingViewModel(PhotoPostProModel model, IToaster toaster)
     {
@@ -52,35 +46,120 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public override void Deactivate()
     {
         this.View.StripListBox.SelectionChanged -= this.OnSelectedThumbnailsChanged;
-        this.allThumbnails.Clear();
-        this.ImageThumbnails.Clear();
-        this.SelectedThumbnails.Clear();
+        this.ClearAllCollections();
         base.Deactivate();
     }
 
     internal void Initialize(List<string> files)
     {
-        var list = new List<UiThumbnail>();
-        foreach (string file in files)
+        this.ClearAllCollections();
+
+        if (files.Count == 0)
         {
-            if (this.libraryManager.LoadedThumbnails.TryGetValue(file, out var loadedThumbnail))
-            {
-                this.allThumbnails.Add(loadedThumbnail);
-                var thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedThumbnail.ImageBytes));
-                list.Add(new UiThumbnail(file , thumbnail));
-            }
+            return;
         }
 
-        this.ImageThumbnails = list;
+        // Create empty slots so that we dont need to use Add which would cause losing the ordering of the files.
+        var list = new List<UiThumbnail?>();
+        for (int i = 0; i < files.Count; ++i)
+        {
+            list.Add(null);
+        }
+
+        var pathList = new List<string>();
+        Parallel.For(0, files.Count, index =>
+        {
+            string file = files[index];
+            if (this.libraryManager.LoadedThumbnails.TryGetValue(file, out var loadedThumbnail))
+            {
+                var thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedThumbnail.ImageBytes));
+
+                // Using an index so that the ordering of the list is maintained 
+                list[index] = new UiThumbnail(file, thumbnail);
+                pathList.Add(loadedThumbnail.Metadata.FullPath);
+            }
+        });
+
+        // We may have 'holes' in the list if some files failed to load, so we filter them out
+        list = list.Where(t => t is not null).ToList();
+
+        // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
+        this.ImageThumbnails = list!;
+
+        Task.Run(() =>
+        {
+            Thread.CurrentThread.Name = "CullingViewModel.LoadHdImages";
+
+            // Delay so the UI can render the thumbnails first
+            Task.Delay(420).Wait();
+
+            // Then load HD images in the background
+            this.LoadHdImages(pathList);
+        });
+
     }
 
-    private void OnSelectedThumbnailsChanged( object? sender, SelectionChangedEventArgs e)
+    private void LoadHdImages(List<string> pathList)
+    {
+        Parallel.For(0, pathList.Count, index =>
+        {
+            if (0 == index % 2)
+            {
+                // throttle 
+                Task.Delay(120).Wait();
+            }
+
+            string path = pathList[index];
+            LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(path);
+            if (loadedHdImage is not null)
+            {
+                if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
+                {
+                    // Decode the image and store it in a dictionary for later use in the UI
+                    // when the user selects one or more thumbnails. 
+                    var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
+                    string key = loadedHdImage.Metadata.MetadataFullPath();
+                    lock (this.allHdImages)
+                    {
+                        this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
+                    }
+                }
+
+                // throttle 
+                Task.Delay(120).Wait();
+            }
+        });
+    }
+
+    private void OnSelectedThumbnailsChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (!this.IsActivated || sender is null)
         {
             return;
         }
 
-        this.SelectedImages = this.SelectedThumbnails.ToList(); 
+        var list = new List<UiThumbnail>(this.SelectedThumbnails.Count);
+        foreach (UiThumbnail selectedThumbnail in this.SelectedThumbnails.ToList())
+        {
+            string key = selectedThumbnail.Key;             
+            if (this.allHdImages.TryGetValue(key, out var hdImage))
+            {
+                list.Add(hdImage    );
+            }
+            else
+            {
+                list.Add(selectedThumbnail);
+            }
+        }
+
+        this.SelectedImages = new(list);
+    }
+
+    private void ClearAllCollections()
+    {
+        this.allHdImages.Clear();
+        this.ImageThumbnails.Clear();
+        this.SelectedThumbnails = [];
+        this.SelectedImages = [];
     }
 }

@@ -6,6 +6,8 @@ using Openize.Heic.Decoder;
 public static class ImageLoader
 {
     public const int ThumbnailLargestDimension = 420;
+    public const int HdWidth = 1920;
+    public const int HdHeight = 1080;
 
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
@@ -323,13 +325,13 @@ public static class ImageLoader
             Debug.WriteLine(extension);
             if (HasHiefExtension(imagePath))
             {
-                loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath);
+                loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: false);
                 if (!loadedImage.IsSuccess)
                 {
                     loadedImage = ImageLoader.TryPreLoadWithLibRaw(imagePath);
                     if (!loadedImage.IsSuccess)
                     {
-                        loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath);
+                        loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: false);
                     }
                 }
             }
@@ -338,22 +340,22 @@ public static class ImageLoader
                 loadedImage = ImageLoader.TryPreLoadWithLibRaw(imagePath);
                 if (!loadedImage.IsSuccess)
                 {
-                    loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath);
+                    loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: false);
                     if (!loadedImage.IsSuccess)
                     {
-                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath);
+                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: false);
                     }
                 }
             }
             else
             {
-                loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath);
+                loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: false);
                 if (!loadedImage.IsSuccess)
                 {
                     loadedImage = ImageLoader.TryPreLoadWithLibRaw(imagePath);
                     if (!loadedImage.IsSuccess)
                     {
-                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath);
+                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: false);
                     }
                 }
             }
@@ -380,7 +382,7 @@ public static class ImageLoader
         }
     }
 
-    private static LoadedImage TryPreLoadHiecWithOpenize(string imagePath)
+    private static LoadedImage TryPreLoadHiecWithOpenize(string imagePath, bool isHd)
     {
         try
         {
@@ -429,7 +431,7 @@ public static class ImageLoader
             var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
 
             // Create thumbnail 
-            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
             Debug.WriteLine("HIEC Image thumbnaiil loaded with Openize: " + imagePath);
 
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
@@ -442,7 +444,7 @@ public static class ImageLoader
         }
     }
 
-    private static LoadedImage TryPreLoadWithImageSharp(string imagePath)
+    private static LoadedImage TryPreLoadWithImageSharp(string imagePath, bool isHd)
     {
         try
         {
@@ -488,7 +490,7 @@ public static class ImageLoader
 
             // Create thumbnail and metadata, image24 mutates! 
             var metadata = new Metadata(imagePath, width, height, directories);
-            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata);
+            byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd);
             return LoadedImage.PreLoaded(metadata, jpgEncoded);
         }
         catch (Exception ex)
@@ -530,14 +532,145 @@ public static class ImageLoader
 
     #endregion Pre Loading 
 
+    #region Loading HD Size Images
+
+    public static LoadedImage? LoadHdImage(string imagePath)
+    {
+        try
+        {
+            // Guard against null or empty image path, returns null if valid
+            LoadedImage? loadedImage = Guard(imagePath);
+            if (loadedImage is not null)
+            {
+                return loadedImage;
+            }
+
+            string? extension = System.IO.Path.GetExtension(imagePath);
+            Debug.WriteLine(extension);
+            if (HasHiefExtension(imagePath))
+            {
+                loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: true);
+                if (!loadedImage.IsSuccess)
+                {
+                    loadedImage = ImageLoader.TryLoadHdWithLibRaw(imagePath);
+                    if (!loadedImage.IsSuccess)
+                    {
+                        loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: true);
+                    }
+                }
+            }
+            else if (HasRawExtension(imagePath))
+            {
+                loadedImage = ImageLoader.TryLoadHdWithLibRaw(imagePath);
+                if (!loadedImage.IsSuccess)
+                {
+                    loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: true);
+                    if (!loadedImage.IsSuccess)
+                    {
+                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: true);
+                    }
+                }
+            }
+            else
+            {
+                loadedImage = ImageLoader.TryPreLoadWithImageSharp(imagePath, isHd: true);
+                if (!loadedImage.IsSuccess)
+                {
+                    loadedImage = ImageLoader.TryLoadHdWithLibRaw(imagePath);
+                    if (!loadedImage.IsSuccess)
+                    {
+                        loadedImage = ImageLoader.TryPreLoadHiecWithOpenize(imagePath, isHd: true);
+                    }
+                }
+            }
+
+            if (loadedImage is null)
+            {
+                return LoadedImage.Fail("Model.Loader.NoImage");
+            }
+            else
+            {
+                loadedImage.LoadedFrom = imagePath;
+                Debug.WriteLine(" Image loaded");
+                return loadedImage;
+            }
+        }
+        catch (Exception ex)
+        {
+            // errorMessage = "An error occurred while loading the source image." + ex.Message;
+            Debug.WriteLine(ex);
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+        }
+    }
+
+    private static unsafe LoadedImage TryLoadHdWithLibRaw(string imagePath)
+    {
+        try
+        {
+            using var r = RawContext.OpenFile(imagePath);
+            r.OutputBitsPerSample = 16;
+            r.Unpack();
+            r.DcrawProcess();
+            using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
+            int width = rawImage.Width;
+            int height = rawImage.Height;
+
+            var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
+            var metadata = new Metadata(imagePath, width, height, directories);
+
+            if (rawImage.Bits == 8 && rawImage.Channels == 3)
+            {
+                var pixelDataByteSpan = rawImage.AsSpan<byte>();
+
+                // Pixel data from LIBRAw is in C++ memory, need to pin it
+                fixed (byte* pixelData = &pixelDataByteSpan[0])
+                {
+                    var image24 = Image.LoadPixelData<Rgb24>(pixelDataByteSpan, width, height);
+                    byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image24, metadata, isHd: true);
+                    Debug.WriteLine("8 bits Image loaded with LibRaw: " + imagePath);
+                    return LoadedImage.PreLoaded(metadata, jpgEncoded);
+                }
+            }
+            else if (rawImage.Bits == 16 && rawImage.Channels == 3)
+            {
+                Span<ushort> pixelDataUshortSpan = rawImage.AsSpan<ushort>();
+                // Pixel data from LIBRAw is in C++ memory, need to pin it
+                fixed (ushort* pixelData = &pixelDataUshortSpan[0])
+                {
+                    Span<byte> byteSpan = MemoryMarshal.AsBytes(pixelDataUshortSpan);
+                    var image48 = Image.LoadPixelData<Rgb48>(byteSpan, width, height);
+                    byte[] jpgEncoded = GenerateJpgThumbnailWithMutate(image48, metadata, isHd: true);
+                    Debug.WriteLine("16 bits Image loaded with LibRaw: " + imagePath);
+                    return LoadedImage.PreLoaded(metadata, jpgEncoded);
+                }
+            }
+            else
+            {
+                // errorMessage = "Unsupported image format.";
+                return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            // errorMessage = "An error occurred while loading the source image with LibRaw: " + ex.Message;
+            Debug.WriteLine(ex);
+            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+        }
+    }
+
+    #endregion Loading HD Size Images
+
     /// <summary> Generates rotated thumnail from image, original is lost </summary>
-    public static byte[] GenerateJpgThumbnailWithMutate(Image<Rgb24> image24, Metadata metadata)
+    /// <remarks> Returns a higher definition and better quality JPEG, if isHD is true . </remarks>
+    public static byte[] GenerateJpgThumbnailWithMutate<TPixel>(Image<TPixel> image, Metadata metadata, bool isHd)
+        where TPixel : unmanaged, IPixel<TPixel>
     {
         // Create thumbnail 
-        image24.Mutate(x => x.Resize(
+        image.Mutate(x => x.Resize(
             new ResizeOptions
             {
-                Size = ThumbnailSize(image24.Width, image24.Height),
+                Size = ThumbnailSize(image.Width, image.Height, isHd),
                 Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
                 Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
             }));
@@ -555,12 +688,13 @@ public static class ImageLoader
                 rotateMode = RotateMode.Rotate270;
             }
 
-            image24.Mutate(x => x.Rotate(rotateMode));
+            Debug.WriteLine(" Rotating: " + rotateMode);
+            //image.Mutate(x => x.Rotate(rotateMode));
         }
 
         // Save as JPG 
         var saveMemoryStream = new MemoryStream();
-        image24.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
+        image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = isHd ? 90 : 80 });
         byte[] jpgEncoded = saveMemoryStream.ToArray();
         return jpgEncoded;
     }
@@ -572,7 +706,7 @@ public static class ImageLoader
         clone.Mutate(x => x.Resize(
             new ResizeOptions
             {
-                Size = ThumbnailSize(imageFp.Width, imageFp.Height),
+                Size = ThumbnailSize(imageFp.Width, imageFp.Height, isHd: false),
                 Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
                 Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
             }));
@@ -583,21 +717,40 @@ public static class ImageLoader
         return jpgEncoded;
     }
 
-    public static Size ThumbnailSize(int width, int height)
+    public static Size ThumbnailSize(int width, int height, bool isHd)
     {
         int newWidth;
         int newHeight;
-        if (width > height)
+        if (isHd)
         {
-            newWidth = ThumbnailLargestDimension;
-            float ratio = width / (float)ThumbnailLargestDimension;
-            newHeight = (int)(0.5f + height / ratio);
+            if (width > height)
+            {
+                float hdRatio = (float)width / HdWidth;
+                newWidth = HdWidth;
+                newHeight = (int)(0.5f + height / hdRatio);
+            }
+            else
+            {
+                float hdRatio = (float)height / HdHeight;
+                newHeight = HdHeight;
+                newWidth = (int)(0.5f + width / hdRatio);
+            }
         }
         else
         {
-            newHeight = ThumbnailLargestDimension;
-            float ratio = height / (float)ThumbnailLargestDimension;
-            newWidth = (int)(0.5f + width / ratio);
+            float thumbRatio; 
+            if (width > height)
+            {
+                newWidth = ThumbnailLargestDimension;
+                thumbRatio = width / (float)ThumbnailLargestDimension;
+                newHeight = (int)(0.5f + height / thumbRatio);
+            }
+            else
+            {
+                newHeight = ThumbnailLargestDimension;
+                thumbRatio = height / (float)ThumbnailLargestDimension;
+                newWidth = (int)(0.5f + width / thumbRatio);
+            }
         }
 
         return new Size(newWidth, newHeight);
