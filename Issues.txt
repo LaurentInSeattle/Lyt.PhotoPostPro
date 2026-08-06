@@ -1,12 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- View transitions when navigating between Process steps sometimes causes the toolboxes to hide.
-
-- Culling Workflow and  Rating system 
-
-- Export (copy) the editing JSON file along with the images.
-
 - Recent Sony A7V image fails to load 
 Check with:
 https://github.com/laheller/SharpLibraw  
@@ -27,6 +21,14 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 WIP
 ---
 
+- Culling Workflow and  Rating system 
+
+
+TODO First
+----------
+
+- Export (copy) the editing JSON file along with the images.
+
 - Image Exports: Quick save
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
@@ -36,10 +38,6 @@ WIP
 - Cleanup unused icons for faster loading 
 
 - Cleanup language strings
-
-
-TODO First : Single Image Process
----------------------------------
 
 - Touch up / Blemish (after geometry) 
 

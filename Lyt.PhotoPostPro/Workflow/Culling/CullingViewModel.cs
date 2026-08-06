@@ -7,7 +7,7 @@
 
 public sealed partial class CullingViewModel : ViewModel<CullingView>
 {
-    public sealed record class UiThumbnail(string Key, WriteableBitmap Bitmap); 
+    public sealed record class UiThumbnail(string Key, WriteableBitmap Bitmap);
 
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
@@ -91,42 +91,52 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             Thread.CurrentThread.Name = "CullingViewModel.LoadHdImages";
 
             // Delay so the UI can render the thumbnails first
-            Task.Delay(420).Wait();
+            Task.Delay(240).Wait();
 
             // Then load HD images in the background
-            this.LoadHdImages(pathList);
+            this.libraryManager.LoadHdImages(pathList);
+            this.DecodeHdImages(pathList);
         });
-
     }
 
-    private void LoadHdImages(List<string> pathList)
+    private void DecodeHdImages(List<string> pathList)
     {
         Parallel.For(0, pathList.Count, index =>
         {
-            if (0 == index % 2)
+            int retries = Math.Max(20, pathList.Count * 2);
+            bool isLoaded = false;
+            while (!isLoaded)
             {
-                // throttle 
-                Task.Delay(120).Wait();
-            }
-
-            string path = pathList[index];
-            LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(path);
-            if (loadedHdImage is not null)
-            {
-                if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
+                if (this.libraryManager.LoadedHdImages.TryGetValue(pathList[index], out LoadedImage? loadedHdImage))
                 {
-                    // Decode the image and store it in a dictionary for later use in the UI
-                    // when the user selects one or more thumbnails. 
-                    var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
-                    string key = loadedHdImage.Metadata.MetadataFullPath();
-                    lock (this.allHdImages)
+                    if (loadedHdImage is not null)
                     {
-                        this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
+                        if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
+                        {
+                            // Decode the image and store it in a dictionary for later use in the UI
+                            // when the user selects one or more thumbnails. 
+                            var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
+                            string key = loadedHdImage.Metadata.MetadataFullPath();
+                            lock (this.allHdImages)
+                            {
+                                this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
+                                isLoaded = true;
+                                break;
+                            }
+                        }
                     }
+
                 }
 
-                // throttle 
-                Task.Delay(120).Wait();
+                --retries;
+                if (retries == 0)
+                {
+                    Debug.WriteLine($"Failed to load HD image for {pathList[index]} after retries.");
+                    break;
+                }
+
+                // Wait for the HD image to be loaded
+                Task.Delay(100).Wait();
             }
         });
     }
@@ -141,10 +151,10 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         var list = new List<UiThumbnail>(this.SelectedThumbnails.Count);
         foreach (UiThumbnail selectedThumbnail in this.SelectedThumbnails.ToList())
         {
-            string key = selectedThumbnail.Key;             
+            string key = selectedThumbnail.Key;
             if (this.allHdImages.TryGetValue(key, out var hdImage))
             {
-                list.Add(hdImage    );
+                list.Add(hdImage);
             }
             else
             {

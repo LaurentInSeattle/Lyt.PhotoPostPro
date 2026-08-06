@@ -10,8 +10,15 @@ public partial class FrameCG : UserControl
         this.LayoutUpdated += this.OnLayoutUpdated;
     }
 
-    private void OnLayoutUpdated(object? sender, EventArgs e) 
-        => this.AdjustLayout(defaultThickness * this.ThicknessFactor); 
+    private void OnLayoutUpdated(object? sender, EventArgs e)
+    {
+        if (!this.IsVisible)
+        {
+            return;
+        }
+
+        this.AdjustLayout(defaultThickness * this.ThicknessFactor);
+    }
 
     /// <summary> ThicknessFactor Styled Property </summary>
     public static readonly StyledProperty<double> ThicknessFactorProperty =
@@ -35,7 +42,7 @@ public partial class FrameCG : UserControl
     {
         if (sender is FrameCG frame)
         {
-            frame.AdjustLayout(defaultThickness * value );
+            frame.AdjustLayout(defaultThickness * value);
         }
 
         return value;

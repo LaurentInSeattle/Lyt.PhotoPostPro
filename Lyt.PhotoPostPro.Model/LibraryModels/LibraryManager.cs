@@ -32,9 +32,19 @@ public sealed class LibraryManager
             Directory.CreateDirectory(this.exportsFolderPath);
         }
 
+        // Adjust capacity as needed
+        this.LoadedHdImages = new(100); 
         this.LoadedThumbnails = [];
     }
 
+    public string LibraryFolderPath => this.libraryFolderPath;
+
+    public string ExportsFolderPath => this.exportsFolderPath;
+
+    // This dictionary is indexed by the path of the source image 
+    public LruDictionary<string, LoadedImage> LoadedHdImages { get; private set; }
+
+    // This dictionary is indexed by the path of the metatdata file for the image 
     public Dictionary<string, LoadedThumbnail> LoadedThumbnails { get; private set; }
 
     public FolderTree? CapturedFolderTree { get; private set; }
@@ -44,10 +54,6 @@ public sealed class LibraryManager
     public FolderTree? EditedFolderTree { get; private set; }
 
     public bool IsLoading { get; private set; }
-
-    public string LibraryFolderPath => this.libraryFolderPath;
-
-    public string ExportsFolderPath => this.exportsFolderPath;
 
     public void Initialize(PhotoPostProModel model, FileManagerModel fileManagerModel)
     {
@@ -611,4 +617,36 @@ public sealed class LibraryManager
         }
     }
 
+    public void LoadHdImages(List<string> pathList)
+    {
+        Parallel.For(0, pathList.Count, index =>
+        {
+            string path = pathList[index];
+            if (this.LoadedHdImages.ContainsKey(path))
+            {
+                return;
+            }
+
+            if (0 == index % 2)
+            {
+                // throttle 
+                Task.Delay(120).Wait();
+            }
+
+            LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(path);
+            if (loadedHdImage is not null)
+            {
+                if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
+                {
+                    lock (this.LoadedHdImages)
+                    {
+                        this.LoadedHdImages.Add(path, loadedHdImage);
+                    }
+                }
+
+                // throttle 
+                Task.Delay(120).Wait();
+            }
+        });
+    }
 }
