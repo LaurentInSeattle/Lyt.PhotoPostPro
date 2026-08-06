@@ -8,6 +8,8 @@ public sealed class LibraryManager
     public const string LibraryFolderName = "Library";
     public const string ExportsFolderName = "Exports";
 
+    public const int CachedHdImageCount = 300; 
+
     private readonly string libraryFolderPath;
     private readonly string exportsFolderPath;
 
@@ -33,7 +35,7 @@ public sealed class LibraryManager
         }
 
         // Adjust capacity as needed
-        this.LoadedHdImages = new(100); 
+        this.LoadedHdImages = new(CachedHdImageCount); 
         this.LoadedThumbnails = [];
     }
 
@@ -630,7 +632,7 @@ public sealed class LibraryManager
             if (0 == index % 2)
             {
                 // throttle 
-                Task.Delay(120).Wait();
+                Task.Delay(40).Wait();
             }
 
             LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(path);
@@ -645,7 +647,7 @@ public sealed class LibraryManager
                 }
 
                 // throttle 
-                Task.Delay(120).Wait();
+                Task.Delay(40).Wait();
             }
         });
     }

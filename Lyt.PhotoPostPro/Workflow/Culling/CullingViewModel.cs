@@ -90,7 +90,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         {
             Thread.CurrentThread.Name = "CullingViewModel.LoadHdImages";
 
-            // Delay so the UI can render the thumbnails first
+            // Delay so the UI can fadein - fadeout and render the thumbnails first
             Task.Delay(240).Wait();
 
             // Then load HD images in the background
@@ -103,40 +103,24 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     {
         Parallel.For(0, pathList.Count, index =>
         {
-            int retries = Math.Max(20, pathList.Count * 2);
-            bool isLoaded = false;
-            while (!isLoaded)
+            // Throttle
+            Task.Delay(40).Wait();
+            if (this.libraryManager.LoadedHdImages.TryGetValue(pathList[index], out LoadedImage? loadedHdImage))
             {
-                if (this.libraryManager.LoadedHdImages.TryGetValue(pathList[index], out LoadedImage? loadedHdImage))
+                if (loadedHdImage is not null)
                 {
-                    if (loadedHdImage is not null)
+                    if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
                     {
-                        if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
+                        // Decode the image and store it in a dictionary for later use in the UI
+                        // when the user selects one or more thumbnails. 
+                        var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
+                        string key = loadedHdImage.Metadata.MetadataFullPath();
+                        lock (this.allHdImages)
                         {
-                            // Decode the image and store it in a dictionary for later use in the UI
-                            // when the user selects one or more thumbnails. 
-                            var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
-                            string key = loadedHdImage.Metadata.MetadataFullPath();
-                            lock (this.allHdImages)
-                            {
-                                this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
-                                isLoaded = true;
-                                break;
-                            }
+                            this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
                         }
                     }
-
                 }
-
-                --retries;
-                if (retries == 0)
-                {
-                    Debug.WriteLine($"Failed to load HD image for {pathList[index]} after retries.");
-                    break;
-                }
-
-                // Wait for the HD image to be loaded
-                Task.Delay(100).Wait();
             }
         });
     }

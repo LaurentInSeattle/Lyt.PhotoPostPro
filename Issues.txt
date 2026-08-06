@@ -5,7 +5,9 @@ Bugs ~ Major Issues
 
 - Pixel debris in White Balance toolbox 
 
-- Limit count of images to cull.
+- Limit count of images to cull and rate per batch.
+
+- User messages for loading HD and creating bitmaps 
 
 - Camera MGr : Check if file still exists after delete - report to UI 
 
