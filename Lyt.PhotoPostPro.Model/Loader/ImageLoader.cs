@@ -5,6 +5,8 @@ using Openize.Heic.Decoder;
 
 public static class ImageLoader
 {
+    public const int ThumbnailQuality = 80;
+    public const int HdImageQuality = 90;
     public const int ThumbnailLargestDimension = 420;
     public const int HdWidth = 1920;
     public const int HdHeight = 1080;
@@ -296,8 +298,9 @@ public static class ImageLoader
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            var metadata = new Metadata(imagePath, width, height, directories);
-            return LoadedImage.FullyLoaded(imageFp, metadata);
+            var metadata = new Metadata(imagePath, width, height, directories, alreadyRotated: true);
+            var loadedImage = LoadedImage.FullyLoaded(imageFp, metadata);
+            return loadedImage;
         }
         catch (Exception ex)
         {
@@ -396,9 +399,28 @@ public static class ImageLoader
 
             // Extract the raw byte span containing the JPEG data
             ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
-            if (jpgEncoded.Length > 0)
+
+            if ( metadata.IsOrientationActionRequired)
             {
-                return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
+                // If orientation action is required, we need to load the image in ImageSharp and
+                // apply the correct orientation
+                var image = Image.Load(jpgEncoded);
+                LoadedImage.RotateIfNeeded(metadata, image);
+                var saveMemoryStream = new MemoryStream();
+                image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = ThumbnailQuality });
+                byte[] jpgRotatedEncoded = saveMemoryStream.ToArray();
+                if (jpgRotatedEncoded.Length > 0)
+                {
+                    return LoadedImage.PreLoaded(metadata, jpgRotatedEncoded);
+                }
+            }
+            else
+            {
+                // Nothing to do, the image is already in the correct orientation
+                if (jpgEncoded.Length > 0)
+                {
+                    return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
+                }
             }
 
             return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
@@ -497,7 +519,9 @@ public static class ImageLoader
             int height = rawImage.Height;
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
-            var metadata = new Metadata(imagePath, width, height, directories);
+
+            // LibRaw rotates the image based on the EXIF orientation tag
+            var metadata = new Metadata(imagePath, width, height, directories, alreadyRotated: true);
 
             if (rawImage.Bits == 8 && rawImage.Channels == 3)
             {
@@ -702,15 +726,6 @@ public static class ImageLoader
     public static byte[] GenerateJpgThumbnailWithMutate<TPixel>(Image<TPixel> image, Metadata metadata, bool isHd)
         where TPixel : unmanaged, IPixel<TPixel>
     {
-        // Create thumbnail 
-        image.Mutate(x => x.Resize(
-            new ResizeOptions
-            {
-                Size = ThumbnailSize(image.Width, image.Height, isHd),
-                Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
-                Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
-            }));
-
         // Rotate if metadata says so
         if (metadata.IsOrientationActionRequired)
         {
@@ -725,12 +740,22 @@ public static class ImageLoader
             }
 
             Debug.WriteLine(" Rotating: " + rotateMode);
-            //image.Mutate(x => x.Rotate(rotateMode));
+            image.Mutate(x => x.Rotate(rotateMode));
         }
+
+        // Create thumbnail 
+        Size size = ThumbnailSize(image.Width, image.Height, isHd);
+        image.Mutate(x => x.Resize(
+            new ResizeOptions
+            {
+                Size = size,
+                Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+            }));
 
         // Save as JPG 
         var saveMemoryStream = new MemoryStream();
-        image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = isHd ? 90 : 80 });
+        image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = isHd ? HdImageQuality : ThumbnailQuality });
         byte[] jpgEncoded = saveMemoryStream.ToArray();
         return jpgEncoded;
     }
@@ -748,7 +773,7 @@ public static class ImageLoader
             }));
 
         var saveMemoryStream = new MemoryStream();
-        clone.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = 80 });
+        clone.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = ThumbnailQuality });
         byte[] jpgEncoded = saveMemoryStream.ToArray();
         return jpgEncoded;
     }

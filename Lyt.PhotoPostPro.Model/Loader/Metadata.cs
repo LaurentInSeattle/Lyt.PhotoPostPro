@@ -21,11 +21,13 @@ public sealed class Metadata
         string fullPath,
         int width,
         int height,
-        IReadOnlyList<MetadataExtractor.Directory>? directories)
+        IReadOnlyList<MetadataExtractor.Directory>? directories, 
+        bool alreadyRotated = false)
     {
         this.FullPath = fullPath;
         this.Width = width;
         this.Height = height;
+        this.AlreadyRotated = alreadyRotated;
 
         FileInfo? fileInfo = new(this.FullPath);
         if (fileInfo is not null)
@@ -73,7 +75,11 @@ public sealed class Metadata
         }
     }
 
-    public bool IsOrientationActionRequired =>  this.OrientationActionRequired != OrientationAction.None;
+    public bool IsOrientationActionRequired 
+        => !this.AlreadyRotated && this.OrientationActionRequired != OrientationAction.None;
+
+    // LibRaw provides images that are already rotated, so we don't need to rotate them again.
+    public bool AlreadyRotated { get; set; } 
 
     public OrientationAction OrientationActionRequired { get; set; } = OrientationAction.None;
 

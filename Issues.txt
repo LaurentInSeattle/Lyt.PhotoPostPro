@@ -1,6 +1,16 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Filter 'None' does not reset 
+
+- Pixel debris in White Balance toolbox 
+
+- Limit count of images to cull.
+
+- Camera MGr : Check if file still exists after delete - report to UI 
+
+- Added folder tree not updated on Add 
+
 - Recent Sony A7V image fails to load 
 Check with:
 https://github.com/laheller/SharpLibraw  

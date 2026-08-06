@@ -56,19 +56,26 @@ public sealed class LoadedImage
         }
 
         // Rotate if metadata says so
-        if (this.Metadata.IsOrientationActionRequired)
+        LoadedImage.RotateIfNeeded(this.Metadata, this.Image);
+    }
+
+    /// <summary> Rotates and muates provided image, if needed. </summary>
+    public static void RotateIfNeeded(Metadata metadata, Image image)
+    {
+        // Rotate if metadata says so
+        if (metadata.IsOrientationActionRequired)
         {
             RotateMode rotateMode = RotateMode.Rotate180;
-            if (this.Metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Cw)
+            if (metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Cw)
             {
                 rotateMode = RotateMode.Rotate90;
             }
-            else if (this.Metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Ccw)
+            else if (metadata.OrientationActionRequired == Metadata.OrientationAction.Rotate90Ccw)
             {
                 rotateMode = RotateMode.Rotate270;
             }
 
-            this.Image.Mutate(x => x.Rotate(rotateMode));
+            image.Mutate(x => x.Rotate(rotateMode));
         }
     }
 }
