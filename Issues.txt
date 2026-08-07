@@ -1,12 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-
 - Limit count of images to cull and rate per batch.
 
 - User messages for loading HD and creating bitmaps 
-
-- Camera MGr : Check if file still exists after delete - report to UI 
 
 - Added folder tree not updated on Add 
 
@@ -41,6 +38,8 @@ TODO First
 - Image Exports: Quick save
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
+
+- Move message definitions in new folders depending on area and workflow 
 
 - Cleanup public vs internal about everywhere 
 

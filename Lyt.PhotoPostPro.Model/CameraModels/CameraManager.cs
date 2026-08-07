@@ -5,28 +5,6 @@
 // Here to block both Path from Avalonia ans ImageSharp 
 using System.IO;
 
-/*
- * 
-MartinKuschnik left a comment (MartinKuschnik/WPDlight#8)
-
-One more thing worth knowing now that you've switched to MediaDevices, since it's a common trip-up:
-
-MediaDevices caches the device handle.
-
-If your app connects to a device, and that device gets unplugged and then plugged back in without restarting the app, 
-MediaDevices will keep using the old (now stale) handle instead of picking up the new connection. 
-Since the underlying device instance no longer exists, this doesn't work and can cause errors or unexpected behavior.
-
-Whether this matters to you depends on your use case:
-
-If your app always connects fresh on a full restart, you're fine.
-If your app is meant to stay running and handle devices being unplugged/replugged, you'll want to detect the 
-disconnect and re-establish the connection explicitly, rather than assuming the existing handle still works.
-
-Just flagging it so it doesn't surprise you later.
-
-*/
-
 public class CameraManager
 {
     public const int UiResponseDelayTime_ms = 66; // About one frame
@@ -363,8 +341,11 @@ public class CameraManager
         try
         {
             device.DeleteFile(file);
-            new DeviceFileDeletedMessage(IsSuccess: true, foundDevice, file, "").Publish();
-            return true;
+            Task.Delay(50).Wait();
+            bool success = ! device.FileExists(file);
+            string message = success ? string.Empty : "File still exists. Protected?";
+            new DeviceFileDeletedMessage(IsSuccess: success, foundDevice, file, message).Publish();
+            return success;
         }
         catch (Exception ex)
         {
