@@ -1,7 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Pixel debris in White Balance toolbox 
 
 - Limit count of images to cull and rate per batch.
 

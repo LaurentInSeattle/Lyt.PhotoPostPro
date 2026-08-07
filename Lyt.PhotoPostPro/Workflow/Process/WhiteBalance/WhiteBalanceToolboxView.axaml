@@ -73,15 +73,17 @@
 				/>
 		</Grid>
 
-		<!-- Second set of Rows : Temperature Tanner Helland-->
+		<!-- Second set of Rows : Temperature Tanner Helland - Invisible -->
 		<TextBlock
 			Grid.Row="4" 
+			IsVisible="False"
 			Text="{DynamicResource Workflow.WhiteBalance.ManualTannerHelland}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Grid
 			Grid.Row="5" 
+			IsVisible="False"
 			> 
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />
