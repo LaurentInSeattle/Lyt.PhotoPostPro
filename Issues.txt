@@ -1,6 +1,12 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Localize loading messages in Culling view 
+
+- Library thumbnail: Loc for "File:" 
+
+- Change navigate icons to folder
+
 - Added folder tree not updated on Add 
 
 - Recent Sony A7V image fails to load 

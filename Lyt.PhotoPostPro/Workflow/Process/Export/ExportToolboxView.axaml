@@ -55,7 +55,7 @@
 			Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
-			GlyphSource="arrow_export_up"
+			GlyphSource="folder_open"
 			Text="{DynamicResource Workflow.Export.Navigate}"
 			Command="{Binding OnNavigate}"
 			IsDisabled="{Binding IsExporting}"

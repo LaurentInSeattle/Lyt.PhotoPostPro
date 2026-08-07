@@ -49,6 +49,7 @@
 			x:Name="StripListBox"
 			Grid.Row="1" Grid.Column="1"
 			ItemsSource="{Binding ImageThumbnails}"
+			SelectedIndex="{Binding SelectedThumbnailIndex}"
 			SelectedItems="{Binding SelectedThumbnails, Mode=TwoWay}"
 			SelectionMode="Multiple"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"

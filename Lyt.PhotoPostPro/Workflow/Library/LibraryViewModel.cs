@@ -94,6 +94,9 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial bool IsAddedSelected { get; set; }
 
+    [ObservableProperty]
+    public partial int SelectionRating { get; set; }
+
     public LibraryViewModel(
         PhotoPostProModel photoPostProModel,
         IDialogService dialogService,
@@ -457,13 +460,15 @@ public sealed partial class LibraryViewModel :
             this.HasSelection = true;
             this.selectedLibraryThumbnailViewModel = libraryThumbnailViewModel;
             this.SelectedThumbnail = libraryThumbnailViewModel.Thumbnail;
+            var metadata = libraryThumbnailViewModel.Metadata;
+            this.SelectionRating = metadata.Rating;
             if (this.SelectedThumnailMetadataViewModel is null)
             {
-                this.SelectedThumnailMetadataViewModel = new MetadataViewModel(libraryThumbnailViewModel.Metadata);
+                this.SelectedThumnailMetadataViewModel = new MetadataViewModel(metadata);
             }
             else
             {
-                this.SelectedThumnailMetadataViewModel.Update(libraryThumbnailViewModel.Metadata);
+                this.SelectedThumnailMetadataViewModel.Update(metadata);
             }
         }
     }

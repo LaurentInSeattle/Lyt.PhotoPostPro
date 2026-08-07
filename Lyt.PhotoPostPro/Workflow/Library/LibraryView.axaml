@@ -91,7 +91,7 @@
 				Width="200" Height="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Margin="0 4 0 4"
-				RatingValue="4"
+				RatingValue="{Binding SelectionRating}"
 				IsReadOnly="True"
 				/>
 			<glyphs:GlyphButton
@@ -134,7 +134,7 @@
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="480" Height="56"
 				Margin="0 0 0 12"
-				GlyphSource="arrow_export_up"
+				GlyphSource="folder_open"
 				ButtonBackground="BorderlessRectangle"
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Library.Navigate}"

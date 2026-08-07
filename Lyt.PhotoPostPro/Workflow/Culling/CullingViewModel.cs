@@ -28,6 +28,9 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
 
     [ObservableProperty]
+    public partial int SelectedThumbnailIndex { get; set; }
+        
+    [ObservableProperty]
     public partial ObservableCollection<UiThumbnail> SelectedImages { get; set; } = [];
 
     [ObservableProperty]
@@ -131,9 +134,13 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             {
                 this.Status = "Ready.";
                 this.StatusIsVisible = true;
+
+                // Clear Selection and select first 
+                this.SelectedThumbnailIndex = -1;
+                this.SelectedThumbnailIndex = 0;
             });
 
-            Schedule.OnUiThread(1_500, () =>
+            Schedule.OnUiThread(2_500, () =>
             {
                 this.Status = string.Empty;
                 this.StatusIsVisible = false;
