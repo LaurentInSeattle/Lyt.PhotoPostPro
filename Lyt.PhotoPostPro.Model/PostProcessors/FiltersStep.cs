@@ -23,7 +23,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     public override void Initialize(Image<RgbaVector> _) => this.Clear();
 
     public override Frame? Reset()
-    {
+    {        
         this.Clear();
         return base.Reset();
     }
@@ -84,6 +84,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             ((this.SelectedFilter == Filter.Grayscale) && (this.Amount < 0.001)) ||
             ((this.SelectedFilter == Filter.Sepia) && (this.Amount < 0.001)))
         {
+            this.ResultImage = this.SourceImage;
             return withFrame ? this.SourceImage.ToFrame() : null;
         }
 

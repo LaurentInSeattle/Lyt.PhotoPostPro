@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Filter 'None' does not reset 
-
 - Pixel debris in White Balance toolbox 
 
 - Limit count of images to cull and rate per batch.

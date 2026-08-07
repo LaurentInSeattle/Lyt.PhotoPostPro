@@ -75,6 +75,7 @@ public sealed partial class FiltersToolboxViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
+        this.Localize(); 
 
         if (!this.isFirstLoad)
         {
@@ -175,7 +176,8 @@ public sealed partial class FiltersToolboxViewModel :
             {
                 default:
                 case FiltersStep.Filter.None:
-                    this.model.Workflow.Reset();
+                    // Call on the model, and NOT the workflow 
+                    this.model.Reset();
                     break;
 
                 case FiltersStep.Filter.Vignette:

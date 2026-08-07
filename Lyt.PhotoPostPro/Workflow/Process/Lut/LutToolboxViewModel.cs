@@ -128,7 +128,8 @@ public sealed partial class LutToolboxViewModel :
 
         if (this.lutMetadata.LutFormat == LutFormat.None)
         {
-            this.model.Workflow.Reset();
+            // Call on the model, and NOT the workflow 
+            this.model.Reset();
         }
         else
         {
