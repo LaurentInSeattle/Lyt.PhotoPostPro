@@ -40,6 +40,11 @@
 			Source="\Assets\Images\sky.jpg"
 			Opacity="0.7"
 			/>
+		<!-- Film strip on the left side --> 
+		<Rectangle
+			Grid.Row="1" Grid.Column="1"
+			Fill="#60000020"
+			/>
 		<ListBox
 			x:Name="StripListBox"
 			Grid.Row="1" Grid.Column="1"
@@ -67,19 +72,35 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-			<ItemsControl 
+		<!-- Center area --> 
+		<Grid
+			x:Name="CenterGrid"
 			Grid.Row="1" Grid.Column="2"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Text="{Binding Status}"
+				IsVisible="{Binding StatusIsVisible}"
+				Margin="12 4 4 4"
+				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<ItemsControl 
+				Grid.Row="1" 
 				ItemsSource="{Binding SelectedImages}"
 				>
-			  <ItemsControl.ItemsPanel>
+				<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-				  <UniformGrid
-					  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-					  />
+					<UniformGrid
+						HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						/>
 				</ItemsPanelTemplate>
-			  </ItemsControl.ItemsPanel>
+				</ItemsControl.ItemsPanel>
 	  
-			  <ItemsControl.ItemTemplate>
+				<ItemsControl.ItemTemplate>
 				<DataTemplate >
 					<Image 
 						Margin="8"
@@ -89,13 +110,22 @@
 						RenderOptions.BitmapInterpolationMode="HighQuality"
 						/>
 				</DataTemplate>
-			  </ItemsControl.ItemTemplate>
+				</ItemsControl.ItemTemplate>
 			</ItemsControl>
+		</Grid>
+
+		<!-- Controls on the right side --> 
+		<Rectangle
+			Grid.Row="1" Grid.Column="4"
+			Fill="#60000020"
+			/>
 		<StackPanel
 			Grid.Row="1" Grid.Column="4"
-			Background="Black"
-			Opacity="0.4"
 			>
+			<shared:SpinView
+				Margin="4"
+				DataContext="{Binding SpinViewModel}"
+				/>
 			<Image
 				Source="{Binding SelectedThumbnail}"
 				Margin="0"

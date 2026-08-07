@@ -30,11 +30,25 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     [ObservableProperty]
     public partial ObservableCollection<UiThumbnail> SelectedImages { get; set; } = [];
 
+    [ObservableProperty]
+    public partial SpinViewModel SpinViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial string Status { get; set; }
+
+    [ObservableProperty]
+    public partial bool StatusIsVisible { get; set; }
+
     public CullingViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.libraryManager = model.LibraryManager;
         this.toaster = toaster;
+        this.SpinViewModel = new SpinViewModel()
+        {
+            IsVisible = false,
+            IsActive = false,
+        };
     }
 
     public override void Activate(object? activationParameters)
@@ -58,6 +72,12 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         {
             return;
         }
+
+
+        this.SpinWait(); 
+        this.Status = "Loading Thumbnails...";
+        this.StatusIsVisible = true;
+
 
         // Create empty slots so that we dont need to use Add which would cause losing the ordering of the files.
         var list = new List<UiThumbnail?>();
@@ -86,6 +106,9 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
         this.ImageThumbnails = list!;
 
+        this.Status = "Loading High Definition Images..."; 
+        this.StatusIsVisible = true;    
+
         Task.Run(() =>
         {
             Thread.CurrentThread.Name = "CullingViewModel.LoadHdImages";
@@ -95,7 +118,27 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
 
             // Then load HD images in the background
             this.libraryManager.LoadHdImages(pathList);
+
+            Dispatch.OnUiThread(() =>
+            {
+                this.Status = "Decoding High Definition Images...";
+                this.StatusIsVisible = true;
+            });
+
             this.DecodeHdImages(pathList);
+
+            Dispatch.OnUiThread(() =>
+            {
+                this.Status = "Ready.";
+                this.StatusIsVisible = true;
+            });
+
+            Schedule.OnUiThread(1_500, () =>
+            {
+                this.Status = string.Empty;
+                this.StatusIsVisible = false;
+                this.SpinWait(start: false);
+            }, DispatcherPriority.ApplicationIdle);
         });
     }
 
@@ -147,6 +190,12 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         }
 
         this.SelectedImages = new(list);
+    }
+
+    private void SpinWait(bool start = true)
+    {
+        this.SpinViewModel.IsVisible = start;
+        this.SpinViewModel.IsActive = start;
     }
 
     private void ClearAllCollections()

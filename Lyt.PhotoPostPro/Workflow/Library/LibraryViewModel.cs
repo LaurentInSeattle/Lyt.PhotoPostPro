@@ -14,6 +14,10 @@ public sealed partial class LibraryViewModel :
         Edited,
     }
 
+    // TODO LATER
+    // Make this an application setting 
+    private const int CullingBatchSize = 48;
+
     private const double YearButtonWidth = 76.0;
     private const double MonthButtonWidth = 120.0;
     private const double DayButtonWidth = 160.0;
@@ -640,11 +644,22 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        // Reorder files by Date Captured 
-        var files = (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
-                 orderby thumb.Metadata.Captured ascending
-                 select thumb.Path)
-                 .ToList(); 
+        var filteredFiles =
+            (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
+             // Filter out images already rated (0 => unrated) 
+             where thumb.Metadata.Rating == 0
+             // Reorder files by Date Captured 
+             orderby thumb.Metadata.Captured ascending
+             select thumb.Path);
+
+        // Limit list to first in the allowed batch size
+        var files = filteredFiles.Take(CullingBatchSize).ToList();
+        if (files.Count == 0)
+        {
+            // no unrated images left to process
+            return;
+        }
+
         var rateAndCull = App.GetRequiredService<CullingViewModel>();
         rateAndCull.Initialize(files);
 

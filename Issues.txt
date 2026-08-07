@@ -1,10 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Limit count of images to cull and rate per batch.
-
-- User messages for loading HD and creating bitmaps 
-
 - Added folder tree not updated on Add 
 
 - Recent Sony A7V image fails to load 
@@ -61,6 +57,8 @@ Missing Features
 
 --- Essential --- 
 
+- App settings 
+
 - Parametrize Root Location of Library and Root Location of Exports 
 
 - Bulk Import of photos into library 
@@ -70,11 +68,11 @@ Missing Features
 
 - LUT 'Explorer': Pich an image and apply all LUTs so that it becomes easy to pick one
 
-- Ability to navigate the library by Date Added, Date Edited, Rating, Keywords, etc.
+- Ability to navigate the library by Rating, Keywords, etc.
 
 - Ability to flag images to insert in a photobook or collection 
 
-- Library backup 
+- Library backup / export 
 
 - Last edited LRU
 
@@ -101,6 +99,8 @@ Avalonia Related Problems
 
 Minor Issues (Low priority)
 ---------------------------
+
+- Make this an application setting :     private const int CullingBatchSize = 48;
 
 - Library selector buttons text for months and days do not update on Language change 
 
