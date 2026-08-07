@@ -79,18 +79,71 @@
 			Grid.Row="1" Grid.Column="2"
 			> 
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
+				<RowDefinition Height="0" /> <!-- Reserved FFU -->
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-			<TextBlock
-				Theme="{StaticResource H3}"
-				Text="{Binding Status}"
-				IsVisible="{Binding StatusIsVisible}"
-				Margin="12 4 4 4"
-				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			<Image 
+				Margin="4"
+				Grid.Row="1" 
+				IsVisible="{Binding SingleImageLayoutIsVisible}"
+				Source="{Binding Bitmap0}" 
+				Stretch="Uniform" 
+				HorizontalAlignment="Center"  VerticalAlignment="Center"
+				RenderOptions.BitmapInterpolationMode="HighQuality"
 				/>
+			<Grid
+				IsVisible="{Binding DualLandscapeImageLayoutIsVisible}"
+				Grid.Row="1" 
+				> 
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Image 
+					Margin="4"
+					Grid.Row="0"
+					Source="{Binding Bitmap1}" 
+					Stretch="Uniform" 
+					HorizontalAlignment="Center"  VerticalAlignment="Center"
+					RenderOptions.BitmapInterpolationMode="HighQuality"
+					/>
+				<Image 
+					Margin="4"
+					Grid.Row="1"
+					Source="{Binding Bitmap2}" 
+					Stretch="Uniform" 
+					HorizontalAlignment="Center"  VerticalAlignment="Center"
+					RenderOptions.BitmapInterpolationMode="HighQuality"
+					/>
+			</Grid>
+			<Grid
+				IsVisible="{Binding DualPortraitImageLayoutIsVisible}"
+				Grid.Row="1" 
+				> 
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Image 
+					Margin="4"
+					Grid.Column="0"
+					Source="{Binding Bitmap1}" 
+					Stretch="Uniform" 
+					HorizontalAlignment="Center"  VerticalAlignment="Center"
+					RenderOptions.BitmapInterpolationMode="HighQuality"
+					/>
+				<Image 
+					Margin="4"
+					Grid.Column="1"
+					Source="{Binding Bitmap2}" 
+					Stretch="Uniform" 
+					HorizontalAlignment="Center"  VerticalAlignment="Center"
+					RenderOptions.BitmapInterpolationMode="HighQuality"
+					/>
+			</Grid>
 			<ItemsControl 
 				Grid.Row="1" 
+				IsVisible="{Binding ManyImagesLayoutIsVisible}"
 				ItemsSource="{Binding SelectedImages}"
 				>
 				<ItemsControl.ItemsPanel>
@@ -104,7 +157,7 @@
 				<ItemsControl.ItemTemplate>
 				<DataTemplate >
 					<Image 
-						Margin="8"
+						Margin="4"
 						Source="{Binding Bitmap}" 
 						Stretch="Uniform" 
 						HorizontalAlignment="Center"  VerticalAlignment="Center"
@@ -123,6 +176,14 @@
 		<StackPanel
 			Grid.Row="1" Grid.Column="4"
 			>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Text="{Binding Status}"
+				IsVisible="{Binding StatusIsVisible}"
+				Foreground="{StaticResource OrangePeel_1_100}"
+				Margin="4 4 4 4"
+				TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
+				/>
 			<shared:SpinView
 				Margin="4"
 				DataContext="{Binding SpinViewModel}"

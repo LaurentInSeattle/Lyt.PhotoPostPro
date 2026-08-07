@@ -37,10 +37,34 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public partial SpinViewModel SpinViewModel { get; set; }
 
     [ObservableProperty]
-    public partial string Status { get; set; }
+    public partial string Status { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial bool StatusIsVisible { get; set; }
+
+    [ObservableProperty]
+    public partial bool SingleImageLayoutIsVisible { get; set; }
+
+    [ObservableProperty]
+    public partial bool DualLandscapeImageLayoutIsVisible { get; set; }
+
+    [ObservableProperty]
+    public partial bool DualPortraitImageLayoutIsVisible { get; set; }
+
+    [ObservableProperty]
+    public partial bool ManyImagesLayoutIsVisible { get; set; }
+
+    [ObservableProperty]
+    // Single image layout bitmap
+    public partial WriteableBitmap? Bitmap0 { get; set; }
+
+    [ObservableProperty]
+    // Dual image layout bitmap - top or left 
+    public partial WriteableBitmap? Bitmap1 { get; set; }
+
+    [ObservableProperty]
+    // Dual image layout bitmap - bottom or right
+    public partial WriteableBitmap? Bitmap2 { get; set; }
 
     public CullingViewModel(PhotoPostProModel model, IToaster toaster)
     {
@@ -63,6 +87,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     public override void Deactivate()
     {
         this.View.StripListBox.SelectionChanged -= this.OnSelectedThumbnailsChanged;
+        this.ClearImages();
         this.ClearAllCollections();
         base.Deactivate();
     }
@@ -80,7 +105,6 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         this.SpinWait(); 
         this.Status = "Loading Thumbnails...";
         this.StatusIsVisible = true;
-
 
         // Create empty slots so that we dont need to use Add which would cause losing the ordering of the files.
         var list = new List<UiThumbnail?>();
@@ -196,6 +220,54 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             }
         }
 
+        if ( list.Count== 0)
+        {
+            return; 
+        }
+
+        this.LayoutSelectedImages(list); 
+    }
+
+    private void LayoutSelectedImages(List<UiThumbnail> list)
+    {
+        this.ClearImages(); 
+
+        if (list.Count == 1)
+        {
+            this.SingleImageLayoutIsVisible = true;
+            this.Bitmap0 = list[0].Bitmap;
+            this.Bitmap1 = null;
+            this.Bitmap2 = null;
+            return; 
+        }
+        
+        if (list.Count == 2)
+        {
+            var bitmap1 = list[0].Bitmap;
+            var size1 = bitmap1.PixelSize;
+            var bitmap2 = list[1].Bitmap;
+            var size2 = bitmap2.PixelSize;
+            if ( ( size1.Width >= size1.Height) && ( size2.Width >= size2.Height))
+            {
+                // Both landscape or square
+                this.DualLandscapeImageLayoutIsVisible = true;
+                this.Bitmap1 = bitmap1;
+                this.Bitmap2 = bitmap2;
+                return; 
+            }
+
+            if ((size1.Width <= size1.Height) && (size2.Width <= size2.Height))
+            {
+                // Both portrait or square
+                this.DualPortraitImageLayoutIsVisible = true;
+                this.Bitmap1 = bitmap1;
+                this.Bitmap2 = bitmap2;
+                return;
+            }
+        }
+
+        // All other cases: use the uniform grid 
+        this.ManyImagesLayoutIsVisible = true;
         this.SelectedImages = new(list);
     }
 
@@ -211,5 +283,18 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         this.ImageThumbnails.Clear();
         this.SelectedThumbnails = [];
         this.SelectedImages = [];
+    }
+
+    private void ClearImages ()
+    {
+        this.SingleImageLayoutIsVisible = false;
+        this.DualLandscapeImageLayoutIsVisible = false;
+        this.DualPortraitImageLayoutIsVisible = false;
+        this.ManyImagesLayoutIsVisible = false;
+
+        this.Bitmap0 = null;
+        this.Bitmap1 = null;
+        this.Bitmap2 = null;
+        this.SelectedImages = new();
     }
 }
