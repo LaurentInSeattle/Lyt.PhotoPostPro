@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Shell;
 
-using static Messaging.ApplicationMessagingExtensions;
-
 public sealed partial class ShellViewModel
     : ViewModel<ShellView>,
     IRecipient<ToolbarCommandMessage>,
@@ -12,7 +10,7 @@ public sealed partial class ShellViewModel
     private readonly IToaster toaster;
     private readonly IAnimationService animationService; 
 
-        [ObservableProperty]
+    [ObservableProperty]
     public partial bool MainToolbarIsVisible { get; set; }
 
     public Mouse MouseMonitor { get; private set;  }
@@ -23,6 +21,7 @@ public sealed partial class ShellViewModel
     public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster, IAnimationService animationService)
     {
         this.model = photoPostProModel;
+        this.model.CameraManager.Initialize(App.MtpService); 
         this.toaster = toaster;
         this.animationService = animationService;
 

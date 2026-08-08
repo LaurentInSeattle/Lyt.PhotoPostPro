@@ -1,5 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro;
 
+using global::Avalonia.OpenGL;
+
+using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
+
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
@@ -8,7 +12,7 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
-    public App() : base(
+    public App(IMtpService mtpService) : base(
         App.Organization,
         App.Application,
         App.RootNamespace,
@@ -115,12 +119,17 @@ public partial class App : ApplicationBase
     {
         // This should be empty, use the OnStartup override
         Instance = this;
+        MtpService = mtpService;
+
         Debug.WriteLine("App Instance created");
     }
 
 #pragma warning disable CS8618 
     // Non-nullable field must contain a non-null value when exiting constructor. 
     public static App Instance { get; private set; }
+
+    public static IMtpService MtpService { get; set ;  }
+
 #pragma warning restore CS8618 
 
     private static Tuple<Type, Type> LoggerService => Service<ILogger, Logger>();

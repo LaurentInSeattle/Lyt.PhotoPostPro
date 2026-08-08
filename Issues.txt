@@ -1,9 +1,10 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Localize loading messages in Culling view 
+- Camera Mgr Failing to update because Media Devices nuget is now targetting Windows 
+	- Abstract API for MTP 
+	- Create Windows Assembly and 'fake' macOS / Linux ones 
 
-- Library thumbnail: Loc for "File:" 
 
 - Added folder tree not updated on Add 
 

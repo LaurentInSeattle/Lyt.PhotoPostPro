@@ -46,9 +46,9 @@ global using Sdcb;
 global using Sdcb.LibRaw;
 
 
-// MediaDevices
+// MTP (MediaDevices on Windows) 
 //
-global using MediaDevices;
+global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
 
 
 // Openize HEIC 

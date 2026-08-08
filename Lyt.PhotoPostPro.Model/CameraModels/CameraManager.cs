@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.CameraModels;
 
-#pragma warning disable CA1416 // Windows ONLY ! 
-
 // Here to block both Path from Avalonia ans ImageSharp 
 using System.IO;
 
@@ -14,6 +12,7 @@ public class CameraManager
 
     private readonly string downloadFolderPath;
 
+    private IMtpService? mtpService; 
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
 
@@ -24,11 +23,19 @@ public class CameraManager
         this.ClearDownloadFolder();
     }
 
+    private IMtpService MtpService
+    {
+        get => this.mtpService is not null ? this.mtpService : throw new Exception("Library Manager is not initialized."); 
+        set => this.mtpService = value;
+    }
+
     public bool IsMonitoring { get; private set; }
 
     public bool IsDownloading { get; private set; }
 
     public bool IsDeleting { get; private set; }
+
+    public void Initialize(IMtpService mtpService) => this.MtpService = mtpService;
 
     public void ClearDownloadFolder()
     {
@@ -86,7 +93,7 @@ public class CameraManager
     public void BeginMonitoringCameraConnexion()
     {
         // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
-        typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
+        // typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
 
         this.ctsMonitoring = new CancellationTokenSource();
         Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
@@ -98,7 +105,7 @@ public class CameraManager
         this.IsMonitoring = false;
     }
 
-    private void TryConnectTo(FoundDevice foundDevice, MediaDevice device)
+    private void TryConnectTo(FoundDevice foundDevice, IMtpDevice device)
     {
         try
         {
@@ -151,7 +158,7 @@ public class CameraManager
         Debug.WriteLine(" Checking Camera Connection");
         try
         {
-            var devices = MediaDevice.GetDevices().ToList();
+            var devices = this.MtpService.GetDevices(); //  MediaDevice.GetDevices().ToList();
             int deviceCount = devices.Count;
             if (deviceCount == 0)
             {
@@ -162,11 +169,11 @@ public class CameraManager
             else
             {
                 List<FoundDevice> foundDevices = new(deviceCount);
-                foreach (MediaDevice device in devices)
+                foreach (IMtpDevice device in devices)
                 {
                     // Basic device info 
                     var connectedDevice =
-                        new FoundDevice(device.DeviceId, device.FriendlyName, device.Manufacturer, device.Description);
+                        new FoundDevice(device.Id, device.FriendlyName, device.Manufacturer, device.Description);
                     foundDevices.Add(connectedDevice);
                 }
 
@@ -176,7 +183,7 @@ public class CameraManager
                 {
                     // Single device: try to connect to it  
                     FoundDevice foundDevice = foundDevices[0];
-                    MediaDevice device = devices[0];
+                    IMtpDevice device = devices[0];
                     Debug.WriteLine("One device found: " + device.Description);
                     this.TryConnectTo(foundDevice, device);
                 }
@@ -192,24 +199,24 @@ public class CameraManager
         }
     }
 
-    public static void DisposeDevice(FoundDevice foundDevice)
+    public void DisposeDevice(FoundDevice foundDevice)
     {
-        var devices = MediaDevice.GetDevices().ToList();
-        MediaDevice? device =
-            (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+        var devices = this.MtpService.GetDevices();
+        IMtpDevice? device =
+            (from dev in devices where dev.Id == foundDevice.Id select dev)
             .FirstOrDefault();
         if (device is not null)
         {
-            device.Dispose();
+            device.Disconnect();
             return;
         }
     }
 
     public void ConnectTo(FoundDevice foundDevice)
     {
-        var devices = MediaDevice.GetDevices().ToList();
-        MediaDevice? device =
-            (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+        var devices = this.MtpService.GetDevices();
+        IMtpDevice? device =
+            (from dev in devices where dev.Id == foundDevice.Id select dev)
             .FirstOrDefault();
         if (device is null)
         {
@@ -220,7 +227,7 @@ public class CameraManager
         this.TryConnectTo(foundDevice, device);
     }
 
-    private static List<string> AllFiles(MediaDevice device)
+    private static List<string> AllFiles(IMtpDevice device)
     {
         HashSet<string> allFiles = [];
 
@@ -274,9 +281,9 @@ public class CameraManager
         int deleted = 0;
         try
         {
-            var devices = MediaDevice.GetDevices().ToList();
-            MediaDevice? device =
-                (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+            var devices = this.MtpService.GetDevices();
+            IMtpDevice? device =
+                (from dev in devices where dev.Id == foundDevice.Id select dev)
                 .FirstOrDefault();
             if (device is null)
             {
@@ -336,7 +343,7 @@ public class CameraManager
         }
     }
 
-    private static bool DeleteFile(FoundDevice foundDevice, MediaDevice device, string file)
+    private static bool DeleteFile(FoundDevice foundDevice, IMtpDevice device, string file)
     {
         try
         {
@@ -381,9 +388,9 @@ public class CameraManager
         int downloads = 0;
         try
         {
-            var devices = MediaDevice.GetDevices().ToList();
-            MediaDevice? device =
-                (from dev in devices where dev.DeviceId == foundDevice.Id select dev)
+            var devices = this.MtpService.GetDevices();
+            IMtpDevice? device =
+                (from dev in devices where dev.Id == foundDevice.Id select dev)
                 .FirstOrDefault();
             if (device is null)
             {
@@ -441,7 +448,7 @@ public class CameraManager
         }
     }
 
-    private bool DownloadFile(FoundDevice foundDevice, MediaDevice device, string file)
+    private bool DownloadFile(FoundDevice foundDevice, IMtpDevice device, string file)
     {
         try
         {
@@ -501,7 +508,7 @@ public class CameraManager
     #endregion Downloading Files 
 
     [Conditional("DEBUG")]
-    private static void DebugPrintDeviceInfo(MediaDevice device)
+    private static void DebugPrintDeviceInfo( IMtpDevice device)
     {
         Debug.WriteLine(new string('=', 60));
 
@@ -511,16 +518,16 @@ public class CameraManager
             Debug.WriteLine(value);
         }
 
-        PrintLabelValue("Id:", device.DeviceId);
+        PrintLabelValue("Id:", device.Id);
         PrintLabelValue("Friendly Name:", device.FriendlyName);
         PrintLabelValue("Manufacturer:", device.Manufacturer);
-        PrintLabelValue("Model:", device.Model);
-        PrintLabelValue("Serial Number:", string.IsNullOrEmpty(device.SerialNumber) ? "(none)" : device.SerialNumber);
-        PrintLabelValue("Firmware:", string.IsNullOrEmpty(device.FirmwareVersion) ? "(unknown)" : device.FirmwareVersion);
-        PrintLabelValue("Type:", device.DeviceType.ToString());
-        PrintLabelValue("Protocol:", device.Protocol);
-        PrintLabelValue("Transport:", device.Transport.ToString());
-        PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
+        //PrintLabelValue("Model:", device.Model);
+        //PrintLabelValue("Serial Number:", string.IsNullOrEmpty(device.SerialNumber) ? "(none)" : device.SerialNumber);
+        //PrintLabelValue("Firmware:", string.IsNullOrEmpty(device.FirmwareVersion) ? "(unknown)" : device.FirmwareVersion);
+        //PrintLabelValue("Type:", device.DeviceType.ToString());
+        //PrintLabelValue("Protocol:", device.Protocol);
+        //PrintLabelValue("Transport:", device.Transport.ToString());
+        //PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
 
         Debug.WriteLine("");
     }

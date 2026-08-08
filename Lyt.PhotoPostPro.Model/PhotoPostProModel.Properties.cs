@@ -117,7 +117,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     }
 
     [JsonIgnore]
-    public CameraManager CameraManager { get; private set; } = new();
+    public CameraManager CameraManager { get; private set; } 
 
     [JsonIgnore]
     public LibraryManager LibraryManager { get; private set; } = new();

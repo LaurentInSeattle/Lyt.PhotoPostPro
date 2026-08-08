@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediaDevices" Version="1.10.0" />
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.15.6581">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -45,6 +44,7 @@
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Mvvm\Lyt.Mvvm.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Persistence\Lyt.Persistence.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Utilities\Lyt.Utilities.csproj" />
+    <ProjectReference Include="..\Lyt.PhotoPostPro.MultiPlatformAbstractions\Lyt.PhotoPostPro.MultiPlatformAbstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

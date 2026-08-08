@@ -47,6 +47,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.fileManager = fileManager;
         this.localizer = localizer;
         this.profiler = profiler;
+        this.CameraManager = new CameraManager();
         this.LibraryManager.Initialize(this, fileManager); 
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
         this.timeoutTimer = new TimeoutTimer(this.OnModelUpdate, timeoutMilliseconds: 250);

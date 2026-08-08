@@ -15,7 +15,8 @@ internal class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
+        => AppBuilder
+            .Configure<App>(()=> new App(ImplementationsProvider.MtpService()))
             .UsePlatformDetect()
             .With(new SkiaOptions() { MaxGpuResourceSizeBytes = 2L * 1024L * 1024L * 1024L }) // 2 GB 
 #if DEBUG
