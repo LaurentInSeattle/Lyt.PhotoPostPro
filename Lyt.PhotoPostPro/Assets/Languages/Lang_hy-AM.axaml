@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">Քաշեք և թողեք գոտի</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">Բարձր հստակությամբ պատկերների բեռնում...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">Բարձր հստակությամբ պատկերների վերծանում...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">Պատրաստ.</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Քաշեք և գցեք պատկերային ֆայլեր պարունակող թղթապանակն այստեղ՝ նոր նախագիծ ստեղծելու համար:</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Սկսելու համար քաշեք և թողեք պատկերի ֆայլը այստեղ:</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">Ֆիլմեր - Ուրիշներ</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Ցույց տալ՝</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Ֆայլ՝</system:String>
 
     <system:String x:Key="Library.RateAndCull">Գնահատեք և հանեք այս հավաքածուն</system:String>
 

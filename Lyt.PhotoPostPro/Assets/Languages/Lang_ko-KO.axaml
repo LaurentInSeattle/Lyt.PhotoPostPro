@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">드래그 앤 드롭 영역</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">고화질 이미지 로드 중...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">고화질 이미지 디코딩...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">준비가 된.</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">이미지 파일이 포함된 폴더를 여기에 끌어다 놓아 새 프로젝트를 만듭니다.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">영화 - 기타</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">보여주다:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">파일:</system:String>
 
     <system:String x:Key="Library.RateAndCull">이 세트 평가 및 선별</system:String>
 

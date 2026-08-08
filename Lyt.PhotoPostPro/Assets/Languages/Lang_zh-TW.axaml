@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">拖放區</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">正在加載高清圖像...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">解碼高清影像...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">準備好。</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">將包含圖像檔案的資料夾拖放到此處以建立新項目。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">將圖像檔案拖放到此處即可開始。</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">電影 - 其他</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">展示：</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">文件：</system:String>
 
     <system:String x:Key="Library.RateAndCull">評價並剔除該集合</system:String>
 

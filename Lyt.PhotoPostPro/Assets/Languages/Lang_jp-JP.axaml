@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">高解像度画像を読み込み中...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">高解像度画像をデコードしています...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">準備ができて。</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">映画 - その他</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">ファイル：</system:String>
 
     <system:String x:Key="Library.RateAndCull">このセットを評価して選別する</system:String>
 

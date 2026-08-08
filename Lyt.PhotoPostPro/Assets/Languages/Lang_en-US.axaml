@@ -31,6 +31,13 @@
 	<!-- Drag and Drop -->
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
+
+	<!-- Culling -->
+	<system:String x:Key="Workflow.Culling.LoadingHD">Loading High Definition Images...</system:String>
+	<system:String x:Key="Workflow.Culling.DecodingHD">Decoding High Definition Images...</system:String>
+	<system:String x:Key="Workflow.Culling.Ready">Ready.</system:String>
+
+
 	<!-- Folder -->
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 
@@ -238,6 +245,7 @@
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+	<system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
 	<system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
 	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>

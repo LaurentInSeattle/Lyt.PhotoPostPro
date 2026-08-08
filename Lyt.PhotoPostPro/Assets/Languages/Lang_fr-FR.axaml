@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">Chargement d'images haute définition...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">Décoder des images haute définition...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">Prêt.</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Faites glisser et déposez ici un dossier contenant des fichiers image pour créer un nouveau projet.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Faites glisser et déposez un fichier image ici pour commencer.</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">Films - Autres</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Déposer:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Évaluez et triez ce groupe</system:String>
 

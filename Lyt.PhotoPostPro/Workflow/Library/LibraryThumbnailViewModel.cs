@@ -87,7 +87,9 @@ public sealed partial class LibraryThumbnailViewModel :
         else
         {
             var fileDate = this.Metadata.FileDateUTC;
-            this.Details = "File: " + fileDate.ToLongDateString() + " " + fileDate.ToShortTimeString();
+            string fileLabel = this.Localize("Workflow.Library.Thumbnail.File");
+            this.Details = 
+                string.Format ( "{0} {1} {2}", fileLabel, fileDate.ToLongDateString() , fileDate.ToShortTimeString());
         }
     }
 

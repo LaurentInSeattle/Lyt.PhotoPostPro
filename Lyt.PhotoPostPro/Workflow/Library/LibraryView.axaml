@@ -73,9 +73,9 @@
 	    	/>
 		<StackPanel
 			Grid.Row="3" Grid.Column="4"
+			Margin="0 6 0 0"
 			>
 			<shared:SpinView
-				Margin="4"
 				DataContext="{Binding SpinViewModel}"
 				/>
 			<Image

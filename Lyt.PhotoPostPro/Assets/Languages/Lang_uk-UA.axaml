@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">Завантаження зображень високої чіткості...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">Декодування зображень високої чіткості...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">Готовий.</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Перетягніть сюди папку з файлами зображень, щоб створити новий проект.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">Фільми - Інше</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Файл:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Оцініть і відберіть цей набір</system:String>
 

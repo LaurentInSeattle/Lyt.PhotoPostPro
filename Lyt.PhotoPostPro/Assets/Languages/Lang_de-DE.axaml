@@ -41,6 +41,12 @@
 
     <system:String x:Key="DragDrop.DropZone">Drag-and-Drop-Zone</system:String>
 
+    <system:String x:Key="Workflow.Culling.LoadingHD">Hochauflösende Bilder werden geladen...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">Hochauflösende Bilder dekodieren...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">Bereit.</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Ziehen Sie einen Ordner mit Bilddateien per Drag-and-Drop hierher, um ein neues Projekt zu erstellen.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Ziehen Sie zunächst eine Bilddatei hierher und legen Sie sie dort ab.</system:String>
@@ -366,6 +372,8 @@
     <system:String x:Key="Workflow.Camera.MoviesOthers">Filme – Andere</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Zeigen:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Datei:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Bewerten und aussortieren Sie dieses Set</system:String>
 

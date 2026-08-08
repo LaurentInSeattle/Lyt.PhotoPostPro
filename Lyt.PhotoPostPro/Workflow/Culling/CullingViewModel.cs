@@ -133,7 +133,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
         this.ImageThumbnails = list!;
 
-        this.Status = "Loading High Definition Images..."; 
+        this.Status = this.Localize("Workflow.Culling.LoadingHD"); 
         this.StatusIsVisible = true;    
 
         Task.Run(() =>
@@ -148,7 +148,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
 
             Dispatch.OnUiThread(() =>
             {
-                this.Status = "Decoding High Definition Images...";
+                this.Status = this.Localize("Workflow.Culling.DecodingHD");
                 this.StatusIsVisible = true;
             });
 
@@ -156,8 +156,9 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
 
             Dispatch.OnUiThread(() =>
             {
-                this.Status = "Ready.";
+                this.Status = this.Localize("Workflow.Culling.Ready");
                 this.StatusIsVisible = true;
+                this.SpinWait(start: false);
 
                 // Clear Selection and select first 
                 this.SelectedThumbnailIndex = -1;
@@ -168,7 +169,6 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             {
                 this.Status = string.Empty;
                 this.StatusIsVisible = false;
-                this.SpinWait(start: false);
             }, DispatcherPriority.ApplicationIdle);
         });
     }
