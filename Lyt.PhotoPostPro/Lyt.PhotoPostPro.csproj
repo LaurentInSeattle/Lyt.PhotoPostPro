@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>AVLN3001;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>AVLN3001;</NoWarn>
+  </PropertyGroup>
+
   <PropertyGroup Label="Avalonia">
     <AvaloniaXamlVerboseExceptions>True</AvaloniaXamlVerboseExceptions>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

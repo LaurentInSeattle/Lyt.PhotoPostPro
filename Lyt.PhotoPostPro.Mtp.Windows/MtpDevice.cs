@@ -2,24 +2,24 @@
 
 public sealed class MtpDevice : IMtpDevice
 {
-    private readonly MediaDevice mediaDevice; 
+    private readonly MediaDevice mediaDevice;
 
-    public MtpDevice(MediaDevice mediaDevice) 
+    public MtpDevice(MediaDevice mediaDevice)
     {
         this.mediaDevice = mediaDevice;
-        this.Id = this.mediaDevice.DeviceId; 
-        this.FriendlyName = this.mediaDevice.FriendlyName;
-        this.Manufacturer = this.mediaDevice.Manufacturer;
-        this.Description = this.mediaDevice.Description;
+        this.Id = this.mediaDevice.DeviceId;
+        this.FriendlyName = Guard(this.mediaDevice.FriendlyName);
+        this.Manufacturer = Guard(this.mediaDevice.Manufacturer);
+        this.Description = Guard(this.mediaDevice.Description);
     }
 
     public string Id { get; private set; }
 
-    public string FriendlyName { get; private set; }
+    public string FriendlyName { get; private set; } = string.Empty;
 
-    public string Manufacturer { get; private set; }
+    public string Manufacturer { get; private set; } = string.Empty;
 
-    public string Description { get; private set; }
+    public string Description { get; private set; } = string.Empty;
 
     public void Update(string friendlyName, string manufacturer, string description)
     {
@@ -41,6 +41,16 @@ public sealed class MtpDevice : IMtpDevice
 
     public bool FileExists(string path) => !this.mediaDevice.FileExists(path);
 
-    public void DownloadFile(string path, MemoryStream memoryStream) 
+    public void DownloadFile(string path, MemoryStream memoryStream)
         => this.mediaDevice.DownloadFile(path, memoryStream);
+
+    private static string Guard(string? source)
+    {
+        if (!string.IsNullOrEmpty(source))
+        {
+            return source;
+        }
+
+        return string.Empty;
+    }
 }

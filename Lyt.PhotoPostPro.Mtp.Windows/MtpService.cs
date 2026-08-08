@@ -2,11 +2,16 @@
 
 public sealed class MtpService : IMtpService
 {
-#pragma warning disable CA1822 // Mark members as static
-
     public List<IMtpDevice> GetDevices()
     {
+        // Media Devices API 2.0
+        // var devices = MediaDeviceManager.Instance.GetDevices();
         var devices = MediaDevice.GetDevices();
+        if ( devices is null || !devices.Any())
+        {
+            return []; 
+        }
+
         var list = new List<IMtpDevice>(8);
         foreach (MediaDevice device in devices)
         {
@@ -15,6 +20,4 @@ public sealed class MtpService : IMtpService
 
         return list;
     }
-
-#pragma warning restore CA1822
 }
