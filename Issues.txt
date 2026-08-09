@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Need to clear confusing empty slots in added and edited folder trees 
+
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
 

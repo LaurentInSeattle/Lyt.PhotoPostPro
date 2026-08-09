@@ -7,4 +7,4 @@ public enum FolderTreeKind
     Edited, 
 }
 
-public sealed record class FolderTreeUpdatedMessage(FolderTreeKind FolderTreeKind, DayFolder DayFolder);
+public sealed record class FolderTreeUpdatedMessage(FolderTreeKind FolderTreeKind, DayFolder? DayFolder = null);

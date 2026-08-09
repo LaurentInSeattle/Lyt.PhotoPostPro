@@ -142,6 +142,10 @@ public sealed class LibraryManager
         this.CapturedFolderTree.Sort();
         this.AddedFolderTree.Sort();
 
+        // Notify UI 
+        // Send only one message should be enough - See how the message is processed in the library view
+        new FolderTreeUpdatedMessage(FolderTreeKind.Added).Publish();
+
         // TODO: Return more details 
         return errors == 0;
     }

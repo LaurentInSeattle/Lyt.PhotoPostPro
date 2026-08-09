@@ -130,9 +130,11 @@ public sealed partial class LibraryViewModel :
         {
             default:
             case FolderTreeKind.Captured:
+                this.Options[^0].Select();
                 break;
 
             case FolderTreeKind.Added:
+                this.Options[^1].Select();
                 break;
 
             case FolderTreeKind.Edited:
