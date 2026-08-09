@@ -8,7 +8,9 @@ public sealed class LibraryManager
     public const string LibraryFolderName = "Library";
     public const string ExportsFolderName = "Exports";
 
-    public const int CachedHdImageCount = 300; 
+    public const int CachedHdImageCount = 300;
+
+    private readonly Lock lockObject;
 
     private readonly string libraryFolderPath;
     private readonly string exportsFolderPath;
@@ -21,6 +23,7 @@ public sealed class LibraryManager
 
     public LibraryManager()
     {
+        this.lockObject = new Lock();
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LibraryFolderName);
         if (!Directory.Exists(this.libraryFolderPath))
@@ -35,7 +38,7 @@ public sealed class LibraryManager
         }
 
         // Adjust capacity as needed
-        this.LoadedHdImages = new(CachedHdImageCount); 
+        this.LoadedHdImages = new(CachedHdImageCount);
         this.LoadedThumbnails = [];
     }
 
@@ -67,15 +70,19 @@ public sealed class LibraryManager
 
     public bool AddDownloadedFiles(List<Metadata> files)
     {
-        int errors = 0;
-        List<Exception> exceptions = [];
-        if (this.fileManager is null)
+        if ((this.fileManager is null) ||
+            (this.CapturedFolderTree is null) ||
+            (this.AddedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
 
+        int errors = 0;
+        List<Exception> exceptions = [];
+
         bool AddDownloadedFile(Metadata metadata)
         {
+
             try
             {
                 if (!File.Exists(metadata.FullPath))
@@ -83,7 +90,7 @@ public sealed class LibraryManager
                     throw new Exception("No such file: " + metadata.FullPath);
                 }
 
-                // Create target folder if needed 
+                // Create target library folder if needed 
                 MetadataFolders metadataFolders = new(metadata);
                 string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
@@ -93,46 +100,18 @@ public sealed class LibraryManager
                 File.Move(metadata.FullPath, targetPath, overwrite: true);
 
                 // Move thumbnail file 
-                string? sourceFolder = 
-                    Path.GetDirectoryName(metadata.FullPath) ?? 
+                string? sourceFolder =
+                    Path.GetDirectoryName(metadata.FullPath) ??
                     throw new Exception("No source folder for: " + metadata.FullPath);
                 string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
                 File.Move(sourcePathThumbnail, targetPathThumbnail, overwrite: true);
 
-                // Verify main file 
-                FileInfo fileInfo = new(targetPath);
-                if (!fileInfo.Exists)
-                {
-                    throw new Exception("Failed to move file" + metadata.FullPath);
-                }
+                // Read back so that we can populate the cache
+                byte[] thumbnailImageBytes = File.ReadAllBytes(targetPathThumbnail);
 
-                if (fileInfo.Length != metadata.Length)
-                {
-                    throw new Exception("Failed to verify file move" + metadata.FullPath);
-                }
-
-                // update metadata 
-                metadata.HasMovedTo(targetPath);
-                metadata.AddedToLibraryUTC = DateTime.UtcNow;
-
-                // Finally serialize and save metadata 
-                string filenameMetadata = metadata.Filename + "_META.json";
-                string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
-                string serialized = this.fileManager.Serialize<Metadata>(metadata);
-                File.WriteAllText(targetPathMetadata, serialized);
-
-                // Now update in memory data structures 
-                // Add thumbnail to cache 
-                byte[] thumbnail = File.ReadAllBytes(targetPathThumbnail);
-                LoadedThumbnail loadedThumbnail = new(Metadata: metadata, ImageBytes: thumbnail);
-                this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
-
-                // Update folder tree 
-                this.CapturedFolderTree?.UpdateOnFileAdded(metadata, targetPathMetadata);
-
-                return true;
+                return this.AddFileFinalSteps(metadata, targetPath, targetFolder, thumbnailImageBytes);
             }
             catch (Exception ex)
             {
@@ -160,6 +139,8 @@ public sealed class LibraryManager
 
 #endif
 
+        this.CapturedFolderTree.Sort();
+        this.AddedFolderTree.Sort();
 
         // TODO: Return more details 
         return errors == 0;
@@ -167,7 +148,9 @@ public sealed class LibraryManager
 
     public bool AddDroppedFile(LoadedImage loadedImage)
     {
-        if ((this.fileManager is null) || (this.CapturedFolderTree is null))
+        if ((this.fileManager is null) ||
+            (this.CapturedFolderTree is null) ||
+            (this.AddedFolderTree is null))            
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -183,7 +166,7 @@ public sealed class LibraryManager
             Metadata metadata = loadedImage.Metadata!;
 
             // ! Checked by loadedImage.IsPreLoaded
-            byte[] thumbnail = loadedImage.JpgThumbnail!;
+            byte[] thumbnailImageBytes = loadedImage.JpgThumbnail!;
 
             if (!File.Exists(metadata.FullPath))
             {
@@ -202,10 +185,39 @@ public sealed class LibraryManager
             // Create thumbnail file 
             string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
             string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
-            File.WriteAllBytes(targetPathThumbnail, thumbnail);
+            File.WriteAllBytes(targetPathThumbnail, thumbnailImageBytes);
 
-            // Verify main file 
-            FileInfo fileInfo = new(targetPath);
+            bool success = this.AddFileFinalSteps(metadata, targetPath, targetFolder, thumbnailImageBytes);
+            if (success)
+            {
+                this.CapturedFolderTree.Sort();
+                this.AddedFolderTree.Sort();
+            }
+
+            return success; 
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false;
+        }
+    }
+
+    private bool AddFileFinalSteps(
+        Metadata metadata, string imageFilePath, string imageFileFolder, byte[] thumbnailImageBytes)
+    {
+        if ((this.fileManager is null) ||
+            (this.CapturedFolderTree is null) ||
+            (this.AddedFolderTree is null) ||
+            (this.EditedFolderTree is null))
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        try
+        {
+            // Verify main image file 
+            FileInfo fileInfo = new(imageFilePath);
             if (!fileInfo.Exists)
             {
                 throw new Exception("Failed to copy file" + metadata.FullPath);
@@ -217,22 +229,27 @@ public sealed class LibraryManager
             }
 
             // update metadata 
-            metadata.HasMovedTo(targetPath);
+            metadata.HasMovedTo(imageFilePath);
             metadata.AddedToLibraryUTC = DateTime.UtcNow;
 
             // Finally serialize and save metadata 
             string filenameMetadata = metadata.Filename + "_META.json";
-            string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
+            string targetPathMetadata = Path.Combine(imageFileFolder, filenameMetadata);
             string serialized = this.fileManager.Serialize<Metadata>(metadata);
             File.WriteAllText(targetPathMetadata, serialized);
 
             // Now update in memory data structures 
-            // Add thumbnail to cache 
-            LoadedThumbnail loadedThumbnail = new(Metadata: metadata, ImageBytes: thumbnail);
-            this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
+            // There can be multiple threads moving files so we need to lock them
+            lock (this.lockObject)
+            {
+                // Add thumbnail to cache 
+                LoadedThumbnail loadedThumbnail = new(Metadata: metadata, thumbnailImageBytes);
+                this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
 
-            // Update folder tree 
-            this.CapturedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata);
+                // Update folder trees 
+                this.CapturedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata, doSort: false);
+                this.AddedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata, doSort: false);
+            }
 
             // All good 
             return true;
@@ -255,7 +272,7 @@ public sealed class LibraryManager
         try
         {
             // Update folder tree 
-            string metadataFilePath = metadata.MetadataFullPath(); 
+            string metadataFilePath = metadata.MetadataFullPath();
             this.EditedFolderTree.Remove(metadataFilePath);
             var dayFolder = this.EditedFolderTree.UpdateOnFileAdded(metadata, metadataFilePath);
 
@@ -291,19 +308,19 @@ public sealed class LibraryManager
                 {
                     foreach (string path in day.MetadataFiles)
                     {
-                        paths.Add(path); 
+                        paths.Add(path);
                     }
                 }
             }
         }
 
-        Parallel.For(0, paths.Count, index => 
+        Parallel.For(0, paths.Count, index =>
         {
             string path = paths[index];
             LoadedThumbnail? thumbnail = this.LoadThumbnail(path);
             if (thumbnail is not null)
             {
-                lock(this.LoadedThumbnails)
+                lock (this.LoadedThumbnails)
                 {
                     // Debug.WriteLine(" Loaded Thumbnail: " + path);
                     this.LoadedThumbnails.Add(path, thumbnail);
@@ -460,8 +477,8 @@ public sealed class LibraryManager
 
         try
         {
-            string? sourceFolder = 
-                Path.GetDirectoryName(metadata.FullPath) ?? 
+            string? sourceFolder =
+                Path.GetDirectoryName(metadata.FullPath) ??
                 throw new Exception("No source folder for: " + metadata.FullPath);
 
             // TODO : Remove ToList()
@@ -515,8 +532,8 @@ public sealed class LibraryManager
             // Create target folder if needed 
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
-            string? sourceFolder = 
-                Path.GetDirectoryName(metadata.FullPath) ?? 
+            string? sourceFolder =
+                Path.GetDirectoryName(metadata.FullPath) ??
                 throw new Exception("No source folder for: " + metadata.FullPath);
             string fileId = workflow.PostProcess.FileUidString;
             string filenameEdit = string.Concat(metadata.Filename, "_EDIT", fileId, ".json");

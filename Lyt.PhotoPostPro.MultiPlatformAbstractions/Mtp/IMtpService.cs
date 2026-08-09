@@ -2,5 +2,7 @@
 
 public interface IMtpService
 {
+    void Initialize(); 
+
     List<IMtpDevice> GetDevices();
 }

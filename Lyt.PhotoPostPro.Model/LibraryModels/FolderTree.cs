@@ -177,7 +177,7 @@ public sealed class FolderTree
         }
     }
 
-    public DayFolder UpdateOnFileAdded(Metadata metadata, string metadataFilePath)
+    public DayFolder UpdateOnFileAdded(Metadata metadata, string metadataFilePath, bool doSort = true)
     {
         metadata.GetLibraryFolders(out int year, out int month, out int day, out int dayOfWeek);
         var yearFolder =
@@ -209,7 +209,11 @@ public sealed class FolderTree
 
         dayFolder.MetadataFiles.Add(metadataFilePath);
 
-        this.Sort();
+        if (doSort)
+        {
+            this.Sort();
+        } 
+
         return dayFolder;
     }
 

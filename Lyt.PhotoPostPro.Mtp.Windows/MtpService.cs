@@ -2,6 +2,10 @@
 
 public sealed class MtpService : IMtpService
 {
+    public void Initialize() =>
+        // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
+        typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
+
     public List<IMtpDevice> GetDevices()
     {
         // Media Devices API 2.0

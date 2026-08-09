@@ -1,18 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Camera Mgr Failing to update because Media Devices nuget is now targetting Windows 
-	- Abstract API for MTP 
-	- Create Windows Assembly and 'fake' macOS / Linux ones 
-
-
-- Added folder tree not updated on Add 
-
-- Recent Sony A7V image fails to load 
-Check with:
-https://github.com/laheller/SharpLibraw  
-https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
-
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
 
@@ -28,7 +16,7 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 WIP
 ---
 
-- Culling Workflow and  Rating system 
+- Culling Workflow and Rating system 
 
 
 TODO First
@@ -96,10 +84,22 @@ Missing Features
 
 - Floating toolbox windows 
 
-Avalonia Related Problems 
--------------------------
+
+Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp) 
+-----------------------------------------------------------------------------
 
 - App freeze when using combo box ??? Avalonia issue
+
+- Media Devices 2.0 cannot transfer many files 
+
+- Recent Sony A7V image fails to load correctly with LibRaw 
+Check with:
+https://github.com/laheller/SharpLibraw  
+https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
+
+- No support yet for Half pixel type in ImageSharp 
+
+- No support yet for HEIC images in ImageSharp 
 
 
 Minor Issues (Low priority)
@@ -115,7 +115,7 @@ Minor Issues (Low priority)
 
 - Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
 
-- No thumbnail updated after edit without export --- By Design ? 
+- Thumbnail is not updated after edit without export --- By Design ? 
 
 
 Cool Stuff to Consider 
@@ -154,4 +154,4 @@ middlle to show top image or bottom image
 
 - Show GPS location in map ( Not google ) 
 
-- Maybe silly: Rewrite Openize HEIC for speed 
+- Maybe silly: Rewrite Openize HEIC for speed. Useless if ImageSharp is going to support HEIC 

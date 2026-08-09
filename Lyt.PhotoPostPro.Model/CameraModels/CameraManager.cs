@@ -92,9 +92,7 @@ public class CameraManager
 
     public void BeginMonitoringCameraConnexion()
     {
-        // Force re-invocation of the Media Device CTOR to prevent potential caching issues 
-        // typeof(MediaDevice).TypeInitializer?.Invoke(null, null);
-
+        this.MtpService.Initialize(); 
         this.ctsMonitoring = new CancellationTokenSource();
         Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
     }
