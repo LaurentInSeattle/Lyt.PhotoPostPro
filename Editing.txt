@@ -411,3 +411,55 @@ or commonly searched by photographers and creators.
 
 100. Canva (templates + edits)
 
+------------  Culling ----------------
+
+  Rejected (R) / 0 stars: Completely ruined photos (blurry, closed eyes, severe under/overexposure) → To be deleted.
+    :star: (1 star): Default rating assigned upon import. Acceptable photos remain at 1 star (snapshots, no editing required).
+    :star::star: (2 stars): Clean and technically correct photos.
+    :star::star::star: (3 stars): Good photos, deserve careful editing.
+    :star::star::star::star: (4 stars): Very good photos (mastered composition and lighting), intended for portfolio or sharing.
+    :star::star::star::star::star: (5 stars): Excellence (zero flaws), intended for large prints.
+
+The Workflow
+
+    1st pass (The rejects): Scroll with the mouse wheel → Press R on unusable photos.
+    2nd pass (The correct ones): Filter by ≥ 1★ → Press 2 to give 2 stars to clean photos.
+    3rd pass (The good ones): Filter by = 2★ → Press 3 to give 3 stars to good photos.
+    4th pass (The very good ones): Filter by = 3★ → Press 4 to isolate very good photos.
+    5th pass (Excellence): Filter by = 4★ → Press 5 for the best photos of the session.
+
+At each step, you filter by the previous rating to reduce the number of images, then add one star to the best ones.
+
+Set your criteria before you start
+
+Culling decisions fall across four axes. Knowing which ones you're prioritising before you sit down makes the process faster and less subjective:
+
+    Technical quality: Is the focus where it needs to be? Is the exposure workable? Is there motion blur that wasn't intended?
+
+    Composition: Is the subject positioned well? Are there distracting elements in the frame?
+
+    Emotional impact: Does this image capture something real? Even a technically imperfect frame can carry a moment worth keeping.
+
+    Redundancy: Is this the best version of a shot you already have? If you have eight frames of the same moment, one of them is the keeper.
+
+The multi-pass workflow
+
+Most professionals work in two to three passes, not one:
+
+    Pass 1 for speed: Move quickly. Flag obvious technical failures. Don't second-guess. The goal here is volume reduction, not curation. This pass should be fast — if you're spending more than a few seconds on any image in this pass, you're making the wrong kind of decisions.
+
+    Pass 2 for story: Now you're selecting. Go through your flagged images and pick the keepers. Think about sequencing, coverage, and narrative. Are there moments missing from your selection? Are there redundant frames you can cut? This is the creative pass.
+
+    Pass 3 for refinement: Look at what you've selected. Do you have too many from one moment and not enough from another? Are there near-identical images you can trim down to the single strongest frame? This pass is where you edit the story.
+
+Common Culling Mistakes
+
+    Editing before culling. Fix the exposure, move on, hit a better version of the same shot ten images later. The time spent on the first frame is wasted. Cull the entire set before opening your editing software.
+
+    Keeping images out of emotional attachment. The first time you photograph something — a new venue, a sport you're unfamiliar with, a type of subject — you'll want to keep images because of what they represent to you. Assess the image, not the experience of taking it.
+
+    Delivering too many similar images. Giving a client 12 nearly identical frames of the same moment doesn't show abundance — it shows you didn't edit with any rigour. Select the one.
+
+    Using Lightroom as your primary culling tool. Lightroom is excellent for editing. It is slow for culling at volume. Dedicated culling tools exist because Lightroom wasn't designed for this stage of the workflow.
+
+    Over-trusting automated AI on emotionally complex material. Full automation works well for technically consistent shooting. If your work has variance, build in a review pass after automation — especially for moments that might appear technically compromised but carry the story.

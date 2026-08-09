@@ -16,7 +16,7 @@ public sealed partial class LibraryViewModel :
 
     // TODO LATER
     // Make this an application setting 
-    private const int CullingBatchSize = 48;
+    private const int CullingBatchSize = 12; // 48;
 
     private const double YearButtonWidth = 76.0;
     private const double MonthButtonWidth = 120.0;

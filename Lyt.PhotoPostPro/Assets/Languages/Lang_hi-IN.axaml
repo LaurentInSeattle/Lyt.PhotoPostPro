@@ -47,6 +47,12 @@
 
     <system:String x:Key="Workflow.Culling.Ready">तैयार।</system:String>
 
+    <system:String x:Key="Workflow.Culling.AddStar">सितारा जोड़ें</system:String>
+
+    <system:String x:Key="Workflow.Culling.RemoveStar">अवनति</system:String>
+
+    <system:String x:Key="Workflow.Culling.Reject">अस्वीकार करना</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">नया प्रोजेक्ट बनाने के लिए छवि फ़ाइलों वाले फ़ोल्डर को यहां खींचें और छोड़ें।</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">आरंभ करने के लिए एक छवि फ़ाइल को यहां खींचें और छोड़ें।</system:String>

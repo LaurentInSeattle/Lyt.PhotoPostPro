@@ -24,6 +24,7 @@ internal sealed class HotKeys
             (e.Key == Key.End) ||
             (e.Key == Key.Insert) ||
             (e.Key == Key.Delete) ||
+            (e.Key == Key.Back) ||
             (e.Key == Key.Pause))
         {
             new HotKeyMessage(e.Key).Publish();

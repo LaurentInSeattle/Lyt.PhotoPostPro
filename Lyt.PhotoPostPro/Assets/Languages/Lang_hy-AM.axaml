@@ -47,6 +47,12 @@
 
     <system:String x:Key="Workflow.Culling.Ready">Պատրաստ.</system:String>
 
+    <system:String x:Key="Workflow.Culling.AddStar">Ավելացնել աստղ</system:String>
+
+    <system:String x:Key="Workflow.Culling.RemoveStar">Կրճատել</system:String>
+
+    <system:String x:Key="Workflow.Culling.Reject">Մերժել</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Քաշեք և գցեք պատկերային ֆայլեր պարունակող թղթապանակն այստեղ՝ նոր նախագիծ ստեղծելու համար:</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Սկսելու համար քաշեք և թողեք պատկերի ֆայլը այստեղ:</system:String>

@@ -1,0 +1,57 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Culling.CullingImageView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Culling"
+	x:DataType="vm:CullingImageViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+
+    xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
+	>
+	<Border
+		x:Name="outerBorder"
+		Background="Transparent"
+		BorderBrush="{StaticResource LightAqua_1_100}"
+		BorderThickness="1"
+		CornerRadius="4"
+		>
+		<Grid
+			Margin="4"
+			>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="42" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="32" />
+			</Grid.RowDefinitions>
+			<stars:RatingControl
+				Grid.Row="0" Grid.Column="1"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				RatingValue="{Binding Rating}"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.ColumnSpan="2"
+				Margin="8 0 0 0"
+				Text="{Binding Title}"
+				Theme="{StaticResource H3}"
+				/>
+			<Image
+				Grid.Row="1"
+				Source="{Binding Image}"
+				IsHitTestVisible="False"
+				RenderOptions.BitmapInterpolationMode="HighQuality"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.ColumnSpan="2"
+				Margin="8 0 0 0"
+				Text="{Binding Details}"
+				Theme="{StaticResource Medium}"
+				/>
+		</Grid>
+	</Border>
+</UserControl>

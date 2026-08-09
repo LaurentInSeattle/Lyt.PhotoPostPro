@@ -5,15 +5,29 @@
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class CullingViewModel : ViewModel<CullingView>
+public sealed partial class CullingViewModel : 
+    ViewModel<CullingView>, 
+    ISelectListener, 
+    IRecipient<HotKeyMessage>
 {
-    public sealed record class UiThumbnail(string Key, WriteableBitmap Bitmap);
+    public enum LayoutKind
+    {
+        None,
+        SingleImage,
+        DualImageLandscape,
+        DualImagePortrait,
+        ManyImages ,
+    }
+
+    public sealed record class UiThumbnail(string Key, Metadata Metadata, WriteableBitmap Bitmap);
 
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
     private readonly IToaster toaster;
 
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
+
+    private LayoutKind layoutKind ;
 
     [ObservableProperty]
     public partial UiThumbnail? SelectedThumbnail { get; set; }
@@ -56,7 +70,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
 
     [ObservableProperty]
     // Single image layout bitmap
-    public partial WriteableBitmap? Bitmap0 { get; set; }
+    public partial CullingImageViewModel? SingleImageViewModel { get; set; }
 
     [ObservableProperty]
     // Dual image layout bitmap - top or left 
@@ -70,6 +84,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
     {
         this.model = model;
         this.libraryManager = model.LibraryManager;
+        this.layoutKind = LayoutKind.None;
         this.toaster = toaster;
         this.SpinViewModel = new SpinViewModel()
         {
@@ -122,7 +137,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
                 var thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedThumbnail.ImageBytes));
 
                 // Using an index so that the ordering of the list is maintained 
-                list[index] = new UiThumbnail(file, thumbnail);
+                list[index] = new UiThumbnail(file, loadedThumbnail.Metadata, thumbnail);
                 pathList.Add(loadedThumbnail.Metadata.FullPath);
             }
         });
@@ -191,7 +206,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
                         string key = loadedHdImage.Metadata.MetadataFullPath();
                         lock (this.allHdImages)
                         {
-                            this.allHdImages.Add(key, new UiThumbnail(key, bitmap));
+                            this.allHdImages.Add(key, new UiThumbnail(key, loadedHdImage.Metadata, bitmap));
                         }
                     }
                 }
@@ -234,8 +249,11 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
 
         if (list.Count == 1)
         {
+            this.layoutKind = LayoutKind.SingleImage;
             this.SingleImageLayoutIsVisible = true;
-            this.Bitmap0 = list[0].Bitmap;
+            var uiThumbnail = list[0]; 
+            this.SingleImageViewModel =
+                new CullingImageViewModel(this, uiThumbnail.Metadata, uiThumbnail.Bitmap);
             this.Bitmap1 = null;
             this.Bitmap2 = null;
             return; 
@@ -250,6 +268,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             if ( ( size1.Width >= size1.Height) && ( size2.Width >= size2.Height))
             {
                 // Both landscape or square
+                this.layoutKind = LayoutKind.DualImageLandscape;
                 this.DualLandscapeImageLayoutIsVisible = true;
                 this.Bitmap1 = bitmap1;
                 this.Bitmap2 = bitmap2;
@@ -259,6 +278,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
             if ((size1.Width <= size1.Height) && (size2.Width <= size2.Height))
             {
                 // Both portrait or square
+                this.layoutKind = LayoutKind.DualImagePortrait;
                 this.DualPortraitImageLayoutIsVisible = true;
                 this.Bitmap1 = bitmap1;
                 this.Bitmap2 = bitmap2;
@@ -267,6 +287,7 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         }
 
         // All other cases: use the uniform grid 
+        this.layoutKind = LayoutKind.ManyImages;
         this.ManyImagesLayoutIsVisible = true;
         this.SelectedImages = new(list);
     }
@@ -292,9 +313,40 @@ public sealed partial class CullingViewModel : ViewModel<CullingView>
         this.DualPortraitImageLayoutIsVisible = false;
         this.ManyImagesLayoutIsVisible = false;
 
-        this.Bitmap0 = null;
+        this.SingleImageViewModel = null;
         this.Bitmap1 = null;
         this.Bitmap2 = null;
-        this.SelectedImages = new();
+        this.SelectedImages = [];
     }
+
+    public void OnSelect(object selectedObject) {}
+
+    [RelayCommand]
+    public void OnAddStar()
+    {
+        if ( this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
+        {
+            this.SingleImageViewModel.ChangeRating(isAddStar: true);
+        }
+    }
+
+    [RelayCommand]
+    public void OnRemoveStar()
+    {
+        if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
+        {
+            this.SingleImageViewModel.ChangeRating(isAddStar: false);
+        }
+    }
+
+    [RelayCommand]
+    public void OnReject ()
+    {
+
+    }
+
+    public void Receive(HotKeyMessage message)
+    {
+        // TODO 
+    } 
 }

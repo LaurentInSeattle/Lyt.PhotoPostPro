@@ -59,4 +59,10 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Workflow\Culling\CullingImageView.axaml.cs">
+      <DependentUpon>CullingImageView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

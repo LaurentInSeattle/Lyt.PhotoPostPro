@@ -47,6 +47,12 @@
 
     <system:String x:Key="Workflow.Culling.Ready">準備ができて。</system:String>
 
+    <system:String x:Key="Workflow.Culling.AddStar">スターを追加</system:String>
+
+    <system:String x:Key="Workflow.Culling.RemoveStar">降格</system:String>
+
+    <system:String x:Key="Workflow.Culling.Reject">拒否する</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
