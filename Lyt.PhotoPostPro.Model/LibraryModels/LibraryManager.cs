@@ -251,8 +251,8 @@ public sealed class LibraryManager
                 this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
 
                 // Update folder trees 
-                this.CapturedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata, doSort: false);
-                this.AddedFolderTree.UpdateOnFileAdded(metadata, targetPathMetadata, doSort: false);
+                this.CapturedFolderTree.UpdateOnFileAdded(DateKind.Captured, metadata, targetPathMetadata, doSort: false);
+                this.AddedFolderTree.UpdateOnFileAdded(DateKind.Added, metadata, targetPathMetadata, doSort: false);
             }
 
             // All good 
@@ -278,7 +278,7 @@ public sealed class LibraryManager
             // Update folder tree 
             string metadataFilePath = metadata.MetadataFullPath();
             this.EditedFolderTree.Remove(metadataFilePath);
-            var dayFolder = this.EditedFolderTree.UpdateOnFileAdded(metadata, metadataFilePath);
+            var dayFolder = this.EditedFolderTree.UpdateOnFileAdded(DateKind.Edited, metadata, metadataFilePath);
 
             // Notify UI 
             new FolderTreeUpdatedMessage(FolderTreeKind.Edited, dayFolder).Publish();

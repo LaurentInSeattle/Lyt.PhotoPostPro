@@ -164,9 +164,23 @@ public sealed class Metadata
     // Folder change ONLY, name and extension do stay the same
     public void HasMovedTo(string fullPath) => this.FullPath = fullPath;
 
-    public void GetLibraryFolders(out int year, out int month, out int day, out int dayOfWeek)
+    public void GetLibraryFolders(DateKind dateKind, out int year, out int month, out int day, out int dayOfWeek)
     {
-        DateTime date = this.Captured != DateTime.MinValue ? this.Captured : this.FileDateUTC;
+        var date = dateKind switch
+        {
+            DateKind.Captured => this.Captured != DateTime.MinValue ? this.Captured : this.FileDateUTC,
+
+            DateKind.Added => this.AddedToLibraryUTC != DateTime.MinValue ?
+                                    this.AddedToLibraryUTC :
+                                    throw new InvalidOperationException("Never Added"),
+
+            DateKind.Edited => this.LastEditedUTC != DateTime.MinValue ?
+                                    this.LastEditedUTC :
+                                    throw new InvalidOperationException("Never Edited"),
+            _ => throw new InvalidOperationException("Missing data kind"),
+        };
+
+        date = date.ToLocalTime() ;
         year = date.Year;
         month = date.Month;
         day = date.Day;
