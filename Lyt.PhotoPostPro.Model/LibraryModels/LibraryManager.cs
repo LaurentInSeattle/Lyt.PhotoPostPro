@@ -513,6 +513,7 @@ public sealed class LibraryManager
                 if (Debugger.IsAttached) { Debugger.Break(); }
             }
 
+            new LibraryRemovedMessage(metadata).Publish();
             return true;
         }
         catch (Exception ex)
@@ -632,6 +633,8 @@ public sealed class LibraryManager
             string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
             string serialized = this.fileManager.Serialize<Metadata>(metadata);
             File.WriteAllText(targetPathMetadata, serialized);
+
+            new LibraryMetadataUpdateMessage(metadata).Publish();
         }
         catch (Exception ex)
         {

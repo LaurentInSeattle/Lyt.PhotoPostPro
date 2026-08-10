@@ -327,6 +327,7 @@ public sealed partial class CullingViewModel :
         if ( this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
             this.SingleImageViewModel.ChangeRating(isAddStar: true);
+            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata);
         }
     }
 
@@ -336,17 +337,43 @@ public sealed partial class CullingViewModel :
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
             this.SingleImageViewModel.ChangeRating(isAddStar: false);
+            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata); 
         }
     }
 
     [RelayCommand]
     public void OnReject ()
     {
-
+        if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
+        {
+            if (this.SingleImageViewModel.Metadata.Rating >= 4)
+            {
+                // TODO
+                // Ask before deleting highly rated image 
+            }
+            
+            this.libraryManager.Remove(this.SingleImageViewModel.Metadata);
+        }
     }
 
     public void Receive(HotKeyMessage message)
     {
-        // TODO 
+        switch (message.Key)
+        {
+            default:
+                return;
+
+            case Key.Back: // Reject: Remove from Library 
+                this.OnReject();
+                break;
+
+            case Key.Insert: // Add Star 
+                this.OnAddStar() ;
+                break;
+
+            case Key.Delete: // Demote 
+                this.OnRemoveStar() ;
+                break;
+        }
     } 
 }

@@ -7,8 +7,8 @@ public sealed partial class LibraryThumbnailViewModel :
     public const double LargeBorderHeight = 280;
     public const double LargeImageHeight = 200;
 
-    public readonly Metadata Metadata;
     public readonly string Path;
+    public Metadata Metadata;
 
     private readonly ISelectListener parent;
 
@@ -22,10 +22,10 @@ public sealed partial class LibraryThumbnailViewModel :
     public partial int Rating { get; set; }
 
     [ObservableProperty]
-    public partial string Title { get; set; }
+    public partial string Title { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string Details { get; set; }
+    public partial string Details { get; set; } = string.Empty; 
 
     [ObservableProperty]
     public partial WriteableBitmap Thumbnail { get; set; }
@@ -39,12 +39,10 @@ public sealed partial class LibraryThumbnailViewModel :
         this.BorderHeight = LargeBorderHeight;
         this.ImageHeight = LargeImageHeight;
         this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
-
-        this.Rating = metadata.Rating;
-        this.Title = string.Empty;
-        this.Details = string.Empty;
-        this.SetThumbnailStrings();
         this.Subscribe<LanguageChangedMessage>();
+
+        this.Update(metadata);
+
     }
 
     // We need to reload the thumbnail view title, so that it will be properly localized
@@ -58,13 +56,13 @@ public sealed partial class LibraryThumbnailViewModel :
     [RelayCommand]
     public void OnIsToAddToLibraryChanged()
     {
-
+        // TODO 
     }
 
     [RelayCommand]
     public void OnIsToRemoveFromCameraChanged()
     {
-
+        // TODO 
     }
 
 #pragma warning restore CA1822 // Mark members as static
@@ -95,6 +93,13 @@ public sealed partial class LibraryThumbnailViewModel :
             this.Details =
                 string.Format("{0} {1} {2}", fileLabel, fileDate.ToLongDateString(), fileDate.ToShortTimeString());
         }
+    }
+
+    internal void Update(Metadata metadata)
+    {
+        this.Metadata = metadata;
+        this.Rating = metadata.Rating;
+        this.SetThumbnailStrings();
     }
 
     //internal void ShowDeselected(Model.GameObjects.Game game)

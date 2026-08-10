@@ -3,6 +3,8 @@
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LibraryLoadedMessage>,
+    IRecipient<LibraryRemovedMessage>,
+    IRecipient<LibraryMetadataUpdateMessage>,
     IRecipient<ThumbnailUpdatedMessage>,
     IRecipient<FolderTreeUpdatedMessage>,
     ISelectListener
@@ -118,6 +120,8 @@ public sealed partial class LibraryViewModel :
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
         this.Subscribe<FolderTreeUpdatedMessage>();
+        this.Subscribe<LibraryRemovedMessage>();
+        this.Subscribe<LibraryMetadataUpdateMessage>();
     }
 
     public void Receive(FolderTreeUpdatedMessage message)
@@ -141,7 +145,7 @@ public sealed partial class LibraryViewModel :
                 this.Options[^1].Select();
                 break;
         }
-    } 
+    }
 
     public void Receive(ThumbnailUpdatedMessage message)
         => Dispatch.OnUiThread(
@@ -561,7 +565,7 @@ public sealed partial class LibraryViewModel :
                 DispatcherPriority.ApplicationIdle);
         });
     }
-    
+
     private void LaunchProcessing()
     {
         var postProcess = this.model.CurrentPostProcess;
@@ -629,17 +633,63 @@ public sealed partial class LibraryViewModel :
                 return;
             }
 
-            // Clear this view 
-            this.SelectedThumbnail = null;
-            this.SelectedThumnailMetadataViewModel = null;
-
-            // Clear the list 
-            this.LibraryThumbnailsPanelViewModel.Thumbnails.Remove(this.selectedLibraryThumbnailViewModel);
-
-            // Clear selection 
-            this.selectedLibraryThumbnailViewModel = null;
-            this.HasSelection = false;
+            // We should receive a LibraryRemovedMessage and execute the code below
+            // See:   Receive(LibraryRemovedMessage message)
         }
+    }
+
+    public void Receive(LibraryRemovedMessage message)
+    {
+        var metadata = message.Metadata;
+        if (!this.TryFindThumbnail(metadata, out LibraryThumbnailViewModel? thumbnail))
+        {
+            // Nothing to do 
+            return;
+        }
+
+        // Remove it the list 
+        this.LibraryThumbnailsPanelViewModel.Thumbnails.Remove(thumbnail);
+
+        if (this.selectedLibraryThumbnailViewModel == null)
+        {
+            // If it was not the selection, Nothing to do 
+            return;
+        }
+
+        // Clear this view 
+        this.SelectedThumbnail = null;
+        this.SelectedThumnailMetadataViewModel = null;
+
+        // Clear selection 
+        this.selectedLibraryThumbnailViewModel = null;
+        this.HasSelection = false;
+    }
+
+    public void Receive(LibraryMetadataUpdateMessage message)
+    {
+        var metadata = message.Metadata;
+        if (!this.TryFindThumbnail(metadata, out LibraryThumbnailViewModel? thumbnail))
+        {
+            // Nothing to do 
+            return;
+        }
+
+        thumbnail.Update(metadata); 
+    }
+
+    private bool TryFindThumbnail(Metadata metadata, [NotNullWhen(true)] out LibraryThumbnailViewModel? foundThumbnail)
+    {
+        foundThumbnail = null;
+        foreach (var thumbnail in this.LibraryThumbnailsPanelViewModel.Thumbnails)
+        {
+            if (thumbnail.Metadata.FullPath.Equals(metadata.FullPath, StringComparison.InvariantCultureIgnoreCase))
+            {
+                foundThumbnail = thumbnail;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     [RelayCommand]
@@ -674,4 +724,5 @@ public sealed partial class LibraryViewModel :
         var shell = App.GetRequiredService<ShellViewModel>();
         shell.EnableAndSelect(ActivatedView.Culling);
     }
+
 }

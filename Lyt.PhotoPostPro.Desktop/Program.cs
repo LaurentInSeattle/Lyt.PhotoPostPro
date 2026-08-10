@@ -1,15 +1,24 @@
 ﻿using Avalonia;
 using System;
+
+#if DEBUG
+// No need for the Mutex
+#else
 using System.Threading;
+#endif
 
 // MUST be placed after 'using Avalonia'
 namespace Lyt.PhotoPostPro.Desktop; 
 
 internal class Program
 {
+#if DEBUG
+    // No need for the Mutex
+#else
     private static Mutex? SingleInstanceMutex;
     private const string MutexUniqueName = "Lyt.PhotoPostPro.Desktop"; 
-        
+#endif
+
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
@@ -34,7 +43,7 @@ internal class Program
         {
             Program.SingleInstanceMutex.ReleaseMutex(); 
         } 
-#endif 
+#endif
     }
 
 
