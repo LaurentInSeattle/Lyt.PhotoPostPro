@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Culling;
 
+using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
+
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 //using SixLabors.ImageSharp;
@@ -29,22 +31,23 @@ public sealed partial class CullingViewModel :
 
     private LayoutKind layoutKind;
 
-    [ObservableProperty]
-    public partial UiThumbnail? SelectedThumbnail { get; set; }
+    //[ObservableProperty]
+    //public partial bool HasSelection { get; set; }
 
     [ObservableProperty]
-    public partial bool HasSelection { get; set; }
+    // The collection of images in the film strip 
+    public partial ObservableCollection<UiThumbnail> ImageThumbnails { get; set; } = [];
 
     [ObservableProperty]
-    public partial List<UiThumbnail> ImageThumbnails { get; set; } = [];
-
-    [ObservableProperty]
+    // the Selected Thumbnails in the film strip 
     public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
 
     [ObservableProperty]
+    // SelectedIndex in the film strip 
     public partial int SelectedThumbnailIndex { get; set; }
 
     [ObservableProperty]
+    // The - More than 2 - images selected from the film strip to show in the center area
     public partial ObservableCollection<UiThumbnail> SelectedImages { get; set; } = [];
 
     [ObservableProperty]
@@ -74,11 +77,11 @@ public sealed partial class CullingViewModel :
 
     [ObservableProperty]
     // Dual image layout bitmap - top or left 
-    public partial WriteableBitmap? Bitmap1 { get; set; }
+    public partial CullingImageViewModel? SingleImageViewModelTopOrLeft { get; set; }
 
     [ObservableProperty]
     // Dual image layout bitmap - bottom or right
-    public partial WriteableBitmap? Bitmap2 { get; set; }
+    public partial CullingImageViewModel? SingleImageViewModelBottomOrRight { get; set; }
 
     public CullingViewModel(PhotoPostProModel model, IToaster toaster)
     {
@@ -146,7 +149,7 @@ public sealed partial class CullingViewModel :
         list = list.Where(t => t is not null).ToList();
 
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
-        this.ImageThumbnails = list!;
+        this.ImageThumbnails = new(list!);
 
         this.Status = this.Localize("Workflow.Culling.LoadingHD");
         this.StatusIsVisible = true;
@@ -254,36 +257,45 @@ public sealed partial class CullingViewModel :
             var uiThumbnail = list[0];
             this.SingleImageViewModel =
                 new CullingImageViewModel(this, uiThumbnail.Metadata, uiThumbnail.Bitmap);
-            this.Bitmap1 = null;
-            this.Bitmap2 = null;
+            this.SingleImageViewModelTopOrLeft = null;
+            this.SingleImageViewModelBottomOrRight = null;
             return;
         }
 
         if (list.Count == 2)
         {
-            var bitmap1 = list[0].Bitmap;
+            var uiThumbnail0 = list[0];
+            var uiThumbnail1 = list[1];
+            var bitmap0 = uiThumbnail0.Bitmap;
+            var size0 = bitmap0.PixelSize;
+            var bitmap1 = uiThumbnail1.Bitmap;
             var size1 = bitmap1.PixelSize;
-            var bitmap2 = list[1].Bitmap;
-            var size2 = bitmap2.PixelSize;
-            if ((size1.Width >= size1.Height) && (size2.Width >= size2.Height))
+            if ((size0.Width >= size0.Height) && (size1.Width >= size1.Height))
             {
                 // Both landscape or square
                 this.layoutKind = LayoutKind.DualImageLandscape;
                 this.DualLandscapeImageLayoutIsVisible = true;
-                this.Bitmap1 = bitmap1;
-                this.Bitmap2 = bitmap2;
-                return;
             }
 
-            if ((size1.Width <= size1.Height) && (size2.Width <= size2.Height))
+            if ((size0.Width <= size0.Height) && (size1.Width <= size1.Height))
             {
                 // Both portrait or square
                 this.layoutKind = LayoutKind.DualImagePortrait;
                 this.DualPortraitImageLayoutIsVisible = true;
-                this.Bitmap1 = bitmap1;
-                this.Bitmap2 = bitmap2;
-                return;
             }
+
+            if (this.DualLandscapeImageLayoutIsVisible || this.DualPortraitImageLayoutIsVisible)
+            {
+                this.SingleImageViewModelTopOrLeft =
+                    new CullingImageViewModel(this, uiThumbnail0.Metadata, bitmap0);
+                this.SingleImageViewModelBottomOrRight =
+                    new CullingImageViewModel(this, uiThumbnail1.Metadata, bitmap1);
+
+                // Done 
+                return; 
+            }
+
+            // For images not in same orientation, we use the 'Many' case 
         }
 
         // All other cases: use the uniform grid 
@@ -314,8 +326,8 @@ public sealed partial class CullingViewModel :
         this.ManyImagesLayoutIsVisible = false;
 
         this.SingleImageViewModel = null;
-        this.Bitmap1 = null;
-        this.Bitmap2 = null;
+        this.SingleImageViewModelTopOrLeft = null;
+        this.SingleImageViewModelBottomOrRight = null;
         this.SelectedImages = [];
     }
 
@@ -368,6 +380,10 @@ public sealed partial class CullingViewModel :
                 if (uiThumbnailToRemove is not null)
                 {
                     this.ImageThumbnails.Remove(uiThumbnailToRemove);
+                    if ( this.ImageThumbnails.Count > 0)
+                    {
+                        this.SelectedThumbnailIndex = 0;
+                    }
                 }
             }
         }

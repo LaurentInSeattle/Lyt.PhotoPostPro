@@ -31,7 +31,8 @@
 			</Grid.RowDefinitions>
 			<stars:RatingControl
 				Grid.Row="0" Grid.Column="1"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Margin="0 0 8 0"
+				HorizontalAlignment="Right" VerticalAlignment="Center"
 				RatingValue="{Binding Rating}"
 				/>
 			<TextBlock

@@ -103,23 +103,19 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
-				<Image 
+				<vm:CullingImageView
 					Margin="4"
-					Grid.Row="0"
-					Source="{Binding Bitmap1}" 
-					Stretch="Uniform" 
+					DataContext="{Binding SingleImageViewModelTopOrLeft}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
-					RenderOptions.BitmapInterpolationMode="HighQuality"
 					/>
-				<Image 
+				<vm:CullingImageView
+					Grid.Row="1" 
 					Margin="4"
-					Grid.Row="1"
-					Source="{Binding Bitmap2}" 
-					Stretch="Uniform" 
+					DataContext="{Binding SingleImageViewModelBottomOrRight}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
-					RenderOptions.BitmapInterpolationMode="HighQuality"
 					/>
 			</Grid>
+
 			<!-- Dual Portrait Image Layout --> 
 			<Grid
 				IsVisible="{Binding DualPortraitImageLayoutIsVisible}"
@@ -129,24 +125,20 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
-				<Image 
+				<vm:CullingImageView
 					Margin="4"
-					Grid.Column="0"
-					Source="{Binding Bitmap1}" 
-					Stretch="Uniform" 
+					DataContext="{Binding SingleImageViewModelTopOrLeft}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
-					RenderOptions.BitmapInterpolationMode="HighQuality"
 					/>
-				<Image 
+				<vm:CullingImageView
 					Margin="4"
 					Grid.Column="1"
-					Source="{Binding Bitmap2}" 
-					Stretch="Uniform" 
+					DataContext="{Binding SingleImageViewModelBottomOrRight}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
-					RenderOptions.BitmapInterpolationMode="HighQuality"
 					/>
 			</Grid>
-			<!-- Many Images Layout: 3 or more  --> 
+
+			<!-- Many Images Layout: 3 or more , or two in distinct orientations --> 
 			<ItemsControl 
 				Grid.Row="1" 
 				IsVisible="{Binding ManyImagesLayoutIsVisible}"
@@ -154,9 +146,7 @@
 				>
 				<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<UniformGrid
-						HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-						/>
+					<UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 				</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 	  

@@ -1,6 +1,10 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Culling : Add text labels for keyboard shortcuts
+
+- Added and Edited are not sorted in library view 
+
 - Fails to load monochrome DNG. Sample: Winter.DNG 
 
 - Message box to confirm delete of highly rated library image 

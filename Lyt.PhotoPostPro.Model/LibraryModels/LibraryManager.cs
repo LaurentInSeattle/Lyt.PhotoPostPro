@@ -49,7 +49,7 @@ public sealed class LibraryManager
     // This dictionary is indexed by the path of the source image 
     public LruDictionary<string, LoadedImage> LoadedHdImages { get; private set; }
 
-    // This dictionary is indexed by the path of the metatdata file for the image 
+    // This dictionary is indexed by the path of the metadata file for the image 
     public Dictionary<string, LoadedThumbnail> LoadedThumbnails { get; private set; }
 
     public FolderTree? CapturedFolderTree { get; private set; }
@@ -247,7 +247,7 @@ public sealed class LibraryManager
             lock (this.lockObject)
             {
                 // Add thumbnail to cache 
-                LoadedThumbnail loadedThumbnail = new(Metadata: metadata, thumbnailImageBytes);
+                LoadedThumbnail loadedThumbnail = new(metadata, thumbnailImageBytes);
                 this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
 
                 // Update folder trees 
@@ -627,6 +627,14 @@ public sealed class LibraryManager
 
         try
         {
+            // Update the cache 
+            string key = metadata.MetadataFullPath(); 
+            if ( this.LoadedThumbnails.TryGetValue( key, out LoadedThumbnail? loadedThumbnail))
+            {
+                loadedThumbnail.Update(metadata); 
+            }
+
+            // Save to disk 
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
             string filenameMetadata = metadata.Filename + "_META.json";
@@ -634,6 +642,7 @@ public sealed class LibraryManager
             string serialized = this.fileManager.Serialize<Metadata>(metadata);
             File.WriteAllText(targetPathMetadata, serialized);
 
+            // notify UI 
             new LibraryMetadataUpdateMessage(metadata).Publish();
         }
         catch (Exception ex)
