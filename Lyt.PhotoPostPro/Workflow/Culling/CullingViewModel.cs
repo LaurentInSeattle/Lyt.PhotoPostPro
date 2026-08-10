@@ -94,6 +94,7 @@ public sealed partial class CullingViewModel :
             IsVisible = false,
             IsActive = false,
         };
+        this.Subscribe<HotKeyMessage>();
     }
 
     public override void Activate(object? activationParameters)
