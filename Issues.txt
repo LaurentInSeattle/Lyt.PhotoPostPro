@@ -1,6 +1,10 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Add stars to library thumbnails 
+
+- Message box to confirm delete of highly rated library image 
+
 - Need to clear confusing empty slots in added and edited folder trees 
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
@@ -69,14 +73,16 @@ Missing Features
 
 - Library backup / export 
 
-- Last edited LRU
-
 - Tools to show both before / after or just after 
 
 - Setup logging for trace to disk 
 
 
 --- Nice to Have ---
+
+- Keep highly rated edited images in a special gallery folder, ability to browse this gallery 
+
+- "Ray of Light" effect.
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
@@ -92,7 +98,7 @@ Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp)
 
 - App freeze when using combo box ??? Avalonia issue
 
-- Media Devices 2.0 cannot transfer many files 
+- Media Devices 2.0 is broken, cannot transfer many files 
 
 - Recent Sony A7V image fails to load correctly with LibRaw 
 Check with:
@@ -128,8 +134,6 @@ Cool Stuff to Consider
 - Set as Desktop Background 
 
 - Show rating stars on the thumbnail in the library view 
-
-- Keep highly rated edited images in a special gallery folder, ability to browse this gallery 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 
