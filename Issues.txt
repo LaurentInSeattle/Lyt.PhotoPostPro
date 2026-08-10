@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Add stars to library thumbnails 
-
 - Message box to confirm delete of highly rated library image 
 
 - Need to clear confusing empty slots in added and edited folder trees 

@@ -8,12 +8,9 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+
+	xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
 	>
-	<UserControl.Styles>
-		<Style Selector="CheckBox.noContent /template/ ContentPresenter#ContentPresenter">
-			<Setter Property="IsVisible" Value="False"/>
-		</Style>
-	</UserControl.Styles>
 	<Border
 		x:Name="outerBorder"
 		Height="{Binding BorderHeight}" 
@@ -45,11 +42,25 @@
 				IsHitTestVisible="False"
 				VerticalAlignment="Center"
 				/>
-			<TextBlock
+			<StackPanel
 				Grid.Row="2" Grid.ColumnSpan="2"
-				Text="{Binding Details}"
-				Theme="{StaticResource Medium}"
-				/>
+				Orientation="Horizontal"
+				>				
+				<Viewbox
+					Height="24" Width="82"
+					>
+					<stars:RatingControl
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						IsReadOnly="True"
+						RatingValue="{Binding Rating}"
+						/>
+				</Viewbox>
+				<TextBlock
+					Text="{Binding Details}"
+					Theme="{StaticResource Medium}"
+					Margin="16 0 0 0"
+					/>
+			</StackPanel>
 		</Grid>
 	</Border>
 </UserControl>

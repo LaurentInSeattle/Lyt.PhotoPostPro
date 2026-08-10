@@ -8,7 +8,7 @@ public sealed partial class LibraryThumbnailViewModel :
     public const double LargeImageHeight = 200;
 
     public readonly Metadata Metadata;
-    public readonly string Path ;
+    public readonly string Path;
 
     private readonly ISelectListener parent;
 
@@ -17,6 +17,9 @@ public sealed partial class LibraryThumbnailViewModel :
 
     [ObservableProperty]
     public partial double ImageHeight { get; set; }
+
+    [ObservableProperty]
+    public partial int Rating { get; set; }
 
     [ObservableProperty]
     public partial string Title { get; set; }
@@ -37,6 +40,7 @@ public sealed partial class LibraryThumbnailViewModel :
         this.ImageHeight = LargeImageHeight;
         this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(imageBytes));
 
+        this.Rating = metadata.Rating;
         this.Title = string.Empty;
         this.Details = string.Empty;
         this.SetThumbnailStrings();
@@ -88,8 +92,8 @@ public sealed partial class LibraryThumbnailViewModel :
         {
             var fileDate = this.Metadata.FileDateUTC;
             string fileLabel = this.Localize("Workflow.Library.Thumbnail.File");
-            this.Details = 
-                string.Format ( "{0} {1} {2}", fileLabel, fileDate.ToLongDateString() , fileDate.ToShortTimeString());
+            this.Details =
+                string.Format("{0} {1} {2}", fileLabel, fileDate.ToLongDateString(), fileDate.ToShortTimeString());
         }
     }
 
