@@ -3,10 +3,6 @@ Bugs ~ Major Issues
 
 - Culling : Add text labels for keyboard shortcuts
 
-- Added and Edited are not sorted in library view 
-
-- Fails to load monochrome DNG. Sample: Winter.DNG 
-
 - Message box to confirm delete of highly rated library image 
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
@@ -101,6 +97,8 @@ Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp)
 - App freeze when using combo box ??? Avalonia issue
 
 - Media Devices 2.0 is broken, cannot transfer many files 
+
+- Fails to load monochrome DNG. Sample: Winter.DNG Not fully supported by LibRaw
 
 - Recent Sony A7V image fails to load correctly with LibRaw 
 Check with:

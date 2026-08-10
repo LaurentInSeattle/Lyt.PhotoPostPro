@@ -18,7 +18,7 @@ public sealed partial class LibraryViewModel :
 
     // TODO LATER
     // Make this an application setting 
-    private const int CullingBatchSize = 12; // 48;
+    private const int CullingBatchSize = 20; // 48;
 
     private const double YearButtonWidth = 76.0;
     private const double MonthButtonWidth = 120.0;
@@ -431,6 +431,7 @@ public sealed partial class LibraryViewModel :
         int sMonth = checkMonth ? selectedMonth!.Month : -1;
         int sYear = selectedYear.Year;
 
+        List<LoadedThumbnail> loadedThumbnailsList = new(list.Count); 
         foreach (var thumbnail in thumbnails)
         {
             Metadata metadata = thumbnail.Value.Metadata;
@@ -453,10 +454,12 @@ public sealed partial class LibraryViewModel :
                 continue;
             }
 
-            list.Add(thumbnail.Key);
+            loadedThumbnailsList.Add(thumbnail.Value);
         }
 
-        return list;
+        return (from thumb in loadedThumbnailsList
+                 orderby thumb.Metadata.Captured ascending
+                 select thumb.Metadata.MetadataFullPath()).ToList();
     }
 
     public void OnSelect(object selectedObject)

@@ -7,6 +7,7 @@ public sealed class Fullscreen(Window mainWindow)
     private Window? fullscreenWindow;
     private View? fullscreenView;
     private Panel? parentPanel;
+    private WindowState mainWindowState; 
 
     public bool IsFullscreen { get; private set; }
 
@@ -68,6 +69,8 @@ public sealed class Fullscreen(Window mainWindow)
                 // LATER => WindowState = WindowState.FullScreen,
             };
 
+            // Save window state before hiding so that we can restore it later on 
+            this.mainWindowState = this.mainWindow.WindowState;
             this.mainWindow.Hide();
 
             if (currentScreen is not null)
@@ -141,8 +144,12 @@ public sealed class Fullscreen(Window mainWindow)
             this.fullscreenWindow.Close();
             this.fullscreenWindow = null;
 
+            // re-home the view 
             this.parentPanel.Children.Add(this.fullscreenView);
+
+            // restore main window state  
             this.mainWindow.ShowInTaskbar = true;
+            this.mainWindow.WindowState = this.mainWindowState;
             this.mainWindow.Show();
             this.IsFullscreen = false;
 
