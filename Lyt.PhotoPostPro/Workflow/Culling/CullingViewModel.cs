@@ -5,9 +5,9 @@
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class CullingViewModel : 
-    ViewModel<CullingView>, 
-    ISelectListener, 
+public sealed partial class CullingViewModel :
+    ViewModel<CullingView>,
+    ISelectListener,
     IRecipient<HotKeyMessage>
 {
     public enum LayoutKind
@@ -16,7 +16,7 @@ public sealed partial class CullingViewModel :
         SingleImage,
         DualImageLandscape,
         DualImagePortrait,
-        ManyImages ,
+        ManyImages,
     }
 
     public sealed record class UiThumbnail(string Key, Metadata Metadata, WriteableBitmap Bitmap);
@@ -27,7 +27,7 @@ public sealed partial class CullingViewModel :
 
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
 
-    private LayoutKind layoutKind ;
+    private LayoutKind layoutKind;
 
     [ObservableProperty]
     public partial UiThumbnail? SelectedThumbnail { get; set; }
@@ -43,7 +43,7 @@ public sealed partial class CullingViewModel :
 
     [ObservableProperty]
     public partial int SelectedThumbnailIndex { get; set; }
-        
+
     [ObservableProperty]
     public partial ObservableCollection<UiThumbnail> SelectedImages { get; set; } = [];
 
@@ -117,7 +117,7 @@ public sealed partial class CullingViewModel :
         }
 
 
-        this.SpinWait(); 
+        this.SpinWait();
         this.Status = "Loading Thumbnails...";
         this.StatusIsVisible = true;
 
@@ -148,8 +148,8 @@ public sealed partial class CullingViewModel :
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
         this.ImageThumbnails = list!;
 
-        this.Status = this.Localize("Workflow.Culling.LoadingHD"); 
-        this.StatusIsVisible = true;    
+        this.Status = this.Localize("Workflow.Culling.LoadingHD");
+        this.StatusIsVisible = true;
 
         Task.Run(() =>
         {
@@ -235,44 +235,44 @@ public sealed partial class CullingViewModel :
             }
         }
 
-        if ( list.Count== 0)
+        if (list.Count == 0)
         {
-            return; 
+            return;
         }
 
-        this.LayoutSelectedImages(list); 
+        this.LayoutSelectedImages(list);
     }
 
     private void LayoutSelectedImages(List<UiThumbnail> list)
     {
-        this.ClearImages(); 
+        this.ClearImages();
 
         if (list.Count == 1)
         {
             this.layoutKind = LayoutKind.SingleImage;
             this.SingleImageLayoutIsVisible = true;
-            var uiThumbnail = list[0]; 
+            var uiThumbnail = list[0];
             this.SingleImageViewModel =
                 new CullingImageViewModel(this, uiThumbnail.Metadata, uiThumbnail.Bitmap);
             this.Bitmap1 = null;
             this.Bitmap2 = null;
-            return; 
+            return;
         }
-        
+
         if (list.Count == 2)
         {
             var bitmap1 = list[0].Bitmap;
             var size1 = bitmap1.PixelSize;
             var bitmap2 = list[1].Bitmap;
             var size2 = bitmap2.PixelSize;
-            if ( ( size1.Width >= size1.Height) && ( size2.Width >= size2.Height))
+            if ((size1.Width >= size1.Height) && (size2.Width >= size2.Height))
             {
                 // Both landscape or square
                 this.layoutKind = LayoutKind.DualImageLandscape;
                 this.DualLandscapeImageLayoutIsVisible = true;
                 this.Bitmap1 = bitmap1;
                 this.Bitmap2 = bitmap2;
-                return; 
+                return;
             }
 
             if ((size1.Width <= size1.Height) && (size2.Width <= size2.Height))
@@ -306,7 +306,7 @@ public sealed partial class CullingViewModel :
         this.SelectedImages = [];
     }
 
-    private void ClearImages ()
+    private void ClearImages()
     {
         this.SingleImageLayoutIsVisible = false;
         this.DualLandscapeImageLayoutIsVisible = false;
@@ -319,12 +319,12 @@ public sealed partial class CullingViewModel :
         this.SelectedImages = [];
     }
 
-    public void OnSelect(object selectedObject) {}
+    public void OnSelect(object selectedObject) { }
 
     [RelayCommand]
     public void OnAddStar()
     {
-        if ( this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
+        if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
             this.SingleImageViewModel.ChangeRating(isAddStar: true);
             this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata);
@@ -337,22 +337,39 @@ public sealed partial class CullingViewModel :
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
             this.SingleImageViewModel.ChangeRating(isAddStar: false);
-            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata); 
+            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata);
         }
     }
 
     [RelayCommand]
-    public void OnReject ()
+    public void OnReject()
     {
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
-            if (this.SingleImageViewModel.Metadata.Rating >= 4)
+            var metadata = this.SingleImageViewModel.Metadata;
+            if (metadata.Rating >= 4)
             {
                 // TODO
                 // Ask before deleting highly rated image 
             }
-            
-            this.libraryManager.Remove(this.SingleImageViewModel.Metadata);
+
+            if (this.libraryManager.Remove(metadata))
+            {
+                // Remove the thumbnail from the film strip on the left 
+                UiThumbnail? uiThumbnailToRemove = null;
+                foreach (var thumbnail in this.ImageThumbnails)
+                {
+                    if (thumbnail.Metadata.FullPath.Equals(metadata.FullPath, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        uiThumbnailToRemove = thumbnail;
+                    }
+                }
+
+                if (uiThumbnailToRemove is not null)
+                {
+                    this.ImageThumbnails.Remove(uiThumbnailToRemove);
+                }
+            }
         }
     }
 
@@ -368,12 +385,12 @@ public sealed partial class CullingViewModel :
                 break;
 
             case Key.Insert: // Add Star 
-                this.OnAddStar() ;
+                this.OnAddStar();
                 break;
 
             case Key.Delete: // Demote 
-                this.OnRemoveStar() ;
+                this.OnRemoveStar();
                 break;
         }
-    } 
+    }
 }
