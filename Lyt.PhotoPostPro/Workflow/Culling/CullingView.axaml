@@ -197,10 +197,12 @@
 					<RowDefinition Height="40" /> <!-- Reserved FFU -->
 					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
 					<RowDefinition Height="64" /> <!-- + or - star -->
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
 					<RowDefinition Height="64" /> <!-- Reject -->
+					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+					<RowDefinition Height="500" />
 				</Grid.RowDefinitions>
 				<glyphs:GlyphButton
 					x:Name="RemoveStarButton"
@@ -215,6 +217,12 @@
 					Text="{DynamicResource Workflow.Culling.RemoveStar}"
 					Command="{Binding OnRemoveStar}"
 					/>
+				<TextBlock
+					Grid.Row="3" Grid.Column="0" 
+					Theme="{StaticResource Small}"
+					HorizontalAlignment="Center"
+					Text="Keyboard:  Delete"
+					/>
 				<glyphs:GlyphButton
 					x:Name="AddStarButton"
 					Grid.Row="2" Grid.Column="1"
@@ -228,6 +236,12 @@
 					Text="{DynamicResource Workflow.Culling.AddStar}"
 					Command="{Binding OnAddStar}"
 					/>
+				<TextBlock
+					Grid.Row="3" Grid.Column="1" 
+					Theme="{StaticResource Small}"
+					HorizontalAlignment="Center"
+					Text="Keyboard:  Insert"
+					/>
 				<glyphs:GlyphButton
 					x:Name="RejectButton"
 					Grid.Row="5" Grid.ColumnSpan="2"
@@ -240,6 +254,18 @@
 					GlyphStrokeThickness="0"
 					Text="{DynamicResource Workflow.Culling.Reject}"
 					Command="{Binding OnReject}"
+					/>
+				<TextBlock
+					Grid.Row="6" Grid.ColumnSpan="2" 
+					Theme="{StaticResource Small}"
+					HorizontalAlignment="Center"
+					Text="Keyboard:  Backspace"
+					/>
+				<metadatapane:MetadataView
+					DataContext="{Binding SelectedImageMetadataViewModel}"
+					HorizontalAlignment="Stretch" 
+					Grid.Row="8" Grid.ColumnSpan="2"
+					Margin="4 0 4 0"
 					/>
 			</Grid>
 			<!-- Dual Landscape Image Layout --> 

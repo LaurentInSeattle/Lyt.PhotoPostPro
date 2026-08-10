@@ -76,6 +76,10 @@ public sealed partial class CullingViewModel :
     public partial CullingImageViewModel? SingleImageViewModel { get; set; }
 
     [ObservableProperty]
+    // Single image metadata 
+    public partial MetadataViewModel? SelectedImageMetadataViewModel { get; set; }
+
+    [ObservableProperty]
     // Dual image layout bitmap - top or left 
     public partial CullingImageViewModel? SingleImageViewModelTopOrLeft { get; set; }
 
@@ -258,8 +262,7 @@ public sealed partial class CullingViewModel :
             var uiThumbnail = list[0];
             this.SingleImageViewModel =
                 new CullingImageViewModel(this, uiThumbnail.Metadata, uiThumbnail.Bitmap);
-            this.SingleImageViewModelTopOrLeft = null;
-            this.SingleImageViewModelBottomOrRight = null;
+            this.SelectedImageMetadataViewModel = new MetadataViewModel(uiThumbnail.Metadata);
             return;
         }
 
@@ -327,6 +330,7 @@ public sealed partial class CullingViewModel :
         this.ManyImagesLayoutIsVisible = false;
 
         this.SingleImageViewModel = null;
+        this.SelectedImageMetadataViewModel = null; 
         this.SingleImageViewModelTopOrLeft = null;
         this.SingleImageViewModelBottomOrRight = null;
         this.SelectedImages = [];
@@ -380,10 +384,11 @@ public sealed partial class CullingViewModel :
 
                 if (uiThumbnailToRemove is not null)
                 {
+                    int wasSelectedIndex = this.SelectedThumbnailIndex;
                     this.ImageThumbnails.Remove(uiThumbnailToRemove);
                     if ( this.ImageThumbnails.Count > 0)
                     {
-                        this.SelectedThumbnailIndex = 0;
+                        this.SelectedThumbnailIndex = Math.Max(0, wasSelectedIndex - 1);
                     }
                 }
             }

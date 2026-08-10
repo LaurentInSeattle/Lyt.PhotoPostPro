@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Culling : Add text labels for keyboard shortcuts
-
 - Message box to confirm delete of highly rated library image 
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
