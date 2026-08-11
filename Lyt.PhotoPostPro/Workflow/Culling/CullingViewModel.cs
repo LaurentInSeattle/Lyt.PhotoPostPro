@@ -30,6 +30,7 @@ public sealed partial class CullingViewModel :
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
 
     private LayoutKind layoutKind;
+    private bool isShowHintsFirstTime; 
 
     //[ObservableProperty]
     //public partial bool HasSelection { get; set; }
@@ -52,6 +53,9 @@ public sealed partial class CullingViewModel :
 
     [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial bool ShowHints { get; set; }
 
     [ObservableProperty]
     public partial string Status { get; set; } = string.Empty;
@@ -93,6 +97,7 @@ public sealed partial class CullingViewModel :
         this.libraryManager = model.LibraryManager;
         this.layoutKind = LayoutKind.None;
         this.toaster = toaster;
+        this.isShowHintsFirstTime = true; 
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,
@@ -254,6 +259,16 @@ public sealed partial class CullingViewModel :
     private void LayoutSelectedImages(List<UiThumbnail> list)
     {
         this.ClearImages();
+
+        this.ShowHints = true;
+        Schedule.OnUiThread(
+            this.isShowHintsFirstTime ? 12_000 : 2_000, 
+            () => 
+            { 
+                this.ShowHints = false;
+                this.isShowHintsFirstTime = false;
+            }, 
+            DispatcherPriority.Background );
 
         if (list.Count == 1)
         {

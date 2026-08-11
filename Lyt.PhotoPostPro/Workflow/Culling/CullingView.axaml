@@ -219,9 +219,10 @@
 					/>
 				<TextBlock
 					Grid.Row="3" Grid.Column="0" 
-					Theme="{StaticResource Small}"
+					Theme="{StaticResource Medium}"
+					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="Keyboard:  Delete"
+					Text="&#x2328;  Delete"
 					/>
 				<glyphs:GlyphButton
 					x:Name="AddStarButton"
@@ -238,9 +239,10 @@
 					/>
 				<TextBlock
 					Grid.Row="3" Grid.Column="1" 
-					Theme="{StaticResource Small}"
+					Theme="{StaticResource Medium}"
+					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="Keyboard:  Insert"
+					Text="&#x2328;  Insert"
 					/>
 				<glyphs:GlyphButton
 					x:Name="RejectButton"
@@ -257,9 +259,10 @@
 					/>
 				<TextBlock
 					Grid.Row="6" Grid.ColumnSpan="2" 
-					Theme="{StaticResource Small}"
+					Theme="{StaticResource Medium}"
+					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="Keyboard:  Backspace"
+					Text="&#x2328;  Backspace"
 					/>
 				<metadatapane:MetadataView
 					DataContext="{Binding SelectedImageMetadataViewModel}"
