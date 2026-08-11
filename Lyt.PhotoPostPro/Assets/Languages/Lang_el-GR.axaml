@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">Απορρίπτω</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">Διατήρηση: Κορυφαία εικόνα</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">Προσθέστε ένα αστέρι στην κορυφή - Απόρριψη κάτω</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">Keep: Κάτω εικόνα</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">Απόρριψη κορυφής - Προσθέστε ένα αστέρι στο κάτω μέρος</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Σύρετε και αποθέστε έναν φάκελο που περιέχει αρχεία εικόνας εδώ για να δημιουργήσετε ένα νέο έργο.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>

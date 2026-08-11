@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">拒否する</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">保持: トップ画像</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">上にスターを追加 - 下を拒否</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">維持: 下の画像</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">上部を拒否 - 下部にスターを追加</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>

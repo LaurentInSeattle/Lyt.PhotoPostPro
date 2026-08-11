@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">Մերժել</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">Պահպանել՝ վերևի պատկեր</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">Ավելացնել աստղ վերևում - Մերժիր ներքևը</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">Պահպանել՝ ներքևի պատկեր</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">Մերժել վերևից - Ավելացնել աստղ ներքևում</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Քաշեք և գցեք պատկերային ֆայլեր պարունակող թղթապանակն այստեղ՝ նոր նախագիծ ստեղծելու համար:</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Սկսելու համար քաշեք և թողեք պատկերի ֆայլը այստեղ:</system:String>

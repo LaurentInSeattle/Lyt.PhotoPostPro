@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">拒绝</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">保留：顶部图片</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">在顶部添加一颗星 - 拒绝底部</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">保留：底部图像</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">拒绝顶部 - 在底部添加一颗星</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">将包含图像文件的文件夹拖放到此处以创建新项目。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">将图像文件拖放到此处即可开始。</system:String>

@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">거부하다</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">유지: 상단 이미지</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">상단에 별 추가 - 하단 거부</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">유지: 하단 이미지</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">상단 거부 - 하단에 별 추가</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">이미지 파일이 포함된 폴더를 여기에 끌어다 놓아 새 프로젝트를 만듭니다.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>

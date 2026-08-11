@@ -36,10 +36,13 @@
 	<system:String x:Key="Workflow.Culling.LoadingHD">Loading High Definition Images...</system:String>
 	<system:String x:Key="Workflow.Culling.DecodingHD">Decoding High Definition Images...</system:String>
 	<system:String x:Key="Workflow.Culling.Ready">Ready.</system:String>
-
 	<system:String x:Key="Workflow.Culling.AddStar">Add Star</system:String>
 	<system:String x:Key="Workflow.Culling.RemoveStar">Demote</system:String>
 	<system:String x:Key="Workflow.Culling.Reject">Reject</system:String>
+	<system:String x:Key="Workflow.Culling.SelectTop">Keep: Top Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectTopHint">Add a Star to Top - Reject Bottom</system:String>
+	<system:String x:Key="Workflow.Culling.SelectBottom">Keep: Bottom Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectBottomHint">Reject Top - Add a Star to Bottom</system:String>
 
 	<!-- Folder -->
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>

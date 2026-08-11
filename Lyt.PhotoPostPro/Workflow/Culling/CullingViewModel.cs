@@ -30,7 +30,9 @@ public sealed partial class CullingViewModel :
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
 
     private LayoutKind layoutKind;
-    private bool isShowHintsFirstTime; 
+    private bool isShowHintsSingleImageFirstTime;
+    private bool isShowHintsDualLandscapeFirstTime;
+    private bool isShowHintsDualPortraitFirstTime;
 
     //[ObservableProperty]
     //public partial bool HasSelection { get; set; }
@@ -97,7 +99,6 @@ public sealed partial class CullingViewModel :
         this.libraryManager = model.LibraryManager;
         this.layoutKind = LayoutKind.None;
         this.toaster = toaster;
-        this.isShowHintsFirstTime = true; 
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,
@@ -109,6 +110,9 @@ public sealed partial class CullingViewModel :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+        this.isShowHintsSingleImageFirstTime = true;
+        this.isShowHintsDualLandscapeFirstTime = true;
+        this.isShowHintsDualPortraitFirstTime = true;
         this.View.StripListBox.SelectionChanged += this.OnSelectedThumbnailsChanged;
     }
 
@@ -261,17 +265,17 @@ public sealed partial class CullingViewModel :
         this.ClearImages();
 
         this.ShowHints = true;
-        Schedule.OnUiThread(
-            this.isShowHintsFirstTime ? 12_000 : 2_000, 
-            () => 
-            { 
-                this.ShowHints = false;
-                this.isShowHintsFirstTime = false;
-            }, 
-            DispatcherPriority.Background );
-
         if (list.Count == 1)
         {
+            Schedule.OnUiThread(
+                this.isShowHintsSingleImageFirstTime ? 12_000 : 2_000,
+                () =>
+                {
+                    this.ShowHints = false;
+                    this.isShowHintsSingleImageFirstTime = false;
+                },
+                DispatcherPriority.Background);
+
             this.layoutKind = LayoutKind.SingleImage;
             this.SingleImageLayoutIsVisible = true;
             var uiThumbnail = list[0];
@@ -305,13 +309,22 @@ public sealed partial class CullingViewModel :
 
             if (this.DualLandscapeImageLayoutIsVisible || this.DualPortraitImageLayoutIsVisible)
             {
+                Schedule.OnUiThread(
+                    this.isShowHintsDualLandscapeFirstTime ? 15_000 : 4_000,
+                    () =>
+                    {
+                        this.ShowHints = false;
+                        this.isShowHintsDualLandscapeFirstTime = false;
+                    },
+                    DispatcherPriority.Background);
+
                 this.SingleImageViewModelTopOrLeft =
                     new CullingImageViewModel(this, uiThumbnail0.Metadata, bitmap0);
                 this.SingleImageViewModelBottomOrRight =
                     new CullingImageViewModel(this, uiThumbnail1.Metadata, bitmap1);
 
                 // Done 
-                return; 
+                return;
             }
 
             // For images not in same orientation, we use the 'Many' case 
@@ -345,7 +358,7 @@ public sealed partial class CullingViewModel :
         this.ManyImagesLayoutIsVisible = false;
 
         this.SingleImageViewModel = null;
-        this.SelectedImageMetadataViewModel = null; 
+        this.SelectedImageMetadataViewModel = null;
         this.SingleImageViewModelTopOrLeft = null;
         this.SingleImageViewModelBottomOrRight = null;
         this.SelectedImages = [];
@@ -358,8 +371,7 @@ public sealed partial class CullingViewModel :
     {
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
-            this.SingleImageViewModel.ChangeRating(isAddStar: true);
-            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata);
+            this.AddStarTo(this.SingleImageViewModel, isAddStar: true);
         }
     }
 
@@ -368,8 +380,7 @@ public sealed partial class CullingViewModel :
     {
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
-            this.SingleImageViewModel.ChangeRating(isAddStar: false);
-            this.libraryManager.SaveMetadata(this.SingleImageViewModel.Metadata);
+            this.AddStarTo(this.SingleImageViewModel, isAddStar: false);
         }
     }
 
@@ -378,56 +389,150 @@ public sealed partial class CullingViewModel :
     {
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
-            var metadata = this.SingleImageViewModel.Metadata;
-            if (metadata.Rating >= 4)
+            this.Remove(this.SingleImageViewModel);
+        } 
+    }
+
+    [RelayCommand]
+    public void OnSelectTop()
+    {
+        if (this.layoutKind != LayoutKind.DualImageLandscape)
+        {
+            return;
+        }
+
+        if (this.SingleImageViewModelTopOrLeft is null || this.SingleImageViewModelBottomOrRight is null)
+        {
+            return;
+        }
+
+        // Add Star to Top or Left, Remove Bottom , Select Top or Left 
+        this.AddStarTo(this.SingleImageViewModelTopOrLeft, isAddStar: true);
+        this.Remove(this.SingleImageViewModelBottomOrRight, SingleImageViewModelTopOrLeft);
+    }
+
+    [RelayCommand]
+    public void OnSelectBottom()
+    {
+        if (this.layoutKind != LayoutKind.DualImageLandscape)
+        {
+            return;
+        }
+
+        if (this.SingleImageViewModelTopOrLeft is null || this.SingleImageViewModelBottomOrRight is null)
+        {
+            return;
+        }
+
+        // Add Star to Bottom or Right, Remove Top or Left, Select Bottom or Right
+        this.AddStarTo(this.SingleImageViewModelBottomOrRight, isAddStar: true);
+        this.Remove(this.SingleImageViewModelTopOrLeft, this.SingleImageViewModelBottomOrRight);
+    }
+
+    private void AddStarTo(CullingImageViewModel viewModel, bool isAddStar)
+    {
+        viewModel.ChangeRating(isAddStar);
+        this.libraryManager.SaveMetadata(viewModel.Metadata);
+    }
+
+    private void Remove (CullingImageViewModel viewModel, CullingImageViewModel? viewModelToSelect = null )
+    {
+        // Remove Bottom or Right 
+        var metadata = viewModel.Metadata;
+        if (metadata.Rating >= 4)
+        {
+            // TODO
+            // Ask before deleting highly rated image 
+        }
+
+        if (this.libraryManager.Remove(metadata))
+        {
+            // Remove the thumbnail from the film strip on the left 
+            int index = this.FindIndexOf(viewModel);
+            if ( index < 0 || index >= this.ImageThumbnails.Count)
             {
-                // TODO
-                // Ask before deleting highly rated image 
+                return; 
             }
 
-            if (this.libraryManager.Remove(metadata))
+            UiThumbnail uiThumbnailToRemove = this.ImageThumbnails[index];
+            int wasSelectedIndex = this.SelectedThumbnailIndex;
+            this.ImageThumbnails.Remove(uiThumbnailToRemove);
+
+            if (viewModelToSelect is null)
             {
-                // Remove the thumbnail from the film strip on the left 
-                UiThumbnail? uiThumbnailToRemove = null;
-                foreach (var thumbnail in this.ImageThumbnails)
+                // Select previous in film strip, unless empty 
+                if (this.ImageThumbnails.Count > 0)
                 {
-                    if (thumbnail.Metadata.FullPath.Equals(metadata.FullPath, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        uiThumbnailToRemove = thumbnail;
-                    }
+                    this.SelectedThumbnailIndex = Math.Max(0, wasSelectedIndex - 1);
+                }
+            } 
+            else
+            {
+                int indexToSelect = this.FindIndexOf(viewModelToSelect);
+                if (indexToSelect < 0 || indexToSelect >= this.ImageThumbnails.Count)
+                {
+                    return;
                 }
 
-                if (uiThumbnailToRemove is not null)
+                // Select specified in film strip, unless empty 
+                if (this.ImageThumbnails.Count > 0)
                 {
-                    int wasSelectedIndex = this.SelectedThumbnailIndex;
-                    this.ImageThumbnails.Remove(uiThumbnailToRemove);
-                    if ( this.ImageThumbnails.Count > 0)
-                    {
-                        this.SelectedThumbnailIndex = Math.Max(0, wasSelectedIndex - 1);
-                    }
+                    this.SelectedThumbnailIndex = indexToSelect;
                 }
             }
         }
     }
 
+    // Returns the Index in the film strip of this image 
+    private int FindIndexOf(CullingImageViewModel viewModel)
+    {
+        for (int index = 0; index < this.ImageThumbnails.Count; ++index)
+        {
+            UiThumbnail thumbnail = this.ImageThumbnails[index];
+            if (thumbnail.Metadata.FullPath.Equals(viewModel.Metadata.FullPath, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return index;
+            }
+        }
+
+        if (Debugger.IsAttached)
+        {
+            // Should never happen
+            Debugger.Break();
+        }
+
+        return -1;
+    }
+
     public void Receive(HotKeyMessage message)
     {
-        switch (message.Key)
+        if (this.layoutKind == LayoutKind.SingleImage)
         {
-            default:
-                return;
+            switch (message.Key)
+            {
+                default:
+                    return;
 
-            case Key.Back: // Reject: Remove from Library 
-                this.OnReject();
-                break;
+                case Key.Back: // Reject: Remove from Library 
+                    this.OnReject();
+                    break;
 
-            case Key.Insert: // Add Star 
-                this.OnAddStar();
-                break;
+                case Key.Insert: // Add Star 
+                    this.OnAddStar();
+                    break;
 
-            case Key.Delete: // Demote 
-                this.OnRemoveStar();
-                break;
+                case Key.Delete: // Demote 
+                    this.OnRemoveStar();
+                    break;
+            }
+        }
+        else if (this.layoutKind == LayoutKind.DualImageLandscape)
+        {
+
+        }
+        else if (this.layoutKind == LayoutKind.DualImagePortrait)
+        {
+
         }
     }
 }

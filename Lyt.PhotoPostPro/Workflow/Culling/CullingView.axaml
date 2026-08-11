@@ -211,18 +211,29 @@
 					FontSize="24"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
 					Width="220" Height="56"
-					GlyphSource="star"
+					GlyphSource="star_off"
 					ButtonBackground="BorderlessRectangle"
 					GlyphStrokeThickness="0"
 					Text="{DynamicResource Workflow.Culling.RemoveStar}"
 					Command="{Binding OnRemoveStar}"
 					/>
+				<!-- Does not look good 
 				<TextBlock
 					Grid.Row="3" Grid.Column="0" 
-					Theme="{StaticResource Medium}"
+					Theme="{StaticResource Large}"
+					IsVisible="{Binding ShowHints}"
+					FontSize="40"
+					HorizontalAlignment="Center"
+					Margin="0 0 40 0"
+					Text="&#x2328;"
+					/>
+				--> 
+				<TextBlock
+					Grid.Row="3" Grid.Column="0" 
+					Theme="{StaticResource Small}"
 					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="&#x2328;  Delete"
+					Text="Delete"
 					/>
 				<glyphs:GlyphButton
 					x:Name="AddStarButton"
@@ -239,10 +250,10 @@
 					/>
 				<TextBlock
 					Grid.Row="3" Grid.Column="1" 
-					Theme="{StaticResource Medium}"
+					Theme="{StaticResource Small}"
 					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="&#x2328;  Insert"
+					Text="Insert"
 					/>
 				<glyphs:GlyphButton
 					x:Name="RejectButton"
@@ -259,10 +270,10 @@
 					/>
 				<TextBlock
 					Grid.Row="6" Grid.ColumnSpan="2" 
-					Theme="{StaticResource Medium}"
+					Theme="{StaticResource Small}"
 					IsVisible="{Binding ShowHints}"
 					HorizontalAlignment="Center"
-					Text="&#x2328;  Backspace"
+					Text="Backspace"
 					/>
 				<metadatapane:MetadataView
 					DataContext="{Binding SelectedImageMetadataViewModel}"
@@ -275,7 +286,59 @@
 			<Grid
 				IsVisible="{Binding DualLandscapeImageLayoutIsVisible}"
 				> 
+				<Grid.RowDefinitions>
+					<RowDefinition Height="40" /> <!-- Reserved FFU -->
+					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+					<RowDefinition Height="64" /> <!-- Select Top -->
+					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+					<RowDefinition Height="64" /> <!-- Select Bottom -->
+					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+					<RowDefinition Height="500" />
+				</Grid.RowDefinitions>
+				<glyphs:GlyphButton
+					x:Name="SelectTopButton"
+					Grid.Row="2" 
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Width="460" Height="56"
+					GlyphSource="caret_up"
+					ButtonBackground="BorderlessRectangle"
+					GlyphStrokeThickness="0"
+					Text="{DynamicResource Workflow.Culling.SelectTop}"
+					Command="{Binding OnSelectTop}"
+					/>
+				<TextBlock
+					Grid.Row="3" Grid.Column="1" 
+					Theme="{StaticResource Small}"
+					IsVisible="{Binding ShowHints}"
+					HorizontalAlignment="Center"
+					Text="{DynamicResource Workflow.Culling.SelectTopHint}"
+					/>
+				<glyphs:GlyphButton
+					x:Name="SelectBottomButton"
+					Grid.Row="5" Grid.ColumnSpan="2"
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Width="460" Height="56"
+					GlyphSource="caret_down"
+					ButtonBackground="BorderlessRectangle"
+					GlyphStrokeThickness="0"
+					Text="{DynamicResource Workflow.Culling.SelectBottom}"
+					Command="{Binding OnSelectBottom}"
+					/>
+				<TextBlock
+					Grid.Row="6" Grid.ColumnSpan="2" 
+					Theme="{StaticResource Small}"
+					IsVisible="{Binding ShowHints}"
+					HorizontalAlignment="Center"
+					Text="Reject Top - Add a Star to Bottom"
+					/>
 			</Grid>
+
 			<!-- Dual Portrait Image Layout --> 
 			<Grid
 				IsVisible="{Binding DualPortraitImageLayoutIsVisible}"

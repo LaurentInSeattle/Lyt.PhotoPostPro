@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">প্রত্যাখ্যান করুন</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">রাখুন: শীর্ষ চিত্র</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">উপরে একটি তারকা যোগ করুন - নীচে প্রত্যাখ্যান করুন</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">রাখুন: নীচের চিত্র</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">শীর্ষে প্রত্যাখ্যান করুন - নীচে একটি তারকা যোগ করুন</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">একটি নতুন প্রকল্প তৈরি করতে এখানে ইমেজ ফাইল ধারণকারী একটি ফোল্ডার টেনে আনুন এবং ড্রপ করুন।</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>

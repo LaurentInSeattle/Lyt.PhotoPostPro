@@ -1,5 +1,35 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  caret_up  -->
+<DrawingGroup x:Key = "caret_upDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M5.1613,14.9073C4.4541,15.7156,5.0281,16.9805,6.102,16.9805L17.8983,16.9805C18.9722,16.9805,19.5462,15.7156,18.839,14.9073L13.3172,8.5967C12.6199,7.7999,11.3804,7.7999,10.6831,8.5967L5.1613,14.9073z M6.653,15.4805L11.812,9.5844C11.9116,9.4706,12.0887,9.4706,12.1883,9.5844L17.3473,15.4805 6.653,15.4805z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="caret_up" Drawing="{StaticResource caret_upDrawingGroup}" />
+
+<!--  caret_down  -->
+<DrawingGroup x:Key = "caret_downDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M5.1613,10.0731C4.4541,9.2649,5.0281,8,6.102,8L17.8983,8C18.9722,8,19.5462,9.2649,18.839,10.0731L13.3172,16.3838C12.6199,17.1806,11.3804,17.1806,10.6831,16.3838L5.1613,10.0731z M6.653,9.5L11.812,15.396C11.9116,15.5099,12.0887,15.5099,12.1883,15.396L17.3473,9.5 6.653,9.5z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="caret_down" Drawing="{StaticResource caret_downDrawingGroup}" />
+
 <!--  star  -->
 <DrawingGroup x:Key = "starDrawingGroup">
 <DrawingGroup>
@@ -29,6 +59,21 @@
   </DrawingGroup>
 </DrawingGroup>
 <DrawingImage x:Key="star_emphasis" Drawing="{StaticResource star_emphasisDrawingGroup}" />
+
+<!--  star_off  -->
+<DrawingGroup x:Key = "star_offDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M3.2803,2.2197C2.9875,1.9268 2.5126,1.9268 2.2197,2.2197 1.9268,2.5126 1.9268,2.9874 2.2197,3.2803L7.0238,8.0846 3.1574,8.6464C2.0501,8.8073,1.6079,10.1681,2.4092,10.9491L6.2244,14.668 5.3237,19.9192C5.1346,21.0221,6.2921,21.8631,7.2825,21.3424L11.9984,18.8631 16.7143,21.3424C17.7047,21.8631,18.8622,21.0221,18.6731,19.9192L18.6348,19.6958 20.7194,21.7805C21.0123,22.0734 21.4872,22.0734 21.7801,21.7805 22.073,21.4876 22.073,21.0127 21.7801,20.7198L3.2803,2.2197z M16.7978,17.8587L17.1433,19.8732 12.6266,17.4987C12.2333,17.2919,11.7635,17.2919,11.3702,17.4987L6.8535,19.8732 7.7161,14.8439C7.7913,14.4059,7.6461,13.9591,7.3279,13.6489L3.6738,10.0871 8.3472,9.408 16.7978,17.8587z M20.323,10.0871L16.751,13.569 17.8117,14.6297 21.5877,10.9491C22.3889,10.168,21.9468,8.8073,20.8395,8.6464L15.567,7.8802 13.209,3.1025C12.7138,2.0991,11.283,2.0991,10.7878,3.1025L9.2998,6.1176 10.4198,7.2376 11.9984,4.0389 14.2568,8.6148C14.4534,9.0133,14.8335,9.2894,15.2732,9.3533L20.323,10.0871z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="star_off" Drawing="{StaticResource star_offDrawingGroup}" />
 
 <!--  star_add  -->
 <DrawingGroup x:Key = "star_addDrawingGroup">

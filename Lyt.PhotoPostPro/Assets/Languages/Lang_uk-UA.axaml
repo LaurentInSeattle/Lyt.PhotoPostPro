@@ -53,6 +53,14 @@
 
     <system:String x:Key="Workflow.Culling.Reject">Відхиляти</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectTop">Keep: верхнє зображення</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">Додайте зірочку вгору - відхиліть низ</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">Keep: нижнє зображення</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">Відхилити верх - додати зірку внизу</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Перетягніть сюди папку з файлами зображень, щоб створити новий проект.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
