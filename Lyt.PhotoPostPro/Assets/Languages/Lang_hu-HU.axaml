@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Felső elutasítása – Csillag hozzáadása az alsó részhez</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Megtartás: Bal oldali kép</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Csillag hozzáadása balra - Elutasítás jobbra</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Tartsa: Jobb kép</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Bal oldali elutasítás – Csillag hozzáadása a jobb oldalhoz</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Új projekt létrehozásához húzzon ide egy képfájlokat tartalmazó mappát.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>

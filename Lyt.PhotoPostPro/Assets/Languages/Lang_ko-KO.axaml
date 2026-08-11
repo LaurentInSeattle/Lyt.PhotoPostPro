@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">상단 거부 - 하단에 별 추가</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">유지: 왼쪽 이미지</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">왼쪽에 별표 추가 - 오른쪽 거부</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">유지: 오른쪽 이미지</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">왼쪽 거부 - 오른쪽에 별 추가</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">이미지 파일이 포함된 폴더를 여기에 끌어다 놓아 새 프로젝트를 만듭니다.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>

@@ -1,6 +1,12 @@
 Bugs ~ Major Issues 
 -------------------
 
+- IMG_0212  Incorrect state for Added and Ratings 
+
+- Message if nothing left to Rate / Cull 
+
+- Folder Tree for Added not updating correctly 
+
 - Still showing empty slots for Added on startup 
 
 - Message box to confirm delete of highly rated library image 

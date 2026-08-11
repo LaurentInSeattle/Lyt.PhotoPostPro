@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">上部を拒否 - 下部にスターを追加</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">キープ: 左の画像</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">左に星を追加 - 右を拒否</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">維持: 右の画像</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">左を拒否 - 右に星を追加</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>

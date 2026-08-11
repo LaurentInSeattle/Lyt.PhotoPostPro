@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Մերժել վերևից - Ավելացնել աստղ ներքևում</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Պահել՝ ձախ պատկեր</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Ավելացրեք աստղ դեպի ձախ - մերժեք աջը</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Պահել՝ աջ պատկեր</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Մերժել ձախը - Աջից աստղ ավելացնել</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Քաշեք և գցեք պատկերային ֆայլեր պարունակող թղթապանակն այստեղ՝ նոր նախագիծ ստեղծելու համար:</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Սկսելու համար քաշեք և թողեք պատկերի ֆայլը այստեղ:</system:String>

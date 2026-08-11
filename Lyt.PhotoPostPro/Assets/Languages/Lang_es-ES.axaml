@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Rechazar la parte superior: agregar una estrella a la parte inferior</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Mantener: Imagen izquierda</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Agregar una estrella a la izquierda - Rechazar a la derecha</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Mantener: Imagen derecha</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Rechazar a la izquierda: agregar una estrella a la derecha</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Arrastre y suelte una carpeta que contenga archivos de imagen aquí para crear un nuevo proyecto.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Arrastre y suelte un archivo de imagen aquí para comenzar.</system:String>

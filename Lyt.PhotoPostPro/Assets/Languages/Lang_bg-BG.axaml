@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Отхвърляне на горната част - Добавяне на звезда към долната част</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Запазване: ляво изображение</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Добавете звезда отляво - отхвърлете отдясно</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Запазване: дясно изображение</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Отхвърляне наляво - Добавяне на звезда вдясно</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Плъзнете и пуснете тук папка, съдържаща файлове с изображения, за да създадете нов проект.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Плъзнете и пуснете файл с изображение тук, за да започнете.</system:String>

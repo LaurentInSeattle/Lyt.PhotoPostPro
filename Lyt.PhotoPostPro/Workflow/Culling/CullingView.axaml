@@ -30,8 +30,6 @@
 			<ColumnDefinition Width="240" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="480"/>
-			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
 		<Image
@@ -82,17 +80,136 @@
 				<RowDefinition Height="0" /> <!-- Reserved FFU -->
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
+
+			<!-- Spinner in the middle--> 
+			<Grid
+				Grid.Row="1" 
+				Background="{StaticResource DeepBlue_0_040}"
+				>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="40" /> 
+					<RowDefinition Height="300" />
+				</Grid.RowDefinitions>
+				<TextBlock
+					Grid.Row="0"
+					Theme="{StaticResource H2}"
+					Text="{Binding Status}"
+					IsVisible="{Binding StatusIsVisible}"
+					Foreground="{StaticResource OrangePeel_1_100}"
+					Margin="4 4 4 4"
+					TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
+					/>
+				<shared:SpinView
+					Margin="4" Grid.Row="1"
+					DataContext="{Binding SpinViewModel}"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Width="480" Height="320"
+					/>
+			</Grid>
+
 			<!-- Single Image Layout --> 
 			<Grid
 				IsVisible="{Binding SingleImageLayoutIsVisible}"
 				Grid.Row="1" 
 				> 
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="8" />
+					<ColumnDefinition Width="480" />
+				</Grid.ColumnDefinitions>
 				<vm:CullingImageView
 					Margin="4"
-					Grid.Row="1" 
 					DataContext="{Binding SingleImageViewModel}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
 					/>
+				<!-- Single Image Layout Control Panel --> 
+				<Grid
+					Width="480" Height="300"
+					Grid.Column="2"
+					VerticalAlignment="Top"
+					> 
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" /> <!-- Reserved FFU -->
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="64" /> <!-- + or - star -->
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="64" /> <!-- Reject -->
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="500" />
+					</Grid.RowDefinitions>
+					<glyphs:GlyphButton
+						x:Name="RemoveStarButton"
+						Grid.Row="2" Grid.Column="0"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="220" Height="56"
+						GlyphSource="star_off"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.RemoveStar}"
+						Command="{Binding OnRemoveStar}"
+						/>
+					<TextBlock
+						Grid.Row="3" Grid.Column="0" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="Delete"
+						/>
+					<glyphs:GlyphButton
+						x:Name="AddStarButton"
+						Grid.Row="2" Grid.Column="1"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="220" Height="56"
+						GlyphSource="star_emphasis"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.AddStar}"
+						Command="{Binding OnAddStar}"
+						/>
+					<TextBlock
+						Grid.Row="3" Grid.Column="1" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="Insert"
+						/>
+					<glyphs:GlyphButton
+						x:Name="RejectButton"
+						Grid.Row="5" Grid.ColumnSpan="2"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						GlyphSource="delete"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.Reject}"
+						Command="{Binding OnReject}"
+						/>
+					<TextBlock
+						Grid.Row="6" Grid.ColumnSpan="2" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="Backspace"
+						/>
+					<metadatapane:MetadataView
+						DataContext="{Binding SelectedImageMetadataViewModel}"
+						HorizontalAlignment="Stretch" 
+						Grid.Row="8" Grid.ColumnSpan="2"
+						Margin="4 0 4 0"
+						/>
+				</Grid>
 			</Grid>
 			<!-- Dual Landscape Image Layout --> 
 			<Grid
@@ -103,6 +220,11 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="8" />
+					<ColumnDefinition Width="480" />
+				</Grid.ColumnDefinitions>
 				<vm:CullingImageView
 					Margin="4"
 					DataContext="{Binding SingleImageViewModelTopOrLeft}"
@@ -114,6 +236,63 @@
 					DataContext="{Binding SingleImageViewModelBottomOrRight}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
 					/>
+				<!-- Dual Landscape Image Layout Control Panel --> 
+				<Grid
+					Grid.Column="2"
+					VerticalAlignment="Top"
+					> 
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" /> <!-- Reserved FFU -->
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="64" /> <!-- Select Top -->
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="64" /> <!-- Select Bottom -->
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
+						<RowDefinition Height="50" />
+					</Grid.RowDefinitions>
+					<glyphs:GlyphButton
+						x:Name="SelectTopButton"
+						Grid.Row="2" 
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						GlyphSource="caret_up"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.SelectTop}"
+						Command="{Binding OnSelectTopOrLeft}"
+						/>
+					<TextBlock
+						Grid.Row="3" Grid.Column="1" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="{DynamicResource Workflow.Culling.SelectTopHint}"
+						/>
+					<glyphs:GlyphButton
+						x:Name="SelectBottomButton"
+						Grid.Row="5" Grid.ColumnSpan="2"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						GlyphSource="caret_down"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.SelectBottom}"
+						Command="{Binding OnSelectBottomOrRight}"
+						/>
+					<TextBlock
+						Grid.Row="6" Grid.ColumnSpan="2" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="{DynamicResource Workflow.Culling.SelectBottomHint}"
+						/>
+				</Grid>
 			</Grid>
 
 			<!-- Dual Portrait Image Layout --> 
@@ -125,17 +304,80 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" /> 
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
 				<vm:CullingImageView
-					Margin="4"
+					Margin="4" Grid.Row="1"
 					DataContext="{Binding SingleImageViewModelTopOrLeft}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
 					/>
 				<vm:CullingImageView
 					Margin="4"
-					Grid.Column="1"
+					Grid.Row="1" Grid.Column="1"
 					DataContext="{Binding SingleImageViewModelBottomOrRight}"
 					HorizontalAlignment="Center"  VerticalAlignment="Center"
 					/>
+				<!-- Dual Portrait Image Layout --> 
+				<Grid
+					Grid.Row="0" Grid.ColumnSpan="2"
+					VerticalAlignment="Top"
+					> 
+					<Grid.RowDefinitions>
+						<RowDefinition Height="64" /> <!-- Select Top -->
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<glyphs:GlyphButton
+						x:Name="SelectLeftButton"
+						Grid.Row="0" Grid.Column="0" 
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						GlyphSource="caret_left"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.SelectLeft}"
+						Command="{Binding OnSelectTopOrLeft}"
+						/>
+					<TextBlock
+						Grid.Row="1" Grid.Column="0" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="{DynamicResource Workflow.Culling.SelectTopHint}"
+						/>
+					<glyphs:GlyphButton
+						x:Name="SelectRightButton"
+						Grid.Row="0" Grid.Column="1"
+						Style="{StaticResource ViewIconButton}"
+						Layout="IconTextLeftSide"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						GlyphSource="caret_right"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Workflow.Culling.SelectRight}"
+						Command="{Binding OnSelectBottomOrRight}"
+						/>
+					<TextBlock
+						Grid.Row="1" Grid.Column="1" 
+						Theme="{StaticResource Small}"
+						IsVisible="{Binding ShowHints}"
+						HorizontalAlignment="Center"
+						Text="{DynamicResource Workflow.Culling.SelectRightHint}"
+						/>
+				</Grid>
+				<Grid
+
+					> 
+				</Grid>
 			</Grid>
 
 			<!-- Many Images Layout: 3 or more , or two in distinct orientations --> 
@@ -145,261 +387,27 @@
 				ItemsSource="{Binding SelectedImages}"
 				>
 				<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-				</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-	  
+					<ItemsPanelTemplate>
+						<UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>	  
 				<ItemsControl.ItemTemplate>
-				<DataTemplate >
-					<Image 
-						Margin="4"
-						Source="{Binding Bitmap}" 
-						Stretch="Uniform" 
-						HorizontalAlignment="Center"  VerticalAlignment="Center"
-						RenderOptions.BitmapInterpolationMode="HighQuality"
-						/>
-				</DataTemplate>
+					<DataTemplate >
+						<Image 
+							Margin="4"
+							Source="{Binding Bitmap}" 
+							Stretch="Uniform" 
+							HorizontalAlignment="Center"  VerticalAlignment="Center"
+							RenderOptions.BitmapInterpolationMode="HighQuality"
+							/>
+					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-		</Grid>
-
-		<!-- Controls on the right side --> 
-		<Rectangle
-			Grid.Row="1" Grid.Column="4"
-			Fill="#60000020"
-			/>
-		<StackPanel
-			Grid.Row="1" Grid.Column="4"
-			>
-			<TextBlock
-				Theme="{StaticResource H3}"
-				Text="{Binding Status}"
-				IsVisible="{Binding StatusIsVisible}"
-				Foreground="{StaticResource OrangePeel_1_100}"
-				Margin="4 4 4 4"
-				TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
-				/>
-			<shared:SpinView
-				Margin="4"
-				DataContext="{Binding SpinViewModel}"
-				/>
-			<!-- Single Image Layout --> 
-			<Grid
-				IsVisible="{Binding SingleImageLayoutIsVisible}"
-				Width="480" Height="300"
-				> 
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="40" /> <!-- Reserved FFU -->
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="64" /> <!-- + or - star -->
-					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="64" /> <!-- Reject -->
-					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="500" />
-				</Grid.RowDefinitions>
-				<glyphs:GlyphButton
-					x:Name="RemoveStarButton"
-					Grid.Row="2" Grid.Column="0"
-					Style="{StaticResource ViewIconButton}"
-					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="220" Height="56"
-					GlyphSource="star_off"
-					ButtonBackground="BorderlessRectangle"
-					GlyphStrokeThickness="0"
-					Text="{DynamicResource Workflow.Culling.RemoveStar}"
-					Command="{Binding OnRemoveStar}"
-					/>
-				<!-- Does not look good 
-				<TextBlock
-					Grid.Row="3" Grid.Column="0" 
-					Theme="{StaticResource Large}"
-					IsVisible="{Binding ShowHints}"
-					FontSize="40"
-					HorizontalAlignment="Center"
-					Margin="0 0 40 0"
-					Text="&#x2328;"
-					/>
-				--> 
-				<TextBlock
-					Grid.Row="3" Grid.Column="0" 
-					Theme="{StaticResource Small}"
-					IsVisible="{Binding ShowHints}"
-					HorizontalAlignment="Center"
-					Text="Delete"
-					/>
-				<glyphs:GlyphButton
-					x:Name="AddStarButton"
-					Grid.Row="2" Grid.Column="1"
-					Style="{StaticResource ViewIconButton}"
-					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="220" Height="56"
-					GlyphSource="star_emphasis"
-					ButtonBackground="BorderlessRectangle"
-					GlyphStrokeThickness="0"
-					Text="{DynamicResource Workflow.Culling.AddStar}"
-					Command="{Binding OnAddStar}"
-					/>
-				<TextBlock
-					Grid.Row="3" Grid.Column="1" 
-					Theme="{StaticResource Small}"
-					IsVisible="{Binding ShowHints}"
-					HorizontalAlignment="Center"
-					Text="Insert"
-					/>
-				<glyphs:GlyphButton
-					x:Name="RejectButton"
-					Grid.Row="5" Grid.ColumnSpan="2"
-					Style="{StaticResource ViewIconButton}"
-					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="460" Height="56"
-					GlyphSource="delete"
-					ButtonBackground="BorderlessRectangle"
-					GlyphStrokeThickness="0"
-					Text="{DynamicResource Workflow.Culling.Reject}"
-					Command="{Binding OnReject}"
-					/>
-				<TextBlock
-					Grid.Row="6" Grid.ColumnSpan="2" 
-					Theme="{StaticResource Small}"
-					IsVisible="{Binding ShowHints}"
-					HorizontalAlignment="Center"
-					Text="Backspace"
-					/>
-				<metadatapane:MetadataView
-					DataContext="{Binding SelectedImageMetadataViewModel}"
-					HorizontalAlignment="Stretch" 
-					Grid.Row="8" Grid.ColumnSpan="2"
-					Margin="4 0 4 0"
-					/>
-			</Grid>
-			<!-- Dual Landscape Image Layout --> 
-			<Grid
-				IsVisible="{Binding DualLandscapeImageLayoutIsVisible}"
-				> 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="40" /> <!-- Reserved FFU -->
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="64" /> <!-- Select Top -->
-					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="64" /> <!-- Select Bottom -->
-					<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
-					<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-					<RowDefinition Height="500" />
-				</Grid.RowDefinitions>
-				<glyphs:GlyphButton
-					x:Name="SelectTopButton"
-					Grid.Row="2" 
-					Style="{StaticResource ViewIconButton}"
-					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="460" Height="56"
-					GlyphSource="caret_up"
-					ButtonBackground="BorderlessRectangle"
-					GlyphStrokeThickness="0"
-					Text="{DynamicResource Workflow.Culling.SelectTop}"
-					Command="{Binding OnSelectTop}"
-					/>
-				<TextBlock
-					Grid.Row="3" Grid.Column="1" 
-					Theme="{StaticResource Small}"
-					IsVisible="{Binding ShowHints}"
-					HorizontalAlignment="Center"
-					Text="{DynamicResource Workflow.Culling.SelectTopHint}"
-					/>
-				<glyphs:GlyphButton
-					x:Name="SelectBottomButton"
-					Grid.Row="5" Grid.ColumnSpan="2"
-					Style="{StaticResource ViewIconButton}"
-					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="460" Height="56"
-					GlyphSource="caret_down"
-					ButtonBackground="BorderlessRectangle"
-					GlyphStrokeThickness="0"
-					Text="{DynamicResource Workflow.Culling.SelectBottom}"
-					Command="{Binding OnSelectBottom}"
-					/>
-				<TextBlock
-					Grid.Row="6" Grid.ColumnSpan="2" 
-					Theme="{StaticResource Small}"
-					IsVisible="{Binding ShowHints}"
-					HorizontalAlignment="Center"
-					Text="Reject Top - Add a Star to Bottom"
-					/>
-			</Grid>
-
-			<!-- Dual Portrait Image Layout --> 
-			<Grid
-				IsVisible="{Binding DualPortraitImageLayoutIsVisible}"
-				> 
-			</Grid>
-			<!-- Many Images Layout: 3 or more  --> 
+			<!-- Many Images Layout: 3 or more  - Control Panel - Nothing for now --> 
 			<Grid
 				IsVisible="{Binding ManyImagesLayoutIsVisible}"
 				> 
 			</Grid>
-
-			<!--
-			<Image
-				Source="{Binding SelectedThumbnail}"
-				Margin="0"
-				IsHitTestVisible="False"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480"
-				MaxHeight="380"
-				/>
-			<stars:RatingControl
-				IsVisible="{Binding HasSelection}"
-				Width="200" Height="24"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Margin="0 4 0 4"
-				RatingValue="4"
-				IsReadOnly="True"
-				/>
-			<glyphs:GlyphButton
-				x:Name="ProcessButton"
-				IsVisible="{Binding HasSelection}"
-				Style="{StaticResource ViewIconButton}"
-				FontSize="24"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480" Height="56"
-				Margin="0 4 0 12"
-				GlyphSource="wand"
-				ButtonBackground="BorderlessRectangle"
-				GlyphStrokeThickness="0"
-				Text="{DynamicResource Library.ProcessImage}"
-				Command="{Binding OnProcess}"
-				/>
-			<metadatapane:MetadataView
-				DataContext="{Binding SelectedThumnailMetadataViewModel}"
-				HorizontalAlignment="Stretch" 
-				Margin="0 0 0 4"
-				/>
-			<glyphs:GlyphButton
-				IsVisible="{Binding HasSelection}"
-				Style="{StaticResource ViewIconButton}"
-				FontSize="24"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480" Height="56"
-				Margin="0 0 0 12"
-				GlyphSource="arrow_export_up"
-				ButtonBackground="BorderlessRectangle"
-				GlyphStrokeThickness="0"
-				Text="{DynamicResource Library.Navigate}"
-				Command="{Binding OnNavigate}"
-				/>
-			-->
-		</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>

@@ -298,17 +298,6 @@ public sealed partial class CullingViewModel :
                 // Both landscape or square
                 this.layoutKind = LayoutKind.DualImageLandscape;
                 this.DualLandscapeImageLayoutIsVisible = true;
-            }
-
-            if ((size0.Width <= size0.Height) && (size1.Width <= size1.Height))
-            {
-                // Both portrait or square
-                this.layoutKind = LayoutKind.DualImagePortrait;
-                this.DualPortraitImageLayoutIsVisible = true;
-            }
-
-            if (this.DualLandscapeImageLayoutIsVisible || this.DualPortraitImageLayoutIsVisible)
-            {
                 Schedule.OnUiThread(
                     this.isShowHintsDualLandscapeFirstTime ? 15_000 : 4_000,
                     () =>
@@ -318,6 +307,26 @@ public sealed partial class CullingViewModel :
                     },
                     DispatcherPriority.Background);
 
+            }
+
+            if ((size0.Width <= size0.Height) && (size1.Width <= size1.Height))
+            {
+                // Both portrait or square
+                this.layoutKind = LayoutKind.DualImagePortrait;
+                this.DualPortraitImageLayoutIsVisible = true;
+                Schedule.OnUiThread(
+                    this.isShowHintsDualPortraitFirstTime ? 15_000 : 4_000,
+                    () =>
+                    {
+                        this.ShowHints = false;
+                        this.isShowHintsDualPortraitFirstTime = false;
+                    },
+                    DispatcherPriority.Background);
+
+            }
+
+            if (this.DualLandscapeImageLayoutIsVisible || this.DualPortraitImageLayoutIsVisible)
+            {
                 this.SingleImageViewModelTopOrLeft =
                     new CullingImageViewModel(this, uiThumbnail0.Metadata, bitmap0);
                 this.SingleImageViewModelBottomOrRight =
@@ -394,9 +403,9 @@ public sealed partial class CullingViewModel :
     }
 
     [RelayCommand]
-    public void OnSelectTop()
+    public void OnSelectTopOrLeft()
     {
-        if (this.layoutKind != LayoutKind.DualImageLandscape)
+        if ((this.layoutKind != LayoutKind.DualImageLandscape) && (this.layoutKind != LayoutKind.DualImagePortrait))
         {
             return;
         }
@@ -412,9 +421,9 @@ public sealed partial class CullingViewModel :
     }
 
     [RelayCommand]
-    public void OnSelectBottom()
+    public void OnSelectBottomOrRight()
     {
-        if (this.layoutKind != LayoutKind.DualImageLandscape)
+        if ((this.layoutKind != LayoutKind.DualImageLandscape) && (this.layoutKind != LayoutKind.DualImagePortrait))
         {
             return;
         }
@@ -463,7 +472,7 @@ public sealed partial class CullingViewModel :
                 // Select previous in film strip, unless empty 
                 if (this.ImageThumbnails.Count > 0)
                 {
-                    this.SelectedThumbnailIndex = Math.Max(0, wasSelectedIndex - 1);
+                    this.SelectedThumbnailIndex = wasSelectedIndex;
                 }
             } 
             else

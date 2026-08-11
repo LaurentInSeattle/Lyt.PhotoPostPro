@@ -43,7 +43,12 @@
 	<system:String x:Key="Workflow.Culling.SelectTopHint">Add a Star to Top - Reject Bottom</system:String>
 	<system:String x:Key="Workflow.Culling.SelectBottom">Keep: Bottom Image</system:String>
 	<system:String x:Key="Workflow.Culling.SelectBottomHint">Reject Top - Add a Star to Bottom</system:String>
+	<system:String x:Key="Workflow.Culling.SelectLeft">Keep: Left Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectLeftHint">Add a Star to Left - Reject Right</system:String>
+	<system:String x:Key="Workflow.Culling.SelectRight">Keep: Right Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
 
+	
 	<!-- Folder -->
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 

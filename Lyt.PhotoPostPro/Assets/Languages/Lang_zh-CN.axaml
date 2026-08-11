@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">拒绝顶部 - 在底部添加一颗星</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">保留：左图</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">向左添加一颗星 - 拒绝右</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">保留：右图</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">拒绝左侧 - 在右侧添加一颗星</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">将包含图像文件的文件夹拖放到此处以创建新项目。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">将图像文件拖放到此处即可开始。</system:String>

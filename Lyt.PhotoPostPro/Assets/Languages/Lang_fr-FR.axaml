@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Rejeter le haut - Ajouter une étoile en bas</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Conserver : Image de gauche</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Ajouter une étoile à gauche - Rejeter à droite</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Conserver : la bonne image</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Rejeter à gauche - Ajouter une étoile à droite</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Faites glisser et déposez ici un dossier contenant des fichiers image pour créer un nouveau projet.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Faites glisser et déposez un fichier image ici pour commencer.</system:String>

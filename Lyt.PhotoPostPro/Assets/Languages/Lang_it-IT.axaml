@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Rifiuta in alto: aggiungi una stella in basso</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Conserva: immagine a sinistra</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Aggiungi una stella a sinistra - Rifiuta a destra</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Conserva: immagine giusta</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: aggiungi una stella a destra</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Trascina qui una cartella contenente file di immagine per creare un nuovo progetto.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>

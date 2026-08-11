@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Απόρριψη κορυφής - Προσθέστε ένα αστέρι στο κάτω μέρος</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Διατήρηση: Αριστερή εικόνα</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Προσθέστε ένα αστέρι στα αριστερά - Απόρριψη δεξιά</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Διατήρηση: Δεξιά εικόνα</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Απόρριψη αριστερά - Προσθέστε ένα αστέρι στα δεξιά</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Σύρετε και αποθέστε έναν φάκελο που περιέχει αρχεία εικόνας εδώ για να δημιουργήσετε ένα νέο έργο.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>

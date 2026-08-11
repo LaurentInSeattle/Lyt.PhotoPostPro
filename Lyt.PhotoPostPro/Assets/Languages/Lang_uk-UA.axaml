@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">Відхилити верх - додати зірку внизу</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">Keep: ліве зображення</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Додайте зірочку ліворуч - відхиліть праворуч</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Keep: праве зображення</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Відхилити ліворуч – додати зірочку праворуч</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">Перетягніть сюди папку з файлами зображень, щоб створити новий проект.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>

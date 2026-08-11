@@ -61,6 +61,14 @@
 
     <system:String x:Key="Workflow.Culling.SelectBottomHint">শীর্ষে প্রত্যাখ্যান করুন - নীচে একটি তারকা যোগ করুন</system:String>
 
+    <system:String x:Key="Workflow.Culling.SelectLeft">রাখুন: বাম চিত্র</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">বামে একটি তারকা যোগ করুন - ডানদিকে প্রত্যাখ্যান করুন</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">রাখুন: ডান চিত্র</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">বাম থেকে প্রত্যাখ্যান করুন - ডানে একটি তারকা যোগ করুন</system:String>
+
     <system:String x:Key="Folder.DropZoneHelp">একটি নতুন প্রকল্প তৈরি করতে এখানে ইমেজ ফাইল ধারণকারী একটি ফোল্ডার টেনে আনুন এবং ড্রপ করুন।</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
