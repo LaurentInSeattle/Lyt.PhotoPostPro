@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Σύρετε και αποθέστε εδώ ένα αρχείο .cube ή 3dl!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Εκκίνηση "LUT Explorer"</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Χειροκίνητη ταξινόμηση χρωμάτων</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Αναβαθμίστε την ένταση χρώματος παγκοσμίως ή χρησιμοποιήστε το Vibrance σε κάθε κανάλι RGB.</system:String>

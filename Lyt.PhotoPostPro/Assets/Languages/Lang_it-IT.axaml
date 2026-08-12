@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Trascina e rilascia qui un file .cube o 3dl!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Avvia "LUT Explorer"</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Gradazione dei colori manuale</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Migliora l'intensità del colore a livello globale oppure utilizza Vividezza su ciascun canale RGB.</system:String>

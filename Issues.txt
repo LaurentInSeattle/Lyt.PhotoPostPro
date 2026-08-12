@@ -5,6 +5,10 @@ Bugs ~ Major Issues
 
 - Add new Images messed up thumb files ? 
 
+- Start editing you automatically give one star 
+
+- Ability to rate again in Export panel 
+
 - Message if nothing left to Rate / Cull 
 
 - Folder Tree for Added not updating correctly 
@@ -29,6 +33,8 @@ WIP
 ---
 
 - LUT 'Explorer': Apply all LUTs so that it becomes easy to pick one
+
+- Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
 
 TODO First

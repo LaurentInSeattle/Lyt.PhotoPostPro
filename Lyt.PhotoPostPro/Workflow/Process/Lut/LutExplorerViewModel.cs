@@ -7,5 +7,9 @@ public sealed partial class LutExplorerViewModel : ViewModel<LutExplorerView>
         
     }
 
-    internal void Launch(LutViewModel lutViewModel) => throw new NotImplementedException();
+    internal void Launch(LutViewModel lutViewModel)
+    {
+
+    }
+
 }

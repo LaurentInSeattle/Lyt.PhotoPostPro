@@ -17,6 +17,9 @@ public sealed partial class LutToolboxViewModel :
     protected override string Title => this.Localize("Workflow.Lut.Title");
 
     [ObservableProperty]
+    public partial bool IsExplorerMode { get; set; }
+
+    [ObservableProperty]
     public partial DropViewModel DropViewModel { get; set; }
 
     [ObservableProperty]
@@ -74,12 +77,37 @@ public sealed partial class LutToolboxViewModel :
         this.isFirstLoad = false;
     }
 
-
     [RelayCommand]
     public void OnLaunchExplorer()
     {
         var vm = App.GetRequiredService<LutViewModel>();
         vm.LaunchExplorer();
+        this.IsExplorerMode = true;
+    }
+
+    public override void OnBeforeBack()
+    {
+        this.HideExplorer();
+        base.OnBeforeBack();
+    }
+
+    public override void OnBeforeReset()
+    {
+        this.HideExplorer();
+        base.OnBeforeReset();
+    }
+
+    public override void OnBeforeNext()
+    {
+        this.HideExplorer(); 
+        base.OnBeforeNext();
+    }
+
+    private void HideExplorer()
+    {
+        this.IsExplorerMode = false;
+        var vm = App.GetRequiredService<LutViewModel>();
+        vm.HideExplorer();
     }
 
     public override void OnModelStepUpdated(LutStep step) => this.UpdateUI(step);

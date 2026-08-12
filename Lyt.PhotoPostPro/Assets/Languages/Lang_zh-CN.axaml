@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">将 .cube 或 3dl 文件拖放到此处！</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">启动“LUT 资源管理器”</system:String>
+
     <system:String x:Key="Workflow.Color.Title">手动颜色分级</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">全局重新调整颜色强度，或者在每个 RGB 通道上使用 Vibrance。</system:String>

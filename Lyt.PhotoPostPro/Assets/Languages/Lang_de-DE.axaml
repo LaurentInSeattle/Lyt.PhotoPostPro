@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Ziehen Sie hier eine .cube- oder 3dl-Datei per Drag Drop!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Starten Sie „LUT Explorer“</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Manuelle Farbkorrektur</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Erhöhen Sie die Farbintensität global oder verwenden Sie Vibrance für jeden RGB-Kanal.</system:String>

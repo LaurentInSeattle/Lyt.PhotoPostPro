@@ -13,6 +13,7 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>	
 	<Grid
+		IsEnabled="{Binding !IsExplorerMode}"
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt LUT --> 
@@ -20,7 +21,7 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Drop LUT --> 
 			<RowDefinition Height="{StaticResource Size.DropBox}" /> <!--  : Drop   --> 
-			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!--  --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Lut Explorer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
@@ -71,12 +72,14 @@
 			DataContext="{Binding DropViewModel}"
 			/>
 		<glyphs:GlyphButton
+			Grid.Row="6" 
+			IsVisible="{Binding !IsExplorerMode}"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export"
 			Text="{DynamicResource Workflow.Lut.LaunchExplorer}"
 			Command="{Binding OnLaunchExplorer}"
-			Width="280"
+			Width="380"
 	    	/>
 	</Grid>
 </UserControl>

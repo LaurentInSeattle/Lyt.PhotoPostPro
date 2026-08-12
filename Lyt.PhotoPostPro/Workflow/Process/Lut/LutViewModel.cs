@@ -17,5 +17,10 @@ public sealed partial class LutViewModel : StepViewModel<LutView>
     {
         this.IsExplorerMode = true;
         this.LutExplorerViewModel.Launch(this); 
-    }          
+    }
+
+    public void HideExplorer()
+    {
+        this.IsExplorerMode = false;
+    }
 }

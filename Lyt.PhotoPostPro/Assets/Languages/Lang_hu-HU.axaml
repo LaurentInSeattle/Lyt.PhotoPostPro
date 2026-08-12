@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Húzzon ide egy .cube vagy 3dl fájlt!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Indítsa el a „LUT Explorer” programot</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Kézi színbesorolás</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Globálisan módosítsa a színintenzitást, vagy használja a Vibrance funkciót minden RGB-csatornán.</system:String>

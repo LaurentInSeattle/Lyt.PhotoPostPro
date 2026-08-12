@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Քաշեք և թողեք այստեղ .cube կամ 3dl ֆայլ:</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Գործարկել «LUT Explorer»-ը</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Ձեռքով գույնի դասակարգում</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Վերափոխեք գույնի ինտենսիվությունը ամբողջ աշխարհում կամ օգտագործեք Vibrance-ը յուրաքանչյուր RGB ալիքում:</system:String>

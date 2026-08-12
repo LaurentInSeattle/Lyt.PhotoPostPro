@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">.cube 또는 3dl 파일을 여기에 드래그 앤 드롭하세요!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT 탐색기' 실행</system:String>
+
     <system:String x:Key="Workflow.Color.Title">수동 컬러 그레이딩</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">색상 강도를 전체적으로 재조정하거나 각 RGB 채널에서 Vibrance를 사용하세요.</system:String>

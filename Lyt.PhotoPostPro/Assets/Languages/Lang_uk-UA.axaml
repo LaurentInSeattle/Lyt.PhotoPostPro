@@ -281,6 +281,8 @@
 
     <system:String x:Key="Workflow.Lut.DragDropHelp">Перетягніть сюди файл .cube або 3dl!</system:String>
 
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Запустіть "LUT Explorer"</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Ручна градація кольорів</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Змініть інтенсивність кольору глобально або використовуйте Vibrance на кожному каналі RGB.</system:String>
