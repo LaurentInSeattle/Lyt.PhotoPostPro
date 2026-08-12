@@ -15,12 +15,23 @@ public sealed partial class LutViewModel : StepViewModel<LutView>
 
     public void LaunchExplorer()
     {
+        if ( this.model.CurrentWorkflow is null)
+        {
+            return; 
+        }
+
+        if (this.model.CurrentWorkflow.CurrentStep is not LutStep lutStep)
+        {
+            return;
+        }
+
         this.IsExplorerMode = true;
-        this.LutExplorerViewModel.Launch(this); 
+        this.LutExplorerViewModel.Launch(this, lutStep); 
     }
 
     public void HideExplorer()
     {
         this.IsExplorerMode = false;
+        this.LutExplorerViewModel.Hide();
     }
 }
