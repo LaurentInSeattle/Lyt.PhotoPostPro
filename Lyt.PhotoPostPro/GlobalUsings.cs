@@ -94,6 +94,10 @@ global using Lyt.Utilities.Randomizing;
 
 #endregion Framework 
 
+// Multiplatform dependencies 
+//
+global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
+
 // Main App library namespaces (Avalonia dependent)
 //
 global using Lyt.PhotoPostPro.Controls;
@@ -109,6 +113,7 @@ global using Lyt.PhotoPostPro.Workflow.Camera;
 global using Lyt.PhotoPostPro.Workflow.Culling;
 global using Lyt.PhotoPostPro.Workflow.Library;
 global using Lyt.PhotoPostPro.Workflow.Library.Dialogs;
+global using Lyt.PhotoPostPro.Workflow.Gallery;
 global using Lyt.PhotoPostPro.Workflow.Language;
 global using Lyt.PhotoPostPro.Workflow.Process;
 global using Lyt.PhotoPostPro.Workflow.Process.Orient;
@@ -145,4 +150,3 @@ global using Lyt.PhotoPostPro.Model.LookUp;
 global using Lyt.PhotoPostPro.Model.PostProcessors;
 global using Lyt.PhotoPostPro.Model.ProcessModels;
 global using Lyt.PhotoPostPro.Model.Utilities;
-

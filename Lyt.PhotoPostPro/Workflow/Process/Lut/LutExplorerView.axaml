@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Process.Lut.LutView"
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Lut.LutExplorerView"
 	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Lut"
-	x:DataType="vm:LutViewModel" 
+	x:DataType="vm:LutExplorerViewModel" 
 	
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,14 +12,4 @@
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
 	Background="Transparent"
 	>
-	<Grid>
-		<shared:BeforeAfterView
-			IsVisible="{Binding !IsExplorerMode}"
-			DataContext="{Binding}"
-			/>
-		<vm:LutExplorerView
-			IsVisible="{Binding $parent[UserControl].DataContext.IsExplorerMode}"
-			DataContext="{Binding LutExplorerViewModel}"
-			/>
-	</Grid>
 </UserControl>

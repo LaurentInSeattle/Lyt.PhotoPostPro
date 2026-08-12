@@ -10,6 +10,7 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="782"
 
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>	
 	<Grid
 		>
@@ -19,6 +20,8 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Drop LUT --> 
 			<RowDefinition Height="{StaticResource Size.DropBox}" /> <!--  : Drop   --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!--  --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Lut Explorer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
 		<TextBlock
@@ -67,5 +70,13 @@
 			Margin="4"
 			DataContext="{Binding DropViewModel}"
 			/>
+		<glyphs:GlyphButton
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="arrow_export"
+			Text="{DynamicResource Workflow.Lut.LaunchExplorer}"
+			Command="{Binding OnLaunchExplorer}"
+			Width="280"
+	    	/>
 	</Grid>
 </UserControl>

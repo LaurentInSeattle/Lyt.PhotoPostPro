@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">Բարի գալուստ PhotoRebel:</system:String>
 
+    <system:String x:Key="Shell.Folder">Գրադարան</system:String>
+
     <system:String x:Key="Shell.Camera">Տեսախցիկ</system:String>
 
-    <system:String x:Key="Shell.Single">Պատկեր</system:String>
+    <system:String x:Key="Shell.Gallery">Պատկերասրահ</system:String>
 
-    <system:String x:Key="Shell.Folder">Գրադարան</system:String>
+    <system:String x:Key="Shell.Single">Պատկեր</system:String>
 
     <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
 

@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">歡迎來到照片反叛者！</system:String>
 
+    <system:String x:Key="Shell.Folder">圖書館</system:String>
+
     <system:String x:Key="Shell.Camera">相機</system:String>
 
-    <system:String x:Key="Shell.Single">影像</system:String>
+    <system:String x:Key="Shell.Gallery">畫廊</system:String>
 
-    <system:String x:Key="Shell.Folder">圖書館</system:String>
+    <system:String x:Key="Shell.Single">影像</system:String>
 
     <system:String x:Key="Shell.Settings">設定</system:String>
 

@@ -17,9 +17,10 @@
 	<system:String x:Key="Shell.Greetings">Welcome to PhotoRebel !</system:String>
 
 	<!-- Shell - Nav' Bar -->
-	<system:String x:Key="Shell.Camera">Camera</system:String>
-	<system:String x:Key="Shell.Single">New Images</system:String>
 	<system:String x:Key="Shell.Folder">Library</system:String>
+	<system:String x:Key="Shell.Camera">Camera</system:String>
+	<system:String x:Key="Shell.Gallery">Gallery</system:String>
+	<system:String x:Key="Shell.Single">New Images</system:String>
 	<system:String x:Key="Shell.Settings">Settings</system:String>
 	<system:String x:Key="Shell.Tools">Tools</system:String>
 	<system:String x:Key="Shell.Language">Language</system:String>

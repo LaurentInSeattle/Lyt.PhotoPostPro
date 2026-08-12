@@ -181,9 +181,10 @@ public sealed partial class ShellViewModel
         #endregion  Unused for now 
 
         // Views present in the main selector on the left  
-        SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
-        SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
+        SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
+        SetupNoToolbar<GalleryViewModel, GalleryView>(ActivatedView.Gallery, view.GalleryButton);
+        SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
         SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
@@ -234,13 +235,16 @@ public sealed partial class ShellViewModel
     }
 
     [RelayCommand]
+    public void OnLibrary() => this.viewSelector?.SelectView(ActivatedView.Library);
+
+    [RelayCommand]
     public void OnCamera() => this.viewSelector?.SelectView(ActivatedView.Camera);
 
     [RelayCommand]
-    public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
+    public void OnGallery() => this.viewSelector?.SelectView(ActivatedView.Gallery);
 
     [RelayCommand]
-    public void OnLibrary() => this.viewSelector?.SelectView(ActivatedView.Library);
+    public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
 
     [RelayCommand]
     public void OnSettings() => this.viewSelector?.SelectView(ActivatedView.Settings);

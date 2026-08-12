@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.Folder">Βιβλιοθήκη</system:String>
+
     <system:String x:Key="Shell.Camera">Κάμερα</system:String>
 
-    <system:String x:Key="Shell.Single">Εικών</system:String>
+    <system:String x:Key="Shell.Gallery">Στοά</system:String>
 
-    <system:String x:Key="Shell.Folder">Βιβλιοθήκη</system:String>
+    <system:String x:Key="Shell.Single">Εικών</system:String>
 
     <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
 

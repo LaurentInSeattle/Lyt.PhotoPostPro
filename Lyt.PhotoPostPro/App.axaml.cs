@@ -1,9 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro;
 
-using global::Avalonia.OpenGL;
-
-using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
-
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
@@ -31,6 +27,7 @@ public partial class App : ApplicationBase
             typeof(SingleViewModel),
             typeof(CameraViewModel),
             typeof(LibraryViewModel),
+            typeof(GalleryViewModel),
             typeof(SettingsViewModel),
             typeof(ToolsViewModel),
             typeof(LanguageViewModel),
@@ -71,6 +68,7 @@ public partial class App : ApplicationBase
 
             typeof(LutViewModel),
             typeof(LutToolboxViewModel),
+            typeof(LutExplorerViewModel),
 
             typeof(ColorViewModel),
             typeof(ColorToolboxViewModel),
@@ -88,10 +86,6 @@ public partial class App : ApplicationBase
             typeof(ExportToolboxViewModel),
             
             // LATER 
-
-            //typeof(CleanupViewModel),
-            //typeof(CleanupToolboxViewModel),
-
 
             //typeof(DenoiseViewModel),
             //typeof(DenoiseToolboxViewModel),

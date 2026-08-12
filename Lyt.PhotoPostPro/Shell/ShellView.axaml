@@ -125,6 +125,15 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton
+						x:Name="GalleryButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="star_emphasis"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Gallery}"
+						Command="{Binding OnGallery}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="SingleButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="wallpaper"

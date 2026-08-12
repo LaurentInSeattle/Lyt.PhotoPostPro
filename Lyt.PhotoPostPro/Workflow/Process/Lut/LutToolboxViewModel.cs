@@ -74,28 +74,36 @@ public sealed partial class LutToolboxViewModel :
         this.isFirstLoad = false;
     }
 
+
+    [RelayCommand]
+    public void OnLaunchExplorer()
+    {
+        var vm = App.GetRequiredService<LutViewModel>();
+        vm.LaunchExplorer();
+    }
+
     public override void OnModelStepUpdated(LutStep step) => this.UpdateUI(step);
 
     private void UpdateUI(LutStep step)
     {
         With.Flag(ref this.doNotUpdateModel, () =>
         {
-            var lutMetadata = step.LutMetadata; 
-            if ( !lutMetadata.IsEmpty)
+            var lutMetadata = step.LutMetadata;
+            if (!lutMetadata.IsEmpty)
             {
-                if ( lutMetadata.IsEmbedded)
+                if (lutMetadata.IsEmbedded)
                 {
-                    int index = 0; 
-                    string lutName = lutMetadata.FriendlyName; 
+                    int index = 0;
+                    string lutName = lutMetadata.FriendlyName;
                     foreach (string name in this.AvailableLutNames)
                     {
-                        if ( name.Equals(lutName, StringComparison.InvariantCultureIgnoreCase))
+                        if (name.Equals(lutName, StringComparison.InvariantCultureIgnoreCase))
                         {
                             this.SelectedIndex = index;
-                            break; 
+                            break;
                         }
 
-                        ++index; 
+                        ++index;
                     }
                 }
             }

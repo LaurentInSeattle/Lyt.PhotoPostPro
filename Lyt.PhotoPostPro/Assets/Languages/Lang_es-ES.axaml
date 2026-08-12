@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">¡Bienvenido a FotoRebel!</system:String>
 
+    <system:String x:Key="Shell.Folder">Biblioteca</system:String>
+
     <system:String x:Key="Shell.Camera">Cámara</system:String>
 
-    <system:String x:Key="Shell.Single">Imagen</system:String>
+    <system:String x:Key="Shell.Gallery">Galería</system:String>
 
-    <system:String x:Key="Shell.Folder">Biblioteca</system:String>
+    <system:String x:Key="Shell.Single">Imagen</system:String>
 
     <system:String x:Key="Shell.Settings">Ajustes</system:String>
 

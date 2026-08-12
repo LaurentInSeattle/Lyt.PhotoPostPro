@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">Üdvözli a PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.Folder">Könyvtár</system:String>
+
     <system:String x:Key="Shell.Camera">Kamera</system:String>
 
-    <system:String x:Key="Shell.Single">Kép</system:String>
+    <system:String x:Key="Shell.Gallery">Galéria</system:String>
 
-    <system:String x:Key="Shell.Folder">Könyvtár</system:String>
+    <system:String x:Key="Shell.Single">Kép</system:String>
 
     <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 

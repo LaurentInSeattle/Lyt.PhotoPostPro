@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">Bienvenue dans Photo Rebellion !</system:String>
 
+    <system:String x:Key="Shell.Folder">Bibliothèque</system:String>
+
     <system:String x:Key="Shell.Camera">Caméra</system:String>
 
-    <system:String x:Key="Shell.Single">Image</system:String>
+    <system:String x:Key="Shell.Gallery">Galerie</system:String>
 
-    <system:String x:Key="Shell.Folder">Bibliothèque</system:String>
+    <system:String x:Key="Shell.Single">Image</system:String>
 
     <system:String x:Key="Shell.Settings">Paramètres</system:String>
 

@@ -2,16 +2,18 @@
 
 public enum ActivatedView : int
 {
+    // Utilities - not used for now 
     GoBack,
     Exit,
 
     // Main selector views
     Library,
     Camera,
-    Language,
+    Gallery,
     Single,
     Settings,
     Tools,
+    Language,
 
     // Hidden views, not directly accessible from the main selector
     Process,
@@ -23,16 +25,16 @@ public enum ActivatedView : int
     Color, 
     Compose,
     Contrast,
-    Denoise,
+    //Denoise,
     Export,
     Exposure,
+    Filters,
+    Lut,
     Orient,
+    Recovery,
     Sharpen,
     Straighten,
     TouchUp,
-    Recovery,
-    WhiteBalance,
     Vignette,
-    Filters,
-    Lut,
+    WhiteBalance,
 }

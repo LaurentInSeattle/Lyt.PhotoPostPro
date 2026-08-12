@@ -3,6 +3,8 @@ Bugs ~ Major Issues
 
 - IMG_0212  Incorrect state for Added and Ratings 
 
+- Add new Images messed up thumb files ? 
+
 - Message if nothing left to Rate / Cull 
 
 - Folder Tree for Added not updating correctly 
@@ -26,7 +28,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Culling Workflow and Rating system 
+- LUT 'Explorer': Apply all LUTs so that it becomes easy to pick one
 
 
 TODO First
@@ -68,8 +70,6 @@ Missing Features
 
 
 --- Important ---
-
-- LUT 'Explorer': Pich an image and apply all LUTs so that it becomes easy to pick one
 
 - Ability to navigate the library by Rating, Keywords, etc.
 

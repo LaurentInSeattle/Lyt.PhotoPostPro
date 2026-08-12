@@ -10,8 +10,6 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
-	xmlns:curve="clr-namespace:Lyt.PhotoPostPro.Panes.CurvePane"
 	>	
 	<Grid
 		>

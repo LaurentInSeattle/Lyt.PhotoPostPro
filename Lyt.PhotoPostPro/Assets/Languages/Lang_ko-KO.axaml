@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel에 오신 것을 환영합니다!</system:String>
 
+    <system:String x:Key="Shell.Folder">도서관</system:String>
+
     <system:String x:Key="Shell.Camera">카메라</system:String>
 
-    <system:String x:Key="Shell.Single">영상</system:String>
+    <system:String x:Key="Shell.Gallery">갱도</system:String>
 
-    <system:String x:Key="Shell.Folder">도서관</system:String>
+    <system:String x:Key="Shell.Single">영상</system:String>
 
     <system:String x:Key="Shell.Settings">설정</system:String>
 

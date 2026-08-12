@@ -94,6 +94,7 @@
 				Width="36" Height="36" 
 				Margin="10 0 0 0"
 				/>
+			<!-- Not Really useful - Consider deleting if temporary test removal is OK 
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
@@ -119,6 +120,7 @@
 				Width="36" Height="36" 
 				Margin="10 0 0 0"
 				/>
+			-->
 		</StackPanel>
 		<TextBlock
 			Grid.Row="1"
@@ -127,7 +129,6 @@
 			Theme="{StaticResource H3}"
 			HorizontalAlignment="Center" VerticalAlignment="Top"
 			/>
-
 		<ScrollViewer
 			Grid.Row="1"
 			Background="Transparent"

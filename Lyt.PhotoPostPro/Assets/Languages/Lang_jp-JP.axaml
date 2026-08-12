@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">フォトレベルへようこそ！</system:String>
 
+    <system:String x:Key="Shell.Folder">図書館</system:String>
+
     <system:String x:Key="Shell.Camera">カメラ</system:String>
 
-    <system:String x:Key="Shell.Single">画像</system:String>
+    <system:String x:Key="Shell.Gallery">ギャラリー</system:String>
 
-    <system:String x:Key="Shell.Folder">図書館</system:String>
+    <system:String x:Key="Shell.Single">画像</system:String>
 
     <system:String x:Key="Shell.Settings">設定</system:String>
 

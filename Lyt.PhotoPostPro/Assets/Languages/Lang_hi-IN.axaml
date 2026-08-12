@@ -23,11 +23,13 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel में आपका स्वागत है!</system:String>
 
+    <system:String x:Key="Shell.Folder">पुस्तकालय</system:String>
+
     <system:String x:Key="Shell.Camera">कैमरा</system:String>
 
-    <system:String x:Key="Shell.Single">छवि</system:String>
+    <system:String x:Key="Shell.Gallery">गैलरी</system:String>
 
-    <system:String x:Key="Shell.Folder">पुस्तकालय</system:String>
+    <system:String x:Key="Shell.Single">छवि</system:String>
 
     <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
 
