@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Запустіть "LUT Explorer"</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">Використовуйте цей LUT</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">Відхилити, немає LUT</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Ручна градація кольорів</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Змініть інтенсивність кольору глобально або використовуйте Vibrance на кожному каналі RGB.</system:String>

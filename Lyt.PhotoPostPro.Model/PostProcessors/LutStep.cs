@@ -92,7 +92,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         new ExploreLutImageGeneratedMessage(LutMetadata.Empty, this.thumbnail.ToFrame()).Publish();
 
         // Throttle to let the UI display this image
-        Task.Delay(120).Wait();
+        Task.Delay(60).Wait();
 
         var luts = LutsManager.BuiltInLuts();
         int lutIndex = 0;
@@ -118,7 +118,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             }
 
             // Throttle to let the UI display the images 
-            Task.Delay(120).Wait();
+            Task.Delay(600).Wait();
         }
 
         if (done)

@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">「LUTエクスプローラー」を起動します</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">このLUTを使用してください</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">無視、LUTなし</system:String>
+
     <system:String x:Key="Workflow.Color.Title">手動カラーグレーディング</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">色の強度をグローバルに再グレードするか、各 RGB チャネルで Vibrance を使用します。</system:String>

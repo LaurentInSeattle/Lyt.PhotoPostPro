@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT एक्सप्लोरर' लॉन्च करें</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">इस LUT का प्रयोग करें</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">ख़ारिज करें, कोई LUT नहीं</system:String>
+
     <system:String x:Key="Workflow.Color.Title">मैन्युअल रंग ग्रेडिंग</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">विश्व स्तर पर रंग की तीव्रता को पुनः ग्रेड करें, या, प्रत्येक आरजीबी चैनल पर वाइब्रेंस का उपयोग करें।</system:String>

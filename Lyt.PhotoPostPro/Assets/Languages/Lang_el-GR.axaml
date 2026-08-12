@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Εκκίνηση "LUT Explorer"</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">Χρησιμοποιήστε αυτό το LUT</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">Απόρριψη, Όχι LUT</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Χειροκίνητη ταξινόμηση χρωμάτων</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Αναβαθμίστε την ένταση χρώματος παγκοσμίως ή χρησιμοποιήστε το Vibrance σε κάθε κανάλι RGB.</system:String>

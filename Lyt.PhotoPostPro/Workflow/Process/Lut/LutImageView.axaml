@@ -1,0 +1,42 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Lut.LutImageView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Lut"
+	x:DataType="vm:LutImageViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+
+	xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
+	>
+	<Border
+		x:Name="outerBorder"
+		Background="Transparent"
+		BorderBrush="{StaticResource LightAqua_1_100}"
+		BorderThickness="1"
+		CornerRadius="4"
+		>
+		<Grid
+			Margin="4"
+			>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="36" />
+			</Grid.RowDefinitions>
+			<Image
+				Grid.Row="0"
+				Source="{Binding Image}"
+				IsHitTestVisible="False"
+				RenderOptions.BitmapInterpolationMode="HighQuality"
+				/>
+			<TextBlock
+				Grid.Row="1" 
+				Text="{Binding Title}"
+				Theme="{StaticResource H3}"
+				VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
+				/>
+		</Grid>
+	</Border>
+</UserControl>

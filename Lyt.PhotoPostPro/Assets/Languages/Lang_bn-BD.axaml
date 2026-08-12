@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT এক্সপ্লোরার' চালু করুন</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">এই LUT ব্যবহার করুন</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">খারিজ, কোন LUT</system:String>
+
     <system:String x:Key="Workflow.Color.Title">ম্যানুয়াল কালার গ্রেডিং</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">বিশ্বব্যাপী রঙের তীব্রতা রিগ্রেড করুন বা, প্রতিটি RGB চ্যানেলে ভাইব্রেন্স ব্যবহার করুন।</system:String>

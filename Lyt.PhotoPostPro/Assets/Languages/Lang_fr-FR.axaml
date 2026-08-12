@@ -283,6 +283,10 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Lancez « Explorateur LUT »</system:String>
 
+    <system:String x:Key="Workflow.Lut.UseThisLut">Utiliser cette LUT</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">Rejeter, pas de LUT</system:String>
+
     <system:String x:Key="Workflow.Color.Title">Étalonnage manuel des couleurs</system:String>
 
     <system:String x:Key="Workflow.Color.Correction">Ajustez l’intensité des couleurs globalement ou utilisez Vibrance sur chaque canal RVB.</system:String>

@@ -10,6 +10,97 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	Background="Transparent"
 	>
+	<Grid> 
+		<Grid.RowDefinitions> 
+			<RowDefinition Height="*" MinHeight="420" />
+			<RowDefinition Height="8" />
+			<RowDefinition Height="*" MinHeight="120" />
+		</Grid.RowDefinitions>
+		<Grid> 
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="64" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="*"/> 
+				<ColumnDefinition Width="*"/> 
+			</Grid.ColumnDefinitions>
+			<vm:LutImageView
+				Grid.Column="0"
+				DataContext="{Binding Original}"
+				/>
+			<vm:LutImageView
+				Grid.Column="1"
+				DataContext="{Binding Selected}"
+				/>
+			<glyphs:GlyphButton
+				x:Name="OriginalButton"
+				Grid.Row="1" Grid.Column="0" 
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="420" Height="56"
+				GlyphSource="dismiss"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Workflow.Lut.NoLut}"
+				Command="{Binding OnNoLut}"
+	    		/>
+			<glyphs:GlyphButton
+				x:Name="UseThisLutButton"
+				Grid.Row="1" Grid.Column="1" 
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="420" Height="56"
+				GlyphSource="star"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Workflow.Lut.UseThisLut}"
+				Command="{Binding OnUseThisLut}"
+	    		/>
+		</Grid>
+		<GridSplitter
+			x:Name="HorizontalSplitter"
+			Classes="thick"
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+			Height="1"
+			ResizeDirection="Rows"
+			ResizeBehavior="PreviousAndNext"
+			DragIncrement="1"
+			ShowsPreview="False"
+			Background="{StaticResource LightAqua_0_100}"
+			Opacity="0.4"
+			ZIndex="999"
+			/>
+		<ScrollViewer
+			Grid.Row="2" Grid.ColumnSpan="2"
+			Background="Transparent"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			>
+			<ItemsControl 
+				ItemsSource="{Binding LutImageViews}"
+				Margin="0 0 24 0"
+				>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<vm:LutImageView
+							MaxWidth="440" MaxHeight="320"
+							Margin="8" 
+							/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</Grid>
 </UserControl>

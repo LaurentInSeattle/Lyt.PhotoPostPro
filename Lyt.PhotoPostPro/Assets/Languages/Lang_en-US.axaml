@@ -183,6 +183,8 @@
 	<system:String x:Key="Workflow.Lut.DropLut">Or... Use your .cube or 3DL file: </system:String>
 	<system:String x:Key="Workflow.Lut.DragDropHelp">Drag and drop here a .cube or 3dl file!</system:String>
 	<system:String x:Key="Workflow.Lut.LaunchExplorer">Launch 'LUT Explorer'</system:String>
+	<system:String x:Key="Workflow.Lut.UseThisLut">Use This LUT</system:String>
+	<system:String x:Key="Workflow.Lut.NoLut">Dismiss, No LUT</system:String>
 
 	<!-- Workflow Color -->
 	<system:String x:Key="Workflow.Color.Title">Manual Color Grading</system:String>
