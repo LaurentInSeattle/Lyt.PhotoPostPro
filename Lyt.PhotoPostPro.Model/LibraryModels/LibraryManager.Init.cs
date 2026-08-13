@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
 
+using Lyt.Framework.Interfaces.Dispatching;
+
 // To avoid namespace conflicts for 'Path' 
 using System.IO;
 
@@ -20,6 +22,7 @@ public sealed partial class LibraryManager
 
     private PhotoPostProModel? model;
     private FileManagerModel? fileManager;
+    private IDispatch? dispatcher;
 
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
@@ -73,10 +76,12 @@ public sealed partial class LibraryManager
 
     public bool IsLoading { get; private set; }
 
-    public void Initialize(PhotoPostProModel model, FileManagerModel fileManagerModel)
+    public void Initialize(PhotoPostProModel model, FileManagerModel fileManagerModel, IDispatch dispatcher)
     {
         this.model = model;
         this.fileManager = fileManagerModel;
+        this.dispatcher = dispatcher;
+
         this.IsLoading = true;
 
         Task.Run(() =>
@@ -86,6 +91,8 @@ public sealed partial class LibraryManager
             this.GenerateFolderTree();
             Task.Delay(200).Wait();
             this.GenerateThumbnailCache();
+            Task.Delay(200).Wait();
+            this.InitializeGallery(); 
         });
     }
 }

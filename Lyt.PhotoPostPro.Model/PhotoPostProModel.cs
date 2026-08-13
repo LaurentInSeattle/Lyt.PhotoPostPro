@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
+using Lyt.Framework.Interfaces.Dispatching;
+
 using static Lyt.Persistence.FileManagerModel;
 
 public sealed partial class PhotoPostProModel : ModelBase
@@ -22,7 +24,8 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     private readonly FileManagerModel fileManager;
     private readonly ILocalizer localizer;
-    private readonly IProfiler profiler; 
+    private readonly IProfiler profiler;
+    private readonly IDispatch dispatcher; 
     private readonly FileId modelFileId;
     private readonly TimeoutTimer timeoutTimer;
 
@@ -42,13 +45,16 @@ public sealed partial class PhotoPostProModel : ModelBase
         FileManagerModel fileManager,
         ILocalizer localizer,
         IProfiler profiler,
+        IDispatch dispatcher,
         ILogger logger) : base(logger)
     {
         this.fileManager = fileManager;
         this.localizer = localizer;
         this.profiler = profiler;
+        this.dispatcher = dispatcher;
+
         this.CameraManager = new CameraManager();
-        this.LibraryManager.Initialize(this, fileManager); 
+        this.LibraryManager.Initialize(this, fileManager, dispatcher); 
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
         this.timeoutTimer = new TimeoutTimer(this.OnModelUpdate, timeoutMilliseconds: 250);
         this.ShouldAutoSave = true;

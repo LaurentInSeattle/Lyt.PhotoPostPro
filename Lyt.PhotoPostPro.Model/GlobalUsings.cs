@@ -68,6 +68,7 @@ global using Lyt.Framework.Interfaces.Profiling;
 // Model Utilities 
 //
 global using Lyt.Collections;
+global using Lyt.FileSystem;
 global using Lyt.Model;
 global using Lyt.Persistence;
 global using Lyt.Utilities.Extensions;
