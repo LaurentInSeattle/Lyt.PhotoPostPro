@@ -35,8 +35,8 @@ public sealed partial class GalleryViewModel : ViewModel<GalleryView>
         }
 
         this.galleryContent = this.libraryManager.GalleryContent;
-        bool nothingToShow = this.galleryContent.Count == 0;
-        if (nothingToShow)
+        this.nothingToShow = this.galleryContent.Count == 0;
+        if (this.nothingToShow)
         {
         }
         else

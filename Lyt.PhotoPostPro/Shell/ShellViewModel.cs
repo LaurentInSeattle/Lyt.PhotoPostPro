@@ -48,16 +48,8 @@ public sealed partial class ShellViewModel
 
         if (message.Command == ToolbarCommandMessage.ToolbarCommand.GoFullscreen)
         {
-            View view; 
-            if ( this.viewSelector.CurrentPrimaryViewModel is ProcessViewModel)
-            {
-                view = App.GetRequiredService<ProcessViewModel>().View;
-            }
-            else if (this.viewSelector.CurrentPrimaryViewModel is CullingViewModel)
-            {
-                view = App.GetRequiredService<CullingViewModel>().View;
-            }
-            else
+            ViewModel? viewModel = this.viewSelector.CurrentPrimaryViewModel; 
+            if ((viewModel is null) || (viewModel.ViewBase is not View view))
             {
                 return;
             }
