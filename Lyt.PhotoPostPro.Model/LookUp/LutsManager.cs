@@ -4,10 +4,24 @@ using static ResourcesUtilities;
 
 public sealed class LutsManager
 {
+    public const string LutsFolderName = "Luts";
+
     private const string CubeExtension = ".cube";
     private const string ThreeDLExtension = ".3dl";
 
+    private readonly string lutsFolderPath;
     private readonly LruDictionary<string, Lut> loadedLuts = new(16);
+
+    public LutsManager()
+    {
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        this.lutsFolderPath = 
+            System.IO.Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
+        if (!Directory.Exists(this.lutsFolderPath))
+        {
+            Directory.CreateDirectory(this.lutsFolderPath);
+        }
+    }
 
     public List<LutMetadata> EnumerateBuiltInLuts()
     {

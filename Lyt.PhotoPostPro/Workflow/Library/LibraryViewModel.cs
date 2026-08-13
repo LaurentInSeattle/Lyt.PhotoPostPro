@@ -498,7 +498,7 @@ public sealed partial class LibraryViewModel :
         }
 
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
-        List<ExistingPostProcessParameters> parameters = this.model.LibraryManager.EnumerateExistingParameters(metadata);
+        List<ExistingPostProcessParameters> parameters = this.model.LibraryManager.EnumerateExistingEditParameters(metadata);
 
         // Launch dialogs if needed 
         if (parameters.Count == 0)
