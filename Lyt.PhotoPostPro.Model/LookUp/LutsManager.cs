@@ -4,14 +4,16 @@ using static ResourcesUtilities;
 
 public sealed class LutsManager
 {
-    private const string Cube = ".cube";
-    private const string ThreeDL = ".3dl";
+    private const string CubeExtension = ".cube";
+    private const string ThreeDLExtension = ".3dl";
 
-    public List<LutMetadata> EnumerateBuiltInLuts ()
+    private readonly LruDictionary<string, Lut> loadedLuts = new(16);
+
+    public List<LutMetadata> EnumerateBuiltInLuts()
     {
         List<LutMetadata> list = [];
 
-        void AddForExtension (string extension , LutFormat lutFormat)
+        void AddForExtension(string extension, LutFormat lutFormat)
         {
             List<string> resources = EnumerateEmbeddedResourceNames(extension);
             foreach (string resource in resources)
@@ -25,26 +27,41 @@ public sealed class LutsManager
             }
         }
 
-        AddForExtension(Cube, LutFormat.Cube);
-        AddForExtension(ThreeDL, LutFormat.ThreeDL);
-        return list; 
+        AddForExtension(CubeExtension, LutFormat.Cube);
+        AddForExtension(ThreeDLExtension, LutFormat.ThreeDL);
+        return list;
     }
 
     public bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
+        if (this.loadedLuts.TryGetValue(lutMetadata.FriendlyName, out lut))
+        {
+            return true;
+        }
+
         if (lutMetadata.IsEmbedded)
         {
-            return TryLoadBuiltInLut(lutMetadata, out lut); 
+            if (this.TryLoadBuiltInLut(lutMetadata, out lut))
+            {
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
+                return true;
+            }
         }
         else
         {
-            return TryLoadLutFromFile (lutMetadata, out lut);
-        } 
+            if (this.TryLoadLutFromFile(lutMetadata, out lut))
+            {
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public bool TryLoadBuiltInLut (LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    private bool TryLoadBuiltInLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
-        lut = null; 
+        lut = null;
         try
         {
             string text = LoadEmbeddedTextResource(lutMetadata.Path, out string? resourceName);
@@ -57,7 +74,7 @@ public sealed class LutsManager
 
             if (lutMetadata.LutFormat == LutFormat.Cube)
             {
-                lut = Lut.FromCubeLines(lines); 
+                lut = Lut.FromCubeLines(lines);
                 return true;
             }
             else if (lutMetadata.LutFormat == LutFormat.ThreeDL)
@@ -65,10 +82,10 @@ public sealed class LutsManager
                 lut = Lut.From3dlLines(lines);
                 return true;
             }
-            else 
+            else
             {
                 throw new NotSupportedException("LUT format not supported");
-            } 
+            }
         }
         catch (Exception ex)
         {
@@ -77,20 +94,20 @@ public sealed class LutsManager
         }
     }
 
-    public bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    private bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null;
         try
         {
-            string path = lutMetadata.Path; 
-            FileInfo fileInfo = new (path);
+            string path = lutMetadata.Path;
+            FileInfo fileInfo = new(path);
             string[] lines = File.ReadAllLines(path);
             string extension = fileInfo.Extension.ToLowerInvariant();
-            if ( extension == Cube)
+            if (extension == CubeExtension)
             {
                 lut = Lut.FromCubeLines(lines);
             }
-            else if (extension == ThreeDL)
+            else if (extension == ThreeDLExtension)
             {
                 lut = Lut.From3dlLines(lines);
             }

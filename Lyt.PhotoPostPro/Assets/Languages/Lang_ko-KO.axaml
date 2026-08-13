@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT 탐색기' 실행</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">원래의</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">이 LUT 사용</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">닫기, LUT 없음</system:String>

@@ -97,7 +97,7 @@
 					<DataTemplate>
 						<vm:LutImageView
 							MaxWidth="440" MaxHeight="320"
-							Margin="8" 
+							Margin="4" 
 							/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Lut;
 
-public sealed partial class LutViewModel : StepViewModel<LutView> 
+public sealed partial class LutViewModel : StepViewModel<LutView> , IRecipient<WorkflowUpdateMessage>
 {
     [ObservableProperty]
     public partial bool IsExplorerMode {  get ; set; }
@@ -8,7 +8,19 @@ public sealed partial class LutViewModel : StepViewModel<LutView>
     [ObservableProperty]
     public partial LutExplorerViewModel LutExplorerViewModel { get; set; }
 
-    public LutViewModel() => this.LutExplorerViewModel = new();
+    public LutViewModel()
+    {
+        this.LutExplorerViewModel = new();
+        this.Subscribe<WorkflowUpdateMessage>();
+    }
+
+    public void Receive(WorkflowUpdateMessage message)
+    {
+        if (message.Kind == WorkflowUpdateKind.Begin || message.Kind == WorkflowUpdateKind.Finish)
+        {
+            this.HideExplorer();
+        }
+    }
 
     public void LaunchExplorer()
     {

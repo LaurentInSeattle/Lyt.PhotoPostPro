@@ -23,7 +23,7 @@
 			>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
-				<RowDefinition Height="36" />
+				<RowDefinition Height="32" />
 			</Grid.RowDefinitions>
 			<Image
 				Grid.Row="0"

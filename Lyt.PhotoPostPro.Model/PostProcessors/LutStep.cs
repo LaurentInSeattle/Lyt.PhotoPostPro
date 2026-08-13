@@ -6,7 +6,6 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     public LutMetadata LutMetadata { get; set; } = LutMetadata.Empty;
 
     private Image<RgbaVector>? thumbnail;
-    private bool exploreCancelled;
 
     public override void Initialize(Image<RgbaVector> _) => this.Clear();
 
@@ -87,14 +86,11 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         return withFrame ? clone.ToFrame() : null;
     }
 
-    public void CancelExploreLuts() => this.exploreCancelled = true;
-
     public void LaunchExploreLuts()
     {
         Task.Run(() =>
         {
             Thread.CurrentThread.Name = "LutStep.ExploreLuts";
-            this.exploreCancelled = false;
             this.ExploreLuts();
         });
     }
@@ -106,62 +102,47 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             return;
         }
 
-        bool done = false;
-
         // Send the original as thumbnail before looping on the LUTs
         new ExploreLutImageGeneratedMessage(LutMetadata.Empty, this.thumbnail.ToFrame()).Publish();
 
-        // Throttle to let the UI display this image
-        Task.Delay(60).Wait();
+        // Throttle to let the UI display the initial image
+        Task.Delay(30).Wait();
 
-        var model = this.PostProcessWorkflow.PostProcess.Model; 
+        var model = this.PostProcessWorkflow.PostProcess.Model;
         var luts = model.LutsManager.EnumerateBuiltInLuts();
-        int lutIndex = 0;
-        while (!done && !this.exploreCancelled)
+        int lutDone = 0;
+        Parallel.For(0, luts.Count, lutIndex =>
         {
-            if (lutIndex >= luts.Count)
-            {
-                done = true;
-                break;
-            }
-
-            // Do not try to paralelize for now, it should be fast enough 
             LutMetadata lutMetadata = luts[lutIndex];
-            ++lutIndex;
-
             if (lutMetadata == LutMetadata.Empty)
             {
                 if (Debugger.IsAttached) { Debugger.Break(); }
-                continue;
+                return;
             }
 
-            if (!model.LutsManager.TryLoadLut(lutMetadata, out Lut? lut))
+            Lut? lut = null;
+            lock (model.LutsManager)
             {
-                // Failed to load LUT ? 
-                if (Debugger.IsAttached) { Debugger.Break(); }
-                continue;
-            }
+                if (!model.LutsManager.TryLoadLut(lutMetadata, out lut))
+                {
+                    // Failed to load LUT ? 
+                    if (Debugger.IsAttached) { Debugger.Break(); }
+                    return;
+                }
 
-            if (lut is null)
-            {
-                continue; 
+                if (lut is null)
+                {
+                    return;
+                }
             }
 
             var clone = this.thumbnail.Clone();
             clone.Lut(lut);
             new ExploreLutImageGeneratedMessage(lutMetadata, clone.ToFrame()).Publish();
+            ++lutDone;
+        });
 
-            // Check for bailing out before waiting 
-            if (this.exploreCancelled)
-            {
-                break;
-            }
-
-            // Throttle to let the UI display the images 
-            Task.Delay(60).Wait();
-        }
-
-        if (done)
+        if (lutDone == luts.Count)
         {
             Debug.WriteLine(" All LUT images generated.");
         }

@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Indítsa el a „LUT Explorer” programot</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">Eredeti</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">Használja ezt a LUT-t</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">Elvetés, nincs LUT</system:String>

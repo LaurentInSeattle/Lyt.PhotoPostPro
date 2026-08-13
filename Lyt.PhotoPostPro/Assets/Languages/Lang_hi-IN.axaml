@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT एक्सप्लोरर' लॉन्च करें</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">मूल</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">इस LUT का प्रयोग करें</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">ख़ारिज करें, कोई LUT नहीं</system:String>

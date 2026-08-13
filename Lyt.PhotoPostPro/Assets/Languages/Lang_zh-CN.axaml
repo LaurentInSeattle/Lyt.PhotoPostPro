@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">启动“LUT 资源管理器”</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">原来的</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">使用此 LUT</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">关闭，无 LUT</system:String>

@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">「LUTエクスプローラー」を起動します</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">オリジナル</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">このLUTを使用してください</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">無視、LUTなし</system:String>

@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">'LUT এক্সপ্লোরার' চালু করুন</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">আসল</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">এই LUT ব্যবহার করুন</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">খারিজ, কোন LUT</system:String>

@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Εκκίνηση "LUT Explorer"</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">Πρωτότυπο</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">Χρησιμοποιήστε αυτό το LUT</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">Απόρριψη, Όχι LUT</system:String>

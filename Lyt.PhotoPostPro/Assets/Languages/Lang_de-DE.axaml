@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Starten Sie „LUT Explorer“</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">Original</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">Verwenden Sie diese LUT</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">Abweisen, keine LUT</system:String>

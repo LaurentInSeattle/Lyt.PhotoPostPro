@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Запустіть "LUT Explorer"</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">Оригінал</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">Використовуйте цей LUT</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">Відхилити, немає LUT</system:String>

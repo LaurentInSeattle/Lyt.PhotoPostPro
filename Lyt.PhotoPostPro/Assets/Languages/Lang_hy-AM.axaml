@@ -283,6 +283,8 @@
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Գործարկել «LUT Explorer»-ը</system:String>
 
+    <system:String x:Key="Workflow.Lut.Original">Օրիգինալ</system:String>
+
     <system:String x:Key="Workflow.Lut.UseThisLut">Օգտագործեք այս LUT-ը</system:String>
 
     <system:String x:Key="Workflow.Lut.NoLut">Հեռացնել, ոչ LUT</system:String>
