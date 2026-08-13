@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Culling.CullingToolbarView"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Culling"
-	x:DataType="vm:CullingToolbarViewModel" 
+	x:Class="Lyt.PhotoPostPro.Workflow.Gallery.GalleryToolbarView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Gallery"
+	x:DataType="vm:GalleryToolbarViewModel" 
 
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

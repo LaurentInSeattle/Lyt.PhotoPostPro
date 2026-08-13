@@ -28,6 +28,7 @@ public partial class App : ApplicationBase
             typeof(CameraViewModel),
             typeof(LibraryViewModel),
             typeof(GalleryViewModel),
+            typeof(GalleryToolbarViewModel),
             typeof(SettingsViewModel),
             typeof(ToolsViewModel),
             typeof(LanguageViewModel),
@@ -158,8 +159,11 @@ public partial class App : ApplicationBase
                     // Master, See PppLanguages.json in Tools folder 
                     "en-US", 
 
-                    // Auto Translated 
-                    "fr-FR", "it-IT", "es-ES", "de-DE",
+                    // Human Translated, with some machine help
+                    "fr-FR", "it-IT", 
+                    
+                    // Fully Auto Translated
+                    "es-ES", "de-DE",
                     "uk-UA", "bg-BG", "el-GR", "hy-AM",
                     "jp-JP", "ko-KO", "zh-CN", "zh-TW",
                     "hi-IN", "bn-BD", "hu-HU",

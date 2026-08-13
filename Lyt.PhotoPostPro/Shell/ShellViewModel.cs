@@ -183,7 +183,8 @@ public sealed partial class ShellViewModel
         // Views present in the main selector on the left  
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
-        SetupNoToolbar<GalleryViewModel, GalleryView>(ActivatedView.Gallery, view.GalleryButton);
+        Setup<GalleryViewModel, GalleryView, GalleryToolbarViewModel, GalleryToolbarView>(
+            ActivatedView.Gallery, view.GalleryButton);
         SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
         SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
         SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
