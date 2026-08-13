@@ -10,4 +10,16 @@ public sealed partial class GalleryViewModel : ViewModel<GalleryView>
         this.model = model;
         this.toaster = toaster;
     }
+
+    [RelayCommand]
+    public void OnBack()
+    {
+
+    }
+
+    [RelayCommand]
+    public void OnNext()
+    {
+
+    }
 }

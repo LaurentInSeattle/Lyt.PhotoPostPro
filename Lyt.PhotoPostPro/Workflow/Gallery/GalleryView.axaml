@@ -12,7 +12,6 @@
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -25,9 +24,40 @@
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="28" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="28" />
+			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
+		<Image
+			Grid.Row="1" Grid.Column="1" Grid.RowSpan="3"
+			/> 
+		<glyphs:GlyphButton
+			x:Name="BackButton"
+			Grid.Row="1" Grid.Column="1" 
+			Style="{StaticResource ViewIconButton}"
+			Layout="IconOnly"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			Width="26" Height="320"
+			GlyphSource="caret_left"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Opacity="0.6"
+			Command="{Binding OnBack}"
+			/>
+		<glyphs:GlyphButton
+			x:Name="NextButton"
+			Grid.Row="1" Grid.Column="3" 
+			Style="{StaticResource ViewIconButton}"
+			Layout="IconOnly"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			Width="26" Height="320"
+			GlyphSource="caret_right"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Opacity="0.6"
+			Command="{Binding OnNext}"
+			/>
 	</Grid>
 </UserControl>
