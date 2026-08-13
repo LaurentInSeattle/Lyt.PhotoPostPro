@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Mtp.Windows;
+﻿namespace Lyt.PhotoPostPro.Implementations.Windows.Mtp;
 
 public sealed class MtpDevice : IMtpDevice
 {

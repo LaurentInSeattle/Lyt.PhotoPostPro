@@ -8,114 +8,117 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
-    public App(IMtpService mtpService) : base(
-        App.Organization,
-        App.Application,
-        App.RootNamespace,
-        typeof(MainWindow),
-        typeof(ApplicationModelBase), // Top level model 
-        [
-            // Models 
-            typeof(FileManagerModel),
-            typeof(PhotoPostProModel),
-        ],
-        [
-            // Singletons
-            typeof(ShellViewModel),
+    public App(
+        IMtpService mtpService, 
+        IWallpaperService wallpaperService) : 
+        base(
+            App.Organization,
+            App.Application,
+            App.RootNamespace,
+            typeof(MainWindow),
+            typeof(ApplicationModelBase), // Top level model 
+            [
+                // Models 
+                typeof(FileManagerModel),
+                typeof(PhotoPostProModel),
+            ],
+            [
+                // Singletons
+                typeof(ShellViewModel),
 
-            // Views and ViewModels from the main view selector            
-            typeof(SingleViewModel),
-            typeof(CameraViewModel),
-            typeof(LibraryViewModel),
-            typeof(GalleryViewModel),
-            typeof(GalleryToolbarViewModel),
-            typeof(SettingsViewModel),
-            typeof(ToolsViewModel),
-            typeof(LanguageViewModel),
-            typeof(LanguageToolbarViewModel),
+                // Views and ViewModels from the main view selector            
+                typeof(SingleViewModel),
+                typeof(CameraViewModel),
+                typeof(LibraryViewModel),
+                typeof(GalleryViewModel),
+                typeof(GalleryToolbarViewModel),
+                typeof(SettingsViewModel),
+                typeof(ToolsViewModel),
+                typeof(LanguageViewModel),
+                typeof(LanguageToolbarViewModel),
 
-            // Culling ViewModel and Toolbar ViewModel
-            // 
-            typeof(CullingViewModel),
-            typeof(CullingToolbarViewModel),
+                // Culling ViewModel and Toolbar ViewModel
+                // 
+                typeof(CullingViewModel),
+                typeof(CullingToolbarViewModel),
 
-            // Process ViewModels and Toolbox ViewModels, in Workflow order for convenience.
-            // 
-            typeof(ProcessViewModel),
-            typeof(ProcessToolbarViewModel),
+                // Process ViewModels and Toolbox ViewModels, in Workflow order for convenience.
+                // 
+                typeof(ProcessViewModel),
+                typeof(ProcessToolbarViewModel),
 
-            typeof(ToolboxHostViewModel),
+                typeof(ToolboxHostViewModel),
 
-            typeof(OrientViewModel),
-            typeof(OrientToolboxViewModel),
+                typeof(OrientViewModel),
+                typeof(OrientToolboxViewModel),
 
-            typeof(StraightenViewModel),
-            typeof(StraightenToolboxViewModel),
+                typeof(StraightenViewModel),
+                typeof(StraightenToolboxViewModel),
 
-            typeof(ComposeViewModel),
-            typeof(ComposeToolboxViewModel),
+                typeof(ComposeViewModel),
+                typeof(ComposeToolboxViewModel),
 
-            typeof(ExposureViewModel),
-            typeof(ExposureToolboxViewModel),
+                typeof(ExposureViewModel),
+                typeof(ExposureToolboxViewModel),
 
-            typeof(RecoveryViewModel),
-            typeof(RecoveryToolboxViewModel),
+                typeof(RecoveryViewModel),
+                typeof(RecoveryToolboxViewModel),
 
-            typeof(WhiteBalanceViewModel),
-            typeof(WhiteBalanceToolboxViewModel),
+                typeof(WhiteBalanceViewModel),
+                typeof(WhiteBalanceToolboxViewModel),
 
-            typeof(ContrastViewModel),
-            typeof(ContrastToolboxViewModel),
+                typeof(ContrastViewModel),
+                typeof(ContrastToolboxViewModel),
 
-            typeof(LutViewModel),
-            typeof(LutToolboxViewModel),
-            typeof(LutExplorerViewModel),
+                typeof(LutViewModel),
+                typeof(LutToolboxViewModel),
+                typeof(LutExplorerViewModel),
 
-            typeof(ColorViewModel),
-            typeof(ColorToolboxViewModel),
+                typeof(ColorViewModel),
+                typeof(ColorToolboxViewModel),
 
-            typeof(SharpenViewModel),
-            typeof(SharpenToolboxViewModel),
+                typeof(SharpenViewModel),
+                typeof(SharpenToolboxViewModel),
 
-            typeof(VignetteViewModel),
-            typeof(VignetteToolboxViewModel),
+                typeof(VignetteViewModel),
+                typeof(VignetteToolboxViewModel),
 
-            typeof(FiltersViewModel),
-            typeof(FiltersToolboxViewModel),
+                typeof(FiltersViewModel),
+                typeof(FiltersToolboxViewModel),
 
-            typeof(ExportViewModel),
-            typeof(ExportToolboxViewModel),
+                typeof(ExportViewModel),
+                typeof(ExportToolboxViewModel),
             
-            // LATER 
+                // LATER 
 
-            //typeof(DenoiseViewModel),
-            //typeof(DenoiseToolboxViewModel),
+                //typeof(DenoiseViewModel),
+                //typeof(DenoiseToolboxViewModel),
 
-
-            //typeof(TouchUpViewModel),
-            //typeof(TouchUpToolboxViewModel),
-        ],
-        [
-            // Services 
-            App.LoggerService,
-            Service<IFocuser, Focuser>(),
-            Service<IAnimationService, AnimationService>(),
-            Service<ILocalizer, LocalizerModel>(),
-            Service<IDialogService, DialogService >(),
-            Service<IDispatch, Dispatch>(),
-            Service<IProfiler, Profiler>(),
-            Service<IToaster, Toaster>(),
-            Service<IRandomizer, Randomizer>(),
-        ],
-        singleInstanceRequested: false,
-        splashImageUri: null,
-        appSplashWindow: new SplashWindow()
-        )
+                //typeof(TouchUpViewModel),
+                //typeof(TouchUpToolboxViewModel),
+            ],
+            [
+                // Services 
+                App.LoggerService,
+                Service<IFocuser, Focuser>(),
+                Service<IAnimationService, AnimationService>(),
+                Service<ILocalizer, LocalizerModel>(),
+                Service<IDialogService, DialogService >(),
+                Service<IDispatch, Dispatch>(),
+                Service<IProfiler, Profiler>(),
+                Service<IToaster, Toaster>(),
+                Service<IRandomizer, Randomizer>(),
+            ],
+            singleInstanceRequested: false,
+            splashImageUri: null,
+            appSplashWindow: new SplashWindow()
+            )
     {
-        // This should be empty, use the OnStartup override
+        // This should be mostly empty, use the OnStartup override
         Instance = this;
         MtpService = mtpService;
-
+        WallpaperService = wallpaperService; 
+        
         Debug.WriteLine("App Instance created");
     }
 
@@ -124,6 +127,8 @@ public partial class App : ApplicationBase
     public static App Instance { get; private set; }
 
     public static IMtpService MtpService { get; set ;  }
+
+    public static IWallpaperService WallpaperService { get; set; }
 
 #pragma warning restore CS8618 
 

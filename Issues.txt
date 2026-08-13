@@ -32,6 +32,12 @@ Bugs ~ Major Issues
 WIP
 ---
 
+- Gallery: Set as Desktop Background 
+
+- Gallery: Slide show 
+
+- Gallery: Auto Add on Export 
+
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
 
@@ -87,8 +93,6 @@ Missing Features
 
 
 --- Nice to Have ---
-
-- Keep highly rated edited images in a special gallery folder, ability to browse this gallery 
 
 - "Ray of Light" effect.
 

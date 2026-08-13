@@ -22,6 +22,7 @@ global using System.Threading.Tasks;
 
 
 global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
+global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
 
 // MediaDevices
 //

@@ -5,7 +5,10 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
-using Lyt.PhotoPostPro.Mtp.Windows;
+using Lyt.PhotoPostPro.Implementations.Windows.Mtp;
+
+using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
+using Lyt.PhotoPostPro.Implementations.Windows.Wallpaper;
 
 public static class ImplementationsProvider
 {
@@ -25,6 +28,30 @@ public static class ImplementationsProvider
             }
 
             throw new ArgumentException("Unknown platform: No OSDescription" );
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.ToString());
+            throw;
+        }
+    }
+
+    public static IWallpaperService WallpaperService()
+    {
+        try
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
+            {
+                // OSPlatform.Linux is NOT supported, at least for now, no way to test it here
+                throw new ArgumentException("Unsupported platform: " + RuntimeInformation.OSDescription);
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return new WallpaperService();
+            }
+
+            throw new ArgumentException("Unknown platform: No OSDescription");
         }
         catch (Exception ex)
         {

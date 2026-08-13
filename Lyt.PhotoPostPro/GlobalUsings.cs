@@ -97,6 +97,8 @@ global using Lyt.Utilities.Randomizing;
 // Multiplatform dependencies 
 //
 global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
+global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
+
 
 // Main App library namespaces (Avalonia dependent)
 //
