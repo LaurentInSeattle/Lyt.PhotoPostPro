@@ -60,8 +60,28 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
+        if (this.LutMetadata == LutMetadata.Empty)
+        {
+            //if (Debugger.IsAttached) { Debugger.Break(); }
+            // Does happen when going back after quickly moving forward in the workflow
+            return null;
+        }
+
+        var model = this.PostProcessWorkflow.PostProcess.Model;
+        if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
+        {
+            // Failed to load LUT ? 
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return null;
+        }
+
+        if (lut is null)
+        {
+            return null;
+        }
+
         var clone = this.SourceImage.Clone();
-        clone.Lut(this.LutMetadata);
+        clone.Lut(lut);
         PostProcessStep.RecalculateHistograms(clone);
         this.ResultImage = clone;
         return withFrame ? clone.ToFrame() : null;
@@ -94,7 +114,8 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         // Throttle to let the UI display this image
         Task.Delay(60).Wait();
 
-        var luts = LutsManager.BuiltInLuts();
+        var model = this.PostProcessWorkflow.PostProcess.Model; 
+        var luts = model.LutsManager.EnumerateBuiltInLuts();
         int lutIndex = 0;
         while (!done && !this.exploreCancelled)
         {
@@ -107,8 +128,27 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             // Do not try to paralelize for now, it should be fast enough 
             LutMetadata lutMetadata = luts[lutIndex];
             ++lutIndex;
+
+            if (lutMetadata == LutMetadata.Empty)
+            {
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                continue;
+            }
+
+            if (!model.LutsManager.TryLoadLut(lutMetadata, out Lut? lut))
+            {
+                // Failed to load LUT ? 
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                continue;
+            }
+
+            if (lut is null)
+            {
+                continue; 
+            }
+
             var clone = this.thumbnail.Clone();
-            clone.Lut(lutMetadata);
+            clone.Lut(lut);
             new ExploreLutImageGeneratedMessage(lutMetadata, clone.ToFrame()).Publish();
 
             // Check for bailing out before waiting 
@@ -118,7 +158,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             }
 
             // Throttle to let the UI display the images 
-            Task.Delay(600).Wait();
+            Task.Delay(60).Wait();
         }
 
         if (done)

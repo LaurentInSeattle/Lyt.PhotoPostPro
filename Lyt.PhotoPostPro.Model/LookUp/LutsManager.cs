@@ -2,12 +2,12 @@
 
 using static ResourcesUtilities;
 
-public static class LutsManager
+public sealed class LutsManager
 {
     private const string Cube = ".cube";
     private const string ThreeDL = ".3dl";
 
-    public static List<LutMetadata> BuiltInLuts ()
+    public List<LutMetadata> EnumerateBuiltInLuts ()
     {
         List<LutMetadata> list = [];
 
@@ -30,7 +30,7 @@ public static class LutsManager
         return list; 
     }
 
-    public static bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    public bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         if (lutMetadata.IsEmbedded)
         {
@@ -42,7 +42,7 @@ public static class LutsManager
         } 
     }
 
-    public static bool TryLoadBuiltInLut (LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    public bool TryLoadBuiltInLut (LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null; 
         try
@@ -77,7 +77,7 @@ public static class LutsManager
         }
     }
 
-    public static bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    public bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null;
         try

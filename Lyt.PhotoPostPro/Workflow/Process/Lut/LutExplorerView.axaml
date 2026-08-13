@@ -53,6 +53,7 @@
 				x:Name="UseThisLutButton"
 				Grid.Row="1" Grid.Column="1" 
 				Style="{StaticResource ViewIconButton}"
+				Layout="IconTextLeftSide"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="420" Height="56"

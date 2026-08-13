@@ -32,8 +32,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- LUT 'Explorer': Apply all LUTs so that it becomes easy to pick one
-
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
 

@@ -621,20 +621,8 @@ public static partial class ImagingAlgorithms
 
     #region LUT 
 
-    public static void Lut(this Image<RgbaVector> image, LutMetadata lutMetadata)
+    public static void Lut(this Image<RgbaVector> image, Lut lut)
     {
-        if (lutMetadata == LutMetadata.Empty)
-        {
-            return;
-        }
-
-        if (!LutsManager.TryLoadLut(lutMetadata, out Lut? lut))
-        {
-            // Failed to load LUT ? 
-            if (Debugger.IsAttached) { Debugger.Break(); }
-            return;
-        }
-
         int height = image.Height;
         Parallel.For(0, height, y =>
         {

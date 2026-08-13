@@ -53,7 +53,7 @@ public sealed partial class LutToolboxViewModel :
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
-            var metaLuts = LutsManager.BuiltInLuts();
+            var metaLuts = this.model.LutsManager.EnumerateBuiltInLuts();
             List<string> list = new(1 + metaLuts.Count)
             {
                this.Localize("Workflow.Lut.None"),
