@@ -25,21 +25,22 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="4" />
-			<ColumnDefinition Width="28" />
+			<ColumnDefinition Width="36" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="28" />
+			<ColumnDefinition Width="36" />
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<Image
-			Grid.Row="1" Grid.Column="1" Grid.RowSpan="3"
-			/> 
+			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+			Source="{Binding GalleryImage}"
+			/>
 		<glyphs:GlyphButton
 			x:Name="BackButton"
 			Grid.Row="1" Grid.Column="1" 
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="26" Height="320"
+			Width="32" Height="320"
 			GlyphSource="caret_left"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
@@ -52,7 +53,7 @@
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="26" Height="320"
+			Width="32" Height="320"
 			GlyphSource="caret_right"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"

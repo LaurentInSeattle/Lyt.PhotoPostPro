@@ -43,6 +43,39 @@ public sealed partial class LibraryManager
         this.dispatcher.OnIdle(this.LoadGalleryFiles); 
     }
 
+    public byte[]? GetGalleryImage(string nowShowing)
+    {
+        try
+        {
+            if (this.GalleryImages.TryGetValue(nowShowing, out byte[]? imageBytes))
+            {
+                return imageBytes;
+            }
+
+            return this.LoadGalleryFile(nowShowing);
+        }
+        catch (Exception ex) 
+        {
+            Debug.WriteLine(ex);
+            return null;
+        } 
+    }
+
+    private byte[]? LoadGalleryFile(string imagePath)
+    {
+        try
+        {
+            byte[] imageBytes = File.ReadAllBytes(imagePath);
+            this.GalleryImages.Add(imagePath, imageBytes);
+            return imageBytes;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return null;
+        }
+    }
+
     private void LoadGalleryFiles()
     {
         // TODO 
