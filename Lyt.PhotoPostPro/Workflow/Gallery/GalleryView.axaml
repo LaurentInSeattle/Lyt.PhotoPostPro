@@ -31,11 +31,20 @@
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<Image
+			x:Name="Image1"
 			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
-			Source="{Binding GalleryImage}"
+			ZIndex="42"
+			Source="{Binding GalleryImage1}"
+			/>
+		<Image
+			x:Name="Image2"
+			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+			ZIndex="42"
+			Source="{Binding GalleryImage2}"
 			/>
 		<glyphs:GlyphButton
 			x:Name="BackButton"
+			IsDisabled="{Binding ButtonsAreDisabled}"
 			Grid.Row="1" Grid.Column="1" 
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"
@@ -49,6 +58,7 @@
 			/>
 		<glyphs:GlyphButton
 			x:Name="NextButton"
+			IsDisabled="{Binding ButtonsAreDisabled}"
 			Grid.Row="1" Grid.Column="3" 
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"

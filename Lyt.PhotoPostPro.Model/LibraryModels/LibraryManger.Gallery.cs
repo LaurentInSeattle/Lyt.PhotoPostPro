@@ -40,7 +40,11 @@ public sealed partial class LibraryManager
             this.GalleryContent.Add(file);
         }
 
-        this.dispatcher.OnIdle(this.LoadGalleryFiles); 
+        // Preload first two images if any present 
+        if ( this.GalleryContent.Count > 0)
+        {
+            this.dispatcher.OnIdle(this.LoadFirstGalleryFile);
+        }
     }
 
     public byte[]? GetGalleryImage(string nowShowing)
@@ -61,7 +65,7 @@ public sealed partial class LibraryManager
         } 
     }
 
-    private byte[]? LoadGalleryFile(string imagePath)
+    public byte[]? LoadGalleryFile(string imagePath)
     {
         try
         {
@@ -76,8 +80,19 @@ public sealed partial class LibraryManager
         }
     }
 
-    private void LoadGalleryFiles()
+    private void LoadFirstGalleryFile()
     {
-        // TODO 
-    } 
+        if (this.dispatcher is null)
+        {
+            throw new Exception("Library not properly initialized.");
+        }
+
+        this.LoadGalleryFile(this.GalleryContent[0]);
+        if (this.GalleryContent.Count > 1)
+        {
+            this.dispatcher.OnIdle(this.LoadNextGalleryFile);
+        }
+    }
+
+    private void LoadNextGalleryFile() => this.LoadGalleryFile(this.GalleryContent[1]);
 }
