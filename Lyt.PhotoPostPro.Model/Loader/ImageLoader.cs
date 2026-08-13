@@ -3,6 +3,8 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
+using System.Net.Http.Headers;
+
 public static class ImageLoader
 {
     public const int ThumbnailQuality = 80;
@@ -70,11 +72,27 @@ public static class ImageLoader
     public static bool HasImageSharpExtension(string path)
         => ImageSharpExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
+    public static List<string> JpgExtensions =
+        [
+            ".jpg", ".jpeg", ".jfif" ,
+        ];
+
+    public static bool HasJpgExtension(string path)
+        => JpgExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
     #region Loading 
 
+    private static bool repairedImage = false;
+
     public static LoadedImage LoadImage(string imagePath)
+    {
+        repairedImage = false;
+        return LoadImageInternal(imagePath);
+    }
+
+    internal static LoadedImage LoadImageInternal(string imagePath)
     {
         try
         {
@@ -236,6 +254,31 @@ public static class ImageLoader
         }
         catch (Exception ex)
         {
+            if (HasJpgExtension(imagePath))
+            {
+                if (!repairedImage)
+                {
+                    if (ImageRepair.TryFixMissingJpgSOI(imagePath, out string repairedImagePath))
+                    {
+                        repairedImage = true;
+                        try
+                        {
+                            var loadedImage = TryLoadWithImageSharp(repairedImagePath);
+                            if (loadedImage is null)
+                            {
+                                // still broken  
+                                throw;
+                            }
+                        }
+                        catch (Exception innerEx)
+                        {
+                            Debug.WriteLine(innerEx);
+                            return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
+                        }
+                    }
+                }
+            }
+
             // errorMessage = "An error occurred while loading the source image with ImageSharp." + ex.Message;
             Debug.WriteLine(ex);
             return LoadedImage.Fail("Model.Loader.Exception", ex.ToString());
@@ -400,7 +443,7 @@ public static class ImageLoader
             // Extract the raw byte span containing the JPEG data
             ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
 
-            if ( metadata.IsOrientationActionRequired)
+            if (metadata.IsOrientationActionRequired)
             {
                 // If orientation action is required, we need to load the image in ImageSharp and
                 // apply the correct orientation
@@ -799,7 +842,7 @@ public static class ImageLoader
         }
         else
         {
-            float thumbRatio; 
+            float thumbRatio;
             if (width > height)
             {
                 newWidth = ThumbnailLargestDimension;
