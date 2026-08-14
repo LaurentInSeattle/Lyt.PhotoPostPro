@@ -1,13 +1,7 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Edit thumb ends up in the wrong location when adding by drop 
-
-- IMG_0212  Incorrect state for Added and Ratings 
-
-- Add new Images messed up thumb files ? 
-
-- Start editing automatically gives you one star 
+- Start editing automatically gives you one star if rating is zero
 
 - Ability to rate again in Export panel 
 
@@ -15,26 +9,28 @@ Bugs ~ Major Issues
 
 - Folder Tree for Added not updating correctly 
 
-- Still showing empty slots for Added on startup 
-
 - Message box to confirm delete of highly rated library image 
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
 
-- Review all process steps to ensure that the source image is not unnecessarily cloned.
-
-- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
-
 - UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 - UI : Final fix for Re-init of Compose is failing at second image 
 
+Bugs - No Repro 
+---------------
+
+- Edit thumb ends up in the wrong location when adding by drop 
+
+- IMG_0212  Incorrect state for Added and Ratings 
+
+- Add new Images messed up thumb files ? 
+
+- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 WIP
 ---
-
-- Gallery: Slide show 
 
 - Gallery: Auto Add on Export if 5 stars  
 
@@ -51,14 +47,6 @@ TODO First
 - Spotlight effect, aka "Ray of Light" effect.
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
-
-- Move message definitions in new folders depending on area and workflow 
-
-- Cleanup public vs internal about everywhere 
-
-- Cleanup unused icons for faster loading 
-
-- Cleanup language strings
 
 - Touch up / Blemish (after geometry) 
 
@@ -91,10 +79,10 @@ Missing Features
 
 - Tools to show both before / after or just after 
 
-- Setup logging for trace to disk 
-
 
 --- Nice to Have ---
+
+- Gallery: Slide show 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
@@ -105,6 +93,42 @@ Missing Features
 - Optimal viewer layout 
 
 - Floating toolbox windows 
+
+
+Minor Issues (Low priority)
+---------------------------
+
+- Make this an application setting :     private const int CullingBatchSize = 48;
+
+- Library selector buttons text for months and days do not update on Language change 
+
+- Switching language while processing cancels the current process
+
+- Tool boxes titles will not localise when language changes 
+
+- Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
+
+- Thumbnail is not updated after edit without export --- By Design ? 
+
+
+
+Code Quality Issues 
+-------------------
+
+- Perf : Review all process steps to ensure that the source image is not unnecessarily cloned. 
+
+- Rename namespaces uselessly ending with "...Models" 
+
+- Move message definitions in new folders depending on area and workflow 
+
+- Cleanup public vs internal about everywhere 
+
+- Cleanup unused icons for faster loading 
+
+- Cleanup language strings
+
+- Setup logging for trace to disk 
+
 
 
 Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp) 
@@ -126,30 +150,11 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 - No support yet for HEIC images in ImageSharp 
 
 
-Minor Issues (Low priority)
----------------------------
-
-- Make this an application setting :     private const int CullingBatchSize = 48;
-
-- Library selector buttons text for months and days do not update on Language change 
-
-- Switching language while processing cancels the current process
-
-- Tool boxes titles will not localise when language changes 
-
-- Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
-
-- Thumbnail is not updated after edit without export --- By Design ? 
-
 
 Cool Stuff to Consider 
 ----------------------
 
 - Share: email, text, post
-
-- Set as Desktop Background 
-
-- Show rating stars on the thumbnail in the library view 
 
 - Other built-in effects to consider:  
 		// HistogramEqualization (CLAHE) 
@@ -157,11 +162,6 @@ Cool Stuff to Consider
 - Implement a MD-Viewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
 - Compress Built-in LUT 
-
-- Cache the LUTs in a dictionary 
-
-- Auto Run full screen as soon we start processing an image, return to windowed mode when done (or on user request)
-Refer to Jigsaw code 
 
 - Improve Image Sharpen with a smarter algorithm (with gray image mask) 
 

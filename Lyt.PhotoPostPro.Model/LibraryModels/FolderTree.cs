@@ -84,10 +84,11 @@ public sealed class FolderTree
                 continue;
             }
 
-            if (forDateAdded && (date == DateTime.MinValue))
+            if (forDateAdded && (date == DateTime.MinValue || date.Year < 1926))
             {
-                // Use the file creation time as a fallback for date added
-                date = metadata.FileDateUTC.ToLocalTime();
+                // Corrupted date added 
+                // Use current date and time as a fallback for date added
+                date = DateTime.Now;
             }
 
             int year = date.Year;
