@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Edit thumb ends up in the wrong location when adding by drop 
+
 - IMG_0212  Incorrect state for Added and Ratings 
 
 - Add new Images messed up thumb files ? 
