@@ -13,7 +13,7 @@ public sealed partial class LibraryManager
         if (this.dispatcher is null)
         {
             throw new Exception("Library not properly initialized.");
-        } 
+        }
 
         // Enumerate files in gallery folder and filter them 
         var files =
@@ -25,26 +25,34 @@ public sealed partial class LibraryManager
             });
         foreach (string file in files)
         {
-            if (!file.IsReadable())
+            if (this.CanAddFile(file))
             {
-                continue; 
-            } 
-
-            FileInfo fileInfo = new(file);
-            if (fileInfo.Length <= GalleryFileMinimumLength)
-            {
-                // Ignore small files
-                continue;
+                this.GalleryContent.Add(file);
             }
-
-            this.GalleryContent.Add(file);
         }
 
         // Preload first two images if any present 
-        if ( this.GalleryContent.Count > 0)
+        if (this.GalleryContent.Count > 0)
         {
             this.dispatcher.OnIdle(this.LoadFirstGalleryFile);
         }
+    }
+
+    public bool CanAddFile(string filePath)
+    {
+        if (!filePath.IsReadable())
+        {
+            return false;
+        }
+
+        FileInfo fileInfo = new(filePath);
+        if (fileInfo.Length <= GalleryFileMinimumLength)
+        {
+            // Ignore small files
+            return false;
+        }
+
+        return true;
     }
 
     public byte[]? GetGalleryImage(string nowShowing)
@@ -58,11 +66,11 @@ public sealed partial class LibraryManager
 
             return this.LoadGalleryFile(nowShowing);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             Debug.WriteLine(ex);
             return null;
-        } 
+        }
     }
 
     public byte[]? LoadGalleryFile(string imagePath)

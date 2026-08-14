@@ -54,7 +54,7 @@
 			GlyphSource="caret_left"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
-			Opacity="0.6"
+			Opacity="0.5"
 			Command="{Binding OnBack}"
 			/>
 		<glyphs:GlyphButton
@@ -69,7 +69,7 @@
 			GlyphSource="caret_right"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
-			Opacity="0.6"
+			Opacity="0.5"
 			Command="{Binding OnNext}"
 			/>
 	</Grid>
