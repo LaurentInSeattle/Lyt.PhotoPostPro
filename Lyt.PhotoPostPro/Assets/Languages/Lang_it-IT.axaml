@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Galleria</system:String>
 
-    <system:String x:Key="Shell.Single">Immagine</system:String>
+    <system:String x:Key="Shell.Import">Importare</system:String>
 
     <system:String x:Key="Shell.Settings">Impostazioni</system:String>
 
@@ -41,7 +41,11 @@
 
     <system:String x:Key="Imaging.InProgressHelp">Attendere prego...</system:String>
 
-    <system:String x:Key="DragDrop.DropZone">Zona trascina e rilascia</system:String>
+    <system:String x:Key="DragDrop.DropZone">Zona trascina e Rilascia</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Come Sfondo</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Naviga verso...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Caricamento immagini ad alta definizione...</system:String>
 
@@ -49,27 +53,27 @@
 
     <system:String x:Key="Workflow.Culling.Ready">Pronto.</system:String>
 
-    <system:String x:Key="Workflow.Culling.AddStar">Aggiungi stella</system:String>
+    <system:String x:Key="Workflow.Culling.AddStar">Aggiungi Stella</system:String>
 
     <system:String x:Key="Workflow.Culling.RemoveStar">Retrocedere</system:String>
 
     <system:String x:Key="Workflow.Culling.Reject">Rifiutare</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectTop">Conserva: immagine in alto</system:String>
+    <system:String x:Key="Workflow.Culling.SelectTop">Conserva: Immagine in alto</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectTopHint">Aggiungi una stella in alto - Rifiuta in basso</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectBottom">Conserva: immagine in basso</system:String>
+    <system:String x:Key="Workflow.Culling.SelectBottom">Conserva: Immagine in basso</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectBottomHint">Rifiuta in alto: aggiungi una stella in basso</system:String>
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">Rifiuta in alto: Aggiungi una stella in basso</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectLeft">Conserva: immagine a sinistra</system:String>
+    <system:String x:Key="Workflow.Culling.SelectLeft">Conserva: Immagine a sinistra</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectLeftHint">Aggiungi una stella a sinistra - Rifiuta a destra</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectRight">Conserva: immagine giusta</system:String>
+    <system:String x:Key="Workflow.Culling.SelectRight">Conserva: Immagine a destra</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: aggiungi una stella a destra</system:String>
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: Aggiungi una stella a destra</system:String>
 
     <system:String x:Key="Folder.DropZoneHelp">Trascina qui una cartella contenente file di immagine per creare un nuovo progetto.</system:String>
 
@@ -107,7 +111,7 @@
 
     <system:String x:Key="Process.Toolbar.FullScreen">A schermo intero</system:String>
 
-    <system:String x:Key="Process.Toolbar.EscToReturn">Esc.  ritornare</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc. ritornare</system:String>
 
     <system:String x:Key="Workflow.Back">Indietro</system:String>
 

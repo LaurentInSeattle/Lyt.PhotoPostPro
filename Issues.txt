@@ -32,8 +32,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Gallery: Set as Desktop Background 
-
 - Gallery: Slide show 
 
 - Gallery: Auto Add on Export if 5 stars  

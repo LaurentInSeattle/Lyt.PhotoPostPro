@@ -9,5 +9,20 @@ public sealed partial class GalleryToolbarViewModel : ViewModel<GalleryToolbarVi
     public void OnFullscreen() =>
         new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.GoFullscreen).Publish();
 
+    [RelayCommand]
+    public void OnNavigate()
+    { 
+        var model = App.GetRequiredService<PhotoPostProModel>();
+        model.NavigateToGallery();
+    }
+
+    [RelayCommand]
+    public void OnWallpaper()
+    {
+        var vm = App.GetRequiredService<GalleryViewModel>();
+        vm.OnWallpaper();
+    }
+
 #pragma warning restore CA1822
+
 }

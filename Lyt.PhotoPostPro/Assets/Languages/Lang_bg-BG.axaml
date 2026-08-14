@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Галерия</system:String>
 
-    <system:String x:Key="Shell.Single">Изображение</system:String>
+    <system:String x:Key="Shell.Import">Импортиране</system:String>
 
     <system:String x:Key="Shell.Settings">Настройки</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">моля изчакайте...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Плъзнете и пуснете зона</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Тапет</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Навигирайте до...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Зареждат се изображения с висока разделителна способност...</system:String>
 

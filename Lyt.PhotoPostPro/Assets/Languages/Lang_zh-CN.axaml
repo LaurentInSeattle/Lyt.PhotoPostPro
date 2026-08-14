@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">画廊</system:String>
 
-    <system:String x:Key="Shell.Single">图像</system:String>
+    <system:String x:Key="Shell.Import">进口</system:String>
 
     <system:String x:Key="Shell.Settings">设置</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">请稍等...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">拖放区</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">墙纸</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">导航至...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">正在加载高清图像...</system:String>
 

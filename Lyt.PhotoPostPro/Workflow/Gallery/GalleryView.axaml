@@ -9,8 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
@@ -30,6 +28,7 @@
 			<ColumnDefinition Width="36" />
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
+		<!-- Images at same Zindex --> 
 		<Image
 			x:Name="Image1"
 			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
@@ -42,14 +41,16 @@
 			ZIndex="42"
 			Source="{Binding GalleryImage2}"
 			/>
+		<!-- Buttons above the Images --> 
 		<glyphs:GlyphButton
 			x:Name="BackButton"
+			ZIndex="420"
 			IsDisabled="{Binding ButtonsAreDisabled}"
 			Grid.Row="1" Grid.Column="1" 
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="32" Height="320"
+			Width="32" Height="520"
 			GlyphSource="caret_left"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"
@@ -58,12 +59,13 @@
 			/>
 		<glyphs:GlyphButton
 			x:Name="NextButton"
+			ZIndex="420"
 			IsDisabled="{Binding ButtonsAreDisabled}"
 			Grid.Row="1" Grid.Column="3" 
 			Style="{StaticResource ViewIconButton}"
 			Layout="IconOnly"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="32" Height="320"
+			Width="32" Height="520"
 			GlyphSource="caret_right"
 			ButtonBackground="BorderlessRectangle"
 			GlyphStrokeThickness="0"

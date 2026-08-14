@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Галерея</system:String>
 
-    <system:String x:Key="Shell.Single">Зображення</system:String>
+    <system:String x:Key="Shell.Import">Імпорт</system:String>
 
     <system:String x:Key="Shell.Settings">Налаштування</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">Будь ласка, зачекайте...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Шпалери</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Перейти до...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Завантаження зображень високої чіткості...</system:String>
 

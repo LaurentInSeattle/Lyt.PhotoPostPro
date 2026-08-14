@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Galería</system:String>
 
-    <system:String x:Key="Shell.Single">Imagen</system:String>
+    <system:String x:Key="Shell.Import">Importar</system:String>
 
     <system:String x:Key="Shell.Settings">Ajustes</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">Espere por favor...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Zona de arrastrar y soltar</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Papel pintado</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Navegar a...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Cargando imágenes de alta definición...</system:String>
 

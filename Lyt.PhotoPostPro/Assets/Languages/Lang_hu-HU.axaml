@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Galéria</system:String>
 
-    <system:String x:Key="Shell.Single">Kép</system:String>
+    <system:String x:Key="Shell.Import">Importálás</system:String>
 
     <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">Kérem, várjon...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Tapéta</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Navigáljon ide...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Nagy felbontású képek betöltése...</system:String>
 

@@ -59,6 +59,8 @@ public sealed partial class LibraryManager
 
     public string ExportsFolderPath => this.exportsFolderPath;
 
+    public string GalleryFolderPath => this.galleryFolderPath;
+
     // This dictionary is indexed by the path of the source image 
     public LruDictionary<string, byte[]> GalleryImages { get; private set; }
 

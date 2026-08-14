@@ -1,11 +1,11 @@
-﻿namespace Lyt.PhotoPostPro.Workflow.Single;
+﻿namespace Lyt.PhotoPostPro.Workflow.Import;
 
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHandler
+public sealed partial class ImportViewModel : ViewModel<ImportView>, IDropPathHandler
 {
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
@@ -27,7 +27,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
     [ObservableProperty]
     public partial MetadataViewModel MetadataViewModel { get; set; }
 
-    public SingleViewModel(PhotoPostProModel model, IToaster toaster)
+    public ImportViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
@@ -53,7 +53,7 @@ public sealed partial class SingleViewModel : ViewModel<SingleView>, IDropPathHa
             mainWindow.WindowState = WindowState.Maximized;
         }
 
-        var viewModel = App.GetRequiredService<SingleViewModel>();
+        var viewModel = App.GetRequiredService<ImportViewModel>();
         viewModel.ProcessCurrentImage();
     }
 

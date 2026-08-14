@@ -29,7 +29,7 @@
 
     <system:String x:Key="Shell.Gallery">Պատկերասրահ</system:String>
 
-    <system:String x:Key="Shell.Single">Պատկեր</system:String>
+    <system:String x:Key="Shell.Import">Ներմուծում</system:String>
 
     <system:String x:Key="Shell.Settings">Կարգավորումներ</system:String>
 
@@ -42,6 +42,10 @@
     <system:String x:Key="Imaging.InProgressHelp">Խնդրում ենք սպասել...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Քաշեք և թողեք գոտի</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Պաստառ</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Նավարկեք դեպի...</system:String>
 
     <system:String x:Key="Workflow.Culling.LoadingHD">Բարձր հստակությամբ պատկերների բեռնում...</system:String>
 

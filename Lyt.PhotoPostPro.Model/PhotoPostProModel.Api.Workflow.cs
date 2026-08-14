@@ -2,10 +2,16 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
-    public static void NavigateToImageFolder(Metadata metadata)
-    {
+    public void NavigateToGallery()
+        // Navigate to global folder, ignoring subdirectories if any 
+        => NavigateTo(this.LibraryManager.GalleryFolderPath);
+
+    public static void NavigateToImageFolder(Metadata metadata) =>
         // Navigate to subdirectory for specified image
-        string? directoryPath = System.IO.Path.GetDirectoryName(metadata.FullPath);
+        NavigateTo(System.IO.Path.GetDirectoryName(metadata.FullPath));
+
+    private static void NavigateTo(string? directoryPath )
+    {
         if (!string.IsNullOrWhiteSpace(directoryPath))
         {
             if (Directory.Exists(directoryPath))

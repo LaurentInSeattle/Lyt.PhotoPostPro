@@ -1,6 +1,6 @@
-namespace Lyt.PhotoPostPro.Workflow.Single;
+namespace Lyt.PhotoPostPro.Workflow.Import;
 
-public partial class SingleView : View
+public partial class ImportView : View
 {
     protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 }

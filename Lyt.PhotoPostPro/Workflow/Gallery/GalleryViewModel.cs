@@ -9,6 +9,7 @@ public sealed partial class GalleryViewModel :
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
     private readonly IAnimationService animationService;
+    private readonly IRandomizer randomizer; 
     private readonly IToaster toaster;
 
     private bool isFirstActivate;
@@ -27,11 +28,16 @@ public sealed partial class GalleryViewModel :
     [ObservableProperty]
     public partial WriteableBitmap? GalleryImage2 { get; set; }
 
-    public GalleryViewModel(PhotoPostProModel model, IAnimationService animationService, IToaster toaster)
+    public GalleryViewModel(
+        PhotoPostProModel model, 
+        IAnimationService animationService, 
+        IRandomizer randomizer,
+        IToaster toaster)
     {
         this.model = model;
         this.libraryManager = model.LibraryManager;
         this.animationService = animationService;
+        this.randomizer = randomizer;
         this.toaster = toaster;
         this.isFirstActivate = true;
     }
@@ -55,12 +61,17 @@ public sealed partial class GalleryViewModel :
 
         this.Subscribe<HotKeyMessage>(); 
 
-        this.galleryContent = this.libraryManager.GalleryContent;
+        // Creates a local copy so that we can shuffle 
+        this.galleryContent = this.libraryManager.GalleryContent.ToList();
+        randomizer.Shuffle(this.galleryContent); 
+
         this.nothingToShow = this.galleryContent.Count == 0;
         this.View.Image1.IsVisible = false;
         this.View.Image2.IsVisible = false;
         if (this.nothingToShow)
         {
+            // TODO
+            // Show "nothing"  
         }
         else
         {
@@ -120,9 +131,10 @@ public sealed partial class GalleryViewModel :
             next = 0;
         }
 
+        // Get ready for next image 
         string nextPath = this.galleryContent[next];
         Schedule.OnUiThread(
-            (int)(FadeDuration * 1_000),
+            100 + (int)(FadeDuration * 1_000),
             this.LoadNextGalleryFile,
             nextPath,
             DispatcherPriority.ApplicationIdle); 
@@ -166,5 +178,16 @@ public sealed partial class GalleryViewModel :
         }
 
         this.showNextOnOne = !this.showNextOnOne;
+    }
+
+    internal void OnWallpaper()
+    {
+        if( galleryContent.Count == 0 )
+        {
+            return; 
+        }
+
+        string path = this.galleryContent[nowShowingIndex]; 
+        App.WallpaperService.Set(path, WallpaperStyle.Fill);
     }
 }

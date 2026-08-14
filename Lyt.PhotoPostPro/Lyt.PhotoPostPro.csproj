@@ -66,6 +66,9 @@
     <Compile Update="Workflow\Gallery\GalleryView.axaml.cs">
       <DependentUpon>GalleryView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Import\ImportView.axaml.cs">
+      <DependentUpon>ImportView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Lut\LutImageView.axaml.cs">
       <DependentUpon>LutImageView.axaml</DependentUpon>
     </Compile>

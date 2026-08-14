@@ -10,7 +10,7 @@ public enum ActivatedView : int
     Library,
     Camera,
     Gallery,
-    Single,
+    Import,
     Settings,
     Tools,
     Language,

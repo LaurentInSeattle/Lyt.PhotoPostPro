@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Single.SingleView"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Single"
-	x:DataType="vm:SingleViewModel" 
+	x:Class="Lyt.PhotoPostPro.Workflow.Import.ImportView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Import"
+	x:DataType="vm:ImportViewModel" 
 	
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

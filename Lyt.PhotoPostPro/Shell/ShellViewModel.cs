@@ -177,7 +177,7 @@ public sealed partial class ShellViewModel
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
         Setup<GalleryViewModel, GalleryView, GalleryToolbarViewModel, GalleryToolbarView>(
             ActivatedView.Gallery, view.GalleryButton);
-        SetupNoToolbar<SingleViewModel, SingleView>(ActivatedView.Single, view.SingleButton);
+        SetupNoToolbar<ImportViewModel, ImportView>(ActivatedView.Import, view.ImportButton);
         SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
         SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
@@ -237,7 +237,7 @@ public sealed partial class ShellViewModel
     public void OnGallery() => this.viewSelector?.SelectView(ActivatedView.Gallery);
 
     [RelayCommand]
-    public void OnSingle() =>this.viewSelector?.SelectView(ActivatedView.Single);
+    public void OnImport() =>this.viewSelector?.SelectView(ActivatedView.Import);
 
     [RelayCommand]
     public void OnSettings() => this.viewSelector?.SelectView(ActivatedView.Settings);

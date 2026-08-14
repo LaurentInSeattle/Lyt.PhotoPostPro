@@ -134,12 +134,12 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton
-						x:Name="SingleButton"
+						x:Name="ImportButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="wallpaper"
+						GlyphSource="add_circle"
 						GlyphStrokeThickness="0"
-						Text="{DynamicResource Shell.Single}"
-						Command="{Binding OnSingle}"
+						Text="{DynamicResource Shell.Import}"
+						Command="{Binding OnImport}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton

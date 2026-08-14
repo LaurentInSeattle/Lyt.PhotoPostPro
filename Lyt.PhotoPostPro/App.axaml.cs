@@ -27,7 +27,7 @@ public partial class App : ApplicationBase
                 typeof(ShellViewModel),
 
                 // Views and ViewModels from the main view selector            
-                typeof(SingleViewModel),
+                typeof(ImportViewModel),
                 typeof(CameraViewModel),
                 typeof(LibraryViewModel),
                 typeof(GalleryViewModel),
@@ -116,8 +116,10 @@ public partial class App : ApplicationBase
     {
         // This should be mostly empty, use the OnStartup override
         Instance = this;
-        MtpService = mtpService;
-        WallpaperService = wallpaperService; 
+
+        // see below comment about service instances 
+        App.MtpService = mtpService;
+        App.WallpaperService = wallpaperService; 
         
         Debug.WriteLine("App Instance created");
     }
@@ -126,8 +128,9 @@ public partial class App : ApplicationBase
     // Non-nullable field must contain a non-null value when exiting constructor. 
     public static App Instance { get; private set; }
 
+    // For these services we dont know the type of the instance, therefore we cannot
+    // register them easily, and we just keep them available as global statics 
     public static IMtpService MtpService { get; set ;  }
-
     public static IWallpaperService WallpaperService { get; set; }
 
 #pragma warning restore CS8618 

@@ -19,6 +19,20 @@
 		>
 		<glyphs:GlyphButton
 			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="wallpaper"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Gallery.Toolbar.Wallpaper}"  
+			Command="{Binding OnWallpaper}"
+			/>
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="folder_open"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Gallery.Toolbar.Navigate}"  
+			Command="{Binding OnNavigate}"
+			/>
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="full_screen_maximize"
 			GlyphStrokeThickness="0.1"
 			Text="{DynamicResource Process.Toolbar.FullScreen}"  
