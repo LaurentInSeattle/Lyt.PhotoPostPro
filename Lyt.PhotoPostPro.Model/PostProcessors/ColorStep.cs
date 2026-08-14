@@ -19,7 +19,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
 
     public ColorAlgorithm Algorithm { get; set; }
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override Frame? Reset()
     {

@@ -182,7 +182,7 @@ public static class ImageLoader
             int height = (int)frame.Height;
             byte[] pixels = frame.GetByteArray(Openize.Heic.Decoder.PixelFormat.Rgb24);
             var image24 = Image.LoadPixelData<Rgb24>(pixels, width, height);
-            var imageFp = image24.CloneAs<RgbaVector>();
+            var imageFp = image24.CloneAs<RgbaHalf>();
             if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with Openize.";
@@ -223,7 +223,7 @@ public static class ImageLoader
             }
 
             Debug.WriteLine(imageFormat.Name);
-            var imageFp = Image.Load<RgbaVector>(imagePath);
+            var imageFp = Image.Load<RgbaHalf>(imagePath);
             if (imageFp is null)
             {
                 // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -297,7 +297,7 @@ public static class ImageLoader
             int width = rawImage.Width;
             int height = rawImage.Height;
 
-            Image<RgbaVector>? imageFp = null;
+            Image<RgbaHalf>? imageFp = null;
             if (rawImage.Bits == 8 && rawImage.Channels == 3)
             {
                 var pixelDataByteSpan = rawImage.AsSpan<byte>();
@@ -306,7 +306,7 @@ public static class ImageLoader
                 fixed (byte* pixelData = &pixelDataByteSpan[0])
                 {
                     var image24 = Image.LoadPixelData<Rgb24>(pixelDataByteSpan, width, height);
-                    imageFp = image24.CloneAs<RgbaVector>();
+                    imageFp = image24.CloneAs<RgbaHalf>();
                     if (imageFp is null)
                     {
                         // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -324,7 +324,7 @@ public static class ImageLoader
                 {
                     Span<byte> byteSpan = MemoryMarshal.AsBytes(pixelDataUshortSpan);
                     var image48 = Image.LoadPixelData<Rgb48>(byteSpan, width, height);
-                    imageFp = image48.CloneAs<RgbaVector>();
+                    imageFp = image48.CloneAs<RgbaHalf>();
                     if (imageFp is null)
                     {
                         // errorMessage = "Failed to load the source image with ImageSharp.";
@@ -766,6 +766,7 @@ public static class ImageLoader
 
     /// <summary> Generates rotated thumnail from image, original is lost </summary>
     /// <remarks> Returns a higher definition and better quality JPEG, if isHD is true . </remarks>
+    /// <remarks> => MUST use TPixel here <= </remarks>
     public static byte[] GenerateJpgThumbnailWithMutate<TPixel>(Image<TPixel> image, Metadata metadata, bool isHd)
         where TPixel : unmanaged, IPixel<TPixel>
     {
@@ -803,7 +804,7 @@ public static class ImageLoader
         return jpgEncoded;
     }
 
-    public static byte[] GenerateJpgThumbnailWithClone(Image<RgbaVector> imageFp)
+    public static byte[] GenerateJpgThumbnailWithClone(Image<RgbaHalf> imageFp)
     {
         // Create thumbnail with cloning 
         var clone = imageFp.Clone();

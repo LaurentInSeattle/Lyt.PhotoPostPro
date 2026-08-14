@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
-
 public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) : 
     PostProcessStep(postProcessWorkflow, PostProcessStep.ContrastStepName)
 {
@@ -25,7 +23,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
 
     public ContrastAlgorithm Algorithm { get; set; }
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override Frame? Reset()
     {

@@ -9,7 +9,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float Shift { get; set; }
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override Frame? Reset()
     {
@@ -45,7 +45,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
             this.Shift != 0;
         if (isChanged)
         {
-            float[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
+            Half[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
             PostProcessStep.RecalculateHistograms(clone);

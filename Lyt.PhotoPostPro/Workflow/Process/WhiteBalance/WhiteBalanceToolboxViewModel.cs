@@ -6,7 +6,7 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 {
     private bool doNotUpdateModel;
     private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm;
-    private float kelvin;
+    // private float kelvin;
     private float temperature;
     private float saturationThreshold;
     private global::Avalonia.Media.Color whitePatch;
@@ -121,15 +121,15 @@ public sealed partial class WhiteBalanceToolboxViewModel :
         });
     }
 
-    partial void OnKelvinSliderValueChanged(double value)
-    {
-        // Slider sends 1000.0 to +40000.0, fine for the model  
-        this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland;
-        this.kelvin = (float)value;
-        int intValue = (int)value;
-        this.KelvinString = intValue.ToString("D");
-        this.UpdateModel();
-    }
+    //partial void OnKelvinSliderValueChanged(double value)
+    //{
+    //    // Slider sends 1000.0 to +40000.0, fine for the model  
+    //    this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland;
+    //    this.kelvin = (float)value;
+    //    int intValue = (int)value;
+    //    this.KelvinString = intValue.ToString("D");
+    //    this.UpdateModel();
+    //}
 
     partial void OnTemperatureSliderValueChanged(double value)
     {
@@ -181,9 +181,9 @@ public sealed partial class WhiteBalanceToolboxViewModel :
                         this.model.ColorMatrixWhiteBalance(this.temperature);
                         break;
 
-                    case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
-                        this.model.TannerHellandWhiteBalance(this.kelvin);
-                        break;
+                    //case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
+                    //    this.model.TannerHellandWhiteBalance(this.kelvin);
+                    //    break;
 
                 }
             });

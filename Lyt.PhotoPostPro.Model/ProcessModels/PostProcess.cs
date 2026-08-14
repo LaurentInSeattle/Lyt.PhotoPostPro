@@ -5,7 +5,7 @@ public sealed class PostProcess
     public PostProcess(
         PhotoPostProModel model, 
         Metadata metadata, 
-        Image<RgbaVector> originalImage,
+        Image<RgbaHalf> originalImage,
         bool isNew, 
         string fileUidString,
         PostProcessParameters postProcessParameters)
@@ -25,9 +25,9 @@ public sealed class PostProcess
         =>  this.MaybeModel ??
             throw new InvalidOperationException("Model must be set before accessing it.");
 
-    public Image<RgbaVector>? MaybeOriginalImage { get; set; }
+    public Image<RgbaHalf>? MaybeOriginalImage { get; set; }
 
-    public Image<RgbaVector> OriginalImage
+    public Image<RgbaHalf> OriginalImage
         =>  this.MaybeOriginalImage ??
             throw new InvalidOperationException("Source image must be loaded before accessing it.");
 

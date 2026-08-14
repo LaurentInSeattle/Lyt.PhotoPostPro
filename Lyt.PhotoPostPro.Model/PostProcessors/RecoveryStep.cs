@@ -7,7 +7,7 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
 
     public float HighlightAmount { get; set; }
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override void PerformStep(PostProcessParameters ppp)
     {

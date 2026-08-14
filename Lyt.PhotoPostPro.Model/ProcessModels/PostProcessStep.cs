@@ -31,16 +31,16 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
 
     public bool IsFirstRun { get; set; } = true;
 
-    public Image<RgbaVector>? SourceImage { get; set; }
+    public Image<RgbaHalf>? SourceImage { get; set; }
 
-    public Image<RgbaVector>? ResultImage { get; set; }
+    public Image<RgbaHalf>? ResultImage { get; set; }
 
     public bool IsFirstStep => this.PreviousStep is null;
 
     public bool IsLastStep => this.NextStep is null;
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Initialize(Image<RgbaVector> originalImage) { } 
+    public virtual void Initialize(Image<RgbaHalf> originalImage) { } 
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Finish() { }
@@ -82,7 +82,7 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
     // Default implementation does nothing. Override in derived classes is needed.
     public virtual Frame? Transform(bool withFrame = true) => null;
 
-    public static void RecalculateHistograms(Image<RgbaVector> image)
+    public static void RecalculateHistograms(Image<RgbaHalf> image)
     {
         Task.Run(() =>
         {

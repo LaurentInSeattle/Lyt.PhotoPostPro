@@ -13,9 +13,9 @@ public sealed class Curve
 
     public CurveKind Kind { get; private set; }
 
-    public float[] Points { get; private set; }
+    public Half[] Points { get; private set; }
 
-    public Curve(float[] gammaLut)
+    public Curve(Half[] gammaLut)
     {
         this.Kind = CurveKind.GammaLut;
         if (gammaLut.Length != ImagingAlgorithms.LutSize)
@@ -23,11 +23,11 @@ public sealed class Curve
             throw new ArgumentException("Not a gamma LUT.");
         }
 
-        this.Points = new float[CurveSize];
+        this.Points = new Half[CurveSize];
         for (int i = 0; i < CurveSize; ++i)
         {
-            float x = ( float ) i / ( CurveSize - 1);
-            float y = ImagingAlgorithms.LutLookup(gammaLut, x);
+            Half x = ( Half ) i / (Half) ( CurveSize - 1);
+            Half y = ImagingAlgorithms.LutLookup(gammaLut, x);
             this.Points[i] = y;
         }
     }

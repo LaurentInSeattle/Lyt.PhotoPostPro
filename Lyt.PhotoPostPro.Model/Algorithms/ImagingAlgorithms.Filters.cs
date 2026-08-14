@@ -2,7 +2,7 @@
 
 public static partial class ImagingAlgorithms
 {
-    public static bool Grayscale(this Image<RgbaVector> image, float grayscaleAmount)
+    public static bool Grayscale(this Image<RgbaHalf> image, float grayscaleAmount)
     {
         if (Math.Abs(grayscaleAmount) > 0.01)
         {
@@ -14,7 +14,7 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Sepia(this Image<RgbaVector> image, float sepiaAmount)
+    public static bool Sepia(this Image<RgbaHalf> image, float sepiaAmount)
     {
         if (Math.Abs(sepiaAmount) > 0.01)
         {
@@ -24,19 +24,21 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool BlackWhite(this Image<RgbaVector> image)
+    public static bool BlackWhite(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.BlackWhite());
         return true;
     }
 
-    public static bool Vignette(this Image<RgbaVector> image)
+    public static bool Vignette(this Image<RgbaHalf> image)
     {
+        // TODO 
+        // USE radius 
         image.Mutate(x => x.Vignette(Color.Black));
         return true;
     }
 
-    public static bool Pixelate(this Image<RgbaVector> image, float pixelationAmount)
+    public static bool Pixelate(this Image<RgbaHalf> image, float pixelationAmount)
     {
         int amount = (int)(0.5f + 100.0f * pixelationAmount);
         if (amount > 0)
@@ -47,22 +49,21 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Lomograph(this Image<RgbaVector> image)
+    public static bool Lomograph(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Lomograph());
         return true;
     }
 
-    public static bool Kodachrome(this Image<RgbaVector> image)
+    public static bool Kodachrome(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Kodachrome());
         return true;
     }
 
-    public static bool Polaroid(this Image<RgbaVector> image)
+    public static bool Polaroid(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Polaroid());
         return true;
     }
-
 }

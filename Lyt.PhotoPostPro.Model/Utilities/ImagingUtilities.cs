@@ -2,13 +2,30 @@
 
 public static class ImagingUtilities
 {
+#pragma warning disable CA2211 
+    // Non-constant fields should not be visible
+
+    public static Half hZero = (Half)0.0f;
+    public static Half hOne = (Half)1.0f;
+
+#pragma warning restore CA2211 
+
+
     public const ushort pixMaxU = ushort.MaxValue;
     public const float pixMaxF = 65535.0f;
     public const double pixMaxD = 65535.0;
 
-    public const int pixRangeI = (int) ( 1 + ushort.MaxValue) ;
+    public const int pixRangeI = (int)(1 + ushort.MaxValue);
     public const float pixRangeF = 65536.0f;
     public const double pixRangeD = 65536.0;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Half ClipH(Half value)
+        => value < hZero ?
+            hZero :
+            value > hOne ?
+                hOne :
+                value;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static float ClipF(float value)
@@ -104,17 +121,17 @@ public static class ImagingUtilities
         }
     }
 
-    public static Frame ToFrame(this Image<RgbaVector> image)
+    public static Frame ToFrame(this Image<RgbaHalf> image)
     {
         try
         {
             PixelTypeInfo pixelTypeInfo = image.PixelType;
-            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 128))
+            if (!pixelTypeInfo.ColorType.HasFlag(PixelColorType.RGB) || (pixelTypeInfo.BitsPerPixel != 64))
             {
-                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaVector.");
+                throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaHalf.");
             }
 
-            if (image is Image<RgbaVector> rgbFp)
+            if (image is Image<RgbaHalf> rgbFp)
             {
                 var frame = new Frame(image.Width, image.Height);
                 if (frame.Data is null)
@@ -126,7 +143,7 @@ public static class ImagingUtilities
                 return frame;
             }
 
-            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaVector.");
+            throw new InvalidOperationException($"Unsupported pixel format: {image.PixelType}. Expected RgbaHalf.");
         }
         catch (Exception ex)
         {
@@ -134,7 +151,7 @@ public static class ImagingUtilities
         }
     }
 
-    public static void PixelRgbaBuffer(this Image<RgbaVector> image, byte[] rgbaData)
+    public static void PixelRgbaBuffer(this Image<RgbaHalf> image, byte[] rgbaData)
     {
         try
         {
@@ -145,13 +162,13 @@ public static class ImagingUtilities
                 for (int y = 0; y < accessor.Height; y++)
                 {
                     var row = accessor.GetRowSpan(y);
-                    foreach (ref RgbaVector pixelVector in row)
+                    foreach (ref RgbaHalf pixelVector in row)
                     {
-                        var pixel = pixelVector.ToRgba32(); 
-                        rgbaData[offset++] = pixel.R ;
-                        rgbaData[offset++] = pixel.G ;
-                        rgbaData[offset++] = pixel.B ;
-                        rgbaData[offset++] = pixel.A ; 
+                        var pixel = pixelVector.ToRgba32();
+                        rgbaData[offset++] = pixel.R;
+                        rgbaData[offset++] = pixel.G;
+                        rgbaData[offset++] = pixel.B;
+                        rgbaData[offset++] = pixel.A;
                     }
                 }
             });

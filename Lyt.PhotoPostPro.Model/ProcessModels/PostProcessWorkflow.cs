@@ -71,7 +71,7 @@ public sealed class PostProcessWorkflow
         return step is null ? throw new Exception("Invalid step type") : step;
     }
 
-    public bool Begin(Image<RgbaVector> originalImage)
+    public bool Begin(Image<RgbaHalf> originalImage)
     {
         if (this.Steps.Count == 0)
         {

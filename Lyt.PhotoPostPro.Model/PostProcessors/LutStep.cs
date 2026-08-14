@@ -3,11 +3,13 @@
 public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.LutStepName)
 {
+    public const int ThumbnailSize = 1024; 
+
     public LutMetadata LutMetadata { get; set; } = LutMetadata.Empty;
 
-    private Image<RgbaVector>? thumbnail;
+    private Image<RgbaHalf>? thumbnail;
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override Frame? Reset()
     {
@@ -25,7 +27,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         this.thumbnail = this.SourceImage.Clone();
-        this.thumbnail.Mutate(x => x.Resize(1024, 0));
+        this.thumbnail.Mutate(x => x.Resize(ThumbnailSize, 0));
     }
 
     public override void PerformStep(PostProcessParameters ppp)

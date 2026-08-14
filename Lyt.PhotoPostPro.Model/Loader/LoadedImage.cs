@@ -10,7 +10,7 @@ public sealed class LoadedImage
 
     public string Exception { get; set; } = string.Empty;
 
-    public Image<RgbaVector>? Image { get; set; }
+    public Image<RgbaHalf>? Image { get; set; }
 
     public Metadata? Metadata { get; set; }
 
@@ -31,7 +31,7 @@ public sealed class LoadedImage
     public static LoadedImage Fail(string message, string exception = "")
         => new() { ErrorMessage = message, Exception = exception };
 
-    public static LoadedImage FullyLoaded(Image<RgbaVector>? image, Metadata? metadata)
+    public static LoadedImage FullyLoaded(Image<RgbaHalf>? image, Metadata? metadata)
         => new() { IsSuccess = true, Image = image, Metadata = metadata };
 
     public static LoadedImage PreLoaded(Metadata? metadata, byte[] jpgThumbnail)

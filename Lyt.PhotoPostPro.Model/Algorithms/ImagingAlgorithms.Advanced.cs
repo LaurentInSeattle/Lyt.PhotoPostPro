@@ -11,16 +11,16 @@ public static partial class ImagingAlgorithms
 
     /// <summary> Creates a Look-Up Table for fast gamma correction. </summary>
     /// <param name="gamma">Gamma value (e.g., 2.2 to brighten midtones, 0.45 to darken).</param>
-    public static float[] CreateGammaLUT(float gamma)
+    public static Half[] CreateGammaLUT(float gamma)
     {
         // Prevent potential division by zero
-        if (gamma <= 0)
+        if (gamma <= 0.0f)
         {
             gamma = 1.0f;
         }
 
         float inverseGamma = 1.0f / gamma;
-        float[] lut = new float[LutSize];
+        var lut = new Half[LutSize];
         Parallel.For(0, LutSize, i =>
         {
             // Normalize to 0.0 - 1.0  and apply power curve
@@ -28,59 +28,61 @@ public static partial class ImagingAlgorithms
             float corrected = MathF.Pow(normalized, inverseGamma);
 
             // Scale back to 0 - 1 and round safely
-            lut[i] = ClipF(corrected);
+            lut[i] = ClipH((Half)corrected);
         });
 
         return lut;
     }
 
-    public static float LutLookup(float[] lut, float value)
+    public static Half LutLookup(Half[] lut, Half value)
     {
-        int low = (int)Math.Floor(value * LutSize);
-        float mid = value * LutSize; 
+        int low = (int)Math.Floor((float)value * LutSize);
+        float mid = (float)value * LutSize;
         int high = low + 1;
         if ((low < 0) || (high >= LutSize))
         {
             return value;
         }
 
-        float vLow = lut[low];
-        float vHigh = lut[high];
-        float alpha = 1.0f - ( mid - low ) / (high - low);
-        alpha = ClipF(alpha); 
-        float lerp =  ( 1.0f - alpha ) * vLow + alpha * vHigh;
+        Half vLow = lut[low];
+        Half vHigh = lut[high];
+        float ratio = (mid - low) / (high - low);
+        Half alpha = hOne - (Half)ratio;
+        alpha = ClipH(alpha);
+        Half lerp = (hOne - alpha) * vLow + alpha * vHigh;
 
-        return lerp ;
+        return lerp;
     }
 
-    public static float[] Gamma(this Image<RgbaVector> image, float gamma, float gain, float shift)
+    public static Half[] Gamma(this Image<RgbaHalf> image, float gamma, float gain, float shift)
     {
         // TODO : Optimize if gamma is zero 
 
         // Will return the LUT for use in the UI 
-        float[] lut = ImagingAlgorithms.CreateGammaLUT(gamma);
+        Half[] lut = ImagingAlgorithms.CreateGammaLUT(gamma);
+        var halfGain = (Half)gain;
+        var halfShift = (Half)shift;
 
         // Parallelize the loop over the rows
         int height = image.Height;
         Parallel.For(0, height, y =>
-        // for (int y = 0; y < height; y++)
         {
             // Get a span for the current row for fast access
-            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> row = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 // pixel manipulation
                 var pixel = row[x];
-                float r = LutLookup(lut, pixel.R);
-                float g = LutLookup(lut, pixel.G);
-                float b = LutLookup(lut, pixel.B);
-                r = ClipF(gain * (r + shift));
-                g = ClipF(gain * (g + shift));
-                b = ClipF(gain * (b + shift));
-                row[x] = new RgbaVector(r, g, b, 1.0f);
+                Half r = LutLookup(lut, pixel.R);
+                Half g = LutLookup(lut, pixel.G);
+                Half b = LutLookup(lut, pixel.B);
+                row[x].R = ClipH(halfGain * (r + halfShift));
+                row[x].G = ClipH(halfGain * (g + halfShift));
+                row[x].B = ClipH(halfGain * (b + halfShift));
+                //row[x] = new RgbaHalf(r, g, b, hOne);
             }
-        //} // classic for 
         });
+
         return lut;
     }
 
@@ -88,95 +90,95 @@ public static partial class ImagingAlgorithms
 
     #region White Balance 
 
-    // Tanner Helland Algorithm 
-    // See: 	https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
-    //
-    // NOT Working so well 
-    // 
-    public static void AdjustColorTemperature(this Image<RgbaVector> image, float kelvin)
-    {
-        float[] rgb = GetRgbFromTemperature(kelvin);
-        float red = rgb[0];
-        float green = rgb[1];
-        float blue = rgb[2];
+    //// Tanner Helland Algorithm 
+    //// See: 	https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html
+    ////
+    //// NOT Working so well 
+    //// 
+    //public static void AdjustColorTemperature(this Image<RgbaVector> image, float kelvin)
+    //{
+    //    float[] rgb = GetRgbFromTemperature(kelvin);
+    //    float red = rgb[0];
+    //    float green = rgb[1];
+    //    float blue = rgb[2];
 
-        // Parallelize the loop over the rows
-        int height = image.Height;
-        Parallel.For(0, height, y =>
-        {
-            // Get a span for the current row for fast access
-            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
-            for (int x = 0; x < row.Length; x++)
-            {
-                // Apply the temperature scaling
-                var pixel = row[x];
-                float r = ClipF(pixel.R * red);
-                float g = ClipF(pixel.G * green);
-                float b = ClipF(pixel.B * blue);
-                row[x] = new RgbaVector(r, g, b, 1.0f);
-            }
-        });
-    }
+    //    // Parallelize the loop over the rows
+    //    int height = image.Height;
+    //    Parallel.For(0, height, y =>
+    //    {
+    //        // Get a span for the current row for fast access
+    //        Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
+    //        for (int x = 0; x < row.Length; x++)
+    //        {
+    //            // Apply the temperature scaling
+    //            var pixel = row[x];
+    //            float r = ClipF(pixel.R * red);
+    //            float g = ClipF(pixel.G * green);
+    //            float b = ClipF(pixel.B * blue);
+    //            row[x] = new RgbaVector(r, g, b, 1.0f);
+    //        }
+    //    });
+    //}
 
-    public static float[] GetRgbFromTemperature(float temperature)
-    {
-        // Temperature must fit between 1000 and 40000 degrees.
-        // All calculations require temperature / 100, so only do the conversion once.
-        temperature = Math.Clamp(temperature, 1000, 40000);
-        temperature /= 100;
+    //private static float[] GetRgbFromTemperature(float temperature)
+    //{
+    //    // Temperature must fit between 1000 and 40000 degrees.
+    //    // All calculations require temperature / 100, so only do the conversion once.
+    //    temperature = Math.Clamp(temperature, 1000, 40000);
+    //    temperature /= 100;
 
-        // Compute each color in turn.
-        float red, green, blue;
+    //    // Compute each color in turn.
+    //    float red, green, blue;
 
-        // First: red.
-        if (temperature <= 66)
-        {
-            red = 1.0f;
-        }
-        else
-        {
-            // Note: the R-squared value for this approximation is 0.988.
-            red = 329.698727446f * MathF.Pow(temperature - 60.0f, -0.1332047592f) / 255.0f;
-            red = ClipF(red);
-        }
+    //    // First: red.
+    //    if (temperature <= 66)
+    //    {
+    //        red = 1.0f;
+    //    }
+    //    else
+    //    {
+    //        // Note: the R-squared value for this approximation is 0.988.
+    //        red = 329.698727446f * MathF.Pow(temperature - 60.0f, -0.1332047592f) / 255.0f;
+    //        red = ClipF(red);
+    //    }
 
-        // Second: green.
-        if (temperature <= 66)
-        {
-            // Note: the R-squared value for this approximation is 0.996.
-            green = (99.4708025861f * MathF.Log(temperature) - 161.1195681661f) / 255.0f;
-        }
-        else
-        {
-            // Note: the R-squared value for this approximation is 0.987.
-            green = 288.1221695283f * MathF.Pow(temperature - 60.0f, -0.0755148492f) / 255.0f;
-        }
+    //    // Second: green.
+    //    if (temperature <= 66)
+    //    {
+    //        // Note: the R-squared value for this approximation is 0.996.
+    //        green = (99.4708025861f * MathF.Log(temperature) - 161.1195681661f) / 255.0f;
+    //    }
+    //    else
+    //    {
+    //        // Note: the R-squared value for this approximation is 0.987.
+    //        green = 288.1221695283f * MathF.Pow(temperature - 60.0f, -0.0755148492f) / 255.0f;
+    //    }
 
-        green = ClipF(green);
+    //    green = ClipF(green);
 
-        // Third: blue.
-        if (temperature >= 66)
-        {
-            blue = 1.0f;
-        }
-        else if (temperature <= 19)
-        {
-            blue = 0.0f;
-        }
-        else
-        {
-            // Note: the R-squared value for this approximation is 0.998.
-            blue = (138.5177312231f * MathF.Log(temperature - 10.0f) - 305.0447927307f) / 255.0f;
-            blue = ClipF(blue);
-        }
+    //    // Third: blue.
+    //    if (temperature >= 66)
+    //    {
+    //        blue = 1.0f;
+    //    }
+    //    else if (temperature <= 19)
+    //    {
+    //        blue = 0.0f;
+    //    }
+    //    else
+    //    {
+    //        // Note: the R-squared value for this approximation is 0.998.
+    //        blue = (138.5177312231f * MathF.Log(temperature - 10.0f) - 305.0447927307f) / 255.0f;
+    //        blue = ClipF(blue);
+    //    }
 
-        return [red, green, blue];
-    }
+    //    return [red, green, blue];
+    //}
 
     // By setting the saturationThreshold to 0.4, any pixel that is more than 40 % saturated gets skipped. 
     // The algorithm now looks at the neutral sidewalks, stones, gray tree trunks, or white clothing in the photo
     // to find the true color cast.
-    public static bool FilteredGrayWorldAWB(this Image<RgbaVector> image, float saturationThreshold = 0.4f)
+    public static bool FilteredGrayWorldAWB(this Image<RgbaHalf> image, float saturationThreshold = 0.4f)
     {
         float totalR = 0, totalG = 0, totalB = 0;
         long validPixelCount = 0;
@@ -186,13 +188,14 @@ public static partial class ImagingAlgorithms
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<RgbaVector> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < pixelRow.Length; x++)
             {
-                var pixel = pixelRow[x].ToScaledVector4();
-                float r = pixel.X;
-                float g = pixel.Y;
-                float b = pixel.Z;
+                // var pixel = pixelRow[x].ToScaledVector4();
+                var pixel = pixelRow[x];
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
 
                 // Calculate saturation (scaled from 0.0 to 1.0)
                 float max = MathF.Max(r, MathF.Max(g, b));
@@ -240,48 +243,46 @@ public static partial class ImagingAlgorithms
 
         // Find the target gray value and coefficients
         float targetGray = (avgR + avgG + avgB) / 3.0f;
-        float rGain = targetGray / avgR;
-        float gGain = targetGray / avgG;
-        float bGain = targetGray / avgB;
+        var rGain = (Half)(targetGray / avgR);
+        var gGain = (Half)(targetGray / avgG);
+        var bGain = (Half)(targetGray / avgB);
 
         // Apply the gains to EVERY pixel in the image
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast access
-            Span<RgbaVector> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < pixelRow.Length; x++)
             {
                 var pixel = pixelRow[x];
-                float r = ClipF(pixel.R * rGain);
-                float g = ClipF(pixel.G * gGain);
-                float b = ClipF(pixel.B * bGain);
-                pixelRow[x] = new RgbaVector(r, g, b, 1.0f);
+                pixelRow[x].R = ClipH(pixel.R * rGain);
+                pixelRow[x].G = ClipH(pixel.G * gGain);
+                pixelRow[x].B = ClipH(pixel.B * bGain);
             }
         });
 
         return true;
     }
 
-    public static void WhitePatchWhiteBalance(this Image<RgbaVector> image, float r, float g, float b)
+    public static void WhitePatchWhiteBalance(this Image<RgbaHalf> image, float r, float g, float b)
     {
         float luminance = (float)MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
-        float rGain = r < 0.001f ? 1.0f : luminance / r;
-        float gGain = g < 0.001f ? 1.0f : luminance / g;
-        float bGain = b < 0.001f ? 1.0f : luminance / b;
+        var rGain = (Half)(r < 0.001f ? 1.0f : luminance / r);
+        var gGain = (Half)(g < 0.001f ? 1.0f : luminance / g);
+        var bGain = (Half)(b < 0.001f ? 1.0f : luminance / b);
 
         // Apply the gains to all pixels in the image
         int height = image.Height;
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<RgbaVector> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < pixelRow.Length; x++)
             {
                 var pixel = pixelRow[x];
-                float r = ClipF(pixel.R * rGain);
-                float g = ClipF(pixel.G * gGain);
-                float b = ClipF(pixel.B * bGain);
-                pixelRow[x] = new RgbaVector(r, g, b, 1.0f);
+                pixelRow[x].R = ClipH(pixel.R * rGain);
+                pixelRow[x].G = ClipH(pixel.G * gGain);
+                pixelRow[x].B = ClipH(pixel.B * bGain);
             }
         });
     }
@@ -290,7 +291,7 @@ public static partial class ImagingAlgorithms
 
     #region Highlights and Shadows
 
-    public static void HighlightsShadows(this Image<RgbaVector> image, float highlight, float shadow)
+    public static void HighlightsShadows(this Image<RgbaHalf> image, float highlight, float shadow)
     {
         const float compress = 0.5f;
         const float low_approximation = 0.01f;
@@ -304,16 +305,16 @@ public static partial class ImagingAlgorithms
         int height = image.Height;
         Parallel.For(0, height, rowIndex =>
         {
-            // Get a span for the current row for fast, safe access
-            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(rowIndex).Span;
+            // Get a span for the current row 
+            Span<RgbaHalf> row = image.DangerousGetPixelRowMemory(rowIndex).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 bool pixelChanged = false;
 
                 var pixel = row[x];
-                float r = pixel.R;
-                float g = pixel.G;
-                float b = pixel.B;
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
                 ColorUtilities.RgbToYiq(r, g, b, out float y, out float i, out float q);
 
                 // No blur yet , use same for now 
@@ -404,7 +405,9 @@ public static partial class ImagingAlgorithms
                 if (pixelChanged)
                 {
                     ColorUtilities.YiqToRgb(y, i, q, out r, out g, out b);
-                    row[x] = new RgbaVector( ClipF(r), ClipF(g), ClipF(b), 1.0f);
+                    row[x].R = ClipH((Half)r);
+                    row[x].G = ClipH((Half)g);
+                    row[x].B = ClipH((Half)b);
                 }
             }
         });
@@ -424,7 +427,7 @@ public static partial class ImagingAlgorithms
     // This avoids oversaturation of pixels that were already very saturated.
     // 
     // All three amounts [-1.00 to 1.00] on the UI 
-    public static void Vibrance(this Image<RgbaVector> image, float redAmount, float greenAmount, float blueAmount)
+    public static void Vibrance(this Image<RgbaHalf> image, float redAmount, float greenAmount, float blueAmount)
     {
         const float scaleFactor = 3.3f;
         redAmount *= scaleFactor;
@@ -440,13 +443,13 @@ public static partial class ImagingAlgorithms
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast access
-            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> row = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 var pixel = row[x];
-                float r = pixel.R;
-                float g = pixel.G;
-                float b = pixel.B;
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
 
                 // Calculate perceived luminance
                 float luminance = MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
@@ -469,7 +472,9 @@ public static partial class ImagingAlgorithms
                 float blueCoeff = 1.0f + (blueAmount * (1.0f - signBlue * saturation));
                 b = float.Lerp(luminance, b, blueCoeff);
 
-                row[x] = new RgbaVector(ClipF(r), ClipF(g), ClipF(b), 1.0f);
+                row[x].R = ClipH((Half)r);
+                row[x].G = ClipH((Half)g);
+                row[x].B = ClipH((Half)b);
             }
         });
     }
@@ -479,9 +484,9 @@ public static partial class ImagingAlgorithms
     #region SCurves Contrast
 
     // Adjusting the multiplier will alter contrast intensity
-    private static float[] CreateSCurveLUT(float contrastMultiplier)
+    private static Half[] CreateSCurveLUT(float contrastMultiplier)
     {
-        float[] lut = new float[LutSize];
+        Half[] lut = new Half[LutSize];
         Parallel.For(0, LutSize, i =>
         {
             // Normalize to 0.0 - 1.0  and apply power curve
@@ -489,33 +494,36 @@ public static partial class ImagingAlgorithms
 
             // Mathematical S-Curve (Sigmoid function)
             float sCurveValue = 1.0f / (1.0f + MathF.Exp(-contrastMultiplier * (normalized - 0.5f)));
-            lut[i] = ClipF(sCurveValue);
+            lut[i] = ClipH((Half)sCurveValue);
         });
+
         return lut;
     }
 
     public static void ApplySCurveContrast(
-        this Image<RgbaVector> image, float redAmount, float greenAmount, float blueAmount)
+        this Image<RgbaHalf> image, float redAmount, float greenAmount, float blueAmount)
     {
         // Only one table should change between calls, consider caching 
-        float[] redLut = CreateSCurveLUT(redAmount);
-        float[] greenLut = CreateSCurveLUT(greenAmount);
-        float[] blueLut = CreateSCurveLUT(blueAmount);
+        Half[] redLut = CreateSCurveLUT(redAmount);
+        Half[] greenLut = CreateSCurveLUT(greenAmount);
+        Half[] blueLut = CreateSCurveLUT(blueAmount);
 
         // Parallelize the loop over the rows
         int height = image.Height;
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<RgbaVector> row = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> row = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < row.Length; x++)
             {
                 // pixel manipulation
                 var pixel = row[x];
-                float r = LutLookup(redLut, pixel.R);
-                float g = LutLookup(greenLut, pixel.G);
-                float b = LutLookup(blueLut, pixel.B);
-                row[x] = new RgbaVector(ClipF(r), ClipF(g), ClipF(b), 1.0f);
+                Half r = LutLookup(redLut, pixel.R);
+                Half g = LutLookup(greenLut, pixel.G);
+                Half b = LutLookup(blueLut, pixel.B);
+                row[x].R = ClipH(r);
+                row[x].G = ClipH(g);
+                row[x].B = ClipH(b);
             }
         });
     }
@@ -525,7 +533,7 @@ public static partial class ImagingAlgorithms
     #region Vignette
 
     public static void Vignette(
-        this Image<RgbaVector> image, float top, float bottom, float left, float right, float lightness)
+        this Image<RgbaHalf> image, float top, float bottom, float left, float right, float lightness)
     {
         int topRow = (int)(image.Height * top);
         int bottomRow = (int)(image.Height * (1.0f - bottom));
@@ -537,7 +545,6 @@ public static partial class ImagingAlgorithms
         // Parallelize the loop over the rows
         int height = image.Height;
         Parallel.For(0, height, row =>
-        // for (int row = 0; row < height; row++)
         {
             // Inside the vignette area 
             float topFactor = 0.0f;
@@ -557,7 +564,7 @@ public static partial class ImagingAlgorithms
             }
 
             // Get a span for the current row for fast, safe access
-            Span<RgbaVector> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
+            Span<RgbaHalf> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
             for (int col = 0; col < rowSpan.Length; col++)
             {
                 if (row > topRow && row < bottomRow && col > leftCol && col < rightCol)
@@ -583,10 +590,9 @@ public static partial class ImagingAlgorithms
                 }
 
                 var pixel = rowSpan[col];
-                float r = pixel.R;
-                float g = pixel.G;
-                float b = pixel.B;
-                float a = pixel.A;
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
 
                 float vignetteFactor = MathF.Max(MathF.Max(topFactor, bottomFactor), MathF.Max(leftFactor, rightFactor));
                 if (darkVignette)
@@ -600,7 +606,9 @@ public static partial class ImagingAlgorithms
 
                     // Convert back to float RGB 
                     ColorUtilities.HslToRgb(hue, saturation, pixelLightness, out float tr, out float tg, out float tb);
-                    rowSpan[col] = new RgbaVector(ClipF(tr), ClipF(tg), ClipF(tb), a);
+                    rowSpan[col].R = ClipH((Half)tr);
+                    rowSpan[col].G = ClipH((Half)tg);
+                    rowSpan[col].B = ClipH((Half)tb);
                 }
                 else
                 {
@@ -610,10 +618,11 @@ public static partial class ImagingAlgorithms
                     r *= scale;
                     g *= scale;
                     b *= scale;
-                    rowSpan[col] = new RgbaVector(ClipF(r), ClipF(g), ClipF(b), a);
+                    rowSpan[col].R = ClipH((Half)r);
+                    rowSpan[col].G = ClipH((Half)g);
+                    rowSpan[col].B = ClipH((Half)b);
                 }
             }
-            // } // 'classic' for
         }); // Parallel For 
     }
 
@@ -621,18 +630,20 @@ public static partial class ImagingAlgorithms
 
     #region LUT 
 
-    public static void Lut(this Image<RgbaVector> image, Lut lut)
+    public static void Lut(this Image<RgbaHalf> image, Lut lut)
     {
         int height = image.Height;
         Parallel.For(0, height, y =>
         {
             // Get a span for the current row for fast, safe access
-            Span<RgbaVector> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
             for (int x = 0; x < pixelRow.Length; x++)
             {
                 var pixel = pixelRow[x];
                 var transformed = lut.LookupTetrahedral(pixel.R, pixel.G, pixel.B);
-                pixelRow[x] = new RgbaVector(transformed.B, transformed.G, transformed.R, 1.0f);
+                pixelRow[x].R = (Half)transformed.B;
+                pixelRow[x].G = (Half)transformed.G;
+                pixelRow[x].B = (Half)transformed.R;
             }
         });
     }

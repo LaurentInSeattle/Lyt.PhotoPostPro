@@ -5,7 +5,7 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
 {
     public float RotationAngle { get ; set ; } // Degrees
 
-    public override void Initialize(Image<RgbaVector> _) => this.Clear();
+    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     public override Frame? Reset()
     {

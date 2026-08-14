@@ -3,7 +3,7 @@ namespace Lyt.PhotoPostPro.Controls;
 public partial class GammaCurveImageControl : UserControl
 {
     private const double canvasHeight = 256.0;
-    private const double canvasWidth = 512.0;
+    private const double canvasWidth = 480.0;
 
     public enum BrushColor { Red, Green, Blue, Luminosity }
 
@@ -34,12 +34,12 @@ public partial class GammaCurveImageControl : UserControl
         PathGeometry geometryCurve = new();
         using (var context = geometryCurve.Open())
         {
-            float[] values = curve.Points;
+            Half[] values = curve.Points;
             for (int i = 0; i < values.Length; i++)
             {
                 // CONSIDER :
                 // Compensate for the non-square frame so that we can see a significant change on the Y axis 
-                double y = canvasHeight * (1.0 - values[i]);
+                double y = canvasHeight * (1.0 - (double) values[i]);
                 double x = i * canvasWidth / (values.Length - 1);
                 Point point = new(x, y);
 

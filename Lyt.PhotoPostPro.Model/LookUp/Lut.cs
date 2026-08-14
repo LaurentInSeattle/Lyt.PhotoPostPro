@@ -282,6 +282,15 @@ public sealed class Lut
             this.TetrahedralInterpolate(r * cubeSizeMinusOne, g * cubeSizeMinusOne, b * cubeSizeMinusOne);
     }
 
+    // Simplified API that should improve pref' just a bit 
+    public LutColor LookupTetrahedral(Half r, Half g, Half b)
+    {
+        int cubeSizeMinusOne = this.Dimension - 1;
+        return
+            this.TetrahedralInterpolate(
+                (float)r * cubeSizeMinusOne, (float)g * cubeSizeMinusOne, (float)b * cubeSizeMinusOne);
+    }
+
 #if DEBUG
     public LutColor Lookup(LutColor color)
     {

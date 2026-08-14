@@ -127,22 +127,22 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void TannerHellandWhiteBalance(float kelvin) =>
-        this.ApiAction(() =>
-        {
-            if ((kelvin < 1000.0) || (kelvin > 40000.0))
-            {
-                return false;
-            }
+    //public void TannerHellandWhiteBalance(float kelvin) =>
+    //    this.ApiAction(() =>
+    //    {
+    //        if ((kelvin < 1000.0) || (kelvin > 40000.0))
+    //        {
+    //            return false;
+    //        }
 
-            if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
-            {
-                this.LastResultFrame = whiteBalanceStep.TannerHellandWhiteBalance(kelvin);
-                return true;
-            }
+    //        if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
+    //        {
+    //            this.LastResultFrame = whiteBalanceStep.TannerHellandWhiteBalance(kelvin);
+    //            return true;
+    //        }
 
-            return false;
-        });
+    //        return false;
+    //    });
 
     public void ColorMatrixWhiteBalance(float temperature) =>
         this.ApiAction(() =>

@@ -7,7 +7,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
     private string currentDirectoryExport = string.Empty;
 
-    public override void Initialize(Image<RgbaVector> originalImage) { }
+    public override void Initialize(Image<RgbaHalf> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
@@ -89,7 +89,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             {
                 // Resize and rescale 
                 // ! Compiler fail ? Verified at begin of method 
-                Image<RgbaVector> imageToResize = this.ResultImage!.Clone();
+                Image<RgbaHalf> imageToResize = this.ResultImage!.Clone();
                 switch (imageParameters.Action)
                 {
                     default:
@@ -125,7 +125,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add watermark, if specified
-                Image<RgbaVector> imageWithWatermark = imageToResize;
+                Image<RgbaHalf> imageWithWatermark = imageToResize;
                 if (imageParameters.WithWatermark)
                 {
                     Watermark? watermark = model.Watermarks.FromKey(imageParameters.WatermarkKey);
@@ -156,7 +156,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add Borders, if specified
-                Image<RgbaVector> imageWithBorders = imageWithWatermark;
+                Image<RgbaHalf> imageWithBorders = imageWithWatermark;
                 if (imageParameters.WithBorders)
                 {
                     Color borderColor =
@@ -178,7 +178,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Add signature, if specified
-                Image<RgbaVector> imageWithSignature = imageWithBorders;
+                Image<RgbaHalf> imageWithSignature = imageWithBorders;
                 if (imageParameters.WithSignature)
                 {
                     Signature? signature = model.Signatures.FromKey(imageParameters.SignatureKey);
@@ -228,7 +228,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
                 }
 
                 // Saving export formatted image: pick encoder and file extension  
-                Image<RgbaVector> finalImage = imageWithSignature;
+                Image<RgbaHalf> finalImage = imageWithSignature;
                 var encoder = imageParameters.ImageEncoder;
                 string extension = imageParameters.FileExtension;
                 string exportPath =
