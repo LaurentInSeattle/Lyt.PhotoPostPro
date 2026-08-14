@@ -5,7 +5,7 @@ Bugs ~ Major Issues
 
 - Add new Images messed up thumb files ? 
 
-- Start editing you automatically give one star 
+- Start editing automatically gives you one star 
 
 - Ability to rate again in Export panel 
 
@@ -36,7 +36,7 @@ WIP
 
 - Gallery: Slide show 
 
-- Gallery: Auto Add on Export 
+- Gallery: Auto Add on Export if 5 stars  
 
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
@@ -47,6 +47,8 @@ TODO First
 - Export (copy) the editing JSON file along with the images.
 
 - Image Exports: Quick save
+
+- Spotlight effect, aka "Ray of Light" effect.
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
 
@@ -94,11 +96,11 @@ Missing Features
 
 --- Nice to Have ---
 
-- "Ray of Light" effect.
-
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Ability to minimize metadata panel 
+
+- Show / Hide Histograms 
 
 - Optimal viewer layout 
 
