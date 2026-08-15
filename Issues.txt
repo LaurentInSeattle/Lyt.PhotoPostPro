@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Start editing automatically gives you one star if rating is zero
-
 - Ability to rate again in Export panel 
 
 - Message if nothing left to Rate / Cull and hide the button 
@@ -31,8 +29,6 @@ Bugs - No Repro
 
 WIP
 ---
-
-- Gallery: Auto Add on Export if 5 stars  
 
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 

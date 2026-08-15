@@ -17,7 +17,7 @@ public sealed partial class LibraryManager
 
         // Enumerate files in gallery folder and filter them 
         var files =
-            Directory.EnumerateFiles(this.galleryFolderPath, "*.jpg", new EnumerationOptions()
+            Directory.EnumerateFiles(this.GalleryFolderPath, "*.jpg", new EnumerationOptions()
             {
                 IgnoreInaccessible = true,
                 RecurseSubdirectories = true,
@@ -37,6 +37,30 @@ public sealed partial class LibraryManager
             this.dispatcher.OnIdle(this.LoadFirstGalleryFile);
         }
     }
+
+    public bool AddToGallery(string sourceFilePath)
+    {
+        try
+        {
+            if (!this.CanAddFile(sourceFilePath))
+            {
+                return false;
+            }
+
+            string filename = Path.GetFileName(sourceFilePath);
+            string targetFilePath = Path.Combine(this.GalleryFolderPath, filename);
+            File.Copy(sourceFilePath, targetFilePath, overwrite: true);
+
+            this.GalleryContent.Add(targetFilePath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false ;
+        }
+    }
+
 
     public bool CanAddFile(string filePath)
     {

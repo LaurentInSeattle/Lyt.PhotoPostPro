@@ -47,6 +47,12 @@ public sealed class PostProcess
     {
         if (this.Workflow is not null)
         {
+            // Auto gives a first star when beginning editing
+            if ( this.Metadata.Rating == 0)
+            {
+                ++this.Metadata.Rating;
+            }
+
             this.Metadata.LastEditedUTC = DateTime.UtcNow;
             this.Model.LibraryManager.SaveMetadata(this.Metadata);
 

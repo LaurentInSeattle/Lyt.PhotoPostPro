@@ -15,6 +15,8 @@ public sealed class ImageParameters
 
     public int JpegQuality { get; set; } = 95;
 
+    public bool IsGalleryFormat { get; set; } = false;
+
     public bool WithSignature { get; set; } = false;
 
     public string SignatureKey { get; set; } = string.Empty;
@@ -43,6 +45,7 @@ public sealed class ImageParameters
                 MegaBytes = this.MegaBytes,
                 OutputFormat = this.OutputFormat,
                 JpegQuality = this.JpegQuality,
+                IsGalleryFormat = this.IsGalleryFormat,
                 WithSignature = this.WithSignature,
                 SignatureKey = this.SignatureKey,
                 WithWatermark = this.WithWatermark,
@@ -54,8 +57,10 @@ public sealed class ImageParameters
                 PostFix = this.PostFix
             };
 
-    // Original size, no name change, very high JPG quality, no watermark, no signature, no borders, no postfix
-    public static ImageParameters Default => new();
+    // Default
+    //      Original size, no name change, very high JPG quality, gallery format, no watermark,
+    //      no signature, no borders, no postfix
+    public static ImageParameters Default => new() { IsGalleryFormat = true } ;
 
     // Resized to Full HD in longuest dimension, high JPG quality, no watermark, no signature, no borders
     public static ImageParameters FullHd =>

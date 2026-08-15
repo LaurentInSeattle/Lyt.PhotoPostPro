@@ -261,9 +261,18 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
         libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 
+        bool hasBeenExportedToGallery = false;
+        bool isFiveStars = metadata.Rating == 5 ;
+
         foreach (var imageParameters in exportParameters.Images)
         {
-            _ = ExportImage(imageParameters, subDirectoryExport);
+            string exportPath = ExportImage(imageParameters, subDirectoryExport);
+            if (imageParameters.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
+            {
+                // Dont care if fails (at least for now) 
+                _ = model.LibraryManager.AddToGallery(sourceFilePath: exportPath);
+                hasBeenExportedToGallery = true;
+            } 
         }
 
         // Must return Frame? for base class override compliance 
