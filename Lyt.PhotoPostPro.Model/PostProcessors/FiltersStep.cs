@@ -51,7 +51,11 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case Filter.Vignette:
-                this.Vignette();
+                if (ppp.FilterAmount > 0.001)
+                {
+                    this.Vignette(ppp.FilterAmount);
+                }
+
                 break;
 
             case Filter.BlackWhite:
@@ -79,8 +83,9 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        // Image is unchanged if the amount is 0.0, for Grayscale and Sepia
+        // Image is unchanged if the amount is 0.0, for Vignette, Grayscale and Sepia
         if ((this.SelectedFilter == Filter.None) ||
+            ((this.SelectedFilter == Filter.Vignette) && (this.Amount < 0.001)) ||
             ((this.SelectedFilter == Filter.Grayscale) && (this.Amount < 0.001)) ||
             ((this.SelectedFilter == Filter.Sepia) && (this.Amount < 0.001)))
         {
@@ -105,7 +110,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
 
             // All other filters are always applied without parameter 
             case Filter.Vignette:
-                clone.Vignette();
+                clone.Vignette(this.Amount);
                 break;
 
             case Filter.BlackWhite:
@@ -145,10 +150,10 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    internal Frame? Vignette()
+    internal Frame? Vignette(float vignetteAmount)
     {
         this.SelectedFilter = Filter.Vignette;
-        this.Amount = 0.0f;
+        this.Amount = vignetteAmount;
         return this.Transform(withFrame: true);
     }
 

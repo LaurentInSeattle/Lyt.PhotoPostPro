@@ -380,12 +380,12 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void Vignette() =>
+    public void Vignette(float vignetteAmount) =>
         this.ApiAction(() =>
         {
             if (this.Workflow.CurrentStep is FiltersStep filtersStep)
             {
-                this.LastResultFrame = filtersStep.Vignette();
+                this.LastResultFrame = filtersStep.Vignette(vignetteAmount);
                 return true;
             }
 

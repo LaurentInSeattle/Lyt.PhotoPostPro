@@ -147,7 +147,9 @@ public sealed partial class FiltersToolboxViewModel :
             return;
         }
 
-        if ((this.selectedFilter == FiltersStep.Filter.Grayscale) || (this.selectedFilter == FiltersStep.Filter.Sepia))
+        if ((this.selectedFilter == FiltersStep.Filter.Grayscale) ||
+            (this.selectedFilter == FiltersStep.Filter.Sepia) ||
+            (this.selectedFilter == FiltersStep.Filter.Vignette))
         {
             this.ThrottleModelUpdate(() =>
             {
@@ -165,6 +167,10 @@ public sealed partial class FiltersToolboxViewModel :
                     case FiltersStep.Filter.Sepia:
                         this.model.Sepia(this.amount);
                         break;
+
+                    case FiltersStep.Filter.Vignette:
+                        this.model.Vignette(this.amount);
+                        break;
                 }
             });
         }
@@ -178,10 +184,6 @@ public sealed partial class FiltersToolboxViewModel :
                 case FiltersStep.Filter.None:
                     // Call on the model, and NOT the workflow 
                     this.model.Reset();
-                    break;
-
-                case FiltersStep.Filter.Vignette:
-                    this.model.Vignette();
                     break;
 
                 case FiltersStep.Filter.BlackWhite:

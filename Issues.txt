@@ -1,25 +1,11 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Add slider and use radius parameters for Vignette 
-
-using (var image = Image.Load("input.jpg"))
-{
-	image.Mutate(x => x.Vignette(
-		Color.Black, 
-		radiusX: 200f, 
-		radiusY: 150f, 
-		rectangle: new Rectangle(0, 0, image.Width, image.Height)
-	));
-	
-	image.Save("output.jpg");
-}
-
 - Start editing automatically gives you one star if rating is zero
 
 - Ability to rate again in Export panel 
 
-- Message if nothing left to Rate / Cull 
+- Message if nothing left to Rate / Cull and hide the button 
 
 - Folder Tree for Added not updating correctly 
 

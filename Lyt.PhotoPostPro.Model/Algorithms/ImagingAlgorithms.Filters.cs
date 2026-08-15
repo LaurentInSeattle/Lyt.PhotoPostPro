@@ -30,11 +30,14 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Vignette(this Image<RgbaHalf> image)
+    public static bool Vignette(this Image<RgbaHalf> image, float vignetteAmount)
     {
-        // TODO 
-        // USE radius 
-        image.Mutate(x => x.Vignette(Color.Black));
+        var color = Color.ParseHex("#A8202020", ColorHexFormat.Argb);
+        float amount = (1.0f - vignetteAmount); 
+        float radiusX = image.Width *  amount / 2.0f;
+        float radiusY = image.Height * amount / 2.0f;
+        image.Mutate(x => x.Vignette(
+            color, radiusX, radiusY, rectangle: new Rectangle(0, 0, image.Width, image.Height)));
         return true;
     }
 
