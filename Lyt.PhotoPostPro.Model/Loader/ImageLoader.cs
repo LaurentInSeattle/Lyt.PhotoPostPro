@@ -3,8 +3,6 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
-using System.Net.Http.Headers;
-
 public static class ImageLoader
 {
     public const int ThumbnailQuality = 80;
