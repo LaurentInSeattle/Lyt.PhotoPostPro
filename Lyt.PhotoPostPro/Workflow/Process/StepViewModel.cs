@@ -32,6 +32,7 @@ public partial class StepViewModel<TView> :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+
         this.Subscribe<SourceImageGeneratedMessage>();
         this.Subscribe<ResultImageGeneratedMessage>();
         this.model.GetStepSourceImage();
@@ -44,6 +45,11 @@ public partial class StepViewModel<TView> :
         this.Unregister<ResultImageGeneratedMessage>();
         this.SourceImage?.Dispose();
         this.ResultImage?.Dispose();
+        if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
+        {
+            this.sourceImageFrame.Dispose();
+        }
+
         base.Deactivate();
     }
 
