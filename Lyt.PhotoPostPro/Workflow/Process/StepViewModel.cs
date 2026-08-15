@@ -43,12 +43,19 @@ public partial class StepViewModel<TView> :
     {
         this.Unregister<SourceImageGeneratedMessage>();
         this.Unregister<ResultImageGeneratedMessage>();
-        this.SourceImage?.Dispose();
-        this.ResultImage?.Dispose();
-        if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
+
+        Dispatch.OnUiThread(() =>
         {
-            this.sourceImageFrame.Dispose();
-        }
+            if (this.IsActivated)
+            {
+                this.SourceImage?.Dispose();
+                this.ResultImage?.Dispose();
+                if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
+                {
+                    this.sourceImageFrame.Dispose();
+                }
+            }
+        }, DispatcherPriority.ApplicationIdle);
 
         base.Deactivate();
     }
