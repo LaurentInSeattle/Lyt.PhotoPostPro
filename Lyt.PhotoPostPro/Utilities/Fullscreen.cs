@@ -26,7 +26,7 @@ public sealed class Fullscreen(Window mainWindow)
                 throw new InvalidOperationException("Failed to remove view");
             }
 
-            // Let avalonia handle the layout pas now that the view is now detached 
+            // Let avalonia handle the layout pass now that the view is now detached 
             // Waiting two frames to ensure the layout is updated before creating the fullscreen window
             Schedule.OnUiThread(
                 130,

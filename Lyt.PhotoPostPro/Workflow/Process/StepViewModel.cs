@@ -10,7 +10,7 @@ public partial class StepViewModel<TView> :
 {
     protected readonly PhotoPostProModel model;
 
-    private Frame? sourceImageFrame; 
+    private Frame? sourceImageFrame;
 
     public StepViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
 
@@ -44,18 +44,26 @@ public partial class StepViewModel<TView> :
         this.Unregister<SourceImageGeneratedMessage>();
         this.Unregister<ResultImageGeneratedMessage>();
 
-        Dispatch.OnUiThread(() =>
+        if (this.IsActivated)
         {
-            if (this.IsActivated)
+            Dispatch.OnUiThread(() =>
             {
-                this.SourceImage?.Dispose();
-                this.ResultImage?.Dispose();
+                this.SourceImageIsVisible = false;
+                this.ResultImageIsVisible = false;
+
+                // Do NOT dispose
+                // This creates Bitmaps to fail... Especially when going Full Screen or transitioning back
+                //
+                // this.SourceImage?.Dispose();
+                // this.ResultImage?.Dispose();
+
+                // Clear the Source Image Frame in case we have not received a Result Image 
                 if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
                 {
                     this.sourceImageFrame.Dispose();
                 }
-            }
-        }, DispatcherPriority.ApplicationIdle);
+            }, DispatcherPriority.ApplicationIdle);
+        }
 
         base.Deactivate();
     }
@@ -67,7 +75,10 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
-                this.sourceImageFrame = message.Frame;    
+                this.sourceImageFrame = message.Frame;
+
+                // do NOT dispose the frame just yet, because the same frame instance could be given 
+                // in the result image message: See below
                 var size = bitmap.PixelSize;
                 this.IsPortrait = size.Height >= size.Width;
                 this.SourceImageIsVisible = true;
@@ -86,10 +97,12 @@ public partial class StepViewModel<TView> :
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
                 message.Frame.Dispose();
+
+                // Now we can dispose the source image frame, if not already done in the line just above 
                 if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
                 {
                     this.sourceImageFrame.Dispose();
-                } 
+                }
 
                 var size = bitmap.PixelSize;
                 this.IsPortrait = size.Height >= size.Width;
@@ -105,12 +118,12 @@ public partial class StepViewModel<TView> :
     // public because base is ViewModel 
     public override void Initialize()
     {
+        this.SourceImageIsVisible = false;
+        this.ResultImageIsVisible = false;
         this.SourceImage?.Dispose();
         this.ResultImage?.Dispose();
         this.ResultImage = null;
-        this.ResultImageIsVisible = false;
         this.SourceImage = null;
-        this.SourceImageIsVisible = false;
     }
 
     protected virtual void OnSourceImageReceived(WriteableBitmap bitmap) { }

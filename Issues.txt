@@ -50,6 +50,8 @@ WIP
 
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
+- Dropped LUT's 
+
 
 TODO First
 ----------
@@ -158,8 +160,6 @@ Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp)
 Check with:
 https://github.com/laheller/SharpLibraw  
 https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
-
-- No support yet for Half pixel type in ImageSharp 
 
 - No support yet for HEIC images in ImageSharp 
 
