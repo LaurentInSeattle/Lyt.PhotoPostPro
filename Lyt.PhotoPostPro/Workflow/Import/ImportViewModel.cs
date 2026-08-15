@@ -138,6 +138,7 @@ public sealed partial class ImportViewModel : ViewModel<ImportView>, IDropPathHa
     private void OnImageLoaded(Frame frame)
     {
         this.SourceImage = frame.ToWriteableBitmap();
+        frame.Dispose();
         Dispatch.OnUiThread(this.View.ZoomableImage.ZoomToFit );
     }
 

@@ -10,6 +10,8 @@ public partial class StepViewModel<TView> :
 {
     protected readonly PhotoPostProModel model;
 
+    private Frame? sourceImageFrame; 
+
     public StepViewModel() => this.model = App.GetRequiredService<PhotoPostProModel>();
 
     [ObservableProperty]
@@ -40,6 +42,8 @@ public partial class StepViewModel<TView> :
     {
         this.Unregister<SourceImageGeneratedMessage>();
         this.Unregister<ResultImageGeneratedMessage>();
+        this.SourceImage?.Dispose();
+        this.ResultImage?.Dispose();
         base.Deactivate();
     }
 
@@ -50,6 +54,7 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                this.sourceImageFrame = message.Frame;    
                 var size = bitmap.PixelSize;
                 this.IsPortrait = size.Height >= size.Width;
                 this.SourceImageIsVisible = true;
@@ -67,6 +72,12 @@ public partial class StepViewModel<TView> :
             if (this.IsActivated)
             {
                 var bitmap = message.Frame.ToWriteableBitmap();
+                message.Frame.Dispose();
+                if ((this.sourceImageFrame is not null) && (this.sourceImageFrame.Data is not null))
+                {
+                    this.sourceImageFrame.Dispose();
+                } 
+
                 var size = bitmap.PixelSize;
                 this.IsPortrait = size.Height >= size.Width;
                 this.ResultImageIsVisible = true;
@@ -81,6 +92,8 @@ public partial class StepViewModel<TView> :
     // public because base is ViewModel 
     public override void Initialize()
     {
+        this.SourceImage?.Dispose();
+        this.ResultImage?.Dispose();
         this.ResultImage = null;
         this.ResultImageIsVisible = false;
         this.SourceImage = null;

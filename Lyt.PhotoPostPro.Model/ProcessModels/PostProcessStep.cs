@@ -43,7 +43,13 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
     public virtual void Initialize(Image<RgbaHalf> originalImage) { } 
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Finish() { }
+    public virtual void Finish() 
+    {
+        this.SourceImage?.Dispose();
+        this.SourceImage = null;
+        this.ResultImage?.Dispose();
+        this.ResultImage = null;
+    }
 
     // Default implementation restore original into result 
     public virtual Frame? Reset()

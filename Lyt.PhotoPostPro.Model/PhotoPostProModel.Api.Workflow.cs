@@ -112,6 +112,8 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             // ! CurrentPostProcess is checked for being not null by ApiAction wrapper 
             this.CurrentPostProcess!.Begin();
+
+            this.dispatcher.OnIdle(() => GC.Collect());
             return true;
         });
     }
@@ -206,7 +208,10 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             this.Workflow.Finish();
+            this.LastResultFrame?.Dispose();
             this.LastResultFrame = null;
+
+            this.dispatcher.OnIdle(()=> GC.Collect());
 
             // No workflow notification
             return false;

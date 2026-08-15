@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Luts\PastelMorning.cube" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Assets\Luts\BlueArchitecture.cube" />
     <EmbeddedResource Include="Assets\Luts\ColdChrome.cube" />
     <EmbeddedResource Include="Assets\Luts\CrispAutumn.cube" />

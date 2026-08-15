@@ -59,22 +59,4 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Workflow\Culling\CullingImageView.axaml.cs">
-      <DependentUpon>CullingImageView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Gallery\GalleryView.axaml.cs">
-      <DependentUpon>GalleryView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Import\ImportView.axaml.cs">
-      <DependentUpon>ImportView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Lut\LutImageView.axaml.cs">
-      <DependentUpon>LutImageView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Lut\LutExplorerView.axaml.cs">
-      <DependentUpon>LutExplorerView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>

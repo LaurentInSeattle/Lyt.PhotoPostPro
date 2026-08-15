@@ -563,7 +563,7 @@ public static partial class ImagingAlgorithms
                 bottomFactor = deltaBottom / (image.Height - bottomRow);
             }
 
-            // Get a span for the current row for fast, safe access
+            // Get a span for the current row 
             Span<RgbaHalf> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
             for (int col = 0; col < rowSpan.Length; col++)
             {

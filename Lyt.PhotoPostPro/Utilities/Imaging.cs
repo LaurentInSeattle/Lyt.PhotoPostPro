@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Utilities;
 
-using System.Runtime.Intrinsics.X86;
-
 public static class Imaging
 {
     public static unsafe WriteableBitmap ToWriteableBitmap(this Frame frame)

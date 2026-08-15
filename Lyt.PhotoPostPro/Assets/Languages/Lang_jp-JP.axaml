@@ -241,11 +241,11 @@
 
     <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">マニュアル - 基本カラーマトリックス (高速)</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T.オフセット:</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">温度オフセット</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">マニュアル - 直接色温度</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T・ケルビン:</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">ケルビン</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">自動 - 「灰色の世界」アルゴリズム</system:String>
 

@@ -12,7 +12,7 @@ public sealed partial class LibraryManager
     public const string ExportsFolderName = "Exports";
 
     public const int CachedHdImageCount = 120;
-    public const int CachedGalleryImageCount = 8;
+    public const int CachedGalleryImageCount = 4;
     
     private readonly Lock lockObject;
 
