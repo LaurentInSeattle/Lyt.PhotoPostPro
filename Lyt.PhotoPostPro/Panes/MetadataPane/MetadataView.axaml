@@ -160,13 +160,14 @@
 				HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton
+				x:Name="WebNavigateButton"
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
 				Style="{StaticResource SmallPanelIconButton}"
-				IsVisible="{Binding HasLocation}"
+				IsVisible="{Binding HasLocation, FallbackValue=x:False}"
+				IsShown="{Binding HasLocation, FallbackValue=x:False}"
 				GlyphSource="globe"
 				HorizontalAlignment="Right" VerticalAlignment="Center"
-				Margin="0 0 16 0"
-				Width="120"
+				Margin="0 0 20 0"
 				Command="{Binding OnWebNavigate}"
 				GlyphStrokeThickness="0.05" 
 				/>		

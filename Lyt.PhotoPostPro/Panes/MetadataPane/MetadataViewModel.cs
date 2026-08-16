@@ -65,9 +65,24 @@ public sealed partial class MetadataViewModel :
 
     public MetadataViewModel()
     {
+        // Needed to hide the web navigate button when there is no metadata yet
+        // and enforce property changed 
+        this.HasLocation = true;
+        this.HasLocation = false;
+
         this.Subscribe<MetadataGeneratedMessage>();
         this.Subscribe<LanguageChangedMessage>();
     }
+
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+
+        this.HasLocation = false;
+        this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
+        this.View.WebNavigateButton.IsShown = false;
+        this.View.WebNavigateButton.IsVisible = false;
+    } 
 
     public MetadataViewModel(Metadata metadata) : this()
     {
@@ -80,6 +95,7 @@ public sealed partial class MetadataViewModel :
         Dispatch.OnUiThread(() =>
         {
             this.metadata = message.Metadata;
+            this.HasLocation = false;
             this.Update(this.metadata);
         }, DispatcherPriority.ApplicationIdle);
     }
@@ -101,6 +117,7 @@ public sealed partial class MetadataViewModel :
     {
         this.metadataLatitude = double.NaN;
         this.metadataLongitude = double.NaN;
+        this.HasLocation = false;
 
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
         this.SizeMB = metadata.SizeMB;
@@ -159,12 +176,22 @@ public sealed partial class MetadataViewModel :
             this.Longitude = longitude + " " + metadata.LongitudeString;
             this.metadataLatitude = metadata.Latitude;
             this.metadataLongitude = metadata.Longitude;
+            if (this.IsBound)
+            {
+                this.View.WebNavigateButton.Margin = new Thickness(0, 0, 16, 0);
+                this.View.WebNavigateButton.IsShown = true;
+            }
         }
         else
         {
             this.Location = string.Empty;
             this.Latitude = string.Empty;
             this.Longitude = string.Empty;
+            if (this.IsBound)
+            {
+                this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
+                this.View.WebNavigateButton.IsShown = false;
+            } 
         }
     }
 
