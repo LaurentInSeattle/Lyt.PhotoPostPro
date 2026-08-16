@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">इस सेट को रेट करें और निकालें</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">नथिंग टू कल, ऑल वन स्टार या मोर</system:String>
+
     <system:String x:Key="Library.ProcessImage">इस छवि को संसाधित करें</system:String>
 
     <system:String x:Key="Library.RemoveImage">लाइब्रेरी से हटाएँ</system:String>

@@ -53,7 +53,7 @@
 
     <system:String x:Key="Workflow.Culling.Ready">Prêt.</system:String>
 
-    <system:String x:Key="Workflow.Culling.AddStar">Ajouter une étoile</system:String>
+    <system:String x:Key="Workflow.Culling.AddStar">Ajouter Une</system:String>
 
     <system:String x:Key="Workflow.Culling.RemoveStar">Rétrograder</system:String>
 
@@ -412,6 +412,8 @@
     <system:String x:Key="Workflow.Library.Thumbnail.File">Déposer:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Évaluez et triez ce groupe</system:String>
+
+    <system:String x:Key="Library.RateAndCullNothing">Rien à éliminer, toutes les photos ont une étoile ou plus</system:String>
 
     <system:String x:Key="Library.ProcessImage">Traiter cette Image</system:String>
 

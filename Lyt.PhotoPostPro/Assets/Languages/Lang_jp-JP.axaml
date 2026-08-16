@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">このセットを評価して選別する</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">除外するものは何もなく、すべて 1 つ星以上</system:String>
+
     <system:String x:Key="Library.ProcessImage">この画像を処理する</system:String>
 
     <system:String x:Key="Library.RemoveImage">ライブラリから削除</system:String>

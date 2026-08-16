@@ -141,7 +141,8 @@
 						<RowDefinition Height="64" /> <!-- Reject -->
 						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
-						<RowDefinition Height="500" />
+						<RowDefinition Height="420" /> <!-- Meta -->
+						<RowDefinition Height="64" /> <!-- Back -->
 					</Grid.RowDefinitions>
 					<glyphs:GlyphButton
 						x:Name="RemoveStarButton"
@@ -208,6 +209,20 @@
 						HorizontalAlignment="Stretch" 
 						Grid.Row="8" Grid.ColumnSpan="2"
 						Margin="4 0 4 0"
+						/>
+					<glyphs:GlyphButton
+						x:Name="BackButton"
+						Grid.Row="9" Grid.ColumnSpan="2"
+						Margin="4 0 4 0"
+						Style="{StaticResource ViewIconButton}"
+						FontSize="24"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Width="460" Height="56"
+						ButtonBackground="BorderlessRectangle"
+						GlyphStrokeThickness="0"
+						GlyphSource="dismiss"
+						Text="{DynamicResource Workflow.Export.Finish}"
+						Command="{Binding OnBackToLibrary}"
 						/>
 				</Grid>
 			</Grid>

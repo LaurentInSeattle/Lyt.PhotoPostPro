@@ -295,6 +295,7 @@
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
 	<system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
 	<system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
+	<system:String x:Key="Library.RateAndCullNothing">Nothing to Cull, All Images have One Star or More</system:String>
 	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
 	<system:String x:Key="Library.Navigate">Navigate to Library Folder</system:String>

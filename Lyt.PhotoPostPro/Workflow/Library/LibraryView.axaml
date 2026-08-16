@@ -56,10 +56,18 @@
 			Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
 			DataContext="{Binding LibraryThumbnailsPanelViewModel}"
 			/>
+		<TextBlock
+			Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+			IsVisible="{Binding IsCullTextVisible}"
+			Margin="0 24 12 0"
+			HorizontalAlignment="Right" VerticalAlignment="Top"
+			Text="{DynamicResource Library.RateAndCullNothing}"
+			Theme="{StaticResource H3}"
+			/>
 		<glyphs:GlyphButton
 			x:Name="CullButton"
 			Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
-			IsVisible="{Binding IsAddedSelected}"
+			IsVisible="{Binding IsCullButtonVisible}"
 			Style="{StaticResource ViewIconButton}"
 			FontSize="24"
 			HorizontalAlignment="Right" VerticalAlignment="Top"

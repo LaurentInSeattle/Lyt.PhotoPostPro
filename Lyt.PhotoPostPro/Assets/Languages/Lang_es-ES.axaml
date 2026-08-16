@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">Califica y selecciona este conjunto</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">Nada que sacrificar, todo una estrella o más</system:String>
+
     <system:String x:Key="Library.ProcessImage">Procesar esta imagen</system:String>
 
     <system:String x:Key="Library.RemoveImage">Eliminar de la biblioteca</system:String>

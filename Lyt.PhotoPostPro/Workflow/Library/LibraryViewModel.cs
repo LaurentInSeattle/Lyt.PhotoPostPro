@@ -95,7 +95,13 @@ public sealed partial class LibraryViewModel :
 
     [ObservableProperty]
     public partial bool IsAddedSelected { get; set; }
+    
+    [ObservableProperty]
+    public partial bool IsCullButtonVisible { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsCullTextVisible { get; set; }
+    
     [ObservableProperty]
     public partial int SelectionRating { get; set; }
 
@@ -248,27 +254,32 @@ public sealed partial class LibraryViewModel :
         }
 
         FolderTree? folderTree;
-        if (optionKey == "Captured")
-        {
-            this.selectedViewing = Viewing.Captured;
-            folderTree = this.libraryMgr.CapturedFolderTree;
-            this.IsAddedSelected = false;
-        }
-        else if (optionKey == "Added")
+        if (optionKey == "Added")
         {
             this.selectedViewing = Viewing.Added;
             folderTree = this.libraryMgr.AddedFolderTree;
             this.IsAddedSelected = true;
-        }
-        else if (optionKey == "Edited")
-        {
-            this.selectedViewing = Viewing.Edited;
-            folderTree = this.libraryMgr.EditedFolderTree;
-            this.IsAddedSelected = false;
+            this.IsCullButtonVisible = false;
         }
         else
         {
-            throw new InvalidOperationException($"Unknown option key: {optionKey}");
+            this.IsAddedSelected = false;
+            this.IsCullButtonVisible = false;
+
+            if (optionKey == "Captured")
+            {
+                this.selectedViewing = Viewing.Captured;
+                folderTree = this.libraryMgr.CapturedFolderTree;
+            }
+            else if (optionKey == "Edited")
+            {
+                this.selectedViewing = Viewing.Edited;
+                folderTree = this.libraryMgr.EditedFolderTree;
+            }
+            else
+            {
+                throw new InvalidOperationException($"Unknown option key: {optionKey}");
+            }
         }
 
         if (folderTree is null)
@@ -370,7 +381,7 @@ public sealed partial class LibraryViewModel :
             List<LibraryThumbnailViewModel> list = [];
             foreach (string path in files)
             {
-                if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
+                if (this.libraryMgr.LoadedThumbnails.TryGetValue(path, out var thumbnail))
                 {
                     LibraryThumbnailViewModel libraryThumbnailViewModel =
                         new(this, path, thumbnail.Metadata, thumbnail.ImageBytes);
@@ -407,59 +418,20 @@ public sealed partial class LibraryViewModel :
             {
                 AddFiles(this.selectedYear.MetadataFiles());
             }
+
+            this.IsCullButtonVisible = false;
+            this.IsCullTextVisible = false;
         }
         else
         {
             bool forAdded = this.selectedViewing == Viewing.Added;
-            var files = this.FindFilesAddedOrEdited(this.selectedDay, this.selectedMonth, this.selectedYear, forAdded);
+            var files = this.libraryMgr.FindFilesAddedOrEdited(
+                this.selectedDay, this.selectedMonth, this.selectedYear, forAdded, out int zeroStarCount);
             AddFiles(files);
+
+            this.IsCullTextVisible = forAdded && (zeroStarCount == 0);
+            this.IsCullButtonVisible = forAdded && (zeroStarCount > 0);
         }
-    }
-
-    private List<string> FindFilesAddedOrEdited(
-        DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear, bool forAdded)
-    {
-        var thumbnails = this.model.LibraryManager.LoadedThumbnails;
-        List<string> list = new(thumbnails.Count);
-
-        bool checkDay = selectedDay is not null;
-        // ! Checked by check day 
-        int sDay = checkDay ? selectedDay!.Day : -1;
-
-        bool checkMonth = selectedMonth is not null;
-        // ! Checked by check month
-        int sMonth = checkMonth ? selectedMonth!.Month : -1;
-        int sYear = selectedYear.Year;
-
-        List<LoadedThumbnail> loadedThumbnailsList = new(list.Count); 
-        foreach (var thumbnail in thumbnails)
-        {
-            Metadata metadata = thumbnail.Value.Metadata;
-            DateTime date =
-                forAdded ?
-                    metadata.AddedToLibraryUTC.ToLocalTime().Date :
-                    metadata.LastEditedUTC.ToLocalTime().Date;
-            if (date.Year != sYear)
-            {
-                continue;
-            }
-
-            if (checkMonth && date.Month != sMonth)
-            {
-                continue;
-            }
-
-            if (checkDay && date.Day != sDay)
-            {
-                continue;
-            }
-
-            loadedThumbnailsList.Add(thumbnail.Value);
-        }
-
-        return (from thumb in loadedThumbnailsList
-                 orderby thumb.Metadata.Captured ascending
-                 select thumb.Metadata.MetadataFullPath()).ToList();
     }
 
     public void OnSelect(object selectedObject)

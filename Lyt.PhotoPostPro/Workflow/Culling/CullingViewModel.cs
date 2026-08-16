@@ -374,6 +374,13 @@ public sealed partial class CullingViewModel :
     }
 
     public void OnSelect(object selectedObject) { }
+    
+    [RelayCommand]
+    public void OnBackToLibrary()
+    {
+        var shell = App.GetRequiredService<ShellViewModel>();   
+        shell.EnableAndSelect(ActivatedView.Library);
+    }
 
     [RelayCommand]
     public void OnAddStar()

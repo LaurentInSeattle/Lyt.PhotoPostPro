@@ -86,9 +86,12 @@ public sealed class FolderTree
 
             if (forDateAdded && (date == DateTime.MinValue || date.Year < 1926))
             {
-                // Corrupted date added 
+                // Corrupted date added, skip it 
+                continue;
+
+                // DON'T : This creates very confusing empty slots in the Library view
                 // Use current date and time as a fallback for date added
-                date = DateTime.Now;
+                // date = DateTime.Now;
             }
 
             int year = date.Year;

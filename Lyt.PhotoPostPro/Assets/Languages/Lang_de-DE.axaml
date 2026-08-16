@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">Bewerten und aussortieren Sie dieses Set</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">Nichts zu streichen, alles mit einem Stern oder mehr</system:String>
+
     <system:String x:Key="Library.ProcessImage">Verarbeiten Sie dieses Bild</system:String>
 
     <system:String x:Key="Library.RemoveImage">Aus der Bibliothek entfernen</system:String>

@@ -1,20 +1,13 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Ability to rate again in Export panel 
+- Folder Tree for Added not updating correctly on image removed 
 
-- Message if nothing left to Rate / Cull and hide the button 
+- Image just rated does not update star rating in selected image panel (Need to select it again) 
 
-- Folder Tree for Added not updating correctly 
+- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
-- Message box to confirm delete of highly rated library image 
-
-- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
-(Additional check box in the dialog)
-
-- UI : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
-
-- UI : Final fix for Re-init of Compose is failing at second image 
+- UI Framework : Final fix for Re-init of Compose is failing at second image 
 
 Bugs - No Repro 
 ---------------
@@ -30,13 +23,20 @@ Bugs - No Repro
 WIP
 ---
 
-- Dropped LUT's 
-
-- Star Filter in Library Thumb Panel ( Disabled for Added ) 
+- Message box to confirm delete of highly rated library image 
 
 
 TODO First
 ----------
+
+- Dropped LUT's 
+
+- Star Filter in Library Thumb Panel ( Disabled for Added ) 
+
+- Ability to rate again in Export panel 
+
+- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
+(Additional check box in the dialog)
 
 - Export (copy) the editing JSON file along with the images.
 
@@ -115,8 +115,6 @@ Code Quality Issues
 -------------------
 
 - Perf : Review all process steps to ensure that the source image is not unnecessarily cloned. 
-
-- Rename namespaces uselessly ending with "...Models" 
 
 - Move message definitions in new folders depending on area and workflow 
 

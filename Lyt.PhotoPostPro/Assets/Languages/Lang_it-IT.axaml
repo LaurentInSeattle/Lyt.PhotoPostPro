@@ -53,7 +53,7 @@
 
     <system:String x:Key="Workflow.Culling.Ready">Pronto.</system:String>
 
-    <system:String x:Key="Workflow.Culling.AddStar">Aggiungi Stella</system:String>
+    <system:String x:Key="Workflow.Culling.AddStar">Aggiungi Una</system:String>
 
     <system:String x:Key="Workflow.Culling.RemoveStar">Retrocedere</system:String>
 
@@ -412,6 +412,8 @@
     <system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Valuta e seleziona questo set</system:String>
+
+    <system:String x:Key="Library.RateAndCullNothing">Niente da eliminare, tutte hanno una stella o più</system:String>
 
     <system:String x:Key="Library.ProcessImage">Edita questa Immagine</system:String>
 

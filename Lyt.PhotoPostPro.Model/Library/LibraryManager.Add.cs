@@ -226,6 +226,57 @@ public sealed partial class LibraryManager
         }
     }
 
+    public List<string> FindFilesAddedOrEdited(
+        DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear, bool forAdded, out int zeroStarCount)
+    {
+        zeroStarCount = 0;        
+        List<string> list = new(this.LoadedThumbnails.Count);
+
+        bool checkDay = selectedDay is not null;
+        // ! Checked by check day 
+        int sDay = checkDay ? selectedDay!.Day : -1;
+
+        bool checkMonth = selectedMonth is not null;
+        // ! Checked by check month
+        int sMonth = checkMonth ? selectedMonth!.Month : -1;
+        int sYear = selectedYear.Year;
+
+        List<LoadedThumbnail> loadedThumbnailsList = new(list.Count);
+        foreach (var thumbnail in this.LoadedThumbnails)
+        {
+            Metadata metadata = thumbnail.Value.Metadata;
+            DateTime date =
+                forAdded ?
+                    metadata.AddedToLibraryUTC.ToLocalTime().Date :
+                    metadata.LastEditedUTC.ToLocalTime().Date;
+            if (date.Year != sYear)
+            {
+                continue;
+            }
+
+            if (checkMonth && date.Month != sMonth)
+            {
+                continue;
+            }
+
+            if (checkDay && date.Day != sDay)
+            {
+                continue;
+            }
+
+            if (metadata.Rating == 0)
+            {
+                ++zeroStarCount;
+            }
+
+            loadedThumbnailsList.Add(thumbnail.Value);
+        }
+
+        return (from thumb in loadedThumbnailsList
+                orderby thumb.Metadata.Captured ascending
+                select thumb.Metadata.MetadataFullPath()).ToList();
+    }
+
     public void GenerateFolderTree()
     {
         try

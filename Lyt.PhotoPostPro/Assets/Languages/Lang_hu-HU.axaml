@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">Értékeld és vágd le ezt a készletet</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">Nothing to Cull, All One Star vagy több</system:String>
+
     <system:String x:Key="Library.ProcessImage">A kép feldolgozása</system:String>
 
     <system:String x:Key="Library.RemoveImage">Eltávolítás a könyvtárból</system:String>

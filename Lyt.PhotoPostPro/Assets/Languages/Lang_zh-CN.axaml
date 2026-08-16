@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">评价并剔除该集合</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">没有什么可剔除的，全部是一星或更多</system:String>
+
     <system:String x:Key="Library.ProcessImage">处理该图像</system:String>
 
     <system:String x:Key="Library.RemoveImage">从库中删除</system:String>

@@ -413,6 +413,8 @@
 
     <system:String x:Key="Library.RateAndCull">이 세트 평가 및 선별</system:String>
 
+    <system:String x:Key="Library.RateAndCullNothing">추려낼 것이 없습니다. 별 하나 이상입니다.</system:String>
+
     <system:String x:Key="Library.ProcessImage">이 이미지 처리</system:String>
 
     <system:String x:Key="Library.RemoveImage">라이브러리에서 제거</system:String>
