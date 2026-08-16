@@ -409,7 +409,7 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
 
-    <system:String x:Key="Workflow.Library.Thumbnail.File">Déposer:</system:String>
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Fichier:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Évaluez et triez ce groupe</system:String>
 

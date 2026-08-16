@@ -23,13 +23,11 @@ Bugs - No Repro
 WIP
 ---
 
-- Message box to confirm delete of highly rated library image 
+- Dropped LUT's 
 
 
 TODO First
 ----------
-
-- Dropped LUT's 
 
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
 

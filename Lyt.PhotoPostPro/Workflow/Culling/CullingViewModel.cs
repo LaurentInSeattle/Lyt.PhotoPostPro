@@ -25,6 +25,7 @@ public sealed partial class CullingViewModel :
 
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
+    private readonly IDialogService dialogService;
     private readonly IToaster toaster;
 
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
@@ -93,12 +94,14 @@ public sealed partial class CullingViewModel :
     // Dual image layout bitmap - bottom or right
     public partial CullingImageViewModel? SingleImageViewModelBottomOrRight { get; set; }
 
-    public CullingViewModel(PhotoPostProModel model, IToaster toaster)
+    public CullingViewModel(PhotoPostProModel model, IDialogService dialogService, IToaster toaster)
     {
         this.model = model;
         this.libraryManager = model.LibraryManager;
-        this.layoutKind = LayoutKind.None;
         this.toaster = toaster;
+        this.dialogService = dialogService;
+
+        this.layoutKind = LayoutKind.None;
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,
@@ -374,11 +377,11 @@ public sealed partial class CullingViewModel :
     }
 
     public void OnSelect(object selectedObject) { }
-    
+
     [RelayCommand]
     public void OnBackToLibrary()
     {
-        var shell = App.GetRequiredService<ShellViewModel>();   
+        var shell = App.GetRequiredService<ShellViewModel>();
         shell.EnableAndSelect(ActivatedView.Library);
     }
 
@@ -406,7 +409,7 @@ public sealed partial class CullingViewModel :
         if (this.layoutKind == LayoutKind.SingleImage && this.SingleImageViewModel is not null)
         {
             this.Remove(this.SingleImageViewModel);
-        } 
+        }
     }
 
     [RelayCommand]
@@ -451,51 +454,91 @@ public sealed partial class CullingViewModel :
         this.libraryManager.SaveMetadata(viewModel.Metadata);
     }
 
-    private void Remove (CullingImageViewModel viewModel, CullingImageViewModel? viewModelToSelect = null )
+    private void Remove(CullingImageViewModel viewModel, CullingImageViewModel? viewModelToSelect = null)
     {
+        this.viewModelToRemove = viewModel;
+        this.viewModelToKeep = viewModelToSelect; 
+
         // Remove Bottom or Right 
         var metadata = viewModel.Metadata;
         if (metadata.Rating >= 4)
         {
-            // TODO
-            // Ask before deleting highly rated image 
+            // Ask before deleting a highly rated image 
+            if (this.dialogService is DialogService modalService)
+            {
+                var shell = App.GetRequiredService<ShellViewModel>();
+                modalService.RunViewModelModal(
+                    shell.ModalHost, new ConfirmRemoveDialogModel(), this.OnRemoveConfirmed);
+            }
+        }
+    }
+
+    private CullingImageViewModel? viewModelToRemove; 
+    private CullingImageViewModel? viewModelToKeep ; 
+
+    private void OnRemoveConfirmed(object? obj, bool isValid)
+    {
+        if (!isValid || obj is not ConfirmRemoveDialogModel)
+        {
+            this.viewModelToRemove = null;
+            this.viewModelToKeep = null;
+            return; 
         }
 
-        if (this.libraryManager.Remove(metadata))
+        if (viewModelToRemove == null)
         {
-            // Remove the thumbnail from the film strip on the left 
-            int index = this.FindIndexOf(viewModel);
-            if ( index < 0 || index >= this.ImageThumbnails.Count)
-            {
-                return; 
-            }
+            return; 
+        }
 
-            UiThumbnail uiThumbnailToRemove = this.ImageThumbnails[index];
-            int wasSelectedIndex = this.SelectedThumbnailIndex;
-            this.ImageThumbnails.Remove(uiThumbnailToRemove);
-
-            if (viewModelToSelect is null)
+        try
+        {
+            var metadata = this.viewModelToRemove.Metadata;
+            if (this.libraryManager.Remove(metadata))
             {
-                // Select previous in film strip, unless empty 
-                if (this.ImageThumbnails.Count > 0)
-                {
-                    this.SelectedThumbnailIndex = wasSelectedIndex;
-                }
-            } 
-            else
-            {
-                int indexToSelect = this.FindIndexOf(viewModelToSelect);
-                if (indexToSelect < 0 || indexToSelect >= this.ImageThumbnails.Count)
+                // Remove the thumbnail from the film strip on the left 
+                int index = this.FindIndexOf(this.viewModelToRemove);
+                if (index < 0 || index >= this.ImageThumbnails.Count)
                 {
                     return;
                 }
 
-                // Select specified in film strip, unless empty 
-                if (this.ImageThumbnails.Count > 0)
+                UiThumbnail uiThumbnailToRemove = this.ImageThumbnails[index];
+                int wasSelectedIndex = this.SelectedThumbnailIndex;
+                this.ImageThumbnails.Remove(uiThumbnailToRemove);
+
+                if (this.viewModelToKeep is null)
                 {
-                    this.SelectedThumbnailIndex = indexToSelect;
+                    // Select previous in film strip, unless empty 
+                    if (this.ImageThumbnails.Count > 0)
+                    {
+                        this.SelectedThumbnailIndex = wasSelectedIndex;
+                    }
+                }
+                else
+                {
+                    int indexToSelect = this.FindIndexOf(this.viewModelToKeep);
+                    if (indexToSelect < 0 || indexToSelect >= this.ImageThumbnails.Count)
+                    {
+                        return;
+                    }
+
+                    // Select specified in film strip, unless empty 
+                    if (this.ImageThumbnails.Count > 0)
+                    {
+                        this.SelectedThumbnailIndex = indexToSelect;
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex); 
+        } 
+        finally
+        {
+            // Whatever happens, release these references 
+            this.viewModelToRemove = null;
+            this.viewModelToKeep = null;
         }
     }
 
