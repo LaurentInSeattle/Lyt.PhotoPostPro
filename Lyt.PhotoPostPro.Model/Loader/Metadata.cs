@@ -338,7 +338,7 @@ public sealed class Metadata
                         }
                         else if (propertyType == typeof(bool))
                         {
-                            // For now , only latitude and longitude 
+                            // For now , only WithFlash 
                             if (code == "WithFlash")
                             {
                                 if (stringValue.Contains("Flash fired", StringComparison.CurrentCultureIgnoreCase))

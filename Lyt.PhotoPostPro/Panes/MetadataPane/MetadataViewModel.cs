@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
-public sealed partial class MetadataViewModel : 
+public sealed partial class MetadataViewModel :
     ViewModel<MetadataView>,
     IRecipient<LanguageChangedMessage>,
     IRecipient<MetadataGeneratedMessage>
@@ -60,6 +60,8 @@ public sealed partial class MetadataViewModel :
     public partial string Longitude { get; private set; } = string.Empty;
 
     private Metadata? metadata;
+    private double metadataLatitude;
+    private double metadataLongitude;
 
     public MetadataViewModel()
     {
@@ -78,15 +80,15 @@ public sealed partial class MetadataViewModel :
         Dispatch.OnUiThread(() =>
         {
             this.metadata = message.Metadata;
-            this.Update(this.metadata); 
+            this.Update(this.metadata);
         }, DispatcherPriority.ApplicationIdle);
     }
 
     public void Receive(LanguageChangedMessage message)
     {
-        if ( this.metadata is null)
+        if (this.metadata is null)
         {
-            return; 
+            return;
         }
 
         Dispatch.OnUiThread(() =>
@@ -97,19 +99,22 @@ public sealed partial class MetadataViewModel :
 
     public void Update(Metadata metadata)
     {
+        this.metadataLatitude = double.NaN;
+        this.metadataLongitude = double.NaN;
+
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
         this.SizeMB = metadata.SizeMB;
         this.Dimensions = metadata.Dimensions;
         string sep = new(System.IO.Path.DirectorySeparatorChar, 1);
-        string sepSpace = " " + sep + " "; 
+        string sepSpace = " " + sep + " ";
         this.FullPath = metadata.FullPath.Replace(sep, sepSpace);
         var localDT = metadata.FileDateUTC.ToLocalTime();
 
-        string fileCreatedFmt = this.Localize("Metadata.FileCreatedFmt"); 
+        string fileCreatedFmt = this.Localize("Metadata.FileCreatedFmt");
         this.FileDateTime =
             string.Format(fileCreatedFmt, localDT.ToLongDateString(), localDT.ToLongTimeString());
 
-        this.HasExif = metadata.HasExifMetadata; 
+        this.HasExif = metadata.HasExifMetadata;
         if (this.HasExif)
         {
             this.MakeModel = metadata.Make + " " + metadata.Model;
@@ -127,10 +132,10 @@ public sealed partial class MetadataViewModel :
             this.ExposureBias = exposureBias + " " + metadata.ExposureBias;
             string focalLength = this.Localize("Metadata.FocalLength");
             this.FocalLength = focalLength + " " + metadata.FocalLength;
-            this.WithFlash = 
+            this.WithFlash =
                 metadata.WithFlash ?
                     this.Localize("Metadata.WithFlash") :
-                    this.Localize("Metadata.NoFlash"); 
+                    this.Localize("Metadata.NoFlash");
         }
         else
         {
@@ -152,7 +157,9 @@ public sealed partial class MetadataViewModel :
             this.Latitude = latitude + " " + metadata.LatitudeString;
             string longitude = this.Localize("Metadata.Longitude");
             this.Longitude = longitude + " " + metadata.LongitudeString;
-        } 
+            this.metadataLatitude = metadata.Latitude;
+            this.metadataLongitude = metadata.Longitude;
+        }
         else
         {
             this.Location = string.Empty;
@@ -160,4 +167,19 @@ public sealed partial class MetadataViewModel :
             this.Longitude = string.Empty;
         }
     }
-}
+
+    [RelayCommand]
+    public void OnWebNavigate()
+    {
+        if ((this.metadata is null) || 
+            !this.HasLocation || 
+            double.IsNaN( this.metadataLatitude) || 
+            double.IsNaN(this.metadataLongitude))
+        {
+            return; 
+        }
+
+        WebUtilities.OpenLocationUrl(
+            WebUtilities.GeoProtocol.GoogleMapsLink, this.metadataLatitude, this.metadataLongitude); 
+    }
+} 
