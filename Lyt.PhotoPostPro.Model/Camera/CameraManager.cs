@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.CameraModels;
+﻿namespace Lyt.PhotoPostPro.Model.Camera;
 
 // Here to block both Path from Avalonia ans ImageSharp 
 using System.IO;

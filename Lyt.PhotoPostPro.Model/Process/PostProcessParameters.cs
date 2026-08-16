@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ProcessModels;
+﻿namespace Lyt.PhotoPostPro.Model.Process;
 
 using static Lyt.PhotoPostPro.Model.PostProcessors.ColorStep;
 using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;

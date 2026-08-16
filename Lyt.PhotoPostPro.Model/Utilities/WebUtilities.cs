@@ -11,16 +11,16 @@ public static class WebUtilities
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                using var proc = new Process { StartInfo = { UseShellExecute = true, FileName = webUrl } };
+                using var proc = new System.Diagnostics.Process { StartInfo = { UseShellExecute = true, FileName = webUrl } };
                 proc.Start();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Process.Start("x-www-browser", webUrl);
+                System.Diagnostics.Process.Start("x-www-browser", webUrl);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                Process.Start("open", webUrl);
+                System.Diagnostics.Process.Start("open", webUrl);
             }
             else
             {

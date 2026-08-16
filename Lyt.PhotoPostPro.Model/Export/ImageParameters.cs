@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.ExportModels;
+﻿namespace Lyt.PhotoPostPro.Model.Export;
 
 public sealed class ImageParameters
 {

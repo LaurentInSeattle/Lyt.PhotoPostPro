@@ -52,7 +52,7 @@ public static  class CrossPlatformRecycle
             CreateNoWindow = true
         };
 
-        using var process = Process.Start(psi);
+        using var process = System.Diagnostics.Process.Start(psi);
         process?.WaitForExit();
     }
 
@@ -68,7 +68,7 @@ public static  class CrossPlatformRecycle
                 CreateNoWindow = true,
                 UseShellExecute = false
             };
-            using var process = Process.Start(psi);
+            using var process = System.Diagnostics.Process.Start(psi);
             process?.WaitForExit();
 
             if (process?.ExitCode == 0)
@@ -88,7 +88,7 @@ public static  class CrossPlatformRecycle
                 CreateNoWindow = true,
                 UseShellExecute = false
             };
-            using var process = Process.Start(psi);
+            using var process = System.Diagnostics.Process.Start(psi);
             process?.WaitForExit();
 
             if (process?.ExitCode == 0)

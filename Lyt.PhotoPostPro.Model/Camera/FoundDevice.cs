@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.CameraModels;
+﻿namespace Lyt.PhotoPostPro.Model.Camera;
 
 public sealed class FoundDevice(string id, string friendlyName, string manufacturer, string description)
 {

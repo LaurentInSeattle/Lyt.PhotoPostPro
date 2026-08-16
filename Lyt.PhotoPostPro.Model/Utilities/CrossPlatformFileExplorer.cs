@@ -18,7 +18,7 @@ public static class CrossPlatformFileExplorer
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             // Windows: Calls explorer.exe directly
-            Process.Start(new ProcessStartInfo
+            System.Diagnostics.Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe",
                 Arguments = $"\"{folderPath}\"",
@@ -28,7 +28,7 @@ public static class CrossPlatformFileExplorer
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
             // macOS: Uses the 'open' command line utility
-            Process.Start(new ProcessStartInfo
+            System.Diagnostics.Process.Start(new ProcessStartInfo
             {
                 FileName = "open",
                 Arguments = $"\"{folderPath}\"",
@@ -38,7 +38,7 @@ public static class CrossPlatformFileExplorer
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             // Linux: xdg-open handles the user's default desktop environment file manager
-            Process.Start(new ProcessStartInfo
+            System.Diagnostics.Process.Start(new ProcessStartInfo
             {
                 FileName = "xdg-open",
                 Arguments = $"\"{folderPath}\"",

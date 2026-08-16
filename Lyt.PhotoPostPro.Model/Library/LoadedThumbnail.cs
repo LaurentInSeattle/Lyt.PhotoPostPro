@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
+﻿namespace Lyt.PhotoPostPro.Model.Library;
 
 public sealed class LoadedThumbnail(Metadata metadata, byte[] imageBytes)
 {

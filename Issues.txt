@@ -30,9 +30,9 @@ Bugs - No Repro
 WIP
 ---
 
-- Star Filter in Library Thumb Panel ( Disabled for Added ) 
-
 - Dropped LUT's 
+
+- Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
 
 TODO First
@@ -53,6 +53,7 @@ TODO First
 - UI to define signature and watermark
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
+
 
 
 Missing Features 
@@ -121,10 +122,6 @@ Code Quality Issues
 
 - Cleanup public vs internal about everywhere 
 
-- Cleanup unused icons for faster loading 
-
-- Cleanup language strings
-
 - Setup logging for trace to disk 
 
 
@@ -169,7 +166,5 @@ Cool Stuff to Consider
 
 - Viewing mode when before and after are stacked with a slider ( or two ) in the 
 middlle to show top image or bottom image 
-
-- Show GPS location in map ( Not google ) 
 
 - Maybe silly: Rewrite Openize HEIC for speed. Useless if ImageSharp is going to support HEIC 

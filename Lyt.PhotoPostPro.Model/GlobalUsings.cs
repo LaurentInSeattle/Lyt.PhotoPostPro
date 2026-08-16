@@ -81,14 +81,14 @@ global using Lyt.Utilities.Randomizing;
 //
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Algorithms;
-global using Lyt.PhotoPostPro.Model.CameraModels;
-global using Lyt.PhotoPostPro.Model.ExportModels;
+global using Lyt.PhotoPostPro.Model.Camera;
+global using Lyt.PhotoPostPro.Model.Export;
 global using Lyt.PhotoPostPro.Model.Frames;
-global using Lyt.PhotoPostPro.Model.LibraryModels;
+global using Lyt.PhotoPostPro.Model.Library;
 global using Lyt.PhotoPostPro.Model.LookUp;
 global using Lyt.PhotoPostPro.Model.Loader;
 global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.PostProcessors;
-global using Lyt.PhotoPostPro.Model.ProcessModels;
+global using Lyt.PhotoPostPro.Model.Process;
 global using Lyt.PhotoPostPro.Model.Utilities;
 

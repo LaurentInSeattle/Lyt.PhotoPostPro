@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.LibraryModels;
+﻿namespace Lyt.PhotoPostPro.Model.Library;
 
 internal static class FilenamesMgr
 {
