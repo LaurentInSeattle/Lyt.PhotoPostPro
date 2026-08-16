@@ -78,6 +78,7 @@ public sealed partial class MetadataViewModel :
     {
         base.OnViewLoaded();
 
+        this.View.IsVisible = false;
         this.HasLocation = false;
         this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
         this.View.WebNavigateButton.IsShown = false;
@@ -118,6 +119,10 @@ public sealed partial class MetadataViewModel :
         this.metadataLatitude = double.NaN;
         this.metadataLongitude = double.NaN;
         this.HasLocation = false;
+        if (this.IsBound)
+        {
+            this.View.IsVisible = true;
+        } 
 
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
         this.SizeMB = metadata.SizeMB;
