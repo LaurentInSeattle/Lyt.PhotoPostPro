@@ -194,9 +194,9 @@
 					Margin="0 0 132 0"
 					VerticalAlignment="Stretch" HorizontalAlignment="Right"
 					/>
-				<!-- Do not add rows and/or columns to the toaster host-->
+
+				<!-- Center Content -->
 				<Grid
-					x:Name="ToasterHost"
 					Grid.Column="1" Grid.Row="1"
 					Margin="0"
 					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
@@ -218,6 +218,14 @@
 						>
 					</Grid>
 				</Grid>
+
+				<!-- Do not add rows and/or columns to the toaster host -->
+				<Grid
+					x:Name="ToasterHost"
+					Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999" 
+					Margin="0"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					/>
 			</Grid>
 		</Grid>
 	</Border>

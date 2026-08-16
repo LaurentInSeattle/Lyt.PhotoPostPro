@@ -90,13 +90,13 @@
 				>
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<WrapPanel/>
+						<UniformGrid />
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<vm:LutImageView
-							MaxWidth="440" MaxHeight="320"
+							MaxWidth="460" MaxHeight="360"
 							Margin="4" 
 							/>
 					</DataTemplate>
