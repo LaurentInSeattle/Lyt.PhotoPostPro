@@ -162,11 +162,11 @@
 			<glyphs:GlyphButton
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
 				Style="{StaticResource SmallPanelIconButton}"
-				Behaviour="Tap"
+				IsVisible="{Binding HasLocation}"
 				GlyphSource="globe"
 				HorizontalAlignment="Right" VerticalAlignment="Center"
 				Margin="0 0 16 0"
-				Width="80"
+				Width="120"
 				Command="{Binding OnWebNavigate}"
 				GlyphStrokeThickness="0.05" 
 				/>		
