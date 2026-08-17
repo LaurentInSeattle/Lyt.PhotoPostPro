@@ -82,6 +82,8 @@ public static class ImageLoader
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
+    public static string LibRawVersion => RawContext.Version;
+
     #region Loading 
 
     private static bool repairedImage = false;

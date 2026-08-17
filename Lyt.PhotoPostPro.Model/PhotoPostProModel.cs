@@ -60,15 +60,29 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ShouldAutoSave = true;
     }
 
+    public IProfiler Profiler => this.profiler;
+
     public override async Task Initialize()
     {
         this.IsInitializing = true;
         await this.Load();
         this.IsInitializing = false;
         this.IsDirty = false;
-    }
 
-    public IProfiler Profiler => this.profiler;
+        // Get the version of LibRaw
+        string libRawVersion = string.Concat(" LibRaw Version: ", ImageLoader.LibRawVersion);
+        Debug.WriteLine(libRawVersion);
+        this.Logger.Info(libRawVersion);
+
+        // Get the assembly version of ImageSharp
+        // ! Has a version
+        string imageSharpVersion =
+            string.Concat(
+                " ImageSharp Version: ",
+                typeof(Image).GetTypeInfo().Assembly.GetName().Version!.ToString());
+        Debug.WriteLine(imageSharpVersion);
+        this.Logger.Info(imageSharpVersion);
+    } 
 
     // Force a save on shutdown 
     public override async Task Shutdown() => await this.Save();
