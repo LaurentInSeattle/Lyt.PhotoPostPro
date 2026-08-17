@@ -39,7 +39,7 @@
 
     <system:String x:Key="Imaging.InProgress">En cours</system:String>
 
-    <system:String x:Key="Imaging.InProgressHelp">S'il vous plaît, attendez...</system:String>
+    <system:String x:Key="Imaging.InProgressHelp">Patientez, s'il vous plaît...</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
 
@@ -47,9 +47,9 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Accédez à...</system:String>
 
-    <system:String x:Key="Workflow.Culling.LoadingHD">Chargement d'images haute définition...</system:String>
+    <system:String x:Key="Workflow.Culling.LoadingHD">Chargement des images haute définition...</system:String>
 
-    <system:String x:Key="Workflow.Culling.DecodingHD">Décoder des images haute définition...</system:String>
+    <system:String x:Key="Workflow.Culling.DecodingHD">Décodage des images haute définition...</system:String>
 
     <system:String x:Key="Workflow.Culling.Ready">Prêt.</system:String>
 
@@ -93,7 +93,7 @@
 
     <system:String x:Key="Metadata.ISOSpeed">Vitesse ISO :</system:String>
 
-    <system:String x:Key="Metadata.Exposure">Exposition:</system:String>
+    <system:String x:Key="Metadata.Exposure">Exposition :</system:String>
 
     <system:String x:Key="Metadata.ExposureBias">Biais d'exposition :</system:String>
 
@@ -101,7 +101,7 @@
 
     <system:String x:Key="Metadata.WithFlash">Avec Flash</system:String>
 
-    <system:String x:Key="Metadata.NoFlash">Pas de flash</system:String>
+    <system:String x:Key="Metadata.NoFlash">Sans Flash</system:String>
 
     <system:String x:Key="Metadata.Location">Position</system:String>
 
@@ -137,7 +137,7 @@
 
     <system:String x:Key="Workflow.Straighten.Guidelines">Afficher ou masquer les guides d'alignement :</system:String>
 
-    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Verticale</system:String>
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Vertical</system:String>
 
     <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Horizontal</system:String>
 
@@ -213,7 +213,7 @@
 
     <system:String x:Key="Workflow.Recovery.Clear">Réinitialiser</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Highlights">Lumières:</system:String>
+    <system:String x:Key="Workflow.Recovery.Highlights">Lumières :</system:String>
 
     <system:String x:Key="Workflow.Recovery.Shadows">Ombres :</system:String>
 
@@ -223,13 +223,13 @@
 
     <system:String x:Key="Workflow.Vignette.Sides">Côtés :</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Top">Haut:</system:String>
+    <system:String x:Key="Workflow.Vignette.Top">Haut :</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Bottom">Bas:</system:String>
+    <system:String x:Key="Workflow.Vignette.Bottom">Bas :</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Left">Gauche:</system:String>
+    <system:String x:Key="Workflow.Vignette.Left">Gauche :</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Right">Droite</system:String>
+    <system:String x:Key="Workflow.Vignette.Right">Droit :</system:String>
 
     <system:String x:Key="Workflow.Vignette.Style">Correction sombre ou claire :</system:String>
 
@@ -241,11 +241,11 @@
 
     <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuel - Matrice de couleurs</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Décalage :</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">Décalage :</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manuel - Température de couleur directe</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin :</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">Kelvin :</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatique - Algorithme « Monde Gris »</system:String>
 
@@ -265,25 +265,25 @@
 
     <system:String x:Key="Workflow.Contrast.Global">Ajustement global</system:String>
 
-    <system:String x:Key="Workflow.Contrast.ContrastAmount">Contraste:</system:String>
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Contraste :</system:String>
 
     <system:String x:Key="Workflow.Contrast.BlurAmount">Flou Sigma :</system:String>
 
-    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Luminosité:</system:String>
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Luminosité :</system:String>
 
     <system:String x:Key="Workflow.Contrast.SCurves">Courbes en S</system:String>
 
     <system:String x:Key="Workflow.Lut.Title">Étalonnage des couleurs</system:String>
 
-    <system:String x:Key="Workflow.Lut.Correction">Utilisez une table de recherche pour ajuster les couleurs et ajouter une « ambiance » spéciale à l’image.</system:String>
+    <system:String x:Key="Workflow.Lut.Correction">Utilisez une table de correspondance pour ajuster les couleurs et ajouter une « ambiance » spéciale à l’image.</system:String>
 
-    <system:String x:Key="Workflow.Lut.UseLut">Choisissez une table de recherche prédéfinie :</system:String>
+    <system:String x:Key="Workflow.Lut.UseLut">Choisissez une table prédéfinie :</system:String>
 
     <system:String x:Key="Workflow.Lut.None">- - Aucune - -</system:String>
 
-    <system:String x:Key="Workflow.Lut.DropLut">Ou... Utilisez votre fichier .cube ou 3DL :</system:String>
+    <system:String x:Key="Workflow.Lut.DropLut">Ou... Utilisez votre fichier .cube ou .3DL :</system:String>
 
-    <system:String x:Key="Workflow.Lut.DragDropHelp">Glissez et déposez ici un fichier .cube ou 3dl !</system:String>
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Glissez et déposez ici un fichier .cube ou .3dl</system:String>
 
     <system:String x:Key="Workflow.Lut.LaunchExplorer">Lancez « Explorateur LUT »</system:String>
 
@@ -303,11 +303,11 @@
 
     <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
 
-    <system:String x:Key="Workflow.Color.Red">Rouge:</system:String>
+    <system:String x:Key="Workflow.Color.Red">Rouge :</system:String>
 
-    <system:String x:Key="Workflow.Color.Green">Vert:</system:String>
+    <system:String x:Key="Workflow.Color.Green">Vert :</system:String>
 
-    <system:String x:Key="Workflow.Color.Blue">Bleu:</system:String>
+    <system:String x:Key="Workflow.Color.Blue">Bleu :</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Augmenter la netteté</system:String>
 
@@ -325,7 +325,7 @@
 
     <system:String x:Key="Workflow.Filters.ExplainAmount">Seulement pour les niveaux de gris ou sépia :</system:String>
 
-    <system:String x:Key="Workflow.Filters.Amount">Quantité:</system:String>
+    <system:String x:Key="Workflow.Filters.Amount">Quantité :</system:String>
 
     <system:String x:Key="Workflow.Filters.None">- - Aucun - -</system:String>
 
@@ -379,19 +379,19 @@
 
     <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Suppression terminée : {0} images supprimées, erreurs : {1}</system:String>
 
-    <system:String x:Key="Workflow.Camera.DeleteAborted">Supprimer abandonné !</system:String>
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Suppression abandonnée</system:String>
 
-    <system:String x:Key="Workflow.Camera.DeleteError">Supprimer l'erreur !</system:String>
+    <system:String x:Key="Workflow.Camera.DeleteError">Erreur lors de la suppression.</system:String>
 
-    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Supprimé de l'appareil photo</system:String>
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Supprimé de l'appareil photo.</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier :</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Anciens</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Récents</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Vérifiez tout :</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Marquez tout :</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Tout effacer :</system:String>
 
@@ -407,7 +407,7 @@
 
     <system:String x:Key="Workflow.Camera.MoviesOthers">Films - Autres</system:String>
 
-    <system:String x:Key="Workflow.Library.Thumbs.Show">Trier:</system:String>
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Trier :</system:String>
 
     <system:String x:Key="Workflow.Library.Thumbnail.File">Fichier:</system:String>
 
@@ -471,7 +471,7 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">Supprimer de la bibliothèque ?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">Cette image principale et toutes ses données jointes telles que les vignettes et les journaux d'édition seront supprimées.&#xD;&#xA;&#xD;&#xA;Tous les fichiers seront déplacés vers la corbeille.&#xD;&#xA;&#xD;&#xA;Cette opération ne peut pas être annulée.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Cette image principale et toutes ses données jointes, telles que les vignettes et les journaux d'édition seront supprimées.&#xD;&#xA;&#xD;&#xA;Tous les fichiers seront déplacés vers la corbeille.&#xD;&#xA;&#xD;&#xA;Cette opération ne peut pas être annulée.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">Recommencer ou continuer ?</system:String>
 
