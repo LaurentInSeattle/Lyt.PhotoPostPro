@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Lut;
 
+using System.IO;
+
 public sealed partial class LutToolboxViewModel :
     ToolboxViewModel<LutToolboxView, LutStep>, IDropPathHandler
 {
@@ -37,8 +39,30 @@ public sealed partial class LutToolboxViewModel :
             return;
         }
 
-        this.lutMetadata = new("New Lut", path, LutFormat.Unknown, IsEmbedded: false);
-        this.UpdateModel();
+        bool isValid = LutsManager.Validate(path, out string message);
+        if (!isValid)
+        {
+            // TODO
+            // Message user and abort 
+            Debug.WriteLine(" LUT OnDropPath Failed: " + message); 
+            return;
+        }
+
+        bool loaded = this.model.LutsManager.AddLut(path, out message, out LutMetadata? lutMetadata);
+        if (!loaded || lutMetadata is null)
+        {
+            // TODO
+            // Message user and abort 
+            Debug.WriteLine(" LUT OnDropPath Failed: " + message);
+            return;
+        }
+
+        // Lut data has been cached and will be ready 
+        this.AvailableLutNames.Add(lutMetadata.FriendlyName);
+        this.AvailableLuts.Add(lutMetadata);
+
+        // Will trigger a SelectedIndexChanged event and simulate choice from the combo box 
+        this.SelectedIndex = this.AvailableLuts.Count - 1;
     }
 
     public override void OnViewLoaded()
@@ -53,7 +77,7 @@ public sealed partial class LutToolboxViewModel :
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Sliders initial positions and string values
-            var metaLuts = this.model.LutsManager.EnumerateBuiltInLuts();
+            var metaLuts = this.model.LutsManager.EnumerateLuts();
             List<string> list = new(1 + metaLuts.Count)
             {
                this.Localize("Workflow.Lut.None"),
@@ -99,7 +123,7 @@ public sealed partial class LutToolboxViewModel :
 
     public override void OnBeforeNext()
     {
-        this.HideExplorer(); 
+        this.HideExplorer();
         base.OnBeforeNext();
     }
 

@@ -111,7 +111,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         Task.Delay(30).Wait();
 
         var model = this.PostProcessWorkflow.PostProcess.Model;
-        var luts = model.LutsManager.EnumerateBuiltInLuts();
+        var luts = model.LutsManager.EnumerateLuts();
         int lutDone = 0;
         Parallel.For(0, luts.Count, lutIndex =>
         {

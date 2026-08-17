@@ -30,7 +30,7 @@
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<!-- 
-			// contrastAmount == from 1.0 to 2.5  - 1.0 -> No Change 
+			// contrastAmount == from 1.0 to 1.5  - 1.0 -> No Change 
 			// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
 		--> 
 		<TextBlock
@@ -62,8 +62,8 @@
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="0.5" TickPlacement="BottomRight"
-				SmallChange="0.01" LargeChange="0.2"
-				Minimum="1" Maximum="2.5"
+				SmallChange="0.01" LargeChange="0.05"
+				Minimum="1" Maximum="1.75"
 				Value="{Binding ContrastSliderValue}"
 				/>
 			<TextBlock

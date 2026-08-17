@@ -1,11 +1,14 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LookUp;
 
+using System.IO;
+
 using static ResourcesUtilities;
 
 public sealed class LutsManager
 {
     public const string LutsFolderName = "Luts";
 
+    public const string Wildcard = "*";
     private const string CubeExtension = ".cube";
     private const string ThreeDLExtension = ".3dl";
 
@@ -15,34 +18,19 @@ public sealed class LutsManager
     public LutsManager()
     {
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        this.lutsFolderPath = 
-            System.IO.Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
+        this.lutsFolderPath =
+            Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
         if (!Directory.Exists(this.lutsFolderPath))
         {
             Directory.CreateDirectory(this.lutsFolderPath);
         }
     }
 
-    public List<LutMetadata> EnumerateBuiltInLuts()
+    public List<LutMetadata> EnumerateLuts()
     {
-        List<LutMetadata> list = [];
-
-        void AddForExtension(string extension, LutFormat lutFormat)
-        {
-            List<string> resources = EnumerateEmbeddedResourceNames(extension);
-            foreach (string resource in resources)
-            {
-                string trimmed = resource.Replace(extension, string.Empty);
-                string[] tokens = trimmed.Split('.', StringSplitOptions.RemoveEmptyEntries);
-                string friendly = tokens[^1];
-                friendly = StringExtensions.Wordify(friendly);
-                var lutMetadata = new LutMetadata(friendly, resource, lutFormat, IsEmbedded: true);
-                list.Add(lutMetadata);
-            }
-        }
-
-        AddForExtension(CubeExtension, LutFormat.Cube);
-        AddForExtension(ThreeDLExtension, LutFormat.ThreeDL);
+        List<LutMetadata> list = EnumerateBuiltInLuts();
+        var userList = this.EnumerateUserLuts();
+        list.AddRange(userList);
         return list;
     }
 
@@ -55,7 +43,7 @@ public sealed class LutsManager
 
         if (lutMetadata.IsEmbedded)
         {
-            if (this.TryLoadBuiltInLut(lutMetadata, out lut))
+            if (TryLoadBuiltInLut(lutMetadata, out lut))
             {
                 this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
                 return true;
@@ -63,7 +51,7 @@ public sealed class LutsManager
         }
         else
         {
-            if (this.TryLoadLutFromFile(lutMetadata, out lut))
+            if (TryLoadLutFromFile(lutMetadata, out lut))
             {
                 this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
                 return true;
@@ -73,7 +61,144 @@ public sealed class LutsManager
         return false;
     }
 
-    private bool TryLoadBuiltInLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    public static bool Validate(string path, out string message)
+    {
+        message = string.Empty;
+        string extension = Path.GetExtension(path).ToLowerInvariant();
+        if ((extension != CubeExtension) && (extension != ThreeDLExtension))
+        {
+            message = "Not a .cube or .3dl file.";
+            return false;
+        }
+
+        if (!path.IsReadable())
+        {
+            message = "File is locked.";
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool AddLut(string lutFilePath, out string message, [NotNullWhen(true)] out LutMetadata? lutMetadata)
+    {
+        message = string.Empty;
+        lutMetadata = null;
+        if (!Validate(lutFilePath, out message))
+        {
+            throw new Exception("Should have called Validate");
+        }
+
+        LutFormat lutFormat;
+        string extension = Path.GetExtension(lutFilePath).ToLowerInvariant();
+        if (extension == CubeExtension)
+        {
+            lutFormat = LutFormat.Cube;
+        }
+        else if (extension == ThreeDLExtension)
+        {
+            lutFormat = LutFormat.ThreeDL;
+        }
+        else
+        {
+            throw new Exception("Should have called Validate");
+        }
+
+        string friendlyName = Path.GetFileNameWithoutExtension(lutFilePath);
+        friendlyName = StringExtensions.Wordify(friendlyName);
+        lutMetadata = new LutMetadata(friendlyName, lutFilePath, lutFormat, IsEmbedded: false);
+        bool canLoad = TryLoadLutFromFile(lutMetadata, out Lut? lut);
+        if (!canLoad || lut is null)
+        {
+            message = "Corrupted? Cannot load.";
+            return false;
+        }
+
+        this.loadedLuts.Add(friendlyName, lut);
+
+        // Try to copy the provided file to our LUT folder for future use
+        // Ok to fail
+        try
+        {
+            string fileName = Path.GetFileName(lutFilePath);
+            string targetPath = Path.Combine(this.lutsFolderPath, fileName);
+            File.Copy(lutFilePath, targetPath, overwrite: true);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
+
+        return true;
+    }
+
+    private static List<LutMetadata> EnumerateBuiltInLuts()
+    {
+        List<LutMetadata> list = [];
+
+        void AddForExtension(string extension, LutFormat lutFormat)
+        {
+            List<string> resources = EnumerateEmbeddedResourceNames(extension);
+            foreach (string resource in resources)
+            {
+                string trimmed = resource.Replace(extension, string.Empty);
+                string[] tokens = trimmed.Split('.', StringSplitOptions.RemoveEmptyEntries);
+                string friendlyName = tokens[^1];
+                friendlyName = StringExtensions.Wordify(friendlyName);
+                var lutMetadata = new LutMetadata(friendlyName, resource, lutFormat, IsEmbedded: true);
+                list.Add(lutMetadata);
+            }
+        }
+
+        AddForExtension(CubeExtension, LutFormat.Cube);
+        AddForExtension(ThreeDLExtension, LutFormat.ThreeDL);
+        return list;
+    }
+
+    private List<LutMetadata> EnumerateUserLuts()
+    {
+        List<LutMetadata> list = [];
+
+        List<string> EnumerateLutFiles(string extension)
+        {
+            List<string> lutFiles = [];
+            try
+            {
+                string searchPattern = string.Concat(Wildcard, extension);
+                lutFiles = Directory.EnumerateFiles(this.lutsFolderPath, searchPattern).ToList();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return lutFiles;
+        }
+
+        void AddForExtension(string extension, LutFormat lutFormat)
+        {
+            List<string> lutFiles = EnumerateLutFiles(extension);
+            foreach (string lutFile in lutFiles)
+            {
+                if (!lutFile.IsReadable())
+                {
+                    Debug.WriteLine(" Cannot be read: " + lutFile);
+                    continue;
+                }
+
+                string friendlyName = Path.GetFileNameWithoutExtension(lutFile);
+                friendlyName = StringExtensions.Wordify(friendlyName);
+                var lutMetadata = new LutMetadata(friendlyName, lutFile, lutFormat, IsEmbedded: false);
+                list.Add(lutMetadata);
+            }
+        }
+
+        AddForExtension(CubeExtension, LutFormat.Cube);
+        AddForExtension(ThreeDLExtension, LutFormat.ThreeDL);
+        return list;
+    }
+
+    private static bool TryLoadBuiltInLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null;
         try
@@ -108,7 +233,7 @@ public sealed class LutsManager
         }
     }
 
-    private bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    private static bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
     {
         lut = null;
         try
