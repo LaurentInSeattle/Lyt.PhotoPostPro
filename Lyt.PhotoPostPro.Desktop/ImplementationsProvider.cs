@@ -4,11 +4,11 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
 using Lyt.PhotoPostPro.Implementations.Windows.Mtp;
+using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
 
-using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
 using Lyt.PhotoPostPro.Implementations.Windows.Wallpaper;
+using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
 
 public static class ImplementationsProvider
 {

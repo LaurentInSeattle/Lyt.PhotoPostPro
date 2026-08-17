@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lyt.PhotoPostPro.Mtp.Windows\Lyt.PhotoPostPro.Implementations.Windows.csproj" />
+    <ProjectReference Include="..\Lyt.PhotoPostPro.Implementations.Windows\Lyt.PhotoPostPro.Implementations.Windows.csproj" />
     <ProjectReference Include="..\Lyt.PhotoPostPro.MultiPlatformAbstractions\Lyt.PhotoPostPro.MultiPlatformAbstractions.csproj" />
     <ProjectReference Include="..\Lyt.PhotoPostPro\Lyt.PhotoPostPro.csproj" />
   </ItemGroup>

@@ -30,7 +30,7 @@
   </Folder>
   <Project Path="Lyt.PhotoPostPro.Desktop/Lyt.PhotoPostPro.Desktop.csproj" />
   <Project Path="Lyt.PhotoPostPro.Model/Lyt.PhotoPostPro.Model.csproj" />
-  <Project Path="Lyt.PhotoPostPro.Mtp.Windows/Lyt.PhotoPostPro.Implementations.Windows.csproj" Id="d30e00db-c814-4e50-b39e-e9766ffe6bb5" />
+  <Project Path="Lyt.PhotoPostPro.Implementations.Windows/Lyt.PhotoPostPro.Implementations.Windows.csproj" Id="d30e00db-c814-4e50-b39e-e9766ffe6bb5" />
   <Project Path="Lyt.PhotoPostPro.MultiPlatformAbstractions/Lyt.PhotoPostPro.MultiPlatformAbstractions.csproj" Id="1bf216ef-42fd-4573-af56-acfff8866fa8" />
   <Project Path="Lyt.PhotoPostPro/Lyt.PhotoPostPro.csproj" />
 </Solution>
