@@ -56,7 +56,7 @@ public sealed partial class LibraryManager
         }
     }
 
-    public bool SaveEditParameters(Metadata metadata, PostProcessWorkflow workflow)
+    public string SaveEditParameters(Metadata metadata, PostProcessWorkflow workflow)
     {
         // As of today, we can handle only one edit 
         if (this.fileManager is null || this.model is null)
@@ -90,13 +90,13 @@ public sealed partial class LibraryManager
             string serialized = this.fileManager.Serialize<PostProcessParameters>(postProcessParameters);
             File.WriteAllText(targetPathEdit, serialized);
 
-            return true;
+            return targetPathEdit;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
             if (Debugger.IsAttached) { Debugger.Break(); }
-            return false;
+            return string.Empty;
         }
     }
 

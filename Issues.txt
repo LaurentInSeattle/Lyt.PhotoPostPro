@@ -1,7 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-
 - Folder Tree for Added not updating correctly on image removed 
 
 - Image just rated does not update star rating in selected image panel (Need to select it again) 
@@ -23,8 +22,6 @@ Bugs - No Repro
 
 WIP
 ---
-
-- Export (copy) the editing JSON file along with the images.
 
 
 TODO First

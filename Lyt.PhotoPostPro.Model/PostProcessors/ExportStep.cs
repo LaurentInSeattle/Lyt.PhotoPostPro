@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using System.IO;
+
 public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
 {
@@ -248,35 +250,55 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             }
         }
 
-        // Create target folder if needed 
-        var postProcess = this.PostProcessWorkflow.PostProcess;
-        var libraryManager = postProcess.Model.LibraryManager;
-        var metadata = postProcess.Metadata;
-        MetadataFolders metadataFolders = new(metadata);
-        string libraryFolderPath = libraryManager.LibraryFolderPath;
-        string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(libraryFolderPath);
-        string? imageLibraryFolderPath = 
-            System.IO.Path.GetDirectoryName(metadata.FullPath) ?? 
-            throw new Exception("No source folder for: " + metadata.FullPath);
-        string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
-        libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
-
-        bool hasBeenExportedToGallery = false;
-        bool isFiveStars = metadata.Rating == 5 ;
-
-        foreach (var imageParameters in exportParameters.Images)
+        try
         {
-            string exportPath = ExportImage(imageParameters, subDirectoryExport);
-            if (imageParameters.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
-            {
-                // Dont care if fails (at least for now) 
-                _ = model.LibraryManager.AddToGallery(sourceFilePath: exportPath);
-                hasBeenExportedToGallery = true;
-            } 
-        }
+            // Create target folder if needed 
+            var postProcess = this.PostProcessWorkflow.PostProcess;
+            var libraryManager = postProcess.Model.LibraryManager;
+            var metadata = postProcess.Metadata;
+            MetadataFolders metadataFolders = new(metadata);
+            string libraryFolderPath = libraryManager.LibraryFolderPath;
+            string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(libraryFolderPath);
+            string? imageLibraryFolderPath =
+                System.IO.Path.GetDirectoryName(metadata.FullPath) ??
+                throw new Exception("No source folder for: " + metadata.FullPath);
+            string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
+            libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 
-        // Must return Frame? for base class override compliance 
-        return null;
+            // Save Editing parameters and copy them to the current export folder
+            // for convenience / inspection / debug / whatever
+            string srcPath = libraryManager.SaveEditParameters(metadata, postProcess.Workflow);
+            string filename = Path.GetFileName(srcPath);
+            string destPath = Path.Combine(subDirectoryExport, filename);
+            File.Copy(srcPath, destPath, overwrite: true);
+
+            bool hasBeenExportedToGallery = false;
+            bool isFiveStars = metadata.Rating == 5;
+
+            foreach (var imageParameters in exportParameters.Images)
+            {
+                string exportPath = ExportImage(imageParameters, subDirectoryExport);
+                if (imageParameters.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
+                {
+                    // Dont care if fails (at least for now) 
+                    _ = model.LibraryManager.AddToGallery(sourceFilePath: exportPath);
+                    hasBeenExportedToGallery = true;
+                }
+            }
+
+            // Must return Frame? for base class override compliance 
+            return null;
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+            if (Debugger.IsAttached)
+            {
+                Debugger.Break();
+            }
+
+            return null;
+        }
     }
 
     internal bool NavigateToExport()

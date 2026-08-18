@@ -201,7 +201,8 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             // ! Verified by ApiAction
-            return this.LibraryManager.SaveEditParameters(this.CurrentPostProcess!.Metadata, this.Workflow);
+            string path = this.LibraryManager.SaveEditParameters(this.CurrentPostProcess!.Metadata, this.Workflow);
+            return ! string.IsNullOrWhiteSpace(path);
         });
 
     public void Finish() =>
