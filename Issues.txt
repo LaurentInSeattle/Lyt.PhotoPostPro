@@ -23,14 +23,14 @@ Bugs - No Repro
 WIP
 ---
 
+- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
+(Additional check box in the dialog)
+
 
 TODO First
 ----------
 
 - Star Filter in Library Thumb Panel ( Disabled for Added ) 
-
-- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
-(Additional check box in the dialog)
 
 - Spotlight effect, aka "Ray of Light" effect.
 
@@ -88,10 +88,6 @@ Minor Issues (Low priority)
 - Use Half float to store LUT's in memory - could be useful for dim 64 
 
 - Make this an application setting :     private const int CullingBatchSize = 48;
-
-- Library selector buttons text for months and days do not update on Language change 
-
-- Library selector buttons for date category do not update on Language change 
 
 - Switching language while processing cancels the current process
 

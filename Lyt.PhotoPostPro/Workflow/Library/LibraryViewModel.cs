@@ -2,6 +2,7 @@
 
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
+    IRecipient<LanguageChangedMessage>,
     IRecipient<LibraryLoadedMessage>,
     IRecipient<LibraryRemovedMessage>,
     IRecipient<LibraryMetadataUpdateMessage>,
@@ -95,13 +96,13 @@ public sealed partial class LibraryViewModel :
 
     [ObservableProperty]
     public partial bool IsAddedSelected { get; set; }
-    
+
     [ObservableProperty]
     public partial bool IsCullButtonVisible { get; set; }
 
     [ObservableProperty]
     public partial bool IsCullTextVisible { get; set; }
-    
+
     [ObservableProperty]
     public partial int SelectionRating { get; set; }
 
@@ -123,11 +124,61 @@ public sealed partial class LibraryViewModel :
 
         this.HasSelection = false;
         this.selectedViewing = Viewing.Captured;
+
+        this.Subscribe<LanguageChangedMessage>();
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
         this.Subscribe<FolderTreeUpdatedMessage>();
         this.Subscribe<LibraryRemovedMessage>();
         this.Subscribe<LibraryMetadataUpdateMessage>();
+    }
+
+    public override void Activate(object? activationParameters)
+    {
+        base.Activate(activationParameters);
+
+        // If equal to 3 we may have had a language change, so we need to select it again 
+        if (this.Options.Count == 3)
+        {
+            // Need to schedule so that the newly created control is bound to its view model 
+            Schedule.OnUiThread(80, () => 
+            {
+                int index = (int)this.selectedViewing;
+                if (this.Options[index].IsBound)
+                {
+                    this.Options[index].Select();
+                }
+            }, DispatcherPriority.Background);
+        } 
+    }
+
+    public void Receive(LanguageChangedMessage message)
+    {
+        this.BuildLibraryOptions();
+
+        // The newly created control is not bound yet
+        // Selecting it will be done on activation 
+
+        FolderTree? folderTree;
+        if (this.selectedViewing == Viewing.Added)
+        {
+            folderTree = this.libraryMgr.AddedFolderTree;
+        }
+        else if (this.selectedViewing == Viewing.Captured)
+        {
+            folderTree = this.libraryMgr.CapturedFolderTree;
+        }
+        else // if (this.selectedViewing == Viewing.Edited)
+        {
+            folderTree = this.libraryMgr.EditedFolderTree;
+        }
+
+        if (folderTree is null)
+        {
+            return;
+        }
+
+        this.BuildCalendarButtons(folderTree);
     }
 
     public void Receive(FolderTreeUpdatedMessage message)
@@ -194,17 +245,7 @@ public sealed partial class LibraryViewModel :
     {
         Debug.WriteLine(" Loaded: " + message.ImageCount + "  - Errors: " + message.ErrorCount);
 
-        List<SelectorButtonViewModel> listOptions = [];
-        string captured = this.Localize("Library.Option.Captured");
-        var vm1 = new SelectorButtonViewModel(captured, OptionButtonWidth, this.OnSelectOption, "Captured");
-        listOptions.Add(vm1);
-        string added = this.Localize("Library.Option.Added");
-        var vm2 = new SelectorButtonViewModel(added, OptionButtonWidth, this.OnSelectOption, "Added");
-        listOptions.Add(vm2);
-        string edited = this.Localize("Library.Option.Edited");
-        var vm3 = new SelectorButtonViewModel(edited, OptionButtonWidth, this.OnSelectOption, "Edited");
-        listOptions.Add(vm3);
-        this.Options = listOptions;
+        this.BuildLibraryOptions();
 
         if (message.ImageCount == 0)
         {
@@ -230,6 +271,21 @@ public sealed partial class LibraryViewModel :
                 this.Options[0].Select();
             },
             DispatcherPriority.Background);
+    }
+
+    private void BuildLibraryOptions()
+    {
+        List<SelectorButtonViewModel> listOptions = [];
+        string captured = this.Localize("Library.Option.Captured");
+        var vm1 = new SelectorButtonViewModel(captured, OptionButtonWidth, this.OnSelectOption, "Captured");
+        listOptions.Add(vm1);
+        string added = this.Localize("Library.Option.Added");
+        var vm2 = new SelectorButtonViewModel(added, OptionButtonWidth, this.OnSelectOption, "Added");
+        listOptions.Add(vm2);
+        string edited = this.Localize("Library.Option.Edited");
+        var vm3 = new SelectorButtonViewModel(edited, OptionButtonWidth, this.OnSelectOption, "Edited");
+        listOptions.Add(vm3);
+        this.Options = listOptions;
     }
 
     private void BuildCalendarButtons(FolderTree folderTree)
@@ -649,7 +705,7 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        thumbnail.Update(metadata); 
+        thumbnail.Update(metadata);
     }
 
     private bool TryFindThumbnail(Metadata metadata, [NotNullWhen(true)] out LibraryThumbnailViewModel? foundThumbnail)
@@ -678,7 +734,7 @@ public sealed partial class LibraryViewModel :
 
         var filteredFiles =
             (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
-             // Filter out images already rated (0 => unrated) 
+                 // Filter out images already rated (0 => unrated) 
              where thumb.Metadata.Rating == 0
              // Reorder files by Date Captured 
              orderby thumb.Metadata.Captured ascending
@@ -699,5 +755,4 @@ public sealed partial class LibraryViewModel :
         var shell = App.GetRequiredService<ShellViewModel>();
         shell.EnableAndSelect(ActivatedView.Culling);
     }
-
 }
