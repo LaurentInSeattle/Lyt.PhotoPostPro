@@ -23,6 +23,13 @@ public sealed partial class GalleryToolbarViewModel : ViewModel<GalleryToolbarVi
         vm.OnWallpaper();
     }
 
+    [RelayCommand]
+    public void OnSlideShowBegin()
+    {
+        var vm = App.GetRequiredService<GalleryViewModel>();
+        vm.OnSlideShowBegin();
+    }
+    
 #pragma warning restore CA1822
 
 }

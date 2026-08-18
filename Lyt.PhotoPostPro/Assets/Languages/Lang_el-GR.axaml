@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Παρουσίαση</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Ταπετσαρία</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Πλοήγηση στο...</system:String>

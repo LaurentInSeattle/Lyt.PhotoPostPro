@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Diaporama</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">En fond d'écran</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Accédez à...</system:String>

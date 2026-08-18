@@ -34,12 +34,14 @@
 			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
 			ZIndex="42"
 			Source="{Binding GalleryImage1}"
+			PointerPressed="OnImagePointerPressed"
 			/>
 		<Image
 			x:Name="Image2"
 			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
 			ZIndex="42"
 			Source="{Binding GalleryImage2}"
+			PointerPressed="OnImagePointerPressed"
 			/>
 		<!-- Buttons above the Images --> 
 		<glyphs:GlyphButton

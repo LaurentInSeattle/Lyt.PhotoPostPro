@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">拖放区</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">幻灯片放映</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">墙纸</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">导航至...</system:String>

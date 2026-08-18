@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Diavetítés</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Tapéta</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Navigáljon ide...</system:String>

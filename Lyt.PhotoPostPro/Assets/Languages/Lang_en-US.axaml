@@ -62,6 +62,7 @@
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
 	<!-- Gallery -->
+	<system:String x:Key="Gallery.Toolbar.SlideShow">Slide Show</system:String>
 	<system:String x:Key="Gallery.Toolbar.Wallpaper">Wallpaper</system:String>
 	<system:String x:Key="Gallery.Toolbar.Navigate">Navigate To...</system:String>
 

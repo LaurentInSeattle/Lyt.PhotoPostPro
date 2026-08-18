@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Плъзнете и пуснете зона</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Слайдшоу</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Тапет</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Навигирайте до...</system:String>

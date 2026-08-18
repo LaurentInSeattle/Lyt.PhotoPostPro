@@ -74,8 +74,6 @@ Missing Features
 
 --- Nice to Have ---
 
-- Gallery: Slide show 
-
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Ability to minimize metadata panel 

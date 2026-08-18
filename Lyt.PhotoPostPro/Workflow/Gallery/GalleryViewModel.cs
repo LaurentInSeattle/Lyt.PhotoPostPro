@@ -6,10 +6,16 @@ public sealed partial class GalleryViewModel :
 {
     private const double FadeDuration = 1.7;
 
+#if DEBUG 
+    private const int SlideDuration = 8;
+#else
+    private const int SlideDuration = 42;
+#endif
+
     private readonly PhotoPostProModel model;
     private readonly LibraryManager libraryManager;
     private readonly IAnimationService animationService;
-    private readonly IRandomizer randomizer; 
+    private readonly IRandomizer randomizer;
     private readonly IToaster toaster;
 
     private bool isFirstActivate;
@@ -18,6 +24,7 @@ public sealed partial class GalleryViewModel :
     private int nowShowingIndex = 0;
     private string nowShowing = string.Empty;
     private bool showNextOnOne;
+    private DispatcherTimer? slideShowTimer;
 
     [ObservableProperty]
     public partial bool ButtonsAreDisabled { get; set; }
@@ -29,8 +36,8 @@ public sealed partial class GalleryViewModel :
     public partial WriteableBitmap? GalleryImage2 { get; set; }
 
     public GalleryViewModel(
-        PhotoPostProModel model, 
-        IAnimationService animationService, 
+        PhotoPostProModel model,
+        IAnimationService animationService,
         IRandomizer randomizer,
         IToaster toaster)
     {
@@ -59,11 +66,11 @@ public sealed partial class GalleryViewModel :
             this.isFirstActivate = false;
         }
 
-        this.Subscribe<HotKeyMessage>(); 
+        this.Subscribe<HotKeyMessage>();
 
         // Creates a local copy so that we can shuffle 
         this.galleryContent = this.libraryManager.GalleryContent.ToList();
-        randomizer.Shuffle(this.galleryContent); 
+        randomizer.Shuffle(this.galleryContent);
 
         this.nothingToShow = this.galleryContent.Count == 0;
         this.View.Image1.IsVisible = false;
@@ -83,6 +90,12 @@ public sealed partial class GalleryViewModel :
 
     public void Receive(HotKeyMessage message)
     {
+        if (message.Key == Key.Escape)
+        {
+            this.OnSlideShowEnd();
+            return;
+        }
+
         if (this.ButtonsAreDisabled)
         {
             // Dont bypass with keys 
@@ -93,29 +106,79 @@ public sealed partial class GalleryViewModel :
         {
             if (message.Key == Key.PageDown)
             {
-                this.OnNext(); 
+                this.Next();
             }
             else // (message.Key == Key.PageUp))
             {
-                this.OnBack();
+                this.Back();
             }
         }
     }
 
     [RelayCommand]
-    public void OnBack()
-    {
-        --this.nowShowingIndex;
-        if (this.nowShowingIndex < 0)
-        {
-            this.nowShowingIndex = this.galleryContent.Count - 1;
-        }
-
-        this.Show();
-    }
+    public void OnBack() => this.Back();
 
     [RelayCommand]
-    public void OnNext()
+    public void OnNext() => this.Next();
+
+    [RelayCommand]
+    public void OnSlideShowBegin()
+    {
+        if (this.nothingToShow)
+        {
+            return;
+        }
+
+        this.slideShowTimer = new DispatcherTimer()
+        {
+            Interval = TimeSpan.FromSeconds(SlideDuration),
+            IsEnabled = false,
+        };
+
+        this.ButtonsAreDisabled = true;
+        this.slideShowTimer.Tick += this.OnSlideShowTimerTick;
+        this.slideShowTimer.IsEnabled = true;
+        this.slideShowTimer.Start();
+        new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.GoFullscreen).Publish();
+    }
+
+    private void OnSlideShowTimerTick(object? sender, EventArgs e)
+    {
+        if (this.nothingToShow)
+        {
+            return;
+        }
+
+        this.Next();
+    }
+
+    internal void OnImageClicked()
+    {
+        if (this.slideShowTimer is null)
+        {
+            // Not running the slide show 
+            return; 
+        } 
+
+        this.OnSlideShowEnd(); 
+        new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.BackToWindowed).Publish();
+    }
+
+    private void OnSlideShowEnd()
+    {
+        this.ButtonsAreDisabled = false;
+
+        if ( this.slideShowTimer is not null)
+        {
+            this.slideShowTimer.Stop();
+            this.slideShowTimer.IsEnabled = false;
+            this.slideShowTimer = null; 
+        }
+    }
+
+    private void LoadNextGalleryFile(string nextPath) => this.libraryManager.LoadGalleryFile(nextPath);
+
+    private void Next()
     {
         ++this.nowShowingIndex;
         if (this.nowShowingIndex == this.galleryContent.Count)
@@ -137,10 +200,19 @@ public sealed partial class GalleryViewModel :
             100 + (int)(FadeDuration * 1_000),
             this.LoadNextGalleryFile,
             nextPath,
-            DispatcherPriority.ApplicationIdle); 
+            DispatcherPriority.ApplicationIdle);
     }
 
-    private void LoadNextGalleryFile(string nextPath) => this.libraryManager.LoadGalleryFile(nextPath);
+    private void Back()
+    {
+        --this.nowShowingIndex;
+        if (this.nowShowingIndex < 0)
+        {
+            this.nowShowingIndex = this.galleryContent.Count - 1;
+        }
+
+        this.Show();
+    }
 
     private void Show()
     {
@@ -182,12 +254,12 @@ public sealed partial class GalleryViewModel :
 
     internal void OnWallpaper()
     {
-        if( galleryContent.Count == 0 )
+        if (galleryContent.Count == 0)
         {
-            return; 
+            return;
         }
 
-        string path = this.galleryContent[nowShowingIndex]; 
+        string path = this.galleryContent[nowShowingIndex];
         App.WallpaperService.Set(path, WallpaperStyle.Fill);
     }
 }

@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">स्लाइड शो</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">वॉलपेपर</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">इस पर नेविगेट करें...</system:String>

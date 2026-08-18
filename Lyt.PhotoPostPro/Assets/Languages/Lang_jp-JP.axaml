@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">スライドショー</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">壁紙</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">ナビゲート...</system:String>

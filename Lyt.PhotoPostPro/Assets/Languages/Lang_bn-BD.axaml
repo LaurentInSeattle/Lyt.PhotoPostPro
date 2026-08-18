@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">ড্র্যাগ অ্যান্ড ড্রপ জোন</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">স্লাইড শো</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">ওয়ালপেপার</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">এতে নেভিগেট করুন...</system:String>

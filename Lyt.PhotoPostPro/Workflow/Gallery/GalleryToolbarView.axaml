@@ -19,6 +19,13 @@
 		>
 		<glyphs:GlyphButton
 			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="slide_play"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Gallery.Toolbar.SlideShow}"  
+			Command="{Binding OnSlideShowBegin}"
+			/>
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="wallpaper"
 			GlyphStrokeThickness="0.1"
 			Text="{DynamicResource Gallery.Toolbar.Wallpaper}"  

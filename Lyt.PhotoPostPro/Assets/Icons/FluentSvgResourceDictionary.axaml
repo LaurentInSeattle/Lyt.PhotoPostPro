@@ -1,5 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  slide_play  -->
+<DrawingGroup x:Key = "slide_playDrawingGroup">
+<DrawingGroup>
+	<DrawingGroup.ClipGeometry>
+	  <RectangleGeometry Rect="0,0,24,24" />
+	</DrawingGroup.ClipGeometry>
+	<GeometryDrawing Brush="#FF212121" >
+	  <GeometryDrawing.Geometry>
+		<PathGeometry FillRule="NonZero" Figures="M4.75,4C3.2312,4,2,5.2312,2,6.75L2,17.25C2,18.7688,3.2312,20,4.75,20L11.4982,20C11.3004,19.5258,11.1572,19.0232,11.0764,18.5L4.75,18.5C4.0596,18.5,3.5,17.9404,3.5,17.25L3.5,6.75C3.5,6.0596,4.0596,5.5,4.75,5.5L19.25,5.5C19.9404,5.5,20.5,6.0596,20.5,6.75L20.5,11.7322C21.051,12.0194,21.5557,12.3832,22,12.8096L22,6.75C22,5.2312,20.7688,4,19.25,4L4.75,4z M23,17.5C23,20.5376 20.5376,23 17.5,23 14.4624,23 12,20.5376 12,17.5 12,14.4624 14.4624,12 17.5,12 20.5376,12 23,14.4624 23,17.5z M16,19.499C16,19.8982,16.4448,20.1365,16.7771,19.9152L19.779,17.9161C20.0761,17.7183,20.0762,17.2817,19.779,17.0838L16.7771,15.0848C16.4448,14.8635,16,15.1017,16,15.5009L16,19.499z" />
+	  </GeometryDrawing.Geometry>
+	</GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="slide_play" Drawing="{StaticResource slide_playDrawingGroup}" />
+
 <!--  globe  -->
 <DrawingGroup x:Key = "globeDrawingGroup">
 <DrawingGroup>

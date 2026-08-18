@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Показ слайдів</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Шпалери</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Перейти до...</system:String>

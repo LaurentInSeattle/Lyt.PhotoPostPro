@@ -43,6 +43,8 @@
 
     <system:String x:Key="DragDrop.DropZone">Zona trascina e Rilascia</system:String>
 
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Presentazione</system:String>
+
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Come Sfondo</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Naviga verso...</system:String>
