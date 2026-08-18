@@ -1,7 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Export;
 
-public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep> 
+public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep>
 {
+    private bool isInitializing;
+
     public ExportToolboxViewModel()
     {
         this.SpinViewModel = new SpinViewModel()
@@ -14,10 +16,24 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     protected override string Title => this.Localize("Workflow.Export.Title");
 
     [ObservableProperty]
+    public partial int Rating { get; set; }
+
+    [ObservableProperty]
     public partial bool IsExporting { get; set; }
 
     [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
+
+    public override void Activate(object? activationParameters)
+    {
+        base.Activate(activationParameters);
+        With.Flag(ref this.isInitializing, () =>
+        {
+            var postProcess = this.model.Workflow.PostProcess;
+            var metadata = postProcess.Metadata;
+            this.Rating = metadata.Rating;
+        });
+    }
 
     private void SpinWait(bool start = true)
     {
@@ -35,7 +51,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         this.IsExporting = true;
         this.SpinWait(start: true);
 
-        Task.Run(() => 
+        Task.Run(() =>
         {
             try
             {
@@ -44,14 +60,14 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-            } 
+            }
             finally
             {
                 // Error or not: stop the spinner and enable the buttons again
-                Dispatch.OnUiThread(() => 
-                { 
-                    this.SpinWait(start: false); 
-                    this.IsExporting = false; 
+                Dispatch.OnUiThread(() =>
+                {
+                    this.SpinWait(start: false);
+                    this.IsExporting = false;
                 });
             }
         });
@@ -66,5 +82,24 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         // TODO: Warn if nothing exported 
         new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.BackToWindowed).Publish();
         this.model.Finish();
+    }
+
+    partial void OnRatingChanged(int value)
+    {
+        if (this.isInitializing)
+        {
+            return;
+        }
+
+        if (value <= 0 && value > 5)
+        {
+            return;
+        }
+
+        // Save new value to model and to disk 
+        var postProcess = this.model.Workflow.PostProcess;
+        var metadata = postProcess.Metadata;
+        metadata.Rating = value;
+        this.model.LibraryManager.SaveMetadata(metadata);
     }
 }

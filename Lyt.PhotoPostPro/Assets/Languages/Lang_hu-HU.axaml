@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Állítsa be az exportálási folyamatot a fő nézetben.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Jó szerkesztés?  A kép értékelését módosíthatja:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Kép(ek) exportálása</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Lépjen a Mappa exportálása elemre</system:String>

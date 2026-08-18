@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">在主视图中设置导出过程。</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">编辑好？ 您可以调整此图像评级：</system:String>
+
     <system:String x:Key="Workflow.Export.Export">导出图像</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">导航至导出文件夹</system:String>

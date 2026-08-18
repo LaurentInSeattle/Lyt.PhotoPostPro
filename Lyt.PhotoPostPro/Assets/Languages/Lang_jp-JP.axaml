@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">メインビューでエクスポートプロセスを設定します。</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">編集が上手い？ この画像評価は次のように調整できます。</system:String>
+
     <system:String x:Key="Workflow.Export.Export">画像のエクスポート</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">エクスポートフォルダーに移動します</system:String>

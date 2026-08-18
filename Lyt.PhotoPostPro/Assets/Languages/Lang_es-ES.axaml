@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Configure el proceso de exportación en la vista principal.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">¿Buena edición?  Puede ajustar la clasificación de esta imagen:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Exportar imágenes</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Vaya a la carpeta Exportar</system:String>

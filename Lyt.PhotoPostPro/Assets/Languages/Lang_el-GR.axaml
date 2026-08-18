@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Ρυθμίστε τη διαδικασία εξαγωγής στην κύρια προβολή.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Καλό μοντάζ;  Μπορείτε να προσαρμόσετε αυτήν την αξιολόγηση εικόνας:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Εξαγωγή εικόνων</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Μεταβείτε στον φάκελο Εξαγωγή</system:String>

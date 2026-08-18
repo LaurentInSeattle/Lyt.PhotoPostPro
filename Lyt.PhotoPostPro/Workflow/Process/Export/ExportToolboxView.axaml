@@ -11,18 +11,21 @@
 
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:stars="clr-namespace:Lyt.Avalonia.Controls.StarRating;assembly=Lyt.Avalonia.Controls"
 	>	
 	<Grid
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- 2 : Prompt Rate Again --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- 3 : Rating Control --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- 4 : Spacer / Spinner --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 5 :  Export Button --> 
 			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 3 :  Export Button --> 
 			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 7 : Navigate Button --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 9 : Navigate Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 10 : Finish Button --> 
@@ -35,8 +38,20 @@
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<TextBlock
+			Grid.Row="2" 
+			Text="{DynamicResource Workflow.Export.RateAgain}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<stars:RatingControl
+			Grid.Row="3" 
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			RatingValue="{Binding Rating}"
+			IsReadOnly="False"
+			/>
 		<glyphs:GlyphButton
-			Grid.Row="3" Grid.Column="0" 
+			Grid.Row="5" Grid.Column="0" 
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export"
@@ -47,12 +62,11 @@
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<shared:SpinView
-			Grid.Row="1" Grid.RowSpan="6"
+			Grid.Row="4" Grid.RowSpan="6"
 			DataContext="{Binding SpinViewModel}"
 			/>
-
 		<glyphs:GlyphButton
-			Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="folder_open"
@@ -63,7 +77,7 @@
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<glyphs:GlyphButton
-			Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="dismiss"

@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">মূল দৃশ্যে রপ্তানি প্রক্রিয়া সেটআপ করুন।</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">ভাল সম্পাদনা?  আপনি এই ইমেজ রেটিং সামঞ্জস্য করতে পারেন:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">ছবি(গুলি) রপ্তানি করুন</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">এক্সপোর্ট ফোল্ডারে নেভিগেট করুন</system:String>

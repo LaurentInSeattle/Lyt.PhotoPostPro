@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Կարգավորեք արտահանման գործընթացը հիմնական տեսքով:</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Լավ խմբագրում?  Դուք կարող եք հարմարեցնել այս պատկերի վարկանիշը.</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Արտահանել պատկեր(ներ)</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Նավարկեք դեպի Արտահանման թղթապանակ</system:String>

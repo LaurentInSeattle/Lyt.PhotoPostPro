@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Richten Sie den Exportvorgang in der Hauptansicht ein.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Gute Bearbeitung?  Sie können diese Bildbewertung anpassen:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Bild(er) exportieren</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Navigieren Sie zum Exportordner</system:String>

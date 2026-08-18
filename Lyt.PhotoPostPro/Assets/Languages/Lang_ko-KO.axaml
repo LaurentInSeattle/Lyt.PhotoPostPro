@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">기본 보기에서 내보내기 프로세스를 설정합니다.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">편집이 잘 됐나요?  이 이미지 등급을 조정할 수 있습니다.</system:String>
+
     <system:String x:Key="Workflow.Export.Export">이미지 내보내기</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">내보내기 폴더로 이동</system:String>

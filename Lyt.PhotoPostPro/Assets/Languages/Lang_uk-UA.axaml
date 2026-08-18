@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Налаштуйте процес експорту в головному вікні.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Гарне редагування?  Ви можете налаштувати цей рейтинг зображення:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Експорт зображень</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Перейдіть до папки експорту</system:String>

@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Настройте процеса на експортиране в основния изглед.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Добра редакция?  Можете да коригирате тази оценка на изображението:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Експортиране на изображение(а)</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Отидете до папка за експортиране</system:String>

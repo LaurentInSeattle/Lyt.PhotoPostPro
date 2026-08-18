@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">Imposta il processo di esportazione nella vista principale.</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">Bella post-produzione? Puoi modificare la classificazione dell'immagine:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">Esporta immagini</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">Navigare alla cartella di esportazione</system:String>

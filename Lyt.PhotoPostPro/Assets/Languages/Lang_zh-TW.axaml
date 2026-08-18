@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">在主視圖中設定匯出過程。</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">編輯好？您可以調整此圖像評級：</system:String>
+
     <system:String x:Key="Workflow.Export.Export">匯出影像</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">導航至匯出資料夾</system:String>

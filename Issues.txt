@@ -24,8 +24,6 @@ Bugs - No Repro
 WIP
 ---
 
-- Ability to rate again in Export panel 
-
 - Export (copy) the editing JSON file along with the images.
 
 
@@ -65,7 +63,7 @@ Missing Features
 
 --- Important ---
 
-- Ability to navigate the library by Rating, Keywords, etc.
+- Ability to navigate and filter the library by Rating, Keywords, etc.
 
 - Ability to flag images to insert in a photobook or collection 
 

@@ -347,6 +347,8 @@
 
     <system:String x:Key="Workflow.Export.Correction">निर्यात प्रक्रिया को मुख्य दृश्य में सेटअप करें।</system:String>
 
+    <system:String x:Key="Workflow.Export.RateAgain">अच्छा संपादन?  आप इस छवि रेटिंग को समायोजित कर सकते हैं:</system:String>
+
     <system:String x:Key="Workflow.Export.Export">छवि निर्यात करें</system:String>
 
     <system:String x:Key="Workflow.Export.Navigate">निर्यात फ़ोल्डर पर नेविगेट करें</system:String>
