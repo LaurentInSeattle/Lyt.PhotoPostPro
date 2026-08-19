@@ -127,23 +127,6 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    //public void TannerHellandWhiteBalance(float kelvin) =>
-    //    this.ApiAction(() =>
-    //    {
-    //        if ((kelvin < 1000.0) || (kelvin > 40000.0))
-    //        {
-    //            return false;
-    //        }
-
-    //        if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
-    //        {
-    //            this.LastResultFrame = whiteBalanceStep.TannerHellandWhiteBalance(kelvin);
-    //            return true;
-    //        }
-
-    //        return false;
-    //    });
-
     public void ColorMatrixWhiteBalance(float temperature) =>
         this.ApiAction(() =>
         {
@@ -310,27 +293,27 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void Vignette(float top, float bottom, float left, float right, float lightness) =>
         this.ApiAction(() =>
         {
-            if ((top < 0.0f) || (top > 0.45f))
+            if ((top < 0.0f) || (top > 0.5f))
             {
                 return false;
             }
 
-            if ((bottom < 0.0f) || (bottom > 0.45f))
+            if ((bottom < 0.0f) || (bottom > 0.5f))
             {
                 return false;
             }
 
-            if ((left < 0.0f) || (left > 0.45f))
+            if ((left < 0.0f) || (left > 0.5f))
             {
                 return false;
             }
 
-            if ((right < 0.0f) || (right > 0.45f))
+            if ((right < 0.0f) || (right > 0.5f))
             {
                 return false;
             }
 
-            if ((lightness < -0.75f) || (lightness > 0.75f))
+            if ((lightness < -0.8f) || (lightness > 0.8f))
             {
                 return false;
             }

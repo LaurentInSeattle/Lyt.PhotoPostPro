@@ -60,7 +60,7 @@
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.45"
+				Minimum="0.0" Maximum="0.5"
 				Value="{Binding TopSliderValue}"
 				/>
 			<TextBlock
@@ -80,7 +80,7 @@
 				Grid.Row="1" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.45"
+				Minimum="0.0" Maximum="0.5"
 				Value="{Binding BottomSliderValue}"
 				/>
 			<TextBlock
@@ -100,7 +100,7 @@
 				Grid.Row="2" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.45"
+				Minimum="0.0" Maximum="0.5"
 				Value="{Binding LeftSliderValue}"
 				/>
 			<TextBlock
@@ -120,7 +120,7 @@
 				Grid.Row="3" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="0.45"
+				Minimum="0.0" Maximum="0.5"
 				Value="{Binding RightSliderValue}"
 				/>
 			<TextBlock
@@ -155,7 +155,7 @@
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.75" Maximum="0.75"
+				Minimum="-0.8" Maximum="0.8"
 				Value="{Binding LightnessSliderValue}"
 				/>
 			<TextBlock

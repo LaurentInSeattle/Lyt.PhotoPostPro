@@ -64,7 +64,6 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
         }
 
         this.IsIdentity = true;
-        this.ResultImage?.Dispose();
         this.ResultImage = this.SourceImage;
         return this.SourceImage.ToFrame();
     }
