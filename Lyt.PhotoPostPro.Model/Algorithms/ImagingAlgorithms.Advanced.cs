@@ -1,7 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
 using static ImagingUtilities;
-using static System.MathF;
 
 public static partial class ImagingAlgorithms
 {

@@ -25,6 +25,13 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
         this.OriginalDy = originalImage.Height;
     }
 
+    protected override void SetIdentity()
+        => base.IsIdentity =
+            this.X == 0 && 
+            this.Y == 0 &&
+            this.Dx == this.OriginalDx && 
+            this.Dy == this.OriginalDy;
+
     public override void PerformStep(PostProcessParameters ppp)
     {
         bool isChanged =
@@ -52,10 +59,11 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
         this.Y = y;
         this.Dx = dx;
         this.Dy = dy;
+        this.SetIdentity();
         return this.Transform();
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {

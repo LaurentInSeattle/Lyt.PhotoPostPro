@@ -9,6 +9,13 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    protected override void SetIdentity()
+    {
+        base.IsIdentity =
+            MathF.Abs(this.ShadowAmount) < 0.001 &&
+            MathF.Abs(this.HighlightAmount) < 0.001f;
+    }
+
     public override void PerformStep(PostProcessParameters ppp)
     {
         bool changed =
@@ -26,7 +33,7 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -51,6 +58,7 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.HighlightAmount = highlightAmount;
         this.ShadowAmount = shadowAmount;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 

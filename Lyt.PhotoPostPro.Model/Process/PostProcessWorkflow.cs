@@ -11,12 +11,12 @@ public sealed class PostProcessWorkflow
         var compositionStep = new CompositionStep(this);
         var exposureStep = new ExposureStep(this);
         var recoveryStep = new RecoveryStep(this);
+        var vignetteStep = new VignetteStep(this);
         var whiteBalanceStep = new WhiteBalanceStep(this);
         var contrastStep = new ContrastStep(this);
         var lutStep = new LutStep(this);
         var colorStep = new ColorStep(this);
         var sharpenStep = new SharpenStep(this);
-        var vignetteStep = new VignetteStep(this);
         var filtersStep = new FiltersStep(this);
         var exportStep = new ExportStep(this);
 

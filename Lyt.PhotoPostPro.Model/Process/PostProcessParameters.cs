@@ -153,7 +153,6 @@ public sealed class PostProcessParameters
         var whiteBalanceStep = workflow.Get<WhiteBalanceStep>();
         this.WhiteBalanceAlgorithm = whiteBalanceStep.Algorithm;
         this.WhiteBalanceSaturationThreshold = whiteBalanceStep.SaturationThreshold;
-        this.WhiteBalanceKelvin = whiteBalanceStep.Kelvin;
         this.WhiteBalanceTemperature = whiteBalanceStep.Temperature;
         this.WhiteBalanceRed = whiteBalanceStep.Red;
         this.WhiteBalanceGreen = whiteBalanceStep.Green;
@@ -225,7 +224,6 @@ public sealed class PostProcessParameters
         var whiteBalanceStep = workflow.Get<WhiteBalanceStep>();
         whiteBalanceStep.Algorithm = this.WhiteBalanceAlgorithm;
         whiteBalanceStep.SaturationThreshold = this.WhiteBalanceSaturationThreshold;
-        whiteBalanceStep.Kelvin = this.WhiteBalanceKelvin;
         whiteBalanceStep.Temperature = this.WhiteBalanceTemperature;
         whiteBalanceStep.Red = this.WhiteBalanceRed;
         whiteBalanceStep.Green = this.WhiteBalanceGreen;

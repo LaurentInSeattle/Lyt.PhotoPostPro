@@ -15,6 +15,9 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    protected override void SetIdentity()
+        => base.IsIdentity = Math.Abs(this.Lightness) < 0.001;
+
     public override Frame? Reset()
     {
         this.Clear();
@@ -36,7 +39,7 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -67,6 +70,7 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
         this.Left = left;
         this.Right = right;
         this.Lightness = lightness;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 

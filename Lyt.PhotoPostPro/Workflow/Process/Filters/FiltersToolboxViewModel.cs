@@ -122,6 +122,11 @@ public sealed partial class FiltersToolboxViewModel :
 
     partial void OnSelectedIndexChanged(int value)
     {
+        if (!this.IsActivated)
+        {
+            return;
+        }
+
         if (value >= 0 && value < this.SupportedFilters.Count)
         {
             // Wait one frame before launching the image color lookup process

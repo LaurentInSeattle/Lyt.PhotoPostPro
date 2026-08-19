@@ -1,10 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Process;
 
-public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
+public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
 {
-    public const string StartStepName = "Start";
-    public const string EndStepName = "End";
-
     public const string OrientationStepName = "Orientation";
     public const string StraightenStepName = "Straighten";
     public const string CompositionStepName = "Composition";
@@ -21,23 +18,30 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
 
     public string Name { get; set; } = name;
 
-    public PostProcessStep? PreviousStep { get; set; }
-
-    public PostProcessStep? NextStep { get; set; }
-
-    public PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow;
-
-    public bool InitialRunNeeded { get; set; }
-
-    public bool IsFirstRun { get; set; } = true;
-
     public Image<RgbaHalf>? SourceImage { get; set; }
 
     public Image<RgbaHalf>? ResultImage { get; set; }
 
-    public bool IsFirstStep => this.PreviousStep is null;
+    internal PostProcessStep? PreviousStep { get; set; }
 
-    public bool IsLastStep => this.NextStep is null;
+    internal PostProcessStep? NextStep { get; set; }
+
+    internal PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow;
+
+    internal bool InitialRunNeeded { get; set; }
+
+    internal bool IsFirstRun { get; set; } = true;
+
+    public bool IsIdentity { get; protected set; }
+
+    internal bool IsFirstStep => this.PreviousStep is null;
+
+    internal bool IsLastStep => this.NextStep is null;
+
+    // Performs actions provided in parameters 
+    public abstract void PerformStep(PostProcessParameters postProcessParameters);
+
+    protected abstract void SetIdentity(); 
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Initialize(Image<RgbaHalf> originalImage) { } 
@@ -59,12 +63,11 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
             return null;
         }
 
+        this.IsIdentity = true;
+        this.ResultImage?.Dispose();
         this.ResultImage = this.SourceImage;
         return this.SourceImage.ToFrame();
     }
-
-    // Performs actions provided in parameters 
-    public virtual void PerformStep(PostProcessParameters postProcessParameters) { }
 
     // Override in derived classes if needed, overrides must call the base class .
     public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) 
@@ -83,12 +86,12 @@ public class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string nam
     }
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
+    internal virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
 
     // Default implementation does nothing. Override in derived classes is needed.
-    public virtual Frame? Transform(bool withFrame = true) => null;
+    internal virtual Frame? Transform(bool withFrame = true) => null;
 
-    public static void RecalculateHistograms(Image<RgbaHalf> image)
+    internal static void RecalculateHistograms(Image<RgbaHalf> image)
     {
         Task.Run(() =>
         {

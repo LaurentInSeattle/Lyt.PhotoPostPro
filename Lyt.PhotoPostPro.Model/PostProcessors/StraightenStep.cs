@@ -7,6 +7,9 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    protected override void SetIdentity()
+        => base.IsIdentity = MathF.Abs(this.RotationAngle) < 0.001f; 
+
     public override Frame? Reset()
     {
         this.Clear();
@@ -28,10 +31,11 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
         float angleDelta = isClockwise ? angle : -angle;
         this.RotationAngle += angleDelta;
         this.Normalize();
+        this.SetIdentity(); 
         return this.Transform();
     }
 
-    public override Frame? Transform(bool withFrame =true )
+    internal override Frame? Transform(bool withFrame =true )
     {
         if (this.SourceImage is null)
         {

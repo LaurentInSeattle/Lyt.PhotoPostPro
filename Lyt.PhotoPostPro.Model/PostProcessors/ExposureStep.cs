@@ -11,6 +11,12 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    protected override void SetIdentity()
+        => base.IsIdentity =
+            MathF.Abs(1.0f - this.Gamma) < 0.001 &&
+            MathF.Abs(1.0f - this.Gain) < 0.001 &&
+            MathF.Abs(this.Shift) < 0.001f;
+
     public override Frame? Reset()
     {
         this.Clear();
@@ -31,7 +37,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -60,6 +66,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         this.Gamma = gamma;
         this.Gain = gain;
         this.Shift = shift;
+        this.SetIdentity(); 
         return this.Transform(withFrame: true);
     }
 

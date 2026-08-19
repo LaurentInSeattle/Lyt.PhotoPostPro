@@ -29,11 +29,15 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
+    protected override void SetIdentity()
+        => base.IsIdentity = this.RotationAngle == 0 &&! this.IsMirrored ;
+
     internal Frame? Rotate(bool isClockwise)
     {
         int angle = isClockwise ? 90 : -90;
         this.RotationAngle += angle;
         this.Normalize();
+        this.SetIdentity();
         return this.Transform();
     }
 
@@ -51,10 +55,11 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
             this.Normalize();
         }
 
+        this.SetIdentity();
         return this.Transform();
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {

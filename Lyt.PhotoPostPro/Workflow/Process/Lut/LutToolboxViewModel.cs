@@ -164,6 +164,11 @@ public sealed partial class LutToolboxViewModel :
 
     partial void OnSelectedIndexChanged(int value)
     {
+        if ( !this.IsActivated)
+        {
+            return; 
+        }
+
         if (value >= 0 && value < this.AvailableLutNames.Count)
         {
             // Wait one frame before launching the image color lookup process

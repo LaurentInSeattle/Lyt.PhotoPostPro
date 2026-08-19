@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
+
 public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.SharpenStepName)
 {
@@ -14,6 +16,18 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     public SharpenAlgorithm Algorithm { get; set; }
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+
+    protected override void SetIdentity()
+    {
+        if (this.Algorithm == SharpenAlgorithm.Sharpen)
+        {
+            base.IsIdentity = MathF.Abs(this.SharpenAmount) < 0.001f;
+        }
+        else // if (Algorithm != SharpenAlgorithm.EdgesMask)
+        {
+            base.IsIdentity = true; 
+        }
+    }
 
     public override Frame? Reset()
     {
@@ -31,7 +45,7 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -63,12 +77,14 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = SharpenAlgorithm.Sharpen;
         this.SharpenAmount = sharpenAmount;
+        this.SetIdentity() ;
         return this.Transform(withFrame: true);
     }
 
     internal Frame? EdgesMask()
     {
         this.Algorithm = SharpenAlgorithm.EdgesMask;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 

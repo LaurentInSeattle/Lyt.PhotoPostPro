@@ -55,8 +55,7 @@ public sealed partial class LutViewModel : StepViewModel<LutView> , IRecipient<W
 
     public void UseThisLut (LutMetadata lutMetadata)
     {
-        // Call on the model, and NOT the workflow 
-        this.model.Reset();
+        // No need to Reset here 
         this.model.Lut(lutMetadata);
         this.HideExplorer();
     }

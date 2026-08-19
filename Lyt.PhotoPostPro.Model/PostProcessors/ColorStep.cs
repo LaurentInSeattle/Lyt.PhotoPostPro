@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
+
 public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ColorStepName)
 {
@@ -20,6 +22,21 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     public ColorAlgorithm Algorithm { get; set; }
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+
+    protected override void SetIdentity()
+    {
+        if (this.Algorithm == ColorAlgorithm.Saturation)
+        {
+            base.IsIdentity = MathF.Abs(1.0f - this.SaturationAmount) < 0.001f ;
+        }
+        else // if (Algorithm != ColorAlgorithm.Vibrance)
+        {
+            base.IsIdentity =
+                MathF.Abs(this.RedAmount) < 0.001f &&
+                MathF.Abs(this.GreenAmount) < 0.001f &&
+                MathF.Abs(this.BlueAmount) < 0.001f;
+        }
+    }
 
     public override Frame? Reset()
     {
@@ -55,7 +72,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -87,6 +104,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = ColorAlgorithm.Saturation;
         this.SaturationAmount = saturationAmount;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -96,6 +114,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         this.RedAmount = redAmount;
         this.GreenAmount = greenAmount;
         this.BlueAmount = blueAmount;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -110,4 +129,3 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         this.BlueAmount = 0.0f;
     }
 }
-

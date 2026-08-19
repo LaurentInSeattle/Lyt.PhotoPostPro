@@ -14,7 +14,14 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     // DO NOT call the base class or else it will call Transform 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
 
-    public override Frame? Transform(bool withFrame = true) => this.Reset();
+    // For abstract compliance only 
+    internal override Frame? Transform(bool withFrame = true) => null;  
+
+    // For abstract compliance only 
+    protected override void SetIdentity() => base.IsIdentity = false;
+
+    // For abstract compliance only 
+    public override void PerformStep(PostProcessParameters postProcessParameters) { } 
 
     public override Frame? Reset()
     {
@@ -23,13 +30,17 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        // Pick the possibly rotated or mirrored from the first step as 
+        // Pick the possibly rotated or mirrored from the very first step as 
         // the source image so that comparisons can be made 
         // The result image from the previous step is our current source
         // so we clone it and that becomes our result image... 
-        var clone = this.SourceImage.Clone();
+
+        //var clone = this.SourceImage.Clone();
+        //this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
+        //this.ResultImage = clone;
+
+        this.ResultImage = this.SourceImage;
         this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
-        this.ResultImage = clone;
         return this.ResultImage.ToFrame();
     }
 

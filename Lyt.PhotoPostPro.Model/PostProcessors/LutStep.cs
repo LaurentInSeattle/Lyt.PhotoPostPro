@@ -11,6 +11,9 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    protected override void SetIdentity()
+        => base.IsIdentity = this.LutMetadata == LutMetadata.Empty;
+
     public override Frame? Reset()
     {
         this.Clear();
@@ -54,7 +57,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         this.Lut(lutMetadata);
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -157,6 +160,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     internal Frame? Lut(LutMetadata lutMetadata)
     {
         this.LutMetadata = lutMetadata;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 

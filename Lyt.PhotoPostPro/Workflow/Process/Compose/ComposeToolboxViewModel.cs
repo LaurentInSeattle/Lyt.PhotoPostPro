@@ -236,5 +236,13 @@ public sealed partial class ComposeToolboxViewModel :
 
     public override void OnBeforeNext() => this.model.Crop(this.x, this.y, this.dx, this.dy);
 
-    partial void OnSelectedIndexChanged(int value) => this.viewModel.SelectCropGuidelines(value);
+    partial void OnSelectedIndexChanged(int value)
+    {
+        if ( ! this.IsActivated)
+        {
+            return;
+        }
+
+        this.viewModel.SelectCropGuidelines(value);
+    } 
 }

@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using static Lyt.PhotoPostPro.Model.PostProcessors.SharpenStep;
+
 public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.FiltersStepName)
 {
@@ -21,6 +23,25 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     public float Amount { get; set; }
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+
+    protected override void SetIdentity()
+    {
+        if (this.SelectedFilter == Filter.None)
+        {
+            base.IsIdentity = true;
+        }
+        else if (
+            (this.SelectedFilter == Filter.Grayscale) || 
+            (this.SelectedFilter == Filter.Sepia) || 
+            (this.SelectedFilter == Filter.Vignette))
+        {
+            base.IsIdentity = MathF.Abs(this.Amount) < 0.001;
+        }
+        else
+        {
+            base.IsIdentity = false;
+        }
+    }
 
     public override Frame? Reset()
     {        
@@ -76,7 +97,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         }
     }
 
-    public override Frame? Transform(bool withFrame = true)
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
@@ -140,6 +161,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Grayscale;
         this.Amount = grayscaleAmount;
+        this.SetIdentity(); 
         return this.Transform(withFrame: true);
     }
 
@@ -147,6 +169,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Sepia;
         this.Amount = sepiaAmount;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -154,6 +177,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Vignette;
         this.Amount = vignetteAmount;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -161,6 +185,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.BlackWhite;
         this.Amount = 0.0f;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -168,6 +193,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Kodachrome;
         this.Amount = 0.0f;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -175,6 +201,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Lomograph;
         this.Amount = 0.0f;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -182,6 +209,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Polaroid;
         this.Amount = 0.0f;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 

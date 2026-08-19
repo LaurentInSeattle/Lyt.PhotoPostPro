@@ -23,6 +23,9 @@ Bugs - No Repro
 WIP
 ---
 
+- Perf : Review all process steps to ensure that the source image is not unnecessarily cloned. 
+	=> Prerequisite for item below
+
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
 
@@ -102,7 +105,7 @@ Minor Issues (Low priority)
 Code Quality Issues 
 -------------------
 
-- Perf : Review all process steps to ensure that the source image is not unnecessarily cloned. 
+- Seems like we could merge Post Process and Workflow classes 
 
 - Move message definitions in new folders depending on area and workflow 
 
