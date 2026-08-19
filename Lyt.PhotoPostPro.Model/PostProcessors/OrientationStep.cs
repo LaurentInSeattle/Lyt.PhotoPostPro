@@ -22,7 +22,7 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
             this.Flip(isMirror: true);
         }
 
-        int angle = ppp.OrientationRotationAngle; 
+        int angle = ppp.OrientationRotationAngle;
         if (angle != 0)
         {
             this.Rotate(isClockwise: angle > 0);
@@ -30,7 +30,7 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     protected override void SetIdentity()
-        => base.IsIdentity = this.RotationAngle == 0 &&! this.IsMirrored ;
+        => base.IsIdentity = this.RotationAngle == 0 && !this.IsMirrored;
 
     internal Frame? Rotate(bool isClockwise)
     {
@@ -66,31 +66,32 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        RotateMode rotateMode =
-            !this.IsRotated ?
-            RotateMode.None :
-                this.RotationAngle == -90 ?
-                    RotateMode.Rotate270 :
-                    this.RotationAngle == 90 ? RotateMode.Rotate90 : RotateMode.Rotate180;
-        FlipMode flipMode = this.IsMirrored ? FlipMode.Horizontal : FlipMode.None;
-
-        var clone = this.SourceImage.Clone();
-        bool isChanged = flipMode != FlipMode.None || rotateMode != RotateMode.None;
-        if (isChanged)
+        if (this.IsIdentity)
         {
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            RotateMode rotateMode =
+                this.RotationAngle == 0 ?
+                RotateMode.None :
+                    this.RotationAngle == -90 ?
+                        RotateMode.Rotate270 :
+                        this.RotationAngle == 90 ? RotateMode.Rotate90 : RotateMode.Rotate180;
+            FlipMode flipMode = this.IsMirrored ? FlipMode.Horizontal : FlipMode.None;
+            var clone = this.SourceImage.Clone();
             clone.Mutate(x => x.RotateFlip(rotateMode, flipMode));
+            this.ResultImage = clone;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
-
-    private bool IsRotated => this.RotationAngle != 0;
 
     private void Clear()
     {
         this.RotationAngle = 0;
         this.IsMirrored = false;
+        this.SetIdentity();
     }
 
     private void Normalize()

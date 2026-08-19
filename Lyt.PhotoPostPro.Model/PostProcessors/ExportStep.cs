@@ -15,13 +15,13 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
 
     // For abstract compliance only 
-    internal override Frame? Transform(bool withFrame = true) => null;  
+    internal override Frame? Transform(bool withFrame = true) => null;
 
     // For abstract compliance only 
     protected override void SetIdentity() => base.IsIdentity = false;
 
     // For abstract compliance only 
-    public override void PerformStep(PostProcessParameters postProcessParameters) { } 
+    public override void PerformStep(PostProcessParameters postProcessParameters) { }
 
     public override Frame? Reset()
     {
@@ -33,15 +33,21 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         // Pick the possibly rotated or mirrored from the very first step as 
         // the source image so that comparisons can be made 
         // The result image from the previous step is our current source
-        // so we clone it and that becomes our result image... 
-
-        //var clone = this.SourceImage.Clone();
-        //this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
-        //this.ResultImage = clone;
-
-        this.ResultImage = this.SourceImage;
-        this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
-        return this.ResultImage.ToFrame();
+        // so we re-use it and that becomes our result image... 
+        int currentStepIndex = this.PostProcessWorkflow.CurrentStepIndex;
+        var previousResult = this.PostProcessWorkflow.Steps[currentStepIndex - 1].ResultImage;
+        if (previousResult is not null)
+        {
+            this.ResultImage = previousResult;
+            this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
+            return this.ResultImage.ToFrame();
+        }
+        else
+        {
+            // Should never happen
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return null;
+        }
     }
 
     internal Frame? Export(ExportParameters exportParameters)

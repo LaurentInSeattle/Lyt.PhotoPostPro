@@ -1,14 +1,14 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) : 
+public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ContrastStepName)
 {
-    public const float SCurveDefault = 4.5f; 
+    public const float SCurveDefault = 4.5f;
 
     public enum ContrastAlgorithm
     {
-        Global, 
-        SCurves, 
+        Global,
+        SCurves,
     }
 
     public ContrastAlgorithm Algorithm { get; set; }
@@ -22,7 +22,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
     public float RedAmount { get; set; }
 
     public float GreenAmount { get; set; }
-    
+
     public float BlueAmount { get; set; }
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
@@ -34,14 +34,14 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
             base.IsIdentity =
                 MathF.Abs(1.0f - this.ContrastAmount) < 0.001f &&
                 MathF.Abs(this.BlurAmount) < 0.001f &&
-                MathF.Abs(this.BrightnessAmount) < 0.001f; 
+                MathF.Abs(this.BrightnessAmount) < 0.001f;
         }
         else // if (Algorithm != ContrastAlgorithm.SCurves)
         {
             base.IsIdentity =
                 MathF.Abs(SCurveDefault - this.RedAmount) < 0.001f &&
                 MathF.Abs(SCurveDefault - this.GreenAmount) < 0.001f &&
-                MathF.Abs(SCurveDefault - this.BlueAmount) < 0.001f; 
+                MathF.Abs(SCurveDefault - this.BlueAmount) < 0.001f;
         }
     }
 
@@ -70,7 +70,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case ContrastAlgorithm.Global:
-                this.GlobalContrast(ppp.ContrastContrastAmount, ppp.ContrastBlurAmount, ppp.ContrastBrightnessAmount); 
+                this.GlobalContrast(ppp.ContrastContrastAmount, ppp.ContrastBlurAmount, ppp.ContrastBrightnessAmount);
                 break;
 
             case ContrastAlgorithm.SCurves:
@@ -86,25 +86,32 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged = true; // For now 
-        switch (this.Algorithm)
+        if (this.IsIdentity)
         {
-            case ContrastAlgorithm.Global:
-                clone.ApplyGlobalContrast(this.ContrastAmount, this.BlurAmount, this.BrightnessAmount);
-                break;
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
+            switch (this.Algorithm)
+            {
+                case ContrastAlgorithm.Global:
+                    clone.ApplyGlobalContrast(this.ContrastAmount, this.BlurAmount, this.BrightnessAmount);
+                    break;
 
-            case ContrastAlgorithm.SCurves:
-                clone.ApplySCurveContrast(this.RedAmount, this.GreenAmount, this.BlueAmount);
-                break;
+                case ContrastAlgorithm.SCurves:
+                    clone.ApplySCurveContrast(this.RedAmount, this.GreenAmount, this.BlueAmount);
+                    break;
 
-            default:
-                throw new NotImplementedException("No such Contrast algorithm");
+                default:
+                    throw new NotImplementedException("No such Contrast algorithm");
+            }
+
+            this.ResultImage = clone;
         }
 
-        PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount)
@@ -113,7 +120,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         this.ContrastAmount = contrastAmount;
         this.BlurAmount = blurAmount;
         this.BrightnessAmount = brightnessAmount;
-        this.SetIdentity(); 
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -121,7 +128,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = ContrastAlgorithm.SCurves;
         this.RedAmount = redAmount;
-        this.GreenAmount = greenAmount; 
+        this.GreenAmount = greenAmount;
         this.BlueAmount = blueAmount;
         this.SetIdentity();
         return this.Transform(withFrame: true);
@@ -138,5 +145,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         this.RedAmount = 4.5f;
         this.GreenAmount = 4.5f;
         this.BlueAmount = 4.5f;
+
+        this.SetIdentity();
     }
 }

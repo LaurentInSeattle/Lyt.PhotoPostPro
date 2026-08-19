@@ -31,10 +31,11 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             base.IsIdentity = true;
         }
         else if (
-            (this.SelectedFilter == Filter.Grayscale) || 
-            (this.SelectedFilter == Filter.Sepia) || 
+            (this.SelectedFilter == Filter.Grayscale) ||
+            (this.SelectedFilter == Filter.Sepia) ||
             (this.SelectedFilter == Filter.Vignette))
         {
+            // Image is unchanged if the amount is 0.0, for Vignette, Grayscale and Sepia
             base.IsIdentity = MathF.Abs(this.Amount) < 0.001;
         }
         else
@@ -44,7 +45,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     public override Frame? Reset()
-    {        
+    {
         this.Clear();
         return base.Reset();
     }
@@ -104,64 +105,61 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        // Image is unchanged if the amount is 0.0, for Vignette, Grayscale and Sepia
-        if ((this.SelectedFilter == Filter.None) ||
-            ((this.SelectedFilter == Filter.Vignette) && (this.Amount < 0.001)) ||
-            ((this.SelectedFilter == Filter.Grayscale) && (this.Amount < 0.001)) ||
-            ((this.SelectedFilter == Filter.Sepia) && (this.Amount < 0.001)))
+        if (this.IsIdentity)
         {
             this.ResultImage = this.SourceImage;
-            return withFrame ? this.SourceImage.ToFrame() : null;
         }
-
-        var clone = this.SourceImage.Clone();
-        switch (this.SelectedFilter)
+        else
         {
-            default:
-            case Filter.None:
-                break;
+            var clone = this.SourceImage.Clone();
+            switch (this.SelectedFilter)
+            {
+                default:
+                case Filter.None:
+                    break;
 
-            case Filter.Grayscale:
-                clone.Grayscale(this.Amount);
-                break;
+                case Filter.Grayscale:
+                    clone.Grayscale(this.Amount);
+                    break;
 
-            case Filter.Sepia:
-                clone.Sepia(this.Amount);
-                break;
+                case Filter.Sepia:
+                    clone.Sepia(this.Amount);
+                    break;
 
-            // All other filters are always applied without parameter 
-            case Filter.Vignette:
-                clone.Vignette(this.Amount);
-                break;
+                // All other filters are always applied without parameter 
+                case Filter.Vignette:
+                    clone.Vignette(this.Amount);
+                    break;
 
-            case Filter.BlackWhite:
-                clone.BlackWhite();
-                break;
+                case Filter.BlackWhite:
+                    clone.BlackWhite();
+                    break;
 
-            case Filter.Kodachrome:
-                clone.Kodachrome();
-                break;
+                case Filter.Kodachrome:
+                    clone.Kodachrome();
+                    break;
 
-            case Filter.Lomograph:
-                clone.Lomograph();
-                break;
+                case Filter.Lomograph:
+                    clone.Lomograph();
+                    break;
 
-            case Filter.Polaroid:
-                clone.Polaroid();
-                break;
+                case Filter.Polaroid:
+                    clone.Polaroid();
+                    break;
+            }
+
+            this.ResultImage = clone;
         }
 
-        PostProcessStep.RecalculateHistograms(clone);
-
-        this.ResultImage = clone;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? Grayscale(float grayscaleAmount)
     {
         this.SelectedFilter = Filter.Grayscale;
         this.Amount = grayscaleAmount;
-        this.SetIdentity(); 
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -217,5 +215,6 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.SelectedFilter = Filter.Grayscale;
         this.Amount = 0.0f;
+        this.SetIdentity();
     }
 }

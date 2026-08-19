@@ -25,7 +25,7 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
         }
         else // if (Algorithm != SharpenAlgorithm.EdgesMask)
         {
-            base.IsIdentity = true; 
+            base.IsIdentity = true;
         }
     }
 
@@ -52,32 +52,39 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged = true; // For now 
-        switch (this.Algorithm)
+        if (this.IsIdentity)
         {
-            case SharpenAlgorithm.Sharpen:
-                clone.ApplyGlobalSharpen(this.SharpenAmount);
-                break;
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
+            switch (this.Algorithm)
+            {
+                case SharpenAlgorithm.Sharpen:
+                    clone.ApplyGlobalSharpen(this.SharpenAmount);
+                    break;
 
-            case SharpenAlgorithm.EdgesMask:
-                // clone.ApplySCurveContrast(this.RedAmount, this.GreenAmount, this.BlueAmount);
-                break;
+                case SharpenAlgorithm.EdgesMask:
+                    // clone.ApplySCurveContrast(this.RedAmount, this.GreenAmount, this.BlueAmount);
+                    break;
 
-            default:
-                throw new NotImplementedException("No such Color algorithm");
+                default:
+                    throw new NotImplementedException("No such Color algorithm");
+            }
+
+            this.ResultImage = clone;
         }
 
-        PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? Sharpen(float sharpenAmount)
     {
         this.Algorithm = SharpenAlgorithm.Sharpen;
         this.SharpenAmount = sharpenAmount;
-        this.SetIdentity() ;
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -92,5 +99,6 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.Algorithm = SharpenAlgorithm.Sharpen;
         this.SharpenAmount = 0.0f;
+        this.SetIdentity();
     }
 }

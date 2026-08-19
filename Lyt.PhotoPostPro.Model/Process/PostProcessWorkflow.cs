@@ -150,7 +150,7 @@ public sealed class PostProcessWorkflow
             {
                 new ModelStepUpdatedMessage(Step: this.CurrentStep).Publish();
             }
-            
+
             // Return current result image 
             var resultImage = this.CurrentStep.ResultImage;
             return resultImage?.ToFrame();

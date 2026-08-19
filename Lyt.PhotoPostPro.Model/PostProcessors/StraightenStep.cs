@@ -1,19 +1,19 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class StraightenStep(PostProcessWorkflow postProcessWorkflow) : 
+public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.StraightenStepName)
 {
-    public float RotationAngle { get ; set ; } // Degrees
+    public float RotationAngle { get; set; } // Degrees
 
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
-        => base.IsIdentity = MathF.Abs(this.RotationAngle) < 0.001f; 
+        => base.IsIdentity = MathF.Abs(this.RotationAngle) < 0.001f;
 
     public override Frame? Reset()
     {
         this.Clear();
-        return base.Reset ();
+        return base.Reset();
     }
 
     public override void PerformStep(PostProcessParameters ppp)
@@ -31,30 +31,37 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
         float angleDelta = isClockwise ? angle : -angle;
         this.RotationAngle += angleDelta;
         this.Normalize();
-        this.SetIdentity(); 
+        this.SetIdentity();
         return this.Transform();
     }
 
-    internal override Frame? Transform(bool withFrame =true )
+    internal override Frame? Transform(bool withFrame = true)
     {
         if (this.SourceImage is null)
         {
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged = Math.Abs(this.RotationAngle) > 0.05;
-        if (isChanged)
+        if (this.IsIdentity)
         {
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
             clone.Mutate(x => x.Rotate(this.RotationAngle));
+            this.ResultImage = clone;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
-    private void Clear() => this.RotationAngle = 0.0f;
-    
+    private void Clear()
+    {
+        this.RotationAngle = 0.0f;
+        this.SetIdentity();
+    }
+
     private void Normalize()
     {
         // In C#, the % operator is a remainder operator, not a true mathematical modulo operator.

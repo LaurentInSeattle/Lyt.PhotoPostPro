@@ -3,7 +3,7 @@
 public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.LutStepName)
 {
-    public const int ThumbnailSize = 1024; 
+    public const int ThumbnailSize = 1024;
 
     public LutMetadata LutMetadata { get; set; } = LutMetadata.Empty;
 
@@ -64,31 +64,33 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        if (this.LutMetadata == LutMetadata.Empty)
+        if (this.IsIdentity)
         {
-            //if (Debugger.IsAttached) { Debugger.Break(); }
             // Does happen when going back after quickly moving forward in the workflow
-            return null;
+            this.ResultImage = this.SourceImage;
         }
-
-        var model = this.PostProcessWorkflow.PostProcess.Model;
-        if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
+        else
         {
-            // Failed to load LUT ? 
-            if (Debugger.IsAttached) { Debugger.Break(); }
-            return null;
+            var model = this.PostProcessWorkflow.PostProcess.Model;
+            if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
+            {
+                // Failed to load LUT ? 
+                if (Debugger.IsAttached) { Debugger.Break(); }
+                return null;
+            }
+
+            if (lut is null)
+            {
+                return null;
+            }
+
+            var clone = this.SourceImage.Clone();
+            clone.Lut(lut);
+            this.ResultImage = clone;
         }
 
-        if (lut is null)
-        {
-            return null;
-        }
-
-        var clone = this.SourceImage.Clone();
-        clone.Lut(lut);
-        PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = clone;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     public void LaunchExploreLuts()
@@ -164,5 +166,9 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         return this.Transform(withFrame: true);
     }
 
-    private void Clear() => this.LutMetadata = LutMetadata.Empty;
+    private void Clear()
+    {
+        this.LutMetadata = LutMetadata.Empty;
+        this.SetIdentity();
+    }
 }

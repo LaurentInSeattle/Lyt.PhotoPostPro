@@ -32,8 +32,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
 
         if (changed)
         {
-            this.AdjustExposure(
-                ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift);
+            this.AdjustExposure(ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift);
         }
     }
 
@@ -44,21 +43,22 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged =
-            Math.Abs(1.0 - this.Gamma) > 0.001 ||
-            Math.Abs(1.0 - this.Gain) > 0.001 ||
-            this.Shift != 0;
-        if (isChanged)
+        if (this.IsIdentity)
         {
+            new GammaLutClearMessage().Publish();
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
             Half[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
-            PostProcessStep.RecalculateHistograms(clone);
+            this.ResultImage = clone;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? AdjustExposure(float gamma, float gain, float shift)
@@ -66,7 +66,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         this.Gamma = gamma;
         this.Gain = gain;
         this.Shift = shift;
-        this.SetIdentity(); 
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -75,6 +75,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         this.Gamma = 1.0f;
         this.Gain = 1.0f;
         this.Shift = 0.0f;
+        this.SetIdentity();
         new GammaLutClearMessage().Publish();
     }
 }

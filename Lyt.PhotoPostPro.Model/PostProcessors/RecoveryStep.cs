@@ -43,15 +43,19 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
         bool isChanged =
             Math.Abs(this.ShadowAmount) > 0.001 ||
             Math.Abs(this.HighlightAmount) > 0.001;
-        var clone = this.SourceImage.Clone();
         if (isChanged)
         {
+            var clone = this.SourceImage.Clone();
             clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount);
-            PostProcessStep.RecalculateHistograms(clone);
+            this.ResultImage = clone;
+        }
+        else
+        {
+            this.ResultImage = this.SourceImage;
         }
 
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? HighlightsShadows(float highlightAmount, float shadowAmount)
@@ -66,5 +70,6 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     {
         this.ShadowAmount = 0.0f;
         this.HighlightAmount = 0.0f;
+        this.SetIdentity();
     }
 }

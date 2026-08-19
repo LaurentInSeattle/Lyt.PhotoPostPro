@@ -27,7 +27,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
     {
         if (this.Algorithm == ColorAlgorithm.Saturation)
         {
-            base.IsIdentity = MathF.Abs(1.0f - this.SaturationAmount) < 0.001f ;
+            base.IsIdentity = MathF.Abs(1.0f - this.SaturationAmount) < 0.001f;
         }
         else // if (Algorithm != ColorAlgorithm.Vibrance)
         {
@@ -79,25 +79,32 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var clone = this.SourceImage.Clone();
-        bool isChanged = true; // For now 
-        switch (this.Algorithm)
+        if (this.IsIdentity)
         {
-            case ColorAlgorithm.Saturation:
-                clone.ApplyGlobalSaturation(this.SaturationAmount);
-                break;
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
+            switch (this.Algorithm)
+            {
+                case ColorAlgorithm.Saturation:
+                    clone.ApplyGlobalSaturation(this.SaturationAmount);
+                    break;
 
-            case ColorAlgorithm.Vibrance:
-                clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
-                break;
+                case ColorAlgorithm.Vibrance:
+                    clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
+                    break;
 
-            default:
-                throw new NotImplementedException("No such Color algorithm");
+                default:
+                    throw new NotImplementedException("No such Color algorithm");
+            }
+
+            this.ResultImage = clone;
         }
 
-        PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = isChanged ? clone : this.SourceImage;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? Saturation(float saturationAmount)
@@ -127,5 +134,6 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         this.RedAmount = 0.0f;
         this.GreenAmount = 0.0f;
         this.BlueAmount = 0.0f;
+        this.SetIdentity();
     }
 }

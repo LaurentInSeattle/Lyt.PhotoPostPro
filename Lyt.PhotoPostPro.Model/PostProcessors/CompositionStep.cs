@@ -27,9 +27,9 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
 
     protected override void SetIdentity()
         => base.IsIdentity =
-            this.X == 0 && 
+            this.X == 0 &&
             this.Y == 0 &&
-            this.Dx == this.OriginalDx && 
+            this.Dx == this.OriginalDx &&
             this.Dy == this.OriginalDy;
 
     public override void PerformStep(PostProcessParameters ppp)
@@ -70,32 +70,16 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        var cropRectangle = new Rectangle(this.X, this.Y, this.Dx, this.Dy);
-        bool isChanged =
-            (this.Dx != 0 && this.Dy != 0) &&
-            (cropRectangle.Height != this.SourceImage.Height || cropRectangle.Width != this.SourceImage.Width);
-        if (isChanged)
+        if (this.IsIdentity)
         {
-            try
-            {
-                var clone = this.SourceImage.Clone();
-                clone.Mutate(x => x.Crop(cropRectangle));
-                this.ResultImage = clone;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                if (Debugger.IsAttached)
-                {
-                    Debugger.Break();
-                }
-
-                return null;
-            }
+            this.ResultImage = this.SourceImage;
         }
         else
         {
-            this.ResultImage = this.SourceImage;
+            var clone = this.SourceImage.Clone();
+            var cropRectangle = new Rectangle(this.X, this.Y, this.Dx, this.Dy);
+            clone.Mutate(x => x.Crop(cropRectangle));
+            this.ResultImage = clone;
         }
 
         return withFrame ? this.ResultImage.ToFrame() : null;
@@ -117,5 +101,6 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
         this.Y = 0;
         this.Dx = this.OriginalDx;
         this.Dy = this.OriginalDy;
+        this.SetIdentity();
     }
 }

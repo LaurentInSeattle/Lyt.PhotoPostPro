@@ -26,7 +26,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
     public override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
-        => this.IsIdentity = this.Algorithm == WhiteBalanceAlgorithm.None; 
+        => this.IsIdentity = this.Algorithm == WhiteBalanceAlgorithm.None;
 
     public override Frame? Reset()
     {
@@ -63,14 +63,13 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
             return null;
         }
 
-        Image<RgbaHalf> clone;
-        if (this.Algorithm == WhiteBalanceAlgorithm.None)
+        if (this.IsIdentity)
         {
-            clone = this.SourceImage;
+            this.ResultImage = this.SourceImage;
         }
         else
         {
-            clone = this.SourceImage.Clone();
+            Image<RgbaHalf> clone = this.SourceImage.Clone();
             switch (this.Algorithm)
             {
                 case WhiteBalanceAlgorithm.ColorMatrix:
@@ -88,18 +87,19 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 default:
                     throw new NotImplementedException("No such White Balance algorithm");
             }
+
+            this.ResultImage = clone;
         }
 
-        PostProcessStep.RecalculateHistograms(clone);
-        this.ResultImage = clone;
-        return withFrame ? clone.ToFrame() : null;
+        PostProcessStep.RecalculateHistograms(this.ResultImage);
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     internal Frame? ColorMatrixWhiteBalance(float temperature)
     {
         this.Algorithm = WhiteBalanceAlgorithm.ColorMatrix;
         this.Temperature = temperature;
-        this.SetIdentity(); 
+        this.SetIdentity();
         return this.Transform(withFrame: true);
     }
 
@@ -131,5 +131,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         this.Red = 0.0f;
         this.Green = 0.0f;
         this.Blue = 0.0f;
+
+        this.SetIdentity();
     }
 }
