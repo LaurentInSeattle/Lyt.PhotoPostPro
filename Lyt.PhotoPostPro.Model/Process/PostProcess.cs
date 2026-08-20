@@ -82,18 +82,44 @@ public sealed class PostProcess
 
     public void Replay()
     {
-        this.IsReplayMode = true;  
-        this.Begin();
+        this.IsReplayMode = true;
 
-        foreach (var step in this.Workflow.Steps)
+        Task.Run(() =>
         {
-            if (step is ExportStep)
+            bool error = false; 
+            try
             {
-                break;
-            }
+                this.Begin();
 
-            this.Workflow.Next();
-            Task.Delay(60).Wait();
-        }
+                // Throttle 
+                Task.Delay(60).Wait();
+
+                foreach (var step in this.Workflow.Steps)
+                {
+                    if (step is ExportStep)
+                    {
+                        break;
+                    }
+
+                    this.Workflow.Next();
+
+                    // Throttle 
+                    Task.Delay(60).Wait();
+                }
+            }
+            catch (Exception ex) 
+            { 
+                Debug.WriteLine(ex);
+                error = true;
+            }
+            finally
+            {
+                if (error)
+                {
+                    this.IsReplayMode = false;
+                    new WorkflowAbortMessage().Publish();
+                } 
+            }
+        });
     } 
 }

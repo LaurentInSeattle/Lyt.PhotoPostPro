@@ -185,7 +185,12 @@ public sealed partial class LibraryManager
             {
                 // Add thumbnail to cache 
                 LoadedThumbnail loadedThumbnail = new(metadata, thumbnailImageBytes);
-                this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
+
+                // Prevents trouble if we already have it, usually because of some previous aborted process
+                if (!this.LoadedThumbnails.ContainsKey(targetPathMetadata))
+                {
+                    this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
+                }
 
                 // Update folder trees 
                 this.CapturedFolderTree.UpdateOnFileAdded(DateKind.Captured, metadata, targetPathMetadata, doSort: false);

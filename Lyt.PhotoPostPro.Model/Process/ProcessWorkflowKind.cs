@@ -7,4 +7,5 @@ public enum WorkflowUpdateKind
     Reset,
     Next,
     Finish,
+    Abort,
 }

@@ -46,6 +46,7 @@ public sealed partial class ProcessViewModel :
 
         if (this.isFirstActivation)
         {
+            // This cannot be done in the constructor
             this.SetupWorkflow();
             this.isFirstActivation = false;
         }
@@ -54,14 +55,12 @@ public sealed partial class ProcessViewModel :
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
-            if (postProcess.IsReplayMode)
-            {
-                this.ActivateCurrentStep(); 
-            }
-            else
+            if (!postProcess.IsReplayMode)
             {
                 this.model.BeginPostProcess();
             }
+
+            this.ActivateCurrentStep();
         }
 
         this.Subscribe<WorkflowUpdateMessage>();
@@ -77,20 +76,18 @@ public sealed partial class ProcessViewModel :
     }
 
     private void ActivateCurrentStep()
-    {
-        Schedule.OnUiThread(60, () =>
-        {
-            if (this.viewSelector is null)
+        => Schedule.OnUiThread(120, () =>
             {
-                return;
-            }
+                if (this.viewSelector is null)
+                {
+                    return;
+                }
 
-            var workflow = this.model.Workflow;
-            string stepName = workflow.CurrentStep.Name;
-            ActivatedView view = FromWorkflowstepName(stepName);
-            this.viewSelector.SelectView(view);
-        }, DispatcherPriority.Background);
-    }
+                var workflow = this.model.Workflow;
+                string stepName = workflow.CurrentStep.Name;
+                ActivatedView view = FromWorkflowstepName(stepName);
+                this.viewSelector.SelectView(view);
+            }, DispatcherPriority.ApplicationIdle);
 
     public void Receive(WorkflowUpdateMessage message)
     {
@@ -231,7 +228,7 @@ public sealed partial class ProcessViewModel :
                 selectableViews,
                 this.OnViewSelected,
                 this.View.ToolboxHostView.ContentGrid,
-                animationService, 
+                null, // no animationService, 
                 animationDuration: 0.25);
     }
 

@@ -6,7 +6,6 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 {
     private bool doNotUpdateModel;
     private WhiteBalanceStep.WhiteBalanceAlgorithm algorithm;
-    // private float kelvin;
     private float temperature;
     private float saturationThreshold;
     private global::Avalonia.Media.Color whitePatch;

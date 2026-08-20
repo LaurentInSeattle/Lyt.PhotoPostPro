@@ -610,19 +610,26 @@ public sealed partial class LibraryViewModel :
 
         if (isReplayMode)
         {
-            Schedule.OnUiThread(120,
-                () =>
-                {
-                    postProcess.Replay();
-                    ActivateProcessView();
-                },
-                DispatcherPriority.ApplicationIdle);
+            // Launch Processing Dialog 
+            // Launch dialog for new processing
+            if (this.dialogService is DialogService modalService)
+            {
+                modalService.RunViewModelModal(
+                    this.shellViewModel.ModalHost, new ProcessingDialogModel(postProcess), this.OnProcessingComplete);
+            }
         }
         else
         {
             ActivateProcessView();
         }
     }
+
+    private void OnProcessingComplete(object arg, bool _)
+        => Schedule.OnUiThread(120, () =>
+        {
+            ActivateProcessView(); 
+        }, DispatcherPriority.ApplicationIdle);
+
 
     private static void ActivateProcessView()
     {
@@ -714,6 +721,9 @@ public sealed partial class LibraryViewModel :
     }
 
     public void Receive(LibraryMetadataUpdateMessage message)
+        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background); 
+
+    private void ReceiveOnUiThread(LibraryMetadataUpdateMessage message)
     {
         var metadata = message.Metadata;
         if (!this.TryFindThumbnail(metadata, out LibraryThumbnailViewModel? thumbnail))

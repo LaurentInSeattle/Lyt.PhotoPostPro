@@ -43,13 +43,13 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
 
     protected abstract void SetIdentity();
 
-    internal abstract Frame? Transform(bool withFrame = true); 
+    internal abstract Frame? Transform(bool withFrame = true);
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Initialize(Image<RgbaHalf> originalImage) { } 
+    public virtual void Initialize(Image<RgbaHalf> originalImage) { }
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Finish() 
+    public virtual void Finish()
     {
         this.SourceImage?.Dispose();
         this.SourceImage = null;
@@ -75,14 +75,19 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
         else
         {
             var clone = this.SourceImage.Clone();
-            transform(clone); 
+            transform(clone);
             this.ResultImage = clone;
         }
 
         if (recalculateHistograms)
         {
-            PostProcessStep.RecalculateHistograms(this.ResultImage);
-        } 
+            bool needForHistograms =
+                !this.PostProcessWorkflow.PostProcess.IsReplayMode || this.NextStep is ExportStep;
+            if (needForHistograms)
+            {
+                PostProcessStep.RecalculateHistograms(this.ResultImage);
+            }
+        }
 
         return withFrame ? this.ResultImage.ToFrame() : null;
     }
@@ -101,15 +106,15 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     }
 
     // Override in derived classes if needed, overrides must call the base class .
-    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind) 
+    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
         Debug.WriteLine("Activating : " + this.Name + "  " + workflowUpdateKind);
         if (this.IsFirstRun)
         {
-            Debug.WriteLine(this.Name + "  - First Run : " + workflowUpdateKind); 
+            Debug.WriteLine(this.Name + "  - First Run : " + workflowUpdateKind);
             this.IsFirstRun = false;
-            this.Reset() ;
-        } 
+            this.Reset();
+        }
         else
         {
             this.Transform(withFrame: false);
@@ -123,7 +128,7 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     {
         Task.Run(() =>
         {
-            Histograms histograms = new(image); 
+            Histograms histograms = new(image);
             new HistogramsGeneratedMessage(histograms).Publish();
         });
     }

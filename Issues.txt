@@ -14,8 +14,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Now able to replay edits but Still need to run a modal dialog with a spinner and showing progress 
-
+- Show progress in replay dialog 
 
 TODO First
 ----------

@@ -59,4 +59,10 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Workflow\Library\Dialogs\ProcessingDialog.axaml.cs">
+      <DependentUpon>ProcessingDialog.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
