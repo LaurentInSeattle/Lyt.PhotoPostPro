@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">এই ছবিটি ইতিমধ্যে সম্পাদনা করা হয়েছে.  আপনি কি আবার শুরু করতে চান নাকি আগের সেটিংস ব্যবহার করতে চান?&#xD;&#xA;&#xD;&#xA;যদি তাই হয়, 'নীচের কম্বো-বক্সে পূর্বে আপডেট করা সেটিংস নির্বাচন করুন এবং 'চালিয়ে যান' এ ক্লিক করুন।&#xD;&#xA;&#xD;&#xA;যদি না হয়, শুধু 'স্টার্ট ওভার' ক্লিক করুন।</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">সরাসরি রপ্তানি করুন: সমস্ত সম্পাদনা স্বয়ংক্রিয়ভাবে পুনরায় চালাবে</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">সর্বশেষ আপডেট করা হয়েছে: {0} এ: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">আমি এমআইটি লাইসেন্সের শর্তাবলী স্বীকার করছি, চালিয়ে যান।</system:String>

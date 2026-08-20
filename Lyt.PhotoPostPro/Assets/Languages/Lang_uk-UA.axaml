@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Це зображення вже відредаговано.  Бажаєте почати спочатку чи використати попередні налаштування?&#xD;&#xA;&#xD;&#xA;Якщо так, виберіть попередньо оновлені параметри у списку нижче та натисніть «Продовжити».&#xD;&#xA;&#xD;&#xA;Якщо ні, просто натисніть «Почати спочатку».</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Безпосередньо до експорту: автоматично відтворюватиме всі зміни</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Останнє оновлення: {0} о: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Я приймаю умови Ліцензії MIT, Продовжити.</system:String>

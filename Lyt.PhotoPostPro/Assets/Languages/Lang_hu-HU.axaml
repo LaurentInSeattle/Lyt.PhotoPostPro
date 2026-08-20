@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Ezt a képet már szerkesztették.  Újra szeretné kezdeni, vagy a korábbi beállításokat szeretné használni?&#xD;&#xA;&#xD;&#xA;Ha igen, válassza ki a korábban frissített beállításokat az alábbi „kombinációs mezőben”, majd kattintson a „Folytatás” gombra.&#xD;&#xA;&#xD;&#xA;Ha nem, kattintson az „Újrakezdés” gombra.</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Közvetlenül az exportáláshoz: Az összes szerkesztést automatikusan visszajátssza</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Utolsó frissítés: {0}, időpont: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Elfogadom az MIT Licenc feltételeit, Folytatás.</system:String>

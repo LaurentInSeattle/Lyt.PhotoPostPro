@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">この画像はすでに編集されています。 やり直しますか、それとも以前の設定を使用しますか?&#xD;&#xA;&#xD;&#xA;その場合は、下のコンボボックスで以前に更新された設定を選択し、「続行」をクリックします。&#xD;&#xA;&#xD;&#xA;そうでない場合は、「やり直す」をクリックしてください。</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">エクスポートに直接: すべての編集を自動的に再生します。</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">最終更新日: {0}、時刻: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT ライセンスの条項に同意します。続行します。</system:String>

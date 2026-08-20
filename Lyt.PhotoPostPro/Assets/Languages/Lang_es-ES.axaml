@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Esta imagen ya ha sido editada.  ¿Quieres empezar de nuevo o utilizar la configuración anterior?&#xD;&#xA;&#xD;&#xA;Si es así, seleccione la configuración actualizada previamente en el 'cuadro combinado a continuación y haga clic en 'Continuar'.&#xD;&#xA;&#xD;&#xA;De lo contrario, simplemente haga clic en "Comenzar de nuevo".</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Directo a exportación: reproducirá todas las ediciones automáticamente</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Última actualización: {0} en: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Acepto los términos de la Licencia MIT, Continuar.</system:String>

@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Cette image a déjà été modifiée. Voulez-vous tout recommencer ou utiliser les paramètres précédents ?&#xD;&#xA;&#xD;&#xA;Si tel est le cas, sélectionnez les paramètres précédemment mis à jour dans la liste déroulante ci-dessous et cliquez sur « Continuer ».&#xD;&#xA;&#xD;&#xA;Sinon, cliquez simplement sur « Recommencer ».</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Direct vers l'exportation : rejouera automatiquement toutes les modifications</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Dernière mise à jour : {0} à : {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">J'accepte les termes de la licence MIT, Continuer.</system:String>

@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">यह छवि पहले ही संपादित की जा चुकी है.  क्या आप दोबारा शुरू करना चाहते हैं या पिछली सेटिंग्स का उपयोग करना चाहते हैं?&#xD;&#xA;&#xD;&#xA;यदि ऐसा है, तो नीचे दिए गए 'कॉम्बो-बॉक्स' में पहले से अपडेट की गई सेटिंग्स का चयन करें और 'जारी रखें' पर क्लिक करें।&#xD;&#xA;&#xD;&#xA;यदि नहीं, तो बस 'स्टार्ट ओवर' पर क्लिक करें।</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">निर्यात के लिए प्रत्यक्ष: सभी संपादन स्वचालित रूप से पुनः चलाएंगे</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">अंतिम अद्यतन: {0} बजे: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">मैं एमआईटी लाइसेंस की शर्तों को स्वीकार करता हूं, जारी रखें।</system:String>

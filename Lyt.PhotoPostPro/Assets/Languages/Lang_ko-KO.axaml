@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">이 이미지는 이미 편집되었습니다.  다시 시작하시겠습니까, 아니면 이전 설정을 사용하시겠습니까?&#xD;&#xA;&#xD;&#xA;그렇다면 아래 '콤보 상자에서 이전에 업데이트된 설정을 선택하고 '계속'을 클릭하세요.&#xD;&#xA;&#xD;&#xA;그렇지 않은 경우 '다시 시작'을 클릭하세요.</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">직접 내보내기: 모든 편집 내용을 자동으로 재생합니다.</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">마지막 업데이트: {0} 시간: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">MIT 라이선스 조건에 동의합니다. 계속하세요.</system:String>

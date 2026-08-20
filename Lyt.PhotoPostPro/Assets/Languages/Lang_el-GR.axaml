@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Αυτή η εικόνα έχει ήδη επεξεργαστεί.  Θέλετε να ξεκινήσετε από την αρχή ή να χρησιμοποιήσετε προηγούμενες ρυθμίσεις;&#xD;&#xA;&#xD;&#xA;Εάν ναι, επιλέξτε τις ρυθμίσεις που έχουν ενημερωθεί προηγουμένως στο «σύνθετο πλαίσιο παρακάτω και κάντε κλικ στο «Συνέχεια».&#xD;&#xA;&#xD;&#xA;Εάν όχι, απλώς κάντε κλικ στο «Έναρξη από την αρχή».</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Απευθείας στην εξαγωγή: Θα αναπαράγει ξανά όλες τις επεξεργασίες αυτόματα</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Τελευταία ενημέρωση: {0} σε: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Αποδέχομαι τους όρους της άδειας MIT, Συνέχεια.</system:String>

@@ -86,7 +86,7 @@
 	<!-- Folder -->
 	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
 
-	<!-- Single -->
+	<!-- Import -->
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image file here to begin.</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
@@ -335,8 +335,9 @@
 
 	<system:String x:Key="Dialog.SelectEdit.Title">Start Over or Continue ?</system:String>
 	<system:String x:Key="Dialog.SelectEdit.Message">This image has already been edited. Do you want to start over or use previous settings?&#xD;&#xA;&#xD;&#xA;If so, select previously updated settings in the 'combo-box below and click 'Continue'.&#xD;&#xA;&#xD;&#xA;If not, just click 'Start Over'.</system:String>
+	<system:String x:Key="Dialog.SelectEdit.ShouldReplay">Direct to Export: Will replay all edits automatically</system:String>
 	<system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Last Updated:  {0}  at:  {1}</system:String>
-
+	
 	<!-- Intro  -->
 	<system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
 	<system:String x:Key="Intro.LicenseTitle">License Terms</system:String>

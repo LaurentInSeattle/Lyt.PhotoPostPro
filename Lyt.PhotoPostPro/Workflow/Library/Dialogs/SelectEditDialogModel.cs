@@ -13,6 +13,12 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
     public partial string? Title { get; set; }
 
     [ObservableProperty]
+    public partial string? ShouldReplay { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsReplayMode { get; private set; }
+
+    [ObservableProperty]
     public partial List<string> ParametersStrings { get; set; } = [];
 
     public List<ExistingPostProcessParameters> PostProcessParametersList { get; private set; }
@@ -30,6 +36,7 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
         this.CanEscape = true;
         this.Title = this.Localize("Dialog.SelectEdit.Title");    // "Start Over or Continue ?";
         this.Message = this.Localize("Dialog.SelectEdit.Message");  // "This image has already been edited... etc
+        this.ShouldReplay = this.Localize("Dialog.SelectEdit.ShouldReplay");  
         var sortedList = (from ppp in postProcessParametersList
                           orderby ppp.PostProcessParameters.Updated descending
                           select ppp)

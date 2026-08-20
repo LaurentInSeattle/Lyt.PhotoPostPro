@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Այս պատկերն արդեն խմբագրվել է։  Ցանկանու՞մ եք նորից սկսել, թե՞ օգտագործել նախորդ կարգավորումները:&#xD;&#xA;&#xD;&#xA;Եթե ​​այո, ընտրեք նախկինում թարմացված կարգավորումները «ներքևի համակցված վանդակում» և սեղմեք «Շարունակել»:&#xD;&#xA;&#xD;&#xA;Եթե ​​ոչ, պարզապես սեղմեք «Սկսել նորից»:</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Ուղղակի դեպի արտահանում. ավտոմատ կերպով կվերարտադրվի բոլոր խմբագրումները</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Վերջին թարմացումը՝ {0} ժամը՝ {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Ես ընդունում եմ MIT լիցենզիայի պայմանները, շարունակել:</system:String>

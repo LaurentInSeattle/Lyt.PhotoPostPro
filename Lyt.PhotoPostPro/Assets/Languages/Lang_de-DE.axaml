@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">Dieses Bild wurde bereits bearbeitet.  Möchten Sie von vorne beginnen oder die vorherigen Einstellungen verwenden?&#xD;&#xA;&#xD;&#xA;Wenn ja, wählen Sie im untenstehenden Kombinationsfeld die zuvor aktualisierten Einstellungen aus und klicken Sie auf „Weiter“.&#xD;&#xA;&#xD;&#xA;Wenn nicht, klicken Sie einfach auf „Von vorne beginnen“.</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Direkt zum Exportieren: Alle Änderungen werden automatisch wiedergegeben</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Zuletzt aktualisiert: {0} um: {1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">Ich akzeptiere die Bedingungen der MIT-Lizenz. Fahren Sie fort.</system:String>

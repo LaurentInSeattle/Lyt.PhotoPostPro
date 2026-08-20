@@ -481,6 +481,8 @@
 
     <system:String x:Key="Dialog.SelectEdit.Message">该图像已经被编辑过。 您想重新开始还是使用以前的设置？&#xD;&#xA;&#xD;&#xA;如果是这样，请在下面的“组合框中选择以前更新的设置，然后单击“继续”。&#xD;&#xA;&#xD;&#xA;如果没有，只需单击“重新开始”。</system:String>
 
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">直接导出：将自动重播所有编辑</system:String>
+
     <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">上次更新时间：{0}，地点：{1}</system:String>
 
     <system:String x:Key="Intro.AgreeMIT">我接受 MIT 许可证的条款，继续。</system:String>
