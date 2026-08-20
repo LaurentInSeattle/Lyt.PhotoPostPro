@@ -4,7 +4,8 @@ using System.IO;
 
 public sealed partial class LibraryManager
 {
-    public const int GalleryFileMinimumLength = 4 * 1024 * 1024;
+    // used to ignore small poorly looking files 
+    public const int GalleryFileMinimumLength = 1 * 1024 * 1024;
 
     public List<string> GalleryContent { get; private set; } = [];
 

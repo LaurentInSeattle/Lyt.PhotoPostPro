@@ -4,12 +4,12 @@ public sealed partial class GalleryViewModel :
     ViewModel<GalleryView>,
     IRecipient<HotKeyMessage>
 {
-    private const double FadeDuration = 1.7;
+    private const double FadeDuration = 1.6;
 
 #if DEBUG 
-    private const int SlideDuration = 8;
+    private const int SlideDuration = 12;
 #else
-    private const int SlideDuration = 42;
+    private const int SlideDuration = 32;
 #endif
 
     private readonly PhotoPostProModel model;
