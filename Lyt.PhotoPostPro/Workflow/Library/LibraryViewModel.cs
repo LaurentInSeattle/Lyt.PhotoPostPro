@@ -141,7 +141,7 @@ public sealed partial class LibraryViewModel :
         if (this.Options.Count == 3)
         {
             // Need to schedule so that the newly created control is bound to its view model 
-            Schedule.OnUiThread(80, () => 
+            Schedule.OnUiThread(80, () =>
             {
                 int index = (int)this.selectedViewing;
                 if (this.Options[index].IsBound)
@@ -149,7 +149,7 @@ public sealed partial class LibraryViewModel :
                     this.Options[index].Select();
                 }
             }, DispatcherPriority.Background);
-        } 
+        }
     }
 
     public void Receive(LanguageChangedMessage message)
@@ -532,7 +532,7 @@ public sealed partial class LibraryViewModel :
         if (parameters.Count == 0)
         {
             // New processing : no dialog 
-            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters());
+            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters(), isReplayMode: false);
         }
         else
         {
@@ -561,12 +561,13 @@ public sealed partial class LibraryViewModel :
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
         if (selectEditDialogModel.IsStartOver)
         {
-            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters());
+            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters(), isReplayMode: false);
         }
         else
         {
             // Grab info from dialog
             PostProcessParameters? parameters = selectEditDialogModel.PostProcessParameters;
+            bool isReplayMode = selectEditDialogModel.IsReplayMode;
             string fileUid = this.model.FileUidString;
             if (parameters is null || string.IsNullOrWhiteSpace(fileUid))
             {
@@ -574,11 +575,11 @@ public sealed partial class LibraryViewModel :
             }
 
             // Continued process: isNew is false, recycled parameters 
-            this.LaunchSpinProcessing(isNew: false, metadata, parameters);
+            this.LaunchSpinProcessing(isNew: false, metadata, parameters, isReplayMode);
         }
     }
 
-    private void LaunchSpinProcessing(bool isNew, Metadata metadata, PostProcessParameters parameters)
+    private void LaunchSpinProcessing(bool isNew, Metadata metadata, PostProcessParameters parameters, bool isReplayMode)
     {
         // Always launch a spinner for big or small files 
         this.SpinWait(start: true);
@@ -590,31 +591,39 @@ public sealed partial class LibraryViewModel :
                 () =>
                 {
                     this.libraryMgr.UpdateEditedFile(metadata);
-                    this.LaunchProcessing();
+                    this.LaunchProcessing(isReplayMode);
                     this.SpinWait(start: false);
                 },
                 DispatcherPriority.ApplicationIdle);
         });
     }
 
-    private void LaunchProcessing()
+    private void LaunchProcessing(bool isReplayMode)
     {
         var postProcess = this.model.CurrentPostProcess;
-        if (postProcess is not null)
-        {
-            var shell = App.GetRequiredService<ShellViewModel>();
-            shell.EnableAndSelect(ActivatedView.Process);
-        }
-        else
+        if (postProcess is null)
         {
             this.Logger.Warning("Failed to create post process from dropped file: ");
             // TODO : Show error message to user
+            return;
         }
 
+        var shell = App.GetRequiredService<ShellViewModel>();
+        shell.EnableAndSelect(ActivatedView.Process);
         var mainWindow = App.MainWindow;
         if (mainWindow.CanMaximize)
         {
             mainWindow.WindowState = WindowState.Maximized;
+        }
+
+        if (isReplayMode)
+        {
+            Schedule.OnUiThread(120,
+                () =>
+                {
+                    postProcess.Replay();
+                },
+                DispatcherPriority.ApplicationIdle);
         }
     }
 
@@ -734,7 +743,7 @@ public sealed partial class LibraryViewModel :
 
         var filteredFiles =
             (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
-                 // Filter out images already rated (0 => unrated) 
+             // Filter out images already rated (0 => unrated) 
              where thumb.Metadata.Rating == 0
              // Reorder files by Date Captured 
              orderby thumb.Metadata.Captured ascending

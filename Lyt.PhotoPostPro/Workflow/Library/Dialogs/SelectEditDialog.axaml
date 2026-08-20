@@ -146,7 +146,7 @@
 							<ScaleTransform ScaleX="1.5" ScaleY="1.5" />
 						</LayoutTransformControl.LayoutTransform>
 						<CheckBox
-							IsChecked="{Binding IsReplayMode}"
+							IsChecked="{Binding IsReplayMode, Mode=TwoWay}"
 							IsThreeState="False"
 							>
 							<CheckBox.Content>

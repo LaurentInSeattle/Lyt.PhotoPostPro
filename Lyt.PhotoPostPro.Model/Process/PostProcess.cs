@@ -75,4 +75,21 @@ public sealed class PostProcess
             Debug.WriteLine("Workflow is null");
         }
     }
+
+    public void Replay()
+    {
+        this.Begin();
+
+        foreach (var step in this.Workflow.Steps)
+        {
+            if (step is ExportStep)
+            {
+                break;
+            }
+
+            this.Workflow.Next();
+            Task.Delay(120).Wait();
+        }
+
+    } 
 }

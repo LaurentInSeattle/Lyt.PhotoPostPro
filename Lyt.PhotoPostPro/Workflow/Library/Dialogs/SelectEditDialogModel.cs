@@ -16,10 +16,13 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
     public partial string? ShouldReplay { get; set; }
 
     [ObservableProperty]
-    public partial bool IsReplayMode { get; private set; }
+    public partial bool IsReplayMode { get; set; }
 
     [ObservableProperty]
     public partial List<string> ParametersStrings { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedParametersIndex { get; set; }
 
     public List<ExistingPostProcessParameters> PostProcessParametersList { get; private set; }
 
@@ -61,9 +64,6 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
                 this.PostProcessParameters = eppp.PostProcessParameters;
             }); 
     }
-
-    [ObservableProperty]
-    public partial int SelectedParametersIndex { get; set; }
 
     partial void OnSelectedParametersIndexChanged(int value)
     {
