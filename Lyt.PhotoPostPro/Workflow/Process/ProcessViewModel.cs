@@ -38,38 +38,65 @@ public sealed partial class ProcessViewModel :
         this.isFirstActivation = true;
         this.HistogramViewModel = new();
         this.ToolboxHostViewModel = new();
-        this.Subscribe<WorkflowUpdateMessage>();
-        this.Subscribe<HotKeyMessage>();
     }
 
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+
         if (this.isFirstActivation)
         {
-            this.isFirstActivation = false;
             this.SetupWorkflow();
+            this.isFirstActivation = false;
         }
 
         this.InitializeWorkflow();
         var postProcess = this.model.CurrentPostProcess;
         if (postProcess is not null)
         {
-            this.model.BeginPostProcess();
+            if (postProcess.IsReplayMode)
+            {
+                this.ActivateCurrentStep(); 
+            }
+            else
+            {
+                this.model.BeginPostProcess();
+            }
         }
+
+        this.Subscribe<WorkflowUpdateMessage>();
+        this.Subscribe<HotKeyMessage>();
     }
 
     public override void Deactivate()
     {
-        base.Deactivate();
+        this.Unregister<WorkflowUpdateMessage>();
+        this.Unregister<HotKeyMessage>();
 
-        // TODO: Close and save all project data 
+        base.Deactivate();
+    }
+
+    private void ActivateCurrentStep()
+    {
+        Schedule.OnUiThread(60, () =>
+        {
+            if (this.viewSelector is null)
+            {
+                return;
+            }
+
+            var workflow = this.model.Workflow;
+            string stepName = workflow.CurrentStep.Name;
+            ActivatedView view = FromWorkflowstepName(stepName);
+            this.viewSelector.SelectView(view);
+        }, DispatcherPriority.Background);
     }
 
     public void Receive(WorkflowUpdateMessage message)
     {
-        if (this.viewSelector is null)
+        if (!this.IsActivated)
         {
+            // Ignore all messages when not active 
             return;
         }
 
@@ -86,13 +113,7 @@ public sealed partial class ProcessViewModel :
         }
         else
         {
-            Dispatch.OnUiThread(() =>
-            {
-                var workflow = this.model.Workflow;
-                string stepName = workflow.CurrentStep.Name;
-                ActivatedView view = FromWorkflowstepName(stepName);
-                this.viewSelector.SelectView(view);
-            }, DispatcherPriority.Normal);
+            this.ActivateCurrentStep();
         }
     }
 

@@ -608,22 +608,30 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        var shell = App.GetRequiredService<ShellViewModel>();
-        shell.EnableAndSelect(ActivatedView.Process);
-        var mainWindow = App.MainWindow;
-        if (mainWindow.CanMaximize)
-        {
-            mainWindow.WindowState = WindowState.Maximized;
-        }
-
         if (isReplayMode)
         {
             Schedule.OnUiThread(120,
                 () =>
                 {
                     postProcess.Replay();
+                    ActivateProcessView();
                 },
                 DispatcherPriority.ApplicationIdle);
+        }
+        else
+        {
+            ActivateProcessView();
+        }
+    }
+
+    private static void ActivateProcessView()
+    {
+        var shell = App.GetRequiredService<ShellViewModel>();
+        shell.EnableAndSelect(ActivatedView.Process);
+        var mainWindow = App.MainWindow;
+        if (mainWindow.CanMaximize)
+        {
+            mainWindow.WindowState = WindowState.Maximized;
         }
     }
 

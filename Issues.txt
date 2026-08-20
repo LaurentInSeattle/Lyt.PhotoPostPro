@@ -12,8 +12,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Should be able to export again with the same settings and process the image without stepping through the workflow again. 
-(Additional check box in the dialog)
+- Now able to replay edits but Still need to run a modal dialog with a spinner and showing progress 
 
 
 TODO First
@@ -135,6 +134,8 @@ Bugs - No Repro
 
 Cool Stuff to Consider 
 ----------------------
+
+- Build PDF photo book 
 
 - Share: email, text, post
 

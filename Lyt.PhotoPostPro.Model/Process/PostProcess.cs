@@ -16,6 +16,8 @@ public sealed class PostProcess
         this.IsNew = isNew;
         this.FileUidString = fileUidString;
         this.PostProcessParameters = postProcessParameters;
+
+        this.IsReplayMode= false;
         this.Workflow = new PostProcessWorkflow(this); 
     }
 
@@ -34,6 +36,8 @@ public sealed class PostProcess
     public PostProcessWorkflow Workflow { get; set; }
 
     public Metadata Metadata { get; set; }
+
+    public bool IsReplayMode { get; private set; }
 
     public bool IsNew { get; private set; }
 
@@ -78,6 +82,7 @@ public sealed class PostProcess
 
     public void Replay()
     {
+        this.IsReplayMode = true;  
         this.Begin();
 
         foreach (var step in this.Workflow.Steps)
@@ -88,8 +93,7 @@ public sealed class PostProcess
             }
 
             this.Workflow.Next();
-            Task.Delay(120).Wait();
+            Task.Delay(60).Wait();
         }
-
     } 
 }
