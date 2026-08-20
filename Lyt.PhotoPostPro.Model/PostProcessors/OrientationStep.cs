@@ -19,31 +19,31 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
     {
         if (ppp.OrientationIsMirrored)
         {
-            this.Flip(isMirror: true);
+            this.Flip(isMirror: true, withFrame: false);
         }
 
         int angle = ppp.OrientationRotationAngle;
         if (angle != 0)
         {
-            this.Rotate(isClockwise: angle > 0);
+            this.Rotate(isClockwise: angle > 0, withFrame: false);
         }
     }
 
     protected override void SetIdentity()
         => base.IsIdentity = this.RotationAngle == 0 && !this.IsMirrored;
 
-    internal Frame? Rotate(bool isClockwise)
+    internal Frame? Rotate(bool isClockwise, bool withFrame = true)
     {
         int angle = isClockwise ? 90 : -90;
         this.RotationAngle += angle;
         this.Normalize();
         this.SetIdentity();
-        return this.Transform();
+        return this.Transform(withFrame);
     }
 
     // Mirror : AKA: Horizontal Flip 
     // Reverse : AKA: Vertical Flip 
-    internal Frame? Flip(bool isMirror)
+    internal Frame? Flip(bool isMirror, bool withFrame = true)
     {
         if (isMirror)
         {
@@ -56,21 +56,11 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
         }
 
         this.SetIdentity();
-        return this.Transform();
+        return this.Transform(withFrame);
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
+        => base.DoTransform((clone) =>
         {
             RotateMode rotateMode =
                 this.RotationAngle == 0 ?
@@ -79,13 +69,9 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
                         RotateMode.Rotate270 :
                         this.RotationAngle == 90 ? RotateMode.Rotate90 : RotateMode.Rotate180;
             FlipMode flipMode = this.IsMirrored ? FlipMode.Horizontal : FlipMode.None;
-            var clone = this.SourceImage.Clone();
             clone.Mutate(x => x.RotateFlip(rotateMode, flipMode));
-            this.ResultImage = clone;
-        }
+        }, withFrame);
 
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
 
     private void Clear()
     {

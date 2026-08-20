@@ -41,7 +41,9 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     // Performs actions provided in parameters 
     public abstract void PerformStep(PostProcessParameters postProcessParameters);
 
-    protected abstract void SetIdentity(); 
+    protected abstract void SetIdentity();
+
+    internal abstract Frame? Transform(bool withFrame = true); 
 
     // Default implementation does nothing. Override in derived classes if needed.
     public virtual void Initialize(Image<RgbaHalf> originalImage) { } 
@@ -53,6 +55,36 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
         this.SourceImage = null;
         this.ResultImage?.Dispose();
         this.ResultImage = null;
+    }
+
+    // Default: Override in derived classes is needed.
+    internal Frame? DoTransform(
+        Action<Image<RgbaHalf>> transform,
+        bool recalculateHistograms = true,
+        bool withFrame = true)
+    {
+        if (this.SourceImage is null)
+        {
+            return null;
+        }
+
+        if (this.IsIdentity)
+        {
+            this.ResultImage = this.SourceImage;
+        }
+        else
+        {
+            var clone = this.SourceImage.Clone();
+            transform(clone); 
+            this.ResultImage = clone;
+        }
+
+        if (recalculateHistograms)
+        {
+            PostProcessStep.RecalculateHistograms(this.ResultImage);
+        } 
+
+        return withFrame ? this.ResultImage.ToFrame() : null;
     }
 
     // Default implementation restore original into result 
@@ -86,9 +118,6 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
 
     // Default implementation does nothing. Override in derived classes if needed.
     internal virtual void Deactivate(WorkflowUpdateKind workflowUpdateKind) { }
-
-    // Default implementation does nothing. Override in derived classes is needed.
-    internal virtual Frame? Transform(bool withFrame = true) => null;
 
     internal static void RecalculateHistograms(Image<RgbaHalf> image)
     {

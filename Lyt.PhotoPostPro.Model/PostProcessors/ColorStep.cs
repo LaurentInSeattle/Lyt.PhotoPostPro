@@ -52,77 +52,49 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case ColorAlgorithm.Saturation:
-                // Check changed 
-                if (MathF.Abs(ppp.ColorSaturationAmount - 1.0f) > 0.001f)
-                {
-                    this.Saturation(ppp.ColorSaturationAmount);
-                }
-
+                this.Saturation(ppp.ColorSaturationAmount, withFrame: false);
                 break;
 
             case ColorAlgorithm.Vibrance:
-                // Check changed 
-                if ((MathF.Abs(ppp.ColorRedAmount) > 0.001f) ||
-                    (MathF.Abs(ppp.ColorGreenAmount) > 0.001f) ||
-                    (MathF.Abs(ppp.ColorBlueAmount) > 0.001f))
-                {
-                    this.Vibrance(ppp.ColorRedAmount, ppp.ColorGreenAmount, ppp.ColorBlueAmount);
-                }
+                this.Vibrance(ppp.ColorRedAmount, ppp.ColorGreenAmount, ppp.ColorBlueAmount, withFrame: false);
                 break;
         }
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
-            switch (this.Algorithm)
+        => base.DoTransform((clone) =>
             {
-                case ColorAlgorithm.Saturation:
-                    clone.ApplyGlobalSaturation(this.SaturationAmount);
-                    break;
+                switch (this.Algorithm)
+                {
+                    case ColorAlgorithm.Saturation:
+                        clone.ApplyGlobalSaturation(this.SaturationAmount);
+                        break;
 
-                case ColorAlgorithm.Vibrance:
-                    clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
-                    break;
+                    case ColorAlgorithm.Vibrance:
+                        clone.Vibrance(this.RedAmount, this.GreenAmount, this.BlueAmount);
+                        break;
 
-                default:
-                    throw new NotImplementedException("No such Color algorithm");
-            }
+                    default:
+                        throw new NotImplementedException("No such Color algorithm");
+                }
+            }, withFrame);
 
-            this.ResultImage = clone;
-        }
-
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? Saturation(float saturationAmount)
+    internal Frame? Saturation(float saturationAmount, bool withFrame = true)
     {
         this.Algorithm = ColorAlgorithm.Saturation;
         this.SaturationAmount = saturationAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Vibrance(float redAmount, float greenAmount, float blueAmount)
+    internal Frame? Vibrance(float redAmount, float greenAmount, float blueAmount, bool withFrame = true)
     {
         this.Algorithm = ColorAlgorithm.Vibrance;
         this.RedAmount = redAmount;
         this.GreenAmount = greenAmount;
         this.BlueAmount = blueAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

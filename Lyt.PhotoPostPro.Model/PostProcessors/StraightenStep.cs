@@ -20,41 +20,23 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
     {
         float angle = ppp.StraightenRotationAngle;
         float absAngle = MathF.Abs(angle);
-        if (absAngle > 0.000_1f)
-        {
-            this.Rotate(isClockwise: angle > 0, absAngle);
-        }
+        this.Rotate(isClockwise: angle > 0, absAngle, withFrame: false);
     }
 
-    internal Frame? Rotate(bool isClockwise, float angle)
+    internal Frame? Rotate(bool isClockwise, float angle, bool withFrame = true)
     {
         float angleDelta = isClockwise ? angle : -angle;
         this.RotationAngle += angleDelta;
         this.Normalize();
         this.SetIdentity();
-        return this.Transform();
+        return this.Transform(withFrame);
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             clone.Mutate(x => x.Rotate(this.RotationAngle));
-            this.ResultImage = clone;
-        }
-
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
+        }, recalculateHistograms: false, withFrame);
 
     private void Clear()
     {

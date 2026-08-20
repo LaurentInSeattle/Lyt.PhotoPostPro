@@ -9,22 +9,8 @@ Bugs ~ Major Issues
 
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
-Bugs - No Repro 
----------------
-
-- Edit thumb ends up in the wrong location when adding by drop 
-
-- IMG_0212  Incorrect state for Added and Ratings 
-
-- Add new Images messed up thumb files ? 
-
-- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
-
 WIP
 ---
-
-- Perf : Review all process steps to ensure that the source image is not unnecessarily cloned. 
-	=> Prerequisite for item below
 
 - Should be able to export again with the same settings and process the image without stepping through the workflow again. 
 (Additional check box in the dialog)
@@ -47,6 +33,7 @@ TODO First
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
+- Long press on a thumbnail should show a bigger view 
 
 
 Missing Features 
@@ -120,7 +107,7 @@ Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp)
 
 - App freeze when using combo box ??? Avalonia issue
 
-- Media Devices 2.0 is broken, cannot transfer many files 
+- Media Devices 2.0 is broken, cannot transfer many files. Stay with 1.10 for now. 
 
 - Fails to load monochrome DNG. Sample: Winter.DNG Not fully supported by LibRaw
 
@@ -129,8 +116,21 @@ Check with:
 https://github.com/laheller/SharpLibraw  
 https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
-- No support yet for HEIC images in ImageSharp 
+- No support (yet) for HEIC images in ImageSharp 
 
+- No support for AVIF images in ImageSharp 
+
+
+Bugs - No Repro 
+---------------
+
+- Edit thumb ends up in the wrong location when adding by drop 
+
+- IMG_0212  Incorrect state for Added and Ratings 
+
+- Add new Images messed up thumb files ? 
+
+- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
 
 
 Cool Stuff to Consider 

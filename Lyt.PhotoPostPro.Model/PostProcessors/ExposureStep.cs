@@ -24,50 +24,30 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     public override void PerformStep(PostProcessParameters ppp)
-    {
-        bool changed =
-            MathF.Abs(ppp.ExposureGamma - 1.0f) > 0.000_1f ||
-            MathF.Abs(ppp.ExposureGain - 1.0f) > 0.000_1f ||
-            MathF.Abs(ppp.ExposureShift) > 0.000_1f;
-
-        if (changed)
-        {
-            this.AdjustExposure(ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift);
-        }
-    }
+        => this.AdjustExposure(ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift, withFrame: false);
 
     internal override Frame? Transform(bool withFrame = true)
     {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
         if (this.IsIdentity)
         {
             new GammaLutClearMessage().Publish();
-            this.ResultImage = this.SourceImage;
         }
-        else
+
+        return base.DoTransform((clone) =>
         {
-            var clone = this.SourceImage.Clone();
             Half[] lut = clone.Gamma(this.Gamma, this.Gain, this.Shift);
             Curve curve = new(lut);
             new GammaLutGeneratedMessage(curve).Publish();
-            this.ResultImage = clone;
-        }
+        }, withFrame);
+    } 
 
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? AdjustExposure(float gamma, float gain, float shift)
+    internal Frame? AdjustExposure(float gamma, float gain, float shift, bool withFrame = true)
     {
         this.Gamma = gamma;
         this.Gain = gain;
         this.Shift = shift;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

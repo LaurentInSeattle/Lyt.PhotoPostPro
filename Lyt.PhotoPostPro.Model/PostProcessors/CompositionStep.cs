@@ -33,19 +33,7 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
             this.Dy == this.OriginalDy;
 
     public override void PerformStep(PostProcessParameters ppp)
-    {
-        bool isChanged =
-            ppp.CompositionX != 0 ||
-            ppp.CompositionY != 0 ||
-            ppp.CompositionDx != ppp.CompositionOriginalDx ||
-            ppp.CompositionDy != ppp.CompositionOriginalDy;
-        if (isChanged)
-        {
-            _ = this.Crop(
-                ppp.CompositionX, ppp.CompositionY,
-                ppp.CompositionDx, ppp.CompositionDy);
-        }
-    }
+        => this.Crop(ppp.CompositionX, ppp.CompositionY, ppp.CompositionDx, ppp.CompositionDy, withFrame: false);
 
     public override Frame? Reset()
     {
@@ -53,37 +41,22 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    internal Frame? Crop(int x, int y, int dx, int dy)
+    internal Frame? Crop(int x, int y, int dx, int dy, bool withFrame = true)
     {
         this.X = x;
         this.Y = y;
         this.Dx = dx;
         this.Dy = dy;
         this.SetIdentity();
-        return this.Transform();
+        return this.Transform(withFrame);
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             var cropRectangle = new Rectangle(this.X, this.Y, this.Dx, this.Dy);
             clone.Mutate(x => x.Crop(cropRectangle));
-            this.ResultImage = clone;
-        }
-
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
+        }, recalculateHistograms: false, withFrame);
 
     public override void Activate(WorkflowUpdateKind workflowUpdateKind)
     {

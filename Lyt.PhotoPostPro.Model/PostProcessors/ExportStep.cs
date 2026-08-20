@@ -15,7 +15,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
 
     // For abstract compliance only 
-    internal override Frame? Transform(bool withFrame = true) => null;
+    internal override Frame? Transform(bool withFrame = true) { return null;  }
 
     // For abstract compliance only 
     protected override void SetIdentity() => base.IsIdentity = false;

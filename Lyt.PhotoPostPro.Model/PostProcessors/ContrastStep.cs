@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
+using System.Security.Cryptography;
+
 public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.ContrastStepName)
 {
@@ -53,46 +55,26 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
 
     public override void PerformStep(PostProcessParameters ppp)
     {
-        /*
-         * Check changed 
-        this.ContrastAmount = 1.0f;
-        this.BlurAmount = 0.0f;
-        this.BrightnessAmount = 0.0f;
-
-        // Clear all properties so that the UI sliders are also reset to zero on Reset 
-        this.RedAmount = 4.5f;
-        this.GreenAmount = 4.5f;
-        this.BlueAmount = 4.5f;
-         */
         switch (ppp.ContrastAlgorithm)
         {
             default:
                 break;
 
             case ContrastAlgorithm.Global:
-                this.GlobalContrast(ppp.ContrastContrastAmount, ppp.ContrastBlurAmount, ppp.ContrastBrightnessAmount);
+                this.GlobalContrast(
+                    ppp.ContrastContrastAmount, ppp.ContrastBlurAmount, ppp.ContrastBrightnessAmount, withFrame: false);
                 break;
 
             case ContrastAlgorithm.SCurves:
-                this.SCurvesContrast(ppp.ContrastRedAmount, ppp.ContrastGreenAmount, ppp.ContrastBlueAmount);
+                this.SCurvesContrast(
+                    ppp.ContrastRedAmount, ppp.ContrastGreenAmount, ppp.ContrastBlueAmount, withFrame: false);
                 break;
         }
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             switch (this.Algorithm)
             {
                 case ContrastAlgorithm.Global:
@@ -106,32 +88,26 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
                 default:
                     throw new NotImplementedException("No such Contrast algorithm");
             }
+        }, withFrame);
 
-            this.ResultImage = clone;
-        }
-
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount)
+    internal Frame? GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount, bool withFrame = true)
     {
         this.Algorithm = ContrastAlgorithm.Global;
         this.ContrastAmount = contrastAmount;
         this.BlurAmount = blurAmount;
         this.BrightnessAmount = brightnessAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? SCurvesContrast(float redAmount, float greenAmount, float blueAmount)
+    internal Frame? SCurvesContrast(float redAmount, float greenAmount, float blueAmount, bool withFrame = true)
     {
         this.Algorithm = ContrastAlgorithm.SCurves;
         this.RedAmount = redAmount;
         this.GreenAmount = greenAmount;
         this.BlueAmount = blueAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

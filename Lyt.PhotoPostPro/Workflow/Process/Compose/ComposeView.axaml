@@ -35,10 +35,12 @@
 				Width="{Binding ImageWidth}"
 				Height="{Binding ImageHeight}"
 				> 
+				<!-- 
 				<Image
 					IsVisible="{ReflectionBinding SourceImageIsVisible}"
 					Source="{ReflectionBinding SourceImage}"
 					/>
+				-->
 				<Image
 					IsVisible="{ReflectionBinding ResultImageIsVisible}"
 					Source="{ReflectionBinding ResultImage}"

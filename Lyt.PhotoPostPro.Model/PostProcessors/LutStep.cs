@@ -54,43 +54,39 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
 
         LutMetadata lutMetadata =
             new(ppp.LutFriendlyName, ppp.LutPath, lutFormat, ppp.LutIsEmbedded);
-        this.Lut(lutMetadata);
+        this.Lut(lutMetadata, withFrame: false);
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
-        {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            // Does happen when going back after quickly moving forward in the workflow
-            this.ResultImage = this.SourceImage;
-        }
-        else
+        => base.DoTransform((clone) =>
         {
             var model = this.PostProcessWorkflow.PostProcess.Model;
             if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
             {
                 // Failed to load LUT ? 
                 if (Debugger.IsAttached) { Debugger.Break(); }
-                return null;
+                return;
             }
 
             if (lut is null)
             {
-                return null;
+                return ;
             }
 
-            var clone = this.SourceImage.Clone();
             clone.Lut(lut);
-            this.ResultImage = clone;
-        }
+        }, withFrame);
 
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
+    internal Frame? Lut(LutMetadata lutMetadata, bool withFrame = true)
+    {
+        this.LutMetadata = lutMetadata;
+        this.SetIdentity();
+        return this.Transform(withFrame);
+    }
+
+    private void Clear()
+    {
+        this.LutMetadata = LutMetadata.Empty;
+        this.SetIdentity();
     }
 
     public void LaunchExploreLuts()
@@ -157,18 +153,5 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         {
             Debug.WriteLine(" LUT images generation aborted.");
         }
-    }
-
-    internal Frame? Lut(LutMetadata lutMetadata)
-    {
-        this.LutMetadata = lutMetadata;
-        this.SetIdentity();
-        return this.Transform(withFrame: true);
-    }
-
-    private void Clear()
-    {
-        this.LutMetadata = LutMetadata.Empty;
-        this.SetIdentity();
     }
 }

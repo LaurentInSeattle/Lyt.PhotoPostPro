@@ -17,15 +17,7 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     public override void PerformStep(PostProcessParameters ppp)
-    {
-        bool changed =
-            MathF.Abs(ppp.RecoveryHighlightAmount) > 0.000_1f ||
-            MathF.Abs(ppp.RecoveryShadowAmount) > 0.000_1f;
-        if (changed)
-        {
-            this.HighlightsShadows(ppp.RecoveryHighlightAmount, ppp.RecoveryShadowAmount);
-        }
-    }
+        => this.HighlightsShadows(ppp.RecoveryHighlightAmount, ppp.RecoveryShadowAmount, withFrame: false);
 
     public override Frame? Reset()
     {
@@ -34,36 +26,17 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        bool isChanged =
-            Math.Abs(this.ShadowAmount) > 0.001 ||
-            Math.Abs(this.HighlightAmount) > 0.001;
-        if (isChanged)
-        {
-            var clone = this.SourceImage.Clone();
             clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount);
-            this.ResultImage = clone;
-        }
-        else
-        {
-            this.ResultImage = this.SourceImage;
-        }
+        }, withFrame);
 
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? HighlightsShadows(float highlightAmount, float shadowAmount)
+    internal Frame? HighlightsShadows(float highlightAmount, float shadowAmount, bool withFrame = true)
     {
         this.HighlightAmount = highlightAmount;
         this.ShadowAmount = shadowAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

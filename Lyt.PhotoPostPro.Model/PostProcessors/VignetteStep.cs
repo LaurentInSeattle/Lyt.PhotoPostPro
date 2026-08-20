@@ -25,38 +25,19 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     public override void PerformStep(PostProcessParameters ppp)
-    {
-        bool isChanged = Math.Abs(ppp.VignetteLightness) > 0.001;
-        if (isChanged)
-        {
-            this.Vignette(
-                ppp.VignetteTop, ppp.VignetteBottom, ppp.VignetteLeft, ppp.VignetteRight, ppp.VignetteLightness);
-        }
-    }
+        => this.Vignette(
+                ppp.VignetteTop, ppp.VignetteBottom, 
+                ppp.VignetteLeft, ppp.VignetteRight, 
+                ppp.VignetteLightness, 
+                withFrame:false);
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             clone.Vignette(this.Top, this.Bottom, this.Left, this.Right, this.Lightness);
-            this.ResultImage = clone;
-        }
+        }, withFrame);
 
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? Vignette(float top, float bottom, float left, float right, float lightness)
+    internal Frame? Vignette(float top, float bottom, float left, float right, float lightness, bool withFrame = true)
     {
         this.Top = top;
         this.Bottom = bottom;
@@ -64,7 +45,7 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
         this.Right = right;
         this.Lightness = lightness;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

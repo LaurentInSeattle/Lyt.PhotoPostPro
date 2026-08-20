@@ -43,33 +43,22 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 break;
 
             case WhiteBalanceAlgorithm.ColorMatrix:
-                this.ColorMatrixWhiteBalance(ppp.WhiteBalanceTemperature);
+                this.ColorMatrixWhiteBalance(ppp.WhiteBalanceTemperature, withFrame:false);
                 break;
 
             case WhiteBalanceAlgorithm.FilteredGrayWorldAWB:
-                this.FilteredGrayWorldAWB(ppp.WhiteBalanceSaturationThreshold);
+                this.FilteredGrayWorldAWB(ppp.WhiteBalanceSaturationThreshold, withFrame: false);
                 break;
 
             case WhiteBalanceAlgorithm.WhitePatch:
-                this.WhitePatchWhiteBalance(ppp.WhiteBalanceRed, ppp.WhiteBalanceGreen, ppp.WhiteBalanceBlue);
+                this.WhitePatchWhiteBalance(ppp.WhiteBalanceRed, ppp.WhiteBalanceGreen, ppp.WhiteBalanceBlue, withFrame: false);
                 break;
         }
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            Image<RgbaHalf> clone = this.SourceImage.Clone();
             switch (this.Algorithm)
             {
                 case WhiteBalanceAlgorithm.ColorMatrix:
@@ -87,38 +76,32 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
                 default:
                     throw new NotImplementedException("No such White Balance algorithm");
             }
+        }, withFrame);
 
-            this.ResultImage = clone;
-        }
-
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? ColorMatrixWhiteBalance(float temperature)
+    internal Frame? ColorMatrixWhiteBalance(float temperature, bool withFrame = true)
     {
         this.Algorithm = WhiteBalanceAlgorithm.ColorMatrix;
         this.Temperature = temperature;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? FilteredGrayWorldAWB(float saturationThreshold)
+    internal Frame? FilteredGrayWorldAWB(float saturationThreshold, bool withFrame = true)
     {
         this.Algorithm = WhiteBalanceAlgorithm.FilteredGrayWorldAWB;
         this.SaturationThreshold = saturationThreshold;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? WhitePatchWhiteBalance(float r, float g, float b)
+    internal Frame? WhitePatchWhiteBalance(float red, float green, float blue, bool withFrame = true)
     {
         this.Algorithm = WhiteBalanceAlgorithm.WhitePatch;
-        this.Red = r;
-        this.Green = g;
-        this.Blue = b;
+        this.Red = red;
+        this.Green = green;
+        this.Blue = blue;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

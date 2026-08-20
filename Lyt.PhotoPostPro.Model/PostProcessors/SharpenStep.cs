@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
-
 public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     PostProcessStep(postProcessWorkflow, PostProcessStep.SharpenStepName)
 {
@@ -36,29 +34,12 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
     }
 
     public override void PerformStep(PostProcessParameters ppp)
-    {
         // Ignore Edge Mask for now 
-        float amount = ppp.SharpenSharpenAmount;
-        if (amount > 0.000_1f)
-        {
-            this.Sharpen(amount);
-        }
-    }
+        => this.Sharpen(ppp.SharpenSharpenAmount, withFrame: false);
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             switch (this.Algorithm)
             {
                 case SharpenAlgorithm.Sharpen:
@@ -72,27 +53,21 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
                 default:
                     throw new NotImplementedException("No such Color algorithm");
             }
+        }, withFrame);
 
-            this.ResultImage = clone;
-        }
-
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? Sharpen(float sharpenAmount)
+    internal Frame? Sharpen(float sharpenAmount, bool withFrame = true)
     {
         this.Algorithm = SharpenAlgorithm.Sharpen;
         this.SharpenAmount = sharpenAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? EdgesMask()
+    internal Frame? EdgesMask(bool withFrame = true)
     {
         this.Algorithm = SharpenAlgorithm.EdgesMask;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()

@@ -60,14 +60,14 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             case Filter.Grayscale:
                 if (ppp.FilterAmount > 0.001)
                 {
-                    this.Grayscale(ppp.FilterAmount);
+                    this.Grayscale(ppp.FilterAmount, withFrame:false);
                 }
                 break;
 
             case Filter.Sepia:
                 if (ppp.FilterAmount > 0.001)
                 {
-                    this.Sepia(ppp.FilterAmount); ;
+                    this.Sepia(ppp.FilterAmount, withFrame: false);
                 }
 
                 break;
@@ -75,43 +75,32 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
             case Filter.Vignette:
                 if (ppp.FilterAmount > 0.001)
                 {
-                    this.Vignette(ppp.FilterAmount);
+                    this.Vignette(ppp.FilterAmount, withFrame: false);
                 }
 
                 break;
 
             case Filter.BlackWhite:
-                this.BlackWhite();
+                this.BlackWhite(withFrame: false);
                 break;
 
             case Filter.Kodachrome:
-                this.Kodachrome();
+                this.Kodachrome(withFrame: false);
                 break;
 
             case Filter.Lomograph:
-                this.Lomograph();
+                this.Lomograph(withFrame: false);
                 break;
 
             case Filter.Polaroid:
-                this.Polaroid();
+                this.Polaroid(withFrame: false);
                 break;
         }
     }
 
     internal override Frame? Transform(bool withFrame = true)
-    {
-        if (this.SourceImage is null)
+        => base.DoTransform((clone) =>
         {
-            return null;
-        }
-
-        if (this.IsIdentity)
-        {
-            this.ResultImage = this.SourceImage;
-        }
-        else
-        {
-            var clone = this.SourceImage.Clone();
             switch (this.SelectedFilter)
             {
                 default:
@@ -147,68 +136,62 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
                     clone.Polaroid();
                     break;
             }
+        }, withFrame);
 
-            this.ResultImage = clone;
-        }
-
-        PostProcessStep.RecalculateHistograms(this.ResultImage);
-        return withFrame ? this.ResultImage.ToFrame() : null;
-    }
-
-    internal Frame? Grayscale(float grayscaleAmount)
+    internal Frame? Grayscale(float grayscaleAmount, bool withFrame = true)
     {
         this.SelectedFilter = Filter.Grayscale;
         this.Amount = grayscaleAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Sepia(float sepiaAmount)
+    internal Frame? Sepia(float sepiaAmount, bool withFrame = true)
     {
         this.SelectedFilter = Filter.Sepia;
         this.Amount = sepiaAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Vignette(float vignetteAmount)
+    internal Frame? Vignette(float vignetteAmount, bool withFrame = true)
     {
         this.SelectedFilter = Filter.Vignette;
         this.Amount = vignetteAmount;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? BlackWhite()
+    internal Frame? BlackWhite(bool withFrame = true)
     {
         this.SelectedFilter = Filter.BlackWhite;
         this.Amount = 0.0f;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Kodachrome()
+    internal Frame? Kodachrome(bool withFrame = true)
     {
         this.SelectedFilter = Filter.Kodachrome;
         this.Amount = 0.0f;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Lomograph()
+    internal Frame? Lomograph(bool withFrame = true)
     {
         this.SelectedFilter = Filter.Lomograph;
         this.Amount = 0.0f;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
-    internal Frame? Polaroid()
+    internal Frame? Polaroid(bool withFrame = true)
     {
         this.SelectedFilter = Filter.Polaroid;
         this.Amount = 0.0f;
         this.SetIdentity();
-        return this.Transform(withFrame: true);
+        return this.Transform(withFrame);
     }
 
     private void Clear()
