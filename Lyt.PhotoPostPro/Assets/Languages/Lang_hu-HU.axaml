@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Közeli</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - Photo Post Processing</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - Photo Post Processing</system:String>
 
     <system:String x:Key="Shell.About">Körülbelül...</system:String>
 

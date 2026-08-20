@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Cerca</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - Postprocesamiento de fotografías</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - Postprocesamiento de fotografías</system:String>
 
     <system:String x:Key="Shell.About">Acerca de...</system:String>
 

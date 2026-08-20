@@ -9,6 +9,8 @@ Bugs ~ Major Issues
 
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
+- Camera File delete error is removing file from view, but should not. 
+
 WIP
 ---
 

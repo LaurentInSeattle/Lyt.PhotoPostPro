@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">近い</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - 写真の後処理</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - 写真の後処理</system:String>
 
     <system:String x:Key="Shell.About">について...</system:String>
 

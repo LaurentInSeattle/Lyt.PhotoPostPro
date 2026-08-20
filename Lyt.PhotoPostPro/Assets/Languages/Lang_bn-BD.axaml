@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">বন্ধ</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - ফটো পোস্ট প্রসেসিং</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - ফটো পোস্ট প্রসেসিং</system:String>
 
     <system:String x:Key="Shell.About">সম্পর্কে...</system:String>
 

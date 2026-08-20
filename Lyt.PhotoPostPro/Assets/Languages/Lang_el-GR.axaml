@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Κοντά</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - Επεξεργασία ανάρτησης φωτογραφιών</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - Επεξεργασία ανάρτησης φωτογραφιών</system:String>
 
     <system:String x:Key="Shell.About">Για...</system:String>
 

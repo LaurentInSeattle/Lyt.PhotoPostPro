@@ -9,8 +9,8 @@ public sealed class MtpService : IMtpService
     public List<IMtpDevice> GetDevices()
     {
         // Media Devices API 2.0
-        // var devices = MediaDeviceManager.Instance.GetDevices();
-        var devices = MediaDevice.GetDevices();
+        var devices = MediaDeviceManager.Instance.GetDevices();
+        // var devices = MediaDevice.GetDevices();
         if ( devices is null || !devices.Any())
         {
             return []; 

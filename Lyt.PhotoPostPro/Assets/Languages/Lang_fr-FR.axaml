@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Fermer</system:String>
 
-    <system:String x:Key="Shell.AppName">Photo Rebellion - Post-Traitement Photo</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebelle - Post-Traitement Photo</system:String>
 
     <system:String x:Key="Shell.About">A propos...</system:String>
 

@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">बंद करना</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - फोटो पोस्ट प्रोसेसिंग</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - फोटो पोस्ट प्रोसेसिंग</system:String>
 
     <system:String x:Key="Shell.About">के बारे में...</system:String>
 

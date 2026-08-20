@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Chiudi</system:String>
 
-    <system:String x:Key="Shell.AppName">FotoRebel - Post-Produzione Fotografica</system:String>
+    <system:String x:Key="Shell.AppName">Foto Ribello - Post-Produzione Fotografica</system:String>
 
     <system:String x:Key="Shell.About">Altro su...</system:String>
 

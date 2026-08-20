@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">닫다</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - 사진 후처리</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - 사진 후처리</system:String>
 
     <system:String x:Key="Shell.About">에 대한...</system:String>
 

@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">Փակել</system:String>
 
-    <system:String x:Key="Shell.AppName">PhotoRebel - Լուսանկարների գրառումների մշակում</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - Լուսանկարների գրառումների մշակում</system:String>
 
     <system:String x:Key="Shell.About">Մոտ...</system:String>
 
