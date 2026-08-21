@@ -1,10 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Process;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.ColorStep;
-using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
-using static Lyt.PhotoPostPro.Model.PostProcessors.FiltersStep;
-using static Lyt.PhotoPostPro.Model.PostProcessors.SharpenStep;
-using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.ColorStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.ContrastStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.FiltersStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.SharpenStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.WhiteBalanceStep;
 
 public sealed record class ExistingPostProcessParameters(
     string FileUidString, ProcessParameters PostProcessParameters);

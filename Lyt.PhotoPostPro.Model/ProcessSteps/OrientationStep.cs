@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
+﻿namespace Lyt.PhotoPostPro.Model.ProcessSteps;
 
 public class OrientationStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.OrientationStepName)

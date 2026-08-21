@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
+﻿namespace Lyt.PhotoPostPro.Model.ProcessSteps;
 
 public sealed class WhiteBalanceStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.WhiteBalanceStepName)

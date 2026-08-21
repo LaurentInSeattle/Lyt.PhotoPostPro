@@ -149,6 +149,6 @@ global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.Library;
 global using Lyt.PhotoPostPro.Model.Loader;
 global using Lyt.PhotoPostPro.Model.LookUp;
-global using Lyt.PhotoPostPro.Model.PostProcessors;
+global using Lyt.PhotoPostPro.Model.ProcessSteps;
 global using Lyt.PhotoPostPro.Model.Process;
 global using Lyt.PhotoPostPro.Model.Utilities;
