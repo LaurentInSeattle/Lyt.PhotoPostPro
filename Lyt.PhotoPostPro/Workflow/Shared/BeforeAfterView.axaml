@@ -9,11 +9,12 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process"
 	>
 	<Grid> 
 		<Grid		
 			x:Name="BeforeAfterPortrait"
-			IsVisible="{ReflectionBinding IsPortrait}"
+			IsVisible="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).IsPortrait}"
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
@@ -30,8 +31,8 @@
 			<images:ZoomableImage
 				x:Name="SourceImagePortrait"
 				Grid.Column="1" Grid.Row="1"
-				Image="{ReflectionBinding SourceImage}"
-				IsVisible="{ReflectionBinding SourceImageIsVisible}"
+				Image="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).SourceImage}"
+				IsVisible="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).SourceImageIsVisible}"
 				ZoomWithMouseWheelBehaviour="ZoomNative"
 				AutoZoomToFit="True"
 				ConstrainZoomOutToFitLevel="True"
@@ -53,8 +54,8 @@
 			<images:ZoomableImage
 				x:Name="ResultImagePortrait"
 				Grid.Column="3" Grid.Row="1"
-				Image="{ReflectionBinding ResultImage}"
-				IsVisible="{ReflectionBinding ResultImageIsVisible}"
+				Image="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).ResultImage}"
+				IsVisible="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).ResultImageIsVisible}"
 				ZoomWithMouseWheelBehaviour="ZoomNative"
 				AutoZoomToFit="True"
 				ConstrainZoomOutToFitLevel="True"
@@ -63,7 +64,7 @@
 		</Grid>
 		<Grid		
 			x:Name="BeforeAfterLandscape"
-			IsVisible="{ReflectionBinding !IsPortrait}"
+			IsVisible="{Binding !$parent[UserControl].((vm:StepViewModel)DataContext).IsPortrait}"
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
@@ -80,8 +81,8 @@
 			<images:ZoomableImage
 				x:Name="SourceImageLandscape"
 				Grid.Column="1" Grid.Row="1"
-				Image="{ReflectionBinding SourceImage}"
-				IsVisible="{ReflectionBinding SourceImageIsVisible}"
+				Image="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).SourceImage}"
+				IsVisible="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).SourceImageIsVisible}"
 				ZoomWithMouseWheelBehaviour="ZoomNative"
 				AutoZoomToFit="True"
 				ConstrainZoomOutToFitLevel="True"
@@ -103,8 +104,8 @@
 			<images:ZoomableImage
 				x:Name="ResultImageLandscape"
 				Grid.Column="1" Grid.Row="3"
-				Image="{ReflectionBinding ResultImage}"
-				IsVisible="{ReflectionBinding ResultImageIsVisible}"
+				Image="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).ResultImage}"
+				IsVisible="{Binding $parent[UserControl].((vm:StepViewModel)DataContext).ResultImageIsVisible}"
 				ZoomWithMouseWheelBehaviour="ZoomNative"
 				AutoZoomToFit="True"
 				ConstrainZoomOutToFitLevel="True"

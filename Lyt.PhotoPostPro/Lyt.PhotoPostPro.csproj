@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Avalonia">
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <AvaloniaXamlVerboseExceptions>True</AvaloniaXamlVerboseExceptions>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

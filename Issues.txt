@@ -3,13 +3,12 @@ Bugs ~ Major Issues
 
 - Folder Tree for Added not updating correctly on image removed 
 
-- Image just rated does not update star rating in selected image panel (Need to select it again) 
-
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 WIP
 ---
 
+- Getting Rid of Reflection Bindings to enable AOT 
 
 TODO First
 ----------
@@ -24,7 +23,9 @@ TODO First
 
 - UI to pick up exports parameters 
 
-- UI to define signature and watermark
+- UI to define signatures 
+
+- UI to define watermarks
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
@@ -141,8 +142,3 @@ Cool Stuff to Consider
 - Crop with maintaining aspect ratio 
 
 - Ability to show or hide hints and beginner tips depending an app settings 
-
-- Viewing mode when before and after are stacked with a slider ( or two ) in the 
-middlle to show top image or bottom image 
-
-- Maybe silly: Rewrite Openize HEIC for speed. Useless if ImageSharp is going to support HEIC 

@@ -3,10 +3,15 @@
 using global::Avalonia.LogicalTree;
 
 public partial class StepViewModel<TView> :
-    ViewModel<TView>,
+    StepViewModel
+    where TView : View, new()
+{
+}
+
+public partial class StepViewModel :
+    ViewModel,
     IRecipient<SourceImageGeneratedMessage>,
     IRecipient<ResultImageGeneratedMessage>
-    where TView : View, new()
 {
     protected readonly PhotoPostProModel model;
 
@@ -136,8 +141,11 @@ public partial class StepViewModel<TView> :
         {
             if (this.IsActivated)
             {
-                var baBiew = this.View.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
-                baBiew?.ZoomToFit();
+                if (this.ViewBase is View view)
+                {
+                    var baBiew = view.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
+                    baBiew?.ZoomToFit();
+                } 
             }
         }, DispatcherPriority.Background);
     }

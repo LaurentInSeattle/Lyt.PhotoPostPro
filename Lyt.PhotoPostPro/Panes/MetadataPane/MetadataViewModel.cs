@@ -3,7 +3,8 @@
 public sealed partial class MetadataViewModel :
     ViewModel<MetadataView>,
     IRecipient<LanguageChangedMessage>,
-    IRecipient<MetadataGeneratedMessage>
+    IRecipient<MetadataGeneratedMessage>,
+    IRecipient<LibraryMetadataUpdateMessage>
 {
     [ObservableProperty]
     public partial string FullPath { get; private set; } = string.Empty;
@@ -71,6 +72,7 @@ public sealed partial class MetadataViewModel :
         this.HasLocation = false;
 
         this.Subscribe<MetadataGeneratedMessage>();
+        this.Subscribe<LibraryMetadataUpdateMessage>();
         this.Subscribe<LanguageChangedMessage>();
     }
 
@@ -83,7 +85,7 @@ public sealed partial class MetadataViewModel :
         this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
         this.View.WebNavigateButton.IsShown = false;
         this.View.WebNavigateButton.IsVisible = false;
-    } 
+    }
 
     public MetadataViewModel(Metadata metadata) : this()
     {
@@ -91,28 +93,30 @@ public sealed partial class MetadataViewModel :
         this.Update(metadata);
     }
 
+    public void Receive(LibraryMetadataUpdateMessage message)
+    {
+        this.metadata = message.Metadata;
+        this.DispatchUpdate();
+    }
+
     public void Receive(MetadataGeneratedMessage message)
     {
-        Dispatch.OnUiThread(() =>
-        {
-            this.metadata = message.Metadata;
-            this.HasLocation = false;
-            this.Update(this.metadata);
-        }, DispatcherPriority.ApplicationIdle);
+        this.metadata = message.Metadata;
+        this.DispatchUpdate();
     }
 
-    public void Receive(LanguageChangedMessage message)
-    {
-        if (this.metadata is null)
-        {
-            return;
-        }
+    public void Receive(LanguageChangedMessage message) => this.DispatchUpdate(); 
 
-        Dispatch.OnUiThread(() =>
+    private void DispatchUpdate()
+        => Dispatch.OnUiThread(() =>
         {
+            if (this.metadata is null)
+            {
+                return;
+            }
+
             this.Update(this.metadata);
         }, DispatcherPriority.ApplicationIdle);
-    }
 
     public void Update(Metadata metadata)
     {
@@ -122,7 +126,7 @@ public sealed partial class MetadataViewModel :
         if (this.IsBound)
         {
             this.View.IsVisible = true;
-        } 
+        }
 
         this.Filename = string.Format("{0} : {1}", metadata.Extension, metadata.Filename);
         this.SizeMB = metadata.SizeMB;
@@ -196,22 +200,22 @@ public sealed partial class MetadataViewModel :
             {
                 this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
                 this.View.WebNavigateButton.IsShown = false;
-            } 
+            }
         }
     }
 
     [RelayCommand]
     public void OnWebNavigate()
     {
-        if ((this.metadata is null) || 
-            !this.HasLocation || 
-            double.IsNaN( this.metadataLatitude) || 
+        if ((this.metadata is null) ||
+            !this.HasLocation ||
+            double.IsNaN(this.metadataLatitude) ||
             double.IsNaN(this.metadataLongitude))
         {
-            return; 
+            return;
         }
 
         WebUtilities.OpenLocationUrl(
-            WebUtilities.GeoProtocol.GoogleMapsLink, this.metadataLatitude, this.metadataLongitude); 
+            WebUtilities.GeoProtocol.GoogleMapsLink, this.metadataLatitude, this.metadataLongitude);
     }
-} 
+}

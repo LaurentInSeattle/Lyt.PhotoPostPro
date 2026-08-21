@@ -179,14 +179,16 @@ public sealed partial class ProcessViewModel :
 
         void Setup<TViewModel, TControl, TToolboxViewModel, TPostProcessStep, TToolboxControl>(
                 ActivatedView activatedView, Control? control = null)
-            where TViewModel : ViewModel<TControl>
+            // where TViewModel : ViewModel<TControl>
+            where TViewModel : ViewModel
             where TControl : Control, IView, new()
             where TToolboxViewModel : ToolboxViewModel<TToolboxControl, TPostProcessStep>
             where TPostProcessStep : ProcessStep
             where TToolboxControl : View, new()
         {
             var vm = App.GetRequiredService<TViewModel>();
-            vm.CreateViewAndBind();
+            var view = new TControl();
+            vm.Bind(view);
             var vmToolbox = App.GetRequiredService<TToolboxViewModel>();
             vmToolbox.CreateViewAndBind();
             vmToolbox.ToolboxHostViewModel = this.ToolboxHostViewModel;

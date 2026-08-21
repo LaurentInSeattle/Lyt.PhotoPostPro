@@ -35,15 +35,9 @@
 				Width="{Binding ImageWidth}"
 				Height="{Binding ImageHeight}"
 				> 
-				<!-- 
 				<Image
-					IsVisible="{ReflectionBinding SourceImageIsVisible}"
-					Source="{ReflectionBinding SourceImage}"
-					/>
-				-->
-				<Image
-					IsVisible="{ReflectionBinding ResultImageIsVisible}"
-					Source="{ReflectionBinding ResultImage}"
+					IsVisible="{Binding ResultImageIsVisible}"
+					Source="{Binding ResultImage}"
 					/>
 				<vm:CropGridView
 					DataContext="{Binding CropGridViewModel}"
