@@ -57,6 +57,7 @@
 	<!-- Spin wait  -->
 	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
 	<system:String x:Key="Imaging.InProgressHelp">Please wait...</system:String>
+	<system:String x:Key="Imaging.NowProcessing">Now Processing: </system:String>
 
 	<!-- Drag and Drop -->
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>

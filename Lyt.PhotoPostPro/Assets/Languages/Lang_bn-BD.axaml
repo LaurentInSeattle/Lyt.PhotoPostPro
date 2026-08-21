@@ -41,6 +41,8 @@
 
     <system:String x:Key="Imaging.InProgressHelp">অনুগ্রহ করে অপেক্ষা করুন...</system:String>
 
+    <system:String x:Key="Imaging.NowProcessing">এখন প্রক্রিয়াকরণ:</system:String>
+
     <system:String x:Key="DragDrop.DropZone">ড্র্যাগ অ্যান্ড ড্রপ জোন</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">স্লাইড শো</system:String>

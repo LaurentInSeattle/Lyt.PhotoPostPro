@@ -41,6 +41,8 @@
 
     <system:String x:Key="Imaging.InProgressHelp">Espere por favor...</system:String>
 
+    <system:String x:Key="Imaging.NowProcessing">Ahora procesando:</system:String>
+
     <system:String x:Key="DragDrop.DropZone">Zona de arrastrar y soltar</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">Diapositivas</system:String>

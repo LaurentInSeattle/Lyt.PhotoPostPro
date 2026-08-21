@@ -15,8 +15,6 @@ public sealed partial class StraightenToolboxViewModel :
         this.Color_4 = GuidelineViewModel.Brushes[4];
     }
 
-    protected override string Title => this.Localize("Workflow.Straighten.Title");
-
     [ObservableProperty]
     public partial SolidColorBrush Color_0 { get; set; }
 

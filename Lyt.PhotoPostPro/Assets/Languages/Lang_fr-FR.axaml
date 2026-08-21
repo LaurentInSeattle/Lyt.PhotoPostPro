@@ -41,6 +41,8 @@
 
     <system:String x:Key="Imaging.InProgressHelp">Patientez, s'il vous plaît...</system:String>
 
+    <system:String x:Key="Imaging.NowProcessing">Traitement en cours :</system:String>
+
     <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">Diaporama</system:String>

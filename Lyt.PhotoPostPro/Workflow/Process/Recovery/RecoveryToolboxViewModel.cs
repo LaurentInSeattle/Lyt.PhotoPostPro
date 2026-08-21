@@ -7,8 +7,6 @@ public sealed partial class RecoveryToolboxViewModel :
     private float highlights;
     private float shadows;
 
-    protected override string Title => this.Localize("Workflow.Recovery.Title");
-
     [ObservableProperty]
     public partial string HighlightsString { get; set; } = string.Empty;
 

@@ -8,8 +8,6 @@ public sealed partial class SharpenToolboxViewModel :
     private SharpenStep.SharpenAlgorithm algorithm;
     private float blur;
 
-    protected override string Title => this.Localize("Workflow.Sharpen.Title");
-
     [ObservableProperty]
     public partial string BlurString { get; set; } = string.Empty;
 

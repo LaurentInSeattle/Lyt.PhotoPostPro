@@ -14,8 +14,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Show progress in replay dialog 
-
 TODO First
 ----------
 
@@ -81,8 +79,6 @@ Minor Issues (Low priority)
 
 - Switching language while processing cancels the current process
 
-- Tool boxes titles will not localise when language changes 
-
 - Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
 
 - Thumbnail is not updated after edit without export --- By Design ? 
@@ -106,8 +102,6 @@ Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp)
 -----------------------------------------------------------------------------
 
 - App freeze when using combo box ??? Avalonia issue
-
-- Media Devices 2.0 is broken, cannot transfer many files. Stay with 1.10 for now. 
 
 - Fails to load monochrome DNG. Sample: Winter.DNG Not fully supported by LibRaw
 

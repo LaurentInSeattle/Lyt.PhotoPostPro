@@ -10,9 +10,6 @@ public sealed partial class VignetteToolboxViewModel :
     private float right;
     private float lightness; 
 
-
-    protected override string Title => this.Localize("Workflow.Vignette.Title");
-
     [ObservableProperty]
     public partial string TopString { get; set; } = string.Empty;
 

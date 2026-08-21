@@ -101,6 +101,7 @@ public sealed class PostProcess
                         break;
                     }
 
+                    new WorkflowProgressMessage(step.LocalizationName).Publish();
                     this.Workflow.Next();
 
                     // Throttle 

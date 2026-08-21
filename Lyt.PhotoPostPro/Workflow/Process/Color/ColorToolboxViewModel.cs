@@ -11,8 +11,6 @@ public sealed partial class ColorToolboxViewModel :
     private float green;
     private float blue;
 
-    protected override string Title => this.Localize("Workflow.Color.Title");
-
     [ObservableProperty]
     public partial string SaturationString { get; set; } = string.Empty;
 

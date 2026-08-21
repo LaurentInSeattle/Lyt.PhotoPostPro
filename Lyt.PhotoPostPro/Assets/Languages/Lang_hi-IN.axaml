@@ -41,6 +41,8 @@
 
     <system:String x:Key="Imaging.InProgressHelp">कृपया प्रतीक्षा करें...</system:String>
 
+    <system:String x:Key="Imaging.NowProcessing">अब प्रसंस्करण:</system:String>
+
     <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">स्लाइड शो</system:String>

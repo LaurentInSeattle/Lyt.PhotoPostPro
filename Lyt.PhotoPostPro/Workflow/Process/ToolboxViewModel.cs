@@ -115,7 +115,8 @@ public partial class ToolboxViewModel<TView, TStep> :
         throw new InvalidCastException("Current Step is not expected PostProcessStep type");
     }
 
-    protected virtual string Title => " *** ? ***";
+    protected virtual string Title => 
+        this.Localize(this.model.Workflow.CurrentStep.LocalizationName);
 
     // Interface implementations must be public, and same below 6 times 
     public virtual void OnModelStepUpdated(TStep step) { }

@@ -41,6 +41,8 @@
 
     <system:String x:Key="Imaging.InProgressHelp">기다리세요...</system:String>
 
+    <system:String x:Key="Imaging.NowProcessing">현재 처리 중:</system:String>
+
     <system:String x:Key="DragDrop.DropZone">드래그 앤 드롭 영역</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">슬라이드쇼</system:String>

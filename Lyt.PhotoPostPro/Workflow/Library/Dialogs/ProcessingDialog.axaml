@@ -98,9 +98,9 @@
 					<TextBlock
 						Text="{Binding Message}"
 						HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="20 0 0 0"
+						Margin="80 0 0 0"
 						Foreground="{StaticResource OrangePeel_1_100}"
-						FontSize="28"
+						FontSize="24"
 						TextWrapping="Wrap"
 						/>
 					<progress:ProgressRing
@@ -109,6 +109,14 @@
 						IsActive="True"
 						Foreground="{StaticResource OrangePeel_1_100}"
 						VerticalAlignment="Center" HorizontalAlignment="Right"
+						/>
+					<TextBlock
+						Text="{Binding Progress}"
+						HorizontalAlignment="Left" VerticalAlignment="Bottom"
+						Margin="20 0 0 20"
+						Foreground="{StaticResource LightAqua_0_080}"
+						FontSize="20"
+						TextWrapping="Wrap"
 						/>
 				</Grid>
 			</Grid>

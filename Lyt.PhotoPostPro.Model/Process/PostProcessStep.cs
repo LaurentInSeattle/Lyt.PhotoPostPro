@@ -16,6 +16,23 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
+    public Dictionary<string, string> LocalizationStrings = new()
+    {
+        {   OrientationStepName  ,  "Workflow.Orient.Title"          },
+        {   StraightenStepName   ,  "Workflow.Straighten.Title"      },
+        {   CompositionStepName  ,  "Workflow.Compose.Title"         },
+        {   ExposureStepName     ,  "Workflow.Exposure.Title"        },
+        {   RecoveryStepName     ,  "Workflow.Recovery.Title"        },
+        {   WhiteBalanceStepName ,  "Workflow.Vignette.Title"        },
+        {   ContrastStepName     ,  "Workflow.WhiteBalance.Title"    },
+        {   LutStepName          ,  "Workflow.Contrast.Title"        },
+        {   ColorStepName        ,  "Workflow.Lut.Title"             },
+        {   SharpenStepName      ,  "Workflow.Color.Title"           },
+        {   VignetteStepName     ,  "Workflow.Sharpen.Title"         },
+        {   FiltersStepName      ,  "Workflow.Filters.Title"         },
+        {   ExportStepName       ,  "Workflow.Export.Title"          },
+    };
+
     public string Name { get; set; } = name;
 
     public Image<RgbaHalf>? SourceImage { get; set; }
@@ -33,6 +50,8 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     internal bool IsFirstRun { get; set; } = true;
 
     public bool IsIdentity { get; protected set; }
+
+    public string LocalizationName => this.LocalizationStrings[this.Name];
 
     internal bool IsFirstStep => this.PreviousStep is null;
 

@@ -13,8 +13,6 @@ public sealed partial class ContrastToolboxViewModel :
     private float green;
     private float blue;
 
-    protected override string Title => this.Localize("Workflow.Contrast.Title");
-
     [ObservableProperty]
     public partial string ContrastString { get; set; } = string.Empty;
 
