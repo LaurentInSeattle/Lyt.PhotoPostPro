@@ -167,7 +167,8 @@
 				IsShown="{Binding HasLocation, FallbackValue=False}"
 				GlyphSource="globe"
 				HorizontalAlignment="Right" VerticalAlignment="Center"
-				Margin="0 0 20 0"
+				Width="120"
+				Margin="0 0 24 0"
 				Command="{Binding OnWebNavigate}"
 				GlyphStrokeThickness="0.05" 
 				/>		

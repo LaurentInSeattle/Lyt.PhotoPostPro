@@ -9,10 +9,9 @@ Bugs ~ Major Issues
 
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
-- Camera File delete error is removing file from view, but should not. 
-
 WIP
 ---
+
 
 TODO First
 ----------
@@ -30,8 +29,6 @@ TODO First
 - UI to define signature and watermark
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
-
-- Long press on a thumbnail should show a bigger view 
 
 
 Missing Features 

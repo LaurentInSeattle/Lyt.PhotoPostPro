@@ -31,7 +31,7 @@
 			<ColumnDefinition Width="168" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="480"/>
+			<ColumnDefinition Width="520"/>
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 
@@ -91,14 +91,14 @@
 				Margin="0"
 				IsHitTestVisible="False"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480"
+				Width="520"
 				MaxHeight="380"
 				/>
 			<stars:RatingControl
 				IsVisible="{Binding HasSelection}"
-				Width="200" Height="24"
+				Width="240" Height="32"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Margin="0 4 0 4"
+				Margin="60 4 0 4"
 				RatingValue="{Binding SelectionRating}"
 				IsReadOnly="True"
 				/>
@@ -108,7 +108,7 @@
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480" Height="56"
+				Width="520" Height="56"
 				Margin="0 4 0 12"
 				GlyphSource="wand"
 				ButtonBackground="BorderlessRectangle"
@@ -122,7 +122,7 @@
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480" Height="56"
+				Width="520" Height="56"
 				Margin="0 0 0 4"
 				GlyphSource="delete"
 				ButtonBackground="BorderlessRectangle"
@@ -140,7 +140,7 @@
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
-				Width="480" Height="56"
+				Width="520" Height="56"
 				Margin="0 0 0 12"
 				GlyphSource="folder_open"
 				ButtonBackground="BorderlessRectangle"
