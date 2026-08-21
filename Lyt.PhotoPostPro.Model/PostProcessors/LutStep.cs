@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.LutStepName)
+public sealed class LutStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.LutStepName)
 {
     public const int ThumbnailSize = 1024;
 
@@ -33,7 +33,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         this.thumbnail.Mutate(x => x.Resize(ThumbnailSize, 0));
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         LutMetadata lutMetadataMaybe =
             new(ppp.LutFriendlyName, ppp.LutPath, LutFormat.Unknown, ppp.LutIsEmbedded);
@@ -60,7 +60,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
     internal override Frame? Transform(bool withFrame = true)
         => base.DoTransform((clone) =>
         {
-            var model = this.PostProcessWorkflow.PostProcess.Model;
+            var model = this.ProcessWorkflow.Model;
             if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
             {
                 // Failed to load LUT ? 
@@ -111,7 +111,7 @@ public sealed class LutStep(PostProcessWorkflow postProcessWorkflow) :
         // Throttle to let the UI display the initial image
         Task.Delay(30).Wait();
 
-        var model = this.PostProcessWorkflow.PostProcess.Model;
+        var model = this.ProcessWorkflow.Model;
         var luts = model.LutsManager.EnumerateLuts();
         int lutDone = 0;
         Parallel.For(0, luts.Count, lutIndex =>

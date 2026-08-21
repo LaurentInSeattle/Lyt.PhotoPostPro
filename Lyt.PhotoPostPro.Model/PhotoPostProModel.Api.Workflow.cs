@@ -24,7 +24,6 @@ public sealed partial class PhotoPostProModel : ModelBase
     /// <summary> Start post processing with a LoadedImage </summary>
     public bool ProcessLoadedImage(LoadedImage loadedImage)
     {
-        this.CurrentPostProcess = null;
         if (loadedImage.Metadata is null)
         {
             return false;
@@ -32,6 +31,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
         try
         {
+            this.CurrentWorkflow = null;
             LoadedImage? fullyLoadedImage = null;
             if (loadedImage.IsFullyLoaded)
             {
@@ -53,15 +53,15 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             // ! because fullyLoadedImage is Fully Loaded 
-            PostProcess postProcess =
+            ProcessWorkflow workflow =
                 new(
                     this,
                     fullyLoadedImage.Metadata!,
                     fullyLoadedImage.Image!,
                     isNew: true,
                     this.FileUidString,
-                    new PostProcessParameters());
-            this.CurrentPostProcess = postProcess;
+                    new ProcessParameters());
+            this.CurrentWorkflow = workflow;
             return true;
         }
         catch (Exception ex)
@@ -76,27 +76,27 @@ public sealed partial class PhotoPostProModel : ModelBase
         Metadata metadata,
         bool isNew,
         string fileUidString,
-        PostProcessParameters postProcessParameters)
+        ProcessParameters postProcessParameters)
     {
-        this.CurrentPostProcess = null;
-
         try
         {
-            PostProcess? postProcess = null;
+            this.CurrentWorkflow = null;
+            ProcessWorkflow? processWorkflow = null;
             LoadedImage loadedImage = ImageLoader.LoadImage(metadata.FullPath);
             if (loadedImage.IsFullyLoaded)
             {
                 // ! because is now Fully Loaded 
-                postProcess =
-                    new PostProcess(this, metadata, loadedImage.Image!, isNew, fileUidString, postProcessParameters);
+                processWorkflow =
+                    new ProcessWorkflow(
+                        this, metadata, loadedImage.Image!, isNew, fileUidString, postProcessParameters);
             }
 
-            if (postProcess is null)
+            if (processWorkflow is null)
             {
                 return false;
             }
 
-            this.CurrentPostProcess = postProcess;
+            this.CurrentWorkflow = processWorkflow;
             return true;
         }
         catch (Exception ex)
@@ -106,13 +106,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    public void BeginPostProcess()
+    public void BeginProcessWorkflow()
     {
         this.ApiAction(() =>
         {
-            // ! CurrentPostProcess is checked for being not null by ApiAction wrapper 
-            this.CurrentPostProcess!.Begin();
-
+            // Workflow is checked for being not null by ApiAction wrapper 
+            this.Workflow.Begin();
             this.dispatcher.OnIdle(() => GC.Collect());
             return true;
         });
@@ -121,14 +120,14 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool GetProcessOriginalImage()
     {
         // NOT an ApiAction wrapper : MUST check for nulls 
-        if (this.CurrentPostProcess is null)
+        if (this.CurrentWorkflow is null)
         {
             return false;
         }
 
         try
         {
-            var sourceImage = this.CurrentPostProcess.OriginalImage;
+            var sourceImage = this.Workflow.OriginalImage;
             this.LastSourceFrame = sourceImage.ToFrame();
             this.IsSourceImageUpdatePending = true;
             return true;
@@ -143,7 +142,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool GetStepSourceImage() =>
         this.ApiAction(() =>
         {
-            if (this.Workflow.CurrentStep is PostProcessStep step)
+            if (this.Workflow.CurrentStep is ProcessStep step)
             {
                 if (step.SourceImage is not null)
                 {
@@ -160,7 +159,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool GetStepResultImage() =>
         this.ApiAction(() =>
         {
-            if (this.Workflow.CurrentStep is PostProcessStep step)
+            if (this.Workflow.CurrentStep is ProcessStep step)
             {
                 if (step.ResultImage is not null)
                 {
@@ -201,7 +200,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             // ! Verified by ApiAction
-            string path = this.LibraryManager.SaveEditParameters(this.CurrentPostProcess!.Metadata, this.Workflow);
+            string path = this.LibraryManager.SaveEditParameters(this.Workflow);
             return ! string.IsNullOrWhiteSpace(path);
         });
 
@@ -228,15 +227,6 @@ public sealed partial class PhotoPostProModel : ModelBase
         if (notify)
         {
             this.timeoutTimer.ResetTimeout();
-        }
-
-        //if ((this.CurrentProject is null) ||
-        //    (this.CurrentProjectMetadata is null) ||
-        if (this.CurrentPostProcess is null)
-        {
-            string errorMessage = "No post process is currently active.";
-            Debug.WriteLine(errorMessage);
-            return false;
         }
 
         if (this.Workflow is null)

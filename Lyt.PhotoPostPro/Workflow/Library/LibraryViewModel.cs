@@ -532,7 +532,7 @@ public sealed partial class LibraryViewModel :
         if (parameters.Count == 0)
         {
             // New processing : no dialog 
-            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters(), isReplayMode: false);
+            this.LaunchSpinProcessing(isNew: true, metadata, new ProcessParameters(), isReplayMode: false);
         }
         else
         {
@@ -561,12 +561,12 @@ public sealed partial class LibraryViewModel :
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
         if (selectEditDialogModel.IsStartOver)
         {
-            this.LaunchSpinProcessing(isNew: true, metadata, new PostProcessParameters(), isReplayMode: false);
+            this.LaunchSpinProcessing(isNew: true, metadata, new ProcessParameters(), isReplayMode: false);
         }
         else
         {
             // Grab info from dialog
-            PostProcessParameters? parameters = selectEditDialogModel.PostProcessParameters;
+            ProcessParameters? parameters = selectEditDialogModel.PostProcessParameters;
             bool isReplayMode = selectEditDialogModel.IsReplayMode;
             string fileUid = this.model.FileUidString;
             if (parameters is null || string.IsNullOrWhiteSpace(fileUid))
@@ -579,7 +579,7 @@ public sealed partial class LibraryViewModel :
         }
     }
 
-    private void LaunchSpinProcessing(bool isNew, Metadata metadata, PostProcessParameters parameters, bool isReplayMode)
+    private void LaunchSpinProcessing(bool isNew, Metadata metadata, ProcessParameters parameters, bool isReplayMode)
     {
         // Always launch a spinner for big or small files 
         this.SpinWait(start: true);
@@ -600,8 +600,8 @@ public sealed partial class LibraryViewModel :
 
     private void LaunchProcessing(bool isReplayMode)
     {
-        var postProcess = this.model.CurrentPostProcess;
-        if (postProcess is null)
+        var workflow = this.model.CurrentWorkflow;
+        if (workflow is null)
         {
             this.Logger.Warning("Failed to create post process from dropped file: ");
             // TODO : Show error message to user
@@ -615,7 +615,7 @@ public sealed partial class LibraryViewModel :
             if (this.dialogService is DialogService modalService)
             {
                 modalService.RunViewModelModal(
-                    this.shellViewModel.ModalHost, new ProcessingDialogModel(postProcess), this.OnProcessingComplete);
+                    this.shellViewModel.ModalHost, new ProcessingDialogModel(workflow), this.OnProcessingComplete);
             }
         }
         else

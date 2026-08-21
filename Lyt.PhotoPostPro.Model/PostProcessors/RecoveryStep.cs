@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.RecoveryStepName)
+public class RecoveryStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.RecoveryStepName)
 {
     public float ShadowAmount { get; set; }
 
@@ -16,7 +16,7 @@ public class RecoveryStep(PostProcessWorkflow postProcessWorkflow) :
             MathF.Abs(this.HighlightAmount) < 0.001f;
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
         => this.HighlightsShadows(ppp.RecoveryHighlightAmount, ppp.RecoveryShadowAmount, withFrame: false);
 
     public override Frame? Reset()

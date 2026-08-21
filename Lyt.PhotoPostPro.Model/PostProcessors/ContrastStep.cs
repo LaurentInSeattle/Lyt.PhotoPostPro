@@ -1,9 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using System.Security.Cryptography;
-
-public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.ContrastStepName)
+public sealed class ContrastStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.ContrastStepName)
 {
     public const float SCurveDefault = 4.5f;
 
@@ -53,7 +51,7 @@ public sealed class ContrastStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         switch (ppp.ContrastAlgorithm)
         {

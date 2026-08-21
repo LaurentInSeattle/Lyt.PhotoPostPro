@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.ExposureStepName)
+public class ExposureStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.ExposureStepName)
 {
     public float Gamma { get; set; }
 
@@ -23,7 +23,7 @@ public class ExposureStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
         => this.AdjustExposure(ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift, withFrame: false);
 
     internal override Frame? Transform(bool withFrame = true)

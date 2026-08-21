@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.WhiteBalanceStepName)
+public sealed class WhiteBalanceStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.WhiteBalanceStepName)
 {
     public enum WhiteBalanceAlgorithm
     {
@@ -34,7 +34,7 @@ public sealed class WhiteBalanceStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         switch (ppp.WhiteBalanceAlgorithm)
         {

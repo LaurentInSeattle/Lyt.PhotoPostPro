@@ -1,9 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.SharpenStep;
-
-public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.FiltersStepName)
+public class FiltersStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.FiltersStepName)
 {
     public enum Filter
     {
@@ -50,7 +48,7 @@ public class FiltersStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         switch (ppp.FilterSelectedFilter)
         {

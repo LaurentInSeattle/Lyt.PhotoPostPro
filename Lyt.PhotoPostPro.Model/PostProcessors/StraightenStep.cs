@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.StraightenStepName)
+public class StraightenStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.StraightenStepName)
 {
     public float RotationAngle { get; set; } // Degrees
 
@@ -16,7 +16,7 @@ public class StraightenStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         float angle = ppp.StraightenRotationAngle;
         float absAngle = MathF.Abs(angle);

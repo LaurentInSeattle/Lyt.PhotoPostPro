@@ -7,19 +7,19 @@ public sealed partial class ProcessViewModel :
 {
     private static readonly Dictionary<string, ActivatedView> WorkflowstepNameToView = new()
     {
-        { PostProcessStep.OrientationStepName, ActivatedView.Orient },
-        { PostProcessStep.StraightenStepName, ActivatedView.Straighten },
-        { PostProcessStep.CompositionStepName, ActivatedView.Compose },
-        { PostProcessStep.ExposureStepName, ActivatedView.Exposure },
-        { PostProcessStep.RecoveryStepName, ActivatedView.Recovery },
-        { PostProcessStep.WhiteBalanceStepName, ActivatedView.WhiteBalance },
-        { PostProcessStep.ContrastStepName, ActivatedView.Contrast },
-        { PostProcessStep.LutStepName, ActivatedView.Lut },
-        { PostProcessStep.ColorStepName, ActivatedView.Color },
-        { PostProcessStep.SharpenStepName, ActivatedView.Sharpen },
-        { PostProcessStep.VignetteStepName, ActivatedView.Vignette },
-        { PostProcessStep.FiltersStepName, ActivatedView.Filters },
-        { PostProcessStep.ExportStepName, ActivatedView.Export },
+        { ProcessStep.OrientationStepName, ActivatedView.Orient },
+        { ProcessStep.StraightenStepName, ActivatedView.Straighten },
+        { ProcessStep.CompositionStepName, ActivatedView.Compose },
+        { ProcessStep.ExposureStepName, ActivatedView.Exposure },
+        { ProcessStep.RecoveryStepName, ActivatedView.Recovery },
+        { ProcessStep.WhiteBalanceStepName, ActivatedView.WhiteBalance },
+        { ProcessStep.ContrastStepName, ActivatedView.Contrast },
+        { ProcessStep.LutStepName, ActivatedView.Lut },
+        { ProcessStep.ColorStepName, ActivatedView.Color },
+        { ProcessStep.SharpenStepName, ActivatedView.Sharpen },
+        { ProcessStep.VignetteStepName, ActivatedView.Vignette },
+        { ProcessStep.FiltersStepName, ActivatedView.Filters },
+        { ProcessStep.ExportStepName, ActivatedView.Export },
     };
 
     private readonly PhotoPostProModel model;
@@ -52,12 +52,12 @@ public sealed partial class ProcessViewModel :
         }
 
         this.InitializeWorkflow();
-        var postProcess = this.model.CurrentPostProcess;
-        if (postProcess is not null)
+        var workflow = this.model.CurrentWorkflow;
+        if (workflow is not null)
         {
-            if (!postProcess.IsReplayMode)
+            if (!workflow.IsReplayMode)
             {
-                this.model.BeginPostProcess();
+                this.model.BeginProcessWorkflow();
             }
 
             this.ActivateCurrentStep();
@@ -182,7 +182,7 @@ public sealed partial class ProcessViewModel :
             where TViewModel : ViewModel<TControl>
             where TControl : Control, IView, new()
             where TToolboxViewModel : ToolboxViewModel<TToolboxControl, TPostProcessStep>
-            where TPostProcessStep : PostProcessStep
+            where TPostProcessStep : ProcessStep
             where TToolboxControl : View, new()
         {
             var vm = App.GetRequiredService<TViewModel>();

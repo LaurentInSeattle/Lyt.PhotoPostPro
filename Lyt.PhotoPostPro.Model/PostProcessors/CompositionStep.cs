@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.CompositionStepName)
+public class CompositionStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.CompositionStepName)
 {
     public int X { get; set; }
 
@@ -32,7 +32,7 @@ public class CompositionStep(PostProcessWorkflow postProcessWorkflow) :
             this.Dx == this.OriginalDx &&
             this.Dy == this.OriginalDy;
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
         => this.Crop(ppp.CompositionX, ppp.CompositionY, ppp.CompositionDx, ppp.CompositionDy, withFrame: false);
 
     public override Frame? Reset()

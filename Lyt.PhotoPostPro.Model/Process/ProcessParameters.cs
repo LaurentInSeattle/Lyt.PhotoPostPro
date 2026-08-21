@@ -7,11 +7,11 @@ using static Lyt.PhotoPostPro.Model.PostProcessors.SharpenStep;
 using static Lyt.PhotoPostPro.Model.PostProcessors.WhiteBalanceStep;
 
 public sealed record class ExistingPostProcessParameters(
-    string FileUidString, PostProcessParameters PostProcessParameters);
+    string FileUidString, ProcessParameters PostProcessParameters);
 
-public sealed class PostProcessParameters
+public sealed class ProcessParameters
 {
-    public PostProcessParameters(/* required for deserialization */ ) { }
+    public ProcessParameters(/* required for deserialization */ ) { }
 
     public DateTime Created { get; set; }
 
@@ -109,14 +109,14 @@ public sealed class PostProcessParameters
 
     public float FilterAmount { get; set; }
 
-    public PostProcessParameters (PostProcessWorkflow workflow)
+    public ProcessParameters (ProcessWorkflow workflow)
     {
         this.Created = DateTime.Now;
         this.Updated = DateTime.Now;
         this.Update(workflow); 
     }
 
-    public void Update(PostProcessWorkflow workflow)
+    public void Update(ProcessWorkflow workflow)
     {
         this.Updated = DateTime.Now;
         var orientationStep = workflow.Get<OrientationStep>();
@@ -188,7 +188,7 @@ public sealed class PostProcessParameters
         this.FilterAmount = filtersStep.Amount;
     }
 
-    public void ToPostProcessWorkflow(PostProcessWorkflow workflow)
+    public void ToProcessWorkflow(ProcessWorkflow workflow)
     {
         var orientationStep = workflow.Get<OrientationStep>();
         orientationStep.RotationAngle = this.OrientationRotationAngle;

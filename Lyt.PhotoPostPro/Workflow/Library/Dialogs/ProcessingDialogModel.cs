@@ -15,11 +15,11 @@ public sealed partial class ProcessingDialogModel :
     [ObservableProperty]
     public partial string? Progress { get; set; }
 
-    private readonly PostProcess postProcess;
+    private readonly ProcessWorkflow processWorkflow;
 
-    public ProcessingDialogModel(PostProcess postProcess)
+    public ProcessingDialogModel(ProcessWorkflow processWorkflow)
     {
-        this.postProcess = postProcess;
+        this.processWorkflow = processWorkflow;
         this.CanEnter = false;
         this.CanEscape = false;
         this.Title = this.Localize("Imaging.InProgress");
@@ -32,7 +32,7 @@ public sealed partial class ProcessingDialogModel :
         Schedule.OnUiThread(60,
             () =>
             {
-                this.postProcess.Replay();
+                this.processWorkflow.Replay();
             },
             DispatcherPriority.ApplicationIdle);
     }

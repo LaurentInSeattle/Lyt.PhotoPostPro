@@ -29,7 +29,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         base.Activate(activationParameters);
         With.Flag(ref this.isInitializing, () =>
         {
-            var postProcess = this.model.Workflow.PostProcess;
+            var postProcess = this.model.Workflow;
             var metadata = postProcess.Metadata;
             this.Rating = metadata.Rating;
         });
@@ -97,8 +97,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         }
 
         // Save new value to model and to disk 
-        var postProcess = this.model.Workflow.PostProcess;
-        var metadata = postProcess.Metadata;
+        var metadata = this.model.Workflow.Metadata;
         metadata.Rating = value;
         this.model.LibraryManager.SaveMetadata(metadata);
     }

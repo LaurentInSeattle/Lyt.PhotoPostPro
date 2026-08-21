@@ -57,12 +57,6 @@ public sealed partial class PhotoPostProModel : ModelBase
     }
 
     [JsonIgnore]
-    public PostProcess? CurrentPostProcess { get; set; } = null;
-
-    [JsonIgnore]
-    public PostProcessWorkflow? CurrentWorkflow => this.CurrentPostProcess?.Workflow;
-
-    [JsonIgnore]
     public bool IsSourceImageUpdatePending { get; set; } = false;
 
     [JsonIgnore]
@@ -94,25 +88,22 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool IsUpdatePending => this.IsSourceImageUpdatePending || this.IsResultImageUpdatePending;
 
     [JsonIgnore]
-    public PostProcessWorkflow Workflow
+    public ProcessWorkflow? CurrentWorkflow { get; private set; }
+
+    [JsonIgnore]
+    public ProcessWorkflow Workflow
     {
         // For when we are 100 % sure that nothing should be null
         // Danger Zone... 
         get
         {
-            if (this.CurrentPostProcess is null)
+            if (this.CurrentWorkflow is null)
             {
                 if (Debugger.IsAttached) { Debugger.Break(); }
                 throw new InvalidOperationException();
             }
 
-            if (this.CurrentPostProcess.Workflow is null)
-            {
-                if (Debugger.IsAttached) { Debugger.Break(); }
-                throw new InvalidOperationException();
-            }
-
-            return this.CurrentPostProcess.Workflow;
+            return this.CurrentWorkflow;
         }
     }
 

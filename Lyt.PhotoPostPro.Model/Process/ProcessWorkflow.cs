@@ -1,10 +1,24 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Process;
 
-public sealed class PostProcessWorkflow
+public sealed class ProcessWorkflow
 {
-    public PostProcessWorkflow(PostProcess postProcess)
+    public ProcessWorkflow(
+        PhotoPostProModel model,
+        Metadata metadata,
+        Image<RgbaHalf> originalImage,
+        bool isNew,
+        string fileUidString,
+        ProcessParameters postProcessParameters)
     {
-        this.PostProcess = postProcess;
+
+        this.MaybeModel = model;
+        this.Metadata = metadata;
+        this.MaybeOriginalImage = originalImage;
+        this.IsNew = isNew;
+        this.FileUidString = fileUidString;
+        this.PostProcessParameters = postProcessParameters;
+
+        this.IsReplayMode = false;
 
         var orientationStep = new OrientationStep(this);
         var straightenStep = new StraightenStep(this);
@@ -48,22 +62,45 @@ public sealed class PostProcessWorkflow
         }
     }
 
-    /// <summary> Steps of the process, should be the only property we need to serialize.  </summary>
-    public List<PostProcessStep> Steps { get; private set; }
+    public PhotoPostProModel? MaybeModel { get; set; }
 
-    public PostProcess PostProcess { get; private set; }
+    public PhotoPostProModel Model
+        => this.MaybeModel ??
+            throw new InvalidOperationException("Model must be set before accessing it.");
+
+    public Image<RgbaHalf>? MaybeOriginalImage { get; set; }
+
+    public Image<RgbaHalf> OriginalImage
+        => this.MaybeOriginalImage ??
+            throw new InvalidOperationException("Source image must be loaded before accessing it.");
+
+    public Metadata Metadata { get; set; }
+
+    public bool IsReplayMode { get; private set; }
+
+    public bool IsNew { get; private set; }
+
+    public string FileUidString { get; private set; } = string.Empty;
+
+    public ProcessParameters PostProcessParameters { get; private set; }
+
+    public string SourceFilePath => this.Metadata.FullPath;
+
+
+    /// <summary> Steps of the process, should be the only property we need to serialize.  </summary>
+    public List<ProcessStep> Steps { get; private set; }
 
     public bool IsComplete { get; private set; }
 
     public int CurrentStepIndex { get; set; }
 
-    public PostProcessStep CurrentStep => this.Steps[this.CurrentStepIndex];
+    public ProcessStep CurrentStep => this.Steps[this.CurrentStepIndex];
 
     public bool CanGoBack => this.CurrentStepIndex > 0;
 
     public bool CanMoveNext => this.CurrentStepIndex < this.Steps.Count - 1;
 
-    public T Get<T>() where T : PostProcessStep
+    public T Get<T>() where T : ProcessStep
     {
         var step =
             (from stp in this.Steps where stp is T stepOfT select (T)stp)
@@ -71,7 +108,65 @@ public sealed class PostProcessWorkflow
         return step is null ? throw new Exception("Invalid step type") : step;
     }
 
-    public bool Begin(Image<RgbaHalf> originalImage)
+    public void Begin()
+    {
+        // Auto gives a first star when beginning editing
+        if (this.Metadata.Rating == 0)
+        {
+            ++this.Metadata.Rating;
+        }
+
+        this.Metadata.LastEditedUTC = DateTime.UtcNow;
+        this.Model.LibraryManager.SaveMetadata(this.Metadata);
+
+        this.Begin(this.OriginalImage);
+    }
+
+    public void Replay()
+    {
+        this.IsReplayMode = true;
+
+        Task.Run(() =>
+        {
+            bool error = false;
+            try
+            {
+                this.Begin();
+
+                // Throttle 
+                Task.Delay(60).Wait();
+
+                foreach (var step in this.Steps)
+                {
+                    if (step is ExportStep)
+                    {
+                        break;
+                    }
+
+                    new WorkflowProgressMessage(step.LocalizationName).Publish();
+                    this.Next();
+
+                    // Throttle 
+                    Task.Delay(60).Wait();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                error = true;
+            }
+            finally
+            {
+                if (error)
+                {
+                    this.IsReplayMode = false;
+                    new WorkflowAbortMessage().Publish();
+                }
+            }
+        });
+    }
+
+    private bool Begin(Image<RgbaHalf> originalImage)
     {
         if (this.Steps.Count == 0)
         {
@@ -87,7 +182,7 @@ public sealed class PostProcessWorkflow
         this.CurrentStep.SourceImage = originalImage;
         this.CurrentStep.ResultImage = originalImage;
 
-        if (!this.PostProcess.IsNew)
+        if (!this.IsNew)
         {
             // We have parameters to continue editing
             foreach (var step in this.Steps)
@@ -97,12 +192,12 @@ public sealed class PostProcessWorkflow
             }
 
             // Do it here for the very first step
-            this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
+            this.CurrentStep.PerformStep(this.PostProcessParameters);
             this.CurrentStep.InitialRunNeeded = false;
         }
 
         this.Notify(null, WorkflowUpdateKind.Begin);
-        PostProcessStep.RecalculateHistograms(originalImage);
+        ProcessStep.RecalculateHistograms(originalImage);
         return true;
     }
 
@@ -137,7 +232,7 @@ public sealed class PostProcessWorkflow
             bool hasPerformedStep = false;
             if (this.CurrentStep.InitialRunNeeded)
             {
-                this.CurrentStep.PerformStep(this.PostProcess.PostProcessParameters);
+                this.CurrentStep.PerformStep(this.PostProcessParameters);
                 this.CurrentStep.InitialRunNeeded = false;
                 hasPerformedStep = true;
             }
@@ -186,13 +281,13 @@ public sealed class PostProcessWorkflow
         var sourceImage = this.CurrentStep.SourceImage;
         if (sourceImage is not null)
         {
-            PostProcessStep.RecalculateHistograms(sourceImage);
+            ProcessStep.RecalculateHistograms(sourceImage);
         }
 
         this.Notify(this.CurrentStep, WorkflowUpdateKind.Reset);
         return frame;
     }
 
-    private void Notify(PostProcessStep? previousStep, WorkflowUpdateKind kind)
+    private void Notify(ProcessStep? previousStep, WorkflowUpdateKind kind)
         => new WorkflowUpdateMessage(previousStep, this.CurrentStep, kind).Publish();
 }

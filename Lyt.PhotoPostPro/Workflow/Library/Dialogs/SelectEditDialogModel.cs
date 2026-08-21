@@ -28,7 +28,7 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
 
     public bool IsStartOver { get; private set; }
 
-    public PostProcessParameters? PostProcessParameters { get; private set; }
+    public ProcessParameters? PostProcessParameters { get; private set; }
 
     public string FileUidString { get; private set; } = string.Empty;
 

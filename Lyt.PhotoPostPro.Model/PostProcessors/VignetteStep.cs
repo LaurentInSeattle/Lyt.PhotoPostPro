@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.VignetteStepName)
+public class VignetteStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.VignetteStepName)
 {
     public float Top { get; set; }
 
@@ -24,7 +24,7 @@ public class VignetteStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
         => this.Vignette(
                 ppp.VignetteTop, ppp.VignetteBottom, 
                 ppp.VignetteLeft, ppp.VignetteRight, 

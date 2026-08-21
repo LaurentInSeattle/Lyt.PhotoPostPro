@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.SharpenStepName)
+public sealed class SharpenStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.SharpenStepName)
 {
     public enum SharpenAlgorithm
     {
@@ -33,7 +33,7 @@ public sealed class SharpenStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
         // Ignore Edge Mask for now 
         => this.Sharpen(ppp.SharpenSharpenAmount, withFrame: false);
 

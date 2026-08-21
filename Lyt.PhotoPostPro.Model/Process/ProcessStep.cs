@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Process;
 
-public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, string name)
+public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 {
     public const string OrientationStepName = "Orientation";
     public const string StraightenStepName = "Straighten";
@@ -39,11 +39,11 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
 
     public Image<RgbaHalf>? ResultImage { get; set; }
 
-    internal PostProcessStep? PreviousStep { get; set; }
+    internal ProcessStep? PreviousStep { get; set; }
 
-    internal PostProcessStep? NextStep { get; set; }
+    internal ProcessStep? NextStep { get; set; }
 
-    internal PostProcessWorkflow PostProcessWorkflow { get; private set; } = postProcessWorkflow;
+    internal ProcessWorkflow ProcessWorkflow { get; private set; } = processWorkflow;
 
     internal bool InitialRunNeeded { get; set; }
 
@@ -58,7 +58,7 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
     internal bool IsLastStep => this.NextStep is null;
 
     // Performs actions provided in parameters 
-    public abstract void PerformStep(PostProcessParameters postProcessParameters);
+    public abstract void PerformStep(ProcessParameters postProcessParameters);
 
     protected abstract void SetIdentity();
 
@@ -101,10 +101,10 @@ public abstract class PostProcessStep(PostProcessWorkflow postProcessWorkflow, s
         if (recalculateHistograms)
         {
             bool needForHistograms =
-                !this.PostProcessWorkflow.PostProcess.IsReplayMode || this.NextStep is ExportStep;
+                !this.ProcessWorkflow.IsReplayMode || this.NextStep is ExportStep;
             if (needForHistograms)
             {
-                PostProcessStep.RecalculateHistograms(this.ResultImage);
+                ProcessStep.RecalculateHistograms(this.ResultImage);
             }
         }
 

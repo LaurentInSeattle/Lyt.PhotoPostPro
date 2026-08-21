@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.OrientationStepName)
+public class OrientationStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.OrientationStepName)
 {
     public int RotationAngle { get; set; } // Degrees
 
@@ -15,7 +15,7 @@ public class OrientationStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         if (ppp.OrientationIsMirrored)
         {

@@ -1,9 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PostProcessors;
 
-using static Lyt.PhotoPostPro.Model.PostProcessors.ContrastStep;
-
-public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.ColorStepName)
+public sealed class ColorStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.ColorStepName)
 {
     public enum ColorAlgorithm
     {
@@ -44,7 +42,7 @@ public sealed class ColorStep(PostProcessWorkflow postProcessWorkflow) :
         return base.Reset();
     }
 
-    public override void PerformStep(PostProcessParameters ppp)
+    public override void PerformStep(ProcessParameters ppp)
     {
         switch (ppp.ColorAlgorithm)
         {

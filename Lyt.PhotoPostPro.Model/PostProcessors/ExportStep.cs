@@ -2,8 +2,8 @@
 
 using System.IO;
 
-public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
-    PostProcessStep(postProcessWorkflow, PostProcessStep.ExportStepName)
+public class ExportStep(ProcessWorkflow processWorkflow) :
+    ProcessStep(processWorkflow, ProcessStep.ExportStepName)
 {
     public const string ExportTag = "EXP_";
 
@@ -21,7 +21,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
     protected override void SetIdentity() => base.IsIdentity = false;
 
     // For abstract compliance only 
-    public override void PerformStep(PostProcessParameters postProcessParameters) { }
+    public override void PerformStep(ProcessParameters postProcessParameters) { }
 
     public override Frame? Reset()
     {
@@ -34,12 +34,12 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         // the source image so that comparisons can be made 
         // The result image from the previous step is our current source
         // so we re-use it and that becomes our result image... 
-        int currentStepIndex = this.PostProcessWorkflow.CurrentStepIndex;
-        var previousResult = this.PostProcessWorkflow.Steps[currentStepIndex - 1].ResultImage;
+        int currentStepIndex = this.ProcessWorkflow.CurrentStepIndex;
+        var previousResult = this.ProcessWorkflow.Steps[currentStepIndex - 1].ResultImage;
         if (previousResult is not null)
         {
             this.ResultImage = previousResult;
-            this.SourceImage = this.PostProcessWorkflow.Steps[0].ResultImage;
+            this.SourceImage = this.ProcessWorkflow.Steps[0].ResultImage;
             return this.ResultImage.ToFrame();
         }
         else
@@ -63,7 +63,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
             exportParameters.Images.Add(ImageParameters.Default);
         }
 
-        PhotoPostProModel model = this.PostProcessWorkflow.PostProcess.Model;
+        PhotoPostProModel model = this.ProcessWorkflow.Model;
 
         // Create subdirectory for exported images
         string sourceImagePath;
@@ -72,7 +72,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         try
         {
             string exportFolderPath = model.LibraryManager.ExportsFolderPath;
-            sourceImagePath = this.PostProcessWorkflow.PostProcess.SourceFilePath;
+            sourceImagePath = this.ProcessWorkflow.SourceFilePath;
             FileInfo fi = new(sourceImagePath);
             string? sourceDirectory = fi.DirectoryName;
             if (string.IsNullOrWhiteSpace(sourceDirectory))
@@ -270,7 +270,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
         try
         {
             // Create target folder if needed 
-            var postProcess = this.PostProcessWorkflow.PostProcess;
+            var postProcess = this.ProcessWorkflow;
             var libraryManager = postProcess.Model.LibraryManager;
             var metadata = postProcess.Metadata;
             MetadataFolders metadataFolders = new(metadata);
@@ -284,7 +284,7 @@ public class ExportStep(PostProcessWorkflow postProcessWorkflow) :
 
             // Save Editing parameters and copy them to the current export folder
             // for convenience / inspection / debug / whatever
-            string srcPath = libraryManager.SaveEditParameters(metadata, postProcess.Workflow);
+            string srcPath = libraryManager.SaveEditParameters(postProcess);
             string filename = Path.GetFileName(srcPath);
             string destPath = Path.Combine(subDirectoryExport, filename);
             File.Copy(srcPath, destPath, overwrite: true);

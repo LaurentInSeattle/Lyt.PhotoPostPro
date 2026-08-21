@@ -56,7 +56,7 @@ public sealed partial class LibraryManager
         }
     }
 
-    public string SaveEditParameters(Metadata metadata, PostProcessWorkflow workflow)
+    public string SaveEditParameters(ProcessWorkflow workflow)
     {
         // As of today, we can handle only one edit 
         if (this.fileManager is null || this.model is null)
@@ -67,27 +67,28 @@ public sealed partial class LibraryManager
         try
         {
             // Create target folder if needed 
+            Metadata metadata = workflow.Metadata;
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
             string? sourceFolder =
                 Path.GetDirectoryName(metadata.FullPath) ??
                 throw new Exception("No source folder for: " + metadata.FullPath);
-            string fileId = workflow.PostProcess.FileUidString;
+            string fileId = workflow.FileUidString;
             string filenameEdit = string.Concat(metadata.Filename, "_EDIT", fileId, ".json");
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
-            PostProcessParameters postProcessParameters;
+            ProcessParameters postProcessParameters;
             if (File.Exists(targetPathEdit))
             {
                 string read = File.ReadAllText(targetPathEdit);
-                postProcessParameters = this.fileManager.Deserialize<PostProcessParameters>(read);
+                postProcessParameters = this.fileManager.Deserialize<ProcessParameters>(read);
                 postProcessParameters.Update(workflow);
             }
             else
             {
-                postProcessParameters = new PostProcessParameters(workflow);
+                postProcessParameters = new ProcessParameters(workflow);
             }
 
-            string serialized = this.fileManager.Serialize<PostProcessParameters>(postProcessParameters);
+            string serialized = this.fileManager.Serialize<ProcessParameters>(postProcessParameters);
             File.WriteAllText(targetPathEdit, serialized);
 
             return targetPathEdit;
@@ -135,7 +136,7 @@ public sealed partial class LibraryManager
                 fileUid = fileUid.Replace(".json", string.Empty);
                 Debug.WriteLine(" " + editFile + " " + fileUid);
                 string read = File.ReadAllText(editFile);
-                var postProcessParameters = this.fileManager.Deserialize<PostProcessParameters>(read);
+                var postProcessParameters = this.fileManager.Deserialize<ProcessParameters>(read);
                 ExistingPostProcessParameters existingPostProcessParameters = new(fileUid, postProcessParameters);
                 list.Add(existingPostProcessParameters);
             }

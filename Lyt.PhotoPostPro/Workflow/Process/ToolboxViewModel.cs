@@ -16,7 +16,7 @@ public partial class ToolboxViewModel<TView, TStep> :
     IToolboxViewModel,
     IRecipient<ModelStepUpdatedMessage>
     where TView : View, new()
-    where TStep : PostProcessStep
+    where TStep : ProcessStep
 {
     protected readonly PhotoPostProModel model;
     protected readonly ShellViewModel shell;
@@ -104,7 +104,7 @@ public partial class ToolboxViewModel<TView, TStep> :
         }, DispatcherPriority.Background);
     }
 
-    protected TAnyStep ModelStep<TAnyStep>() where TAnyStep : PostProcessStep
+    protected TAnyStep ModelStep<TAnyStep>() where TAnyStep : ProcessStep
     {
         var step = this.model.Workflow.CurrentStep;
         if (step is TAnyStep anyStep)

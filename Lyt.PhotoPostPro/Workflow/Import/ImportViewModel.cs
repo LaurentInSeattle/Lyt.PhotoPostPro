@@ -171,8 +171,8 @@ public sealed partial class ImportViewModel : ViewModel<ImportView>, IDropPathHa
         }
 
         this.model.ProcessLoadedImage(this.loadedImage);
-        var postProcess = this.model.CurrentPostProcess;
-        if (postProcess is not null)
+        var workflow = this.model.CurrentWorkflow;
+        if (workflow is not null)
         {
             var shell = App.GetRequiredService<ShellViewModel>();
             shell.EnableAndSelect(ActivatedView.Process);

@@ -7,8 +7,6 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
-- UI Framework : Final fix for Re-init of Compose is failing at second image 
-
 WIP
 ---
 
@@ -51,7 +49,7 @@ Missing Features
 
 - Library backup / export 
 
-- Tools to show both before / after or just after 
+- Controls to show both before / after or just after 
 
 
 --- Nice to Have ---
@@ -82,8 +80,6 @@ Minor Issues (Low priority)
 
 Code Quality Issues 
 -------------------
-
-- Seems like we could merge Post Process and Workflow classes 
 
 - Move message definitions in new folders depending on area and workflow 
 
@@ -120,6 +116,8 @@ Bugs - No Repro
 - Add new Images messed up thumb files ? 
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
+
+- UI Framework : Final fix for Re-init of Compose is failing at second image 
 
 
 Cool Stuff to Consider 
