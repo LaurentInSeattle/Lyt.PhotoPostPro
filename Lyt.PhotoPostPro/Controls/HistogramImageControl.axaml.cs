@@ -14,10 +14,24 @@ public partial class HistogramImageControl : UserControl
     private readonly SolidColorBrush brushBlue = new(Colors.DodgerBlue);
     private readonly SolidColorBrush brushGray = new(Colors.OldLace);
 
-    public HistogramImageControl() => this.InitializeComponent();
-
-    public void Load(Histogram histogram, BrushColor color)
+    private HistogramViewModel? histogramViewModel; 
+        
+    public HistogramImageControl()
     {
+        this.InitializeComponent();
+        this.PointerReleased += this.OnPointerReleased;
+    }
+
+    private void OnPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        this.histogramViewModel?.OnClick(); 
+        e.Handled = true;
+    }
+
+    public void Load(Histogram histogram, BrushColor color, HistogramViewModel histogramViewModel)
+    {
+        this.histogramViewModel = histogramViewModel;
+
         float[] bins = histogram.Bins;
         const double canvasHeight = 340.0;
         const double canvasWidth = 1024.0;
@@ -143,7 +157,6 @@ public partial class HistogramImageControl : UserControl
         }
 
         if (histogram.IsClippingHigh)
-
         {
             AddClippingIcon(isAtLeft: false);
         }

@@ -60,8 +60,6 @@ Missing Features
 
 - Ability to minimize metadata panel 
 
-- Show / Hide Histograms 
-
 - Optimal viewer layout 
 
 - Floating toolbox windows 
