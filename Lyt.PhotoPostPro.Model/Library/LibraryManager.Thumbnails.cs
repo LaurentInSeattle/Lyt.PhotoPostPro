@@ -4,6 +4,8 @@ using System.IO ;
 
 public sealed partial class LibraryManager
 {
+    private object lockObjectFiles = new(); 
+
     public static void StaticLoadThumbnails(object? data)
     {
         if (data is not LibraryManager libraryManager)
@@ -56,6 +58,7 @@ public sealed partial class LibraryManager
         }
 
         Parallel.For(0, paths.Count, index =>
+        // for ( int index = 0; index < paths.Count; ++ index )
         {
             string path = paths[index];
             LoadedThumbnail? thumbnail = this.LoadThumbnail(path);
@@ -67,6 +70,7 @@ public sealed partial class LibraryManager
                     this.LoadedThumbnails.Add(path, thumbnail);
                 }
             }
+        // }
         });
 
         profiler.EndTiming(" Loaded Thumbnails: " + this.LoadedThumbnails.Count);
@@ -115,6 +119,10 @@ public sealed partial class LibraryManager
     {
         try
         {
+            // Was used to fix some serialization misery 
+            // Keep for now 
+            // this.CheckForNans(metadataFilePath); 
+            
             string serialized = File.ReadAllText(metadataFilePath);
             var jsonTypeInfo = AppJsonContext.Default.Metadata;
 
@@ -159,7 +167,38 @@ public sealed partial class LibraryManager
         {
             Debug.WriteLine(ex);
             ++this.errorLoadingCount;
+            Debug.WriteLine(" Failed for Path: " + metadataFilePath);
             return null;
+        }
+    }
+
+    [Conditional("DEBUG")]
+    private void CheckForNans(string metadataFilePath)
+    {
+        lock (this.lockObjectFiles)
+        {
+            string serialized = File.ReadAllText(metadataFilePath);
+            bool edited = false;
+            if ( serialized.Contains("NaN") )
+            {
+                serialized = serialized.Replace("\"Latitude\": \"NaN\"", "\"Latitude\": 666.666");
+                serialized = serialized.Replace("\"Longitude\": \"NaN\"", "\"Longitude\": 666.666");
+                edited = true;
+            }
+
+            if (serialized.Contains("\"666.666\""))
+            {
+                serialized = serialized.Replace("\"Latitude\": \"666.666\"", "\"Latitude\": 666.666");
+                serialized = serialized.Replace("\"Longitude\": \"666.666\"", "\"Longitude\": 666.666");
+                edited = true;
+            }
+
+            if (edited)
+            {
+                File.WriteAllText(metadataFilePath, serialized);
+                Task.Delay(100).Wait();
+                Debug.WriteLine(" Fixed for NaNs: " + metadataFilePath);
+            }
         }
     }
 }
