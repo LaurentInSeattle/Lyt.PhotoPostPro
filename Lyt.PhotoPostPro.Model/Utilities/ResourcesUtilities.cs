@@ -2,6 +2,14 @@
 
 public static class ResourcesUtilities
 {
+
+    //[JsonSerializable(typeof(PhotoPostProModel))]
+    //// [JsonSerializable(typeof(List<MyModel>))]
+    //public partial class AppJsonSerializerContext : JsonSerializerContext
+    //{
+    //}
+
+
     private static string ResourcesPath = "Lyt.PhotoPostPro.Model.Assets";
     private static Assembly ExecutingAssembly;
     public const string ResourcesExtension = ".json";
@@ -30,7 +38,9 @@ public static class ResourcesUtilities
                 RespectRequiredConstructorParameters = true,
                 RespectNullableAnnotations = true,
             };
-        jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        // 
+        // NOT AOT Compatible 
+        // jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     }
 
     public static void SetResourcesPath(string resourcePath )
@@ -115,44 +125,6 @@ public static class ResourcesUtilities
         }
 
         throw new Exception("Failed to load resource: " + name);
-    }
-
-    public static string Serialize<T>(T binaryObject) where T : class
-    {
-        try
-        {
-            string serialized = JsonSerializer.Serialize(binaryObject, jsonSerializerOptions);
-            if (!string.IsNullOrWhiteSpace(serialized))
-            {
-                return serialized;
-            }
-
-            throw new Exception("Serialized as null or empty string.");
-        }
-        catch (Exception ex)
-        {
-            string msg = "Failed to serialize " + typeof(T).FullName + "\n" + ex.ToString();
-            throw new Exception(msg, ex);
-        }
-    }
-
-    public static T Deserialize<T>(string serialized) where T : class
-    {
-        try
-        {
-            object? deserialized = JsonSerializer.Deserialize<T>(serialized, jsonSerializerOptions);
-            if (deserialized is T binaryObject)
-            {
-                return binaryObject;
-            }
-
-            throw new Exception();
-        }
-        catch (Exception ex)
-        {
-            string msg = "Failed to deserialize " + typeof(T).FullName + "\n" + ex.ToString();
-            throw new Exception(msg, ex);
-        }
     }
 
     [Conditional("DEBUG")]

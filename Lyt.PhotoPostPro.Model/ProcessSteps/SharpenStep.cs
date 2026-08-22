@@ -3,6 +3,7 @@
 public sealed class SharpenStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.SharpenStepName)
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<SharpenAlgorithm>))]
     public enum SharpenAlgorithm
     {
         Sharpen,

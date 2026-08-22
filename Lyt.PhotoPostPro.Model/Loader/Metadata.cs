@@ -6,6 +6,7 @@ public sealed class Metadata
 {
     private const float Megabytes = 1024.0f * 1024.0f;
 
+    [JsonConverter(typeof(JsonStringEnumConverter<OrientationAction>))]
     public enum OrientationAction
     {
         None,

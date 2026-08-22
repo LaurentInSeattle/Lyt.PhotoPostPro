@@ -3,6 +3,7 @@
 public sealed class ColorStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.ColorStepName)
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<ColorAlgorithm>))]
     public enum ColorAlgorithm
     {
         Saturation,

@@ -5,6 +5,7 @@ public sealed class ContrastStep(ProcessWorkflow processWorkflow) :
 {
     public const float SCurveDefault = 4.5f;
 
+    [JsonConverter(typeof(JsonStringEnumConverter<ContrastAlgorithm>))]
     public enum ContrastAlgorithm
     {
         Global,

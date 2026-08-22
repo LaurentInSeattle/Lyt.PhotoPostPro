@@ -5,8 +5,10 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <PublishAot>true</PublishAot>
     <ApplicationIcon>ppp.ico</ApplicationIcon>
   </PropertyGroup>
+  
   <ItemGroup>
     <Content Include="ppp.ico" />
   </ItemGroup>

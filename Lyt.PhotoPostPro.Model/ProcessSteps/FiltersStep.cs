@@ -3,6 +3,7 @@
 public class FiltersStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.FiltersStepName)
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<Filter>))]
     public enum Filter
     {
         None,

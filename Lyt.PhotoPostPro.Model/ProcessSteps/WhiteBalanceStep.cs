@@ -3,6 +3,7 @@
 public sealed class WhiteBalanceStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.WhiteBalanceStepName)
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<WhiteBalanceAlgorithm>))]
     public enum WhiteBalanceAlgorithm
     {
         None,

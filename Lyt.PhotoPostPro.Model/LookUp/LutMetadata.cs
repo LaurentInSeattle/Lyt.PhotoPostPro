@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LookUp;
 
+[JsonConverter(typeof(JsonStringEnumConverter<LutFormat>))]
 public enum LutFormat
 {
     // Use to clear embedded LUT == No LUT 

@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Export;
 
+[JsonConverter(typeof(JsonStringEnumConverter<ExportAction>))]
 public enum ExportAction
 {
     None,
@@ -8,6 +9,7 @@ public enum ExportAction
     ToFileSize,
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<OutputFormat>))]
 public enum OutputFormat
 {
     Jpeg,
@@ -15,6 +17,7 @@ public enum OutputFormat
     Bmp,
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<ImageBorderStyle>))]
 public enum ImageBorderStyle
 {
     None,
@@ -23,6 +26,7 @@ public enum ImageBorderStyle
     Custom,
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<ImageBorderThickness>))]
 public enum ImageBorderThickness
 {
     Thick,
@@ -30,6 +34,7 @@ public enum ImageBorderThickness
     Custom,
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<SignatureLocation>))]
 public enum SignatureLocation
 {
     TopLeft,
