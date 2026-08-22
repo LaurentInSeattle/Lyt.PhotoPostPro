@@ -154,7 +154,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         return Task.CompletedTask;
     }
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
+    //[RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public void SelectLanguage(string languageKey)
     {
         this.Language = languageKey;

@@ -72,7 +72,6 @@ public sealed partial class ShellViewModel
         }
     }
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public override void OnViewLoaded()
     {
         this.Logger.Debug("OnViewLoaded begins");
@@ -123,9 +122,9 @@ public sealed partial class ShellViewModel
         void Setup<TViewModel, TControl, TToolbarViewModel, TToolbarControl>(
                 ActivatedView activatedView, Control? control = null)
             where TViewModel : ViewModel<TControl>
-            where TControl : Control, IView, new()
+            where TControl : UserControl, IView, new()
             where TToolbarViewModel : ViewModel<TToolbarControl>
-            where TToolbarControl : Control, IView, new()
+            where TToolbarControl : UserControl, IView, new()
         {
             var vm = App.GetRequiredService<TViewModel>();
             vm.CreateViewAndBind();
@@ -138,7 +137,7 @@ public sealed partial class ShellViewModel
         void SetupNoToolbar<TViewModel, TControl>(
                 ActivatedView activatedView, Control control)
             where TViewModel : ViewModel<TControl>
-            where TControl : Control, IView, new()
+            where TControl : UserControl, IView, new()
         {
             var vm = App.GetRequiredService<TViewModel>();
             vm.CreateViewAndBind();
