@@ -91,12 +91,13 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         try
         {
+            var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel; 
             if (!this.fileManager.Exists(this.modelFileId))
             {
-                this.fileManager.Save(this.modelFileId, PhotoPostProModel.DefaultData);
+                this.fileManager.Save(this.modelFileId, PhotoPostProModel.DefaultData, jsonTypeInfo);
             }
 
-            PhotoPostProModel model = this.fileManager.Load<PhotoPostProModel>(this.modelFileId);
+            PhotoPostProModel model = this.fileManager.Load<PhotoPostProModel>(this.modelFileId, jsonTypeInfo);
 
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
@@ -126,7 +127,8 @@ public sealed partial class PhotoPostProModel : ModelBase
             //}
 #endif // DEBUG 
 
-            this.fileManager.Save(this.modelFileId, this);
+            var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel;
+            this.fileManager.Save(this.modelFileId, this, jsonTypeInfo);
 
 #if DEBUG 
             //try
@@ -152,6 +154,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         return Task.CompletedTask;
     }
 
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public void SelectLanguage(string languageKey)
     {
         this.Language = languageKey;

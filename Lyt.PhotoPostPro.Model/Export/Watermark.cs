@@ -14,11 +14,13 @@ public sealed class Watermark
 
     public int FontSize { get; set; } = 142;
 
-    public FontStyle FontStyle { get; set; } = FontStyle.Bold;
+    public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Bold;
 
     public string Text { get; set; } = "... ... Copyright © 2026 Laurent From San Francisco. All rights reserved. ... ...";
 
     public uint HexColorArgb { get; set; } = 0x80FFFFFF;
+
+    public FontStyle FontStyle => (FontStyle)(int)this.PppFontStyle; 
 
     // No transparency because we are using RGB 
     public Color Color => Color.Parse(this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);

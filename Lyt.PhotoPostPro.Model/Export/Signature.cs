@@ -14,13 +14,15 @@ public sealed class Signature
 
     public int FontSize { get; set; } = 26;
 
-    public FontStyle FontStyle { get; set; } = FontStyle.Italic;
+    public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Italic;
 
     public string Text { get; set; } = "Edited with Lyt.PhotoPostPro";
 
     public SignatureLocation Location { get; set; } = SignatureLocation.BottomRight;
 
     public uint HexColorArgb { get; set; } = 0xFFFFFFFF;
+
+    public FontStyle FontStyle => (FontStyle)(int)this.PppFontStyle;
 
     public Color Color => Color.Parse (this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }

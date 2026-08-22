@@ -91,7 +91,7 @@ public sealed partial class LibraryManager
     {
         if ((this.fileManager is null) ||
             (this.CapturedFolderTree is null) ||
-            (this.AddedFolderTree is null))            
+            (this.AddedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -135,7 +135,7 @@ public sealed partial class LibraryManager
                 this.AddedFolderTree.Sort();
             }
 
-            return success; 
+            return success;
         }
         catch (Exception ex)
         {
@@ -176,7 +176,8 @@ public sealed partial class LibraryManager
             // Finally serialize and save metadata 
             string filenameMetadata = metadata.Filename + "_META.json";
             string targetPathMetadata = Path.Combine(imageFileFolder, filenameMetadata);
-            string serialized = this.fileManager.Serialize<Metadata>(metadata);
+            var jsonTypeInfo = AppJsonContext.Default.Metadata;
+            string serialized = this.fileManager.Serialize(metadata, jsonTypeInfo);
             File.WriteAllText(targetPathMetadata, serialized);
 
             // Now update in memory data structures 
@@ -234,7 +235,7 @@ public sealed partial class LibraryManager
     public List<string> FindFilesAddedOrEdited(
         DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear, bool forAdded, out int zeroStarCount)
     {
-        zeroStarCount = 0;        
+        zeroStarCount = 0;
         List<string> list = new(this.LoadedThumbnails.Count);
 
         bool checkDay = selectedDay is not null;

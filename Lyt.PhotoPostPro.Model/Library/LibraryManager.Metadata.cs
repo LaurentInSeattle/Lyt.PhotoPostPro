@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Library;
 
 using System.IO;
+using System.Text.Json.Serialization.Metadata;
 
 public sealed partial class LibraryManager
 {
@@ -76,11 +77,13 @@ public sealed partial class LibraryManager
             string fileId = workflow.FileUidString;
             string filenameEdit = string.Concat(metadata.Filename, "_EDIT", fileId, ".json");
             string targetPathEdit = Path.Combine(targetFolder, filenameEdit);
+
+            var jsonTypeInfo = AppJsonContext.Default.ProcessParameters;
             ProcessParameters postProcessParameters;
             if (File.Exists(targetPathEdit))
             {
                 string read = File.ReadAllText(targetPathEdit);
-                postProcessParameters = this.fileManager.Deserialize<ProcessParameters>(read);
+                postProcessParameters = this.fileManager.Deserialize(read, jsonTypeInfo);
                 postProcessParameters.Update(workflow);
             }
             else
@@ -88,7 +91,7 @@ public sealed partial class LibraryManager
                 postProcessParameters = new ProcessParameters(workflow);
             }
 
-            string serialized = this.fileManager.Serialize<ProcessParameters>(postProcessParameters);
+            string serialized = this.fileManager.Serialize(postProcessParameters, jsonTypeInfo);
             File.WriteAllText(targetPathEdit, serialized);
 
             return targetPathEdit;
@@ -136,7 +139,8 @@ public sealed partial class LibraryManager
                 fileUid = fileUid.Replace(".json", string.Empty);
                 Debug.WriteLine(" " + editFile + " " + fileUid);
                 string read = File.ReadAllText(editFile);
-                var postProcessParameters = this.fileManager.Deserialize<ProcessParameters>(read);
+                var jsonTypeInfo = AppJsonContext.Default.ProcessParameters; 
+                var postProcessParameters = this.fileManager.Deserialize(read, jsonTypeInfo);
                 ExistingPostProcessParameters existingPostProcessParameters = new(fileUid, postProcessParameters);
                 list.Add(existingPostProcessParameters);
             }
@@ -172,7 +176,8 @@ public sealed partial class LibraryManager
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
             string filenameMetadata = metadata.Filename + "_META.json";
             string targetPathMetadata = Path.Combine(targetFolder, filenameMetadata);
-            string serialized = this.fileManager.Serialize<Metadata>(metadata);
+            var jsonTypeInfo = AppJsonContext.Default.Metadata;
+            string serialized = this.fileManager.Serialize(metadata, jsonTypeInfo);
             File.WriteAllText(targetPathMetadata, serialized);
 
             // notify UI 

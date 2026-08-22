@@ -120,8 +120,8 @@ public sealed partial class MetadataViewModel :
 
     public void Update(Metadata metadata)
     {
-        this.metadataLatitude = double.NaN;
-        this.metadataLongitude = double.NaN;
+        this.metadataLatitude = Metadata.InvalidLatLong;
+        this.metadataLongitude = Metadata.InvalidLatLong;
         this.HasLocation = false;
         if (this.IsBound)
         {

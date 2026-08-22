@@ -4,6 +4,8 @@ using System.IO;
 
 public sealed class Metadata
 {
+    public const double InvalidLatLong = 666.666;
+
     private const float Megabytes = 1024.0f * 1024.0f;
 
     [JsonConverter(typeof(JsonStringEnumConverter<OrientationAction>))]
@@ -152,15 +154,19 @@ public sealed class Metadata
 
     public bool WithFlash { get; set; }
 
-    public double Latitude { get; set; } = double.NaN;
+    public double Latitude { get; set; } = InvalidLatLong;
 
-    public double Longitude { get; set; } = double.NaN;
+    public double Longitude { get; set; } = InvalidLatLong;
 
     public string LatitudeString { get; set; } = string.Empty;
 
     public string LongitudeString { get; set; } = string.Empty;
 
-    public bool HasLocationMetadata => double.IsNormal(this.Latitude) && double.IsNormal(this.Longitude);
+    public bool HasLocationMetadata =>
+        this.Latitude >= -90.0 && 
+        this.Latitude <= 90.0 && 
+        this.Longitude >= -180.0 &&
+        this.Longitude <= 180.0;
 
     // Folder change ONLY, name and extension do stay the same
     public void HasMovedTo(string fullPath) => this.FullPath = fullPath;
@@ -251,7 +257,7 @@ public sealed class Metadata
 
         bool TryParseExifGps(string stringValue, out double gpsLocation)
         {
-            gpsLocation = double.NaN;
+            gpsLocation = InvalidLatLong;
             string[] tokens =
                 stringValue.Split(
                     [' ', '\'', '"', '°'],

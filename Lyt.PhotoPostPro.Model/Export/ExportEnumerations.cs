@@ -42,3 +42,13 @@ public enum SignatureLocation
     BottomLeft,
     BottomRight,
 }
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter<PppFontStyle>))]
+public enum PppFontStyle
+{
+    Regular = 0,
+    Bold = 1,
+    Italic = 2,
+    BoldItalic = 3
+}

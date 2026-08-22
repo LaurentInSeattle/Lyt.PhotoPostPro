@@ -72,6 +72,7 @@ public sealed partial class ShellViewModel
         }
     }
 
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public override void OnViewLoaded()
     {
         this.Logger.Debug("OnViewLoaded begins");

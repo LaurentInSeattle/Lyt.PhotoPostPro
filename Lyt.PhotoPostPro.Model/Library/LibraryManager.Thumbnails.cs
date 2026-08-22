@@ -116,8 +116,10 @@ public sealed partial class LibraryManager
         try
         {
             string serialized = File.ReadAllText(metadataFilePath);
+            var jsonTypeInfo = AppJsonContext.Default.Metadata;
+
             // ! Checked before calling 
-            Metadata? maybe = this.fileManager!.Deserialize<Metadata>(serialized);
+            Metadata? maybe = this.fileManager!.Deserialize(serialized, jsonTypeInfo);
             if (maybe is not Metadata metadata)
             {
                 throw new Exception("Failed to load metadata: " + metadataFilePath);
