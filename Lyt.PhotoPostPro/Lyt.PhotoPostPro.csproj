@@ -41,10 +41,48 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\Languages\Lang_bg-BG.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_bn-BD.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_de-DE.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_el-GR.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_en-US.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_es-ES.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_fr-FR.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_hi-IN.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_hu-HU.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_hy-AM.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_it-IT.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_jp-JP.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_ko-KO.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_uk-UA.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_zh-CN.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_zh-TW.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controls\Panels\SVirtualizingPanel.cs" />
     <Compile Remove="Controls\Panels\SVirtualizingStackPanel.cs" />
     <Compile Remove="Controls\Panels\SVirtualizingUniformGrid.cs" />
     <Compile Remove="Controls\Panels\SVirtualizingWrapPanel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Languages\Lang_bg-BG.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_bn-BD.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_de-DE.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_el-GR.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_en-US.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_es-ES.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_fr-FR.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_hi-IN.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_hu-HU.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_hy-AM.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_it-IT.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_jp-JP.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_ko-KO.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_uk-UA.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_zh-CN.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_zh-TW.axaml" />
   </ItemGroup>
 
   <ItemGroup>

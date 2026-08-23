@@ -38,7 +38,7 @@
 
                 <!--
                 These are loaded dynamically, when the localizer is tasked to load a language.
-                -->
+                They are now Embedded Resources 
                 <ResourceInclude Source="/Assets/Languages/Lang_en-US.axaml" />
                 <ResourceInclude Source="/Assets/Languages/Lang_fr-FR.axaml" />
                 <ResourceInclude Source="/Assets/Languages/Lang_it-IT.axaml" />
@@ -55,6 +55,7 @@
                 <ResourceInclude Source="/Assets/Languages/Lang_uk-UA.axaml" />
                 <ResourceInclude Source="/Assets/Languages/Lang_zh-CN.axaml" />
                 <ResourceInclude Source="/Assets/Languages/Lang_zh-TW.axaml" />
+                --> 
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

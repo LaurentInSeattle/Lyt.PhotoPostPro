@@ -173,6 +173,7 @@ public partial class App : ApplicationBase
         await localizer.Configure(
             new LocalizerConfiguration
             {
+                Assembly = Assembly.GetExecutingAssembly(), 
                 AssemblyName = App.AssemblyName,
                 Languages =
                 [

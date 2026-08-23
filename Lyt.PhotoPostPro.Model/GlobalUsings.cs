@@ -71,6 +71,7 @@ global using Lyt.Collections;
 global using Lyt.FileSystem;
 global using Lyt.Model;
 global using Lyt.Persistence;
+global using Lyt.Resources;
 global using Lyt.Utilities.Extensions;
 global using Lyt.Utilities.Parallel;
 global using Lyt.Utilities.Profiling;
