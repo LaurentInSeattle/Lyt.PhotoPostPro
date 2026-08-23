@@ -9,106 +9,13 @@ public partial class App : ApplicationBase
     public const string AssetsFolder = "Assets";
 
     public App(
-        IMtpService mtpService, 
-        IWallpaperService wallpaperService) : 
+        IMtpService mtpService,
+        IWallpaperService wallpaperService) :
         base(
             App.Organization,
             App.Application,
             App.RootNamespace,
-            typeof(MainWindow),
-            typeof(ApplicationModelBase), // Top level model 
-            [
-                // Models 
-                typeof(FileManagerModel),
-                typeof(PhotoPostProModel),
-            ],
-            [
-                // Singletons
-                typeof(ShellViewModel),
-
-                // Views and ViewModels from the main view selector            
-                typeof(ImportViewModel),
-                typeof(CameraViewModel),
-                typeof(LibraryViewModel),
-                typeof(GalleryViewModel),
-                typeof(GalleryToolbarViewModel),
-                typeof(SettingsViewModel),
-                typeof(ToolsViewModel),
-                typeof(LanguageViewModel),
-                typeof(LanguageToolbarViewModel),
-
-                // Culling ViewModel and Toolbar ViewModel
-                // 
-                typeof(CullingViewModel),
-                typeof(CullingToolbarViewModel),
-
-                // Process ViewModels and Toolbox ViewModels, in Workflow order for convenience.
-                // 
-                typeof(ProcessViewModel),
-                typeof(ProcessToolbarViewModel),
-
-                typeof(ToolboxHostViewModel),
-
-                typeof(OrientViewModel),
-                typeof(OrientToolboxViewModel),
-
-                typeof(StraightenViewModel),
-                typeof(StraightenToolboxViewModel),
-
-                typeof(ComposeViewModel),
-                typeof(ComposeToolboxViewModel),
-
-                typeof(ExposureViewModel),
-                typeof(ExposureToolboxViewModel),
-
-                typeof(RecoveryViewModel),
-                typeof(RecoveryToolboxViewModel),
-
-                typeof(WhiteBalanceViewModel),
-                typeof(WhiteBalanceToolboxViewModel),
-
-                typeof(ContrastViewModel),
-                typeof(ContrastToolboxViewModel),
-
-                typeof(LutViewModel),
-                typeof(LutToolboxViewModel),
-                typeof(LutExplorerViewModel),
-
-                typeof(ColorViewModel),
-                typeof(ColorToolboxViewModel),
-
-                typeof(SharpenViewModel),
-                typeof(SharpenToolboxViewModel),
-
-                typeof(VignetteViewModel),
-                typeof(VignetteToolboxViewModel),
-
-                typeof(FiltersViewModel),
-                typeof(FiltersToolboxViewModel),
-
-                typeof(ExportViewModel),
-                typeof(ExportToolboxViewModel),
-            
-                // LATER 
-
-                //typeof(DenoiseViewModel),
-                //typeof(DenoiseToolboxViewModel),
-
-                //typeof(TouchUpViewModel),
-                //typeof(TouchUpToolboxViewModel),
-            ],
-            [
-                // Services 
-                App.LoggerService,
-                Service<IFocuser, Focuser>(),
-                Service<IAnimationService, AnimationService>(),
-                Service<ILocalizer, LocalizerModel>(),
-                Service<IDialogService, DialogService >(),
-                Service<IDispatch, Dispatch>(),
-                Service<IProfiler, Profiler>(),
-                Service<IToaster, Toaster>(),
-                Service<IRandomizer, Randomizer>(),
-            ],
+            InitializeHosting,
             singleInstanceRequested: false,
             splashImageUri: null,
             appSplashWindow: new SplashWindow()
@@ -119,8 +26,8 @@ public partial class App : ApplicationBase
 
         // see below comment about service instances 
         App.MtpService = mtpService;
-        App.WallpaperService = wallpaperService; 
-        
+        App.WallpaperService = wallpaperService;
+
         Debug.WriteLine("App Instance created");
     }
 
@@ -130,17 +37,118 @@ public partial class App : ApplicationBase
 
     // For these services we dont know the type of the instance, therefore we cannot
     // register them easily, and we just keep them available as global statics 
-    public static IMtpService MtpService { get; set ;  }
+    public static IMtpService MtpService { get; set; }
     public static IWallpaperService WallpaperService { get; set; }
 
 #pragma warning restore CS8618 
 
     private static Tuple<Type, Type> LoggerService => Service<ILogger, Logger>();
-        //Debugger.IsAttached ?
-        //        Service<ILogger, LogViewerWindow>() :
-        //        Service<ILogger, Logger>();
+    //Debugger.IsAttached ?
+    //        Service<ILogger, LogViewerWindow>() :
+    //        Service<ILogger, Logger>();
 
     public bool RestartRequired { get; set; }
+
+    public static IHost InitializeHosting()
+    {
+        var host = Host.CreateDefaultBuilder()
+            .ConfigureServices((_0, services) =>
+            {
+                // Register the app
+                _ = services.AddSingleton<IApplicationBase>(App.Instance);
+
+                // Always Main Window 
+                _ = services.AddSingleton<Window, MainWindow>();
+
+                // The Application Model, also  a singleton, no need here to also add it without the inferface  
+                _ = services.AddSingleton<IApplicationModel, ApplicationModelBase>(); // Top level model
+
+                // Models 
+                _ = services.AddSingleton<FileManagerModel>();
+                _ = services.AddSingleton<PhotoPostProModel>();
+
+                // Singletons, they do not need an interface. 
+                //
+                // Shell 
+                _ = services.AddSingleton<ShellViewModel>();
+
+                // Views and ViewModels from the main view selector            
+                _ = services.AddSingleton<ImportViewModel>();
+                _ = services.AddSingleton<CameraViewModel>();
+                _ = services.AddSingleton<LibraryViewModel>();
+                _ = services.AddSingleton<GalleryViewModel>();
+                _ = services.AddSingleton<GalleryToolbarViewModel>();
+                _ = services.AddSingleton<SettingsViewModel>();
+                _ = services.AddSingleton<ToolsViewModel>();
+                _ = services.AddSingleton<LanguageViewModel>();
+                _ = services.AddSingleton<LanguageToolbarViewModel>();
+
+
+                // Culling ViewModel and its Toolbar ViewModel
+                // 
+                _ = services.AddSingleton<CullingViewModel>();
+                _ = services.AddSingleton<CullingToolbarViewModel>();
+
+                // Process ViewModels and Toolbox ViewModels, in Workflow order for convenience.
+                // 
+                _ = services.AddSingleton<ProcessViewModel>();
+                _ = services.AddSingleton<ProcessToolbarViewModel>();
+                _ = services.AddSingleton<ToolboxHostViewModel>();
+
+                _ = services.AddSingleton<OrientViewModel>();
+                _ = services.AddSingleton<OrientToolboxViewModel>();
+
+                _ = services.AddSingleton<StraightenViewModel>();
+                _ = services.AddSingleton<StraightenToolboxViewModel>();
+
+                _ = services.AddSingleton<ComposeViewModel>();
+                _ = services.AddSingleton<ComposeToolboxViewModel>();
+
+                _ = services.AddSingleton<ExposureViewModel>();
+                _ = services.AddSingleton<ExposureToolboxViewModel>();
+
+                _ = services.AddSingleton<RecoveryViewModel>();
+                _ = services.AddSingleton<RecoveryToolboxViewModel>();
+
+                _ = services.AddSingleton<VignetteViewModel>();
+                _ = services.AddSingleton<VignetteToolboxViewModel>();
+
+                _ = services.AddSingleton<WhiteBalanceViewModel>();
+                _ = services.AddSingleton<WhiteBalanceToolboxViewModel>();
+
+                _ = services.AddSingleton<ContrastViewModel>();
+                _ = services.AddSingleton<ContrastToolboxViewModel>();
+
+                _ = services.AddSingleton<LutViewModel>();
+                _ = services.AddSingleton<LutToolboxViewModel>();
+                _ = services.AddSingleton<LutExplorerViewModel>();
+
+                _ = services.AddSingleton<ColorViewModel>();
+                _ = services.AddSingleton<ColorToolboxViewModel>();
+
+                _ = services.AddSingleton<SharpenViewModel>();
+                _ = services.AddSingleton<SharpenToolboxViewModel>();
+
+                _ = services.AddSingleton<FiltersViewModel>();
+                _ = services.AddSingleton<FiltersToolboxViewModel>();
+
+                _ = services.AddSingleton<ExportViewModel>();
+                _ = services.AddSingleton<ExportToolboxViewModel>();
+
+                // Services, all must comply to a specific interface 
+                _ = services.AddSingleton<ILogger, BasicLogger>();
+                _ = services.AddSingleton<IFocuser, Focuser>();
+                _ = services.AddSingleton<IAnimationService, AnimationService>();
+                _ = services.AddSingleton<ILocalizer, LocalizerModel>();
+                _ = services.AddSingleton<IDialogService, DialogService>();
+                _ = services.AddSingleton<IDispatch, Dispatch>();
+                _ = services.AddSingleton<IProfiler, Profiler>();
+                _ = services.AddSingleton<IToaster, Toaster>();
+                _ = services.AddSingleton<IRandomizer, Randomizer>();
+            }).Build();
+
+        return host;
+    }
 
     protected override async Task OnStartupBegin()
     {
