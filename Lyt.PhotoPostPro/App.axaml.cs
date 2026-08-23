@@ -48,7 +48,6 @@ public partial class App : ApplicationBase
     public static List<Type> GetModelTypes () 
         => [typeof(FileManagerModel), typeof(PhotoPostProModel)];
     
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public static IHost InitializeHosting()
     {
         IServiceCollection? registeredServices = null;  

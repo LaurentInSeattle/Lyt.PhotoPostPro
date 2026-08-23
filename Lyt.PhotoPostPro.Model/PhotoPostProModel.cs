@@ -89,7 +89,6 @@ public sealed partial class PhotoPostProModel : ModelBase
     // Force a save on shutdown 
     public override async Task Shutdown() => await this.Save();
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public Task Load()
     {
         try
@@ -169,7 +168,6 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.Logger.Debug("OnViewLoaded language loaded");
     }
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public void SelectLanguage(string languageKey)
     {
         this.Language = languageKey;

@@ -18,7 +18,6 @@ public sealed partial class ShellViewModel
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster, IAnimationService animationService)
     {
         this.model = photoPostProModel;
