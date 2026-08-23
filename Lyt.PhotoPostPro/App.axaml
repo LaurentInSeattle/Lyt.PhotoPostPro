@@ -38,10 +38,24 @@
 
                 <!--
                 These are loaded dynamically, when the localizer is tasked to load a language.
-                <ResourceInclude Source="/Assets/Languages/en-US.axaml" />
-                <ResourceInclude Source="/Assets/Languages/fr-FR.axaml" />
-                <ResourceInclude Source="/Assets/Languages/it-IT.axaml" />
                 -->
+                <ResourceInclude Source="/Assets/Languages/Lang_en-US.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_fr-FR.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_it-IT.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_bg-BG.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_bn-BD.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_de-DE.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_el-GR.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_es-ES.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_hi-IN.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_hu-HU.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_hy-AM.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_jp-JP.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_ko-KO.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_uk-UA.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_zh-CN.axaml" />
+                <ResourceInclude Source="/Assets/Languages/Lang_zh-TW.axaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
