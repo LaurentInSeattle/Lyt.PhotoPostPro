@@ -51,6 +51,7 @@ public partial class App : ApplicationBase
 
     public static IHost InitializeHosting()
     {
+        IServiceCollection? registeredServices = null;  
         var host = Host.CreateDefaultBuilder()
             .ConfigureServices((_0, services) =>
             {
@@ -145,6 +146,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<IProfiler, Profiler>();
                 _ = services.AddSingleton<IToaster, Toaster>();
                 _ = services.AddSingleton<IRandomizer, Randomizer>();
+
+                registeredServices = services; 
             }).Build();
 
         return host;
