@@ -2,6 +2,8 @@
 
 using Lyt.Framework.Interfaces.Dispatching;
 
+using System.Globalization;
+
 using static Lyt.Persistence.FileManagerModel;
 
 public sealed partial class PhotoPostProModel : ModelBase
@@ -87,6 +89,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     // Force a save on shutdown 
     public override async Task Shutdown() => await this.Save();
 
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public Task Load()
     {
         try
@@ -101,7 +104,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
-
+            this.SelectLanguage(this.Language);
             new ModelLoadedMessage().Publish();
             return Task.CompletedTask;
         }
@@ -154,7 +157,19 @@ public sealed partial class PhotoPostProModel : ModelBase
         return Task.CompletedTask;
     }
 
-    //[RequiresUnreferencedCode("For resource include in SelectLanguage")]
+    public void SetupLanguage()
+    {
+        // Select default language 
+        string preferredLanguage = this.Language;
+        this.Logger.Debug("Language: " + preferredLanguage);
+        this.Language = preferredLanguage;
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(preferredLanguage);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(preferredLanguage);
+
+        this.Logger.Debug("OnViewLoaded language loaded");
+    }
+
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public void SelectLanguage(string languageKey)
     {
         this.Language = languageKey;

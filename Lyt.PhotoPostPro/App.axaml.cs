@@ -16,6 +16,7 @@ public partial class App : ApplicationBase
             App.Application,
             App.RootNamespace,
             InitializeHosting,
+            GetModelTypes,
             singleInstanceRequested: false,
             splashImageUri: null,
             appSplashWindow: new SplashWindow()
@@ -42,13 +43,12 @@ public partial class App : ApplicationBase
 
 #pragma warning restore CS8618 
 
-    private static Tuple<Type, Type> LoggerService => Service<ILogger, Logger>();
-    //Debugger.IsAttached ?
-    //        Service<ILogger, LogViewerWindow>() :
-    //        Service<ILogger, Logger>();
-
     public bool RestartRequired { get; set; }
 
+    public static List<Type> GetModelTypes () 
+        => [typeof(FileManagerModel), typeof(PhotoPostProModel)];
+    
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public static IHost InitializeHosting()
     {
         IServiceCollection? registeredServices = null;  
@@ -137,7 +137,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ExportToolboxViewModel>();
 
                 // Services, all must comply to a specific interface 
-                _ = services.AddSingleton<ILogger, BasicLogger>();
+                // _ = services.AddSingleton<ILogger, BasicLogger>();
+                _ = services.AddSingleton<ILogger, LogViewerWindow>();
                 _ = services.AddSingleton<IFocuser, Focuser>();
                 _ = services.AddSingleton<IAnimationService, AnimationService>();
                 _ = services.AddSingleton<ILocalizer, LocalizerModel>();

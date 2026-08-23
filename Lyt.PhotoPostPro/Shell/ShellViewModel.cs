@@ -18,6 +18,7 @@ public sealed partial class ShellViewModel
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
 
+    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster, IAnimationService animationService)
     {
         this.model = photoPostProModel;
@@ -28,7 +29,7 @@ public sealed partial class ShellViewModel
         this.fullscreen = new Fullscreen(App.MainWindow);
         this.MouseMonitor = new Mouse();
         this.MouseMonitor.Start(App.MainWindow);
-
+        this.model.SetupLanguage(); 
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
     }
@@ -75,21 +76,11 @@ public sealed partial class ShellViewModel
     public override void OnViewLoaded()
     {
         this.Logger.Debug("OnViewLoaded begins");
-
         base.OnViewLoaded();
         if (this.View is null)
         {
             throw new Exception("Failed to startup...");
         }
-
-        // Select default language 
-        string preferredLanguage = this.model.Language;
-        this.Logger.Debug("Language: " + preferredLanguage);
-        this.Localizer.SelectLanguage(preferredLanguage);
-        Thread.CurrentThread.CurrentCulture = new CultureInfo(preferredLanguage);
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo(preferredLanguage);
-
-        this.Logger.Debug("OnViewLoaded language loaded");
 
         // Create all statics views and bind them 
         this.SetupWorkflow();
