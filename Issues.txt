@@ -1,26 +1,25 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Camera View: Should hide some buttons in Other mode 
-
 - Folder Tree for Added not updating correctly on image removed 
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+
 WIP
 ---
 
+- Ability to filter the library by Rating : Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
-TODO First
-----------
+- Camera View: Should hide some buttons in Other mode 
 
-- Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
-- Spotlight effect, aka "Ray of Light" effect.
+Essential Missing Features 
+--------------------------
+
+- Bulk Import of photos into library 
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
-
-- Touch up / Blemish (after geometry) 
 
 - UI to pick up exports parameters 
 
@@ -28,41 +27,11 @@ TODO First
 
 - UI to define watermarks
 
-- Save color grading as a LUT : Option to Generate LUT in the Export step 
-
-
-Missing Features 
-----------------
-
---- Essential --- 
-
-- App settings 
+- First Run View : Setup root locations 
 
 - Parametrize Root Location of Library and Root Location of Exports 
 
-- Bulk Import of photos into library 
-
-
---- Important ---
-
-- Ability to navigate and filter the library by Rating, Keywords, etc.
-
-- Ability to flag images to insert in a photobook or collection 
-
-- Library backup / export 
-
-- Controls to show both before / after or just after 
-
-
---- Nice to Have ---
-
-- Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
-
-- Ability to minimize metadata panel 
-
-- Optimal viewer layout 
-
-- Floating toolbox windows 
+- App settings 
 
 
 Minor Issues (Low priority)
@@ -111,10 +80,6 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 Bugs - No Repro 
 ---------------
 
-- Edit thumb ends up in the wrong location when adding by drop 
-
-- IMG_0212  Incorrect state for Added and Ratings 
-
 - Add new Images messed up thumb files ? 
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
@@ -122,8 +87,32 @@ Bugs - No Repro
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
 
-Cool Stuff to Consider 
-----------------------
+VNext - Cool Stuff to Consider 
+------------------------------
+
+- Touch up / Blemish (after geometry) 
+
+- Library backup / export 
+
+- Save color grading as a LUT : Option to Generate LUT in the Export step 
+
+- Spotlight effect, aka "Ray of Light" effect.
+
+- Controls to show both before / after or just after 
+
+- Add keywords to images 
+
+- Ability to search the library by Keywords.
+
+- Ability to flag images to insert in a photobook or collection 
+
+- Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
+
+- Ability to minimize metadata panel 
+
+- Optimal viewer layout 
+
+- Floating toolbox windows 
 
 - Build PDF photo book 
 
