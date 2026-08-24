@@ -15,7 +15,7 @@ public sealed partial class CameraViewModel :
     private const string CancelTransferLocKey = "Workflow.Camera.CancelTransfer";
     private const string TransferAbortedLocKey = "Workflow.Camera.TransferAborted";
     private const string NoDeviceLocKey = "Workflow.Camera.NoDevice"; // "No camera or device found...";
-    private const string DetectedLocKey = "Workflow.Camera.DetectedLocKey"; // "Device or Camera detected.";
+    private const string DetectedLocKey = "Workflow.Camera.Detected"; // "Device or Camera detected.";
     private const string ConnectedLocKey = "Workflow.Camera.Connected"; // "Connected";
     private const string NotRespondingLocKey = "Workflow.Camera.NotResponding"; // "Not responding.";
     private const string NoFilesLocKey = "Workflow.Camera.NoFiles"; // "No files on device.";

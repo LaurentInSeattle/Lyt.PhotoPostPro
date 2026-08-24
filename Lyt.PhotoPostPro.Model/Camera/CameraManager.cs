@@ -13,7 +13,7 @@ public class CameraManager
     private readonly string downloadFolderPath;
 
     private ILogger logger;
-    private IMtpService? mtpService; 
+    private IMtpService? mtpService;
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
 
@@ -27,7 +27,7 @@ public class CameraManager
 
     private IMtpService MtpService
     {
-        get => this.mtpService is not null ? this.mtpService : throw new Exception("Library Manager is not initialized."); 
+        get => this.mtpService is not null ? this.mtpService : throw new Exception("Library Manager is not initialized.");
         set => this.mtpService = value;
     }
 
@@ -94,7 +94,7 @@ public class CameraManager
 
     public void BeginMonitoringCameraConnexion()
     {
-        this.MtpService.Initialize(); 
+        this.MtpService.Initialize();
         this.ctsMonitoring = new CancellationTokenSource();
         Task.Run(async () => { this.MonitorCameraConnexion(this.ctsMonitoring.Token); });
     }
@@ -112,7 +112,7 @@ public class CameraManager
             device.Connect();
             if (device.IsConnected)
             {
-                foundDevice.Update(device.FriendlyName, device.Manufacturer, device.Description); 
+                foundDevice.Update(device.FriendlyName, device.Manufacturer, device.Description);
                 new DeviceStatusMessage(IsConnected: true, foundDevice).Publish();
                 DebugPrintDeviceInfo(device);
                 var files = AllFiles(device);
@@ -128,7 +128,7 @@ public class CameraManager
         catch (Exception ex)
         {
             new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
-            Debug.WriteLine($" Error while inspecting device {device.FriendlyName}: {ex.Message}");
+            this.logger.Warning($" Error while inspecting device {device.FriendlyName}: {ex.Message}");
         }
     }
 
@@ -145,11 +145,11 @@ public class CameraManager
         }
         catch (TaskCanceledException tce)
         {
-            Debug.WriteLine($" Task Canceled Exception : {tce.Message}");
+            this.logger.Warning($" Task Canceled Exception : {tce.Message}");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
+            this.logger.Warning($" Error while monitoring devices: {ex.Message}");
         }
     }
 
@@ -164,7 +164,7 @@ public class CameraManager
             {
                 // Publish an empty list 
                 new DevicesFoundMessage([]).Publish();
-                Debug.WriteLine(" No devices found");
+                this.logger.Warning(" No devices found");
             }
             else
             {
@@ -195,7 +195,7 @@ public class CameraManager
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($" Error while reading device data: {ex.Message}");
+            this.logger.Warning($" Exception while reading device data: {ex.Message}");
         }
     }
 
@@ -264,7 +264,9 @@ public class CameraManager
         this.ctsDownloading = new CancellationTokenSource();
         Task.Run(async () =>
         {
-            this.DeleteFiles(foundDevice, selectedFiles, this.ctsDownloading.Token);
+            // Need to make a copy of the list 
+            var selectedFilesCopy = selectedFiles.ToList();
+            this.DeleteFiles(foundDevice, selectedFilesCopy, this.ctsDownloading.Token);
         });
     }
 
@@ -314,7 +316,7 @@ public class CameraManager
                 if (!DeleteFile(foundDevice, device, file))
                 {
                     ++errors;
-                    Debug.WriteLine("Delete error");
+                    this.logger.Warning("Delete error");
                 }
                 else
                 {
@@ -329,34 +331,34 @@ public class CameraManager
         }
         catch (TaskCanceledException tce)
         {
-            Debug.WriteLine($" Task Canceled Exception : {tce.Message}");
+            this.logger.Warning($" Task Canceled Exception : {tce.Message}");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
+            this.logger.Warning($" Exception while monitoring devices: {ex.Message}");
             new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
         }
         finally
         {
-            Debug.WriteLine("Deleted: Files " + deleted + "  Errors: " + errors );
+            Debug.WriteLine("Deleted: Files " + deleted + "  Errors: " + errors);
             new DeviceDeleteCompleteMessage(foundDevice, completed, toDelete.Count, deleted, errors).Publish();
         }
     }
 
-    private static bool DeleteFile(FoundDevice foundDevice, IMtpDevice device, string file)
+    private bool DeleteFile(FoundDevice foundDevice, IMtpDevice device, string file)
     {
         try
         {
             device.DeleteFile(file);
             Task.Delay(50).Wait();
-            bool success = ! device.FileExists(file);
+            bool success = !device.FileExists(file);
             string message = success ? string.Empty : "File still exists. Protected?";
             new DeviceFileDeletedMessage(IsSuccess: success, foundDevice, file, message).Publish();
             return success;
         }
         catch (Exception ex)
         {
-            Debug.WriteLine("Exception thrown: " + ex);
+            this.logger.Warning(" Delete File Exception thrown: " + ex);
             new DeviceFileDeletedMessage(IsSuccess: false, foundDevice, file, "Exception thrown: " + ex).Publish();
             return false;
         }
@@ -371,7 +373,9 @@ public class CameraManager
         this.ctsDownloading = new CancellationTokenSource();
         Task.Run(async () =>
         {
-            this.DownloadFiles(foundDevice, selectedFiles, this.ctsDownloading.Token);
+            // Need to make a copy of the list 
+            var selectedFilesCopy = selectedFiles.ToList(); 
+            this.DownloadFiles(foundDevice, selectedFilesCopy, this.ctsDownloading.Token);
         });
     }
 
@@ -421,7 +425,7 @@ public class CameraManager
                 if (!this.DownloadFile(foundDevice, device, file))
                 {
                     ++errors;
-                    Debug.WriteLine("Download error");
+                    this.logger.Warning("Download error");
                 }
                 else
                 {
@@ -435,11 +439,11 @@ public class CameraManager
         }
         catch (TaskCanceledException tce)
         {
-            Debug.WriteLine($" Task Canceled Exception : {tce.Message}");
+            this.logger.Warning($" Task Canceled Exception : {tce.Message}");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($" Error while monitoring devices: {ex.Message}");
+            this.logger.Warning($" Error while downloading files from device: {ex.Message}");
             new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
         }
         finally
@@ -492,13 +496,13 @@ public class CameraManager
             }
 
             new DeviceFileDownloadedMessage(
-                IsSuccess: false, IsDownloaded: true, 
+                IsSuccess: false, IsDownloaded: true,
                 foundDevice, file, targetPath).Publish();
             return false;
         }
         catch (Exception ex)
         {
-            Debug.WriteLine("Exception thrown: " + ex);
+            this.logger.Warning(" Download File: Exception thrown: " + ex);
             new DeviceFileDownloadedMessage(
                 IsSuccess: false, IsDownloaded: false, foundDevice, file, "Exception thrown: " + ex).Publish();
             return false;
@@ -508,14 +512,13 @@ public class CameraManager
     #endregion Downloading Files 
 
     [Conditional("DEBUG")]
-    private static void DebugPrintDeviceInfo( IMtpDevice device)
+    private void DebugPrintDeviceInfo(IMtpDevice device)
     {
         Debug.WriteLine(new string('=', 60));
 
-        static void PrintLabelValue(string label, string value)
+        void PrintLabelValue(string label, string value)
         {
-            Debug.Write(label.PadRight(22));
-            Debug.WriteLine(value);
+            this.logger.Warning(label.PadRight(22) + " " + value );
         }
 
         PrintLabelValue("Id:", device.Id);

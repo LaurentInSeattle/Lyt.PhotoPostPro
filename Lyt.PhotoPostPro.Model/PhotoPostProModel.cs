@@ -161,7 +161,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         // Select default language 
         string preferredLanguage = this.Language;
         this.Logger.Debug("Language: " + preferredLanguage);
-        this.Language = preferredLanguage;
+        this.SelectLanguage ( preferredLanguage);
         Thread.CurrentThread.CurrentCulture = new CultureInfo(preferredLanguage);
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(preferredLanguage);
 

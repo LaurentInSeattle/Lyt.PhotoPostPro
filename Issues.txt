@@ -1,7 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
-- CRITICAL ~ Media Devices fails in Release and AOT, ok in DEBUG : Download one file then stop 
+
+- Camera View - Video : delete error should not remove view 
 
 - Folder Tree for Added not updating correctly on image removed 
 

@@ -6,6 +6,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <ApplicationIcon>ppp.ico</ApplicationIcon>
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 
   <!--
