@@ -209,6 +209,21 @@
 </DrawingGroup>
 <DrawingImage x:Key="toolbox" Drawing="{StaticResource toolboxDrawingGroup}" />
 
+<!--  arrow_download  -->
+<DrawingGroup x:Key = "arrow_downloadDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M18.2498,20.5009C18.664,20.5008 19,20.8365 19,21.2507 19,21.6649 18.6644,22.0008 18.2502,22.0009L5.2502,22.0047C4.836,22.0048 4.5,21.6691 4.5,21.2549 4.5,20.8407 4.8356,20.5048 5.2498,20.5047L18.2498,20.5009z M11.6482,2.0127L11.75,2.0059C12.1297,2.0059,12.4435,2.288,12.4932,2.6541L12.5,2.7559 12.499,16.4409 16.2208,12.7205C16.4871,12.4543,16.9038,12.4301,17.1974,12.648L17.2815,12.7206C17.5477,12.9869,17.5719,13.4036,17.354,13.6972L17.2814,13.7813 12.2837,18.7779C12.0176,19.044,11.6012,19.0683,11.3076,18.8507L11.2235,18.7782 6.22,13.7816C5.9269,13.4889 5.9266,13.014 6.2193,12.7209 6.4854,12.4545 6.902,12.43 7.1958,12.6477L7.28,12.7202 10.999,16.4339 11,2.7559C11,2.3762,11.2822,2.0624,11.6482,2.0127L11.75,2.0059 11.6482,2.0127z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="arrow_download" Drawing="{StaticResource arrow_downloadDrawingGroup}" />
+
 <!--  arrow_export_up  -->
 <DrawingGroup x:Key = "arrow_export_upDrawingGroup">
 <DrawingGroup>

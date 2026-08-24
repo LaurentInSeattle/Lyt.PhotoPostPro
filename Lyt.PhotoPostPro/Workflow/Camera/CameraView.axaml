@@ -38,36 +38,36 @@
 			>
 			<TextBlock
 				Margin="0 0 0 0"
-				MinWidth="260"
+				MinWidth="400"
 				Text="{Binding DeviceStatus}"
 				Theme="{StaticResource H3}"
 				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
-				GlyphSource="arrow_export"
+				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				GlyphSource="arrow_download"
 				Text="{Binding DownloadButtonText}"
 				Command="{Binding OnDownload}"
+				IsVisible="{Binding ShowImages}"
 				IsDisabled="{Binding DownloadButtonIsDisabled}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
-				GlyphSource="arrow_export"
+				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				GlyphSource="add_circle"
 				Text="{DynamicResource Workflow.Camera.File.AddLibrary}"
 				Command="{Binding OnAddToLibrary}"
+				IsVisible="{Binding ShowImages}"
 				IsDisabled="{Binding AddToLibraryButtonIsDisabled}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				Layout="TextOnly"
-				HorizontalAlignment="Left" Width="240" Margin="8 0 0 0"
-				GlyphSource="arrow_export"
+				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				GlyphSource="delete"
 				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				Command="{Binding OnRemoveFromCamera}"
+				IsVisible="{Binding ShowImages}"
 				IsDisabled="{Binding RemoveFromCameraButtonIsDisabled}"
 				/>
 			<toggle:ToggleSwitch

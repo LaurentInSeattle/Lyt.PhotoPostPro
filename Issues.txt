@@ -11,9 +11,6 @@ WIP
 
 - Ability to filter the library by Rating : Star Filter in Library Thumb Panel ( Disabled for Added ) 
 
-- Camera View: Should hide some buttons in Other mode 
-
-
 Essential Missing Features 
 --------------------------
 
