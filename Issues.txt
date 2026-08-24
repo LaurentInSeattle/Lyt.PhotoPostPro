@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- CRITICAL ~ Media Devices fails in Release and AOT, ok in DEBUG : Download one file then stop 
+
 - Folder Tree for Added not updating correctly on image removed 
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
@@ -8,7 +10,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Getting Rid of Reflection Bindings to enable AOT 
+- Finalize AOT 
 
 TODO First
 ----------

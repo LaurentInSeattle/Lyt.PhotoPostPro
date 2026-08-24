@@ -134,6 +134,9 @@ public sealed class LutsManager
 
     private static List<LutMetadata> EnumerateBuiltInLuts()
     {
+        ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
+        ResourcesUtilities.SetResourcesPath("Lyt.PhotoPostPro.Model");
+
         List<LutMetadata> list = [];
 
         void AddForExtension(string extension, LutFormat lutFormat)
@@ -203,6 +206,9 @@ public sealed class LutsManager
         lut = null;
         try
         {
+            ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
+            ResourcesUtilities.SetResourcesPath("Lyt.PhotoPostPro.Model");
+
             string text = LoadEmbeddedTextResource(lutMetadata.Path, out string? resourceName);
 
             // Splits by both \r\n and \n, trimming and removing any empty entries 

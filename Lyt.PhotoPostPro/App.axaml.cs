@@ -136,8 +136,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ExportToolboxViewModel>();
 
                 // Services, all must comply to a specific interface 
-                // _ = services.AddSingleton<ILogger, BasicLogger>();
-                _ = services.AddSingleton<ILogger, LogViewerWindow>();
+                _ = services.AddSingleton<ILogger, BasicLogger>();
+                // _ = services.AddSingleton<ILogger, LogViewerWindow>();
                 _ = services.AddSingleton<IFocuser, Focuser>();
                 _ = services.AddSingleton<IAnimationService, AnimationService>();
                 _ = services.AddSingleton<ILocalizer, LocalizerModel>();

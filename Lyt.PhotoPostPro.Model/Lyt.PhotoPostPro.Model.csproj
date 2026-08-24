@@ -39,7 +39,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Collections\Lyt.Collections.csproj" />
-    <ProjectReference Include="..\..\Lyt.Framework\Lyt.Mvvm\Lyt.Mvvm.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Persistence\Lyt.Persistence.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Resources\Lyt.Resources.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Utilities\Lyt.Utilities.csproj" />

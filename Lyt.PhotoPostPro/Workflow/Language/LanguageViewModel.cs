@@ -46,7 +46,6 @@ public sealed partial class LanguageViewModel : ViewModel<LanguageView>
     [ObservableProperty]
     public partial int SelectedLanguageIndex { get; set; }
 
-    [RequiresUnreferencedCode("For resource include in SelectLanguage")]
     partial void OnSelectedLanguageIndexChanged(int value)
     { 
         // Do not change the language when initializing 

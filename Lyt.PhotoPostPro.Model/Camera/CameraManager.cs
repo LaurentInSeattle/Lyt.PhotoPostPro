@@ -12,12 +12,14 @@ public class CameraManager
 
     private readonly string downloadFolderPath;
 
+    private ILogger logger;
     private IMtpService? mtpService; 
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
 
-    public CameraManager()
+    public CameraManager(ILogger logger)
     {
+        this.logger = logger;
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.downloadFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
         this.ClearDownloadFolder();
