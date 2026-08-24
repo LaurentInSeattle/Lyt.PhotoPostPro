@@ -329,7 +329,7 @@ public sealed partial class CameraViewModel :
             this.downloadedFiles.Add(message.File);
             this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + ":  " + deleted;
 
-            // Remove thumb from panel 
+            // Remove thumb image from panel 
             var thumbViewModel =
                 (from vm in this.ThumbnailsPanelViewModel.Thumbnails
                  where vm.Metadata.CameraFullPath == message.File
@@ -338,6 +338,19 @@ public sealed partial class CameraViewModel :
             if (thumbViewModel is not null)
             {
                 this.ThumbnailsPanelViewModel.Thumbnails.Remove(thumbViewModel);
+                return; 
+            }
+
+            // It could also be another file or video 
+            var otherFileViewModel = 
+                (from vm in this.OtherFilesPanelViewModel.Files
+                 where vm.CameraFile == message.File
+                 select vm)
+                 .FirstOrDefault();
+            if (otherFileViewModel is not null) 
+            {
+                // Remove entry in UI list 
+                this.OtherFilesPanelViewModel.Files.Remove(otherFileViewModel);
             }
         }
         else
@@ -499,9 +512,5 @@ public sealed partial class CameraViewModel :
 
         // Delete 
         this.cameraMgr.BeginDeletingFiles(this.foundDevice, [file]);
-
-        // Remove entry in UI list 
-        this.OtherFilesPanelViewModel.Files.Remove(cameraFileViewModel);
-
     }
 }

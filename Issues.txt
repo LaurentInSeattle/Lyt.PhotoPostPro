@@ -1,8 +1,7 @@
 Bugs ~ Major Issues 
 -------------------
 
-
-- Camera View - Video : delete error should not remove view 
+- Camera View: Should hide some buttons in Other mode 
 
 - Folder Tree for Added not updating correctly on image removed 
 
@@ -11,7 +10,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Finalize AOT 
 
 TODO First
 ----------

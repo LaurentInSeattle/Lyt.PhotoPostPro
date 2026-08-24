@@ -17,6 +17,8 @@ public sealed partial class CameraFileViewModel : ViewModel<CameraFileView>
 	[ObservableProperty]
 	public partial string Glyph { get; set; }
 
+	public string CameraFile => this.file; 
+
 	/// <summary>  Creates a thumbnail view model </summary>
 	public CameraFileViewModel(CameraViewModel parent, DeviceFileDownloadedMessage message)
 	{
