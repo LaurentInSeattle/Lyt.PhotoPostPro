@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Показати:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Показати всі</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">З Зірками</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Файл:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Оцініть і відберіть цей набір</system:String>

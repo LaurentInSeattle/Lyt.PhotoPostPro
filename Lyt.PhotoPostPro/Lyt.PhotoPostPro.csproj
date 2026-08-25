@@ -55,8 +55,13 @@
     <AvaloniaResource Remove="Assets\Languages\Lang_jp-JP.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_ko-KO.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_uk-UA.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_vi-VI.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_zh-CN.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_zh-TW.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Languages\Lang_vi-VI.axaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,6 +86,7 @@
     <EmbeddedResource Include="Assets\Languages\Lang_jp-JP.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_ko-KO.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_uk-UA.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_vi-VI.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_zh-CN.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_zh-TW.axaml" />
   </ItemGroup>

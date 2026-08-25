@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Trier :</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Afficher tout</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Avec les étoiles</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Fichier:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Évaluez et triez ce groupe</system:String>

@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- CRITICAL : IP Banned to Google Translation - Need backup solution : Libre Translate 
+
 - Folder Tree for Added not updating correctly on image removed 
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 

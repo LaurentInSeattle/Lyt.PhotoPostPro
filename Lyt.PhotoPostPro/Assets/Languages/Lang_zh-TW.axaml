@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">展示：</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">全部顯示</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">有星星相接</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">文件：</system:String>
 
     <system:String x:Key="Library.RateAndCull">評價並剔除該集合</system:String>

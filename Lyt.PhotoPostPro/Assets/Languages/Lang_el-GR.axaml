@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Επίδειξη:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Εμφάνιση όλων</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Με αστέρια</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Αρχείο:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Βαθμολογήστε και αποσπάστε αυτό το σετ</system:String>

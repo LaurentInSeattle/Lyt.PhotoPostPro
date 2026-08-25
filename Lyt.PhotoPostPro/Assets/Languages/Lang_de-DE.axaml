@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Zeigen:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Alle anzeigen</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Mit Sternen</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Datei:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Bewerten und aussortieren Sie dieses Set</system:String>

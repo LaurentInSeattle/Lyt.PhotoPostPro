@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">보여주다:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">모두보기</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">별들</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">파일:</system:String>
 
     <system:String x:Key="Library.RateAndCull">이 세트 평가 및 선별</system:String>

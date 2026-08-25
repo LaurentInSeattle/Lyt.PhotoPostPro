@@ -3,7 +3,7 @@
     "Created": "2025-06-02T13:29:23.8484774-07:00",
     "LastUpdated": "2025-06-02T13:29:23.8484844-07:00",
     "Format": "Axaml",
-   "FolderPath": "C:\\Users\\Laurent\\source\\repos\\Lyt.PhotoPostPro\\Lyt.PhotoPostPro\\Assets\\Languages",
+    "FolderPath": "..\\Lyt.PhotoPostPro\\Assets\\Languages",
     "SourceFile": "Lang_en-US.axaml",
     "TargetFileFormat": "Lang_{0}.axaml",
     "SourceLanguageCultureKey": "en-US",
@@ -15,13 +15,14 @@
         "bg-BG",
         "el-GR",
         "jp-JP",
-        "hy-AM",
         "ko-KO",
         "zh-CN",
         "zh-TW",
         "hi-IN",
         "bn-BD",
         "hu-HU",
+        "vi-VI",
         "de-DE"
     ]
+
 }

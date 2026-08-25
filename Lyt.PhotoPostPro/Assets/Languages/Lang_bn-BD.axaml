@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">দেখান:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">সমগ্র প্রদর্শন করা হবে</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">তারা</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">ফাইল:</system:String>
 
     <system:String x:Key="Library.RateAndCull">এই সেটটি রেট করুন এবং কাটুন</system:String>

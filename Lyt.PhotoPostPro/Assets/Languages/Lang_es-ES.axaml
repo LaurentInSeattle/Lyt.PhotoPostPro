@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Espectáculo:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Mostrar todos</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Con estrellas</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Archivo:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Califica y selecciona este conjunto</system:String>

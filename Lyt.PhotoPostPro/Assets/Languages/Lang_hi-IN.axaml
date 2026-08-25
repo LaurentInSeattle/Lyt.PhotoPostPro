@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">दिखाओ:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">सब दिखाओ</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">स्टार के साथ</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">फ़ाइल:</system:String>
 
     <system:String x:Key="Library.RateAndCull">इस सेट को रेट करें और निकालें</system:String>

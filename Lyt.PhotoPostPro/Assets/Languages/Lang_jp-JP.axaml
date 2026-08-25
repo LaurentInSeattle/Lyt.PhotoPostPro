@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">見せる：</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">すべて表示</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">星を使って</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">ファイル：</system:String>
 
     <system:String x:Key="Library.RateAndCull">このセットを評価して選別する</system:String>

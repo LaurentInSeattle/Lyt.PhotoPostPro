@@ -1,0 +1,522 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">Đóng</system:String>
+
+    <system:String x:Key="Shell.AppName">Photo Rebel  ~  Hậu kỳ Nhiếp ảnh</system:String>
+
+    <system:String x:Key="Shell.About">Về...</system:String>
+
+    <system:String x:Key="Shell.Play">Phát</system:String>
+
+    <system:String x:Key="Shell.Exit">Thoát</system:String>
+
+    <system:String x:Key="Shell.Cancel">Thôi</system:String>
+
+    <system:String x:Key="Shell.Close">Đóng</system:String>
+
+    <system:String x:Key="Shell.Ready">Sẵn sàng.</system:String>
+
+    <system:String x:Key="Shell.Greetings">Chào mừng tới PhotoRebel!</system:String>
+
+    <system:String x:Key="Shell.Folder">Thư viện</system:String>
+
+    <system:String x:Key="Shell.Camera">Máy ảnh</system:String>
+
+    <system:String x:Key="Shell.Gallery">Gallery</system:String>
+
+    <system:String x:Key="Shell.Import">Nhập</system:String>
+
+    <system:String x:Key="Shell.Settings">Thiết lập</system:String>
+
+    <system:String x:Key="Shell.Tools">Công cụ</system:String>
+
+    <system:String x:Key="Shell.Language">Ngôn ngữ</system:String>
+
+    <system:String x:Key="Imaging.InProgress">Tiến hành</system:String>
+
+    <system:String x:Key="Imaging.InProgressHelp">Xin chờ đã...</system:String>
+
+    <system:String x:Key="Imaging.NowProcessing">Đang xử lý:</system:String>
+
+    <system:String x:Key="DragDrop.DropZone">Vùng kéo và thả</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.SlideShow">Trình chiếu</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">Ảnh nền</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">Chuyển tới...</system:String>
+
+    <system:String x:Key="Workflow.Culling.LoadingHD">Đang nạp ảnh bảo mật cao...</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">Đang giải mã ảnh tối đa...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">Sẵn sàng.</system:String>
+
+    <system:String x:Key="Workflow.Culling.AddStar">Thêm sao</system:String>
+
+    <system:String x:Key="Workflow.Culling.RemoveStar">Demote</system:String>
+
+    <system:String x:Key="Workflow.Culling.Reject">Từ chối</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTop">Giữ:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">Thêm ngôi sao vào đáy</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">Giữ:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">Từ chối cấp cao - Thêm ngôi sao vào đáy</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeft">Giữ:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">Thêm ngôi sao vào phải</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">Giữ:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">Từ chối trái - thêm ngôi sao bên phải</system:String>
+
+    <system:String x:Key="Folder.DropZoneHelp">Kéo và thả thư mục chứa tập tin ảnh vào đây để tạo một dự án mới.</system:String>
+
+    <system:String x:Key="Single.DropZoneHelp">Kéo và thả tập tin ảnh vào đây để bắt đầu.</system:String>
+
+    <system:String x:Key="Single.ProcessImage">Tiến trình Ảnh này</system:String>
+
+    <system:String x:Key="Single.LoadImageFailTitle">Tải thất bại</system:String>
+
+    <system:String x:Key="Single.LoadImageFailMessage">Không thể tải ảnh này.</system:String>
+
+    <system:String x:Key="Metadata.FileCreatedFmt">Tập tin được tạo:</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">Bắt được:</system:String>
+
+    <system:String x:Key="Metadata.Aperture">Độ mở:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">Tốc độ ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">Lộ sáng:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">Bias lộ sáng:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">Tiêu cự:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">Với chớp</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">Không có chớp</system:String>
+
+    <system:String x:Key="Metadata.Location">Địa điểm</system:String>
+
+    <system:String x:Key="Metadata.Latitude">Độ rộng:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">Độ dài:</system:String>
+
+    <system:String x:Key="Process.Toolbar.FullScreen">Toàn màn hình</system:String>
+
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc. trở lại</system:String>
+
+    <system:String x:Key="Workflow.Back">Lùi</system:String>
+
+    <system:String x:Key="Workflow.Reset">Đặt lại</system:String>
+
+    <system:String x:Key="Workflow.Next">Kế</system:String>
+
+    <system:String x:Key="Workflow.Orient.Title">Định hướng và phản chiếu</system:String>
+
+    <system:String x:Key="Workflow.Orient.Format">Phục hồi chân dung hay định dạng cảnh:</system:String>
+
+    <system:String x:Key="Workflow.Orient.Flip">Lật ảnh khi cần:</system:String>
+
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
+
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
+
+    <system:String x:Key="Workflow.Orient.Mirror">Lỗi</system:String>
+
+    <system:String x:Key="Workflow.Orient.Reverse">Lật ngược</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Title">Sửa đổi hình ảnh</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Guidelines">Hiển thị hay ẩn Hướng dẫn Đường kẻ:</system:String>
+
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">Dọc</system:String>
+
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Lật ngang</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Rotate">Xoay tới</system:String>
+
+    <system:String x:Key="Workflow.Straighten.ClearRotate">Không xoay</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1°</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5°</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5°</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- Được rồi</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 1. 0°</system:String>
+
+    <system:String x:Key="Workflow.Compose.Title">Đang thay đổi quan điểm</system:String>
+
+    <system:String x:Key="Workflow.Compose.Croplines">Cắt dòng:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Clear">Đặt lại</system:String>
+
+    <system:String x:Key="Workflow.Compose.Preview">Xem thử</system:String>
+
+    <system:String x:Key="Workflow.Compose.Top">Trên:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Bottom">Dưới:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">Trái:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">Phải:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">Bề rộng:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">Chiều cao:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">Tỷ lệ hình thể:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">Chọn một hướng dẫn tạo tác:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- Không..</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">Luật thứ ba</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">Khung</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">Đường giữa</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">Thay đổi</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">Tam giác vàng lên</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">Tam giác vàng xuống</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">Lộ sáng toàn cục</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">Bạn có thể sửa chữa với bất kỳ hoặc cả ba phương pháp kết hợp: sửa gamma, đa nhân hay chuyển độ sáng bổ sung.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">Đặt lại</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">Gamma (γ):</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">Tăng:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">Dịch:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">Những điểm nổi bật và bóng tối</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">Một thuật toán phát sáng không tuyến tính để hiển thị và phục hồi chi tiết trong ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">Đặt lại</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">Tô sáng:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">Bóng:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">Sửa chữa phơi nắng chọn</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">Áp dụng sửa chữa phơi nắng cho các cạnh của ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">Mặt:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">Trên:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">Dưới:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">Trái:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">Phải</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">Sửa chữa đen tối hay nhẹ:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">Độ mạnh:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">Cán cân trắng</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">Tự động điều chỉnh nhiệt độ màu hoặc tự điều chỉnh.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Thủ công - Ma trận màu cơ bản (Nhanh)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">Hiệu số T:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Thủ công - Nhiệt độ màu trực tiếp</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Tự động - Thuật toán "Gray World"</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Bão hoà:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Chú ý: thuật toán 'Gray World' hoạt động tốt chỉ trên hình ảnh có nhiều màu sắc khác nhau.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Chữ thường</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Comment</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Ấn vào vùng sáng trên ảnh gốc cần phải trắng hay không màu, rồi chạy thuật toán.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">Điều chỉnh độ tương phản</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">Sửa đổi độ tương phản toàn cục hoặc dùng S-Curves trên mỗi kênh RGB.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">Điều chỉnh toàn cục</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Độ tương phản:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Sigma mờ:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Độ sáng:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">Curves</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">Chọn</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">Dùng bảng tra tìm để điều chỉnh màu và thêm một số «vibe » đặc biệt vào ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">Chọn một bảng tìm kiếm đã định sẵn:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- Không..</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">Hoặc..</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">Kéo và thả xuống đây một tập tin .cube hoặc 3dl!</system:String>
+
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">Khởi chạy 'LUT Explorer'</system:String>
+
+    <system:String x:Key="Workflow.Lut.Original">Gốc</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseThisLut">Dùng Name</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">Giải tán</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">Màu vẽ tay</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">Hạ cấp cường độ màu toàn cục, hoặc dùng Vibrance trên mỗi kênh RGB.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">Điều chỉnh toàn cục</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">Bão hoà:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">Đỏ:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">Lục:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">Xanh nước biển:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">Mài sắc</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">Khởi động sự tương phản địa phương dọc theo các cạnh của đồ vật trong ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">Điều chỉnh toàn cục</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">Chú ý: độ sắc quá có thể gây hại. Nó có thể giới thiệu "halos" theo cạnh và khuếch đại tiếng ồn kỹ thuật số.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">Lọc đặc biệt</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">Áp dụng hiệu ứng đặc biệt cho ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Đối với mức xám hoặc Sepia:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">Số lượng:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- Không..</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">Mức xám</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">Đen trắng</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">Kodarome</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">Hình cực</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">Lompography</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">Xuất</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">Thiết lập tiến trình xuất khẩu ở ô xem chính.</system:String>
+
+    <system:String x:Key="Workflow.Export.RateAgain">Biên tập tốt chứ? Bạn có thể điều chỉnh đánh giá ảnh này:</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">Xuất ảnh</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">Chuyển tới thư mục xuất</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">Tất cả đã xong, trở lại thư viện</system:String>
+
+    <system:String x:Key="Workflow.Camera.BeginTransfer">Bắt đầu truyền</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">Hủy truyền</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">Comment</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">Không tìm thấy máy ảnh hay thiết bị...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">Phát hiện thiết bị hoặc máy ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">Đã kết nối</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">Không trả lời.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">Không có tập tin về thiết bị.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">tập tin sẵn sàng chuyển.</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferedTo">Đã truyền sang:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">Lỗi truyền:!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">Truyền xong:</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Thao tác hoàn tất:</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">Đã xoá!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">Lỗi!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">Đã xoá khỏi máy ảnh</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">Hiện:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Thứ nhất</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Gần đây</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Đánh dấu:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Xoá tất cả:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Bật/ tắt tất cả:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">Lưu vào màn hình nền</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">Bỏ khỏi máy ảnh</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">Thêm vào thư viện</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">Ảnh chụp - Ảnh</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">Phim ảnh - phim khác</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">Hiện:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Hiện tất cả</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Với các ngôi sao</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">Tập tin:</system:String>
+
+    <system:String x:Key="Library.RateAndCull">Tốc độ và Giá trị thiết lập này</system:String>
+
+    <system:String x:Key="Library.RateAndCullNothing">Không có gì cần chữa, mọi ảnh có một ngôi sao hay hơn</system:String>
+
+    <system:String x:Key="Library.ProcessImage">Tiến trình Ảnh này</system:String>
+
+    <system:String x:Key="Library.RemoveImage">Bỏ ra khỏi thư viện</system:String>
+
+    <system:String x:Key="Library.Navigate">Chuyển tới thư mục thư viện</system:String>
+
+    <system:String x:Key="Library.StartOver">Chạy lại</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">Tiếp tục sửa</system:String>
+
+    <system:String x:Key="Library.Option.Captured">Đã bắt</system:String>
+
+    <system:String x:Key="Library.Option.Added">Đã thêm</system:String>
+
+    <system:String x:Key="Library.Option.Edited">Đã sửa</system:String>
+
+    <system:String x:Key="Library.Month.January">Tháng Giêng</system:String>
+
+    <system:String x:Key="Library.Month.February">Tháng Hai</system:String>
+
+    <system:String x:Key="Library.Month.March">Tháng Ba</system:String>
+
+    <system:String x:Key="Library.Month.April">Tháng Tư</system:String>
+
+    <system:String x:Key="Library.Month.May">Tháng Năm</system:String>
+
+    <system:String x:Key="Library.Month.June">Tháng Sáu</system:String>
+
+    <system:String x:Key="Library.Month.July">Tháng Bảy</system:String>
+
+    <system:String x:Key="Library.Month.August">Tháng Tám</system:String>
+
+    <system:String x:Key="Library.Month.September">Tháng Chín</system:String>
+
+    <system:String x:Key="Library.Month.October">Tháng Mười</system:String>
+
+    <system:String x:Key="Library.Month.November">Tháng Mười Một</system:String>
+
+    <system:String x:Key="Library.Month.December">Tháng Mười Hai</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">Chủ Nhật</system:String>
+
+    <system:String x:Key="Library.Day.Monday">Thứ Hai</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">Thứ Ba</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">Thứ Tư</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">Thứ Năm</system:String>
+
+    <system:String x:Key="Library.Day.Friday">Thứ Sáu</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">Thứ Bảy</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Bỏ ra khỏi thư viện?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">Ảnh nền và tất cả dữ liệu đã gắn như ảnh mẫu ảnh và bản ghi sửa đổi sẽ bị xoá. &#xD;&#xA;&#xD;&#xA;Tất cả các tập tin sẽ được chuyển vào thùng xe đạp. &#xD;&#xA;&#xD;&#xA;thao tác này không thể được thực hiện.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">Bắt đầu lại hay tiếp tục?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">Ảnh này đã được biên tập. Bạn có muốn bắt đầu lại hay dùng thiết lập trước?  &#xD;&#xA;&#xD;&#xA;Nếu vậy, hãy chọn những thiết lập đã cập nhật trước đây trong hộp 'combo-box bên dưới và nhấn 'Tiếp tục'. &#xD;&#xA;&#xD;&#xA; Nếu không, chỉ cần nhấn 'Start over'.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Trực tiếp tới Xuất: Sẽ tua lại mọi sửa đổi tự động</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Cập nhật lần cuối:</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">Tôi chấp nhận điều kiện của giấy phép MIT, Tiếp tục.</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">Điều kiện giấy phép</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">Ứng dụng này được cung cấp cho bạn theo điều khoản của Giấy phép MIT.</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">Ứng dụng này được cung cấp cho bạn theo điều khoản của giấy phép MIT và, cùng với các điều khoản khác, không có bất kỳ bảo đảm nào. Bằng cách sử dụng phần mềm này, bạn hoàn toàn đồng ý với các điều kiện và điều kiện của giấy phép MIT.</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">Bộ nhắc nhở quan trọng</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">Một số điểm quan trọng cần nhớ về hình ảnh được tải về...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">Chúng tôi khuyên bạn nên dùng những hình ảnh được tải về làm giấy dán tường. Để sử dụng bất kỳ cách nào khác, thương mại hay cách khác, hãy liên lạc với người giữ bản quyền.</system:String>
+
+    <system:String x:Key="Language.Continue">Tiếp tục</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">Dọn dẹp ngay bây giờ</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">Bộ nhắc nhở quan trọng</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">Một điểm quan trọng cần nhớ về việc tải về hình ảnh...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">Chúng tôi khuyên bạn nên sử dụng hình ảnh được tải về chỉ như hình ảnh giải đố. Để sử dụng bất kỳ cách nào khác, thương mại hay cách khác, hãy liên lạc với người giữ bản quyền.</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">Lỗi hệ thống tập tin.</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">Không thể lưu tập tin ảnh.</system:String>
+
+</ResourceDictionary>

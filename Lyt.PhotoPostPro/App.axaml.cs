@@ -176,17 +176,21 @@ public partial class App : ApplicationBase
                 AssemblyName = App.AssemblyName,
                 Languages =
                 [
+                    // Not supported by Libre: "hy-AM", Replaced by Vietnamese
+
                     // Master, See PppLanguages.json in Tools folder 
                     "en-US", 
 
                     // Human Translated, with some machine help
-                    "fr-FR", "it-IT", 
-                    
+                    "fr-FR", "it-IT",
+
+                    // Partially Human Translated, with a lot of machine help
+                    "es-ES", 
+
                     // Fully Auto Translated
-                    "es-ES", "de-DE",
-                    "uk-UA", "bg-BG", "el-GR", "hy-AM",
+                    "uk-UA", "bg-BG", "el-GR", "de-DE",
                     "jp-JP", "ko-KO", "zh-CN", "zh-TW",
-                    "hi-IN", "bn-BD", "hu-HU",
+                    "hi-IN", "bn-BD", "hu-HU", "vi-VI",
                 ],
                 // Use default for all other config parameters of the Localizer 
             });
@@ -215,3 +219,4 @@ public partial class App : ApplicationBase
     // Why does it need to be there ??? 
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 }
+

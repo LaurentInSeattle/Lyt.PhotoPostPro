@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Megmutat:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Az összes megjelenítése</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Csillagokkal</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">Fájl:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Értékeld és vágd le ezt a készletet</system:String>

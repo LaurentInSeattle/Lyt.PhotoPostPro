@@ -111,7 +111,7 @@
 			<TextBlock
 				Grid.Column="1" Grid.Row="3"
 				Margin="20 0 0 0"
-				Text="Ընտրեք օգտվողի միջերեսի լեզուն:"
+				Text="Chọn ngôn ngữ của giao diện người dùng."
 				Theme="{StaticResource H2}"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>

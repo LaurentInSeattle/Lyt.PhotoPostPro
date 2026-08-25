@@ -415,6 +415,10 @@
 
     <system:String x:Key="Workflow.Library.Thumbs.Show">Mostra:</system:String>
 
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Mostra tutto</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">Con le stelle</system:String>
+
     <system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
 
     <system:String x:Key="Library.RateAndCull">Valuta e seleziona questo set</system:String>
