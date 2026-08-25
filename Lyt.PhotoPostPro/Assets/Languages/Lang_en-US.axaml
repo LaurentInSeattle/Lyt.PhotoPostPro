@@ -296,6 +296,10 @@
 
 	<!-- Library -->
 	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+
+	<system:String x:Key="Workflow.Library.Thumbs.ShowAll">Show All</system:String>
+	<system:String x:Key="Workflow.Library.Thumbs.ShowStarred">With Stars</system:String>
+
 	<system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
 	<system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
 	<system:String x:Key="Library.RateAndCullNothing">Nothing to Cull, All Images have One Star or More</system:String>

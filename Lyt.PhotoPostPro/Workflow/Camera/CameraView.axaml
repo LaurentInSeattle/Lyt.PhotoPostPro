@@ -18,18 +18,18 @@
 	<Grid		
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="8" />
+			<RowDefinition Height="4" />
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Buttons --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Messages --> 
 			<RowDefinition Height="*" />
-			<RowDefinition Height="8" />
+			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
 			<ColumnDefinition Width="480"/>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<StackPanel
 			Orientation="Horizontal"
@@ -45,7 +45,7 @@
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
 				GlyphSource="arrow_download"
 				Text="{Binding DownloadButtonText}"
 				Command="{Binding OnDownload}"
@@ -54,7 +54,7 @@
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
 				GlyphSource="add_circle"
 				Text="{DynamicResource Workflow.Camera.File.AddLibrary}"
 				Command="{Binding OnAddToLibrary}"
@@ -63,7 +63,7 @@
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Margin="8 0 0 0"
+				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
 				GlyphSource="delete"
 				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				Command="{Binding OnRemoveFromCamera}"

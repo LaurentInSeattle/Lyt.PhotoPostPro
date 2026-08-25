@@ -6,52 +6,94 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     IRecipient<LanguageChangedMessage>
 {
     private readonly PhotoPostProModel photoPostProModel;
-    private readonly LibraryViewModel cameraViewModel;
+    private readonly LibraryViewModel libraryViewModel;
 
     [ObservableProperty]
     public partial bool SortOrder { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; }
+    public partial bool ShowAll { get; set; }
+
+    [ObservableProperty]
+    public partial int Rating { get; set; }
+
+    public ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<LibraryThumbnailViewModel> DisplayedThumbnails { get; set; }
 
     [ObservableProperty]
     public partial string EmptyMessage { get; set; }
 
-    public LibraryThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, LibraryViewModel collectionViewModel)
+    public LibraryThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, LibraryViewModel libraryViewModel)
     {
         this.photoPostProModel = photoPostProModel;
-        this.cameraViewModel = collectionViewModel;
+        this.libraryViewModel = libraryViewModel;
         this.Thumbnails = [];
+        this.DisplayedThumbnails = [];
         this.EmptyMessage = string.Empty;
-        this.SortOrder = true; 
+        this.SortOrder = true;
+        this.ShowAll = true;
+        this.Rating = 1;
+        this.Thumbnails.CollectionChanged += (_,_) => this.Sort(); 
+
         this.Subscribe<LanguageChangedMessage>();
     }
 
-    public void Receive(LanguageChangedMessage _) { } //  => this.PopulateComboBox();
+    public void Receive(LanguageChangedMessage _) { } 
 
-    public void Sort(bool ascending = true)
+    partial void OnSortOrderChanged(bool value) => this.Sort();
+
+    partial void OnShowAllChanged(bool value) => this.Sort();
+
+    partial void OnRatingChanged(int value) => this.Sort();
+
+    public void Sort()
     {
         if (this.Thumbnails.Count == 0)
         {
             return;
         }
 
-        if (ascending)
+        IEnumerable<LibraryThumbnailViewModel> sorted; 
+        if (this.ShowAll)
         {
-            var sorted =
-                (from thumb in this.Thumbnails
-                 orderby thumb.Metadata.Captured ascending
-                 select thumb).ToList();
-            this.Thumbnails = new(sorted);
-        }
+            if (this.SortOrder)
+            {
+                sorted =
+                    (from thumb in this.Thumbnails
+                     orderby thumb.Metadata.Captured ascending
+                     select thumb);
+            }
+            else
+            {
+                sorted =
+                    (from thumb in this.Thumbnails
+                     orderby thumb.Metadata.Captured descending
+                     select thumb);
+            }
+        } 
         else
         {
-            var sorted =
-                (from thumb in this.Thumbnails
-                 orderby thumb.Metadata.Captured descending
-                 select thumb).ToList();
-            this.Thumbnails = new(sorted);
+            if (this.SortOrder)
+            {
+                sorted =
+                    (from thumb in this.Thumbnails
+                     where thumb.Metadata.Rating >= this.Rating
+                     orderby thumb.Metadata.Captured ascending
+                     select thumb);
+            }
+            else
+            {
+                sorted =
+                    (from thumb in this.Thumbnails
+                     where thumb.Metadata.Rating >= this.Rating
+                     orderby thumb.Metadata.Captured descending
+                     select thumb);
+            }
         }
+
+        this.DisplayedThumbnails = new(sorted);
     }
 
     public void OnSelect(object selectedObject)
@@ -87,7 +129,5 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         //    }
         //}
     }
-
-    partial void OnSortOrderChanged(bool value) => this.Sort(ascending: value); 
 
 }
