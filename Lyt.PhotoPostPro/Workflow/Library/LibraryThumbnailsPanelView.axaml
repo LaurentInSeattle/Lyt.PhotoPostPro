@@ -45,12 +45,14 @@
 				Value="{Binding SortOrder}"
 				/>
 			<TextBlock
+				IsVisible="{Binding ShowRatingFilter}"
 				Margin="20 0 0 0"
 				Text="{DynamicResource Workflow.Camera.Thumbs.Show}"
 				Theme="{StaticResource H3}"
 				/>
 			<toggle:ToggleSwitch
 				x:Name="ShowAllSwitch"
+				IsVisible="{Binding ShowRatingFilter}"
 				Margin="4 0 8 0"
 				Style="{StaticResource StandardToggleSwitch}"
 				TrueText="{DynamicResource Workflow.Library.Thumbs.ShowAll}"
@@ -60,7 +62,7 @@
 				Value="{Binding ShowAll}"
 				/>
 			<stars:RatingControl
-				IsVisible="{Binding !ShowAll}"
+				IsVisible="{Binding ShowRatingControl}"
 				Margin="4 0 8 0"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				RatingValue="{Binding Rating}"

@@ -21,7 +21,7 @@
 
     <system:String x:Key="Shell.Ready">Pronto.</system:String>
 
-    <system:String x:Key="Shell.Greetings">Benvenuti a FotoRebel !</system:String>
+    <system:String x:Key="Shell.Greetings">Benvenuti a Foto Ribello !</system:String>
 
     <system:String x:Key="Shell.Folder">Raccolta</system:String>
 
@@ -33,7 +33,7 @@
 
     <system:String x:Key="Shell.Settings">Impostazioni</system:String>
 
-    <system:String x:Key="Shell.Tools">Utensili</system:String>
+    <system:String x:Key="Shell.Tools">Strumenti</system:String>
 
     <system:String x:Key="Shell.Language">Lingua</system:String>
 

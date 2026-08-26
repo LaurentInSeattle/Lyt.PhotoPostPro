@@ -210,32 +210,13 @@ public sealed partial class LibraryViewModel :
 
     public void ReceiveOnUiThread(ThumbnailUpdatedMessage message)
     {
-        string path = message.Path;
-        var list = this.LibraryThumbnailsPanelViewModel.Thumbnails;
-
-        // Find old View model and remove it 
-        var oldVm = (from vm in list where vm.Path == path select vm).FirstOrDefault();
-        if (oldVm is null)
+        this.LibraryThumbnailsPanelViewModel.Update(message.Path);
+        var first  = this.LibraryThumbnailsPanelViewModel.GetFirstDisplayed();  
+        if ( first is not  null)
         {
-            return;
-        }
-
-        list.Remove(oldVm);
-
-        // Bring in the new one 
-        if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
-        {
-            // Add to list 
-            LibraryThumbnailViewModel libraryThumbnailViewModel =
-                new(this, path, thumbnail.Metadata, thumbnail.ImageBytes);
-            list.Add(libraryThumbnailViewModel);
-
             // make it the current selection 
-            this.OnSelect(libraryThumbnailViewModel);
+            this.OnSelect(first);
         }
-
-        // Adjust order 
-        this.LibraryThumbnailsPanelViewModel.Sort();
     }
 
     public void Receive(LibraryLoadedMessage message)
@@ -345,6 +326,7 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
+        this.LibraryThumbnailsPanelViewModel.SetViewingMode(this.selectedViewing);
         this.BuildCalendarButtons(folderTree);
 
         if (this.Years.Count > 0)
@@ -445,18 +427,12 @@ public sealed partial class LibraryViewModel :
                 }
             }
 
-            this.LibraryThumbnailsPanelViewModel.Thumbnails = new(list);
+            this.LibraryThumbnailsPanelViewModel.Populate(list);
 
-            var thumbnails = this.LibraryThumbnailsPanelViewModel.Thumbnails;
-            if (thumbnails.Count == 0)
+            var first = this.LibraryThumbnailsPanelViewModel.GetFirstDisplayed();
+            if (first is not null)
             {
-                // The logic of the folder system should prevent an empty list 
-                // but removing files from the library does not remove its directory 
-                // therefore there could be empty slots 
-            }
-            else
-            {
-                this.OnSelect(thumbnails[0]);
+                this.OnSelect(first);
             }
         }
 
@@ -694,16 +670,19 @@ public sealed partial class LibraryViewModel :
     }
 
     public void Receive(LibraryRemovedMessage message)
+        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
+
+    public void ReceiveOnUiThread(LibraryRemovedMessage message)
     {
-        var metadata = message.Metadata;
-        if (!this.TryFindThumbnail(metadata, out LibraryThumbnailViewModel? thumbnail))
+        if (!this.LibraryThumbnailsPanelViewModel.TryFindThumbnail(
+            message.Metadata, out LibraryThumbnailViewModel? thumbnail))
         {
             // Nothing to do 
             return;
         }
 
         // Remove it the list 
-        this.LibraryThumbnailsPanelViewModel.Thumbnails.Remove(thumbnail);
+        this.LibraryThumbnailsPanelViewModel.Remove(thumbnail);
 
         if (this.selectedLibraryThumbnailViewModel == null)
         {
@@ -726,46 +705,27 @@ public sealed partial class LibraryViewModel :
     private void ReceiveOnUiThread(LibraryMetadataUpdateMessage message)
     {
         var metadata = message.Metadata;
-        if (!this.TryFindThumbnail(metadata, out LibraryThumbnailViewModel? thumbnail))
+        if (!this.LibraryThumbnailsPanelViewModel.TryFindThumbnail(
+                metadata, out LibraryThumbnailViewModel? thumbnail))
         {
-            // Nothing to do 
+            // Not found, Nothing to do 
             return;
         }
 
         thumbnail.Update(metadata);
     }
 
-    private bool TryFindThumbnail(Metadata metadata, [NotNullWhen(true)] out LibraryThumbnailViewModel? foundThumbnail)
-    {
-        foundThumbnail = null;
-        foreach (var thumbnail in this.LibraryThumbnailsPanelViewModel.Thumbnails)
-        {
-            if (thumbnail.Metadata.FullPath.Equals(metadata.FullPath, StringComparison.InvariantCultureIgnoreCase))
-            {
-                foundThumbnail = thumbnail;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     [RelayCommand]
     public void OnRateAndCull()
     {
-        if (this.LibraryThumbnailsPanelViewModel.Thumbnails.Count == 0)
+        if (this.LibraryThumbnailsPanelViewModel.IsEmpty)
         {
             // no images to process
             return;
         }
 
-        var filteredFiles =
-            (from thumb in this.LibraryThumbnailsPanelViewModel.Thumbnails
-             // Filter out images already rated (0 => unrated) 
-             where thumb.Metadata.Rating == 0
-             // Reorder files by Date Captured 
-             orderby thumb.Metadata.Captured ascending
-             select thumb.Path);
+        // Enumerate thumbs with zero rating, returning their paths
+        var filteredFiles = this.LibraryThumbnailsPanelViewModel.GetUnratedThumbnailsPaths();
 
         // Limit list to first in the allowed batch size
         var files = filteredFiles.Take(CullingBatchSize).ToList();

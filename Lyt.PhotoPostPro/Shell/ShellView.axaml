@@ -109,7 +109,7 @@
 					<glyphs:GlyphButton
 						x:Name="LibraryButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="folder"
+						GlyphSource="image_multiple"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Folder}"
 						Command="{Binding OnLibrary}"
@@ -136,7 +136,7 @@
 					<glyphs:GlyphButton
 						x:Name="ImportButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="add_circle"
+						GlyphSource="collections"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Import}"
 						Command="{Binding OnImport}"
