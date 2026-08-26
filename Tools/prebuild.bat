@@ -4,6 +4,5 @@ cd
 cd %~p0
 cd 
 Lyt.Translator.Cli.exe PppLanguages.json
-pause 
 cd 
 exit 0

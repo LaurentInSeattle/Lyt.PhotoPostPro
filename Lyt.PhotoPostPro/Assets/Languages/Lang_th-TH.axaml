@@ -7,7 +7,7 @@
 
     <system:String x:Key="Toast.Dismiss">ปิด</system:String>
 
-    <system:String x:Key="Shell.AppName">การประมวลผลภาพถ่ายใหม่ - การทําการพิมพ์ภาพถ่าย</system:String>
+    <system:String x:Key="Shell.AppName">Photo Rebel - การทําการพิมพ์ภาพถ่าย</system:String>
 
     <system:String x:Key="Shell.About">เกี่ยวกับ...</system:String>
 
@@ -481,11 +481,11 @@
 
     <system:String x:Key="Dialog.ConfirmRemove.Title">เอาออกจากไลบรารี?</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Message">นี่เป็นภาพหลักและข้อมูลทั้งหมดที่แนบมาด้วย เช่น ภาพตัวอย่างและปูมบันทึกการแก้ไข &# xD;&# xA;&# xD;&# xA สืบค้นเมื่อ: ไม่สามารถยกเลิกปฏิบัติการนี้ได้.</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Message">นี่เป็นภาพหลักและข้อมูลทั้งหมดที่แนบมาด้วย เช่น ภาพตัวอย่างและปูมบันทึกการแก้ไข  &#xD;&#xA;&#xD;&#xA; สืบค้นเมื่อ: ไม่สามารถยกเลิกปฏิบัติการนี้ได้.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.Title">เริ่มใหม่หรือทําต่อไป?</system:String>
 
-    <system:String x:Key="Dialog.SelectEdit.Message">ภาพนี้ได้ถูกแก้ไขเรียบร้อยแล้ว คุณต้องการจะเริ่มใหม่หรือใช้ค่าที่ตั้งไว้ก่อนหน้านี้? &# xD;&# xA;&# xD;&# xA สืบค้นเมื่อ 'combo-box ด้านล่างนี้'; หากเป็นเช่นนั้น ให้เลือกการตั้งค่าที่ปรับปรุงแล้วใน 'combo-box ด้านล่างนี้แล้วคลิกที่ 'ทําต่อไป'. http: xD; #xAA##xD;&# xAA ถ้าไม่ได้เพียงแค่คลิก 'เริ่มต้น'.</system:String>
+    <system:String x:Key="Dialog.SelectEdit.Message">ภาพนี้ได้ถูกแก้ไขเรียบร้อยแล้ว คุณต้องการจะเริ่มใหม่หรือใช้ค่าที่ตั้งไว้ก่อนหน้านี้? &#xD;&#xA;&#xD;&#xA;สืบค้นเมื่อ 'combo-box ด้านล่างนี้'; หากเป็นเช่นนั้น ให้เลือกการตั้งค่าที่ปรับปรุงแล้วใน 'combo-box ด้านล่างนี้แล้วคลิกที่ 'ทําต่อไป'. &#xD;&#xA;&#xD;&#xA;ถ้าไม่ได้เพียงแค่คลิก 'เริ่มต้น'.</system:String>
 
     <system:String x:Key="Dialog.SelectEdit.ShouldReplay">โดยตรงเพื่อส่งออก: จะทําการแก้ไขใหม่ทั้งหมดโดยอัตโนมัติ</system:String>
 
