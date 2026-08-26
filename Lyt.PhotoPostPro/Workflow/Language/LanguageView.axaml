@@ -37,11 +37,13 @@
 				<RowDefinition Height="54" />
 				<RowDefinition Height="54" />
 				<RowDefinition Height="54" />
+
 				<RowDefinition Height="54" />
 				<RowDefinition Height="54" />
 				<RowDefinition Height="54" />
+				<RowDefinition Height="54" />				
 				<RowDefinition Height="54" />
-				<RowDefinition Height="54" />
+
 				<RowDefinition Height="54" />
 				<RowDefinition Height="54" />
 			</Grid.RowDefinitions>
@@ -109,6 +111,13 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>
 			<TextBlock
+				Grid.Column="0" Grid.Row="10"
+				Margin="20 0 0 0"
+				Text="เลือกภาษาของส่วนติดต่อผู้ใช้"
+				Theme="{StaticResource H2}"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
+			<TextBlock
 				Grid.Column="1" Grid.Row="3"
 				Margin="20 0 0 0"
 				Text="Chọn ngôn ngữ của giao diện người dùng."
@@ -157,6 +166,14 @@
 				Grid.Column="1" Grid.Row="9"
 				Margin="20 0 0 0"
 				Text="Válassza ki a felhasználói felület nyelvét."
+				Theme="{StaticResource H2}"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
+			<!-- PT   -->
+			<TextBlock
+				Grid.Column="1" Grid.Row="10"
+				Margin="20 0 0 0"
+				Text="Selecione o idioma da interface do utilizador."
 				Theme="{StaticResource H2}"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>

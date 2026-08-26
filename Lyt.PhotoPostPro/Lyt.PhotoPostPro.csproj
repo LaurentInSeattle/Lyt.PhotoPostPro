@@ -54,6 +54,8 @@
     <AvaloniaResource Remove="Assets\Languages\Lang_it-IT.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_jp-JP.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_ko-KO.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_pt-PT.axaml" />
+    <AvaloniaResource Remove="Assets\Languages\Lang_th-TH.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_uk-UA.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_vi-VI.axaml" />
     <AvaloniaResource Remove="Assets\Languages\Lang_zh-CN.axaml" />
@@ -61,6 +63,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Languages\Lang_pt-PT.axaml" />
+    <AvaloniaXaml Remove="Assets\Languages\Lang_th-TH.axaml" />
     <AvaloniaXaml Remove="Assets\Languages\Lang_vi-VI.axaml" />
   </ItemGroup>
 
@@ -88,6 +92,8 @@
     <EmbeddedResource Include="Assets\Languages\Lang_uk-UA.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_vi-VI.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_zh-CN.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_pt-PT.axaml" />
+    <EmbeddedResource Include="Assets\Languages\Lang_th-TH.axaml" />
     <EmbeddedResource Include="Assets\Languages\Lang_zh-TW.axaml" />
   </ItemGroup>
 

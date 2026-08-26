@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Add PT and Thai languages 
-
 - Folder Tree for Added not updating correctly on image removed 
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
@@ -10,6 +8,8 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
+- Add PT and Thai languages 
 
 
 Essential Missing Features 

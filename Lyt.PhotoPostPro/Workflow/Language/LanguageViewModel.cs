@@ -2,7 +2,7 @@
 
 public sealed partial class LanguageViewModel : ViewModel<LanguageView>
 {
-    private static readonly List<LanguageInfoViewModel> SupportedLanguages =  // 16 
+    private static readonly List<LanguageInfoViewModel> SupportedLanguages =  // 18 
     [
         // Not supported by Libre 
         // new LanguageInfoViewModel("hy-AM", "Հայերէն", "Armenia.png" , string.Empty ) ,
@@ -26,6 +26,9 @@ public sealed partial class LanguageViewModel : ViewModel<LanguageView>
         new LanguageInfoViewModel("bn-BD", "বাঙ্গালী", "Bangladesh.png" , string.Empty ) ,
         new LanguageInfoViewModel("hu-HU", "Magyar" , "Hungary.png" , string.Empty ) ,
         new LanguageInfoViewModel("vi-VI", "Việt NamName", "Vietnam.png", string.Empty ) ,
+
+        new LanguageInfoViewModel("pt-PT", "Português" , "Portugal.png" , "Brazil.png" ) ,
+        new LanguageInfoViewModel("th-TH", "แบบไทย" , "Thailand.png" , string.Empty ) ,
     ];
 
     private readonly PhotoPostProModel model;

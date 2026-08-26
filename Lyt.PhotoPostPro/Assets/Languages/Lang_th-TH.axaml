@@ -1,0 +1,522 @@
+
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    >
+
+    <system:String x:Key="Toast.Dismiss">ปิด</system:String>
+
+    <system:String x:Key="Shell.AppName">การประมวลผลภาพถ่ายใหม่ - การทําการพิมพ์ภาพถ่าย</system:String>
+
+    <system:String x:Key="Shell.About">เกี่ยวกับ...</system:String>
+
+    <system:String x:Key="Shell.Play">เล่น</system:String>
+
+    <system:String x:Key="Shell.Exit">ออก</system:String>
+
+    <system:String x:Key="Shell.Cancel">ยกเลิก</system:String>
+
+    <system:String x:Key="Shell.Close">ปิด</system:String>
+
+    <system:String x:Key="Shell.Ready">พร้อม.</system:String>
+
+    <system:String x:Key="Shell.Greetings">ยินดีต้อนรับสู่โฟโต้รีเบล!</system:String>
+
+    <system:String x:Key="Shell.Folder">ไลบรารี</system:String>
+
+    <system:String x:Key="Shell.Camera">กล้อง</system:String>
+
+    <system:String x:Key="Shell.Gallery">คลังภาพ</system:String>
+
+    <system:String x:Key="Shell.Import">นําเข้า</system:String>
+
+    <system:String x:Key="Shell.Settings">ตั้งค่า</system:String>
+
+    <system:String x:Key="Shell.Tools">เครื่องมือ</system:String>
+
+    <system:String x:Key="Shell.Language">ภาษา</system:String>
+
+    <system:String x:Key="Imaging.InProgress">อยู่ระหว่างดําเนินการ</system:String>
+
+    <system:String x:Key="Imaging.InProgressHelp">โปรดรอสักครู่...</system:String>
+
+    <system:String x:Key="Imaging.NowProcessing">การประมวลผล:</system:String>
+
+    <system:String x:Key="DragDrop.DropZone">ลากและวางเขตเวลา</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.SlideShow">แสดงภาพนิ่ง</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Wallpaper">พื้นหลัง</system:String>
+
+    <system:String x:Key="Gallery.Toolbar.Navigate">นําเสนอไปยัง...</system:String>
+
+    <system:String x:Key="Workflow.Culling.LoadingHD">กําลังเรียกภาพจากกล้อง.</system:String>
+
+    <system:String x:Key="Workflow.Culling.DecodingHD">ถอดรหัสภาพจําลองระดับสูง...</system:String>
+
+    <system:String x:Key="Workflow.Culling.Ready">พร้อม.</system:String>
+
+    <system:String x:Key="Workflow.Culling.AddStar">เพิ่มดาว</system:String>
+
+    <system:String x:Key="Workflow.Culling.RemoveStar">สาธิต</system:String>
+
+    <system:String x:Key="Workflow.Culling.Reject">ปฏิเสธ</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTop">คงภาพบน:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectTopHint">ลบทั้งเธรด</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottom">คงที่: ภาพล่างสุด</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectBottomHint">& ลบเลเยอร์</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeft">คงภาพ:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectLeftHint">เพิ่มวัตถุ</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRight">คงตําแหน่ง:</system:String>
+
+    <system:String x:Key="Workflow.Culling.SelectRightHint">ปฏิเสธ - เพิ่มดาวไปทางขวา</system:String>
+
+    <system:String x:Key="Folder.DropZoneHelp">ลากและทิ้งโฟลเดอร์ที่เก็บแฟ้มอิมเมจไว้ที่นี่ เพื่อสร้างโครงการใหม่.</system:String>
+
+    <system:String x:Key="Single.DropZoneHelp">ลากและวางแฟ้มภาพไว้ที่นี่เพื่อเริ่ม.</system:String>
+
+    <system:String x:Key="Single.ProcessImage">โพรเซส ภาพนี้</system:String>
+
+    <system:String x:Key="Single.LoadImageFailTitle">การโหลดล้มเหลว</system:String>
+
+    <system:String x:Key="Single.LoadImageFailMessage">ไม่สามารถเรียกใช้อิมเมจนี้ได้.</system:String>
+
+    <system:String x:Key="Metadata.FileCreatedFmt">แฟ้มถูกสร้าง: {0} ที่ {1}</system:String>
+
+    <system:String x:Key="Metadata.FileCapturedFmt">จับภาพ: {0} ที่ {1}</system:String>
+
+    <system:String x:Key="Metadata.Aperture">ความลึก:</system:String>
+
+    <system:String x:Key="Metadata.ISOSpeed">ความเร็ว ISO:</system:String>
+
+    <system:String x:Key="Metadata.Exposure">ความไวแสง:</system:String>
+
+    <system:String x:Key="Metadata.ExposureBias">ความไวแสง:</system:String>
+
+    <system:String x:Key="Metadata.FocalLength">ความยาวโฟกัส:</system:String>
+
+    <system:String x:Key="Metadata.WithFlash">ด้วยแฟลช</system:String>
+
+    <system:String x:Key="Metadata.NoFlash">ไม่ใช้แฟลช</system:String>
+
+    <system:String x:Key="Metadata.Location">ตําแหน่ง</system:String>
+
+    <system:String x:Key="Metadata.Latitude">เส้นรุ้ง:</system:String>
+
+    <system:String x:Key="Metadata.Longitude">เส้นแวง:</system:String>
+
+    <system:String x:Key="Process.Toolbar.FullScreen">เต็มจอ</system:String>
+
+    <system:String x:Key="Process.Toolbar.EscToReturn">เอสเอส เพื่อกลับไป</system:String>
+
+    <system:String x:Key="Workflow.Back">กลับ</system:String>
+
+    <system:String x:Key="Workflow.Reset">ตั้งค่าใหม่</system:String>
+
+    <system:String x:Key="Workflow.Next">ต่อไป</system:String>
+
+    <system:String x:Key="Workflow.Orient.Title">ทิศทางและกระจกเงา</system:String>
+
+    <system:String x:Key="Workflow.Orient.Format">เรียกคืนรูปภาพหรือรูปแบบภูมิทัศน์:</system:String>
+
+    <system:String x:Key="Workflow.Orient.Flip">พลิกภาพตามที่ต้องการ:</system:String>
+
+    <system:String x:Key="Workflow.Orient.RotateMinus">- 90 องศา</system:String>
+
+    <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 องศา</system:String>
+
+    <system:String x:Key="Workflow.Orient.Mirror">กระจก</system:String>
+
+    <system:String x:Key="Workflow.Orient.Reverse">พลิก</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Title">ปรับ ภาพ ให้ ตรง</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Guidelines">แสดงหรือซ่อนคํากํากับการจัดวาง:</system:String>
+
+    <system:String x:Key="Workflow.Straighten.VerticalGuideline">แนวตั้ง</system:String>
+
+    <system:String x:Key="Workflow.Straighten.HorizontalGuideline">ไล่ระดับสีในแนวนอน</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Rotate">หมุนภาพเพื่อปรับค่าการจัดวาง:</system:String>
+
+    <system:String x:Key="Workflow.Straighten.ClearRotate">การหมุนเลขศูนย์</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 องศา</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 องศา</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5 องศา</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5 องศา</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1 องศา</system:String>
+
+    <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1 องศา</system:String>
+
+    <system:String x:Key="Workflow.Compose.Title">การ หา คู่</system:String>
+
+    <system:String x:Key="Workflow.Compose.Croplines">บรรทัดที่ตัดมา:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Clear">ตั้งค่าใหม่</system:String>
+
+    <system:String x:Key="Workflow.Compose.Preview">แสดงตัวอย่าง</system:String>
+
+    <system:String x:Key="Workflow.Compose.Top">ด้านบน:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Bottom">ล่าง:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Left">ด้านซ้าย:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Right">ขวา:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Width">ความกว้าง:</system:String>
+
+    <system:String x:Key="Workflow.Compose.Height">ความสูง:</system:String>
+
+    <system:String x:Key="Workflow.Compose.AspectRatio">สัดส่วนภาพ:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CompositionGuides">เลือกแนวการจัดองค์ประกอบ:</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.None">- ไม่มี -</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Thirds">กฎข้อสาม</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Frame">กรอบ</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Halves">เส้นพริ้วไหว</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Diagonals">เส้นทแยง</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenUp">สามเหลี่ยมทองคําขึ้น</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.GoldenDown">สามเหลี่ยมทองคําลง</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Title">ความไวแสงทั่วไป</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Correction">คุณสามารถแก้ไขใด ๆ หรือทั้งสามวิธีการรวมกันได้: การแก้ไขค่าแกมมา, การเพิ่มหรือเพิ่มความสว่าง.</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Clear">ตั้งค่าใหม่</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gamma">ค่าแกมม่า:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Gain">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Shift">เลื่อนบิต:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Title">จุด เด่น และ เงา</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Correction">อัลกอริธึมลูมินซ์แบบไม่เชิงเส้น เพื่อเปิดเผยและกู้รายละเอียดจากภาพ.</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Clear">ตั้งค่าใหม่</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Highlights">จุด เด่น:</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Shadows">เงา:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Title">แก้ไขการเปิดรับแสง เลือก</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Correction">ใช้การปรับแก้ค่าแสงในส่วนภาพที่เลือกไว้.</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Sides">ด้าน:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Top">ด้านบน:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Bottom">ล่าง:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Left">ด้านซ้าย:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Right">ขวา</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Style">การแก้ความเข้มหรือแสง:</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Strength">ความเข้มสี:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Title">สมดุลสีขาว</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Correction">ปรับอุณหภูมิสีให้ถูกต้องโดยอัตโนมัติ หรือปรับค่าเอง.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">ใช้เอง - เมทริกซ์สีพื้นฐาน (ด่วน)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">ข้อควรจํา:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">อุณหภูมิสีเอง</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">ที เคลวิน:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">อัตโนมัติ - 'Gray World' Algorith</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">ความอิ่มสี:</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">หมายเหตุ: อัลกอริทึม 'Gray World' ใช้ได้ผลเฉพาะกับภาพที่มีสีสันหลากหลาย.</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.WhitePatch">กึ่งอัตโนมัติ - 'ขาว' อัลกอริต</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">ประมวลผลสีขาว</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">คลิกบนพื้นที่สว่าง ๆ บนภาพต้นฉบับ ที่ควรจะขาวหรือไม่มีสี จากนั้นเรียกใช้อัลกอริทึม.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Title">ปรับความเปรียบต่าง</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Correction">ปรับความเปรียบต่างทั่วโลกให้ถูกต้อง หรือใช้ S- Curves ในแต่ละช่อง RGB.</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Global">ตั้งค่าทั่วไป</system:String>
+
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">ความเปรียบต่าง:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BlurAmount">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">ความสว่าง:</system:String>
+
+    <system:String x:Key="Workflow.Contrast.SCurves">แฟ้ม S</system:String>
+
+    <system:String x:Key="Workflow.Lut.Title">ผังตารางการค้นหา</system:String>
+
+    <system:String x:Key="Workflow.Lut.Correction">ใช้ตารางการค้นหาเพื่อปรับค่าสีและเพิ่ม 'vibe' พิเศษบางอย่างไปยังภาพ.</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseLut">เลือกตารางการค้นหาที่กําหนด:</system:String>
+
+    <system:String x:Key="Workflow.Lut.None">- ไม่มี -</system:String>
+
+    <system:String x:Key="Workflow.Lut.DropLut">หรือใช้แฟ้ม .cuble หรือ 3DL</system:String>
+
+    <system:String x:Key="Workflow.Lut.DragDropHelp">ลากและวางที่นี่แฟ้ม .cub หรือ 3dl!</system:String>
+
+    <system:String x:Key="Workflow.Lut.LaunchExplorer">เรียกใช้ 'LUT Explect'</system:String>
+
+    <system:String x:Key="Workflow.Lut.Original">ดั้งเดิม</system:String>
+
+    <system:String x:Key="Workflow.Lut.UseThisLut">ใช้ LUT นี้</system:String>
+
+    <system:String x:Key="Workflow.Lut.NoLut">ไม่สนใจ ไม่มี LUT</system:String>
+
+    <system:String x:Key="Workflow.Color.Title">พิมพ์สีเอง</system:String>
+
+    <system:String x:Key="Workflow.Color.Correction">ลดความเข้มสีทั่วโลก หรือใช้ vbrance ในแต่ละช่องแบบ RGB.</system:String>
+
+    <system:String x:Key="Workflow.Color.Global">ตั้งค่าทั่วไป</system:String>
+
+    <system:String x:Key="Workflow.Color.SaturationAmount">ความอิ่มสี:</system:String>
+
+    <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+
+    <system:String x:Key="Workflow.Color.Red">สีแดง:</system:String>
+
+    <system:String x:Key="Workflow.Color.Green">สีเขียว:</system:String>
+
+    <system:String x:Key="Workflow.Color.Blue">สีน้ําเงิน:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Title">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Correction">เพิ่มความเปรียบต่างภายในเครื่อง ตามขอบของวัตถุในภาพ.</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Global">ตั้งค่าทั่วไป</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">ซิกมา:</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Note">ข้อ ควร จํา: การ ทํา มาก เกิน ไป อาจ ก่อ ผล เสีย หาย ได้. มันสามารถทําให้เห็น "ฮาโลส" ตามขอบ และขยายเสียงดิจิตอล.</system:String>
+
+    <system:String x:Key="Workflow.Filters.Title">ตัวกรองพิเศษ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Correction">ปรับใช้ลูกเล่นพิเศษกับภาพ.</system:String>
+
+    <system:String x:Key="Workflow.Filters.ExplainAmount">สําหรับสีเทาหรือ Sepia:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Amount">จํานวนครั้งที่:</system:String>
+
+    <system:String x:Key="Workflow.Filters.None">- ไม่มี -</system:String>
+
+    <system:String x:Key="Workflow.Filters.Grayscale">ไล่ระดับสีเทา</system:String>
+
+    <system:String x:Key="Workflow.Filters.Sepia">ภาษาเซเปียName</system:String>
+
+    <system:String x:Key="Workflow.Filters.Vignette">& ขาว</system:String>
+
+    <system:String x:Key="Workflow.Filters.BlackWhite">ขาวดํา</system:String>
+
+    <system:String x:Key="Workflow.Filters.Kodachrome">สีโคดะ</system:String>
+
+    <system:String x:Key="Workflow.Filters.Polaroid">โพลารอยด์</system:String>
+
+    <system:String x:Key="Workflow.Filters.Lomograph">ค้นหา</system:String>
+
+    <system:String x:Key="Workflow.Export.Title">ส่งออก</system:String>
+
+    <system:String x:Key="Workflow.Export.Correction">ตั้งค่าโพรเซสส่งออกในมุมมองหลัก.</system:String>
+
+    <system:String x:Key="Workflow.Export.RateAgain">การแก้ไขที่ดี? คุณสามารถปรับระดับความชื่นชอบของภาพได้:</system:String>
+
+    <system:String x:Key="Workflow.Export.Export">ส่งออกรูปภาพ</system:String>
+
+    <system:String x:Key="Workflow.Export.Navigate">เปิด/ ปิด การส่งออกโฟลเดอร์</system:String>
+
+    <system:String x:Key="Workflow.Export.Finish">เสร็จแล้ว, กลับไปที่ไลบรารี</system:String>
+
+    <system:String x:Key="Workflow.Camera.BeginTransfer">เริ่มการส่งถ่ายข้อมูล</system:String>
+
+    <system:String x:Key="Workflow.Camera.CancelTransfer">ยกเลิกการถ่ายโอน</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferAborted">การส่งถ่ายข้อมูลถูกยกเลิก</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoDevice">ไม่พบกล้องหรืออุปกรณ์...</system:String>
+
+    <system:String x:Key="Workflow.Camera.Detected">ตรวจพบอุปกรณ์หรือกล้อง.</system:String>
+
+    <system:String x:Key="Workflow.Camera.Connected">เชื่อมต่อแล้ว</system:String>
+
+    <system:String x:Key="Workflow.Camera.NotResponding">ไม่ตอบสนอง.</system:String>
+
+    <system:String x:Key="Workflow.Camera.NoFiles">ไม่มีแฟ้มที่อยู่บนอุปกรณ์.</system:String>
+
+    <system:String x:Key="Workflow.Camera.FilesReady">แฟ้มพร้อมที่จะโอน.</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferedTo">ถ่ายโอนไปยัง:</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferError">การส่งล้มเหลว!</system:String>
+
+    <system:String x:Key="Workflow.Camera.TransferComplete">การส่งถ่ายข้อมูลเสร็จสมบูรณ์: {0} การถ่ายโอนภาพ, แฟ้มหรือข้อผิดพลาดอื่น ๆ: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">การลบภาพทั้งหมด: {0} ภาพถูกลบแล้ว, มีข้อผิดพลาด: {1}</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteAborted">ลบออก!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteError">ลบข้อผิดพลาด!</system:String>
+
+    <system:String x:Key="Workflow.Camera.DeleteFromCamera">ลบออกจากกล้องแล้ว</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.Show">แสดง:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">เก่าที่สุดก่อน</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">อยู่เหนือ% 1 ตัวปัจจุบัน</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">เช็คทั้งหมด:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">ล้างทั้งหมด:</system:String>
+
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">เปิด/ ปิด ทั้งหมด:</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.SaveDesktop">บันทึกไปยังพื้นที่ทํางาน</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.RemoveCamera">เอาออกจากกล้อง</system:String>
+
+    <system:String x:Key="Workflow.Camera.File.AddLibrary">เพิ่มไปยังไลบรารี</system:String>
+
+    <system:String x:Key="Workflow.Camera.PhotosImages">ภาพถ่าย - รูปภาพ</system:String>
+
+    <system:String x:Key="Workflow.Camera.MoviesOthers">ภาพยนตร์ - อื่น ๆ</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.Show">แสดง:</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowAll">แสดงทั้งหมด</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">ด้วยดวงดาว</system:String>
+
+    <system:String x:Key="Workflow.Library.Thumbnail.File">แฟ้ม:</system:String>
+
+    <system:String x:Key="Library.RateAndCull">การประเมินและแก้ไขการตั้งค่านี้</system:String>
+
+    <system:String x:Key="Library.RateAndCullNothing">ไม่ มี อะไร จะ สะกด ได้ ทุก ภาพ มี ดาว หนึ่ง ดวง หรือ มาก กว่า นั้น</system:String>
+
+    <system:String x:Key="Library.ProcessImage">โพรเซส ภาพนี้</system:String>
+
+    <system:String x:Key="Library.RemoveImage">ลบออกจากไลบรารี</system:String>
+
+    <system:String x:Key="Library.Navigate">นํามายังโฟลเดอร์ของไลบรารี</system:String>
+
+    <system:String x:Key="Library.StartOver">เริ่มทํางานใหม่</system:String>
+
+    <system:String x:Key="Library.ContinueEdit">แก้ไขต่อไป</system:String>
+
+    <system:String x:Key="Library.Option.Captured">จับภาพแล้ว</system:String>
+
+    <system:String x:Key="Library.Option.Added">เพิ่ม</system:String>
+
+    <system:String x:Key="Library.Option.Edited">แก้ไขแล้ว</system:String>
+
+    <system:String x:Key="Library.Month.January">มกราคม</system:String>
+
+    <system:String x:Key="Library.Month.February">กุมภาพันธ์</system:String>
+
+    <system:String x:Key="Library.Month.March">มีนาคม</system:String>
+
+    <system:String x:Key="Library.Month.April">เมษายน</system:String>
+
+    <system:String x:Key="Library.Month.May">พฤษภาคม</system:String>
+
+    <system:String x:Key="Library.Month.June">มิถุนายน</system:String>
+
+    <system:String x:Key="Library.Month.July">กรกฎาคม</system:String>
+
+    <system:String x:Key="Library.Month.August">สิงหาคม</system:String>
+
+    <system:String x:Key="Library.Month.September">กันยายน</system:String>
+
+    <system:String x:Key="Library.Month.October">ตุลาคม</system:String>
+
+    <system:String x:Key="Library.Month.November">พฤศจิกายน</system:String>
+
+    <system:String x:Key="Library.Month.December">ธันวาคม</system:String>
+
+    <system:String x:Key="Library.Day.Sunday">อาทิตย์</system:String>
+
+    <system:String x:Key="Library.Day.Monday">จันทร์</system:String>
+
+    <system:String x:Key="Library.Day.Tuesday">อังคาร</system:String>
+
+    <system:String x:Key="Library.Day.Wednesday">วันพุธ</system:String>
+
+    <system:String x:Key="Library.Day.Thursday">พฤหัสบดี</system:String>
+
+    <system:String x:Key="Library.Day.Friday">ศุกร์</system:String>
+
+    <system:String x:Key="Library.Day.Saturday">เสาร์</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Title">เอาออกจากไลบรารี?</system:String>
+
+    <system:String x:Key="Dialog.ConfirmRemove.Message">นี่เป็นภาพหลักและข้อมูลทั้งหมดที่แนบมาด้วย เช่น ภาพตัวอย่างและปูมบันทึกการแก้ไข &# xD;&# xA;&# xD;&# xA สืบค้นเมื่อ: ไม่สามารถยกเลิกปฏิบัติการนี้ได้.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Title">เริ่มใหม่หรือทําต่อไป?</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.Message">ภาพนี้ได้ถูกแก้ไขเรียบร้อยแล้ว คุณต้องการจะเริ่มใหม่หรือใช้ค่าที่ตั้งไว้ก่อนหน้านี้? &# xD;&# xA;&# xD;&# xA สืบค้นเมื่อ 'combo-box ด้านล่างนี้'; หากเป็นเช่นนั้น ให้เลือกการตั้งค่าที่ปรับปรุงแล้วใน 'combo-box ด้านล่างนี้แล้วคลิกที่ 'ทําต่อไป'. http: xD; #xAA##xD;&# xAA ถ้าไม่ได้เพียงแค่คลิก 'เริ่มต้น'.</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.ShouldReplay">โดยตรงเพื่อส่งออก: จะทําการแก้ไขใหม่ทั้งหมดโดยอัตโนมัติ</system:String>
+
+    <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">ปรับปรุงล่าสุด: {0} ที่: {1}</system:String>
+
+    <system:String x:Key="Intro.AgreeMIT">ผมยอมรับข้อตกลงในใบอนุญาตของ MIT ต่อ.</system:String>
+
+    <system:String x:Key="Intro.LicenseTitle">สัญญาอนุญาตสิทธิ์</system:String>
+
+    <system:String x:Key="Intro.LicenseSubtitle">โปรแกรมนี้ให้คุณภายใต้สัญญาอนุญาตสิทธิ์ของ MIT.</system:String>
+
+    <system:String x:Key="Intro.LicenseTerms">แอพพลิเคชันนี้ได้ถูกจัดเตรียมไว้ให้คุณ ภายใต้เงื่อนไขในสัญญาอนุญาตของ MIT และร่วมกับเงื่อนไขอื่น ๆ แสดงให้เห็นว่า ไม่มีการรับประกันชนิดใด โดยการใช้ซอฟต์แวร์นี้ คุณตกลงอย่างเต็มที่กับเงื่อนไขและเงื่อนไขของใบอนุญาตของ MIT.</system:String>
+
+    <system:String x:Key="Intro.ReminderTitle">เตือนความจําสําคัญ</system:String>
+
+    <system:String x:Key="Intro.ReminderSubtitle">จุด สําคัญ บาง จุด ที่ พึง จด จํา เกี่ยว กับ การ ดาวน์โหลด ภาพ...</system:String>
+
+    <system:String x:Key="Intro.ReminderText">ขอแนะนําให้ใช้ภาพที่ถูกดาวน์โหลดมาเป็นวอลเปเปอร์เท่านั้น สําหรับการใช้งานอื่น ๆ โฆษณาหรืออื่น ๆ โปรดติดต่อผู้ถือลิขสิทธิ์.</system:String>
+
+    <system:String x:Key="Language.Continue">ทําต่อไป</system:String>
+
+    <system:String x:Key="Settings.CleanupNow">ล้างภาพเดี๋ยวนี้</system:String>
+
+    <system:String x:Key="Settings.ReminderTitle">เตือนความจําสําคัญ</system:String>
+
+    <system:String x:Key="Settings.ReminderSubtitle">จุดสําคัญที่จะนึกถึงการดาวน์โหลดภาพ...</system:String>
+
+    <system:String x:Key="Settings.ReminderText">ขอแนะนําให้ใช้ภาพที่ถูกดาวน์โหลดมาเป็นภาพปริศนาเท่านั้น สําหรับการใช้งานอื่น ๆ โฆษณาหรืออื่น ๆ โปรดติดต่อผู้ถือลิขสิทธิ์.</system:String>
+
+    <system:String x:Key="Shared.FileErrorTitle">ระบบแฟ้มผิดพลาด.</system:String>
+
+    <system:String x:Key="Shared.FileErrorText">ไม่สามารถบันทึกแฟ้มอิมเมจได้.</system:String>
+
+</ResourceDictionary>

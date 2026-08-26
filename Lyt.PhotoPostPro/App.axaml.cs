@@ -191,6 +191,9 @@ public partial class App : ApplicationBase
                     "uk-UA", "bg-BG", "el-GR", "de-DE",
                     "jp-JP", "ko-KO", "zh-CN", "zh-TW",
                     "hi-IN", "bn-BD", "hu-HU", "vi-VI",
+
+                    // New 
+                    "pt-PT", "th-TH"
                 ],
                 // Use default for all other config parameters of the Localizer 
             });
@@ -219,4 +222,3 @@ public partial class App : ApplicationBase
     // Why does it need to be there ??? 
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 }
-
