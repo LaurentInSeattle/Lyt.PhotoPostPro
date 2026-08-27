@@ -1,0 +1,78 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Import.File.FileImportView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Import.File"
+	x:DataType="vm:FileImportViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+
+	Background="Transparent"
+	>
+	<Grid	
+		x:Name="ToasterHost"
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="480"/>
+			<ColumnDefinition Width="8" />
+		</Grid.ColumnDefinitions>
+		<images:ZoomableImage
+			x:Name="ZoomableImage"
+			Grid.Column="1" Grid.Row="1"
+			Image="{Binding SourceImage}"
+			ZoomWithMouseWheelBehaviour="ZoomNative"
+			AutoZoomToFit="True"
+			ConstrainZoomOutToFitLevel="True"
+			SelectionMode="None"
+			/>
+		<StackPanel
+			Grid.Row="1" Grid.Column="3"
+			>
+			<shared:DropView
+				DataContext="{Binding DropViewModel}"
+				Width="472" 
+				HorizontalAlignment="Center"
+				/>
+			<shared:SpinView
+				Width="472" 
+				HorizontalAlignment="Center"
+				DataContext="{Binding SpinViewModel}"
+				/>
+			<glyphs:GlyphButton
+				x:Name="ProcessButton"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="472" Height="56"
+				Margin="0 12 0 12"
+				GlyphSource="wand"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Single.ProcessImage}"
+				IsDisabled="{Binding ProcessIsDisabled}"
+				Command="{Binding OnProcess}"
+	    		/>
+			<meta:MetadataView
+				DataContext="{Binding MetadataViewModel}"
+				IsVisible="{Binding !IsDisabled, ElementName=ProcessButton}"
+				Width="472" 
+				HorizontalAlignment="Center"
+				/>
+		</StackPanel>
+	</Grid>
+</UserControl>

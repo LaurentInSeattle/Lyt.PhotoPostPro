@@ -74,6 +74,9 @@ public partial class App : ApplicationBase
 
                 // Views and ViewModels from the main view selector            
                 _ = services.AddSingleton<ImportViewModel>();
+                _ = services.AddSingleton<FileImportViewModel>();
+                _ = services.AddSingleton<FolderImportViewModel>();
+
                 _ = services.AddSingleton<CameraViewModel>();
                 _ = services.AddSingleton<LibraryViewModel>();
                 _ = services.AddSingleton<GalleryViewModel>();

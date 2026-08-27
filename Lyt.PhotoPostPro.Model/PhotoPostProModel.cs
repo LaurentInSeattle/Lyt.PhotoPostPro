@@ -4,7 +4,7 @@ using static Lyt.Persistence.FileManagerModel;
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
-    public const string RootPathDefault = "Default"; 
+    public const string RootPathDefault = "Default";
     public const string DefaultLanguage = "en-US";
     public const string PhotoPostProAppName = "PhotoRebel";
     public const string PhotoPostProFilename = "PhotoRebelData";
@@ -14,7 +14,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             RootPath = "Default",
             Language = DefaultLanguage,
-            FileUid = 0, 
+            FileUid = 0,
             IsFirstRun = true,
             Signatures = new Signatures(),
             Watermarks = new Watermarks(),
@@ -25,12 +25,13 @@ public sealed partial class PhotoPostProModel : ModelBase
     private readonly FileManagerModel fileManager;
     private readonly ILocalizer localizer;
     private readonly IProfiler profiler;
-    private readonly IDispatch dispatcher; 
+    private readonly IDispatch dispatcher;
     private readonly FileId modelFileId;
     private readonly TimeoutTimer timeoutTimer;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
     public PhotoPostProModel() : base(null)
     {
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
@@ -38,8 +39,6 @@ public sealed partial class PhotoPostProModel : ModelBase
         // Empty CTOR required for deserialization 
         this.ShouldAutoSave = false;
     }
-#pragma warning restore CS8625 
-#pragma warning restore CS8618
 
     public PhotoPostProModel(
         FileManagerModel fileManager,
@@ -52,20 +51,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.localizer = localizer;
         this.profiler = profiler;
         this.dispatcher = dispatcher;
-
-        if ( this.RootPath.Equals(RootPathDefault, StringComparison.InvariantCultureIgnoreCase))
-        {
-            this.RootPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        }
-
-        this.CameraManager = new CameraManager(this, logger);
-        this.LutsManager = new LutsManager(this, logger);
-        this.LibraryManager = new (this, fileManager, dispatcher, logger); 
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
         this.timeoutTimer = new TimeoutTimer(this.OnModelUpdate, timeoutMilliseconds: 250);
-        this.ShouldAutoSave = true;
-        this.LibraryManager.Initialize();
     }
+
+#pragma warning restore CS8625 
+#pragma warning restore CS8618
 
     [JsonIgnore]
     public IProfiler Profiler => this.profiler;
@@ -74,8 +65,17 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         this.IsInitializing = true;
         await this.Load();
-        this.IsInitializing = false;
-        this.IsDirty = false;
+
+        if (this.RootPath.Equals(RootPathDefault, StringComparison.InvariantCultureIgnoreCase))
+        {
+            this.RootPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        }
+
+        this.CameraManager = new CameraManager(this, base.Logger);
+        this.LutsManager = new LutsManager(this, base.Logger);
+        this.LibraryManager = new(this, fileManager, dispatcher, base.Logger);
+        this.ShouldAutoSave = true;
+        this.LibraryManager.Initialize();
 
         // Get the version of LibRaw
         string libRawVersion = string.Concat(" LibRaw Version: ", ImageLoader.LibRawVersion);
@@ -86,11 +86,15 @@ public sealed partial class PhotoPostProModel : ModelBase
         // ! Has a version
         string imageSharpVersion =
             string.Concat(
-                " ImageSharp Version: ",
-                typeof(Image).GetTypeInfo().Assembly.GetName().Version!.ToString());
+                " ImageSharp Version: ", typeof(Image).GetTypeInfo().Assembly.GetName().Version!.ToString());
         Debug.WriteLine(imageSharpVersion);
         this.Logger.Info(imageSharpVersion);
-    } 
+
+        this.IsDirty = false;
+
+        new ModelLoadedMessage().Publish();
+        this.IsInitializing = false;
+    }
 
     // Force a save on shutdown 
     public override async Task Shutdown() => await this.Save();
@@ -99,7 +103,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         try
         {
-            var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel; 
+            var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel;
             if (!this.fileManager.Exists(this.modelFileId))
             {
                 this.fileManager.Save(this.modelFileId, PhotoPostProModel.DefaultData, jsonTypeInfo);
@@ -110,7 +114,6 @@ public sealed partial class PhotoPostProModel : ModelBase
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
             this.SelectLanguage(this.Language);
-            new ModelLoadedMessage().Publish();
             return Task.CompletedTask;
         }
         catch (Exception ex)
@@ -167,9 +170,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         // Select default language 
         string preferredLanguage = this.Language;
         this.Logger.Debug("Language: " + preferredLanguage);
-        this.SelectLanguage ( preferredLanguage);
-        Thread.CurrentThread.CurrentCulture = new CultureInfo(preferredLanguage);
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo(preferredLanguage);
+        this.SelectLanguage(preferredLanguage);
 
         this.Logger.Debug("OnViewLoaded language loaded");
     }
@@ -177,7 +178,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void SelectLanguage(string languageKey)
     {
         this.Language = languageKey;
-        this.localizer.SelectLanguage(languageKey);
+        this.localizer.SelectLanguage(this.Language);
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(this.Language);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(this.Language);
     }
 
     public void ClearFirstRun()
@@ -193,9 +196,9 @@ public sealed partial class PhotoPostProModel : ModelBase
             return;
         }
 
-        if ( this.IsSourceImageUpdatePending && this.LastSourceFrame is not null)
+        if (this.IsSourceImageUpdatePending && this.LastSourceFrame is not null)
         {
-            this.IsSourceImageUpdatePending = false; 
+            this.IsSourceImageUpdatePending = false;
             new SourceImageGeneratedMessage(this.LastSourceFrame).Publish();
         }
 
