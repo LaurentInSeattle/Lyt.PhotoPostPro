@@ -55,6 +55,8 @@ Code Quality Issues
 
 - Setup logging for trace to disk 
 
+- Speed up LUT code using Value (struct) for colours instead of classes.
+
 
 
 Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp) 
@@ -84,8 +86,8 @@ Bugs - No Repro
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
 
-VNext - Cool Stuff to Consider 
-------------------------------
+V.Next - Cool Stuff to Consider 
+-------------------------------
 
 - Touch up / Blemish (after geometry) 
 

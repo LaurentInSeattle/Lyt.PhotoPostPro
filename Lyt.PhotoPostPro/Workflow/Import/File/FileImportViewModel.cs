@@ -5,7 +5,7 @@
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDropPathHandler
+public sealed partial class FileImportViewModel : ViewModel<FileImportView>
 {
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
@@ -13,10 +13,10 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
     private LoadedImage? loadedImage;
 
     [ObservableProperty]
-    public partial WriteableBitmap? SourceImage { get; set; }
+    public partial bool IsFileMode { get; set; } = true;
 
     [ObservableProperty]
-    public partial DropViewModel DropViewModel { get; set; }
+    public partial WriteableBitmap? SourceImage { get; set; }
 
     [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
@@ -32,17 +32,23 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
         this.model = model;
         this.toaster = toaster;
         this.MetadataViewModel = new();
+        this.IsFileMode = false;
         this.SpinViewModel = new SpinViewModel()
         {
             IsVisible = false,
             IsActive = false,
         };
-
-        this.DropViewModel = new DropViewModel(this, "Single.DropZoneHelp") { IsVisible = true };
     }
 
-#pragma warning disable CA1822 // Mark members as static
-    // RelayCommand's cannot be static 
+    public void OnSingleFileDrop(string path)
+    {
+        // Clear the previous image, if any, to avoid a blink 
+        this.SourceImage = null;
+
+        // Always launch a spinner for big or small files 
+        this.SpinWait(start: true);
+        Task.Run(() => { this.TryLoadImage(path); });
+    }
 
     [RelayCommand]
     public void OnProcess()
@@ -53,23 +59,36 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
             mainWindow.WindowState = WindowState.Maximized;
         }
 
-        var viewModel = App.GetRequiredService<FileImportViewModel>();
-        viewModel.ProcessCurrentImage();
+        this.ProcessCurrentImage();
     }
 
-#pragma warning restore CA1822
-    public void OnDropPath(string path, bool isDirectory)
+    [RelayCommand]
+    public void OnAdd()
     {
-        if (isDirectory)
+        this.AddImageToLibrary();
+
+        // Go back to import drop screen 
+        var importVm = App.GetRequiredService<ImportViewModel>();
+        importVm.SetInitialState(); 
+    } 
+    private void AddImageToLibrary ()
+    {
+        if (this.loadedImage is null)
         {
-            this.Logger.Warning("Dropped path is a directory, expected a file.");
+            this.Logger.Warning("No image to process.");
             return;
+        }
+
+        var libraryManager = this.model.LibraryManager;
+        libraryManager.AddDroppedFile(this.loadedImage);
+        if (this.loadedImage.Metadata is Metadata metadata)
+        {
+            libraryManager.UpdateEditedFile(metadata);
         }
         else
         {
-            // Always launch a spinner for big or small files 
-            SpinWait(start: true);
-            Task.Run(() => { this.TryLoadImage(path); });
+            this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
+            // No need to show error message to user
         }
     }
 
@@ -79,7 +98,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
         try
         {
             this.loadedImage = ImageLoader.LoadImage(path);
-            loadedImage.CreateThumbnail();
+            this.loadedImage.CreateThumbnail();
             if (loadedImage.IsSuccess && loadedImage.IsFullyLoadedWithThumbnail)
             {
                 // ! Verified by loadedImage.IsFullyLoaded
@@ -139,14 +158,13 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
     {
         this.SourceImage = frame.ToWriteableBitmap();
         frame.Dispose();
-        Dispatch.OnUiThread(this.View.ZoomableImage.ZoomToFit );
+        Dispatch.OnUiThread(this.View.ZoomableImage.ZoomToFit);
     }
 
     private void SpinWait(bool start = true)
     {
         this.SpinViewModel.IsVisible = start;
         this.SpinViewModel.IsActive = start;
-        this.DropViewModel.IsVisible = !start;
         this.ProcessIsDisabled = start;
     }
 
@@ -158,17 +176,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>, IDr
             return;
         }
 
-        var libraryManager = this.model.LibraryManager; 
-        libraryManager.AddDroppedFile(this.loadedImage);
-        if (this.loadedImage.Metadata is Metadata metadata)
-        {
-            libraryManager.UpdateEditedFile(metadata);
-        }
-        else
-        {
-            this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
-            // No need to show error message to user
-        }
+        this.AddImageToLibrary();
 
         this.model.ProcessLoadedImage(this.loadedImage);
         var workflow = this.model.CurrentWorkflow;

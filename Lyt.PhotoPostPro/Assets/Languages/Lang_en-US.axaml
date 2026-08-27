@@ -89,6 +89,7 @@
 
 	<!-- Import -->
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image file here to begin.</system:String>
+	<system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
