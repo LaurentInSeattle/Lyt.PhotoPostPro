@@ -1,20 +1,18 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
-using Lyt.Framework.Interfaces.Dispatching;
-
-using System.Globalization;
-
 using static Lyt.Persistence.FileManagerModel;
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
+    public const string RootPathDefault = "Default"; 
     public const string DefaultLanguage = "en-US";
-    public const string PhotoPostProAppName = "PhotoPostPro";
-    public const string PhotoPostProFilename = "PhotoPostProData";
+    public const string PhotoPostProAppName = "PhotoRebel";
+    public const string PhotoPostProFilename = "PhotoRebelData";
 
     private static readonly PhotoPostProModel DefaultData =
         new()
         {
+            RootPath = "Default",
             Language = DefaultLanguage,
             FileUid = 0, 
             IsFirstRun = true,
@@ -55,13 +53,21 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.profiler = profiler;
         this.dispatcher = dispatcher;
 
-        this.CameraManager = new CameraManager(logger);
-        this.LibraryManager.Initialize(this, fileManager, dispatcher); 
+        if ( this.RootPath.Equals(RootPathDefault, StringComparison.InvariantCultureIgnoreCase))
+        {
+            this.RootPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        }
+
+        this.CameraManager = new CameraManager(this, logger);
+        this.LutsManager = new LutsManager(this, logger);
+        this.LibraryManager = new (this, fileManager, dispatcher, logger); 
         this.modelFileId = new FileId(Area.User, Kind.Json, PhotoPostProModel.PhotoPostProFilename);
         this.timeoutTimer = new TimeoutTimer(this.OnModelUpdate, timeoutMilliseconds: 250);
         this.ShouldAutoSave = true;
+        this.LibraryManager.Initialize();
     }
 
+    [JsonIgnore]
     public IProfiler Profiler => this.profiler;
 
     public override async Task Initialize()

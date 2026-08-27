@@ -12,14 +12,18 @@ public sealed class LutsManager
     private const string CubeExtension = ".cube";
     private const string ThreeDLExtension = ".3dl";
 
+    private readonly PhotoPostProModel model;
+    private readonly ILogger logger;
     private readonly string lutsFolderPath;
     private readonly LruDictionary<string, Lut> loadedLuts = new(16);
 
-    public LutsManager()
+    public LutsManager(PhotoPostProModel model, ILogger logger)
     {
-        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        this.model = model;
+        this.logger = logger;
+
         this.lutsFolderPath =
-            Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
+            Path.Combine(this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
         if (!Directory.Exists(this.lutsFolderPath))
         {
             Directory.CreateDirectory(this.lutsFolderPath);

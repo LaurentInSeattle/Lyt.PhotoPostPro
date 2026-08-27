@@ -10,18 +10,21 @@ public class CameraManager
     public const int FastCameraMonitoringTime_ms = 3_500;
     public const int SlowCameraMonitoringTime_ms = 5_000;
 
+    private readonly PhotoPostProModel model;
+    private readonly ILogger logger;
     private readonly string downloadFolderPath;
 
-    private ILogger logger;
     private IMtpService? mtpService;
     private CancellationTokenSource? ctsMonitoring;
     private CancellationTokenSource? ctsDownloading;
 
-    public CameraManager(ILogger logger)
+    public CameraManager(PhotoPostProModel model,  ILogger logger)
     {
+        this.model = model;
         this.logger = logger;
-        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        this.downloadFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
+
+        this.downloadFolderPath = 
+            Path.Combine(this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
         this.ClearDownloadFolder();
     }
 

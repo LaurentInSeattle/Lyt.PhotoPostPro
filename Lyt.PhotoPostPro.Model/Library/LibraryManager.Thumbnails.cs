@@ -4,8 +4,6 @@ using System.IO ;
 
 public sealed partial class LibraryManager
 {
-    private object lockObjectFiles = new(); 
-
     public static void StaticLoadThumbnails(object? data)
     {
         if (data is not LibraryManager libraryManager)
@@ -38,8 +36,7 @@ public sealed partial class LibraryManager
             return;
         }
 
-        // ! We MUST have a model 
-        var profiler = this.model!.Profiler;
+        var profiler = this.model.Profiler;
         profiler.StartTiming();
 
         List<string> paths = new(1024);

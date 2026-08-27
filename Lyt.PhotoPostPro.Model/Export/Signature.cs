@@ -16,7 +16,7 @@ public sealed class Signature
 
     public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Italic;
 
-    public string Text { get; set; } = "Edited with Lyt.PhotoPostPro";
+    public string Text { get; set; } = "Edited with Photo Rebel";
 
     public SignatureLocation Location { get; set; } = SignatureLocation.BottomRight;
 

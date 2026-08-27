@@ -1,7 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Library;
 
 using System.IO;
-using System.Text.Json.Serialization.Metadata;
 
 public sealed partial class LibraryManager
 {
@@ -60,11 +59,6 @@ public sealed partial class LibraryManager
     public string SaveEditParameters(ProcessWorkflow workflow)
     {
         // As of today, we can handle only one edit 
-        if (this.fileManager is null || this.model is null)
-        {
-            throw new Exception("Library Manager is not initialized.");
-        }
-
         try
         {
             // Create target folder if needed 
@@ -106,11 +100,6 @@ public sealed partial class LibraryManager
 
     public List<ExistingPostProcessParameters> EnumerateExistingEditParameters(Metadata metadata)
     {
-        if (this.fileManager is null || this.model is null)
-        {
-            throw new Exception("Library Manager is not initialized.");
-        }
-
         List<ExistingPostProcessParameters> list = [];
         string? targetFolder = Path.GetDirectoryName(metadata.FullPath);
         if (targetFolder is null)
@@ -157,11 +146,6 @@ public sealed partial class LibraryManager
 
     public void SaveMetadata(Metadata metadata)
     {
-        if (this.fileManager is null || this.model is null)
-        {
-            throw new Exception("Library Manager is not initialized.");
-        }
-
         try
         {
             // Update the cache 

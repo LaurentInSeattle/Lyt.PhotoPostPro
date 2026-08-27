@@ -1,21 +1,20 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Folder Tree for Added not updating correctly on image removed 
-
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+- Folder Tree for Added not updating correctly on image removed 
+
+- Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 
 WIP
 ---
 
-- Add PT and Thai languages 
+- Bulk Import of photos into library 
 
 
 Essential Missing Features 
 --------------------------
-
-- Bulk Import of photos into library 
 
 - Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
 
@@ -26,8 +25,6 @@ Essential Missing Features
 - UI to define watermarks
 
 - First Run View : Setup root locations 
-
-- Parametrize Root Location of Library and Root Location of Exports 
 
 - App settings 
 

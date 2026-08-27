@@ -35,9 +35,9 @@
             HorizontalAlignment="Left" VerticalAlignment="Top"
             />
         <TextBlock
-            Text="Photo Post Processing"
+            Text="Photo Rebel"
             Margin="0"
-            FontSize="74"
+            FontSize="78"
             FontWeight="DemiBold"
             Foreground="#FFa8efff"
             HorizontalAlignment="Center" VerticalAlignment="Center"

@@ -8,6 +8,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     #region Serialized -  No model changed event
 
     [JsonRequired]
+    public string RootPath { get; set; } = RootPathDefault; 
+
+    [JsonRequired]
     public string Language
     {
         get
@@ -111,10 +114,10 @@ public sealed partial class PhotoPostProModel : ModelBase
     public CameraManager CameraManager { get; private set; } 
 
     [JsonIgnore]
-    public LibraryManager LibraryManager { get; private set; } = new();
+    public LibraryManager LibraryManager { get; private set; }
 
     [JsonIgnore]
-    public LutsManager LutsManager { get; private set; } = new();
+    public LutsManager LutsManager { get; private set; }
 
     #endregion Not serialized - No model changed event
 

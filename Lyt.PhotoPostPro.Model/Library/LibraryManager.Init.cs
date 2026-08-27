@@ -16,19 +16,27 @@ public sealed partial class LibraryManager
     
     private readonly Lock lockObject;
 
+    private readonly PhotoPostProModel model;
+    private readonly FileManagerModel fileManager;
+    private readonly IDispatch dispatcher;
+    private readonly ILogger logger;
+
     private readonly string libraryFolderPath;
     private readonly string galleryFolderPath;
     private readonly string exportsFolderPath;
-
-    private PhotoPostProModel? model;
-    private FileManagerModel? fileManager;
-    private IDispatch? dispatcher;
+    private readonly object lockObjectFiles = new();
 
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
 
-    public LibraryManager()
+    public LibraryManager(
+        PhotoPostProModel model, FileManagerModel fileManager, IDispatch dispatcher, ILogger logger)
     {
+        this.model = model;
+        this.fileManager = fileManager;
+        this.dispatcher = dispatcher;
+        this.logger = logger;
+
         this.lockObject = new Lock();
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LibraryFolderName);
@@ -78,12 +86,8 @@ public sealed partial class LibraryManager
 
     public bool IsLoading { get; private set; }
 
-    public void Initialize(PhotoPostProModel model, FileManagerModel fileManagerModel, IDispatch dispatcher)
+    public void Initialize()
     {
-        this.model = model;
-        this.fileManager = fileManagerModel;
-        this.dispatcher = dispatcher;
-
         this.IsLoading = true;
 
         Task.Run(() =>
