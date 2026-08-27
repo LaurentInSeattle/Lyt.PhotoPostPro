@@ -1,7 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Loader;
 
+using System.IO;
+
 public static partial class ImageLoader
 {
+    #region Extensions Definitions
+
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
     public static List<string> ExcludedExtensions = [".aae", ".docx", ".xlsx", ".pdf"];
@@ -59,7 +63,8 @@ public static partial class ImageLoader
             ".srw", // Samsung
             ".tco", // intoPIX
             ".x3f", // Sigma
-            // 
+
+            // Generic 
             ".dng" , // Adobe 
             ".raw" , // Generic 
         ];
@@ -85,4 +90,100 @@ public static partial class ImageLoader
         => JpgExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
+
+    #endregion Extensions Definitions
+
+    private readonly static EnumerationOptions enumerationOptions = new()
+    {
+        IgnoreInaccessible = true,
+        RecurseSubdirectories = false,
+        MatchType = MatchType.Simple,
+    };
+
+    public static FolderStatistics InspectFolder(string folderPath)
+    {
+        var statistics = new FolderStatistics(folderPath);
+        if (string.IsNullOrWhiteSpace(folderPath))
+        {
+            statistics.Fail("Invalid folder path");
+            return statistics;
+        }
+
+        if (!Directory.Exists(folderPath))
+        {
+            statistics.Fail("Invalid folder path");
+            return statistics;
+        }
+
+        ProcessDirectory(folderPath, statistics);
+        statistics.Pack(); 
+        return statistics;
+    }
+
+    private static bool ProcessDirectory(string folderPath, FolderStatistics statistics)
+    {
+        try
+        {
+            var files = folderPath.EnumerateFiles(enumerationOptions, "*.*");
+            if (files.Count > 0)
+            {
+                foreach (string file in files)
+                {
+                    var fileInfo = new FileInfo(file);
+                    long size = fileInfo.Length;
+                    float sizeMB = size / (1024.0f * 1024.0f);
+                    ImageKind kind = FromFilePath(file);
+                    statistics.Add(kind, file, sizeMB);
+                }
+            }
+
+            // Recurse to sub folders
+            var subDirs = folderPath.EnumerateDirectories();
+            foreach (string subDir in subDirs)
+            {
+                if (!ProcessDirectory(subDir, statistics))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Exception thrown: \n" + ex);
+            statistics.Fail(ex.ToString());
+            return false;
+        }
+    }
+
+    private static ImageKind FromFilePath(string filePath)
+    {
+        if (HasMovieExtension(filePath))
+        {
+            return ImageKind.Movie;
+        }
+
+        if (HasJpgExtension(filePath))
+        {
+            return ImageKind.Jpeg;
+        }
+
+        if (HasHiefExtension(filePath))
+        {
+            return ImageKind.Heic;
+        }
+
+        if (HasImageSharpExtension(filePath))
+        {
+            return ImageKind.OtherImages;
+        }
+
+        if (HasRawExtension(filePath))
+        {
+            return ImageKind.Raw;
+        }
+
+        return ImageKind.Unrecognized;
+    }
 }

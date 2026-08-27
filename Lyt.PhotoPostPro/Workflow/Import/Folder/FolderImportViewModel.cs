@@ -22,7 +22,7 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
 
     public void OnFolderDrop(string path)
     {
-
+        var statistics = ImageLoader.InspectFolder(path);
     }
 
 #pragma warning disable CA1822 // Mark members as static
