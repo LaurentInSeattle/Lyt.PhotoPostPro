@@ -3,7 +3,7 @@
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
-    public const string Application = "PhotoPostPro";
+    public const string Application = "PhotoRebel";
     public const string RootNamespace = "Lyt.PhotoPostPro";
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
