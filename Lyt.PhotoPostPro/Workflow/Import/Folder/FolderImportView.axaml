@@ -60,7 +60,7 @@
 
 		<ScrollViewer
 			Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
-			IsVisible="{Binding IsMessageVisible}"
+			IsVisible="{Binding AreStatisticsVisible}"
 			Background="Transparent"
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"

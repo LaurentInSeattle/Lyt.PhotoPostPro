@@ -5,7 +5,7 @@ Bugs ~ Major Issues
 
 - Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 
-- Add sample photo at initial startup so that the library is never completely empty.
+- Add one sample photo at initial startup so that the library is never completely empty.
 
 - In editing view, should not show "Nothing to cull..."
 

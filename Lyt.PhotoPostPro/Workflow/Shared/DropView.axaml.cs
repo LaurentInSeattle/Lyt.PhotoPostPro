@@ -91,10 +91,9 @@ public partial class DropView : View
                 {
                     if (this.DataContext is DropViewModel dropViewModel)
                     {
-                        if (dropViewModel.OnDrop(path, isDirectory))
-                        {
-                            break;
-                        }
+                        // We process only the first file or the first directory 
+                        dropViewModel.OnDrop(path, isDirectory); 
+                        break;
                     }
                 }
             }

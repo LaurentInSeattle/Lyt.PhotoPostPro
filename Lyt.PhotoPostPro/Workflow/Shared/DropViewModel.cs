@@ -21,19 +21,24 @@ public sealed partial class DropViewModel : ViewModel<DropView>, IRecipient<Lang
 
     public void Receive(LanguageChangedMessage message) => this.Localize();
 
-    private void Localize() => this.DropZoneHelp = this.Localize(this.dropZoneHelpKey); 
+    private void Localize() => this.DropZoneHelp = this.Localize(this.dropZoneHelpKey);
 
-    internal bool OnDrop(string path, bool isDirectory)
+    // Dispatch so that the Drag and Drop thread completes
+    internal void OnDrop(string path, bool isDirectory)
+        => Dispatch.OnUiThread(() => 
+            { 
+                this.OnDropOnUiThread(path, isDirectory); 
+            }, DispatcherPriority.Background); 
+
+    private void OnDropOnUiThread(string path, bool isDirectory)
     {
         try
         {
             this.dropPathHandler.OnDropPath(path, isDirectory);
-            return true;
         }
         catch (Exception ex)
         {
             this.Logger.Warning(ex.ToString());
-            return false;
         }
     }
 }
