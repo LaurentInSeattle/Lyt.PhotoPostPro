@@ -72,8 +72,8 @@ public sealed partial class LibraryManager
 
         profiler.EndTiming(" Loaded Thumbnails: " + this.LoadedThumbnails.Count);
 
-        this.AddedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateAdded: true);
-        this.EditedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateAdded: false);
+        this.UnratedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateRated: true);
+        this.EditedFolderTree = FolderTree.GenerateFromDate(this.LoadedThumbnails, forDateRated: false);
 
         new LibraryLoadedMessage(ImageCount: this.imageLoadedCount, ErrorCount: this.errorLoadingCount).Publish();
         this.IsLoading = false;
@@ -169,6 +169,8 @@ public sealed partial class LibraryManager
         }
     }
 
+    #region Dead Code  - Keep for now 
+
     [Conditional("DEBUG")]
     private void CheckForNans(string metadataFilePath)
     {
@@ -198,4 +200,6 @@ public sealed partial class LibraryManager
             }
         }
     }
+
+    #endregion Dead Code  - Keep for now 
 }

@@ -5,10 +5,30 @@ using System.IO;
 
 public sealed partial class LibraryManager
 {
+    public bool IsAlreadyInLibrary(Metadata metadata)
+    {
+        // Check if the target library folder is existing 
+        MetadataFolders metadataFolders = new(metadata);
+        string targetFolder = metadataFolders.WouldBeDirectoryPath(this.libraryFolderPath);
+        if (!Directory.Exists(targetFolder))
+        {
+            return false;
+        }
+
+        string sourceFilename = Path.GetFileName(metadata.FullPath);
+        string targetPath = Path.Combine(targetFolder, sourceFilename);
+        if (!File.Exists(targetPath))
+        {
+            return false;
+        } 
+
+        return true;
+    }
+
     public bool AddDownloadedFiles(List<Metadata> files)
     {
         if ((this.CapturedFolderTree is null) ||
-            (this.AddedFolderTree is null))
+            (this.UnratedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -18,12 +38,16 @@ public sealed partial class LibraryManager
 
         bool AddDownloadedFile(Metadata metadata)
         {
-
             try
             {
                 if (!File.Exists(metadata.FullPath))
                 {
                     throw new Exception("No such file: " + metadata.FullPath);
+                }
+
+                if (this.IsAlreadyInLibrary(metadata))
+                {
+                    throw new Exception("Already present in library: " + metadata.FullPath);
                 }
 
                 // Create target library folder if needed 
@@ -76,11 +100,11 @@ public sealed partial class LibraryManager
 #endif
 
         this.CapturedFolderTree.Sort();
-        this.AddedFolderTree.Sort();
+        this.UnratedFolderTree.Sort();
 
         // Notify UI 
         // Send only one message should be enough - See how the message is processed in the library view
-        new FolderTreeUpdatedMessage(FolderTreeKind.Added).Publish();
+        new FolderTreeUpdatedMessage(FolderTreeKind.Unrated).Publish();
 
         // TODO: Return more details 
         return errors == 0;
@@ -90,7 +114,7 @@ public sealed partial class LibraryManager
     {
         if ((this.fileManager is null) ||
             (this.CapturedFolderTree is null) ||
-            (this.AddedFolderTree is null))
+            (this.UnratedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -104,6 +128,11 @@ public sealed partial class LibraryManager
 
             // ! Checked by loadedImage.IsPreLoaded
             Metadata metadata = loadedImage.Metadata!;
+
+            if (this.IsAlreadyInLibrary(metadata))
+            {
+                throw new Exception("Already present in library: " + metadata.FullPath);
+            }
 
             // ! Checked by loadedImage.IsPreLoaded
             byte[] thumbnailImageBytes = loadedImage.JpgThumbnail!;
@@ -131,7 +160,7 @@ public sealed partial class LibraryManager
             if (success)
             {
                 this.CapturedFolderTree.Sort();
-                this.AddedFolderTree.Sort();
+                this.UnratedFolderTree.Sort();
             }
 
             return success;
@@ -147,7 +176,7 @@ public sealed partial class LibraryManager
         Metadata metadata, string imageFilePath, string imageFileFolder, byte[] thumbnailImageBytes)
     {
         if ((this.CapturedFolderTree is null) ||
-            (this.AddedFolderTree is null))
+            (this.UnratedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }
@@ -191,8 +220,8 @@ public sealed partial class LibraryManager
                 }
 
                 // Update folder trees 
-                this.CapturedFolderTree.UpdateOnFileAdded(DateKind.Captured, metadata, targetPathMetadata, doSort: false);
-                this.AddedFolderTree.UpdateOnFileAdded(DateKind.Added, metadata, targetPathMetadata, doSort: false);
+                _ = this.CapturedFolderTree.UpdateOnFileAdded(DateKind.Captured, metadata, targetPathMetadata, doSort: false);
+                _ = this.UnratedFolderTree.UpdateOnFileAdded(DateKind.Added, metadata, targetPathMetadata, doSort: false);
             }
 
             // All good 
@@ -220,8 +249,11 @@ public sealed partial class LibraryManager
             this.EditedFolderTree.Remove(metadataFilePath);
             var dayFolder = this.EditedFolderTree.UpdateOnFileAdded(DateKind.Edited, metadata, metadataFilePath);
 
-            // Notify UI 
-            new FolderTreeUpdatedMessage(FolderTreeKind.Edited, dayFolder).Publish();
+            // Notify UI, if needed
+            if (dayFolder is not null)
+            {
+                new FolderTreeUpdatedMessage(FolderTreeKind.Edited, dayFolder).Publish();
+            }
         }
         catch (Exception ex)
         {
@@ -229,8 +261,9 @@ public sealed partial class LibraryManager
         }
     }
 
-    public List<string> FindFilesAddedOrEdited(
-        DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear, bool forAdded, out int zeroStarCount)
+    public List<string> FindFilesUnratedOrEdited(
+        DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear,
+        bool forUnrated, out int zeroStarCount)
     {
         zeroStarCount = 0;
         List<string> list = new(this.LoadedThumbnails.Count);
@@ -249,7 +282,7 @@ public sealed partial class LibraryManager
         {
             Metadata metadata = thumbnail.Value.Metadata;
             DateTime date =
-                forAdded ?
+                forUnrated ?
                     metadata.AddedToLibraryUTC.ToLocalTime().Date :
                     metadata.LastEditedUTC.ToLocalTime().Date;
             if (date.Year != sYear)
@@ -263,6 +296,11 @@ public sealed partial class LibraryManager
             }
 
             if (checkDay && date.Day != sDay)
+            {
+                continue;
+            }
+
+            if (forUnrated && metadata.Rating > 0)
             {
                 continue;
             }

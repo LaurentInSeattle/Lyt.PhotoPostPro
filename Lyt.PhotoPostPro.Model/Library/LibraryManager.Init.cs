@@ -24,7 +24,7 @@ public sealed partial class LibraryManager
     private readonly string libraryFolderPath;
     private readonly string galleryFolderPath;
     private readonly string exportsFolderPath;
-    private readonly object lockObjectFiles = new();
+    private readonly Lock lockObjectFiles = new();
 
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
@@ -80,7 +80,7 @@ public sealed partial class LibraryManager
 
     public FolderTree? CapturedFolderTree { get; private set; }
 
-    public FolderTree? AddedFolderTree { get; private set; }
+    public FolderTree? UnratedFolderTree { get; private set; }
 
     public FolderTree? EditedFolderTree { get; private set; }
 

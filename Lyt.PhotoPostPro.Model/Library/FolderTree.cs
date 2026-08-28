@@ -70,21 +70,21 @@ public sealed class FolderTree
         return tree;
     }
 
-    public static FolderTree GenerateFromDate(Dictionary<string, LoadedThumbnail> metadataDictionary, bool forDateAdded)
+    public static FolderTree GenerateFromDate(Dictionary<string, LoadedThumbnail> metadataDictionary, bool forDateRated)
     {
         FolderTree tree = new();
         foreach (var item in metadataDictionary)
         {
             string filePath = item.Key;
             Metadata metadata = item.Value.Metadata;
-            var date = forDateAdded ? metadata.AddedToLibraryUTC.ToLocalTime() : metadata.LastEditedUTC.ToLocalTime();
-            if (!forDateAdded && (date == DateTime.MinValue))
+            var date = forDateRated ? metadata.AddedToLibraryUTC.ToLocalTime() : metadata.LastEditedUTC.ToLocalTime();
+            if (!forDateRated && (date == DateTime.MinValue))
             {
                 // Never edited, skip it
                 continue;
             }
 
-            if (forDateAdded && (date == DateTime.MinValue || date.Year < 1926))
+            if (forDateRated && (date == DateTime.MinValue || date.Year < 1926))
             {
                 // Corrupted date added, skip it 
                 continue;
@@ -94,7 +94,7 @@ public sealed class FolderTree
                 // date = DateTime.Now;
             }
 
-            if (forDateAdded && metadata.Rating > 0)
+            if (forDateRated && metadata.Rating > 0)
             {
                 // has already been culled and rated, skip it 
                 continue;
@@ -187,8 +187,13 @@ public sealed class FolderTree
         }
     }
 
-    public DayFolder UpdateOnFileAdded(DateKind dateKind, Metadata metadata, string metadataFilePath, bool doSort = true)
+    public DayFolder? UpdateOnFileAdded(DateKind dateKind, Metadata metadata, string metadataFilePath, bool doSort = true)
     {
+        if (dateKind == DateKind.Added && metadata.Rating > 0)
+        {
+            return null;
+        }
+
         metadata.GetLibraryFolders(dateKind, out int year, out int month, out int day, out int dayOfWeek);
         var yearFolder =
             (from folder in this.YearFolders where folder.Year == year select folder)

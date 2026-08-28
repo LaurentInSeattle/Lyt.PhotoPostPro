@@ -60,6 +60,25 @@ public sealed class MetadataFolders
 
     public string Day { get; private set; }
 
+    public string WouldBeDirectoryPath(string rootPath)
+    {
+        try
+        {
+            if (!Directory.Exists(rootPath))
+            {
+                throw new InvalidOperationException("No such directory path: " + rootPath);
+            }
+
+            string dayFolderPath = Path.Combine(rootPath, this.Year, this.Month, this.Day);
+            return dayFolderPath;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return rootPath;
+        }
+    }
+
     public string CreateDirectoryPathIfNeeded(string rootPath)
     {
         try

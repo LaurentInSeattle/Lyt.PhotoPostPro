@@ -3,7 +3,7 @@
 public enum FolderTreeKind
 {
     Captured, 
-    Added, 
+    Unrated, 
     Edited, 
 }
 

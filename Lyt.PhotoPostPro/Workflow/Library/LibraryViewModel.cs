@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
+using System.Text.RegularExpressions;
+
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LanguageChangedMessage>,
@@ -13,7 +15,7 @@ public sealed partial class LibraryViewModel :
     public enum Viewing
     {
         Captured,
-        Added,
+        Unrated,
         Edited,
     }
 
@@ -95,7 +97,7 @@ public sealed partial class LibraryViewModel :
     public partial bool HasSelection { get; set; }
 
     [ObservableProperty]
-    public partial bool IsAddedSelected { get; set; }
+    public partial bool IsUnratedSelected { get; set; }
 
     [ObservableProperty]
     public partial bool IsCullButtonVisible { get; set; }
@@ -160,9 +162,9 @@ public sealed partial class LibraryViewModel :
         // Selecting it will be done on activation 
 
         FolderTree? folderTree;
-        if (this.selectedViewing == Viewing.Added)
+        if (this.selectedViewing == Viewing.Unrated)
         {
-            folderTree = this.libraryMgr.AddedFolderTree;
+            folderTree = this.libraryMgr.UnratedFolderTree;
         }
         else if (this.selectedViewing == Viewing.Captured)
         {
@@ -194,7 +196,7 @@ public sealed partial class LibraryViewModel :
                 this.Options[^0].Select();
                 break;
 
-            case FolderTreeKind.Added:
+            case FolderTreeKind.Unrated:
                 this.Options[^1].Select();
                 break;
 
@@ -258,13 +260,16 @@ public sealed partial class LibraryViewModel :
     {
         List<SelectorButtonViewModel> listOptions = [];
         string captured = this.Localize("Library.Option.Captured");
-        var vm1 = new SelectorButtonViewModel(captured, OptionButtonWidth, this.OnSelectOption, "Captured");
+        var vm1 = new SelectorButtonViewModel(
+            captured, OptionButtonWidth, this.OnSelectOption, Viewing.Captured.ToString());
         listOptions.Add(vm1);
-        string added = this.Localize("Library.Option.Added");
-        var vm2 = new SelectorButtonViewModel(added, OptionButtonWidth, this.OnSelectOption, "Added");
+        string unrated = this.Localize("Library.Option.Added");
+        var vm2 = new SelectorButtonViewModel(
+            unrated, OptionButtonWidth, this.OnSelectOption, Viewing.Unrated.ToString());
         listOptions.Add(vm2);
         string edited = this.Localize("Library.Option.Edited");
-        var vm3 = new SelectorButtonViewModel(edited, OptionButtonWidth, this.OnSelectOption, "Edited");
+        var vm3 = new SelectorButtonViewModel(
+            edited, OptionButtonWidth, this.OnSelectOption, Viewing.Edited.ToString());
         listOptions.Add(vm3);
         this.Options = listOptions;
     }
@@ -291,24 +296,24 @@ public sealed partial class LibraryViewModel :
         }
 
         FolderTree? folderTree;
-        if (optionKey == "Added")
+        if (optionKey == Viewing.Unrated.ToString())
         {
-            this.selectedViewing = Viewing.Added;
-            folderTree = this.libraryMgr.AddedFolderTree;
-            this.IsAddedSelected = true;
+            this.selectedViewing = Viewing.Unrated;
+            folderTree = this.libraryMgr.UnratedFolderTree;
+            this.IsUnratedSelected = true;
             this.IsCullButtonVisible = false;
         }
         else
         {
-            this.IsAddedSelected = false;
+            this.IsUnratedSelected = false;
             this.IsCullButtonVisible = false;
 
-            if (optionKey == "Captured")
+            if (optionKey == Viewing.Captured.ToString())
             {
                 this.selectedViewing = Viewing.Captured;
                 folderTree = this.libraryMgr.CapturedFolderTree;
             }
-            else if (optionKey == "Edited")
+            else if (optionKey == Viewing.Edited.ToString())
             {
                 this.selectedViewing = Viewing.Edited;
                 folderTree = this.libraryMgr.EditedFolderTree;
@@ -462,13 +467,13 @@ public sealed partial class LibraryViewModel :
         }
         else
         {
-            bool forAdded = this.selectedViewing == Viewing.Added;
-            var files = this.libraryMgr.FindFilesAddedOrEdited(
-                this.selectedDay, this.selectedMonth, this.selectedYear, forAdded, out int zeroStarCount);
+            bool forUnrated = this.selectedViewing == Viewing.Unrated;
+            var files = this.libraryMgr.FindFilesUnratedOrEdited(
+                this.selectedDay, this.selectedMonth, this.selectedYear, forUnrated, out int zeroStarCount);
             AddFiles(files);
 
-            this.IsCullTextVisible = forAdded && (zeroStarCount == 0);
-            this.IsCullButtonVisible = forAdded && (zeroStarCount > 0);
+            this.IsCullTextVisible = forUnrated && (zeroStarCount == 0);
+            this.IsCullButtonVisible = forUnrated && (zeroStarCount > 0);
         }
     }
 

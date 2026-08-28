@@ -49,8 +49,15 @@
 				HorizontalAlignment="Center"
 				DataContext="{Binding SpinViewModel}"
 				/>
+			<TextBlock
+				IsVisible="{Binding !IsNewAddition}"
+				HorizontalAlignment="Center" 
+				Text="{Binding Message}"
+				Theme="{StaticResource H3}"
+				/>
 			<glyphs:GlyphButton
 				x:Name="AddButton"
+				IsVisible="{Binding IsNewAddition}"
 				Style="{StaticResource ViewIconButton}"
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -75,13 +82,27 @@
 				FontSize="24"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Width="472" Height="56"
-				Margin="0 12 0 12"
+				Margin="0 36 0 12"
 				GlyphSource="wand"
 				ButtonBackground="BorderlessRectangle"
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Single.ProcessImage}"
 				IsDisabled="{Binding ProcessIsDisabled}"
 				Command="{Binding OnProcess}"
+	    		/>
+
+			<glyphs:GlyphButton
+				x:Name="BackButton"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="472" Height="56"
+				Margin="0 42 0 12"
+				GlyphSource="chevron_left"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Workflow.Back}"
+				Command="{Binding OnBack}"
 	    		/>
 		</StackPanel>
 	</Grid>

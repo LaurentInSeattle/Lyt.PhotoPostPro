@@ -16,6 +16,12 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
     public partial bool IsFileMode { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool IsNewAddition { get; set; } = true;
+
+    [ObservableProperty]
+    public partial string Message { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial WriteableBitmap? SourceImage { get; set; }
 
     [ObservableProperty]
@@ -46,6 +52,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         this.SourceImage = null;
 
         // Always launch a spinner for big or small files 
+        this.Message = string.Empty;
         this.SpinWait(start: true);
         Task.Run(() => { this.TryLoadImage(path); });
     }
@@ -66,11 +73,18 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
     public void OnAdd()
     {
         this.AddImageToLibrary();
+        this.GoBack();
+    }
 
+    [RelayCommand]
+    public void OnBack() => this.GoBack(); 
+
+    private void GoBack () 
+    {
         // Go back to import drop screen 
         var importVm = App.GetRequiredService<ImportViewModel>();
-        importVm.SetInitialState(); 
-    } 
+        importVm.SetInitialState();
+    }
 
     private void AddImageToLibrary ()
     {
@@ -92,6 +106,30 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
             this.loadedImage.CreateThumbnail();
             if (loadedImage.IsSuccess && loadedImage.IsFullyLoadedWithThumbnail)
             {
+                bool isAlreadyInLibray = false;
+                if ( loadedImage.Metadata is Metadata metadata)
+                {
+                    if (this.model.LibraryManager.IsAlreadyInLibrary(metadata) )
+                    {
+                        isAlreadyInLibray = true;
+                    }
+                }
+
+                Dispatch.OnUiThread(() =>
+                {
+                    if (isAlreadyInLibray)
+                    {
+                        // Hide 'Add' button: Show message instead 
+                        this.Message = this.Localize("Import.File.AlreadyIn");
+                        this.IsNewAddition = false;
+                    }
+                    else
+                    {
+                        this.Message = string.Empty;
+                        this.IsNewAddition = true;
+                    }
+                }, DispatcherPriority.Background);
+
                 // ! Verified by loadedImage.IsFullyLoaded
                 var imageFrame = ImagingUtilities.ToFrame(this.loadedImage.Image!);
                 if (imageFrame is not null)
@@ -121,12 +159,12 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         finally
         {
             // Error or not: stop the spinner 
-            Dispatch.OnUiThread(() => { this.SpinWait(start: false); });
+            Dispatch.OnUiThread(() => { this.SpinWait(start: false); }, DispatcherPriority.Background);
 
             if (!string.IsNullOrWhiteSpace(error))
             {
                 this.Logger.Error(error);
-                Dispatch.OnUiThread(() => { this.OnImageFailed(error); });
+                Dispatch.OnUiThread(() => { this.OnImageFailed(error); }, DispatcherPriority.Background);
             }
         }
     }
@@ -137,12 +175,15 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         this.loadedImage = null;
 
         // Show error message to user
-        this.toaster.Host = this.View.ToasterHost;
-        this.toaster.Show(
-            this.Localize("Single.LoadImageFailTitle"),
-            this.Localize("Single.LoadImageFailMessage"),
-            8_000,
-            InformationLevel.Error);
+        this.Message = this.Localize("Single.LoadImageFailMessage");
+        this.IsNewAddition = false; 
+
+        //this.toaster.Host = this.View.ToasterHost;
+        //this.toaster.Show(
+        //    this.Localize("Single.LoadImageFailTitle"),
+        //    this.Localize("Single.LoadImageFailMessage"),
+        //    8_000,
+        //    InformationLevel.Error);
     }
 
     private void OnImageLoaded(Frame frame)
