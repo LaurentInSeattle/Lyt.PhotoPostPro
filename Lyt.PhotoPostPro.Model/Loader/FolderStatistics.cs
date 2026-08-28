@@ -21,13 +21,40 @@ public sealed class FolderStatistics(string path)
         //      Movie,
         //      Unrecognized,
         [
-            new ImageStatistics ( ImageKind.Jpeg),
-            new ImageStatistics ( ImageKind.Heic),
-            new ImageStatistics ( ImageKind.Raw),
-            new ImageStatistics ( ImageKind.OtherImages),
-            new ImageStatistics ( ImageKind.Movie),
-            new ImageStatistics ( ImageKind.Unrecognized),
+            new ImageStatistics(ImageKind.Jpeg),
+            new ImageStatistics(ImageKind.Heic),
+            new ImageStatistics(ImageKind.Raw),
+            new ImageStatistics(ImageKind.OtherImages),
+            new ImageStatistics(ImageKind.Movie),
+            new ImageStatistics(ImageKind.Unrecognized),
         ];
+
+    public bool IsEmpty => this.Path == string.Empty;
+
+    public void Clear()
+    {
+        this.Path = string.Empty;
+        this.Success = false;
+        this.Message = "Is Empty";
+        this.ImageStatistics =
+        // In the order of the enum 
+        //      Jpeg, 
+        //      Heic, 
+        //      Raw,
+        //      OtherImages,
+        //      Movie,
+        //      Unrecognized,
+        [
+            new ImageStatistics(ImageKind.Jpeg),
+            new ImageStatistics(ImageKind.Heic),
+            new ImageStatistics(ImageKind.Raw),
+            new ImageStatistics(ImageKind.OtherImages),
+            new ImageStatistics(ImageKind.Movie),
+            new ImageStatistics(ImageKind.Unrecognized),
+        ];
+    }
+
+    public bool HasNoImage => this.ImageFileCount == 0; 
 
     public void Fail(string message)
     {
@@ -48,8 +75,12 @@ public sealed class FolderStatistics(string path)
         this.TotalFileCount =
              (from stats in this.ImageStatistics where stats.FileCount > 0 select stats.FileCount).Sum();
         this.ImageFileCount =
-             (from stats in this.ImageStatistics 
-              where stats.FileCount > 0 && (stats.Kind != ImageKind.Movie ) && (stats.Kind != ImageKind.Unrecognized)
+             (from stats in this.ImageStatistics
+              where stats.FileCount > 0 && (stats.Kind != ImageKind.Movie) && (stats.Kind != ImageKind.Unrecognized)
               select stats.FileCount).Sum();
+        if ( this.TotalFileCount == 0)
+        {
+            this.Clear(); 
+        }
     }
 }
