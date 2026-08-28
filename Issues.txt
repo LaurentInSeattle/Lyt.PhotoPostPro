@@ -1,13 +1,17 @@
 Bugs ~ Major Issues 
 -------------------
 
-- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
-
-- Folder Tree for Added not updating correctly on image removed 
+- CRITICAL : Image not found 
 
 - Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 
 - Add sample photo at initial startup so that the library is never completely empty.
+
+- In editing view, should not show "Nothing to cull..."
+
+- After completing an edit, image does not show up in edited 
+
+- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 WIP
 ---

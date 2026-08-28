@@ -94,6 +94,12 @@ public sealed class FolderTree
                 // date = DateTime.Now;
             }
 
+            if (forDateAdded && metadata.Rating > 0)
+            {
+                // has already been culled and rated, skip it 
+                continue;
+            }
+
             int year = date.Year;
             int month = date.Month;
             int day = date.Day;
@@ -216,7 +222,7 @@ public sealed class FolderTree
         if (doSort)
         {
             this.Sort();
-        } 
+        }
 
         return dayFolder;
     }

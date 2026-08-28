@@ -343,6 +343,12 @@ public sealed partial class LibraryViewModel :
                 },
                 DispatcherPriority.Background);
         }
+        else
+        {
+            // Nothing has ever been edited : Clear the panel and clear selection 
+            this.LibraryThumbnailsPanelViewModel.Clear();
+            this.ClearSelection();
+        }
     }
 
     private void OnSelectYear(object? tag)
@@ -690,6 +696,11 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
+        this.ClearSelection();
+    } 
+
+    private void ClearSelection ()
+    { 
         // Clear this view 
         this.SelectedThumbnail = null;
         this.SelectedThumnailMetadataViewModel = null;

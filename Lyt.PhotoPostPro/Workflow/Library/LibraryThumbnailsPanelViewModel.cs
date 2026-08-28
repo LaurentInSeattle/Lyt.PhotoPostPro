@@ -63,11 +63,25 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     public void Populate(List<LibraryThumbnailViewModel> list)
     {
-        this.Thumbnails.CollectionChanged -= (_, _) => this.FilterAndSort();
-        var collection = new ObservableCollection<LibraryThumbnailViewModel>(list);
-        this.Thumbnails = collection;
-        this.Thumbnails.CollectionChanged += (_, _) => this.FilterAndSort();
-        this.FilterAndSort();
+        if (list.Count > 0)
+        {
+            this.Thumbnails.CollectionChanged -= (_, _) => this.FilterAndSort();
+            var collection = new ObservableCollection<LibraryThumbnailViewModel>(list);
+            this.Thumbnails = collection;
+            this.Thumbnails.CollectionChanged += (_, _) => this.FilterAndSort();
+            this.FilterAndSort();
+        } 
+        else
+        {
+            this.Clear();
+        }
+    }
+
+    public void Clear ()
+    {
+        // Clear the panel 
+        this.Thumbnails = [];
+        this.DisplayedThumbnails = [];
     }
 
     public LibraryThumbnailViewModel? GetFirstDisplayed()

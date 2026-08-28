@@ -7,8 +7,7 @@ public sealed partial class LibraryManager
 {
     public bool AddDownloadedFiles(List<Metadata> files)
     {
-        if ((this.fileManager is null) ||
-            (this.CapturedFolderTree is null) ||
+        if ((this.CapturedFolderTree is null) ||
             (this.AddedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
@@ -147,10 +146,8 @@ public sealed partial class LibraryManager
     private bool AddFileFinalSteps(
         Metadata metadata, string imageFilePath, string imageFileFolder, byte[] thumbnailImageBytes)
     {
-        if ((this.fileManager is null) ||
-            (this.CapturedFolderTree is null) ||
-            (this.AddedFolderTree is null) ||
-            (this.EditedFolderTree is null))
+        if ((this.CapturedFolderTree is null) ||
+            (this.AddedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
         }

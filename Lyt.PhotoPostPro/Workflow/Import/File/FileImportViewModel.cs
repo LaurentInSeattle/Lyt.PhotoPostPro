@@ -71,6 +71,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         var importVm = App.GetRequiredService<ImportViewModel>();
         importVm.SetInitialState(); 
     } 
+
     private void AddImageToLibrary ()
     {
         if (this.loadedImage is null)
@@ -79,17 +80,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
             return;
         }
 
-        var libraryManager = this.model.LibraryManager;
-        libraryManager.AddDroppedFile(this.loadedImage);
-        if (this.loadedImage.Metadata is Metadata metadata)
-        {
-            libraryManager.UpdateEditedFile(metadata);
-        }
-        else
-        {
-            this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
-            // No need to show error message to user
-        }
+        this.model.LibraryManager.AddDroppedFile(this.loadedImage);
     }
 
     private void TryLoadImage(string path)
@@ -177,6 +168,16 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         }
 
         this.AddImageToLibrary();
+
+        if (this.loadedImage.Metadata is Metadata metadata)
+        {
+            this.model.LibraryManager.UpdateEditedFile(metadata);
+        }
+        else
+        {
+            this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
+            // No need to show error message to user
+        }
 
         this.model.ProcessLoadedImage(this.loadedImage);
         var workflow = this.model.CurrentWorkflow;

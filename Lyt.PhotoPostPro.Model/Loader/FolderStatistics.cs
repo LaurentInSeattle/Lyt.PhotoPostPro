@@ -10,6 +10,8 @@ public sealed class FolderStatistics(string path)
 
     public int TotalFileCount { get; private set; } // = 0;
 
+    public int ImageFileCount { get; private set; } // = 0;
+
     public List<ImageStatistics> ImageStatistics { get; private set; } =
         // In the order of the enum 
         //      Jpeg, 
@@ -44,6 +46,10 @@ public sealed class FolderStatistics(string path)
         this.ImageStatistics =
              (from stats in this.ImageStatistics where stats.FileCount > 0 select stats).ToList();
         this.TotalFileCount =
-             (from stats in this.ImageStatistics where stats.FileCount > 0 select stats.FileCount).Sum(); 
+             (from stats in this.ImageStatistics where stats.FileCount > 0 select stats.FileCount).Sum();
+        this.ImageFileCount =
+             (from stats in this.ImageStatistics 
+              where stats.FileCount > 0 && (stats.Kind != ImageKind.Movie ) && (stats.Kind != ImageKind.Unrecognized)
+              select stats.FileCount).Sum();
     }
 }

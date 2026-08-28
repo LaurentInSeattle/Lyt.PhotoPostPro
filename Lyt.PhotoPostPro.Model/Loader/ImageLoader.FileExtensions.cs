@@ -174,14 +174,15 @@ public static partial class ImageLoader
             return ImageKind.Heic;
         }
 
-        if (HasImageSharpExtension(filePath))
-        {
-            return ImageKind.OtherImages;
-        }
-
         if (HasRawExtension(filePath))
         {
             return ImageKind.Raw;
+        }
+
+        // This check must be done last 
+        if (HasImageSharpExtension(filePath))
+        {
+            return ImageKind.OtherImages;
         }
 
         return ImageKind.Unrecognized;
