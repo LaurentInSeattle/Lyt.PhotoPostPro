@@ -1,16 +1,94 @@
 <UserControl 
-    x:Class="Lyt.PhotoPostPro.Workflow.Import.Folder.ImageCategoryView"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-    >
-    <Grid
-        Margin="12"
-        Background="DarkBlue"
-        Width="800" Height="120"
-        >
-        
-    </Grid>
+	x:Class="Lyt.PhotoPostPro.Workflow.Import.Folder.ImageCategoryView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Import.Folder"
+	x:DataType="vm:ImageCategoryViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>
+	<UserControl.Styles>
+		<Style Selector="CheckBox.noContent /template/ ContentPresenter#ContentPresenter">
+			<Setter Property="IsVisible" Value="False"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Border
+		x:Name="outerBorder"
+		Margin="8"
+		Background="Transparent"
+		BorderBrush="{StaticResource LightAqua_1_100}"
+		BorderThickness="1"
+		CornerRadius="4"
+		>
+		<Grid
+			Margin="4"
+			Background="Transparent"
+			>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="80" />
+				<ColumnDefinition Width="160" />
+				<ColumnDefinition Width="280" />
+				<ColumnDefinition Width="220" />
+			</Grid.ColumnDefinitions>
+			<glyphs:SvgIcon
+				Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
+				Source="{Binding GlyphSource}"
+				IsHitTestVisible="False"
+				Width="54" Height="54"
+				Foreground="{StaticResource LightAqua_0_080}"
+				StrokeThickness="0.01"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+				Text="{Binding Kind}"
+				Theme="{StaticResource Title}"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="0" Grid.Column="2"
+				Text="{Binding FileCount}"
+				Theme="{StaticResource H3}"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
+				/>
+			<TextBlock
+				Grid.Row="1" Grid.Column="2"
+				Text="{Binding SizeOnDisk}"
+				Theme="{StaticResource H3}"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
+				/>
+			<LayoutTransformControl
+				Grid.Row="0" Grid.RowSpan="2" Grid.Column="4"
+				VerticalAlignment="Center" HorizontalAlignment="Left"
+				Margin="16 0 0 0"
+				>
+				<LayoutTransformControl.LayoutTransform>
+					<ScaleTransform ScaleX="2.2" ScaleY="2.2" />
+				</LayoutTransformControl.LayoutTransform>
+				<CheckBox
+					IsChecked="{Binding IsImportIncluded, Mode=TwoWay}"
+					IsThreeState="False"
+					>
+					<CheckBox.Content>
+						<TextBlock 
+							Text="Import"
+							IsVisible="{Binding IsImportIncluded}"
+							Foreground="{StaticResource LightAqua_0_100}" 
+							FontSize="10"
+							TextWrapping="Wrap"
+							/>
+					</CheckBox.Content>
+				</CheckBox>
+			</LayoutTransformControl>					
+		</Grid>
+	</Border>
 </UserControl>

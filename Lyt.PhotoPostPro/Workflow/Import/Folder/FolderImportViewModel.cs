@@ -49,12 +49,12 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         if (this.statistics.IsEmpty)
         {
             // Empty 
-            this.ShowMessage("Empty");
+            this.ShowMessage("Workflow.Import.Folder.Empty");
         }
         else if (this.statistics.HasNoImage)
         {
             // With files but no images 
-            this.ShowMessage("With files but no images");
+            this.ShowMessage("Workflow.Import.Folder.WithFilesNoImages");
         }
         else if (this.statistics.Success)
         {
@@ -63,13 +63,13 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         else
         {
             // Error ? 
-            this.ShowMessage("Error while collecting files");
+            this.ShowMessage("Workflow.Import.Folder.ErrorWhileCollecting");
         }
     }
 
     private void ShowMessage(string message)
     {
-        this.Message = message;
+        this.Message = this.Localize(message);
         this.IsMessageVisible = true;
         this.AreStatisticsVisible = false;
 
@@ -104,10 +104,15 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         var list = new List<ImageCategoryViewModel>(this.statistics.ImageStatistics.Count);
         foreach (var imageCategory in this.statistics.ImageStatistics)
         {
-            list.Add(new ImageCategoryViewModel(path, imageCategory));
+            list.Add(new ImageCategoryViewModel(this, path, imageCategory));
         }
 
         this.ImageCategories = new(list); 
+    }
+
+    internal void OnImportSelectionChanged(ImageCategoryViewModel vm, bool shouldImport)
+    {
+
     }
 
     private void GoBack()
@@ -122,6 +127,5 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
 
     [RelayCommand]
     public void OnBack() => this.GoBack();
-
 #pragma warning restore CA1822
 }

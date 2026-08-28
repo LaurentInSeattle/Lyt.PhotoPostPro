@@ -11,13 +11,6 @@
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
-	
-	<UserControl.Styles>
-		<Style Selector="CheckBox.noContent /template/ ContentPresenter#ContentPresenter">
-			<Setter Property="IsVisible" Value="False"/>
-		</Style>
-	</UserControl.Styles>
-
 	<Border
 		x:Name="outerBorder"
 		Height="140" 
