@@ -74,7 +74,7 @@ public static partial class ImageLoader
 
     public static List<string> ImageSharpExtensions =
         [
-            ".tiff", ".cur", ".png", ".pbm", ".qoi", ".tga",
+            ".tiff", ".cur", ".png", ".pbm", ".ppm", ".qoi", ".tga",
             ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".jfif" , ".bmp", ".exr",
         ];
 

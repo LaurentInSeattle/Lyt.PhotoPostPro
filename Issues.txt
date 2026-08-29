@@ -61,6 +61,10 @@ Minor Issues (Low priority)
 Code Quality Issues 
 -------------------
 
+- Move Import code to Model - No UI there !
+
+- Fix Hard Coded litteral "CameraDownloads" 
+
 - Move message definitions in new folders depending on area and workflow 
 
 - Cleanup public vs internal about everywhere 

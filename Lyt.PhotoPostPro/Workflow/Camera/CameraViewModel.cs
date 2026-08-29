@@ -47,14 +47,6 @@ public sealed partial class CameraViewModel :
         this.downloadedFiles = [];
         this.ThumbnailsPanelViewModel = new(this.model, this);
         this.OtherFilesPanelViewModel = new(this.model, this);
-
-        this.Subscribe<DevicesFoundMessage>();
-        this.Subscribe<DeviceStatusMessage>();
-        this.Subscribe<DeviceFileListMessage>();
-        this.Subscribe<DeviceFileDownloadedMessage>();
-        this.Subscribe<DeviceDownloadCompleteMessage>();
-        this.Subscribe<DeviceFileDeletedMessage>();
-        this.Subscribe<DeviceDeleteCompleteMessage>();
     }
 
     [ObservableProperty]
@@ -93,6 +85,15 @@ public sealed partial class CameraViewModel :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+
+        this.Subscribe<DevicesFoundMessage>();
+        this.Subscribe<DeviceStatusMessage>();
+        this.Subscribe<DeviceFileListMessage>();
+        this.Subscribe<DeviceFileDownloadedMessage>();
+        this.Subscribe<DeviceDownloadCompleteMessage>();
+        this.Subscribe<DeviceFileDeletedMessage>();
+        this.Subscribe<DeviceDeleteCompleteMessage>();
+
         this.NullifyDevice();
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
@@ -117,6 +118,15 @@ public sealed partial class CameraViewModel :
     public override void Deactivate()
     {
         base.Deactivate();
+
+        this.Unregister<DevicesFoundMessage>();
+        this.Unregister<DeviceStatusMessage>();
+        this.Unregister<DeviceFileListMessage>();
+        this.Unregister<DeviceFileDownloadedMessage>();
+        this.Unregister<DeviceDownloadCompleteMessage>();
+        this.Unregister<DeviceFileDeletedMessage>();
+        this.Unregister<DeviceDeleteCompleteMessage>();
+
         this.NullifyDevice();
         this.cameraMgr.EndMonitoringCameraConnexion();
         this.cameraMgr.EndDownloadingFiles();

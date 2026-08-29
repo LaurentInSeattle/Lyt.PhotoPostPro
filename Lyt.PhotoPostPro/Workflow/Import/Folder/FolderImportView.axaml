@@ -34,8 +34,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="4" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="4" />
-				<ColumnDefinition Width="480"/>
+				<ColumnDefinition Width="12" />
+				<ColumnDefinition Width="560"/>
 				<ColumnDefinition Width="4" />
 			</Grid.ColumnDefinitions>
 			<StackPanel
@@ -79,8 +79,8 @@
 					Margin="0 0 0 12"
 					IsHitTestVisible="False"
 					HorizontalAlignment="Center" VerticalAlignment="Center"
-					Width="480"
-					MaxHeight="500"
+					Width="560"
+					MaxHeight="520"
 					/>
 				<meta:MetadataView
 					DataContext="{Binding SelectedThumnailMetadataViewModel}"

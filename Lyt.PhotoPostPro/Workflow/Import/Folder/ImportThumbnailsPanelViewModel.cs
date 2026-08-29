@@ -6,7 +6,7 @@ public sealed partial class ImportThumbnailsPanelViewModel :
     IRecipient<LanguageChangedMessage>
 {
     private readonly PhotoPostProModel photoPostProModel;
-    private readonly FolderImportViewModel cameraViewModel;
+    private readonly FolderImportViewModel folderImportViewModel;
 
     [ObservableProperty]
     public partial bool SortOrder { get; set; }
@@ -17,10 +17,10 @@ public sealed partial class ImportThumbnailsPanelViewModel :
     [ObservableProperty]
     public partial string EmptyMessage { get; set; }
 
-    public ImportThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, FolderImportViewModel collectionViewModel)
+    public ImportThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, FolderImportViewModel folderImportViewModel)
     {
         this.photoPostProModel = photoPostProModel;
-        this.cameraViewModel = collectionViewModel;
+        this.folderImportViewModel = folderImportViewModel;
         this.Thumbnails = [];
         // this.ShowInProgress = this.jigsawModel.ShowInProgress;
         this.EmptyMessage = string.Empty;
