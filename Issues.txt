@@ -3,8 +3,6 @@ Bugs ~ Major Issues
 
 - Implement basic denoising 
 
-- CRITICAL : Image not found 
-
 - Message for empty gallery 
 
 - Message for empty library 
@@ -16,8 +14,6 @@ Bugs ~ Major Issues
 - Add one sample photo at initial startup so that the library is never completely empty.
 
 - In editing view, should not show "Nothing to cull..."
-
-- After completing an edit, image does not show up in edited 
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
@@ -41,6 +37,7 @@ Essential Missing Features
 - First Run View : Setup root locations 
 
 - App settings 
+
 
 
 Minor Issues (Low priority)
@@ -95,6 +92,10 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 Bugs - No Repro 
 ---------------
 
+- CRITICAL : Image not found 
+
+- After completing an edit, image does not show up in edited 
+
 - Add new Images messed up thumb files ? 
 
 - Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
@@ -102,12 +103,11 @@ Bugs - No Repro
 - UI Framework : Final fix for Re-init of Compose is failing at second image 
 
 
-V.Next - Cool Stuff to Consider 
--------------------------------
+
+V.Next 
+------
 
 - Touch up / Blemish (after geometry) 
-
-- Library backup / export 
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
@@ -119,7 +119,21 @@ V.Next - Cool Stuff to Consider
 
 - Ability to search the library by Keywords.
 
+
+
+V.Next.Next 
+-----------
+
+- Build PDF photo book 
+
 - Ability to flag images to insert in a photobook or collection 
+
+- Library backup / export 
+
+
+
+Cool Stuff to Consider 
+----------------------
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
@@ -128,8 +142,6 @@ V.Next - Cool Stuff to Consider
 - Optimal viewer layout 
 
 - Floating toolbox windows 
-
-- Build PDF photo book 
 
 - Share: email, text, post
 
