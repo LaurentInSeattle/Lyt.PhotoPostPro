@@ -1,7 +1,15 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Implement basic denoising 
+
 - CRITICAL : Image not found 
+
+- Message for empty gallery 
+
+- Message for empty library 
+
+- Message for no edits 
 
 - Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 

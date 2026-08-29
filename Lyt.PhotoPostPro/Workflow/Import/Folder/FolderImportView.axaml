@@ -20,69 +20,113 @@
 	<Grid	
 		x:Name="ToasterHost"
 		> 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="4" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="120" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="4" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="480" />
-			<ColumnDefinition Width="8" />
-		</Grid.ColumnDefinitions>
-
-		<TextBlock
-			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
+		<!-- Drag and Drop layout --> 
+		<Grid
 			IsVisible="{Binding IsMessageVisible}"
-			Text="{Binding Message}"
-			Theme="{StaticResource H2}"
-			MaxWidth="480" 
-			TextWrapping="Wrap"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
-			/>
-		<glyphs:GlyphButton
-			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
-			IsVisible="{Binding IsMessageVisible}"
-			Style="{StaticResource ViewIconButton}"
-			FontSize="24"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="472" Height="56"
-			GlyphSource="chevron_left"
-			ButtonBackground="BorderlessRectangle"
-			GlyphStrokeThickness="0"
-			Text="{DynamicResource Workflow.Back}"
-			Command="{Binding OnBack}"
-	    	/>
-
-		<ScrollViewer
-			Grid.Column="1" Grid.Row="1" Grid.RowSpan="4"
-			Width="780"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="120" />
+				<RowDefinition Height="80" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="4" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Row="2"
+				Text="{Binding Message}"
+				Theme="{StaticResource H2}"
+				MaxWidth="480" 
+				TextWrapping="Wrap"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				/>
+			<glyphs:GlyphButton
+				Grid.Row="3"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Width="472" Height="56"
+				GlyphSource="chevron_left"
+				ButtonBackground="BorderlessRectangle"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Workflow.Back}"
+				Command="{Binding OnBack}"
+	    		/>
+		</Grid>
+		<!-- File selection layout --> 
+		<Grid
 			IsVisible="{Binding AreStatisticsVisible}"
-			Background="Transparent"
-			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-			ScrollViewer.VerticalScrollBarVisibility="Auto"
-			>
-			<ItemsControl 
-				ItemsSource="{Binding ImageCategories}"
-				Margin="0 0 24 0"
-				>
-				<ItemsControl.ItemsPanel>
-					<ItemsPanelTemplate>
-						<VirtualizingStackPanel />
-					</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<vm:ImageCategoryView Margin="0 12 0 12" />
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</ScrollViewer>
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="4" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="8" />
+				<ColumnDefinition Width="820" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="8" />
+			</Grid.ColumnDefinitions>
 
+			<ScrollViewer
+				Grid.Column="1" Grid.Row="1" 
+				Width="780"
+				IsVisible="{Binding AreStatisticsVisible}"
+				Background="Transparent"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				ScrollViewer.VerticalScrollBarVisibility="Auto"
+				>
+				<ItemsControl 
+					ItemsSource="{Binding ImageCategories}"
+					Margin="0 0 24 0"
+					>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<VirtualizingStackPanel />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<vm:ImageCategoryView Margin="0 12 0 12" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+
+			<StackPanel
+				Grid.Column="2" Grid.Row="1" 
+				Margin="0 12 0 0" 
+				> 
+				<TextBlock
+					Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
+					Text="{Binding TotalSpaceRequiredString}"
+					Theme="{StaticResource H2}"
+					MaxWidth="480" 
+					TextWrapping="Wrap"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+				<TextBlock
+					Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
+					Text="{Binding AvailableSpace}"
+					Theme="{StaticResource H2}"
+					MaxWidth="480" 
+					TextWrapping="Wrap"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+				<glyphs:GlyphButton
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Width="472" Height="56"
+					GlyphSource="chevron_left"
+					ButtonBackground="BorderlessRectangle"
+					GlyphStrokeThickness="0"
+					Text="{DynamicResource Workflow.Back}"
+					Command="{Binding OnBack}"
+	    			/>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>
