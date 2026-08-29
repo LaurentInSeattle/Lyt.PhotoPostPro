@@ -1,0 +1,129 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Import.Folder.ImportThumbnailsPanelView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Import.Folder"
+	x:DataType="vm:ImportThumbnailsPanelViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid
+		Background="Transparent"
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="72" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<StackPanel
+			Orientation="Horizontal"
+			Margin="0 0 0 0"
+			HorizontalAlignment="Left"
+			Height="72"
+			>
+			<Rectangle
+				Fill="#70000020"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
+			<TextBlock
+				Grid.Row="1"
+				Text="{DynamicResource Workflow.Camera.Thumbs.Show}"
+				Theme="{StaticResource H3}"
+				/>
+			<toggle:ToggleSwitch
+				x:Name="ShowInProgressSwitch"
+				Margin="4 0 8 0"
+				Style="{StaticResource StandardToggleSwitch}"
+				TrueText="{DynamicResource Workflow.Camera.Thumbs.OldestFirst}"
+				FalseText="{DynamicResource Workflow.Camera.Thumbs.RecentOnTop}"
+				Height="30" Width="300"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Value="{Binding SortOrder}"
+				/>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Margin="10 0 0 0"
+				Text="{DynamicResource Workflow.Camera.Thumbs.CheckAll}"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="folder"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				CommandParameter="Check"
+				Width="36" Height="36" 
+				Margin="10 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="camera"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnMarkAllToRemoveFromCamera}"
+				CommandParameter="Check"
+				Width="36" Height="36" 
+				Margin="10 0 0 0"
+				/>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Margin="10 0 0 0"
+				Text="{DynamicResource Workflow.Camera.Thumbs.ClearAll}"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="folder"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnMarkAllToAddToLibrary}"
+				CommandParameter="Clear"
+				Width="36" Height="36" 
+				Margin="10 0 0 0"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource PanelIconButton}"
+				Layout="IconOnly"
+				GlyphSource="camera"
+				GlyphStrokeThickness="0.1"
+				Command="{Binding OnMarkAllToRemoveFromCamera}"
+				CommandParameter="Clear"
+				Width="36" Height="36" 
+				Margin="10 0 0 0"
+				/>
+		</StackPanel>
+		<TextBlock
+			Grid.Row="1"
+			Margin="6 20 6 6"
+			Text="{Binding EmptyMessage}"
+			Theme="{StaticResource H3}"
+			HorizontalAlignment="Center" VerticalAlignment="Top"
+			/>
+		<ScrollViewer
+			Grid.Row="1"
+			Background="Transparent"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			>
+			<ItemsControl 
+				ItemsSource="{Binding Thumbnails}"
+				Margin="0 0 24 0"
+				>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<vm:ImportThumbnailView Margin="12" />
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+	</Grid>
+</UserControl>

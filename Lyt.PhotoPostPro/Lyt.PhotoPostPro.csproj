@@ -114,8 +114,14 @@
     <Compile Update="Workflow\Import\File\FileImportView.axaml.cs">
       <DependentUpon>FileImportView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Import\Folder\ImportThumbnailView.axaml.cs">
+      <DependentUpon>ImportThumbnailView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Import\Folder\FolderImportView.axaml.cs">
       <DependentUpon>FolderImportView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Import\Folder\ImportThumbnailsPanelView.axaml.cs">
+      <DependentUpon>ImportThumbnailsPanelView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Workflow\Library\Dialogs\ProcessingDialog.axaml.cs">
       <DependentUpon>ProcessingDialog.axaml</DependentUpon>

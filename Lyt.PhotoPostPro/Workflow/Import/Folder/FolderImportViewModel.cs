@@ -10,6 +10,7 @@ using Lyt.FileSystem;
 public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
 {
     private const float MegaByte = 1024.0f * 1024.0f;
+    private const float MinimumDiskAvailableMegaByte = 8.0f * 1024.0f; // 8 GB 
 
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
@@ -30,13 +31,46 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
     public partial bool AreStatisticsVisible { get; set; }
 
     [ObservableProperty]
+    public partial bool IsImportVisible{ get; set; }
+
+    [ObservableProperty]
     public partial ObservableCollection<ImageCategoryViewModel> ImageCategories { get; set; }
+
+    [ObservableProperty]
+    public partial bool ShowImportButton { get; set; }
 
     [ObservableProperty]
     public partial string TotalSpaceRequiredString { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string AvailableSpace { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial WriteableBitmap? SelectedThumbnail { get; set; }
+
+    [ObservableProperty]
+    public partial MetadataViewModel? SelectedThumnailMetadataViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial ImportThumbnailsPanelViewModel ImportThumbnailsPanelViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial string ImportStatus { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string DownloadButtonText { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool DownloadButtonIsDisabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial string FileImported { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool AddToLibraryButtonIsDisabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool RemoveFromCameraButtonIsDisabled { get; set; } = true;
 
     private float totalSpaceRequiredMB;
     private float availableMegabytes;
@@ -50,13 +84,20 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         this.IsFolderMode = false;
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
+        this.IsImportVisible = false;
         this.ImageCategories = new();
+    }
+
+    [RelayCommand]
+    public void OnCancelImport()
+    {
     }
 
     public void OnFolderDrop(string path)
     {
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
+        this.IsImportVisible = false;
         this.statistics.Clear();
         this.statistics = ImageLoader.InspectFolder(path);
         if (this.statistics.IsEmpty)
@@ -79,8 +120,9 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
                 this.availableMegabytes = (float)availableBytes / MegaByte;
                 string name = driveInfo.Name;
                 string label = driveInfo.VolumeLabel;
+                // string format = "Workflow.Import.Folder.ReqSPace";
                 // string format = "Workflow.Import.Folder.DriveInfo";
-                this.TotalSpaceRequiredString = "Required Space: n/a";
+                this.TotalSpaceRequiredString = "Required Space: " + this.DiskSpaceString(0.0f);
                 string diskSpace = this.DiskSpaceString(this.availableMegabytes); 
                 this.AvailableSpace =
                     string.Format( "Available Space on {0} ({1}): {2}", name, label, diskSpace);
@@ -127,6 +169,8 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         this.Message = string.Empty;
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = true;
+        this.IsImportVisible= false;
+        this.ShowImportButton = false;
 
         string path = this.statistics.Path;
         var list = new List<ImageCategoryViewModel>(this.statistics.ImageStatistics.Count);
@@ -153,10 +197,15 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
         string diskSpace = this.DiskSpaceString(this.totalSpaceRequiredMB);
         this.TotalSpaceRequiredString = string.Format("Required Space: {0}", diskSpace);
 
-        if (this.totalSpaceRequiredMB > this.availableMegabytes)
+        if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
         {
             // Alert 
-            // Hide Import buttons 
+            // Hide Import button
+            this.ShowImportButton = false;
+        }
+        else
+        {
+            this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f; 
         }
     }
 
@@ -172,13 +221,36 @@ public sealed partial class FolderImportViewModel : ViewModel<FolderImportView>
 
     [RelayCommand]
     public void OnBack() => this.GoBack();
+
+    [RelayCommand]
+    public void OnImport()
+    {
+        this.ShowImportButton = false;
+
+        // Collect the list of files to import 
+        var pathList = new List<string>();
+        foreach (ImageCategoryViewModel vm in this.ImageCategories)
+        {
+            if (!vm.IsImportIncluded)
+            {
+                continue;
+            }
+
+            pathList.AddRange(vm.ImageStatistics.Paths); 
+        }
+
+        this.IsMessageVisible = false;
+        this.AreStatisticsVisible = false;
+        this.IsImportVisible = true;
+    }
+
 #pragma warning restore CA1822
 
     private string DiskSpaceString(float megabytes)
     {
         if (megabytes <= 0.0)
         {
-            return "n/a";
+            return "---";
         }
 
         bool isBig = megabytes > 1999.999f;
