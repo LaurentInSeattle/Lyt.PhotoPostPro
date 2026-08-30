@@ -9,7 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
@@ -26,8 +25,7 @@
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
-				<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Buttons --> 
-				<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Messages --> 
+				<RowDefinition Height="72" /> <!-- Status and Buttons --> 
 				<RowDefinition Height="*" />
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
@@ -52,13 +50,44 @@
 					/>
 				<!-- Cancel Import --> 
 				<glyphs:GlyphButton
-					Style="{StaticResource ControlIconButton}"
-					HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
+					Margin="16 0 16 0"
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					Width="360" Height="56"
 					GlyphSource="dismiss"
-					Text="{Binding DownloadButtonText}"
+					Text="{DynamicResource Workflow.Import.Folder.Cancel}"
 					Command="{Binding OnCancelImport}"
-					IsDisabled="{Binding DownloadButtonIsDisabled}"
-					/>
+					IsDisabled="{Binding CancelButtonIsDisabled}"
+	    			/>
+
+				<!-- Add To Library  --> 
+				<glyphs:GlyphButton
+					Margin="16 0 16 0"
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					Width="360" Height="56"
+					GlyphSource="add_circle"
+					Text="{DynamicResource Workflow.Import.Folder.AddToLibrary}"
+					Command="{Binding OnAddToLibrary}"
+					IsDisabled="{Binding AddButtonIsDisabled}"
+	    			/>
+
+				<!-- Back  --> 
+				<glyphs:GlyphButton
+					Margin="16 0 16 0"
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Width="360" Height="56"
+					GlyphSource="chevron_left"
+					ButtonBackground="BorderlessRectangle"
+					GlyphStrokeThickness="0"
+					Text="{DynamicResource Workflow.Back}"
+					Command="{Binding OnBack}"
+					IsDisabled="{Binding AddButtonIsDisabled}"
+	    			/>
 			</StackPanel>
 			<TextBlock
 				Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
@@ -66,13 +95,13 @@
 				Theme="{StaticResource H3}"
 				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>
-
 			<vm:ImportThumbnailsPanelView 
-				Grid.Row="3" Grid.Column="1"
+				Grid.Row="2" Grid.Column="1"
 				DataContext="{Binding ImportThumbnailsPanelViewModel}"
 				/>
 			<StackPanel
-				Grid.Row="3" Grid.Column="3"
+				Grid.Row="2" Grid.Column="3"
+				Margin="0 72 0 0"
 				>
 				<Image
 					Source="{Binding SelectedThumbnail}"

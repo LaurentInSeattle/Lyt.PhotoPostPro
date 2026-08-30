@@ -47,24 +47,14 @@
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
-				Text="{DynamicResource Workflow.Camera.Thumbs.CheckAll}"
+				Text="{DynamicResource Workflow.Import.Folder.ImportAll}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
-				GlyphSource="folder"
+				GlyphSource="add_circle"
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
-				CommandParameter="Check"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
-				/>
-			<glyphs:GlyphButton
-				Style="{StaticResource PanelIconButton}"
-				Layout="IconOnly"
-				GlyphSource="camera"
-				GlyphStrokeThickness="0.1"
-				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Check"
 				Width="36" Height="36" 
 				Margin="10 0 0 0"
@@ -72,24 +62,14 @@
 			<TextBlock
 				Theme="{StaticResource H3}"
 				Margin="10 0 0 0"
-				Text="{DynamicResource Workflow.Camera.Thumbs.ClearAll}"
+				Text="{DynamicResource Workflow.Import.Folder.IgnoreAll}"
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource PanelIconButton}"
 				Layout="IconOnly"
-				GlyphSource="folder"
+				GlyphSource="dismiss_circle"
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
-				CommandParameter="Clear"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
-				/>
-			<glyphs:GlyphButton
-				Style="{StaticResource PanelIconButton}"
-				Layout="IconOnly"
-				GlyphSource="camera"
-				GlyphStrokeThickness="0.1"
-				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Clear"
 				Width="36" Height="36" 
 				Margin="10 0 0 0"

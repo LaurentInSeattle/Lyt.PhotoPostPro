@@ -2,6 +2,8 @@
 
 using Lyt.FileSystem;
 
+using System.Diagnostics.Metrics;
+
 using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
 
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
@@ -27,6 +29,7 @@ public sealed partial class FolderImportViewModel :
     private DispatcherTimer? timer;
     private float totalSpaceRequiredMB;
     private float availableMegabytes;
+    private bool cancelPreload;
 
     [ObservableProperty]
     public partial bool IsFolderMode { get; set; }
@@ -68,19 +71,13 @@ public sealed partial class FolderImportViewModel :
     public partial string ImportStatus { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string DownloadButtonText { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial bool DownloadButtonIsDisabled { get; set; } = true;
+    public partial bool CancelButtonIsDisabled { get; set; } = true;
 
     [ObservableProperty]
     public partial string FileImported { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool AddToLibraryButtonIsDisabled { get; set; } = true;
-
-    [ObservableProperty]
-    public partial bool RemoveFromCameraButtonIsDisabled { get; set; } = true;
+    public partial bool AddButtonIsDisabled { get; set; } = true;
 
     public FolderImportViewModel(PhotoPostProModel model, IToaster toaster)
     {
@@ -90,7 +87,8 @@ public sealed partial class FolderImportViewModel :
         this.preloadedFiles = new();
 
         this.downloadFolderPath =
-            System.IO.Path.Combine(this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, "CameraDownloads");
+            System.IO.Path.Combine(
+                this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, LibraryManager.CameraDownloadsFolderName);
         this.IsFolderMode = false;
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
@@ -104,6 +102,7 @@ public sealed partial class FolderImportViewModel :
     [RelayCommand]
     public void OnCancelImport()
     {
+        this.cancelPreload = true;
     }
 
     public void OnFolderDrop(string path)
@@ -133,12 +132,13 @@ public sealed partial class FolderImportViewModel :
                 this.availableMegabytes = (float)availableBytes / MegaByte;
                 string name = driveInfo.Name;
                 string label = driveInfo.VolumeLabel;
-                // string format = "Workflow.Import.Folder.ReqSPace";
-                // string format = "Workflow.Import.Folder.DriveInfo";
-                this.TotalSpaceRequiredString = "Required Space: " + this.DiskSpaceString(0.0f);
+                string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
+                this.TotalSpaceRequiredString =
+                    string.Format(reqSpaceFormat, this.DiskSpaceString(0.0f));
                 string diskSpace = this.DiskSpaceString(this.availableMegabytes);
+                string diskSpaceFormat = this.Localize("Workflow.Import.Folder.DriveInfoFormat");
                 this.AvailableSpace =
-                    string.Format("Available Space on {0} ({1}): {2}", name, label, diskSpace);
+                    string.Format(diskSpaceFormat, name, label, diskSpace);
             }
 
             this.ShowStatistics();
@@ -184,6 +184,7 @@ public sealed partial class FolderImportViewModel :
         this.AreStatisticsVisible = true;
         this.IsImportVisible = false;
         this.ShowImportButton = false;
+        this.AddButtonIsDisabled = true;
 
         string path = this.statistics.Path;
         var list = new List<ImageCategoryViewModel>(this.statistics.ImageStatistics.Count);
@@ -208,7 +209,8 @@ public sealed partial class FolderImportViewModel :
         }
 
         string diskSpace = this.DiskSpaceString(this.totalSpaceRequiredMB);
-        this.TotalSpaceRequiredString = string.Format("Required Space: {0}", diskSpace);
+        string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
+        this.TotalSpaceRequiredString = string.Format(reqSpaceFormat, diskSpace);
 
         if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
         {
@@ -224,6 +226,8 @@ public sealed partial class FolderImportViewModel :
 
     private void GoBack()
     {
+        this.DestroyTimer();
+
         // Go back to import drop screen 
         var importVm = App.GetRequiredService<ImportViewModel>();
         importVm.SetInitialState();
@@ -231,6 +235,13 @@ public sealed partial class FolderImportViewModel :
 
     [RelayCommand]
     public void OnBack() => this.GoBack();
+
+    [RelayCommand]
+    public void OnAddToLibrary()
+    {
+
+    }
+
 
     [RelayCommand]
     public void OnImport()
@@ -255,13 +266,11 @@ public sealed partial class FolderImportViewModel :
 
         this.preloadedFiles = new(pathList.Count);
         this.ImportThumbnailsPanelViewModel.Thumbnails.Clear();
-        this.ClearSelection(); 
-        
-        //this.FileDownloaded = string.Empty;
-        //this.downloadedFiles.Clear();
-        //this.ThumbnailsPanelViewModel.Thumbnails.Clear();
-        //this.cameraMgr.BeginDownloadingFiles(this.foundDevice, this.selectedFiles);
-        //this.DownloadButtonText = this.Localize(CancelTransferLocKey);
+        this.ImportStatus = this.Localize("Workflow.Import.Folder.Preloading");
+        this.cancelPreload = false;
+        this.CancelButtonIsDisabled = false;
+        this.AddButtonIsDisabled = true;
+        this.ClearSelection();
 
         // Launch the Import thread 
         _ = Task.Run(async () =>
@@ -276,6 +285,17 @@ public sealed partial class FolderImportViewModel :
 
     public void ReceiveOnUiThread(ImportCompleteMessage message)
     {
+        this.cancelPreload = false;
+        this.CancelButtonIsDisabled = true;
+        string importStatusFormat = this.Localize("Workflow.Import.Folder.PreloadCompleteFormat");
+        this.ImportStatus = string.Format(importStatusFormat, message.Imports, message.Errors);
+
+        var thumbnails = this.ImportThumbnailsPanelViewModel.Thumbnails;
+        if (thumbnails.Count > 0)
+        {
+            this.OnSelect(thumbnails[0]);
+            this.AddButtonIsDisabled = false;
+        }
     }
 
     public void Receive(ImportFileMessage message)
@@ -295,9 +315,10 @@ public sealed partial class FolderImportViewModel :
         if (message.IsSuccess)
         {
             this.preloadedFiles.Add(message.Path);
-            if (message.ThumbnailBytes is not null && message.Metadata is not null)
+            var loadedImage = message.LoadedImage;
+            if (loadedImage is not null && loadedImage.IsPreLoaded)
             {
-                var thumbnail = new ImportThumbnailViewModel(this, message.Metadata, message.ThumbnailBytes);
+                var thumbnail = new ImportThumbnailViewModel(this, loadedImage);
                 this.ImportThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
             }
         }
@@ -314,23 +335,29 @@ public sealed partial class FolderImportViewModel :
         int imports = 0;
         try
         {
-            // TODO 
             // Speed up this loop 
-            foreach (string file in pathList)
+            Parallel.For(0, pathList.Count, async (index) =>
             {
-                if (!this.ImportFile(file))
+                if (this.cancelPreload)
                 {
-                    ++errors;
-                    this.Logger.Warning("Download error");
+                    return;
+                }
+
+                string file = pathList[index];
+                bool success = this.ImportFile(file);
+                if (success)
+                {
+                    Interlocked.Increment(ref imports);
                 }
                 else
                 {
-                    ++imports;
+                    Interlocked.Increment(ref errors);
+                    this.Logger.Warning("Download error" + file);
                 }
 
                 // Throttle so that the UI has enough time to show the thumbanil 
-                await Task.Delay(60);
-            }
+                await Task.Delay(20);
+            });
 
             completed = true;
         }
@@ -359,11 +386,7 @@ public sealed partial class FolderImportViewModel :
             {
                 // ! Verified by loadedImage.IsPreLoaded
                 new ImportFileMessage(
-                    IsSuccess: true,
-                    Path: file,
-                    Message: "Success",
-                    loadedImage.Metadata,
-                    loadedImage.JpgThumbnail!).Publish();
+                    IsSuccess: true, Path: file, Message: "Success", loadedImage).Publish();
                 return true;
             }
 
@@ -400,7 +423,7 @@ public sealed partial class FolderImportViewModel :
         this.SelectedThumnailMetadataViewModel = null;
     }
 
-    private string DiskSpaceString(float megabytes)
+    public string DiskSpaceString(float megabytes)
     {
         if (megabytes <= 0.0)
         {

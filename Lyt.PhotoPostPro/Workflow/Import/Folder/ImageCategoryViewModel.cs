@@ -2,8 +2,8 @@
 
 public sealed partial class ImageCategoryViewModel : ViewModel<ImageCategoryView>
 {
-    private readonly FolderImportViewModel parent; 
-    private readonly string path; 
+    private readonly FolderImportViewModel parent;
+    private readonly string path;
     private readonly ImageStatistics imageStatistics;
 
     [ObservableProperty]
@@ -26,7 +26,7 @@ public sealed partial class ImageCategoryViewModel : ViewModel<ImageCategoryView
     public ImageCategoryViewModel(
         FolderImportViewModel parent, string path, ImageStatistics imageStatistics)
     {
-        this.parent = parent; 
+        this.parent = parent;
         this.path = path;
         this.imageStatistics = imageStatistics;
 
@@ -34,9 +34,9 @@ public sealed partial class ImageCategoryViewModel : ViewModel<ImageCategoryView
         {
             default:
             case ImageKind.Unrecognized:
-                this.GlyphSource = "document_question_mark"; 
+                this.GlyphSource = "document_question_mark";
                 this.Kind = "? ? ?";
-                this.IsImportIncluded = false; 
+                this.IsImportIncluded = false;
                 break;
 
             case ImageKind.Jpeg:
@@ -70,14 +70,15 @@ public sealed partial class ImageCategoryViewModel : ViewModel<ImageCategoryView
         }
 
         string fileCountFormat = this.Localize("Workflow.Import.Folder.FileCountFormat");
-        this.FileCount = string.Format("{0} Files", imageStatistics.FileCount);
+        this.FileCount = string.Format(fileCountFormat, imageStatistics.FileCount);
 
         string sizeOnDiskFormat = this.Localize("Workflow.Import.Folder.SizeOnDiskFormat");
-        this.SizeOnDisk = string.Format("Size required on disk: {0:F1} MB", imageStatistics.SizeOnDiskMB);
+        string sizeOnDisk = parent.DiskSpaceString(imageStatistics.SizeOnDiskMB);
+        this.SizeOnDisk = string.Format(sizeOnDiskFormat, sizeOnDisk);
     }
 
     partial void OnIsImportIncludedChanged(bool value)
-        => this.parent.OnImportSelectionChanged(this, shouldImport: value); 
+        => this.parent.OnImportSelectionChanged(this, shouldImport: value);
 
     /*
       

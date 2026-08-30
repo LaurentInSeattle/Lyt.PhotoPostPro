@@ -116,29 +116,4 @@ public sealed partial class ImportThumbnailsPanelViewModel :
 
         }
     }
-
-    [RelayCommand]
-    public void OnMarkAllToRemoveFromCamera(object? parameter)
-    {
-        if (parameter is not string operation)
-        {
-            return;
-        }
-
-        foreach (var thumbnailViewModel in this.Thumbnails)
-        {
-            if (operation == "Check")
-            {
-                thumbnailViewModel.IsToRemoveFromCamera = true;
-            }
-            else if (operation == "Clear")
-            {
-                thumbnailViewModel.IsToRemoveFromCamera = false;
-            }
-            else if (operation == "Toggle")
-            {
-                thumbnailViewModel.IsToRemoveFromCamera = !thumbnailViewModel.IsToRemoveFromCamera;
-            }
-        }
-    }
 }

@@ -10,6 +10,7 @@ public sealed partial class LibraryManager
     public const string LibraryFolderName = "Library";
     public const string GalleryFolderName = "Gallery";
     public const string ExportsFolderName = "Exports";
+    public const string CameraDownloadsFolderName = "CameraDownloads";
 
     public const int CachedHdImageCount = 120;
     public const int CachedGalleryImageCount = 4;

@@ -93,6 +93,22 @@
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Empty">This folder is empty.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">This folder contains no image.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Error while collecting file information.</system:String>
+
+	<system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} Files</system:String>
+	<system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Size required on disk: {0}</system:String>
+
+	<system:String x:Key="Workflow.Import.Folder.ImportAll">Check All to Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.IgnoreAll">Uncheck All to Ignore</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Import">Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Cancel">Cancel Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Required Space: {0}</system:String>
+	<system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Available Space on {0} ({1}): {2}</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Preloading">Preloading images...</system:String>
+	<system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Preloading complete: {0} images, {1} errors.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.AddToLibrary">Add Checked to Library</system:String>
 
 	<!-- Metadata -->
 	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>

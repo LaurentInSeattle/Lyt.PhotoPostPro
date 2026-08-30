@@ -70,15 +70,6 @@
 					IsChecked="{Binding IsToAddToLibrary, Mode=TwoWay}"
 					Command="{Binding OnIsToAddToLibraryChanged}"
 					/>
-				<CheckBox
-					Classes="noContent"
-					Grid.Row="4"
-					Padding="0"
-					VerticalAlignment="Bottom" HorizontalAlignment="Center"
-					IsThreeState="False"
-					IsChecked="{Binding IsToRemoveFromCamera, Mode=TwoWay}"
-					Command="{Binding OnIsToRemoveFromCameraChanged}"
-					/>
 			</Grid>
 		</Grid>
 	</Border>
