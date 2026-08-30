@@ -79,6 +79,9 @@ public sealed partial class FolderImportViewModel :
     [ObservableProperty]
     public partial bool AddButtonIsDisabled { get; set; } = true;
 
+    [ObservableProperty]
+    public partial bool BackButtonIsDisabled { get; set; } = true;
+
     public FolderImportViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
@@ -239,9 +242,41 @@ public sealed partial class FolderImportViewModel :
     [RelayCommand]
     public void OnAddToLibrary()
     {
+        this.CancelButtonIsDisabled = false;
+        this.AddButtonIsDisabled = true;
+        this.BackButtonIsDisabled = true;
 
+        this.ImportStatus = this.Localize("Workflow.Import.Folder.Adding");
+
+        Schedule.OnUiThread(120, ()=>
+        {
+            // See if we need to do that in a secondary thread 
+            var libraryManager = this.model.LibraryManager;
+            foreach (var thumbnailVM in this.ImportThumbnailsPanelViewModel.Thumbnails)
+            {
+                if (!thumbnailVM.IsToAddToLibrary)
+                {
+                    continue;
+                }
+
+                var loadedImage = thumbnailVM.LoadedImage;
+                if (libraryManager.IsAlreadyInLibrary(thumbnailVM.Metadata))
+                {
+                    continue;
+                }
+
+                libraryManager.AddDroppedFile(loadedImage, doSort: false);
+            }
+
+            libraryManager.SortTrees();
+
+            Schedule.OnUiThread(120, () =>
+            {
+                this.ImportStatus = this.Localize("Workflow.Import.Folder.Added");
+                this.BackButtonIsDisabled = false;
+            }, DispatcherPriority.Background); 
+        }, DispatcherPriority.Background);
     }
-
 
     [RelayCommand]
     public void OnImport()

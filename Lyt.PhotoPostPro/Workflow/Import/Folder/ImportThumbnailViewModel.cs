@@ -8,7 +8,8 @@ public sealed partial class ImportThumbnailViewModel :
     public const double LargeImageHeight = 200;
 
     public readonly Metadata Metadata;
-    private readonly LoadedImage loadedImage;
+    public readonly LoadedImage LoadedImage;
+
     private readonly ISelectListener parent;
 
     [ObservableProperty]
@@ -41,7 +42,7 @@ public sealed partial class ImportThumbnailViewModel :
         }
 
         this.parent = parent;
-        this.loadedImage = loadedImage;
+        this.LoadedImage = loadedImage;
 
         this.Metadata = loadedImage.Metadata;
         this.BorderHeight = LargeBorderHeight;

@@ -20,7 +20,7 @@ public sealed partial class LibraryManager
         if (!File.Exists(targetPath))
         {
             return false;
-        } 
+        }
 
         return true;
     }
@@ -110,7 +110,19 @@ public sealed partial class LibraryManager
         return errors == 0;
     }
 
-    public bool AddDroppedFile(LoadedImage loadedImage)
+    public void SortTrees()
+    {
+        if ((this.CapturedFolderTree is null) ||
+            (this.UnratedFolderTree is null))
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
+        this.CapturedFolderTree.Sort();
+        this.UnratedFolderTree.Sort();
+    }
+
+    public bool AddDroppedFile(LoadedImage loadedImage, bool doSort = true)
     {
         if ((this.fileManager is null) ||
             (this.CapturedFolderTree is null) ||
@@ -157,7 +169,7 @@ public sealed partial class LibraryManager
             File.WriteAllBytes(targetPathThumbnail, thumbnailImageBytes);
 
             bool success = this.AddFileFinalSteps(metadata, targetPath, targetFolder, thumbnailImageBytes);
-            if (success)
+            if (success && doSort)
             {
                 this.CapturedFolderTree.Sort();
                 this.UnratedFolderTree.Sort();
@@ -171,6 +183,7 @@ public sealed partial class LibraryManager
             return false;
         }
     }
+
 
     private bool AddFileFinalSteps(
         Metadata metadata, string imageFilePath, string imageFileFolder, byte[] thumbnailImageBytes)
