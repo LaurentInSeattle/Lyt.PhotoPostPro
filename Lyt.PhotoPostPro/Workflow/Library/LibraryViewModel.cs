@@ -152,6 +152,10 @@ public sealed partial class LibraryViewModel :
                 }
             }, DispatcherPriority.Background);
         }
+
+        // We are potentially about to launch heavy stuff, so clean up while we still can
+        // We have about at least one second for Drag and drop to happen 
+        this.Dispatcher.OnIdle(() => GC.Collect());
     }
 
     public void Receive(LanguageChangedMessage message)

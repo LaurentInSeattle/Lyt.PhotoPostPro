@@ -49,6 +49,7 @@ public sealed partial class SelectorButtonViewModel(
             return;
         }
 
+        this.View.BringIntoView();
         this.View.OnSelect();
         this.onSelect(this.tag);
     }

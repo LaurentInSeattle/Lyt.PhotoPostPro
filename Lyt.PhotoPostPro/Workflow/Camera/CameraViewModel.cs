@@ -113,6 +113,10 @@ public sealed partial class CameraViewModel :
         this.isDownloading = false;
         // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
+
+        // We are potentially about to launch heavy stuff, so clean up while we still can
+        // We have about at least one second for Drag and drop to happen 
+        this.Dispatcher.OnIdle(() => GC.Collect());
     }
 
     public override void Deactivate()

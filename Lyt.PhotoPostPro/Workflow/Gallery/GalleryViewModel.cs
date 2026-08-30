@@ -86,6 +86,10 @@ public sealed partial class GalleryViewModel :
             this.showNextOnOne = true;
             Dispatch.OnUiThread(this.Show);
         }
+
+        // We are potentially about to launch heavy stuff, so clean up while we still can
+        // We have about at least one second for Drag and drop to happen 
+        this.Dispatcher.OnIdle(() => GC.Collect());
     }
 
     public void Receive(HotKeyMessage message)

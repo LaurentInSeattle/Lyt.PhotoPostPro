@@ -24,7 +24,7 @@ public sealed partial class FolderImportViewModel :
     private readonly IToaster toaster;
     private readonly string downloadFolderPath;
 
-    private List<string> preloadedFiles;
+    private int expectedFileCount;
     private FolderStatistics statistics;
     private DispatcherTimer? timer;
     private float totalSpaceRequiredMB;
@@ -87,7 +87,6 @@ public sealed partial class FolderImportViewModel :
         this.model = model;
         this.toaster = toaster;
         this.statistics = new FolderStatistics(string.Empty);
-        this.preloadedFiles = new();
 
         this.downloadFolderPath =
             System.IO.Path.Combine(
@@ -248,7 +247,7 @@ public sealed partial class FolderImportViewModel :
 
         this.ImportStatus = this.Localize("Workflow.Import.Folder.Adding");
 
-        Schedule.OnUiThread(120, ()=>
+        Schedule.OnUiThread(120, () =>
         {
             // See if we need to do that in a secondary thread 
             var libraryManager = this.model.LibraryManager;
@@ -274,7 +273,7 @@ public sealed partial class FolderImportViewModel :
             {
                 this.ImportStatus = this.Localize("Workflow.Import.Folder.Added");
                 this.BackButtonIsDisabled = false;
-            }, DispatcherPriority.Background); 
+            }, DispatcherPriority.Background);
         }, DispatcherPriority.Background);
     }
 
@@ -299,7 +298,7 @@ public sealed partial class FolderImportViewModel :
         this.AreStatisticsVisible = false;
         this.IsImportVisible = true;
 
-        this.preloadedFiles = new(pathList.Count);
+        this.expectedFileCount = pathList.Count;
         this.ImportThumbnailsPanelViewModel.Thumbnails.Clear();
         this.ImportStatus = this.Localize("Workflow.Import.Folder.Preloading");
         this.cancelPreload = false;
@@ -331,6 +330,8 @@ public sealed partial class FolderImportViewModel :
             this.OnSelect(thumbnails[0]);
             this.AddButtonIsDisabled = false;
         }
+
+        this.BackButtonIsDisabled = false;
     }
 
     public void Receive(ImportFileMessage message)
@@ -345,11 +346,8 @@ public sealed partial class FolderImportViewModel :
             // return;
         }
 
-        //string transferedTo = this.Localize(TransferedToLocKey);
-        //string transferError = this.Localize(TransferErrorLocKey);
         if (message.IsSuccess)
         {
-            this.preloadedFiles.Add(message.Path);
             var loadedImage = message.LoadedImage;
             if (loadedImage is not null && loadedImage.IsPreLoaded)
             {
@@ -361,6 +359,10 @@ public sealed partial class FolderImportViewModel :
         {
             // this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  " + transferError;
         }
+
+        this.ImportStatus =
+            this.Localize("Workflow.Import.Folder.Preloading") +
+            string.Format("  {0} / {1}", this.ImportThumbnailsPanelViewModel.Thumbnails.Count, this.expectedFileCount);
     }
 
     private async void BeginImport(List<string> pathList)
@@ -391,7 +393,7 @@ public sealed partial class FolderImportViewModel :
                 }
 
                 // Throttle so that the UI has enough time to show the thumbanil 
-                await Task.Delay(20);
+                await Task.Delay(60);
             });
 
             completed = true;
