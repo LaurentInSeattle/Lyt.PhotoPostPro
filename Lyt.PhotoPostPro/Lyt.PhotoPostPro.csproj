@@ -37,64 +37,28 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <AvaloniaResource Include="Assets\Images\**" />
-    <AvaloniaResource Include="Assets\Languages\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaResource Remove="Assets\Languages\Lang_bg-BG.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_bn-BD.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_de-DE.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_el-GR.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_en-US.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_es-ES.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_fr-FR.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_hi-IN.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_hu-HU.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_hy-AM.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_it-IT.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_jp-JP.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_ko-KO.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_pt-PT.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_th-TH.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_uk-UA.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_vi-VI.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_zh-CN.axaml" />
-    <AvaloniaResource Remove="Assets\Languages\Lang_zh-TW.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaXaml Remove="Assets\Languages\Lang_pt-PT.axaml" />
-    <AvaloniaXaml Remove="Assets\Languages\Lang_th-TH.axaml" />
-    <AvaloniaXaml Remove="Assets\Languages\Lang_vi-VI.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Controls\Panels\SVirtualizingPanel.cs" />
-    <Compile Remove="Controls\Panels\SVirtualizingStackPanel.cs" />
-    <Compile Remove="Controls\Panels\SVirtualizingUniformGrid.cs" />
-    <Compile Remove="Controls\Panels\SVirtualizingWrapPanel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\Languages\Lang_bg-BG.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_bn-BD.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_de-DE.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_el-GR.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_en-US.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_es-ES.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_fr-FR.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_hi-IN.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_hu-HU.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_hy-AM.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_it-IT.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_jp-JP.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_ko-KO.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_uk-UA.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_vi-VI.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_zh-CN.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_pt-PT.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_th-TH.axaml" />
-    <EmbeddedResource Include="Assets\Languages\Lang_zh-TW.axaml" />
+    <EmbeddedResource Include="Languages\Lang_bg-BG.lang" />
+    <EmbeddedResource Include="Languages\Lang_bn-BD.lang" />
+    <EmbeddedResource Include="Languages\Lang_de-DE.lang" />
+    <EmbeddedResource Include="Languages\Lang_el-GR.lang" />
+    <EmbeddedResource Include="Languages\Lang_en-US.lang" />
+    <EmbeddedResource Include="Languages\Lang_es-ES.lang" />
+    <EmbeddedResource Include="Languages\Lang_fr-FR.lang" />
+    <EmbeddedResource Include="Languages\Lang_hi-IN.lang" />
+    <EmbeddedResource Include="Languages\Lang_hu-HU.lang" />
+    <EmbeddedResource Include="Languages\Lang_hy-AM.lang" />
+    <EmbeddedResource Include="Languages\Lang_it-IT.lang" />
+    <EmbeddedResource Include="Languages\Lang_jp-JP.lang" />
+    <EmbeddedResource Include="Languages\Lang_ko-KO.lang" />
+    <EmbeddedResource Include="Languages\Lang_uk-UA.lang" />
+    <EmbeddedResource Include="Languages\Lang_vi-VI.lang" />
+    <EmbeddedResource Include="Languages\Lang_zh-CN.lang" />
+    <EmbeddedResource Include="Languages\Lang_pt-PT.lang" />
+    <EmbeddedResource Include="Languages\Lang_th-TH.lang" />
+    <EmbeddedResource Include="Languages\Lang_zh-TW.lang" />
   </ItemGroup>
 
   <ItemGroup>
@@ -108,24 +72,6 @@
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Persistence\Lyt.Persistence.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Utilities\Lyt.Utilities.csproj" />
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Workflow\Import\File\FileImportView.axaml.cs">
-      <DependentUpon>FileImportView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Import\Folder\ImportThumbnailView.axaml.cs">
-      <DependentUpon>ImportThumbnailView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Import\Folder\FolderImportView.axaml.cs">
-      <DependentUpon>FolderImportView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Import\Folder\ImportThumbnailsPanelView.axaml.cs">
-      <DependentUpon>ImportThumbnailsPanelView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\Dialogs\ProcessingDialog.axaml.cs">
-      <DependentUpon>ProcessingDialog.axaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

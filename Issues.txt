@@ -64,6 +64,8 @@ Code Quality Issues
 
 - Move Import code to Model - No UI there !
 
+- Cleanup ugly Virtualizing Wrap Panel if it does not get supported in Avalonia 
+
 - Move message definitions in new folders depending on area and workflow 
 
 - Cleanup public vs internal about everywhere 
@@ -89,6 +91,8 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 - No support (yet) for HEIC images in ImageSharp 
 
 - No support for AVIF images in ImageSharp 
+
+- No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
 
 Bugs - No Repro 

@@ -1,5 +1,4 @@
 ﻿using Avalonia.Labs.Controls.Utils;
-using Avalonia.VisualTree;
 
 namespace Avalonia.Labs.Controls;
 
@@ -9,7 +8,7 @@ namespace Avalonia.Labs.Controls;
 public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, IItemSizeProvider
 {
     // The fallback size in case size calculation went wrong
-    private static readonly Size _FallbackItemSize = new Size(48, 48);
+    private static readonly Size _FallbackItemSize = new Size(400, 120);
     private Size? _sizeOfFirstItem;
     private Size? _averageItemSizeCache;
 
@@ -19,9 +18,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private double _startItemOffsetX;
     private double _startItemOffsetY;
 
-    /// <summary>
-    /// Gets an empty size
-    /// </summary>
+    /// <summary> Gets an empty size </summary>
     private static readonly Size _EmptySize = new Size(0, 0);
 
     private const double EPSILON = 0.001;
@@ -47,9 +44,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         WrapPanel.OrientationProperty.AddOwner<VirtualizingWrapPanel>(
             new StyledPropertyMetadata<Orientation>(Orientation.Horizontal));
 
-    /// <summary>
-    /// Defines the <see cref="ItemSize"/> property.
-    /// </summary>
+    /// <summary> Defines the <see cref="ItemSize"/> property. </summary>
     public static readonly StyledProperty<Size> ItemSizeProperty =
         AvaloniaProperty.Register<VirtualizingWrapPanel, Size>(nameof(ItemSize), _EmptySize);
 
@@ -545,21 +540,38 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
-                _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems!.Count, _updateElementIndex);
+                if (e.NewItems is not null)
+                {
+                    _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, _updateElementIndex);
+                }
                 break;
+
             case NotifyCollectionChangedAction.Remove:
-                _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems!.Count, _updateElementIndex,
-                    _recycleElementOnItemRemoved);
+                if (e.OldItems is not null)
+                {
+                    _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, _updateElementIndex, _recycleElementOnItemRemoved);
+                }
                 break;
+
             case NotifyCollectionChangedAction.Replace:
-                _realizedElements.ItemsReplaced(e.OldStartingIndex, e.OldItems!.Count,
-                    _recycleElementOnItemRemoved);
+                if (e.OldItems is not null)
+                {
+                    _realizedElements.ItemsReplaced(e.OldStartingIndex, e.OldItems.Count, _recycleElementOnItemRemoved);
+                }
                 break;
+
             case NotifyCollectionChangedAction.Move:
-                _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems!.Count, _updateElementIndex,
-                    _recycleElementOnItemRemoved);
-                _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems!.Count, _updateElementIndex);
+                if (e.OldItems is not null)
+                {
+                    _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, _updateElementIndex, _recycleElementOnItemRemoved);
+                }
+
+                if (e.NewItems is not null)
+                {
+                    _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, _updateElementIndex);
+                }
                 break;
+
             case NotifyCollectionChangedAction.Reset:
                 _realizedElements.ItemsReset(_recycleElementOnItemRemoved);
                 break;
@@ -1469,10 +1481,13 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             var containerSize = DetermineContainerSize(item, container, upfrontKnownItemSize);
 
-            if (_measureElements!.GetElement(itemIndex) == null)
+            if (_measureElements is not null)
             {
-                _averageItemSizeCache = null;
-                _measureElements!.Add(itemIndex, container, containerSize);
+                if (_measureElements.GetElement(itemIndex) == null)
+                {
+                    _averageItemSizeCache = null;
+                    _measureElements.Add(itemIndex, container, containerSize);
+                }
             }
 
             if (AllowDifferentSizedItems == false && _sizeOfFirstItem is null)
@@ -1511,6 +1526,9 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             if (endItemIndexFound == false)
             {
+                Debug.Assert(_sizeOfFirstItem is not null);
+
+                // ! See Debug assert above 
                 if (y >= endOffsetY
                     || (AllowDifferentSizedItems == false
                         && x + GetWidth(_sizeOfFirstItem!.Value) > wrappingWidth
@@ -1551,7 +1569,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void VirtualizeItemsBeforeStartIndex()
     {
-        _realizedElements!.RecycleElementsBefore(_startItemIndex, RecycleElement);
+        _realizedElements?.RecycleElementsBefore(_startItemIndex, RecycleElement);
     }
 
     /// <summary>
@@ -1559,7 +1577,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void VirtualizeItemsAfterEndIndex()
     {
-        _realizedElements!.RecycleElementsAfter(_endItemIndex, RecycleElement);
+        _realizedElements?.RecycleElementsAfter(_endItemIndex, RecycleElement);
     }
 
     /// <summary>
@@ -1777,25 +1795,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private Size CalculateAverageItemSize()
     {
         var sizes = _realizedElements?.Sizes;
-        var count = sizes?.Count ?? 0;
-
-        if (count > 0)
+        int count = sizes?.Count ?? 0;
+        if (sizes is null || count == 0)
         {
-            double totalWidth = 0;
-            double totalHeight = 0;
-
-            for (int i = 0; i < count; i++)
-            {
-                totalWidth += sizes![i].Width;
-                totalHeight += sizes![i].Height;
-            }
-
-            return new Size(
-                totalWidth / count,
-                totalHeight / count);
+            return _FallbackItemSize;
         }
 
-        return _FallbackItemSize;
+        double totalWidth = 0;
+        double totalHeight = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            totalWidth += sizes[i].Width;
+            totalHeight += sizes[i].Height;
+        }
+
+        return new Size(totalWidth / count, totalHeight / count);
     }
 
     /// <summary>
@@ -2271,6 +2286,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             return realized;
 
         var item = items[index];
+
+        // ! See Debug assert above 
         var generator = ItemContainerGenerator!;
 
         if (generator.NeedsContainer(item, index, out var recycleKey))
@@ -2327,9 +2344,13 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the prepared container</returns>
     private Control GetItemAsOwnContainer(object? item, int index)
     {
+        Debug.Assert(item is not null);
         Debug.Assert(ItemContainerGenerator is not null);
 
+        // ! See Debug assert above 
         var controlItem = (Control)item!;
+
+        // ! See Debug assert above 
         var generator = ItemContainerGenerator!;
 
         if (!controlItem.IsSet(_RecycleKeyProperty))
@@ -2358,6 +2379,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         if (recycleKey is null)
             return null;
 
+        // ! See Debug assert above 
         var generator = ItemContainerGenerator!;
 
         if (_recyclePool?.TryGetValue(recycleKey, out var recyclePool) == true && recyclePool.Count > 0)
@@ -2383,6 +2405,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     {
         Debug.Assert(ItemContainerGenerator is not null);
 
+        // ! See Debug assert above 
         var generator = ItemContainerGenerator!;
         var container = generator.CreateContainer(item, index, recycleKey);
 
@@ -2423,6 +2446,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         }
         else
         {
+            // ! See Debug assert above 
             ItemContainerGenerator!.ClearItemContainer(element);
             PushToRecyclePool(recycleKey, element);
             element.SetCurrentValue(Visual.IsVisibleProperty, false);
@@ -2446,6 +2470,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         else
         {
             // RemoveInternalChild(element);
+            // ! See Debug assert above 
             ItemContainerGenerator!.ClearItemContainer(element);
             PushToRecyclePool(recycleKey, element);
             element.SetCurrentValue(Visual.IsVisibleProperty, false);
