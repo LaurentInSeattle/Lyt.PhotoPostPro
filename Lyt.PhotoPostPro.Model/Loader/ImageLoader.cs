@@ -373,30 +373,55 @@ public static partial class ImageLoader
 
             // Extract the raw byte span containing the JPEG data
             ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
+            var image = Image.Load(jpgEncoded);
 
+            // Check if the thumbnail needs to be resized 
+            bool resized = false;
+            if ((image.Width > ThumbnailLargestDimension) || (image.Height > ThumbnailLargestDimension))
+            {
+                // Resize the thumbnail 
+                resized = true;
+                Size size = ThumbnailSize(image.Width, image.Height, isHd: false);
+                image.Mutate(x => x.Resize(
+                    new ResizeOptions
+                    {
+                        Size = size,
+                        Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                        Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+                    }));
+            }
+
+            bool rotated = false;
             if (metadata.IsOrientationActionRequired)
             {
                 // If orientation action is required, we need to load the image in ImageSharp and
                 // apply the correct orientation
-                var image = Image.Load(jpgEncoded);
+                rotated = true;
                 LoadedImage.RotateIfNeeded(metadata, image);
+            }
+
+            if (rotated || resized)
+            {
                 var saveMemoryStream = new MemoryStream();
                 image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = ThumbnailQuality });
-                byte[] jpgRotatedEncoded = saveMemoryStream.ToArray();
-                if (jpgRotatedEncoded.Length > 0)
+                byte[] jpgMutatedEncoded = saveMemoryStream.ToArray();
+                if (jpgMutatedEncoded.Length > 0)
                 {
-                    return LoadedImage.PreLoaded(metadata, jpgRotatedEncoded);
+                    image.Dispose();
+                    return LoadedImage.PreLoaded(metadata, jpgMutatedEncoded);
                 }
             }
             else
             {
-                // Nothing to do, the image is already in the correct orientation
+                // Nothing to do, the image was small enough and already in the correct orientation
                 if (jpgEncoded.Length > 0)
                 {
+                    image.Dispose();
                     return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
                 }
             }
 
+            image.Dispose();
             return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
         }
         catch (Exception ex)

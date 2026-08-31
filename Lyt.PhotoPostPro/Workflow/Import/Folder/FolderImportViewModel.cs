@@ -373,7 +373,13 @@ public sealed partial class FolderImportViewModel :
         try
         {
             // Speed up this loop 
-            Parallel.For(0, pathList.Count, async (index) =>
+            var options = new ParallelOptions()
+            {
+                // Limit to 4 concurrent threads
+                MaxDegreeOfParallelism = 4 
+            };
+
+            Parallel.For(0, pathList.Count, options, async (index) =>
             {
                 if (this.cancelPreload)
                 {
