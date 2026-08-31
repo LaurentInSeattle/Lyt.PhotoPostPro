@@ -11,6 +11,7 @@
 
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
+	xmlns:vwp="using:Avalonia.Labs.Controls"
 	>
 	<Grid
 		Background="Transparent"
@@ -142,7 +143,7 @@
 				>
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<WrapPanel/>
+						<vwp:VirtualizingWrapPanel/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>

@@ -13,6 +13,8 @@ public static partial class ImageLoader
 
     public static string LibRawVersion => RawContext.Version;
 
+    private static Lock libRawLock = new();
+
     #region Loading 
 
     private static bool repairedImage = false;
@@ -369,11 +371,30 @@ public static partial class ImageLoader
             int height = r.Height;
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
             var metadata = new Metadata(imagePath, width, height, directories);
-            ProcessedImage thumbnail = r.ExportThumbnail();
 
-            // Extract the raw byte span containing the JPEG data
-            ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
-            var image = Image.Load(jpgEncoded);
+            // Lock libraw because we use multple threads when loading thumbnails on Import
+            byte[]? bytesJpgEncoded = null;
+            lock (libRawLock)
+            {
+                // Extract the raw byte span containing the JPEG data
+                ProcessedImage thumbnail = r.ExportThumbnail();
+                ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
+
+                // Copy to .Net memory while locked 
+                bytesJpgEncoded = jpgEncoded.ToArray();
+            }
+
+            if (bytesJpgEncoded is null)
+            {
+                return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
+            }
+
+            var image = Image.Load(bytesJpgEncoded);
+            if (image is null)
+            {
+                return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
+            }
+
 
             // Check if the thumbnail needs to be resized 
             bool resized = false;
@@ -414,10 +435,10 @@ public static partial class ImageLoader
             else
             {
                 // Nothing to do, the image was small enough and already in the correct orientation
-                if (jpgEncoded.Length > 0)
+                if (bytesJpgEncoded.Length > 0)
                 {
                     image.Dispose();
-                    return LoadedImage.PreLoaded(metadata, jpgEncoded.ToArray());
+                    return LoadedImage.PreLoaded(metadata, bytesJpgEncoded);
                 }
             }
 

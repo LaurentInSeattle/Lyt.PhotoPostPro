@@ -1,10 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-- CRITICAL: Library sometimes shows up empty at startup 
+- CRITICAL : Image not found 
 
-- CRITICAL: Need a virtualizing Wrap Panel for Imports , Camera, Library. 
-		See: https://github.com/sbaeumlisberger/VirtualizingWrapPanel
+- CRITICAL: Library sometimes shows up empty at startup 
 
 - Implement basic denoising 
 
@@ -94,8 +93,6 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
 Bugs - No Repro 
 ---------------
-
-- CRITICAL : Image not found 
 
 - After completing an edit, image does not show up in edited 
 

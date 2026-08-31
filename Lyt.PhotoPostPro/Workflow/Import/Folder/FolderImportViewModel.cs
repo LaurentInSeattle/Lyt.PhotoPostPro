@@ -2,10 +2,6 @@
 
 using Lyt.FileSystem;
 
-using System.Diagnostics.Metrics;
-
-using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
-
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 //using SixLabors.ImageSharp;
@@ -399,7 +395,7 @@ public sealed partial class FolderImportViewModel :
                 }
 
                 // Throttle so that the UI has enough time to show the thumbanil 
-                await Task.Delay(60);
+                await Task.Delay(40);
             });
 
             completed = true;
