@@ -210,16 +210,19 @@ public sealed partial class FolderImportViewModel :
         string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
         this.TotalSpaceRequiredString = string.Format(reqSpaceFormat, diskSpace);
 
-        if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
-        {
-            // Alert 
-            // Hide Import button
-            this.ShowImportButton = false;
-        }
-        else
-        {
-            this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f;
-        }
+        // Incorrect !
+        // We need to count available space when the preview step is complete 
+        //if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
+        //{
+        //    // Alert 
+        //    // Hide Import button
+        //    this.ShowImportButton = false;
+        //}
+        //else
+        //{
+        //    this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f;
+        //}
+        this.ShowImportButton = true;
     }
 
     private void GoBack()
@@ -348,7 +351,13 @@ public sealed partial class FolderImportViewModel :
             if (loadedImage is not null && loadedImage.IsPreLoaded)
             {
                 var thumbnail = new ImportThumbnailViewModel(this, loadedImage);
-                this.ImportThumbnailsPanelViewModel.Thumbnails.Add(thumbnail);
+                var thumbnails = this.ImportThumbnailsPanelViewModel.Thumbnails;
+                thumbnails.Add(thumbnail);
+                if (thumbnails.Count == 1)
+                {
+                    // Select the first recieved so that user has a clue about selecting images
+                    this.OnSelect(thumbnail);
+                }
             }
         }
         else
@@ -372,7 +381,7 @@ public sealed partial class FolderImportViewModel :
             var options = new ParallelOptions()
             {
                 // Limit to 4 concurrent threads
-                MaxDegreeOfParallelism = 4 
+                MaxDegreeOfParallelism = 4
             };
 
             Parallel.For(0, pathList.Count, options, async (index) =>

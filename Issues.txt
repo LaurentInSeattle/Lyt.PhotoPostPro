@@ -5,6 +5,8 @@ Bugs ~ Major Issues
 
 - CRITICAL: Library sometimes shows up empty at startup 
 
+- Rejected in Culling still in library collection 
+
 - Implement basic denoising 
 
 - Message for empty gallery 
