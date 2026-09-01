@@ -26,6 +26,10 @@ public sealed partial class GalleryViewModel :
     private bool showNextOnOne;
     private DispatcherTimer? slideShowTimer;
 
+    
+    [ObservableProperty]
+    public partial bool GalleryIsEmpty { get; set; }
+
     [ObservableProperty]
     public partial bool ButtonsAreDisabled { get; set; }
 
@@ -73,6 +77,8 @@ public sealed partial class GalleryViewModel :
         randomizer.Shuffle(this.galleryContent);
 
         this.nothingToShow = this.galleryContent.Count == 0;
+        this.GalleryIsEmpty = this.nothingToShow;
+
         this.View.Image1.IsVisible = false;
         this.View.Image2.IsVisible = false;
         if (this.nothingToShow)

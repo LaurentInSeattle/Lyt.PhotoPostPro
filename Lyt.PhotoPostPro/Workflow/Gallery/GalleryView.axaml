@@ -28,6 +28,15 @@
 			<ColumnDefinition Width="36" />
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
+		<TextBlock
+			Grid.Row="1" Grid.Column="2" 
+			Margin="0 -100 0 0"
+			IsVisible="{Binding GalleryIsEmpty}"
+			Text="{StaticResource Gallery.Empty}"
+			Theme="{StaticResource H2}"
+			Foreground="{StaticResource Alert.TextColor}"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			/>
 		<!-- Images at same Zindex --> 
 		<Image
 			x:Name="Image1"

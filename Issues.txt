@@ -9,12 +9,6 @@ Bugs ~ Major Issues
 
 - Implement basic denoising 
 
-- Message for empty gallery 
-
-- Message for empty library 
-
-- Message for no edits 
-
 - Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 
 - Add one sample photo at initial startup so that the library is never completely empty.
@@ -25,8 +19,6 @@ Bugs ~ Major Issues
 
 WIP
 ---
-
-- Bulk Import of photos into library 
 
 
 Essential Missing Features 

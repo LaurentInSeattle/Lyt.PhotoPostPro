@@ -108,6 +108,9 @@ public sealed partial class LibraryViewModel :
     [ObservableProperty]
     public partial int SelectionRating { get; set; }
 
+    [ObservableProperty]
+    public partial bool LibraryIsEmpty { get; set; }
+
     public LibraryViewModel(
         PhotoPostProModel photoPostProModel,
         IDialogService dialogService,
@@ -217,8 +220,8 @@ public sealed partial class LibraryViewModel :
     public void ReceiveOnUiThread(ThumbnailUpdatedMessage message)
     {
         this.LibraryThumbnailsPanelViewModel.Update(message.Path);
-        var first  = this.LibraryThumbnailsPanelViewModel.GetFirstDisplayed();  
-        if ( first is not  null)
+        var first = this.LibraryThumbnailsPanelViewModel.GetFirstDisplayed();
+        if (first is not null)
         {
             // make it the current selection 
             this.OnSelect(first);
@@ -234,10 +237,11 @@ public sealed partial class LibraryViewModel :
 
         this.BuildLibraryOptions();
 
-        if (message.ImageCount == 0)
+        bool empty = message.ImageCount == 0;
+        this.LibraryIsEmpty = empty;
+        if (empty)
         {
-            // TODO 
-            // Toast: Your library is empty 
+            // library is empty 
             return;
         }
 
@@ -618,7 +622,7 @@ public sealed partial class LibraryViewModel :
     private void OnProcessingComplete(object arg, bool _)
         => Schedule.OnUiThread(120, () =>
         {
-            ActivateProcessView(); 
+            ActivateProcessView();
         }, DispatcherPriority.ApplicationIdle);
 
 
@@ -706,10 +710,10 @@ public sealed partial class LibraryViewModel :
         }
 
         this.ClearSelection();
-    } 
+    }
 
-    private void ClearSelection ()
-    { 
+    private void ClearSelection()
+    {
         // Clear this view 
         this.SelectedThumbnail = null;
         this.SelectedThumnailMetadataViewModel = null;
@@ -720,7 +724,7 @@ public sealed partial class LibraryViewModel :
     }
 
     public void Receive(LibraryMetadataUpdateMessage message)
-        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background); 
+        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
 
     private void ReceiveOnUiThread(LibraryMetadataUpdateMessage message)
     {

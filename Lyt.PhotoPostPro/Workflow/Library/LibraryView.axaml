@@ -34,6 +34,15 @@
 			<ColumnDefinition Width="520"/>
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+		<TextBlock
+			Grid.Row="3" Grid.Column="2" 
+			Margin="0 -100 0 0"
+			IsVisible="{Binding LibraryIsEmpty}"
+			Text="{StaticResource Library.Empty}"
+			Theme="{StaticResource H2}"
+			Foreground="{StaticResource Alert.TextColor}"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			/>
 
 		<controls:VSelectorControl
 			Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" 
