@@ -24,6 +24,7 @@ public sealed partial class FolderImportViewModel :
     private FolderStatistics statistics;
     private DispatcherTimer? timer;
     private float totalSpaceRequiredMB;
+    private float selectedSpaceRequiredMB;
     private float availableMegabytes;
     private bool cancelPreload;
 
@@ -68,6 +69,9 @@ public sealed partial class FolderImportViewModel :
 
     [ObservableProperty]
     public partial bool CancelButtonIsDisabled { get; set; } = true;
+
+    [ObservableProperty]
+    public partial string SelectedSpaceRequiredString { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string FileImported { get; set; } = string.Empty;
@@ -132,8 +136,8 @@ public sealed partial class FolderImportViewModel :
                 string label = driveInfo.VolumeLabel;
                 string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
                 this.TotalSpaceRequiredString =
-                    string.Format(reqSpaceFormat, this.DiskSpaceString(0.0f));
-                string diskSpace = this.DiskSpaceString(this.availableMegabytes);
+                    string.Format(reqSpaceFormat, Metadata.DiskSpaceString(0.0f));
+                string diskSpace = Metadata.DiskSpaceString(this.availableMegabytes);
                 string diskSpaceFormat = this.Localize("Workflow.Import.Folder.DriveInfoFormat");
                 this.AvailableSpace =
                     string.Format(diskSpaceFormat, name, label, diskSpace);
@@ -206,22 +210,9 @@ public sealed partial class FolderImportViewModel :
             this.totalSpaceRequiredMB -= vm.ImageStatistics.SizeOnDiskMB;
         }
 
-        string diskSpace = this.DiskSpaceString(this.totalSpaceRequiredMB);
+        string diskSpace = Metadata.DiskSpaceString(this.totalSpaceRequiredMB);
         string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
         this.TotalSpaceRequiredString = string.Format(reqSpaceFormat, diskSpace);
-
-        // Incorrect !
-        // We need to count available space when the preview step is complete 
-        //if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
-        //{
-        //    // Alert 
-        //    // Hide Import button
-        //    this.ShowImportButton = false;
-        //}
-        //else
-        //{
-        //    this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f;
-        //}
         this.ShowImportButton = true;
     }
 
@@ -282,7 +273,7 @@ public sealed partial class FolderImportViewModel :
         this.ShowImportButton = false;
 
         // Collect the list of files to import 
-        var pathList = new List<string>();
+        var pathDictionary = new Dictionary<string, float>();
         foreach (ImageCategoryViewModel vm in this.ImageCategories)
         {
             if (!vm.IsImportIncluded)
@@ -290,14 +281,20 @@ public sealed partial class FolderImportViewModel :
                 continue;
             }
 
-            pathList.AddRange(vm.ImageStatistics.Paths);
+            foreach (var kvp in vm.ImageStatistics.Paths)
+            {
+                pathDictionary[kvp.Key] = kvp.Value;
+            }
         }
 
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
         this.IsImportVisible = true;
 
-        this.expectedFileCount = pathList.Count;
+        this.expectedFileCount = pathDictionary.Count;
+        this.selectedSpaceRequiredMB = 0.0f;
+        string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
+        this.SelectedSpaceRequiredString = string.Format(reqSpaceFormat, Metadata.DiskSpaceString(0.0f));
         this.ImportThumbnailsPanelViewModel.Thumbnails.Clear();
         this.ImportStatus = this.Localize("Workflow.Import.Folder.Preloading");
         this.cancelPreload = false;
@@ -308,8 +305,9 @@ public sealed partial class FolderImportViewModel :
         // Launch the Import thread 
         _ = Task.Run(async () =>
             {
-                // copy the list !
-                this.BeginImport(pathList.ToList());
+                // copy the dictionary entry keys
+                var pathList = pathDictionary.Keys.ToList();
+                this.BeginImport(pathList);
             });
     }
 
@@ -331,6 +329,19 @@ public sealed partial class FolderImportViewModel :
         }
 
         this.BackButtonIsDisabled = false;
+
+        // TODO
+        // We need to count available space when the preview step is complete 
+        //if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
+        //{
+        //    // Alert 
+        //    // Hide Import button
+        //    this.ShowImportButton = false;
+        //}
+        //else
+        //{
+        //    this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f;
+        //}
     }
 
     public void Receive(ImportFileMessage message)
@@ -471,27 +482,25 @@ public sealed partial class FolderImportViewModel :
         this.SelectedThumnailMetadataViewModel = null;
     }
 
-    public string DiskSpaceString(float megabytes)
+    internal void OnIsToAddToLibraryChanged(ImportThumbnailViewModel importThumbnailViewModel)
     {
-        if (megabytes <= 0.0)
+        float sizeOnDiskMB = importThumbnailViewModel.Metadata.SizeOnDiskMB;
+        if (importThumbnailViewModel.IsToAddToLibrary)
         {
-            return "---";
+            this.selectedSpaceRequiredMB += sizeOnDiskMB;
+        }
+        else if (this.selectedSpaceRequiredMB > 0.0f)
+        {
+            this.selectedSpaceRequiredMB -= sizeOnDiskMB;
+        }
+        else
+        {
+            // This should never happen 
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            this.selectedSpaceRequiredMB = 0.0f;
         }
 
-        bool isBig = megabytes > 1999.999f;
-        string unit = isBig ? "GB" : "MB";
-        if (isBig)
-        {
-            megabytes /= 1024.0f;
-        }
-
-        bool isHuge = megabytes > 1999.999f;
-        if (isHuge)
-        {
-            unit = "TB";
-            megabytes /= 1024.0f;
-        }
-
-        return string.Format("{0:F1} {1}", megabytes, unit);
+        string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
+        this.SelectedSpaceRequiredString = string.Format(reqSpaceFormat, Metadata.DiskSpaceString(this.selectedSpaceRequiredMB));
     }
 }

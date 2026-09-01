@@ -73,16 +73,10 @@ public sealed partial class ImageCategoryViewModel : ViewModel<ImageCategoryView
         this.FileCount = string.Format(fileCountFormat, imageStatistics.FileCount);
 
         string sizeOnDiskFormat = this.Localize("Workflow.Import.Folder.SizeOnDiskFormat");
-        string sizeOnDisk = parent.DiskSpaceString(imageStatistics.SizeOnDiskMB);
+        string sizeOnDisk = Metadata.DiskSpaceString(imageStatistics.SizeOnDiskMB);
         this.SizeOnDisk = string.Format(sizeOnDiskFormat, sizeOnDisk);
     }
 
     partial void OnIsImportIncludedChanged(bool value)
         => this.parent.OnImportSelectionChanged(this, shouldImport: value);
-
-    /*
-      
-    public List<string> Paths { get; private set; } = []; 
-
-    */
 }

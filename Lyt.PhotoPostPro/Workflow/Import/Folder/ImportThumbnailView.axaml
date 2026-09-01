@@ -68,7 +68,6 @@
 					VerticalAlignment="Top" HorizontalAlignment="Center"
 					IsThreeState="False"
 					IsChecked="{Binding IsToAddToLibrary, Mode=TwoWay}"
-					Command="{Binding OnIsToAddToLibraryChanged}"
 					/>
 			</Grid>
 		</Grid>

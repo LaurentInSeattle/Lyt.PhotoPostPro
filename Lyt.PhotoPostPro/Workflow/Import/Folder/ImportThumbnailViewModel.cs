@@ -49,7 +49,7 @@ public sealed partial class ImportThumbnailViewModel :
         this.ImageHeight = LargeImageHeight;
         this.Thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedImage.JpgThumbnail));
 
-        this.IsToAddToLibrary = true;
+        this.IsToAddToLibrary = false;
         this.Title = string.Empty;
         this.Details = string.Empty;
         this.SetThumbnailStrings();
@@ -61,10 +61,13 @@ public sealed partial class ImportThumbnailViewModel :
 
     internal void OnSelect() => this.parent.OnSelect(this);
 
-    [RelayCommand]
-    public void OnIsToAddToLibraryChanged()
+    partial void OnIsToAddToLibraryChanged(bool value)
     {
-    }
+        if ( this.parent is FolderImportViewModel folderImportViewModel)
+        {
+            folderImportViewModel.OnIsToAddToLibraryChanged(this);
+        }
+    } 
 
     private void SetThumbnailStrings()
     {

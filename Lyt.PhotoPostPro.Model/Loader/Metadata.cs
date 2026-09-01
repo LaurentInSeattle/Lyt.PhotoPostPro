@@ -45,8 +45,6 @@ public sealed class Metadata
             string extension = fileInfo.Extension;
             this.Filename = fileInfo.Name.Replace(extension, "");
             this.Extension = extension.Replace(".", "").ToUpperInvariant();
-            float length = fileInfo.Length / Megabytes;
-            this.SizeMB = string.Format("{0:F1} MB", length);
             this.Length = fileInfo.Length;
             this.FileDateUTC = fileInfo.CreationTimeUtc;
         }
@@ -99,7 +97,9 @@ public sealed class Metadata
     /// <summary> File name extension - no DOT </summary>
     public string Extension { get; set; } = string.Empty;
 
-    public string SizeMB { get; set; } = string.Empty;
+    public float SizeOnDiskMB => this.Length / Megabytes;
+
+    public string SizeMB => DiskSpaceString(this.SizeOnDiskMB);
 
     public long Length { get; set; }
 
@@ -463,5 +463,29 @@ public sealed class Metadata
         {
             this.OrientationActionRequired = OrientationAction.None; 
         }
+    }
+
+    public static string DiskSpaceString(float megabytes)
+    {
+        if (megabytes <= 0.0)
+        {
+            return "---";
+        }
+
+        bool isBig = megabytes > 1999.999f;
+        string unit = isBig ? "GB" : "MB";
+        if (isBig)
+        {
+            megabytes /= 1024.0f;
+        }
+
+        bool isHuge = megabytes > 1999.999f;
+        if (isHuge)
+        {
+            unit = "TB";
+            megabytes /= 1024.0f;
+        }
+
+        return string.Format("{0:F1} {1}", megabytes, unit);
     }
 }

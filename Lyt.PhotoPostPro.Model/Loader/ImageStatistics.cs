@@ -8,12 +8,12 @@ public sealed  class ImageStatistics(ImageKind kind)
 
     public float SizeOnDiskMB { get; private set; } // = 0.0f;
 
-    public List<string> Paths { get; private set; } = []; 
+    public Dictionary<string, float> Paths { get; private set; } = []; 
 
     internal void Update(string path, float sizeOnDiskMB)
     {
         ++ this.FileCount;
         this.SizeOnDiskMB += sizeOnDiskMB; 
-        this.Paths.Add(path);
+        this.Paths.Add(path, sizeOnDiskMB);
     }
 }

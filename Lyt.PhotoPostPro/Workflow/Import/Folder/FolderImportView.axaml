@@ -25,7 +25,8 @@
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
-				<RowDefinition Height="72" /> <!-- Status and Buttons --> 
+				<RowDefinition Height="64" /> <!-- Status and Buttons --> 
+				<RowDefinition Height="64" /> <!-- Disk Space  --> 
 				<RowDefinition Height="*" />
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
@@ -89,14 +90,30 @@
 					IsDisabled="{Binding BackButtonIsDisabled}"
 	    			/>
 			</StackPanel>
-			<TextBlock
+			<StackPanel
+				Orientation="Horizontal"
 				Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-				Text="{Binding FileImported}"
-				Theme="{StaticResource H3}"
-				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-				/>
+				HorizontalAlignment="Left" 
+				> 
+				<TextBlock
+					Margin="0 0 24 0"
+					Text="{Binding SelectedSpaceRequiredString}"
+					Theme="{StaticResource H3}"
+					MaxWidth="480" 
+					TextWrapping="Wrap"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+				<TextBlock
+					Margin="0"
+					Text="{Binding AvailableSpace}"
+					Theme="{StaticResource H3}"
+					MaxWidth="480" 
+					TextWrapping="Wrap"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+			</StackPanel>
 			<vm:ImportThumbnailsPanelView 
-				Grid.Row="2" Grid.Column="1"
+				Grid.Row="3" Grid.Column="1"
 				DataContext="{Binding ImportThumbnailsPanelViewModel}"
 				/>
 			<StackPanel
