@@ -25,6 +25,34 @@ public sealed partial class LibraryManager
         return true;
     }
 
+    // Returns true if we can add the file to the library, false if it is a duplicate
+    // No conflict
+    //      - or - 
+    // this file is a RAW that takes precedence over the JPG, so we can add it to the library
+    public bool CheckForDuplicates(string imageFullPath, string targetFolder)
+    {
+        string filename = Path.GetFileNameWithoutExtension(imageFullPath);
+        var existingFiles = Directory.EnumerateFiles(targetFolder, filename, SearchOption.TopDirectoryOnly);
+        if (!existingFiles.Any())
+        {
+            // No other files with the same name, so we can add it to the library
+            return true;
+        }
+
+        foreach (var existingFile in existingFiles)
+        {
+            string existingExtension = Path.GetExtension(existingFile).ToLowerInvariant();
+            if (ImageLoader.HasRawExtension(existingExtension))
+            {
+                // There is already a RAW file with the same name,
+                // so we cannot add this file to the library
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public bool AddDownloadedFiles(List<Metadata> files)
     {
         if ((this.CapturedFolderTree is null) ||
@@ -40,29 +68,35 @@ public sealed partial class LibraryManager
         {
             try
             {
-                if (!File.Exists(metadata.FullPath))
+                string fullPath = metadata.FullPath;
+                if (!File.Exists(fullPath))
                 {
-                    throw new Exception("No such file: " + metadata.FullPath);
+                    throw new Exception("No such file: " + fullPath);
                 }
 
                 if (this.IsAlreadyInLibrary(metadata))
                 {
-                    throw new Exception("Already present in library: " + metadata.FullPath);
+                    throw new Exception("Already present in library: " + fullPath);
                 }
 
                 // Create target library folder if needed 
                 MetadataFolders metadataFolders = new(metadata);
                 string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
+                if (!this.CheckForDuplicates(fullPath, targetFolder))
+                {
+                    throw new Exception("Duplicate file found in library: " + fullPath);
+                }
+
                 // Move main file 
-                string targetFilename = Path.GetFileName(metadata.FullPath);
+                string targetFilename = Path.GetFileName(fullPath);
                 string targetPath = Path.Combine(targetFolder, targetFilename);
-                File.Move(metadata.FullPath, targetPath, overwrite: true);
+                File.Move(fullPath, targetPath, overwrite: true);
 
                 // Move thumbnail file 
                 string? sourceFolder =
-                    Path.GetDirectoryName(metadata.FullPath) ??
-                    throw new Exception("No source folder for: " + metadata.FullPath);
+                    Path.GetDirectoryName(fullPath) ??
+                    throw new Exception("No source folder for: " + fullPath);
                 string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
@@ -124,8 +158,7 @@ public sealed partial class LibraryManager
 
     public bool AddDroppedFile(LoadedImage loadedImage, bool doSort = true)
     {
-        if ((this.fileManager is null) ||
-            (this.CapturedFolderTree is null) ||
+        if ((this.CapturedFolderTree is null) ||
             (this.UnratedFolderTree is null))
         {
             throw new Exception("Library Manager is not initialized.");
@@ -140,28 +173,33 @@ public sealed partial class LibraryManager
 
             // ! Checked by loadedImage.IsPreLoaded
             Metadata metadata = loadedImage.Metadata!;
+            string fullPath = metadata.FullPath;
 
             if (this.IsAlreadyInLibrary(metadata))
             {
-                throw new Exception("Already present in library: " + metadata.FullPath);
+                throw new Exception("Already present in library: " + fullPath);
             }
 
             // ! Checked by loadedImage.IsPreLoaded
             byte[] thumbnailImageBytes = loadedImage.JpgThumbnail!;
-
-            if (!File.Exists(metadata.FullPath))
+            if (!File.Exists(fullPath))
             {
-                throw new Exception("No such file: " + metadata.FullPath);
+                throw new Exception("No such file: " + fullPath);
             }
 
             // Create target folder if needed 
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
+            if (!this.CheckForDuplicates(fullPath, targetFolder))
+            {
+                throw new Exception("Duplicate file found in library: " + fullPath);
+            }
+
             // Copy main file - NOT Move 
-            string targetFilename = Path.GetFileName(metadata.FullPath);
+            string targetFilename = Path.GetFileName(fullPath);
             string targetPath = Path.Combine(targetFolder, targetFilename);
-            File.Copy(metadata.FullPath, targetPath, overwrite: true);
+            File.Copy(fullPath, targetPath, overwrite: true);
 
             // Create thumbnail file 
             string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
