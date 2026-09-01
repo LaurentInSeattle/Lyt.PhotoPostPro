@@ -59,14 +59,15 @@ Minor Issues (Low priority)
 
 - Thumbnail is not updated after edit without export --- By Design ? 
 
+- Virtualizing Wrap Panel weird layouts at times (See 2017 pictures) Does not repro easily.
 
 
 Code Quality Issues 
 -------------------
 
-- Move Import code to Model - No UI there !
+- Move most Import code to Model - No UI there !
 
-- Cleanup ugly Virtualizing Wrap Panel if it does not get supported in Avalonia 
+- Cleanup ugly code of Virtualizing Wrap Panel if it does not get supported in Avalonia 
 
 - Move message definitions in new folders depending on area and workflow 
 
@@ -75,6 +76,8 @@ Code Quality Issues
 - Setup logging for trace to disk 
 
 - Speed up LUT code using Value (struct) for colours instead of classes.
+
+- Launch the logging window minimized in both release and debug mode
 
 
 

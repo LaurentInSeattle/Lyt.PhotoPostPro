@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Import.Folder;
 
-using Lyt.FileSystem;
-
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 //using SixLabors.ImageSharp;
@@ -74,6 +72,9 @@ public sealed partial class FolderImportViewModel :
     public partial string SelectedSpaceRequiredString { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial string DiskSpaceAlert { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial string FileImported { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -105,6 +106,7 @@ public sealed partial class FolderImportViewModel :
     public void OnCancelImport()
     {
         this.cancelPreload = true;
+        this.ImportStatus = this.Localize("Workflow.Import.Folder.PreloadCancelled");
     }
 
     public void OnFolderDrop(string path)
@@ -330,18 +332,27 @@ public sealed partial class FolderImportViewModel :
 
         this.BackButtonIsDisabled = false;
 
-        // TODO
-        // We need to count available space when the preview step is complete 
-        //if (this.totalSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
-        //{
-        //    // Alert 
-        //    // Hide Import button
-        //    this.ShowImportButton = false;
-        //}
-        //else
-        //{
-        //    this.ShowImportButton = this.totalSpaceRequiredMB > 0.0f;
-        //}
+        // We need to count available space when the preview step is complete
+        this.CheckAvailableSpace(); 
+    }
+
+    private void CheckAvailableSpace ()
+    {
+        // We need to count available space when the preview step is complete
+        this.DiskSpaceAlert = string.Empty;
+        if (this.selectedSpaceRequiredMB > this.availableMegabytes - MinimumDiskAvailableMegaByte)
+        {
+            // Alert 
+            string diskSpaceAlert = this.Localize("Workflow.Import.Folder.DiskSpaceAlert");
+            this.DiskSpaceAlert = diskSpaceAlert;
+
+            // Hide Add button
+            this.AddButtonIsDisabled = true;
+        }
+        else
+        {
+            this.AddButtonIsDisabled = this.selectedSpaceRequiredMB <= 0.0f;
+        }
     }
 
     public void Receive(ImportFileMessage message)
@@ -502,5 +513,9 @@ public sealed partial class FolderImportViewModel :
 
         string reqSpaceFormat = this.Localize("Workflow.Import.Folder.ReqSpaceFormat");
         this.SelectedSpaceRequiredString = string.Format(reqSpaceFormat, Metadata.DiskSpaceString(this.selectedSpaceRequiredMB));
+
+        // We need to count available space when any step change
+        this.CheckAvailableSpace();
+
     }
 }

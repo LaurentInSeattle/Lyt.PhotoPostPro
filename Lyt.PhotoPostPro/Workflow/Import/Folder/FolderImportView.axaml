@@ -99,16 +99,19 @@
 					Margin="0 0 24 0"
 					Text="{Binding SelectedSpaceRequiredString}"
 					Theme="{StaticResource H3}"
-					MaxWidth="480" 
-					TextWrapping="Wrap"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+				<TextBlock
+					Margin="0 0 24 0"
+					Text="{Binding AvailableSpace}"
+					Theme="{StaticResource H3}"
 					HorizontalAlignment="Left" VerticalAlignment="Center"
 					/>
 				<TextBlock
 					Margin="0"
-					Text="{Binding AvailableSpace}"
+					Text="{Binding DiskSpaceAlert}"
 					Theme="{StaticResource H3}"
-					MaxWidth="480" 
-					TextWrapping="Wrap"
+					Foreground="{StaticResource Alert.TextColor}"
 					HorizontalAlignment="Left" VerticalAlignment="Center"
 					/>
 			</StackPanel>

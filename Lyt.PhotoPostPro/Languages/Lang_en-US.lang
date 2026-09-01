@@ -112,8 +112,10 @@
 
 	<system:String x:Key="Workflow.Import.Folder.Adding">Adding selected images to Library...</system:String>
 	<system:String x:Key="Workflow.Import.Folder.Added">Complete: Selected images added to Library.</system:String>
+  <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Preloading Cancelled...</system:String>
+  <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficient disk space available.</system:String>
 
-	<!-- Metadata -->
+  <!-- Metadata -->
 	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.Aperture">Aperture:</system:String>
