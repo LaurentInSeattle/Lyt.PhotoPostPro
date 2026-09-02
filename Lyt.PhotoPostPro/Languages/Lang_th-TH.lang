@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">ลากและวางเขตเวลา</system:String>
 
+    <system:String x:Key="Gallery.Empty">แกลเลอรี่ดวงที่ 5 ของคุณ.</system:String>
+
+    <system:String x:Key="Library.Empty">ไลบรารีของรูปภาพของคุณว่างเปล่า ใช้ 'นําเข้า' เพื่อเพิ่มภาพต่าง ๆ.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">แสดงภาพนิ่ง</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">พื้นหลัง</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">ลากและวางแฟ้มภาพไว้ที่นี่เพื่อเริ่ม.</system:String>
 
+    <system:String x:Key="Single.AddImage">เพิ่มรูปภาพนี้ไปยังไลบรารี</system:String>
+
     <system:String x:Key="Single.ProcessImage">โพรเซส ภาพนี้</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">การโหลดล้มเหลว</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">ไม่สามารถเรียกใช้อิมเมจนี้ได้.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">โฟลเดอร์นี้ว่าง.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">โฟลเดอร์นี้ไม่มีอิมเมจอยู่.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">เกิดข้อผิดพลาดขณะเก็บข้อมูล.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">แฟ้ม {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">ต้องการขนาดบนดิสก์: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">เลือกทั้งหมดที่จะนําเข้า</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">เลิกกาทั้งหมดเพื่อไม่สนใจ</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">นําเข้า</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">ยกเลิกการนําเข้า</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">พื้นที่ที่ต้องการ: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">พื้นที่ที่มีบน {0} (: {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">กําลังดาวน์โหลดภาพ...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">การโหลดภาพโดยสมบูรณ์: {0} ภาพ, การลบข้อมูลล้มเหลว.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">เพิ่มการตรวจสอบไปยังไลบรารี</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">เพิ่มภาพที่เลือกไว้ไปยังไลบรารี...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">เสร็จสมบูรณ์: ภาพที่เลือกไว้ที่ถูกเพิ่มไปยังไลบรารี.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">ยกเลิกการโหลดก่อน...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">พื้นที่บนดิสก์ไม่เพียงพอ.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">แฟ้มถูกสร้าง: {0} ที่ {1}</system:String>
 

@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
 
+    <system:String x:Key="Gallery.Empty">'five Star'の最高の写真のギャラリーは空です.</system:String>
+
+    <system:String x:Key="Library.Empty">あなたの写真のライブラリは空です。 'Import' を使用して画像を追加します.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">スライドショー</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">壁紙</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
 
+    <system:String x:Key="Single.AddImage">この画像をライブラリに追加する</system:String>
+
     <system:String x:Key="Single.ProcessImage">この画像を処理する</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">ロードに失敗しました</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">この画像は読み込めませんでした。</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">このフォルダは空です.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">このフォルダには画像がありません.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">ファイル情報を収集する際のエラー.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} ファイル</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">ディスクのサイズ: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">すべてのインポートをチェック</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">全てを無視する</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">インポート</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">キャンセルの輸入</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">必要なスペース: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">{0} で利用可能なスペース ({1}): {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">プレロード画像...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">読み込み完了: {0} イメージ、 {1} エラー.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">ライブラリにチェックを追加</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">選択した画像をライブラリに追加する...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">完了: ライブラリに追加された画像を選択します.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">プレロード解除...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">ディスク容量が不足しています.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">ファイルが作成されました: {0}、{1}</system:String>
 

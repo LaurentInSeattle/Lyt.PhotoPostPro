@@ -5,11 +5,7 @@ Bugs ~ Major Issues
 
 - CRITICAL: Library sometimes shows up empty at startup 
 
-- Rejected in Culling still in library collection 
-
 - Implement basic denoising 
-
-- Bypassing the XAML loader for loading language files breaks the 'css' style newlines 
 
 - Add one sample photo at initial startup so that the library is never completely empty.
 
@@ -19,6 +15,9 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
+- Rejected in Culling still in library collection 
+
 
 
 Essential Missing Features 

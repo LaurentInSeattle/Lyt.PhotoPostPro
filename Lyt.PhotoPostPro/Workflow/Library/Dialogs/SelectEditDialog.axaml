@@ -15,7 +15,7 @@
 	xmlns:countdown="clr-namespace:Lyt.Avalonia.Controls.Countdown;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="720" Height="460"
+		Width="740" Height="510"
 		Background="Transparent"
 		>
 		<Rectangle
@@ -99,7 +99,7 @@
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="16"/>
-						<RowDefinition Height="100"/> <!-- Message -->  
+						<RowDefinition Height="150"/> <!-- Message -->  
 						<RowDefinition Height="90"/> <!-- Combo -->  
 						<RowDefinition Height="90"/> <!-- Checkbox -->  
 						<RowDefinition Height="90"/> <!-- Buttons -->  

@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">Arrastar e Soltar Zona</system:String>
 
+    <system:String x:Key="Gallery.Empty">Sua galeria de 'cinco estrelas' melhores fotos está vazia.</system:String>
+
+    <system:String x:Key="Library.Empty">Sua biblioteca de imagens está vazia. Use "Importar" para adicionar imagens.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">Apresentação</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Papel de parede</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">Arraste e solte um arquivo de imagem aqui para começar.</system:String>
 
+    <system:String x:Key="Single.AddImage">Adicionar esta imagem à biblioteca</system:String>
+
     <system:String x:Key="Single.ProcessImage">Processo Esta imagem</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Falha no carregamento</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Não foi possível carregar esta imagem.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">Esta pasta está vazia.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">Esta pasta não contém nenhuma imagem.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Erro ao coletar informações do arquivo.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">Ficheiros {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Tamanho necessário no disco: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">Verificar tudo para importar</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Desmarcar tudo para ignorar</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">Importar</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">Cancelar Importação</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Espaço Obrigatório: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Espaço disponível em {0} ({1}): {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Pré- carregar imagens...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Pré-carregamento completo: {0} imagens, {1} erros.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Adicionar verificado à biblioteca</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">Adicionando imagens selecionadas à Biblioteca...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">Completo: Imagens selecionadas adicionadas à Biblioteca.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Pré- carregar cancelado...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Espaço em disco insuficiente disponível.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Arquivo criado: {0} em {1}</system:String>
 

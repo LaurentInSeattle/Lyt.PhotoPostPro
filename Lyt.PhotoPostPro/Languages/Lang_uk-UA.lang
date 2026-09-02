@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
 
+    <system:String x:Key="Gallery.Empty">Галерея 'five stars' Кращі фотографії порожній.</system:String>
+
+    <system:String x:Key="Library.Empty">Бібліотека зображень порожній. Використовуйте "Імпорт" для додавання зображень.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">Показ слайдів</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Шпалери</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 
+    <system:String x:Key="Single.AddImage">Додати це зображення до бібліотеки</system:String>
+
     <system:String x:Key="Single.ProcessImage">Обробити це зображення</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Помилка завантаження</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Не вдалося завантажити це зображення.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">Ця папка порожній.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">Ця папка не містить зображення.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Помилка при зборі інформації про файл.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} Файли</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Розмір, необхідний на диску: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">Перевірити всі</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Показати всі Ignore</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">Імпорт</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">Скасувати імпорт</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Необхідний простір: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Доступний простір на {0} ({1}): {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Перевантаження зображень ...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Перевантаження завершено: {0} зображення, {1} помилки.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Додати до бібліотеки</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">Додавання вибраних зображень до бібліотеки...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">Повний: Вибрані зображення додано до бібліотеки.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Перевантаження Скасовано ...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Недостатній дисковий простір доступні.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Файл створено: {0} о {1}</system:String>
 

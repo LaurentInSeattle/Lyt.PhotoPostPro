@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
 
+    <system:String x:Key="Gallery.Empty">आपकी गैलरी 'पाँच सितारों' सबसे अच्छा चित्र खाली है।.</system:String>
+
+    <system:String x:Key="Library.Empty">आपकी तस्वीरों की लाइब्रेरी खाली है। छवियों को जोड़ने के लिए 'आयात' का उपयोग करें।.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">स्लाइड शो</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">वॉलपेपर</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">आरंभ करने के लिए एक छवि फ़ाइल को यहां खींचें और छोड़ें।</system:String>
 
+    <system:String x:Key="Single.AddImage">इस छवि को लाइब्रेरी में जोड़ें</system:String>
+
     <system:String x:Key="Single.ProcessImage">इस छवि को संसाधित करें</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">लोड विफल हो गया</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">यह छवि लोड नहीं की जा सकी.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">यह फ़ोल्डर खाली है।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">इस फ़ोल्डर में कोई छवि नहीं है।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">फ़ाइल जानकारी एकत्र करते समय त्रुटि।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} फ़ाइलें</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">डिस्क पर आवश्यक आकार: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">सभी को आयात करने के लिए जाँच करें</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">All to Ignore</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">आयात</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">आयात रद्द करना</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">आवश्यक अंतरिक्ष: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">{0} ({1}) पर उपलब्ध स्पेस: {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Preloading images...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Preloading complete: {0} छवियां, {1} त्रुटियाँ.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Add Checked to Library</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">चयनित छवियों को लाइब्रेरी में जोड़ना ...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">पूर्ण: चयनित छवियों को लाइब्रेरी में जोड़ा गया।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">रद्द करना.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">अपर्याप्त डिस्क स्थान उपलब्ध है।.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">फ़ाइल बनाई गई: {0} पर {1}</system:String>
 

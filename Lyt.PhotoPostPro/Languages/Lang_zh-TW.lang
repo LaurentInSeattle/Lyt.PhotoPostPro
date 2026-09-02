@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">拖放區</system:String>
 
+    <system:String x:Key="Gallery.Empty">有"五星"好相片被取出.</system:String>
+
+    <system:String x:Key="Library.Empty">您相片相簿已空出 。 使用 “ 匯入 ” 來新增影像 .</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">幻燈片放映</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">壁紙</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">將圖像檔案拖放到此處即可開始。</system:String>
 
+    <system:String x:Key="Single.AddImage">將此影像添加到相簿</system:String>
+
     <system:String x:Key="Single.ProcessImage">處理該影像</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">載入失敗</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">無法載入該圖片。</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">此資料夾是空的 .</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">此資料夾中沒有影像 .</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">收集檔案資訊出錯 .</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} 文件</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">在磁碟上需要大小: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">檢查全部以匯入</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">取消檢查以忽略</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">匯入</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">取消匯入</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">需要的空間: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">在 {0} ({1}) 上可用的空間 :{2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">正在預載影像...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">預載完成: {0}相片,{1}出錯 .</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">已檢查已新增到相簿</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">正在新增所選取的影像到相簿中...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">完成: 已選取的影像已新增到相簿 .</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">已取消的預載中...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">磁碟空間不足 .</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">檔案已建立：{0}，時間：{1}</system:String>
 

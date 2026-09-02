@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">Плъзнете и пуснете зона</system:String>
 
+    <system:String x:Key="Gallery.Empty">Вашата галерия с най-добрите пет звезди е празна.</system:String>
+
+    <system:String x:Key="Library.Empty">Библиотеката ти е празна. Използвайте 'Импорт', за да добавите изображения.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">Слайдшоу</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Тапет</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">Плъзнете и пуснете файл с изображение тук, за да започнете.</system:String>
 
+    <system:String x:Key="Single.AddImage">Добавяне на това изображение в библиотеката</system:String>
+
     <system:String x:Key="Single.ProcessImage">Обработка на това изображение</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Неуспешно зареждане</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Това изображение не можа да бъде заредено.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">Тази папка е празна.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">Тази папка не съдържа изображение.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Грешка при събиране на информация за файла.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">Файлове</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Размер на диска: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">Проверка на всички за импортиране</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Отписване на всички за игнориране</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">Внос</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">Отмяна на импортирането</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Необходимо пространство: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Достъпно пространство на {0} ({1}): {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Презареждане на изображения...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Предварително зареждане завърши: {0} изображения, грешки.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Добавяне проверено в библиотеката</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">Добавяне на избрани изображения в библиотеката...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">Завършване: Избрани изображения добавени към Библиотеката.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Презареждането е отменено...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Недостатъчно свободно дисково пространство.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Файлът е създаден: {0} на {1}</system:String>
 

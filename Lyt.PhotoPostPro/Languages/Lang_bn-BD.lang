@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">ড্র্যাগ অ্যান্ড ড্রপ জোন</system:String>
 
+    <system:String x:Key="Gallery.Empty">আপনার পাঁচটি তারার সেরা ছবির গ্যালারি খালি।.</system:String>
+
+    <system:String x:Key="Library.Empty">আপনার লাইব্রেরির ফটো ফাঁকা। ছবি যোগ করতে ' আমদানী' ব্যবহার করুন।.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">স্লাইড শো</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">ওয়ালপেপার</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
 
+    <system:String x:Key="Single.AddImage">এই ছবিটি লাইব্রেরির মধ্যে যোগ করুন</system:String>
+
     <system:String x:Key="Single.ProcessImage">এই চিত্রটি প্রক্রিয়া করুন</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">লোড ব্যর্থ হয়েছে</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">এই ছবি লোড করা যাবে না.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">ফোল্ডার ফাঁকা ।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">এই ফোল্ডারের মধ্যে কোনো ছবি উপস্থিত নেই।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">ফাইল সংগ্রহ করতে সমস্যা ।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} ফাইল</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">ডিস্কের মধ্যে আবশ্যক মাপ: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">সব আমদানি করো</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">উপেক্ষা করার জন্য চিহ্নিত ব্যাক-আপ উপেক্ষা করা হবে</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">ইম্পোর্ট</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">ইম্পোর্ট বাতিল</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">আবশ্যক স্থান: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">{0}-র মধ্যে উপস্থিত স্থান: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">ছবি লোড করা হচ্ছে...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">ছবি লোড করা হয়েছে: {0}, {1}।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">লাইব্রেরির মধ্যে আপডেট করা হয়েছে</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">নির্বাচিত ছবি ক্লিপবোর্ডে যোগ করা হচ্ছে...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">নির্বাচিত চিত্র সফলভাবে লাইব্রেরীতে যোগ করা হয়েছে।.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">প্রিলোড করা হয়েছে...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">ডিস্কে পর্যাপ্ত স্থান উপলব্ধ নেই।.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">ফাইল তৈরি করা হয়েছে: {1} এ {0}</system:String>
 

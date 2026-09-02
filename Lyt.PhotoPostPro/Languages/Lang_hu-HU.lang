@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
+    <system:String x:Key="Gallery.Empty">Az öt csillag legjobb képeinek galériája üres.</system:String>
+
+    <system:String x:Key="Library.Empty">A képtár üres. A képek hozzáadásához használja az 'importálás' opciót.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">Diavetítés</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Tapéta</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 
+    <system:String x:Key="Single.AddImage">A kép felvétele a könyvtárba</system:String>
+
     <system:String x:Key="Single.ProcessImage">A kép feldolgozása</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Betöltés sikertelen</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Ezt a képet nem sikerült betölteni.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">Ez a mappa üres.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">Ez a mappa nem tartalmaz képet.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Hiba történt a fájlinformációk gyűjtése közben.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} Fájlok</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">A lemezen szükséges méret: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">Az összes importálás ellenőrzése</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Minden kikapcsolása figyelmen kívül hagyáshoz</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">Import</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">Importálás törlése</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Szükséges hely: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Elérhető hely: {0} ({1}): {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Képek feltöltése...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Teljes feltöltés: {0} képek, {1} hibák.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Hozzáadás ellenőrizve könyvtárba</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">A kiválasztott képek felvétele a könyvtárba...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">Teljes: Válogatott képek hozzáadva a könyvtárhoz.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Törölve...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Nincs elegendő lemezterület.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Fájl létrehozva: {0}, {1}</system:String>
 

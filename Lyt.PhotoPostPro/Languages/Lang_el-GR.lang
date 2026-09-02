@@ -45,6 +45,10 @@
 
     <system:String x:Key="DragDrop.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
 
+    <system:String x:Key="Gallery.Empty">Η γκαλερί σου με τις καλύτερες φωτογραφίες των πέντε αστέρων είναι άδεια.</system:String>
+
+    <system:String x:Key="Library.Empty">Η βιβλιοθήκη με τις φωτογραφίες σου είναι άδεια. Χρήση 'Εισαγωγή' για την προσθήκη εικόνων.</system:String>
+
     <system:String x:Key="Gallery.Toolbar.SlideShow">Παρουσίαση</system:String>
 
     <system:String x:Key="Gallery.Toolbar.Wallpaper">Ταπετσαρία</system:String>
@@ -83,11 +87,49 @@
 
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>
 
+    <system:String x:Key="Single.AddImage">Προσθήκη αυτής της εικόνας στη βιβλιοθήκη</system:String>
+
     <system:String x:Key="Single.ProcessImage">Επεξεργαστείτε αυτήν την εικόνα</system:String>
 
     <system:String x:Key="Single.LoadImageFailTitle">Η φόρτωση απέτυχε</system:String>
 
     <system:String x:Key="Single.LoadImageFailMessage">Δεν ήταν δυνατή η φόρτωση αυτής της εικόνας.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Empty">Αυτός ο φάκελος είναι άδειος.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">Αυτός ο φάκελος δεν περιέχει εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Σφάλμα κατά τη συλλογή πληροφοριών αρχείου.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.FileCountFormat">Αρχεία {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Μέγεθος που απαιτείται στο δίσκο: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ImportAll">Έλεγχος όλων για εισαγωγή</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Απενεργοποιήστε όλα για να αγνοήσετε</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Import">Εισαγωγή</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Cancel">Ακύρωση εισαγωγής</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Απαιτούμενος χώρος: {0}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Διαθέσιμος χώρος στο {0} ({1}: {2}</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Preloading">Προφόρτωση εικόνων...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Η προφόρτωση ολοκληρώθηκε: {0} εικόνες, {1} λάθη.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Προσθήκη επιλεγμένου στη βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Adding">Προσθήκη επιλεγμένων εικόνων στη Βιβλιοθήκη...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.Added">Πλήρης: Επιλεγμένες εικόνες προστίθενται στη Βιβλιοθήκη.</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Η προφόρτωση ακυρώθηκε...</system:String>
+
+    <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Ανεπαρκής διαθέσιμος χώρος στο δίσκο.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Δημιουργήθηκε αρχείο: {0} στις {1}</system:String>
 
