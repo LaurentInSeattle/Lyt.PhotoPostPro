@@ -613,6 +613,8 @@ public sealed partial class LibraryViewModel :
         }
         else
         {
+            // Hide all buttons
+            this.HasSelection = false;
             ActivateProcessView();
         }
     }
