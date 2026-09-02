@@ -12,6 +12,16 @@ Bugs ~ Major Issues
 WIP
 ---
 
+Implement layout and tabs for tools: Signature, Watermark, Export, etc.
+
+Implement generic Editor 
+
+Implement Export Editor 
+
+Implement Signature Editor 
+
+Implement Watermark Editor 
+
 
 Essential Missing Features 
 --------------------------
