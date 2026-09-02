@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Линии на изрязване:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Нулиране</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Преглед</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Най-горе:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Златни триъгълници нагоре</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Златни триъгълници надолу</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Деноиз</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Нанесете за намаляване на шума в изображението.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- Никакви..</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO зърно</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Глобална експозиция</system:String>
 

@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Schnittlinien:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Zurücksetzen</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Vorschau</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Spitze:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Goldene Dreiecke nach oben</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Goldene Dreiecke nach unten</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Denois</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Bewerben Sie sich, um das Rauschen im Bild zu reduzieren.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- - Keine -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO-Korn</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Globale Präsenz</system:String>
 

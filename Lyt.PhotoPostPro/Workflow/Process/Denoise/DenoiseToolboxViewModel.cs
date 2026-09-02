@@ -7,12 +7,9 @@ public sealed partial class DenoiseToolboxViewModel :
     private bool doNotUpdateModel;
     private DenoiseStep.DenoiseAlgorithm selectedFilter;
 
-    private float amount;
-
     public DenoiseToolboxViewModel()
     {
         this.selectedFilter = DenoiseStep.DenoiseAlgorithm.None ;
-        this.amount = 0.0f;
         this.Subscribe<LanguageChangedMessage>();
     }
 

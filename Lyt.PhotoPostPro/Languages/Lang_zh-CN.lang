@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">作物线：</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">重置</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">预览</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">顶部：</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">金三角向上</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">金三角向下</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">德诺瓦斯</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">应用来减少图像中的噪音 .</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- 没有</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO 谷物</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">全球曝光</system:String>
 

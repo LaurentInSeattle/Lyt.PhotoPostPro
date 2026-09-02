@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Γραμμές περικοπής:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Επαναφορά</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Πρεμιέρα</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Κορυφή:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Χρυσά Τρίγωνα επάνω</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Χρυσά Τρίγωνα Κάτω</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Δεινόρεξη</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Εφαρμογή για τη μείωση του θορύβου στην εικόνα.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- Καμία..</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">Κριθάρι ISO</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Παγκόσμια Έκθεση</system:String>
 

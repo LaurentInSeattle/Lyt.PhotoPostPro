@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">บรรทัดที่ตัดมา:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">ตั้งค่าใหม่</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">แสดงตัวอย่าง</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">ด้านบน:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">สามเหลี่ยมทองคําขึ้น</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">สามเหลี่ยมทองคําลง</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">ปรับใช้เพื่อลดเสียงรบกวนของภาพ.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- ไม่มี -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">เกรน มาตรฐาน</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">ความไวแสงทั่วไป</system:String>
 

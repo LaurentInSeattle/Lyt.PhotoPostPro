@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Лінії кадрування:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Скинути</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Попередній перегляд</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Вгорі:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Золоті трикутники вгору</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Золоті трикутники вниз</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Деноз</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Застосовувати для зменшення шуму в образі.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- - Ні -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO Зерно</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Глобальна експозиція</system:String>
 

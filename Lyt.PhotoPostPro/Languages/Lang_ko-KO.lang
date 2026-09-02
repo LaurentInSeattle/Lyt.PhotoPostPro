@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">절단선:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">다시 놓기</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">시사</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">맨 위:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">골든 트라이앵글 업</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">골든 트라이앵글 다운</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">인기 있는</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">이미지의 소음을 감소시키기 위하여 적용하십시오.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- - 없음 - -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO 곡물</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">글로벌 노출</system:String>
 

@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Linee di Ritaglio:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Reset</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Anteprima</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Superiore:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Triangoli d'oro in alto</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangoli d'oro in basso</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Riduzione del Rumore</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Applicare per ridurre il rumore nell'immagine.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- - Nessuno - -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">Rumore ISO</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Esposizione Globale</system:String>
 

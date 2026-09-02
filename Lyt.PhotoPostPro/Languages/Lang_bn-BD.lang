@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">ক্রপ লাইন:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">রিসেট করুন</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">পূর্বরূপ</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">শীর্ষ:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">গোল্ডেন ট্রায়াঙ্গলস আপ</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">গোল্ডেন ট্রায়াঙ্গলস ডাউন</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">দিন</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">ছবিতে শব্দ হ্রাসের জন্য প্রয়োগ করুন।.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- কিছুই না -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO ব্লু-টুথ</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">গ্লোবাল এক্সপোজার</system:String>
 

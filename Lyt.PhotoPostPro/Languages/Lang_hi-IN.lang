@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">फसल रेखाएँ:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">रीसेट करें</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">पूर्व दर्शन</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">शीर्ष:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">स्वर्ण त्रिभुज ऊपर</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">नीचे सुनहरे त्रिकोण</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">छवि में शोर को कम करने के लिए लागू करें।.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- कोई नहीं -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">आईएसओ अनाज</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">वैश्विक एक्सपोजर</system:String>
 

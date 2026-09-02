@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Vágósorok:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Reset</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Előnézet</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Felső:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Arany háromszögek felfelé</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Arany háromszögek lefelé</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Alkalmazás a hang csökkentésére a képen.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- Semmi</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Globális expozíció</system:String>
 

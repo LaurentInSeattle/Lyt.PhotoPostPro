@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Cắt dòng:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Đặt lại</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Xem thử</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Trên:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Tam giác vàng lên</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Tam giác vàng xuống</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Kích hoạt</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Áp dụng để giảm nhiễu trong ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- Không..</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">Name</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Lộ sáng toàn cục</system:String>
 

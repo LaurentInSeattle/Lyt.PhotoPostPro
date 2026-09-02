@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">トリミングライン:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">リセット</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">プレビュー</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">トップ：</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">ゴールデン トライアングルズ アップ</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">ゴールデン トライアングルズ ダウン</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">デノワーズ</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">画像の騒音を抑える.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- - なし - -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISOの穀物</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">世界的な暴露</system:String>
 

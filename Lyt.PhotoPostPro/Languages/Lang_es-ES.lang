@@ -207,8 +207,6 @@
 
     <system:String x:Key="Workflow.Compose.Croplines">Líneas de cultivo:</system:String>
 
-    <system:String x:Key="Workflow.Compose.Clear">Reiniciar</system:String>
-
     <system:String x:Key="Workflow.Compose.Preview">Avance</system:String>
 
     <system:String x:Key="Workflow.Compose.Top">Arriba:</system:String>
@@ -240,6 +238,14 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Triángulos dorados arriba</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triángulos dorados hacia abajo</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Correction">Aplicar para reducir el ruido en la imagen.</system:String>
+
+    <system:String x:Key="Workflow.Denoise.None">- Ninguno -</system:String>
+
+    <system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
 
     <system:String x:Key="Workflow.Exposure.Title">Exposición global</system:String>
 
