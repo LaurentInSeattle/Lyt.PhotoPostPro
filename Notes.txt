@@ -15,15 +15,7 @@ The chart below lists how the 8 standard EXIF values map to their required physi
 
 
 
---- 
-
-https://imagecompression.info/test_images/  
-
---- 
-
 ==> Lib MTP :  https://github.com/shaosss/libMtpSharp 
-
-==> WPD Light : https://github.com/MartinKuschnik/WPDlight
 
 ------------
 
@@ -63,52 +55,6 @@ baseImage.Mutate(x => x.DrawImage(watermark, new Point(50, 50), 0.3f));
 
 baseImage.Save("output.jpg");
 
-----------
-
-To treat high-ISO grain (luminance and chroma noise) effectively, a pure median blur 
-can sometimes look too blocky. A better approach in ImageSharp is to combine a mild 
-Gaussian Blur (to blend the grain) with a subtle Box Blur or a very low-radius 
-Median Blur, or to apply the processing specifically to a cloned layer to blend it back.
-
-Here is an optimized approach for high-ISO grain using a gentle Gaussian smoothing:C# Implementationcsharpusing SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-
-// Load the high-ISO photo
-using var image = Image.Load<Rgba32>("high_iso_input.jpg");
-
-image.Mutate(x => {
-	// Apply a soft Gaussian blur to smooth out the grain
-	// Sigma controls the amount of smoothing (keep it low: 0.5 to 1.5)
-	x.GaussianBlur(sigma: 0.8f);
-});
-
-// Save the cleaner image
-image.Save("high_iso_denoised.jpg");
-
-
-// Load your input image
-using var image = Image.Load<Rgba32>("input.jpg");
-
-// Apply the Median Blur
-// A radius of 3 is a good starting point for mild to moderate noise
-image.Mutate(x => x.MedianBlur(radius: 3));
-
-// Save the processed image
-image.Save("output_denoised.jpg");
-
-//Adjusting the Radius: 
-// The radius determines the size of the neighborhood window used for filtering. 
-// Use a smaller odd number (e.g., 3 or 5). 
-// Using too large of a radius can result in a loss of fine details and a "watercolor" 
-// effect
-
-Tips for High-ISO GrainKeep Sigma Low: A sigma value between 0.5f and 1.2f targets 
-fine high-ISO grain without destroying shapes.
-Chroma Noise: ImageSharp operates on RGB space by default. 
-If your high-ISO noise has severe colored specks (chroma noise), a small MedianBlur(1) 
-or MedianBlur(2) works better than Gaussian blur to eliminate the color artifacts.
-If you notice the image gets too soft, I can show you how to re-sharpen the edges using 
-an unsharp mask right after blurring. 
 
 
 	1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables

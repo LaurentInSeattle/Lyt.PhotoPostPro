@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Block buttons when clicking process in Library view 
-
 - CRITICAL : Image not found 
 
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
@@ -13,8 +11,6 @@ Bugs ~ Major Issues
 
 WIP
 ---
-
-- Implement basic denoising 
 
 
 Essential Missing Features 

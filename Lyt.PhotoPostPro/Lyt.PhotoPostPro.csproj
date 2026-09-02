@@ -74,13 +74,4 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Workflow\Process\Denoise\DenoiseToolboxView.axaml.cs">
-      <DependentUpon>DenoiseToolboxView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Denoise\DenoiseView.axaml.cs">
-      <DependentUpon>DenoiseView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>
