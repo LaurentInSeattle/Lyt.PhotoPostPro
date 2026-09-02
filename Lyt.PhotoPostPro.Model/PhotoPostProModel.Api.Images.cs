@@ -75,11 +75,11 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    internal void IsoGrainDenoise(
-        float gaussianSharpen, // 0.8f
-        int medianBlur, // 1
-        float gaussianBlur, // 0.75f
-        float blendFactor /*  0.4f */  ) => 
+    public void IsoGrainDenoise(
+        float gaussianSharpen = 0.8f,
+        int medianBlur = 1,
+        float gaussianBlur = 0.75f,
+        float blendFactor = 0.4f) => 
         this.ApiAction(() =>
         {
             if ((gaussianSharpen < 0.7f) || (gaussianSharpen > 0.9f))

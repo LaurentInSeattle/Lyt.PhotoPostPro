@@ -73,6 +73,7 @@ public sealed partial class GalleryViewModel :
         this.Subscribe<HotKeyMessage>();
 
         // Creates a local copy so that we can shuffle 
+        this.libraryManager.InitializeGallery(); 
         this.galleryContent = this.libraryManager.GalleryContent.ToList();
         randomizer.Shuffle(this.galleryContent);
 

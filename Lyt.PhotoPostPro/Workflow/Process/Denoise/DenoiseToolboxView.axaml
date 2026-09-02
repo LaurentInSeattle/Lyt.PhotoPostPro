@@ -15,15 +15,13 @@
 	<Grid
 		>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Filters --> 
-			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 1 : Filter combo --> 
-			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 3 : Explain Amount  --> 
-			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- 4Amount --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Algorithm --> 
+			<RowDefinition Height="{StaticResource Size.ComboBox}" /> <!-- 1 : Algorithm combo --> 
+			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
-			Text="{DynamicResource Workflow.Filters.Correction}"
+			Text="{DynamicResource Workflow.Denoise.Correction}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
@@ -55,41 +53,6 @@
 					</DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>		
-		</Grid>
-		<TextBlock
-			Grid.Row="3" 
-			Text="{DynamicResource Workflow.Filters.ExplainAmount}"
-			Theme="{StaticResource Large}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-		<Grid
-			Grid.Row="4" 
-			> 
-			<Grid.ColumnDefinitions> 
-				<ColumnDefinition Width="100" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="70" />
-			</Grid.ColumnDefinitions>
-			<!-- Single Row: Effect  Amount -->	
-			<TextBlock
-				Grid.Row="0" Grid.Column="0" 
-				Theme="{StaticResource Large}"
-				HorizontalAlignment="Right"
-				Text="{DynamicResource Workflow.Filters.Amount}"
-				/>
-			<Slider 
-				Grid.Row="0" Grid.Column="1" 
-				TickFrequency="0.1" TickPlacement="BottomRight"
-				SmallChange="0.01" LargeChange="0.05"
-				Minimum="0.0" Maximum="1.0"
-				Value="{Binding AmountSliderValue}"
-				/>
-			<TextBlock
-				Grid.Row="0" Grid.Column="2" 
-				Theme="{StaticResource Large}"
-				HorizontalAlignment="Left"
-				Text="{Binding AmountString}"
-				/>
 		</Grid>
 	</Grid>
 </UserControl>

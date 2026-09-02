@@ -201,6 +201,7 @@ public sealed partial class ProcessViewModel :
         Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientationStep, OrientToolboxView>(ActivatedView.Orient);
         Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenStep, StraightenToolboxView>(ActivatedView.Straighten);
         Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep, ComposeToolboxView>(ActivatedView.Compose);
+        Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseStep, DenoiseToolboxView>(ActivatedView.Denoise);
         Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep, RecoveryToolboxView>(ActivatedView.Recovery);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);

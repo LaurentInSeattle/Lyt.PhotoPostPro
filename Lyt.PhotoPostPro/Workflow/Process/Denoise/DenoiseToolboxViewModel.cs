@@ -37,12 +37,6 @@ public sealed partial class DenoiseToolboxViewModel :
     [ObservableProperty]
     public partial int SelectedIndex { get; set; }
 
-    [ObservableProperty]
-    public partial string AmountString { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial double AmountSliderValue { get; set; }
-
     public void Receive(LanguageChangedMessage _) => this.Localize();
 
     private void Localize()
@@ -72,11 +66,6 @@ public sealed partial class DenoiseToolboxViewModel :
             // Enforce property changed 
             this.SelectedIndex = 1;
             this.SelectedIndex = 0;
-
-            // Sliders initial positions and string values
-            // Enforce property changed 
-            this.AmountSliderValue = this.amount + 0.01;
-            this.AmountSliderValue = this.amount;
         });
 
         this.isFirstLoad = false;
@@ -89,20 +78,7 @@ public sealed partial class DenoiseToolboxViewModel :
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             this.SelectedIndex = (int)step.Algorithm;
-
-            // Here we need to undo the operations done reading the sliders 
-            // No transforms for highlights and shadows amounts 
-            // this.AmountSliderValue = step.Amount;
         });
-    }
-
-    partial void OnAmountSliderValueChanged(double value)
-    {
-        // Slider sends 0 to +1
-        this.amount = (float)value;
-        int intValue = (int)(value * 100.0 + 0.5);
-        this.AmountString = intValue.ToString("D") + " %";
-        this.UpdateModel();
     }
 
     partial void OnSelectedIndexChanged(int value)
@@ -149,7 +125,7 @@ public sealed partial class DenoiseToolboxViewModel :
                         break;
 
                     case DenoiseStep.DenoiseAlgorithm.IsoGrain:
-                        // this.model.IsoGrain(this.amount);
+                        this.model.IsoGrainDenoise ();
                         break;
                 }
             });
