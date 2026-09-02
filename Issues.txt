@@ -15,11 +15,10 @@ WIP
 ---
 
 
-
 Essential Missing Features 
 --------------------------
 
-- Watermarks with transparency (Image now have an alpha channel, then draw the watermark on it, then save)
+- Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
 
 - UI to pick up exports parameters 
 
@@ -27,7 +26,7 @@ Essential Missing Features
 
 - UI to define watermarks
 
-- First Run View : Setup root locations 
+- First Run View : Setup root locations, etc 
 
 - App settings 
 
@@ -52,7 +51,7 @@ Minor Issues (Low priority)
 Code Quality Issues 
 -------------------
 
-- Move most Import code to Model - No UI there !
+- Cleanup code tha builds file names and paths.
 
 - Cleanup ugly code of Virtualizing Wrap Panel if it does not get supported in Avalonia 
 

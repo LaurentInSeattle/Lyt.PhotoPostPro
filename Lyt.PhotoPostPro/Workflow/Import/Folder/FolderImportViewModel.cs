@@ -105,7 +105,7 @@ public sealed partial class FolderImportViewModel :
     [RelayCommand]
     public void OnCancelImport()
     {
-        this.cancelPreload = true;
+        this.model.LibraryManager.CancelImport();
         this.ImportStatus = this.Localize("Workflow.Import.Folder.PreloadCancelled");
     }
 
@@ -141,8 +141,7 @@ public sealed partial class FolderImportViewModel :
                     string.Format(reqSpaceFormat, Metadata.DiskSpaceString(0.0f));
                 string diskSpace = Metadata.DiskSpaceString(this.availableMegabytes);
                 string diskSpaceFormat = this.Localize("Workflow.Import.Folder.DriveInfoFormat");
-                this.AvailableSpace =
-                    string.Format(diskSpaceFormat, name, label, diskSpace);
+                this.AvailableSpace = string.Format(diskSpaceFormat, name, label, diskSpace);
             }
 
             this.ShowStatistics();
@@ -304,13 +303,9 @@ public sealed partial class FolderImportViewModel :
         this.AddButtonIsDisabled = true;
         this.ClearSelection();
 
-        // Launch the Import thread 
-        _ = Task.Run(async () =>
-            {
-                // copy the dictionary entry keys
-                var pathList = pathDictionary.Keys.ToList();
-                this.BeginImport(pathList);
-            });
+        // copy the dictionary entry keys
+        var pathList = pathDictionary.Keys.ToList();
+        this.model.LibraryManager.BeginImport(pathList);
     }
 
     public void Receive(ImportCompleteMessage message)
@@ -333,10 +328,10 @@ public sealed partial class FolderImportViewModel :
         this.BackButtonIsDisabled = false;
 
         // We need to count available space when the preview step is complete
-        this.CheckAvailableSpace(); 
+        this.CheckAvailableSpace();
     }
 
-    private void CheckAvailableSpace ()
+    private void CheckAvailableSpace()
     {
         // We need to count available space when the preview step is complete
         this.DiskSpaceAlert = string.Empty;
@@ -392,85 +387,6 @@ public sealed partial class FolderImportViewModel :
             string.Format("  {0} / {1}", this.ImportThumbnailsPanelViewModel.Thumbnails.Count, this.expectedFileCount);
     }
 
-    private async void BeginImport(List<string> pathList)
-    {
-        bool completed = false;
-        int errors = 0;
-        int imports = 0;
-        try
-        {
-            // Speed up this loop 
-            var options = new ParallelOptions()
-            {
-                // Limit to 4 concurrent threads
-                MaxDegreeOfParallelism = 4
-            };
-
-            Parallel.For(0, pathList.Count, options, async (index) =>
-            {
-                if (this.cancelPreload)
-                {
-                    return;
-                }
-
-                string file = pathList[index];
-                bool success = this.ImportFile(file);
-                if (success)
-                {
-                    Interlocked.Increment(ref imports);
-                }
-                else
-                {
-                    Interlocked.Increment(ref errors);
-                    this.Logger.Warning("Download error" + file);
-                }
-
-                // Throttle so that the UI has enough time to show the thumbanil 
-                await Task.Delay(40);
-            });
-
-            completed = true;
-        }
-        catch (Exception ex)
-        {
-            this.Logger.Warning($" Error while importing files: {ex.Message}");
-        }
-        finally
-        {
-            new ImportCompleteMessage(completed, pathList.Count, imports, errors).Publish();
-        }
-    }
-
-    private bool ImportFile(string file)
-    {
-        try
-        {
-            if (!System.IO.File.Exists(file))
-            {
-                new ImportFileMessage(IsSuccess: false, Path: file, Message: "No Such File.").Publish();
-                return false;
-            }
-
-            LoadedImage loadedImage = ImageLoader.PreLoadImage(file);
-            if (loadedImage.IsSuccess && loadedImage.IsPreLoaded)
-            {
-                // ! Verified by loadedImage.IsPreLoaded
-                new ImportFileMessage(
-                    IsSuccess: true, Path: file, Message: "Success", loadedImage).Publish();
-                return true;
-            }
-
-            new ImportFileMessage(IsSuccess: false, Path: file, Message: "Unknown Error").Publish();
-            return false;
-        }
-        catch (Exception ex)
-        {
-            this.Logger.Warning(" Import File: Exception thrown: " + ex);
-            new ImportFileMessage(IsSuccess: false, Path: file, Message: "Exception thrown: " + ex).Publish();
-            return false;
-        }
-    }
-
     public void OnSelect(object selectedObject)
     {
         if (selectedObject is ImportThumbnailViewModel importThumbnailViewModel)
@@ -516,6 +432,5 @@ public sealed partial class FolderImportViewModel :
 
         // We need to count available space when any step change
         this.CheckAvailableSpace();
-
     }
 }

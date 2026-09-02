@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro.Messaging;
+﻿namespace Lyt.PhotoPostPro.Model.Messaging;
 
 public sealed record class ImportCompleteMessage(
     bool Completed,
