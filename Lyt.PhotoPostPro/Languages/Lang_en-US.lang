@@ -184,14 +184,14 @@
 	<system:String x:Key="Workflow.Compose.CG.GoldenUp"> Golden Triangles Up</system:String>
 	<system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
 
-  <!-- Workflow Denoise -->
-  <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
-  <system:String x:Key="Workflow.Denoise.Correction">Apply to reduce noise in the image.</system:String>
-  <!-- Algorithm Combobox -->
-  <system:String x:Key="Workflow.Denoise.None"> - - None - -</system:String>
-  <system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
+	<!-- Workflow Denoise -->
+	<system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
+	<system:String x:Key="Workflow.Denoise.Correction">Apply to reduce noise in the image.</system:String>
+	<!-- Algorithm Combobox -->
+	<system:String x:Key="Workflow.Denoise.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
 
-  <!-- Workflow Exposure -->
+	<!-- Workflow Exposure -->
 	<system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
 	<system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
 	<system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
