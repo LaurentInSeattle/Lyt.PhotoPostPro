@@ -24,7 +24,6 @@ public sealed partial class FolderImportViewModel :
     private float totalSpaceRequiredMB;
     private float selectedSpaceRequiredMB;
     private float availableMegabytes;
-    private bool cancelPreload;
 
     [ObservableProperty]
     public partial bool IsFolderMode { get; set; }
@@ -298,7 +297,6 @@ public sealed partial class FolderImportViewModel :
         this.SelectedSpaceRequiredString = string.Format(reqSpaceFormat, Metadata.DiskSpaceString(0.0f));
         this.ImportThumbnailsPanelViewModel.Thumbnails.Clear();
         this.ImportStatus = this.Localize("Workflow.Import.Folder.Preloading");
-        this.cancelPreload = false;
         this.CancelButtonIsDisabled = false;
         this.AddButtonIsDisabled = true;
         this.ClearSelection();
@@ -313,7 +311,6 @@ public sealed partial class FolderImportViewModel :
 
     public void ReceiveOnUiThread(ImportCompleteMessage message)
     {
-        this.cancelPreload = false;
         this.CancelButtonIsDisabled = true;
         string importStatusFormat = this.Localize("Workflow.Import.Folder.PreloadCompleteFormat");
         this.ImportStatus = string.Format(importStatusFormat, message.Imports, message.Errors);

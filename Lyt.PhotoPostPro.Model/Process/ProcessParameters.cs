@@ -2,6 +2,7 @@
 
 using static Lyt.PhotoPostPro.Model.ProcessSteps.ColorStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.ContrastStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.DenoiseStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.FiltersStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.SharpenStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.WhiteBalanceStep;
@@ -16,6 +17,8 @@ public sealed class ProcessParameters
     public DateTime Created { get; set; }
 
     public DateTime Updated { get; set; }
+
+    // Geometry 
 
     public int OrientationRotationAngle { get; set; } // Degrees
 
@@ -34,6 +37,21 @@ public sealed class ProcessParameters
     public int CompositionOriginalDx { get; set; }
 
     public int CompositionOriginalDy { get; set; }
+
+    // Denoise 
+
+    public DenoiseAlgorithm DenoiseAlgorithm { get; set; }
+
+    public float IsoGrainDenoiseGaussianSharpen { get; set; }
+
+    public int IsoGrainDenoiseMedianBlur { get; set; }
+
+    public float IsoGrainDenoiseGaussianBlur { get; set; }
+
+    public float IsoGrainDenoiseBlendFactor { get; set; }
+
+
+    // Exposure 
 
     public float ExposureGamma { get; set; }
 
@@ -55,6 +73,8 @@ public sealed class ProcessParameters
 
     public float VignetteLightness { get; set; }
 
+    // White Balance
+
     public WhiteBalanceAlgorithm WhiteBalanceAlgorithm { get; set; }
 
     public float WhiteBalanceSaturationThreshold { get; set; }
@@ -68,6 +88,8 @@ public sealed class ProcessParameters
     public float WhiteBalanceGreen { get; set; }
 
     public float WhiteBalanceBlue { get; set; }
+
+    // Contrast
 
     public ContrastAlgorithm ContrastAlgorithm { get; set; }
 
@@ -84,6 +106,7 @@ public sealed class ProcessParameters
     public float ContrastBlueAmount { get; set; }
 
     // LUT 
+
     public string LutFriendlyName { get; set; } = string.Empty;
 
     public string LutPath { get; set; } = string.Empty;
@@ -91,6 +114,7 @@ public sealed class ProcessParameters
     public bool LutIsEmbedded { get; set; }
 
     // Color 
+
     public ColorAlgorithm ColorAlgorithm { get; set; }
 
     public float ColorSaturationAmount { get; set; }
@@ -101,6 +125,8 @@ public sealed class ProcessParameters
 
     public float ColorBlueAmount { get; set; }
 
+    // Sharpen
+
     public SharpenAlgorithm SharpenAlgorithm { get; set; }
 
     public float SharpenSharpenAmount { get; set; }
@@ -108,6 +134,7 @@ public sealed class ProcessParameters
     public Filter FilterSelectedFilter { get; set; }
 
     public float FilterAmount { get; set; }
+
 
     public ProcessParameters (ProcessWorkflow workflow)
     {
@@ -133,6 +160,13 @@ public sealed class ProcessParameters
         this.CompositionDy = compositionStep.Dy;
         this.CompositionOriginalDx = compositionStep.OriginalDx;
         this.CompositionOriginalDy = compositionStep.OriginalDy;
+
+        var denoiseStep = workflow.Get<DenoiseStep>();
+        this.DenoiseAlgorithm = denoiseStep.Algorithm;
+        this.IsoGrainDenoiseGaussianSharpen = denoiseStep.GaussianSharpen;
+        this.IsoGrainDenoiseMedianBlur = denoiseStep.MedianBlur;
+        this.IsoGrainDenoiseGaussianBlur = denoiseStep.GaussianBlur;
+        this.IsoGrainDenoiseBlendFactor = denoiseStep.BlendFactor;
 
         var exposureStep = workflow.Get<ExposureStep>();
         this.ExposureGain = exposureStep.Gain;
@@ -204,6 +238,13 @@ public sealed class ProcessParameters
         compositionStep.Dy = this.CompositionDy;
         compositionStep.OriginalDx = this.CompositionOriginalDx;
         compositionStep.OriginalDy = this.CompositionOriginalDy;
+
+        var denoiseStep = workflow.Get<DenoiseStep>();
+        denoiseStep.Algorithm = this.DenoiseAlgorithm;
+        denoiseStep.GaussianSharpen = this.IsoGrainDenoiseGaussianSharpen;
+        denoiseStep.MedianBlur = this.IsoGrainDenoiseMedianBlur;
+        denoiseStep.GaussianBlur = this.IsoGrainDenoiseGaussianBlur;
+        denoiseStep.BlendFactor = this.IsoGrainDenoiseBlendFactor;
 
         var exposureStep = workflow.Get<ExposureStep>();
         exposureStep.Gain = this.ExposureGain;

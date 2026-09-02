@@ -75,6 +75,42 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    internal void IsoGrainDenoise(
+        float gaussianSharpen, // 0.8f
+        int medianBlur, // 1
+        float gaussianBlur, // 0.75f
+        float blendFactor /*  0.4f */  ) => 
+        this.ApiAction(() =>
+        {
+            if ((gaussianSharpen < 0.7f) || (gaussianSharpen > 0.9f))
+            {
+                return false;
+            }
+
+            if ((medianBlur < 0) || (medianBlur > 3))
+            {
+                return false;
+            }
+
+            if ((gaussianBlur < 0.6f) || (gaussianBlur > 0.9f))
+            {
+                return false;
+            }
+
+            if ((blendFactor < 0.3f) || (blendFactor > 0.5f))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is DenoiseStep denoiseStep)
+            {
+                this.LastResultFrame = denoiseStep.IsoGrainDenoise(gaussianSharpen, medianBlur, gaussianBlur, blendFactor);
+                return true;
+            }
+
+            return false;
+        });
+
     public void AdjustExposure(float gamma, float gain, float shift) =>
         this.ApiAction(() =>
         {

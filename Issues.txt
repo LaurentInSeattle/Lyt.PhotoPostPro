@@ -5,14 +5,14 @@ Bugs ~ Major Issues
 
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
-- Implement basic denoising 
-
 - Add one sample photo at initial startup so that the library is never completely empty.
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 WIP
 ---
+
+- Implement basic denoising 
 
 
 Essential Missing Features 

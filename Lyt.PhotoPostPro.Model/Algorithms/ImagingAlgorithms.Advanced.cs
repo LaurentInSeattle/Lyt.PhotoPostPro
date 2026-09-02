@@ -4,6 +4,34 @@ using static ImagingUtilities;
 
 public static partial class ImagingAlgorithms
 {
+    #region Denoise 
+
+    // TODO:
+    // Validate the need of all parameters
+    public static void IsoGrainDenoise(
+        this Image<RgbaHalf> image, 
+        float gaussianSharpen, // 0.8f
+        int medianBlur, // 1
+        float gaussianBlur, // 0.75f
+        float blendFactor) // 0.4f
+    {
+        // Create a clone to isolate structural luminance
+        // Keep the green channel strong, safely tone down noisy Red/Blue lines
+        using Image<RgbaHalf> structuralLayer = 
+            image.Clone(ctx => ctx.GaussianSharpen(gaussianSharpen) );
+
+        // Target the core color grain on the main image
+        // Median blur destroys high-frequency chromatic speckles
+        // A micro Gaussian blur smooths out the rest of the ISO uniform grain
+        image.Mutate(ctx => ctx.MedianBlur(medianBlur, preserveAlpha: true).GaussianBlur(gaussianBlur));
+
+        // Blend a percentage of the sharp structure back over the smooth image
+        // This masks the "blurry" look while keeping the background grain suppressed
+        image.Mutate(ctx => ctx.DrawImage(structuralLayer, PixelColorBlendingMode.Overlay, blendFactor));
+    }
+
+    #endregion Denoise 
+
     #region Brightness / Gamma 
 
     public const int LutSize = 1024;

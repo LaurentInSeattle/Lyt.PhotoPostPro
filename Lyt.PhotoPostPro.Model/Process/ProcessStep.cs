@@ -5,6 +5,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string OrientationStepName = "Orientation";
     public const string StraightenStepName = "Straighten";
     public const string CompositionStepName = "Composition";
+    public const string DenoiseStepName = "Denoise";
     public const string ExposureStepName = "Exposure";
     public const string RecoveryStepName = "Recovery";
     public const string WhiteBalanceStepName = "WhiteBalance";
@@ -21,6 +22,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   OrientationStepName  ,  "Workflow.Orient.Title"          },
         {   StraightenStepName   ,  "Workflow.Straighten.Title"      },
         {   CompositionStepName  ,  "Workflow.Compose.Title"         },
+        {   DenoiseStepName     ,  "Workflow.Denoise.Title"        },
         {   ExposureStepName     ,  "Workflow.Exposure.Title"        },
         {   RecoveryStepName     ,  "Workflow.Recovery.Title"        },
         {   VignetteStepName     ,  "Workflow.Vignette.Title"        },
