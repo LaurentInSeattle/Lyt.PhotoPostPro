@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Library;
 
-using System.Text.RegularExpressions;
-
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LanguageChangedMessage>,

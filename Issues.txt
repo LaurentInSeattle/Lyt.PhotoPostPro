@@ -3,20 +3,16 @@ Bugs ~ Major Issues
 
 - CRITICAL : Image not found 
 
-- CRITICAL: Library sometimes shows up empty at startup 
+- CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Implement basic denoising 
 
 - Add one sample photo at initial startup so that the library is never completely empty.
 
-- In editing view, should not show "Nothing to cull..."
-
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 WIP
 ---
-
-- Rejected in Culling still in library collection 
 
 
 

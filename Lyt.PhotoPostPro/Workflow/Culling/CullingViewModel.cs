@@ -475,10 +475,14 @@ public sealed partial class CullingViewModel :
                     shell.ModalHost, new ConfirmRemoveDialogModel(), this.OnRemoveConfirmed);
             }
         }
+        else
+        {
+            this.DoRemove();
+        }
     }
 
     private CullingImageViewModel? viewModelToRemove; 
-    private CullingImageViewModel? viewModelToKeep ; 
+    private CullingImageViewModel? viewModelToKeep ;
 
     private void OnRemoveConfirmed(object? obj, bool isValid)
     {
@@ -486,12 +490,17 @@ public sealed partial class CullingViewModel :
         {
             this.viewModelToRemove = null;
             this.viewModelToKeep = null;
-            return; 
+            return;
         }
 
+        this.DoRemove();
+    }
+
+    private void DoRemove()
+    {
         if (viewModelToRemove == null)
         {
-            return; 
+            return;
         }
 
         try
