@@ -19,8 +19,8 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Status and Buttons --> 
-			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Download Messages --> 
+			<RowDefinition Height="64" /> <!-- Status and Buttons --> 
+			<RowDefinition Height="64" /> <!-- Download Messages --> 
 			<RowDefinition Height="*" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -38,14 +38,17 @@
 			>
 			<TextBlock
 				Margin="0 0 0 0"
-				MinWidth="400"
+				MinWidth="320"
 				Text="{Binding DeviceStatus}"
 				Theme="{StaticResource H3}"
 				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>
 			<glyphs:GlyphButton
-				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
+				Margin="16 0 16 0"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				Width="320" Height="56"
 				GlyphSource="arrow_download"
 				Text="{Binding DownloadButtonText}"
 				Command="{Binding OnDownload}"
@@ -53,8 +56,11 @@
 				IsDisabled="{Binding DownloadButtonIsDisabled}"
 				/>
 			<glyphs:GlyphButton
-				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
+				Margin="16 0 16 0"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				Width="320" Height="56"
 				GlyphSource="add_circle"
 				Text="{DynamicResource Workflow.Camera.File.AddLibrary}"
 				Command="{Binding OnAddToLibrary}"
@@ -62,8 +68,11 @@
 				IsDisabled="{Binding AddToLibraryButtonIsDisabled}"
 				/>
 			<glyphs:GlyphButton
-				Style="{StaticResource ControlIconButton}"
-				HorizontalAlignment="Left" Width="280" Height="40" Margin="8 0 0 0"
+				Margin="16 0 16 0"
+				Style="{StaticResource ViewIconButton}"
+				FontSize="24"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				Width="320" Height="56"
 				GlyphSource="delete"
 				Text="{DynamicResource Workflow.Camera.File.RemoveCamera}"
 				Command="{Binding OnRemoveFromCamera}"

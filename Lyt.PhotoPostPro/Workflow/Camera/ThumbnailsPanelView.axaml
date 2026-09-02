@@ -47,7 +47,7 @@
 				/>
 			<TextBlock
 				Theme="{StaticResource H3}"
-				Margin="10 0 0 0"
+				Margin="20 0 0 0"
 				Text="{DynamicResource Workflow.Camera.Thumbs.CheckAll}"
 				/>
 			<glyphs:GlyphButton
@@ -57,7 +57,7 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Check"
-				Width="36" Height="36" 
+				Width="80" Height="36" 
 				Margin="10 0 0 0"
 				/>
 			<glyphs:GlyphButton
@@ -67,12 +67,12 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Check"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
+				Width="80" Height="36" 
+				Margin="20 0 0 0"
 				/>
 			<TextBlock
 				Theme="{StaticResource H3}"
-				Margin="10 0 0 0"
+				Margin="40 0 0 0"
 				Text="{DynamicResource Workflow.Camera.Thumbs.ClearAll}"
 				/>
 			<glyphs:GlyphButton
@@ -82,7 +82,7 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Clear"
-				Width="36" Height="36" 
+				Width="80" Height="36" 
 				Margin="10 0 0 0"
 				/>
 			<glyphs:GlyphButton
@@ -92,8 +92,8 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToRemoveFromCamera}"
 				CommandParameter="Clear"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
+				Width="80" Height="36" 
+				Margin="20 0 0 0"
 				/>
 			<!-- Not Really useful - Consider deleting if temporary test removal is OK 
 			<TextBlock

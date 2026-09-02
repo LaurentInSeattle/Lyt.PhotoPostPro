@@ -57,7 +57,7 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Check"
-				Width="72" Height="36" 
+				Width="80" Height="36" 
 				Margin="10 0 0 0"
 				/>
 			<TextBlock
@@ -72,7 +72,7 @@
 				GlyphStrokeThickness="0.1"
 				Command="{Binding OnMarkAllToAddToLibrary}"
 				CommandParameter="Clear"
-				Width="72" Height="36" 
+				Width="80" Height="36" 
 				Margin="10 0 0 0"
 				/>
 		</StackPanel>

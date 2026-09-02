@@ -33,8 +33,6 @@ Essential Missing Features
 Minor Issues (Low priority)
 ---------------------------
 
-- Use Half float to store LUT's in memory - could be useful for dim 64 
-
 - Make this an application setting :     private const int CullingBatchSize = 48;
 
 - Switching language while processing cancels the current process
@@ -58,8 +56,6 @@ Code Quality Issues
 - Cleanup public vs internal about everywhere 
 
 - Setup logging for trace to disk 
-
-- Speed up LUT code using Value (struct) for colours instead of classes.
 
 - Launch the logging window minimized in both release and debug mode
 
