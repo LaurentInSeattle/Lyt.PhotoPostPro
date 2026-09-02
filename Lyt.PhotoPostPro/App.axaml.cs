@@ -107,6 +107,9 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ComposeViewModel>();
                 _ = services.AddSingleton<ComposeToolboxViewModel>();
 
+                _ = services.AddSingleton<DenoiseViewModel>();
+                _ = services.AddSingleton<DenoiseToolboxViewModel>();
+
                 _ = services.AddSingleton<ExposureViewModel>();
                 _ = services.AddSingleton<ExposureToolboxViewModel>();
 

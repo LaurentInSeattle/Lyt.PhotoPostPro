@@ -25,7 +25,7 @@ public enum ActivatedView : int
     Color, 
     Compose,
     Contrast,
-    //Denoise,
+    Denoise,
     Export,
     Exposure,
     Filters,

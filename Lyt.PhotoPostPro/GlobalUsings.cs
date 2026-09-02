@@ -101,7 +101,7 @@ global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
 global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
 
 
-// Main App library namespaces (Avalonia dependent)
+// Main App assembly namespaces (Avalonia dependent)
 //
 global using Lyt.PhotoPostPro.Controls;
 global using Lyt.PhotoPostPro.Panes;
@@ -125,6 +125,7 @@ global using Lyt.PhotoPostPro.Workflow.Process;
 global using Lyt.PhotoPostPro.Workflow.Process.Orient;
 global using Lyt.PhotoPostPro.Workflow.Process.Straighten;
 global using Lyt.PhotoPostPro.Workflow.Process.Compose;
+global using Lyt.PhotoPostPro.Workflow.Process.Denoise;
 global using Lyt.PhotoPostPro.Workflow.Process.Exposure;
 global using Lyt.PhotoPostPro.Workflow.Process.Contrast;
 global using Lyt.PhotoPostPro.Workflow.Process.Lut;
@@ -142,7 +143,7 @@ global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Tools;
 
 
-// Model library namespaces
+// Model assembly namespaces
 //
 global using Lyt.PhotoPostPro.Model;
 global using Lyt.PhotoPostPro.Model.Camera;

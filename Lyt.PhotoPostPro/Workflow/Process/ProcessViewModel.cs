@@ -10,6 +10,7 @@ public sealed partial class ProcessViewModel :
         { ProcessStep.OrientationStepName, ActivatedView.Orient },
         { ProcessStep.StraightenStepName, ActivatedView.Straighten },
         { ProcessStep.CompositionStepName, ActivatedView.Compose },
+        { ProcessStep.DenoiseStepName, ActivatedView.Denoise },
         { ProcessStep.ExposureStepName, ActivatedView.Exposure },
         { ProcessStep.RecoveryStepName, ActivatedView.Recovery },
         { ProcessStep.WhiteBalanceStepName, ActivatedView.WhiteBalance },
