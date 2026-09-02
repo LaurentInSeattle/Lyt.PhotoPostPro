@@ -61,7 +61,7 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
         => base.DoTransform((clone) =>
         {
             var model = this.ProcessWorkflow.Model;
-            if (!model.LutsManager.TryLoadLut(this.LutMetadata, out Lut? lut))
+            if (!model.LutsManager.TryLoadLut(this.LutMetadata, out LutHalf? lut))
             {
                 // Failed to load LUT ? 
                 if (Debugger.IsAttached) { Debugger.Break(); }
@@ -70,7 +70,7 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
 
             if (lut is null)
             {
-                return ;
+                return;
             }
 
             clone.Lut(lut);
@@ -123,24 +123,24 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
                 return;
             }
 
-            Lut? lut = null;
+            LutHalf? lutHalf = null;
             lock (model.LutsManager)
             {
-                if (!model.LutsManager.TryLoadLut(lutMetadata, out lut))
+                if (!model.LutsManager.TryLoadLut(lutMetadata, out lutHalf))
                 {
                     // Failed to load LUT ? 
                     if (Debugger.IsAttached) { Debugger.Break(); }
                     return;
                 }
 
-                if (lut is null)
+                if (lutHalf is null)
                 {
                     return;
                 }
             }
 
             var clone = this.thumbnail.Clone();
-            clone.Lut(lut);
+            clone.Lut(lutHalf);
             new ExploreLutImageGeneratedMessage(lutMetadata, clone.ToFrame()).Publish();
             ++lutDone;
         });

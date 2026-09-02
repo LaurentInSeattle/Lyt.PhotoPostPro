@@ -1,18 +1,16 @@
 ﻿namespace Lyt.PhotoPostPro.Model.LookUp;
 
-using System.Globalization;
-
-/// <summary> A class that represents a 3D LUT with a 3D multidimensional array.  </summary>
-public sealed class Lut
+/// <summary> A class that represents a 3D LUT with a 3D multidimensional array of Half Colors.  </summary>
+public sealed class LutHalf
 {
     private static readonly string[] Separators = [" "];
 
     /// <summary> Creates a new Lut from the array of string lines a 3DL file </summary>
     /// <param name="lines"> The file Content</param>
     /// <returns>A LUT object</returns>
-    public static Lut From3dlLines(string[] lines)
+    public static LutHalf From3dlLines(string[] lines)
     {
-        var lut = new Lut();
+        var lut = new LutHalf();
 
         // Skip all:
         // - empty lines
@@ -36,7 +34,7 @@ public sealed class Lut
         }
 
         // Now we are on the line containing the slices
-        string[] tokens = line.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
+        string[] tokens = line.Split(LutHalf.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
 
         // All tokens should parse as ints and be in increasing order
         int cubeSize = tokens.GetLength(0);
@@ -78,7 +76,7 @@ public sealed class Lut
                 continue;
             }
 
-            string[] dataTokens = dataLine.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
+            string[] dataTokens = dataLine.Split(LutHalf.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
             if (dataTokens.GetLength(0) != 3)
             {
                 continue;
@@ -127,7 +125,7 @@ public sealed class Lut
         }
 
         lut.Dimension = DimensionFromPixelCount(rawIndex / 3);
-        lut.Table = new LutColor[lut.Dimension, lut.Dimension, lut.Dimension];
+        lut.Table = new LutHalfColor[lut.Dimension, lut.Dimension, lut.Dimension];
 
         // Second pass to create the color table.
         cubeSize = lut.Dimension;
@@ -146,13 +144,13 @@ public sealed class Lut
             int bluIndex = cubeIndex % cubeSize;
 
             ++cubeIndex;
-            if (lut.Table[redIndex, greIndex, bluIndex] != null)
-            {
-                throw new Exception("Invalid table indexing");
-            }
+            //if (lut.Table[redIndex, greIndex, bluIndex] != null)
+            //{
+            //    throw new Exception("Invalid table indexing");
+            //}
 
             lut.Table[redIndex, greIndex, bluIndex] =
-                LutColor.FromRgbInt(redValue, greValue, bluValue, maxFloat);
+                LutHalfColor.FromRgbInt(redValue, greValue, bluValue, maxFloat);
         }
 
         lut.Validate();
@@ -166,9 +164,9 @@ public sealed class Lut
     /// <summary> Creates a new Lut from the array of string lines a .Cube file </summary>
     /// <param name="lines"> The file Content</param>
     /// <returns>A LUT object</returns>
-    public static Lut FromCubeLines(string[] lines)
+    public static LutHalf FromCubeLines(string[] lines)
     {
-        var lut = new Lut();
+        var lut = new LutHalf();
 
         // Skip all:
         // - empty lines
@@ -203,7 +201,7 @@ public sealed class Lut
                 continue;
             }
 
-            string[] dataTokens = dataLine.Split(Lut.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
+            string[] dataTokens = dataLine.Split(LutHalf.Separators, 256, StringSplitOptions.RemoveEmptyEntries);
             if (dataTokens.GetLength(0) != 3)
             {
                 continue;
@@ -233,7 +231,7 @@ public sealed class Lut
         }
 
         lut.Dimension = DimensionFromPixelCount(rawIndex / 3);
-        lut.Table = new LutColor[lut.Dimension, lut.Dimension, lut.Dimension];
+        lut.Table = new LutHalfColor[lut.Dimension, lut.Dimension, lut.Dimension];
 
         // Second pass to create the color table.
         int cubeSize = lut.Dimension;
@@ -251,12 +249,12 @@ public sealed class Lut
             int bluIndex = cubeIndex % cubeSize;
 
             ++cubeIndex;
-            if (lut.Table[redIndex, greIndex, bluIndex] != null)
-            {
-                throw new Exception("LUT - Invalid table indexing");
-            }
+            //if (lut.Table[redIndex, greIndex, bluIndex] != null)
+            //{
+            //    throw new Exception("LUT - Invalid table indexing");
+            //}
 
-            lut.Table[redIndex, greIndex, bluIndex] = LutColor.FromRgbFloat(redValue, greValue, bluValue);
+            lut.Table[redIndex, greIndex, bluIndex] = LutHalfColor.FromRgbFloat(redValue, greValue, bluValue);
         }
 
         lut.Validate();
@@ -264,134 +262,54 @@ public sealed class Lut
         return lut;
     }
 
-    public LutAlgorithm Algorithm { get; private set; } = LutAlgorithm.Tetrahedral;
-
     public int Dimension { get; private set; }
 
     public int OutputDepth { get; private set; }
 
     public List<int> Slices { get; private set; } = [];
 
-    public LutColor[,,] Table { get; private set; } = new LutColor[0, 0, 0];
+    public LutHalfColor[,,] Table { get; private set; } = new LutHalfColor[0, 0, 0];
 
-    // Simplified API that should improve pref' just a bit 
-    public LutColor LookupTetrahedral(float r, float g, float b)
+    public LutHalfColor Lookup(Half r, Half g, Half b)
     {
-        int cubeSizeMinusOne = this.Dimension - 1;
-        return
-            this.TetrahedralInterpolate(r * cubeSizeMinusOne, g * cubeSizeMinusOne, b * cubeSizeMinusOne);
-    }
-
-    // Simplified API that should improve pref' just a bit 
-    public LutColor LookupTetrahedral(Half r, Half g, Half b)
-    {
-        int cubeSizeMinusOne = this.Dimension - 1;
+        Half cubeSizeMinusOne = (Half)(this.Dimension - 1);
         return
             this.TetrahedralInterpolate(
-                (float)r * cubeSizeMinusOne, (float)g * cubeSizeMinusOne, (float)b * cubeSizeMinusOne);
+                r * cubeSizeMinusOne, g * cubeSizeMinusOne, b * cubeSizeMinusOne);
     }
-
-#if DEBUG
-    public LutColor Lookup(LutColor color)
-    {
-        color.Validate();
-
-        LutColor lutColor;
-        int cubeSizeMinusOne = this.Dimension - 1;
-        switch (this.Algorithm)
-        {
-            default:
-            case LutAlgorithm.Swizzle:
-                // Simple color swizzle for testing
-                return new LutColor()
-                {
-                    R = color.B,
-                    G = color.G,
-                    B = color.R,
-                };
-
-            case LutAlgorithm.TriLinear:
-                lutColor = this.TriLinearInterpolate(color.R * cubeSizeMinusOne, color.G * cubeSizeMinusOne, color.B * cubeSizeMinusOne);
-                break;
-
-            case LutAlgorithm.Tetrahedral:
-                lutColor = this.TetrahedralInterpolate(color.R * cubeSizeMinusOne, color.G * cubeSizeMinusOne, color.B * cubeSizeMinusOne);
-                break;
-        }
-
-        lutColor.Validate();
-        return lutColor;
-    }
-
-    private LutColor TriLinearInterpolate(float redPoint, float greenPoint, float bluePoint)
-    {
-        // float input from 0 to cubeSize-1
-        // Gets the interpolated color at an interpolated lattice point.
-
-        int cubeSize = this.Dimension;
-        int cubeSizeMinusOne = this.Dimension - 1;
-
-        int lowerRedPoint = Clamp((int)Math.Floor(redPoint), 0, cubeSizeMinusOne);
-        int upperRedPoint = Clamp(lowerRedPoint + 1, 0, cubeSizeMinusOne);
-        int lowerGreenPoint = Clamp((int)Math.Floor(greenPoint), 0, cubeSizeMinusOne);
-        int upperGreenPoint = Clamp(lowerGreenPoint + 1, 0, cubeSizeMinusOne);
-        int lowerBluePoint = Clamp((int)Math.Floor(bluePoint), 0, cubeSizeMinusOne);
-        int upperBluePoint = Clamp(lowerBluePoint + 1, 0, cubeSizeMinusOne);
-
-        // Tri linear interpolation requires 8 vertices
-        var C000 = this.Table[lowerRedPoint, lowerGreenPoint, lowerBluePoint];
-        var C010 = this.Table[lowerRedPoint, lowerGreenPoint, upperBluePoint];
-        var C100 = this.Table[upperRedPoint, lowerGreenPoint, lowerBluePoint];
-        var C001 = this.Table[lowerRedPoint, upperGreenPoint, lowerBluePoint];
-        var C110 = this.Table[upperRedPoint, lowerGreenPoint, upperBluePoint];
-        var C111 = this.Table[upperRedPoint, upperGreenPoint, upperBluePoint];
-        var C101 = this.Table[upperRedPoint, upperGreenPoint, lowerBluePoint];
-        var C011 = this.Table[lowerRedPoint, upperGreenPoint, upperBluePoint];
-
-        float alphaRed = 1.0f - (upperRedPoint - redPoint);
-        var C00 = LutColor.Lerp(C000, C100, alphaRed);
-        var C10 = LutColor.Lerp(C010, C110, alphaRed);
-        var C01 = LutColor.Lerp(C001, C101, alphaRed);
-        var C11 = LutColor.Lerp(C011, C111, alphaRed);
-        float alphaBlue = 1.0f - (upperBluePoint - bluePoint);
-        var C1 = LutColor.Lerp(C01, C11, alphaBlue);
-        var C0 = LutColor.Lerp(C00, C10, alphaBlue);
-        return LutColor.Lerp(C0, C1, 1.0f - (upperGreenPoint - greenPoint));
-    }
-
-#endif 
 
     // Tetrahedral interpolation. Based on code found in Truelight Software Library paper.
     // http://www.filmlight.ltd.uk/pdf/whitepapers/FL-TL-TN-0057-SoftwareLib.pdf
-    private LutColor TetrahedralInterpolate(float redPoint, float greenPoint, float bluePoint)
+    private LutHalfColor TetrahedralInterpolate(Half redPoint, Half greenPoint, Half bluePoint)
     {
         // When interpolating on the tetrahedrons, only 4 lookups and four lerps are needed.
         int cubeSize = this.Dimension;
         int cubeSizeMinusOne = this.Dimension - 1;
 
-        int lowerRedPoint = Clamp((int)Math.Floor(redPoint), 0, cubeSizeMinusOne);
+        int lowerRedPoint = Clamp((int)Math.Floor((float)redPoint), 0, cubeSizeMinusOne);
         int upperRedPoint = Clamp(lowerRedPoint + 1, 0, cubeSizeMinusOne);
-        int lowerGreenPoint = Clamp((int)Math.Floor(greenPoint), 0, cubeSizeMinusOne);
+        int lowerGreenPoint = Clamp((int)Math.Floor((float)greenPoint), 0, cubeSizeMinusOne);
         int upperGreenPoint = Clamp(lowerGreenPoint + 1, 0, cubeSizeMinusOne);
-        int lowerBluePoint = Clamp((int)Math.Floor(bluePoint), 0, cubeSizeMinusOne);
+        int lowerBluePoint = Clamp((int)Math.Floor((float)bluePoint), 0, cubeSizeMinusOne);
         int upperBluePoint = Clamp(lowerBluePoint + 1, 0, cubeSizeMinusOne);
 
-        float deltaRed = redPoint - lowerRedPoint;
-        float deltaBlue = bluePoint - lowerBluePoint;
-        float deltaGreen = greenPoint - lowerGreenPoint;
+        Half deltaRed = redPoint - (Half)lowerRedPoint;
+        Half deltaBlue = bluePoint - (Half)lowerBluePoint;
+        Half deltaGreen = greenPoint - (Half)lowerGreenPoint;
+
         var c000 = this.Table[lowerRedPoint, lowerGreenPoint, lowerBluePoint];
         var c111 = this.Table[upperRedPoint, upperGreenPoint, upperBluePoint];
 
-        var c = new LutColor();
+        var c = new LutHalfColor();
         if (deltaRed > deltaGreen)
         {
             if (deltaGreen > deltaBlue)
             {
                 var c100 = this.Table[upperRedPoint, lowerGreenPoint, lowerBluePoint];
                 var c110 = this.Table[upperRedPoint, upperGreenPoint, lowerBluePoint];
-                float alphaR = 1.0f - deltaRed;
-                float deltaRG = deltaRed - deltaGreen;
-                float deltaGB = deltaGreen - deltaBlue;
+                Half alphaR = (Half)1.0f - deltaRed;
+                Half deltaRG = deltaRed - deltaGreen;
+                Half deltaGB = deltaGreen - deltaBlue;
                 c.R = alphaR * c000.R + deltaRG * c100.R + deltaGB * c110.R + deltaBlue * c111.R;
                 c.G = alphaR * c000.G + deltaRG * c100.G + deltaGB * c110.G + deltaBlue * c111.G;
                 c.B = alphaR * c000.B + deltaRG * c100.B + deltaGB * c110.B + deltaBlue * c111.B;
@@ -400,9 +318,9 @@ public sealed class Lut
             {
                 var c100 = this.Table[upperRedPoint, lowerGreenPoint, lowerBluePoint];
                 var c101 = this.Table[upperRedPoint, lowerGreenPoint, upperBluePoint];
-                float alphaR = 1.0f - deltaRed;
-                float deltaRB = deltaRed - deltaBlue;
-                float deltaBG = deltaBlue - deltaGreen;
+                Half alphaR = (Half)1.0f - deltaRed;
+                Half deltaRB = deltaRed - deltaBlue;
+                Half deltaBG = deltaBlue - deltaGreen;
                 c.R = alphaR * c000.R + deltaRB * c100.R + deltaBG * c101.R + deltaGreen * c111.R;
                 c.G = alphaR * c000.G + deltaRB * c100.G + deltaBG * c101.G + deltaGreen * c111.G;
                 c.B = alphaR * c000.B + deltaRB * c100.B + deltaBG * c101.B + deltaGreen * c111.B;
@@ -411,9 +329,9 @@ public sealed class Lut
             {
                 var c001 = this.Table[lowerRedPoint, lowerGreenPoint, upperBluePoint];
                 var c101 = this.Table[upperRedPoint, lowerGreenPoint, upperBluePoint];
-                float alphaB = 1.0f - deltaBlue;
-                float deltaBR = deltaBlue - deltaRed;
-                float deltaRG = deltaRed - deltaGreen;
+                Half alphaB = (Half)1.0f - deltaBlue;
+                Half deltaBR = deltaBlue - deltaRed;
+                Half deltaRG = deltaRed - deltaGreen;
                 c.R = alphaB * c000.R + deltaBR * c001.R + deltaRG * c101.R + deltaGreen * c111.R;
                 c.G = alphaB * c000.G + deltaBR * c001.G + deltaRG * c101.G + deltaGreen * c111.G;
                 c.B = alphaB * c000.B + deltaBR * c001.B + deltaRG * c101.B + deltaGreen * c111.B;
@@ -425,18 +343,18 @@ public sealed class Lut
             {
                 var c001 = this.Table[lowerRedPoint, lowerGreenPoint, upperBluePoint];
                 var c011 = this.Table[lowerRedPoint, upperGreenPoint, upperBluePoint];
-                float alphaB = 1.0f - deltaBlue;
-                float deltaBG = deltaBlue - deltaGreen;
-                float deltaGR = deltaGreen - deltaRed;
+                Half alphaB = (Half)1.0f - deltaBlue;
+                Half deltaBG = deltaBlue - deltaGreen;
+                Half deltaGR = deltaGreen - deltaRed;
                 c.R = alphaB * c000.R + deltaBG * c001.R + deltaGR * c011.R + deltaRed * c111.R;
                 c.G = alphaB * c000.G + deltaBG * c001.G + deltaGR * c011.G + deltaRed * c111.G;
                 c.B = alphaB * c000.B + deltaBG * c001.B + deltaGR * c011.B + deltaRed * c111.B;
             }
             else if (deltaBlue > deltaRed)
             {
-                float alphaG = 1.0f - deltaGreen;
-                float deltaGB = deltaGreen - deltaBlue;
-                float deltaBR = deltaBlue - deltaRed;
+                Half alphaG = (Half)1.0f - deltaGreen;
+                Half deltaGB = deltaGreen - deltaBlue;
+                Half deltaBR = deltaBlue - deltaRed;
                 var c010 = this.Table[lowerRedPoint, upperGreenPoint, lowerBluePoint];
                 var c011 = this.Table[lowerRedPoint, upperGreenPoint, upperBluePoint];
                 c.R = alphaG * c000.R + deltaGB * c010.R + deltaBR * c011.R + deltaRed * c111.R;
@@ -447,9 +365,9 @@ public sealed class Lut
             {
                 var c010 = this.Table[lowerRedPoint, upperGreenPoint, lowerBluePoint];
                 var c110 = this.Table[upperRedPoint, upperGreenPoint, lowerBluePoint];
-                float alphaG = 1.0f - deltaGreen;
-                float deltaGR = deltaGreen - deltaRed;
-                float deltaRB = deltaRed - deltaBlue;
+                Half alphaG = (Half)1.0f - deltaGreen;
+                Half deltaGR = deltaGreen - deltaRed;
+                Half deltaRB = deltaRed - deltaBlue;
                 c.R = alphaG * c000.R + deltaGR * c010.R + deltaRB * c110.R + deltaBlue * c111.R;
                 c.G = alphaG * c000.G + deltaGR * c010.G + deltaRB * c110.G + deltaBlue * c111.G;
                 c.B = alphaG * c000.B + deltaGR * c010.B + deltaRB * c110.B + deltaBlue * c111.B;
@@ -525,14 +443,7 @@ public sealed class Lut
                 for (int b = 0; b < size; ++b)
                 {
                     var color = this.Table[r, g, b];
-                    if (color == null)
-                    {
-                        throw new ArgumentException("No color loaded");
-                    }
-                    else
-                    {
-                        color.Validate();
-                    }
+                    color.Validate();
                 }
             }
         }

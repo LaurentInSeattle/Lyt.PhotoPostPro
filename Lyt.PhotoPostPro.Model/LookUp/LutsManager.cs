@@ -15,7 +15,8 @@ public sealed class LutsManager
     private readonly PhotoPostProModel model;
     private readonly ILogger logger;
     private readonly string lutsFolderPath;
-    private readonly LruDictionary<string, Lut> loadedLuts = new(16);
+
+    private readonly LruDictionary<string, LutHalf> loadedLuts = new(16);
 
     public LutsManager(PhotoPostProModel model, ILogger logger)
     {
@@ -38,26 +39,26 @@ public sealed class LutsManager
         return list;
     }
 
-    public bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    public bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out LutHalf? lutHalf)
     {
-        if (this.loadedLuts.TryGetValue(lutMetadata.FriendlyName, out lut))
+        if (this.loadedLuts.TryGetValue(lutMetadata.FriendlyName, out lutHalf))
         {
             return true;
         }
 
         if (lutMetadata.IsEmbedded)
         {
-            if (TryLoadBuiltInLut(lutMetadata, out lut))
+            if (TryLoadBuiltInLut(lutMetadata, out lutHalf))
             {
-                this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
                 return true;
             }
         }
         else
         {
-            if (TryLoadLutFromFile(lutMetadata, out lut))
+            if (TryLoadLutFromFile(lutMetadata, out lutHalf))
             {
-                this.loadedLuts.Add(lutMetadata.FriendlyName, lut);
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
                 return true;
             }
         }
@@ -111,14 +112,14 @@ public sealed class LutsManager
         string friendlyName = Path.GetFileNameWithoutExtension(lutFilePath);
         friendlyName = StringExtensions.Wordify(friendlyName);
         lutMetadata = new LutMetadata(friendlyName, lutFilePath, lutFormat, IsEmbedded: false);
-        bool canLoad = TryLoadLutFromFile(lutMetadata, out Lut? lut);
-        if (!canLoad || lut is null)
+        bool canLoad = TryLoadLutFromFile(lutMetadata, out LutHalf? lutHalf);
+        if (!canLoad || lutHalf is null)
         {
             message = "Corrupted? Cannot load.";
             return false;
         }
 
-        this.loadedLuts.Add(friendlyName, lut);
+        this.loadedLuts.Add(friendlyName, lutHalf);
 
         // Try to copy the provided file to our LUT folder for future use
         // Ok to fail
@@ -205,9 +206,9 @@ public sealed class LutsManager
         return list;
     }
 
-    private static bool TryLoadBuiltInLut(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    private static bool TryLoadBuiltInLut(LutMetadata lutMetadata, [NotNullWhen(true)] out LutHalf? lutHalf)
     {
-        lut = null;
+        lutHalf = null;
         try
         {
             ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
@@ -223,12 +224,12 @@ public sealed class LutsManager
 
             if (lutMetadata.LutFormat == LutFormat.Cube)
             {
-                lut = Lut.FromCubeLines(lines);
+                lutHalf = LutHalf.FromCubeLines(lines);
                 return true;
             }
             else if (lutMetadata.LutFormat == LutFormat.ThreeDL)
             {
-                lut = Lut.From3dlLines(lines);
+                lutHalf = LutHalf.From3dlLines(lines);
                 return true;
             }
             else
@@ -243,9 +244,9 @@ public sealed class LutsManager
         }
     }
 
-    private static bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out Lut? lut)
+    private static bool TryLoadLutFromFile(LutMetadata lutMetadata, [NotNullWhen(true)] out LutHalf? lutHalf)
     {
-        lut = null;
+        lutHalf = null;
         try
         {
             string path = lutMetadata.Path;
@@ -254,11 +255,11 @@ public sealed class LutsManager
             string extension = fileInfo.Extension.ToLowerInvariant();
             if (extension == CubeExtension)
             {
-                lut = Lut.FromCubeLines(lines);
+                lutHalf = LutHalf.FromCubeLines(lines);
             }
             else if (extension == ThreeDLExtension)
             {
-                lut = Lut.From3dlLines(lines);
+                lutHalf = LutHalf.From3dlLines(lines);
             }
             else
             {

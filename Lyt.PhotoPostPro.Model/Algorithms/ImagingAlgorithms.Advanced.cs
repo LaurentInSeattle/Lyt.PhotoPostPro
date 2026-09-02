@@ -9,7 +9,7 @@ public static partial class ImagingAlgorithms
     // TODO:
     // Validate the need of all parameters
     public static void IsoGrainDenoise(
-        this Image<RgbaHalf> image, 
+        this Image<RgbaHalf> image,
         float gaussianSharpen, // 0.8f
         int medianBlur, // 1
         float gaussianBlur, // 0.75f
@@ -17,8 +17,8 @@ public static partial class ImagingAlgorithms
     {
         // Create a clone to isolate structural luminance
         // Keep the green channel strong, safely tone down noisy Red/Blue lines
-        using Image<RgbaHalf> structuralLayer = 
-            image.Clone(ctx => ctx.GaussianSharpen(gaussianSharpen) );
+        using Image<RgbaHalf> structuralLayer =
+            image.Clone(ctx => ctx.GaussianSharpen(gaussianSharpen));
 
         // Target the core color grain on the main image
         // Median blur destroys high-frequency chromatic speckles
@@ -657,7 +657,7 @@ public static partial class ImagingAlgorithms
 
     #region LUT 
 
-    public static void Lut(this Image<RgbaHalf> image, Lut lut)
+    public static void Lut(this Image<RgbaHalf> image, LutHalf lutHalf)
     {
         int height = image.Height;
         Parallel.For(0, height, y =>
@@ -667,10 +667,10 @@ public static partial class ImagingAlgorithms
             for (int x = 0; x < pixelRow.Length; x++)
             {
                 var pixel = pixelRow[x];
-                var transformed = lut.LookupTetrahedral(pixel.R, pixel.G, pixel.B);
-                pixelRow[x].R = (Half)transformed.B;
-                pixelRow[x].G = (Half)transformed.G;
-                pixelRow[x].B = (Half)transformed.R;
+                var transformed = lutHalf.Lookup(pixel.R, pixel.G, pixel.B);
+                pixelRow[x].R = transformed.B;
+                pixelRow[x].G = transformed.G;
+                pixelRow[x].B = transformed.R;
             }
         });
     }
