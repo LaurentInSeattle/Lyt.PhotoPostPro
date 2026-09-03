@@ -223,9 +223,9 @@
 		<Setter Property="BackgroundVisualState" Value="{StaticResource ToolbarIconBackgroundVisualState}"/>
 		<Setter Property="BackgroundBorderVisualState" Value="{StaticResource ToolbarIconBackgroundBorderVisualState}"/>
 		<Setter Property="Width" Value="130" />
-		<Setter Property="Height" Value="40" />
-		<Setter Property="Margin" Value="2 4 2 4" />
-		<Setter Property="FontSize" Value="18" />
+		<Setter Property="Height" Value="44" />
+		<Setter Property="Margin" Value="4 0 4 0" />
+		<Setter Property="FontSize" Value="20" />
 		<Setter Property="FontWeight" Value="SemiBold"/>
 		<Setter Property="Layout" Value="TextOnly" />
 		<Setter Property="Behaviour" Value="Tap" />

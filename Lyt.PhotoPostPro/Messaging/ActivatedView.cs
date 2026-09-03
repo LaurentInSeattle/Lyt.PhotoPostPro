@@ -37,4 +37,7 @@ public enum ActivatedView : int
     TouchUp,
     Vignette,
     WhiteBalance,
+    Exports,
+    Signatures,
+    Watermarks,
 }

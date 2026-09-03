@@ -141,6 +141,10 @@ global using Lyt.PhotoPostPro.Workflow.Process.Shared;
 global using Lyt.PhotoPostPro.Workflow.Settings;
 global using Lyt.PhotoPostPro.Workflow.Shared;
 global using Lyt.PhotoPostPro.Workflow.Tools;
+global using Lyt.PhotoPostPro.Workflow.Tools.Exporting;
+global using Lyt.PhotoPostPro.Workflow.Tools.Signing;
+global using Lyt.PhotoPostPro.Workflow.Tools.Watermarking;
+
 
 
 // Model assembly namespaces

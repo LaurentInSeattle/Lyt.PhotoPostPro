@@ -62,10 +62,27 @@
 	<!-- Drag and Drop -->
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
+
+	<!-- Tools -->
+	<!-- Editor -->
+	<system:String x:Key="Tools.Editor.AddNew">Create New...</system:String>
+	<system:String x:Key="Tools.Editor.Add">Add</system:String>
+	<system:String x:Key="Tools.Editor.Delete">Delete</system:String>
+	<system:String x:Key="Tools.Editor.Save">Save Changes</system:String>
+
+	<!-- Signatures -->
+	<system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
+	
+	<!-- Watermarks -->
+	<system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
+
+	<!-- Exports -->
+	<system:String x:Key="Tools.Select.Exports">Exports</system:String>
+
+
 	<!-- Gallery -->
 	<system:String x:Key="Gallery.Empty">Your gallery of 'five stars' best pictures is empty.</system:String>
 	<system:String x:Key="Library.Empty">Your library of pictures is empty. Use 'Import' to add images.</system:String>
-
 	<system:String x:Key="Gallery.Toolbar.SlideShow">Slide Show</system:String>
 	<system:String x:Key="Gallery.Toolbar.Wallpaper">Wallpaper</system:String>
 	<system:String x:Key="Gallery.Toolbar.Navigate">Navigate To...</system:String>

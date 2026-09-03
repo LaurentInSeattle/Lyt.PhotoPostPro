@@ -74,4 +74,20 @@
     <ProjectReference Include="..\Lyt.PhotoPostPro.Model\Lyt.PhotoPostPro.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Workflow\Tools\Editor\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Workflow\Tools\Exporting\ExportsView.axaml.cs">
+      <DependentUpon>ExportsView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\Signing\SignaturesView.axaml.cs">
+      <DependentUpon>SignaturesView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\Watermarking\WatermarksView.axaml.cs">
+      <DependentUpon>WatermarksView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

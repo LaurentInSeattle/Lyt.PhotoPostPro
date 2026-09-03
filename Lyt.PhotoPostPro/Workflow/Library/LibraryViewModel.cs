@@ -21,12 +21,12 @@ public sealed partial class LibraryViewModel :
     // Make this an application setting 
     private const int CullingBatchSize = 20; // 48;
 
-    private const double YearButtonWidth = 76.0;
-    private const double MonthButtonWidth = 120.0;
-    private const double DayButtonWidth = 160.0;
-    private const double OptionButtonWidth = 160.0;
+    private const double ButtonHeight = 52.0;
+    private const double YearButtonWidth = 80.0;
+    private const double MonthButtonWidth = 140.0;
+    private const double DayButtonWidth = 180.0;
+    private const double OptionButtonWidth = 180.0;
 
-    // Will NEED to localize
     private static readonly string[] MonthString =
     [
         "Library.Month.January",
@@ -43,7 +43,6 @@ public sealed partial class LibraryViewModel :
         "Library.Month.December",
     ];
 
-    // Will NEED to localize
     private static readonly string[] DayString =
     [
         // Order MUST match the DayOfWeek enumeration, so Sunday comes first 
@@ -267,15 +266,15 @@ public sealed partial class LibraryViewModel :
         List<SelectorButtonViewModel> listOptions = [];
         string captured = this.Localize("Library.Option.Captured");
         var vm1 = new SelectorButtonViewModel(
-            captured, OptionButtonWidth, this.OnSelectOption, Viewing.Captured.ToString());
+            captured, OptionButtonWidth, ButtonHeight, this.OnSelectOption, Viewing.Captured.ToString());
         listOptions.Add(vm1);
         string unrated = this.Localize("Library.Option.Added");
         var vm2 = new SelectorButtonViewModel(
-            unrated, OptionButtonWidth, this.OnSelectOption, Viewing.Unrated.ToString());
+            unrated, OptionButtonWidth, ButtonHeight, this.OnSelectOption, Viewing.Unrated.ToString());
         listOptions.Add(vm2);
         string edited = this.Localize("Library.Option.Edited");
         var vm3 = new SelectorButtonViewModel(
-            edited, OptionButtonWidth, this.OnSelectOption, Viewing.Edited.ToString());
+            edited, OptionButtonWidth, ButtonHeight, this.OnSelectOption, Viewing.Edited.ToString());
         listOptions.Add(vm3);
         this.Options = listOptions;
     }
@@ -285,7 +284,7 @@ public sealed partial class LibraryViewModel :
         List<SelectorButtonViewModel> listYears = [];
         foreach (var year in folderTree.YearFolders)
         {
-            var vm = new SelectorButtonViewModel(year.Year.ToString(), YearButtonWidth, this.OnSelectYear, year);
+            var vm = new SelectorButtonViewModel(year.Year.ToString(), YearButtonWidth, ButtonHeight, this.OnSelectYear, year);
             listYears.Add(vm);
         }
 
@@ -377,7 +376,7 @@ public sealed partial class LibraryViewModel :
         foreach (var month in year.MonthFolders)
         {
             string monthString = this.Localize(MonthString[month.Month - 1]);
-            var vm = new SelectorButtonViewModel(monthString, MonthButtonWidth, this.OnSelectMonth, month);
+            var vm = new SelectorButtonViewModel(monthString, MonthButtonWidth, ButtonHeight, this.OnSelectMonth, month);
             listMonths.Add(vm);
         }
 
@@ -402,7 +401,7 @@ public sealed partial class LibraryViewModel :
         {
             string dayOfWeek = this.Localize(DayString[day.DayOfWeek]);
             string dayString = dayOfWeek + " " + day.Day.ToString();
-            var vm = new SelectorButtonViewModel(dayString, DayButtonWidth, this.OnSelectDay, day);
+            var vm = new SelectorButtonViewModel(dayString, DayButtonWidth, ButtonHeight, this.OnSelectDay, day);
             listDays.Add(vm);
         }
 

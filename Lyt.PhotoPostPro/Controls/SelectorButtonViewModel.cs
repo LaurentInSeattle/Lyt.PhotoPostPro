@@ -1,7 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Controls;
 
 public sealed partial class SelectorButtonViewModel(
-    string buttonText, double buttonWidth, Action<object?> onSelect, object? tag = null) :
+    string buttonText, double buttonWidth, double buttonHeight, 
+    Action<object?> onSelect, 
+    object? tag = null) :
     ViewModel<SelectorButtonView>
 {
     private readonly Action<object?> onSelect = onSelect;
@@ -25,6 +27,12 @@ public sealed partial class SelectorButtonViewModel(
 
     [ObservableProperty]
     public partial double ButtonWidth { get; set; } = buttonWidth;
+
+    [ObservableProperty]
+    public partial double ButtonHeight { get; set; } = buttonHeight;
+
+    [ObservableProperty]
+    public partial GridLength RowHeight { get; set; } = new GridLength(buttonHeight - 4, GridUnitType.Pixel);
 
     [RelayCommand]
     public void OnSelect()

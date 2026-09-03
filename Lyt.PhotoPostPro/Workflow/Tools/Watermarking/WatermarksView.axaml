@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Tools.ToolsView"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools"
-	x:DataType="vm:ToolsViewModel" 
+	x:Class="Lyt.PhotoPostPro.Workflow.Tools.Watermarking.WatermarksView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Watermarking"
+	x:DataType="vm:WatermarksViewModel" 
 	
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,7 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
@@ -18,11 +17,9 @@
 	Background="Transparent"
 	>
 	<Grid	
-		x:Name="ToasterHost"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="80" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -31,14 +28,5 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
-		<controls:HSelectorControl
-			Grid.Row="1" Grid.Column="1" 
-			SelectorButtons="{Binding ToolsButtons}"
-			/> 
-		<Grid
-			x:Name="ViewContent"
-			Grid.Row="2" Grid.Column="1"
-			> 
-		</Grid>
 	</Grid>
 </UserControl>

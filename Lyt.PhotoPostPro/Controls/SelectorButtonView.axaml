@@ -12,11 +12,11 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid		
-		Height="52"
+		Height="{Binding ButtonHeight}"
 		>
 		<Grid.RowDefinitions> 
-			<RowDefinition Height="48" />
-			<RowDefinition Height="4" />
+			<RowDefinition Height="{Binding RowHeight}" />
+			<RowDefinition Height="6" />
 		</Grid.RowDefinitions>
 		<glyphs:GlyphButton
 			x:Name="NavigationButton"
@@ -29,8 +29,8 @@
 			x:Name="NavigationIndicator"
 			IsVisible="False"
 			Grid.Row="1"
-			Margin="2 0 2 0"
-			Height="2" 
+			Margin="4 0 4 0"
+			Height="3" 
 			HorizontalAlignment="Stretch" VerticalAlignment="Center"
 			Fill="{StaticResource FreshGreen_2_100}"
 			/>

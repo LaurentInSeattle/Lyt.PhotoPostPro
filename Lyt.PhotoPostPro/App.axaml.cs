@@ -82,10 +82,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<GalleryViewModel>();
                 _ = services.AddSingleton<GalleryToolbarViewModel>();
                 _ = services.AddSingleton<SettingsViewModel>();
-                _ = services.AddSingleton<ToolsViewModel>();
                 _ = services.AddSingleton<LanguageViewModel>();
                 _ = services.AddSingleton<LanguageToolbarViewModel>();
-
 
                 // Culling ViewModel and its Toolbar ViewModel
                 // 
@@ -140,6 +138,12 @@ public partial class App : ApplicationBase
 
                 _ = services.AddSingleton<ExportViewModel>();
                 _ = services.AddSingleton<ExportToolboxViewModel>();
+
+                // Tools and its sub ViewModels 
+                _ = services.AddSingleton<ToolsViewModel>();
+                _ = services.AddSingleton<ExportsViewModel>();
+                _ = services.AddSingleton<SignaturesViewModel>();
+                _ = services.AddSingleton<WatermarksViewModel>();
 
                 // Services, all must comply to a specific interface 
                 // _ = services.AddSingleton<ILogger, LogViewerWindow>();
