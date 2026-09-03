@@ -74,7 +74,12 @@ public sealed partial class ToolsViewModel : ViewModel<ToolsView>
             return;
         }
 
-        this.viewSelector?.SelectView(activatedView);
+        if (this.viewSelector is null)
+        {
+            throw new Exception("No view selector");
+        }
+
+        this.viewSelector.SelectView(activatedView);
     }
 
     private void SetupWorkflow()

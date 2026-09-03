@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Export;
 
-public sealed class Signature
+public sealed class Signature : IEditable
 {
     public const string DefaultKey = "Default";
 
@@ -9,6 +9,8 @@ public sealed class Signature
     public static Signature Default => DefaultSignature;
 
     public string Key { get; set; } = string.Empty;
+
+    public string FriendlyName { get; set; } = string.Empty;
 
     public string FontFamily { get; set; } = "Segoe Script";
 

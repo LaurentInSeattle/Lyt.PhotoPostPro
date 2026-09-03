@@ -1,12 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Editor;
 
-public interface IEditableObject
-{
-    string FriendlyName { get; set; }
-
-    UserControl EditingForm { get; set; }
-}
-
 public sealed partial class EditorViewModel : ViewModel<EditorView>
 {
     private readonly PhotoPostProModel model;
@@ -14,11 +7,7 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
 
     [ObservableProperty]
     // The collection of editable items in the master list - left side 
-    public partial ObservableCollection<IEditableObject> EditableObjects { get; set; } = [];
-
-    [ObservableProperty]
-    // the currently selected editable item in the master list 
-    public partial IEditableObject? SelectedObject { get; set; }
+    public partial ObservableCollection<IEditable> EditableObjects { get; set; } = [];
 
     [ObservableProperty]
     // SelectedIndex in the master list 
@@ -29,12 +18,19 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
     public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial UserControl? EditingForm { get; set; } 
+    public partial UserControl? EditingForm { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsEditMode { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsAddMode { get; set; }
 
     public EditorViewModel(PhotoPostProModel model)
     {
         this.model = model;
         this.isFirstActivation = true;
+        this.IsEditMode = true;
     }
 
     public override void Activate(object? activationParameters)
@@ -56,8 +52,44 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
 
     partial void OnSelectedObjectIndexChanged(int value)
     {
-        var selected = this.SelectedObject;
+        if ( value < 0 || value >= this.EditableObjects.Count)
+        {
+            return;
+        }
 
+        var selected = this.EditableObjects[value];
+        if ( selected is null)
+        {
+            return; 
+        }
+
+        this.FriendlyName = selected.FriendlyName; 
     }
 
+    public void Populate(IEnumerable<IEditable> editableObjects, UserControl editingForm)
+    {
+        this.EditableObjects.Clear();
+        foreach (var editable in editableObjects)
+        {
+            this.EditableObjects.Add(editable);
+        }
+
+        this.SelectedObjectIndex = -1; 
+        this.EditingForm = editingForm; 
+    }
+
+    [RelayCommand]
+    public void OnAdd()
+    {
+    }
+
+    [RelayCommand]
+    public void OnDelete()
+    {
+    }
+
+    [RelayCommand]
+    public void OnSave()
+    {
+    }
 }

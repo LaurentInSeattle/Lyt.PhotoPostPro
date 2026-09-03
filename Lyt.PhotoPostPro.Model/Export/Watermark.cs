@@ -1,12 +1,14 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Export;
 
-public sealed class Watermark
+public sealed class Watermark : IEditable
 {
     public const string DefaultKey = "Default";
 
     private static Watermark DefaultWatermark => new() { Key = DefaultKey };
 
     public static Watermark Default => DefaultWatermark;
+
+    public string FriendlyName { get; set; } = string.Empty;
 
     public string Key { get; set; } = string.Empty;
 
@@ -22,7 +24,8 @@ public sealed class Watermark
 
     public FontStyle FontStyle => (FontStyle)(int)this.PppFontStyle; 
 
-    // No transparency because we are using RGB 
+    // TODO:
+    // Implement transparency because we are not using RGB any longer 
     public Color Color => Color.Parse(this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }
 
