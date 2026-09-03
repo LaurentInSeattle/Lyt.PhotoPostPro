@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Arrastar e Soltar Zona</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Criar um Novo...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Adicionar</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Apagar</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Salvar alterações</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Assinaturas</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Marcas de água</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Exportações</system:String>
+
     <system:String x:Key="Gallery.Empty">Sua galeria de 'cinco estrelas' melhores fotos está vazia.</system:String>
 
     <system:String x:Key="Library.Empty">Sua biblioteca de imagens está vazia. Use "Importar" para adicionar imagens.</system:String>

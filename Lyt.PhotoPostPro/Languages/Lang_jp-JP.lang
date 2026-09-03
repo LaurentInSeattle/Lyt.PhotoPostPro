@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">新規作成.</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">追加する</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">削除</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">変更を保存</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">シグネチャー</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">ウォーターマーク</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">エクスポート</system:String>
+
     <system:String x:Key="Gallery.Empty">'five Star'の最高の写真のギャラリーは空です.</system:String>
 
     <system:String x:Key="Library.Empty">あなたの写真のライブラリは空です。 'Import' を使用して画像を追加します.</system:String>

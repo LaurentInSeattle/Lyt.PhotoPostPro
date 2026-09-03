@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Плъзнете и пуснете зона</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Създаване на нов...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Добавяне</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Изтриване</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Запис на промените</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Подписи</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Водни знаци</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Износ</system:String>
+
     <system:String x:Key="Gallery.Empty">Вашата галерия с най-добрите пет звезди е празна.</system:String>
 
     <system:String x:Key="Library.Empty">Библиотеката ти е празна. Използвайте 'Импорт', за да добавите изображения.</system:String>

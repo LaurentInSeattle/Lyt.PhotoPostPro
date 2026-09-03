@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Δημιουργία νέου...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Προσθήκη</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Διαγραφή</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Αποθήκευση αλλαγών</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Υπογραφή</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Υδατογραφήματα</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Εξαγωγές</system:String>
+
     <system:String x:Key="Gallery.Empty">Η γκαλερί σου με τις καλύτερες φωτογραφίες των πέντε αστέρων είναι άδεια.</system:String>
 
     <system:String x:Key="Library.Empty">Η βιβλιοθήκη με τις φωτογραφίες σου είναι άδεια. Χρήση 'Εισαγωγή' για την προσθήκη εικόνων.</system:String>

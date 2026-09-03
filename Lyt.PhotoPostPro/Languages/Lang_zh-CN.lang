@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">拖放区</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">创建新...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">添加</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">删除</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">保存更改</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">签署</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">水印</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">出口</system:String>
+
     <system:String x:Key="Gallery.Empty">你的"五星最佳相片"画廊是空的.</system:String>
 
     <system:String x:Key="Library.Empty">您的图片库为空 。 使用“ 导入” 添加图像 .</system:String>

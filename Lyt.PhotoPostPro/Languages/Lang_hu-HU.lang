@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Új...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Hozzáadás</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Törlés</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Változások mentése</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Aláírás</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Vízjelek</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Export</system:String>
+
     <system:String x:Key="Gallery.Empty">Az öt csillag legjobb képeinek galériája üres.</system:String>
 
     <system:String x:Key="Library.Empty">A képtár üres. A képek hozzáadásához használja az 'importálás' opciót.</system:String>

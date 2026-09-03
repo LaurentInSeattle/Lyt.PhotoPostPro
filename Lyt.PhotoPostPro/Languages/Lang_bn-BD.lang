@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">ড্র্যাগ অ্যান্ড ড্রপ জোন</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">নতুন নির্মাণ করুন...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">যোগ করুন</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">মুছে ফেলুন</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">০ চ্যানেল</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">স্বাক্ষর</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">জলছবি</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">এক্সপোর্ট করুন</system:String>
+
     <system:String x:Key="Gallery.Empty">আপনার পাঁচটি তারার সেরা ছবির গ্যালারি খালি।.</system:String>
 
     <system:String x:Key="Library.Empty">আপনার লাইব্রেরির ফটো ফাঁকা। ছবি যোগ করতে ' আমদানী' ব্যবহার করুন।.</system:String>

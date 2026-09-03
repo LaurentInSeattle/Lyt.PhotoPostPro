@@ -75,10 +75,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Workflow\Tools\Editor\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Update="Workflow\Tools\Editor\EditorView.axaml.cs">
+      <DependentUpon>EditorView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Tools\Exporting\ExportsView.axaml.cs">
       <DependentUpon>ExportsView.axaml</DependentUpon>
     </Compile>

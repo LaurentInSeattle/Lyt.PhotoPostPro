@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">드래그 앤 드롭 영역</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">새로운...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">기타</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">기타 제품</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">자주 묻는 질문</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">제품정보</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">워터마크</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">수출입</system:String>
+
     <system:String x:Key="Gallery.Empty">'five stars' 최고의 사진 갤러리가 비어 있습니다.</system:String>
 
     <system:String x:Key="Library.Empty">사진의 도서관은 비어 있습니다. 이미지를 추가하려면 'Import'를 사용하십시오.</system:String>

@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">ลากและวางเขตเวลา</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">สร้างใหม่...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">เพิ่ม</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">ลบ</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">จัดเก็บความเปลี่ยนแปลง</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">ลายเซ็น</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">ลายน้ํา</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">ส่งออก</system:String>
+
     <system:String x:Key="Gallery.Empty">แกลเลอรี่ดวงที่ 5 ของคุณ.</system:String>
 
     <system:String x:Key="Library.Empty">ไลบรารีของรูปภาพของคุณว่างเปล่า ใช้ 'นําเข้า' เพื่อเพิ่มภาพต่าง ๆ.</system:String>

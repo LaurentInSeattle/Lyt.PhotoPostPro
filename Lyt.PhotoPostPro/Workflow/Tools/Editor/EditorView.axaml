@@ -1,0 +1,87 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Tools.Editor.EditorView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Editor"
+	x:DataType="vm:EditorViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+
+	Background="Transparent"
+	>
+	<Grid	
+		x:Name="ToasterHost"
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="80" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="240" />
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+		</Grid.ColumnDefinitions>
+		<Rectangle
+			Grid.Row="0" Grid.Column="0"
+			Grid.RowSpan="99" Grid.ColumnSpan="99"
+			Fill="#60000020"
+			/>
+
+		<!-- List box of editable objects on the left side --> 
+		<ListBox
+			x:Name="StripListBox"
+			Grid.Row="1" Grid.RowSpan="3" Grid.Column="1"
+			ItemsSource="{Binding EditableObjects}"
+			SelectedIndex="{Binding SelectedObjectIndex}"
+			SelectedItem="{Binding SelectedObject, Mode=TwoWay}"
+			SelectionMode="Single"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			> 
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<VirtualizingStackPanel 
+						Background="Transparent"
+						Orientation="Vertical" 
+						/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock 
+						Margin="4 0 24 0"
+						Theme="{StaticResource H3}"
+						Text="{Binding FriendlyName}" 
+						Width="200" Height="40"
+						/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<!-- Editing form on the right side --> 
+		<TextBlock 
+			Grid.Row="1" Grid.Column="1"
+			Margin="4 0 24 0"
+			Theme="{StaticResource H3}"
+			Text="{Binding FriendlyName}" 
+			Width="200" Height="40"
+			/>
+		<ContentControl 
+			Grid.Row="2" Grid.Column="1"
+			Content="{Binding EditingForm}"
+			/>
+		
+	</Grid>
+</UserControl>

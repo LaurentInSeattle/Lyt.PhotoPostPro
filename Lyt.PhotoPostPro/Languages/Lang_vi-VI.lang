@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Vùng kéo và thả</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Tạo mới...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Thêm</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Xoá</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Lưu thay đổi</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Chữ ký</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Thủy ấn</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Xuất</system:String>
+
     <system:String x:Key="Gallery.Empty">Phòng trưng bày tốt nhất của bạn năm ngôi sao là trống rỗng.</system:String>
 
     <system:String x:Key="Library.Empty">Thư viện ảnh của bạn rỗng. Dùng « Mở đích » để thêm ảnh.</system:String>

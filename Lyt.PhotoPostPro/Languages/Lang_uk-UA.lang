@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Створити новий ...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Додати</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Делет</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Зберегти зміни</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Навігація</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Водні знаки</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Експорт</system:String>
+
     <system:String x:Key="Gallery.Empty">Галерея 'five stars' Кращі фотографії порожній.</system:String>
 
     <system:String x:Key="Library.Empty">Бібліотека зображень порожній. Використовуйте "Імпорт" для додавання зображень.</system:String>

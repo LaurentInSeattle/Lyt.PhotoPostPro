@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">Zona trascina e Rilascia</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">Crea nuovo...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">Aggiungi</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">Cancella</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">Salvare le modifiche</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">Firme</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">Filigrane</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">Esportazioni</system:String>
+
     <system:String x:Key="Gallery.Empty">La tua galleria di 'cinque stelle' migliori immagini è vuota.</system:String>
 
     <system:String x:Key="Library.Empty">La tua biblioteca di immagini è vuota. Utilizzare 'Import' per aggiungere immagini.</system:String>

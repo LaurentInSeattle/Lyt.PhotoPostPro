@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">拖放區</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">建立新的...</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">添加</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">刪除</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">儲存變更</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">簽名</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">水印</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">出口</system:String>
+
     <system:String x:Key="Gallery.Empty">有"五星"好相片被取出.</system:String>
 
     <system:String x:Key="Library.Empty">您相片相簿已空出 。 使用 “ 匯入 ” 來新增影像 .</system:String>

@@ -45,6 +45,20 @@
 
     <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
 
+    <system:String x:Key="Tools.Editor.AddNew">नया.</system:String>
+
+    <system:String x:Key="Tools.Editor.Add">जोड़ें</system:String>
+
+    <system:String x:Key="Tools.Editor.Delete">डिलीट</system:String>
+
+    <system:String x:Key="Tools.Editor.Save">परिवर्तन सहेजें</system:String>
+
+    <system:String x:Key="Tools.Select.Signatures">हस्ताक्षर</system:String>
+
+    <system:String x:Key="Tools.Select.Watermarks">वॉटरमार्क</system:String>
+
+    <system:String x:Key="Tools.Select.Exports">निर्यात</system:String>
+
     <system:String x:Key="Gallery.Empty">आपकी गैलरी 'पाँच सितारों' सबसे अच्छा चित्र खाली है।.</system:String>
 
     <system:String x:Key="Library.Empty">आपकी तस्वीरों की लाइब्रेरी खाली है। छवियों को जोड़ने के लिए 'आयात' का उपयोग करें।.</system:String>
