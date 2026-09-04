@@ -22,9 +22,8 @@ public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>
     public override void Activate(object? activationParameters) 
     {
         base.Activate(activationParameters);
-
-        this.editorViewModel.Populate(
-            this.model.Signatures.AvailableSignatures, 
-            new UserControl() { Background = Brushes.MintCream}); 
+        var vm = new SignatureEditViewModel(this.model);
+        var editingForm = vm.CreateViewAndBind();
+        this.editorViewModel.Populate(this.model.Signatures.AvailableSignatures, editingForm); 
     } 
 }

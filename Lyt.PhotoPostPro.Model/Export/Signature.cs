@@ -2,13 +2,11 @@
 
 public sealed class Signature : IEditable
 {
-    public const string DefaultKey = "Default";
+    public const string DefaultName = "Default";
 
-    private static Signature DefaultSignature => new() { Key = DefaultKey };
+    private static Signature DefaultSignature => new() { FriendlyName = DefaultName };
 
     public static Signature Default => DefaultSignature;
-
-    public string Key { get; set; } = string.Empty;
 
     public string FriendlyName { get; set; } = string.Empty;
 
@@ -36,5 +34,6 @@ public sealed class Signatures
 
     public Signatures() => this.AvailableSignatures.Add(Signature.Default);
 
-    public Signature? FromKey(string key) => this.AvailableSignatures.FirstOrDefault(s => s.Key == key);
+    public Signature? FromFriendlyName(string friendlyName) 
+        => this.AvailableSignatures.FirstOrDefault(s => s.FriendlyName == friendlyName);
 }

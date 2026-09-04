@@ -200,7 +200,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 Image<RgbaHalf> imageWithSignature = imageWithBorders;
                 if (imageParameters.WithSignature)
                 {
-                    Signature? signature = model.Signatures.FromKey(imageParameters.SignatureKey);
+                    Signature? signature = model.Signatures.FromFriendlyName(imageParameters.SignatureKey);
                     if (signature is not null)
                     {
                         // Adding signature : Placement 

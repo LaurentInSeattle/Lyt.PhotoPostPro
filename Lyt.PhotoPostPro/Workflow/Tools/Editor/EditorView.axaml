@@ -21,7 +21,7 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="60" />
+			<RowDefinition Height="64" />
 			<RowDefinition Height="Auto" MinHeight="120" />
 			<RowDefinition Height="64" />
 			<RowDefinition Height="*" />
@@ -29,7 +29,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="280" />
+			<ColumnDefinition Width="300" />
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="680" />
 			<ColumnDefinition Width="8" />
@@ -67,6 +67,7 @@
 							Text="{Binding FriendlyName}" 
 							Margin="4 0 24 0"
 							HorizontalAlignment="Center" VerticalAlignment="Center"
+							Foreground="{StaticResource LightAqua_0_100}"
 							/>
 					</Grid>
 				</DataTemplate>
@@ -81,6 +82,7 @@
 			Text="{Binding FriendlyName}" 
 			HorizontalAlignment="Center" VerticalAlignment="Center"
 			TextAlignment="Center"
+			Foreground="{StaticResource LightAqua_0_100}"
 			/>
 		<ContentControl 
 			Grid.Row="2" Grid.Column="3"
