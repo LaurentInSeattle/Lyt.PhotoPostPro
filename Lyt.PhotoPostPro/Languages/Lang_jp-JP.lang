@@ -5,25 +5,25 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     >
 
-    <system:String x:Key="Toast.Dismiss">近い</system:String>
+    <system:String x:Key="Toast.Dismiss">消去</system:String>
 
     <system:String x:Key="Shell.AppName">Photo Rebel - 写真の後処理</system:String>
 
     <system:String x:Key="Shell.About">について...</system:String>
 
-    <system:String x:Key="Shell.Play">遊ぶ</system:String>
+    <system:String x:Key="Shell.Play">再生</system:String>
 
-    <system:String x:Key="Shell.Exit">やめる</system:String>
+    <system:String x:Key="Shell.Exit">取り出す</system:String>
 
     <system:String x:Key="Shell.Cancel">キャンセル</system:String>
 
-    <system:String x:Key="Shell.Close">近い</system:String>
+    <system:String x:Key="Shell.Close">閉じる</system:String>
 
     <system:String x:Key="Shell.Ready">準備ができて。</system:String>
 
     <system:String x:Key="Shell.Greetings">フォトレベルへようこそ！</system:String>
 
-    <system:String x:Key="Shell.Folder">図書館</system:String>
+    <system:String x:Key="Shell.Folder">フォルダー</system:String>
 
     <system:String x:Key="Shell.Camera">カメラ</system:String>
 
@@ -77,7 +77,7 @@
 
     <system:String x:Key="Workflow.Culling.AddStar">スターを追加</system:String>
 
-    <system:String x:Key="Workflow.Culling.RemoveStar">降格</system:String>
+    <system:String x:Key="Workflow.Culling.RemoveStar">スターを消去</system:String>
 
     <system:String x:Key="Workflow.Culling.Reject">拒否する</system:String>
 
@@ -123,7 +123,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.IgnoreAll">全てを無視する</system:String>
 
-    <system:String x:Key="Workflow.Import.Folder.Import">インポート</system:String>
+    <system:String x:Key="Workflow.Import.Folder.Import">取り込み</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.Cancel">キャンセルの輸入</system:String>
 
@@ -147,7 +147,7 @@
 
     <system:String x:Key="Metadata.FileCreatedFmt">ファイルが作成されました: {0}、{1}</system:String>
 
-    <system:String x:Key="Metadata.FileCapturedFmt">捕獲: {0}、{1}</system:String>
+    <system:String x:Key="Metadata.FileCapturedFmt">保存: {0}、{1}</system:String>
 
     <system:String x:Key="Metadata.Aperture">絞り:</system:String>
 
@@ -223,17 +223,17 @@
 
     <system:String x:Key="Workflow.Compose.Preview">プレビュー</system:String>
 
-    <system:String x:Key="Workflow.Compose.Top">トップ：</system:String>
+    <system:String x:Key="Workflow.Compose.Top">トップ</system:String>
 
-    <system:String x:Key="Workflow.Compose.Bottom">底：</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">底</system:String>
 
-    <system:String x:Key="Workflow.Compose.Left">左：</system:String>
+    <system:String x:Key="Workflow.Compose.Left">左</system:String>
 
-    <system:String x:Key="Workflow.Compose.Right">右：</system:String>
+    <system:String x:Key="Workflow.Compose.Right">右</system:String>
 
-    <system:String x:Key="Workflow.Compose.Width">幅：</system:String>
+    <system:String x:Key="Workflow.Compose.Width">幅</system:String>
 
-    <system:String x:Key="Workflow.Compose.Height">身長：</system:String>
+    <system:String x:Key="Workflow.Compose.Height">高さ</system:String>
 
     <system:String x:Key="Workflow.Compose.AspectRatio">アスペクト比:</system:String>
 
@@ -261,7 +261,7 @@
 
     <system:String x:Key="Workflow.Denoise.IsoGrain">ISOの穀物</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Title">世界的な暴露</system:String>
+    <system:String x:Key="Workflow.Exposure.Title">露光</system:String>
 
     <system:String x:Key="Workflow.Exposure.Correction">ガンマ補正、乗算ゲイン、または加算輝度シフトの 3 つの方法のいずれかまたはすべてを組み合わせて補正できます。</system:String>
 
@@ -269,7 +269,7 @@
 
     <system:String x:Key="Workflow.Exposure.Gamma">ガンマ：</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Gain">得：</system:String>
+    <system:String x:Key="Workflow.Exposure.Gain">利益</system:String>
 
     <system:String x:Key="Workflow.Exposure.Shift">シフト：</system:String>
 
@@ -365,23 +365,23 @@
 
     <system:String x:Key="Workflow.Color.Global">グローバル調整</system:String>
 
-    <system:String x:Key="Workflow.Color.SaturationAmount">飽和：</system:String>
+    <system:String x:Key="Workflow.Color.SaturationAmount">飽和</system:String>
 
     <system:String x:Key="Workflow.Color.Vibrance">活気</system:String>
 
-    <system:String x:Key="Workflow.Color.Red">赤：</system:String>
+    <system:String x:Key="Workflow.Color.Red">赤</system:String>
 
-    <system:String x:Key="Workflow.Color.Green">緑：</system:String>
+    <system:String x:Key="Workflow.Color.Green">緑</system:String>
 
-    <system:String x:Key="Workflow.Color.Blue">青：</system:String>
+    <system:String x:Key="Workflow.Color.Blue">青</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Title">研ぐ</system:String>
+    <system:String x:Key="Workflow.Sharpen.Title">明確にする</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Correction">画像内のオブジェクトのエッジに沿った局所的なコントラストを高めます。</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Global">グローバル調整</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.BlurAmount">シグマ：</system:String>
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">シグマ</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Note">注: 削りすぎると有害になる可能性があります。 エッジに沿って目に見える「ハロー」が発生し、デジタル ノイズが増幅される可能性があります。</system:String>
 
@@ -391,7 +391,7 @@
 
     <system:String x:Key="Workflow.Filters.ExplainAmount">グレースケールまたはセピアの場合:</system:String>
 
-    <system:String x:Key="Workflow.Filters.Amount">額：</system:String>
+    <system:String x:Key="Workflow.Filters.Amount">量</system:String>
 
     <system:String x:Key="Workflow.Filters.None">- - なし - -</system:String>
 
@@ -401,7 +401,7 @@
 
     <system:String x:Key="Workflow.Filters.Vignette">ビネット</system:String>
 
-    <system:String x:Key="Workflow.Filters.BlackWhite">黒と白</system:String>
+    <system:String x:Key="Workflow.Filters.BlackWhite">白黒</system:String>
 
     <system:String x:Key="Workflow.Filters.Kodachrome">コダクローム</system:String>
 
@@ -409,7 +409,7 @@
 
     <system:String x:Key="Workflow.Filters.Lomograph">ロモグラフ</system:String>
 
-    <system:String x:Key="Workflow.Export.Title">輸出</system:String>
+    <system:String x:Key="Workflow.Export.Title">転送</system:String>
 
     <system:String x:Key="Workflow.Export.Correction">メインビューでエクスポートプロセスを設定します。</system:String>
 
@@ -497,7 +497,7 @@
 
     <system:String x:Key="Library.ContinueEdit">編集を続ける</system:String>
 
-    <system:String x:Key="Library.Option.Captured">捕らえられた</system:String>
+    <system:String x:Key="Library.Option.Captured">取り込まれた</system:String>
 
     <system:String x:Key="Library.Option.Added">追加した</system:String>
 
@@ -507,7 +507,7 @@
 
     <system:String x:Key="Library.Month.February">2月</system:String>
 
-    <system:String x:Key="Library.Month.March">行進</system:String>
+    <system:String x:Key="Library.Month.March">3月</system:String>
 
     <system:String x:Key="Library.Month.April">4月</system:String>
 
@@ -557,7 +557,7 @@
 
     <system:String x:Key="Intro.LicenseTitle">ライセンス条項</system:String>
 
-    <system:String x:Key="Intro.LicenseSubtitle">このアプリケーションは、MIT ライセンスの条件に基づいて提供されます。</system:String>
+    <system:String x:Key="Intro.LicenseSubtitle">このアプリケーションは MIT ライセンスの条件に基づいて提供されており、他の条件とともに、いかなる種類の保証もありません。</system:String>
 
     <system:String x:Key="Intro.LicenseTerms">このアプリケーションは MIT ライセンスの条件に基づいて提供されており、他の条件とともに、いかなる種類の保証も意味しません。 このソフトウェアを使用すると、MIT ライセンスの利用規約に完全に同意したものとみなされます。</system:String>
 
@@ -575,7 +575,7 @@
 
     <system:String x:Key="Settings.ReminderSubtitle">ダウンロードした画像について覚えておくべき重要な点がいくつかあります...</system:String>
 
-    <system:String x:Key="Settings.ReminderText">ダウンロードした画像は壁紙としてのみ使用することをお勧めします。 商業的またはその他の目的でその他の使用を行う場合は、著作権所有者にお問い合わせください。</system:String>
+    <system:String x:Key="Settings.ReminderText">ダウンロードした画像は壁紙としてのみ使用することをお勧めします。 営利またはその他の目的で使用を行う場合は、著作権所有者にお問い合わせください。</system:String>
 
     <system:String x:Key="Shared.FileErrorTitle">ファイルシステムエラー。</system:String>
 
