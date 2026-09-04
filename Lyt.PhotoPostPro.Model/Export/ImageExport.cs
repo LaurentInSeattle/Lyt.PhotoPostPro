@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Export;
 
-public sealed class ImageParameters
+public sealed class ImageExport
 {
     public ExportAction Action { get; set; } = ExportAction.None;
 
@@ -36,7 +36,7 @@ public sealed class ImageParameters
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
 
-    public ImageParameters Clone()
+    public ImageExport Clone()
         =>  new()
             {
                 Action = this.Action,
@@ -60,10 +60,10 @@ public sealed class ImageParameters
     // Default
     //      Original size, no name change, very high JPG quality, gallery format, no watermark,
     //      no signature, no borders, no postfix
-    public static ImageParameters Default => new() { IsGalleryFormat = true } ;
+    public static ImageExport Default => new() { IsGalleryFormat = true } ;
 
     // Resized to Full HD in longuest dimension, high JPG quality, no watermark, no signature, no borders
-    public static ImageParameters FullHd =>
+    public static ImageExport FullHd =>
         new()
         {
             PostFix = "_HD",
@@ -74,7 +74,7 @@ public sealed class ImageParameters
         };
 
     // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
-    public static ImageParameters ThumbnailLibrary =>
+    public static ImageExport ThumbnailLibrary =>
         new()
         {
             PostFix = "_THUMB_EDIT",
@@ -85,7 +85,7 @@ public sealed class ImageParameters
         };
 
     // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
-    public static ImageParameters Thumbnail =>
+    public static ImageExport Thumbnail =>
         new()
         {
             PostFix = "_THUMB_EDIT",

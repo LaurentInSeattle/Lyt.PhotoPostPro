@@ -3,13 +3,11 @@
 public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>
 {
     private readonly PhotoPostProModel model;
-    private readonly IToaster toaster;
     private readonly EditorViewModel editorViewModel;
 
-    public SignaturesViewModel(PhotoPostProModel model, IToaster toaster)
+    public SignaturesViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.toaster = toaster;
         this.editorViewModel = new EditorViewModel(this.model);
     }
 

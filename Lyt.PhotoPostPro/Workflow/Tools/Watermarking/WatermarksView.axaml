@@ -9,10 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	xmlns:edit="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Editor"
 
 	Background="Transparent"
 	>
@@ -20,13 +17,22 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
+			<RowDefinition Height="80" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+		<edit:EditorView
+			x:Name="EditorView"
+			Grid.Row="2" Grid.Column="2" 
+			>
+		</edit:EditorView>
 	</Grid>
 </UserControl>

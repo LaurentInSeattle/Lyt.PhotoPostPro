@@ -81,11 +81,17 @@
     <Compile Update="Workflow\Tools\Exporting\ExportsView.axaml.cs">
       <DependentUpon>ExportsView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Tools\Exporting\ExportEditView.axaml.cs">
+      <DependentUpon>ExportEditView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Tools\Signing\SignatureEditView.axaml.cs">
       <DependentUpon>SignatureEditView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Workflow\Tools\Signing\SignaturesView.axaml.cs">
       <DependentUpon>SignaturesView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\Watermarking\WatermarkEditView.axaml.cs">
+      <DependentUpon>WatermarkEditView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Workflow\Tools\Watermarking\WatermarksView.axaml.cs">
       <DependentUpon>WatermarksView.axaml</DependentUpon>

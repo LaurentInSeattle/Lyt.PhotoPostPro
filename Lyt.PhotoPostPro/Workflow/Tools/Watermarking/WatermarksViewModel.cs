@@ -8,11 +8,24 @@
 public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>
 {
     private readonly PhotoPostProModel model;
-    private readonly IToaster toaster;
+    private readonly EditorViewModel editorViewModel;
 
-    public WatermarksViewModel(PhotoPostProModel model, IToaster toaster)
+    public WatermarksViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.toaster = toaster;
+        this.editorViewModel = new EditorViewModel(this.model);
+    }
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+        this.View.EditorView.DataContext = this.editorViewModel;
+    }
+
+    public override void Activate(object? activationParameters)
+    {
+        base.Activate(activationParameters);
+        var vm = new WatermarkEditViewModel(this.model);
+        var editingForm = vm.CreateViewAndBind();
+        this.editorViewModel.Populate(this.model.Watermarks.AvailableWatermarks, editingForm);
     }
 }

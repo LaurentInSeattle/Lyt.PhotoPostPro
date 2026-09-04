@@ -2,23 +2,23 @@
 
 public sealed class ExportParameters
 {
-    public List<ImageParameters> Images { get; set; } = [];
+    public List<ImageExport> Images { get; set; } = [];
 
     public ExportParameters()
     {
         // Default stuff because we have no UI for that yet 
 
         // Adds the default export
-        this.Images.Add(ImageParameters.Default);
+        this.Images.Add(ImageExport.Default);
 
         // Adds the HD sized export
-        this.Images.Add(ImageParameters.FullHd);
+        this.Images.Add(ImageExport.FullHd);
 
         // Adds the thumbnail export
         // this.Images.Add(ImageParameters.Thumbnail);
 
         // Adds the HD sized export with black borders
-        var hdWithBlackBorders = ImageParameters.FullHd.Clone() ;
+        var hdWithBlackBorders = ImageExport.FullHd.Clone() ;
         hdWithBlackBorders.JpegQuality = ImageLoader.ThumbnailQuality; 
         hdWithBlackBorders.WithBorders = true;
         hdWithBlackBorders.BorderStyle = ImageBorderStyle.BlackBorder;

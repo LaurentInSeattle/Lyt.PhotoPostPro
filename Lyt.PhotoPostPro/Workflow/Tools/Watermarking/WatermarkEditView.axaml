@@ -1,7 +1,7 @@
 <UserControl 
-	x:Class="Lyt.PhotoPostPro.Workflow.Tools.Exporting.ExportsView"
-	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Exporting"
-	x:DataType="vm:ExportsViewModel" 
+	x:Class="Lyt.PhotoPostPro.Workflow.Tools.Watermarking.WatermarkEditView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Watermarking"
+	x:DataType="vm:WatermarkEditViewModel" 
 	
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,25 +14,21 @@
 	Background="Transparent"
 	>
 	<Grid	
+		ShowGridLines="True"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
 			<RowDefinition Height="80" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="80" />
+			<RowDefinition Height="80" />
+			<RowDefinition Height="80" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
-		<edit:EditorView
-			x:Name="EditorView"
-			Grid.Row="2" Grid.Column="2" 
-			>
-		</edit:EditorView>
 	</Grid>
 </UserControl>

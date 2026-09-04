@@ -60,7 +60,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
         var images = exportParameters.Images;
         if (images.Count == 0)
         {
-            exportParameters.Images.Add(ImageParameters.Default);
+            exportParameters.Images.Add(ImageExport.Default);
         }
 
         PhotoPostProModel model = this.ProcessWorkflow.Model;
@@ -102,7 +102,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             return null;
         }
 
-        string ExportImage(ImageParameters imageParameters, string folderPath)
+        string ExportImage(ImageExport imageParameters, string folderPath)
         {
             try
             {
@@ -279,7 +279,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             string? imageLibraryFolderPath =
                 System.IO.Path.GetDirectoryName(metadata.FullPath) ??
                 throw new Exception("No source folder for: " + metadata.FullPath);
-            string thumbnailPath = ExportImage(ImageParameters.Thumbnail, imageLibraryFolderPath);
+            string thumbnailPath = ExportImage(ImageExport.Thumbnail, imageLibraryFolderPath);
             libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 
             // Save Editing parameters and copy them to the current export folder

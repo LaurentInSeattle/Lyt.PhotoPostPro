@@ -2,7 +2,7 @@
 
 public sealed partial class ToolsViewModel : ViewModel<ToolsView>
 {
-    private static readonly Dictionary<string, ActivatedView> ToolsString = new Dictionary<string, ActivatedView>
+    private static readonly Dictionary<string, ActivatedView> ToolsString = new()
     {
         { "Tools.Select.Signatures", ActivatedView.Signatures },
         { "Tools.Select.Watermarks", ActivatedView.Watermarks },
@@ -46,11 +46,6 @@ public sealed partial class ToolsViewModel : ViewModel<ToolsView>
                 }
             }, DispatcherPriority.Background);
         }
-    }
-
-    public override void Deactivate()
-    {
-        base.Deactivate();
     }
 
     private void BuildToolsButtons()
