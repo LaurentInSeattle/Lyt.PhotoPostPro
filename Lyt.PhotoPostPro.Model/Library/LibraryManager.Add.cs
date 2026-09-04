@@ -93,10 +93,26 @@ public sealed partial class LibraryManager
                 string targetPath = Path.Combine(targetFolder, targetFilename);
                 File.Move(fullPath, targetPath, overwrite: true);
 
+                // A few times copying the main file has failed without any exception,
+                // so we check if the file is there and retry after a short delay
+                if (!File.Exists(targetPath))
+                {
+                    if (Debugger.IsAttached) { Debugger.Break(); }
+
+                    // Retry after a short delay
+                    Task.Delay(50).Wait();
+                    File.Move(fullPath, targetPath, overwrite: true);
+                    if (!File.Exists(targetPath))
+                    {
+                        // Still not there, so we give up
+                        throw new Exception("Failed to copy main image file: " + fullPath);
+                    }
+                }
+
                 // Move thumbnail file 
                 string? sourceFolder =
-                    Path.GetDirectoryName(fullPath) ??
-                    throw new Exception("No source folder for: " + fullPath);
+                Path.GetDirectoryName(fullPath) ??
+                throw new Exception("No source folder for: " + fullPath);
                 string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
                 string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
                 string sourcePathThumbnail = Path.Combine(sourceFolder, filenameThumbnail);
@@ -110,6 +126,7 @@ public sealed partial class LibraryManager
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                this.logger.Warning("Exception thrown while AddDownloadedFiles: " + ex);
                 lock (exceptions)
                 {
                     ++errors;
@@ -218,6 +235,7 @@ public sealed partial class LibraryManager
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            this.logger.Warning("Exception thrown while AddDroppedFile: " + ex);
             return false;
         }
     }
@@ -281,6 +299,7 @@ public sealed partial class LibraryManager
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            this.logger.Warning("Exception thrown while AddFileFinalSteps: " + ex);
             return false;
         }
     }
@@ -309,6 +328,7 @@ public sealed partial class LibraryManager
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            this.logger.Warning("Exception thrown while UpdateEditedFile: " + ex);
         }
     }
 
