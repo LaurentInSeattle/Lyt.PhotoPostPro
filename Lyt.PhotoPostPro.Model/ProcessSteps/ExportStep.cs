@@ -147,7 +147,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 Image<RgbaHalf> imageWithWatermark = imageToResize;
                 if (imageParameters.WithWatermark)
                 {
-                    Watermark? watermark = model.Watermarks.FromKey(imageParameters.WatermarkKey);
+                    Watermark? watermark = model.Watermarks.FromFriendlyName(imageParameters.WatermarkKey);
                     if (watermark is not null)
                     {
                         // Adding watermark : Placement 

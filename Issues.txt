@@ -12,13 +12,10 @@ Bugs ~ Major Issues
 WIP
 ---
 
-Implement layout and tabs for tools: Signature, Watermark, Export, etc.
-
-Implement generic Editor 
+- UI to define signatures 
+	Implement Signature Editor 
 
 Implement Export Editor 
-
-Implement Signature Editor 
 
 Implement Watermark Editor 
 
@@ -30,7 +27,6 @@ Essential Missing Features
 
 - UI to pick up exports parameters 
 
-- UI to define signatures 
 
 - UI to define watermarks
 
@@ -56,6 +52,8 @@ Minor Issues (Low priority)
 
 Code Quality Issues 
 -------------------
+
+- Move Export code to a dedicated class to keep the ExportStep class clean.
 
 - Cleanup code tha builds file names and paths.
 

@@ -8,6 +8,7 @@ public sealed class Signature : IEditable
 
     public static Signature Default => DefaultSignature;
 
+
     public string FriendlyName { get; set; } = string.Empty;
 
     public string FontFamily { get; set; } = "Segoe Script";
@@ -22,8 +23,10 @@ public sealed class Signature : IEditable
 
     public uint HexColorArgb { get; set; } = 0xFFFFFFFF;
 
+    [JsonIgnore]
     public FontStyle FontStyle => (FontStyle)(int)this.PppFontStyle;
 
+    [JsonIgnore]
     public Color Color => Color.Parse (this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }
 

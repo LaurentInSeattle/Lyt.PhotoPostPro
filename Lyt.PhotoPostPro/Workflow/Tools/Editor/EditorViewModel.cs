@@ -1,15 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Editor;
 
-public interface IEditor
-{
-    void BeginAdd();
-    void BeginEdit(IEditable editable);
-    void Add();
-    void Save();
-    void Delete();
-}
-
-
 public sealed partial class EditorViewModel : ViewModel<EditorView>
 {
     public sealed class AddNewEditable(string friendlyName) : IEditable
