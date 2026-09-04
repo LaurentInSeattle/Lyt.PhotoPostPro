@@ -218,6 +218,9 @@ public sealed partial class LibraryManager
             string targetPath = Path.Combine(targetFolder, targetFilename);
             File.Copy(fullPath, targetPath, overwrite: true);
 
+            // Update metadata to reflect the new location of the main file
+            metadata.HasMovedTo(targetPath);
+
             // Create thumbnail file 
             string filenameThumbnail = metadata.Filename + "_THUMB.jpg";
             string targetPathThumbnail = Path.Combine(targetFolder, filenameThumbnail);
