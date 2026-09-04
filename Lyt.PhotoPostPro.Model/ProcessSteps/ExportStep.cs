@@ -50,17 +50,17 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
         }
     }
 
-    internal Frame? Export(ExportParameters exportParameters)
+    internal Frame? Export(ImageExportsCollection imageExports)
     {
         if (this.ResultImage is null)
         {
             return null;
         }
 
-        var images = exportParameters.Images;
+        var images = imageExports.AvailableImageExports;
         if (images.Count == 0)
         {
-            exportParameters.Images.Add(ImageExport.Default);
+            imageExports.AvailableImageExports.Add(ImageExport.Default);
         }
 
         PhotoPostProModel model = this.ProcessWorkflow.Model;
@@ -102,14 +102,14 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             return null;
         }
 
-        string ExportImage(ImageExport imageParameters, string folderPath)
+        string ExportImage(ImageExport imageExport, string folderPath)
         {
             try
             {
                 // Resize and rescale 
                 // ! Compiler fail ? Verified at begin of method 
                 Image<RgbaHalf> imageToResize = this.ResultImage!.Clone();
-                switch (imageParameters.Action)
+                switch (imageExport.Action)
                 {
                     default:
                     case ExportAction.None:
@@ -124,7 +124,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         throw new NotImplementedException("ExportAction.ToScale is not implemented yet.");
 
                     case ExportAction.ToDimensions:
-                        int dimension = imageParameters.Dimension;
+                        int dimension = imageExport.Dimension;
                         int width = imageToResize.Width;
                         int height = imageToResize.Height;
                         if (width > height)
@@ -145,9 +145,9 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Add watermark, if specified
                 Image<RgbaHalf> imageWithWatermark = imageToResize;
-                if (imageParameters.WithWatermark)
+                if (imageExport.WithWatermark)
                 {
-                    Watermark? watermark = model.Watermarks.FromFriendlyName(imageParameters.WatermarkKey);
+                    Watermark? watermark = model.Watermarks.FromFriendlyName(imageExport.WatermarkKey);
                     if (watermark is not null)
                     {
                         // Adding watermark : Placement 
@@ -176,12 +176,12 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Add Borders, if specified
                 Image<RgbaHalf> imageWithBorders = imageWithWatermark;
-                if (imageParameters.WithBorders)
+                if (imageExport.WithBorders)
                 {
                     Color borderColor =
-                        imageParameters.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
+                        imageExport.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
                     double thicknessFactor =
-                        imageParameters.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5;
+                        imageExport.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5;
                     int borderWidth = (int)(thicknessFactor * imageWithBorders.Width / 100.0);
                     int borderHeight = (int)(thicknessFactor * imageWithBorders.Height / 100.0);
                     int border = Math.Max(borderWidth, borderHeight);
@@ -198,9 +198,9 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Add signature, if specified
                 Image<RgbaHalf> imageWithSignature = imageWithBorders;
-                if (imageParameters.WithSignature)
+                if (imageExport.WithSignature)
                 {
-                    Signature? signature = model.Signatures.FromFriendlyName(imageParameters.SignatureKey);
+                    Signature? signature = model.Signatures.FromFriendlyName(imageExport.SignatureKey);
                     if (signature is not null)
                     {
                         // Adding signature : Placement 
@@ -248,10 +248,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Saving export formatted image: pick encoder and file extension  
                 Image<RgbaHalf> finalImage = imageWithSignature;
-                var encoder = imageParameters.ImageEncoder;
-                string extension = imageParameters.FileExtension;
+                var encoder = imageExport.ImageEncoder;
+                string extension = imageExport.FileExtension;
                 string exportPath =
-                    System.IO.Path.Combine(folderPath, fileName + imageParameters.PostFix + extension);
+                    System.IO.Path.Combine(folderPath, fileName + imageExport.PostFix + extension);
                 finalImage.Save(exportPath, encoder);
                 return exportPath;
             }
@@ -292,10 +292,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             bool hasBeenExportedToGallery = false;
             bool isFiveStars = metadata.Rating == 5;
 
-            foreach (var imageParameters in exportParameters.Images)
+            foreach (var imageExport in imageExports.AvailableImageExports)
             {
-                string exportPath = ExportImage(imageParameters, subDirectoryExport);
-                if (imageParameters.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
+                string exportPath = ExportImage(imageExport, subDirectoryExport);
+                if (imageExport.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
                 {
                     // Dont care if fails (at least for now) 
                     _ = model.LibraryManager.AddToGallery(sourceFilePath: exportPath);

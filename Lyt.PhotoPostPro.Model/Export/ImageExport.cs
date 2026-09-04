@@ -1,7 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Export;
 
-public sealed class ImageExport
+public sealed class ImageExport : IEditable
 {
+    public string FriendlyName { get; set; } = string.Empty;
+
     public ExportAction Action { get; set; } = ExportAction.None;
 
     public int Dimension { get; set; } = 1920;
@@ -60,12 +62,17 @@ public sealed class ImageExport
     // Default
     //      Original size, no name change, very high JPG quality, gallery format, no watermark,
     //      no signature, no borders, no postfix
-    public static ImageExport Default => new() { IsGalleryFormat = true } ;
+    public static ImageExport Default => new() 
+    {
+        FriendlyName = "Best Quality",
+        IsGalleryFormat = true 
+    } ;
 
     // Resized to Full HD in longuest dimension, high JPG quality, no watermark, no signature, no borders
     public static ImageExport FullHd =>
         new()
         {
+            FriendlyName = "Full HD",
             PostFix = "_HD",
             Action = ExportAction.ToDimensions,
             Dimension = 1920,
@@ -77,6 +84,7 @@ public sealed class ImageExport
     public static ImageExport ThumbnailLibrary =>
         new()
         {
+            FriendlyName = "Thumbnail",
             PostFix = "_THUMB_EDIT",
             Action = ExportAction.ToDimensions,
             Dimension = 480,
@@ -95,22 +103,7 @@ public sealed class ImageExport
             JpegQuality = 85,
         };
 
-    public string FileExtension
-        => this.OutputFormat switch
-        {
-            OutputFormat.Jpeg => ".jpg",
-            OutputFormat.Png => ".png",
-            OutputFormat.Bmp => ".bmp",
-            _ => throw new NotImplementedException(),
-        };
+    public string FileExtension => this.OutputFormat.FileExtension(); 
 
-    public IImageEncoder ImageEncoder
-        => this.OutputFormat switch
-        {
-            OutputFormat.Jpeg => new JpegEncoder() { ColorType = JpegColorType.Rgb, Quality = this.JpegQuality },
-            OutputFormat.Png => new PngEncoder() { ColorType = PngColorType.Rgb },
-            OutputFormat.Bmp => new BmpEncoder() { BitsPerPixel = BmpBitsPerPixel.Bit24 },
-            _ => throw new NotImplementedException(),
-        };
-
+    public IImageEncoder ImageEncoder => this.OutputFormat.ImageEncoder(this.JpegQuality);
 }

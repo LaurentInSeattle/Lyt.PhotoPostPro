@@ -29,14 +29,3 @@ public sealed class Signature : IEditable
     [JsonIgnore]
     public Color Color => Color.Parse (this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }
-
-/// <summary> Will load from disk ~ LATER </summary>
-public sealed class Signatures
-{
-    public List<Signature> AvailableSignatures { get; set; } = [];
-
-    public Signatures() => this.AvailableSignatures.Add(Signature.Default);
-
-    public Signature? FromFriendlyName(string friendlyName) 
-        => this.AvailableSignatures.FirstOrDefault(s => s.FriendlyName == friendlyName);
-}

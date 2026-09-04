@@ -37,10 +37,12 @@ public sealed partial class PhotoPostProModel : ModelBase
     public bool IsFirstRun { get; set; }
 
     [JsonRequired]
-    public Signatures Signatures { get; set; } = new();
+    public SignaturesCollection Signatures { get; set; } = new();
 
     [JsonRequired]
-    public Watermarks Watermarks { get; set; } = new();
+    public WatermarksCollection Watermarks { get; set; } = new();
+
+    public ImageExportsCollection ImageExports { get; set; } = new();
 
     #endregion Serialized -  No model changed event
 

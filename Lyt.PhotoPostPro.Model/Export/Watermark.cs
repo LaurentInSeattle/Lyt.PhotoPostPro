@@ -29,14 +29,3 @@ public sealed class Watermark : IEditable
     [JsonIgnore]
     public Color Color => Color.Parse(this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }
-
-/// <summary> Will load from disk ~ LATER </summary>
-public sealed class Watermarks
-{
-    public List<Watermark> AvailableWatermarks { get; set; } = [];
-
-    public Watermarks() => this.AvailableWatermarks.Add(Watermark.Default);
-
-    public Watermark? FromFriendlyName(string friendlyName)
-            => this.AvailableWatermarks.FirstOrDefault(s => s.FriendlyName == friendlyName);
-}

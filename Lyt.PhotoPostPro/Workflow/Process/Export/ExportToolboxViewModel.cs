@@ -45,7 +45,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public void OnExport()
     {
         // TODO: Collect parameters 
-        ExportParameters exportParameters = new();
+        ImageExportsCollection imageExports = new();
 
         // Always launch a spinner for big or small files 
         this.IsExporting = true;
@@ -55,7 +55,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         {
             try
             {
-                this.model.Export(exportParameters);
+                this.model.Export(imageExports);
             }
             catch (Exception ex)
             {

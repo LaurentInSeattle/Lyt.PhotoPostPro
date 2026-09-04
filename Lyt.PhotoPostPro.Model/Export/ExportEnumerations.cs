@@ -52,3 +52,24 @@ public enum PppFontStyle
     Italic = 2,
     BoldItalic = 3
 }
+
+public static class OutputFomatExtensions
+{
+    public static string FileExtension(this OutputFormat outputFormat)
+        => outputFormat switch
+        {
+            OutputFormat.Jpeg => ".jpg",
+            OutputFormat.Png => ".png",
+            OutputFormat.Bmp => ".bmp",
+            _ => throw new NotImplementedException(),
+        };
+
+    public static IImageEncoder ImageEncoder(this OutputFormat outputFormat, int jpegQuality)
+        => outputFormat switch
+        {
+            OutputFormat.Jpeg => new JpegEncoder() { ColorType = JpegColorType.Rgb, Quality = jpegQuality },
+            OutputFormat.Png => new PngEncoder() { ColorType = PngColorType.Rgb },
+            OutputFormat.Bmp => new BmpEncoder() { BitsPerPixel = BmpBitsPerPixel.Bit24 },
+            _ => throw new NotImplementedException(),
+        };
+}

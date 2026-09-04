@@ -8,8 +8,8 @@
 [JsonSerializable(typeof(Signature))]
 [JsonSerializable(typeof(Watermark))]
 // With ending S 
-[JsonSerializable(typeof(Signatures))]
-[JsonSerializable(typeof(Watermarks))]
+[JsonSerializable(typeof(SignaturesCollection))]
+[JsonSerializable(typeof(WatermarksCollection))]
 
 [JsonSerializable(typeof(ExportAction))]
 [JsonSerializable(typeof(OutputFormat))]

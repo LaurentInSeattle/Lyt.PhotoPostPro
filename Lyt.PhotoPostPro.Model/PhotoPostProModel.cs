@@ -16,8 +16,8 @@ public sealed partial class PhotoPostProModel : ModelBase
             Language = DefaultLanguage,
             FileUid = 0,
             IsFirstRun = true,
-            Signatures = new Signatures(),
-            Watermarks = new Watermarks(),
+            Signatures = new SignaturesCollection(),
+            Watermarks = new WatermarksCollection(),
         };
 
     private readonly Lock lockObject = new();

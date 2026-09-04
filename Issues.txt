@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- CRITICAL : Import Single Image Not updating path 
+
 - CRITICAL : Image not found 
 
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
