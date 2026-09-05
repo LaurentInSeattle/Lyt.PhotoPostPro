@@ -72,7 +72,7 @@
 	<system:String x:Key="Tools.Editor.Save">Save Changes</system:String>
 
 	<!-- Used in multiple Editor VM's-->
-	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
+	<system:String x:Key="Tools.Editor.TextPrompt">Signature Text</system:String>
 	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>
 	<system:String x:Key="Tools.Editor.ColorPrompt">Color</system:String>
 	<system:String x:Key="Tools.Editor.FontSizePrompt">Font Size</system:String>

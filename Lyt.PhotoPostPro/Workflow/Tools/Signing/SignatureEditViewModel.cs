@@ -28,7 +28,7 @@ public sealed partial class SignatureEditViewModel :
         // "Solid - 950", // 950 // Apparently not supported 
     ];
 
-    private static readonly List<SignatureLocation> SupportedSignatureLocationValues =
+    private static readonly List<SignatureLocation> SupportedSignaturePlacementValues =
     [
         SignatureLocation.TopLeft,
         SignatureLocation.TopRight,
@@ -36,7 +36,7 @@ public sealed partial class SignatureEditViewModel :
         SignatureLocation.BottomRight,
     ];
 
-    private static readonly List<string> SupportedSignatureLocationText =
+    private static readonly List<string> SupportedSignaturePlacementText =
     [
         "Tools.Editor.TopLeft",
         "Tools.Editor.TopRight",
@@ -81,10 +81,10 @@ public sealed partial class SignatureEditViewModel :
     */
 
     [ObservableProperty]
-    public partial string FriendlyName { get; set; }
+    public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string Text { get; set; }
+    public partial string Text { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string FontSizeString { get; set; }
@@ -102,7 +102,7 @@ public sealed partial class SignatureEditViewModel :
     public partial int SelectedFontFamilyIndex { get; set; }
 
     [ObservableProperty]
-    public partial Color ForegroundColor { get; set; }
+    public partial Color ForegroundColor { get; set; } = Color.FromUInt32(0xFF_FF_FF_FF); // Pure White 
 
     [ObservableProperty]
     public partial List<string> SupportedFontWeights { get; set; }
@@ -111,20 +111,25 @@ public sealed partial class SignatureEditViewModel :
     public partial int SelectedTextFontWeightsIndex { get; set; }
 
     [ObservableProperty]
+    public partial ObservableCollection<string> SupportedPlacements { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedPlacementIndex { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<string> SupportedFontStyles { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedFontStylesIndex { get; set; }
+
+    [ObservableProperty]
     public partial string ValidationMessage { get; set; }
 
     public SignatureEditViewModel(PhotoPostProModel model)
     {
         this.model = model;
 
-        this.fontSize = 26;
-        this.fontWeight = 400;
-        this.ForegroundColor = Color.FromUInt32(0xFF_FF_FA_FE);
-        this.FriendlyName = Signature.DefaultName;
-        this.Text = "Edited with Photo Rebel";
-        this.FontSizeString = this.fontSize.ToString("D");
-        this.SupportedFontWeights = SignatureEditViewModel.SupportedFontWeightText;
-
+        this.SetDefaults();
         var fontCollection = FontManager.Current.SystemFonts;
         var fontFamilies = new List<FontFamily>(fontCollection).OrderBy(x => x.Name).ToList();
 
@@ -145,32 +150,141 @@ public sealed partial class SignatureEditViewModel :
         }
 
         this.SupportedFontFamilies = fontFamilies;
+        this.SupportedFontWeights = SignatureEditViewModel.SupportedFontWeightText;
 
         // Enforce property changed
         this.SelectedTextFontWeightsIndex = 0;
-        this.SelectedTextFontWeightsIndex = 6;
+        this.SelectedTextFontWeightsIndex = 4;
 
-        this.ValidationMessage = "What Ze ?";
+        this.ValidationMessage = string.Empty;
     }
 
-    public override void OnViewLoaded()
+    private void SetDefaults()
     {
-        base.OnViewLoaded();
+        this.fontSize = 26;
+        this.fontWeight = 400;
+        this.ForegroundColor = Color.FromUInt32(0xFF_FF_FA_F0);
+        this.FriendlyName = Signature.DefaultName;
+        this.Text = "Edited with Photo Rebel";
+        this.FontSizeString = this.fontSize.ToString("D");
     }
 
-    public override void Activate(object? activationParameters)
+    private void PopulateLocalizedComboBoxes()
     {
-        base.Activate(activationParameters);
+        // We may need to localize (again) the supported placements text, so let's do 
+        var list = new List<string>();
+        foreach (string item in SupportedSignaturePlacementText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedPlacements = new(list);
+
+        // Enforce property changed
+        this.SelectedPlacementIndex = 0;
+        this.SelectedPlacementIndex = 3;
+
+        // Same for the supported font styles
+        list.Clear();
+        foreach (string item in SupportedFontStyleText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedFontStyles = new(list);
+
+        // Enforce property changed
+        this.SelectedFontStylesIndex = 0;
+        this.SelectedFontStylesIndex = 2;
     }
 
     // Populate the form with defaults 
     public void BeginAdd()
     {
+        this.PopulateLocalizedComboBoxes();
+        this.SetDefaults();
     }
 
     // Populate the form with provided editable 
     public void BeginEdit(IEditable editable)
     {
+        if (editable is not Signature signature)
+        {
+            return;
+        }
+
+        this.PopulateLocalizedComboBoxes();
+
+        this.FriendlyName = signature.FriendlyName;
+        this.Text = signature.Text;
+
+        this.SelectedPlacementIndex = -1;
+        for (int i = 0; i < SupportedSignaturePlacementValues.Count; ++i)
+        {
+            if (signature.Location == SupportedSignaturePlacementValues[i])
+            {
+                this.SelectedPlacementIndex = i;
+                break;
+            }
+        }
+
+        this.ForegroundColor = Color.FromUInt32(signature.HexColorArgb);
+        this.FontSizeString = signature.FontSize.ToString("D");
+
+        this.SelectedTextFontWeightsIndex = -1;
+        for (int i = 0; i < SupportedFontWeights.Count; ++i)
+        {
+            if (signature.FontWeight == SupportedFontWeightValues[i])
+            {
+                this.SelectedTextFontWeightsIndex = i;
+                break;
+            }
+        }
+
+        this.SelectedFontFamilyIndex = -1;
+        for (int i = 0; i < this.SupportedFontFamilies.Count; ++i)
+        {
+            if (signature.FontFamily.Equals(this.SupportedFontFamilies[i].Name, StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.SelectedFontFamilyIndex = i;
+                break;
+            }
+        }
+
+        this.SelectedFontStylesIndex = -1;
+        for (int i = 0; i < SupportedFontStyleValues.Count; ++i)
+        {
+            if (signature.PppFontStyle == SupportedFontStyleValues[i])
+            {
+                this.SelectedFontStylesIndex = i;
+                break;
+            }
+        }
+    }
+
+    partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage(); 
+
+    partial void OnTextChanged(string value) => this.ValidateAndMessage();
+
+    partial void OnFontSizeStringChanged(string value) => this.ValidateAndMessage();
+
+    partial void OnSelectedTextFontWeightsIndexChanged(int value) => this.ValidateAndMessage();
+
+    private void ValidateAndMessage()
+    {
+        if (!this.Validate(out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return; 
+        }
+
+        this.ValidationMessage = string.Empty; 
+    }
+
+    private bool Validate(out string message)
+    {
+        message = string.Empty;
+        return true; 
     }
 
     // Clicked "Add" button - add new editable to model, refresh master list,
