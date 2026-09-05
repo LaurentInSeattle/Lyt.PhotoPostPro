@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Signing;
 
-public sealed partial class SignatureEditViewModel : 
+public sealed partial class SignatureEditViewModel :
     ViewModel<SignatureEditView>, IEditor
 {
     private static readonly List<int> SupportedFontWeightValues =
@@ -26,6 +26,38 @@ public sealed partial class SignatureEditViewModel :
         "Extra Bold - 800",
         "Heavy - 900",
         // "Solid - 950", // 950 // Apparently not supported 
+    ];
+
+    private static readonly List<SignatureLocation> SupportedSignatureLocationValues =
+    [
+        SignatureLocation.TopLeft,
+        SignatureLocation.TopRight,
+        SignatureLocation.BottomLeft,
+        SignatureLocation.BottomRight,
+    ];
+
+    private static readonly List<string> SupportedSignatureLocationText =
+    [
+        "Tools.Editor.TopLeft",
+        "Tools.Editor.TopRight",
+        "Tools.Editor.BottomLeft",
+        "Tools.Editor.BottomRight",
+    ];
+
+    private static readonly List<PppFontStyle> SupportedFontStyleValues =
+    [
+        PppFontStyle.Regular,
+        PppFontStyle.Bold ,
+        PppFontStyle.Italic,
+        PppFontStyle.BoldItalic,
+    ];
+
+    private static readonly List<string> SupportedFontStyleText =
+    [
+        "Tools.Editor.Regular",
+        "Tools.Editor.Bold",
+        "Tools.Editor.Italic",
+        "Tools.Editor.BoldItalic",
     ];
 
     private readonly PhotoPostProModel model;
@@ -61,6 +93,9 @@ public sealed partial class SignatureEditViewModel :
     public partial PppFontStyle PppFontStyle { get; set; }
 
     [ObservableProperty]
+    public partial SignatureLocation Location { get; set; }
+
+    [ObservableProperty]
     public partial List<FontFamily> SupportedFontFamilies { get; set; }
 
     [ObservableProperty]
@@ -84,9 +119,9 @@ public sealed partial class SignatureEditViewModel :
 
         this.fontSize = 26;
         this.fontWeight = 400;
-        this.ForegroundColor = Color.FromUInt32(0xFF_00_00_00);
+        this.ForegroundColor = Color.FromUInt32(0xFF_FF_FA_FE);
         this.FriendlyName = Signature.DefaultName;
-        this.Text = Signature.DefaultName;
+        this.Text = "Edited with Photo Rebel";
         this.FontSizeString = this.fontSize.ToString("D");
         this.SupportedFontWeights = SignatureEditViewModel.SupportedFontWeightText;
 
@@ -114,26 +149,28 @@ public sealed partial class SignatureEditViewModel :
         // Enforce property changed
         this.SelectedTextFontWeightsIndex = 0;
         this.SelectedTextFontWeightsIndex = 6;
+
+        this.ValidationMessage = "What Ze ?";
     }
 
-    public override void OnViewLoaded() 
+    public override void OnViewLoaded()
     {
-        base.OnViewLoaded(); 
-    } 
+        base.OnViewLoaded();
+    }
 
-    public override void Activate(object? activationParameters) 
+    public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
     }
 
     // Populate the form with defaults 
-    public void BeginAdd() 
-    { 
+    public void BeginAdd()
+    {
     }
 
     // Populate the form with provided editable 
     public void BeginEdit(IEditable editable)
-    { 
+    {
     }
 
     // Clicked "Add" button - add new editable to model, refresh master list,
@@ -154,6 +191,6 @@ public sealed partial class SignatureEditViewModel :
     public void Delete()
     {
 
-    } 
-         
+    }
+
 }

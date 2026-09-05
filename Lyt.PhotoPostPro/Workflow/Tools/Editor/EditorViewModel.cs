@@ -94,11 +94,15 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
             this.EditableObjects.Add(editable);
         }
 
-        this.SelectedObjectIndex = -1;
         this.EditingForm = editingForm;
         if (this.EditingForm.DataContext is IEditor editor)
         {
             this.editor = editor;
+
+            // Force property changed to ensure that the selected index is reset
+            // And will initialize the editing form with 'Add New...'
+            this.SelectedObjectIndex = -1;
+            this.SelectedObjectIndex = 0;
         }
         else
         {

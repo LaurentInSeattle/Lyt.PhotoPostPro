@@ -14,72 +14,101 @@
 	Background="Transparent"
 	>
 	<Grid	
-		ShowGridLines="True"
+		ShowGridLines="False"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="12" /> <!-- Spacer --> 
+			<RowDefinition Height="30" /> <!-- Validation --> 
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="420" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 
 		<TextBlock
-			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" 
-			Text="Optional top frame label, ABOVE the QR code:"
+			Grid.Column="1" Grid.Row="1" 
 			Theme="{StaticResource Medium}"
-			Margin="0"
-			TextAlignment="Left"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			Text="{DynamicResource Tools.Editor.FriendlyNamePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<TextBox
 			x:Name="FriendlyNameTextBox"
-			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+			Grid.Column="2" Grid.Row="1" 
 			VerticalContentAlignment="Center" 
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			PlaceholderText="Text above the QR code."
+			Width="360" Height="40"
 			MaxLength="40"
 			Text="{Binding FriendlyName}"
-			Margin="0"
 			/>
-
 		<TextBlock
-			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" 
-			Text="Optional top frame label, ABOVE the QR code:"
+			Grid.Column="1" Grid.Row="2" 
 			Theme="{StaticResource Medium}"
-			Margin="0"
-			TextAlignment="Left"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			Text="{DynamicResource Tools.Editor.FriendlyNamePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<TextBox
 			x:Name="TextTextBox"
-			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+			Grid.Column="2" Grid.Row="2" 
 			VerticalContentAlignment="Center" 
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			PlaceholderText="Text above the QR code."
-			MaxLength="40"
+			Width="360" Height="40"
+			MaxLength="60"
 			Text="{Binding Text}"
 			Margin="0"
 			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="3" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.SignaturePlacement}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="3" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedFontWeights}"
+			SelectedIndex="{Binding SelectedTextFontWeightsIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+
 
 		<TextBlock
-			Grid.Column="2" Grid.Row="2" 
-			Margin="0"
-			Text="Color"
+			Grid.Column="1" Grid.Row="4" 
+			Text="{DynamicResource Tools.Editor.ColorPrompt}"
 			Theme="{StaticResource Medium}"
-			TextAlignment="Left"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<ColorPicker
-			Grid.Column="0" Grid.Row="3" 
-			Width="280" Height="40"
+			Grid.Column="2" Grid.Row="4" 
+			Width="360" Height="40"
 			Color="{Binding ForegroundColor}"
 			ColorModel="Rgba"
 			Foreground="{StaticResource LightAqua_0_120}"
@@ -87,41 +116,33 @@
 			IsAlphaVisible="False"
 			VerticalAlignment="Center" HorizontalAlignment="Stretch" 
 			/> 
-
 		<TextBlock
-			Grid.Column="0" Grid.Row="8" 
-			Text="Font Size:"
+			Grid.Column="1" Grid.Row="5" 
+			Text="{DynamicResource Tools.Editor.FontSizePrompt}"
 			Theme="{StaticResource Medium}"
-			Margin="0"
-			Width="80"
-			TextAlignment="Left"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<TextBox
-			Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="8"
+			Grid.Column="2" Grid.Row="5"
 			VerticalContentAlignment="Center" 
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			PlaceholderText="Font Size (8 to 80)"
-			MaxLength="40"
+			Width="360" Height="40"
+			MaxLength="4"
 			Text="{Binding FontSizeString}"
-			Margin="80 0 40 0"
 			/>
-
 		<TextBlock
-			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" 
-			Text="Font Weight:"
+			Grid.Column="1" Grid.Row="6" 
+			Text="{DynamicResource Tools.Editor.FontWeightPrompt}"
 			Theme="{StaticResource Medium}"
-			Margin="0"
-			Width="90"
-			TextAlignment="Left"
-			VerticalAlignment="Center" HorizontalAlignment="Left"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<ComboBox
-			Grid.Column="2" Grid.Row="8" 
+			Grid.Column="2" Grid.Row="6" 
 			IsEditable="False"
-			Margin="80 0 0 0"
-			Width="200" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
 			ItemsSource="{Binding SupportedFontWeights}"
 			SelectedIndex="{Binding SelectedTextFontWeightsIndex}"
 			>
@@ -138,21 +159,18 @@
 		</ComboBox>
 
 		<TextBlock
-			Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" 
-			Text="Font Family: (for both texts)"
+			Grid.Column="1" Grid.Row="7" 
+			Text="{DynamicResource Tools.Editor.FontFamilyPrompt}"
 			Theme="{StaticResource Medium}"
-			Margin="0 0 20 0"
-			Width="280"
 			TextAlignment="Right"
 			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 
 		<ComboBox
-			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="14" 
+			Grid.Column="2" Grid.Row="7" 
 			IsEditable="False"
-			Margin="10 0 0 0"
-			Width="280" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
 			ItemsSource="{Binding SupportedFontFamilies}"
 			SelectedIndex="{Binding SelectedFontFamilyIndex}"
 			>
@@ -174,10 +192,38 @@
 		</ComboBox>
 
 		<TextBlock
-			Grid.Row="15"  Grid.ColumnSpan="3" 
+			Grid.Column="1" Grid.Row="8" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.FontStylePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="8" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedFontWeights}"
+			SelectedIndex="{Binding SelectedTextFontWeightsIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Row="10"  Grid.Column="1" Grid.ColumnSpan="2" 
 			Text="{Binding ValidationMessage}"
 			Theme="{StaticResource ValidationError}"
-			Margin="40 0 0 0"
+			TextAlignment="Center"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
 			/>
 	</Grid>
 </UserControl>

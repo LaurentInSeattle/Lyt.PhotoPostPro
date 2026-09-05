@@ -31,7 +31,8 @@
 	<x:String x:Key="StringManagedFileChooserOverwritePromptFileAlreadyExistsText">{0} already exists. Do you want to replace it?</x:String>
 	<x:String x:Key="StringManagedFileChooserOverwritePromptConfirmText">Yes</x:String>
 	<x:String x:Key="StringManagedFileChooserOverwritePromptCancelText">No</x:String>
---> 
+-->
+
 	<!-- Toast-->
 	<system:String x:Key="Toast.Dismiss">Close</system:String>
 
@@ -70,9 +71,28 @@
 	<system:String x:Key="Tools.Editor.Delete">Delete</system:String>
 	<system:String x:Key="Tools.Editor.Save">Save Changes</system:String>
 
+	<!-- Used in multiple Editor VM's-->
+	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
+	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>
+	<system:String x:Key="Tools.Editor.ColorPrompt">Color</system:String>
+	<system:String x:Key="Tools.Editor.FontSizePrompt">Font Size</system:String>
+	<system:String x:Key="Tools.Editor.FontWeightPrompt">Font Weight</system:String>
+	<system:String x:Key="Tools.Editor.FontFamilyPrompt">Font Family</system:String>
+	<system:String x:Key="Tools.Editor.FontStylePrompt">Font Style</system:String>
+
+	<system:String x:Key="Tools.Editor.Regular">Regular</system:String>
+	<system:String x:Key="Tools.Editor.Bold">Bold</system:String>
+	<system:String x:Key="Tools.Editor.Italic">Italic</system:String>
+	<system:String x:Key="Tools.Editor.BoldItalic">Bold Italic</system:String>
+	
 	<!-- Signatures -->
 	<system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
-	
+	<system:String x:Key="Tools.Editor.SignaturePlacement">Signature Placement</system:String>
+	<system:String x:Key="Tools.Editor.TopLeft">Top Left</system:String>
+	<system:String x:Key="Tools.Editor.TopRight">Top Right</system:String>
+	<system:String x:Key="Tools.Editor.BottomLeft">Bottom Left</system:String>
+	<system:String x:Key="Tools.Editor.BottomRight">Bottom Right</system:String>
+
 	<!-- Watermarks -->
 	<system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
 
@@ -104,12 +124,9 @@
 	<system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
 
 	
-	<!-- Folder -->
-	<system:String x:Key="Folder.DropZoneHelp">Drag and drop a folder containing image files here to create a new project.</system:String>
-
 	<!-- Import -->
-	<system:String x:Key="Single.DropZoneHelp">Drag and drop an image file here to begin.</system:String>
-	<system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
+  <system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
+  <system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
 	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
 	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
