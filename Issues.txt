@@ -1,7 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-- CRITICAL : Import Single Image Not updating path -  Same cause: Image not found 
+- Drag and Drop message is confusing 
+
+- CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
 
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
@@ -15,9 +17,9 @@ WIP
 - UI to define signatures 
 	Implement Signature Editor 
 
-Implement Export Editor 
-
 Implement Watermark Editor 
+
+Implement Export Editor 
 
 
 Essential Missing Features 
@@ -25,10 +27,9 @@ Essential Missing Features
 
 - Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
 
-- UI to pick up exports parameters 
-
-
 - UI to define watermarks
+
+- UI to pick up exports parameters 
 
 - First Run View : Setup root locations, etc 
 
@@ -55,7 +56,7 @@ Code Quality Issues
 
 - Move Export code to a dedicated class to keep the ExportStep class clean.
 
-- Cleanup code tha builds file names and paths.
+- Cleanup code that builds file names and paths.
 
 - Cleanup ugly code of Virtualizing Wrap Panel if it does not get supported in Avalonia 
 
@@ -69,7 +70,7 @@ Code Quality Issues
 
 
 
-Third Party Related Problems (Avalonia / Media Devices / LibRaw / ImageSharp) 
+Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 -----------------------------------------------------------------------------
 
 - App freeze when using combo box ??? Avalonia issue

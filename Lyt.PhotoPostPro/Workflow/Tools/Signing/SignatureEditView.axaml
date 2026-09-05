@@ -30,5 +30,154 @@
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" 
+			Text="Optional top frame label, ABOVE the QR code:"
+			Theme="{StaticResource Medium}"
+			Margin="0"
+			TextAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<TextBox
+			x:Name="FriendlyNameTextBox"
+			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			PlaceholderText="Text above the QR code."
+			MaxLength="40"
+			Text="{Binding FriendlyName}"
+			Margin="0"
+			/>
+
+		<TextBlock
+			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" 
+			Text="Optional top frame label, ABOVE the QR code:"
+			Theme="{StaticResource Medium}"
+			Margin="0"
+			TextAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<TextBox
+			x:Name="TextTextBox"
+			Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			PlaceholderText="Text above the QR code."
+			MaxLength="40"
+			Text="{Binding Text}"
+			Margin="0"
+			/>
+
+		<TextBlock
+			Grid.Column="2" Grid.Row="2" 
+			Margin="0"
+			Text="Color"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<ColorPicker
+			Grid.Column="0" Grid.Row="3" 
+			Width="280" Height="40"
+			Color="{Binding ForegroundColor}"
+			ColorModel="Rgba"
+			Foreground="{StaticResource LightAqua_0_120}"
+			IsAlphaEnabled="False"
+			IsAlphaVisible="False"
+			VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+			/> 
+
+		<TextBlock
+			Grid.Column="0" Grid.Row="8" 
+			Text="Font Size:"
+			Theme="{StaticResource Medium}"
+			Margin="0"
+			Width="80"
+			TextAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<TextBox
+			Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="8"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			PlaceholderText="Font Size (8 to 80)"
+			MaxLength="40"
+			Text="{Binding FontSizeString}"
+			Margin="80 0 40 0"
+			/>
+
+		<TextBlock
+			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" 
+			Text="Font Weight:"
+			Theme="{StaticResource Medium}"
+			Margin="0"
+			Width="90"
+			TextAlignment="Left"
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="8" 
+			IsEditable="False"
+			Margin="80 0 0 0"
+			Width="200" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			ItemsSource="{Binding SupportedFontWeights}"
+			SelectedIndex="{Binding SelectedTextFontWeightsIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="14" 
+			Text="Font Family: (for both texts)"
+			Theme="{StaticResource Medium}"
+			Margin="0 0 20 0"
+			Width="280"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+
+		<ComboBox
+			Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="14" 
+			IsEditable="False"
+			Margin="10 0 0 0"
+			Width="280" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			ItemsSource="{Binding SupportedFontFamilies}"
+			SelectedIndex="{Binding SelectedFontFamilyIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock 
+						Text="{Binding Name}" 
+						FontFamily="{Binding}" 
+						Foreground="{StaticResource LightAqua_0_100}"
+						FontSize="20"
+						/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Row="15"  Grid.ColumnSpan="3" 
+			Text="{Binding ValidationMessage}"
+			Theme="{StaticResource ValidationError}"
+			Margin="40 0 0 0"
+			/>
 	</Grid>
 </UserControl>

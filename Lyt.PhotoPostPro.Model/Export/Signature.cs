@@ -8,12 +8,15 @@ public sealed class Signature : IEditable
 
     public static Signature Default => DefaultSignature;
 
+    //
 
     public string FriendlyName { get; set; } = string.Empty;
 
     public string FontFamily { get; set; } = "Segoe Script";
 
     public int FontSize { get; set; } = 26;
+
+    public int FontWeight { get; set; } = 400;
 
     public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Italic;
 
