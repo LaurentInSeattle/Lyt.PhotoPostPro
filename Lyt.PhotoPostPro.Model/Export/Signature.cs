@@ -2,7 +2,7 @@
 
 public sealed class Signature : IEditable
 {
-    public const string DefaultName = "Default";
+    public const string DefaultName = "Default Signature";
 
     private static Signature DefaultSignature => new() { FriendlyName = DefaultName };
 

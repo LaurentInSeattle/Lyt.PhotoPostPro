@@ -2,7 +2,7 @@
 
 public sealed class Watermark : IEditable
 {
-    public const string DefaultName = "Default";
+    public const string DefaultName = "Default Watermark";
 
     private static Watermark DefaultWatermark => new() { FriendlyName = DefaultName };
 
@@ -17,7 +17,7 @@ public sealed class Watermark : IEditable
 
     public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Bold;
 
-    public string Text { get; set; } = "... ... Copyright © 2026 Laurent From San Francisco. All rights reserved. ... ...";
+    public string Text { get; set; } = "... ... Copyright © 2026 Laurent. All rights reserved. ... ...";
 
     public uint HexColorArgb { get; set; } = 0x80FFFFFF;
 
