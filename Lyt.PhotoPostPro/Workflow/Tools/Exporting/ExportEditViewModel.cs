@@ -6,11 +6,12 @@ public sealed partial class ExportEditViewModel :
     private readonly PhotoPostProModel model;
 
     /* 
+
+    public string FriendlyName { get; set; } = string.Empty;
+
     public ExportAction Action { get; set; } = ExportAction.None;
 
     public int Dimension { get; set; } = 1920;
-
-    public float ScaleFactor { get; set; } = 1.0f;
 
     // Target size in megabytes when action is set to ExportAction.ToFileSize
     public float MegaBytes { get; set; } = 1.0f;
@@ -23,11 +24,11 @@ public sealed partial class ExportEditViewModel :
 
     public bool WithSignature { get; set; } = false;
 
-    public string SignatureKey { get; set; } = string.Empty;
+    public string SignatureName { get; set; } = string.Empty;
 
     public bool WithWatermark { get; set; } = false;
 
-    public string WatermarkKey { get; set; } = string.Empty;
+    public string WatermarkName { get; set; } = string.Empty;
 
     public bool WithBorders { get; set; } = false;
 
@@ -35,10 +36,9 @@ public sealed partial class ExportEditViewModel :
 
     public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.Thick;
 
-    public string BorderStyleKey { get; set; } = string.Empty;
-
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
+
 
     */
 

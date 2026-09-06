@@ -147,7 +147,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 Image<RgbaHalf> imageWithWatermark = imageToResize;
                 if (imageExport.WithWatermark)
                 {
-                    Watermark? watermark = model.Watermarks.FromFriendlyName(imageExport.WatermarkKey);
+                    Watermark? watermark = model.Watermarks.FromFriendlyName(imageExport.WatermarkName);
                     if (watermark is not null)
                     {
                         // Adding watermark : Placement 
@@ -200,7 +200,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 Image<RgbaHalf> imageWithSignature = imageWithBorders;
                 if (imageExport.WithSignature)
                 {
-                    Signature? signature = model.Signatures.FromFriendlyName(imageExport.SignatureKey);
+                    Signature? signature = model.Signatures.FromFriendlyName(imageExport.SignatureName);
                     if (signature is not null)
                     {
                         // Adding signature : Placement 

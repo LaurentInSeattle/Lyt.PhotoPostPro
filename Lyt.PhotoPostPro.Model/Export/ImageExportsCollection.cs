@@ -20,7 +20,7 @@ public sealed class ImageExportsCollection
         hdWithBlackBorders.BorderStyle = ImageBorderStyle.BlackBorder;
         hdWithBlackBorders.BorderThickness = ImageBorderThickness.Thin;
         hdWithBlackBorders.WithSignature = true;
-        hdWithBlackBorders.SignatureKey = Signature.DefaultName;
+        hdWithBlackBorders.SignatureName = Signature.DefaultName;
         //hdWithBlackBorders.WithWatermark = true;
         //hdWithBlackBorders.WatermarkKey = Watermark.DefaultKey;
         hdWithBlackBorders.PostFix = "_HDBB";

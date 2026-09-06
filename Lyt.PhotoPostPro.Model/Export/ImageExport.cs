@@ -8,8 +8,6 @@ public sealed class ImageExport : IEditable
 
     public int Dimension { get; set; } = 1920;
 
-    public float ScaleFactor { get; set; } = 1.0f;
-
     // Target size in megabytes when action is set to ExportAction.ToFileSize
     public float MegaBytes { get; set; } = 1.0f;
 
@@ -21,19 +19,17 @@ public sealed class ImageExport : IEditable
 
     public bool WithSignature { get; set; } = false;
 
-    public string SignatureKey { get; set; } = string.Empty;
+    public string SignatureName { get; set; } = string.Empty;
 
     public bool WithWatermark { get; set; } = false;
 
-    public string WatermarkKey { get; set; } = string.Empty;
+    public string WatermarkName { get; set; } = string.Empty;
 
     public bool WithBorders { get; set; } = false;
 
     public ImageBorderStyle BorderStyle { get; set; } = ImageBorderStyle.None;
 
     public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.Thick;
-
-    public string BorderStyleKey { get; set; } = string.Empty;
 
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
@@ -43,18 +39,16 @@ public sealed class ImageExport : IEditable
             {
                 Action = this.Action,
                 Dimension = this.Dimension,
-                ScaleFactor = this.ScaleFactor,
                 MegaBytes = this.MegaBytes,
                 OutputFormat = this.OutputFormat,
                 JpegQuality = this.JpegQuality,
                 IsGalleryFormat = this.IsGalleryFormat,
                 WithSignature = this.WithSignature,
-                SignatureKey = this.SignatureKey,
+                SignatureName = this.SignatureName,
                 WithWatermark = this.WithWatermark,
-                WatermarkKey = this.WatermarkKey,
+                WatermarkName = this.WatermarkName,
                 WithBorders = this.WithBorders,
                 BorderStyle = this.BorderStyle,
-                BorderStyleKey = this.BorderStyleKey,
                 BorderThickness = this.BorderThickness,
                 PostFix = this.PostFix
             };
@@ -103,7 +97,9 @@ public sealed class ImageExport : IEditable
             JpegQuality = 85,
         };
 
-    public string FileExtension => this.OutputFormat.FileExtension(); 
+    [JsonIgnore]
+    public string FileExtension => this.OutputFormat.FileExtension();
 
+    [JsonIgnore]
     public IImageEncoder ImageEncoder => this.OutputFormat.ImageEncoder(this.JpegQuality);
 }
