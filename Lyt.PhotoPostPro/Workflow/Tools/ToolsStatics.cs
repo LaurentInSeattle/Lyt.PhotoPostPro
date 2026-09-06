@@ -58,4 +58,28 @@ internal static class ToolsStatics
         "Tools.Editor.Italic",
         "Tools.Editor.BoldItalic",
     ];
+
+    internal static List<FontFamily> FontFamilies()
+    {
+        var fontCollection = FontManager.Current.SystemFonts;
+        var fontFamilies = new List<FontFamily>(fontCollection).OrderBy(x => x.Name).ToList();
+
+        // UGLY HACK !
+        // Crash when opening the combo if the InterV font is present in the list
+        // Note: Inter is doing fine...
+        var toRemove =
+            (from family in fontFamilies
+             where family.Name.StartsWith("InterV", StringComparison.InvariantCultureIgnoreCase)
+             // where family.Name.StartsWith("Inter", StringComparison.InvariantCultureIgnoreCase) 
+             select family).ToList();
+        if (toRemove.Count > 0)
+        {
+            foreach (var family in toRemove)
+            {
+                fontFamilies.Remove(family);
+            }
+        }
+
+        return fontFamilies;
+    }
 }

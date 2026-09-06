@@ -63,26 +63,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
         this.editorViewModel = editorViewModel;
 
         this.SetDefaults();
-        var fontCollection = FontManager.Current.SystemFonts;
-        var fontFamilies = new List<FontFamily>(fontCollection).OrderBy(x => x.Name).ToList();
-
-        // UGLY HACK !
-        // Crash when opening the combo if the InterV font is present in the list
-        // Note: Inter is doing fine...
-        var toRemove =
-            (from family in fontFamilies
-             where family.Name.StartsWith("InterV", StringComparison.InvariantCultureIgnoreCase)
-             // where family.Name.StartsWith("Inter", StringComparison.InvariantCultureIgnoreCase) 
-             select family).ToList();
-        if (toRemove.Count > 0)
-        {
-            foreach (var family in toRemove)
-            {
-                fontFamilies.Remove(family);
-            }
-        }
-
-        this.SupportedFontFamilies = fontFamilies;
+        this.SupportedFontFamilies = FontFamilies();
         this.SupportedFontWeights = SupportedFontWeightText;
 
         // Enforce property changed
@@ -303,7 +284,6 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
     private Signature CollectData()
         => new()
         {
-
             FriendlyName = this.FriendlyName.Trim(),
             Text = this.Text.Trim(),
             FontSize = this.fontSize,

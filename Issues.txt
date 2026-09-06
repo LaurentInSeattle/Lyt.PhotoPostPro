@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Drag and Drop message is confusing 
-
 - CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
 
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
@@ -11,23 +9,21 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+
 WIP
 ---
 
-- UI to define signatures 
-	Implement Signature Editor 
-
-Implement Watermark Editor 
-
 Implement Export Editor 
+
+Convert Export Edits to plain TXT file 
+
+Disk Usage statistics 
 
 
 Essential Missing Features 
 --------------------------
 
 - Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
-
-- UI to define watermarks
 
 - UI to pick up exports parameters 
 
@@ -111,7 +107,7 @@ V.Next
 
 - Spotlight effect, aka "Ray of Light" effect.
 
-- Controls to show both before / after or just after 
+- Controls to show both before / after (for comparison) or just the current image in the viewer  
 
 - Add keywords to images 
 

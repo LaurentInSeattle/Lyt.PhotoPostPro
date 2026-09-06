@@ -14,21 +14,158 @@
 	Background="Transparent"
 	>
 	<Grid	
-		ShowGridLines="True"
+		ShowGridLines="False"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="12" /> <!-- Spacer --> 
+			<RowDefinition Height="30" /> <!-- Validation --> 
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="420" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="1" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.FriendlyNamePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			x:Name="FriendlyNameTextBox"
+			Grid.Column="2" Grid.Row="1" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="40"
+			Text="{Binding FriendlyName}"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="2" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.TextPrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			x:Name="TextTextBox"
+			Grid.Column="2" Grid.Row="2" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="60"
+			Text="{Binding Text}"
+			Margin="0"
+			/>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="3" 
+			Text="{DynamicResource Tools.Editor.ColorPrompt}"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ColorPicker
+			Grid.Column="2" Grid.Row="3" 
+			Width="360" Height="40"
+			Color="{Binding ForegroundColor}"
+			ColorModel="Rgba"
+			Foreground="{StaticResource LightAqua_0_120}"
+			IsAlphaEnabled="False"
+			IsAlphaVisible="False"
+			VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+			/> 
+		<TextBlock
+			Grid.Column="1" Grid.Row="4" 
+			Text="{DynamicResource Tools.Editor.FontSizePrompt}"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			Grid.Column="2" Grid.Row="4"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="4"
+			Text="{Binding FontSizeString}"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="5" 
+			Text="{DynamicResource Tools.Editor.FontFamilyPrompt}"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="5" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedFontFamilies}"
+			SelectedIndex="{Binding SelectedFontFamilyIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock 
+						Text="{Binding Name}" 
+						FontFamily="{Binding}" 
+						Foreground="{StaticResource LightAqua_0_100}"
+						FontSize="20"
+						/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="6" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.FontStylePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="6" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedFontStyles}"
+			SelectedIndex="{Binding SelectedFontStylesIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="2" 
+			Text="{Binding ValidationMessage}"
+			Theme="{StaticResource ValidationError}"
+			TextAlignment="Center"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			/>
 	</Grid>
 </UserControl>
