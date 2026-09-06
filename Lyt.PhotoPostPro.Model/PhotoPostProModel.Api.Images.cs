@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
-using Lyt.PhotoPostPro.Model.Export;
-
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public bool Rotate(bool isClockwise) =>

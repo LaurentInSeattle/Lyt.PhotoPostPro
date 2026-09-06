@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Signing;
 
-public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>
+public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>, IEditorDataProvider
 {
     private readonly PhotoPostProModel model;
     private readonly EditorViewModel editorViewModel;
@@ -8,7 +8,7 @@ public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>
     public SignaturesViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.editorViewModel = new EditorViewModel(this.model);
+        this.editorViewModel = new EditorViewModel(this, this.model);
     }
 
     public override void OnViewLoaded() 
@@ -20,8 +20,13 @@ public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>
     public override void Activate(object? activationParameters) 
     {
         base.Activate(activationParameters);
-        var vm = new SignatureEditViewModel(this.model);
+        var vm = new SignatureEditViewModel(this.model, this.editorViewModel);
         var editingForm = vm.CreateViewAndBind();
         this.editorViewModel.Populate(this.model.Signatures.AvailableSignatures, editingForm); 
-    } 
+    }
+
+    public void Refresh()
+    {
+        this.editorViewModel.Refresh(this.model.Signatures.AvailableSignatures);
+    }
 }

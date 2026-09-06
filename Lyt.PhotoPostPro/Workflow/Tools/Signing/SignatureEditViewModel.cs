@@ -1,93 +1,25 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Signing;
 
-public sealed partial class SignatureEditViewModel :
-    ViewModel<SignatureEditView>, IEditor
+using static Lyt.PhotoPostPro.Workflow.Tools.ToolsStatics;
+
+public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView>, IEditor
 {
-    private static readonly List<int> SupportedFontWeightValues =
-    [
-        100, 200, 300, 350 ,
-        400, 500, 600, 700,
-        800, 900, 
-        // 950 // Apparently not supported 
-    ];
-
-    private static readonly List<string> SupportedFontWeightText =
-    [
-        "Thin - 100",
-        "Extra Light - 200",
-        "Light - 300",
-        "Semi Light - 350",
-
-        "Normal / Regular - 400",
-        "Medium - 500",
-        "Semi Bold - 600",
-        "Bold - 700",
-
-        "Extra Bold - 800",
-        "Heavy - 900",
-        // "Solid - 950", // 950 // Apparently not supported 
-    ];
-
-    private static readonly List<SignatureLocation> SupportedSignaturePlacementValues =
-    [
-        SignatureLocation.TopLeft,
-        SignatureLocation.TopRight,
-        SignatureLocation.BottomLeft,
-        SignatureLocation.BottomRight,
-    ];
-
-    private static readonly List<string> SupportedSignaturePlacementText =
-    [
-        "Tools.Editor.TopLeft",
-        "Tools.Editor.TopRight",
-        "Tools.Editor.BottomLeft",
-        "Tools.Editor.BottomRight",
-    ];
-
-    private static readonly List<PppFontStyle> SupportedFontStyleValues =
-    [
-        PppFontStyle.Regular,
-        PppFontStyle.Bold ,
-        PppFontStyle.Italic,
-        PppFontStyle.BoldItalic,
-    ];
-
-    private static readonly List<string> SupportedFontStyleText =
-    [
-        "Tools.Editor.Regular",
-        "Tools.Editor.Bold",
-        "Tools.Editor.Italic",
-        "Tools.Editor.BoldItalic",
-    ];
-
     private readonly PhotoPostProModel model;
+    private readonly EditorViewModel editorViewModel;
+
     private int fontSize = 26;
-    private int fontWeight = 400;
-
-    /* 
-    public string FriendlyName { get; set; } = string.Empty;
-
-    public string Text { get; set; } = "Edited with Photo Rebel";
-
-    public int FontSize { get; set; } = 26;
-
-    public string FontFamily { get; set; } = "Segoe Script";
-
-    public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Italic;
-
-    public SignatureLocation Location { get; set; } = SignatureLocation.BottomRight;
-
-    public uint HexColorArgb { get; set; } = 0xFFFFFFFF;
-    */
 
     [ObservableProperty]
     public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial bool FriendlyNameIsDisabled { get; set; }
+
+    [ObservableProperty]
     public partial string Text { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string FontSizeString { get; set; }
+    public partial string FontSizeString { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial PppFontStyle PppFontStyle { get; set; }
@@ -125,9 +57,10 @@ public sealed partial class SignatureEditViewModel :
     [ObservableProperty]
     public partial string ValidationMessage { get; set; }
 
-    public SignatureEditViewModel(PhotoPostProModel model)
+    public SignatureEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
     {
         this.model = model;
+        this.editorViewModel = editorViewModel;
 
         this.SetDefaults();
         var fontCollection = FontManager.Current.SystemFonts;
@@ -150,7 +83,7 @@ public sealed partial class SignatureEditViewModel :
         }
 
         this.SupportedFontFamilies = fontFamilies;
-        this.SupportedFontWeights = SignatureEditViewModel.SupportedFontWeightText;
+        this.SupportedFontWeights = SupportedFontWeightText;
 
         // Enforce property changed
         this.SelectedTextFontWeightsIndex = 0;
@@ -161,11 +94,10 @@ public sealed partial class SignatureEditViewModel :
 
     private void SetDefaults()
     {
-        this.fontSize = 26;
-        this.fontWeight = 400;
-        this.ForegroundColor = Color.FromUInt32(0xFF_FF_FA_F0);
+        this.ForegroundColor = Color.FromUInt32(0xFF_FF_F8_F0);
         this.FriendlyName = Signature.DefaultName;
         this.Text = "Edited with Photo Rebel";
+        this.fontSize = 26;
         this.FontSizeString = this.fontSize.ToString("D");
     }
 
@@ -201,6 +133,7 @@ public sealed partial class SignatureEditViewModel :
     // Populate the form with defaults 
     public void BeginAdd()
     {
+        this.FriendlyNameIsDisabled = false;
         this.PopulateLocalizedComboBoxes();
         this.SetDefaults();
     }
@@ -213,6 +146,7 @@ public sealed partial class SignatureEditViewModel :
             return;
         }
 
+        this.FriendlyNameIsDisabled = true;
         this.PopulateLocalizedComboBoxes();
 
         this.FriendlyName = signature.FriendlyName;
@@ -262,7 +196,7 @@ public sealed partial class SignatureEditViewModel :
         }
     }
 
-    partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage(); 
+    partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
 
     partial void OnTextChanged(string value) => this.ValidateAndMessage();
 
@@ -275,36 +209,108 @@ public sealed partial class SignatureEditViewModel :
         if (!this.Validate(out string message))
         {
             this.ValidationMessage = this.Localize(message);
-            return; 
+            this.editorViewModel.EnableButtons(enabled: false);
+            return;
         }
 
-        this.ValidationMessage = string.Empty; 
+        this.ValidationMessage = string.Empty;
+        this.editorViewModel.EnableButtons(enabled: true);
     }
 
     private bool Validate(out string message)
     {
         message = string.Empty;
-        return true; 
+        string friendlyName = this.FriendlyName?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(friendlyName) || friendlyName.Length < 3)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameRequired";
+            return false;
+        }
+
+        string text = this.Text?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(text) || friendlyName.Length < 3)
+        {
+            message = "Tools.Editor.Validation.TextRequired";
+            return false;
+        }
+
+        string fontSizeString = this.FontSizeString?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(fontSizeString) || !int.TryParse(fontSizeString, out int maybeFontSize))
+        {
+            message = "Tools.Editor.Validation.FontSizeRequired";
+            return false;
+        }
+
+        if (maybeFontSize < 6 || maybeFontSize > 200)
+        {
+            message = "Tools.Editor.Validation.FontSizeOutOfRange";
+            return false;
+        }
+
+        this.fontSize = maybeFontSize;
+
+        return true;
     }
 
-    // Clicked "Add" button - add new editable to model, refresh master list,
-    // and then select new item in master list
-    public void Add()
+    // Clicked "Add" button - add new editable to model
+    // Returns true if successful, so that the editor can refresh the master list and select a new item 
+    public bool Add()
     {
+        Signature? existing = this.model.Signatures.FromFriendlyName(this.FriendlyName.Trim());
+        if (existing is not null)
+        {
+            this.ValidationMessage = this.Localize("Tools.Editor.Validation.FriendlyNameAlreadyExists");
+            return false;
+        }
 
+        var newSignature = this.CollectData();
+        if (!this.model.AddSignature(newSignature, out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return false;
+        }
+
+        return true;
     }
 
     // Clicked "Save" button - Save edits to model 
-    public void Save()
+    // Returns true if successful, so that the editor can refresh the master list and select a new item 
+    public bool Save()
     {
+        var editedSignature = this.CollectData();
+        if (!this.model.EditSignature(editedSignature, out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return false;
+        }
 
+        return true;
     }
 
-    // Clicked "Delete" button - Remove from model, refresh master list,
-    // and then select new item in master list
-    public void Delete()
+    // Clicked "Delete" button - Remove from model
+    // Returns true if successful, so that the editor can refresh the master list and select a new item 
+    public bool Delete()
     {
+        if (!this.model.DeleteSignature(this.FriendlyName.Trim(), out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return false;
+        }
 
+        return true;
     }
 
+    private Signature CollectData()
+        => new()
+        {
+
+            FriendlyName = this.FriendlyName.Trim(),
+            Text = this.Text.Trim(),
+            FontSize = this.fontSize,
+            FontFamily = this.SupportedFontFamilies[this.SelectedFontFamilyIndex].Name,
+            FontWeight = SupportedFontWeightValues[this.SelectedTextFontWeightsIndex],
+            PppFontStyle = SupportedFontStyleValues[this.SelectedFontStylesIndex],
+            Location = SupportedSignaturePlacementValues[this.SelectedPlacementIndex],
+            HexColorArgb = this.ForegroundColor.ToUInt32()
+        };
 }

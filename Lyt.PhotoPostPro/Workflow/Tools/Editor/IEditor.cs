@@ -6,9 +6,14 @@ public interface IEditor
 
     void BeginEdit(IEditable editable);
     
-    void Add();
+    bool Add();
     
-    void Save();
+    bool Save();
     
-    void Delete();
+    bool Delete();
+}
+
+public interface IEditorDataProvider
+{
+    void Refresh();
 }

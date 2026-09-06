@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Exporting;
 
-public sealed partial class ExportsViewModel : ViewModel<ExportsView>
+public sealed partial class ExportsViewModel : ViewModel<ExportsView>, IEditorDataProvider
 {
     private readonly PhotoPostProModel model;
     private readonly EditorViewModel editorViewModel;
@@ -8,7 +8,7 @@ public sealed partial class ExportsViewModel : ViewModel<ExportsView>
     public ExportsViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.editorViewModel = new EditorViewModel(this.model);
+        this.editorViewModel = new EditorViewModel(this, this.model);
     }
     public override void OnViewLoaded()
     {
@@ -23,5 +23,10 @@ public sealed partial class ExportsViewModel : ViewModel<ExportsView>
         var editingForm = vm.CreateViewAndBind();
 
         this.editorViewModel.Populate(this.model.ImageExports.AvailableImageExports, editingForm);
+    }
+
+    public void Refresh()
+    {
+        this.editorViewModel.Refresh(this.model.ImageExports.AvailableImageExports);
     }
 }

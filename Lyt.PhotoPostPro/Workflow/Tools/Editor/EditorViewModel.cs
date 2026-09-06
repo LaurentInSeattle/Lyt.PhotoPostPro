@@ -8,6 +8,7 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
     }
 
     private readonly PhotoPostProModel model;
+    private readonly IEditorDataProvider editorDataProvider; 
 
     private IEditor? editor;
     private bool isFirstActivation;
@@ -33,9 +34,21 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
     [ObservableProperty]
     public partial bool IsAddMode { get; set; }
 
-    public EditorViewModel(PhotoPostProModel model)
+    [ObservableProperty]
+    public partial bool IsAddButtonDisabled { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsSaveButtonDisabled { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsDeleteButtonDisabled { get; set; }
+
+
+    public EditorViewModel(IEditorDataProvider editorDataProvider, PhotoPostProModel model )
     {
         this.model = model;
+        this.editorDataProvider = editorDataProvider;
+
         this.isFirstActivation = true;
         this.IsEditMode = true;
     }
@@ -57,6 +70,12 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
         this.EditableObjects.Clear();
     }
 
+    public void EnableButtons(bool enabled)
+    {
+        this.IsAddButtonDisabled = !enabled;
+        this.IsSaveButtonDisabled = !enabled;
+        this.IsDeleteButtonDisabled = !enabled;
+    }
     partial void OnSelectedObjectIndexChanged(int value)
     {
         if (value < 0 || value >= this.EditableObjects.Count)
@@ -87,6 +106,21 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
 
     public void Populate(IEnumerable<IEditable> editableObjects, UserControl editingForm)
     {
+        this.EditingForm = editingForm;
+        if (this.EditingForm.DataContext is IEditor editor)
+        {
+            this.editor = editor;
+        }
+        else
+        {
+            throw new InvalidOperationException("EditingForm.DataContext must implement IEditor");
+        }
+
+        this.Refresh(editableObjects);
+    }
+
+    public void Refresh(IEnumerable<IEditable> editableObjects)
+    {
         this.EditableObjects.Clear();
         this.EditableObjects.Add(new AddNewEditable(this.Localize("Tools.Editor.AddNew")));
         foreach (var editable in editableObjects)
@@ -94,42 +128,56 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
             this.EditableObjects.Add(editable);
         }
 
-        this.EditingForm = editingForm;
-        if (this.EditingForm.DataContext is IEditor editor)
-        {
-            this.editor = editor;
-
-            // Force property changed to ensure that the selected index is reset
-            // And will initialize the editing form with 'Add New...'
-            this.SelectedObjectIndex = -1;
-            this.SelectedObjectIndex = 0;
-        }
-        else
-        {
-            throw new InvalidOperationException("EditingForm.DataContext must implement IEditor");
-        }
+        // Force property changed to ensure that the selected index is reset
+        // And will initialize the editing form with 'Add New...'
+        this.SelectedObjectIndex = -1;
+        this.SelectedObjectIndex = 0;
     }
 
     [RelayCommand]
     public void OnAdd()
     {
+        if (this.editor is null)
+        {
+            return; 
+        }
+
         // Clicked "Add" button: refresh master list,
         // and then select new item in master list
-        this.editor?.Add();
+        if ( this.editor.Add())
+        {
+            this.editorDataProvider.Refresh();
+        }
     }
 
     [RelayCommand]
     public void OnDelete()
     {
+        if (this.editor is null)
+        {
+            return;
+        }
+
         // Clicked "Delete" button: refresh master list,
         // and then select new item in master list
-        this.editor?.Delete();
+        if (this.editor.Delete())
+        {
+            this.editorDataProvider.Refresh();
+        }
     }
 
     [RelayCommand]
     public void OnSave()
     {
+        if (this.editor is null)
+        {
+            return;
+        }
+
         // Clicked "Save" button
-        this.editor?.Save();
+        if (this.editor.Save())
+        {
+            this.editorDataProvider.Refresh();
+        }
     }
 }

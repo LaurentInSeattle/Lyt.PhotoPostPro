@@ -5,7 +5,7 @@
 //using SixLabors.ImageSharp;
 //using SixLabors.ImageSharp.PixelFormats;
 
-public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>
+public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>, IEditorDataProvider
 {
     private readonly PhotoPostProModel model;
     private readonly EditorViewModel editorViewModel;
@@ -13,7 +13,7 @@ public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>
     public WatermarksViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.editorViewModel = new EditorViewModel(this.model);
+        this.editorViewModel = new EditorViewModel(this, this.model);
     }
     public override void OnViewLoaded()
     {
@@ -24,8 +24,13 @@ public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        var vm = new WatermarkEditViewModel(this.model);
+        var vm = new WatermarkEditViewModel(this.model, this.editorViewModel);
         var editingForm = vm.CreateViewAndBind();
         this.editorViewModel.Populate(this.model.Watermarks.AvailableWatermarks, editingForm);
+    }
+
+    public void Refresh()
+    {
+        this.editorViewModel.Refresh(this.model.Watermarks.AvailableWatermarks);
     }
 }

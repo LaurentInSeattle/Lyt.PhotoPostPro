@@ -69,21 +69,21 @@ public sealed partial class ExportEditViewModel :
 
     // Clicked "Add" button - add new editable to model, refresh master list,
     // and then select new item in master list
-    public void Add()
+    public bool Add()
     {
-
+        return true;
     }
 
     // Clicked "Save" button - Save edits to model 
-    public void Save()
+    public bool Save()
     {
-
+        return true;
     }
 
     // Clicked "Delete" button - Remove from model, refresh master list,
     // and then select new item in master list
-    public void Delete()
+    public bool Delete()
     {
-
+        return true;
     }          
 }
