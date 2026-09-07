@@ -1,8 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-public static partial class ImagingAlgorithms
+internal static partial class ImagingAlgorithms
 {
-	public static void ApplyColorTemperature(this Image<RgbaHalf> image, float temperature)
+    internal static void ApplyColorTemperature(this Image<RgbaHalf> image, float temperature)
 	{
 		// Clamp the temperature value to a reasonable range (-100 to 100)
 		temperature = Math.Clamp(temperature, -100f, 100f);
@@ -23,10 +23,10 @@ public static partial class ImagingAlgorithms
 		image.Mutate(ctx => ctx.Filter(matrix));
 	}
 
-	// contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
-	// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
-	// brightnessAmount comes from 0.0 to 0.5 => Add one for Img# 
-	public static bool ApplyGlobalContrast(
+    // contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
+    // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
+    // brightnessAmount comes from 0.0 to 0.5 => Add one for Img# 
+    internal static bool ApplyGlobalContrast(
 		this Image<RgbaHalf> image, float contrastAmount, float blurAmount, float brightnessAmount )
 	{
 		if (Math.Abs(contrastAmount - 1.0) > 0.01)
@@ -47,10 +47,10 @@ public static partial class ImagingAlgorithms
 		return true;
 	}
 
-	//     A value of 0 is completely un-saturated. A value of 1 leaves the input unchanged.
-	//     Other values are linear multipliers on the effect. Values of amount over 1 are
-	//     allowed, providing super-saturated results
-	public static bool ApplyGlobalSaturation(this Image<RgbaHalf> image, float saturationAmount)
+    //     A value of 0 is completely un-saturated. A value of 1 leaves the input unchanged.
+    //     Other values are linear multipliers on the effect. Values of amount over 1 are
+    //     allowed, providing super-saturated results
+    internal static bool ApplyGlobalSaturation(this Image<RgbaHalf> image, float saturationAmount)
 	{
 		if (Math.Abs(saturationAmount - 1.0) > 0.01)
 		{
@@ -60,8 +60,8 @@ public static partial class ImagingAlgorithms
 		return true;
 	}
 
-	//   sharpenAmount: sigma: The 'sigma' value representing the weight of the blur.
-	public static bool ApplyGlobalSharpen(this Image<RgbaHalf> image, float sharpenAmount)
+    //   sharpenAmount: sigma: The 'sigma' value representing the weight of the blur.
+    internal static bool ApplyGlobalSharpen(this Image<RgbaHalf> image, float sharpenAmount)
 	{
 		if (Math.Abs(sharpenAmount) > 0.01)
 		{

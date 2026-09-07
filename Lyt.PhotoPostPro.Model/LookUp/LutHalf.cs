@@ -8,7 +8,7 @@ public sealed class LutHalf
     /// <summary> Creates a new Lut from the array of string lines a 3DL file </summary>
     /// <param name="lines"> The file Content</param>
     /// <returns>A LUT object</returns>
-    public static LutHalf From3dlLines(string[] lines)
+    internal static LutHalf From3dlLines(string[] lines)
     {
         var lut = new LutHalf();
 
@@ -164,7 +164,7 @@ public sealed class LutHalf
     /// <summary> Creates a new Lut from the array of string lines a .Cube file </summary>
     /// <param name="lines"> The file Content</param>
     /// <returns>A LUT object</returns>
-    public static LutHalf FromCubeLines(string[] lines)
+    internal static LutHalf FromCubeLines(string[] lines)
     {
         var lut = new LutHalf();
 
@@ -262,21 +262,21 @@ public sealed class LutHalf
         return lut;
     }
 
-    public int Dimension { get; private set; }
-
-    public int OutputDepth { get; private set; }
-
-    public List<int> Slices { get; private set; } = [];
-
-    public LutHalfColor[,,] Table { get; private set; } = new LutHalfColor[0, 0, 0];
-
-    public LutHalfColor Lookup(Half r, Half g, Half b)
+    internal LutHalfColor Lookup(Half r, Half g, Half b)
     {
-        Half cubeSizeMinusOne = (Half)(this.Dimension - 1);
+        var cubeSizeMinusOne = (Half)(this.Dimension - 1);
         return
             this.TetrahedralInterpolate(
                 r * cubeSizeMinusOne, g * cubeSizeMinusOne, b * cubeSizeMinusOne);
     }
+
+    internal int Dimension { get; private set; }
+
+    private int OutputDepth { get; set; }
+
+    private List<int> Slices { get; set; } = [];
+
+    private LutHalfColor[,,] Table { get; set; } = new LutHalfColor[0, 0, 0];
 
     // Tetrahedral interpolation. Based on code found in Truelight Software Library paper.
     // http://www.filmlight.ltd.uk/pdf/whitepapers/FL-TL-TN-0057-SoftwareLib.pdf

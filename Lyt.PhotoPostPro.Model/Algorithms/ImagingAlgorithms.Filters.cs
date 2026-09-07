@@ -1,8 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-public static partial class ImagingAlgorithms
+internal static partial class ImagingAlgorithms
 {
-    public static bool Grayscale(this Image<RgbaHalf> image, float grayscaleAmount)
+    internal static bool Grayscale(this Image<RgbaHalf> image, float grayscaleAmount)
     {
         if (Math.Abs(grayscaleAmount) > 0.01)
         {
@@ -14,7 +14,7 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Sepia(this Image<RgbaHalf> image, float sepiaAmount)
+    internal static bool Sepia(this Image<RgbaHalf> image, float sepiaAmount)
     {
         if (Math.Abs(sepiaAmount) > 0.01)
         {
@@ -24,13 +24,13 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool BlackWhite(this Image<RgbaHalf> image)
+    internal static bool BlackWhite(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.BlackWhite());
         return true;
     }
 
-    public static bool Vignette(this Image<RgbaHalf> image, float vignetteAmount)
+    internal static bool Vignette(this Image<RgbaHalf> image, float vignetteAmount)
     {
         var color = Color.ParseHex("#A8202020", ColorHexFormat.Argb);
         float amount = (1.0f - vignetteAmount); 
@@ -41,7 +41,7 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Pixelate(this Image<RgbaHalf> image, float pixelationAmount)
+    internal static bool Pixelate(this Image<RgbaHalf> image, float pixelationAmount)
     {
         int amount = (int)(0.5f + 100.0f * pixelationAmount);
         if (amount > 0)
@@ -52,19 +52,19 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static bool Lomograph(this Image<RgbaHalf> image)
+    internal static bool Lomograph(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Lomograph());
         return true;
     }
 
-    public static bool Kodachrome(this Image<RgbaHalf> image)
+    internal static bool Kodachrome(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Kodachrome());
         return true;
     }
 
-    public static bool Polaroid(this Image<RgbaHalf> image)
+    internal static bool Polaroid(this Image<RgbaHalf> image)
     {
         image.Mutate(x => x.Polaroid());
         return true;

@@ -9,18 +9,18 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
 
     private Image<RgbaHalf>? thumbnail;
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
         => base.IsIdentity = this.LutMetadata == LutMetadata.Empty;
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void Activate(WorkflowUpdateKind workflowUpdateKind)
+    internal override void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
         base.Activate(workflowUpdateKind);
 
@@ -33,7 +33,7 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
         this.thumbnail.Mutate(x => x.Resize(ThumbnailSize, 0));
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
     {
         LutMetadata lutMetadataMaybe =
             new(ppp.LutFriendlyName, ppp.LutPath, LutFormat.Unknown, ppp.LutIsEmbedded);

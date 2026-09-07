@@ -15,7 +15,7 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
 
     public int OriginalDy { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> originalImage)
+    internal override void Initialize(Image<RgbaHalf> originalImage)
     {
         this.X = 0;
         this.Y = 0;
@@ -32,10 +32,10 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
             this.Dx == this.OriginalDx &&
             this.Dy == this.OriginalDy;
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
         => this.Crop(ppp.CompositionX, ppp.CompositionY, ppp.CompositionDx, ppp.CompositionDy, withFrame: false);
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
@@ -58,7 +58,7 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
             clone.Mutate(x => x.Crop(cropRectangle));
         }, recalculateHistograms: false, withFrame);
 
-    public override void Activate(WorkflowUpdateKind workflowUpdateKind)
+    internal override void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
         base.Activate(workflowUpdateKind);
 

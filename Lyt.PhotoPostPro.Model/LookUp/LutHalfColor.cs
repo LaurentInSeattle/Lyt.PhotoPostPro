@@ -3,13 +3,13 @@
 using static ImagingUtilities; 
 
 /// <summary> A struct that represents a color using half floating point values.  </summary>
-public struct LutHalfColor
+internal struct LutHalfColor
 {
-    public Half R;
-    public Half G;
-    public Half B;
+    internal Half R;
+    internal Half G;
+    internal Half B;
 
-    public static LutHalfColor FromRgbInt(int red, int gre, int blu, float maxValue)
+    internal static LutHalfColor FromRgbInt(int red, int gre, int blu, float maxValue)
     {
         var lutColor = new LutHalfColor()
         {
@@ -22,7 +22,7 @@ public struct LutHalfColor
         return lutColor;
     }
 
-    public static LutHalfColor FromRgbFloat(float red, float gre, float blu)
+    internal static LutHalfColor FromRgbFloat(float red, float gre, float blu)
     {
         var lutColor = new LutHalfColor()
         {
@@ -35,7 +35,7 @@ public struct LutHalfColor
         return lutColor;
     }
 
-    public uint ToRgba()
+    internal uint ToRgba()
     {
         uint red = (uint)(this.R * (Half)255.0f);
         uint gre = (uint)(this.G * (Half)255.0f);
@@ -44,7 +44,7 @@ public struct LutHalfColor
         return (alp << 24) | (red << 16) | (gre << 8) | blu;
     }
 
-    public static LutHalfColor Lerp(LutHalfColor c1, LutHalfColor c2, Half alpha)
+    internal static LutHalfColor Lerp(LutHalfColor c1, LutHalfColor c2, Half alpha)
     {
         LutHalfColor.ValidateInterpolator(alpha);
 

@@ -14,7 +14,7 @@ public sealed class SharpenStep(ProcessWorkflow processWorkflow) :
 
     public SharpenAlgorithm Algorithm { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
     {
@@ -28,13 +28,13 @@ public sealed class SharpenStep(ProcessWorkflow processWorkflow) :
         }
     }
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
         // Ignore Edge Mask for now 
         => this.Sharpen(ppp.SharpenSharpenAmount, withFrame: false);
 

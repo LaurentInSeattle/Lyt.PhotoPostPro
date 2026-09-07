@@ -7,16 +7,9 @@ namespace Lyt.PhotoPostPro.Model.Frames;
 /// </summary>
 public sealed partial class Frame : IDisposable
 {
-    public static readonly ParallelOptions ParallelOptions; 
+    private const int BitsPerPixel = 32;
 
-    static Frame()
-    {
-        Frame.ParallelOptions = 
-            new ParallelOptions 
-            { 
-                MaxDegreeOfParallelism = Environment.ProcessorCount,                 
-            };
-    }
+    private const int BytesPerPixel = 4;
 
     private bool disposedValue;
 
@@ -44,13 +37,7 @@ public sealed partial class Frame : IDisposable
 
     public byte[]? Data { get; private set; }
 
-    public int PixelCount => this.Width * this.Height;
-
-    public int ByteCount => this.PixelCount * BytesPerPixel;
-
-    public static int BitsPerPixel => 32;
-
-    public static int BytesPerPixel => 4 ;
+    public int ByteCount => this.Width * this.Height * BytesPerPixel;
 
     public Frame DeepClone()
     {

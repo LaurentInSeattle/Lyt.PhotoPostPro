@@ -2,13 +2,13 @@
 
 using static ImagingUtilities;
 
-public static partial class ImagingAlgorithms
+internal static partial class ImagingAlgorithms
 {
     #region Denoise 
 
     // TODO:
     // Validate the need of all parameters
-    public static void IsoGrainDenoise(
+    internal static void IsoGrainDenoise(
         this Image<RgbaHalf> image,
         float gaussianSharpen, // 0.8f
         int medianBlur, // 1
@@ -38,7 +38,7 @@ public static partial class ImagingAlgorithms
 
     /// <summary> Creates a Look-Up Table for fast gamma correction. </summary>
     /// <param name="gamma">Gamma value (e.g., 2.2 to brighten midtones, 0.45 to darken).</param>
-    public static Half[] CreateGammaLUT(float gamma)
+    internal static Half[] CreateGammaLUT(float gamma)
     {
         // Prevent potential division by zero
         if (gamma <= 0.0f)
@@ -61,7 +61,7 @@ public static partial class ImagingAlgorithms
         return lut;
     }
 
-    public static Half LutLookup(Half[] lut, Half value)
+    internal static Half LutLookup(Half[] lut, Half value)
     {
         int low = (int)Math.Floor((float)value * LutSize);
         float mid = (float)value * LutSize;
@@ -81,7 +81,7 @@ public static partial class ImagingAlgorithms
         return lerp;
     }
 
-    public static Half[] Gamma(this Image<RgbaHalf> image, float gamma, float gain, float shift)
+    internal static Half[] Gamma(this Image<RgbaHalf> image, float gamma, float gain, float shift)
     {
         // TODO : Optimize if gamma is zero 
 
@@ -205,7 +205,7 @@ public static partial class ImagingAlgorithms
     // By setting the saturationThreshold to 0.4, any pixel that is more than 40 % saturated gets skipped. 
     // The algorithm now looks at the neutral sidewalks, stones, gray tree trunks, or white clothing in the photo
     // to find the true color cast.
-    public static bool FilteredGrayWorldAWB(this Image<RgbaHalf> image, float saturationThreshold = 0.4f)
+    internal static bool FilteredGrayWorldAWB(this Image<RgbaHalf> image, float saturationThreshold = 0.4f)
     {
         float totalR = 0, totalG = 0, totalB = 0;
         long validPixelCount = 0;
@@ -291,7 +291,7 @@ public static partial class ImagingAlgorithms
         return true;
     }
 
-    public static void WhitePatchWhiteBalance(this Image<RgbaHalf> image, float r, float g, float b)
+    internal static void WhitePatchWhiteBalance(this Image<RgbaHalf> image, float r, float g, float b)
     {
         float luminance = (float)MathF.Sqrt(0.299f * (r * r) + 0.587f * (g * g) + 0.114f * (b * b));
         var rGain = (Half)(r < 0.001f ? 1.0f : luminance / r);
@@ -318,7 +318,7 @@ public static partial class ImagingAlgorithms
 
     #region Highlights and Shadows
 
-    public static void HighlightsShadows(this Image<RgbaHalf> image, float highlight, float shadow)
+    internal static void HighlightsShadows(this Image<RgbaHalf> image, float highlight, float shadow)
     {
         const float compress = 0.5f;
         const float low_approximation = 0.01f;
@@ -454,7 +454,7 @@ public static partial class ImagingAlgorithms
     // This avoids oversaturation of pixels that were already very saturated.
     // 
     // All three amounts [-1.00 to 1.00] on the UI 
-    public static void Vibrance(this Image<RgbaHalf> image, float redAmount, float greenAmount, float blueAmount)
+    internal static void Vibrance(this Image<RgbaHalf> image, float redAmount, float greenAmount, float blueAmount)
     {
         const float scaleFactor = 3.3f;
         redAmount *= scaleFactor;
@@ -527,7 +527,7 @@ public static partial class ImagingAlgorithms
         return lut;
     }
 
-    public static void ApplySCurveContrast(
+    internal static void ApplySCurveContrast(
         this Image<RgbaHalf> image, float redAmount, float greenAmount, float blueAmount)
     {
         // Only one table should change between calls, consider caching 
@@ -559,7 +559,7 @@ public static partial class ImagingAlgorithms
 
     #region Vignette
 
-    public static void Vignette(
+    internal static void Vignette(
         this Image<RgbaHalf> image, float top, float bottom, float left, float right, float lightness)
     {
         int topRow = (int)(image.Height * top);
@@ -657,7 +657,7 @@ public static partial class ImagingAlgorithms
 
     #region LUT 
 
-    public static void Lut(this Image<RgbaHalf> image, LutHalf lutHalf)
+    internal static void Lut(this Image<RgbaHalf> image, LutHalf lutHalf)
     {
         int height = image.Height;
         Parallel.For(0, height, y =>

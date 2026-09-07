@@ -5,18 +5,18 @@ public class StraightenStep(ProcessWorkflow processWorkflow) :
 {
     public float RotationAngle { get; set; } // Degrees
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
         => base.IsIdentity = MathF.Abs(this.RotationAngle) < 0.001f;
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
     {
         float angle = ppp.StraightenRotationAngle;
         float absAngle = MathF.Abs(angle);

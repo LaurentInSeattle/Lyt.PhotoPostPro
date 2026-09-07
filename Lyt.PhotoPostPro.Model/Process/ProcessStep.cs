@@ -22,7 +22,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   OrientationStepName  ,  "Workflow.Orient.Title"          },
         {   StraightenStepName   ,  "Workflow.Straighten.Title"      },
         {   CompositionStepName  ,  "Workflow.Compose.Title"         },
-        {   DenoiseStepName     ,  "Workflow.Denoise.Title"        },
+        {   DenoiseStepName      ,  "Workflow.Denoise.Title"         },
         {   ExposureStepName     ,  "Workflow.Exposure.Title"        },
         {   RecoveryStepName     ,  "Workflow.Recovery.Title"        },
         {   VignetteStepName     ,  "Workflow.Vignette.Title"        },
@@ -37,9 +37,12 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 
     public string Name { get; set; } = name;
 
+    public string LocalizationName => this.LocalizationStrings[this.Name];
+
     public Image<RgbaHalf>? SourceImage { get; set; }
 
     public Image<RgbaHalf>? ResultImage { get; set; }
+
 
     internal ProcessStep? PreviousStep { get; set; }
 
@@ -51,26 +54,24 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 
     internal bool IsFirstRun { get; set; } = true;
 
-    public bool IsIdentity { get; protected set; }
-
-    public string LocalizationName => this.LocalizationStrings[this.Name];
+    protected internal bool IsIdentity { get; set; }
 
     internal bool IsFirstStep => this.PreviousStep is null;
 
     internal bool IsLastStep => this.NextStep is null;
 
     // Performs actions provided in parameters 
-    public abstract void PerformStep(ProcessParameters postProcessParameters);
+    internal abstract void PerformStep(ProcessParameters postProcessParameters);
 
     protected abstract void SetIdentity();
 
     internal abstract Frame? Transform(bool withFrame = true);
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Initialize(Image<RgbaHalf> originalImage) { }
+    internal virtual void Initialize(Image<RgbaHalf> originalImage) { }
 
     // Default implementation does nothing. Override in derived classes if needed.
-    public virtual void Finish()
+    internal virtual void Finish()
     {
         this.SourceImage?.Dispose();
         this.SourceImage = null;
@@ -114,7 +115,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     }
 
     // Default implementation restore original into result 
-    public virtual Frame? Reset()
+    internal virtual Frame? Reset()
     {
         if (this.SourceImage is null)
         {
@@ -127,7 +128,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     }
 
     // Override in derived classes if needed, overrides must call the base class .
-    public virtual void Activate(WorkflowUpdateKind workflowUpdateKind)
+    internal virtual void Activate(WorkflowUpdateKind workflowUpdateKind)
     {
         Debug.WriteLine("Activating : " + this.Name + "  " + workflowUpdateKind);
         if (this.IsFirstRun)

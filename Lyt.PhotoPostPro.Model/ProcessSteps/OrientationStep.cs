@@ -7,15 +7,15 @@ public class OrientationStep(ProcessWorkflow processWorkflow) :
 
     public bool IsMirrored { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
     {
         if (ppp.OrientationIsMirrored)
         {

@@ -9,7 +9,7 @@ public class ExposureStep(ProcessWorkflow processWorkflow) :
 
     public float Shift { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
         => base.IsIdentity =
@@ -17,13 +17,13 @@ public class ExposureStep(ProcessWorkflow processWorkflow) :
             MathF.Abs(1.0f - this.Gain) < 0.001 &&
             MathF.Abs(this.Shift) < 0.001f;
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
         => this.AdjustExposure(ppp.ExposureGamma, ppp.ExposureGain, ppp.ExposureShift, withFrame: false);
 
     internal override Frame? Transform(bool withFrame = true)

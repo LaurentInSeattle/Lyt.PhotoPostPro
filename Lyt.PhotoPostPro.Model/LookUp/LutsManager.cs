@@ -39,33 +39,6 @@ public sealed class LutsManager
         return list;
     }
 
-    public bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out LutHalf? lutHalf)
-    {
-        if (this.loadedLuts.TryGetValue(lutMetadata.FriendlyName, out lutHalf))
-        {
-            return true;
-        }
-
-        if (lutMetadata.IsEmbedded)
-        {
-            if (TryLoadBuiltInLut(lutMetadata, out lutHalf))
-            {
-                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
-                return true;
-            }
-        }
-        else
-        {
-            if (TryLoadLutFromFile(lutMetadata, out lutHalf))
-            {
-                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static bool Validate(string path, out string message)
     {
         message = string.Empty;
@@ -135,6 +108,33 @@ public sealed class LutsManager
         }
 
         return true;
+    }
+
+    internal bool TryLoadLut(LutMetadata lutMetadata, [NotNullWhen(true)] out LutHalf? lutHalf)
+    {
+        if (this.loadedLuts.TryGetValue(lutMetadata.FriendlyName, out lutHalf))
+        {
+            return true;
+        }
+
+        if (lutMetadata.IsEmbedded)
+        {
+            if (TryLoadBuiltInLut(lutMetadata, out lutHalf))
+            {
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
+                return true;
+            }
+        }
+        else
+        {
+            if (TryLoadLutFromFile(lutMetadata, out lutHalf))
+            {
+                this.loadedLuts.Add(lutMetadata.FriendlyName, lutHalf);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static List<LutMetadata> EnumerateBuiltInLuts()

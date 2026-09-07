@@ -13,18 +13,18 @@ public class VignetteStep(ProcessWorkflow processWorkflow) :
 
     public float Lightness { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
         => base.IsIdentity = Math.Abs(this.Lightness) < 0.001;
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
         => this.Vignette(
                 ppp.VignetteTop, ppp.VignetteBottom, 
                 ppp.VignetteLeft, ppp.VignetteRight, 

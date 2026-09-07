@@ -9,10 +9,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
     private string currentDirectoryExport = string.Empty;
 
-    public override void Initialize(Image<RgbaHalf> originalImage) { }
+    internal override void Initialize(Image<RgbaHalf> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 
-    public override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
+    internal override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
 
     // For abstract compliance only 
     internal override Frame? Transform(bool withFrame = true) { return null;  }
@@ -21,9 +21,9 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
     protected override void SetIdentity() => base.IsIdentity = false;
 
     // For abstract compliance only 
-    public override void PerformStep(ProcessParameters postProcessParameters) { }
+    internal override void PerformStep(ProcessParameters postProcessParameters) { }
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         if (this.SourceImage is null)
         {

@@ -7,7 +7,7 @@ public class RecoveryStep(ProcessWorkflow processWorkflow) :
 
     public float HighlightAmount { get; set; }
 
-    public override void Initialize(Image<RgbaHalf> _) => this.Clear();
+    internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     protected override void SetIdentity()
     {
@@ -16,10 +16,10 @@ public class RecoveryStep(ProcessWorkflow processWorkflow) :
             MathF.Abs(this.HighlightAmount) < 0.001f;
     }
 
-    public override void PerformStep(ProcessParameters ppp)
+    internal override void PerformStep(ProcessParameters ppp)
         => this.HighlightsShadows(ppp.RecoveryHighlightAmount, ppp.RecoveryShadowAmount, withFrame: false);
 
-    public override Frame? Reset()
+    internal override Frame? Reset()
     {
         this.Clear();
         return base.Reset();

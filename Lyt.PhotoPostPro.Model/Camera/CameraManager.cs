@@ -530,14 +530,6 @@ public class CameraManager
         PrintLabelValue("Id:", device.Id);
         PrintLabelValue("Friendly Name:", device.FriendlyName);
         PrintLabelValue("Manufacturer:", device.Manufacturer);
-        //PrintLabelValue("Model:", device.Model);
-        //PrintLabelValue("Serial Number:", string.IsNullOrEmpty(device.SerialNumber) ? "(none)" : device.SerialNumber);
-        //PrintLabelValue("Firmware:", string.IsNullOrEmpty(device.FirmwareVersion) ? "(unknown)" : device.FirmwareVersion);
-        //PrintLabelValue("Type:", device.DeviceType.ToString());
-        //PrintLabelValue("Protocol:", device.Protocol);
-        //PrintLabelValue("Transport:", device.Transport.ToString());
-        //PrintLabelValue("Power:", $"{device.PowerLevel} ({device.PowerSource})");
-
         Debug.WriteLine("");
     }
 }
