@@ -99,28 +99,6 @@ public static class ImagingUtilities
                 ushort.MaxValue :
                 (ushort)Math.Round(value * 65535.0f);
 
-    public static Image ToThumbnail(this Image image, int width)
-    {
-        try
-        {
-            // Create a thumbnail of the specified width
-            var copy = image.Clone(x => { });
-            copy
-            .Mutate(
-                img => img.Resize(new ResizeOptions
-                {
-                    Size = new Size(width, (int)(image.Height * (double)width / image.Width)),
-                    Mode = ResizeMode.Crop
-                })
-            .GaussianSharpen());
-            return copy;
-        }
-        catch (Exception ex)
-        {
-            throw new InvalidOperationException("Failed to create thumbnail.", ex);
-        }
-    }
-
     public static Frame ToFrame(this Image<RgbaHalf> image)
     {
         try
@@ -139,7 +117,45 @@ public static class ImagingUtilities
                     throw new OutOfMemoryException("Failed to allocate buffer for a new frame.");
                 }
 
-                rgbFp.PixelRgbaBuffer(frame.Data);
+                byte[] rgbaData = frame.Data;
+
+                // Directly grab the contiguous Memory reference
+                if (image.DangerousTryGetSinglePixelMemory(out Memory<RgbaHalf> pixelMemory))
+                {
+                    // Access the span directly without copying any data
+                    int offset = 0;
+                    Span<RgbaHalf> pixelSpan = pixelMemory.Span;
+                    for (int i = 0; i < pixelSpan.Length; i++)
+                    {
+                        RgbaHalf pixelVector = pixelSpan[i];
+                        var pixel = pixelVector.ToRgba32();
+                        rgbaData[offset++] = pixel.R;
+                        rgbaData[offset++] = pixel.G;
+                        rgbaData[offset++] = pixel.B;
+                        rgbaData[offset++] = pixel.A;
+                    }
+                }
+                else
+                {
+                    // Fallback if memory padding or fragmentation prevented a single contiguous buffer
+                    image.ProcessPixelRows(accessor =>
+                    {
+                        int offset = 0;
+                        for (int y = 0; y < accessor.Height; y++)
+                        {
+                            var row = accessor.GetRowSpan(y);
+                            foreach (ref RgbaHalf pixelVector in row)
+                            {
+                                var pixel = pixelVector.ToRgba32();
+                                rgbaData[offset++] = pixel.R;
+                                rgbaData[offset++] = pixel.G;
+                                rgbaData[offset++] = pixel.B;
+                                rgbaData[offset++] = pixel.A;
+                            }
+                        }
+                    });
+                }
+
                 return frame;
             }
 
@@ -156,22 +172,6 @@ public static class ImagingUtilities
         try
         {
             // Consider: Pin the RGBA buffer and use a pointer 
-            image.ProcessPixelRows(accessor =>
-            {
-                int offset = 0;
-                for (int y = 0; y < accessor.Height; y++)
-                {
-                    var row = accessor.GetRowSpan(y);
-                    foreach (ref RgbaHalf pixelVector in row)
-                    {
-                        var pixel = pixelVector.ToRgba32();
-                        rgbaData[offset++] = pixel.R;
-                        rgbaData[offset++] = pixel.G;
-                        rgbaData[offset++] = pixel.B;
-                        rgbaData[offset++] = pixel.A;
-                    }
-                }
-            });
         }
         catch (Exception ex)
         {
