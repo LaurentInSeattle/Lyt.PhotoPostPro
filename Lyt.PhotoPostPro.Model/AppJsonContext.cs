@@ -1,15 +1,23 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
-[JsonSourceGenerationOptions(WriteIndented = true)]
+[JsonSourceGenerationOptions(
+    WriteIndented = true, 
+    AllowTrailingCommas = true, 
+    IgnoreReadOnlyProperties = true, 
+    IgnoreReadOnlyFields = true 
+    )]
+
 [JsonSerializable(typeof(PhotoPostProModel))]
 [JsonSerializable(typeof(Metadata))]
 [JsonSerializable(typeof(ProcessParameters))]
 
 [JsonSerializable(typeof(Signature))]
 [JsonSerializable(typeof(Watermark))]
-// With ending S 
+[JsonSerializable(typeof(ImageExport))]
+
 [JsonSerializable(typeof(SignaturesCollection))]
 [JsonSerializable(typeof(WatermarksCollection))]
+[JsonSerializable(typeof(ImageExportsCollection))]
 
 [JsonSerializable(typeof(ExportAction))]
 [JsonSerializable(typeof(OutputFormat))]

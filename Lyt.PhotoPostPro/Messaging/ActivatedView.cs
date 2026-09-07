@@ -40,4 +40,5 @@ public enum ActivatedView : int
     Exports,
     Signatures,
     Watermarks,
+    Statistics,
 }

@@ -19,7 +19,7 @@ public sealed partial class ExportsViewModel : ViewModel<ExportsView>, IEditorDa
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        var vm = new ExportEditViewModel(this.model);
+        var vm = new ExportEditViewModel(this.model, this.editorViewModel);
         var editingForm = vm.CreateViewAndBind();
 
         this.editorViewModel.Populate(this.model.ImageExports.AvailableImageExports, editingForm);

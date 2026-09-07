@@ -14,13 +14,16 @@
 	Background="Transparent"
 	>
 	<Grid	
-		ShowGridLines="True"
+		ShowGridLines="False"
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
 			<RowDefinition Height="60" /> <!-- Friendly Name -->
 			<RowDefinition Height="100" /> <!-- Description -->
-			<RowDefinition Height="80" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
 			<RowDefinition Height="80" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -46,11 +49,12 @@
 			Width="360" Height="40"
 			MaxLength="40"
 			Text="{Binding FriendlyName}"
+			IsEnabled="{Binding FriendlyNameIsEnabled}"
 			/>
 		<TextBlock
 			Grid.Column="1" Grid.Row="2" 
 			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.TextPrompt}"
+			Text="{DynamicResource Tools.Editor.DescriptionPrompt}"
 			TextAlignment="Right"
 			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
@@ -65,6 +69,52 @@
 			Margin="0"
 			AcceptsReturn="True"
 			/>
+		<LayoutTransformControl
+			Grid.Column="2" Grid.Row="3" 
+			VerticalAlignment="Center" HorizontalAlignment="Left"
+			Margin="30 0 0 0"
+			>
+			<LayoutTransformControl.LayoutTransform>
+				<ScaleTransform ScaleX="1.4" ScaleY="1.4" />
+			</LayoutTransformControl.LayoutTransform>
+			<CheckBox
+				IsChecked="{Binding ShouldResize, Mode=TwoWay}"
+				IsThreeState="False"
+				>
+				<CheckBox.Content>
+					<TextBlock 
+						Text="{DynamicResource Tools.Editor.ResizeDimensionPrompt}"
+						Foreground="{StaticResource LightAqua_0_100}" 
+						FontSize="13"
+						TextWrapping="Wrap"
+						/>
+				</CheckBox.Content>
+			</CheckBox>
+		</LayoutTransformControl>
 
+		<TextBlock
+			Grid.Column="1" Grid.Row="4" 
+			Text="{DynamicResource Tools.Editor.ResizeDimensionPrompt}"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			Grid.Column="2" Grid.Row="4"
+			IsEnabled="{Binding IsResizeDimensionEnabled}"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="4"
+			Text="{Binding ResizeDimensionString}"
+			/>
+
+		<TextBlock
+			Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="2" 
+			Text="{Binding ValidationMessage}"
+			Theme="{StaticResource ValidationError}"
+			TextAlignment="Center"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			/>
 	</Grid>
 </UserControl>

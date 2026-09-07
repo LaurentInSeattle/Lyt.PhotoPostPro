@@ -90,6 +90,9 @@
     <Compile Update="Workflow\Tools\Signing\SignaturesView.axaml.cs">
       <DependentUpon>SignaturesView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Tools\Statistics\StatisticsView.axaml.cs">
+      <DependentUpon>StatisticsView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Tools\Watermarking\WatermarkEditView.axaml.cs">
       <DependentUpon>WatermarkEditView.axaml</DependentUpon>
     </Compile>

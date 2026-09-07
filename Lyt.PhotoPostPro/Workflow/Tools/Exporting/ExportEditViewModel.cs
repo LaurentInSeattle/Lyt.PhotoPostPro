@@ -4,7 +4,9 @@ public sealed partial class ExportEditViewModel :
     ViewModel<ExportEditView>, IEditor
 {
     private readonly PhotoPostProModel model;
+    private readonly EditorViewModel editorViewModel;
 
+    private int resizeDimension = 1920;
     /* 
 
     public string FriendlyName { get; set; } = string.Empty;
@@ -12,9 +14,6 @@ public sealed partial class ExportEditViewModel :
     public ExportAction Action { get; set; } = ExportAction.None;
 
     public int Dimension { get; set; } = 1920;
-
-    // Target size in megabytes when action is set to ExportAction.ToFileSize
-    public float MegaBytes { get; set; } = 1.0f;
 
     public OutputFormat OutputFormat { get; set; } = OutputFormat.Jpeg;
 
@@ -46,34 +45,156 @@ public sealed partial class ExportEditViewModel :
     public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool FriendlyNameIsDisabled { get; set; }
+    public partial bool FriendlyNameIsEnabled { get; set; }
 
     [ObservableProperty]
     public partial string Description { get; set; } = string.Empty;
 
-    public ExportEditViewModel(PhotoPostProModel model)
+    [ObservableProperty]
+    public partial bool ShouldResize { get; set; }
+
+    [ObservableProperty]
+    public partial string ResizeDimensionString { get; set; } = "1920";
+
+    [ObservableProperty]
+    public partial bool IsResizeDimensionEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial string ValidationMessage { get; set; } = string.Empty;
+
+    public ExportEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
     {
         this.model = model;
+        this.editorViewModel = editorViewModel;
+
+        this.SetDefaults();
+        this.ValidationMessage = string.Empty;
     }
 
-    public override void OnViewLoaded() 
+    private void SetDefaults()
     {
-        base.OnViewLoaded(); 
+        this.FriendlyName = "New Export Specification";
+        this.ShouldResize = true; 
+        this.resizeDimension = 1920;
+        this.ResizeDimensionString = this.resizeDimension.ToString("D");
+    }
+
+    private void PopulateLocalizedComboBoxes()
+    {
+        //// Same for the supported font styles
+        //var list = new List<string>();
+        //foreach (string item in SupportedFontStyleText)
+        //{
+        //    list.Add(this.Localize(item));
+        //}
+
+        //this.SupportedFontStyles = new(list);
+
+        //// Enforce property changed
+        //this.SelectedFontStylesIndex = 0;
+        //this.SelectedFontStylesIndex = 2;
+    }
+
+    partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
+
+    partial void OnDescriptionChanged(string value) => this.ValidateAndMessage();
+
+    partial void OnResizeDimensionStringChanged(string value) => this.ValidateAndMessage();
+
+    partial void OnShouldResizeChanged(bool value)
+    {
+        this.IsResizeDimensionEnabled = value; 
+        this.ValidateAndMessage();
     } 
 
-    public override void Activate(object? activationParameters) 
+    private void ValidateAndMessage()
     {
-        base.Activate(activationParameters);
+        if (!this.Validate(out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            this.editorViewModel.EnableButtons(enabled: false);
+            return;
+        }
+
+        this.ValidationMessage = string.Empty;
+        this.editorViewModel.EnableButtons(enabled: true);
+    }
+
+    private bool Validate(out string message)
+    {
+        message = string.Empty;
+        string friendlyName = this.FriendlyName?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(friendlyName) || friendlyName.Length < 3)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameRequired";
+            return false;
+        }
+
+        if (this.ShouldResize)
+        {
+            string resizeDimensionString = this.ResizeDimensionString?.Trim() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(resizeDimensionString) || !int.TryParse(resizeDimensionString, out int maybeResizeDimension))
+            {
+                message = "Tools.Editor.Validation.ResizeDimensionRequired";
+                return false;
+            }
+
+            if (maybeResizeDimension < 360 || maybeResizeDimension > 12 * 1024)
+            {
+                message = "Tools.Editor.Validation.ResizeDimensionOutOfRange";
+                return false;
+            }
+
+            this.resizeDimension = maybeResizeDimension;
+        } 
+
+        return true;
     }
 
     // Populate the form with defaults 
     public void BeginAdd() 
-    { 
+    {
+        this.FriendlyNameIsEnabled = true;
+        this.PopulateLocalizedComboBoxes();
+        this.SetDefaults();
     }
 
     // Populate the form with provided editable 
     public void BeginEdit(IEditable editable)
-    { 
+    {
+        if (editable is not ImageExport imageExport)
+        {
+            return;
+        }
+
+        this.FriendlyNameIsEnabled = false;
+        this.PopulateLocalizedComboBoxes();
+
+        this.FriendlyName = imageExport.FriendlyName;
+        this.Description = imageExport.Description;
+        this.ShouldResize = imageExport.Action == ExportAction.ToDimensions;
+        this.ResizeDimensionString = imageExport.Dimension.ToString("D");
+        this.IsResizeDimensionEnabled = this.ShouldResize;
+
+        //this.SelectedFontFamilyIndex = -1;
+        //for (int i = 0; i < this.SupportedFontFamilies.Count; ++i)
+        //{
+        //    if (imageExport.FontFamily.Equals(this.SupportedFontFamilies[i].Name, StringComparison.InvariantCultureIgnoreCase))
+        //    {
+        //        this.SelectedFontFamilyIndex = i;
+        //        break;
+        //    }
+        //}
+
+        //this.SelectedFontStylesIndex = -1;
+        //for (int i = 0; i < SupportedFontStyleValues.Count; ++i)
+        //{
+        //    if (imageExport.PppFontStyle == SupportedFontStyleValues[i])
+        //    {
+        //        this.SelectedFontStylesIndex = i;
+        //        break;
+        //    }
+        //}
     }
 
     // Clicked "Add" button - add new editable to model, refresh master list,

@@ -1,9 +1,12 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools;
 
+using Lyt.PhotoPostPro.Workflow.Tools.Statistics;
+
 public sealed partial class ToolsViewModel : ViewModel<ToolsView>
 {
     private static readonly Dictionary<string, ActivatedView> ToolsString = new()
     {
+        { "Tools.Select.Statistics", ActivatedView.Statistics },
         { "Tools.Select.Signatures", ActivatedView.Signatures },
         { "Tools.Select.Watermarks", ActivatedView.Watermarks },
         { "Tools.Select.Exports", ActivatedView.Exports },
@@ -91,6 +94,7 @@ public sealed partial class ToolsViewModel : ViewModel<ToolsView>
         }
 
         // No buttons, toolbox or toolbars for all tool views: 
+        Setup<StatisticsViewModel, StatisticsView>(ActivatedView.Statistics);
         Setup<ExportsViewModel, ExportsView>(ActivatedView.Exports);
         Setup<SignaturesViewModel, SignaturesView>(ActivatedView.Signatures);
         Setup<WatermarksViewModel, WatermarksView>(ActivatedView.Watermarks);

@@ -144,6 +144,7 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ExportsViewModel>();
                 _ = services.AddSingleton<SignaturesViewModel>();
                 _ = services.AddSingleton<WatermarksViewModel>();
+                _ = services.AddSingleton<StatisticsViewModel>();
 
                 // Services, all must comply to a specific interface 
                 // _ = services.AddSingleton<ILogger, LogViewerWindow>();

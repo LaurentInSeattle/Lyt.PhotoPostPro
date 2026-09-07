@@ -13,7 +13,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
     public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool FriendlyNameIsDisabled { get; set; }
+    public partial bool FriendlyNameIsEnabled { get; set; }
 
     [ObservableProperty]
     public partial string Text { get; set; } = string.Empty;
@@ -114,7 +114,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
     // Populate the form with defaults 
     public void BeginAdd()
     {
-        this.FriendlyNameIsDisabled = false;
+        this.FriendlyNameIsEnabled = true;
         this.PopulateLocalizedComboBoxes();
         this.SetDefaults();
     }
@@ -127,7 +127,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
             return;
         }
 
-        this.FriendlyNameIsDisabled = true;
+        this.FriendlyNameIsEnabled = false;
         this.PopulateLocalizedComboBoxes();
 
         this.FriendlyName = signature.FriendlyName;

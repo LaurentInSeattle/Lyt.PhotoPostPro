@@ -50,6 +50,7 @@
 			Width="360" Height="40"
 			MaxLength="40"
 			Text="{Binding FriendlyName}"
+			IsEnabled="{Binding FriendlyNameIsEnabled}"
 			/>
 		<TextBlock
 			Grid.Column="1" Grid.Row="2" 

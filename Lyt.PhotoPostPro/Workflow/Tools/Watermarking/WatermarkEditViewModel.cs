@@ -7,21 +7,6 @@ public sealed partial class WatermarkEditViewModel :
 {
     private readonly PhotoPostProModel model;
     private readonly EditorViewModel editorViewModel;
-    /* 
-
-    public string FriendlyName { get; set; } = string.Empty;
-
-    public string FontFamily { get; set; } = "Arial";
-
-    public int FontSize { get; set; } = 142;
-
-    public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Bold;
-
-    public string Text { get; set; } = "... ... Copyright © 2026 Laurent. All rights reserved. ... ...";
-
-    public uint HexColorArgb { get; set; } = 0x80FFFFFF;
-
-    */
 
     private int fontSize = 26;
 
@@ -29,7 +14,7 @@ public sealed partial class WatermarkEditViewModel :
     public partial string FriendlyName { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial bool FriendlyNameIsDisabled { get; set; }
+    public partial bool FriendlyNameIsEnabled { get; set; }
 
     [ObservableProperty]
     public partial string Text { get; set; } = string.Empty;
@@ -96,7 +81,7 @@ public sealed partial class WatermarkEditViewModel :
     // Populate the form with defaults 
     public void BeginAdd()
     {
-        this.FriendlyNameIsDisabled = false;
+        this.FriendlyNameIsEnabled = true;
         this.PopulateLocalizedComboBoxes();
         this.SetDefaults();
     }
@@ -109,7 +94,7 @@ public sealed partial class WatermarkEditViewModel :
             return;
         }
 
-        this.FriendlyNameIsDisabled = true;
+        this.FriendlyNameIsEnabled = false;
         this.PopulateLocalizedComboBoxes();
 
         this.FriendlyName = watermark.FriendlyName;
@@ -192,6 +177,7 @@ public sealed partial class WatermarkEditViewModel :
 
         return true;
     }
+
     // Clicked "Add" button - add new editable to model, refresh master list,
     // and then select new item in master list
     public bool Add()

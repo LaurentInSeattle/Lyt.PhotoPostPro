@@ -11,7 +11,7 @@ public sealed class ImageExport : IEditable
     public int Dimension { get; set; } = 1920;
 
     // Target size in megabytes when action is set to ExportAction.ToFileSize
-    public float MegaBytes { get; set; } = 1.0f;
+    // public float MegaBytes { get; set; } = 1.0f;
 
     public OutputFormat OutputFormat { get; set; } = OutputFormat.Jpeg;
 
