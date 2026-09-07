@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
-
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
@@ -89,6 +87,8 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 
 Bugs - No Repro 
 ---------------
+
+- CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
 
 - After completing an edit, image does not show up in edited 
 
