@@ -42,6 +42,15 @@ public sealed partial class ExportEditViewModel :
 
     */
 
+    [ObservableProperty]
+    public partial string FriendlyName { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool FriendlyNameIsDisabled { get; set; }
+
+    [ObservableProperty]
+    public partial string Description { get; set; } = string.Empty;
+
     public ExportEditViewModel(PhotoPostProModel model)
     {
         this.model = model;

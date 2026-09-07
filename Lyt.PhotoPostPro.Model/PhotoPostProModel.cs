@@ -18,6 +18,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             IsFirstRun = true,
             Signatures = new SignaturesCollection(),
             Watermarks = new WatermarksCollection(),
+            ImageExports = new ImageExportsCollection(),
         };
 
     private readonly Lock lockObject = new();

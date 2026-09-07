@@ -15,7 +15,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
     internal override void Activate(WorkflowUpdateKind workflowUpdateKind) => this.Reset();
 
     // For abstract compliance only 
-    internal override Frame? Transform(bool withFrame = true) { return null;  }
+    internal override Frame? Transform(bool withFrame = true) { return null; }
 
     // For abstract compliance only 
     protected override void SetIdentity() => base.IsIdentity = false;
@@ -115,13 +115,13 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                     case ExportAction.None:
                         break;
 
-                    case ExportAction.ToFileSize:
-                        // TODO: Implement file size export logic here
-                        throw new NotImplementedException("ExportAction.ToFileSize is not implemented yet.");
+                    //case ExportAction.ToFileSize:
+                    //    // TODO: Implement file size export logic here
+                    //    throw new NotImplementedException("ExportAction.ToFileSize is not implemented yet.");
 
-                    case ExportAction.ToScale:
-                        // TODO: Implement to scale export logic here
-                        throw new NotImplementedException("ExportAction.ToScale is not implemented yet.");
+                    //case ExportAction.ToScale:
+                    //    // TODO: Implement to scale export logic here
+                    //    throw new NotImplementedException("ExportAction.ToScale is not implemented yet.");
 
                     case ExportAction.ToDimensions:
                         int dimension = imageExport.Dimension;
@@ -180,11 +180,11 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 {
                     Color borderColor =
                         imageExport.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
-                    double thicknessFactor =
-                        imageExport.BorderThickness == ImageBorderThickness.Thick ? 3.5 : 2.5;
+                    double thicknessFactor = imageExport.BorderThickness.ThicknessFactor();
                     int borderWidth = (int)(thicknessFactor * imageWithBorders.Width / 100.0);
                     int borderHeight = (int)(thicknessFactor * imageWithBorders.Height / 100.0);
                     int border = Math.Max(borderWidth, borderHeight);
+
                     // Weigthed padding would need a second pass 
                     imageWithBorders.Mutate(x => x.Resize(
                         new ResizeOptions
@@ -279,7 +279,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             string? imageLibraryFolderPath =
                 System.IO.Path.GetDirectoryName(metadata.FullPath) ??
                 throw new Exception("No source folder for: " + metadata.FullPath);
-            string thumbnailPath = ExportImage(ImageExport.Thumbnail, imageLibraryFolderPath);
+            string thumbnailPath = ExportImage(ImageExport.ImageThumbnailAfterEdit, imageLibraryFolderPath);
             libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
 
             // Save Editing parameters and copy them to the current export folder

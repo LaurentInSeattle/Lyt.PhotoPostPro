@@ -42,6 +42,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     [JsonRequired]
     public WatermarksCollection Watermarks { get; set; } = new();
 
+    [JsonRequired]
     public ImageExportsCollection ImageExports { get; set; } = new();
 
     #endregion Serialized -  No model changed event

@@ -9,23 +9,25 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+- Figure out if we need to implement exporting to scale and export to file size.  
+ ( If yes, implement it.  If not, remove the enum values and code references. ) 
 
 WIP
 ---
 
+Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
+
+UI to pick up exports parameters 
+
 Implement Export Editor 
-
-Convert Export Edits to plain TXT file 
-
-Disk Usage statistics 
 
 
 Essential Missing Features 
 --------------------------
 
-- Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
+- Convert Export Edits to plain TXT file 
 
-- UI to pick up exports parameters 
+- Disk Usage statistics 
 
 - First Run View : Setup root locations, etc 
 

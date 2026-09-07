@@ -4,6 +4,8 @@ public sealed class ImageExport : IEditable
 {
     public string FriendlyName { get; set; } = string.Empty;
 
+    public string Description { get; set; } = string.Empty;
+
     public ExportAction Action { get; set; } = ExportAction.None;
 
     public int Dimension { get; set; } = 1920;
@@ -34,60 +36,19 @@ public sealed class ImageExport : IEditable
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
 
-    public ImageExport Clone()
-        =>  new()
-            {
-                Action = this.Action,
-                Dimension = this.Dimension,
-                MegaBytes = this.MegaBytes,
-                OutputFormat = this.OutputFormat,
-                JpegQuality = this.JpegQuality,
-                IsGalleryFormat = this.IsGalleryFormat,
-                WithSignature = this.WithSignature,
-                SignatureName = this.SignatureName,
-                WithWatermark = this.WithWatermark,
-                WatermarkName = this.WatermarkName,
-                WithBorders = this.WithBorders,
-                BorderStyle = this.BorderStyle,
-                BorderThickness = this.BorderThickness,
-                PostFix = this.PostFix
-            };
-
     // Default
     //      Original size, no name change, very high JPG quality, gallery format, no watermark,
     //      no signature, no borders, no postfix
     public static ImageExport Default => new() 
     {
         FriendlyName = "Best Quality",
+        Description = "Original Size - Best Quality",
         IsGalleryFormat = true 
     } ;
 
-    // Resized to Full HD in longuest dimension, high JPG quality, no watermark, no signature, no borders
-    public static ImageExport FullHd =>
-        new()
-        {
-            FriendlyName = "Full HD",
-            PostFix = "_HD",
-            Action = ExportAction.ToDimensions,
-            Dimension = 1920,
-            OutputFormat = OutputFormat.Jpeg,
-            JpegQuality = 90,
-        };
-
+    // Used to create the image thumbnail after edits - Not user accessible 
     // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
-    public static ImageExport ThumbnailLibrary =>
-        new()
-        {
-            FriendlyName = "Thumbnail",
-            PostFix = "_THUMB_EDIT",
-            Action = ExportAction.ToDimensions,
-            Dimension = 480,
-            OutputFormat = OutputFormat.Jpeg,
-            JpegQuality = 85,
-        };
-
-    // Resized to 480 pixels in longuest dimension, medium JPG quality, no watermark, no signature, no borders
-    public static ImageExport Thumbnail =>
+    public static ImageExport ImageThumbnailAfterEdit =>
         new()
         {
             PostFix = "_THUMB_EDIT",

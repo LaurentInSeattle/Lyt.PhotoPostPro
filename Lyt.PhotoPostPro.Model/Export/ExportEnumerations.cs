@@ -4,9 +4,11 @@
 public enum ExportAction
 {
     None,
-    ToScale,
     ToDimensions,
-    ToFileSize,
+
+    // Not supported for now 
+    // ToScale,
+    // ToFileSize,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<OutputFormat>))]
@@ -23,15 +25,20 @@ public enum ImageBorderStyle
     None,
     BlackBorder,
     WhiteBorder,
-    Custom,
+
+    // Not supported for now 
+    // Custom,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<ImageBorderThickness>))]
 public enum ImageBorderThickness
 {
     Thick,
+    Medium, 
     Thin,
-    Custom,
+
+    // Not supported for now 
+    // Custom,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<SignatureLocation>))]
@@ -55,6 +62,16 @@ public enum PppFontStyle
 
 public static class OutputFomatExtensions
 {
+    public static double ThicknessFactor(this ImageBorderThickness thickness)
+        => thickness switch
+        {
+            ImageBorderThickness.Thick => 3.5,
+            ImageBorderThickness.Medium => 2.5,
+            ImageBorderThickness.Thin => 1.5,
+
+            _ => throw new NotImplementedException(),
+        };
+
     public static string FileExtension(this OutputFormat outputFormat)
         => outputFormat switch
         {

@@ -18,8 +18,8 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="80" />
+			<RowDefinition Height="60" /> <!-- Friendly Name -->
+			<RowDefinition Height="100" /> <!-- Description -->
 			<RowDefinition Height="80" />
 			<RowDefinition Height="80" />
 			<RowDefinition Height="4" />
@@ -27,8 +27,44 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="420" />
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="1" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.FriendlyNamePrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			x:Name="FriendlyNameTextBox"
+			Grid.Column="2" Grid.Row="1" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="40"
+			Text="{Binding FriendlyName}"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="2" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.TextPrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			x:Name="TextTextBox"
+			Grid.Column="2" Grid.Row="2" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="80"
+			MaxLength="60"
+			Text="{Binding Description}"
+			Margin="0"
+			AcceptsReturn="True"
+			/>
+
 	</Grid>
 </UserControl>
