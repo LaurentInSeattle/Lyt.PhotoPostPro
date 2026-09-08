@@ -17,19 +17,68 @@
 
 	Background="Transparent"
 	>
-	<Grid	
-		x:Name="ToasterHost"
-		> 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="4" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="4" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
-		</Grid.ColumnDefinitions>
-	</Grid>
+	<Border
+		Background="#B0000020"
+		BorderBrush="{StaticResource LightAqua_3_100}"
+		BorderThickness="1"
+		CornerRadius="8"
+		VerticalAlignment="Center" HorizontalAlignment="Center"
+		>		
+		<Grid	
+			Margin="8"
+			ShowGridLines="True"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4" />
+				<RowDefinition Height="80" />
+				<RowDefinition Height="16" />
+				<RowDefinition Height="300" />
+				<RowDefinition Height="16" />
+				<RowDefinition Height="300" />
+				<RowDefinition Height="4" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="8" />
+				<ColumnDefinition Width="600" />
+				<ColumnDefinition Width="16" />
+				<ColumnDefinition Width="600" />
+				<ColumnDefinition Width="8" />
+			</Grid.ColumnDefinitions>
+			<Rectangle
+				Grid.Row="0" Grid.Column="0"
+				Grid.RowSpan="99" Grid.ColumnSpan="99"
+				/>
+			<!-- Global disk space --> 
+			<Grid
+				Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+				Background="Blue"
+				> 
+			</Grid>
+			<!-- Library Stats --> 
+			<Grid
+				Grid.Row="3" Grid.Column="1" 
+				Background="Green"
+				> 
+			</Grid>
+			<!-- Exports Stats --> 
+			<Grid
+				Grid.Row="3" Grid.Column="3" 
+				Background="Firebrick"
+				> 
+			</Grid>
+			<!-- Gallery Stats --> 
+			<Grid
+				Grid.Row="5" Grid.Column="1" 
+				Background="Goldenrod"
+				> 
+			</Grid>
+			<!-- Luts Stats --> 
+			<Grid
+				Grid.Row="5" Grid.Column="3" 
+				Background="LightPink"
+				> 
+			</Grid>
+		</Grid>
+	</Border>
 </UserControl>
