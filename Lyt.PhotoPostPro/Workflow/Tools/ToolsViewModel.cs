@@ -36,19 +36,22 @@ public sealed partial class ToolsViewModel : ViewModel<ToolsView>
         {
             // This cannot be done in the constructor
             this.SetupWorkflow();
-            this.BuildToolsButtons(); 
             this.isFirstActivation = false;
 
-            // Need to schedule so that the newly created control is bound to its view model 
-            Schedule.OnUiThread(90, () =>
-            {
-                var button = this.ToolsButtons[0]; 
-                if (button.IsBound)
-                {
-                    button.Select();
-                }
-            }, DispatcherPriority.Background);
         }
+
+        // Rebuild the buttons in case we switch language
+        this.BuildToolsButtons();
+
+        // Need to schedule so that the newly created control is bound to its view model 
+        Schedule.OnUiThread(90, () =>
+        {
+            var button = this.ToolsButtons[0];
+            if (button.IsBound)
+            {
+                button.Select();
+            }
+        }, DispatcherPriority.Background);
     }
 
     private void BuildToolsButtons()

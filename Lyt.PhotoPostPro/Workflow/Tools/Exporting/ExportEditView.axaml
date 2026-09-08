@@ -110,6 +110,50 @@
 			/>
 
 		<TextBlock
+			Grid.Column="1" Grid.Row="5" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.OutputFormat}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="5" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedOutputFormats}"
+			SelectedIndex="{Binding SelectedOutputFormatIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="6" 
+			Text="{DynamicResource Tools.Editor.QualityPrompt}"
+			Theme="{StaticResource Medium}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			Grid.Column="2" Grid.Row="6"
+			IsEnabled="{Binding IsCompressionEnabled}"
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="4"
+			Text="{Binding QualityString}"
+			/>
+
+		<TextBlock
 			Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="2" 
 			Text="{Binding ValidationMessage}"
 			Theme="{StaticResource ValidationError}"

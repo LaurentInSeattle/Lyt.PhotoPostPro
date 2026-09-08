@@ -59,6 +59,22 @@ internal static class ToolsStatics
         "Tools.Editor.BoldItalic",
     ];
 
+    internal static readonly List<OutputFormat> SupportedOutputFormatValues =
+    [
+        OutputFormat.Jpeg, 
+        OutputFormat.WebP, 
+        OutputFormat.Png, 
+        OutputFormat.Bmp,
+    ];
+
+    internal static readonly List<string> SupportedOutputFormatText =
+    [
+        "Tools.Editor.Jpg",
+        "Tools.Editor.Webp",
+        "Tools.Editor.Png",
+        "Tools.Editor.Bmp",
+    ];
+
     internal static List<FontFamily> FontFamilies()
     {
         var fontCollection = FontManager.Current.SystemFonts;

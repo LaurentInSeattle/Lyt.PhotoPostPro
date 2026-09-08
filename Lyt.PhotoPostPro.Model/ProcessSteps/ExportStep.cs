@@ -179,7 +179,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Add Borders, if specified
                 Image<RgbaHalf> imageWithBorders = imageWithWatermark;
-                if (imageExport.WithBorders)
+                if (imageExport.BorderStyle != ImageBorderStyle.None)
                 {
                     Color borderColor =
                         imageExport.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;

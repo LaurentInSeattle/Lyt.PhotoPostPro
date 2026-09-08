@@ -15,7 +15,7 @@ public sealed class ImageExport : IEditable
 
     public OutputFormat OutputFormat { get; set; } = OutputFormat.Jpeg;
 
-    public int JpegQuality { get; set; } = 95;
+    public int Quality { get; set; } = 95;
 
     public bool IsGalleryFormat { get; set; } = false;
 
@@ -26,8 +26,6 @@ public sealed class ImageExport : IEditable
     public bool WithWatermark { get; set; } = false;
 
     public string WatermarkName { get; set; } = string.Empty;
-
-    public bool WithBorders { get; set; } = false;
 
     public ImageBorderStyle BorderStyle { get; set; } = ImageBorderStyle.None;
 
@@ -55,12 +53,12 @@ public sealed class ImageExport : IEditable
             Action = ExportAction.ToDimensions,
             Dimension = 480,
             OutputFormat = OutputFormat.Jpeg,
-            JpegQuality = 85,
+            Quality = 85,
         };
 
     [JsonIgnore]
     public string FileExtension => this.OutputFormat.FileExtension();
 
     [JsonIgnore]
-    public IImageEncoder ImageEncoder => this.OutputFormat.ImageEncoder(this.JpegQuality);
+    public IImageEncoder ImageEncoder => this.OutputFormat.ImageEncoder(this.Quality);
 }

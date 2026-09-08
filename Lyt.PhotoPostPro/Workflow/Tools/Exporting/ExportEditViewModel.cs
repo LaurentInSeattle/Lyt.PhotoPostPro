@@ -1,25 +1,18 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Exporting;
 
-public sealed partial class ExportEditViewModel : 
+using static Lyt.PhotoPostPro.Workflow.Tools.ToolsStatics;
+
+public sealed partial class ExportEditViewModel :
     ViewModel<ExportEditView>, IEditor
 {
     private readonly PhotoPostProModel model;
     private readonly EditorViewModel editorViewModel;
 
     private int resizeDimension = 1920;
+    private int quality = 85;
+    private bool isGalleryFormat;
+
     /* 
-
-    public string FriendlyName { get; set; } = string.Empty;
-
-    public ExportAction Action { get; set; } = ExportAction.None;
-
-    public int Dimension { get; set; } = 1920;
-
-    public OutputFormat OutputFormat { get; set; } = OutputFormat.Jpeg;
-
-    public int JpegQuality { get; set; } = 95;
-
-    public bool IsGalleryFormat { get; set; } = false;
 
     public bool WithSignature { get; set; } = false;
 
@@ -37,7 +30,6 @@ public sealed partial class ExportEditViewModel :
 
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
-
 
     */
 
@@ -60,6 +52,18 @@ public sealed partial class ExportEditViewModel :
     public partial bool IsResizeDimensionEnabled { get; set; }
 
     [ObservableProperty]
+    public partial ObservableCollection<string> SupportedOutputFormats { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedOutputFormatIndex { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsCompressionEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial string QualityString { get; set; } = "85";
+
+    [ObservableProperty]
     public partial string ValidationMessage { get; set; } = string.Empty;
 
     public ExportEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
@@ -74,25 +78,27 @@ public sealed partial class ExportEditViewModel :
     private void SetDefaults()
     {
         this.FriendlyName = "New Export Specification";
-        this.ShouldResize = true; 
+        this.ShouldResize = true;
         this.resizeDimension = 1920;
         this.ResizeDimensionString = this.resizeDimension.ToString("D");
+        this.quality = 85;
+        this.QualityString = this.quality.ToString("D");
     }
 
     private void PopulateLocalizedComboBoxes()
     {
-        //// Same for the supported font styles
-        //var list = new List<string>();
-        //foreach (string item in SupportedFontStyleText)
-        //{
-        //    list.Add(this.Localize(item));
-        //}
+        // We may need to localize (again) the supported placements text, so let's do 
+        var list = new List<string>();
+        foreach (string item in SupportedOutputFormatText)
+        {
+            list.Add(this.Localize(item));
+        }
 
-        //this.SupportedFontStyles = new(list);
+        this.SupportedOutputFormats = new(list);
 
-        //// Enforce property changed
-        //this.SelectedFontStylesIndex = 0;
-        //this.SelectedFontStylesIndex = 2;
+        // Enforce property changed
+        this.SelectedOutputFormatIndex = 1;
+        this.SelectedOutputFormatIndex = 0;
     }
 
     partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
@@ -101,11 +107,16 @@ public sealed partial class ExportEditViewModel :
 
     partial void OnResizeDimensionStringChanged(string value) => this.ValidateAndMessage();
 
+    partial void OnSelectedOutputFormatIndexChanged(int value) => this.ValidateAndMessage();
+
+    partial void OnQualityStringChanged(string value) => this.ValidateAndMessage();
+
+
     partial void OnShouldResizeChanged(bool value)
     {
-        this.IsResizeDimensionEnabled = value; 
+        this.IsResizeDimensionEnabled = value;
         this.ValidateAndMessage();
-    } 
+    }
 
     private void ValidateAndMessage()
     {
@@ -146,13 +157,36 @@ public sealed partial class ExportEditViewModel :
             }
 
             this.resizeDimension = maybeResizeDimension;
-        } 
+        }
+
+        if (this.SelectedOutputFormatIndex >= 0 && this.SelectedOutputFormatIndex < SupportedOutputFormatValues.Count)
+        {
+            var outputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex];
+            this.IsCompressionEnabled = (outputFormat == OutputFormat.Jpeg) || (outputFormat == OutputFormat.WebP);
+            if (this.IsCompressionEnabled)
+            {
+                string qualityString = this.QualityString?.Trim() ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(qualityString) || !int.TryParse(qualityString, out int maybeQuality))
+                {
+                    message = "Tools.Editor.Validation.QualityRequired";
+                    return false;
+                }
+
+                if (maybeQuality < 20 || maybeQuality > 100)
+                {
+                    message = "Tools.Editor.Validation.QualityOutOfRange";
+                    return false;
+                }
+
+                this.quality = maybeQuality;
+            }
+        }
 
         return true;
     }
 
     // Populate the form with defaults 
-    public void BeginAdd() 
+    public void BeginAdd()
     {
         this.FriendlyNameIsEnabled = true;
         this.PopulateLocalizedComboBoxes();
@@ -167,6 +201,7 @@ public sealed partial class ExportEditViewModel :
             return;
         }
 
+        this.isGalleryFormat = imageExport.IsGalleryFormat;
         this.FriendlyNameIsEnabled = false;
         this.PopulateLocalizedComboBoxes();
 
@@ -176,25 +211,17 @@ public sealed partial class ExportEditViewModel :
         this.ResizeDimensionString = imageExport.Dimension.ToString("D");
         this.IsResizeDimensionEnabled = this.ShouldResize;
 
-        //this.SelectedFontFamilyIndex = -1;
-        //for (int i = 0; i < this.SupportedFontFamilies.Count; ++i)
-        //{
-        //    if (imageExport.FontFamily.Equals(this.SupportedFontFamilies[i].Name, StringComparison.InvariantCultureIgnoreCase))
-        //    {
-        //        this.SelectedFontFamilyIndex = i;
-        //        break;
-        //    }
-        //}
+        this.SelectedOutputFormatIndex = 0;
+        for (int i = 0; i < SupportedOutputFormatValues.Count; ++i)
+        {
+            if (imageExport.OutputFormat == SupportedOutputFormatValues[i])
+            {
+                this.SelectedOutputFormatIndex = i;
+                break;
+            }
+        }
 
-        //this.SelectedFontStylesIndex = -1;
-        //for (int i = 0; i < SupportedFontStyleValues.Count; ++i)
-        //{
-        //    if (imageExport.PppFontStyle == SupportedFontStyleValues[i])
-        //    {
-        //        this.SelectedFontStylesIndex = i;
-        //        break;
-        //    }
-        //}
+        this.QualityString = imageExport.Quality.ToString("D");
     }
 
     // Clicked "Add" button - add new editable to model, refresh master list,
@@ -214,6 +241,33 @@ public sealed partial class ExportEditViewModel :
     // and then select new item in master list
     public bool Delete()
     {
+        if (this.isGalleryFormat)
+        {
+            this.ValidationMessage = this.Localize("Tools.Editor.Validation.CannotDeleteGalleryFormat");
+            return false;
+        }
+
         return true;
-    }          
+    }
+
+    private ImageExport CollectData()
+    => new()
+    {
+        FriendlyName = this.FriendlyName.Trim(),
+        Description = this.Description.Trim(),
+        Action = this.ShouldResize ? ExportAction.ToDimensions : ExportAction.None,
+        OutputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex],
+        Quality = this.quality,
+        IsGalleryFormat = this.isGalleryFormat,
+        PostFix = string.Empty,
+        Dimension = this.resizeDimension,
+        WithSignature = false,
+        SignatureName = string.Empty,
+        WithWatermark = false,
+        WatermarkName = string.Empty,
+        WithBorders = false,
+        BorderStyle = ImageBorderStyle.None,
+        BorderThickness = ImageBorderThickness.Thick,
+    };
+
 }
