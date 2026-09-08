@@ -15,6 +15,7 @@ public enum ExportAction
 public enum OutputFormat
 {
     Jpeg,
+    WebP,
     Png,
     Bmp,
 }
@@ -34,7 +35,7 @@ public enum ImageBorderStyle
 public enum ImageBorderThickness
 {
     Thick,
-    Medium, 
+    Medium,
     Thin,
 
     // Not supported for now 
@@ -76,15 +77,17 @@ public static class OutputFomatExtensions
         => outputFormat switch
         {
             OutputFormat.Jpeg => ".jpg",
+            OutputFormat.WebP => ".webp",
             OutputFormat.Png => ".png",
             OutputFormat.Bmp => ".bmp",
             _ => throw new NotImplementedException(),
         };
 
-    public static IImageEncoder ImageEncoder(this OutputFormat outputFormat, int jpegQuality)
+    public static IImageEncoder ImageEncoder(this OutputFormat outputFormat, int quality)
         => outputFormat switch
         {
-            OutputFormat.Jpeg => new JpegEncoder() { ColorType = JpegColorType.Rgb, Quality = jpegQuality },
+            OutputFormat.Jpeg => new JpegEncoder() { ColorType = JpegColorType.Rgb, Quality = quality },
+            OutputFormat.WebP => new WebpEncoder() { FileFormat = WebpFileFormatType.Lossy, Quality = quality },
             OutputFormat.Png => new PngEncoder() { ColorType = PngColorType.Rgb },
             OutputFormat.Bmp => new BmpEncoder() { BitsPerPixel = BmpBitsPerPixel.Bit24 },
             _ => throw new NotImplementedException(),

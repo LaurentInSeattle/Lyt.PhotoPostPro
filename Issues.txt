@@ -17,8 +17,6 @@ Implement Export Editor UI to pick up exports parameters
 
 Provide default for Signatures, Watermarks, and Exports
 
-Allow exports in WebP format (ImageSharp supports it)
-
 
 Essential Missing Features 
 --------------------------

@@ -36,6 +36,7 @@ global using SixLabors.ImageSharp.Formats;
 global using SixLabors.ImageSharp.Formats.Bmp;
 global using SixLabors.ImageSharp.Formats.Jpeg;
 global using SixLabors.ImageSharp.Formats.Png;
+global using SixLabors.ImageSharp.Formats.Webp;
 global using SixLabors.ImageSharp.Metadata;
 global using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 global using SixLabors.ImageSharp.PixelFormats;
