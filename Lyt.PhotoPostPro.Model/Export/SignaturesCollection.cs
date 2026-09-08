@@ -9,4 +9,7 @@ public sealed class SignaturesCollection
     public Signature? FromFriendlyName(string friendlyName)
         => this.AvailableSignatures.FirstOrDefault(
             s => s.FriendlyName.Equals( friendlyName, StringComparison.InvariantCultureIgnoreCase));
+
+    public bool IsAvailable(string friendlyName)
+        => this.FromFriendlyName(friendlyName) is not null;
 }

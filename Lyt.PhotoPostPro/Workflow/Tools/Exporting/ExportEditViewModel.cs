@@ -22,12 +22,6 @@ public sealed partial class ExportEditViewModel :
 
     public string WatermarkName { get; set; } = string.Empty;
 
-    public bool WithBorders { get; set; } = false;
-
-    public ImageBorderStyle BorderStyle { get; set; } = ImageBorderStyle.None;
-
-    public ImageBorderThickness BorderThickness { get; set; } = ImageBorderThickness.Thick;
-
     // String added to filename to identify the export type
     public string PostFix { get; set; } = string.Empty;
 
@@ -64,6 +58,21 @@ public sealed partial class ExportEditViewModel :
     public partial string QualityString { get; set; } = "85";
 
     [ObservableProperty]
+    public partial ObservableCollection<string> SupportedBorderStyles { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedBorderStyleIndex { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<string> SupportedBorderThicknesses { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedBorderThicknessIndex { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsBorderThicknessEnabled { get; set; }
+
+    [ObservableProperty]
     public partial string ValidationMessage { get; set; } = string.Empty;
 
     public ExportEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
@@ -83,6 +92,8 @@ public sealed partial class ExportEditViewModel :
         this.ResizeDimensionString = this.resizeDimension.ToString("D");
         this.quality = 85;
         this.QualityString = this.quality.ToString("D");
+        this.SelectedBorderStyleIndex = 0;
+        this.SelectedBorderThicknessIndex = 0;
     }
 
     private void PopulateLocalizedComboBoxes()
@@ -99,6 +110,32 @@ public sealed partial class ExportEditViewModel :
         // Enforce property changed
         this.SelectedOutputFormatIndex = 1;
         this.SelectedOutputFormatIndex = 0;
+
+        list = new List<string>();
+        foreach (string item in SupportedImageBorderStyleText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedBorderStyles = new(list);
+
+        // Enforce property changed
+        this.SelectedBorderStyleIndex = 1;
+        this.SelectedBorderStyleIndex = 0;
+
+        this.IsBorderThicknessEnabled = false; 
+
+        list = new List<string>();
+        foreach (string item in SupportedImageBorderThicknessText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedBorderThicknesses = new(list);
+
+        // Enforce property changed
+        this.SelectedBorderThicknessIndex = 1;
+        this.SelectedBorderThicknessIndex = 0;
     }
 
     partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
@@ -110,7 +147,10 @@ public sealed partial class ExportEditViewModel :
     partial void OnSelectedOutputFormatIndexChanged(int value) => this.ValidateAndMessage();
 
     partial void OnQualityStringChanged(string value) => this.ValidateAndMessage();
+    
+    partial void OnSelectedBorderStyleIndexChanged(int value) => this.ValidateAndMessage();
 
+    partial void OnSelectedBorderThicknessIndexChanged(int value) => this.ValidateAndMessage();
 
     partial void OnShouldResizeChanged(bool value)
     {
@@ -138,6 +178,13 @@ public sealed partial class ExportEditViewModel :
         if (string.IsNullOrWhiteSpace(friendlyName) || friendlyName.Length < 3)
         {
             message = "Tools.Editor.Validation.FriendlyNameRequired";
+            return false;
+        }
+
+        string description = this.Description?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(description) || description.Length < 3)
+        {
+            message = "Tools.Editor.Validation.DescriptionNameRequired";
             return false;
         }
 
@@ -182,6 +229,12 @@ public sealed partial class ExportEditViewModel :
             }
         }
 
+        if (this.SelectedBorderStyleIndex >= 0 && this.SelectedBorderStyleIndex < SupportedImageBorderStyleValues.Count)
+        {
+            ImageBorderStyle borderStyle = SupportedImageBorderStyleValues[this.SelectedBorderStyleIndex];
+            this.IsBorderThicknessEnabled = borderStyle != ImageBorderStyle.None;
+        }
+
         return true;
     }
 
@@ -222,18 +275,61 @@ public sealed partial class ExportEditViewModel :
         }
 
         this.QualityString = imageExport.Quality.ToString("D");
+
+        this.SelectedBorderStyleIndex = 0;
+        for (int i = 0; i < SupportedImageBorderStyleValues.Count; ++i)
+        {
+            if (imageExport.BorderStyle == SupportedImageBorderStyleValues[i])
+            {
+                this.SelectedBorderStyleIndex = i;
+                break;
+            }
+        }
+
+        this.SelectedBorderThicknessIndex = 0;
+        for (int i = 0; i < SupportedImageBorderThicknessValues.Count; ++i)
+        {
+            if (imageExport.BorderThickness == SupportedImageBorderThicknessValues[i])
+            {
+                this.SelectedBorderThicknessIndex = i;
+                break;
+            }
+        }
+
+        this.IsBorderThicknessEnabled = imageExport.BorderStyle != ImageBorderStyle.None;
     }
 
     // Clicked "Add" button - add new editable to model, refresh master list,
     // and then select new item in master list
     public bool Add()
     {
+        ImageExport? existing = this.model.ImageExports.FromFriendlyName(this.FriendlyName.Trim());
+        if (existing is not null)
+        {
+            this.ValidationMessage = this.Localize("Tools.Editor.Validation.FriendlyNameAlreadyExists");
+            return false;
+        }
+
+        var newImageExport = this.CollectData();
+        if (!this.model.AddImageExport(newImageExport, out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return false;
+        }
+
         return true;
     }
 
     // Clicked "Save" button - Save edits to model 
     public bool Save()
     {
+        var editedImageExport = this.CollectData();
+        if (!this.model.EditImageExport(editedImageExport, out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
+            return false;
+        }
+
         return true;
     }
 
@@ -244,6 +340,12 @@ public sealed partial class ExportEditViewModel :
         if (this.isGalleryFormat)
         {
             this.ValidationMessage = this.Localize("Tools.Editor.Validation.CannotDeleteGalleryFormat");
+            return false;
+        }
+
+        if (!this.model.DeleteImageExport(this.FriendlyName.Trim(), out string message))
+        {
+            this.ValidationMessage = this.Localize(message);
             return false;
         }
 
@@ -260,15 +362,13 @@ public sealed partial class ExportEditViewModel :
         OutputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex],
         Quality = this.quality,
         IsGalleryFormat = this.isGalleryFormat,
+        BorderStyle = SupportedImageBorderStyleValues[this.SelectedBorderStyleIndex],
+        BorderThickness = SupportedImageBorderThicknessValues[this.SelectedBorderThicknessIndex],
 
-        BorderStyle = ImageBorderStyle.None,
-        BorderThickness = ImageBorderThickness.Thick,
-
+        // TODO 
         PostFix = string.Empty,
 
-        WithSignature = false,
         SignatureName = string.Empty,
-        WithWatermark = false,
         WatermarkName = string.Empty,
     };
 }

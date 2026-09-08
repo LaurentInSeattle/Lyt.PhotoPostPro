@@ -75,6 +75,34 @@ internal static class ToolsStatics
         "Tools.Editor.Bmp",
     ];
 
+    internal static readonly List<ImageBorderStyle> SupportedImageBorderStyleValues =
+    [
+        ImageBorderStyle.None,
+        ImageBorderStyle.BlackBorder,
+        ImageBorderStyle.WhiteBorder,
+    ];
+
+    internal static readonly List<string> SupportedImageBorderStyleText =
+    [
+        "Tools.Editor.None",
+        "Tools.Editor.BlackBorder",
+        "Tools.Editor.WhiteBorder",
+    ];
+
+    internal static readonly List<ImageBorderThickness> SupportedImageBorderThicknessValues =
+    [
+        ImageBorderThickness.Thin,
+        ImageBorderThickness.Medium,
+        ImageBorderThickness.Thick,
+    ];
+
+    internal static readonly List<string> SupportedImageBorderThicknessText =
+    [
+        "Tools.Editor.Thin",
+        "Tools.Editor.Medium",
+        "Tools.Editor.Thick",
+    ];
+
     internal static List<FontFamily> FontFamilies()
     {
         var fontCollection = FontManager.Current.SystemFonts;

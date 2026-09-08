@@ -119,4 +119,63 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         }
     }
+
+    public bool EditImageExport(ImageExport newImageExport, out string message)
+    {
+        if (this.DeleteImageExport(newImageExport.FriendlyName, out message))
+        {
+            return this.AddImageExport(newImageExport, out message);
+
+        }
+
+        return false;
+    }
+
+    public bool AddImageExport(ImageExport newImageExport, out string message)
+    {
+        message = string.Empty;
+        ImageExport? existing = this.ImageExports.FromFriendlyName(newImageExport.FriendlyName.Trim());
+        if (existing is not null)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameAlreadyExists";
+            return false;
+        }
+
+        try
+        {
+            this.ImageExports.AvailableImageExports.Add(newImageExport);
+            this.Save();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            this.Logger.Error(" Failed to add new image export: " + newImageExport.FriendlyName + "  " + ex);
+            message = "Tools.Editor.Validation.AddImageExportFailed";
+            return false;
+        }
+    }
+
+    public bool DeleteImageExport(string friendlyName, out string message)
+    {
+        message = string.Empty;
+        ImageExport? existing = this.ImageExports.FromFriendlyName(friendlyName.Trim());
+        if (existing is null)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameNotFound";
+            return false;
+        }
+
+        try
+        {
+            this.ImageExports.AvailableImageExports.Remove(existing);
+            this.Save();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            this.Logger.Error(" Failed to delete image export: " + friendlyName + "  " + ex);
+            message = "Tools.Editor.Validation.DeleteImageExportFailed";
+            return false;
+        }
+    }
 }

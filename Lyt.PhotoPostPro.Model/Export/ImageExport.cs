@@ -19,11 +19,7 @@ public sealed class ImageExport : IEditable
 
     public bool IsGalleryFormat { get; set; } = false;
 
-    public bool WithSignature { get; set; } = false;
-
     public string SignatureName { get; set; } = string.Empty;
-
-    public bool WithWatermark { get; set; } = false;
 
     public string WatermarkName { get; set; } = string.Empty;
 
@@ -61,4 +57,10 @@ public sealed class ImageExport : IEditable
 
     [JsonIgnore]
     public IImageEncoder ImageEncoder => this.OutputFormat.ImageEncoder(this.Quality);
+
+    [JsonIgnore]
+    public bool WithWatermark => !string.IsNullOrWhiteSpace(this.WatermarkName);
+
+    [JsonIgnore]
+    public bool WithSignature => !string.IsNullOrWhiteSpace(this.SignatureName);
 }

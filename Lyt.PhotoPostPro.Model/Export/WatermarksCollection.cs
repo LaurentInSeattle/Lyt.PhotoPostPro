@@ -8,4 +8,7 @@ public sealed class WatermarksCollection
 
     public Watermark? FromFriendlyName(string friendlyName)
             => this.AvailableWatermarks.FirstOrDefault(s => s.FriendlyName == friendlyName);
+
+    public bool IsAvailable(string friendlyName)
+        => this.FromFriendlyName(friendlyName) is not null;
 }

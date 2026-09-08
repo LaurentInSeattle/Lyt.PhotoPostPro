@@ -24,7 +24,10 @@
 			<RowDefinition Height="60" />
 			<RowDefinition Height="60" />
 			<RowDefinition Height="60" />
-			<RowDefinition Height="80" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="80" /> <!-- Validation -->
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -154,7 +157,62 @@
 			/>
 
 		<TextBlock
-			Grid.Row="8"  Grid.Column="1" Grid.ColumnSpan="2" 
+			Grid.Column="1" Grid.Row="7" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.BorderStyle}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="7" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding SupportedBorderStyles}"
+			SelectedIndex="{Binding SelectedBorderStyleIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="8" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.BorderThickness}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="8" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			IsEnabled="{Binding IsBorderThicknessEnabled}"
+			ItemsSource="{Binding SupportedBorderThicknesses}"
+			SelectedIndex="{Binding SelectedBorderThicknessIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Row="10"  Grid.Column="1" Grid.ColumnSpan="2" 
 			Text="{Binding ValidationMessage}"
 			Theme="{StaticResource ValidationError}"
 			TextAlignment="Center"
