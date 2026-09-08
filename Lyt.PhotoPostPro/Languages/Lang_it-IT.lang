@@ -23,7 +23,7 @@
 
     <system:String x:Key="Shell.Greetings">Benvenuti a Foto Ribello !</system:String>
 
-    <system:String x:Key="Shell.Folder">Raccolta</system:String>
+    <system:String x:Key="Shell.Folder">Libreria</system:String>
 
     <system:String x:Key="Shell.Camera">Fotocamera</system:String>
 
@@ -61,7 +61,7 @@
 
     <system:String x:Key="Gallery.Empty">La tua galleria di 'cinque stelle' migliori immagini è vuota.</system:String>
 
-    <system:String x:Key="Library.Empty">La tua biblioteca di immagini è vuota. Utilizzare 'Import' per aggiungere immagini.</system:String>
+    <system:String x:Key="Library.Empty">La tua libreria di immagini è vuota. Utilizzare 'Import' per aggiungere immagini.</system:String>
 
     <system:String x:Key="Gallery.Toolbar.SlideShow">Presentazione</system:String>
 
@@ -137,9 +137,9 @@
 
     <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Aggiungi 'Checked' to Library</system:String>
 
-    <system:String x:Key="Workflow.Import.Folder.Adding">Aggiungere immagini selezionate alla Biblioteca...</system:String>
+    <system:String x:Key="Workflow.Import.Folder.Adding">Aggiungere immagini selezionate alla Libreria...</system:String>
 
-    <system:String x:Key="Workflow.Import.Folder.Added">Completa: Immagini selezionate aggiunte alla Biblioteca.</system:String>
+    <system:String x:Key="Workflow.Import.Folder.Added">Completa: Immagini selezionate aggiunte alla Libreria.</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Precarico annullato...</system:String>
 
@@ -489,7 +489,7 @@
 
     <system:String x:Key="Library.ProcessImage">Edita questa Immagine</system:String>
 
-    <system:String x:Key="Library.RemoveImage">Rimuovi dalla Raccolta</system:String>
+    <system:String x:Key="Library.RemoveImage">Rimuovi dalla Libreria</system:String>
 
     <system:String x:Key="Library.Navigate">Navigare alla cartella Libreria</system:String>
 
@@ -541,7 +541,7 @@
 
     <system:String x:Key="Library.Day.Saturday">Sabato</system:String>
 
-    <system:String x:Key="Dialog.ConfirmRemove.Title">Rimuovere dalla Raccolta ?</system:String>
+    <system:String x:Key="Dialog.ConfirmRemove.Title">Rimuovere dalla Libreria ?</system:String>
 
     <system:String x:Key="Dialog.ConfirmRemove.Message">Questa immagine master e tutti i dati allegati, come miniature e registri delle modifiche, verranno eliminati.&#xD;&#xA;&#xD;&#xA;Tutti i file verranno spostati nel Cestino.&#xD;&#xA;&#xD;&#xA;Questa operazione non può essere annullata.</system:String>
 
