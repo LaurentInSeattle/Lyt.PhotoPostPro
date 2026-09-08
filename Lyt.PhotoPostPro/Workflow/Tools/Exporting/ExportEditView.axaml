@@ -27,6 +27,8 @@
 			<RowDefinition Height="60" />
 			<RowDefinition Height="60" />
 			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="60" />
 			<RowDefinition Height="80" /> <!-- Validation -->
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -211,8 +213,81 @@
 			</ComboBox.ItemTemplate>
 		</ComboBox>
 
+		<!-- Signature -->
 		<TextBlock
-			Grid.Row="10"  Grid.Column="1" Grid.ColumnSpan="2" 
+			Grid.Column="1" Grid.Row="9" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.Signature}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="9" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding AvailableSignatures}"
+			SelectedIndex="{Binding SelectedSignatureIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<!-- Watermark -->
+		<TextBlock
+			Grid.Column="1" Grid.Row="10" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.Watermark}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<ComboBox
+			Grid.Column="2" Grid.Row="10" 
+			IsEditable="False"
+			Width="360" Height="40"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
+			ItemsSource="{Binding AvailableWatermarks}"
+			SelectedIndex="{Binding SelectedWatermarkIndex}"
+			>
+			<ComboBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ComboBox.ItemsPanel>
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+
+		<TextBlock
+			Grid.Column="1" Grid.Row="11" 
+			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.PostfixPrompt}"
+			TextAlignment="Right"
+			VerticalAlignment="Center" HorizontalAlignment="Right"
+			/>
+		<TextBox
+			x:Name="PostfixTextBox"
+			Grid.Column="2" Grid.Row="11" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			Width="360" Height="40"
+			MaxLength="40"
+			Text="{Binding PostFix}"
+			/>
+
+		<TextBlock
+			Grid.Row="12"  Grid.Column="1" Grid.ColumnSpan="2" 
 			Text="{Binding ValidationMessage}"
 			Theme="{StaticResource ValidationError}"
 			TextAlignment="Center"

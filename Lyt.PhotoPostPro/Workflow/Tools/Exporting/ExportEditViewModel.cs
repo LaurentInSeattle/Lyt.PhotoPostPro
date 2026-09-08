@@ -14,11 +14,7 @@ public sealed partial class ExportEditViewModel :
 
     /* 
 
-    public bool WithSignature { get; set; } = false;
-
     public string SignatureName { get; set; } = string.Empty;
-
-    public bool WithWatermark { get; set; } = false;
 
     public string WatermarkName { get; set; } = string.Empty;
 
@@ -73,6 +69,21 @@ public sealed partial class ExportEditViewModel :
     public partial bool IsBorderThicknessEnabled { get; set; }
 
     [ObservableProperty]
+    public partial ObservableCollection<string> AvailableSignatures { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedSignatureIndex { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<string> AvailableWatermarks { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedWatermarkIndex { get; set; }
+
+    [ObservableProperty]
+    public partial string PostFix { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial string ValidationMessage { get; set; } = string.Empty;
 
     public ExportEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
@@ -98,7 +109,7 @@ public sealed partial class ExportEditViewModel :
 
     private void PopulateLocalizedComboBoxes()
     {
-        // We may need to localize (again) the supported placements text, so let's do 
+        // We may need to localize (again)
         var list = new List<string>();
         foreach (string item in SupportedOutputFormatText)
         {
@@ -125,7 +136,7 @@ public sealed partial class ExportEditViewModel :
 
         this.IsBorderThicknessEnabled = false; 
 
-        list = new List<string>();
+        list = [];
         foreach (string item in SupportedImageBorderThicknessText)
         {
             list.Add(this.Localize(item));
@@ -136,6 +147,34 @@ public sealed partial class ExportEditViewModel :
         // Enforce property changed
         this.SelectedBorderThicknessIndex = 1;
         this.SelectedBorderThicknessIndex = 0;
+
+        list = [];
+        list.Add(this.Localize("Tools.Editor.Signature.None"));
+        IEnumerable<string> signatures = this.model.Signatures.AvailableSignatures.Select(s => s.FriendlyName);
+        foreach (string signature in signatures)
+        {
+            list.Add(signature);
+        }
+
+        this.AvailableSignatures = new(list);
+
+        // Enforce property changed
+        this.SelectedSignatureIndex = 1;
+        this.SelectedSignatureIndex = 0;
+
+        list = [];
+        list.Add(this.Localize("Tools.Editor.Watermark.None"));
+        IEnumerable<string> watermarks = this.model.Watermarks.AvailableWatermarks.Select(w => w.FriendlyName); 
+        foreach (string watermark in watermarks)
+        {
+            list.Add(watermark);
+        }
+
+        this.AvailableWatermarks = new(list);
+
+        // Enforce property changed
+        this.SelectedWatermarkIndex = 1;
+        this.SelectedWatermarkIndex = 0;
     }
 
     partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
