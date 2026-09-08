@@ -256,18 +256,19 @@ public sealed partial class ExportEditViewModel :
         FriendlyName = this.FriendlyName.Trim(),
         Description = this.Description.Trim(),
         Action = this.ShouldResize ? ExportAction.ToDimensions : ExportAction.None,
+        Dimension = this.resizeDimension,
         OutputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex],
         Quality = this.quality,
         IsGalleryFormat = this.isGalleryFormat,
+
+        BorderStyle = ImageBorderStyle.None,
+        BorderThickness = ImageBorderThickness.Thick,
+
         PostFix = string.Empty,
-        Dimension = this.resizeDimension,
+
         WithSignature = false,
         SignatureName = string.Empty,
         WithWatermark = false,
         WatermarkName = string.Empty,
-        WithBorders = false,
-        BorderStyle = ImageBorderStyle.None,
-        BorderThickness = ImageBorderThickness.Thick,
     };
-
 }
