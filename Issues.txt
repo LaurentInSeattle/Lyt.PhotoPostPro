@@ -13,11 +13,11 @@ Bugs ~ Major Issues
 WIP
 ---
 
-Watermarks with transparency (Images now have an alpha channel, then draw the watermark on it, then save)
+Implement Export Editor UI to pick up exports parameters 
 
-UI to pick up exports parameters 
+Provide default for Signatures, Watermarks, and Exports
 
-Implement Export Editor 
+Allow exports in WebP format (ImageSharp supports it)
 
 
 Essential Missing Features 

@@ -24,8 +24,6 @@ public sealed class Watermark : IEditable
     [JsonIgnore]
     public FontStyle FontStyle => (FontStyle)(int)this.PppFontStyle;
 
-    // TODO:
-    // Implement transparency because we are not using RGB any longer 
     [JsonIgnore]
     public Color Color => Color.Parse(this.HexColorArgb.ToString("X"), ColorHexFormat.Argb);
 }

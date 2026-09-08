@@ -158,6 +158,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         Font font = SystemFonts.CreateFont(watermark.FontFamily, watermark.FontSize, watermark.FontStyle);
                         var textOptions = new RichTextOptions(font)
                         {
+                            VerticalAlignment = VerticalAlignment.Center,
                             HorizontalAlignment = HorizontalAlignment.Center,
                             TextAlignment = TextAlignment.Center,
                             Origin = origin,
@@ -167,9 +168,11 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                             WrappingLength = imageWithWatermark.Width * 0.9f, // Wrap text to 90% of image width
                         };
 
+                        // Adjust alpha for transparency
+                        var brush = new SolidBrush(watermark.Color.WithAlpha(0.3f));
                         imageWithWatermark.Mutate(x => x.Paint(canvas =>
                         {
-                            canvas.DrawText(textOptions, watermark.Text, Brushes.Solid(watermark.Color), pen: null);
+                            canvas.DrawText(textOptions, watermark.Text, brush, pen: null);
                         }));
                     }
                 }
