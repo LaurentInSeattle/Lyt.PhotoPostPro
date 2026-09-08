@@ -1,14 +1,13 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Watermarks and Signatures need to be scaled to the exported image size.  
+
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
-
-- Figure out if we need to implement exporting to scale and export to file size.  
- ( If yes, implement it.  If not, remove the enum values and code references. ) 
 
 WIP
 ---
@@ -56,7 +55,7 @@ Code Quality Issues
 
 - Move message definitions in new folders depending on area and workflow 
 
-- Cleanup public vs internal about everywhere 
+- Cleanup public vs internal about everywhere in UI ( done for Model classes )
 
 - Setup logging for trace to disk 
 
@@ -100,6 +99,9 @@ Bugs - No Repro
 
 V.Next 
 ------
+
+- Figure out if we need to implement exporting to scale and export to file size.  
+ ( If yes, implement it.  If not, remove the enum values and code references. ) 
 
 - Touch up / Blemish (after geometry) 
 

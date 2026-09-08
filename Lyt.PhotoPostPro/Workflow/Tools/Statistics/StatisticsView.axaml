@@ -52,8 +52,18 @@
 			<!-- Global disk space --> 
 			<Grid
 				Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
-				Background="Blue"
 				> 
+				<TextBlock
+					Text="{Binding AvailableSpace}"
+					Theme="{StaticResource H2}"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					/>
+				<TextBlock
+					Text="{Binding DiskSpaceAlert}"
+					Theme="{StaticResource H2}"
+					Foreground="{StaticResource Alert.TextColor}"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					/>
 			</Grid>
 			<!-- Library Stats --> 
 			<Grid

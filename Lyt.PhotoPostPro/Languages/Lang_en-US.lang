@@ -73,8 +73,9 @@
 
 	<!-- Statistics -->
 	<system:String x:Key="Tools.Select.Statistics">Statistics</system:String>
+	<system:String x:Key="Tools.Statistics.LowDisk">You are running out of disk space!</system:String>
 
-	<!-- Used in multiple Editor VM's-->
+		<!-- Used in multiple Editor VM's-->
 	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
 	<system:String x:Key="Tools.Editor.DescriptionPrompt">Description</system:String>
 	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>

@@ -53,6 +53,9 @@ public sealed partial class FolderImportViewModel :
     public partial string AvailableSpace { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial string DiskSpaceAlert { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial WriteableBitmap? SelectedThumbnail { get; set; }
 
     [ObservableProperty]
@@ -69,9 +72,6 @@ public sealed partial class FolderImportViewModel :
 
     [ObservableProperty]
     public partial string SelectedSpaceRequiredString { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial string DiskSpaceAlert { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string FileImported { get; set; } = string.Empty;
