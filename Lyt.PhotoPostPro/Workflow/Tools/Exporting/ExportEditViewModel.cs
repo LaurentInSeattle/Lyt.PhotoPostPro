@@ -126,7 +126,7 @@ public sealed partial class ExportEditViewModel :
         this.SelectedOutputFormatIndex = 0;
         this.IsCompressionEnabled = false;
 
-        list = new List<string>();
+        list = [];
         foreach (string item in SupportedImageBorderStyleText)
         {
             list.Add(this.Localize(item));

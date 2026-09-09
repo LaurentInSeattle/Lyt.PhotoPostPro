@@ -40,6 +40,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\Panels\SVirtualizingPanel.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingStackPanel.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingUniformGrid.cs" />
+    <Compile Remove="Controls\Panels\SVirtualizingWrapPanel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Languages\Lang_bg-BG.lang" />
     <EmbeddedResource Include="Languages\Lang_bn-BD.lang" />
     <EmbeddedResource Include="Languages\Lang_de-DE.lang" />
@@ -102,6 +109,10 @@
     <Compile Update="Workflow\Tools\Watermarking\WatermarksView.axaml.cs">
       <DependentUpon>WatermarksView.axaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\Panels\" />
   </ItemGroup>
 
 </Project>

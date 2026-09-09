@@ -167,7 +167,7 @@ public sealed partial class CullingViewModel :
         });
 
         // We may have 'holes' in the list if some files failed to load, so we filter them out
-        list = list.Where(t => t is not null).ToList();
+        list = [.. list.Where(t => t is not null)];
 
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
         this.ImageThumbnails = new(list!);
@@ -382,6 +382,9 @@ public sealed partial class CullingViewModel :
 
     public void OnSelect(object selectedObject) { }
 
+#pragma warning disable CA1822 // Mark members as static
+    // Relay commands cannot be static 
+
     [RelayCommand]
     public void OnBackToLibrary()
     {
@@ -431,7 +434,7 @@ public sealed partial class CullingViewModel :
 
         // Add Star to Top or Left, Remove Bottom , Select Top or Left 
         this.AddStarTo(this.SingleImageViewModelTopOrLeft, isAddStar: true);
-        this.Remove(this.SingleImageViewModelBottomOrRight, SingleImageViewModelTopOrLeft);
+        this.Remove(this.SingleImageViewModelBottomOrRight, this.SingleImageViewModelTopOrLeft);
     }
 
     [RelayCommand]
@@ -451,6 +454,8 @@ public sealed partial class CullingViewModel :
         this.AddStarTo(this.SingleImageViewModelBottomOrRight, isAddStar: true);
         this.Remove(this.SingleImageViewModelTopOrLeft, this.SingleImageViewModelBottomOrRight);
     }
+
+#pragma warning restore CA1822 // Mark members as static
 
     private void AddStarTo(CullingImageViewModel viewModel, bool isAddStar)
     {

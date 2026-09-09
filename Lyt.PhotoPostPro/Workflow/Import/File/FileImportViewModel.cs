@@ -73,13 +73,18 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
     public void OnAdd()
     {
         this.AddImageToLibrary();
-        this.GoBack();
+        GoBack();
     }
 
-    [RelayCommand]
-    public void OnBack() => this.GoBack(); 
+#pragma warning disable CA1822 // Mark members as static
+    // Relay commands cannot be static 
 
-    private void GoBack () 
+    [RelayCommand]
+    public void OnBack() => GoBack();
+
+#pragma warning restore CA1822 // Mark members as static
+
+    private static void GoBack () 
     {
         // Go back to import drop screen 
         var importVm = App.GetRequiredService<ImportViewModel>();

@@ -43,7 +43,6 @@ public sealed partial class LutViewModel : StepViewModel<LutView> , IRecipient<W
         var toolbox = App.GetRequiredService<LutToolboxViewModel>();
         toolbox.IsExplorerMode = false; 
         this.IsExplorerMode = false;
-        this.LutExplorerViewModel.Hide();
     }
 
     public void NoLut()

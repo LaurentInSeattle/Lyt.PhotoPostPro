@@ -75,7 +75,7 @@ public sealed class FolderStatistics(string path, string localizationKey)
     internal void Pack()
     {
         this.ImageStatistics =
-             (from stats in this.ImageStatistics where stats.FileCount > 0 select stats).ToList();
+             [.. (from stats in this.ImageStatistics where stats.FileCount > 0 select stats)];
         this.TotalFileCount =
              (from stats in this.ImageStatistics where stats.FileCount > 0 select stats.FileCount).Sum();
         this.ImageFileCount =

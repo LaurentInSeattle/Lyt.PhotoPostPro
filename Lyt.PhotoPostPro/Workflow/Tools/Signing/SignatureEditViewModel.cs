@@ -147,7 +147,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
         this.FontSizeString = signature.FontSize.ToString("D");
 
         this.SelectedTextFontWeightsIndex = -1;
-        for (int i = 0; i < SupportedFontWeights.Count; ++i)
+        for (int i = 0; i < this.SupportedFontWeights.Count; ++i)
         {
             if (signature.FontWeight == SupportedFontWeightValues[i])
             {

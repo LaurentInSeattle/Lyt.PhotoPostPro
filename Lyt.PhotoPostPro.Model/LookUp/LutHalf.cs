@@ -283,7 +283,6 @@ public sealed class LutHalf
     private LutHalfColor TetrahedralInterpolate(Half redPoint, Half greenPoint, Half bluePoint)
     {
         // When interpolating on the tetrahedrons, only 4 lookups and four lerps are needed.
-        int cubeSize = this.Dimension;
         int cubeSizeMinusOne = this.Dimension - 1;
 
         int lowerRedPoint = Clamp((int)Math.Floor((float)redPoint), 0, cubeSizeMinusOne);

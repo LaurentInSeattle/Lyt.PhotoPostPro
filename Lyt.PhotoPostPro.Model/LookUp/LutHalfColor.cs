@@ -35,7 +35,7 @@ internal struct LutHalfColor
         return lutColor;
     }
 
-    internal uint ToRgba()
+    internal readonly uint ToRgba()
     {
         uint red = (uint)(this.R * (Half)255.0f);
         uint gre = (uint)(this.G * (Half)255.0f);
@@ -71,12 +71,12 @@ internal struct LutHalfColor
         return lutColor;
     }
 
-    public override string ToString() => string.Format(" {0:F2} , {1:F2} , {2:F2} ", this.R, this.G, this.B);
+    public override readonly string ToString() => string.Format(" {0:F2} , {1:F2} , {2:F2} ", this.R, this.G, this.B);
 
     private static float Remap(int value, float maxValue) => (float)value / maxValue;
 
     [Conditional("DEBUG")]
-    public void Validate()
+    public readonly void Validate()
     {
         if ((this.R > (Half)1.0f) || (this.G > (Half)1.0f) || (this.B > (Half)1.0f))
         {

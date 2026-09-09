@@ -120,7 +120,7 @@ public class CameraManager
             {
                 foundDevice.Update(device.FriendlyName, device.Manufacturer, device.Description);
                 new DeviceStatusMessage(IsConnected: true, foundDevice).Publish();
-                DebugPrintDeviceInfo(device);
+                this.DebugPrintDeviceInfo(device);
                 var files = AllFiles(device);
                 Debug.WriteLine("Found files: " + files.Count);
                 new DeviceFileListMessage(foundDevice, files).Publish();
@@ -319,7 +319,7 @@ public class CameraManager
                     break;
                 }
 
-                if (!DeleteFile(foundDevice, device, file))
+                if (!this.DeleteFile(foundDevice, device, file))
                 {
                     ++errors;
                     this.logger.Warning("Delete error");

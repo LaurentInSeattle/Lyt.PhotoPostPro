@@ -95,7 +95,7 @@ public sealed partial class FolderImportViewModel :
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
         this.IsImportVisible = false;
-        this.ImageCategories = new();
+        this.ImageCategories = [];
         this.ImportThumbnailsPanelViewModel = new(this.model, this);
         this.Subscribe<ImportFileMessage>();
         this.Subscribe<ImportCompleteMessage>();

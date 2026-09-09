@@ -1,10 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Watermarking;
 
-// Do not add those ImageSharp namespaces to global using as some class definitions conflict
-// with the ones from Avalonia. (Point, Rectangle, etc.) 
-//using SixLabors.ImageSharp;
-//using SixLabors.ImageSharp.PixelFormats;
-
 public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>, IEditorDataProvider
 {
     private readonly PhotoPostProModel model;
@@ -29,8 +24,5 @@ public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>, IEd
         this.editorViewModel.Populate(this.model.Watermarks.AvailableWatermarks, editingForm);
     }
 
-    public void Refresh()
-    {
-        this.editorViewModel.Refresh(this.model.Watermarks.AvailableWatermarks);
-    }
+    public void Refresh() => this.editorViewModel.Refresh(this.model.Watermarks.AvailableWatermarks);
 }

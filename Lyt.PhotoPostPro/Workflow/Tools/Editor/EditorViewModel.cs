@@ -1,17 +1,18 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Editor;
 
-public sealed partial class EditorViewModel : ViewModel<EditorView>
+public sealed partial class EditorViewModel(
+    IEditorDataProvider editorDataProvider, PhotoPostProModel model) : ViewModel<EditorView>
 {
     public sealed class AddNewEditable(string friendlyName) : IEditable
     {
         public string FriendlyName { get; set; } = friendlyName;
     }
 
-    private readonly PhotoPostProModel model;
-    private readonly IEditorDataProvider editorDataProvider; 
+    private readonly PhotoPostProModel model = model;
+    private readonly IEditorDataProvider editorDataProvider = editorDataProvider;
 
     private IEditor? editor;
-    private bool isFirstActivation;
+    private bool isFirstActivation = true;
 
     [ObservableProperty]
     // The collection of editable items in the master list - left side 
@@ -29,7 +30,7 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
     public partial UserControl? EditingForm { get; set; }
 
     [ObservableProperty]
-    public partial bool IsEditMode { get; set; }
+    public partial bool IsEditMode { get; set; } = true;
 
     [ObservableProperty]
     public partial bool IsAddMode { get; set; }
@@ -42,16 +43,6 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
 
     [ObservableProperty]
     public partial bool IsDeleteButtonDisabled { get; set; }
-
-
-    public EditorViewModel(IEditorDataProvider editorDataProvider, PhotoPostProModel model )
-    {
-        this.model = model;
-        this.editorDataProvider = editorDataProvider;
-
-        this.isFirstActivation = true;
-        this.IsEditMode = true;
-    }
 
     public override void Activate(object? activationParameters)
     {
@@ -139,12 +130,12 @@ public sealed partial class EditorViewModel : ViewModel<EditorView>
     {
         if (this.editor is null)
         {
-            return; 
+            return;
         }
 
         // Clicked "Add" button: refresh master list,
         // and then select new item in master list
-        if ( this.editor.Add())
+        if (this.editor.Add())
         {
             this.editorDataProvider.Refresh();
         }

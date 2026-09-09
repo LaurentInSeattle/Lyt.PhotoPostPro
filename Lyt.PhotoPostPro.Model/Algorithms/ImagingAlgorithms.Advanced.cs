@@ -513,7 +513,7 @@ internal static partial class ImagingAlgorithms
     // Adjusting the multiplier will alter contrast intensity
     private static Half[] CreateSCurveLUT(float contrastMultiplier)
     {
-        Half[] lut = new Half[LutSize];
+        var lut = new Half[LutSize];
         Parallel.For(0, LutSize, i =>
         {
             // Normalize to 0.0 - 1.0  and apply power curve

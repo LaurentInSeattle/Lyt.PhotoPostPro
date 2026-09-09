@@ -2,7 +2,7 @@
 
 using Lyt.PhotoPostPro.Workflow.Tools.Statistics;
 
-public sealed partial class ToolsViewModel : ViewModel<ToolsView>
+public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toaster) : ViewModel<ToolsView>
 {
     private static readonly Dictionary<string, ActivatedView> ToolsString = new()
     {
@@ -12,18 +12,11 @@ public sealed partial class ToolsViewModel : ViewModel<ToolsView>
         { "Tools.Select.Exports", ActivatedView.Exports },
     };
 
-    private readonly PhotoPostProModel model;
-    private readonly IToaster toaster;
+    private readonly PhotoPostProModel model = model;
+    private readonly IToaster toaster = toaster;
 
     private ViewSelector<ActivatedView>? viewSelector;
-    private bool isFirstActivation;
-
-    public ToolsViewModel(PhotoPostProModel model, IToaster toaster)
-    {
-        this.model = model;
-        this.toaster = toaster;
-        this.isFirstActivation = true;
-    }
+    private bool isFirstActivation = true;
 
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> ToolsButtons { get; set; } = [];

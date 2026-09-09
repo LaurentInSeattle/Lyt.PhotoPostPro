@@ -166,16 +166,4 @@ public static class ImagingUtilities
             throw new InvalidOperationException("Failed to get pixel buffer.", ex);
         }
     }
-
-    public static void PixelRgbaBuffer(this Image<RgbaHalf> image, byte[] rgbaData)
-    {
-        try
-        {
-            // Consider: Pin the RGBA buffer and use a pointer 
-        }
-        catch (Exception ex)
-        {
-            throw new InvalidOperationException("Failed to get pixel buffer.", ex);
-        }
-    }
 }

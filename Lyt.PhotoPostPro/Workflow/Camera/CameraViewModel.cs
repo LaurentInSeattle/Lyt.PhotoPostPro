@@ -513,7 +513,7 @@ public sealed partial class CameraViewModel :
         }
     }
 
-    internal void RemoveFromCamera(CameraFileViewModel cameraFileViewModel, string file)
+    internal void RemoveFromCamera(string file)
     {
         if (this.foundDevice is null)
         {

@@ -26,7 +26,7 @@ public sealed partial class LibraryManager
             });
         foreach (string file in files)
         {
-            if (this.CanAddFile(file))
+            if (CanAddFile(file))
             {
                 this.GalleryContent.Add(file);
             }
@@ -43,7 +43,7 @@ public sealed partial class LibraryManager
     {
         try
         {
-            if (!this.CanAddFile(sourceFilePath))
+            if (!CanAddFile(sourceFilePath))
             {
                 return false;
             }
@@ -63,7 +63,7 @@ public sealed partial class LibraryManager
     }
 
 
-    public bool CanAddFile(string filePath)
+    public static bool CanAddFile(string filePath)
     {
         if (!filePath.IsReadable())
         {

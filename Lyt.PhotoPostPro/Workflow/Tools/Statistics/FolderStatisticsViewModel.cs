@@ -1,10 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Statistics;
 
-public sealed partial class FolderStatisticsViewModel : ViewModel<FolderStatisticsView>
+public sealed partial class FolderStatisticsViewModel(PhotoPostProModel model) : ViewModel<FolderStatisticsView>
 {
-    private readonly PhotoPostProModel model;
+    private readonly PhotoPostProModel model = model;
 
-    private string navigationPath;
+    private string navigationPath = string.Empty;
 
     [ObservableProperty]
     public partial string FolderName { get; set; } = string.Empty;
@@ -17,12 +17,6 @@ public sealed partial class FolderStatisticsViewModel : ViewModel<FolderStatisti
 
     [ObservableProperty]
     public partial string ImageFileCount { get; set; } = string.Empty;
-
-    public FolderStatisticsViewModel(PhotoPostProModel model)
-    {
-        this.model = model;
-        this.navigationPath = string.Empty;
-    }
 
     public void Update(FolderStatistics folderStatistics)
     {

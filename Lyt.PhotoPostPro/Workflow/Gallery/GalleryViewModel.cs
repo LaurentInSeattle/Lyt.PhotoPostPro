@@ -1,6 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Gallery;
 
-public sealed partial class GalleryViewModel :
+public sealed partial class GalleryViewModel(
+    PhotoPostProModel model,
+    IAnimationService animationService,
+    IRandomizer randomizer,
+    IToaster toaster) :
     ViewModel<GalleryView>,
     IRecipient<HotKeyMessage>
 {
@@ -12,13 +16,13 @@ public sealed partial class GalleryViewModel :
     private const int SlideDuration = 32;
 #endif
 
-    private readonly PhotoPostProModel model;
-    private readonly LibraryManager libraryManager;
-    private readonly IAnimationService animationService;
-    private readonly IRandomizer randomizer;
-    private readonly IToaster toaster;
+    private readonly PhotoPostProModel model = model;
+    private readonly LibraryManager libraryManager = model.LibraryManager;
+    private readonly IAnimationService animationService = animationService;
+    private readonly IRandomizer randomizer = randomizer;
+    private readonly IToaster toaster = toaster;
 
-    private bool isFirstActivate;
+    private bool isFirstActivate = true;
     private List<string> galleryContent = [];
     private bool nothingToShow;
     private int nowShowingIndex = 0;
@@ -38,20 +42,6 @@ public sealed partial class GalleryViewModel :
 
     [ObservableProperty]
     public partial WriteableBitmap? GalleryImage2 { get; set; }
-
-    public GalleryViewModel(
-        PhotoPostProModel model,
-        IAnimationService animationService,
-        IRandomizer randomizer,
-        IToaster toaster)
-    {
-        this.model = model;
-        this.libraryManager = model.LibraryManager;
-        this.animationService = animationService;
-        this.randomizer = randomizer;
-        this.toaster = toaster;
-        this.isFirstActivate = true;
-    }
 
     public override void Deactivate()
     {
@@ -74,7 +64,7 @@ public sealed partial class GalleryViewModel :
 
         // Creates a local copy so that we can shuffle 
         this.libraryManager.InitializeGallery(); 
-        this.galleryContent = this.libraryManager.GalleryContent.ToList();
+        this.galleryContent = [.. this.libraryManager.GalleryContent];
         randomizer.Shuffle(this.galleryContent);
 
         this.nothingToShow = this.galleryContent.Count == 0;

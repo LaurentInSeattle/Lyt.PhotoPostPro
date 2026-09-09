@@ -29,7 +29,7 @@ public sealed partial class LibraryManager
     // No conflict
     //      - or - 
     // this file is a RAW that takes precedence over the JPG, so we can add it to the library
-    public bool CheckForDuplicates(string imageFullPath, string targetFolder)
+    public static bool CheckForDuplicates(string imageFullPath, string targetFolder)
     {
         string filename = Path.GetFileNameWithoutExtension(imageFullPath);
         var existingFiles = Directory.EnumerateFiles(targetFolder, filename, SearchOption.TopDirectoryOnly);
@@ -39,7 +39,7 @@ public sealed partial class LibraryManager
             return true;
         }
 
-        foreach (var existingFile in existingFiles)
+        foreach (string existingFile in existingFiles)
         {
             string existingExtension = Path.GetExtension(existingFile).ToLowerInvariant();
             if (ImageLoader.HasRawExtension(existingExtension))
@@ -83,7 +83,7 @@ public sealed partial class LibraryManager
                 MetadataFolders metadataFolders = new(metadata);
                 string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
-                if (!this.CheckForDuplicates(fullPath, targetFolder))
+                if (!CheckForDuplicates(fullPath, targetFolder))
                 {
                     throw new Exception("Duplicate file found in library: " + fullPath);
                 }
@@ -208,7 +208,7 @@ public sealed partial class LibraryManager
             MetadataFolders metadataFolders = new(metadata);
             string targetFolder = metadataFolders.CreateDirectoryPathIfNeeded(this.libraryFolderPath);
 
-            if (!this.CheckForDuplicates(fullPath, targetFolder))
+            if (!CheckForDuplicates(fullPath, targetFolder))
             {
                 throw new Exception("Duplicate file found in library: " + fullPath);
             }
@@ -286,10 +286,7 @@ public sealed partial class LibraryManager
                 LoadedThumbnail loadedThumbnail = new(metadata, thumbnailImageBytes);
 
                 // Prevents trouble if we already have it, usually because of some previous aborted process
-                if (!this.LoadedThumbnails.ContainsKey(targetPathMetadata))
-                {
-                    this.LoadedThumbnails.Add(targetPathMetadata, loadedThumbnail);
-                }
+                this.LoadedThumbnails.TryAdd(targetPathMetadata, loadedThumbnail);
 
                 // Update folder trees 
                 _ = this.CapturedFolderTree.UpdateOnFileAdded(DateKind.Captured, metadata, targetPathMetadata, doSort: false);
@@ -387,9 +384,9 @@ public sealed partial class LibraryManager
             loadedThumbnailsList.Add(thumbnail.Value);
         }
 
-        return (from thumb in loadedThumbnailsList
+        return [.. (from thumb in loadedThumbnailsList
                 orderby thumb.Metadata.Captured ascending
-                select thumb.Metadata.MetadataFullPath()).ToList();
+                select thumb.Metadata.MetadataFullPath())];
     }
 
     public void GenerateFolderTree()

@@ -54,9 +54,12 @@ public sealed partial class CameraThumbnailViewModel :
 
 	internal void OnSelect() => this.parent.OnSelect(this);
 
-	[RelayCommand]
-	public void OnIsToAddToLibraryChanged()
-	{
+#pragma warning disable CA1822 // Mark members as static
+	// Relay Commands cannot be static 
+
+    [RelayCommand]
+    public void OnIsToAddToLibraryChanged()
+    {
 	}
 
 	[RelayCommand]
@@ -64,8 +67,10 @@ public sealed partial class CameraThumbnailViewModel :
 	{
 
 	}
-	
-	private void SetThumbnailStrings()
+
+#pragma warning restore CA1822 // Mark members as static
+
+    private void SetThumbnailStrings()
 	{
 		string? currentLanguage = this.Localizer.CurrentLanguage;
 		if (!string.IsNullOrEmpty(currentLanguage))

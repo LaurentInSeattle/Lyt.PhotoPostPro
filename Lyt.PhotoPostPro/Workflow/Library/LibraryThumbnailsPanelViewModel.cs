@@ -2,15 +2,16 @@
 
 using static Lyt.PhotoPostPro.Workflow.Library.LibraryViewModel;
 
-public sealed partial class LibraryThumbnailsPanelViewModel :
+public sealed partial class LibraryThumbnailsPanelViewModel(
+    PhotoPostProModel photoPostProModel, LibraryViewModel libraryViewModel) :
     ViewModel<LibraryThumbnailsPanelView>,
     ISelectListener
 {
-    private readonly PhotoPostProModel photoPostProModel;
-    private readonly LibraryViewModel libraryViewModel;
+    private readonly PhotoPostProModel photoPostProModel = photoPostProModel;
+    private readonly LibraryViewModel libraryViewModel = libraryViewModel;
 
     [ObservableProperty]
-    public partial bool SortOrder { get; set; }
+    public partial bool SortOrder { get; set; } = true;
 
     [ObservableProperty]
     public partial bool ShowRatingFilter { get; set; }
@@ -19,31 +20,18 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     public partial bool ShowRatingControl { get; set; }
 
     [ObservableProperty]
-    public partial bool ShowAll { get; set; }
+    public partial bool ShowAll { get; set; } = true;
 
     [ObservableProperty]
-    public partial int Rating { get; set; }
+    public partial int Rating { get; set; } = 1;
 
-    private ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; }
-
-    [ObservableProperty]
-    public partial ObservableCollection<LibraryThumbnailViewModel> DisplayedThumbnails { get; set; }
+    private ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; } = [];
 
     [ObservableProperty]
-    public partial string EmptyMessage { get; set; }
+    public partial ObservableCollection<LibraryThumbnailViewModel> DisplayedThumbnails { get; set; } = [];
 
-    public LibraryThumbnailsPanelViewModel(PhotoPostProModel photoPostProModel, LibraryViewModel libraryViewModel)
-    {
-        this.photoPostProModel = photoPostProModel;
-        this.libraryViewModel = libraryViewModel;
-
-        this.Thumbnails = [];
-        this.DisplayedThumbnails = [];
-        this.EmptyMessage = string.Empty;
-        this.SortOrder = true;
-        this.ShowAll = true;
-        this.Rating = 1;
-    }
+    [ObservableProperty]
+    public partial string EmptyMessage { get; set; } = string.Empty;
 
     public bool IsEmpty => this.Thumbnails.Count == 0 ;
 

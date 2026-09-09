@@ -24,8 +24,6 @@ public sealed partial class LutExplorerViewModel :
     [ObservableProperty]
     public partial ObservableCollection<LutImageViewModel> LutImageViews { get; set; } = [];
 
-    internal void Hide() {  }
-
     internal void Launch(LutViewModel lutViewModel, LutStep lutStep)
     {
         this.lutViewModel = lutViewModel;

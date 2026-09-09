@@ -174,7 +174,7 @@ public sealed class LutsManager
             try
             {
                 string searchPattern = string.Concat(Wildcard, extension);
-                lutFiles = Directory.EnumerateFiles(this.LutsFolderPath, searchPattern).ToList();
+                lutFiles = [.. Directory.EnumerateFiles(this.LutsFolderPath, searchPattern)];
             }
             catch (Exception ex)
             {

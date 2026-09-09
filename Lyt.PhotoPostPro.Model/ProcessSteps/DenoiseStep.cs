@@ -27,10 +27,7 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
 
     internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
-    protected override void SetIdentity()
-    {
-        base.IsIdentity = this.Algorithm == DenoiseAlgorithm.None; 
-    }
+    protected override void SetIdentity() => base.IsIdentity = this.Algorithm == DenoiseAlgorithm.None; 
 
     internal override Frame? Reset()
     {

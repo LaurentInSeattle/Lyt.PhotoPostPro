@@ -13,7 +13,7 @@ public static partial class ImageLoader
 
     public static string LibRawVersion => RawContext.Version;
 
-    private static Lock libRawLock = new();
+    private static readonly Lock libRawLock = new();
 
     #region Loading 
 
