@@ -7,7 +7,7 @@ Bugs ~ Major Issues
 
 - Startup view when loading many thumnails
 
-- CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
+- Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
 
@@ -16,7 +16,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Convert Export Edits to plain TXT file 
+- Select Exports options in Export Step
 
 
 Essential Missing Features 

@@ -290,14 +290,19 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             string srcPath = libraryManager.SaveEditParameters(postProcess);
             string filename = Path.GetFileName(srcPath);
             string destPath = Path.Combine(subDirectoryExport, filename);
-            File.Copy(srcPath, destPath, overwrite: true);
 
+            // Change extension for 'human' readability - Code will use JSON files 
+            string finalPath = Path.ChangeExtension(destPath, ".txt");
+            File.Copy(srcPath, finalPath, overwrite: true);
+
+            // Loop through all image exports definitions and export 
             bool hasBeenExportedToGallery = false;
             bool isFiveStars = metadata.Rating == 5;
-
             foreach (var imageExport in imageExports.AvailableImageExports)
             {
                 string exportPath = ExportImage(imageExport, subDirectoryExport);
+
+                // Add only once to gallery when applicable and if given five stars 
                 if (imageExport.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
                 {
                     // Dont care if fails (at least for now) 
