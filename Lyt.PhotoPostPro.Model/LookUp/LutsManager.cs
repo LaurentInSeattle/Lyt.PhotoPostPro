@@ -12,9 +12,10 @@ public sealed class LutsManager
     private const string CubeExtension = ".cube";
     private const string ThreeDLExtension = ".3dl";
 
+    public readonly string LutsFolderPath;
+
     private readonly PhotoPostProModel model;
     private readonly ILogger logger;
-    private readonly string lutsFolderPath;
 
     private readonly LruDictionary<string, LutHalf> loadedLuts = new(16);
 
@@ -23,11 +24,11 @@ public sealed class LutsManager
         this.model = model;
         this.logger = logger;
 
-        this.lutsFolderPath =
+        this.LutsFolderPath =
             Path.Combine(this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
-        if (!Directory.Exists(this.lutsFolderPath))
+        if (!Directory.Exists(this.LutsFolderPath))
         {
-            Directory.CreateDirectory(this.lutsFolderPath);
+            Directory.CreateDirectory(this.LutsFolderPath);
         }
     }
 
@@ -99,7 +100,7 @@ public sealed class LutsManager
         try
         {
             string fileName = Path.GetFileName(lutFilePath);
-            string targetPath = Path.Combine(this.lutsFolderPath, fileName);
+            string targetPath = Path.Combine(this.LutsFolderPath, fileName);
             File.Copy(lutFilePath, targetPath, overwrite: true);
         }
         catch (Exception ex)
@@ -173,7 +174,7 @@ public sealed class LutsManager
             try
             {
                 string searchPattern = string.Concat(Wildcard, extension);
-                lutFiles = Directory.EnumerateFiles(this.lutsFolderPath, searchPattern).ToList();
+                lutFiles = Directory.EnumerateFiles(this.LutsFolderPath, searchPattern).ToList();
             }
             catch (Exception ex)
             {

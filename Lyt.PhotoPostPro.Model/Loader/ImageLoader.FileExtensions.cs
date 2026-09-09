@@ -4,6 +4,11 @@ using System.IO;
 
 public static partial class ImageLoader
 {
+    public const string LibraryLocalizationKey = "Space.Key.Library";
+    public const string GalleryLocalizationKey = "Space.Key.Gallery";
+    public const string ExportsLocalizationKey = "Space.Key.Exports";
+    public const string LutsLocalizationKey = "Space.Key.Luts";
+
     #region Extensions Definitions
 
 #pragma warning disable CA2211 // Non-constant fields should not be visible
@@ -100,9 +105,30 @@ public static partial class ImageLoader
         MatchType = MatchType.Simple,
     };
 
-    public static FolderStatistics InspectFolder(string folderPath)
+    public static void CollectStatistics(PhotoPostProModel model)
     {
-        var statistics = new FolderStatistics(folderPath);
+        Task.Run(() =>
+        {
+            var driveStatistics = new DriveStatistics(0L);
+            if (FileSystemExtensions.DriveInfo(model.RootPath) is DriveInfo driveInfo)
+            {
+                driveStatistics =
+                    new DriveStatistics(driveInfo.AvailableFreeSpace, driveInfo.Name, driveInfo.VolumeLabel);
+            }
+
+            var libraryManager = model.LibraryManager;
+            var libraryStatistics = InspectFolder(libraryManager.LibraryFolderPath, LibraryLocalizationKey);
+            var galleryStatistics = InspectFolder(libraryManager.GalleryFolderPath, GalleryLocalizationKey);
+            var exportStatistics = InspectFolder(libraryManager.ExportsFolderPath, ExportsLocalizationKey);
+            var lutsStatistics = InspectFolder(model.LutsManager.LutsFolderPath, LutsLocalizationKey);
+            new SystemStatisticsMessage(
+                driveStatistics, libraryStatistics, galleryStatistics, exportStatistics, lutsStatistics).Publish();
+        });
+    }
+
+    public static FolderStatistics InspectFolder(string folderPath, string localizationKey = "")
+    {
+        var statistics = new FolderStatistics(folderPath, localizationKey);
         if (string.IsNullOrWhiteSpace(folderPath))
         {
             statistics.Fail("Invalid folder path");
@@ -116,7 +142,7 @@ public static partial class ImageLoader
         }
 
         ProcessDirectory(folderPath, statistics);
-        statistics.Pack(); 
+        statistics.Pack();
         return statistics;
     }
 

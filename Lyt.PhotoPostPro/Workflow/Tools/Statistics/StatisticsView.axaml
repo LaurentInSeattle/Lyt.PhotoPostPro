@@ -26,24 +26,23 @@
 		>		
 		<Grid	
 			Margin="8"
-			ShowGridLines="True"
 			VerticalAlignment="Center" HorizontalAlignment="Center"
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
-				<RowDefinition Height="80" />
+				<RowDefinition Height="60" />
+				<RowDefinition Height="0" />
+				<RowDefinition Height="280" />
 				<RowDefinition Height="16" />
-				<RowDefinition Height="300" />
-				<RowDefinition Height="16" />
-				<RowDefinition Height="300" />
+				<RowDefinition Height="280" />
 				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="600" />
+				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="320" />
 				<ColumnDefinition Width="16" />
-				<ColumnDefinition Width="600" />
-				<ColumnDefinition Width="8" />
+				<ColumnDefinition Width="320" />
+				<ColumnDefinition Width="40" />
 			</Grid.ColumnDefinitions>
 			<Rectangle
 				Grid.Row="0" Grid.Column="0"
@@ -51,45 +50,45 @@
 				/>
 			<!-- Global disk space --> 
 			<Grid
-				Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
 				> 
 				<TextBlock
 					Text="{Binding AvailableSpace}"
 					Theme="{StaticResource H2}"
-					HorizontalAlignment="Left" VerticalAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
 					/>
 				<TextBlock
 					Text="{Binding DiskSpaceAlert}"
 					Theme="{StaticResource H2}"
 					Foreground="{StaticResource Alert.TextColor}"
 					Margin="0 0 80 0"
-					HorizontalAlignment="Right" VerticalAlignment="Center"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
 					/>
 			</Grid>
 			<!-- Library Stats --> 
-			<Grid
+			<vm:FolderStatisticsView
 				Grid.Row="3" Grid.Column="1" 
-				Background="Green"
-				> 
-			</Grid>
+				DataContext="{Binding LibraryStatistics}"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
 			<!-- Exports Stats --> 
-			<Grid
+			<vm:FolderStatisticsView
 				Grid.Row="3" Grid.Column="3" 
-				Background="Firebrick"
-				> 
-			</Grid>
+				DataContext="{Binding ExportsStatistics}"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
 			<!-- Gallery Stats --> 
-			<Grid
+			<vm:FolderStatisticsView
 				Grid.Row="5" Grid.Column="1" 
-				Background="Goldenrod"
-				> 
-			</Grid>
+				DataContext="{Binding GalleryStatistics}"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
 			<!-- Luts Stats --> 
-			<Grid
+			<vm:FolderStatisticsView
 				Grid.Row="5" Grid.Column="3" 
-				Background="LightPink"
-				> 
-			</Grid>
+				DataContext="{Binding LutsStatistics}"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				/>
 		</Grid>
 	</Border>
 </UserControl>

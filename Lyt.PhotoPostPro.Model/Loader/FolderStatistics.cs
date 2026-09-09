@@ -1,8 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Loader;
 
-public sealed class FolderStatistics(string path)
+public sealed class FolderStatistics(string path, string localizationKey)
 {
     public string Path { get; private set; } = path;
+
+    public string LocalizationKey { get; private set; } = localizationKey;
 
     public bool Success { get; private set; } = true;
 
@@ -12,8 +14,10 @@ public sealed class FolderStatistics(string path)
 
     public int ImageFileCount { get; private set; } // = 0;
 
+    public float TotalSizeOnDiskMB { get; private set; } // = 0;
+
     public List<ImageStatistics> ImageStatistics { get; private set; } =
-        // In the order of the enum 
+        // In the order of the ImageKind enum 
         //      Jpeg, 
         //      Heic, 
         //      Raw,
@@ -56,19 +60,19 @@ public sealed class FolderStatistics(string path)
 
     public bool HasNoImage => this.ImageFileCount == 0; 
 
-    public void Fail(string message)
+    internal void Fail(string message)
     {
         this.Success = false;
         this.Message = message;
     }
 
-    public void Add(ImageKind kind, string path, float sizeOnDiskMB)
+    internal void Add(ImageKind kind, string path, float sizeOnDiskMB)
     {
         var stats = this.ImageStatistics[(int)kind];
         stats.Update(path, sizeOnDiskMB);
     }
 
-    public void Pack()
+    internal void Pack()
     {
         this.ImageStatistics =
              (from stats in this.ImageStatistics where stats.FileCount > 0 select stats).ToList();
@@ -78,6 +82,8 @@ public sealed class FolderStatistics(string path)
              (from stats in this.ImageStatistics
               where stats.FileCount > 0 && (stats.Kind != ImageKind.Movie) && (stats.Kind != ImageKind.Unrecognized)
               select stats.FileCount).Sum();
+        this.TotalSizeOnDiskMB =
+             (from stats in this.ImageStatistics where stats.FileCount > 0 select stats.SizeOnDiskMB).Sum();
         if ( this.TotalFileCount == 0)
         {
             this.Clear(); 

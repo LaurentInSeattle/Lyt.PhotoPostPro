@@ -86,7 +86,7 @@ public sealed partial class FolderImportViewModel :
     {
         this.model = model;
         this.toaster = toaster;
-        this.statistics = new FolderStatistics(string.Empty);
+        this.statistics = new FolderStatistics(string.Empty, string.Empty);
 
         this.downloadFolderPath =
             System.IO.Path.Combine(

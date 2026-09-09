@@ -1,0 +1,93 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Tools.Statistics.FolderStatisticsView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Statistics"
+	x:DataType="vm:FolderStatisticsViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+
+	Background="Transparent"
+	>
+	<Grid	
+		Margin="4"
+		VerticalAlignment="Top" HorizontalAlignment="Center"
+		> 
+		<Grid.ColumnDefinitions >
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="150"/>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="130"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions> 
+			<RowDefinition Height="64" />
+			<RowDefinition Height="44" />
+			<RowDefinition Height="44" />
+			<RowDefinition Height="44" />
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+			Text="{Binding FolderName}"
+			Theme="{StaticResource H3}"
+			Foreground="{StaticResource LightAqua_0_100}"
+			FontSize="20"
+			FontWeight="Bold"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Rectangle 
+			Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+			HorizontalAlignment="Right" VerticalAlignment="Stretch"
+			Fill="{StaticResource FreshGreen_0_100}"
+			Width="3"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="1"
+			Text="{DynamicResource Tools.Statistics.SizeOnDisk}"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Column="3" Grid.Row="1"
+			Text="{Binding SizeOnDisk}"
+			Theme="{StaticResource H3}"
+			Foreground="{StaticResource LightAqua_0_100}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="2"
+			Text="{DynamicResource Tools.Statistics.ImageFileCount}"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Column="3" Grid.Row="2"
+			Text="{Binding ImageFileCount}"
+			Theme="{StaticResource H3}"
+			Foreground="{StaticResource LightAqua_0_100}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Column="1" Grid.Row="3"
+			Text="{DynamicResource Tools.Statistics.TotalFileCount}"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Column="3" Grid.Row="3"
+			Text="{Binding TotalFileCount}"
+			Theme="{StaticResource H3}"
+			Foreground="{StaticResource LightAqua_0_100}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+			
+			
+	</Grid>
+</UserControl>

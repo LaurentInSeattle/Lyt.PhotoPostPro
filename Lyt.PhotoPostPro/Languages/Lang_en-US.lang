@@ -74,8 +74,16 @@
 	<!-- Statistics -->
 	<system:String x:Key="Tools.Select.Statistics">Statistics</system:String>
 	<system:String x:Key="Tools.Statistics.LowDisk">You are running out of disk space!</system:String>
+	<system:String x:Key="Tools.Statistics.SizeOnDisk">Size On Disk</system:String>
+	<system:String x:Key="Tools.Statistics.ImageFileCount">Image Files</system:String>
+	<system:String x:Key="Tools.Statistics.TotalFileCount">All Files</system:String>
 
-		<!-- Used in multiple Editor VM's-->
+	<system:String x:Key="Space.Key.Library">Library</system:String>
+	<system:String x:Key="Space.Key.Gallery">Gallery</system:String>
+	<system:String x:Key="Space.Key.Exports">Exports</system:String>
+	<system:String x:Key="Space.Key.Luts">Look up Colour Tables</system:String>
+
+	<!-- Used in multiple Editor VM's-->
 	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
 	<system:String x:Key="Tools.Editor.DescriptionPrompt">Description</system:String>
 	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>
