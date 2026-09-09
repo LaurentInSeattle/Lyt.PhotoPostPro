@@ -43,7 +43,7 @@
 
     <system:String x:Key="Imaging.NowProcessing">Traitement en cours :</system:String>
 
-    <system:String x:Key="DragDrop.DropZone">Zone glisser-déposer</system:String>
+    <system:String x:Key="DragDrop.DropZone">Zone de glisser-déposer</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Créer...</system:String>
 
@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Enregistrer</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Statistiques</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Tu es à court d'espace disque !</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Texte</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Désignation des marchandises</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Nom amical</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Couleur</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Taille de la police</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Poids de la police</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Famille de polices</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Style de police</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Normal</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Gras</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Italique</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Italique gras</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Postfix de nom de fichier</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Placement de la Signature </system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">En haut à gauche</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">En haut à droite</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">En bas à gauche</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">En bas à droite</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Filigranes</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Exportations</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Redimensionner selon la dimension spécifiée</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">Format de sortie</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Avec Pertes</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Avec Pertes</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Sans perte</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Sans perte</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Qualité de compression (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Style de bordure</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Aucune</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Bordure noire</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Bordure blanche</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Épaisseur de la bordure</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Fine</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Moyenne</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Épaisse</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Filigrane</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Signature</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Pas de filigrane</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Pas de signature</system:String>
 
     <system:String x:Key="Gallery.Empty">Votre galerie 'cinq étoiles' des meilleures images est vide.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Conserver : la bonne image</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rejeter à gauche - Ajouter une étoile à droite</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Faites glisser et déposez ici un dossier contenant des fichiers image pour créer un nouveau projet.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Faites glisser et déposez un fichier image ici pour commencer.</system:String>
 

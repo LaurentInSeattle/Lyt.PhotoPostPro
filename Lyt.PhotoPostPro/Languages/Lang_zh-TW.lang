@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">儲存變更</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">统计</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">你快沒磁碟了!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">文字</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">描述</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">友好名</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">顏色</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">字型大小</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">字体重量</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">字型家族</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">字型樣式</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">定期</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">粗体</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">斜体</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">粗体斜体</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">文件名后缀</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">簽名</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">簽名位置</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">在左上</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">右上</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">左下</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">右下</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">水印</system:String>
 
     <system:String x:Key="Tools.Select.Exports">出口</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">大小調整到指定的尺寸</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">輸出格式</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - 有損</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - 有損失</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - 无損失</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - 有失</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">壓縮質量 (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">邊框樣式</system:String>
+
+    <system:String x:Key="Tools.Editor.None">無</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">黑色邊框</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">白邊框</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">邊框厚度</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">微小</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">中</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">高</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">水印</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">簽名</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">沒有水印</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">沒有簽名</system:String>
 
     <system:String x:Key="Gallery.Empty">有"五星"好相片被取出.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">保留：右圖</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">拒絕左側 - 在右側添加一顆星</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">將包含圖像檔案的資料夾拖放到此處以建立新項目。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">將圖像檔案拖放到此處即可開始。</system:String>
 

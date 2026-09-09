@@ -90,9 +90,9 @@
 	<system:String x:Key="Tools.Editor.Italic">Italic</system:String>
 	<system:String x:Key="Tools.Editor.BoldItalic">Bold Italic</system:String>
 
-  <system:String x:Key="Tools.Editor.PostfixPrompt">File Name Postfix</system:String>
+	<system:String x:Key="Tools.Editor.PostfixPrompt">File Name Postfix</system:String>
 
-  <!-- Signatures -->
+	<!-- Signatures -->
 	<system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
 	<system:String x:Key="Tools.Editor.SignaturePlacement">Signature Placement</system:String>
 	<system:String x:Key="Tools.Editor.TopLeft">Top Left</system:String>

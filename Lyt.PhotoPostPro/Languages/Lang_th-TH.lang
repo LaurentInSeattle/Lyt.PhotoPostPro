@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">จัดเก็บความเปลี่ยนแปลง</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">สถิติ</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">คุณไม่มีเนื้อที่บนดิสก์แล้ว!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">ข้อความ</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">คําอธิบาย</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">ชื่อที่เป็นมิตร</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">สี</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">ขนาดตัวอักษร</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">น้ําหนักตัวอักษร</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">ตระกูลแบบอักษร</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">รูปแบบตัวอักษร</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">ปกติ</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">ตัวหนา</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">ตัวเอียง</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">ตัวเอียงตัวหนา</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">ชื่อแฟ้มPostfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">ลายเซ็น</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">ตําแหน่งลายเซ็น</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">บนซ้าย</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">ด้านบนขวา</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">ล่างซ้าย</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">ล่างขวา</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">ลายน้ํา</system:String>
 
     <system:String x:Key="Tools.Select.Exports">ส่งออก</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">ปรับขนาดไปยังมิติที่ระบุ</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">รูปแบบการพิมพ์ออก</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - ลอสซี</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">เว็บพี - ลอสซี</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - ไร้การสูญเสีย</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - ไร้การสูญเสีย</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">คุณภาพการบีบอัด (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">รูปแบบกรอบ</system:String>
+
+    <system:String x:Key="Tools.Editor.None">ไม่มี</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">กรอบสีดํา</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">กรอบสีขาว</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">ความหนาของกรอบ</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">สี</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">สื่อ</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">หนา</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">ลายน้ํา</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">ลายเซ็น</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">ไม่มีลายน้ํา</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">ไม่มีลายเซ็น</system:String>
 
     <system:String x:Key="Gallery.Empty">แกลเลอรี่ดวงที่ 5 ของคุณ.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">คงตําแหน่ง:</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">ปฏิเสธ - เพิ่มดาวไปทางขวา</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">ลากและทิ้งโฟลเดอร์ที่เก็บแฟ้มอิมเมจไว้ที่นี่ เพื่อสร้างโครงการใหม่.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ลากและวางแฟ้มภาพไว้ที่นี่เพื่อเริ่ม.</system:String>
 

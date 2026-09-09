@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Változások mentése</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Statisztika</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Kifogytál a lemezből!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Szöveg</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Leírás</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Baráti név</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Szín</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Betűméret</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Betűtömeg</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Betűtípus Család</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Betűtípus stílus</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Rendszeres</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Merész</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Olasz</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Merész olasz</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Fájl neve Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Aláírás</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Aláírás</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">Bal felső</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">Jobb felső</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">Bal alsó</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">Jobb alsó</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Vízjelek</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Export</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Átméretezés meghatározott méretre</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">OutputFormat</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Lossy</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Lossy</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Veszteség nélküli</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Veszteség nélküli</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Kompressziós minőség (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Határstílus</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Nincs</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Fekete határ</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Fehér határ</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Határvastagság</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Vékony</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Közepes</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Vastag</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Vízjel</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Aláírás</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Nincs vízjel</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Nincs aláírás</system:String>
 
     <system:String x:Key="Gallery.Empty">Az öt csillag legjobb képeinek galériája üres.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Tartsa: Jobb kép</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Bal oldali elutasítás – Csillag hozzáadása a jobb oldalhoz</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Új projekt létrehozásához húzzon ide egy képfájlokat tartalmazó mappát.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 

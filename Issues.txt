@@ -1,6 +1,8 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Create a better looking toaster 
+
 - Watermarks and Signatures need to be scaled to the exported image size.  
 
 - Startup view when loading many thumnails
@@ -14,14 +16,14 @@ Bugs ~ Major Issues
 WIP
 ---
 
+- Convert Export Edits to plain TXT file 
+
+- Disk Usage statistics 
+
 
 
 Essential Missing Features 
 --------------------------
-
-- Convert Export Edits to plain TXT file 
-
-- Disk Usage statistics 
 
 - First Run View : Setup root locations, etc 
 

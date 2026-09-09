@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">০ চ্যানেল</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">পরিসংখ্যান</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">ডিস্কের স্থান ফাঁকা হয়ে গেছে!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">টেক্সট</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">বিবরণ</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">সহজ নাম</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">রঙ</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">ফন্টের মাপ</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">ফন্ট</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">ফন্ট পরিবার</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">ফন্টের ধরন</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">সাধারণ</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">গাঢ়</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">ইতালিয়</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">গাঢ় তারতম্য</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">ফাইল নাম পোস্ট করারMugin</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">স্বাক্ষর</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">স্বাক্ষরের স্থাপনা</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">উপরে বাঁদিকে</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">উপরে ডানদিকে</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">নীচে- বাঁদিকে</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">নীচে ডানদিকে</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">জলছবি</system:String>
 
     <system:String x:Key="Tools.Select.Exports">এক্সপোর্ট করুন</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">চিহ্নিত মাত্রা পরিবর্তন করো</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">আউটপুট বিন্যাস</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">জে- জি- বি</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">ওয়েব পি- পি- বি</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - উচ্চ গুণমান (লস-লেস)</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">বি- এম- বি</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">কম্প্রেশনের গুণমান ( (%s)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">সীমানার ধরন</system:String>
+
+    <system:String x:Key="Tools.Editor.None">শূণ্য</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">কালো প্রান্তরেখা</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">সাদা প্রান্ত</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">প্রান্তের প্রস্থ</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">আপনার</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">মাঝারি</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">পুরু</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">জলছবি</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">স্বাক্ষর</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">জলছবি</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">কোন স্বাক্ষর পাওয়া যায়নি</system:String>
 
     <system:String x:Key="Gallery.Empty">আপনার পাঁচটি তারার সেরা ছবির গ্যালারি খালি।.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">রাখুন: ডান চিত্র</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">বাম থেকে প্রত্যাখ্যান করুন - ডানে একটি তারকা যোগ করুন</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">একটি নতুন প্রকল্প তৈরি করতে এখানে ইমেজ ফাইল ধারণকারী একটি ফোল্ডার টেনে আনুন এবং ড্রপ করুন।</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
 

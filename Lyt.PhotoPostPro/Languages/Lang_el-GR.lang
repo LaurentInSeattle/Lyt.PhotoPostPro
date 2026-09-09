@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Αποθήκευση αλλαγών</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Στατιστικά</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Σου τελειώνει ο χώρος του δίσκου!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Κείμενο</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Περιγραφή εμπορευμάτων</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Φιλικό όνομα</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Χρώμα</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Μέγεθος γραμματοσειράς</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Βάρος γραμματοσειράς</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Οικογένεια γραμματοσειρών</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Στυλ γραμματοσειράς</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Κανονική</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Έντονα</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Πλάγιο</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Έντονα πλάγια γράμματα</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Όνομα αρχείου Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Υπογραφή</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Τόπος υπογραφής</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">Πάνω αριστερά</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">Πάνω δεξιά</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">Κάτω αριστερά</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">Κάτω δεξιά</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Υδατογραφήματα</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Εξαγωγές</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Αλλαγή μεγέθους σε καθορισμένη διάσταση</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">ΈξοδοςFormat</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Απώλεια</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Απώλεια</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Απώλεια</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Απώλεια</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Ποιότητα συμπίεσης (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Στυλ περιγράμματος</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Καμία</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Μαύρο σύνορο</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Λευκό σύνορο</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Πάχος των συνόρων</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Λεπτό</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Μεσαίο</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Πάχος</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Υδατογράφημα</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Υπογραφή</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Χωρίς υδατογράφημα</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Χωρίς υπογραφή</system:String>
 
     <system:String x:Key="Gallery.Empty">Η γκαλερί σου με τις καλύτερες φωτογραφίες των πέντε αστέρων είναι άδεια.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Διατήρηση: Δεξιά εικόνα</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Απόρριψη αριστερά - Προσθέστε ένα αστέρι στα δεξιά</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Σύρετε και αποθέστε έναν φάκελο που περιέχει αρχεία εικόνας εδώ για να δημιουργήσετε ένα νέο έργο.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>
 

@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Salvare le modifiche</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Statistiche</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Stai esaurendo lo spazio su disco!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Testo</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Designazione</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Nome amichevole</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Colore</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Dimensione del carattere</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Font Peso</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Font Family</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Stile del carattere</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Regolare</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Grassetto</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Italica</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Grassetto Italica</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Nome file Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Firme</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Luogo della firma</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">In Alto - A sinistra</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">In Alto - Adestra</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">In basso - A sinistra</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">In basso - A destra</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Filigrane</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Esportazioni</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Ridimensionare la dimensione specificata</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">Formato dell'output</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Con perdita</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Con perdita</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Senza perdite</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Senza perdite</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Qualità di compressione (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Stile di Cornice</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Nessuno</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Cornice Nera</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Cornice bianca</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Spessore di cornice</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Sottile</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Media</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Spessa</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Filigrana</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Firma</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Nessuna filigrana</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Nessuna firma</system:String>
 
     <system:String x:Key="Gallery.Empty">La tua galleria di 'cinque stelle' migliori immagini è vuota.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Conserva: Immagine a destra</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: Aggiungi una stella a destra</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Trascina qui una cartella contenente file di immagine per creare un nuovo progetto.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>
 

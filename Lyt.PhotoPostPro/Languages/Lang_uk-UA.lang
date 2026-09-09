@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Зберегти зміни</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Статистика</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Ви працюєте з дискового простору!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Головна</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Опис</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Ім'я</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Колір</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Розмір шрифту</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Вага шрифту</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Сім'я шрифтів</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Стиль шрифту</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Головна</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Золотий</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Логін</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Золотий Italic</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Ім'я файла Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Навігація</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Розміщення реклами</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">Зберегти</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">Топ Право</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">Зберегти</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">Підсумок Право</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Водні знаки</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Експорт</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Розмір вказаний розмір</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">Головна</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Лосси</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">ВебП - Лоссі</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Без втрат</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Без втрат</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Якість стиснення (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Прикордонний стиль</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Ні</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Чорний кордон</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Білий кордон</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Товщина кордону</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Тінь</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Середній</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Товсті</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Водомарка</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Підписка</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Немає водяних знаків</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Немає підпису</system:String>
 
     <system:String x:Key="Gallery.Empty">Галерея 'five stars' Кращі фотографії порожній.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Keep: праве зображення</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Відхилити ліворуч – додати зірочку праворуч</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Перетягніть сюди папку з файлами зображень, щоб створити новий проект.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 

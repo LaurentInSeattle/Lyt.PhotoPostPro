@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Lưu thay đổi</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Thống kê</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">Bạn đang chạy ra khỏi không gian đĩa!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Văn bản</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Mô tả</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Tên thân thiện</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Màu</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Cỡ phông chữ</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Trọng tải Phông chữ</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Nhóm phông</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Kiểu phông chữ</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Chuẩn</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Đậm</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Chữ viết tắt</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Chữ viết nghiêng đậm</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Lưu tên tập tin</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Chữ ký</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Vị trí chữ ký</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">Trái trên</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">Phải trên</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">Dưới trái</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">Dưới phải</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Thủy ấn</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Xuất</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Xoá( delete)</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">Đỏ tươi</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Thiếu vắng</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Thiếu</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Không mất gì</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Không mất gì</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Chất lượng nén (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Viền</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Không có</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Viền đen</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">Viền trắng</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Viền</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Mảnh</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Vừa</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Dầy</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Thủy ấn</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Chữ ký</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">Không thủy ấn</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Không có chữ ký</system:String>
 
     <system:String x:Key="Gallery.Empty">Phòng trưng bày tốt nhất của bạn năm ngôi sao là trống rỗng.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Giữ:</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Từ chối trái - thêm ngôi sao bên phải</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Kéo và thả thư mục chứa tập tin ảnh vào đây để tạo một dự án mới.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Kéo và thả tập tin ảnh vào đây để bắt đầu.</system:String>
 

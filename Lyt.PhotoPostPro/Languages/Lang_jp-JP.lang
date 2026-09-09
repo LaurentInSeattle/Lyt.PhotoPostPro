@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">変更を保存</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">統計データ</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">ディスクの空き容量が不足しています!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">テキスト</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">コンテンツ</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">友好的な名前</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">カラー</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">文字サイズ</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">フォント重量</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">フォントファミリー</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">フォントスタイル</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">レギュラー</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">ボールド</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">イタリック</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">ボルド・イタリック</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">ファイル名 Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">シグネチャー</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">署名の配置</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">左上のトップ</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">トップ右</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">最下左</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">ボトム右</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">ウォーターマーク</system:String>
 
     <system:String x:Key="Tools.Select.Exports">エクスポート</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">指定された寸法にサイズを変更</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">出力形式</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - 損失</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - 損失</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - ロスレス</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - ロスレス</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">圧縮品質(%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">ボーダースタイル</system:String>
+
+    <system:String x:Key="Tools.Editor.None">なし</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">ブラックボーダー</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">ホワイトボーダー</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">ボーダーの厚さ</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">ログイン</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">メディア</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">ステンレス</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">ウォーターマーク</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">サインイン</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">ウォーターマークなし</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">署名なし</system:String>
 
     <system:String x:Key="Gallery.Empty">'five Star'の最高の写真のギャラリーは空です.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">維持: 右の画像</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">左を拒否 - 右に星を追加</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">ここに画像ファイルが入ったフォルダーをドラッグ＆ドロップして、新規プロジェクトを作成します。</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
 

@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">자주 묻는 질문</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">관련 기사</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">당신은 디스크 공간에서 실행!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">이름 *</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">제품 설명</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">친절한 이름</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">색깔: 회색</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">이름 *</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">연락처</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">본문 바로가기</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">이름 *</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">(주)</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">지원하다</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">인기 카테고리</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">대담한 Italic</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">파일 이름 Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">제품정보</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">회사연혁</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">왼쪽 상단</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">맨 위로</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">바닥 왼쪽</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">연락처</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">워터마크</system:String>
 
     <system:String x:Key="Tools.Select.Exports">수출입</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">지정된 차원에 크기를 나타냅니다</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">산출Format</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - 손실</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - 손실</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - 무손실</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - 무손실</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">압축 질 (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Border 스타일</system:String>
+
+    <system:String x:Key="Tools.Editor.None">이름 *</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">블랙 국경</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">백색 국경</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Border 두께</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">이름 *</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">주요 특징</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">뚱 베어</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">워터마크</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">주요특징</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">워터 마크 없음</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">No 서명</system:String>
 
     <system:String x:Key="Gallery.Empty">'five stars' 최고의 사진 갤러리가 비어 있습니다.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">유지: 오른쪽 이미지</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">왼쪽 거부 - 오른쪽에 별 추가</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">이미지 파일이 포함된 폴더를 여기에 끌어다 놓아 새 프로젝트를 만듭니다.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
 

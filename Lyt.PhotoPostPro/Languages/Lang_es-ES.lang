@@ -53,11 +53,89 @@
 
     <system:String x:Key="Tools.Editor.Save">Guardar cambios</system:String>
 
+    <system:String x:Key="Tools.Select.Statistics">Estadísticas</system:String>
+
+    <system:String x:Key="Tools.Statistics.LowDisk">¡Te estás quedando sin espacio de disco!</system:String>
+
+    <system:String x:Key="Tools.Editor.TextPrompt">Texto</system:String>
+
+    <system:String x:Key="Tools.Editor.DescriptionPrompt">Descripción</system:String>
+
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Nombre amistoso</system:String>
+
+    <system:String x:Key="Tools.Editor.ColorPrompt">Color</system:String>
+
+    <system:String x:Key="Tools.Editor.FontSizePrompt">Tamaño de la fuente</system:String>
+
+    <system:String x:Key="Tools.Editor.FontWeightPrompt">Peso de la fuente</system:String>
+
+    <system:String x:Key="Tools.Editor.FontFamilyPrompt">Font Family</system:String>
+
+    <system:String x:Key="Tools.Editor.FontStylePrompt">Estilo de fuente</system:String>
+
+    <system:String x:Key="Tools.Editor.Regular">Recursos ordinarios</system:String>
+
+    <system:String x:Key="Tools.Editor.Bold">Bold</system:String>
+
+    <system:String x:Key="Tools.Editor.Italic">Italic</system:String>
+
+    <system:String x:Key="Tools.Editor.BoldItalic">Bold Italic</system:String>
+
+    <system:String x:Key="Tools.Editor.PostfixPrompt">Nombre del archivo Postfix</system:String>
+
     <system:String x:Key="Tools.Select.Signatures">Firmas</system:String>
+
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Lugar de ubicación</system:String>
+
+    <system:String x:Key="Tools.Editor.TopLeft">Top Izquierda</system:String>
+
+    <system:String x:Key="Tools.Editor.TopRight">Top Right</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomLeft">Bottom Left</system:String>
+
+    <system:String x:Key="Tools.Editor.BottomRight">Bien</system:String>
 
     <system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
 
     <system:String x:Key="Tools.Select.Exports">Exportaciones</system:String>
+
+    <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Resize to specified dimension</system:String>
+
+    <system:String x:Key="Tools.Editor.OutputFormat">OutputFormat</system:String>
+
+    <system:String x:Key="Tools.Editor.Jpg">JPG - Lossy</system:String>
+
+    <system:String x:Key="Tools.Editor.Webp">WebP - Pérdida</system:String>
+
+    <system:String x:Key="Tools.Editor.Png">PNG - Sin pérdidas</system:String>
+
+    <system:String x:Key="Tools.Editor.Bmp">BMP - Sin pérdidas</system:String>
+
+    <system:String x:Key="Tools.Editor.QualityPrompt">Calidad de la compresión (%)</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderStyle">Estilo de frontera</system:String>
+
+    <system:String x:Key="Tools.Editor.None">Ninguno</system:String>
+
+    <system:String x:Key="Tools.Editor.BlackBorder">Black Border</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteBorder">White Border</system:String>
+
+    <system:String x:Key="Tools.Editor.BorderThickness">Lastre de fronteras</system:String>
+
+    <system:String x:Key="Tools.Editor.Thin">Thin</system:String>
+
+    <system:String x:Key="Tools.Editor.Medium">Mediana</system:String>
+
+    <system:String x:Key="Tools.Editor.Thick">Ladrón</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark">Watermark</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature">Firma</system:String>
+
+    <system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
+
+    <system:String x:Key="Tools.Editor.Signature.None">Sin firma</system:String>
 
     <system:String x:Key="Gallery.Empty">Tu galería de las mejores fotos de 5 estrellas está vacía.</system:String>
 
@@ -96,8 +174,6 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Mantener: Imagen derecha</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rechazar a la izquierda: agregar una estrella a la derecha</system:String>
-
-    <system:String x:Key="Folder.DropZoneHelp">Arrastre y suelte una carpeta que contenga archivos de imagen aquí para crear un nuevo proyecto.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Arrastre y suelte un archivo de imagen aquí para comenzar.</system:String>
 
