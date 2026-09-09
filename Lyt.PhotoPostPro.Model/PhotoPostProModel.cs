@@ -115,6 +115,12 @@ public sealed partial class PhotoPostProModel : ModelBase
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
             this.SelectLanguage(this.Language);
+            if (this.CreateDefaultExports())
+            {
+                // We just added stuff: Save the newly added data 
+                this.Save();
+            }
+
             return Task.CompletedTask;
         }
         catch (Exception ex)

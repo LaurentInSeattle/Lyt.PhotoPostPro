@@ -8,6 +8,7 @@ public sealed class Watermark : IEditable
 
     public static Watermark Default => DefaultWatermark;
 
+    //
 
     public string FriendlyName { get; set; } = string.Empty;
 
@@ -17,7 +18,7 @@ public sealed class Watermark : IEditable
 
     public PppFontStyle PppFontStyle { get; set; } = PppFontStyle.Bold;
 
-    public string Text { get; set; } = "... ... Copyright © 2026 Laurent. All rights reserved. ... ...";
+    public string Text { get; set; } = "Copyright © 2026 Laurent. All rights reserved.";
 
     public uint HexColorArgb { get; set; } = 0x80FFFFFF;
 

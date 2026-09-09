@@ -178,4 +178,30 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         }
     }
+
+    internal bool CreateDefaultExports()
+    {
+        bool needModelSave = false;
+        if (this.Signatures.AvailableSignatures.Count == 0)
+        {
+            this.AddSignature(Signature.Default, out string _);
+            needModelSave = true;
+        }
+
+        if (this.Watermarks.AvailableWatermarks.Count == 0)
+        {
+            this.AddWatermark(Watermark.Default, out string _);
+            needModelSave = true;
+        }
+
+        if (this.ImageExports.AvailableImageExports.Count == 0)
+        {
+            this.AddImageExport(ImageExport.Default, out string _);
+            this.AddImageExport(ImageExport.HiDef, out string _);
+            this.AddImageExport(ImageExport.Web, out string _);
+            needModelSave = true;
+        }
+
+        return needModelSave;
+    }
 }

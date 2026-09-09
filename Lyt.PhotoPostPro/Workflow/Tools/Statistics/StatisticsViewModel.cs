@@ -3,7 +3,7 @@
 public sealed partial class StatisticsViewModel : ViewModel<StatisticsView>
 {
     private const float MegaByte = 1024.0f * 1024.0f;
-    private const float MinimumDiskAvailableMegaByte = 80.0f * 1024.0f; // 8 GB 
+    private const float MinimumDiskAvailableMegaByte = 8.0f * 1024.0f; // 8 GB 
 
     private readonly PhotoPostProModel model;
 
