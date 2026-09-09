@@ -103,8 +103,11 @@ public sealed partial class ExportEditViewModel :
         this.ResizeDimensionString = this.resizeDimension.ToString("D");
         this.quality = 85;
         this.QualityString = this.quality.ToString("D");
+        this.SelectedOutputFormatIndex = 0;
+        this.IsCompressionEnabled = false;
         this.SelectedBorderStyleIndex = 0;
         this.SelectedBorderThicknessIndex = 0;
+        this.IsBorderThicknessEnabled = false;
     }
 
     private void PopulateLocalizedComboBoxes()
@@ -121,6 +124,7 @@ public sealed partial class ExportEditViewModel :
         // Enforce property changed
         this.SelectedOutputFormatIndex = 1;
         this.SelectedOutputFormatIndex = 0;
+        this.IsCompressionEnabled = false;
 
         list = new List<string>();
         foreach (string item in SupportedImageBorderStyleText)
@@ -133,8 +137,7 @@ public sealed partial class ExportEditViewModel :
         // Enforce property changed
         this.SelectedBorderStyleIndex = 1;
         this.SelectedBorderStyleIndex = 0;
-
-        this.IsBorderThicknessEnabled = false; 
+        this.IsBorderThicknessEnabled = false;
 
         list = [];
         foreach (string item in SupportedImageBorderThicknessText)
@@ -164,7 +167,7 @@ public sealed partial class ExportEditViewModel :
 
         list = [];
         list.Add(this.Localize("Tools.Editor.Watermark.None"));
-        IEnumerable<string> watermarks = this.model.Watermarks.AvailableWatermarks.Select(w => w.FriendlyName); 
+        IEnumerable<string> watermarks = this.model.Watermarks.AvailableWatermarks.Select(w => w.FriendlyName);
         foreach (string watermark in watermarks)
         {
             list.Add(watermark);
@@ -186,10 +189,16 @@ public sealed partial class ExportEditViewModel :
     partial void OnSelectedOutputFormatIndexChanged(int value) => this.ValidateAndMessage();
 
     partial void OnQualityStringChanged(string value) => this.ValidateAndMessage();
-    
+
     partial void OnSelectedBorderStyleIndexChanged(int value) => this.ValidateAndMessage();
 
     partial void OnSelectedBorderThicknessIndexChanged(int value) => this.ValidateAndMessage();
+
+    partial void OnSelectedSignatureIndexChanged(int value) => this.ValidateAndMessage();
+
+    partial void OnSelectedWatermarkIndexChanged(int value) => this.ValidateAndMessage();
+
+    partial void OnPostFixChanged(string value) => this.ValidateAndMessage();
 
     partial void OnShouldResizeChanged(bool value)
     {
@@ -274,6 +283,19 @@ public sealed partial class ExportEditViewModel :
             this.IsBorderThicknessEnabled = borderStyle != ImageBorderStyle.None;
         }
 
+        if (!this.isGalleryFormat)
+        {
+            // All exports must have a post-fix to identify the export type.
+            // This is used to avoid overwriting the original image and to identify the export type in the filename.
+            // Exception : Gallery format exports do not require a post-fix.
+            string postFix = this.PostFix?.Trim() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(postFix) || postFix.Length == 0)
+            {
+                message = "Tools.Editor.Validation.PostFixRequired";
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -338,8 +360,7 @@ public sealed partial class ExportEditViewModel :
         this.IsBorderThicknessEnabled = imageExport.BorderStyle != ImageBorderStyle.None;
     }
 
-    // Clicked "Add" button - add new editable to model, refresh master list,
-    // and then select new item in master list
+    // Clicked "Add" button - add new editable to model
     public bool Add()
     {
         ImageExport? existing = this.model.ImageExports.FromFriendlyName(this.FriendlyName.Trim());
@@ -372,8 +393,7 @@ public sealed partial class ExportEditViewModel :
         return true;
     }
 
-    // Clicked "Delete" button - Remove from model, refresh master list,
-    // and then select new item in master list
+    // Clicked "Delete" button - Remove from model, 
     public bool Delete()
     {
         if (this.isGalleryFormat)
@@ -392,22 +412,43 @@ public sealed partial class ExportEditViewModel :
     }
 
     private ImageExport CollectData()
-    => new()
     {
-        FriendlyName = this.FriendlyName.Trim(),
-        Description = this.Description.Trim(),
-        Action = this.ShouldResize ? ExportAction.ToDimensions : ExportAction.None,
-        Dimension = this.resizeDimension,
-        OutputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex],
-        Quality = this.quality,
-        IsGalleryFormat = this.isGalleryFormat,
-        BorderStyle = SupportedImageBorderStyleValues[this.SelectedBorderStyleIndex],
-        BorderThickness = SupportedImageBorderThicknessValues[this.SelectedBorderThicknessIndex],
+        // Ensure that the post-fix starts with an underscore
+        string postFix = this.PostFix?.Trim() ?? string.Empty;
+        if (!postFix.StartsWith('_'))
+        {
+            postFix += '_';
+        }
 
-        // TODO 
-        PostFix = string.Empty,
+        // Index 0 is "None" so we only want to use a signature if the index is greater than 0
+        string signatureName = string.Empty;
+        if (this.SelectedSignatureIndex > 0 && this.SelectedSignatureIndex < this.AvailableSignatures.Count)
+        {
+            signatureName = this.AvailableSignatures[this.SelectedSignatureIndex];
+        }
 
-        SignatureName = string.Empty,
-        WatermarkName = string.Empty,
-    };
+        // Index 0 is "None" so we only want to use a watermark if the index is greater than 0
+        string watermarkName = string.Empty;
+        if (this.SelectedWatermarkIndex > 0 && this.SelectedWatermarkIndex < this.AvailableWatermarks.Count)
+        {
+            watermarkName = this.AvailableWatermarks[this.SelectedWatermarkIndex];
+        }
+
+        return new ImageExport()
+        {
+            FriendlyName = this.FriendlyName.Trim(),
+            Description = this.Description.Trim(),
+            Action = this.ShouldResize ? ExportAction.ToDimensions : ExportAction.None,
+            Dimension = this.resizeDimension,
+            OutputFormat = SupportedOutputFormatValues[this.SelectedOutputFormatIndex],
+            Quality = this.quality,
+            IsGalleryFormat = this.isGalleryFormat,
+            BorderStyle = SupportedImageBorderStyleValues[this.SelectedBorderStyleIndex],
+            BorderThickness = SupportedImageBorderThicknessValues[this.SelectedBorderThicknessIndex],
+
+            PostFix = postFix,
+            SignatureName = signatureName,
+            WatermarkName = watermarkName,
+        };
+    }
 }

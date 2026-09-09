@@ -18,18 +18,18 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="60" /> <!-- Friendly Name -->
-			<RowDefinition Height="100" /> <!-- Description -->
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="80" /> <!-- Validation -->
+			<RowDefinition Height="54" /> <!-- Friendly Name -->
+			<RowDefinition Height="90" /> <!-- Description -->
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="60" /> <!-- Validation -->
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>

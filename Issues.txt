@@ -3,6 +3,8 @@ Bugs ~ Major Issues
 
 - Watermarks and Signatures need to be scaled to the exported image size.  
 
+- Startup view when loading many thumnails
+
 - CRITICAL: Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
@@ -11,8 +13,6 @@ Bugs ~ Major Issues
 
 WIP
 ---
-
-Implement Export Editor UI to pick up exports parameters 
 
 Provide default for Signatures, Watermarks, and Exports
 

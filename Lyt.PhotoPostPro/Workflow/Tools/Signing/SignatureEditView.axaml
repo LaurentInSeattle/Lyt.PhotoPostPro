@@ -18,16 +18,16 @@
 		> 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
-			<RowDefinition Height="60" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
+			<RowDefinition Height="54" />
 			<RowDefinition Height="12" /> <!-- Spacer --> 
-			<RowDefinition Height="30" /> <!-- Validation --> 
+			<RowDefinition Height="60" /> <!-- Validation --> 
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>

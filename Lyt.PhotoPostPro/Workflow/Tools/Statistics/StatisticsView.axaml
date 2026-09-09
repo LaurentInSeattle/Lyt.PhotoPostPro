@@ -62,7 +62,8 @@
 					Text="{Binding DiskSpaceAlert}"
 					Theme="{StaticResource H2}"
 					Foreground="{StaticResource Alert.TextColor}"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
+					Margin="0 0 80 0"
+					HorizontalAlignment="Right" VerticalAlignment="Center"
 					/>
 			</Grid>
 			<!-- Library Stats --> 
