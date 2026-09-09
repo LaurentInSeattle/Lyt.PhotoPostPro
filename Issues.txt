@@ -18,9 +18,6 @@ WIP
 
 - Convert Export Edits to plain TXT file 
 
-- Disk Usage statistics 
-
-
 
 Essential Missing Features 
 --------------------------

@@ -10,7 +10,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         // Navigate to subdirectory for specified image
         NavigateTo(System.IO.Path.GetDirectoryName(metadata.FullPath));
 
-    private static void NavigateTo(string? directoryPath )
+    public static void NavigateTo(string? directoryPath)
     {
         if (!string.IsNullOrWhiteSpace(directoryPath))
         {
@@ -201,7 +201,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             // ! Verified by ApiAction
             string path = this.LibraryManager.SaveEditParameters(this.Workflow);
-            return ! string.IsNullOrWhiteSpace(path);
+            return !string.IsNullOrWhiteSpace(path);
         });
 
     public void Finish() =>
@@ -211,7 +211,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             this.LastResultFrame?.Dispose();
             this.LastResultFrame = null;
 
-            this.dispatcher.OnIdle(()=> GC.Collect());
+            this.dispatcher.OnIdle(() => GC.Collect());
 
             // No workflow notification
             return false;

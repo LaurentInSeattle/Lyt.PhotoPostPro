@@ -9,11 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -23,12 +19,13 @@
 		> 
 		<Grid.ColumnDefinitions >
 			<ColumnDefinition Width="10"/>
-			<ColumnDefinition Width="150"/>
+			<ColumnDefinition Width="120"/>
 			<ColumnDefinition Width="10"/>
 			<ColumnDefinition Width="130"/>
+			<ColumnDefinition Width="80"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions> 
-			<RowDefinition Height="64" />
+			<RowDefinition Height="56" />
 			<RowDefinition Height="44" />
 			<RowDefinition Height="44" />
 			<RowDefinition Height="44" />
@@ -42,11 +39,23 @@
 			FontWeight="Bold"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
+		<glyphs:GlyphButton
+			x:Name="FolderNavigateButton"
+			Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0"
+			Style="{StaticResource SmallPanelIconButton}"
+			GlyphSource="folder_open"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
+			Width="70"
+			Margin="0 0 30 0"
+			Command="{Binding OnFolderNavigate}"
+			GlyphStrokeThickness="0.05" 
+			Opacity="0.7"
+			/>		
 		<Rectangle 
 			Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
 			HorizontalAlignment="Right" VerticalAlignment="Stretch"
 			Fill="{StaticResource FreshGreen_0_100}"
-			Width="3"
+			Width="1.5"
 			/>
 		<TextBlock
 			Grid.Column="1" Grid.Row="1"
@@ -86,8 +95,6 @@
 			Theme="{StaticResource H3}"
 			Foreground="{StaticResource LightAqua_0_100}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
-			
-			
+			/>			
 	</Grid>
 </UserControl>

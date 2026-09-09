@@ -9,86 +9,97 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
-
 	Background="Transparent"
 	>
-	<Border
-		Background="#B0000020"
-		BorderBrush="{StaticResource LightAqua_3_100}"
-		BorderThickness="1"
-		CornerRadius="8"
-		VerticalAlignment="Center" HorizontalAlignment="Center"
-		>		
-		<Grid	
-			Margin="8"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			> 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="4" />
-				<RowDefinition Height="60" />
-				<RowDefinition Height="0" />
-				<RowDefinition Height="280" />
-				<RowDefinition Height="16" />
-				<RowDefinition Height="280" />
-				<RowDefinition Height="4" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="40" />
-				<ColumnDefinition Width="320" />
-				<ColumnDefinition Width="16" />
-				<ColumnDefinition Width="320" />
-				<ColumnDefinition Width="40" />
-			</Grid.ColumnDefinitions>
-			<Rectangle
-				Grid.Row="0" Grid.Column="0"
-				Grid.RowSpan="99" Grid.ColumnSpan="99"
-				/>
-			<!-- Global disk space --> 
-			<Grid
-				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
+	<Grid	
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="80" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+		</Grid.ColumnDefinitions>
+		<Border
+			Grid.Row="2" Grid.Column="2"
+			Background="#B0000020"
+			BorderBrush="{StaticResource LightAqua_3_100}"
+			BorderThickness="1"
+			CornerRadius="8"
+			VerticalAlignment="Top" HorizontalAlignment="Center"
+			>		
+			<Grid	
+				Margin="8"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
 				> 
-				<TextBlock
-					Text="{Binding AvailableSpace}"
-					Theme="{StaticResource H2}"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
+				<Grid.RowDefinitions>
+					<RowDefinition Height="8" />
+					<RowDefinition Height="70" />
+					<RowDefinition Height="0" />
+					<RowDefinition Height="250" />
+					<RowDefinition Height="16" />
+					<RowDefinition Height="250" />
+					<RowDefinition Height="4" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50" />
+					<ColumnDefinition Width="360" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="360" />
+					<ColumnDefinition Width="50" />
+				</Grid.ColumnDefinitions>
+				<Rectangle
+					Grid.Row="0" Grid.Column="0"
+					Grid.RowSpan="99" Grid.ColumnSpan="99"
 					/>
-				<TextBlock
-					Text="{Binding DiskSpaceAlert}"
-					Theme="{StaticResource H2}"
-					Foreground="{StaticResource Alert.TextColor}"
-					Margin="0 0 80 0"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
+				<!-- Global disk space --> 
+				<Grid
+					Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
+					> 
+					<TextBlock
+						Text="{Binding AvailableSpace}"
+						Theme="{StaticResource H2}"
+						HorizontalAlignment="Center" VerticalAlignment="Top"
+						/>
+					<TextBlock
+						Text="{Binding DiskSpaceAlert}"
+						Theme="{StaticResource H2}"
+						Foreground="{StaticResource Alert.TextColor}"
+						HorizontalAlignment="Center" VerticalAlignment="Bottom"
+						/>
+				</Grid>
+				<!-- Library Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="3" Grid.Column="1" 
+					DataContext="{Binding LibraryStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
+				<!-- Exports Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="3" Grid.Column="3" 
+					DataContext="{Binding ExportsStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
+				<!-- Gallery Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="5" Grid.Column="1" 
+					DataContext="{Binding GalleryStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
+				<!-- Luts Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="5" Grid.Column="3" 
+					DataContext="{Binding LutsStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 					/>
 			</Grid>
-			<!-- Library Stats --> 
-			<vm:FolderStatisticsView
-				Grid.Row="3" Grid.Column="1" 
-				DataContext="{Binding LibraryStatistics}"
-				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-				/>
-			<!-- Exports Stats --> 
-			<vm:FolderStatisticsView
-				Grid.Row="3" Grid.Column="3" 
-				DataContext="{Binding ExportsStatistics}"
-				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-				/>
-			<!-- Gallery Stats --> 
-			<vm:FolderStatisticsView
-				Grid.Row="5" Grid.Column="1" 
-				DataContext="{Binding GalleryStatistics}"
-				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-				/>
-			<!-- Luts Stats --> 
-			<vm:FolderStatisticsView
-				Grid.Row="5" Grid.Column="3" 
-				DataContext="{Binding LutsStatistics}"
-				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-				/>
-		</Grid>
-	</Border>
+		</Border>
+	</Grid>
 </UserControl>
