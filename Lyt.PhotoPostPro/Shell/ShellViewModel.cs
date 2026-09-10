@@ -86,10 +86,10 @@ public sealed partial class ShellViewModel
         this.Logger.Debug("OnViewLoaded SetupWorkflow complete");
 
         // Ready 
-        this.toaster.Host = this.View.ToasterHost;
-        this.toaster.Show(
-            this.Localize("Shell.Ready"), this.Localize("Shell.Greetings"),
-            5_000, InformationLevel.Info);
+        //this.toaster.Host = this.View.ToasterHost;
+        //this.toaster.Show(
+        //    this.Localize("Shell.Ready"), this.Localize("Shell.Greetings"),
+        //    5_000, InformationLevel.Info);
 
         this.isFirstActivation = true;
 

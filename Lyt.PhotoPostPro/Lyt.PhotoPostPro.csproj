@@ -82,6 +82,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Workflow\Library\Dialogs\LoadingDialog.axaml.cs">
+      <DependentUpon>LoadingDialog.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Export\ImageExportView.axaml.cs">
       <DependentUpon>ImageExportView.axaml</DependentUpon>
     </Compile>

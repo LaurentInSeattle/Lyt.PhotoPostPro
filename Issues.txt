@@ -1,13 +1,9 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Create a better looking toaster 
+- Adjust filter vignette parameters for Img# 
 
 - Watermarks and Signatures need to be scaled to the exported image size.  
-
-- Startup view when loading many thumnails
-
-- Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
 
@@ -16,6 +12,7 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
 
 
 Essential Missing Features 
@@ -82,6 +79,8 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 Bugs - No Repro 
 ---------------
 
+- Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
+
 - CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
 
 - After completing an edit, image does not show up in edited 
@@ -97,20 +96,18 @@ Bugs - No Repro
 V.Next 
 ------
 
-- Figure out if we need to implement exporting to scale and export to file size.  
- ( If yes, implement it.  If not, remove the enum values and code references. ) 
+- Spotlight effect, aka "Ray of Light" effect.
 
 - Touch up / Blemish (after geometry) 
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
-- Spotlight effect, aka "Ray of Light" effect.
-
 - Controls to show both before / after (for comparison) or just the current image in the viewer  
 
-- Add keywords to images 
+- Add keywords to images and then Ability to search the library by Keywords.
 
-- Ability to search the library by Keywords.
+- Figure out if we need to implement exporting to scale and export to file size.  
+ ( If yes, implement it.  If not, remove the enum values and code references. ) 
 
 
 
@@ -121,7 +118,7 @@ V.Next.Next
 
 - Ability to flag images to insert in a photobook or collection 
 
-- Library backup / export 
+- Library backup / export - Might be unnecessary 
 
 
 

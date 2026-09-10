@@ -14,7 +14,7 @@ public sealed partial class LibraryManager
 
     public const int CachedHdImageCount = 120;
     public const int CachedGalleryImageCount = 4;
-    
+
     private readonly Lock lockObject;
 
     private readonly PhotoPostProModel model;
@@ -93,13 +93,34 @@ public sealed partial class LibraryManager
 
         Task.Run(() =>
         {
+#if DEBUG 
+            const int fileCountTrigger = 1000;
+            const int initialDelay  = 700;
+#else
+            const int fileCountTrigger = 1500; 
+            const int initialDelay  = 500;
+#endif
             // wait a bit so that we dont delay the app starting up 
-            Task.Delay(666).Wait();
+            Task.Delay(initialDelay).Wait();
             this.GenerateFolderTree();
-            Task.Delay(200).Wait();
+            if (this.CapturedFolderTree is not null)
+            {
+                int fileCount = this.CapturedFolderTree.FileCount();
+                if (fileCount > fileCountTrigger)
+                {
+                    new LibraryLoadingMessage(fileCount).Publish();
+                    Task.Delay(300).Wait();
+                }
+            }
+
+#if DEBUG 
+            // Simulate slow loading - if needed for debug ONLY 
+            // Task.Delay(3000).Wait();
+#endif
+
             this.GenerateThumbnailCache();
             Task.Delay(200).Wait();
-            this.InitializeGallery(); 
+            this.InitializeGallery();
         });
     }
 }
