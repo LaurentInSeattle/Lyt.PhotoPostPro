@@ -125,26 +125,28 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private int _focusedIndex = -1;
     private double? _navigationAnchor;
     private int _lastNavigationIndex = -1;
-    protected int LastNavigationIndex => _lastNavigationIndex;
+    protected int LastNavigationIndex => this._lastNavigationIndex;
 
     private void ClearRowCache()
     {
-        _rowCache.Clear();
+        this._rowCache.Clear();
     }
 
     private void AddRowCacheEntry(int startIndex, double y, double height, int count, double summedUpChildWidth)
     {
         if (count <= 0)
+        {
             return;
+        }
 
         int index = -1;
         // Optimization: check last entry first as it's the most common case during forward realization
-        if (_rowCache.Count > 0)
+        if (this._rowCache.Count > 0)
         {
-            var last = _rowCache[_rowCache.Count - 1];
+            var last = this._rowCache[this._rowCache.Count - 1];
             if (last.StartIndex == startIndex)
             {
-                index = _rowCache.Count - 1;
+                index = this._rowCache.Count - 1;
             }
             else if (last.StartIndex < startIndex)
             {
@@ -153,16 +155,16 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             else
             {
                 // Out of order or scrolling up, find insertion point or existing entry using binary search
-                int lo = 0, hi = _rowCache.Count - 1;
+                int lo = 0, hi = this._rowCache.Count - 1;
                 while (lo <= hi)
                 {
                     int mid = (lo + hi) >> 1;
-                    if (_rowCache[mid].StartIndex == startIndex)
+                    if (this._rowCache[mid].StartIndex == startIndex)
                     {
                         index = mid;
                         break;
                     }
-                    if (_rowCache[mid].StartIndex < startIndex)
+                    if (this._rowCache[mid].StartIndex < startIndex)
                     {
                         lo = mid + 1;
                     }
@@ -176,10 +178,10 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                 {
                     // Insertion point is at 'lo'
                     index = lo;
-                    _rowCache.Insert(index, new RowInfo { StartIndex = startIndex, Y = y, Height = height, Count = count, SummedUpChildWidth = summedUpChildWidth });
-                    if (index + 1 < _rowCache.Count)
+                    this._rowCache.Insert(index, new RowInfo { StartIndex = startIndex, Y = y, Height = height, Count = count, SummedUpChildWidth = summedUpChildWidth });
+                    if (index + 1 < this._rowCache.Count)
                     {
-                        _rowCache.RemoveRange(index + 1, _rowCache.Count - (index + 1));
+                        this._rowCache.RemoveRange(index + 1, this._rowCache.Count - (index + 1));
                     }
                     goto Trim;
                 }
@@ -188,14 +190,14 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         if (index >= 0)
         {
-            var existing = _rowCache[index];
+            var existing = this._rowCache[index];
             // If the row info changed, we must invalidate all subsequent rows in the cache
             // as their Y position depends on this row.
             if (!existing.Y.IsCloseTo(y) || !existing.Height.IsCloseTo(height) || existing.Count != count || !existing.SummedUpChildWidth.IsCloseTo(summedUpChildWidth))
             {
-                if (index + 1 < _rowCache.Count)
+                if (index + 1 < this._rowCache.Count)
                 {
-                    _rowCache.RemoveRange(index + 1, _rowCache.Count - (index + 1));
+                    this._rowCache.RemoveRange(index + 1, this._rowCache.Count - (index + 1));
                 }
                 existing.Y = y;
                 existing.Height = height;
@@ -205,22 +207,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         }
         else
         {
-            _rowCache.Add(new RowInfo { StartIndex = startIndex, Y = y, Height = height, Count = count, SummedUpChildWidth = summedUpChildWidth });
-            index = _rowCache.Count - 1;
+            this._rowCache.Add(new RowInfo { StartIndex = startIndex, Y = y, Height = height, Count = count, SummedUpChildWidth = summedUpChildWidth });
+            index = this._rowCache.Count - 1;
         }
 
     Trim:
-        if (_rowCache.Count > RowCacheCapacity)
+        if (this._rowCache.Count > RowCacheCapacity)
         {
             // If we are adding/updating near the start, trim from the end.
             // Otherwise trim from the start.
-            if (index < _rowCache.Count / 2)
+            if (index < this._rowCache.Count / 2)
             {
-                _rowCache.RemoveAt(_rowCache.Count - 1);
+                this._rowCache.RemoveAt(this._rowCache.Count - 1);
             }
             else
             {
-                _rowCache.RemoveAt(0);
+                this._rowCache.RemoveAt(0);
             }
         }
     }
@@ -230,10 +232,10 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public VirtualizingWrapPanel()
     {
-        _recycleElement = RecycleElement;
-        _recycleElementOnItemRemoved = RecycleElementOnItemRemoved;
-        _updateElementIndex = UpdateElementIndex;
-        EffectiveViewportChanged += OnEffectiveViewportChanged;
+        this._recycleElement = this.RecycleElement;
+        this._recycleElementOnItemRemoved = this.RecycleElementOnItemRemoved;
+        this._updateElementIndex = this.UpdateElementIndex;
+        EffectiveViewportChanged += this.OnEffectiveViewportChanged;
     }
 
     /// <summary>
@@ -242,8 +244,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public Orientation Orientation
     {
-        get => GetValue(OrientationProperty);
-        set => SetValue(OrientationProperty, value);
+        get => this.GetValue(OrientationProperty);
+        set => this.SetValue(OrientationProperty, value);
     }
 
     /// <summary>
@@ -252,8 +254,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public Size ItemSize
     {
-        get => GetValue(ItemSizeProperty);
-        set => SetValue(ItemSizeProperty, value);
+        get => this.GetValue(ItemSizeProperty);
+        set => this.SetValue(ItemSizeProperty, value);
     }
 
     /// <summary>
@@ -263,8 +265,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public bool AllowDifferentSizedItems
     {
-        get => GetValue(AllowDifferentSizedItemsProperty);
-        set => SetValue(AllowDifferentSizedItemsProperty, value);
+        get => this.GetValue(AllowDifferentSizedItemsProperty);
+        set => this.SetValue(AllowDifferentSizedItemsProperty, value);
     }
 
     /// <summary>
@@ -273,8 +275,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public IItemSizeProvider? ItemSizeProvider
     {
-        get => GetValue(ItemSizeProviderProperty);
-        set => SetValue(ItemSizeProviderProperty, value);
+        get => this.GetValue(ItemSizeProviderProperty);
+        set => this.SetValue(ItemSizeProviderProperty, value);
     }
 
     /// <summary>
@@ -282,8 +284,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public SpacingMode SpacingMode
     {
-        get => GetValue(SpacingModeProperty);
-        set => SetValue(SpacingModeProperty, value);
+        get => this.GetValue(SpacingModeProperty);
+        set => this.SetValue(SpacingModeProperty, value);
     }
 
     /// <summary>
@@ -295,8 +297,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </remarks>
     public bool StretchItems
     {
-        get => GetValue(StretchItemsProperty);
-        set => SetValue(StretchItemsProperty, value);
+        get => this.GetValue(StretchItemsProperty);
+        set => this.SetValue(StretchItemsProperty, value);
     }
 
     /// <summary>
@@ -310,8 +312,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </remarks>
     public bool IsGridLayoutEnabled
     {
-        get => GetValue(IsGridLayoutEnabledProperty);
-        set => SetValue(IsGridLayoutEnabledProperty, value);
+        get => this.GetValue(IsGridLayoutEnabledProperty);
+        set => this.SetValue(IsGridLayoutEnabledProperty, value);
     }
 
     /// <summary>
@@ -320,79 +322,100 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public int CacheRows
     {
-        get => GetValue(CacheRowsProperty);
-        set => SetValue(CacheRowsProperty, value);
+        get => this.GetValue(CacheRowsProperty);
+        set => this.SetValue(CacheRowsProperty, value);
     }
 
     /// <summary>
     /// Gets the index of the first realized element, or -1 if no elements are realized.
     /// </summary>
-    public int FirstRealizedIndex => _realizedElements?.FirstIndex ?? -1;
+    public int FirstRealizedIndex => this._realizedElements?.FirstIndex ?? -1;
 
     /// <summary>
     /// Gets the index of the last realized element, or -1 if no elements are realized.
     /// </summary>
-    public int LastRealizedIndex => _realizedElements?.LastIndex ?? -1;
+    public int LastRealizedIndex => this._realizedElements?.LastIndex ?? -1;
 
 
     /// <inheritdoc />
     protected override Size MeasureOverride(Size availableSize)
     {
-        var items = Items;
+        var items = this.Items;
 
         if (items.Count == 0)
-            return default;
-
-        var orientation = Orientation;
-
-        var wrappingWidth = GetWidth(availableSize);
-        if (double.IsInfinity(wrappingWidth))
         {
-            wrappingWidth = GetWidth(_viewport.Size);
+            return default;
         }
 
-        if (wrappingWidth <= 0) wrappingWidth = _lastLayoutWidth;
-        if (wrappingWidth <= 0) wrappingWidth = GetWidth(Bounds.Size);
-        if (wrappingWidth <= 0) wrappingWidth = GetWidth(DesiredSize);
-        if (wrappingWidth <= 0) wrappingWidth = _FallbackItemSize.Width * 10;
+        var orientation = this.Orientation;
+
+        double wrappingWidth = this.GetWidth(availableSize);
+        if (double.IsInfinity(wrappingWidth))
+        {
+            wrappingWidth = this.GetWidth(this._viewport.Size);
+        }
+
+        if (wrappingWidth <= 0)
+        {
+            wrappingWidth = this._lastLayoutWidth;
+        }
+
+        if (wrappingWidth <= 0)
+        {
+            wrappingWidth = this.GetWidth(this.Bounds.Size);
+        }
+
+        if (wrappingWidth <= 0)
+        {
+            wrappingWidth = this.GetWidth(this.DesiredSize);
+        }
+
+        if (wrappingWidth <= 0)
+        {
+            wrappingWidth = _FallbackItemSize.Width * 10;
+        }
 
         // If we're bringing an item into view, ignore any layout passes until we receive a new
         // effective viewport.
-        if (_isWaitingForViewportUpdate)
-            return EstimateDesiredSize(orientation, items.Count, wrappingWidth);
+        if (this._isWaitingForViewportUpdate)
+        {
+            return this.EstimateDesiredSize(orientation, items.Count, wrappingWidth);
+        }
 
-        _isInLayout = true;
+        this._isInLayout = true;
 
         try
         {
             // _realizedElements?.ValidateStartU(Orientation);
-            _realizedElements ??= new();
-            _measureElements ??= new();
+            this._realizedElements ??= new();
+            this._measureElements ??= new();
 
             // If the viewport is disjunct then we can recycle everything
-            var disjunct = _startItemIndex < _realizedElements.FirstIndex
-                           || _startItemIndex > _realizedElements.LastIndex;
+            bool disjunct = this._startItemIndex < this._realizedElements.FirstIndex
+                           || this._startItemIndex > this._realizedElements.LastIndex;
 
             if (disjunct)
-                _realizedElements.RecycleAllElements(_recycleElement);
+            {
+                this._realizedElements.RecycleAllElements(this._recycleElement);
+            }
 
             // Do the measure, creating/recycling elements as necessary to fill the viewport. Don't
             // write to _realizedElements yet, only _measureElements.
-            RealizeAndVirtualizeItems();
+            this.RealizeAndVirtualizeItems();
 
             // Now swap the measureElements and realizedElements collection.
-            (_measureElements, _realizedElements) = (_realizedElements, _measureElements);
-            _measureElements.ResetForReuse();
+            (this._measureElements, this._realizedElements) = (this._realizedElements, this._measureElements);
+            this._measureElements.ResetForReuse();
 
             // If there is a focused element is outside the visible viewport (i.e.
             // _focusedElement is non-null), ensure it's measured.
-            _focusedElement?.Measure(availableSize);
+            this._focusedElement?.Measure(availableSize);
 
-            return CalculateDesiredSize(orientation, items.Count, wrappingWidth);
+            return this.CalculateDesiredSize(orientation, items.Count, wrappingWidth);
         }
         finally
         {
-            _isInLayout = false;
+            this._isInLayout = false;
         }
     }
 
@@ -403,111 +426,113 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <inheritdoc />
     protected override Size ArrangeOverride(Size finalSize)
     {
-        if (_realizedElements is null)
+        if (this._realizedElements is null)
+        {
             return default;
+        }
 
-        _isInLayout = true;
+        this._isInLayout = true;
 
         try
         {
-            if (_startItemIndex == -1)
+            if (this._startItemIndex == -1)
             {
                 return finalSize;
             }
 
-            if (_realizedElements.Count < _endItemIndex - _startItemIndex + 1)
+            if (this._realizedElements.Count < this._endItemIndex - this._startItemIndex + 1)
             {
                 return finalSize;
             }
 
-            double x = _startItemOffsetX; // + GetX(_viewport.TopLeft);
-            double y = _startItemOffsetY; // - GetY(_viewport.TopLeft);
+            double x = this._startItemOffsetX; // + GetX(_viewport.TopLeft);
+            double y = this._startItemOffsetY; // - GetY(_viewport.TopLeft);
             double rowHeight = 0;
             double arrangedRowHeight = 0; // max height of only realized (non-null) children
-            var finalWidth = GetWidth(finalSize);
-            var items = Items;
+            double finalWidth = this.GetWidth(finalSize);
+            var items = this.Items;
 
-            _rowChildrenReuse.Clear();
-            _childSizesReuse.Clear();
+            this._rowChildrenReuse.Clear();
+            this._childSizesReuse.Clear();
             double summedUpChildWidth = 0;
 
-            for (int i = _startItemIndex; i <= _endItemIndex; i++)
+            for (int i = this._startItemIndex; i <= this._endItemIndex; i++)
             {
-                var item = items[i];
-                var child = _realizedElements.GetElement(i);
+                object? item = items[i];
+                var child = this._realizedElements.GetElement(i);
 
-                Size? upfrontKnownItemSize = GetUpfrontKnownItemSize(item);
+                Size? upfrontKnownItemSize = this.GetUpfrontKnownItemSize(item);
 
                 Size childSize = upfrontKnownItemSize ??
-                                 _realizedElements.GetElementSize(child) ?? _FallbackItemSize;
+                                 this._realizedElements.GetElementSize(child) ?? _FallbackItemSize;
 
-                if (_rowChildrenReuse.Count > 0 && x + GetWidth(childSize) > finalWidth)
+                if (this._rowChildrenReuse.Count > 0 && x + this.GetWidth(childSize) > finalWidth)
                 {
-                    ArrangeRow(finalWidth, _rowChildrenReuse, _childSizesReuse, y, summedUpChildWidth, arrangedRowHeight);
+                    this.ArrangeRow(finalWidth, this._rowChildrenReuse, this._childSizesReuse, y, summedUpChildWidth, arrangedRowHeight);
                     x = 0;
                     y += rowHeight;
                     rowHeight = 0;
                     arrangedRowHeight = 0;
-                    _rowChildrenReuse.Clear();
-                    _childSizesReuse.Clear();
+                    this._rowChildrenReuse.Clear();
+                    this._childSizesReuse.Clear();
                     summedUpChildWidth = 0;
                 }
 
-                x += GetWidth(childSize);
-                rowHeight = Math.Max(rowHeight, GetHeight(childSize));
+                x += this.GetWidth(childSize);
+                rowHeight = Math.Max(rowHeight, this.GetHeight(childSize));
                 if (child != null)
                 {
-                    _rowChildrenReuse.Add(child);
-                    _childSizesReuse.Add(childSize);
-                    summedUpChildWidth += GetWidth(childSize);
-                    arrangedRowHeight = Math.Max(arrangedRowHeight, GetHeight(childSize));
+                    this._rowChildrenReuse.Add(child);
+                    this._childSizesReuse.Add(childSize);
+                    summedUpChildWidth += this.GetWidth(childSize);
+                    arrangedRowHeight = Math.Max(arrangedRowHeight, this.GetHeight(childSize));
 
-                    _scrollAnchorProvider?.RegisterAnchorCandidate(child);
+                    this._scrollAnchorProvider?.RegisterAnchorCandidate(child);
                 }
             }
 
-            if (_rowChildrenReuse.Count > 0)
+            if (this._rowChildrenReuse.Count > 0)
             {
-                ArrangeRow(finalWidth, _rowChildrenReuse, _childSizesReuse, y, summedUpChildWidth, arrangedRowHeight);
+                this.ArrangeRow(finalWidth, this._rowChildrenReuse, this._childSizesReuse, y, summedUpChildWidth, arrangedRowHeight);
             }
 
             // Ensure that the focused element is in the correct position.
-            if (_focusedElement is not null && _focusedIndex >= 0)
+            if (this._focusedElement is not null && this._focusedIndex >= 0)
             {
-                var startPoint = FindItemOffset(_focusedIndex, finalWidth);
+                var startPoint = this.FindItemOffset(this._focusedIndex, finalWidth);
 
-                double focusedOffsetX = GetX(startPoint);
-                double focusedOffsetY = GetY(startPoint);
+                double focusedOffsetX = this.GetX(startPoint);
+                double focusedOffsetY = this.GetY(startPoint);
 
-                var rect = Orientation == Orientation.Horizontal ?
-                    new Rect(focusedOffsetX, focusedOffsetY, _focusedElement.DesiredSize.Width, _focusedElement.DesiredSize.Height) :
-                    new Rect(focusedOffsetY, focusedOffsetX, _focusedElement.DesiredSize.Width, _focusedElement.DesiredSize.Height);
-                _focusedElement.Arrange(rect);
+                var rect = this.Orientation == Orientation.Horizontal ?
+                    new Rect(focusedOffsetX, focusedOffsetY, this._focusedElement.DesiredSize.Width, this._focusedElement.DesiredSize.Height) :
+                    new Rect(focusedOffsetY, focusedOffsetX, this._focusedElement.DesiredSize.Width, this._focusedElement.DesiredSize.Height);
+                this._focusedElement.Arrange(rect);
             }
 
             // Ensure that the scrollTo element is in the correct position.
-            if (_scrollToElement is not null && _scrollToIndex >= 0)
+            if (this._scrollToElement is not null && this._scrollToIndex >= 0)
             {
-                var startPoint = FindItemOffset(_scrollToIndex, finalWidth);
+                var startPoint = this.FindItemOffset(this._scrollToIndex, finalWidth);
 
-                double scrollToOffsetX = GetX(startPoint);
-                double scrollToOffsetY = GetY(startPoint);
+                double scrollToOffsetX = this.GetX(startPoint);
+                double scrollToOffsetY = this.GetY(startPoint);
 
-                var rect = Orientation == Orientation.Horizontal ?
-                    new Rect(scrollToOffsetX, scrollToOffsetY, _scrollToElement.DesiredSize.Width,
+                var rect = this.Orientation == Orientation.Horizontal ?
+                    new Rect(scrollToOffsetX, scrollToOffsetY, this._scrollToElement.DesiredSize.Width,
                         finalSize.Height) :
                     new Rect(scrollToOffsetY, scrollToOffsetX, finalSize.Width,
-                        _scrollToElement.DesiredSize.Height);
-                _scrollToElement.Arrange(rect);
+                        this._scrollToElement.DesiredSize.Height);
+                this._scrollToElement.Arrange(rect);
             }
 
             return finalSize;
         }
         finally
         {
-            _isInLayout = false;
+            this._isInLayout = false;
 
-            RaiseEvent(new RoutedEventArgs(Orientation == Orientation.Horizontal ?
+            this.RaiseEvent(new RoutedEventArgs(this.Orientation == Orientation.Horizontal ?
                 HorizontalSnapPointsChangedEvent :
                 VerticalSnapPointsChangedEvent));
         }
@@ -517,63 +542,65 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
-        _scrollAnchorProvider = this.FindAncestorOfType<IScrollAnchorProvider>();
+        this._scrollAnchorProvider = this.FindAncestorOfType<IScrollAnchorProvider>();
     }
 
     /// <inheritdoc />
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
-        _scrollAnchorProvider = null;
+        this._scrollAnchorProvider = null;
     }
 
     /// <inheritdoc />
     protected override void OnItemsChanged(IReadOnlyList<object?> items, NotifyCollectionChangedEventArgs e)
     {
-        _averageItemSizeCache = null;
-        ClearRowCache();
-        InvalidateMeasure();
+        this._averageItemSizeCache = null;
+        this.ClearRowCache();
+        this.InvalidateMeasure();
 
-        if (_realizedElements is null)
+        if (this._realizedElements is null)
+        {
             return;
+        }
 
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
                 if (e.NewItems is not null)
                 {
-                    _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, _updateElementIndex);
+                    this._realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, this._updateElementIndex);
                 }
                 break;
 
             case NotifyCollectionChangedAction.Remove:
                 if (e.OldItems is not null)
                 {
-                    _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, _updateElementIndex, _recycleElementOnItemRemoved);
+                    this._realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, this._updateElementIndex, this._recycleElementOnItemRemoved);
                 }
                 break;
 
             case NotifyCollectionChangedAction.Replace:
                 if (e.OldItems is not null)
                 {
-                    _realizedElements.ItemsReplaced(e.OldStartingIndex, e.OldItems.Count, _recycleElementOnItemRemoved);
+                    this._realizedElements.ItemsReplaced(e.OldStartingIndex, e.OldItems.Count, this._recycleElementOnItemRemoved);
                 }
                 break;
 
             case NotifyCollectionChangedAction.Move:
                 if (e.OldItems is not null)
                 {
-                    _realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, _updateElementIndex, _recycleElementOnItemRemoved);
+                    this._realizedElements.ItemsRemoved(e.OldStartingIndex, e.OldItems.Count, this._updateElementIndex, this._recycleElementOnItemRemoved);
                 }
 
                 if (e.NewItems is not null)
                 {
-                    _realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, _updateElementIndex);
+                    this._realizedElements.ItemsInserted(e.NewStartingIndex, e.NewItems.Count, this._updateElementIndex);
                 }
                 break;
 
             case NotifyCollectionChangedAction.Reset:
-                _realizedElements.ItemsReset(_recycleElementOnItemRemoved);
+                this._realizedElements.ItemsReset(this._recycleElementOnItemRemoved);
                 break;
         }
     }
@@ -584,31 +611,40 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         base.OnItemsControlChanged(oldValue);
 
         if (oldValue is not null)
-            oldValue.PropertyChanged -= OnItemsControlPropertyChanged;
-        if (ItemsControl is not null)
-            ItemsControl.PropertyChanged += OnItemsControlPropertyChanged;
+        {
+            oldValue.PropertyChanged -= this.OnItemsControlPropertyChanged;
+        }
+
+        if (this.ItemsControl is not null)
+        {
+            this.ItemsControl.PropertyChanged += this.OnItemsControlPropertyChanged;
+        }
     }
 
     /// <inheritdoc />
     protected override IInputElement? GetControl(NavigationDirection direction, IInputElement? from, bool wrap)
     {
-        var count = Items.Count;
+        int count = this.Items.Count;
         var fromControl = from as Control;
 
         if (count == 0 ||
             (fromControl is null && direction is not NavigationDirection.First and not NavigationDirection.Last))
+        {
             return null;
+        }
 
-        var fromIndex = fromControl != null ? IndexFromContainer(fromControl) : -1;
+        int fromIndex = fromControl != null ? this.IndexFromContainer(fromControl) : -1;
 
         if (fromIndex == -1 && direction is not NavigationDirection.First and not NavigationDirection.Last)
-            return null;
-
-        var toIndex = fromIndex;
-
-        if (fromIndex != _lastNavigationIndex)
         {
-            _navigationAnchor = null;
+            return null;
+        }
+
+        int toIndex = fromIndex;
+
+        if (fromIndex != this._lastNavigationIndex)
+        {
+            this._navigationAnchor = null;
         }
 
         // Reset or update navigation anchor
@@ -616,16 +652,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         {
             case NavigationDirection.Up:
             case NavigationDirection.Down:
-                if (Orientation == Orientation.Vertical)
-                    _navigationAnchor = null;
+                if (this.Orientation == Orientation.Vertical)
+                {
+                    this._navigationAnchor = null;
+                }
+
                 break;
             case NavigationDirection.Left:
             case NavigationDirection.Right:
-                if (Orientation == Orientation.Horizontal)
-                    _navigationAnchor = null;
+                if (this.Orientation == Orientation.Horizontal)
+                {
+                    this._navigationAnchor = null;
+                }
+
                 break;
             default:
-                _navigationAnchor = null;
+                this._navigationAnchor = null;
                 break;
         }
 
@@ -638,22 +680,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                 toIndex = count - 1;
                 break;
             case NavigationDirection.Next:
-                NavigateRight(ref toIndex);
+                this.NavigateRight(ref toIndex);
                 break;
             case NavigationDirection.Previous:
-                NavigateLeft(ref toIndex);
+                this.NavigateLeft(ref toIndex);
                 break;
             case NavigationDirection.Left:
-                NavigateLeft(ref toIndex);
+                this.NavigateLeft(ref toIndex);
                 break;
             case NavigationDirection.Right:
-                NavigateRight(ref toIndex);
+                this.NavigateRight(ref toIndex);
                 break;
             case NavigationDirection.Up:
-                NavigateUp(ref toIndex);
+                this.NavigateUp(ref toIndex);
                 break;
             case NavigationDirection.Down:
-                NavigateDown(ref toIndex);
+                this.NavigateDown(ref toIndex);
                 break;
             default:
                 return null;
@@ -661,41 +703,49 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         if (fromIndex == toIndex)
         {
-            _lastNavigationIndex = toIndex;
+            this._lastNavigationIndex = toIndex;
             return from;
         }
 
         if (wrap)
         {
             if (toIndex < 0)
+            {
                 toIndex = count - 1;
+            }
             else if (toIndex >= count)
+            {
                 toIndex = 0;
+            }
         }
         else
         {
             if (toIndex < 0)
+            {
                 toIndex = 0;
+            }
             else if (toIndex >= count)
+            {
                 toIndex = count - 1;
+            }
         }
 
-        _lastNavigationIndex = toIndex;
-        return ScrollIntoView(toIndex);
+        this._lastNavigationIndex = toIndex;
+        return this.ScrollIntoView(toIndex);
     }
 
     /// <inheritdoc />
     protected override IEnumerable<Control>? GetRealizedContainers()
     {
-        if (_realizedElements is null)
+        if (this._realizedElements is null)
         {
             return null;
         }
 
-        var elements = _realizedElements.Elements;
-        var count = elements.Count;
+        var elements = this._realizedElements.Elements;
+        int count = elements.Count;
         var result = new List<Control>(count);
-        for (var i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             if (elements[i] is { } element)
             {
@@ -709,47 +759,70 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <inheritdoc />
     protected override Control? ContainerFromIndex(int index)
     {
-        if (index < 0 || index >= Items.Count)
+        if (index < 0 || index >= this.Items.Count)
+        {
             return null;
-        if (_scrollToIndex == index)
-            return _scrollToElement;
-        if (_focusedIndex == index)
-            return _focusedElement;
-        if (GetRealizedElement(index) is { } realized)
+        }
+
+        if (this._scrollToIndex == index)
+        {
+            return this._scrollToElement;
+        }
+
+        if (this._focusedIndex == index)
+        {
+            return this._focusedElement;
+        }
+
+        if (this.GetRealizedElement(index) is { } realized)
+        {
             return realized;
-        if (Items[index] is Control c && ReferenceEquals(c.GetValue(_RecycleKeyProperty), s_itemIsItsOwnContainer))
+        }
+
+        if (this.Items[index] is Control c && ReferenceEquals(c.GetValue(_RecycleKeyProperty), s_itemIsItsOwnContainer))
+        {
             return c;
+        }
+
         return null;
     }
 
     /// <inheritdoc />
     protected override int IndexFromContainer(Control container)
     {
-        if (ReferenceEquals(container, _scrollToElement))
-            return _scrollToIndex;
-        if (ReferenceEquals(container, _focusedElement))
-            return _focusedIndex;
-        return _realizedElements?.GetIndex(container) ?? -1;
+        if (ReferenceEquals(container, this._scrollToElement))
+        {
+            return this._scrollToIndex;
+        }
+
+        if (ReferenceEquals(container, this._focusedElement))
+        {
+            return this._focusedIndex;
+        }
+
+        return this._realizedElements?.GetIndex(container) ?? -1;
     }
 
     private Rect GetExpectedItemRect(int index, double wrappingWidth)
     {
-        var items = Items;
+        var items = this.Items;
         if (index < 0 || index >= items.Count)
+        {
             return default;
+        }
 
-        var start = FindItemOffset(index, wrappingWidth);
-        var itemSize = GetAssumedItemSize(index, items[index]);
-        double width = GetWidth(itemSize);
-        double height = GetHeight(itemSize);
+        var start = this.FindItemOffset(index, wrappingWidth);
+        var itemSize = this.GetAssumedItemSize(index, items[index]);
+        double width = this.GetWidth(itemSize);
+        double height = this.GetHeight(itemSize);
 
         // Find extra width from stretching if applicable
-        if (StretchItems)
+        if (this.StretchItems)
         {
             // Find start of row
-            double y = GetY(start);
+            double y = this.GetY(start);
             int rowStartIndex = index;
-            while (rowStartIndex > 0 && GetY(FindItemOffset(rowStartIndex - 1, wrappingWidth)).IsCloseTo(y))
+            while (rowStartIndex > 0 && this.GetY(this.FindItemOffset(rowStartIndex - 1, wrappingWidth)).IsCloseTo(y))
             {
                 rowStartIndex--;
             }
@@ -758,14 +831,14 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             double rowSummedUpWidth = 0;
             int rowCount = 0;
             int k = rowStartIndex;
-            while (k < items.Count && GetY(FindItemOffset(k, wrappingWidth)).IsCloseTo(y))
+            while (k < items.Count && this.GetY(this.FindItemOffset(k, wrappingWidth)).IsCloseTo(y))
             {
-                rowSummedUpWidth += GetWidth(GetAssumedItemSize(k, items[k]));
+                rowSummedUpWidth += this.GetWidth(this.GetAssumedItemSize(k, items[k]));
                 rowCount++;
                 k++;
             }
 
-            GetRowLayout(wrappingWidth, rowCount, rowSummedUpWidth, out var innerSpacing, out _, out var extraWidth);
+            this.GetRowLayout(wrappingWidth, rowCount, rowSummedUpWidth, out double innerSpacing, out _, out double extraWidth);
             width += extraWidth;
 
             // If it's not the last item in the row, add innerSpacing to ensure the spacing is also visible
@@ -775,34 +848,38 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             }
         }
 
-        return CreateRect(GetX(start), GetY(start), width, height);
+        return this.CreateRect(this.GetX(start), this.GetY(start), width, height);
     }
 
     /// <inheritdoc />
     protected override Control? ScrollIntoView(int index)
     {
-        var items = Items;
+        var items = this.Items;
 
-        if (_isInLayout || index < 0 || index >= items.Count || _realizedElements is null || !IsEffectivelyVisible)
+        if (this._isInLayout || index < 0 || index >= items.Count || this._realizedElements is null || !this.IsEffectivelyVisible)
+        {
             return null;
+        }
 
-        var wrappingWidth = GetWrappingWidth();
+        double wrappingWidth = this.GetWrappingWidth();
 
         if (TopLevel.GetTopLevel(this) is not { } root)
+        {
             return null;
+        }
 
-        var element = GetRealizedElement(index);
+        var element = this.GetRealizedElement(index);
 
         if (element is not null)
         {
-            var rect = GetExpectedItemRect(index, wrappingWidth);
+            var rect = this.GetExpectedItemRect(index, wrappingWidth);
 
-            if (!_viewport.Contains(rect))
+            if (!this._viewport.Contains(rect))
             {
-                _isWaitingForViewportUpdate = true;
-                InvalidateMeasure();
+                this._isWaitingForViewportUpdate = true;
+                this.InvalidateMeasure();
                 root.UpdateLayout();
-                _isWaitingForViewportUpdate = false;
+                this._isWaitingForViewportUpdate = false;
             }
 
             element.BringIntoView();
@@ -812,26 +889,26 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         {
             // Create and measure the element to be brought into view. Store it in a field so that
             // it can be re-used in the layout pass.
-            var scrollToElement = GetOrCreateElement(items, index);
+            var scrollToElement = this.GetOrCreateElement(items, index);
             scrollToElement.Measure(Size.Infinity);
 
             // Get the expected position of the element and put it in place.
-            var rect = GetExpectedItemRect(index, wrappingWidth);
+            var rect = this.GetExpectedItemRect(index, wrappingWidth);
             scrollToElement.Arrange(rect);
 
             // Store the element and index so that they can be used in the layout pass.
-            _scrollToElement = scrollToElement;
-            _scrollToIndex = index;
+            this._scrollToElement = scrollToElement;
+            this._scrollToIndex = index;
 
             // If the item being brought into view was added since the last layout pass then
             // our bounds won't be updated, so any containing scroll viewers will not have an
             // updated extent. Do a layout pass to ensure that the containing scroll viewers
             // will be able to scroll the new item into view.
-            if (!Bounds.Contains(rect) && !_viewport.Contains(rect))
+            if (!this.Bounds.Contains(rect) && !this._viewport.Contains(rect))
             {
-                _isWaitingForViewportUpdate = true;
+                this._isWaitingForViewportUpdate = true;
                 root.UpdateLayout();
-                _isWaitingForViewportUpdate = false;
+                this._isWaitingForViewportUpdate = false;
             }
 
             // Try to bring the item into view.
@@ -842,15 +919,15 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             // - Measure is first done with the old viewport (which will be a no-op, see MeasureOverride)
             // - The viewport is then updated by the layout system which invalidates our measure
             // - Measure is then done with the new viewport.
-            _isWaitingForViewportUpdate = !_viewport.Contains(rect);
+            this._isWaitingForViewportUpdate = !this._viewport.Contains(rect);
             root.UpdateLayout();
 
             // If for some reason the layout system didn't give us a new viewport during the layout, we
             // need to do another layout pass as the one that took place was a no-op.
-            if (_isWaitingForViewportUpdate)
+            if (this._isWaitingForViewportUpdate)
             {
-                _isWaitingForViewportUpdate = false;
-                InvalidateMeasure();
+                this._isWaitingForViewportUpdate = false;
+                this.InvalidateMeasure();
                 root.UpdateLayout();
             }
 
@@ -860,24 +937,40 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             // hence the width extent should be correct now, and we can try to scroll again.
             scrollToElement.BringIntoView();
 
-            if (_scrollToElement is not null)
+            if (this._scrollToElement is not null)
             {
-                RecycleElement(_scrollToElement, _scrollToIndex);
+                this.RecycleElement(this._scrollToElement, this._scrollToIndex);
             }
 
-            _scrollToElement = null;
-            _scrollToIndex = -1;
+            this._scrollToElement = null;
+            this._scrollToIndex = -1;
             return scrollToElement;
         }
     }
 
     private double GetWrappingWidth()
     {
-        var width = GetWidth(_viewport.Size);
-        if (width <= 0) width = _lastLayoutWidth;
-        if (width <= 0) width = GetWidth(Bounds.Size);
-        if (width <= 0) width = GetWidth(DesiredSize);
-        if (width <= 0) width = _FallbackItemSize.Width * 10;
+        double width = this.GetWidth(this._viewport.Size);
+        if (width <= 0)
+        {
+            width = this._lastLayoutWidth;
+        }
+
+        if (width <= 0)
+        {
+            width = this.GetWidth(this.Bounds.Size);
+        }
+
+        if (width <= 0)
+        {
+            width = this.GetWidth(this.DesiredSize);
+        }
+
+        if (width <= 0)
+        {
+            width = _FallbackItemSize.Width * 10;
+        }
+
         return width;
     }
 
@@ -890,26 +983,32 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the desired size</returns>
     private Size CalculateDesiredSize(Orientation orientation, int itemCount, double wrappingWidth)
     {
-        if (itemCount == 0) return _EmptySize;
+        if (itemCount == 0)
+        {
+            return _EmptySize;
+        }
 
-        var averageItemSize = GetAverageItemSize();
+        var averageItemSize = this.GetAverageItemSize();
 
-        var itemWidth = GetWidth(averageItemSize);
-        var itemHeight = GetHeight(averageItemSize);
+        double itemWidth = this.GetWidth(averageItemSize);
+        double itemHeight = this.GetHeight(averageItemSize);
 
-        if (itemWidth == 0 || itemHeight == 0) return _EmptySize;
+        if (itemWidth == 0 || itemHeight == 0)
+        {
+            return _EmptySize;
+        }
 
-        var itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / itemWidth), 1);
+        double itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / itemWidth), 1);
 
         double sizeU = 0d;
-        if (AllowDifferentSizedItems)
+        if (this.AllowDifferentSizedItems)
         {
             // If we have a partially populated row cache, we can use it to estimate the rest
-            if (_rowCache.Count > 0)
+            if (this._rowCache.Count > 0)
             {
-                var lastRow = _rowCache[_rowCache.Count - 1];
-                var startIndex = lastRow.StartIndex + lastRow.Count;
-                var remainingItems = itemCount - startIndex;
+                var lastRow = this._rowCache[this._rowCache.Count - 1];
+                int startIndex = lastRow.StartIndex + lastRow.Count;
+                int remainingItems = itemCount - startIndex;
 
                 if (remainingItems <= 0)
                 {
@@ -917,7 +1016,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                 }
                 else
                 {
-                    if (ItemSizeProvider is not null)
+                    if (this.ItemSizeProvider is not null)
                     {
                         double x = 0;
                         double rowHeight = 0;
@@ -925,25 +1024,25 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
                         for (int i = startIndex; i < itemCount; i++)
                         {
-                            var item = Items[i];
-                            Size itemSize = GetAssumedItemSize(i, item);
+                            object? item = this.Items[i];
+                            Size itemSize = this.GetAssumedItemSize(i, item);
 
-                            if (x != 0 && x + GetWidth(itemSize) > wrappingWidth)
+                            if (x != 0 && x + this.GetWidth(itemSize) > wrappingWidth)
                             {
                                 x = 0;
                                 y += rowHeight;
                                 rowHeight = 0;
                             }
 
-                            x += GetWidth(itemSize);
-                            rowHeight = Math.Max(rowHeight, GetHeight(itemSize));
+                            x += this.GetWidth(itemSize);
+                            rowHeight = Math.Max(rowHeight, this.GetHeight(itemSize));
                         }
                         sizeU = y + rowHeight;
                     }
                     else
                     {
                         // Estimate remaining rows
-                        var remainingRows = Math.Ceiling(remainingItems / itemsPerRow);
+                        double remainingRows = Math.Ceiling(remainingItems / itemsPerRow);
                         sizeU = lastRow.Y + lastRow.Height + (remainingRows * itemHeight);
                     }
                 }
@@ -976,15 +1075,15 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the estimated desired size</returns>
     private Size EstimateDesiredSize(Orientation orientation, int itemCount, double wrappingWidth)
     {
-        if (_scrollToIndex >= 0 && _scrollToElement is not null)
+        if (this._scrollToIndex >= 0 && this._scrollToElement is not null)
         {
             // We have an element to scroll to, so we can estimate the desired size based on the
             // element's position and the remaining elements.
-            var remainingItems = itemCount - _scrollToIndex - 1;
+            int remainingItems = itemCount - this._scrollToIndex - 1;
 
             if (remainingItems <= 0)
             {
-                var u = GetY(_scrollToElement.Bounds.BottomRight);
+                double u = this.GetY(this._scrollToElement.Bounds.BottomRight);
                 return orientation == Orientation.Horizontal ?
                     new(wrappingWidth, u) :
                     new(u, wrappingWidth);
@@ -992,43 +1091,43 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             double sizeU;
 
-            if (AllowDifferentSizedItems && ItemSizeProvider is not null)
+            if (this.AllowDifferentSizedItems && this.ItemSizeProvider is not null)
             {
                 double x = 0;
                 double rowHeight = 0;
                 double y = 0;
 
                 // Find start of row for _scrollToIndex
-                var start = FindItemOffset(_scrollToIndex, wrappingWidth);
-                x = GetX(start);
-                y = GetY(start);
+                var start = this.FindItemOffset(this._scrollToIndex, wrappingWidth);
+                x = this.GetX(start);
+                y = this.GetY(start);
 
-                for (int i = _scrollToIndex; i < itemCount; i++)
+                for (int i = this._scrollToIndex; i < itemCount; i++)
                 {
-                    Size itemSize = (i == _scrollToIndex) ?
-                        new Size(GetWidth(_scrollToElement.Bounds.Size), GetHeight(_scrollToElement.Bounds.Size)) :
-                        GetAssumedItemSize(i, Items[i]);
+                    Size itemSize = (i == this._scrollToIndex) ?
+                        new Size(this.GetWidth(this._scrollToElement.Bounds.Size), this.GetHeight(this._scrollToElement.Bounds.Size)) :
+                        this.GetAssumedItemSize(i, this.Items[i]);
 
-                    if (x != 0 && x + GetWidth(itemSize) > wrappingWidth)
+                    if (x != 0 && x + this.GetWidth(itemSize) > wrappingWidth)
                     {
                         x = 0;
                         y += rowHeight;
                         rowHeight = 0;
                     }
 
-                    x += GetWidth(itemSize);
-                    rowHeight = Math.Max(rowHeight, GetHeight(itemSize));
+                    x += this.GetWidth(itemSize);
+                    rowHeight = Math.Max(rowHeight, this.GetHeight(itemSize));
                 }
                 sizeU = y + rowHeight;
             }
             else
             {
-                var avgSize = GetAverageItemSize();
-                var avgWidth = GetWidth(avgSize);
-                var itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / avgWidth), 1);
-                var remainingRows = (int)Math.Ceiling(remainingItems / itemsPerRow);
-                var u = GetY(_scrollToElement.Bounds.BottomRight);
-                sizeU = u + (remainingRows * GetHeight(avgSize));
+                var avgSize = this.GetAverageItemSize();
+                double avgWidth = this.GetWidth(avgSize);
+                double itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / avgWidth), 1);
+                int remainingRows = (int)Math.Ceiling(remainingItems / itemsPerRow);
+                double u = this.GetY(this._scrollToElement.Bounds.BottomRight);
+                sizeU = u + (remainingRows * this.GetHeight(avgSize));
             }
 
             return orientation == Orientation.Horizontal ?
@@ -1036,7 +1135,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                 new(sizeU, wrappingWidth);
         }
 
-        return DesiredSize;
+        return this.DesiredSize;
     }
 
     /// <inheritdoc />
@@ -1045,27 +1144,27 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         if (change.Property == OrientationProperty)
         {
-            ClearRowCache();
-            InvalidateMeasure();
-            InvalidateArrange();
+            this.ClearRowCache();
+            this.InvalidateMeasure();
+            this.InvalidateArrange();
             // Defer ScrollIntoView until after the layout triggered above has completed.
             // Calling it synchronously here risks reentrancy because OnPropertyChanged
             // fires before Measure/Arrange, and ScrollIntoView itself calls UpdateLayout.
-            Dispatcher.UIThread.Post(() => ScrollIntoView(0), DispatcherPriority.Background);
+            Dispatcher.UIThread.Post(() => this.ScrollIntoView(0), DispatcherPriority.Background);
         }
 
         if (change.Property == AllowDifferentSizedItemsProperty || change.Property == ItemSizeProperty ||
             change.Property == IsGridLayoutEnabledProperty || change.Property == StretchItemsProperty ||
             change.Property == CacheRowsProperty)
         {
-            foreach (var child in Children)
+            foreach (var child in this.Children)
             {
                 child.InvalidateMeasure();
             }
 
-            ClearRowCache();
-            InvalidateMeasure();
-            InvalidateArrange();
+            this.ClearRowCache();
+            this.InvalidateMeasure();
+            this.InvalidateArrange();
         }
 
 
@@ -1077,10 +1176,10 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void RealizeAndVirtualizeItems()
     {
-        FindStartIndexAndOffset();
-        VirtualizeItemsBeforeStartIndex();
-        RealizeItemsAndFindEndIndex();
-        VirtualizeItemsAfterEndIndex();
+        this.FindStartIndexAndOffset();
+        this.VirtualizeItemsBeforeStartIndex();
+        this.RealizeItemsAndFindEndIndex();
+        this.VirtualizeItemsAfterEndIndex();
     }
 
     /// <summary>
@@ -1089,17 +1188,17 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the estimated average Size</returns>
     private Size GetAverageItemSize()
     {
-        if (!ItemSize.NearlyEquals(_EmptySize))
+        if (!this.ItemSize.NearlyEquals(_EmptySize))
         {
-            return ItemSize;
+            return this.ItemSize;
         }
-        else if (!AllowDifferentSizedItems)
+        else if (!this.AllowDifferentSizedItems)
         {
-            return _sizeOfFirstItem ?? _FallbackItemSize;
+            return this._sizeOfFirstItem ?? _FallbackItemSize;
         }
         else
         {
-            return _averageItemSizeCache ??= CalculateAverageItemSize();
+            return this._averageItemSizeCache ??= this.CalculateAverageItemSize();
         }
     }
 
@@ -1113,47 +1212,80 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     {
         double x = 0, y = 0, rowHeight = 0;
 
-        if (!AllowDifferentSizedItems && Items.Count > 0)
+        if (!this.AllowDifferentSizedItems && this.Items.Count > 0)
         {
-            var itemWidth = GetWidth(GetAssumedItemSize(Items[0]));
-            var itemHeight = GetHeight(GetAssumedItemSize(Items[0]));
+            double itemWidth = this.GetWidth(this.GetAssumedItemSize(this.Items[0]));
+            double itemHeight = this.GetHeight(this.GetAssumedItemSize(this.Items[0]));
 
-            if (itemWidth == 0 || itemHeight == 0) return new Point();
+            if (itemWidth == 0 || itemHeight == 0)
+            {
+                return new Point();
+            }
 
-            var viewportWidth = wrappingWidth ?? GetWidth(_viewport.Size);
-            if (viewportWidth <= 0) viewportWidth = _lastLayoutWidth;
-            if (viewportWidth <= 0) viewportWidth = GetWidth(Bounds.Size);
-            if (viewportWidth <= 0) viewportWidth = GetWidth(DesiredSize);
-            if (viewportWidth <= 0) viewportWidth = _FallbackItemSize.Width * 10; // Extreme fallback
+            double viewportWidth = wrappingWidth ?? this.GetWidth(this._viewport.Size);
+            if (viewportWidth <= 0)
+            {
+                viewportWidth = this._lastLayoutWidth;
+            }
 
-            var itemsPerRow = (int)Math.Max(Math.Floor((viewportWidth + EPSILON) / itemWidth), 1);
+            if (viewportWidth <= 0)
+            {
+                viewportWidth = this.GetWidth(this.Bounds.Size);
+            }
 
-            var itemRowIndex = (int)Math.Floor(itemIndex * 1.0 / itemsPerRow);
+            if (viewportWidth <= 0)
+            {
+                viewportWidth = this.GetWidth(this.DesiredSize);
+            }
+
+            if (viewportWidth <= 0)
+            {
+                viewportWidth = _FallbackItemSize.Width * 10; // Extreme fallback
+            }
+
+            int itemsPerRow = (int)Math.Max(Math.Floor((viewportWidth + EPSILON) / itemWidth), 1);
+
+            int itemRowIndex = (int)Math.Floor(itemIndex * 1.0 / itemsPerRow);
             y = itemRowIndex * itemHeight;
 
-            GetRowLayout(viewportWidth, itemsPerRow, itemsPerRow * itemWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
-            var indexInRow = itemIndex - itemRowIndex * itemsPerRow;
+            this.GetRowLayout(viewportWidth, itemsPerRow, itemsPerRow * itemWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
+            int indexInRow = itemIndex - itemRowIndex * itemsPerRow;
             x = outerSpacing + indexInRow * (itemWidth + extraWidth + innerSpacing);
 
-            return CreatePoint(x, y);
+            return this.CreatePoint(x, y);
         }
 
-        var effectiveWrappingWidth = wrappingWidth ?? GetWidth(_viewport.Size);
-        if (effectiveWrappingWidth <= 0) effectiveWrappingWidth = _lastLayoutWidth;
-        if (effectiveWrappingWidth <= 0) effectiveWrappingWidth = GetWidth(Bounds.Size);
-        if (effectiveWrappingWidth <= 0) effectiveWrappingWidth = GetWidth(DesiredSize);
-        if (effectiveWrappingWidth <= 0) effectiveWrappingWidth = _FallbackItemSize.Width * 10; // Extreme fallback
+        double effectiveWrappingWidth = wrappingWidth ?? this.GetWidth(this._viewport.Size);
+        if (effectiveWrappingWidth <= 0)
+        {
+            effectiveWrappingWidth = this._lastLayoutWidth;
+        }
+
+        if (effectiveWrappingWidth <= 0)
+        {
+            effectiveWrappingWidth = this.GetWidth(this.Bounds.Size);
+        }
+
+        if (effectiveWrappingWidth <= 0)
+        {
+            effectiveWrappingWidth = this.GetWidth(this.DesiredSize);
+        }
+
+        if (effectiveWrappingWidth <= 0)
+        {
+            effectiveWrappingWidth = _FallbackItemSize.Width * 10; // Extreme fallback
+        }
 
         int startIndex = 0;
 
         // Try to use row cache to quickly jump to the correct row and then accumulate within the row
-        if (_rowCache.Count > 0)
+        if (this._rowCache.Count > 0)
         {
-            int lo = 0, hi = _rowCache.Count - 1, best = -1;
+            int lo = 0, hi = this._rowCache.Count - 1, best = -1;
             while (lo <= hi)
             {
                 int mid = (lo + hi) >> 1;
-                var r = _rowCache[mid];
+                var r = this._rowCache[mid];
                 if (r.StartIndex <= itemIndex)
                 {
                     best = mid;
@@ -1167,27 +1299,27 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             if (best >= 0)
             {
-                var row = _rowCache[best];
+                var row = this._rowCache[best];
                 y = row.Y;
                 rowHeight = row.Height;
 
                 // If the item is within this row, we can calculate its X using row info
                 if (itemIndex < row.StartIndex + row.Count)
                 {
-                    GetRowLayout(effectiveWrappingWidth, row.Count, row.SummedUpChildWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
+                    this.GetRowLayout(effectiveWrappingWidth, row.Count, row.SummedUpChildWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
                     x = outerSpacing;
                     for (int i = row.StartIndex; i < itemIndex; i++)
                     {
-                        var size = GetAssumedItemSize(i, Items[i]);
-                        x += GetWidth(size) + extraWidth + innerSpacing;
+                        var size = this.GetAssumedItemSize(i, this.Items[i]);
+                        x += this.GetWidth(size) + extraWidth + innerSpacing;
                     }
-                    return CreatePoint(x, y);
+                    return this.CreatePoint(x, y);
                 }
                 else
                 {
                     // Item is beyond this row. 
                     // If it's the last row in cache, it might be partial, so we start linear scan from its start.
-                    if (best == _rowCache.Count - 1)
+                    if (best == this._rowCache.Count - 1)
                     {
                         startIndex = row.StartIndex;
                         y = row.Y;
@@ -1209,10 +1341,10 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             double currentRowSummedUpWidth = 0;
             x = 0;
 
-            for (int i = startIndex; i < Items.Count; i++)
+            for (int i = startIndex; i < this.Items.Count; i++)
             {
-                Size itemSize = GetAssumedItemSize(i, Items[i]);
-                double itemWidth = GetWidth(itemSize);
+                Size itemSize = this.GetAssumedItemSize(i, this.Items[i]);
+                double itemWidth = this.GetWidth(itemSize);
 
                 if (currentRowCount > 0 && x + itemWidth > effectiveWrappingWidth + EPSILON)
                 {
@@ -1220,14 +1352,14 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                     if (itemIndex < i)
                     {
                         // Target was in the row we just finished.
-                        GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
+                        this.GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
                         double finalX = outerSpacing;
                         for (int j = currentRowStartIndex; j < itemIndex; j++)
                         {
-                            var s = GetAssumedItemSize(j, Items[j]);
-                            finalX += GetWidth(s) + extraWidth + innerSpacing;
+                            var s = this.GetAssumedItemSize(j, this.Items[j]);
+                            finalX += this.GetWidth(s) + extraWidth + innerSpacing;
                         }
-                        return CreatePoint(finalX, y);
+                        return this.CreatePoint(finalX, y);
                     }
 
                     x = 0;
@@ -1240,37 +1372,37 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
                 x += itemWidth;
                 currentRowSummedUpWidth += itemWidth;
-                rowHeight = Math.Max(rowHeight, GetHeight(itemSize));
+                rowHeight = Math.Max(rowHeight, this.GetHeight(itemSize));
                 currentRowCount++;
 
-                if (i == itemIndex && i == Items.Count - 1)
+                if (i == itemIndex && i == this.Items.Count - 1)
                 {
                     // It's the last item and it's our target.
-                    GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
+                    this.GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
                     double finalX = outerSpacing;
                     for (int j = currentRowStartIndex; j < itemIndex; j++)
                     {
-                        var s = GetAssumedItemSize(j, Items[j]);
-                        finalX += GetWidth(s) + extraWidth + innerSpacing;
+                        var s = this.GetAssumedItemSize(j, this.Items[j]);
+                        finalX += this.GetWidth(s) + extraWidth + innerSpacing;
                     }
-                    return CreatePoint(finalX, y);
+                    return this.CreatePoint(finalX, y);
                 }
             }
 
             // Check if it's in the last (possibly unfinished) row
             if (itemIndex >= currentRowStartIndex && itemIndex < currentRowStartIndex + currentRowCount)
             {
-                GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
+                this.GetRowLayout(effectiveWrappingWidth, currentRowCount, currentRowSummedUpWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
                 double finalX = outerSpacing;
                 for (int j = currentRowStartIndex; j < itemIndex; j++)
                 {
-                    var s = GetAssumedItemSize(j, Items[j]);
-                    finalX += GetWidth(s) + extraWidth + innerSpacing;
+                    var s = this.GetAssumedItemSize(j, this.Items[j]);
+                    finalX += this.GetWidth(s) + extraWidth + innerSpacing;
                 }
-                return CreatePoint(finalX, y);
+                return this.CreatePoint(finalX, y);
             }
 
-            return CreatePoint(0, y);
+            return this.CreatePoint(0, y);
         }
     }
 
@@ -1279,32 +1411,32 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void FindStartIndexAndOffset()
     {
-        double startOffsetY = DetermineStartOffsetY();
+        double startOffsetY = this.DetermineStartOffsetY();
 
         if (startOffsetY <= 0)
         {
-            _startItemIndex = Items.Count > 0 ? 0 : -1;
-            _startItemOffsetX = 0;
-            _startItemOffsetY = 0;
+            this._startItemIndex = this.Items.Count > 0 ? 0 : -1;
+            this._startItemOffsetX = 0;
+            this._startItemOffsetY = 0;
             return;
         }
 
-        _startItemIndex = -1;
+        this._startItemIndex = -1;
 
         double x = 0, y = 0, rowHeight = 0;
         int indexOfFirstRowItem = 0;
 
         int itemIndex = 0;
-        var wrappingWidth = GetWrappingWidth();
+        double wrappingWidth = this.GetWrappingWidth();
 
         // Use cached rows if available to quickly resolve the starting row
-        if (_rowCache.Count > 0)
+        if (this._rowCache.Count > 0)
         {
-            int lo = 0, hi = _rowCache.Count - 1, best = -1;
+            int lo = 0, hi = this._rowCache.Count - 1, best = -1;
             while (lo <= hi)
             {
                 int mid = (lo + hi) >> 1;
-                var r = _rowCache[mid];
+                var r = this._rowCache[mid];
                 if (r.Y <= startOffsetY)
                 {
                     best = mid;
@@ -1319,16 +1451,16 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             if (best >= 0)
             {
                 // Found a row that starts at or before startOffsetY
-                var foundRow = _rowCache[best];
+                var foundRow = this._rowCache[best];
 
                 if (startOffsetY < foundRow.Y + foundRow.Height)
                 {
                     // This row (or one before it) contains startOffsetY
-                    var targetIndex = Math.Max(0, best - Math.Max(0, CacheRows));
-                    var r = _rowCache[targetIndex];
-                    _startItemIndex = r.StartIndex;
-                    _startItemOffsetX = 0;
-                    _startItemOffsetY = r.Y;
+                    int targetIndex = Math.Max(0, best - Math.Max(0, this.CacheRows));
+                    var r = this._rowCache[targetIndex];
+                    this._startItemIndex = r.StartIndex;
+                    this._startItemOffsetX = 0;
+                    this._startItemOffsetY = r.Y;
                     return;
                 }
                 else
@@ -1343,44 +1475,49 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             }
         }
 
-        if (!AllowDifferentSizedItems && Items.Count > 0)
+        if (!this.AllowDifferentSizedItems && this.Items.Count > 0)
         {
-            var itemWidth = GetWidth(GetAssumedItemSize(Items[0]));
-            var itemHeight = GetHeight(GetAssumedItemSize(Items[0]));
+            double itemWidth = this.GetWidth(this.GetAssumedItemSize(this.Items[0]));
+            double itemHeight = this.GetHeight(this.GetAssumedItemSize(this.Items[0]));
 
-            if (itemWidth == 0 || itemHeight == 0) return;
+            if (itemWidth == 0 || itemHeight == 0)
+            {
+                return;
+            }
 
-            var itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / itemWidth), 1);
+            double itemsPerRow = Math.Max(Math.Floor((wrappingWidth + EPSILON) / itemWidth), 1);
 
-            var startRowIndex = (int)Math.Floor(startOffsetY / itemHeight);
-            _startItemIndex = (int)(startRowIndex * itemsPerRow);
-            _startItemOffsetX = 0;
-            _startItemOffsetY = startRowIndex * itemHeight;
+            int startRowIndex = (int)Math.Floor(startOffsetY / itemHeight);
+            this._startItemIndex = (int)(startRowIndex * itemsPerRow);
+            this._startItemOffsetX = 0;
+            this._startItemOffsetY = startRowIndex * itemHeight;
 
             // Apply CacheRows
-            var rowsToMoveUp = Math.Max(0, CacheRows);
-            var actualRowsToMoveUp = Math.Min(startRowIndex, rowsToMoveUp);
-            _startItemIndex -= (int)(actualRowsToMoveUp * itemsPerRow);
-            _startItemOffsetY -= actualRowsToMoveUp * itemHeight;
+            int rowsToMoveUp = Math.Max(0, this.CacheRows);
+            int actualRowsToMoveUp = Math.Min(startRowIndex, rowsToMoveUp);
+            this._startItemIndex -= (int)(actualRowsToMoveUp * itemsPerRow);
+            this._startItemOffsetY -= actualRowsToMoveUp * itemHeight;
 
             return;
         }
 
-        if (AllowDifferentSizedItems && Items.Count > 0)
+        if (this.AllowDifferentSizedItems && this.Items.Count > 0)
         {
-            _previousRowsReuse.Clear();
+            this._previousRowsReuse.Clear();
 
             // Linear scan fallback
-            for (; itemIndex < Items.Count; itemIndex++)
+            for (; itemIndex < this.Items.Count; itemIndex++)
             {
-                var item = Items[itemIndex];
-                Size itemSize = GetAssumedItemSize(itemIndex, item);
+                object? item = this.Items[itemIndex];
+                Size itemSize = this.GetAssumedItemSize(itemIndex, item);
 
-                if (x + GetWidth(itemSize) > wrappingWidth && x != 0)
+                if (x + this.GetWidth(itemSize) > wrappingWidth && x != 0)
                 {
-                    _previousRowsReuse.Add((indexOfFirstRowItem, y));
-                    if (_previousRowsReuse.Count > CacheRows + 1)
-                        _previousRowsReuse.RemoveAt(0);
+                    this._previousRowsReuse.Add((indexOfFirstRowItem, y));
+                    if (this._previousRowsReuse.Count > this.CacheRows + 1)
+                    {
+                        this._previousRowsReuse.RemoveAt(0);
+                    }
 
                     x = 0;
                     y += rowHeight;
@@ -1388,25 +1525,25 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                     indexOfFirstRowItem = itemIndex;
                 }
 
-                x += GetWidth(itemSize);
-                rowHeight = Math.Max(rowHeight, GetHeight(itemSize));
+                x += this.GetWidth(itemSize);
+                rowHeight = Math.Max(rowHeight, this.GetHeight(itemSize));
 
                 if (y + rowHeight > startOffsetY)
                 {
                     // Found the row containing startOffsetY. 
                     // Move back by CacheRows if possible.
-                    if (_previousRowsReuse.Count > 0)
+                    if (this._previousRowsReuse.Count > 0)
                     {
-                        var targetRow = _previousRowsReuse[Math.Max(0, _previousRowsReuse.Count - Math.Max(0, CacheRows))];
-                        _startItemIndex = targetRow.index;
-                        _startItemOffsetX = 0;
-                        _startItemOffsetY = targetRow.y;
+                        var targetRow = this._previousRowsReuse[Math.Max(0, this._previousRowsReuse.Count - Math.Max(0, this.CacheRows))];
+                        this._startItemIndex = targetRow.index;
+                        this._startItemOffsetX = 0;
+                        this._startItemOffsetY = targetRow.y;
                     }
                     else
                     {
-                        _startItemIndex = indexOfFirstRowItem;
-                        _startItemOffsetX = 0;
-                        _startItemOffsetY = y;
+                        this._startItemIndex = indexOfFirstRowItem;
+                        this._startItemOffsetX = 0;
+                        this._startItemOffsetY = y;
                     }
                     return;
                 }
@@ -1414,11 +1551,11 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         }
 
         // make sure that at least one item is realized to allow correct calculation of the extent
-        if (_startItemIndex == -1 && Items.Count > 0)
+        if (this._startItemIndex == -1 && this.Items.Count > 0)
         {
-            _startItemIndex = Items.Count - 1;
-            _startItemOffsetX = x;
-            _startItemOffsetY = y;
+            this._startItemIndex = this.Items.Count - 1;
+            this._startItemOffsetX = x;
+            this._startItemOffsetY = y;
         }
     }
 
@@ -1427,51 +1564,51 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void RealizeItemsAndFindEndIndex()
     {
-        if (_startItemIndex == -1)
+        if (this._startItemIndex == -1)
         {
-            _endItemIndex = -1;
+            this._endItemIndex = -1;
             return;
         }
 
-        int newEndItemIndex = Items.Count - 1;
+        int newEndItemIndex = this.Items.Count - 1;
         bool endItemIndexFound = false;
 
-        double endOffsetY = DetermineEndOffsetY();
+        double endOffsetY = this.DetermineEndOffsetY();
 
-        var wrappingWidth = GetWrappingWidth();
-        double x = _startItemOffsetX;
-        double y = _startItemOffsetY;
+        double wrappingWidth = this.GetWrappingWidth();
+        double x = this._startItemOffsetX;
+        double y = this._startItemOffsetY;
         double rowHeight = 0;
         double currentRowSummedUpWidth = 0;
-        int currentRowStartIndex = _startItemIndex;
+        int currentRowStartIndex = this._startItemIndex;
         int currentRowCount = 0;
         bool endRowReached = false;
-        int extraRowsToRealize = Math.Max(0, CacheRows);
+        int extraRowsToRealize = Math.Max(0, this.CacheRows);
 
-        for (int itemIndex = _startItemIndex; itemIndex <= newEndItemIndex; itemIndex++)
+        for (int itemIndex = this._startItemIndex; itemIndex <= newEndItemIndex; itemIndex++)
         {
             if (itemIndex == 0)
             {
-                _sizeOfFirstItem = null;
+                this._sizeOfFirstItem = null;
             }
 
-            object? item = Items[itemIndex];
+            object? item = this.Items[itemIndex];
 
-            var container = GetOrCreateElement(Items, itemIndex);
+            var container = this.GetOrCreateElement(this.Items, itemIndex);
 
-            if (container == _scrollToElement)
+            if (container == this._scrollToElement)
             {
-                _scrollToIndex = -1;
-                _scrollToElement = null;
+                this._scrollToIndex = -1;
+                this._scrollToElement = null;
             }
 
-            Size? upfrontKnownItemSize = GetUpfrontKnownItemSize(item);
+            Size? upfrontKnownItemSize = this.GetUpfrontKnownItemSize(item);
 
             // Prefer measuring with a concrete size when truly known (ItemSize, _sizeOfFirstItem, or provider).
             // If unknown, use Size.Infinity so the template can produce its natural DesiredSize.
             Size? measureSize = upfrontKnownItemSize
-                                ?? _sizeOfFirstItem
-                                ?? (!ItemSize.NearlyEquals(_EmptySize) ? ItemSize : (Size?)null);
+                                ?? this._sizeOfFirstItem
+                                ?? (!this.ItemSize.NearlyEquals(_EmptySize) ? this.ItemSize : (Size?)null);
 
             // Optimization: Skip Measure if the container already has the correct desired size.
             // However, we MUST measure if the container was just recycled (e.g. from GetOrCreateElement)
@@ -1479,26 +1616,26 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             // Avalonia's VirtualizingPanel usually handles this, but since we are doing custom realization:
             container.Measure(measureSize ?? Size.Infinity);
 
-            var containerSize = DetermineContainerSize(item, container, upfrontKnownItemSize);
+            var containerSize = this.DetermineContainerSize(item, container, upfrontKnownItemSize);
 
-            if (_measureElements is not null)
+            if (this._measureElements is not null)
             {
-                if (_measureElements.GetElement(itemIndex) == null)
+                if (this._measureElements.GetElement(itemIndex) == null)
                 {
-                    _averageItemSizeCache = null;
-                    _measureElements.Add(itemIndex, container, containerSize);
+                    this._averageItemSizeCache = null;
+                    this._measureElements.Add(itemIndex, container, containerSize);
                 }
             }
 
-            if (AllowDifferentSizedItems == false && _sizeOfFirstItem is null)
+            if (this.AllowDifferentSizedItems == false && this._sizeOfFirstItem is null)
             {
-                _sizeOfFirstItem = containerSize;
+                this._sizeOfFirstItem = containerSize;
             }
 
-            if (x != 0 && (x + GetWidth(containerSize)) > (wrappingWidth + EPSILON))
+            if (x != 0 && (x + this.GetWidth(containerSize)) > (wrappingWidth + EPSILON))
             {
                 // finalize previous row in cache
-                AddRowCacheEntry(currentRowStartIndex, y, rowHeight, currentRowCount, currentRowSummedUpWidth);
+                this.AddRowCacheEntry(currentRowStartIndex, y, rowHeight, currentRowCount, currentRowSummedUpWidth);
 
                 // If we've already reached the viewport end row earlier, count down extra rows
                 if (endRowReached)
@@ -1519,19 +1656,19 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                 currentRowCount = 0;
             }
 
-            x += GetWidth(containerSize);
-            currentRowSummedUpWidth += GetWidth(containerSize);
-            rowHeight = Math.Max(rowHeight, GetHeight(containerSize));
+            x += this.GetWidth(containerSize);
+            currentRowSummedUpWidth += this.GetWidth(containerSize);
+            rowHeight = Math.Max(rowHeight, this.GetHeight(containerSize));
             currentRowCount++;
 
             if (endItemIndexFound == false)
             {
-                Debug.Assert(_sizeOfFirstItem is not null);
+                Debug.Assert(this._sizeOfFirstItem is not null);
 
                 // ! See Debug assert above 
                 if (y >= endOffsetY
-                    || (AllowDifferentSizedItems == false
-                        && x + GetWidth(_sizeOfFirstItem!.Value) > wrappingWidth
+                    || (this.AllowDifferentSizedItems == false
+                        && x + this.GetWidth(this._sizeOfFirstItem!.Value) > wrappingWidth
                         && y + rowHeight >= endOffsetY))
                 {
                     endItemIndexFound = true;
@@ -1542,9 +1679,9 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         }
 
         // finalize last row
-        AddRowCacheEntry(currentRowStartIndex, y, rowHeight, currentRowCount, currentRowSummedUpWidth);
+        this.AddRowCacheEntry(currentRowStartIndex, y, rowHeight, currentRowCount, currentRowSummedUpWidth);
 
-        _endItemIndex = newEndItemIndex;
+        this._endItemIndex = newEndItemIndex;
     }
 
     /// <summary>
@@ -1556,12 +1693,12 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns></returns>
     private Size DetermineContainerSize(object? item, Control container, Size? upfrontKnownItemSize)
     {
-        if (ItemSizeProvider is not null && item is not null)
+        if (this.ItemSizeProvider is not null && item is not null)
         {
-            return ItemSizeProvider.GetSizeForItem(item);
+            return this.ItemSizeProvider.GetSizeForItem(item);
         }
 
-        return upfrontKnownItemSize ?? _realizedElements?.GetElementSize(container) ?? container.DesiredSize;
+        return upfrontKnownItemSize ?? this._realizedElements?.GetElementSize(container) ?? container.DesiredSize;
     }
 
     /// <summary>
@@ -1569,7 +1706,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void VirtualizeItemsBeforeStartIndex()
     {
-        _realizedElements?.RecycleElementsBefore(_startItemIndex, RecycleElement);
+        this._realizedElements?.RecycleElementsBefore(this._startItemIndex, this.RecycleElement);
     }
 
     /// <summary>
@@ -1577,7 +1714,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private void VirtualizeItemsAfterEndIndex()
     {
-        _realizedElements?.RecycleElementsAfter(_endItemIndex, RecycleElement);
+        this._realizedElements?.RecycleElementsAfter(this._endItemIndex, this.RecycleElement);
     }
 
     /// <summary>
@@ -1586,7 +1723,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the y-component of the effective viewport</returns>
     private double DetermineStartOffsetY()
     {
-        return Math.Max(GetY(_viewport.TopLeft), 0);
+        return Math.Max(this.GetY(this._viewport.TopLeft), 0);
     }
 
     /// <summary>
@@ -1595,7 +1732,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the y-component of the effective viewport</returns>
     private double DetermineEndOffsetY()
     {
-        return Math.Max(0, GetY(_viewport.BottomRight));
+        return Math.Max(0, this.GetY(this._viewport.BottomRight));
     }
 
     /// <summary>
@@ -1610,19 +1747,19 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             return null;
         }
 
-        if (!ItemSize.NearlyEquals(_EmptySize))
+        if (!this.ItemSize.NearlyEquals(_EmptySize))
         {
-            return ItemSize;
+            return this.ItemSize;
         }
 
-        if (!AllowDifferentSizedItems && _sizeOfFirstItem != null)
+        if (!this.AllowDifferentSizedItems && this._sizeOfFirstItem != null)
         {
-            return _sizeOfFirstItem;
+            return this._sizeOfFirstItem;
         }
 
-        if (ItemSizeProvider != null)
+        if (this.ItemSizeProvider != null)
         {
-            return ItemSizeProvider.GetSizeForItem(item);
+            return this.ItemSizeProvider.GetSizeForItem(item);
         }
 
         return null;
@@ -1636,19 +1773,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the assumed size of the item</returns>
     private Size GetAssumedItemSize(int index, object? item)
     {
-        if (item is null) return _EmptySize;
+        if (item is null)
+        {
+            return _EmptySize;
+        }
 
-        if (GetUpfrontKnownItemSize(item) is { } upfrontKnownItemSize)
+        if (this.GetUpfrontKnownItemSize(item) is { } upfrontKnownItemSize)
         {
             return upfrontKnownItemSize;
         }
 
-        if (_realizedElements?.GetElementSize(index) is { } cachedItemSize)
+        if (this._realizedElements?.GetElementSize(index) is { } cachedItemSize)
         {
             return cachedItemSize;
         }
 
-        return GetAverageItemSize();
+        return this.GetAverageItemSize();
     }
 
     /// <summary>
@@ -1658,14 +1798,17 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the assumed size of the item</returns>
     private Size GetAssumedItemSize(object? item)
     {
-        if (item is null) return _EmptySize;
+        if (item is null)
+        {
+            return _EmptySize;
+        }
 
-        if (GetUpfrontKnownItemSize(item) is { } upfrontKnownItemSize)
+        if (this.GetUpfrontKnownItemSize(item) is { } upfrontKnownItemSize)
         {
             return upfrontKnownItemSize;
         }
 
-        return GetAverageItemSize();
+        return this.GetAverageItemSize();
     }
 
     /// <summary>
@@ -1679,29 +1822,29 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="rowHeight">the pre-calculated maximum height of all realized children in the row</param>
     private void ArrangeRow(double rowWidth, List<Control> children, List<Size> childSizes, double y, double summedUpChildWidth, double rowHeight)
     {
-        var childCount = children.Count;
-        GetRowLayout(rowWidth, childCount, summedUpChildWidth, out var innerSpacing, out var outerSpacing, out var extraWidth);
+        int childCount = children.Count;
+        this.GetRowLayout(rowWidth, childCount, summedUpChildWidth, out double innerSpacing, out double outerSpacing, out double extraWidth);
 
-        double x = -GetX(_viewport.TopLeft) + outerSpacing;
+        double x = -this.GetX(this._viewport.TopLeft) + outerSpacing;
 
-        if (AllowDifferentSizedItems)
+        if (this.AllowDifferentSizedItems)
         {
             for (int i = 0; i < childCount; i++)
             {
                 var child = children[i];
                 Size childSize = childSizes[i];
-                child.Arrange(CreateRect(x, y, GetWidth(childSize) + extraWidth, rowHeight));
-                x += GetWidth(childSize) + extraWidth + innerSpacing;
+                child.Arrange(this.CreateRect(x, y, this.GetWidth(childSize) + extraWidth, rowHeight));
+                x += this.GetWidth(childSize) + extraWidth + innerSpacing;
             }
         }
         else
         {
-            double childWidth = GetWidth(childSizes[0]);
+            double childWidth = this.GetWidth(childSizes[0]);
             double arrangedWidth = childWidth + extraWidth;
             for (int i = 0; i < childCount; i++)
             {
                 var child = children[i];
-                child.Arrange(CreateRect(x, y, arrangedWidth, rowHeight));
+                child.Arrange(this.CreateRect(x, y, arrangedWidth, rowHeight));
                 x += arrangedWidth + innerSpacing;
             }
         }
@@ -1713,18 +1856,18 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         extraWidthPerItem = 0;
         double effectiveSummedUpWidth = summedUpChildWidth;
 
-        if (StretchItems && actualChildCount > 0)
+        if (this.StretchItems && actualChildCount > 0)
         {
-            if (AllowDifferentSizedItems)
+            if (this.AllowDifferentSizedItems)
             {
                 extraWidthPerItem = (rowWidth - summedUpChildWidth) / actualChildCount;
                 effectiveSummedUpWidth = rowWidth;
             }
             else
             {
-                var averageSize = GetAverageItemSize();
-                var childWidth = GetWidth(averageSize);
-                int itemsPerRow = IsGridLayoutEnabled ?
+                var averageSize = this.GetAverageItemSize();
+                double childWidth = this.GetWidth(averageSize);
+                int itemsPerRow = this.IsGridLayoutEnabled ?
                     (int)Math.Max(1, Math.Floor((rowWidth + EPSILON) / childWidth)) :
                     actualChildCount;
 
@@ -1736,7 +1879,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             }
         }
 
-        CalculateRowSpacing(rowWidth, actualChildCount, effectiveSummedUpWidth, out innerSpacing, out outerSpacing);
+        this.CalculateRowSpacing(rowWidth, actualChildCount, effectiveSummedUpWidth, out innerSpacing, out outerSpacing);
     }
 
     /// <summary>
@@ -1752,10 +1895,10 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     {
         int spacingChildCount = actualChildCount;
 
-        if (!AllowDifferentSizedItems && IsGridLayoutEnabled)
+        if (!this.AllowDifferentSizedItems && this.IsGridLayoutEnabled)
         {
-            var averageItemSize = GetAverageItemSize();
-            var itemWidth = GetWidth(averageItemSize);
+            var averageItemSize = this.GetAverageItemSize();
+            double itemWidth = this.GetWidth(averageItemSize);
             if (itemWidth > 0)
             {
                 spacingChildCount = (int)Math.Max(1, Math.Floor((rowWidth + EPSILON) / itemWidth));
@@ -1764,7 +1907,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         double unusedWidth = Math.Max(0, rowWidth - summedUpChildWidth);
 
-        switch (SpacingMode)
+        switch (this.SpacingMode)
         {
             case SpacingMode.Uniform:
                 innerSpacing = outerSpacing = unusedWidth / (spacingChildCount + 1);
@@ -1794,7 +1937,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the average item size or <see cref="_FallbackItemSize"/> if no items are available</returns>
     private Size CalculateAverageItemSize()
     {
-        var sizes = _realizedElements?.Sizes;
+        var sizes = this._realizedElements?.Sizes;
         int count = sizes?.Count ?? 0;
         if (sizes is null || count == 0)
         {
@@ -1821,22 +1964,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private void OnEffectiveViewportChanged(object? sender, EffectiveViewportChangedEventArgs e)
     {
         // var vertical = Orientation == Orientation.Vertical;
-        var oldViewportStartX = GetX(_viewport.TopLeft);
-        var oldViewportStartY = GetY(_viewport.TopLeft); // vertical ? ScrollOffset.Top : _viewport.Left;
-        var oldViewportEndX = GetX(_viewport.BottomRight);
-        var oldViewportEndY = GetY(_viewport.BottomRight); // vertical ? _viewport.Bottom : _viewport.Right;
+        double oldViewportStartX = this.GetX(this._viewport.TopLeft);
+        double oldViewportStartY = this.GetY(this._viewport.TopLeft); // vertical ? ScrollOffset.Top : _viewport.Left;
+        double oldViewportEndX = this.GetX(this._viewport.BottomRight);
+        double oldViewportEndY = this.GetY(this._viewport.BottomRight); // vertical ? _viewport.Bottom : _viewport.Right;
 
-        _viewport = e.EffectiveViewport;
-        _isWaitingForViewportUpdate = false;
+        this._viewport = e.EffectiveViewport;
+        this._isWaitingForViewportUpdate = false;
 
-        var newViewportStartX = GetX(_viewport.TopLeft);
-        var newViewportStartY = GetY(_viewport.TopLeft); // vertical ? _viewport.Top : _viewport.Left;
-        var newViewportEndX = GetX(_viewport.BottomRight);
-        var newViewportEndY = GetY(_viewport.BottomRight); // ? _viewport.Bottom : _viewport.Right);
+        double newViewportStartX = this.GetX(this._viewport.TopLeft);
+        double newViewportStartY = this.GetY(this._viewport.TopLeft); // vertical ? _viewport.Top : _viewport.Left;
+        double newViewportEndX = this.GetX(this._viewport.BottomRight);
+        double newViewportEndY = this.GetY(this._viewport.BottomRight); // ? _viewport.Bottom : _viewport.Right);
 
-        var newViewportWidth = GetWidth(_viewport.Size);
+        double newViewportWidth = this.GetWidth(this._viewport.Size);
 
-        if (_lastLayoutWidth.IsCloseTo(newViewportWidth))
+        if (this._lastLayoutWidth.IsCloseTo(newViewportWidth))
         {
             // Optimization: Skip InvalidateMeasure if the new viewport is within what we already have realized/cached.
             // This is safe because:
@@ -1847,16 +1990,16 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             // Compute the bottom of the last realized row from the row cache (O(1)) instead of
             // calling FindItemOffset which can be O(N) for AllowDifferentSizedItems.
             double endItemBottom = double.MaxValue;
-            if (_rowCache.Count > 0)
+            if (this._rowCache.Count > 0)
             {
-                var lastRow = _rowCache[_rowCache.Count - 1];
+                var lastRow = this._rowCache[this._rowCache.Count - 1];
                 endItemBottom = lastRow.Y + lastRow.Height;
             }
 
-            double cacheMargin = CacheRows > 0 ? GetHeight(GetAverageItemSize()) : 0;
-            bool withinCached = _realizedElements != null &&
-                                _startItemIndex >= 0 && _endItemIndex >= 0 &&
-                                newViewportStartY >= _startItemOffsetY + cacheMargin &&
+            double cacheMargin = this.CacheRows > 0 ? this.GetHeight(this.GetAverageItemSize()) : 0;
+            bool withinCached = this._realizedElements != null &&
+                                this._startItemIndex >= 0 && this._endItemIndex >= 0 &&
+                                newViewportStartY >= this._startItemOffsetY + cacheMargin &&
                                 newViewportEndY <= endItemBottom - cacheMargin;
 
             if (withinCached)
@@ -1866,22 +2009,22 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                     !oldViewportStartY.IsCloseTo(newViewportStartY) ||
                     !oldViewportEndY.IsCloseTo(newViewportEndY))
                 {
-                    InvalidateArrange();
+                    this.InvalidateArrange();
                 }
 
                 return;
             }
         }
 
-        _lastLayoutWidth = newViewportWidth;
-        ClearRowCache();
+        this._lastLayoutWidth = newViewportWidth;
+        this.ClearRowCache();
 
         if (!oldViewportStartX.IsCloseTo(newViewportStartX) ||
             !oldViewportEndX.IsCloseTo(newViewportEndX) ||
             !oldViewportStartY.IsCloseTo(newViewportStartY) ||
             !oldViewportEndY.IsCloseTo(newViewportEndY))
         {
-            InvalidateMeasure();
+            this.InvalidateMeasure();
         }
     }
 
@@ -1892,34 +2035,34 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="e">the event args</param>
     private void OnItemsControlPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (_focusedElement is not null &&
+        if (this._focusedElement is not null &&
             e.Property == KeyboardNavigation.TabOnceActiveElementProperty &&
-            ReferenceEquals(e.GetOldValue<IInputElement?>(), _focusedElement))
+            ReferenceEquals(e.GetOldValue<IInputElement?>(), this._focusedElement))
         {
             // TabOnceActiveElement has moved away from _focusedElement so we can recycle it.
-            RecycleElement(_focusedElement, _focusedIndex);
-            _focusedElement = null;
-            _focusedIndex = -1;
+            this.RecycleElement(this._focusedElement, this._focusedIndex);
+            this._focusedElement = null;
+            this._focusedIndex = -1;
         }
     }
 
     private void NavigateLeft(ref int currentIndex)
     {
-        switch (Orientation)
+        switch (this.Orientation)
         {
             case Orientation.Horizontal:
                 --currentIndex;
                 break;
 
             case Orientation.Vertical:
-                if (AllowDifferentSizedItems)
+                if (this.AllowDifferentSizedItems)
                 {
-                    currentIndex = GetIndexInRelativeRow(currentIndex, -1);
+                    currentIndex = this.GetIndexInRelativeRow(currentIndex, -1);
                 }
                 else
                 {
-                    var itemsPerRow =
-                        (int)Math.Max(Math.Floor((GetWidth(_viewport.Size) + EPSILON) / GetWidth(GetAverageItemSize())), 1);
+                    int itemsPerRow =
+                        (int)Math.Max(Math.Floor((this.GetWidth(this._viewport.Size) + EPSILON) / this.GetWidth(this.GetAverageItemSize())), 1);
                     currentIndex -= itemsPerRow;
                 }
                 break;
@@ -1928,21 +2071,21 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
     private void NavigateRight(ref int currentIndex)
     {
-        switch (Orientation)
+        switch (this.Orientation)
         {
             case Orientation.Horizontal:
                 ++currentIndex;
                 break;
 
             case Orientation.Vertical:
-                if (AllowDifferentSizedItems)
+                if (this.AllowDifferentSizedItems)
                 {
-                    currentIndex = GetIndexInRelativeRow(currentIndex, 1);
+                    currentIndex = this.GetIndexInRelativeRow(currentIndex, 1);
                 }
                 else
                 {
-                    var itemsPerRow =
-                        (int)Math.Max(Math.Floor((GetWidth(_viewport.Size) + EPSILON) / GetWidth(GetAverageItemSize())), 1);
+                    int itemsPerRow =
+                        (int)Math.Max(Math.Floor((this.GetWidth(this._viewport.Size) + EPSILON) / this.GetWidth(this.GetAverageItemSize())), 1);
                     currentIndex += itemsPerRow;
                 }
                 break;
@@ -1951,20 +2094,20 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
     private void NavigateUp(ref int currentIndex)
     {
-        switch (Orientation)
+        switch (this.Orientation)
         {
             case Orientation.Vertical:
                 --currentIndex;
                 break;
             case Orientation.Horizontal:
-                if (AllowDifferentSizedItems)
+                if (this.AllowDifferentSizedItems)
                 {
-                    currentIndex = GetIndexInRelativeRow(currentIndex, -1);
+                    currentIndex = this.GetIndexInRelativeRow(currentIndex, -1);
                 }
                 else
                 {
-                    var itemsPerRow =
-                        (int)Math.Max(Math.Floor((GetWidth(_viewport.Size) + EPSILON) / GetWidth(GetAverageItemSize())), 1);
+                    int itemsPerRow =
+                        (int)Math.Max(Math.Floor((this.GetWidth(this._viewport.Size) + EPSILON) / this.GetWidth(this.GetAverageItemSize())), 1);
                     currentIndex -= itemsPerRow;
                 }
                 break;
@@ -1973,20 +2116,20 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
     private void NavigateDown(ref int currentIndex)
     {
-        switch (Orientation)
+        switch (this.Orientation)
         {
             case Orientation.Vertical:
                 ++currentIndex;
                 break;
             case Orientation.Horizontal:
-                if (AllowDifferentSizedItems)
+                if (this.AllowDifferentSizedItems)
                 {
-                    currentIndex = GetIndexInRelativeRow(currentIndex, 1);
+                    currentIndex = this.GetIndexInRelativeRow(currentIndex, 1);
                 }
                 else
                 {
-                    var itemsPerRow =
-                        (int)Math.Max(Math.Floor((GetWidth(_viewport.Size) + EPSILON) / GetWidth(GetAverageItemSize())), 1);
+                    int itemsPerRow =
+                        (int)Math.Max(Math.Floor((this.GetWidth(this._viewport.Size) + EPSILON) / this.GetWidth(this.GetAverageItemSize())), 1);
                     currentIndex += itemsPerRow;
                 }
                 break;
@@ -1995,23 +2138,25 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
     private int GetIndexInRelativeRow(int currentIndex, int rowOffset)
     {
-        var itemCount = Items.Count;
+        int itemCount = this.Items.Count;
         if (currentIndex < 0 || currentIndex >= itemCount)
+        {
             return currentIndex;
+        }
 
-        var wrappingWidth = GetWrappingWidth();
+        double wrappingWidth = this.GetWrappingWidth();
 
         // --- Step 1: find source row StartIndex from cache (O(log N)) or single linear scan (O(N)) ---
         int sourceCacheIndex = -1;
         RowInfo? sourceRowHint = null;
 
-        if (_rowCache.Count > 0)
+        if (this._rowCache.Count > 0)
         {
-            int lo = 0, hi = _rowCache.Count - 1;
+            int lo = 0, hi = this._rowCache.Count - 1;
             while (lo <= hi)
             {
                 int mid = (lo + hi) >> 1;
-                var r = _rowCache[mid];
+                var r = this._rowCache[mid];
                 if (r.StartIndex <= currentIndex)
                 {
                     if (currentIndex < r.StartIndex + r.Count)
@@ -2031,35 +2176,39 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         if (sourceRowHint is null)
         {
-            sourceRowHint = FindRowByLinearScan(currentIndex, wrappingWidth);
+            sourceRowHint = this.FindRowByLinearScan(currentIndex, wrappingWidth);
             if (sourceRowHint is null)
+            {
                 return currentIndex;
+            }
         }
 
         // Scan source row for true Count/SummedWidth (cache entry may be incomplete if it's the last row)
-        var (sourceCount, sourceSumW) = ScanRowFromStart(sourceRowHint.StartIndex, wrappingWidth);
+        var (sourceCount, sourceSumW) = this.ScanRowFromStart(sourceRowHint.StartIndex, wrappingWidth);
 
         // --- Step 2: compute current item X and width (no FindItemOffset) ---
-        GetRowLayout(wrappingWidth, sourceCount, sourceSumW,
-            out var sourceInnerSpacing, out var sourceOuterSpacing, out var sourceExtraWidth);
+        this.GetRowLayout(wrappingWidth, sourceCount, sourceSumW,
+            out double sourceInnerSpacing, out double sourceOuterSpacing, out double sourceExtraWidth);
 
         double currentX = sourceOuterSpacing;
         for (int i = sourceRowHint.StartIndex; i < currentIndex; i++)
-            currentX += GetWidth(GetAssumedItemSize(i, Items[i])) + sourceExtraWidth + sourceInnerSpacing;
+        {
+            currentX += this.GetWidth(this.GetAssumedItemSize(i, this.Items[i])) + sourceExtraWidth + sourceInnerSpacing;
+        }
 
-        var rawCurrentWidth = GetWidth(GetAssumedItemSize(currentIndex, Items[currentIndex]));
-        var currentWidth = rawCurrentWidth + sourceExtraWidth;
-        var currentMidX = currentX + currentWidth / 2;
+        double rawCurrentWidth = this.GetWidth(this.GetAssumedItemSize(currentIndex, this.Items[currentIndex]));
+        double currentWidth = rawCurrentWidth + sourceExtraWidth;
+        double currentMidX = currentX + currentWidth / 2;
 
         // Use or initialize navigation anchor
-        if (_navigationAnchor.HasValue)
+        if (this._navigationAnchor.HasValue)
         {
-            currentMidX = _navigationAnchor.Value;
+            currentMidX = this._navigationAnchor.Value;
             currentWidth = 0; // Use a zero-width span when we have an anchor to avoid wide-item drift
         }
         else
         {
-            _navigationAnchor = currentMidX;
+            this._navigationAnchor = currentMidX;
         }
 
         // --- Step 3: find target row StartIndex from cache (O(1)) or single linear scan (O(N)) ---
@@ -2068,19 +2217,25 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         if (sourceCacheIndex >= 0)
         {
             int targetCacheIndex = sourceCacheIndex + rowOffset;
-            if (targetCacheIndex >= 0 && targetCacheIndex < _rowCache.Count)
+            if (targetCacheIndex >= 0 && targetCacheIndex < this._rowCache.Count)
             {
-                targetStartIndex = _rowCache[targetCacheIndex].StartIndex;
+                targetStartIndex = this._rowCache[targetCacheIndex].StartIndex;
             }
             else
             {
                 // Adjacent row is outside cache bounds
                 int searchFrom = rowOffset < 0 ? sourceRowHint.StartIndex - 1 : sourceRowHint.StartIndex + sourceCount;
                 if (searchFrom < 0 || searchFrom >= itemCount)
+                {
                     return currentIndex;
-                var fallback = FindRowByLinearScan(searchFrom, wrappingWidth);
+                }
+
+                var fallback = this.FindRowByLinearScan(searchFrom, wrappingWidth);
                 if (fallback is null)
+                {
                     return currentIndex;
+                }
+
                 targetStartIndex = fallback.StartIndex;
             }
         }
@@ -2088,20 +2243,28 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         {
             int searchFrom = rowOffset < 0 ? sourceRowHint.StartIndex - 1 : sourceRowHint.StartIndex + sourceCount;
             if (searchFrom < 0 || searchFrom >= itemCount)
+            {
                 return currentIndex;
-            var fallback = FindRowByLinearScan(searchFrom, wrappingWidth);
+            }
+
+            var fallback = this.FindRowByLinearScan(searchFrom, wrappingWidth);
             if (fallback is null)
+            {
                 return currentIndex;
+            }
+
             targetStartIndex = fallback.StartIndex;
         }
 
         // --- Step 4: scan target row for true Count/SummedWidth, then find closest item ---
-        var (targetCount, targetSumW) = ScanRowFromStart(targetStartIndex, wrappingWidth);
+        var (targetCount, targetSumW) = this.ScanRowFromStart(targetStartIndex, wrappingWidth);
         if (targetCount == 0)
+        {
             return currentIndex;
+        }
 
-        GetRowLayout(wrappingWidth, targetCount, targetSumW,
-            out var targetInnerSpacing, out var targetOuterSpacing, out var targetExtraWidth);
+        this.GetRowLayout(wrappingWidth, targetCount, targetSumW,
+            out double targetInnerSpacing, out double targetOuterSpacing, out double targetExtraWidth);
 
         double sourceStart = currentMidX - currentWidth / 2;
         double sourceEnd = currentMidX + currentWidth / 2;
@@ -2119,8 +2282,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         for (int i = 0; i < targetCount; i++)
         {
             int idx = targetStartIndex + i;
-            var itemWidth = GetWidth(GetAssumedItemSize(idx, Items[idx])) + targetExtraWidth;
-            var itemMidX = itemX + itemWidth / 2;
+            double itemWidth = this.GetWidth(this.GetAssumedItemSize(idx, this.Items[idx])) + targetExtraWidth;
+            double itemMidX = itemX + itemWidth / 2;
 
             double overlap = Math.Max(0, Math.Min(sourceEnd, itemX + itemWidth) - Math.Max(sourceStart, itemX));
             double diff = Math.Abs(itemMidX - currentMidX);
@@ -2152,11 +2315,14 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     {
         double x = 0, sumW = 0;
         int count = 0;
-        for (int i = startIndex; i < Items.Count; i++)
+        for (int i = startIndex; i < this.Items.Count; i++)
         {
-            var w = GetWidth(GetAssumedItemSize(i, Items[i]));
+            double w = this.GetWidth(this.GetAssumedItemSize(i, this.Items[i]));
             if (count > 0 && x + w > wrappingWidth + EPSILON)
+            {
                 break;
+            }
+
             x += w;
             sumW += w;
             count++;
@@ -2171,42 +2337,52 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     private RowInfo? FindRowByLinearScan(int itemIndex, double wrappingWidth)
     {
-        if (itemIndex < 0 || itemIndex >= Items.Count)
+        if (itemIndex < 0 || itemIndex >= this.Items.Count)
+        {
             return null;
+        }
 
         double x = 0, y = 0, rowHeight = 0, rowSummedWidth = 0;
         int scanFrom = 0, rowStart = 0, rowCount = 0;
 
         // Seed from the nearest cached predecessor to avoid scanning from index 0
-        if (_rowCache.Count > 0)
+        if (this._rowCache.Count > 0)
         {
-            int lo = 0, hi = _rowCache.Count - 1, best = -1;
+            int lo = 0, hi = this._rowCache.Count - 1, best = -1;
             while (lo <= hi)
             {
                 int mid = (lo + hi) >> 1;
-                if (_rowCache[mid].StartIndex <= itemIndex) { best = mid; lo = mid + 1; }
-                else hi = mid - 1;
+                if (this._rowCache[mid].StartIndex <= itemIndex) { best = mid; lo = mid + 1; }
+                else
+                {
+                    hi = mid - 1;
+                }
             }
             if (best >= 0)
             {
-                var seed = _rowCache[best];
+                var seed = this._rowCache[best];
                 if (itemIndex < seed.StartIndex + seed.Count)
+                {
                     return seed; // already covered by cache
+                }
+
                 scanFrom = seed.StartIndex + seed.Count;
                 y = seed.Y + seed.Height;
                 rowStart = scanFrom;
             }
         }
 
-        for (int i = scanFrom; i < Items.Count; i++)
+        for (int i = scanFrom; i < this.Items.Count; i++)
         {
-            var size = GetAssumedItemSize(i, Items[i]);
-            var w = GetWidth(size);
+            var size = this.GetAssumedItemSize(i, this.Items[i]);
+            double w = this.GetWidth(size);
 
             if (rowCount > 0 && x + w > wrappingWidth + EPSILON)
             {
                 if (itemIndex >= rowStart && itemIndex < i)
+                {
                     return new RowInfo { StartIndex = rowStart, Y = y, Height = rowHeight, Count = rowCount, SummedUpChildWidth = rowSummedWidth };
+                }
 
                 y += rowHeight;
                 rowHeight = 0;
@@ -2218,13 +2394,15 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             x += w;
             rowSummedWidth += w;
-            rowHeight = Math.Max(rowHeight, GetHeight(size));
+            rowHeight = Math.Max(rowHeight, this.GetHeight(size));
             rowCount++;
         }
 
         // Last (possibly incomplete) row
         if (itemIndex >= rowStart && itemIndex < rowStart + rowCount)
+        {
             return new RowInfo { StartIndex = rowStart, Y = y, Height = rowHeight, Count = rowCount, SummedUpChildWidth = rowSummedWidth };
+        }
 
         return null;
     }
@@ -2232,34 +2410,34 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <summary>
     /// Calculates a virtual X-coordinate based on the <see cref="Orientation"/>
     /// </summary>
-    private double GetX(Point point) => Orientation == Orientation.Horizontal ? point.X : point.Y;
+    private double GetX(Point point) => this.Orientation == Orientation.Horizontal ? point.X : point.Y;
 
     /// <summary>
     /// Calculates a virtual Y-coordinate based on the <see cref="Orientation"/>
     /// </summary>
-    private double GetY(Point point) => Orientation == Orientation.Horizontal ? point.Y : point.X;
+    private double GetY(Point point) => this.Orientation == Orientation.Horizontal ? point.Y : point.X;
 
     /// <summary>
     /// Calculates a virtual width-component based on the <see cref="Orientation"/>
     /// </summary>
-    private double GetWidth(Size size) => Orientation == Orientation.Horizontal ? size.Width : size.Height;
+    private double GetWidth(Size size) => this.Orientation == Orientation.Horizontal ? size.Width : size.Height;
 
     /// <summary>
     /// Calculates a virtual height-component based on the <see cref="Orientation"/>
     /// </summary>
-    private double GetHeight(Size size) => Orientation == Orientation.Horizontal ? size.Height : size.Width;
+    private double GetHeight(Size size) => this.Orientation == Orientation.Horizontal ? size.Height : size.Width;
 
     /// <summary>
     /// Creates a virtual Point based on the <see cref="Orientation"/>
     /// </summary>
     private Point CreatePoint(double x, double y) =>
-        Orientation == Orientation.Horizontal ? new Point(x, y) : new Point(y, x);
+        this.Orientation == Orientation.Horizontal ? new Point(x, y) : new Point(y, x);
 
     /// <summary>
     /// Creates a virtual Rect based on the <see cref="Orientation"/>
     /// </summary>
     private Rect CreateRect(double x, double y, double width, double height) =>
-        Orientation == Orientation.Horizontal ? new Rect(x, y, width, height) : new Rect(y, x, height, width);
+        this.Orientation == Orientation.Horizontal ? new Rect(x, y, width, height) : new Rect(y, x, height, width);
 
 
     /// <summary>
@@ -2270,34 +2448,36 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the requested container</returns>
     private Control GetOrCreateElement(IReadOnlyList<object?> items, int index)
     {
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
-        if (GetRealizedElement(index, ref _focusedIndex, ref _focusedElement) is { } focusedElement)
+        if (GetRealizedElement(index, ref this._focusedIndex, ref this._focusedElement) is { } focusedElement)
         {
             return focusedElement;
         }
 
-        if (GetRealizedElement(index, ref _scrollToIndex, ref _scrollToElement) is { } scrollToElement)
+        if (GetRealizedElement(index, ref this._scrollToIndex, ref this._scrollToElement) is { } scrollToElement)
         {
             return scrollToElement;
         }
 
-        if (GetRealizedElement(index) is { } realized)
+        if (this.GetRealizedElement(index) is { } realized)
+        {
             return realized;
+        }
 
-        var item = items[index];
+        object? item = items[index];
 
         // ! See Debug assert above 
-        var generator = ItemContainerGenerator!;
+        var generator = this.ItemContainerGenerator!;
 
-        if (generator.NeedsContainer(item, index, out var recycleKey))
+        if (generator.NeedsContainer(item, index, out object? recycleKey))
         {
-            return GetRecycledElement(item, index, recycleKey) ??
-                   CreateElement(item, index, recycleKey);
+            return this.GetRecycledElement(item, index, recycleKey) ??
+                   this.CreateElement(item, index, recycleKey);
         }
         else
         {
-            return GetItemAsOwnContainer(item, index);
+            return this.GetItemAsOwnContainer(item, index);
         }
     }
 
@@ -2308,7 +2488,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the realized container</returns>
     private Control? GetRealizedElement(int index)
     {
-        return _realizedElements?.GetElement(index);
+        return this._realizedElements?.GetElement(index);
     }
 
     /// <summary>
@@ -2345,18 +2525,18 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private Control GetItemAsOwnContainer(object? item, int index)
     {
         Debug.Assert(item is not null);
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
         // ! See Debug assert above 
         var controlItem = (Control)item!;
 
         // ! See Debug assert above 
-        var generator = ItemContainerGenerator!;
+        var generator = this.ItemContainerGenerator!;
 
         if (!controlItem.IsSet(_RecycleKeyProperty))
         {
             generator.PrepareItemContainer(controlItem, controlItem, index);
-            AddInternalChild(controlItem);
+            this.AddInternalChild(controlItem);
             controlItem.SetValue(_RecycleKeyProperty, s_itemIsItsOwnContainer);
             generator.ItemContainerPrepared(controlItem, item, index);
         }
@@ -2374,15 +2554,17 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the recycled container</returns>
     private Control? GetRecycledElement(object? item, int index, object? recycleKey)
     {
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
         if (recycleKey is null)
+        {
             return null;
+        }
 
         // ! See Debug assert above 
-        var generator = ItemContainerGenerator!;
+        var generator = this.ItemContainerGenerator!;
 
-        if (_recyclePool?.TryGetValue(recycleKey, out var recyclePool) == true && recyclePool.Count > 0)
+        if (this._recyclePool?.TryGetValue(recycleKey, out var recyclePool) == true && recyclePool.Count > 0)
         {
             var recycled = recyclePool.Pop();
             recycled.SetCurrentValue(Visual.IsVisibleProperty, true);
@@ -2403,15 +2585,15 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <returns>the created element</returns>
     private Control CreateElement(object? item, int index, object? recycleKey)
     {
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
         // ! See Debug assert above 
-        var generator = ItemContainerGenerator!;
+        var generator = this.ItemContainerGenerator!;
         var container = generator.CreateContainer(item, index, recycleKey);
 
         container.SetValue(_RecycleKeyProperty, recycleKey);
         generator.PrepareItemContainer(container, item, index);
-        AddInternalChild(container);
+        this.AddInternalChild(container);
         generator.ItemContainerPrepared(container, item, index);
 
         return container;
@@ -2424,31 +2606,31 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="index">the item index</param>
     private void RecycleElement(Control element, int index)
     {
-        Debug.Assert(ItemsControl is not null);
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemsControl is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
-        _scrollAnchorProvider?.UnregisterAnchorCandidate(element);
+        this._scrollAnchorProvider?.UnregisterAnchorCandidate(element);
 
-        var recycleKey = element.GetValue(_RecycleKeyProperty);
+        object? recycleKey = element.GetValue(_RecycleKeyProperty);
 
         if (recycleKey is null)
         {
-            RemoveInternalChild(element);
+            this.RemoveInternalChild(element);
         }
         else if (recycleKey == s_itemIsItsOwnContainer)
         {
             element.SetCurrentValue(Visual.IsVisibleProperty, false);
         }
-        else if (ReferenceEquals(KeyboardNavigation.GetTabOnceActiveElement(ItemsControl), element))
+        else if (ReferenceEquals(KeyboardNavigation.GetTabOnceActiveElement(this.ItemsControl), element))
         {
-            _focusedElement = element;
-            _focusedIndex = index;
+            this._focusedElement = element;
+            this._focusedIndex = index;
         }
         else
         {
             // ! See Debug assert above 
-            ItemContainerGenerator!.ClearItemContainer(element);
-            PushToRecyclePool(recycleKey, element);
+            this.ItemContainerGenerator!.ClearItemContainer(element);
+            this.PushToRecyclePool(recycleKey, element);
             element.SetCurrentValue(Visual.IsVisibleProperty, false);
         }
     }
@@ -2459,20 +2641,20 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="element">the container to recycle</param>
     private void RecycleElementOnItemRemoved(Control element)
     {
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
-        var recycleKey = element.GetValue(_RecycleKeyProperty);
+        object? recycleKey = element.GetValue(_RecycleKeyProperty);
 
         if (recycleKey is null || recycleKey == s_itemIsItsOwnContainer)
         {
-            RemoveInternalChild(element);
+            this.RemoveInternalChild(element);
         }
         else
         {
             // RemoveInternalChild(element);
             // ! See Debug assert above 
-            ItemContainerGenerator!.ClearItemContainer(element);
-            PushToRecyclePool(recycleKey, element);
+            this.ItemContainerGenerator!.ClearItemContainer(element);
+            this.PushToRecyclePool(recycleKey, element);
             element.SetCurrentValue(Visual.IsVisibleProperty, false);
         }
     }
@@ -2484,19 +2666,21 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="element">the container to recycle</param>
     private void PushToRecyclePool(object recycleKey, Control element)
     {
-        _recyclePool ??= new();
+        this._recyclePool ??= new();
 
-        if (!_recyclePool.TryGetValue(recycleKey, out var pool))
+        if (!this._recyclePool.TryGetValue(recycleKey, out var pool))
         {
             pool = new();
-            _recyclePool.Add(recycleKey, pool);
+            this._recyclePool.Add(recycleKey, pool);
         }
 
         pool.Push(element);
 
         // If the pool exceeds the cap, eject the oldest container from the visual tree.
         while (pool.Count > RecyclePoolMaxSize)
-            RemoveInternalChild(pool.Pop());
+        {
+            this.RemoveInternalChild(pool.Pop());
+        }
     }
 
     /// <summary>
@@ -2507,9 +2691,9 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <param name="newIndex">the new index</param>
     private void UpdateElementIndex(Control element, int oldIndex, int newIndex)
     {
-        Debug.Assert(ItemContainerGenerator is not null);
+        Debug.Assert(this.ItemContainerGenerator is not null);
 
-        ItemContainerGenerator.ItemContainerIndexChanged(element, oldIndex, newIndex);
+        this.ItemContainerGenerator.ItemContainerIndexChanged(element, oldIndex, newIndex);
     }
 
     /// <summary>
@@ -2543,35 +2727,44 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <inheritdoc/>
     public Size GetSizeForItem(object item)
     {
-        return GetUpfrontKnownItemSize(item) ?? GetAssumedItemSize(item);
+        return this.GetUpfrontKnownItemSize(item) ?? this.GetAssumedItemSize(item);
     }
 
     /// <inheritdoc/>
     public IReadOnlyList<double> GetIrregularSnapPoints(Orientation orientation,
         SnapPointsAlignment snapPointsAlignment)
     {
-        if (_realizedElements is null)
+        if (this._realizedElements is null)
         {
             return Array.Empty<double>();
         }
 
         return new VirtualizingWrapPanelSnapPointList(
-            _realizedElements,
-            Items.Count,
+            this._realizedElements,
+            this.Items.Count,
             orientation,
-            Orientation,
+            this.Orientation,
             snapPointsAlignment,
-            GetWidth(GetAverageItemSize()), // This is slightly wrong as it depends on orientation, but VirtualizingWrapPanelSnapPointList seems to want one size
+            this.GetWidth(this.GetAverageItemSize()), // This is slightly wrong as it depends on orientation, but VirtualizingWrapPanelSnapPointList seems to want one size
             this as IItemSizeProvider);
     }
 
     private Control? GetFirstRealizedContainer()
     {
-        if (_realizedElements is null)
+        if (this._realizedElements is null)
+        {
             return null;
-        var elements = _realizedElements.Elements;
-        for (var i = 0; i < elements.Count; i++)
-            if (elements[i] is { } e) return e;
+        }
+
+        var elements = this._realizedElements.Elements;
+        for (int i = 0; i < elements.Count; i++)
+        {
+            if (elements[i] is { } e)
+            {
+                return e;
+            }
+        }
+
         return null;
     }
 
@@ -2580,7 +2773,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
         out double offset)
     {
         offset = 0f;
-        var firstChild = GetFirstRealizedContainer();
+        var firstChild = this.GetFirstRealizedContainer();
 
         if (firstChild == null)
         {
@@ -2589,11 +2782,13 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
         double snapPoint = 0;
 
-        switch (Orientation)
+        switch (this.Orientation)
         {
             case Orientation.Horizontal:
-                if (!AreHorizontalSnapPointsRegular)
+                if (!this.AreHorizontalSnapPointsRegular)
+                {
                     throw new InvalidOperationException();
+                }
 
                 snapPoint = firstChild.Bounds.Width;
                 switch (snapPointsAlignment)
@@ -2611,8 +2806,11 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
                 break;
             case Orientation.Vertical:
-                if (!AreVerticalSnapPointsRegular)
+                if (!this.AreVerticalSnapPointsRegular)
+                {
                     throw new InvalidOperationException();
+                }
+
                 snapPoint = firstChild.Bounds.Height;
                 switch (snapPointsAlignment)
                 {
@@ -2638,8 +2836,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public event EventHandler<RoutedEventArgs>? HorizontalSnapPointsChanged
     {
-        add => AddHandler(HorizontalSnapPointsChangedEvent, value);
-        remove => RemoveHandler(HorizontalSnapPointsChangedEvent, value);
+        add => this.AddHandler(HorizontalSnapPointsChangedEvent, value);
+        remove => this.RemoveHandler(HorizontalSnapPointsChangedEvent, value);
     }
 
     /// <summary>
@@ -2647,8 +2845,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public event EventHandler<RoutedEventArgs>? VerticalSnapPointsChanged
     {
-        add => AddHandler(VerticalSnapPointsChangedEvent, value);
-        remove => RemoveHandler(VerticalSnapPointsChangedEvent, value);
+        add => this.AddHandler(VerticalSnapPointsChangedEvent, value);
+        remove => this.RemoveHandler(VerticalSnapPointsChangedEvent, value);
     }
 
     /// <summary>
@@ -2656,8 +2854,8 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public bool AreHorizontalSnapPointsRegular
     {
-        get => GetValue(AreHorizontalSnapPointsRegularProperty);
-        set => SetValue(AreHorizontalSnapPointsRegularProperty, value);
+        get => this.GetValue(AreHorizontalSnapPointsRegularProperty);
+        set => this.SetValue(AreHorizontalSnapPointsRegularProperty, value);
     }
 
     /// <summary>
@@ -2665,7 +2863,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     public bool AreVerticalSnapPointsRegular
     {
-        get => GetValue(AreVerticalSnapPointsRegularProperty);
-        set => SetValue(AreVerticalSnapPointsRegularProperty, value);
+        get => this.GetValue(AreVerticalSnapPointsRegularProperty);
+        set => this.SetValue(AreVerticalSnapPointsRegularProperty, value);
     }
 }

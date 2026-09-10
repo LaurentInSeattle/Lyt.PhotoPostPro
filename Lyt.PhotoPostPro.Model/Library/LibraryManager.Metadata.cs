@@ -35,11 +35,7 @@ public sealed partial class LibraryManager
             // Remove thumbnail from cache 
             string filename = string.Concat(metadata.Filename, "_META.json");
             string thumbnailKey = Path.Combine(sourceFolder, filename);
-            if (this.LoadedThumbnails.ContainsKey(thumbnailKey))
-            {
-                this.LoadedThumbnails.Remove(thumbnailKey);
-            }
-            else
+            if (!this.LoadedThumbnails.Remove(thumbnailKey))
             {
                 // No thumbnail ? 
                 if (Debugger.IsAttached) { Debugger.Break(); }

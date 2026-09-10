@@ -16,16 +16,16 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
 
     public VirtualizingWrapPanelSnapPointList(RealizedWrapElements realizedElements, int count, Orientation orientation, Orientation parentOrientation, SnapPointsAlignment snapPointsAlignment, double size, IItemSizeProvider? itemSizeProvider)
     {
-        _realizedElements = realizedElements;
-        _orientation = orientation;
-        _parentOrientation = parentOrientation;
-        _snapPointsAlignment = snapPointsAlignment;
-        _size = size;
-        _itemSizeProvider = itemSizeProvider;
+        this._realizedElements = realizedElements;
+        this._orientation = orientation;
+        this._parentOrientation = parentOrientation;
+        this._snapPointsAlignment = snapPointsAlignment;
+        this._size = size;
+        this._itemSizeProvider = itemSizeProvider;
         if (parentOrientation == orientation)
         {
-            _start = Math.Max(0, _realizedElements.FirstIndex - ExtraCount);
-            _end = Math.Min(count - 1, _realizedElements.LastIndex + ExtraCount);
+            this._start = Math.Max(0, this._realizedElements.FirstIndex - ExtraCount);
+            this._end = Math.Min(count - 1, this._realizedElements.LastIndex + ExtraCount);
         }
     }
 
@@ -33,22 +33,24 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
     {
         get
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= this.Count)
+            {
                 throw new ArgumentOutOfRangeException(nameof(index));
+            }
 
-            index += _start;
+            index += this._start;
 
             double snapPoint = 0;
-            var averageElementSize = _size;
+            var averageElementSize = this._size;
 
             Control? container;
-            switch (_orientation)
+            switch (this._orientation)
             {
                 case Orientation.Horizontal:
-                    container = _realizedElements.GetElement(index);
+                    container = this._realizedElements.GetElement(index);
                     if (container != null)
                     {
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Near:
                                 snapPoint = container.Bounds.Left;
@@ -61,16 +63,16 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
                                 break;
                         }
                     }
-                    else if (index < _realizedElements.FirstIndex)
+                    else if (index < this._realizedElements.FirstIndex)
                     {
                         // Estimate position by stepping backward from the first realized element.
-                        var firstElement = _realizedElements.GetElement(_realizedElements.FirstIndex);
+                        var firstElement = this._realizedElements.GetElement(this._realizedElements.FirstIndex);
                         double basePosition = firstElement != null
                             ? firstElement.Bounds.Left
-                            : _realizedElements.FirstIndex * averageElementSize;
-                        int stepsBack = _realizedElements.FirstIndex - index;
+                            : this._realizedElements.FirstIndex * averageElementSize;
+                        int stepsBack = this._realizedElements.FirstIndex - index;
                         snapPoint = basePosition - stepsBack * averageElementSize;
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Center:
                                 snapPoint += averageElementSize / 2;
@@ -83,13 +85,13 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
                     else
                     {
                         // index > LastIndex: estimate forward from the last realized element.
-                        int stepsForward = index - _realizedElements.LastIndex;
-                        var lastElement = _realizedElements.GetElement(_realizedElements.LastIndex);
+                        int stepsForward = index - this._realizedElements.LastIndex;
+                        var lastElement = this._realizedElements.GetElement(this._realizedElements.LastIndex);
                         double basePosition = lastElement != null
                             ? lastElement.Bounds.Right
-                            : (_realizedElements.LastIndex + 1) * averageElementSize;
+                            : (this._realizedElements.LastIndex + 1) * averageElementSize;
                         snapPoint = basePosition + (stepsForward - 1) * averageElementSize;
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Center:
                                 snapPoint += averageElementSize / 2;
@@ -101,10 +103,10 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
                     }
                     break;
                 case Orientation.Vertical:
-                    container = _realizedElements.GetElement(index);
+                    container = this._realizedElements.GetElement(index);
                     if (container != null)
                     {
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Near:
                                 snapPoint = container.Bounds.Top;
@@ -117,16 +119,16 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
                                 break;
                         }
                     }
-                    else if (index < _realizedElements.FirstIndex)
+                    else if (index < this._realizedElements.FirstIndex)
                     {
                         // Estimate position by stepping backward from the first realized element.
-                        var firstElement = _realizedElements.GetElement(_realizedElements.FirstIndex);
+                        var firstElement = this._realizedElements.GetElement(this._realizedElements.FirstIndex);
                         double basePosition = firstElement != null
                             ? firstElement.Bounds.Top
-                            : _realizedElements.FirstIndex * averageElementSize;
-                        int stepsBack = _realizedElements.FirstIndex - index;
+                            : this._realizedElements.FirstIndex * averageElementSize;
+                        int stepsBack = this._realizedElements.FirstIndex - index;
                         snapPoint = basePosition - stepsBack * averageElementSize;
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Center:
                                 snapPoint += averageElementSize / 2;
@@ -139,13 +141,13 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
                     else
                     {
                         // index > LastIndex: estimate forward from the last realized element.
-                        int stepsForward = index - _realizedElements.LastIndex;
-                        var lastElement = _realizedElements.GetElement(_realizedElements.LastIndex);
+                        int stepsForward = index - this._realizedElements.LastIndex;
+                        var lastElement = this._realizedElements.GetElement(this._realizedElements.LastIndex);
                         double basePosition = lastElement != null
                             ? lastElement.Bounds.Bottom
-                            : (_realizedElements.LastIndex + 1) * averageElementSize;
+                            : (this._realizedElements.LastIndex + 1) * averageElementSize;
                         snapPoint = basePosition + (stepsForward - 1) * averageElementSize;
-                        switch (_snapPointsAlignment)
+                        switch (this._snapPointsAlignment)
                         {
                             case SnapPointsAlignment.Center:
                                 snapPoint += averageElementSize / 2;
@@ -162,13 +164,15 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
         }
     }
 
-    public int Count => _parentOrientation != _orientation ? 0 : _end - _start + 1;
+    public int Count => this._parentOrientation != this._orientation ? 0 : this._end - this._start + 1;
 
     public IEnumerator<double> GetEnumerator()
     {
-        for (var i = 0; i < Count; i++)
+        for (var i = 0; i < this.Count; i++)
+        {
             yield return this[i];
+        }
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }

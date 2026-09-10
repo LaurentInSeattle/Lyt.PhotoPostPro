@@ -5,10 +5,14 @@ internal static class CollectionExtensions
     internal static void InsertMany<T>(this List<T> list, int index, T item, int count)
     {
         if (count < 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(count));
+        }
 
         if (count == 0)
+        {
             return;
+        }
 
         list.InsertRange(index, new RepeatCollection<T>(item, count));
     }
@@ -20,7 +24,9 @@ internal static class CollectionExtensions
         public RepeatCollection(T item, int count)
         {
             if (count < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(count));
+            }
 
             _item = item;
             Count = count;
@@ -39,23 +45,33 @@ internal static class CollectionExtensions
         public IEnumerator<T> GetEnumerator()
         {
             for (var i = 0; i < Count; i++)
+            {
                 yield return _item;
+            }
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
             if (array is null)
+            {
                 throw new ArgumentNullException(nameof(array));
+            }
 
             if ((uint)arrayIndex > (uint)array.Length)
+            {
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+            }
 
             if (array.Length - arrayIndex < Count)
+            {
                 throw new ArgumentException("Destination array is not long enough.", nameof(array));
+            }
 
             var end = arrayIndex + Count;
             for (var i = arrayIndex; i < end; i++)
+            {
                 array[i] = _item;
+            }
         }
     }
 }

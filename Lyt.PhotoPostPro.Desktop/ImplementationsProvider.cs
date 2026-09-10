@@ -1,4 +1,4 @@
-﻿namespace Lyt.PhotoPostPro;
+﻿namespace Lyt.PhotoPostPro.Desktop;
 
 using System;
 using System.Diagnostics;
