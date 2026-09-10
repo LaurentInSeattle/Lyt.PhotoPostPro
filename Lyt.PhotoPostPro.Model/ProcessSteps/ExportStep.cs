@@ -50,17 +50,17 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
         }
     }
 
-    internal Frame? Export(ImageExportsCollection imageExports)
+    internal Frame? Export(List<ImageExport> imageExports)
     {
         if (this.ResultImage is null)
         {
             return null;
         }
 
-        var images = imageExports.AvailableImageExports;
-        if (images.Count == 0)
+        if (imageExports.Count == 0)
         {
-            imageExports.AvailableImageExports.Add(ImageExport.Default);
+            // Should never happen 
+            imageExports.Add(ImageExport.Default);
         }
 
         PhotoPostProModel model = this.ProcessWorkflow.Model;
@@ -298,7 +298,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             // Loop through all image exports definitions and export 
             bool hasBeenExportedToGallery = false;
             bool isFiveStars = metadata.Rating == 5;
-            foreach (var imageExport in imageExports.AvailableImageExports)
+            foreach (var imageExport in imageExports)
             {
                 string exportPath = ExportImage(imageExport, subDirectoryExport);
 
@@ -326,7 +326,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
         }
     }
 
-    internal bool NavigateToExport()
+    internal bool NavigateToExportFolder()
     {
         // Navigate to subdirectory for exported images
         if (string.IsNullOrWhiteSpace(this.currentDirectoryExport))

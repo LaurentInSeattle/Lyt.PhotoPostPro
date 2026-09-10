@@ -457,7 +457,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void Export(ImageExportsCollection imageExports) =>
+    public void Export(List<ImageExport> imageExports) =>
         this.ApiAction(() =>
         {
             if (this.Workflow.CurrentStep is ExportStep exportStep)
@@ -474,7 +474,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is ExportStep exportStep)
             {
-                _ = exportStep.NavigateToExport();
+                _ = exportStep.NavigateToExportFolder();
                 return true;
             }
 

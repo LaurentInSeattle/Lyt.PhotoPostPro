@@ -54,7 +54,7 @@
 		<Rectangle 
 			Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
 			HorizontalAlignment="Right" VerticalAlignment="Stretch"
-			Fill="{StaticResource FreshGreen_0_100}"
+			Fill="{StaticResource FreshGreen_1_100}"
 			Width="1.5"
 			/>
 		<TextBlock

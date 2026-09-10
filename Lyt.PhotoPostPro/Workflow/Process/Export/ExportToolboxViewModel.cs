@@ -44,9 +44,13 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     [RelayCommand]
     public void OnExport()
     {
-        // TODO: Collect parameters and filter exports to be done,
-        // then pass them to model.Export()
-        ImageExportsCollection imageExports = this.model.ImageExports;
+        // Collect parameters and filter exports to be done, then pass them to model.Export()
+        var exportViewModel = App.GetRequiredService<ExportViewModel>();
+        List<ImageExport> imageExports = [];
+        foreach(var imageExportViewModel in exportViewModel.SelectedImageExports)
+        {
+            imageExports.Add(imageExportViewModel.ImageExport); 
+        }
 
         // Always launch a spinner for big or small files 
         this.IsExporting = true;

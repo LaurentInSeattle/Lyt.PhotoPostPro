@@ -22,7 +22,7 @@
 			<ColumnDefinition Width="4" />
 			<ColumnDefinition Width="*" MinWidth="150"/>
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="600" MinWidth="150"/>
+			<ColumnDefinition Width="560" MinWidth="150"/>
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 		<shared:BeforeAfterView
@@ -47,5 +47,29 @@
 			Fill="MidnightBlue"
 			Opacity="0.3"
 			/>
+		<ScrollViewer
+			Grid.Column="3" Grid.Row="1" 
+			Width="540"
+			Background="Transparent"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			>
+			<ItemsControl 
+				ItemsSource="{Binding ImageExports}"
+				Margin="0 0 24 0"
+				>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<vm:ImageExportView Margin="0 16 0 0" />
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
 	</Grid>
 </UserControl>

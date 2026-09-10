@@ -16,8 +16,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Select Exports options in Export Step
-
 
 Essential Missing Features 
 --------------------------
