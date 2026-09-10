@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Implementations.Windows.Mtp;
 
+[SupportedOSPlatform("windows")]
 public sealed class MtpService : IMtpService
 {
     public void Initialize() { } 

@@ -15,6 +15,7 @@
     <Project Path="../Lyt.Framework/Lyt.Utilities/Lyt.Utilities.csproj" />
   </Folder>
   <Folder Name="/Solution Folder/">
+    <File Path=".editorconfig" />
     <File Path="Editing.txt" />
     <File Path="Issues.txt" />
     <File Path="LICENSE" />
@@ -23,14 +24,15 @@
     <File Path="Sizes.txt" />
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
   </Folder>
+  <Folder Name="/Solution Items/" />
   <Folder Name="/Tools/">
     <File Path="Tools/Lyt.Translator.Cli.exe" />
     <File Path="Tools/PppLanguages.json" />
     <File Path="Tools/prebuild.bat" />
   </Folder>
   <Project Path="Lyt.PhotoPostPro.Desktop/Lyt.PhotoPostPro.Desktop.csproj" />
-  <Project Path="Lyt.PhotoPostPro.Model/Lyt.PhotoPostPro.Model.csproj" />
   <Project Path="Lyt.PhotoPostPro.Implementations.Windows/Lyt.PhotoPostPro.Implementations.Windows.csproj" Id="d30e00db-c814-4e50-b39e-e9766ffe6bb5" />
+  <Project Path="Lyt.PhotoPostPro.Model/Lyt.PhotoPostPro.Model.csproj" />
   <Project Path="Lyt.PhotoPostPro.MultiPlatformAbstractions/Lyt.PhotoPostPro.MultiPlatformAbstractions.csproj" Id="1bf216ef-42fd-4573-af56-acfff8866fa8" />
   <Project Path="Lyt.PhotoPostPro/Lyt.PhotoPostPro.csproj" />
 </Solution>

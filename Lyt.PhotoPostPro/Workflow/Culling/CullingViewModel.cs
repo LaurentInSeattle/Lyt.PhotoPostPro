@@ -503,7 +503,7 @@ public sealed partial class CullingViewModel :
 
     private void DoRemove()
     {
-        if (viewModelToRemove == null)
+        if (this.viewModelToRemove == null)
         {
             return;
         }

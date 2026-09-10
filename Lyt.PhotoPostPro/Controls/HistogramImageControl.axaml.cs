@@ -39,21 +39,21 @@ public partial class HistogramImageControl : UserControl
         SolidColorBrush brush =
             color switch
             {
-                BrushColor.Red => brushRed,
-                BrushColor.Green => brushGreen,
-                BrushColor.Blue => brushBlue,
-                BrushColor.Luminosity => brushGray,
-                _ => brushGray,
+                BrushColor.Red => this.brushRed,
+                BrushColor.Green => this.brushGreen,
+                BrushColor.Blue => this.brushBlue,
+                BrushColor.Luminosity => this.brushGray,
+                _ => this.brushGray,
             };
 
         SolidColorBrush brushDark =
             color switch
             {
-                BrushColor.Red => brushRedDark,
-                BrushColor.Green => brushGreenDark,
-                BrushColor.Blue => brushBlueDark,
-                BrushColor.Luminosity => brushGrayDark,
-                _ => brushGrayDark,
+                BrushColor.Red => this.brushRedDark,
+                BrushColor.Green => this.brushGreenDark,
+                BrushColor.Blue => this.brushBlueDark,
+                BrushColor.Luminosity => this.brushGrayDark,
+                _ => this.brushGrayDark,
             };
 
         this.MainCanvas.Children.Clear();

@@ -55,7 +55,7 @@ public sealed partial class GalleryViewModel(
     {
         base.Activate(activationParameters);
 
-        if (isFirstActivate)
+        if (this.isFirstActivate)
         {
             this.isFirstActivate = false;
         }
@@ -65,7 +65,7 @@ public sealed partial class GalleryViewModel(
         // Creates a local copy so that we can shuffle 
         this.libraryManager.InitializeGallery(); 
         this.galleryContent = [.. this.libraryManager.GalleryContent];
-        randomizer.Shuffle(this.galleryContent);
+        this.randomizer.Shuffle(this.galleryContent);
 
         this.nothingToShow = this.galleryContent.Count == 0;
         this.GalleryIsEmpty = this.nothingToShow;
@@ -217,7 +217,7 @@ public sealed partial class GalleryViewModel(
 
     private void Show()
     {
-        if (nothingToShow)
+        if (this.nothingToShow)
         {
             return;
         }
@@ -255,12 +255,12 @@ public sealed partial class GalleryViewModel(
 
     internal void OnWallpaper()
     {
-        if (galleryContent.Count == 0)
+        if (this.galleryContent.Count == 0)
         {
             return;
         }
 
-        string path = this.galleryContent[nowShowingIndex];
+        string path = this.galleryContent[this.nowShowingIndex];
         App.WallpaperService.Set(path, WallpaperStyle.Fill);
     }
 }

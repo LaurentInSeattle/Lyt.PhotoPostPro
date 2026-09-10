@@ -13,6 +13,7 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+
 WIP
 ---
 
@@ -43,15 +44,15 @@ Minor Issues (Low priority)
 Code Quality Issues 
 -------------------
 
-- Move Export code to a dedicated class to keep the ExportStep class clean.
-
 - Cleanup code that builds file names and paths.
+
+- Move Export code to a dedicated class to keep the ExportStep class clean.
 
 - Cleanup ugly code of Virtualizing Wrap Panel if it does not get supported in Avalonia 
 
 - Move message definitions in new folders depending on area and workflow 
 
-- Cleanup public vs internal about everywhere in UI ( done for Model classes )
+- Cleanup public vs internal about everywhere in UI ( mostly done for Model classes )
 
 - Setup logging for trace to disk 
 

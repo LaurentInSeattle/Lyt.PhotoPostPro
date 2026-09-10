@@ -61,7 +61,7 @@ public partial class ToolboxViewModel<TView, TStep> :
     protected void ThrottleModelUpdate(Action action)
     {
         // Debug.WriteLine(" IsLeftButtonPressed : " + this.IsLeftButtonPressed);
-        if (pendingAction is not null)
+        if (this.pendingAction is not null)
         {
             return;
         }

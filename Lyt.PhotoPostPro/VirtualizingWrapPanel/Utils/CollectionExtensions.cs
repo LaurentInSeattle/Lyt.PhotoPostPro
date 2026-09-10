@@ -28,8 +28,8 @@ internal static class CollectionExtensions
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 
-            _item = item;
-            Count = count;
+            this._item = item;
+            this.Count = count;
         }
 
         public int Count { get; }
@@ -40,13 +40,13 @@ internal static class CollectionExtensions
         public bool Contains(T item) => throw new NotSupportedException();
         public bool Remove(T item) => throw new NotSupportedException();
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (var i = 0; i < Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
-                yield return _item;
+                yield return this._item;
             }
         }
 
@@ -62,15 +62,15 @@ internal static class CollectionExtensions
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             }
 
-            if (array.Length - arrayIndex < Count)
+            if (array.Length - arrayIndex < this.Count)
             {
                 throw new ArgumentException("Destination array is not long enough.", nameof(array));
             }
 
-            var end = arrayIndex + Count;
-            for (var i = arrayIndex; i < end; i++)
+            int end = arrayIndex + this.Count;
+            for (int i = arrayIndex; i < end; i++)
             {
-                array[i] = _item;
+                array[i] = this._item;
             }
         }
     }

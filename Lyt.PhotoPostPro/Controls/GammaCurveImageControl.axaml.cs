@@ -22,13 +22,13 @@ public partial class GammaCurveImageControl : UserControl
     public void Clear()
     {
         this.MainCanvas.Children.Clear();
-        this.DrawDiagonal(brushGray);
+        this.DrawDiagonal(this.brushGray);
     }
 
     public void Load(Curve curve)
     {
         this.MainCanvas.Children.Clear();
-        this.DrawDiagonal(brushRed);
+        this.DrawDiagonal(this.brushRed);
 
         // Curve path to show the curve points : Geometry is not filled 
         PathGeometry geometryCurve = new();
@@ -65,7 +65,7 @@ public partial class GammaCurveImageControl : UserControl
 
         var curvePath = new global::Avalonia.Controls.Shapes.Path
         {
-            Stroke = brushGrayDark,
+            Stroke = this.brushGrayDark,
             StrokeThickness = 4,
             Data = geometryCurve,
             Opacity = 1.0,

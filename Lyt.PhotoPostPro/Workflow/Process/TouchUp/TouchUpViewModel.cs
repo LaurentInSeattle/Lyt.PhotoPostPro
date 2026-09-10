@@ -6,8 +6,5 @@ public sealed partial class TouchUpViewModel : StepViewModel<TouchUpView>
     {
     }
 
-    public override void Activate(object? activationParameters)
-    {
-        base.Activate(activationParameters);
-    }
+    public override void Activate(object? activationParameters) => base.Activate(activationParameters);
 }

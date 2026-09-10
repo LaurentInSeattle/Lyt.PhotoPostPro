@@ -163,8 +163,8 @@ public sealed partial class FolderImportViewModel :
         {
             Interval = TimeSpan.FromSeconds(7),
         };
-        timer.Tick += this.OnTimerTick;
-        timer.Start();
+        this.timer.Tick += this.OnTimerTick;
+        this.timer.Start();
     }
 
     private void OnTimerTick(object? sender, EventArgs e)

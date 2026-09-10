@@ -16,34 +16,34 @@ internal class RealizedWrapElements
     public RealizedWrapElements()
     {
         // Pre-allocate with reasonable capacity to reduce reallocations
-        _elements = new List<Control?>(32);
-        _sizes = new List<Size>(32);
+        this._elements = new List<Control?>(32);
+        this._sizes = new List<Size>(32);
     }
 
     /// <summary>
     /// Gets the number of realized elements.
     /// </summary>
-    public int Count => _elements.Count;
+    public int Count => this._elements.Count;
 
     /// <summary>
     /// Gets the index of the first realized element, or -1 if no elements are realized.
     /// </summary>
-    public int FirstIndex => _elements.Count > 0 ? _firstIndex : -1;
+    public int FirstIndex => this._elements.Count > 0 ? this._firstIndex : -1;
 
     /// <summary>
     /// Gets the index of the last realized element, or -1 if no elements are realized.
     /// </summary>
-    public int LastIndex => _elements.Count > 0 ? _firstIndex + _elements.Count - 1 : -1;
+    public int LastIndex => this._elements.Count > 0 ? this._firstIndex + this._elements.Count - 1 : -1;
 
     /// <summary>
     /// Gets the elements.
     /// </summary>
-    public IReadOnlyList<Control?> Elements => _elements;
+    public IReadOnlyList<Control?> Elements => this._elements;
 
     /// <summary>
     /// Gets the sizes of the elements on the primary axis.
     /// </summary>
-    public IReadOnlyList<Size> Sizes => _sizes;
+    public IReadOnlyList<Size> Sizes => this._sizes;
 
     /// <summary>
     /// Adds a newly realized element to the collection.
@@ -54,29 +54,31 @@ internal class RealizedWrapElements
     public void Add(int index, Control element, Size size)
     {
         if (index < 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
-        var count = _elements.Count;
+        int count = this._elements.Count;
 
         if (count == 0)
         {
-            _elements.Add(element);
-            _sizes.Add(size);
-            _elementToIndex[element] = index;
-            _firstIndex = index;
+            this._elements.Add(element);
+            this._sizes.Add(size);
+            this._elementToIndex[element] = index;
+            this._firstIndex = index;
         }
-        else if (index == _firstIndex + count)
+        else if (index == this._firstIndex + count)
         {
-            _elements.Add(element);
-            _sizes.Add(size);
-            _elementToIndex[element] = index;
+            this._elements.Add(element);
+            this._sizes.Add(size);
+            this._elementToIndex[element] = index;
         }
-        else if (index == _firstIndex - 1)
+        else if (index == this._firstIndex - 1)
         {
-            --_firstIndex;
-            _elements.Insert(0, element);
-            _sizes.Insert(0, size);
-            _elementToIndex[element] = index;
+            --this._firstIndex;
+            this._elements.Insert(0, element);
+            this._sizes.Insert(0, size);
+            this._elementToIndex[element] = index;
         }
         else
         {
@@ -91,10 +93,13 @@ internal class RealizedWrapElements
     /// <returns>The element if realized; otherwise null.</returns>
     public Control? GetElement(int index)
     {
-        var i = index - _firstIndex;
-        var count = _elements.Count;
+        int i = index - this._firstIndex;
+        int count = this._elements.Count;
         if (i >= 0 && i < count)
-            return _elements[i];
+        {
+            return this._elements[i];
+        }
+
         return null;
     }
 
@@ -106,18 +111,25 @@ internal class RealizedWrapElements
     /// </returns>
     public Size? GetElementSize(Control? child)
     {
-        if (child == null) return null;
+        if (child == null)
+        {
+            return null;
+        }
 
-        var index = GetIndex(child);
+        int index = this.GetIndex(child);
 
         if (index < 0)
+        {
             return null;
+        }
 
-        var localIndex = index - _firstIndex;
-        if (localIndex < 0 || localIndex >= _sizes.Count)
+        int localIndex = index - this._firstIndex;
+        if (localIndex < 0 || localIndex >= this._sizes.Count)
+        {
             return null;
+        }
 
-        return _sizes[localIndex];
+        return this._sizes[localIndex];
     }
 
     /// <summary>
@@ -127,14 +139,18 @@ internal class RealizedWrapElements
     /// <returns>The size of the element or null if not found</returns>
     public Size? GetElementSize(int index)
     {
-        if (index < FirstIndex)
+        if (index < this.FirstIndex)
+        {
             return null;
+        }
 
-        var localIndex = index - _firstIndex;
-        if (localIndex >= _sizes.Count)
+        int localIndex = index - this._firstIndex;
+        if (localIndex >= this._sizes.Count)
+        {
             return null;
+        }
 
-        return _sizes[localIndex];
+        return this._sizes[localIndex];
     }
 
     /// <summary>
@@ -142,10 +158,7 @@ internal class RealizedWrapElements
     /// </summary>
     /// <param name="element">The element.</param>
     /// <returns>The index or -1 if the element is not present in the collection.</returns>
-    public int GetIndex(Control element)
-    {
-        return _elementToIndex.TryGetValue(element, out var index) ? index : -1;
-    }
+    public int GetIndex(Control element) => this._elementToIndex.TryGetValue(element, out int index) ? index : -1;
 
     /// <summary>
     /// Updates the elements in response to items being inserted into the source collection.
@@ -156,43 +169,50 @@ internal class RealizedWrapElements
     public void ItemsInserted(int index, int count, Action<Control, int, int> updateElementIndex)
     {
         if (index < 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
-        var elementCount = _elements.Count;
+        int elementCount = this._elements.Count;
         if (elementCount == 0)
+        {
             return;
+        }
 
         // Get the index within the realized _elements collection.
-        var first = _firstIndex;
-        var realizedIndex = index - first;
+        int first = this._firstIndex;
+        int realizedIndex = index - first;
 
         if (realizedIndex < elementCount)
         {
             // The insertion point affects the realized elements. Update the index of the
             // elements after the insertion point.
-            var start = Math.Max(realizedIndex, 0);
+            int start = Math.Max(realizedIndex, 0);
 
-            for (var i = start; i < elementCount; ++i)
+            for (int i = start; i < elementCount; ++i)
             {
-                if (_elements[i] is not { } element)
+                if (this._elements[i] is not { } element)
+                {
                     continue;
-                var oldIndex = i + first;
-                var newIndex = oldIndex + count;
+                }
+
+                int oldIndex = i + first;
+                int newIndex = oldIndex + count;
                 updateElementIndex(element, oldIndex, newIndex);
-                _elementToIndex[element] = newIndex;
+                this._elementToIndex[element] = newIndex;
             }
 
             if (realizedIndex < 0)
             {
                 // The insertion point was before the first element, update the first index.
-                _firstIndex += count;
+                this._firstIndex += count;
             }
             else
             {
                 // The insertion point was within the realized elements, insert an empty space
                 // in _elements and _sizes.
-                _elements.InsertMany(realizedIndex, null, count);
-                _sizes.InsertMany(realizedIndex, Size.Infinity, count);
+                this._elements.InsertMany(realizedIndex, null, count);
+                this._sizes.InsertMany(realizedIndex, Size.Infinity, count);
             }
         }
     }
@@ -211,31 +231,35 @@ internal class RealizedWrapElements
         Action<Control> recycleElement)
     {
         if (index < 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
-        var elementCount = _elements.Count;
+        int elementCount = this._elements.Count;
         if (elementCount == 0)
+        {
             return;
+        }
 
         // Get the removal start and end index within the realized _elements collection.
-        var first = _firstIndex;
-        var last = first + elementCount - 1;
-        var startIndex = index - first;
-        var endIndex = (index + count) - first;
+        int first = this._firstIndex;
+        int last = first + elementCount - 1;
+        int startIndex = index - first;
+        int endIndex = (index + count) - first;
 
         if (endIndex < 0)
         {
             // The removed range was before the realized elements. Update the first index and
             // the indexes of the realized elements.
-            _firstIndex -= count;
+            this._firstIndex -= count;
 
-            var newIndex = _firstIndex;
-            for (var i = 0; i < elementCount; ++i)
+            int newIndex = this._firstIndex;
+            for (int i = 0; i < elementCount; ++i)
             {
-                if (_elements[i] is { } element)
+                if (this._elements[i] is { } element)
                 {
                     updateElementIndex(element, newIndex + count, newIndex);
-                    _elementToIndex[element] = newIndex;
+                    this._elementToIndex[element] = newIndex;
                 }
 
                 ++newIndex;
@@ -244,39 +268,39 @@ internal class RealizedWrapElements
         else if (startIndex < elementCount)
         {
             // Recycle and remove the affected elements.
-            var start = Math.Max(startIndex, 0);
-            var end = Math.Min(endIndex, elementCount);
+            int start = Math.Max(startIndex, 0);
+            int end = Math.Min(endIndex, elementCount);
 
-            for (var i = start; i < end; ++i)
+            for (int i = start; i < end; ++i)
             {
-                if (_elements[i] is { } element)
+                if (this._elements[i] is { } element)
                 {
-                    _elements[i] = null;
-                    _elementToIndex.Remove(element);
+                    this._elements[i] = null;
+                    this._elementToIndex.Remove(element);
                     recycleElement(element);
                 }
             }
 
-            _elements.RemoveRange(start, end - start);
-            _sizes.RemoveRange(start, end - start);
+            this._elements.RemoveRange(start, end - start);
+            this._sizes.RemoveRange(start, end - start);
 
             // If the remove started before and ended within our realized elements, then our new
             // first index will be the index where the remove started. Mark StartU as unstable
             // because we can't rely on it now to estimate element heights.
             if (startIndex <= 0 && end < last)
             {
-                _firstIndex = first = index;
+                this._firstIndex = first = index;
             }
 
             // Update the indexes of the elements after the removed range.
-            end = _elements.Count;
-            var newIndex = first + start;
-            for (var i = start; i < end; ++i)
+            end = this._elements.Count;
+            int newIndex = first + start;
+            for (int i = start; i < end; ++i)
             {
-                if (_elements[i] is { } element)
+                if (this._elements[i] is { } element)
                 {
                     updateElementIndex(element, newIndex + count, newIndex);
-                    _elementToIndex[element] = newIndex;
+                    this._elementToIndex[element] = newIndex;
                 }
 
                 ++newIndex;
@@ -293,26 +317,30 @@ internal class RealizedWrapElements
     public void ItemsReplaced(int index, int count, Action<Control> recycleElement)
     {
         if (index < 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
-        var elementCount = _elements.Count;
+        int elementCount = this._elements.Count;
         if (elementCount == 0)
+        {
             return;
+        }
 
         // Get the index within the realized _elements collection.
-        var startIndex = index - _firstIndex;
-        var endIndex = Math.Min(startIndex + count, elementCount);
+        int startIndex = index - this._firstIndex;
+        int endIndex = Math.Min(startIndex + count, elementCount);
 
         if (startIndex >= 0 && endIndex > startIndex)
         {
-            for (var i = startIndex; i < endIndex; ++i)
+            for (int i = startIndex; i < endIndex; ++i)
             {
-                if (_elements[i] is { } element)
+                if (this._elements[i] is { } element)
                 {
                     recycleElement(element);
-                    _elementToIndex.Remove(element);
-                    _elements[i] = null;
-                    _sizes[i] = Size.Infinity;
+                    this._elementToIndex.Remove(element);
+                    this._elements[i] = null;
+                    this._sizes[i] = Size.Infinity;
                 }
             }
         }
@@ -324,23 +352,25 @@ internal class RealizedWrapElements
     /// <param name="recycleElement">A method used to recycle elements.</param>
     public void ItemsReset(Action<Control> recycleElement)
     {
-        var count = _elements.Count;
+        int count = this._elements.Count;
         if (count == 0)
-            return;
-
-        for (var i = 0; i < count; i++)
         {
-            if (_elements[i] is { } e)
+            return;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            if (this._elements[i] is { } e)
             {
-                _elements[i] = null;
-                _elementToIndex.Remove(e);
+                this._elements[i] = null;
+                this._elementToIndex.Remove(e);
                 recycleElement(e);
             }
         }
 
-        _elements.Clear();
-        _sizes.Clear();
-        _elementToIndex.Clear();
+        this._elements.Clear();
+        this._sizes.Clear();
+        this._elementToIndex.Clear();
     }
 
     /// <summary>
@@ -350,33 +380,35 @@ internal class RealizedWrapElements
     /// <param name="recycleElement">A method used to recycle elements.</param>
     public void RecycleElementsBefore(int index, Action<Control, int> recycleElement)
     {
-        var count = _elements.Count;
-        var first = _firstIndex;
+        int count = this._elements.Count;
+        int first = this._firstIndex;
 
         if (index <= first || count == 0)
+        {
             return;
+        }
 
         if (index > first + count - 1)
         {
-            RecycleAllElements(recycleElement);
+            this.RecycleAllElements(recycleElement);
         }
         else
         {
-            var endIndex = index - first;
+            int endIndex = index - first;
 
-            for (var i = 0; i < endIndex; ++i)
+            for (int i = 0; i < endIndex; ++i)
             {
-                if (_elements[i] is { } e)
+                if (this._elements[i] is { } e)
                 {
-                    _elements[i] = null;
-                    _elementToIndex.Remove(e);
+                    this._elements[i] = null;
+                    this._elementToIndex.Remove(e);
                     recycleElement(e, i + first);
                 }
             }
 
-            _elements.RemoveRange(0, endIndex);
-            _sizes.RemoveRange(0, endIndex);
-            _firstIndex = index;
+            this._elements.RemoveRange(0, endIndex);
+            this._sizes.RemoveRange(0, endIndex);
+            this._firstIndex = index;
         }
     }
 
@@ -387,33 +419,35 @@ internal class RealizedWrapElements
     /// <param name="recycleElement">A method used to recycle elements.</param>
     public void RecycleElementsAfter(int index, Action<Control, int> recycleElement)
     {
-        var count = _elements.Count;
-        var first = _firstIndex;
+        int count = this._elements.Count;
+        int first = this._firstIndex;
 
         if (index >= first + count - 1 || count == 0)
+        {
             return;
+        }
 
         if (index < first)
         {
-            RecycleAllElements(recycleElement);
+            this.RecycleAllElements(recycleElement);
         }
         else
         {
-            var startIndex = (index + 1) - first;
+            int startIndex = (index + 1) - first;
 
-            for (var i = startIndex; i < count; ++i)
+            for (int i = startIndex; i < count; ++i)
             {
-                if (_elements[i] is { } e)
+                if (this._elements[i] is { } e)
                 {
-                    _elements[i] = null;
-                    _elementToIndex.Remove(e);
+                    this._elements[i] = null;
+                    this._elementToIndex.Remove(e);
                     recycleElement(e, i + first);
                 }
             }
 
-            var removeCount = count - startIndex;
-            _elements.RemoveRange(startIndex, removeCount);
-            _sizes.RemoveRange(startIndex, removeCount);
+            int removeCount = count - startIndex;
+            this._elements.RemoveRange(startIndex, removeCount);
+            this._sizes.RemoveRange(startIndex, removeCount);
         }
     }
 
@@ -423,25 +457,27 @@ internal class RealizedWrapElements
     /// <param name="recycleElement">A method used to recycle elements.</param>
     public void RecycleAllElements(Action<Control, int> recycleElement)
     {
-        var count = _elements.Count;
+        int count = this._elements.Count;
         if (count == 0)
-            return;
-
-        var first = _firstIndex;
-        for (var i = 0; i < count; i++)
         {
-            if (_elements[i] is { } e)
+            return;
+        }
+
+        int first = this._firstIndex;
+        for (int i = 0; i < count; i++)
+        {
+            if (this._elements[i] is { } e)
             {
-                _elements[i] = null;
-                _elementToIndex.Remove(e);
+                this._elements[i] = null;
+                this._elementToIndex.Remove(e);
                 recycleElement(e, i + first);
             }
         }
 
-        _firstIndex = 0;
-        _elements.Clear();
-        _sizes.Clear();
-        _elementToIndex.Clear();
+        this._firstIndex = 0;
+        this._elements.Clear();
+        this._sizes.Clear();
+        this._elementToIndex.Clear();
     }
 
     /// <summary>
@@ -449,9 +485,9 @@ internal class RealizedWrapElements
     /// </summary>
     public void ResetForReuse()
     {
-        _firstIndex = 0;
-        _elements.Clear();
-        _sizes.Clear();
-        _elementToIndex.Clear();
+        this._firstIndex = 0;
+        this._elements.Clear();
+        this._sizes.Clear();
+        this._elementToIndex.Clear();
     }
 }

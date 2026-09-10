@@ -8,7 +8,7 @@ namespace Avalonia.Labs.Controls;
 public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, IItemSizeProvider
 {
     // The fallback size in case size calculation went wrong
-    private static readonly Size _FallbackItemSize = new Size(400, 120);
+    private static readonly Size _FallbackItemSize = new(400, 120);
     private Size? _sizeOfFirstItem;
     private Size? _averageItemSizeCache;
 
@@ -19,7 +19,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private double _startItemOffsetY;
 
     /// <summary> Gets an empty size </summary>
-    private static readonly Size _EmptySize = new Size(0, 0);
+    private static readonly Size _EmptySize = new(0, 0);
 
     private const double EPSILON = 0.001;
 
@@ -91,7 +91,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private static readonly AttachedProperty<object?> _RecycleKeyProperty =
         AvaloniaProperty.RegisterAttached<VirtualizingWrapPanel, Control, object?>("RecycleKey");
 
-    private static readonly object s_itemIsItsOwnContainer = new object();
+    private static readonly object s_itemIsItsOwnContainer = new();
     private readonly Action<Control, int> _recycleElement;
     private readonly Action<Control> _recycleElementOnItemRemoved;
     private readonly Action<Control, int, int> _updateElementIndex;
@@ -127,10 +127,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     private int _lastNavigationIndex = -1;
     protected int LastNavigationIndex => this._lastNavigationIndex;
 
-    private void ClearRowCache()
-    {
-        this._rowCache.Clear();
-    }
+    private void ClearRowCache() => this._rowCache.Clear();
 
     private void AddRowCacheEntry(int startIndex, double y, double height, int count, double summedUpChildWidth)
     {
@@ -1704,36 +1701,24 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// <summary>
     /// Removes all items that are realized before start index
     /// </summary>
-    private void VirtualizeItemsBeforeStartIndex()
-    {
-        this._realizedElements?.RecycleElementsBefore(this._startItemIndex, this.RecycleElement);
-    }
+    private void VirtualizeItemsBeforeStartIndex() => this._realizedElements?.RecycleElementsBefore(this._startItemIndex, this.RecycleElement);
 
     /// <summary>
     /// Removes all items that are realized after start index
     /// </summary>
-    private void VirtualizeItemsAfterEndIndex()
-    {
-        this._realizedElements?.RecycleElementsAfter(this._endItemIndex, this.RecycleElement);
-    }
+    private void VirtualizeItemsAfterEndIndex() => this._realizedElements?.RecycleElementsAfter(this._endItemIndex, this.RecycleElement);
 
     /// <summary>
     /// Calculates the start y-offset of the effective viewport
     /// </summary>
     /// <returns>the y-component of the effective viewport</returns>
-    private double DetermineStartOffsetY()
-    {
-        return Math.Max(this.GetY(this._viewport.TopLeft), 0);
-    }
+    private double DetermineStartOffsetY() => Math.Max(this.GetY(this._viewport.TopLeft), 0);
 
     /// <summary>
     /// Calculates the end y-offset of the effective viewport
     /// </summary>
     /// <returns>the y-component of the effective viewport</returns>
-    private double DetermineEndOffsetY()
-    {
-        return Math.Max(0, this.GetY(this._viewport.BottomRight));
-    }
+    private double DetermineEndOffsetY() => Math.Max(0, this.GetY(this._viewport.BottomRight));
 
     /// <summary>
     /// Calculates the upfront known item size
@@ -2486,10 +2471,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
     /// </summary>
     /// <param name="index">The container index to lookup</param>
     /// <returns>the realized container</returns>
-    private Control? GetRealizedElement(int index)
-    {
-        return this._realizedElements?.GetElement(index);
-    }
+    private Control? GetRealizedElement(int index) => this._realizedElements?.GetElement(index);
 
     /// <summary>
     /// Gets the realized element or null if not available
@@ -2725,10 +2707,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
             RoutingStrategies.Bubble);
 
     /// <inheritdoc/>
-    public Size GetSizeForItem(object item)
-    {
-        return this.GetUpfrontKnownItemSize(item) ?? this.GetAssumedItemSize(item);
-    }
+    public Size GetSizeForItem(object item) => this.GetUpfrontKnownItemSize(item) ?? this.GetAssumedItemSize(item);
 
     /// <inheritdoc/>
     public IReadOnlyList<double> GetIrregularSnapPoints(Orientation orientation,

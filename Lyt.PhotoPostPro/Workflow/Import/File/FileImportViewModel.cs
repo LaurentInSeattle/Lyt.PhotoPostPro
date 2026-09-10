@@ -109,10 +109,10 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         {
             this.loadedImage = ImageLoader.LoadImage(path);
             this.loadedImage.CreateThumbnail();
-            if (loadedImage.IsSuccess && loadedImage.IsFullyLoadedWithThumbnail)
+            if (this.loadedImage.IsSuccess && this.loadedImage.IsFullyLoadedWithThumbnail)
             {
                 bool isAlreadyInLibray = false;
-                if ( loadedImage.Metadata is Metadata metadata)
+                if (this.loadedImage.Metadata is Metadata metadata)
                 {
                     if (this.model.LibraryManager.IsAlreadyInLibrary(metadata) )
                     {
@@ -154,7 +154,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
             }
             else
             {
-                error = "Failed to load image file: " + loadedImage.ErrorMessage;
+                error = "Failed to load image file: " + this.loadedImage.ErrorMessage;
             }
         }
         catch (Exception ex)

@@ -41,7 +41,7 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
             index += this._start;
 
             double snapPoint = 0;
-            var averageElementSize = this._size;
+            double averageElementSize = this._size;
 
             Control? container;
             switch (this._orientation)
@@ -168,7 +168,7 @@ internal class VirtualizingWrapPanelSnapPointList : IReadOnlyList<double>
 
     public IEnumerator<double> GetEnumerator()
     {
-        for (var i = 0; i < this.Count; i++)
+        for (int i = 0; i < this.Count; i++)
         {
             yield return this[i];
         }
