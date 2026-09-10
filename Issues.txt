@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Adjust filter vignette parameters for Img# 
-
 - Watermarks and Signatures need to be scaled to the exported image size.  
 
 - Add one sample photo at initial startup so that the library is never completely empty.
