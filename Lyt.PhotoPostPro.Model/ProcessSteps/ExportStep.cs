@@ -65,7 +65,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
         PhotoPostProModel model = this.ProcessWorkflow.Model;
 
-        // Create subdirectory for exported images
+        // Create new subdirectory for exported images
         string sourceImagePath;
         string fileName;
         string subDirectoryExport;
@@ -154,8 +154,13 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         int fontSpace = (int)(watermark.FontSize * 0.7);
                         PointF origin = new(imageWithWatermark.Width / 2, 0.8f * imageWithWatermark.Height / 2);
 
+                        // Create font and scaling its size according to image dimensions 
+                        int largestDimension = int.Max(imageWithWatermark.Width, imageWithWatermark.Height);
+                        float scalingFactor = largestDimension / 1920.0f;
+                        int fontSize = (int)(watermark.FontSize * scalingFactor);
+                        Font font = SystemFonts.CreateFont(watermark.FontFamily, fontSize, watermark.FontStyle);
+
                         // Adding watermark : Drawing
-                        Font font = SystemFonts.CreateFont(watermark.FontFamily, watermark.FontSize, watermark.FontStyle);
                         var textOptions = new RichTextOptions(font)
                         {
                             VerticalAlignment = VerticalAlignment.Center,

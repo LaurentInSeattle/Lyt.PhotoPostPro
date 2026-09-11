@@ -1,8 +1,6 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Watermarks and Signatures need to be scaled to the exported image size.  
-
 - Add one sample photo at initial startup so that the library is never completely empty.
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
@@ -10,6 +8,8 @@ Bugs ~ Major Issues
 
 WIP
 ---
+
+- Localize some missing messages in Exports panels 
 
 
 
@@ -74,10 +74,14 @@ https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
 - No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
 
-Bugs - No Repro 
----------------
+Bugs - No Recent Repro 
+----------------------
 
 - Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
+
+
+Bugs - No Repro for quite a While 
+---------------------------------
 
 - CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
 
