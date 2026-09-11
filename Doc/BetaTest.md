@@ -1,6 +1,8 @@
 # What is Photo Rebel ? 
 
-Photo Rebel is a complete software solution for the Digital Photography enthouiast, amateur or pro, beginner or experimented.
+Photo Rebel is a **complete** software solution for the Digital Photography enthousiast, amateur or pro, beginner or experimented.
+
+<p align="left"><img src="..\Screenshots\Screenshot_Library_JP - Small.png" height="500"/>
 
 Photo Rebel will: 
 
@@ -8,25 +10,27 @@ Photo Rebel will:
 
 - Organize and classifly the images (3) on your PC storage system, analysing EXIF metadata, building a well and clearly structured photo library.
 
-- Import any images (3) from any secondary disk you might have into your library. 
+- Import any images (3) from any storage device, like a secondary disk or zip drive you might have, into your library. 
 
-- Help you browse your library and easily the images you want.
+- Help you browse your library and easily find the images you want.
 
-- Assist you with the somewaht 'painful' process of culling and rating your pictures.
+- Assist you with the somewhat 'painful' and time consumming process of culling and rating your pictures.
 
-- Help you to edit your photos providing adavanced tools and a workflow designed with the help of professional photograpphers.
+- Help you edit your photos providing adavanced tools and a solid workflow designed with the help of professional photograpphers.
 
-- Export your photos in the best usage format, for print, web publishing or gallery. (4) 
+- Export your photos in the best usage size and format, for print, web publishing or gallery. (4) 
 
-- Sign and Watermarks your photos: Customize text, fonts, style, placement, colours.
+- Help you sign and watermark your photos: Customize text, fonts, style, placement, colours.
 
-- Photos have been shot to be seen: The gallery will showcase them: Full screen, Slide-Show, Set as Desktop Background.
+- Photos have been shot to be seen: The gallery will showcase them: Full screen slide-Show, Set images as Desktop Background.
 
 - Photo Rebel speaks your language: Human localized to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
 
-- Photo Rebel hates the cloud and does not require the INternet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
- 
-# Screenshots 
+- Photo Rebel truly hates the cloud and does not require the Internet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
+
+- Photo Rebel uses no AI and works perfectly on 'old' computers. 
+
+- # Screenshots 
 
 The main screen of the library: 
 
@@ -120,6 +124,29 @@ Manual Code Update:
 
 - Back to Install steps: Re-install the program as shown in the "Install" section above
 
+# Minimum Computer Configuration - Will handle 20 Mega pixel images 
+
+- Intel 64 bit computer, quad-core, 3 GHz
+
+- Windows 10 or 11 
+
+- 8 GB Memory 
+
+- No GPU requirements
+
+- Solid State hard drive recommended by not necessary 
+
+# "Flying" Computer Configuration - Will easily handle 60 Mega pixel images  
+
+- Intel 64 bit computer, eight-core, 4 GHz
+
+- Windows 11 
+
+- 16 GB Memory 
+
+- No GPU requirements
+
+- Solid State hard drive 
 
 # Notes
 
