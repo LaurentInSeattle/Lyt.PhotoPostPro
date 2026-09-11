@@ -21,21 +21,21 @@ Photo Rebel will:
 
 - Assist you with the somewhat 'painful' and time consumming process of **culling and rating** your pictures.
 
-- Help you **edit your photos** providing adavanced tools and a solid workflow designed with the help of professional photograpphers.
+- Help you **edit your photos** providing advanced tools and a solid workflow designed with the help of professional photograpphers.
 
 - **Export** your photos in the best usage size and format, for print, web publishing or gallery. (4) 
 
-- Help you **sign and watermark** your photos: Customize text, fonts, style, placement, colours.
+- Help you **sign and watermark** your photos: Customize borders, signature text, fonts, style, placement, colours.
 
 - Photos have been shot to be seen: The **gallery** will showcase them: Full screen slide-Show, Set images as Desktop Background.
 
-- Photo Rebel **speaks your language**: Human localized to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
+- Photo Rebel **speaks your language**: Localized by fluent and native (human) speakers to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
 
 - Photo Rebel truly hates the cloud and does not require the Internet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
 
 - Photo Rebel uses no GPU support, no AI and works perfectly on 'old' computers.
 
-- # Screenshots 
+# Screenshots 
 
 The main screen of the library: 
 
