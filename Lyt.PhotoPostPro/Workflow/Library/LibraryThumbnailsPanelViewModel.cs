@@ -33,21 +33,21 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     [ObservableProperty]
     public partial string EmptyMessage { get; set; } = string.Empty;
 
-    public bool IsEmpty => this.Thumbnails.Count == 0 ;
+    public bool IsEmpty => this.Thumbnails.Count == 0;
 
-    public void SetViewingMode (Viewing viewing)
+    public void SetViewingMode(Viewing viewing)
     {
         this.ShowRatingFilter = viewing == Viewing.Captured;
-        this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll; 
+        this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll;
     }
 
     public IEnumerable<string> GetUnratedThumbnailsPaths()
-        =>   from thumb in this.Thumbnails
-             // Filter out images already rated (0 => unrated) 
-             where thumb.Metadata.Rating == 0
-             // Reorder files by Date Captured 
-             orderby thumb.Metadata.Captured ascending
-             select thumb.Path;
+        => from thumb in this.Thumbnails
+           // Filter out images already rated (0 => unrated) 
+           where thumb.Metadata.Rating == 0
+           // Reorder files by Date Captured 
+           orderby thumb.Metadata.Captured ascending
+           select thumb.Path;
 
     public void Populate(List<LibraryThumbnailViewModel> list)
     {
@@ -58,14 +58,14 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             this.Thumbnails = collection;
             this.Thumbnails.CollectionChanged += (_, _) => this.FilterAndSort();
             this.FilterAndSort();
-        } 
+        }
         else
         {
             this.Clear();
         }
     }
 
-    public void Clear ()
+    public void Clear()
     {
         // Clear the panel 
         this.Thumbnails = [];
@@ -82,9 +82,9 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     public void Update(string path)
     {
         // Find old View model using the provided path and remove it 
-        var oldVm = 
-            (from vm in this.Thumbnails 
-             where vm.Path.Equals( path, StringComparison.InvariantCultureIgnoreCase) 
+        var oldVm =
+            (from vm in this.Thumbnails
+             where vm.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase)
              select vm).FirstOrDefault();
         if (oldVm is null)
         {
@@ -123,9 +123,9 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     partial void OnShowAllChanged(bool value)
     {
         // If we moved this setting, we can only be viewing in Captured Mode 
-        this.SetViewingMode(Viewing.Captured); 
+        this.SetViewingMode(Viewing.Captured);
         this.FilterAndSort();
-    } 
+    }
 
     partial void OnRatingChanged(int value) => this.FilterAndSort();
 
@@ -176,6 +176,15 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
         }
 
         this.DisplayedThumbnails = new(sorted);
+        var first = sorted.FirstOrDefault();
+        if (first is not null && this.IsBound)
+        {
+            // Does not work: possibly because of using virtualization 
+            // first.View.BringIntoView();
+            // Therefore directly manipulate the scroll viewer to scroll to top-left
+            var scrollViewer = this.View.DisplayedThumbnailsScrollViewer; 
+            scrollViewer?.Offset = new (0.0, 0.0); 
+        }
     }
 
     public void OnSelect(object selectedObject)

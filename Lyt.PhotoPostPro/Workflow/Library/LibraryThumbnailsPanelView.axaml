@@ -79,6 +79,7 @@
 			/>
 
 		<ScrollViewer
+			x:Name="DisplayedThumbnailsScrollViewer"
 			Grid.Row="1"
 			Background="Transparent"
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"

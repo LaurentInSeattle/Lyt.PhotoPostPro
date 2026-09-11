@@ -5,7 +5,6 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
-- Scroll into view first thumb when navigating library 
 
 WIP
 ---
