@@ -63,17 +63,17 @@ Gallery
 
 # Editing Tools ~ Your workflow 
 
-- Mirror 
+- Mirroring 
 
-- Portrait vs Landscape Adjust 
+- Portrait vs Landscape Adjustment 
 
 - Straightening (6)
 
 - Cropping 
 
-- Denoise 
+- ISO Grain Denoise - for low light scenes. 
 
-- Global Exposure: Gamma, Multiply, Shift
+- Global Exposure: Combined Gamma, Multiply, Shift
 
 - Recovery: Highlights and Shadows
 
@@ -87,11 +87,17 @@ Gallery
 
 - Manual Color grading : Global saturation or per channel vibrance  
 
-- Sharpening  
+- Sharpening 
 
 - Misc. Filters: Grayscale, Sepia, Vignette, Polaroid, Kodachrome, etc...
 
-You can go back and forth editing steps as you wish. (8)
+You can skip any step and go back and forth editing steps as you wish. (8)
+
+# Coming Someday... Hopefully Soon 
+
+Build **photobooks** from your library.
+
+Additional editing tools 
 
 # Install ~ FOR NOW 
 
@@ -119,7 +125,7 @@ There is NO uninstallation program. (yet)
 
 - Delete Program Data: Navigate to "Documents". Open "Lyt" subfolder, Open "PhotoRebel" subfolder, delete everything. This deletes applications settings and preferences.
 
-- Delete Imported images: Navigate to "Pictures". Open "PhotoRebel" subfolder, check wha you want to keep, delete what you want to delete.
+- Delete Imported images: Navigate to "Pictures". Open "PhotoRebel" subfolder, check what you want to keep, delete what you want to delete.
 
 # Updates ~ FOR NOW 
 
