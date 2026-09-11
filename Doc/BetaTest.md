@@ -6,25 +6,25 @@ Photo Rebel is a **complete** software solution for the Digital Photography enth
 
 Photo Rebel will: 
 
-- Connect to your camera (1) or iPhone (2) and download the images you pick to your Personal Computer.
+- **Connect** to your camera (1) or iPhone (2) and download the images you pick to your Personal Computer.
 
-- Organize and classifly the images (3) on your PC storage system, analysing EXIF metadata, building a well and clearly structured photo library.
+- **Organize** and classifly the images (3) on your PC storage system, analysing EXIF metadata, building a well and clearly structured photo library.
 
-- Import any images (3) from any storage device, like a secondary disk or zip drive you might have, into your library. 
+- **Import** any images (3) from any storage device, like a secondary disk or zip drive you might have, into your library. 
 
-- Help you browse your library and easily find the images you want.
+- Help you **browse** your library and easily find the images you want.
 
-- Assist you with the somewhat 'painful' and time consumming process of culling and rating your pictures.
+- Assist you with the somewhat 'painful' and time consumming process of **culling and rating** your pictures.
 
-- Help you edit your photos providing adavanced tools and a solid workflow designed with the help of professional photograpphers.
+- Help you **edit your photos** providing adavanced tools and a solid workflow designed with the help of professional photograpphers.
 
-- Export your photos in the best usage size and format, for print, web publishing or gallery. (4) 
+- **Export** your photos in the best usage size and format, for print, web publishing or gallery. (4) 
 
-- Help you sign and watermark your photos: Customize text, fonts, style, placement, colours.
+- Help you **sign and watermark** your photos: Customize text, fonts, style, placement, colours.
 
-- Photos have been shot to be seen: The gallery will showcase them: Full screen slide-Show, Set images as Desktop Background.
+- Photos have been shot to be seen: The **gallery** will showcase them: Full screen slide-Show, Set images as Desktop Background.
 
-- Photo Rebel speaks your language: Human localized to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
+- Photo Rebel **speaks your language**: Human localized to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
 
 - Photo Rebel truly hates the cloud and does not require the Internet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
 
@@ -86,7 +86,7 @@ Gallery
 
 - Misc. Filters: Grayscale, Sepia, Vignette, Polaroid, Kodachrome, etc...
 
-You can go back and forth editing steps as you wish.
+You can go back and forth editing steps as you wish. (8)
 
 # Install ~ FOR NOW 
 
@@ -95,11 +95,13 @@ For Now: Windows Only - x64 Only
 
 There is NO installation program. (yet)
 
-- Download Zip file.
+- Download Zip file. (9) 
 
 - Extract to some folder.
 
-- Create shortcuts, pin to taskbar... 
+- Keep all content together, do not move files around, do not rename files.
+
+- Optionally: Create a shortcut, pin to taskbar... 
 
 - Ready: Click the colorful icon to launch Photo Rebel. 
 
@@ -164,3 +166,7 @@ Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, 
 (6) Rotate by as little as 0.1 degrees - and of course way more, as needed.
 
 (7) Help with translations is more than welcome and would be much appreciated.
+
+(8) All editing steps are performed in Floating Point to preserve image quality.
+
+(9) Photo Rebel is a 'modern' .Net 10 application. It is fully compiled to x86 native code and there is no need to download additional components. Everything is in the ZIP file.
