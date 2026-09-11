@@ -12,17 +12,6 @@ public sealed partial class ExportEditViewModel :
     private int quality = 85;
     private bool isGalleryFormat;
 
-    /* 
-
-    public string SignatureName { get; set; } = string.Empty;
-
-    public string WatermarkName { get; set; } = string.Empty;
-
-    // String added to filename to identify the export type
-    public string PostFix { get; set; } = string.Empty;
-
-    */
-
     [ObservableProperty]
     public partial string FriendlyName { get; set; } = string.Empty;
 
@@ -108,6 +97,7 @@ public sealed partial class ExportEditViewModel :
         this.SelectedBorderStyleIndex = 0;
         this.SelectedBorderThicknessIndex = 0;
         this.IsBorderThicknessEnabled = false;
+        this.PostFix = "_XXX"; 
     }
 
     private void PopulateLocalizedComboBoxes()
@@ -358,6 +348,32 @@ public sealed partial class ExportEditViewModel :
         }
 
         this.IsBorderThicknessEnabled = imageExport.BorderStyle != ImageBorderStyle.None;
+
+        this.SelectedSignatureIndex = 0;
+        var signatures = this.model.Signatures.AvailableSignatures; 
+        for (int i = 0; i < signatures.Count; ++i)
+        {
+            if (imageExport.SignatureName == signatures[i].FriendlyName)
+            {
+                // Plus one because zero is no signature 
+                this.SelectedSignatureIndex = i +1;
+                break;
+            }
+        }
+
+        this.SelectedWatermarkIndex= 0;
+        var watermarks   = this.model.Watermarks.AvailableWatermarks;
+        for (int i = 0; i < watermarks.Count; ++i)
+        {
+            if (imageExport.WatermarkName == watermarks[i].FriendlyName)
+            {
+                // Plus one because zero is no watermark 
+                this.SelectedWatermarkIndex = i + 1;
+                break;
+            }
+        }
+
+        this.PostFix = imageExport.PostFix;
     }
 
     // Clicked "Add" button - add new editable to model
@@ -417,7 +433,7 @@ public sealed partial class ExportEditViewModel :
         string postFix = this.PostFix?.Trim() ?? string.Empty;
         if (!postFix.StartsWith('_'))
         {
-            postFix += '_';
+            postFix = '_' + postFix;
         }
 
         // Index 0 is "None" so we only want to use a signature if the index is greater than 0

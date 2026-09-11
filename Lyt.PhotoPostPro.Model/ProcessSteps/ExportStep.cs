@@ -174,7 +174,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         };
 
                         // Adjust alpha for transparency
-                        var brush = new SolidBrush(watermark.Color.WithAlpha(0.3f));
+                        var brush = new SolidBrush(watermark.Color.WithAlpha(0.25f));
                         imageWithWatermark.Mutate(x => x.Paint(canvas =>
                         {
                             canvas.DrawText(textOptions, watermark.Text, brush, pen: null);

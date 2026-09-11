@@ -32,7 +32,7 @@
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="8" />
-				<ColumnDefinition Width="300" />
+				<ColumnDefinition Width="340" />
 				<ColumnDefinition Width="8" />
 				<ColumnDefinition Width="680" />
 				<ColumnDefinition Width="8" />
@@ -62,7 +62,7 @@
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Grid
-							Width="200" Height="40"
+							Width="320" Height="40"
 							> 
 							<TextBlock 
 								Theme="{StaticResource H3}"
