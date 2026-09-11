@@ -222,7 +222,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
             return false;
         }
 
-        if (maybeFontSize < 6 || maybeFontSize > 200)
+        if (maybeFontSize < 6 || maybeFontSize > 260)
         {
             message = "Tools.Editor.Validation.FontSizeOutOfRange";
             return false;

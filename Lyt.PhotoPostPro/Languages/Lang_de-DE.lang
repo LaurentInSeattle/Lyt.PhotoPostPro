@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">Schauen Sie nach Colour Tables</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">Ein eindeutiger Name ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">Eine Beschreibung ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">Eine gültige Bilddimension ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">Die bereitgestellte Bilddimension liegt außerhalb des Bereichs.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">Ein gültiger prozentsatz der bildqualität ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">Der Prozentsatz der bereitgestellten Bildqualität liegt außerhalb des Bereichs.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">Ein eindeutiger Dateiname Postfix ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">Dieser Name ist bereits in Gebrauch.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">Diese Exportformatspezifikation kann nicht gelöscht werden.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">Einige Texte sind erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">Eine gültige Schriftgröße ist erforderlich.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">Der angegebene Schriftgrößenwert liegt außerhalb des Bereichs.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Beschreibung</system:String>

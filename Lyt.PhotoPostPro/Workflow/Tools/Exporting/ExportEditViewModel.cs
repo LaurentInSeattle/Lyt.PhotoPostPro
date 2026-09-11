@@ -97,7 +97,7 @@ public sealed partial class ExportEditViewModel :
         this.SelectedBorderStyleIndex = 0;
         this.SelectedBorderThicknessIndex = 0;
         this.IsBorderThicknessEnabled = false;
-        this.PostFix = "_XXX"; 
+        this.PostFix = "_XXX";
     }
 
     private void PopulateLocalizedComboBoxes()
@@ -350,19 +350,19 @@ public sealed partial class ExportEditViewModel :
         this.IsBorderThicknessEnabled = imageExport.BorderStyle != ImageBorderStyle.None;
 
         this.SelectedSignatureIndex = 0;
-        var signatures = this.model.Signatures.AvailableSignatures; 
+        var signatures = this.model.Signatures.AvailableSignatures;
         for (int i = 0; i < signatures.Count; ++i)
         {
             if (imageExport.SignatureName == signatures[i].FriendlyName)
             {
                 // Plus one because zero is no signature 
-                this.SelectedSignatureIndex = i +1;
+                this.SelectedSignatureIndex = i + 1;
                 break;
             }
         }
 
-        this.SelectedWatermarkIndex= 0;
-        var watermarks   = this.model.Watermarks.AvailableWatermarks;
+        this.SelectedWatermarkIndex = 0;
+        var watermarks = this.model.Watermarks.AvailableWatermarks;
         for (int i = 0; i < watermarks.Count; ++i)
         {
             if (imageExport.WatermarkName == watermarks[i].FriendlyName)

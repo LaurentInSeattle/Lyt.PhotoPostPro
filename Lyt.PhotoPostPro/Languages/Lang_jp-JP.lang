@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">カラーテーブルを見る</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">ユニークな名前が必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">説明が必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">有効な画像寸法が必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">付属の画像寸法は範囲外です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">有効な画像品質パーセンテージが必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">提供した画像の品質割合は範囲外です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">独自のファイル名のpostfixが必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">この名前は既に使われています.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">このエクスポート形式仕様は削除できません.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">一部のテキストが必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">有効なフォントサイズが必要です.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">提供されているフォントサイズ値は範囲外です.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">テキスト</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">コンテンツ</system:String>

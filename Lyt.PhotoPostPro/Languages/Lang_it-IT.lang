@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">File 'LUT'</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">È richiesto un nome unico.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">È richiesta una descrizione.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">È richiesta una dimensione immagine valida.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">La dimensione dell'immagine fornita è fuori intervallo.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">È richiesta una percentuale di qualità dell'immagine valida.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">La percentuale di qualità dell'immagine fornita è fuori intervallo.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">È richiesto un nome di file unico postfix.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">Questo nome è già in uso.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">Questa specifica del formato di esportazione non può essere cancellata.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">È richiesto un testo.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">È richiesta una dimensione valida del carattere.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">Il valore della dimensione del carattere fornito è fuori intervallo.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Testo</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Designazione</system:String>

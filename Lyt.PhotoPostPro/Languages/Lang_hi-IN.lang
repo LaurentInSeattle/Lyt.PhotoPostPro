@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">रंगीन टेबल</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">एक अद्वितीय नाम की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">विवरण की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">एक वैध छवि आयाम की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">प्रदान की गई छवि आयाम सीमा से बाहर है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">एक वैध छवि गुणवत्ता प्रतिशत की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">प्रदान की गई छवि गुणवत्ता प्रतिशत सीमा से बाहर है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">एक अद्वितीय फ़ाइल नाम postfix की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">यह नाम पहले से ही उपयोग में है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">इस निर्यात प्रारूप विनिर्देश को हटाया नहीं जा सकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">कुछ पाठ की आवश्यकता होती है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">एक वैध फ़ॉन्ट आकार की आवश्यकता है।.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">प्रदान किया गया फ़ॉन्ट आकार मूल्य सीमा से बाहर है।.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">पाठ</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">विवरण</system:String>

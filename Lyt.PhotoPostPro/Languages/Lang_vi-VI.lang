@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">Tra bảng màu</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">Cần có một tên riêng.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">Cần phải có mô tả.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">Cần thiết một chiều ảnh hợp lệ.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">Không gian hình ảnh được cung cấp nằm ngoài phạm vi.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">Cần có tỷ lệ chất lượng ảnh hợp lệ.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">Phần trăm chất lượng ảnh được cung cấp nằm ngoài phạm vi.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">Cần có một tên tập tin đặc biệt postfix.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">Tên này đang được dùng.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">Không thể xoá tập tin định dạng xuất khẩu này.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">Cần có một số đoạn văn.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">Cần thiết kích cỡ phông chữ hợp lệ.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">Giá trị kích cỡ phông chữ cho trước nằm ngoài phạm vi.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Văn bản</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Mô tả</system:String>

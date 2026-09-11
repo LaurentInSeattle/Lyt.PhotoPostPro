@@ -84,6 +84,19 @@
 	<system:String x:Key="Space.Key.Luts">Look up Colour Tables</system:String>
 
 	<!-- Used in multiple Editor VM's-->
+	<system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">A unique name is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">A description is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">A valid image dimension is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">The provided image dimension is out of range.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.QualityRequired">A valid image quality percentage is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">The provided image quality percentage is out of range.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.PostFixRequired">A unique file name postfix is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">This name is already in use.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">This export format specification cannot be deleted.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.TextRequired">Some text is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FontSizeRequired">A valid font size is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">The provided font size value is out of range.</system:String>
+
 	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
 	<system:String x:Key="Tools.Editor.DescriptionPrompt">Description</system:String>
 	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>

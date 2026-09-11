@@ -1,22 +1,19 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Add one sample photo at initial startup so that the library is never completely empty.
-
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 WIP
 ---
 
-- Localize some missing messages in Exports panels 
+- First Run View : Setup root locations, etc 
 
 
 
 Essential Missing Features 
 --------------------------
 
-- First Run View : Setup root locations, etc 
 
 - App settings 
 
@@ -34,6 +31,7 @@ Minor Issues (Low priority)
 - Thumbnail is not updated after edit without export --- By Design ? 
 
 - Virtualizing Wrap Panel weird layouts at times (See 2017 pictures) Does not repro easily.
+
 
 
 Code Quality Issues 
@@ -143,6 +141,8 @@ Cool Stuff to Consider
 - Implement a MD-Viewer for built-in documentation : Maybe just Port https://github.com/masterLazy/MdViewer to AVA 
 
 - Compress Built-in LUT 
+
+- Improve Highlights and Shadows with a blur image mask to prevent 'halos'.
 
 - Improve Image Sharpen with a smarter algorithm (with gray image mask) 
 

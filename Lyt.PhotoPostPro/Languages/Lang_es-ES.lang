@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">Buscar tablas de colores</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">Se requiere un nombre único.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">Se requiere una descripción.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">Se requiere una dimensión de imagen válida.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">La dimensión de imagen proporcionada está fuera de alcance.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">Se requiere un porcentaje válido de calidad de imagen.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">El porcentaje de calidad de imagen proporcionado está fuera de rango.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">Se requiere un nombre de archivo único.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">Este nombre ya está en uso.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">Esta especificación del formato de exportación no puede eliminarse.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">Se requiere algún texto.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">Se requiere un tamaño de fuente válido.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">El valor de tamaño de fuente proporcionado está fuera de rango.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Texto</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Descripción</system:String>

@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">Преглед на цветови таблици</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">Изисква се уникално име.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">Необходимо е описание.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">Изисква се валидно измерение на изображението.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">Предоставеното измерение на изображението е извън обхват.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">Изисква се валиден процент на качество на изображението.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">Предоставеният процент на качество на изображението е извън обхват.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">Изисква се уникално име на файла postfix.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">Това име вече се използва.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">Тази спецификация на формат за износ не може да бъде заличена.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">Изисква се някакъв текст.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">Изисква се валиден размер на шрифта.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">Предоставената стойност за размера на шрифта е извън обхват.</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Текст</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Описание</system:String>

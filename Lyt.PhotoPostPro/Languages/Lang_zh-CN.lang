@@ -71,6 +71,30 @@
 
     <system:String x:Key="Space.Key.Luts">查找颜色表格</system:String>
 
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">需要一个独特的名称.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">需要说明.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">需要一个有效的图像维度 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">提供的图像维度超出范围 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityRequired">需要有一个有效的图像质量百分比.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">所提供的图像质量百分比超出范围.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.PostFixRequired">需要一个唯一的文件名后缀 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">此名称已经在使用中 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">此导出格式规格不能被删除 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.TextRequired">需要一些文本.</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">需要一个有效的字体大小 .</system:String>
+
+    <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">提供的字体大小值超出范围 .</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">文本</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">说明</system:String>
