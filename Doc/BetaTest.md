@@ -22,27 +22,103 @@ Photo Rebel will:
 
 - Photos have been shot to be seen: The gallery will showcase them: Full screen, Slide-Show, Set as Desktop Background.
 
-- Photo Rebel speaks your language: Human localized to: French, Italian, Japanese, Spanish (partially), English. 10+ other languages machine translated (5)
+- Photo Rebel speaks your language: Human localized to: French, Italian, Japanese, Spanish (partially - still in progress), English. 10+ other languages machine translated (5) (7)
 
+- Photo Rebel hates the cloud and does not require the INternet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
+ 
 # Screenshots 
+
+The main screen of the library: 
 
 <p align="left"><img src="..\Screenshots\Screenshot_Library_JP - Small.png" height="500"/>
 
-"\Screenshot_Library_JP - Small.png"
-"\Screenshot_Gallery_ZH - Small.png"
-"C:\Users\Laurent\Desktop\Shots\Screenshot_Composition_IT - Small.png"
-"C:\Users\Laurent\Desktop\Shots\Screenshot_Grading_FR - Small.png"
-"C:\Users\Laurent\Desktop\Shots\Screenshot_Export_EN - Small.png"
-"C:\Users\Laurent\Desktop\Shots\Screenshot_Import_EN - Small.png"
+Importing images into your library: 
 
-# Editing Tools 
+<p align="left"><img src="..\Screenshots\Screenshot_Import_EN - Small.png" height="500"/>
 
+Editing Tools - Composition: 
 
-# Install 
+<p align="left"><img src="..\Screenshots\Screenshot_Composition_IT - Small.png" height="500"/>
+
+Editing Tools - Color Grading with *.cube LUT's: 
+
+<p align="left"><img src="..\Screenshots\Screenshot_Grading_FR - Small.png" height="500"/>
+
+Export Tool: 
+
+<p align="left"><img src="..\Screenshots\Screenshot_Export_EN - Small.png" height="500"/>
+
+Gallery 
+
+<p align="left"><img src="..\Screenshots\Screenshot_Gallery_ZH - Small.png" height="500"/>
+
+# Editing Tools ~ Your workflow 
+
+- Mirror 
+
+- Portrait vs Landscape Adjust 
+
+- Straightening (6)
+
+- Cropping 
+
+- Denoise 
+
+- Global Exposure: Gamma, Multiply, Shift
+
+- Recovery: Highlights and Shadows
+
+- Selective exposure correction 
+
+- White Balance: Three algorithms available: Direct, Gray World, White Patch 
+
+- Contrast: Contrast, Blur, Brightness mix
+
+- Color grading with *.cube or *.3DL LUT's - The "Lut Explorer" will help you choose the best LUT...
+
+- Manual Color grading : Global saturation or per channel vibrance  
+
+- Sharpening  
+
+- Misc. Filters: Grayscale, Sepia, Vignette, Polaroid, Kodachrome, etc...
+
+You can go back and forth editing steps as you wish.
+
+# Install ~ FOR NOW 
+
+For Now: Windows Only - x64 Only  
+	(No support for 32 bit platforms, ARM processors, macOS, Unix'es) 
+
+There is NO installation program. (yet)
+
+- Download Zip file.
+
+- Extract to some folder.
+
+- Create shortcuts, pin to taskbar... 
+
+- Ready: Click the colorful icon to launch Photo Rebel. 
+
 
 # Uninstall 
 
+There is NO uninstallation program. (yet)
+
+- Delete Program: Delete the folder you extracted. This will ONLY delete the program.
+
+- Delete Program Data: Navigate to "Documents". Open "Lyt" subfolder, Open "PhotoRebel" subfolder, delete everything. This 
+
+- Delete Imported images: Navigate to "Pictures". Open "PhotoRebel" subfolder, delete what you want to delete.
+
 # Updates 
+
+There are NO automatic updates. (yet)
+
+Manual Code Update: 
+
+- Perform the "Delete Program" step above. STOP there. KEEP program data, KEEP images.
+
+- Back to Install steps: Re-install the program as shown in the "Install" section above
 
 
 # Notes
@@ -56,4 +132,8 @@ Photo Rebel will:
 (4) Supported image formats: JPG with configurable quality, WebP with configurable quality, PNG, BMP 
 
 (5) Machine translated to: 
-Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, Hindi, Hungarian, Korean, Portuguese, Thai, Ukranian, Vietnamese 
+Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, Hindi, Hungarian, Korean, Portuguese, Thai, Ukranian, Vietnamese. 
+
+(6) Rotate by as little as 0.1 degrees - and of course way more, as needed.
+
+(7) Help with translations is more than welcome and would be much appreciated.
