@@ -5,6 +5,7 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+- Scroll into view first thumb when navigating library 
 
 WIP
 ---
@@ -116,9 +117,7 @@ V.Next
 V.Next.Next 
 -----------
 
-- Build PDF photo book 
-
-- Ability to flag images to insert in a photobook or collection 
+- Build PDF photo book: Ability to flag images to insert in the photobook.
 
 - Library backup / export - Might be unnecessary 
 
@@ -126,6 +125,8 @@ V.Next.Next
 
 Cool Stuff to Consider 
 ----------------------
+
+- Combo-Borders: Black with thin white line, White with thin black line, etc...
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 

@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Σου τελειώνει ο χώρος του δίσκου!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Μέγεθος στο δίσκο</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Αρχεία εικόνας</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Όλα τα αρχεία</system:String>
+
+    <system:String x:Key="Space.Key.Library">Βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Πινακοθήκη</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Εξαγωγές</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Αναζήτηση χρωματικών πινάκων</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Κείμενο</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Περιγραφή εμπορευμάτων</system:String>

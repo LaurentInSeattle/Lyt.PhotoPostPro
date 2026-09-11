@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">你快沒磁碟了!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">在磁碟上大小</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">影像文件</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">所有文件</system:String>
+
+    <system:String x:Key="Space.Key.Library">文库</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">相簿</system:String>
+
+    <system:String x:Key="Space.Key.Exports">出口</system:String>
+
+    <system:String x:Key="Space.Key.Luts">查取顏色表</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">文字</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">描述</system:String>

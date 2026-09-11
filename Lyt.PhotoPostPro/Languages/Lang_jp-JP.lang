@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">ディスクの空き容量が不足しています!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">ディスクのサイズ</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">画像ファイル</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">すべてのファイル</system:String>
+
+    <system:String x:Key="Space.Key.Library">ライブラリー</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">ギャラリー</system:String>
+
+    <system:String x:Key="Space.Key.Exports">エクスポート</system:String>
+
+    <system:String x:Key="Space.Key.Luts">カラーテーブルを見る</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">テキスト</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">コンテンツ</system:String>

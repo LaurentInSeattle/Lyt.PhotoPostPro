@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">ডিস্কের স্থান ফাঁকা হয়ে গেছে!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">ডিস্কের মাপ</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">ফাইল ইম্পোর্ট করা হচ্ছে</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">সকল ফাইল</system:String>
+
+    <system:String x:Key="Space.Key.Library">লাইব্রেরি</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">গ্যালারি</system:String>
+
+    <system:String x:Key="Space.Key.Exports">এক্সপোর্ট করুন</system:String>
+
+    <system:String x:Key="Space.Key.Luts">আই. পি. রং দেখুন</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">টেক্সট</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">বিবরণ</system:String>

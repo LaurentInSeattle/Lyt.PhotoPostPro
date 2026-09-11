@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">¡Te estás quedando sin espacio de disco!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Tamaño en el disco</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Archivos de imagen</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Todos los archivos</system:String>
+
+    <system:String x:Key="Space.Key.Library">Biblioteca</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Galería</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Exportaciones</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Buscar tablas de colores</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Texto</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Descripción</system:String>

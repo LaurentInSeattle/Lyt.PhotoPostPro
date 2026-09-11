@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Ви працюєте з дискового простору!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Розмір на диску</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Файли зображень</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Всі файли</system:String>
+
+    <system:String x:Key="Space.Key.Library">Новини</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Видання</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Експорт</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Подивитися кольорові таблиці</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Головна</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Опис</system:String>

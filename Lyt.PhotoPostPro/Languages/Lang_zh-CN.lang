@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">你没有磁盘空间了!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">磁盘上的大小</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">图像文件</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">所有文件</system:String>
+
+    <system:String x:Key="Space.Key.Library">图书馆</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">图片库</system:String>
+
+    <system:String x:Key="Space.Key.Exports">出口</system:String>
+
+    <system:String x:Key="Space.Key.Luts">查找颜色表格</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">文本</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">说明</system:String>

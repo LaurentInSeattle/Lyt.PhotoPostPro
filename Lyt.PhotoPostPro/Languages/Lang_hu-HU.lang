@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Kifogytál a lemezből!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">A lemez mérete</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Képfájlok</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Minden fájl</system:String>
+
+    <system:String x:Key="Space.Key.Library">Könyvtár</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Galéria</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Export</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Színtáblák keresése</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Szöveg</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Leírás</system:String>

@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">당신은 디스크 공간에서 실행!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Disk에 크기</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">이미지 파일</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">모든 파일</system:String>
+
+    <system:String x:Key="Space.Key.Library">관련 기사</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">회사연혁</system:String>
+
+    <system:String x:Key="Space.Key.Exports">수출입</system:String>
+
+    <system:String x:Key="Space.Key.Luts">색상표 찾기</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">이름 *</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">제품 설명</system:String>

@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">आप डिस्क स्पेस से बाहर चल रहे हैं!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">डिस्क पर आकार</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">छवि फ़ाइलें</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">सभी फ़ाइलें</system:String>
+
+    <system:String x:Key="Space.Key.Library">पुस्तकालय</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">गैलरी</system:String>
+
+    <system:String x:Key="Space.Key.Exports">निर्यात</system:String>
+
+    <system:String x:Key="Space.Key.Luts">रंगीन टेबल</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">पाठ</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">विवरण</system:String>

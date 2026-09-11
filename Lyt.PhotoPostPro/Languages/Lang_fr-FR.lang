@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Tu es à court d'espace disque !</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Taille sur le disque</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Fichiers image</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Tous les fichiers</system:String>
+
+    <system:String x:Key="Space.Key.Library">Bibliothèque</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Galerie</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Exportations</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Consulter les tableaux de couleurs</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Texte</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Désignation des marchandises</system:String>
@@ -85,7 +99,7 @@
 
     <system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
 
-    <system:String x:Key="Tools.Editor.SignaturePlacement">Placement de la Signature </system:String>
+    <system:String x:Key="Tools.Editor.SignaturePlacement">Placement de la Signature</system:String>
 
     <system:String x:Key="Tools.Editor.TopLeft">En haut à gauche</system:String>
 

@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Ihnen geht der Speicherplatz aus!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Größe auf der Festplatte</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Bilddateien</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Alle Dateien</system:String>
+
+    <system:String x:Key="Space.Key.Library">Bibliothek</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Galerie</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Ausfuhren</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Schauen Sie nach Colour Tables</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Beschreibung</system:String>

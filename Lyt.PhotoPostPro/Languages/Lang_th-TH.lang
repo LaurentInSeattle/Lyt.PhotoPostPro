@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">คุณไม่มีเนื้อที่บนดิสก์แล้ว!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">ขนาดบนดิสก์</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">แฟ้มรูปภาพ</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">แฟ้มทั้งหมด</system:String>
+
+    <system:String x:Key="Space.Key.Library">ไลบรารี</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">คลังภาพ</system:String>
+
+    <system:String x:Key="Space.Key.Exports">ส่งออก</system:String>
+
+    <system:String x:Key="Space.Key.Luts">ค้นหาตารางสี</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">ข้อความ</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">คําอธิบาย</system:String>

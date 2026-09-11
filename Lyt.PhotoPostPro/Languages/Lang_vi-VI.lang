@@ -57,6 +57,20 @@
 
     <system:String x:Key="Tools.Statistics.LowDisk">Bạn đang chạy ra khỏi không gian đĩa!</system:String>
 
+    <system:String x:Key="Tools.Statistics.SizeOnDisk">Cỡ trên đĩa</system:String>
+
+    <system:String x:Key="Tools.Statistics.ImageFileCount">Tập tin ảnh</system:String>
+
+    <system:String x:Key="Tools.Statistics.TotalFileCount">Mọi tập tin</system:String>
+
+    <system:String x:Key="Space.Key.Library">Thư viện</system:String>
+
+    <system:String x:Key="Space.Key.Gallery">Gallery</system:String>
+
+    <system:String x:Key="Space.Key.Exports">Xuất</system:String>
+
+    <system:String x:Key="Space.Key.Luts">Tra bảng màu</system:String>
+
     <system:String x:Key="Tools.Editor.TextPrompt">Văn bản</system:String>
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Mô tả</system:String>
