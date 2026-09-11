@@ -69,7 +69,7 @@
 
     <system:String x:Key="Space.Key.Exports">Esportazioni</system:String>
 
-    <system:String x:Key="Space.Key.Luts">Guarda su Tavoli a colori</system:String>
+    <system:String x:Key="Space.Key.Luts">File 'LUT'</system:String>
 
     <system:String x:Key="Tools.Editor.TextPrompt">Testo</system:String>
 
