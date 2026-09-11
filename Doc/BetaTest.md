@@ -1,6 +1,11 @@
-# What is Photo Rebel ? 
+# Photo Rebel ? 
 
 Photo Rebel is a **complete** software solution for the Digital Photography enthousiast, amateur or pro, beginner or experimented.
+
+- Complete 'Raw' Support
+- MTP Camera Connexion
+- Floating Point Editing and Image Processing
+- Extensive Image Library Management
 
 <p align="left"><img src="..\Screenshots\Screenshot_Library_JP - Small.png" height="500"/>
 
@@ -28,7 +33,7 @@ Photo Rebel will:
 
 - Photo Rebel truly hates the cloud and does not require the Internet: Preserve your privacy, keep your photo safe from AI 'harvesting'. 
 
-- Photo Rebel uses no AI and works perfectly on 'old' computers. 
+- Photo Rebel uses no GPU support, no AI and works perfectly on 'old' computers.
 
 - # Screenshots 
 
@@ -106,17 +111,17 @@ There is NO installation program. (yet)
 - Ready: Click the colorful icon to launch Photo Rebel. 
 
 
-# Uninstall 
+# Uninstall ~ FOR NOW 
 
 There is NO uninstallation program. (yet)
 
 - Delete Program: Delete the folder you extracted. This will ONLY delete the program.
 
-- Delete Program Data: Navigate to "Documents". Open "Lyt" subfolder, Open "PhotoRebel" subfolder, delete everything. This 
+- Delete Program Data: Navigate to "Documents". Open "Lyt" subfolder, Open "PhotoRebel" subfolder, delete everything. This deletes applications settings and preferences.
 
-- Delete Imported images: Navigate to "Pictures". Open "PhotoRebel" subfolder, delete what you want to delete.
+- Delete Imported images: Navigate to "Pictures". Open "PhotoRebel" subfolder, check wha you want to keep, delete what you want to delete.
 
-# Updates 
+# Updates ~ FOR NOW 
 
 There are NO automatic updates. (yet)
 
@@ -126,7 +131,9 @@ Manual Code Update:
 
 - Back to Install steps: Re-install the program as shown in the "Install" section above
 
-# Minimum Computer Configuration - Will handle 20 Mega pixel images 
+# Minimum Computer Configuration
+
+**Will handle 20 Mega pixel images** 
 
 - Intel 64 bit computer, quad-core, 3 GHz
 
@@ -138,7 +145,9 @@ Manual Code Update:
 
 - Solid State hard drive recommended by not necessary 
 
-# "Flying" Computer Configuration - Will easily handle 60 Mega pixel images  
+# "Flying" Computer Configuration 
+
+**Will easily handle 60 Mega pixel images**
 
 - Intel 64 bit computer, eight-core, 4 GHz
 
@@ -150,15 +159,28 @@ Manual Code Update:
 
 - Solid State hard drive 
 
+# Dependencies 
+
+Photo Rebel is built on top of: (9)
+
+- Avalonia / Skia 
+- LibRaw
+- Media Devices 
+- Image Sharp 
+- Metadata Extractor 
+- Openize 
+- MVVM Community Toolkit 
+- Microsoft Hosting Dependency Injection Framework  
+
 # Notes
 
-(1) Hundreds of camera supported, old and new. Thanks to the MTP integration. 
+(1) Hundreds of camera models supported, old and new. Thanks to the MTP integration. 
 
 (2) Apple will not let any program remove files, photos or images from your iPhone or iPad device: So... iPhones are Read-Only.
 
 (3) All images formats are supported: HIEC (iPhone), RAW (via LibRaw) and all well-known classic desktop formats, such as JPG, WebP, PNG, etc. Exceptions: AVIF, JLX. 
 
-(4) Supported image formats: JPG with configurable quality, WebP with configurable quality, PNG, BMP 
+(4) Supported exports image formats: JPG with configurable quality, WebP with configurable quality, PNG, BMP 
 
 (5) Machine translated to: 
 Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, Hindi, Hungarian, Korean, Portuguese, Thai, Ukranian, Vietnamese. 
@@ -167,6 +189,7 @@ Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, 
 
 (7) Help with translations is more than welcome and would be much appreciated.
 
-(8) All editing steps are performed in Floating Point to preserve image quality.
+(8) All editing steps calculations and processing are performed in Floating Point arithmetic to preserve high image quality.
 
-(9) Photo Rebel is a 'modern' .Net 10 application. It is fully compiled to x86 native code and there is no need to download additional components. Everything is in the ZIP file.
+(9) Photo Rebel is a 'modern' .Net 10 application. It is fully compiled to x86 native code (also known as 'AOT') and there is no need to download additional components or 'frameworks'. Everything is in the ZIP file.
+
