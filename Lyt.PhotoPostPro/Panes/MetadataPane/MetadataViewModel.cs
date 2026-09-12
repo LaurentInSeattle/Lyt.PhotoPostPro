@@ -230,14 +230,20 @@ public sealed partial class MetadataViewModel :
     }
 
     [RelayCommand]
-    public void OnHandleTags()
+    public void OnHandleKeywords()
     {
         if (this.metadata is null) 
         {
             return;
         }
 
-        // TODO 
+        // Launch dialog for editing
+        var dialogService = App.GetRequiredService<IDialogService>();
+        var shellViewModel = App.GetRequiredService<ShellViewModel>();
+        if (dialogService is DialogService modalService)
+        {
+            modalService.RunViewModelModal(shellViewModel.ModalHost, new EditKeywordsDialogModel(this.metadata));
+        }
     }
 
 

@@ -84,17 +84,17 @@ public sealed partial class SelectEditDialogModel : DialogViewModel<SelectEditDi
     }
 
     [RelayCommand]
-    public async Task OnCancel() => this.Cancel();
+    public void OnCancel() => this.Cancel();
 
     [RelayCommand]
-    public async Task OnStartOver()
+    public void OnStartOver()
     {
         this.IsStartOver = true;
         this.TrySaveAndClose();
     }
 
     [RelayCommand]
-    public async Task OnContinue()
+    public void OnContinue()
     {
         this.IsStartOver = false;
         this.TrySaveAndClose();

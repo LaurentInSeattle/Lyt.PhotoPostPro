@@ -20,8 +20,8 @@ public sealed partial class ConfirmRemoveDialogModel :  DialogViewModel<ConfirmR
     }
 
     [RelayCommand]
-    public async Task OnCancel() => this.Cancel();
+    public void OnCancel() => this.Cancel();
 
     [RelayCommand]
-    public async Task OnRemove() => this.TrySaveAndClose() ;
+    public void OnRemove() => this.TrySaveAndClose() ;
 }

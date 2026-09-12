@@ -1,0 +1,28 @@
+Version Names / Git Tags / Dates 
+ 
+A: Alessandra - Initial Beta - No Setup - No Store - Planned: Late September 
+
+B: Bianca
+C: Chiara
+D: Donatella
+E: Emilia
+F: Federica 
+G: Giulia
+H: Helena 
+I: Illaria
+J: Jovana 
+K: Karina
+L: Lucia
+M: Martina
+N: Nicoletta
+O: Ornella
+P: Paola
+Q: Quirina
+R: Rosa
+S: Sabrina
+T: Teresa
+U: Ursula
+V: Valentina
+X: Xenia 
+Y: Yolanda
+Z: Zita

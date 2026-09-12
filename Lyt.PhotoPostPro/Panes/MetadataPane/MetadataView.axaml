@@ -93,7 +93,7 @@
 				HorizontalAlignment="Right" VerticalAlignment="Center"
 				Width="120"
 				Margin="0 0 24 0"
-				Command="{Binding OnHandleTags}"
+				Command="{Binding OnHandleKeywords}"
 				GlyphStrokeThickness="0.05" 
 				/>		
 		</Grid>

@@ -3,6 +3,7 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
+- Loading dialog dismissal does not behave : close other dialogs
 
 WIP
 ---

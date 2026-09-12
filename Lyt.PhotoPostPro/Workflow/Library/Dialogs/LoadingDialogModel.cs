@@ -36,7 +36,9 @@ public sealed partial class LoadingDialogModel :
         this.timer = null;
     }
 
-    private void OnTimerTick(object? sender, EventArgs e)
+    private void OnTimerTick(object? sender, EventArgs e) => this.Dismiss();
+
+    private void Dismiss()
     {
         this.timer?.Stop();
         this.timer = null;
@@ -44,5 +46,5 @@ public sealed partial class LoadingDialogModel :
     }
 
     public void Receive(LibraryLoadedMessage message)
-        => Dispatch.OnUiThread(this.Cancel, DispatcherPriority.ApplicationIdle);
+        => Dispatch.OnUiThread(this.Dismiss, DispatcherPriority.ApplicationIdle);
 }

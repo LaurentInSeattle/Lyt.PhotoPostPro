@@ -18,23 +18,26 @@
 		>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="40" />
 		</Grid.ColumnDefinitions>
 
 		<TextBlock
-			Margin="4"
+			Margin="8 2 8 2"
+			Padding="12 0 12 0"
 			Text="{Binding Keyword}"
-			Theme="{StaticResource Large}"
-			Foreground="{StaticResource DarkBlue_0_100}"
+			Theme="{StaticResource VeryLarge}"
+			Background="{StaticResource DarkBlue_0_100}"
 			TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"
 			/>
 		<glyphs:GlyphButton
-			Grid.Column="1"
+			Grid.Column="2"
 			Style="{StaticResource SmallPanelIconButton}"
-			Margin="2"
 			GlyphSource="dismiss"
 			GlyphStrokeThickness="0"
 			Command="{Binding OnDelete}"
+			Width="26" Height="26"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
 			/>
 	</Grid>
 </UserControl>

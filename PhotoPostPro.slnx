@@ -7,6 +7,7 @@
   </Folder>
   <Folder Name="/Doc/">
     <File Path="Doc/BetaTest.md" />
+    <File Path="Doc/versions.txt" />
   </Folder>
   <Folder Name="/Framework/">
     <Project Path="../Lyt.Framework/Lyt.Collections/Lyt.Collections.csproj" />

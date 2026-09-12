@@ -1,102 +1,93 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
-public sealed partial class EditKeywordsDialogModel : DialogViewModel<EditKeywordsDialog, object>
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+
+public sealed partial class EditKeywordsDialogModel :
+    DialogViewModel<EditKeywordsDialog, object>,
+    ICanDeleteKeyword
 {
-#pragma warning disable IDE0044 // Add readonly modifier
-    private bool isInitializing;
-#pragma warning restore IDE0044 
+    [ObservableProperty]
+    public partial string Message { get; set; }
 
     [ObservableProperty]
-    public partial string? Message { get; set; }
+    public partial string Title { get; set; }
 
     [ObservableProperty]
-    public partial string? Title { get; set; }
+    public partial string KeywordsText { get; set; }
 
     [ObservableProperty]
-    public partial string? ShouldReplay { get; set; }
+    public partial ObservableCollection<KeywordViewModel> Keywords { get; set; } = [];
 
-    [ObservableProperty]
-    public partial bool IsReplayMode { get; set; }
-
-    [ObservableProperty]
-    public partial List<string> ParametersStrings { get; set; } = [];
-
-    [ObservableProperty]
-    public partial int SelectedParametersIndex { get; set; }
-
-    public List<ExistingPostProcessParameters> PostProcessParametersList { get; private set; }
-
-    public bool IsStartOver { get; private set; }
-
-    public ProcessParameters? PostProcessParameters { get; private set; }
-
-    public string FileUidString { get; private set; } = string.Empty;
-
-    public EditKeywordsDialogModel(List<ExistingPostProcessParameters> postProcessParametersList)
+    public EditKeywordsDialogModel(Metadata metadata)
     {
-        this.IsStartOver = true;
         this.CanEnter = false;
         this.CanEscape = true;
-        this.Title = this.Localize("Dialog.SelectEdit.Title");    // "Start Over or Continue ?";
-        this.Message = this.Localize("Dialog.SelectEdit.Message");  // "This image has already been edited... etc
-        this.ShouldReplay = this.Localize("Dialog.SelectEdit.ShouldReplay");  
-        var sortedList = (from ppp in postProcessParametersList
-                          orderby ppp.PostProcessParameters.Updated descending
-                          select ppp)
-                          .ToList();
-        string lastUpdatedFmt = this.Localize("Dialog.SelectEdit.LastUpdatedFmt"); // "Last Updated:  {0}  at:  {1}", 
-        var strings = (from ppp in sortedList
-                       select string.Format(
-                           lastUpdatedFmt , // "Last Updated:  {0}  at:  {1}", 
-                           ppp.PostProcessParameters.Updated.ToLongDateString(),
-                           ppp.PostProcessParameters.Updated.ToLongTimeString()))
-                       .ToList();
-        this.PostProcessParametersList = sortedList;
+        this.Title = this.Localize("Dialog.Keywords.Title");
+        this.Message = this.Localize("Dialog.Keywords.Message");
+        this.KeywordsText = string.Empty;
+        List<KeywordViewModel> keywords = [];
+        foreach (string keyword in metadata.Keywords)
+        {
+            keywords.Add(new KeywordViewModel(this, keyword.Capitalize()));
+        }
 
-        With.Flag(ref this.isInitializing, () =>
-            {
-                this.ParametersStrings = strings;
-                this.SelectedParametersIndex = 0;
-
-                // Pickup first by default 
-                var eppp = this.PostProcessParametersList[0];
-                this.FileUidString = eppp.FileUidString;
-                this.PostProcessParameters = eppp.PostProcessParameters;
-            }); 
+        this.Keywords = new(keywords);
     }
 
-    partial void OnSelectedParametersIndexChanged(int value)
+    [RelayCommand]
+    public void OnCancel() => this.Cancel();
+
+    [RelayCommand]
+    public void OnAdd()
     {
-        // Do not change when initializing 
-        if (this.isInitializing)
+        string keywordsText = this.KeywordsText.Trim();
+        if (string.IsNullOrWhiteSpace(keywordsText))
         {
             return;
         }
 
-        if (value < 0 || value >= this.PostProcessParametersList.Count)
+        char[] separators = [' ', '\n', '\r', ',', ';'];
+        string[] tokens =
+            keywordsText.Split(separators, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (tokens is null || tokens.Length == 0)
         {
-            return; 
+            return;
         }
 
-        var eppp = this.PostProcessParametersList[value]; 
-        this.FileUidString = eppp.FileUidString;
-        this.PostProcessParameters = eppp.PostProcessParameters;
+        foreach (string token in tokens)
+        {
+            // Check if already there 
+            var foundVm =
+                (from vm in this.Keywords
+                 where vm.Keyword.Equals(token, StringComparison.CurrentCultureIgnoreCase)
+                 select vm).FirstOrDefault();
+            if ( foundVm is null)
+            {
+                // Not there: add it 
+                this.Keywords.Add(new KeywordViewModel(this, token.Capitalize()));
+            }
+            // Else: do not add and continue
+        }
+
+        this.KeywordsText = string.Empty;
     }
 
-    [RelayCommand]
-    public async Task OnCancel() => this.Cancel();
-
-    [RelayCommand]
-    public async Task OnStartOver()
+    public void DeleteKeyword(string keyword)
     {
-        this.IsStartOver = true;
-        this.TrySaveAndClose();
+        var foundVm =
+            (from vm in this.Keywords
+             where vm.Keyword.Equals(keyword, StringComparison.CurrentCultureIgnoreCase)
+             select vm).FirstOrDefault();
+        if (foundVm is not null)
+        {
+            this.Keywords.Remove(foundVm);
+        }
+
+        this.UpdateModelMetadata();
     }
 
-    [RelayCommand]
-    public async Task OnContinue()
+    private void UpdateModelMetadata()
     {
-        this.IsStartOver = false;
-        this.TrySaveAndClose();
+
     }
 }

@@ -12,7 +12,7 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="740" Height="510"
+		Width="740" Height="400"
 		Background="Transparent"
 		>
 		<Rectangle
@@ -79,7 +79,7 @@
 						Margin="2"
 						GlyphSource="dismiss"
 						GlyphStrokeThickness="0"
-						Text="{DynamicResource Shell.Cancel}"
+						Text="{DynamicResource Shell.Close}"
 						Command="{Binding OnCancel}"
 						/>
 				</Grid>
@@ -91,97 +91,66 @@
 					ShowGridLines="False"
 					>
 					<Grid.ColumnDefinitions> 
+						<ColumnDefinition Width="20" />
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="60" />
+						<ColumnDefinition Width="20" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="16"/>
-						<RowDefinition Height="150"/> <!-- Message -->  
-						<RowDefinition Height="90"/> <!-- Combo -->  
-						<RowDefinition Height="90"/> <!-- Checkbox -->  
-						<RowDefinition Height="90"/> <!-- Buttons -->  
+						<RowDefinition Height="60"/> <!-- Message -->  
+						<RowDefinition Height="120"/> <!-- Items Control / Wrap Panel -->  
+						<RowDefinition Height="40"/> <!-- Text Box / Add  -->  
 						<RowDefinition Height="4"/> <!-- Spacer -->  
 					</Grid.RowDefinitions>
 					<TextBlock
 						Text="{Binding Message}"
-						Grid.Row="1" Grid.ColumnSpan="2"
+						Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
 						HorizontalAlignment="Left" VerticalAlignment="Top"
 						Margin="20 0 20 0"
 						Foreground="{StaticResource LightAqua_0_080}"
 						FontSize="20"
 						TextWrapping="Wrap"
 						/>
-					<ComboBox
-						Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-						VerticalAlignment="Center" HorizontalAlignment="Left"
+					<ItemsControl 
+						x:Name="KeywordsItemsControl"
+						Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
 						Margin="20 0 0 0"
-						ItemsSource="{Binding ParametersStrings}"
-						SelectedIndex="{Binding SelectedParametersIndex, Mode=TwoWay}"
-						Width="680" Height="54" MaxDropDownHeight="480"
+						VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						ItemsSource="{Binding Keywords}"
 						>
-						<ComboBox.ItemsPanel>
+						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
-								<StackPanel Orientation="Vertical"/>
+								<WrapPanel Orientation="Horizontal"/>
 							</ItemsPanelTemplate>
-						</ComboBox.ItemsPanel>
-						<ComboBox.ItemTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<TextBlock 
-									Text="{Binding}"
-									Foreground="{StaticResource LightAqua_0_100}" 
-									FontSize="20"
-									/>
+								<vm:KeywordView Margin="4 0 4 0"/>
 							</DataTemplate>
-						</ComboBox.ItemTemplate>
-					</ComboBox>
-					<LayoutTransformControl
-						Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-						VerticalAlignment="Center" HorizontalAlignment="Left"
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+					<TextBox
+						Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
 						Margin="20 0 0 0"
+						VerticalContentAlignment="Center" TextAlignment="Left"
+						VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						Text="{Binding KeywordsText, Mode=TwoWay}"
 						>
-						<LayoutTransformControl.LayoutTransform>
-							<ScaleTransform ScaleX="1.5" ScaleY="1.5" />
-						</LayoutTransformControl.LayoutTransform>
-						<CheckBox
-							IsChecked="{Binding IsReplayMode, Mode=TwoWay}"
-							IsThreeState="False"
-							>
-							<CheckBox.Content>
-								<TextBlock 
-									Text="{Binding ShouldReplay}"
-									Foreground="{StaticResource LightAqua_0_100}" 
-									FontSize="13"
-									TextWrapping="Wrap"
-									/>
-							</CheckBox.Content>
-						</CheckBox>
-					</LayoutTransformControl>					
+						<TextBox.KeyBindings>
+							<KeyBinding Gesture="Enter"  Command="{Binding OnAdd}" />
+						</TextBox.KeyBindings>					
+					</TextBox>
 					<glyphs:GlyphButton
-						x:Name="StartOverButton"
-						Style="{StaticResource ViewIconButton}"
-						Grid.Row="4" Grid.Column="0"
-						FontSize="24"
-						HorizontalAlignment="Center" VerticalAlignment="Center"
-						Width="330" Height="54"
-						GlyphSource="wand"
-						ButtonBackground="BorderlessRectangle"
+						Grid.Row="3" Grid.Column="3" 
+						Style="{StaticResource SmallPanelIconButton}"
+						GlyphSource="add_circle"
 						GlyphStrokeThickness="0"
-						Text="{DynamicResource Library.StartOver}"
-						Command="{Binding OnStartOver}"
-	    				/>
-					<glyphs:GlyphButton
-						x:Name="ContinueButton"
-						Grid.Row="4" Grid.Column="1"
-						Style="{StaticResource ViewIconButton}"
-						FontSize="24"
-						HorizontalAlignment="Center" VerticalAlignment="Center"
-						Width="330" Height="54"
-						GlyphSource="arrow_export"
-						ButtonBackground="BorderlessRectangle"
-						GlyphStrokeThickness="0"
-						Text="{DynamicResource Library.ContinueEdit}"
-						Command="{Binding OnContinue}"
-	    				/>
+						Command="{Binding OnAdd}"
+						Width="40" Height="40"
+						VerticalAlignment="Center" HorizontalAlignment="Center"
+						/>
 				</Grid>
 			</Grid>
 		</Border>
