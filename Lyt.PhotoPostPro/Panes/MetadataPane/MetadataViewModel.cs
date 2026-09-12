@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
+using System.Text;
+
 public sealed partial class MetadataViewModel :
     ViewModel<MetadataView>,
     IRecipient<LanguageChangedMessage>,
@@ -20,6 +22,12 @@ public sealed partial class MetadataViewModel :
 
     [ObservableProperty]
     public partial string FileDateTime { get; private set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string KeywordsTitle { get; private set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string KeywordsList { get; private set; } = string.Empty;
 
     [ObservableProperty]
     public partial bool HasExif { get; private set; }
@@ -120,6 +128,23 @@ public sealed partial class MetadataViewModel :
 
     public void Update(Metadata metadata)
     {
+        this.KeywordsTitle = this.Localize("Metadata.Keywords"); 
+        if (metadata.Keywords.Count == 0)
+        {
+            this.KeywordsList = this.Localize("Workflow.Denoise.None");
+        }
+        else
+        {
+            StringBuilder sb = new(); 
+            foreach (string keyword in metadata.Keywords)
+            {
+                sb.Append(keyword.Capitalize());
+                sb.Append("   ");
+            }
+
+            this.KeywordsList = sb.ToString(); 
+        }
+
         this.metadataLatitude = Metadata.InvalidLatLong;
         this.metadataLongitude = Metadata.InvalidLatLong;
         this.HasLocation = false;
@@ -203,6 +228,18 @@ public sealed partial class MetadataViewModel :
             }
         }
     }
+
+    [RelayCommand]
+    public void OnHandleTags()
+    {
+        if (this.metadata is null) 
+        {
+            return;
+        }
+
+        // TODO 
+    }
+
 
     [RelayCommand]
     public void OnWebNavigate()

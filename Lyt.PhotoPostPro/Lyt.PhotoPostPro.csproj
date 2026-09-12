@@ -82,6 +82,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Panes\MetadataPane\EditKeywordsDialog.axaml.cs">
+      <DependentUpon>EditKeywordsDialog.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Panes\MetadataPane\KeywordView.axaml.cs">
+      <DependentUpon>KeywordView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Library\Dialogs\LoadingDialog.axaml.cs">
       <DependentUpon>LoadingDialog.axaml</DependentUpon>
     </Compile>

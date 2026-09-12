@@ -11,6 +11,7 @@
     <system:Double x:Key="H2.FontSize">24</system:Double>
     <system:Double x:Key="H3.FontSize">18</system:Double>
     <system:Double x:Key="Alert.FontSize">20</system:Double>
+    <system:Double x:Key="VeryLarge.FontSize">20</system:Double>
     <system:Double x:Key="Large.FontSize">16</system:Double>
     <system:Double x:Key="Medium.FontSize">14</system:Double>
     <system:Double x:Key="Small.FontSize">12</system:Double>
@@ -54,6 +55,12 @@
         <Setter Property="FontSize" Value="{StaticResource H1.FontSize}" />
         <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="Foreground" Value="{StaticResource Data.TextColor}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextAlignment" Value="Left" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="VeryLarge" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="{StaticResource VeryLarge.FontSize}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="TextAlignment" Value="Left" />
     </ControlTheme>

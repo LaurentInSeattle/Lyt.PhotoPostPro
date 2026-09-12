@@ -1,0 +1,40 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Panes.MetadataPane.KeywordView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	x:DataType="vm:KeywordViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+	
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid
+		Background="{StaticResource LightAqua_4_100}"
+		Height="40"
+		Margin="4"
+		>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="40" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Margin="4"
+			Text="{Binding Keyword}"
+			Theme="{StaticResource Large}"
+			Foreground="{StaticResource DarkBlue_0_100}"
+			TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"
+			/>
+		<glyphs:GlyphButton
+			Grid.Column="1"
+			Style="{StaticResource SmallPanelIconButton}"
+			Margin="2"
+			GlyphSource="dismiss"
+			GlyphStrokeThickness="0"
+			Command="{Binding OnDelete}"
+			/>
+	</Grid>
+</UserControl>

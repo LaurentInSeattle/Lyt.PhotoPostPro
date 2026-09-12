@@ -18,7 +18,7 @@
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="0" />
-				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 				<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 				<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
 				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Path --> 
@@ -29,7 +29,7 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-				Theme="{StaticResource H3}"
+				Theme="{StaticResource VeryLarge}"
 				Text="{Binding Filename}"
 				HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>
@@ -60,13 +60,51 @@
 				/>
 		</Grid>
 
+		<!-- Keywords -->
+		<Grid
+			Background="Transparent"
+			IsVisible="True"
+			> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="4" />
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Title and button  --> 
+				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- keywords --> 
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Row="1" Grid.Column="0"
+				Theme="{StaticResource VeryLarge}"
+				Text="{Binding KeywordsTitle}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<TextBlock
+				Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+				Theme="{StaticResource Large}"
+				Text="{Binding KeywordsList}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<glyphs:GlyphButton
+				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+				Style="{StaticResource SmallPanelIconButton}"
+				GlyphSource="tag"
+				HorizontalAlignment="Right" VerticalAlignment="Center"
+				Width="120"
+				Margin="0 0 24 0"
+				Command="{Binding OnHandleTags}"
+				GlyphStrokeThickness="0.05" 
+				/>		
+		</Grid>
+
 		<!-- Exif -->
 		<Grid
 			Background="Transparent"
 			IsVisible="{Binding HasExif}"
 			> 
 			<Grid.RowDefinitions>
-				<RowDefinition Height="{StaticResource Size.Spacer}" />
+				<RowDefinition Height="4" />
 				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Make / Model --> 
 				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- DT Captured  --> 
 				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Aperture / ISO   --> 
@@ -79,7 +117,7 @@
 			</Grid.ColumnDefinitions>
 		<TextBlock
 			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-			Theme="{StaticResource H3}"
+			Theme="{StaticResource VeryLarge}"
 			Text="{Binding MakeModel}"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
@@ -133,7 +171,7 @@
 			IsVisible="{Binding HasLocation}"
 			> 
 			<Grid.RowDefinitions>
-				<RowDefinition Height="{StaticResource Size.Spacer}" />
+				<RowDefinition Height="4" />
 				<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Location    --> 
 				<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Lat / long     --> 
 			</Grid.RowDefinitions>
@@ -143,7 +181,7 @@
 			</Grid.ColumnDefinitions>
 			<TextBlock
 				Grid.Row="1" Grid.Column="0"
-				Theme="{StaticResource H3}"
+				Theme="{StaticResource VeryLarge}"
 				Text="{Binding Location}"
 				HorizontalAlignment="Left" VerticalAlignment="Center"
 				/>

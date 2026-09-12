@@ -62,6 +62,7 @@ public sealed partial class LibraryManager
         this.GalleryImages = new(CachedGalleryImageCount);
         this.LoadedHdImages = new(CachedHdImageCount);
         this.LoadedThumbnails = [];
+        this.KeywordsIndex = []; 
     }
 
     public string LibraryFolderPath => this.libraryFolderPath;
@@ -78,6 +79,9 @@ public sealed partial class LibraryManager
 
     // This dictionary is indexed by the path of the metadata file for the image 
     public Dictionary<string, LoadedThumbnail> LoadedThumbnails { get; private set; }
+
+    // This dictionary is indexed by a keyword and valued are the path of the metadata files for the images 
+    public Dictionary<string, HashSet<string>> KeywordsIndex { get; private set;  }
 
     public FolderTree? CapturedFolderTree { get; private set; }
 

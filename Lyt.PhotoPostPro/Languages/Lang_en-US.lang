@@ -203,6 +203,7 @@
 	<system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficient disk space available.</system:String>
 
 	<!-- Metadata -->
+	<system:String x:Key="Metadata.Keywords">Keywords</system:String>
 	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.Aperture">Aperture:</system:String>
@@ -272,7 +273,7 @@
 	<system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 	<system:String x:Key="Workflow.Denoise.Correction">Apply to reduce noise in the image.</system:String>
 	<!-- Algorithm Combobox -->
-	<system:String x:Key="Workflow.Denoise.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Denoise.None">- - None - -</system:String>
 	<system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
 
 	<!-- Workflow Exposure -->

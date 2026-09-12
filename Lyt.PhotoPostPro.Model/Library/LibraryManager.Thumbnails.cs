@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Library;
 
-using System.IO ;
+using System.IO;
 
 public sealed partial class LibraryManager
 {
@@ -65,9 +65,26 @@ public sealed partial class LibraryManager
                 {
                     // Debug.WriteLine(" Loaded Thumbnail: " + path);
                     this.LoadedThumbnails.Add(path, thumbnail);
+
+                    // Load metadata keywords into the index 
+                    var metadata = thumbnail.Metadata;
+                    foreach (string keywordRaw in metadata.Keywords)
+                    {
+                        string keyword = keywordRaw.ToLowerInvariant();
+
+                        // The threads are already locked so this access is safe 
+                        if (this.KeywordsIndex.TryGetValue(keyword, out HashSet<string>? hash))
+                        {
+                            hash.Add(path);
+                        }
+                        else
+                        {
+                            this.KeywordsIndex.Add(keyword, [path]);
+                        }
+                    }
                 }
             }
-        // }
+            // }
         });
 
         profiler.EndTiming(" Loaded Thumbnails: " + this.LoadedThumbnails.Count);
@@ -119,7 +136,7 @@ public sealed partial class LibraryManager
             // Was used to fix some serialization misery 
             // Keep for now 
             // this.CheckForNans(metadataFilePath); 
-            
+
             string serialized = File.ReadAllText(metadataFilePath);
             var jsonTypeInfo = AppJsonContext.Default.Metadata;
 
@@ -169,6 +186,70 @@ public sealed partial class LibraryManager
         }
     }
 
+    // Lookup the index, can provide multiple keywords, if so this is a AND operation 
+    // LATER: Add OR and NOT operators 
+    public HashSet<string> KeywordsLookup(string keywordsString)
+    {
+        string[] operators = ["AND", "OR", "NOT"];
+
+        bool IsOperator(string token) => (from op in operators where token == op select op).Any();
+
+        char[] separators = [' ', '\n', '\r', ',', ';'];
+        string[] tokens =
+            keywordsString.Split(separators, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        if (tokens is null || tokens.Length == 0)
+        {
+            return [];
+        }
+
+        // Find first non empty hash 
+        HashSet<string>? firstHash = null;
+        int currentIndex = 0;
+        for (int tokenIndex = 0; tokenIndex < tokens.Length; ++tokenIndex)
+        {
+            string token = tokens[tokenIndex];
+            if (IsOperator(token))
+            {
+                continue;
+            }
+
+            var hash = this.KeywordsIndex[token];
+            if (hash.Count == 0)
+            {
+                continue;
+            }
+
+            firstHash = hash;
+            currentIndex = tokenIndex;
+            break;
+        }
+
+        if (firstHash is null || firstHash.Count == 0)
+        {
+            return [];
+        }
+
+        for (int tokenIndex = currentIndex + 1; tokenIndex < tokens.Length; ++tokenIndex)
+        {
+            string token = tokens[tokenIndex];
+            if (IsOperator(token))
+            {
+                continue;
+            }
+
+            var hash = this.KeywordsIndex[token];
+            if (hash.Count == 0)
+            {
+                continue;
+            }
+
+            firstHash.IntersectWith(hash);
+        }
+
+        return firstHash; 
+    }
+
     #region Dead Code  - Keep for now 
 
     [Conditional("DEBUG")]
@@ -178,7 +259,7 @@ public sealed partial class LibraryManager
         {
             string serialized = File.ReadAllText(metadataFilePath);
             bool edited = false;
-            if ( serialized.Contains("NaN") )
+            if (serialized.Contains("NaN"))
             {
                 serialized = serialized.Replace("\"Latitude\": \"NaN\"", "\"Latitude\": 666.666");
                 serialized = serialized.Replace("\"Longitude\": \"NaN\"", "\"Longitude\": 666.666");

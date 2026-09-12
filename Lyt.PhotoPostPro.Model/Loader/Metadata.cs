@@ -126,6 +126,7 @@ public sealed class Metadata
         return Path.Combine(directoryPath, this.Filename + "_META.json");
     }
 
+    public List<string> Keywords { get; set; } = []; 
 
     // Star count from 0 (unrated) , then 1 to 5 (best)
     public int Rating { get; set; }
