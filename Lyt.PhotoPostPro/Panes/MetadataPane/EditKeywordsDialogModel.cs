@@ -1,11 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
-
 public sealed partial class EditKeywordsDialogModel :
     DialogViewModel<EditKeywordsDialog, object>,
     ICanDeleteKeyword
 {
+    private readonly Metadata metadata; 
+
     [ObservableProperty]
     public partial string Message { get; set; }
 
@@ -20,10 +20,11 @@ public sealed partial class EditKeywordsDialogModel :
 
     public EditKeywordsDialogModel(Metadata metadata)
     {
+        this.metadata = metadata;
         this.CanEnter = false;
         this.CanEscape = true;
-        this.Title = this.Localize("Dialog.Keywords.Title");
-        this.Message = this.Localize("Dialog.Keywords.Message");
+        this.Title = this.Localize("Metadata.Dialog.Keywords.Title");
+        this.Message = this.Localize("Metadata.Dialog.Keywords.Message");
         this.KeywordsText = string.Empty;
         List<KeywordViewModel> keywords = [];
         foreach (string keyword in metadata.Keywords)
@@ -70,6 +71,7 @@ public sealed partial class EditKeywordsDialogModel :
         }
 
         this.KeywordsText = string.Empty;
+        this.UpdateModelAndMetadata();
     }
 
     public void DeleteKeyword(string keyword)
@@ -83,11 +85,17 @@ public sealed partial class EditKeywordsDialogModel :
             this.Keywords.Remove(foundVm);
         }
 
-        this.UpdateModelMetadata();
+        this.UpdateModelAndMetadata();
     }
 
-    private void UpdateModelMetadata()
+    private void UpdateModelAndMetadata()
     {
+        var allKeywords =
+            (from vm in this.Keywords select vm.Keyword.ToLowerInvariant()).ToList();
+        this.metadata.Keywords = allKeywords; 
+        var model = App.GetRequiredService<PhotoPostProModel>();
+        model.LibraryManager.SaveMetadata(this.metadata);
 
+        // TODO : update the Keywords master index 
     }
 }

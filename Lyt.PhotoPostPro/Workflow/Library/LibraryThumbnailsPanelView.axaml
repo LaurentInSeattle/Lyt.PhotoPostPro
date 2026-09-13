@@ -12,6 +12,7 @@
 	xmlns:vwp="using:Avalonia.Labs.Controls"
 	xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
 		Background="Transparent"
@@ -68,6 +69,33 @@
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				RatingValue="{Binding Rating}"
 				IsReadOnly="False"
+				/>
+			<TextBox
+				Margin="12 0 0 0"
+				Height="34" Width="200"
+				VerticalContentAlignment="Center" TextAlignment="Left"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				Text="{Binding KeywordsText, Mode=TwoWay}"
+				>
+				<TextBox.KeyBindings>
+					<KeyBinding Gesture="Enter"  Command="{Binding OnFilter}" />
+				</TextBox.KeyBindings>					
+			</TextBox>
+			<glyphs:GlyphButton
+				Style="{StaticResource SmallPanelIconButton}"
+				GlyphSource="search"
+				GlyphStrokeThickness="0"
+				Command="{Binding OnFilter}"
+				Width="32" Height="32"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				/>
+			<glyphs:GlyphButton
+				Style="{StaticResource SmallPanelIconButton}"
+				GlyphSource="dismiss"
+				GlyphStrokeThickness="0"
+				Command="{Binding OnClear}"
+				Width="32" Height="32"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
 				/>
 		</StackPanel>
 		<TextBlock

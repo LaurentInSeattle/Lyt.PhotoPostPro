@@ -214,13 +214,25 @@ public sealed partial class LibraryManager
                 continue;
             }
 
-            var hash = this.KeywordsIndex[token];
+            if (!this.KeywordsIndex.TryGetValue(token, out var hash))
+            {
+                continue;
+            }
+
             if (hash.Count == 0)
             {
                 continue;
             }
 
-            firstHash = hash;
+            // We need to deep clone or else we are going to corrupt the master index when 
+            // performing the intersects in the next steps.
+            HashSet<string> deepClone = new(hash.Count);
+            foreach (string path in hash)
+            {
+                _ = deepClone.Add(path);
+            }
+
+            firstHash = deepClone;
             currentIndex = tokenIndex;
             break;
         }
@@ -238,7 +250,11 @@ public sealed partial class LibraryManager
                 continue;
             }
 
-            var hash = this.KeywordsIndex[token];
+            if (!this.KeywordsIndex.TryGetValue(token, out var hash))
+            {
+                continue;
+            }
+
             if (hash.Count == 0)
             {
                 continue;
@@ -247,7 +263,7 @@ public sealed partial class LibraryManager
             firstHash.IntersectWith(hash);
         }
 
-        return firstHash; 
+        return firstHash;
     }
 
     #region Dead Code  - Keep for now 

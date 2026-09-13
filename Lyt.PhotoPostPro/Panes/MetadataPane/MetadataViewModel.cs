@@ -95,39 +95,26 @@ public sealed partial class MetadataViewModel :
         this.View.WebNavigateButton.IsVisible = false;
     }
 
-    public MetadataViewModel(Metadata metadata) : this()
+    public MetadataViewModel(Metadata metadata) : this() => this.DispatchUpdate(metadata);
+
+    public void Receive(LibraryMetadataUpdateMessage message) => this.DispatchUpdate(message.Metadata);
+
+    public void Receive(MetadataGeneratedMessage message) => this.DispatchUpdate(message.Metadata);
+
+    public void Receive(LanguageChangedMessage message)
     {
-        this.metadata = metadata;
-        this.Update(metadata);
-    }
-
-    public void Receive(LibraryMetadataUpdateMessage message)
-    {
-        this.metadata = message.Metadata;
-        this.DispatchUpdate();
-    }
-
-    public void Receive(MetadataGeneratedMessage message)
-    {
-        this.metadata = message.Metadata;
-        this.DispatchUpdate();
-    }
-
-    public void Receive(LanguageChangedMessage message) => this.DispatchUpdate(); 
-
-    private void DispatchUpdate()
-        => Dispatch.OnUiThread(() =>
+        if (this.metadata is not null)
         {
-            if (this.metadata is null)
-            {
-                return;
-            }
+            this.DispatchUpdate(this.metadata);
+        } 
+    } 
 
-            this.Update(this.metadata);
-        }, DispatcherPriority.ApplicationIdle);
+    private void DispatchUpdate(Metadata metadata)
+        => Dispatch.OnUiThread(() => { this.Update(metadata); }, DispatcherPriority.ApplicationIdle);
 
     public void Update(Metadata metadata)
     {
+        this.metadata = metadata; 
         this.KeywordsTitle = this.Localize("Metadata.Keywords"); 
         if (metadata.Keywords.Count == 0)
         {

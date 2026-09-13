@@ -204,6 +204,8 @@
 
 	<!-- Metadata -->
 	<system:String x:Key="Metadata.Keywords">Keywords</system:String>
+	<system:String x:Key="Metadata.Dialog.Keywords.Title">Edit Image Tags</system:String>
+	<system:String x:Key="Metadata.Dialog.Keywords.Message">Add new image tags or remove existing ones.</system:String>
 	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
 	<system:String x:Key="Metadata.Aperture">Aperture:</system:String>

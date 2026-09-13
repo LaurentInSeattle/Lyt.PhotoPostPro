@@ -3,12 +3,14 @@
 using static Lyt.PhotoPostPro.Workflow.Library.LibraryViewModel;
 
 public sealed partial class LibraryThumbnailsPanelViewModel(
-    PhotoPostProModel photoPostProModel, LibraryViewModel libraryViewModel) :
+    PhotoPostProModel model, LibraryViewModel libraryViewModel) :
     ViewModel<LibraryThumbnailsPanelView>,
     ISelectListener
 {
-    private readonly PhotoPostProModel photoPostProModel = photoPostProModel;
+    private readonly PhotoPostProModel model = model;
     private readonly LibraryViewModel libraryViewModel = libraryViewModel;
+
+    private HashSet<string>? metadataPaths;
 
     [ObservableProperty]
     public partial bool SortOrder { get; set; } = true;
@@ -24,6 +26,9 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
 
     [ObservableProperty]
     public partial int Rating { get; set; } = 1;
+
+    [ObservableProperty]
+    public partial string KeywordsText { get; set; } = string.Empty;
 
     private ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; } = [];
 
@@ -43,7 +48,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
 
     public IEnumerable<string> GetUnratedThumbnailsPaths()
         => from thumb in this.Thumbnails
-           // Filter out images already rated (0 => unrated) 
+               // Filter out images already rated (0 => unrated) 
            where thumb.Metadata.Rating == 0
            // Reorder files by Date Captured 
            orderby thumb.Metadata.Captured ascending
@@ -94,7 +99,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
         this.Thumbnails.Remove(oldVm);
 
         // Bring in the new one 
-        if (this.photoPostProModel.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
+        if (this.model.LibraryManager.LoadedThumbnails.TryGetValue(path, out var thumbnail))
         {
             // Add to list 
             LibraryThumbnailViewModel libraryThumbnailViewModel =
@@ -129,6 +134,8 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
 
     partial void OnRatingChanged(int value) => this.FilterAndSort();
 
+    partial void OnKeywordsTextChanged(string value) => this.OnFilter();
+
     private void FilterAndSort()
     {
         if (this.Thumbnails.Count == 0)
@@ -137,20 +144,34 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             return;
         }
 
+        // Filter thumbnails using metadata paths if not null and populated
+        IEnumerable<LibraryThumbnailViewModel> filtered;
+        if (this.metadataPaths is not null && this.metadataPaths.Count > 0)
+        {
+            filtered =
+                (from thumb in this.Thumbnails
+                 where this.metadataPaths.Contains(thumb.Metadata.MetadataFullPath())
+                 select thumb);
+        }
+        else
+        {
+            filtered = this.Thumbnails;
+        }
+
         IEnumerable<LibraryThumbnailViewModel> sorted;
         if (this.ShowAll)
         {
             if (this.SortOrder)
             {
                 sorted =
-                    (from thumb in this.Thumbnails
+                    (from thumb in filtered
                      orderby thumb.Metadata.Captured ascending
                      select thumb);
             }
             else
             {
                 sorted =
-                    (from thumb in this.Thumbnails
+                    (from thumb in filtered
                      orderby thumb.Metadata.Captured descending
                      select thumb);
             }
@@ -160,7 +181,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             if (this.SortOrder)
             {
                 sorted =
-                    (from thumb in this.Thumbnails
+                    (from thumb in filtered
                      where thumb.Metadata.Rating >= this.Rating
                      orderby thumb.Metadata.Captured ascending
                      select thumb);
@@ -168,7 +189,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             else
             {
                 sorted =
-                    (from thumb in this.Thumbnails
+                    (from thumb in filtered
                      where thumb.Metadata.Rating >= this.Rating
                      orderby thumb.Metadata.Captured descending
                      select thumb);
@@ -182,9 +203,34 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             // Does not work: possibly because of using virtualization 
             // first.View.BringIntoView();
             // Therefore directly manipulate the scroll viewer to scroll to top-left
-            var scrollViewer = this.View.DisplayedThumbnailsScrollViewer; 
-            scrollViewer?.Offset = new (0.0, 0.0); 
+            var scrollViewer = this.View.DisplayedThumbnailsScrollViewer;
+            scrollViewer?.Offset = new(0.0, 0.0);
         }
+    }
+
+    [RelayCommand]
+    public void OnFilter()
+    {
+        if (string.IsNullOrWhiteSpace(this.KeywordsText))
+        {
+            this.OnClear();
+            return;
+        }
+
+        this.metadataPaths = this.model.LibraryManager.KeywordsLookup(this.KeywordsText);
+        this.FilterAndSort();
+    }
+
+    [RelayCommand]
+    public void OnClear()
+    {
+        this.metadataPaths = null;
+        if (string.IsNullOrWhiteSpace(this.KeywordsText))
+        {
+            this.KeywordsText = string.Empty;
+        } 
+
+        this.FilterAndSort();
     }
 
     public void OnSelect(object selectedObject)
