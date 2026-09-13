@@ -266,37 +266,27 @@ public sealed partial class LibraryManager
         return firstHash;
     }
 
-    #region Dead Code  - Keep for now 
-
-    [Conditional("DEBUG")]
-    private void CheckForNans(string metadataFilePath)
+    public void UpdateKeywordsMasterIndex(Metadata metadata)
     {
-        lock (this.lockObjectFiles)
+        string path = metadata.MetadataFullPath();
+        
+        void Populate (HashSet<string> keywords)
         {
-            string serialized = File.ReadAllText(metadataFilePath);
-            bool edited = false;
-            if (serialized.Contains("NaN"))
+            foreach (string keyword in metadata.Keywords)
             {
-                serialized = serialized.Replace("\"Latitude\": \"NaN\"", "\"Latitude\": 666.666");
-                serialized = serialized.Replace("\"Longitude\": \"NaN\"", "\"Longitude\": 666.666");
-                edited = true;
-            }
-
-            if (serialized.Contains("\"666.666\""))
-            {
-                serialized = serialized.Replace("\"Latitude\": \"666.666\"", "\"Latitude\": 666.666");
-                serialized = serialized.Replace("\"Longitude\": \"666.666\"", "\"Longitude\": 666.666");
-                edited = true;
-            }
-
-            if (edited)
-            {
-                File.WriteAllText(metadataFilePath, serialized);
-                Task.Delay(100).Wait();
-                Debug.WriteLine(" Fixed for NaNs: " + metadataFilePath);
+                _ = keywords.Add(keyword.ToLowerInvariant());
             }
         }
-    }
 
-    #endregion Dead Code  - Keep for now 
+        if ( this.KeywordsIndex.TryGetValue(path, out var hash) )
+        {
+            Populate(hash); 
+        }
+        else
+        {
+            HashSet<string> keywords = new ();
+            Populate(keywords);
+            this.KeywordsIndex.Add(path, keywords); 
+        }
+    }
 }

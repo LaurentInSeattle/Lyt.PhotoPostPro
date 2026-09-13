@@ -90,12 +90,16 @@ public sealed partial class EditKeywordsDialogModel :
 
     private void UpdateModelAndMetadata()
     {
+        // update the image metadata with updated keywords
         var allKeywords =
             (from vm in this.Keywords select vm.Keyword.ToLowerInvariant()).ToList();
         this.metadata.Keywords = allKeywords; 
         var model = App.GetRequiredService<PhotoPostProModel>();
-        model.LibraryManager.SaveMetadata(this.metadata);
 
-        // TODO : update the Keywords master index 
+        var libraryManager = model.LibraryManager; 
+        libraryManager.SaveMetadata(this.metadata);
+
+        // update the Keywords master index so that updated filtering works without having to reload 
+        libraryManager.UpdateKeywordsMasterIndex(this.metadata);
     }
 }

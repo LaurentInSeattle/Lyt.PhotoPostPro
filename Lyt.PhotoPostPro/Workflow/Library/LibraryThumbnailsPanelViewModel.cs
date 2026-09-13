@@ -48,7 +48,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
 
     public IEnumerable<string> GetUnratedThumbnailsPaths()
         => from thumb in this.Thumbnails
-               // Filter out images already rated (0 => unrated) 
+           // Filter out images already rated (0 => unrated) 
            where thumb.Metadata.Rating == 0
            // Reorder files by Date Captured 
            orderby thumb.Metadata.Captured ascending
@@ -225,7 +225,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     public void OnClear()
     {
         this.metadataPaths = null;
-        if (string.IsNullOrWhiteSpace(this.KeywordsText))
+        if (!string.IsNullOrWhiteSpace(this.KeywordsText))
         {
             this.KeywordsText = string.Empty;
         } 
@@ -266,5 +266,4 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
         //    }
         //}
     }
-
 }
