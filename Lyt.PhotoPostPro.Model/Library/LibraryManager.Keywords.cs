@@ -86,25 +86,26 @@ public sealed partial class LibraryManager
     {
         string path = metadata.MetadataFullPath();
 
-        void Populate(HashSet<string> keywords)
+        // Completely remove 'path' from every entry in the dictionary  
+        foreach (HashSet<string> hash in this.KeywordsIndex.Values)
         {
-            foreach (string keyword in metadata.Keywords)
+            _ = hash.Remove(path);
+        }
+
+        // Add new keywords and add again keywords that were removed 
+        foreach (string keyword in metadata.Keywords)
+        {
+            string key = keyword.ToLowerInvariant();
+            if (this.KeywordsIndex.TryGetValue(key, out var hash))
             {
-                _ = keywords.Add(keyword.ToLowerInvariant());
+                _ = hash.Add(path);
+            }
+            else
+            {
+                this.KeywordsIndex.Add(key, [path]);
             }
         }
 
-        if (this.KeywordsIndex.TryGetValue(path, out var hash))
-        {
-            Populate(hash);
-        }
-        else
-        {
-            HashSet<string> keywords = new();
-            Populate(keywords);
-            this.KeywordsIndex.Add(path, keywords);
-        }
-
-        new LibraryKeywordsUpdateMessage().Publish(); 
+        new LibraryKeywordsUpdateMessage().Publish();
     }
 }

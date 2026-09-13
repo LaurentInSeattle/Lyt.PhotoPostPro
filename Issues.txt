@@ -7,8 +7,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Library panel does not update correctly when adding or removing keywords 
-
 - Tags on culling 
 
 - First Run View : Setup root locations, etc 

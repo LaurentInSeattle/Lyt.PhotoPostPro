@@ -11,6 +11,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     private readonly LibraryViewModel libraryViewModel;
 
     private HashSet<string>? metadataPaths;
+    private bool isFilterActive; 
 
     public LibraryThumbnailsPanelViewModel(
         PhotoPostProModel model, LibraryViewModel libraryViewModel)
@@ -37,6 +38,9 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     [ObservableProperty]
     public partial bool ShowSearchWidgets { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsFiltered { get; set; }
 
     [ObservableProperty]
     public partial string KeywordsText { get; set; } = string.Empty;
@@ -153,6 +157,8 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     private void FilterAndSort()
     {
+        this.isFilterActive = false;
+        this.IsFiltered = false; 
         if (this.Thumbnails.Count == 0)
         {
             this.DisplayedThumbnails.Clear();
@@ -163,6 +169,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         IEnumerable<LibraryThumbnailViewModel> filtered;
         if (this.metadataPaths is not null && this.metadataPaths.Count > 0)
         {
+            this.isFilterActive = true; 
             filtered =
                 (from thumb in this.Thumbnails
                  where this.metadataPaths.Contains(thumb.Metadata.MetadataFullPath())
@@ -211,6 +218,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
             }
         }
 
+        this.IsFiltered = this.ShowSearchWidgets && this.isFilterActive;
         this.DisplayedThumbnails = new(sorted);
         var first = sorted.FirstOrDefault();
         if (first is not null && this.IsBound)

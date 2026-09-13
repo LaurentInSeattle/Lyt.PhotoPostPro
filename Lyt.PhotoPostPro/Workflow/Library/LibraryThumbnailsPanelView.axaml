@@ -42,7 +42,7 @@
 				Style="{StaticResource StandardToggleSwitch}"
 				TrueText="{DynamicResource Workflow.Camera.Thumbs.OldestFirst}"
 				FalseText="{DynamicResource Workflow.Camera.Thumbs.RecentOnTop}"
-				Height="30" Width="380"
+				Height="30" Width="340"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Value="{Binding SortOrder}"
 				/>
@@ -59,7 +59,7 @@
 				Style="{StaticResource StandardToggleSwitch}"
 				TrueText="{DynamicResource Workflow.Library.Thumbs.ShowAll}"
 				FalseText="{DynamicResource Workflow.Library.Thumbs.ShowStarred}"
-				Height="30" Width="380"
+				Height="30" Width="340"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Value="{Binding ShowAll}"
 				/>
@@ -72,7 +72,7 @@
 				/>
 			<TextBox
 				Margin="12 0 0 0"
-				Height="34" Width="200"
+				Height="34" Width="180"
 				VerticalContentAlignment="Center" TextAlignment="Left"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				Text="{Binding KeywordsText, Mode=TwoWay}"
@@ -97,6 +97,14 @@
 				GlyphSource="dismiss"
 				GlyphStrokeThickness="0"
 				Command="{Binding OnClear}"
+				Width="32" Height="32"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				/>
+			<glyphs:SvgIcon
+				IsVisible="{Binding IsFiltered}"
+				Source="image_search"
+				Foreground="{StaticResource FreshGreen_1_100}"
+				StrokeThickness="0.05"
 				Width="32" Height="32"
 				VerticalAlignment="Center" HorizontalAlignment="Center"
 				/>
