@@ -76,6 +76,7 @@
 				VerticalContentAlignment="Center" TextAlignment="Left"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				Text="{Binding KeywordsText, Mode=TwoWay}"
+				IsVisible="{Binding ShowSearchWidgets}"
 				>
 				<TextBox.KeyBindings>
 					<KeyBinding Gesture="Enter"  Command="{Binding OnFilter}" />
@@ -83,6 +84,7 @@
 			</TextBox>
 			<glyphs:GlyphButton
 				Style="{StaticResource SmallPanelIconButton}"
+				IsVisible="{Binding ShowSearchWidgets}"
 				GlyphSource="search"
 				GlyphStrokeThickness="0"
 				Command="{Binding OnFilter}"
@@ -91,6 +93,7 @@
 				/>
 			<glyphs:GlyphButton
 				Style="{StaticResource SmallPanelIconButton}"
+				IsVisible="{Binding ShowSearchWidgets}"
 				GlyphSource="dismiss"
 				GlyphStrokeThickness="0"
 				Command="{Binding OnClear}"

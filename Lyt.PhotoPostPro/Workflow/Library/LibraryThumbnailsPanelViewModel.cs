@@ -28,6 +28,9 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     public partial int Rating { get; set; } = 1;
 
     [ObservableProperty]
+    public partial bool ShowSearchWidgets { get; set; }
+
+    [ObservableProperty]
     public partial string KeywordsText { get; set; } = string.Empty;
 
     private ObservableCollection<LibraryThumbnailViewModel> Thumbnails { get; set; } = [];
@@ -44,6 +47,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     {
         this.ShowRatingFilter = viewing == Viewing.Captured;
         this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll;
+        this.ShowSearchWidgets = viewing == Viewing.Captured;
     }
 
     public IEnumerable<string> GetUnratedThumbnailsPaths()
@@ -56,6 +60,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
 
     public void Populate(List<LibraryThumbnailViewModel> list)
     {
+        this.Clear();
         if (list.Count > 0)
         {
             this.Thumbnails.CollectionChanged -= (_, _) => this.FilterAndSort();
@@ -63,10 +68,6 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
             this.Thumbnails = collection;
             this.Thumbnails.CollectionChanged += (_, _) => this.FilterAndSort();
             this.FilterAndSort();
-        }
-        else
-        {
-            this.Clear();
         }
     }
 

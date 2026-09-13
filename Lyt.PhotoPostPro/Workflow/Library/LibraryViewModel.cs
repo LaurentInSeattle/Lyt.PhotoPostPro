@@ -445,7 +445,10 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
-        void AddFiles(List<string> files)
+
+        this.LibraryIsEmpty = this.libraryMgr.LoadedThumbnails.Count ==0 ;
+
+        void AddFiles(HashSet<string> files)
         {
             List<LibraryThumbnailViewModel> list = [];
             foreach (string path in files)
@@ -459,7 +462,6 @@ public sealed partial class LibraryViewModel :
             }
 
             this.LibraryThumbnailsPanelViewModel.Populate(list);
-
             var first = this.LibraryThumbnailsPanelViewModel.GetFirstDisplayed();
             if (first is not null)
             {

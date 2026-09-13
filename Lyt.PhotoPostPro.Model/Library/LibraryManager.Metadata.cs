@@ -11,6 +11,13 @@ public sealed partial class LibraryManager
             throw new Exception("Library Manager is not initialized.");
         }
 
+        if ((this.CapturedFolderTree is null) ||
+            (this.UnratedFolderTree is null) ||
+            (this.EditedFolderTree is null))
+        {
+            throw new Exception("Library Manager is not initialized.");
+        }
+
         try
         {
             string? sourceFolder =
@@ -40,6 +47,11 @@ public sealed partial class LibraryManager
                 // No thumbnail ? 
                 if (Debugger.IsAttached) { Debugger.Break(); }
             }
+
+            // Remove from folder trees
+            this.CapturedFolderTree.Remove(metadata);
+            this.UnratedFolderTree.Remove(metadata);
+            this.EditedFolderTree.Remove(metadata);
 
             new LibraryRemovedMessage(metadata).Publish();
             return true;
@@ -124,7 +136,7 @@ public sealed partial class LibraryManager
                 fileUid = fileUid.Replace(".json", string.Empty);
                 Debug.WriteLine(" " + editFile + " " + fileUid);
                 string read = File.ReadAllText(editFile);
-                var jsonTypeInfo = AppJsonContext.Default.ProcessParameters; 
+                var jsonTypeInfo = AppJsonContext.Default.ProcessParameters;
                 var postProcessParameters = this.fileManager.Deserialize(read, jsonTypeInfo);
                 ExistingPostProcessParameters existingPostProcessParameters = new(fileUid, postProcessParameters);
                 list.Add(existingPostProcessParameters);

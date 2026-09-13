@@ -22,6 +22,9 @@ public sealed partial class MetadataViewModel :
 
     [ObservableProperty]
     public partial string FileDateTime { get; private set; } = string.Empty;
+    
+    [ObservableProperty]
+    public partial bool AreKeywordsVisible { get; private set; }
 
     [ObservableProperty]
     public partial string KeywordsTitle { get; private set; } = string.Empty;
@@ -90,6 +93,7 @@ public sealed partial class MetadataViewModel :
 
         this.View.IsVisible = false;
         this.HasLocation = false;
+        this.AreKeywordsVisible = false;
         this.View.WebNavigateButton.Margin = new Thickness(0, 0, -1000, 0);
         this.View.WebNavigateButton.IsShown = false;
         this.View.WebNavigateButton.IsVisible = false;
@@ -114,7 +118,9 @@ public sealed partial class MetadataViewModel :
 
     public void Update(Metadata metadata)
     {
-        this.metadata = metadata; 
+        this.metadata = metadata;
+
+        this.AreKeywordsVisible = metadata.AddedToLibraryUTC != DateTime.MinValue;
         this.KeywordsTitle = this.Localize("Metadata.Keywords"); 
         if (metadata.Keywords.Count == 0)
         {

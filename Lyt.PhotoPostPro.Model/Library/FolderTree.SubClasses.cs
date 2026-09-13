@@ -6,12 +6,12 @@ public sealed class YearFolder
 
     public List<MonthFolder> MonthFolders { get; set; } = [];
 
-    public List<string> MetadataFiles()
+    public HashSet<string> MetadataFiles()
     {
-        List<string> files = [];
+        HashSet<string> files = [];
         foreach (var month in this.MonthFolders)
         {
-            files.AddRange(month.MetadataFiles());
+            files.UnionWith(month.MetadataFiles());
         }
 
         return files;
@@ -39,12 +39,12 @@ public sealed class MonthFolder
 
     public List<DayFolder> DayFolders { get; set; } = [];
 
-    public List<string> MetadataFiles()
+    public HashSet<string> MetadataFiles()
     {
-        List<string> files = [];  
+        HashSet<string> files = [];  
         foreach (var day in this.DayFolders)
         {
-            files.AddRange(day.MetadataFiles); 
+            files.UnionWith(day.MetadataFiles); 
         }
 
         return files;
@@ -74,5 +74,5 @@ public sealed class DayFolder
 
     public int DayOfWeek { get; set; }
 
-    public List<string> MetadataFiles { get; set; } = [];
+    public HashSet<string> MetadataFiles { get; set; } = [];
 }

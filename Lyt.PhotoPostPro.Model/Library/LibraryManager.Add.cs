@@ -332,7 +332,7 @@ public sealed partial class LibraryManager
         }
     }
 
-    public List<string> FindFilesUnratedOrEdited(
+    public HashSet<string> FindFilesUnratedOrEdited(
         DayFolder? selectedDay, MonthFolder? selectedMonth, YearFolder selectedYear,
         bool forUnrated, out int zeroStarCount)
     {

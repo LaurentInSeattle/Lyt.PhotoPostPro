@@ -63,7 +63,7 @@
 		<!-- Keywords -->
 		<Grid
 			Background="Transparent"
-			IsVisible="True"
+			IsVisible="{Binding AreKeywordsVisible}"
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
@@ -89,6 +89,8 @@
 			<glyphs:GlyphButton
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
 				Style="{StaticResource SmallPanelIconButton}"
+				IsVisible="{Binding AreKeywordsVisible, FallbackValue=False}"
+				IsShown="{Binding AreKeywordsVisible, FallbackValue=False}"
 				GlyphSource="tag"
 				HorizontalAlignment="Right" VerticalAlignment="Center"
 				Width="80"
