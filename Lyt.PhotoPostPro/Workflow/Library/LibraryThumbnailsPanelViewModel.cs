@@ -2,15 +2,23 @@
 
 using static Lyt.PhotoPostPro.Workflow.Library.LibraryViewModel;
 
-public sealed partial class LibraryThumbnailsPanelViewModel(
-    PhotoPostProModel model, LibraryViewModel libraryViewModel) :
+public sealed partial class LibraryThumbnailsPanelViewModel :
     ViewModel<LibraryThumbnailsPanelView>,
+    IRecipient<LibraryKeywordsUpdateMessage>,
     ISelectListener
 {
-    private readonly PhotoPostProModel model = model;
-    private readonly LibraryViewModel libraryViewModel = libraryViewModel;
+    private readonly PhotoPostProModel model;
+    private readonly LibraryViewModel libraryViewModel;
 
     private HashSet<string>? metadataPaths;
+
+    public LibraryThumbnailsPanelViewModel(
+        PhotoPostProModel model, LibraryViewModel libraryViewModel)
+    {
+        this.model = model;
+        this.libraryViewModel = libraryViewModel;
+        this.Subscribe<LibraryKeywordsUpdateMessage>(); 
+    }
 
     [ObservableProperty]
     public partial bool SortOrder { get; set; } = true;
@@ -42,6 +50,12 @@ public sealed partial class LibraryThumbnailsPanelViewModel(
     public partial string EmptyMessage { get; set; } = string.Empty;
 
     public bool IsEmpty => this.Thumbnails.Count == 0;
+
+    public void Receive(LibraryKeywordsUpdateMessage message)
+        => Dispatch.OnUiThread(()=> { this.ReceiveOnUiThread(); }, DispatcherPriority.Background);
+
+    // Invoke OnFilter because we need to rebuild the metadata paths if needed 
+    public void ReceiveOnUiThread() => this.OnFilter(); 
 
     public void SetViewingMode(Viewing viewing)
     {

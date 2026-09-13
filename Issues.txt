@@ -3,21 +3,21 @@ Bugs ~ Major Issues
 
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
-- Loading dialog dismissal does not behave : close other dialogs
 
 WIP
 ---
 
-- First Run View : Setup root locations, etc 
+- Library panel does not update correctly when adding or removing keywords 
 
+- Tags on culling 
+
+- First Run View : Setup root locations, etc 
 
 
 Essential Missing Features 
 --------------------------
 
-
 - App settings 
-
 
 
 Minor Issues (Low priority)

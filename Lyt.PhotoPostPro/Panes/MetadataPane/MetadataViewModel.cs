@@ -101,7 +101,10 @@ public sealed partial class MetadataViewModel :
 
     public MetadataViewModel(Metadata metadata) : this() => this.DispatchUpdate(metadata);
 
-    public void Receive(LibraryMetadataUpdateMessage message) => this.DispatchUpdate(message.Metadata);
+    public void Receive(LibraryMetadataUpdateMessage message)
+    {
+        this.DispatchUpdate(message.Metadata);
+    } 
 
     public void Receive(MetadataGeneratedMessage message) => this.DispatchUpdate(message.Metadata);
 
