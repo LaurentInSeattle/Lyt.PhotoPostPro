@@ -82,57 +82,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Panes\MetadataPane\LibraryAddKeywordsDialog.axaml.cs">
-      <DependentUpon>LibraryAddKeywordsDialog.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Panes\MetadataPane\EditKeywordsDialog.axaml.cs">
-      <DependentUpon>EditKeywordsDialog.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Panes\MetadataPane\KeywordView.axaml.cs">
-      <DependentUpon>KeywordView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Library\Dialogs\LoadingDialog.axaml.cs">
-      <DependentUpon>LoadingDialog.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Compose\CompositionGuides\ValleyCG.axaml.cs">
-      <DependentUpon>ValleyCG.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Compose\CompositionGuides\PyramidCG.axaml.cs">
-      <DependentUpon>PyramidCG.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Process\Export\ImageExportView.axaml.cs">
-      <DependentUpon>ImageExportView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Editor\EditorView.axaml.cs">
-      <DependentUpon>EditorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Exporting\ExportsView.axaml.cs">
-      <DependentUpon>ExportsView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Exporting\ExportEditView.axaml.cs">
-      <DependentUpon>ExportEditView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Signing\SignatureEditView.axaml.cs">
-      <DependentUpon>SignatureEditView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Signing\SignaturesView.axaml.cs">
-      <DependentUpon>SignaturesView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Statistics\FolderStatisticsView.axaml.cs">
-      <DependentUpon>FolderStatisticsView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Statistics\StatisticsView.axaml.cs">
-      <DependentUpon>StatisticsView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Watermarking\WatermarkEditView.axaml.cs">
-      <DependentUpon>WatermarkEditView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Tools\Watermarking\WatermarksView.axaml.cs">
-      <DependentUpon>WatermarksView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Controls\Panels\" />
   </ItemGroup>
 
