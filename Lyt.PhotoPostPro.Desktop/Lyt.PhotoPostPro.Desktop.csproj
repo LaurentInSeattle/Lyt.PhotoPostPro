@@ -9,10 +9,6 @@
     <PublishAot>true</PublishAot>
   </PropertyGroup>
 
-  <!--
-      <PublishAot>true</PublishAot>
-  -->
-  
   <ItemGroup>
     <Content Include="ppp.ico" />
   </ItemGroup>
@@ -29,8 +25,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SkiaSharp" Version="4.152.0" />  
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Lyt.PhotoPostPro.Implementations.Windows\Lyt.PhotoPostPro.Implementations.Windows.csproj" />
     <ProjectReference Include="..\Lyt.PhotoPostPro.MultiPlatformAbstractions\Lyt.PhotoPostPro.MultiPlatformAbstractions.csproj" />
