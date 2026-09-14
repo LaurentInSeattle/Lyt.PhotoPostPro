@@ -91,6 +91,12 @@
     <Compile Update="Workflow\Library\Dialogs\LoadingDialog.axaml.cs">
       <DependentUpon>LoadingDialog.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\ValleyCG.axaml.cs">
+      <DependentUpon>ValleyCG.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Compose\CompositionGuides\PyramidCG.axaml.cs">
+      <DependentUpon>PyramidCG.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Export\ImageExportView.axaml.cs">
       <DependentUpon>ImageExportView.axaml</DependentUpon>
     </Compile>

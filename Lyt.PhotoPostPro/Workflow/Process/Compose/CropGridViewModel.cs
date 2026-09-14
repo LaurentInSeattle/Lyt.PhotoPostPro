@@ -94,6 +94,8 @@ public sealed partial class CropGridViewModel(
         this.View.GoldenDownCG.IsVisible = false;
         this.View.HalvesCG.IsVisible = false;
         this.View.DiagonalsCG.IsVisible = false;
+        this.View.PyramidCG.IsVisible = false;
+        this.View.ValleyCG.IsVisible = false;
 
         Control control = cgIndex switch
         {
@@ -104,6 +106,8 @@ public sealed partial class CropGridViewModel(
             4 => this.View.DiagonalsCG,
             5 => this.View.GoldenUpCG,
             6 => this.View.GoldenDownCG,
+            7 => this.View.PyramidCG,
+            8 => this.View.ValleyCG,
             _ => this.View.ZeroCG,
         };
 

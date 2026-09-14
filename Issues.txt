@@ -7,7 +7,7 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Tags on culling 
+- Auto-Tags on culling 
 
 - First Run View : Setup root locations, etc 
 
@@ -35,6 +35,8 @@ Minor Issues (Low priority)
 
 Code Quality Issues 
 -------------------
+
+- MUST redo the composition guides code 
 
 - Cleanup code that builds file names and paths.
 
@@ -123,6 +125,8 @@ Cool Stuff to Consider
 ----------------------
 
 - Combo-Borders: Black with thin white line, White with thin black line, etc...
+
+- Pyramid Up and Down Composition guides 
 
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 

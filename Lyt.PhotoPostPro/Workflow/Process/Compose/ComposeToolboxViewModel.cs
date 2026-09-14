@@ -51,6 +51,8 @@ public sealed partial class ComposeToolboxViewModel :
             "Workflow.Compose.CG.Diagonals"  , // 4 => this.View.DiagonalsCG,
             "Workflow.Compose.CG.GoldenUp"  , // 5 => this.View.GoldenUpCG,
             "Workflow.Compose.CG.GoldenDown"  , // 6 => this.View.GoldenDownCG,
+            "Workflow.Compose.CG.Pyramid"  , // 7 => this.View.PyramidCG,
+            "Workflow.Compose.CG.Valley"  , // 8 => this.View.ValleyCG,
         ];
 
     [ObservableProperty]
@@ -64,6 +66,8 @@ public sealed partial class ComposeToolboxViewModel :
             " Diagonals "  , // 4 => this.View.DiagonalsCG,
             " Golden Triangle Up "  , // 5 => this.View.GoldenUpCG,
             " Golden Triangle Down "  , // 6 => this.View.GoldenDownCG,
+            " Pyramid"  , // 7 => this.View.PyramidCG,
+            " Valley"  , // 8 => this.View.ValleyCG,
         ];
 
     [ObservableProperty]

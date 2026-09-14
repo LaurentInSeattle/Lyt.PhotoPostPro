@@ -126,6 +126,22 @@
 			ThicknessFactor="{Binding CompositionSize}"
 			Brush="{Binding LineColor}"
 			/>
+		<cg:PyramidCG
+			x:Name="PyramidCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
+			/>
+		<cg:ValleyCG
+			x:Name="ValleyCG"
+			Grid.Row="2" Grid.Column="2" 
+			IsVisible="False"
+			Opacity="{Binding CompositionOpacity}"
+			ThicknessFactor="{Binding CompositionSize}"
+			Brush="{Binding LineColor}"
+			/>
 		<cg:FrameCG
 			x:Name="FrameCG"
 			Grid.Row="2" Grid.Column="2" 
