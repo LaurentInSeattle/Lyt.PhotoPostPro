@@ -164,7 +164,7 @@ public sealed partial class CullingViewModel :
             list.Add(null);
         }
 
-        var pathList = new List<string>();
+        var metadataList = new List<Metadata>();
         Parallel.For(0, files.Count, index =>
         {
             string file = files[index];
@@ -173,13 +173,8 @@ public sealed partial class CullingViewModel :
                 var thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedThumbnail.ImageBytes));
 
                 // Using an index so that the ordering of the list is maintained 
-                if (loadedThumbnail.Metadata.AddedToLibraryUTC == DateTime.MinValue)
-                {
-                    Debugger.Break(); 
-                }
-
                 list[index] = new UiThumbnail(file, loadedThumbnail.Metadata, thumbnail);
-                pathList.Add(loadedThumbnail.Metadata.FullPath);
+                metadataList.Add(loadedThumbnail.Metadata);
             }
         });
 
@@ -200,7 +195,7 @@ public sealed partial class CullingViewModel :
             Task.Delay(240).Wait();
 
             // Then load HD images in the background
-            this.libraryManager.LoadHdImages(pathList);
+            this.libraryManager.LoadHdImages(metadataList);
 
             Dispatch.OnUiThread(() =>
             {
@@ -208,7 +203,7 @@ public sealed partial class CullingViewModel :
                 this.StatusIsVisible = true;
             });
 
-            this.DecodeHdImages(pathList);
+            this.DecodeHdImages(metadataList);
 
             Dispatch.OnUiThread(() =>
             {
@@ -255,13 +250,14 @@ public sealed partial class CullingViewModel :
         this.KeywordsList = sb.ToString() ;
     }
 
-    private void DecodeHdImages(List<string> pathList)
+    private void DecodeHdImages(List<Metadata> metadataList)
     {
-        Parallel.For(0, pathList.Count, index =>
+        Parallel.For(0, metadataList.Count, index =>
         {
             // Throttle
             Task.Delay(40).Wait();
-            if (this.libraryManager.LoadedHdImages.TryGetValue(pathList[index], out LoadedImage? loadedHdImage))
+            string key = metadataList[index].MetadataFullPath(); 
+            if (this.libraryManager.LoadedHdImages.TryGetValue(key, out LoadedImage? loadedHdImage))
             {
                 if (loadedHdImage is not null)
                 {
@@ -270,7 +266,6 @@ public sealed partial class CullingViewModel :
                         // Decode the image and store it in a dictionary for later use in the UI
                         // when the user selects one or more thumbnails. 
                         var bitmap = WriteableBitmap.Decode(new MemoryStream(imageBytes));
-                        string key = loadedHdImage.Metadata.MetadataFullPath();
                         lock (this.allHdImages)
                         {
                             // BUG - FIX ME ! 

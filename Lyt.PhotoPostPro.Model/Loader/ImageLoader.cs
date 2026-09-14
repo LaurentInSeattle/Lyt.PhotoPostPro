@@ -395,7 +395,6 @@ public static partial class ImageLoader
                 return LoadedImage.Fail("Model.Loader.LibRawFailLoad");
             }
 
-
             // Check if the thumbnail needs to be resized 
             bool resized = false;
             if ((image.Width > ThumbnailLargestDimension) || (image.Height > ThumbnailLargestDimension))
@@ -457,10 +456,11 @@ public static partial class ImageLoader
 
     #region Loading HD Size Images
 
-    public static LoadedImage? LoadHdImage(string imagePath)
+    public static LoadedImage? LoadHdImage(Metadata metadata)
     {
         try
         {
+            string imagePath = metadata.FullPath;
             // Guard against null or empty image path, returns null if valid
             LoadedImage? loadedImage = Guard(imagePath);
             if (loadedImage is not null)
@@ -513,6 +513,9 @@ public static partial class ImageLoader
             }
             else
             {
+                // Force original metadata so that we do loose added information and
+                // more pre-calculated fields
+                loadedImage.Metadata = metadata;
                 loadedImage.LoadedFrom = imagePath;
                 Debug.WriteLine(" Image loaded");
                 return loadedImage;
@@ -541,8 +544,62 @@ public static partial class ImageLoader
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);
 
             // LibRaw rotates the image based on the EXIF orientation tag
-            var metadata = new Metadata(imagePath, width, height, directories, alreadyRotated: true);
+            // If we use the built in JPG it is not rotated 
+            var metadata = new Metadata(imagePath, width, height, directories, alreadyRotated: false);
 
+            // Lock libraw because we use multple threads when loading HD images 
+            bool thumbnailIsGoodEnough = false;
+            byte[]? bytesJpgEncoded = null;
+            Image<Rgb24>? image = null;
+            lock (libRawLock)
+            {
+                // Extract the raw byte span containing the JPEG data
+                ProcessedImage thumbnail = r.ExportThumbnail();
+
+                // Copy to .Net memory while locked 
+                ReadOnlySpan<byte> jpgEncoded = thumbnail.AsSpan<byte>();
+                bytesJpgEncoded = jpgEncoded.ToArray();
+                image = Image<Rgb24>.Load<Rgb24>(bytesJpgEncoded);
+            }
+
+            if (image is not null)
+            {
+                int thumbWidth = image.Width;
+                int thumbHeight = image.Height;
+                if (thumbWidth > thumbHeight)
+                {
+                    if (thumbWidth >= HdWidth * 0.9)
+                    {
+                        // Thumbnail provided by the camera is good enough
+                        thumbnailIsGoodEnough = true;
+                    }
+                }
+                else
+                {
+                    if (thumbHeight >= HdHeight * 0.9)
+                    {
+                        // Thumbnail provided by the camera is good enough
+                        thumbnailIsGoodEnough = true;
+                    }
+                }
+
+                if (thumbnailIsGoodEnough)
+                {
+                    // Check if the thumbnail needs to be resized 
+                    if ((image.Width > HdWidth) || (image.Height > HdHeight))
+                    {
+                        // Resize the thumbnail 
+                        bytesJpgEncoded = GenerateJpgThumbnailWithMutate(image, metadata, isHd: true);
+                    }
+
+                    // Camera provides a decent image, no need for more processing 
+                    Debug.WriteLine(" HD loading: Using camera provided image");
+                    return LoadedImage.PreLoaded(metadata, bytesJpgEncoded);
+                }
+            }
+
+            // If we use the built in RAW data it is already rotated 
+            metadata = new Metadata(imagePath, width, height, directories, alreadyRotated: true);
             if (rawImage.Bits == 8 && rawImage.Channels == 3)
             {
                 var pixelDataByteSpan = rawImage.AsSpan<byte>();

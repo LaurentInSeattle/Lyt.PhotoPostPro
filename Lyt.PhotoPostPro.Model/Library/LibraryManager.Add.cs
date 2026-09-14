@@ -403,11 +403,12 @@ public sealed partial class LibraryManager
         }
     }
 
-    public void LoadHdImages(List<string> pathList)
+    public void LoadHdImages(List<Metadata> metadataList)
     {
-        Parallel.For(0, pathList.Count, index =>
+        Parallel.For(0, metadataList.Count, index =>
         {
-            string path = pathList[index];
+            Metadata metadata = metadataList[index];
+            string path = metadata.MetadataFullPath();
             if (this.LoadedHdImages.ContainsKey(path))
             {
                 return;
@@ -419,7 +420,7 @@ public sealed partial class LibraryManager
                 Task.Delay(40).Wait();
             }
 
-            LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(path);
+            LoadedImage? loadedHdImage = ImageLoader.LoadHdImage(metadata);
             if (loadedHdImage is not null)
             {
                 if (loadedHdImage.JpgThumbnail is byte[] imageBytes && loadedHdImage.Metadata is not null)
