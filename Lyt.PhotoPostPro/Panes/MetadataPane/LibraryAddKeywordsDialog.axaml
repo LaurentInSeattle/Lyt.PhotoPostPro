@@ -1,0 +1,158 @@
+<UserControl
+	x:Class="Lyt.PhotoPostPro.Panes.MetadataPane.LibraryAddKeywordsDialog"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	x:DataType="vm:LibraryAddKeywordsDialogModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>
+	<Grid
+		Width="740" Height="400"
+		Background="Transparent"
+		>
+		<Rectangle
+			Fill="#C0000020"
+			Grid.ColumnSpan="999" Grid.RowSpan="999"
+			RadiusX="4" RadiusY="4"
+			Margin="1"
+			/>
+		<Border
+			Margin ="1"
+			BorderThickness="1.0"
+			BorderBrush="{StaticResource ResourceKey= LightAqua_2_100}"
+			Background="Transparent"
+			>
+			<Grid
+				>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="4"/>
+					<RowDefinition Height="68"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Rectangle
+					Grid.Row="0"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					Fill="{StaticResource ResourceKey= OrangePeel_2_080}"
+					/>
+				<Rectangle
+					Grid.Row="1"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					Fill="#60202040"
+					/>
+				<Rectangle
+					Grid.Row="1"
+					Height="1"
+					VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+					Fill="#F0302070"
+					/>
+				<TextBlock
+					Grid.Row="1" Grid.Column="0"
+					Text="{Binding Title}"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					Margin="20 -4 0 0"
+					FontSize="26"
+					Foreground="{StaticResource LightAqua_0_080}"
+					TextWrapping="Wrap"
+					/>
+				<!--Toolbar -->
+				<Grid
+					Grid.Row="1"
+					HorizontalAlignment="Right" VerticalAlignment="Center"
+					Margin="0 0 12 0"
+					>
+					<Grid.ColumnDefinitions>
+						<!-- Ring  -->
+						<ColumnDefinition Width="72" />
+						<!-- Spacer -->
+						<ColumnDefinition Width="40" />
+						<!-- Dismiss -->
+						<ColumnDefinition Width="80" />
+					</Grid.ColumnDefinitions>
+					<glyphs:GlyphButton
+						Grid.Column="2"
+						Style="{StaticResource AppToolbarIconButton}"
+						Margin="2"
+						GlyphSource="dismiss"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Close}"
+						Command="{Binding OnCancel}"
+						/>
+				</Grid>
+
+				<!--Content -->
+				<Grid
+					x:Name="InnerGrid"
+					Grid.Row="2"
+					ShowGridLines="False"
+					>
+					<Grid.ColumnDefinitions> 
+						<ColumnDefinition Width="20" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="60" />
+						<ColumnDefinition Width="20" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="16"/>
+						<RowDefinition Height="60"/> <!-- Message -->  
+						<RowDefinition Height="120"/> <!-- Items Control / Wrap Panel -->  
+						<RowDefinition Height="40"/> <!-- Text Box / Add  -->  
+						<RowDefinition Height="4"/> <!-- Spacer -->  
+					</Grid.RowDefinitions>
+					<TextBlock
+						Text="{Binding Message}"
+						Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+						HorizontalAlignment="Left" VerticalAlignment="Top"
+						Margin="20 0 20 0"
+						Foreground="{StaticResource LightAqua_0_080}"
+						FontSize="20"
+						TextWrapping="Wrap"
+						/>
+					<ItemsControl 
+						x:Name="KeywordsItemsControl"
+						Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+						Margin="20 0 0 0"
+						VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						ItemsSource="{Binding Keywords}"
+						>
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel Orientation="Horizontal"/>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<vm:KeywordView Margin="4 0 4 0"/>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+					<TextBox
+						Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+						Margin="20 0 0 0"
+						VerticalContentAlignment="Center" TextAlignment="Left"
+						VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						Text="{Binding KeywordsText, Mode=TwoWay}"
+						>
+						<TextBox.KeyBindings>
+							<KeyBinding Gesture="Enter"  Command="{Binding OnAdd}" />
+						</TextBox.KeyBindings>					
+					</TextBox>
+					<glyphs:GlyphButton
+						Grid.Row="3" Grid.Column="3" 
+						Style="{StaticResource SmallPanelIconButton}"
+						GlyphSource="add_circle"
+						GlyphStrokeThickness="0"
+						Command="{Binding OnAdd}"
+						Width="40" Height="40"
+						VerticalAlignment="Center" HorizontalAlignment="Center"
+						/>
+				</Grid>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

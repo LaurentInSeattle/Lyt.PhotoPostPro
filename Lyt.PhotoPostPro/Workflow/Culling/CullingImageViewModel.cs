@@ -26,7 +26,6 @@ public sealed partial class CullingImageViewModel :
         this.parent = parent;
         this.Metadata = metadata;
         this.Image = image;
-
         this.Rating = metadata.Rating; 
         this.Title = string.Empty;
         this.Details = string.Empty;

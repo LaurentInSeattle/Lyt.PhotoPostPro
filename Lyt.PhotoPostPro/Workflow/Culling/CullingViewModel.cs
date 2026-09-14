@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Culling;
 
+using System.Text;
+
 using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
 
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
@@ -27,16 +29,16 @@ public sealed partial class CullingViewModel :
     private readonly LibraryManager libraryManager;
     private readonly IDialogService dialogService;
     private readonly IToaster toaster;
-
     private readonly Dictionary<string, UiThumbnail> allHdImages = [];
 
     private LayoutKind layoutKind;
     private bool isShowHintsSingleImageFirstTime;
     private bool isShowHintsDualLandscapeFirstTime;
     private bool isShowHintsDualPortraitFirstTime;
+    private HashSet<string> keywordsToAdd = [];
 
-    //[ObservableProperty]
-    //public partial bool HasSelection { get; set; }
+    [ObservableProperty]
+    public partial string KeywordsList { get; set; } = string.Empty;
 
     [ObservableProperty]
     // The collection of images in the film strip 
@@ -107,6 +109,7 @@ public sealed partial class CullingViewModel :
             IsVisible = false,
             IsActive = false,
         };
+
         this.Subscribe<HotKeyMessage>();
     }
 
@@ -140,10 +143,19 @@ public sealed partial class CullingViewModel :
             return;
         }
 
-
         this.SpinWait();
         this.Status = "Loading Thumbnails...";
         this.StatusIsVisible = true;
+
+        // Launch keywords dialog 
+        if (this.dialogService is DialogService modalService)
+        {
+            this.keywordsToAdd = [];
+            this.KeywordsList = "No keywords will added."; 
+            var shell = App.GetRequiredService<ShellViewModel>();
+            modalService.RunViewModelModal(
+                shell.ModalHost, new LibraryAddKeywordsDialogModel(this.keywordsToAdd), this.OnSaveKeywords);
+        }
 
         // Create empty slots so that we dont need to use Add which would cause losing the ordering of the files.
         var list = new List<UiThumbnail?>();
@@ -161,6 +173,11 @@ public sealed partial class CullingViewModel :
                 var thumbnail = WriteableBitmap.Decode(new MemoryStream(loadedThumbnail.ImageBytes));
 
                 // Using an index so that the ordering of the list is maintained 
+                if (loadedThumbnail.Metadata.AddedToLibraryUTC == DateTime.MinValue)
+                {
+                    Debugger.Break(); 
+                }
+
                 list[index] = new UiThumbnail(file, loadedThumbnail.Metadata, thumbnail);
                 pathList.Add(loadedThumbnail.Metadata.FullPath);
             }
@@ -212,6 +229,32 @@ public sealed partial class CullingViewModel :
         });
     }
 
+    private void OnSaveKeywords(object? obj, bool isValid)
+    {
+        if (!isValid || obj is not LibraryAddKeywordsDialogModel dialogModel)
+        {
+            return;
+        }
+
+        // Collect keywords 
+        var keywords = 
+            from vm in dialogModel.Keywords
+            where ! string.IsNullOrWhiteSpace(vm.Keyword)
+            select vm.Keyword.ToLowerInvariant();
+        this.keywordsToAdd = [.. keywords];
+
+        // TODO : Clean up ! 
+        StringBuilder sb = new();
+        sb.Append("Automatically added keywords: "); 
+        foreach (string keyword in keywords)
+        {
+            sb.Append(keyword.Capitalize()  );
+            sb.Append("  ");
+        }
+
+        this.KeywordsList = sb.ToString() ;
+    }
+
     private void DecodeHdImages(List<string> pathList)
     {
         Parallel.For(0, pathList.Count, index =>
@@ -230,6 +273,9 @@ public sealed partial class CullingViewModel :
                         string key = loadedHdImage.Metadata.MetadataFullPath();
                         lock (this.allHdImages)
                         {
+                            // BUG - FIX ME ! 
+                            // NEED the original metadata here, not the one from the HD image 
+                            // because we need the correct DateAdded among many other fields 
                             this.allHdImages.Add(key, new UiThumbnail(key, loadedHdImage.Metadata, bitmap));
                         }
                     }
@@ -386,6 +432,18 @@ public sealed partial class CullingViewModel :
     // Relay commands cannot be static 
 
     [RelayCommand]
+    public void OnChangeKeywords()
+    {
+        // Launch keywords dialog 
+        if (this.dialogService is DialogService modalService)
+        {
+            var shell = App.GetRequiredService<ShellViewModel>();
+            modalService.RunViewModelModal(
+                shell.ModalHost, new LibraryAddKeywordsDialogModel(this.keywordsToAdd), this.OnSaveKeywords);
+        }
+    }
+
+    [RelayCommand]
     public void OnBackToLibrary()
     {
         var shell = App.GetRequiredService<ShellViewModel>();
@@ -460,7 +518,15 @@ public sealed partial class CullingViewModel :
     private void AddStarTo(CullingImageViewModel viewModel, bool isAddStar)
     {
         viewModel.ChangeRating(isAddStar);
-        this.libraryManager.SaveMetadata(viewModel.Metadata);
+        var metadata = viewModel.Metadata; 
+        if ( this.keywordsToAdd.Count > 0)
+        {
+            HashSet<string> hash = [.. metadata.Keywords];
+            hash.UnionWith(this.keywordsToAdd);
+            metadata.Keywords = [.. hash]; 
+        }
+
+        this.libraryManager.SaveMetadata(metadata);
     }
 
     private void Remove(CullingImageViewModel viewModel, CullingImageViewModel? viewModelToSelect = null)

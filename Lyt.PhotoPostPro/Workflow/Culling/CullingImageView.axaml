@@ -9,7 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
 
-    xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
+	xmlns:stars="using:Lyt.Avalonia.Controls.StarRating"
 	>
 	<Border
 		x:Name="outerBorder"
