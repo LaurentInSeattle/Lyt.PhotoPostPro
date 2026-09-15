@@ -158,6 +158,7 @@
 	<system:String x:Key="Gallery.Toolbar.Navigate">Navigate To...</system:String>
 
 	<!-- Culling -->
+	<system:String x:Key="Workflow.Culling.Loading">Loading...</system:String>
 	<system:String x:Key="Workflow.Culling.LoadingHD">Loading High Definition Images...</system:String>
 	<system:String x:Key="Workflow.Culling.DecodingHD">Decoding High Definition Images...</system:String>
 	<system:String x:Key="Workflow.Culling.Ready">Ready.</system:String>
@@ -173,7 +174,14 @@
 	<system:String x:Key="Workflow.Culling.SelectRight">Keep: Right Image</system:String>
 	<system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
 
-	
+	<!-- Culling - Keywords -->
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Keywords (a.k.a. Tags) </system:String>
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Message">When given one star or more, therefore kept in the library, images will be automatically 'tagged' with these keywords. &#xD;&#xA;&#xD;&#xA;You will be able to change them at any time during the culling and rating process.</system:String>
+	<system:String x:Key="Workflow.Culling.Keywords">Keywords (a.k.a. Tags) </system:String>
+	<system:String x:Key="Workflow.Culling.ChangeKeywords">Change Keywords</system:String>
+	<system:String x:Key="Workflow.Culling.NoKeywords">No Keywords will be assigned to this image.</system:String>
+	<system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these keywords will be assigned to this image.</system:String>
+
 	<!-- Import -->
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
 	<system:String x:Key="Single.AddImage">Add This Image to Library</system:String>

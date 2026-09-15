@@ -12,7 +12,7 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	<Grid
-		Width="740" Height="400"
+		Width="740" Height="500"
 		Background="Transparent"
 		>
 		<Rectangle
@@ -99,8 +99,8 @@
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="16"/>
-						<RowDefinition Height="60"/> <!-- Message -->  
-						<RowDefinition Height="120"/> <!-- Items Control / Wrap Panel -->  
+						<RowDefinition Height="140"/> <!-- Message -->  
+						<RowDefinition Height="160"/> <!-- Items Control / Wrap Panel -->  
 						<RowDefinition Height="40"/> <!-- Text Box / Add  -->  
 						<RowDefinition Height="4"/> <!-- Spacer -->  
 					</Grid.RowDefinitions>

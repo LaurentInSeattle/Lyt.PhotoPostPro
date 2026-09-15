@@ -9,11 +9,9 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
-	xmlns:stars="clr-namespace:Lyt.Avalonia.Controls.StarRating;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
 	>
@@ -132,7 +130,7 @@
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="40" /> <!-- Reserved FFU -->
+						<RowDefinition Height="4" /> <!-- Reserved FFU -->
 						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
 						<RowDefinition Height="64" /> <!-- + or - star -->
 						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
@@ -142,9 +140,11 @@
 						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
 						<RowDefinition Height="420" /> <!-- Meta -->
 						<RowDefinition Height="{StaticResource Size.Spacer}" />
-						<RowDefinition Height="{StaticResource Size.PromptOneLine}" />
+						<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> 
+						<RowDefinition Height="{StaticResource Size.PromptTwoLines}" />
+						<RowDefinition Height="{StaticResource Size.PromptThreeLines}" />
 						<RowDefinition Height="64" /> <!-- Change Tags  -->
-						<RowDefinition Height="{StaticResource Size.Spacer}" />
+						<RowDefinition Height="{StaticResource Size.TallSpacer}" />
 						<RowDefinition Height="64" /> <!-- Back -->
 					</Grid.RowDefinitions>
 					<glyphs:GlyphButton
@@ -215,13 +215,26 @@
 						/>
 					<TextBlock
 						Grid.Row="10" Grid.ColumnSpan="2" 
-						Theme="{StaticResource H3}"
+						Theme="{StaticResource VeryLarge}"
+						HorizontalAlignment="Left"
+						Text="{Binding KeywordsTitle}" 
+						/>
+					<TextBlock
+						Grid.Row="11" Grid.ColumnSpan="2" 
+						Theme="{StaticResource Large}"
+						HorizontalAlignment="Left"
+						Text="{Binding KeywordsPrompt}" 
+						/>
+					<TextBlock
+						Grid.Row="12" Grid.ColumnSpan="2" 
+						Theme="{StaticResource VeryLarge}"
+						FontWeight="DemiBold"
 						HorizontalAlignment="Left"
 						Text="{Binding KeywordsList}" 
 						/>
 					<glyphs:GlyphButton
 						x:Name="ChangeKeywordsButton"
-						Grid.Row="11" Grid.ColumnSpan="2"
+						Grid.Row="13" Grid.ColumnSpan="2"
 						Margin="4 0 4 0"
 						Style="{StaticResource ViewIconButton}"
 						FontSize="24"
@@ -235,7 +248,7 @@
 						/>
 					<glyphs:GlyphButton
 						x:Name="BackButton"
-						Grid.Row="13" Grid.ColumnSpan="2"
+						Grid.Row="15" Grid.ColumnSpan="2"
 						Margin="4 0 4 0"
 						Style="{StaticResource ViewIconButton}"
 						FontSize="24"

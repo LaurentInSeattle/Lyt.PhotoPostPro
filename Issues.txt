@@ -1,13 +1,13 @@
 Bugs ~ Major Issues 
 -------------------
 
+- Edited image not showing up in Edited section, need to restrat the app
+
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 WIP
 ---
-
-- Auto-Tags on culling 
 
 - First Run View : Setup root locations, etc 
 

@@ -3,6 +3,8 @@
 using System.Text;
 
 using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+using static System.Net.Mime.MediaTypeNames;
 
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
@@ -36,6 +38,12 @@ public sealed partial class CullingViewModel :
     private bool isShowHintsDualLandscapeFirstTime;
     private bool isShowHintsDualPortraitFirstTime;
     private HashSet<string> keywordsToAdd = [];
+
+    [ObservableProperty]
+    public partial string KeywordsTitle { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string KeywordsPrompt { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial string KeywordsList { get; set; } = string.Empty;
@@ -144,14 +152,15 @@ public sealed partial class CullingViewModel :
         }
 
         this.SpinWait();
-        this.Status = "Loading Thumbnails...";
+        this.KeywordsTitle = this.Localize("Workflow.Culling.Keywords");
+        this.Status = this.Localize("Workflow.Culling.Loading");
         this.StatusIsVisible = true;
 
         // Launch keywords dialog 
         if (this.dialogService is DialogService modalService)
         {
             this.keywordsToAdd = [];
-            this.KeywordsList = "No keywords will added."; 
+            this.PopulateKeywords();
             var shell = App.GetRequiredService<ShellViewModel>();
             modalService.RunViewModelModal(
                 shell.ModalHost, new LibraryAddKeywordsDialogModel(this.keywordsToAdd), this.OnSaveKeywords);
@@ -232,22 +241,33 @@ public sealed partial class CullingViewModel :
         }
 
         // Collect keywords 
-        var keywords = 
+        var keywords =
             from vm in dialogModel.Keywords
-            where ! string.IsNullOrWhiteSpace(vm.Keyword)
+            where !string.IsNullOrWhiteSpace(vm.Keyword)
             select vm.Keyword.ToLowerInvariant();
         this.keywordsToAdd = [.. keywords];
+        this.PopulateKeywords();
+    }
 
-        // TODO : Clean up ! 
-        StringBuilder sb = new();
-        sb.Append("Automatically added keywords: "); 
-        foreach (string keyword in keywords)
+    private void PopulateKeywords()
+    {
+        if (this.keywordsToAdd.Count == 0)
         {
-            sb.Append(keyword.Capitalize()  );
-            sb.Append("  ");
+            this.KeywordsPrompt = this.Localize("Workflow.Culling.NoKeywords"); 
+            this.KeywordsList = string.Empty;
         }
+        else
+        {
+            this.KeywordsPrompt = this.Localize("Workflow.Culling.WithKeywords");
+            StringBuilder sb = new();
+            foreach (string keyword in this.keywordsToAdd)
+            {
+                sb.Append(keyword.Capitalize());
+                sb.Append("  ");
+            }
 
-        this.KeywordsList = sb.ToString() ;
+            this.KeywordsList = sb.ToString();
+        }
     }
 
     private void DecodeHdImages(List<Metadata> metadataList)
@@ -256,7 +276,7 @@ public sealed partial class CullingViewModel :
         {
             // Throttle
             Task.Delay(40).Wait();
-            string key = metadataList[index].MetadataFullPath(); 
+            string key = metadataList[index].MetadataFullPath();
             if (this.libraryManager.LoadedHdImages.TryGetValue(key, out LoadedImage? loadedHdImage))
             {
                 if (loadedHdImage is not null)
@@ -513,12 +533,12 @@ public sealed partial class CullingViewModel :
     private void AddStarTo(CullingImageViewModel viewModel, bool isAddStar)
     {
         viewModel.ChangeRating(isAddStar);
-        var metadata = viewModel.Metadata; 
-        if ( this.keywordsToAdd.Count > 0)
+        var metadata = viewModel.Metadata;
+        if (this.keywordsToAdd.Count > 0)
         {
             HashSet<string> hash = [.. metadata.Keywords];
             hash.UnionWith(this.keywordsToAdd);
-            metadata.Keywords = [.. hash]; 
+            metadata.Keywords = [.. hash];
         }
 
         this.libraryManager.SaveMetadata(metadata);
@@ -527,7 +547,7 @@ public sealed partial class CullingViewModel :
     private void Remove(CullingImageViewModel viewModel, CullingImageViewModel? viewModelToSelect = null)
     {
         this.viewModelToRemove = viewModel;
-        this.viewModelToKeep = viewModelToSelect; 
+        this.viewModelToKeep = viewModelToSelect;
 
         // Remove Bottom or Right 
         var metadata = viewModel.Metadata;
@@ -547,8 +567,8 @@ public sealed partial class CullingViewModel :
         }
     }
 
-    private CullingImageViewModel? viewModelToRemove; 
-    private CullingImageViewModel? viewModelToKeep ;
+    private CullingImageViewModel? viewModelToRemove;
+    private CullingImageViewModel? viewModelToKeep;
 
     private void OnRemoveConfirmed(object? obj, bool isValid)
     {
@@ -611,8 +631,8 @@ public sealed partial class CullingViewModel :
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex); 
-        } 
+            Debug.WriteLine(ex);
+        }
         finally
         {
             // Whatever happens, release these references 
