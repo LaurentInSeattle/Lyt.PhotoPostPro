@@ -1,27 +1,27 @@
 Bugs ~ Major Issues 
 -------------------
 
-- Edited image not showing up in Edited section, need to restrat the app
-
 - UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 WIP
 ---
 
-- Setup logging for trace to disk 
+- Edited image not showing up in Edited section, need to restart the app 
+Re occurence of : - After completing an edit, image does not show up in edited 
 
+- Keywords lookup fail (beach / small) 
 
+ 
 Missing Features 
 ----------------
 
 - App settings 
-Setup root locations
+Setup library root location : Danger ? 
 CullingBatchSize = 48;
 
 Minor Issues (Low priority)
 ---------------------------
-
 
 - Switching language while processing cancels the current process
 
@@ -30,7 +30,6 @@ Minor Issues (Low priority)
 - Thumbnail is not updated after edit without export --- By Design ? 
 
 - Virtualizing Wrap Panel weird layouts at times (See 2017 pictures) Does not repro easily.
-
 
 
 Code Quality Issues 
@@ -81,8 +80,6 @@ Bugs - No Repro for quite a While
 ---------------------------------
 
 - CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
-
-- After completing an edit, image does not show up in edited 
 
 - Add new Images messed up thumb files ? 
 

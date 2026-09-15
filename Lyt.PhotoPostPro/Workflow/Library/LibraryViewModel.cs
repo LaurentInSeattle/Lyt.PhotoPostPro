@@ -315,18 +315,19 @@ public sealed partial class LibraryViewModel :
             return;
         }
 
+        this.IsCullButtonVisible = false;
+        this.IsCullTextVisible = false;
+
         FolderTree? folderTree;
         if (optionKey == Viewing.Unrated.ToString())
         {
             this.selectedViewing = Viewing.Unrated;
             folderTree = this.libraryMgr.UnratedFolderTree;
             this.IsUnratedSelected = true;
-            this.IsCullButtonVisible = false;
         }
         else
         {
             this.IsUnratedSelected = false;
-            this.IsCullButtonVisible = false;
 
             if (optionKey == Viewing.Captured.ToString())
             {
@@ -373,6 +374,10 @@ public sealed partial class LibraryViewModel :
             // Nothing has ever been edited : Clear the panel and clear selection 
             this.LibraryThumbnailsPanelViewModel.Clear();
             this.ClearSelection();
+            if (this.selectedViewing == Viewing.Unrated)
+            {
+                this.IsCullTextVisible = true; 
+            }
         }
     }
 
