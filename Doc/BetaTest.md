@@ -2,6 +2,7 @@
 
 Photo Rebel is a **complete** software solution for the Digital Photography enthousiast, amateur or pro, beginner or experimented.
 
+- Non-Destructive Edits
 - Complete 'Raw' Support
 - MTP Camera Connexion
 - Floating Point Editing and Image Processing
@@ -199,3 +200,12 @@ Bengali, Bulgarian, Chinese (Simplified), Chinese (Traditional), German, Greek, 
 
 (9) Photo Rebel is a 'modern' .Net 10 application. It is fully compiled to x86 native code (also known as 'AOT') and there is no need to download additional components or 'frameworks'. Everything is in the ZIP file.
 
+# More Screenshots (for Black and White lovers)
+
+Blend Luminance and Color images 
+
+<p align="left"><img src="..\Screenshots\BW.jpg" height="500"/>
+
+Use a specialized *.cube Lookup Table 
+
+<p align="left"><img src="..\Screenshots\LutBW.jpg" height="500"/>

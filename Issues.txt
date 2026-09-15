@@ -126,8 +126,6 @@ Cool Stuff to Consider
 
 - Combo-Borders: Black with thin white line, White with thin black line, etc...
 
-- Pyramid Up and Down Composition guides 
-
 - Dynamic Workflow: Ability to not be constrained by the default workflow and be able to pick the prefered next step.
 
 - Ability to minimize metadata panel 
