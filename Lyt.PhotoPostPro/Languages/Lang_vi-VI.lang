@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Chuyển tới...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Đang nạp...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Đang nạp ảnh bảo mật cao...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Đang giải mã ảnh tối đa...</system:String>
@@ -212,6 +214,20 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Giữ:</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Từ chối trái - thêm ngôi sao bên phải</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Định nghĩa từ khoá (a.k.a. Tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Khi đưa ra một ngôi sao hoặc nhiều hơn, do đó giữ trong thư viện, ảnh sẽ tự động được « bịt mắt » bằng các từ khóa này. 
+
+ ; bạn sẽ có thể thay đổi chúng bất cứ lúc nào trong quá trình phân loại và đánh giá.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Từ khoá (a.k.a. Tags)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Thay đổi</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">Không có từ khoá nào được gán cho ảnh này.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Khi cho một hoặc nhiều hơn, do đó giữ trong thư viện, những từ khoá này sẽ được gán cho ảnh này.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Kéo và thả tập tin ảnh vào đây để bắt đầu.</system:String>
 
@@ -258,6 +274,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Đang nạp sẵn...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Không đủ chỗ trên đĩa.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Từ khoá</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Sửa thẻ ảnh</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Thêm thẻ ảnh mới hoặc gỡ bỏ những thẻ đã có.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Tập tin được tạo:</system:String>
 
@@ -366,6 +388,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Tam giác vàng lên</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Tam giác vàng xuống</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Kim tự tháp</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Thu nhỏ</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Kích hoạt</system:String>
 

@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Перейти до...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Завантаження.</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Завантаження зображень високої чіткості...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Декодування зображень високої чіткості...</system:String>
@@ -212,6 +214,18 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Keep: праве зображення</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Відхилити ліворуч – додати зірочку праворуч</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Дефін Ключові слова (наприклад, теги)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Коли надана одна зірка або більше, отже, зберігається в бібліотеці, зображення будуть автоматично позначені з цими словами. &#x&#&# ;Ви зможете змінити їх в будь-який час під час культового та рейтингового процесу.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Ключові слова:</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Змінити ключові слова</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">Не буде призначено для цього образу.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">При наданні однієї зірки або більше, отже, зберігаються в бібліотеці, ці ключові слова будуть призначені для цього зображення.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Перевантаження Скасовано ...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Недостатній дисковий простір доступні.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Ключові слова</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Редагувати зображення</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Додати нові теги зображення або видалити існуючі.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Файл створено: {0} о {1}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Золоті трикутники вгору</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Золоті трикутники вниз</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Пірамід</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Долина</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Деноз</system:String>
 

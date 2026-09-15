@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Навигирайте до...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Зареждане...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Зареждат се изображения с висока разделителна способност...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Декодиране на изображения с висока разделителна способност...</system:String>
@@ -212,6 +214,20 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Запазване: дясно изображение</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Отхвърляне наляво - Добавяне на звезда вдясно</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Дефинирай ключови думи (известен още като Tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Когато се даде една звезда или повече, поради което се съхранява в библиотеката, изображенията автоматично ще бъдат маркирани с тези ключови думи. 
+
+ ;Ще можете да ги промените по всяко време по време на процеса на унищожаване и оценка.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Ключови думи (известен още като Tags)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Промяна на ключови думи</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">На това изображение няма да бъдат присвоявани ключови думи.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Когато се даде една звезда или повече, затова се съхранява в библиотеката, тези ключови думи ще бъдат определени на този образ.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Плъзнете и пуснете файл с изображение тук, за да започнете.</system:String>
 
@@ -258,6 +274,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Презареждането е отменено...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Недостатъчно свободно дисково пространство.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Ключови думи</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Редактиране на тагове с изображения</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Добавяне на нови тагове или премахване на съществуващите.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Файлът е създаден: {0} на {1}</system:String>
 
@@ -366,6 +388,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Златни триъгълници нагоре</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Златни триъгълници надолу</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Пирамида</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Долина</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Деноиз</system:String>
 

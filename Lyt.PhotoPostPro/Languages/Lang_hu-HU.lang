@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Navigáljon ide...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Betöltés...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Nagy felbontású képek betöltése...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Nagy felbontású képek dekódolása...</system:String>
@@ -212,6 +214,18 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Tartsa: Jobb kép</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Bal oldali elutasítás – Csillag hozzáadása a jobb oldalhoz</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Határozza meg a kulcsszavakat (más néven: Címkék)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, a képeket automatikusan "megjelölik" ezekkel a kulcsszavakkal. & # xD; & # xA; & # xD; & # xA; A válogatási és minősítési folyamat során bármikor megváltoztathatja azokat.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Kulcsszavak (más néven: Címkék)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Kulcsszavak módosítása</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">Ezen a képen nem lesznek kulcsszavak.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, ezeket a kulcsszavakat ehhez a képhez rendelik.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Törölve...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Nincs elegendő lemezterület.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Kulcsszavak</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Képcímkék szerkesztése</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Új képcímkék hozzáadása vagy a meglévők eltávolítása.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Fájl létrehozva: {0}, {1}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Arany háromszögek felfelé</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Arany háromszögek lefelé</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Piramid</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Völgy</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 

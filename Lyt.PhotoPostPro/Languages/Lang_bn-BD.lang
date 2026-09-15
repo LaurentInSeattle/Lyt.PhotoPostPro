@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">এতে নেভিগেট করুন...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">লোড করা হচ্ছে...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">হাই ডেফিনিশন ছবি লোড হচ্ছে...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">হাই ডেফিনিশন ছবি ডিকোডিং...</system:String>
@@ -212,6 +214,18 @@
     <system:String x:Key="Workflow.Culling.SelectRight">রাখুন: ডান চিত্র</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">বাম থেকে প্রত্যাখ্যান করুন - ডানে একটি তারকা যোগ করুন</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">অভিব্যক্তি নির্দেশক শব্দ (a.c)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">যখন এক বা একাধিক তারকাকে লাইব্রেরিতে রাখা হয়, তখন এই শব্দগুলোর সঙ্গে স্বয়ংক্রিয়ভাবে সংযুক্ত করা হবে । #xD; এবং #xAA; এবং #xD#xD; এবং #x#x#xD আপনি যে কোন সময়ে তাদের পরিবর্তন করতে পারবেন এই রোগ এবং রেটিং প্রক্রিয়ার সময়।.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">কীওয়ার্ড (Aa.K) ট্যাগ</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">মূলশব্দ পরিবর্তন করুন</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">এই ছবিটির জন্য কোন নির্দেশক শব্দ বরাদ্দ করা হবে না।.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">এক বা একাধিক তারকাকে যখন লাইব্রেরিতে রাখা হয়, তখন এই শব্দগুলোকে এই চিত্রের জন্য নিযুক্ত করা হবে ।.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">প্রিলোড করা হয়েছে...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">ডিস্কে পর্যাপ্ত স্থান উপলব্ধ নেই।.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">মূলশব্দ</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">ছবি সম্পাদনা</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">নতুন ইমেজ ট্যাগ যোগ অথবা অপসারণ করুন।.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">ফাইল তৈরি করা হয়েছে: {1} এ {0}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">গোল্ডেন ট্রায়াঙ্গলস আপ</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">গোল্ডেন ট্রায়াঙ্গলস ডাউন</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">পিরামিড</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">ভ্যালি</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">দিন</system:String>
 

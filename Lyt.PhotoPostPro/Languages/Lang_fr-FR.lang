@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Accédez à...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Chargement...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Chargement des images haute définition...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Décodage des images haute définition...</system:String>
@@ -209,9 +211,21 @@
 
     <system:String x:Key="Workflow.Culling.SelectLeftHint">Ajouter une étoile à gauche - Rejeter à droite</system:String>
 
-    <system:String x:Key="Workflow.Culling.SelectRight">Conserver : la bonne image</system:String>
+    <system:String x:Key="Workflow.Culling.SelectRight">Conserver : Image de droite</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rejeter à gauche - Ajouter une étoile à droite</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Définir les mots clés (ou étiquettes)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Lorsqu'une étoile (ou plus) est donnée à une image, donc conservée dans la bibliothèque, les images seront automatiquement « taguées » avec ces mots clés.&#xD;&#xA;&#xD;&#xA;Vous pourrez les modifier à tout moment pendant le processus de tri et de notation.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Mots clés (ou étiquettes)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Modifier les mots clés</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">Aucun mot-clé ne sera attribué à cette image.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Lorsqu'il est donné une étoile ou plus à une image, donc conservée dans la bibliothèque, ces mots clés lui seront assignés.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Faites glisser et déposez un fichier image ici pour commencer.</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Préchargement Annulé...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Espace disque disponible insuffisant.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Mots clés</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Modifier les étiquettes de l'image</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Ajoutez de nouvelles balises d'image ou supprimez celles existantes.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">Fichier créé : {0} à {1}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Triangles d'or vers le haut</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangles d'or vers le bas</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Pyramide</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Vallée</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Réduction de Bruit</system:String>
 

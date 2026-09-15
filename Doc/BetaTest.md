@@ -7,6 +7,7 @@ Photo Rebel is a **complete** software solution for the Digital Photography enth
 - MTP Camera Connexion
 - Floating Point Editing and Image Processing
 - Extensive Image Library Management
+- 'Pro' Exports: file formats, borders, watermarks, signatures
 
 <p align="left"><img src="..\Screenshots\Screenshot_Library_JP - Small.png" height="500"/>
 

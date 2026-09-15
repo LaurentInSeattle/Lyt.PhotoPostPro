@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">นําเสนอไปยัง...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">กําลังโหลด...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">กําลังเรียกภาพจากกล้อง.</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">ถอดรหัสภาพจําลองระดับสูง...</system:String>
@@ -212,6 +214,18 @@
     <system:String x:Key="Workflow.Culling.SelectRight">คงตําแหน่ง:</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">ปฏิเสธ - เพิ่มดาวไปทางขวา</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">นิยามคําหลัก (a.k.a. tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">เมื่อกําหนดให้ใช้ดาวฤกษ์หนึ่งดวงหรือมากกว่า จึงจะถูกเก็บไว้ในไลบรารีนั้น ภาพจะถูกจองด้วยคําสําคัญเหล่านี้โดยอัตโนมัติ &# xD;&# xA;&# xD;&# xA คุณจะสามารถเปลี่ยนมันได้ตลอดเวลา ในระหว่างการคัดแยกและเรตติ้ง.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">คีย์เวิร์ด (ป้าย a.k.a.)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">เปลี่ยนคําสําคัญ</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">จะไม่มีการกําหนดคําสําคัญสําหรับภาพนี้.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">เมื่อกําหนดให้ดาวดวงหนึ่งหรือมากกว่านั้นเก็บไว้ในห้องสมุด คําสําคัญเหล่านี้จะถูกกําหนดให้เป็นรูปภาพนี้.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ลากและวางแฟ้มภาพไว้ที่นี่เพื่อเริ่ม.</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">ยกเลิกการโหลดก่อน...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">พื้นที่บนดิสก์ไม่เพียงพอ.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">คําสําคัญ</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">แก้ไขป้ายกํากับของภาพ</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">เพิ่มป้ายกํากับใหม่ หรือลบที่มีอยู่แล้ว.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">แฟ้มถูกสร้าง: {0} ที่ {1}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">สามเหลี่ยมทองคําขึ้น</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">สามเหลี่ยมทองคําลง</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">พีระมิด</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">หุบเขา</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">ความแหลม:</system:String>
 

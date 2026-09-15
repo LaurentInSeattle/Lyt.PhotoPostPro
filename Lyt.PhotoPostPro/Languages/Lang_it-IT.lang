@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">Naviga verso...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">Caricamento...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">Caricamento immagini ad alta definizione...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">Decodifica di immagini ad alta definizione...</system:String>
@@ -212,6 +214,18 @@
     <system:String x:Key="Workflow.Culling.SelectRight">Conserva: Immagine a destra</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: Aggiungi una stella a destra</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire le parole chiave (a.k.a. Tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con queste parole chiave.&#xD;&#xA;&#xD;&#xA;Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">Parole chiave (a.k.a. Tags)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambiare le parole chiave</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">Nessuna Parola chiave sarà assegnata a questa immagine.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Quando viene data una stella o più, quindi conservata nella libreria, queste parole chiave saranno assegnate a questa immagine.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>
 
@@ -258,6 +272,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Precarico annullato...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficiente spazio disponibile su disco.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">Parole chiave</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">Modifica delle immagini</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Aggiungere nuovi tag immagine o rimuovere quelli esistenti.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">File creato: {0} alle {1}</system:String>
 
@@ -366,6 +386,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">Triangoli d'oro in alto</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">Triangoli d'oro in basso</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">Piramide</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">Valle della Valle</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Riduzione del Rumore</system:String>
 

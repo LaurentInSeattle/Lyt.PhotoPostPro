@@ -185,6 +185,8 @@
 
     <system:String x:Key="Gallery.Toolbar.Navigate">导航至...</system:String>
 
+    <system:String x:Key="Workflow.Culling.Loading">正在装入...</system:String>
+
     <system:String x:Key="Workflow.Culling.LoadingHD">正在加载高清图像...</system:String>
 
     <system:String x:Key="Workflow.Culling.DecodingHD">解码高清图像...</system:String>
@@ -212,6 +214,20 @@
     <system:String x:Key="Workflow.Culling.SelectRight">保留：右图</system:String>
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">拒绝左侧 - 在右侧添加一颗星</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">定义关键词( a.k.a. tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">当给定一星或多星, 因此保存在库中时, 图像会自动用这些关键字“ 标记 ” 。 
+
+ ;在收视和评分过程中,你可以随时修改.</system:String>
+
+    <system:String x:Key="Workflow.Culling.Keywords">关键词(a.k.a.Tags)</system:String>
+
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">更改关键字</system:String>
+
+    <system:String x:Key="Workflow.Culling.NoKeywords">此图像将不会指定关键字 .</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">当给定一等星或多等星,因此保留在库中时,这些关键词会被分配到这个图像上.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">将图像文件拖放到此处即可开始。</system:String>
 
@@ -258,6 +274,12 @@
     <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">预装已取消...</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">磁盘空间不足.</system:String>
+
+    <system:String x:Key="Metadata.Keywords">关键词</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Title">编辑图像标记</system:String>
+
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">添加新图像标记或删除已存在的标记 .</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">文件已创建：{0}，时间：{1}</system:String>
 
@@ -366,6 +388,10 @@
     <system:String x:Key="Workflow.Compose.CG.GoldenUp">金三角向上</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.GoldenDown">金三角向下</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Pyramid">金字塔</system:String>
+
+    <system:String x:Key="Workflow.Compose.CG.Valley">谷类</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">德诺瓦斯</system:String>
 
