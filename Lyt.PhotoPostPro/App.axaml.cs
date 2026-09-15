@@ -146,9 +146,21 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<WatermarksViewModel>();
                 _ = services.AddSingleton<StatisticsViewModel>();
 
+                // Logging Services, pick one 
+#if DEBUG
+                if ( Debugger.IsAttached)
+                {
+                    _ = services.AddSingleton<ILogger, BasicLogger>();
+                }
+                else
+                {
+                    _ = services.AddSingleton<ILogger, LogViewerWindow>();
+                }
+#else
+                _ = services.AddSingleton<ILogger, Lyt.FileLogger.FileLogger>();
+#endif 
+
                 // Services, all must comply to a specific interface 
-                // _ = services.AddSingleton<ILogger, LogViewerWindow>();
-                _ = services.AddSingleton<ILogger, BasicLogger>();
                 _ = services.AddSingleton<IFocuser, Focuser>();
                 _ = services.AddSingleton<IAnimationService, AnimationService>();
                 _ = services.AddSingleton<ILocalizer, LocalizerModel>();

@@ -217,10 +217,6 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definir palavras-chave (também conhecido por Tags)</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando dada uma estrela ou mais, portanto, mantidas na biblioteca, as imagens serão automaticamente 'tagged' com essas palavras-chave. 
-
- ;Você será capaz de mudá-los a qualquer momento durante o processo de abate e classificação.</system:String>
-
     <system:String x:Key="Workflow.Culling.Keywords">Palavras-chave (também conhecido por Etiquetas)</system:String>
 
     <system:String x:Key="Workflow.Culling.ChangeKeywords">Mudar as Palavras- Chave</system:String>

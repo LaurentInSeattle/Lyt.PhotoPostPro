@@ -9,19 +9,19 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- First Run View : Setup root locations, etc 
+- Setup logging for trace to disk 
 
 
-Essential Missing Features 
---------------------------
+Missing Features 
+----------------
 
 - App settings 
-
+Setup root locations
+CullingBatchSize = 48;
 
 Minor Issues (Low priority)
 ---------------------------
 
-- Make this an application setting :     private const int CullingBatchSize = 48;
 
 - Switching language while processing cancels the current process
 
@@ -47,8 +47,6 @@ Code Quality Issues
 - Move message definitions in new folders depending on area and workflow 
 
 - Cleanup public vs internal about everywhere in UI ( mostly done for Model classes )
-
-- Setup logging for trace to disk 
 
 - Launch the logging window minimized in both release and debug mode
 

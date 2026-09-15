@@ -11,6 +11,7 @@
   </Folder>
   <Folder Name="/Framework/">
     <Project Path="../Lyt.Framework/Lyt.Collections/Lyt.Collections.csproj" />
+    <Project Path="../Lyt.Framework/Lyt.FileLogger/Lyt.FileLogger.csproj" />
     <Project Path="../Lyt.Framework/Lyt.FileSystem/Lyt.FileSystem.csproj" />
     <Project Path="../Lyt.Framework/Lyt.Framework.Interfaces/Lyt.Framework.Interfaces.csproj" />
     <Project Path="../Lyt.Framework/Lyt.Model/Lyt.Model.csproj" />
