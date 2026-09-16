@@ -7,7 +7,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-- Edited image not showing up in Edited section, need to restart the app 
 Re occurence of : - After completing an edit, image does not show up in edited 
 
 - Keywords lookup fail (beach / small) 

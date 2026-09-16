@@ -184,6 +184,24 @@ public sealed class FolderTree
             {
                 year.MonthFolders.Remove(month);
             }
+
+            // Remove empty days on all remaining months 
+            foreach (MonthFolder month in year.MonthFolders)
+            {
+                var daysToRemove = new List<DayFolder>();
+                foreach (DayFolder day in month.DayFolders)
+                {
+                    if (day.MetadataFiles.Count == 0)
+                    {
+                        daysToRemove.Add(day);
+                    }
+                }
+
+                foreach (DayFolder day in daysToRemove)
+                {
+                    month.DayFolders.Remove(day);
+                }
+            }
         }
     }
 
@@ -264,6 +282,24 @@ public sealed class FolderTree
                 }
             }
         }
+
+        this.Cleanup(); 
     }
 
+    internal void UpdateForEdits(Metadata metadata)
+    {
+        string filePath = metadata.MetadataFullPath();
+        this.Remove(filePath); 
+
+        var date = DateTime.UtcNow; 
+        int year = date.Year;
+        int month = date.Month;
+        int day = date.Day;
+        int dayOfWeek = (int)date.DayOfWeek;
+
+        YearFolder yearFolder = this.AddYearIfNeeded(year);
+        MonthFolder monthFolder = yearFolder.AddMonthIfNeeded(month);
+        DayFolder dayFolder = monthFolder.AddDayIfNeeded(day, dayOfWeek);
+        dayFolder.MetadataFiles.Add(filePath);
+    }
 }

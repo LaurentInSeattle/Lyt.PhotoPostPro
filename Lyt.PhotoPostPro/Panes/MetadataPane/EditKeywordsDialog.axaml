@@ -132,6 +132,7 @@
 						</ItemsControl.ItemTemplate>
 					</ItemsControl>
 					<TextBox
+						x:Name="KeywordsTextBox"
 						Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
 						Margin="20 0 0 0"
 						VerticalContentAlignment="Center" TextAlignment="Left"

@@ -52,16 +52,20 @@ public sealed partial class PhotoPostProModel : ModelBase
                 return false;
             }
 
-            // ! because fullyLoadedImage is Fully Loaded 
+            // ! for Metadata because fullyLoadedImage is Fully Loaded 
+            var metadata = fullyLoadedImage.Metadata!;
+
+            // ! for Image because fullyLoadedImage is Fully Loaded 
             ProcessWorkflow workflow =
                 new(
                     this,
-                    fullyLoadedImage.Metadata!,
+                    metadata,
                     fullyLoadedImage.Image!,
                     isNew: true,
                     this.FileUidString,
                     new ProcessParameters());
             this.CurrentWorkflow = workflow;
+            this.UpdateEditedFolderTree(metadata);
             return true;
         }
         catch (Exception ex)
@@ -97,6 +101,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             this.CurrentWorkflow = processWorkflow;
+            this.UpdateEditedFolderTree(metadata); 
             return true;
         }
         catch (Exception ex)
@@ -104,6 +109,17 @@ public sealed partial class PhotoPostProModel : ModelBase
             Debug.WriteLine(ex);
             return false;
         }
+    }
+
+    private void UpdateEditedFolderTree (Metadata metadata)
+    {
+        var folderTree = this.LibraryManager.EditedFolderTree; 
+        if ( folderTree is null )
+        {
+            return;
+        }
+
+        folderTree.UpdateForEdits(metadata);  
     }
 
     public void BeginProcessWorkflow()
