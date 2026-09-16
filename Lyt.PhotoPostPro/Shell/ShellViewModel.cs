@@ -13,6 +13,9 @@ public sealed partial class ShellViewModel
     [ObservableProperty]
     public partial bool MainToolbarIsVisible { get; set; }
 
+    [ObservableProperty]
+    public partial string AppName { get; set; } = string.Empty; 
+
     public Mouse MouseMonitor { get; private set;  }
 
     private ViewSelector<ActivatedView>? viewSelector;
@@ -80,6 +83,8 @@ public sealed partial class ShellViewModel
         {
             throw new Exception("Failed to startup...");
         }
+
+        this.AppName = string.Format("{0} - ( {1} )", this.Localize("Shell.AppName"), App.Version);
 
         // Create all statics views and bind them 
         this.SetupWorkflow();

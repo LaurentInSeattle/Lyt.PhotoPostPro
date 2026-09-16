@@ -92,7 +92,7 @@
 				<TextBlock
 					Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
 					Theme="{StaticResource Title}"
-					Text="{DynamicResource Shell.AppName}"
+					Text="{Binding AppName}"
 					HorizontalAlignment="Left" VerticalAlignment="Center"
 					Margin="12 0 0 0"
 					Foreground="{StaticResource PastelOrchid_0_080}"

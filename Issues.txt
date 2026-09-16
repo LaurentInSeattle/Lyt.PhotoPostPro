@@ -7,10 +7,6 @@ Bugs ~ Major Issues
 WIP
 ---
 
-Re occurence of : - After completing an edit, image does not show up in edited 
-
-- Keywords lookup fail (beach / small) 
-
  
 Missing Features 
 ----------------

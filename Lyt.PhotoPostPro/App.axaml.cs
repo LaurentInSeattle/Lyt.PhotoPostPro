@@ -8,6 +8,8 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
+    public const string Version = "Alessandra"; 
+
     public App(
         IMtpService mtpService,
         IWallpaperService wallpaperService) :
@@ -181,6 +183,8 @@ public partial class App : ApplicationBase
         ViewModel.TypeInitialize(ApplicationBase.AppHost);
 
         var logger = App.GetRequiredService<ILogger>();
+        logger.Info("***  " + Application + "  ***");
+        logger.Info("***  " + Version + "  ***"); 
         logger.Debug("OnStartupBegin begins");
 
         // This needs to complete before all models are initialized.
