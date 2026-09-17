@@ -13,12 +13,31 @@ public static partial class ImageLoader
 
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
-    public static List<string> ExcludedExtensions = [".aae", ".docx", ".xlsx", ".pdf"];
+    // Dont touch these files 
+    public static List<string> ExcludedExtensions = 
+        [
+            // Binaries 
+            ".aae", ".app", ".exe" , ".dll", ".iso", ".ipa", ".dmg", 
+            // MSFT Office docs,
+            ".docx", ".xlsx", ".pptx", ".vsdx", ".doc", ".xls", ".ppt",  ".vsd", ".pst",  
+            // Apple Office docs,
+            ".pages", ".numbers", ".key", 
+            // music 
+            ".mp3", ".ogg", ".wav", ".aif", ".aiff", ".pcm", ".flac", ".aac",    
+            // common misc 
+            ".pdf", ".txt", ".zip", ".html", ".css", ".js", ".json", ".svg",
+        ];
 
     public static bool HasExcludedExtension(string path)
         => ExcludedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
 
-    public static List<string> MovieExtensions = [".mp4", ".mov", ".mkv", ".avi", ".webm"];
+    public static List<string> MovieExtensions = 
+        [
+            ".mp4", ".mov", ".mkv", ".avi", ".webm",
+            ".m4v", ".mts", ".m2ts", ".mxf", ".mpg", ".mpeg", 
+            ".mod", ".tod", ".3gp", ".3g2", ".vob"
+        ];
+
 
     public static bool HasMovieExtension(string path)
         => MovieExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
@@ -79,7 +98,7 @@ public static partial class ImageLoader
 
     public static List<string> ImageSharpExtensions =
         [
-            ".tiff", ".cur", ".png", ".pbm", ".ppm", ".qoi", ".tga",
+            ".tiff", ".tif", ".cur", ".png", ".pbm", ".ppm", ".qoi", ".tga",
             ".webp", ".ico", ".gif", ".jpg", ".jpeg", ".jfif" , ".bmp", ".exr",
         ];
 
