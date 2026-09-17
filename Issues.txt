@@ -1,9 +1,3 @@
-Bugs ~ Major Issues 
--------------------
-
-- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
-
-
 WIP
 ---
 
@@ -19,8 +13,6 @@ Minor Issues (Low priority)
 ---------------------------
 
 - Switching language while processing cancels the current process
-
-- Date / Time not localized for Japanese : Metadata and thumb panels (other languages OK) 
 
 - Thumbnail is not updated after edit without export --- By Design ? 
 
@@ -45,7 +37,6 @@ Code Quality Issues
 - Launch the logging window minimized in both release and debug mode
 
 
-
 Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 -----------------------------------------------------------------------------
 
@@ -53,35 +44,13 @@ Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 
 - Fails to load monochrome DNG. Sample: Winter.DNG Not fully supported by LibRaw
 
-- Recent Sony A7V image fails to load correctly with LibRaw 
-Check with:
-https://github.com/laheller/SharpLibraw  
-https://github.com/hurlbertvisionlab/LibRawWrapper/tree/main/LibRawWrapper
-
 - No support (yet) for HEIC images in ImageSharp 
 
 - No support for AVIF images in ImageSharp 
 
 - No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
-
-Bugs - No Recent Repro 
-----------------------
-
-- Library sometimes shows up empty at startup - Maybe when there is very few images in the library.  
-
-
-Bugs - No Repro for quite a While 
----------------------------------
-
-- CRITICAL : Import Single Image ( Randomly ? ) Not updating path -  Same cause: Image not found 
-
-- Add new Images messed up thumb files ? 
-
-- Crop lines gone in Composition step, back after starting a new image.  (no repro yet)
-
-- UI Framework : Final fix for Re-init of Compose is failing at second image 
-
+- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 V.Next 
@@ -113,6 +82,8 @@ V.Next.Next
 
 Cool Stuff to Consider 
 ----------------------
+
+- Selective desaturation 
 
 - Combo-Borders: Black with thin white line, White with thin black line, etc...
 

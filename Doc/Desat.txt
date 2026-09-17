@@ -1,0 +1,171 @@
+To desaturate all colors in an image except for one target color, use the HSL (Hue, Saturation, Lightness) color space algorithm, which isolates a specific hue range and reduces the saturation of everything outside that range to zero.The Algorithm StepsConvert RGB to HSL: For each pixel with RGB values \([0, 1]\), calculate the Hue (\(H \in [0, 360^\circ]\)), Saturation (\(S \in [0, 1]\)), and Lightness (\(L \in [0, 1]\)).Define the Target Hue: Choose the target color's hue (\(H_{\text{target}}\)) and set an allowable tolerance range (Δ H), such as ± 15° to 30°.Calculate Distance or Mask: Determine if the pixel's hue falls within the target range:If \(\vert{}H - H_{\text{target}}\vert{} \le \Delta H\) (accounting for hue wrap-around at 0° / 360°), keep the original saturation S.Otherwise, set the new saturation \(S_{\text{new}} = 0\) (or scale it down smoothly using a falloff/feather function to avoid harsh edges).Convert Back to RGB: Recompute the RGB values using the modified HSL values and the original Lightness (L).
+
+csharpusing SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using System;
+
+class ColorIsolator
+{
+    public static void IsolateColor(string inputPath, string outputPath, float targetHue, float tolerance)
+    {
+        // Load the image with 32-bit RGBA pixel format
+        using (Image<Rgba32> image = Image.Load<Rgba32>(inputPath))
+        {
+            // Process pixels row by row
+            image.ProcessPixelRows(accessor =>
+            {
+                for (int y = 0; y < accessor.Height; y++)
+                {
+                    Span<Rgba32> pixelRow = accessor.GetRowSpan(y);
+                    for (int x = 0; x < accessor.Width; x++)
+                    {
+                        ref Rgba32 pixel = ref pixelRow[x];
+
+                        // 1. Convert RGB to HSV
+                        ColorToHsv(pixel.R, pixel.G, pixel.B, out float h, out float s, out float v);
+
+                        // 2. Calculate the shortest angular distance on a 360-degree wheel
+                        float diff = Math.Abs(h - targetHue);
+                        if (diff > 180) diff = 360 - diff;
+
+                        // 3. If outside tolerance, desaturate completely (set Saturation to 0)
+                        if (diff > tolerance)
+                        {
+                            s = 0;
+                        }
+
+                        // 4. Convert back to RGB and update the pixel
+                        HsvToRgb(h, s, v, out byte r, out byte g, out byte b);
+                        pixel.R = r;
+                        pixel.G = g;
+                        pixel.B = b;
+                    }
+                }
+            });
+
+            // Save the modified image
+            image.Save(outputPath);
+        }
+    }
+
+    // Helper: RGB [0-255] to HSV [H: 0-360, S: 0-1, V: 0-1]
+    private static void ColorToHsv(byte r, byte g, byte b, out float h, out float s, out float v)
+    {
+        float rf = r / 255f;
+        float gf = g / 255f;
+        float bf = b / 255f;
+
+        float max = Math.Max(rf, Math.Max(gf, bf));
+        float min = Math.Min(rf, Math.Min(gf, bf));
+        float delta = max - min;
+
+        v = max;
+        s = max == 0 ? 0 : delta / max;
+
+        if (delta == 0)
+        {
+            h = 0;
+        }
+        else
+        {
+            if (max == rf) h = (gf - bf) / delta + (gf < bf ? 6 : 0);
+            else if (max == gf) h = (bf - rf) / delta + 2;
+            else h = (rf - gf) / delta + 4;
+            h *= 60;
+        }
+    }
+
+    // Helper: HSV to RGB
+    private static void HsvToRgb(float h, float s, float v, out byte r, out byte g, out byte b)
+    {
+        if (s == 0)
+        {
+            byte val = (byte)(v * 255);
+            r = g = b = val;
+            return;
+        }
+
+        float sector = h / 60f;
+        int i = (int)Math.Floor(sector);
+        float f = sector - i;
+
+        float p = v * (1 - s);
+        float q = v * (1 - s * f);
+        float t = v * (1 - s * (1 - f));
+
+        float rf = 0, gf = 0, bf = 0;
+        switch (i % 6)
+        {
+            case 0: rf = v; gf = t; bf = p; break;
+            case 1: rf = q; gf = v; bf = p; break;
+            case 2: rf = p; gf = v; bf = t; break;
+            case 3: rf = p; gf = q; bf = v; break;
+            case 4: rf = t; gf = p; bf = v; break;
+            case 5: rf = v; gf = p; bf = q; break;
+        }
+
+        r = (byte)(rf * 255);
+        g = (byte)(gf * 255);
+        b = (byte)(bf * 255);
+    }
+}
+Use code with caution.How to use itcsharp// Example: Keep only Red (Hue around 0 or 360) with a 20-degree window
+ColorIsolator.IsolateColor("input.jpg", "output.jpg", targetHue: 0f, tolerance: 20f);
+
+// Example: Keep only Green (Hue around 120)
+ColorIsolator.IsolateColor("input.jpg", "output.jpg", targetHue: 120f, tolerance: 25f);
+
+
+If you are using ImageSharp, you don't actually need to write manual conversion math or loop through individual pixels pixel-by-pixel. ImageSharp has built-in Hsl32 types and structural pixel manipulators that make this significantly faster and cleaner.Here is the native ImageSharp way to do it, including a smooth feathering edge so the transition between color and grayscale isn't jagged.
+
+public class ImageSharpColorIsolator
+{
+    public static void IsolateColor(string inputPath, string outputPath, float targetHue, float tolerance, float feather = 10f)
+    {
+        // Load the image
+        using (Image<Rgba32> image = Image.Load<Rgba32>(inputPath))
+        {
+            // Process the image using ImageSharp's built-in pixel structures
+            image.ProcessPixelRows(accessor =>
+            {
+                for (int y = 0; y < accessor.Height; y++)
+                {
+                    Span<Rgba32> pixelRow = accessor.GetRowSpan(y);
+                    
+                    for (int x = 0; x < accessor.Width; x++)
+                    {
+                        // 1. Convert Rgba32 directly to ImageSharp's native Hsl32
+                        Hsl32 hslPixel = pixelRow[x]; 
+
+                        // 2. Calculate the shortest distance on a 360-degree color wheel
+                        float diff = Math.Abs(hslPixel.H - targetHue);
+                        if (diff > 180f) diff = 360f - diff;
+
+                        // 3. Determine desaturation amount
+                        if (diff > tolerance + feather)
+                        {
+                            // Completely outside target and feather zone -> Grayscale
+                            hslPixel.S = 0;
+                        }
+                        else if (diff > tolerance)
+                        {
+                            // Smoothly fade out saturation in the feather zone
+                            float ratio = 1f - ((diff - tolerance) / feather);
+                            hslPixel.S *= ratio;
+                        }
+                        // If diff <= tolerance, we leave the original Saturation (hslPixel.S) untouched
+
+                        // 4. Convert back implicitly and save over the original pixel
+                        pixelRow[x] = hslPixel; 
+                    }
+                }
+            });
+
+            // Save the result
+            image.Save(outputPath);
+        }
+    }
+}
+Use code with caution.Why this is better for ImageSharp:Implicit Conversions: ImageSharp allows you to assign a Rgba32 directly to an Hsl32 struct (Hsl32 hslPixel = pixelRow[x];). It handles the color space conversions internally using highly optimized code.Feather Parameter: The feather argument handles colors that sit right on the edge of your tolerance. Instead of a harsh cut-off (which creates noisy, pixelated borders), it smoothly scales down the saturation.Usage Example:csharp// Keep pure blues (Hue ~240) with a 20-degree window and a 10-degree smooth falloff
+ImageSharpColorIsolator.IsolateColor("beach.jpg", "isolated_blue.jpg", targetHue: 240f, tolerance: 20f, feather: 10f);
+Use code with caution.If you want to take this further, let me know:Do you also need to isolate multiple hue ranges at the exact same time (like keeping reds and blues)?Do you need to restrict the mask based on brightness (e.g., ignoring very dark shadows or bright white highlights)?
