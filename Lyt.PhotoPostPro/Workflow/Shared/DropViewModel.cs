@@ -14,6 +14,12 @@ public sealed partial class DropViewModel : ViewModel<DropView>, IRecipient<Lang
     }
 
     [ObservableProperty]
+    public partial double Width { get; set; } = 380.0;
+
+    [ObservableProperty]
+    public partial double Height { get; set; } = 240.0; 
+
+    [ObservableProperty]
     public partial bool IsVisible { get; set; }
 
     [ObservableProperty]

@@ -31,7 +31,6 @@
 		<shared:DropView
 			Grid.Row="1" Grid.Column="1"
 			DataContext="{Binding DropViewModel}"
-			Width="472" 
 			HorizontalAlignment="Center" VerticalAlignment="Center"
 			/>
 		<file:FileImportView
