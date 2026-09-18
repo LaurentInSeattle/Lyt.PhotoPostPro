@@ -3,6 +3,8 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
+using System.Reflection.Metadata;
+
 public static partial class ImageLoader
 {
     public const int ThumbnailQuality = 80;
@@ -222,11 +224,18 @@ public static partial class ImageLoader
     {
         try
         {
-            using var r = RawContext.OpenFile(imagePath);
-            r.OutputBitsPerSample = 16;
-            r.Unpack();
-            r.DcrawProcess();
-            using ProcessedImage rawImage = r.MakeDcrawMemoryImage();
+            using var libRaw = RawContext.OpenFile(imagePath);
+            libRaw.OutputBitsPerSample = 16;
+            libRaw.AutoBright = false;
+            libRaw.OutputColorSpace = LibRawColorSpace.SRGB;
+            libRaw.AdjustMaximumThreshold = 0.00005f;
+            libRaw.DemosaicAlgorithm = DemosaicAlgorithm.DirectHomogeneousTransformation; 
+
+            //libraw_set_fbdd_noiserd(handler, LibRaw_FBDD_noise_reduction.FULL_FBDD);
+
+            libRaw.Unpack();
+            libRaw.DcrawProcess();
+            using ProcessedImage rawImage = libRaw.MakeDcrawMemoryImage();
             int width = rawImage.Width;
             int height = rawImage.Height;
 
