@@ -9,15 +9,6 @@ Missing Features
 Setup library root location : Danger ? 
 CullingBatchSize = 48;
 
-Minor Issues (Low priority)
----------------------------
-
-- Switching language while processing cancels the current process
-
-- Thumbnail is not updated after edit without export --- By Design ? 
-
-- Virtualizing Wrap Panel weird layouts at times (See 2017 pictures) Does not repro easily.
-
 
 Code Quality Issues 
 -------------------

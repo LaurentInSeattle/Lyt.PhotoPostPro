@@ -194,12 +194,12 @@ public sealed partial class LibraryViewModel :
 
     public void ReceiveOnUiThread(LibraryLoadingMessage message)
     {
-        // Launch dialog 
-        if (this.dialogService is DialogService modalService)
-        {
-            // Do nothing on close or dismiss
-            modalService.RunViewModelModal(this.shellViewModel.ModalHost, new LoadingDialogModel());
-        }
+        //// Launch dialog 
+        //if (this.dialogService is DialogService modalService)
+        //{
+        //    // Do nothing on close or dismiss
+        //    modalService.RunViewModelModal(this.shellViewModel.ModalHost, new LoadingDialogModel());
+        //}
     }
 
     public void Receive(FolderTreeUpdatedMessage message)
