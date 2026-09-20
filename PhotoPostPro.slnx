@@ -18,6 +18,8 @@
   </Folder>
   <Folder Name="/Doc/">
     <File Path="Doc/BetaTest.md" />
+    <File Path="Doc/PhotoRebelGuide.txt" />
+    <File Path="Doc/privacy.txt" />
     <File Path="Doc/versions.txt" />
   </Folder>
   <Folder Name="/Framework/">
@@ -56,8 +58,8 @@
   </Folder>
   <Folder Name="/Solution Folder/">
     <File Path=".editorconfig" />
+    <File Path="Code.txt" />
     <File Path="Editing.txt" />
-    <File Path="Issues.txt" />
     <File Path="LICENSE" />
     <File Path="Notes.txt" />
     <File Path="README.md" />

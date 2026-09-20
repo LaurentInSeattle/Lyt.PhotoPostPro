@@ -1,7 +1,9 @@
 WIP
 ---
 
- 
+Doc 
+
+
 Missing Features 
 ----------------
 
@@ -33,15 +35,10 @@ Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 
 - App freeze when using combo box ??? Avalonia issue
 
-- Fails to load monochrome DNG. Sample: Winter.DNG Not fully supported by LibRaw
-
 - No support (yet) for HEIC images in ImageSharp 
-
-- No support for AVIF images in ImageSharp 
 
 - No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
-- UI Framework : Visual issues (and spurious commands) when hovering quickly above 'Continuous' glyph buttons (Compose view) 
 
 
 V.Next 
