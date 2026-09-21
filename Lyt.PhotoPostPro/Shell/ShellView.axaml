@@ -161,6 +161,15 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton
+						x:Name="DocumentationButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="book"
+						GlyphStrokeThickness="0"
+						Text="Documentation"
+						Command="{Binding OnDocumentation}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="FlagButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="flag"

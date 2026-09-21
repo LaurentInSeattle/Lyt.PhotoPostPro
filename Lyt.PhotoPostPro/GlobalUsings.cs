@@ -16,6 +16,7 @@ global using System.Linq;
 global using System.Reflection;
 global using System.Runtime.CompilerServices;
 global using System.Runtime.InteropServices;
+global using System.Runtime.Versioning;
 global using System.Threading;
 global using System.Threading.Tasks;
 global using System.Windows.Input;
@@ -95,11 +96,14 @@ global using Lyt.Utilities.Randomizing;
 
 #endregion Framework 
 
+global using PDFtoImage;
+
+global using SkiaSharp;
+
 // Multiplatform dependencies 
 //
 global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Mtp;
 global using Lyt.PhotoPostPro.MultiPlatformAbstractions.Wallpaper;
-
 
 // Main App assembly namespaces (Avalonia dependent)
 //
@@ -114,6 +118,7 @@ global using Lyt.PhotoPostPro.Shell;
 global using Lyt.PhotoPostPro.Utilities;
 global using Lyt.PhotoPostPro.Workflow.Camera;
 global using Lyt.PhotoPostPro.Workflow.Culling;
+global using Lyt.PhotoPostPro.Workflow.Documentation;
 global using Lyt.PhotoPostPro.Workflow.Library;
 global using Lyt.PhotoPostPro.Workflow.Library.Dialogs;
 global using Lyt.PhotoPostPro.Workflow.Gallery;

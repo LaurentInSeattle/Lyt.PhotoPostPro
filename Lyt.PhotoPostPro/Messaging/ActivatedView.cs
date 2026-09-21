@@ -41,4 +41,5 @@ public enum ActivatedView : int
     Signatures,
     Watermarks,
     Statistics,
+    Documentation,
 }

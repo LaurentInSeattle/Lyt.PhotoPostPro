@@ -167,6 +167,7 @@ public sealed partial class ShellViewModel
         //}
         #endregion  Unused for now 
 
+        
         // Views present in the main selector on the left  
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
@@ -175,6 +176,8 @@ public sealed partial class ShellViewModel
         SetupNoToolbar<ImportViewModel, ImportView>(ActivatedView.Import, view.ImportButton);
         SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
         SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
+
+        SetupNoToolbar<DocumentationViewModel, DocumentationView>(ActivatedView.Documentation, view.DocumentationButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
 
@@ -236,6 +239,9 @@ public sealed partial class ShellViewModel
 
     [RelayCommand]
     public void OnSettings() => this.viewSelector?.SelectView(ActivatedView.Settings);
+
+    [RelayCommand]
+    public void OnDocumentation() => this.viewSelector?.SelectView(ActivatedView.Documentation);
 
     [RelayCommand]
     public void OnLanguage() => this.viewSelector?.SelectView(ActivatedView.Language);

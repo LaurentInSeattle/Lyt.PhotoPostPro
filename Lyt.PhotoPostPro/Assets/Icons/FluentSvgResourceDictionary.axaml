@@ -1,5 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  book  -->
+<DrawingGroup x:Key = "bookDrawingGroup">
+<DrawingGroup>
+	<DrawingGroup.ClipGeometry>
+	  <RectangleGeometry Rect="0,0,24,24" />
+	</DrawingGroup.ClipGeometry>
+	<GeometryDrawing Brush="#FF212121" >
+	  <GeometryDrawing.Geometry>
+		<PathGeometry FillRule="NonZero" Figures="M7,6C7,5.4477,7.4477,5,8,5L16,5C16.5523,5,17,5.4477,17,6L17,8C17,8.5523,16.5523,9,16,9L8,9C7.4477,9,7,8.5523,7,8L7,6z M8.5,7.5L15.5,7.5 15.5,6.5 8.5,6.5 8.5,7.5z M4,4.5C4,3.1193,5.1193,2,6.5,2L18,2C19.3807,2,20.5,3.1193,20.5,4.5L20.5,18.75C20.5,19.1642,20.1642,19.5,19.75,19.5L5.5,19.5C5.5,20.0523,5.9477,20.5,6.5,20.5L19.75,20.5C20.1642,20.5 20.5,20.8358 20.5,21.25 20.5,21.6642 20.1642,22 19.75,22L6.5,22C5.1193,22,4,20.8807,4,19.5L4,4.5z M5.5,18L19,18 19,4.5C19,3.9477,18.5523,3.5,18,3.5L6.5,3.5C5.9477,3.5,5.5,3.9477,5.5,4.5L5.5,18z" />
+	  </GeometryDrawing.Geometry>
+	</GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="book" Drawing="{StaticResource bookDrawingGroup}" />
+
 <!--  image_search  -->
 <DrawingGroup x:Key = "image_searchDrawingGroup">
 <DrawingGroup>

@@ -8,7 +8,7 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
-    public const string Version = "Bianca"; 
+    public const string Version = "Chiara"; 
 
     public App(
         IMtpService mtpService,
@@ -86,6 +86,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<SettingsViewModel>();
                 _ = services.AddSingleton<LanguageViewModel>();
                 _ = services.AddSingleton<LanguageToolbarViewModel>();
+
+                _ = services.AddSingleton<DocumentationViewModel>();
 
                 // Culling ViewModel and its Toolbar ViewModel
                 // 

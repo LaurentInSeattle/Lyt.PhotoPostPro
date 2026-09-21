@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -30,6 +30,7 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.2" />
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3" />
     <PackageReference Include="SkiaSharp" Version="4.152.0" />
+    <PackageReference Include="PDFtoImage" Version="5.4.0" />
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.16.6891">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -86,6 +87,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\Panels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Workflow\Documentation\DocumentationView.axaml.cs">
+      <DependentUpon>DocumentationView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

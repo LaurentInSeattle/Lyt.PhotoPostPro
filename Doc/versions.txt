@@ -4,8 +4,8 @@ A: Alessandra - Private Beta - No Setup - No Store - Released: September 16th
 
 B: Bianca - Open Beta - No Setup - No Store - Released: September 21st
 
+C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Planned: Early October 
 
-C: Chiara
 D: Donna
 E: Emilia
 F: Federica 
