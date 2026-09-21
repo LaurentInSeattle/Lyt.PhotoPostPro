@@ -2,7 +2,7 @@ Version Names / Git Tags / Dates
  
 A: Alessandra - Private Beta - No Setup - No Store - Released: September 16th
 
-B: Bianca - - Open Beta - No Setup - No Store - Planned: Late September 
+B: Bianca - Open Beta - No Setup - No Store - Released: September 21st
 
 
 C: Chiara
