@@ -165,7 +165,7 @@
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="book"
 						GlyphStrokeThickness="0"
-						Text="Documentation"
+						Text="{DynamicResource Shell.Documentation}"
 						Command="{Binding OnDocumentation}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>

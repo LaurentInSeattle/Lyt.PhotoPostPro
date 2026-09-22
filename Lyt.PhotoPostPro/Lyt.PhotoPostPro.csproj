@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -69,6 +69,8 @@
     <EmbeddedResource Include="Languages\Lang_pt-PT.lang" />
     <EmbeddedResource Include="Languages\Lang_th-TH.lang" />
     <EmbeddedResource Include="Languages\Lang_zh-TW.lang" />
+    <EmbeddedResource Include="Resources\Documentation\Doc_en-US_Rotated.pdf" />
+    <EmbeddedResource Include="Resources\Documentation\Doc_en-US.pdf" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,7 @@ global using System.Reflection;
 global using System.Runtime.CompilerServices;
 global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
+global using System.Text;
 global using System.Threading;
 global using System.Threading.Tasks;
 global using System.Windows.Input;

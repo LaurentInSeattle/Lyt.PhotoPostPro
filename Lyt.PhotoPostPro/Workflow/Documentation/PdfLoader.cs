@@ -2,16 +2,51 @@
 
 using global::Avalonia.Media.Imaging;
 
+using Lyt.Resources;
+
+public sealed record class PdfPageLoadedMessage(PdfPage PdfPage);
+
+public sealed record class PdfLoadedStatusMessage(bool Complete, Exception? Exception = null);
+
 public sealed record class PdfPage(int PageNumber, Bitmap Page, Bitmap Thumbnail);
 
-public sealed record class PdfPages(List<PdfPage> Pages, Exception? Exception = null); 
-
-[SupportedOSPlatform("Windows")]
+//[SupportedOSPlatform("Windows")]
 public static class PdfLoader
 {
-    public static async Task<PdfPages> Load(Stream pdfStream, string? pdfPassword = null)
+    public static void Unload()
+    {
+
+    }
+
+    public static void BeginLoadDocumentation(string language = "", string? pdfPassword = null)
+    {
+        if (string.IsNullOrWhiteSpace(language))
+        {
+            language = "en-US";
+        }
+
+        Task.Run(() => 
+        {
+            MemoryStream memoryStream = LoadDocumentationFile(language);
+            LoadPages(memoryStream, pdfPassword); 
+        }); 
+    }
+
+    private static MemoryStream LoadDocumentationFile (string language)
+    {
+        ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
+        ResourcesUtilities.SetResourcesPath("Lyt.PhotoPostPro");
+        string docPath = string.Format("Doc_{0}.pdf", language); 
+        byte[] pdfBytes = ResourcesUtilities.LoadEmbeddedBinaryResource(docPath, out string? resourceName);
+        return new MemoryStream(pdfBytes); 
+    }
+
+#pragma warning disable CA1416 
+    // Validate platform compatibility
+    // For : Conversion.ToImagesAsync  
+
+    private static async void LoadPages(Stream pdfStream, string? pdfPassword = null)
     {        
-        List<PdfPage> pages = [];
         try
         {
             PDFtoImage.RenderOptions renderOptions = new();
@@ -30,19 +65,24 @@ public static class PdfLoader
                 var bitmapPage = new Bitmap(memoryStream);
                 var bitmapThumbnail = CreateThumbnail(bitmapPage);
                 ++pageNumber;
-                pages.Add(new PdfPage(pageNumber, bitmapPage, bitmapThumbnail)); 
+                var page = new PdfPage(pageNumber, bitmapPage, bitmapThumbnail);
+
+                Debug.WriteLine(" Loaded documentation page " + pageNumber.ToString());
+                new PdfPageLoadedMessage(page).Publish();  
             }
 
-            return new PdfPages(pages);
+            new PdfLoadedStatusMessage(Complete: true).Publish();
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
-            return new PdfPages(pages, ex);
+            new PdfLoadedStatusMessage(Complete: false, Exception: ex).Publish();
         }
     }
 
-    public static Bitmap CreateThumbnail(Bitmap originalBitmap, int targetWidth = 240, int targetHeight = 360)
+#pragma warning restore CA1416 // Validate platform compatibility
+
+    public static Bitmap CreateThumbnail(Bitmap originalBitmap, int targetWidth = 320, int targetHeight = 360)
     {
         // Calculate scale factor while maintaining the aspect ratio
         double scale = Math.Min(

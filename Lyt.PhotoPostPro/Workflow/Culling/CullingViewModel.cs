@@ -1,11 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Culling;
 
-using System.Text;
-
-using static Lyt.PhotoPostPro.Workflow.Culling.CullingViewModel;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
-using static System.Net.Mime.MediaTypeNames;
-
 // Do not add those ImageSharp namespaces to global using as some class definitions conflict
 // with the ones from Avalonia. (Point, Rectangle, etc.) 
 //using SixLabors.ImageSharp;
