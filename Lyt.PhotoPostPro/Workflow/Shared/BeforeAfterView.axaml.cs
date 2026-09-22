@@ -1,5 +1,35 @@
 namespace Lyt.PhotoPostPro.Workflow.Process.Shared;
+/*
+<Window xmlns="https://github.com"
+        xmlns:x="http://microsoft.com"
+        x:Class="AvaloniaBeforeAfter.MainWindow"
+        Title="Before / After View" Width="800" Height="500">
 
+    <Grid RowDefinitions="*, Auto">
+        <!-- Comparison Area -->
+        <Panel Grid.Row="0" Background="DarkGray">
+            <!-- Before Image (Bottom Layer) -->
+            <Image Source="/Assets/before.jpg" Stretch="UniformToFill" />
+
+            <!-- After Image (Top Layer, clipped by a Border or Grid width) -->
+            <Border HorizontalAlignment="Left" 
+                    Width="{Binding #SplitSlider.Value}" 
+                    ClipToBounds="True">
+                <Image Source="/Assets/after.jpg" 
+                       Stretch="UniformToFill" 
+                       Width="{Binding #ParentPanel.Bounds.Width}"
+                       HorizontalAlignment="Left"/>
+            </Border>
+        </Panel>
+
+        <!-- Slider Control to Adjust the Split -->
+        <Slider x:Name="SplitSlider" Grid.Row="1" 
+                Minimum="0" Maximum="800" Value="400" 
+                Margin="20" />
+    </Grid>
+</Window>
+
+*/
 public partial class BeforeAfterView : UserControl
 {
     public BeforeAfterView()

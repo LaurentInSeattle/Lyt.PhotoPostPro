@@ -177,7 +177,8 @@ public sealed partial class ShellViewModel
         SetupNoToolbar<SettingsViewModel, SettingsView>(ActivatedView.Settings, view.SettingsButton);
         SetupNoToolbar<ToolsViewModel, ToolsView>(ActivatedView.Tools, view.ToolsButton);
 
-        SetupNoToolbar<DocumentationViewModel, DocumentationView>(ActivatedView.Documentation, view.DocumentationButton);
+        Setup<DocumentationViewModel, DocumentationView, DocumentationToolbarViewModel, DocumentationToolbarView>(
+            ActivatedView.Documentation, view.DocumentationButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
 

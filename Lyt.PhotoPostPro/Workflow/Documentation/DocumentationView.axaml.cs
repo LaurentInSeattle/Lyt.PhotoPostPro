@@ -26,12 +26,15 @@ public partial class DocumentationView : View
         var controls = this.PagesItemControl.GetRealizedContainers().ToList();
         if (controls.Count == 0)
         {
+            // Happens when the pages are about to load and user shake the mouse
             return;
         }
 
         if (controls.Count == 1)
         {
-            if ((controls[0] is ContentPresenter presenter && presenter.Content is DocPageViewModel docPageViewModel))
+            // Very common case when the application window is large enough
+            if ((controls[0] is ContentPresenter presenter) && 
+                (presenter.Content is DocPageViewModel docPageViewModel))
             {
                 PublishPageNumberIfChanged(docPageViewModel);
             }
@@ -41,6 +44,7 @@ public partial class DocumentationView : View
 
         double bestVisibleRatio = double.MinValue;
         DocPageViewModel? bestDocPageViewModel = null;
+        var viewport = this.PagesScrollViewer.Viewport;
         foreach (var control in controls)
         {
             if ((control is not ContentPresenter presenter) ||
@@ -56,7 +60,6 @@ public partial class DocumentationView : View
             }
 
             var itemRect = new Rect(control.Bounds.Size).TransformToAABB(transform.Value);
-            var viewport = this.PagesScrollViewer.Viewport;
             var viewportRect = new Rect(0, 0, viewport.Width, viewport.Height);
             Rect intersection = itemRect.Intersect(viewportRect);
             double visibleRatio =

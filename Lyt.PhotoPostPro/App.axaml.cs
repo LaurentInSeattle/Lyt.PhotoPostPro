@@ -75,19 +75,23 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ShellViewModel>();
 
                 // Views and ViewModels from the main view selector            
+                _ = services.AddSingleton<LibraryViewModel>();
+                _ = services.AddSingleton<CameraViewModel>();
+
                 _ = services.AddSingleton<ImportViewModel>();
                 _ = services.AddSingleton<FileImportViewModel>();
                 _ = services.AddSingleton<FolderImportViewModel>();
 
-                _ = services.AddSingleton<CameraViewModel>();
-                _ = services.AddSingleton<LibraryViewModel>();
                 _ = services.AddSingleton<GalleryViewModel>();
                 _ = services.AddSingleton<GalleryToolbarViewModel>();
+
                 _ = services.AddSingleton<SettingsViewModel>();
-                _ = services.AddSingleton<LanguageViewModel>();
-                _ = services.AddSingleton<LanguageToolbarViewModel>();
 
                 _ = services.AddSingleton<DocumentationViewModel>();
+                _ = services.AddSingleton<DocumentationToolbarViewModel>();
+
+                _ = services.AddSingleton<LanguageViewModel>();
+                _ = services.AddSingleton<LanguageToolbarViewModel>();
 
                 // Culling ViewModel and its Toolbar ViewModel
                 // 

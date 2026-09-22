@@ -1,5 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  play  -->
+<DrawingGroup x:Key = "playDrawingGroup">
+<DrawingGroup>
+	<DrawingGroup.ClipGeometry>
+	  <RectangleGeometry Rect="0,0,24,24" />
+	</DrawingGroup.ClipGeometry>
+	<GeometryDrawing Brush="#FF212121" >
+	  <GeometryDrawing.Geometry>
+		<PathGeometry FillRule="NonZero" Figures="M7.6085,4.6149C7.1087,4.343,6.5,4.7047,6.5,5.2737L6.5,18.726C6.5,19.2949,7.1087,19.6567,7.6085,19.3848L19.97,12.6586C20.4921,12.3746,20.4921,11.6251,19.97,11.341L7.6085,4.6149z M5,5.2737C5,3.5668,6.8261,2.4815,8.3254,3.2973L20.687,10.0235C22.2531,10.8756,22.2531,13.124,20.687,13.9762L8.3254,20.7024C6.8261,21.5181,5,20.4328,5,18.726L5,5.2737z" />
+	  </GeometryDrawing.Geometry>
+	</GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="play" Drawing="{StaticResource playDrawingGroup}" />
+
 <!--  book  -->
 <DrawingGroup x:Key = "bookDrawingGroup">
 <DrawingGroup>

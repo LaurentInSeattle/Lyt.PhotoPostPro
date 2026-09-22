@@ -98,6 +98,9 @@
     <Compile Update="Workflow\Documentation\DocPageView.axaml.cs">
       <DependentUpon>DocPageView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Documentation\DocumentationToolbarView.axaml.cs">
+      <DependentUpon>DocumentationToolbarView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

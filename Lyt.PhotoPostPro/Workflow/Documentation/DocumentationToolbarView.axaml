@@ -1,0 +1,95 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Documentation.DocumentationToolbarView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Documentation"
+	x:DataType="vm:DocumentationToolbarViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
+	>	
+	<StackPanel
+		Orientation="Horizontal"
+		Margin="0 0 0 0"
+		HorizontalAlignment="Right"
+		Background="#30000080"
+		>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="next"
+			GlyphStrokeThickness="0.1"
+			GlyphAngle="180"
+			Text="First"  
+			Width="80"
+			BackgroundMargin="8"
+			Command="{Binding OnFirst}"
+			/>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="play"
+			GlyphStrokeThickness="0.1"
+			GlyphAngle="180"
+			Text="Previous"  
+			Width="80"
+			BackgroundMargin="8"
+			Command="{Binding OnPrevious}"
+			/>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="play"
+			GlyphStrokeThickness="0.1"
+			Text="Next"  
+			Width="80"
+			BackgroundMargin="8"
+			Command="{Binding OnNext}"
+			/>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="next"
+			GlyphStrokeThickness="0.1"
+			Text="Last"  
+			Width="80"
+			BackgroundMargin="8"
+			Command="{Binding OnLast}"
+			/>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource AppToolbarIconButton}"
+			GlyphSource="full_screen_maximize"
+			GlyphStrokeThickness="0.1"
+			Text="{DynamicResource Process.Toolbar.FullScreen}"  
+			Command="{Binding OnFullscreen}"
+			/>
+		<!-- TODO 
+		<controls:ExtendedTextBlock
+			Grid.Column="13" Grid.ColumnSpan="2" Grid.Row="1"
+			Text="{DynamicResource Puzzle.Toolbar.EscToReturn}"  
+			Typography="{StaticResource Medium}"
+			Foreground="{StaticResource PastelOrchid_0_080}"
+			/>
+
+		<glyphs:GlyphButton
+			Style="{StaticResource ToolbarIconButton}"
+			Behaviour="Tap"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			Width="220" Height="56"
+			Margin="0 4 0 4"
+			GlyphSource="next"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Text="{DynamicResource Language.Continue}"
+			Command="{Binding OnNext}"
+	    	/>
+		-->
+	</StackPanel>
+
+</UserControl>
