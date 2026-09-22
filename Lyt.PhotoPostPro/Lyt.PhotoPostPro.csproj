@@ -95,6 +95,9 @@
     <Compile Update="Workflow\Documentation\DocumentationView.axaml.cs">
       <DependentUpon>DocumentationView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Documentation\DocPageView.axaml.cs">
+      <DependentUpon>DocPageView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

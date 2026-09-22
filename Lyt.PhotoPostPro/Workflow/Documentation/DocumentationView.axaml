@@ -1,8 +1,8 @@
-<UserControl 
+<UserControl
 	x:Class="Lyt.PhotoPostPro.Workflow.Documentation.DocumentationView"
 	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Documentation"
-	x:DataType="vm:DocumentationViewModel" 
-	
+	x:DataType="vm:DocumentationViewModel"
+
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,8 +17,8 @@
 
 	Background="Transparent"
 	>
-	<Grid	
-		> 
+	<Grid
+		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
 			<RowDefinition Height="*" />
@@ -32,7 +32,7 @@
 			<ColumnDefinition Width="8" />
 		</Grid.ColumnDefinitions>
 
-		<!-- Film strip on the left side --> 
+		<!-- Film strip on the left side -->
 		<Rectangle
 			Grid.Row="1" Grid.Column="1"
 			Fill="#60000020"
@@ -44,20 +44,20 @@
 			SelectedIndex="{Binding SelectedThumbnailIndex}"
 			SelectionMode="Single"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-			> 
+			>
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
-					<VirtualizingStackPanel 
+					<VirtualizingStackPanel
 						Background="Transparent"
-						Orientation="Vertical" 
+						Orientation="Vertical"
 						/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Image 
+					<Image
 						Margin="4 0 24 0"
-						Source="{Binding Bitmap}" 
+						Source="{Binding Bitmap}"
 						Width="280" MaxHeight="250"
 						/>
 				</DataTemplate>
@@ -65,13 +65,14 @@
 		</ListBox>
 
 		<ScrollViewer
+			x:Name="PagesScrollViewer"
 			Grid.Row="1" Grid.Column="3"
 			Background="Transparent"
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			>
-			<ItemsControl 
+			<ItemsControl
 				x:Name="PagesItemControl"
 				ItemsSource="{Binding Pages}"
 				Margin="0 0 24 0"
@@ -83,15 +84,7 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Grid
-							HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-							>
-							<Image
-								Source="{Binding}"
-								Stretch="Uniform"
-								Margin="8 16 8 16" 
-								/>
-						</Grid>
+						<vm:DocPageView Margin="8 16 8 16" />
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>

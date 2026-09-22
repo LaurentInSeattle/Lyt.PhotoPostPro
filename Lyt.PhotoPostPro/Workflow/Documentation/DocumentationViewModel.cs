@@ -3,7 +3,8 @@
 public sealed partial class DocumentationViewModel : 
     ViewModel<DocumentationView>,
     IRecipient<PdfPageLoadedMessage>,
-    IRecipient<PdfLoadedStatusMessage>
+    IRecipient<PdfLoadedStatusMessage>,
+    IRecipient<PdfPageInViewMessage>
 {
     public sealed record class PageThumbnail(int PageNumber,  Bitmap Bitmap);
 
@@ -16,7 +17,7 @@ public sealed partial class DocumentationViewModel :
 
     // The collection of full pages in the main area
     [ObservableProperty]
-    public partial ObservableCollection<Bitmap> Pages { get; set; } = [];
+    public partial ObservableCollection<DocPageViewModel> Pages { get; set; } = [];
 
     [ObservableProperty]
     // SelectedIndex in the film strip 
@@ -34,6 +35,7 @@ public sealed partial class DocumentationViewModel :
 
         this.Subscribe<PdfPageLoadedMessage>();
         this.Subscribe<PdfLoadedStatusMessage>();
+        this.Subscribe<PdfPageInViewMessage>();
 
         PdfLoader.BeginLoadDocumentation();
     }
@@ -47,6 +49,7 @@ public sealed partial class DocumentationViewModel :
 
         this.Unregister<PdfPageLoadedMessage>();
         this.Unregister<PdfLoadedStatusMessage>();
+        this.Unregister<PdfPageInViewMessage>();
 
         base.Deactivate(); 
     }
@@ -62,12 +65,17 @@ public sealed partial class DocumentationViewModel :
         var page = message.PdfPage;
         var pageThumbnail = new PageThumbnail(page.PageNumber, page.Thumbnail);
         this.PageThumbnails.Add(pageThumbnail);
-        this.Pages.Add(page.Page); 
+        this.Pages.Add(new DocPageViewModel(page.PageNumber, page.Page)); 
     }
 
     public void ReceiveOnUiThread(PdfLoadedStatusMessage message)
     {
 
+    }
+
+    public void Receive(PdfPageInViewMessage message)
+    {
+        Debug.WriteLine(" Page in view: " + message.PageNumber.ToString()); 
     }
 
     partial void OnSelectedThumbnailIndexChanged(int value)
