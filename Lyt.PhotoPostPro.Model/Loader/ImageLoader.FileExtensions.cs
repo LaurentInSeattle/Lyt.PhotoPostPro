@@ -16,6 +16,8 @@ public static partial class ImageLoader
     // Dont touch these files 
     public static List<string> ExcludedExtensions = 
         [
+            // Avif - Not supported - Hopefully just for now
+            ".avif", 
             // Binaries 
             ".aae", ".app", ".exe" , ".dll", ".iso", ".ipa", ".dmg", 
             // MSFT Office docs,

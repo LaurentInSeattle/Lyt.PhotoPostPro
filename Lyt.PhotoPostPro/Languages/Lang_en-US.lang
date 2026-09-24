@@ -35,6 +35,7 @@
 
 	<!-- Toast-->
 	<system:String x:Key="Toast.Dismiss">Close</system:String>
+	<system:String x:Key="Toast.Error">Error</system:String>
 
 	<!-- Shell -->
 	<system:String x:Key="Shell.AppName">Photo Rebel - Photo Post Processing</system:String>
@@ -46,6 +47,16 @@
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Rebel !</system:String>
 
+	<!-- File -->
+	<system:String x:Key="File.NotExist">This file does not exist.</system:String>
+	<system:String x:Key="File.TooSmall">This file is too small.</system:String>
+	<system:String x:Key="File.TooBig">This file is too big.</system:String>
+	<system:String x:Key="File.ImageNotSupported">This file is not an image file or the image file format is not supported.</system:String>
+	<system:String x:Key="File.CantRead">This file cannot be read, is maybe locked.</system:String>
+	<system:String x:Key="File.FailRead">Failed to open and read this file.</system:String>
+	<system:String x:Key="File.ImageNotDecoded">This image file is possibly corrupted or the image file format is does not match the file extension.</system:String>
+	<system:String x:Key="File.Exception">An error occurred while processing this image file.</system:String>
+	
 	<!-- Shell - Nav' Bar -->
 	<system:String x:Key="Shell.Folder">Library</system:String>
 	<system:String x:Key="Shell.Camera">Camera</system:String>
@@ -53,8 +64,8 @@
 	<system:String x:Key="Shell.Import">Import</system:String>
 	<system:String x:Key="Shell.Settings">Settings</system:String>
 	<system:String x:Key="Shell.Tools">Tools</system:String>
-  <system:String x:Key="Shell.Documentation">Documentation</system:String>
-  <system:String x:Key="Shell.Language">Language</system:String>
+	<system:String x:Key="Shell.Documentation">Documentation</system:String>
+	<system:String x:Key="Shell.Language">Language</system:String>
 
 	<!-- Spin wait  -->
 	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
@@ -63,7 +74,6 @@
 
 	<!-- Drag and Drop -->
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
-
 
 	<!-- Tools -->
 	<!-- Editor -->

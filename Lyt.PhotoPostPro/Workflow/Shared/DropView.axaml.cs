@@ -24,13 +24,13 @@ public partial class DropView : View
         }
     }
 
-    public DropView() : base ()
+    public DropView() : base()
     {
         if (normalBrush is not null)
         {
             this.DropRectangle.Stroke = normalBrush;
         }
-        
+
         this.normalBrushBackground = this.DropRectangle.Fill;
 
         DragDrop.SetAllowDrop(this.DropBorder, true);
@@ -49,7 +49,7 @@ public partial class DropView : View
 
     // Do nothing:  Because the data context will never ever change once set.
     // => Trying to bind again will create troubles for nested views and vm's  
-    protected override void OnDataContextChanged(object? sender, EventArgs e) {  }
+    protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 
     private void OnDragEnter(object? _, DragEventArgs e)
     {
@@ -78,7 +78,7 @@ public partial class DropView : View
         }
 
         IDataTransfer dataTransfer = dragEventArgs.DataTransfer;
-        var files = dataTransfer.TryGetFiles(); 
+        var files = dataTransfer.TryGetFiles();
         if (files is not null)
         {
             foreach (IStorageItem file in files)
@@ -92,7 +92,9 @@ public partial class DropView : View
                     if (this.DataContext is DropViewModel dropViewModel)
                     {
                         // We process only the first file or the first directory 
-                        dropViewModel.OnDrop(path, isDirectory); 
+                        // This is most likely not running on the UI thread, so we need to  dispatch 
+                        // This is done in the ViewModel 
+                        dropViewModel.OnDrop(path, isDirectory);
                         break;
                     }
                 }
