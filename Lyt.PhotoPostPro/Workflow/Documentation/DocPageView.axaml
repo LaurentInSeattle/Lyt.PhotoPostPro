@@ -11,6 +11,7 @@
 	>
 	<Grid
 		HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+		MinHeight="2"
 		>
 		<Image
 			Source="{Binding PageBitmap}"
