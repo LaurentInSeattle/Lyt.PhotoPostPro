@@ -40,6 +40,14 @@
 			Command="{Binding OnPrevious}"
 			/>
 
+		<TextBlock
+			Theme="{StaticResource Title}"
+			Text="{Binding CurrentPage}"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="12 0 12 0"
+			Foreground="{StaticResource PastelOrchid_0_080}"
+			/>
+
 		<glyphs:GlyphButton
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="play"

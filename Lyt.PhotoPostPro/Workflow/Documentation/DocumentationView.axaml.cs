@@ -18,7 +18,8 @@ public partial class DocumentationView : View
             int page = docPageViewModel.PageNumber;
             if (page != this.pdfPageInView)
             {
-                new PdfPageInViewMessage(page).Publish();
+                int pageCount = this.PagesItemControl.ItemCount;
+                new PdfPageInViewMessage(page, pageCount).Publish();
                 this.pdfPageInView = page;
             }
         }

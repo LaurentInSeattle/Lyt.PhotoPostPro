@@ -75,10 +75,15 @@ public sealed partial class DocumentationViewModel :
         var pageThumbnail = new PageThumbnail(page.PageNumber, page.Thumbnail);
         this.PageThumbnails.Add(pageThumbnail);
         this.Pages.Add(new DocPageViewModel(page.PageNumber, page.Page));
+        new PdfPageInViewMessage(1 + this.currentPageIndex, this.Pages.Count).Publish();
     }
 
     public void ReceiveOnUiThread(PdfLoadedStatusMessage message)
     {
+        if ( message.Complete)
+        {
+            new PdfPageInViewMessage(1 + this.currentPageIndex, this.Pages.Count).Publish(); 
+        }
 
     }
 

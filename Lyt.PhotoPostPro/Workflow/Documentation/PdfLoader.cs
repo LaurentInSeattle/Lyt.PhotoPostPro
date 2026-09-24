@@ -4,7 +4,7 @@ using global::Avalonia.Media.Imaging;
 
 using Lyt.Resources;
 
-public sealed record class PdfPageInViewMessage(int PageNumber);
+public sealed record class PdfPageInViewMessage(int PageNumber, int PageCount);
 
 public sealed record class PdfPageLoadedMessage(PdfPage PdfPage);
 
