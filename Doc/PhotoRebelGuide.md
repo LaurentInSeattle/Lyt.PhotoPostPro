@@ -144,6 +144,9 @@ your top-tier images for sharing, printing, or publishing.
 
 Ideally, all images in your library should be at least 'Two Stars'.
 
+Each time an image is selected in the library, a larger thumbnail and its metadata is shown in the right panel, 
+along with the 'Tags' section. Clicking the stars will let you change the rating given to that particular picture.
+
 # Culling 
 
 Culling is the very important process of reviewing a large batch of raw photos and selecting only the strongest 
@@ -166,6 +169,13 @@ now I do so and maybe you do so as well.
 
 Culling with Photo Rebel 
 
+Click the 'stack of photos' icon on the navigation bar on the left side to enter 'Library' mode.
+Choose the 'Added' filter at the top left, navigate the date buttons to find the photos you want to rate and cull.
+Photos added on that day will show up as thumbnails. All photos there are unrated, all with zero stars. 
+
+Clicking "Rate and Cull" will launch the culling workflow.
+
+# The Culling Workflow 
 
 # The Editing Workflow 
 
