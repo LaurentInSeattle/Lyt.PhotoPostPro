@@ -151,18 +151,29 @@ images while discarding duplicates, blurry shots, and technical mistakes before 
 
 Why Culling is Important? 
 
-It saves time: Editing every single photo from a shoot wastes hours. 
+It saves time: Editing and tagging every single photo from a photoshoot wastes hours. 
 Culling cuts down the number of files so you only spend time on the best shots.
 It improves quality: Removing duplicate angles and minor blunders ensures that every image you present 
-meets a high standard.
+meets a high quality standard.
 It prevents fatigue: Looking at hundreds of near-identical pictures might wears out your creative energy. 
 Culling early keeps your mind fresh for actual editing choices.
 It saves storage space: High-resolution digital files take up massive amounts of hard drive and cloud capacity. Deleting unused raw files frees up valuable storage.
 It is often more satisfying: We often prefer a tight, curated gallery of amazing moments over a bloated collection filled 
 with repetitive frames.
 
+All professional photographers have told me many times that I should cull more aggressively, 
+now I do so and maybe you do so as well.
 
-# The Gallery
+Culling with Photo Rebel 
+
+
+# The Editing Workflow 
+
+## Orientation 
+
+## Straightening 
+
+# Your Gallery
 
 
 
