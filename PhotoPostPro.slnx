@@ -18,7 +18,9 @@
   </Folder>
   <Folder Name="/Doc/">
     <File Path="Doc/BetaTest.md" />
-    <File Path="Doc/PhotoRebelGuide.txt" />
+    <File Path="Doc/Editing.txt" />
+    <File Path="Doc/PhotoRebelGuide.md" />
+    <File Path="Doc/PhotoSizesAndRatios.txt" />
     <File Path="Doc/privacy.txt" />
     <File Path="Doc/versions.txt" />
   </Folder>
@@ -65,6 +67,11 @@
     <File Path="README.md" />
     <File Path="Sizes.txt" />
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
+  </Folder>
+  <Folder Name="/TechNotes/">
+    <File Path="TechNotes/Code.txt" />
+    <File Path="TechNotes/Desat.txt" />
+    <File Path="TechNotes/TechnicalNotes.txt" />
   </Folder>
   <Folder Name="/Tools/">
     <File Path="Tools/Lyt.Translator.Cli.exe" />
