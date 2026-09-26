@@ -3,6 +3,7 @@
 public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportToolboxView, ExportStep>
 {
     private bool isInitializing;
+    private bool hasExported;
 
     public ExportToolboxViewModel()
     {
@@ -22,11 +23,17 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public partial bool IsExporting { get; set; }
 
     [ObservableProperty]
+    public partial bool IsNavigateButtonDisabled { get; set; }
+
+    [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
 
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
+
+        this.hasExported = false;
+        this.IsNavigateButtonDisabled = true;
         With.Flag(ref this.isInitializing, () =>
         {
             var postProcess = this.model.Workflow;
@@ -47,9 +54,9 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         // Collect parameters and filter exports to be done, then pass them to model.Export()
         var exportViewModel = App.GetRequiredService<ExportViewModel>();
         List<ImageExport> imageExports = [];
-        foreach(var imageExportViewModel in exportViewModel.SelectedImageExports)
+        foreach (var imageExportViewModel in exportViewModel.SelectedImageExports)
         {
-            imageExports.Add(imageExportViewModel.ImageExport); 
+            imageExports.Add(imageExportViewModel.ImageExport);
         }
 
         // Always launch a spinner for big or small files 
@@ -73,6 +80,8 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
                 {
                     this.SpinWait(start: false);
                     this.IsExporting = false;
+                    this.hasExported = true;
+                    this.IsNavigateButtonDisabled = false;
                 });
             }
         });
@@ -84,7 +93,12 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     [RelayCommand]
     public void OnFinish()
     {
-        // TODO: Warn if nothing exported 
+        // Warn if nothing exported 
+        if (!this.hasExported)
+        {
+            // TODO 
+        }
+
         new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.BackToWindowed).Publish();
         this.model.Finish();
     }

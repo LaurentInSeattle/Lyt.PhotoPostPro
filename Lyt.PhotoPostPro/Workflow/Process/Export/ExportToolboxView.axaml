@@ -72,7 +72,7 @@
 			GlyphSource="folder_open"
 			Text="{DynamicResource Workflow.Export.Navigate}"
 			Command="{Binding OnNavigate}"
-			IsDisabled="{Binding IsExporting}"
+			IsDisabled="{Binding IsNavigateButtonDisabled}"
 			Width="380" Height="44"
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
