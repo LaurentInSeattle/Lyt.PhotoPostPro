@@ -61,6 +61,7 @@ public sealed partial class LibraryViewModel :
     private readonly ShellViewModel shellViewModel;
     private readonly LibraryManager libraryMgr;
 
+    private bool isFirstActivate; 
     private Viewing selectedViewing;
     private YearFolder? selectedYear;
     private MonthFolder? selectedMonth;
@@ -125,6 +126,7 @@ public sealed partial class LibraryViewModel :
             IsActive = false,
         };
 
+        this.isFirstActivate= true;
         this.HasSelection = false;
         this.selectedViewing = Viewing.Captured;
 
@@ -141,22 +143,27 @@ public sealed partial class LibraryViewModel :
     {
         base.Activate(activationParameters);
 
-        // If equal to 3 we may have had a language change, so we need to select it again 
-        if (this.Options.Count == 3)
+        if (this.isFirstActivate)
         {
+            this.isFirstActivate = false; 
+
             // Need to schedule so that the newly created control is bound to its view model 
             Schedule.OnUiThread(80, () =>
             {
                 int index = (int)this.selectedViewing;
-                if (this.Options[index].IsBound)
+                if (index.IsInBounds(this.Options))
                 {
-                    this.Options[index].Select();
-                }
+                    var option = this.Options[index]; 
+                    if (option.IsBound)
+                    {
+                        option.Select();
+                    }
+                } 
             }, DispatcherPriority.Background);
         }
 
         // We are potentially about to launch heavy stuff, so clean up while we still can
-        // We have about at least one second for Drag and drop to happen 
+        // We have about at least one second for something to happen 
         this.Dispatcher.OnIdle(() => GC.Collect());
     }
 
