@@ -107,7 +107,7 @@ public static class PdfLoader
             pixelSize, dpi, stride: skBitmap.RowBytes);
     }
 
-    public static Bitmap CreateThumbnail(Bitmap originalBitmap, int targetWidth = 320, int targetHeight = 360)
+    public static Bitmap CreateThumbnail(Bitmap originalBitmap, int targetWidth = 400, int targetHeight = 420)
     {
         // Calculate scale factor while maintaining the aspect ratio
         double scale = Math.Min(

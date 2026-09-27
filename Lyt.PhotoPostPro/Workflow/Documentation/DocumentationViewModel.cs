@@ -7,7 +7,8 @@ public sealed partial class DocumentationViewModel :
     IRecipient<PdfPageLoadedMessage>,
     IRecipient<PdfLoadedStatusMessage>,
     IRecipient<PdfPageInViewMessage>,
-    IRecipient<DocPageNavigateMessage>
+    IRecipient<DocPageNavigateMessage>,
+    IRecipient<HotKeyMessage>
 {
     public sealed record class PageThumbnail(int PageNumber, Bitmap Bitmap);
 
@@ -43,6 +44,7 @@ public sealed partial class DocumentationViewModel :
         this.Subscribe<PdfLoadedStatusMessage>();
         this.Subscribe<PdfPageInViewMessage>();
         this.Subscribe<DocPageNavigateMessage>();
+        this.Subscribe<HotKeyMessage>();
 
         PdfLoader.BeginLoadDocumentation();
         this.currentPageIndex = -1;
@@ -59,8 +61,27 @@ public sealed partial class DocumentationViewModel :
         this.Unregister<PdfLoadedStatusMessage>();
         this.Unregister<PdfPageInViewMessage>();
         this.Unregister<DocPageNavigateMessage>();
+        this.Unregister<HotKeyMessage>();
 
         base.Deactivate();
+    }
+
+    public void Receive(HotKeyMessage message)
+    {
+        if ( message.Key == Key.PageDown)
+        {
+            if (this.SelectedThumbnailIndex < this.Pages.Count - 1 )
+            {
+                ++this.SelectedThumbnailIndex; 
+            }
+        }
+        else if(message.Key == Key.PageUp)
+        {
+            if (this.SelectedThumbnailIndex > 0)
+            {
+                --this.SelectedThumbnailIndex;
+            }
+        }
     }
 
     public void Receive(PdfPageLoadedMessage message)
