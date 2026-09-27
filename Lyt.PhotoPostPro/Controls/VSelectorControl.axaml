@@ -29,7 +29,7 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<local:SelectorButtonView Margin="0 4 0 4"/>
+						<local:SelectorButtonView Margin="0 10 0 10"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
