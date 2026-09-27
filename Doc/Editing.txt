@@ -118,9 +118,6 @@ Professionals edit in a predictable order to avoid over-editing and to get consi
 
 1) Crop Like a Pro (Fast Composition Fix)
 
-    Straighten horizons and vertical lines.
-    Remove distractions at the edges.
-    Use a consistent crop ratio across a series if it’s for a portfolio or Instagram.
 
 Pro tip: crop before heavy color work. Composition changes can alter what needs attention.
 2) Fix Exposure Without Nuking Detail
@@ -150,12 +147,6 @@ Over-saturation screams “beginner.” Pros build impact using contrast and ton
 
 5) Skin Tones (Portraits Live Here)
 
-If you edit portraits, this is the money skill.
-
-    Avoid orange faces (too warm) and red faces (too much saturation).
-    Reduce clarity/texture on skin if it looks harsh (but don’t blur skin into plastic).
-    Keep whites of eyes natural (no neon whitening).
-
 6) Local Adjustments (Where Pros Add “Pop”)
 
 Pros don’t crank global sliders. They edit locally:
@@ -167,11 +158,6 @@ Pros don’t crank global sliders. They edit locally:
 
 7) Sharpening & Noise: Clean, Not Crunchy
 
-    Sharpen at the end.
-    Zoom to 100% to judge sharpening.
-    Use noise reduction carefully—too much makes photos waxy.
-
-Rule: Slight noise is fine. “Crunchy” sharpening is not.
 Professional Editing Checklist (Fast)
 Check 	What “Pro” Looks Like 	What to Fix If It’s Off
 Highlights 	Bright areas keep texture 	Lower highlights / whites

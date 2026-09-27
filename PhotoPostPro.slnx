@@ -18,7 +18,6 @@
   </Folder>
   <Folder Name="/Doc/">
     <File Path="Doc/BetaTest.md" />
-    <File Path="Doc/Editing.txt" />
     <File Path="Doc/PhotoRebelGuide.md" />
     <File Path="Doc/PhotoSizesAndRatios.txt" />
     <File Path="Doc/privacy.txt" />
@@ -61,11 +60,8 @@
   <Folder Name="/Solution Folder/">
     <File Path=".editorconfig" />
     <File Path="Code.txt" />
-    <File Path="Editing.txt" />
     <File Path="LICENSE" />
-    <File Path="Notes.txt" />
     <File Path="README.md" />
-    <File Path="Sizes.txt" />
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
   </Folder>
   <Folder Name="/TechNotes/">
