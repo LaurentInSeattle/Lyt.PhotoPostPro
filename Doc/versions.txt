@@ -4,7 +4,7 @@ A: Alessandra - Private Beta - No Setup - No Store - Ava 12.1.2 - Released: Sept
 
 B: Bianca - Open Beta - No Setup - No Store - Ava 12.1.2 - Released: September 21st
 
-C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12.1.3 - Planned: Early October 
+C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12.1.2 - Planned: Early October 
 
 D: Donna
 E: Emilia

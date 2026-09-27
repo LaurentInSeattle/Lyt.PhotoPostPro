@@ -100,21 +100,21 @@ ensuring you edit your best work first.
 - Simplifies Portfolio Building: Consistent ratings create a permanent, searchable record of 
 your top-tier images for sharing, printing, or publishing.
 
-Ideally, all images in your library should be at least 'Two Stars'.
+Ideally, all images in your library should be at least rated 'Two Stars'.
 
 # Culling common mistakes
 
-- Editing before culling. Fix the exposure, move on, hit a better version of the same shot ten images later. 
-The time spent on the first frame is wasted. Cull the entire set before opening your editing software.
+- Editing before culling: Fix the exposure, move on, hit a better version of the same shot ten images later. 
+The time spent on the first frame is wasted. Cull the entire set before beginning editing.
 
-- Keeping images out of emotional attachment. The first time you photograph something — a new venue, a sport 
+- Keeping images out of emotional attachment: The first time you photograph something — a new venue, a sport 
 you're unfamiliar with, a type of subject — you'll want to keep images because of what they represent to you. 
 Assess the image, not the experience of taking it.
 
 - Delivering too many similar images. Keeping twenty nearly identical frames of the same moment doesn't 
 show talent — it shows you didn't edit with any rigour. Select the best ones.
 
-- Over-trusting automated AI on emotionally complex material. 
+- Over-trusting Artificial (so called) Intelligence on emotionally complex material. 
 
 # Before Editing, Remember...
 
@@ -124,7 +124,7 @@ show talent — it shows you didn't edit with any rigour. Select the best ones.
 
 - Avoid Plastification: Do not oversmooth, especially for portraits.
 
-- Avoid Cartoonification: Use saturation and vibrance 'responsibly'.
+- Avoid Cartoonification: Drive saturation and vibrance 'responsibly'.
 
 - Mort a la Vignette: Enough is Enough! 
 
@@ -134,114 +134,209 @@ show talent — it shows you didn't edit with any rigour. Select the best ones.
 
 - Make sure that your edits are actually improving on the original. 
 
-# The Recommended Editing Workflow 
+# Step One - Geometry 
+
+It is very important to proceed in the correct order when editing. 
+Here is what most 'Pro' photographers consistently do recommend.
 
 ## Orientation 
 
+Some cameras and PC software sometimes do not work together well. 
+Occasionally, some photos will open up upside down or incorrectly rotated.
+This is the very first thing to fix, and that's only pushing a single button.
+
 ## Mirroring 
+
+In the 'western' world we have been taught to read from left to right. 
+Consequently, many people, not everybody, have a negative 'feeling' or 'discomfort' when a photo shows movement heading from right to left.
+Mirroring the image often helps, but not always. 
+Similarly, movement shown moving up is often unconsciously prefered compared to going down.
+Something to use wisely though.
 
 ## Straightening 
 
 Straightening a photo corrects a tilted frame so that natural horizons and architectural lines appear level.
-    Straighten horizons and vertical lines.
-Why Straightening Matters
-Fixes visual balance: Human eyes naturally expect level lines. 
+
+Why Straightening Matters ? 
+
+- Fixes visual balance: Human eyes naturally expect level lines. 
 A crooked horizon or leaning building creates subconscious tension or discomfort for the viewer.
-Removes distractions: When lines are straight, the viewer focuses on your main subject instead of wondering 
+
+- Removes distractions: When lines are straight, the viewer focuses on your main subject instead of wondering 
 why the image feels "off".
-Adds professionalism: Leveling turns a casual snapshot into a polished, deliberate piece of work.
-Improves flow: Straight vertical and horizontal guides help lead the eye smoothly across the composition.
+
+- Adds professionalism: Leveling turns a casual snapshot into a polished, deliberate piece of work.
+
+- Improves flow: Straight vertical and horizontal guides help lead the eye smoothly across the composition.
 
 ## Composition / Framing / Cropping
 
-    Remove distractions at the edges.
-    Use a consistent crop ratio across a series if it’s for a portfolio or Instagram.
+This is where Editing gives you again a second chance to improve your photos.
 
-## Denoising
+It is difficult to patiently frame fugitive instants or take advantage of unique 
+opportunies to snap a memorable image: Recomposing in such cases helps a huge lot! 
+
+Cropping can remove 'distractions' at the edges of the image.
+
+Cropping will improve your composition: Find the lines that drive the picture and balance them. 
+You will be able to re-center or off-center the protagonists present in the image.
+You would follow the classic "Rule of Thirds" or try more elaborate compositions, such as the 'Golden Spiral'. 
+
+This step is essential and should not be skipped.
+
+# Step Two - Exposure 
+
+Once we are done with this 'Geometry' work, comes the 'image processing' sequence of steps.
+If your software has this functionalitiy available, you may wish proceed with these adjustments 
+displaying black and white images.
+
+## Low Light Denoising
+
+First thing you should do is to zoom into the image and find out if the image has noise or grain, typically 
+red dots more or less equaly spaced in the darker areas of the image. 
+Photos shots in low light settings are a common example.
+
+If so, apply the denoising filter to eliminate or reduce this 'digital noise'.
+
+However, use noise reduction carefully, too much makes photos waxy and protrait skins look made from plastic.
 
 ## Global Exposure
 
-- Gamma 
-- Gain
-- Shift 
+- Shift: Add some 'brightness' to all pixels of the image. Handle with care as this can destroy the highlights of the 
+image. Use it only when the histograms are all showing a completely flat line on the right sides. After shifting, you will notice 
+that the histograms actually are shifting left or right.
 
-## Hightlights and Shadows 
+- Gain: Multiply 'brightness' to all pixels of the image. Again, use gently, and only if needed. 
+
+- Gamma: Adjust exposure following a 'gamma' power curve, and more effective in the shadows and mid-tone areas. 
+
+Make sure to not overshoot this step, it could compromise the effectiveness of the next steps.
+
+## Highlights and Shadows 
+
+On this step, you can somewhat 'tame' some Hightlights that could be really too bright.
+
+The Shadows can be brightened a bit to reveal details that would be invisible in the dark.
+
+Normally you decide to either boost highlights or shadows, and very rarely both.
+
+Overcooking this steps yields images with poor contrast and feeling 'boring'.
 
 ## Selective Exposure 
 
+The most overused effect is the elliptical dark vignette that you definitely avoid.
+
+However, darkening or brightening one side of the image can create interesting effects and bring some 'life' to what could be
+a monotonous background.
+
+The spotlight effect consists in increasing brightness on a specific area of the image, preferably more or less circular. 
+It is easy to setup and often yields good results when off-centered, and supporting your geometry choices.
+Multiplying spotlights is definitely not recommended, only one is best.
+
+Using 'Selective Exposure' tools to recover or rescue a poorly exposed image does not work so well.
+
+# Step Three - Colours
+
+We can now turn colours back on our display. 
+
 ## White Balance
 
-Bad white balance is why edits look yellow, green, or lifeless.
+This step must be completed before any other colour adjustments.
 
-    Warmth controls yellow/blue.
-    Tint controls green/magenta.
-    For portraits, prioritize natural skin over “cool cinematic” vibes.
+Bad white balance is why edits look yellow, green, bizarre or lifeless. 
 
-Pro habit: fix white balance before boosting saturation.
+Figure out in the image an area that should be white, or gray neutral. Zoom in as necessary to find that spot.
+Adjust your white balance settings so that the choosen spot becomes white or gray neutral. 
+This is one of the 'One-Click' methods available in Photo Rebel.
+
+Adjusting colour temperature and the "Gray World" algorithm are also very effective at providing well balanced colours.
 
 ## Contrast
 
-Over-saturation screams “beginner.” Pros build impact using contrast and tone first.
+Global Contrast
 
-    Increase contrast slightly for depth.
-    Prefer vibrance over saturation (it’s usually smarter on skin tones).
-    Use selective color/HSL to tame one loud color instead of boosting everything.
+Most cameras do not handle contrast as well as the human eye. 
+Therefore, increasing contrast slightly for additional depth is almost always a good move. (Note: Slightly!)
+Combining this step with a very gentle touch of blur and brightness also helps.
+This is a typical case where pushing the sliders too hard can be detrimental.
+
+Contrast Equilization  
+
+This contrast pass (known as CLAHE) is very effective because changes are applied only where needed.
+Photo Rebel does not support CLAHE yet.
 
 ## Color Grading with Lookup Tables 
 
-If you edit portraits, this is the money skill.
+Color Grading Tables also widely known as LUT's, are a perfect tool to apply the same color effect to any image.
+Initially developped for video, their use has gained traction in digital photography. 
+You can download hundreds of LUTs from the Internet and build up a strong library of color effects.
+Those color effects are immensely varried, cinematic or futistic effects, moods, specialized for medical applications, etc. 
 
-    Avoid orange faces (too warm) and red faces (too much saturation).
-    Reduce clarity/texture on skin if it looks harsh (but don’t blur skin into plastic).
-    Keep whites of eyes natural (no neon whitening).
+If you are editing a set of pictures for a given event, let's say a wedding, applying the very same "Romantic Pastels" LUT 
+to all your morning shots will save you a huge amount of time of pushing sliders and will bring style consistency to your work.
+
+Photo Rebel supports CUBE and 3DL lut files. It ships with a few sample LUT's and can handle all the ones 
+you may have downloaded from the web or created your self. The Photo Rebel 'LUT Explorer' helps you to easily pick one 
+in your library.  
+
+On the downside, LUT are often destructive, sometimes creating additional digital noise. 
+
 
 ## Manual Color Grading
 
-    Brighten the subject slightly (subtle dodge)
-    Darken distracting areas (subtle burn)
-    Control skies separately (highlights, dehaze, color)
-    Add gentle clarity to textures you want to emphasize (not faces)
+Warning ! Over-saturation screams “Beginner”. Use wisely
+
+Portraits: 
+
+You should often prefer vibrance over saturation, more subtle and usually better on skin tones.
+Prioritize natural skin over “cool cinematic” vibes.
+Avoid orange faces - too warm and red faces - too much saturation.
+Keep whites of eyes natural: no neon whitening.
 
 ## Sharpening 
 
-    Sharpen at the end.
-    Zoom to 100% to judge sharpening.
-    Use noise reduction carefully—too much makes photos waxy.
+Always sharpen at the very end.
 
-Rule: Slight noise is fine. “Crunchy” sharpening is not.
+Zoom in deeep into the image to 200% or more to evaluate judge sharpening: Just a bit of noise is usually fine. 
+“Crunchy” sharpening is not. There should be no color dots regularly spaced.
 
-## Special Effects (Blenders) 
+# Step Four - Evaluation  
 
-# Your Gallery
+Nobody watching you, you will be your very own judge: Compare side by side your final result and your edit. 
+There MUST be improvements, it MUST be better.
 
-# Tools: Borders,  Signatures and Watermarks 
+Export the raw image to the desired format and rate again the image.
+
+Post on the web, social media...
+
+Photo Rebel had saved all your editing steps and has left the original unchanged.
+
 
 # Why Do My Edited Photos Look Bad?
 
 If your edits look “off” even though you’re trying all the sliders, you’re not alone. 
+
 Most edited photos look bad for a few predictable reasons: too much contrast, weird color, crunchy sharpness, 
 or edits that fight the original light.
 
-This section breaks down the most common mistakes (and quick fixes) so your photos look clean, natural, and 
-intentionally edited—without the overprocessed vibe.
+This section breaks down the most common mistakes so your photos look clean, natural, and 
+intentionally edited without the overprocessed vibe.
 
-- The Edit Is Too Strong: The #1 Problem
+## The Edit Is Too Strong: The #1 Problem
 
 When an edit looks bad, it’s usually not the idea; it’s the intensity. 
 Phones and social apps make it easy to push sliders too far.
 
 Try to reduce your adjustments by 30–50% and compare.
-Quick check: Toggle “before/after.” If the edit shocks you, it’s too much.
+Toggle “before/after.” If the edit shocks you, it’s too much.
 
-- Highlights Are Blown Out - Or Shadows Are Crushed
+## Highlights Are Blown Out - Or Shadows Are Crushed
 
 Bright skies, windows, and white clothing get ruined fast. On the other side, deep shadows can turn into muddy black patches with no detail.
 
-    Fix: Lower highlights first, then adjust exposure.
-    Fix: Lift shadows slightly, then add a touch of contrast back.
-    Rule: Keep detail in the brightest and darkest areas when possible.
+Keep detail in the brightest and darkest areas when possible.
 
-- White Balance Is Off: Everything Looks “Weird”
+## White Balance Is Off: Everything Looks “Weird”
 
 Bad color is the fastest way to make an edit look amateur. 
 If skin looks orange, shadows look green, or the photo feels cold and lifeless—white balance is the culprit.
@@ -250,39 +345,28 @@ Adjust temperature until whites look neutral, white or gray - not yellow or blue
 Use color grading later to eventually correct green/magenta casts.
 Don’t “guess.” Zoom in on something that should be neutral- a white wall, gray shirt, a piece paper, and use it as the reference point. 
 
-- Too Much Sharpening: The “Crunchy” Look
+## Too Much Sharpening: The “Crunchy” Look
 
 Sharpening can make landscapes and buildings pop, but they can wreck portraits and make everything look harsh, 
 gritty, and over-sharpened.
 
-    Fix: Pull back clarity/structure/texture until skin and edges look natural.
-    Portrait rule: If pores, wrinkles, or noise suddenly dominate the photo, you went too far.
+Portrait rule: Skin MUST look natural. If pores, wrinkles, or noise suddenly dominate the photo, you went too far.
 
 Phone images are already sharpened by default. Adding more sharpness often creates halos around edges and makes 
 noise look worse. Reduce sharpening, then try to start with a bit of noise reduction.
 
-    Zoom rule: Check at 100% zoom before exporting.
-
-- Cartoonification: Saturation Is Too High
+## Cartoonification: Saturation Is Too High
 
 Heavy saturation makes blues neon, skin orange, and greens radioactive. 
 It also destroys subtle tones and looks fake fast. Prefer vibrance over saturation for a more natural boost.
 For portraits, if your model's skin looks sunburnt, saturation is almost always the reason.
 
-- You’re Editing a Photo That Was Badly Lit
+## You’re Editing a Photo That Was Badly Lit
 
 Editing can enhance a good photo, but it can’t fully rescue harsh overhead sun, mixed indoor lighting, or super dark 
 blurry shots. If the light is fighting you, your edit will look worse the harder you push it.
 
-- Edits are fighting each other
+## Edits are fighting each other
 
 Many people apply a filter, then also crank another one (exposure, contrast or saturation) on top. 
 That stacking is a common reason edits look muddy or unnatural.
-
-
-# What Makes an Edit Look “Pro” ?
-
-Cropping that improves composition.
-Balanced exposure: highlights not blown, shadows not muddy.
-Natural colours, especially skin tones.
-Intentional contrast, bringing depth without harshness.
