@@ -105,11 +105,11 @@
 				/>
 			<stars:RatingControl
 				IsVisible="{Binding HasSelection}"
-				Width="240" Height="32"
+				Width="240" Height="40"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				Margin="60 4 0 4"
 				RatingValue="{Binding SelectionRating}"
-				IsReadOnly="True"
+				IsReadOnly="False"
 				/>
 			<glyphs:GlyphButton
 				x:Name="ProcessButton"

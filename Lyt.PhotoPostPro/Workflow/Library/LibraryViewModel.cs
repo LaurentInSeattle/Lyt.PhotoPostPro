@@ -531,6 +531,18 @@ public sealed partial class LibraryViewModel :
         }
     }
 
+    partial void OnSelectionRatingChanged(int value)
+    {
+        if (this.selectedLibraryThumbnailViewModel is null || this.selectedLibraryThumbnailViewModel.Metadata is null)
+        {
+            return; 
+        }
+
+        var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
+        metadata.Rating = value;
+        this.model.LibraryManager.SaveMetadata(metadata);
+    }
+
     private void SpinWait(bool start = true)
     {
         this.SpinViewModel.IsVisible = start;
