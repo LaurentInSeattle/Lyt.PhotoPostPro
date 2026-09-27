@@ -29,8 +29,8 @@ public sealed partial class ImportViewModel : ViewModel<ImportView>, IDropPathHa
             new DropViewModel(this, "Single.DropZoneHelp")
             {
                 IsVisible = true,
-                Height = 600,
-                Width = 820,
+                Height = 640,
+                Width = 920,
             };
         this.FileImportViewModel = new FileImportViewModel(this.model, toaster);
         this.FolderImportViewModel = new FolderImportViewModel(this.model, toaster);

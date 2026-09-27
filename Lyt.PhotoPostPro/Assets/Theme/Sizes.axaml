@@ -11,10 +11,6 @@
     <system:Double x:Key="Dbl.PromptOneLine">24</system:Double>
     <system:Double x:Key="Dbl.PromptTwoLines">48</system:Double>
     <system:Double x:Key="Dbl.PromptThreeLines">72</system:Double>
-    <system:Double x:Key="Dbl.OneSlider">40</system:Double>
-    <system:Double x:Key="Dbl.TwoSliders">80</system:Double>
-    <system:Double x:Key="Dbl.ThreeSliders">120</system:Double>
-    <system:Double x:Key="Dbl.FourSliders">160</system:Double>
     <system:Double x:Key="Dbl.PanelButtons">62</system:Double>
     <system:Double x:Key="Dbl.OneSmallButton">48</system:Double>
     <system:Double x:Key="Dbl.TwoSmallButtons">96</system:Double>
@@ -25,6 +21,11 @@
     <system:Double x:Key="Dbl.ComboBox">54</system:Double>
     <system:Double x:Key="Dbl.DropBox">260</system:Double>
 
+    <system:Double x:Key="Dbl.OneSlider">60</system:Double>
+    <system:Double x:Key="Dbl.TwoSliders">120</system:Double>
+    <system:Double x:Key="Dbl.ThreeSliders">180</system:Double>
+    <system:Double x:Key="Dbl.FourSliders">240</system:Double>
+
     <!-- Various Grid row heights used in tool box views --> 
     <controls:GridLength x:Key="Size.Spacer">8</controls:GridLength>
     <controls:GridLength x:Key="Size.TallSpacer">32</controls:GridLength>
@@ -32,10 +33,6 @@
     <controls:GridLength x:Key="Size.PromptOneLine">24</controls:GridLength>
     <controls:GridLength x:Key="Size.PromptTwoLines">48</controls:GridLength>
     <controls:GridLength x:Key="Size.PromptThreeLines">72</controls:GridLength>
-    <controls:GridLength x:Key="Size.OneSlider">40</controls:GridLength>
-    <controls:GridLength x:Key="Size.TwoSliders">80</controls:GridLength>
-    <controls:GridLength x:Key="Size.ThreeSliders">120</controls:GridLength>
-    <controls:GridLength x:Key="Size.FourSliders">160</controls:GridLength>
     <controls:GridLength x:Key="Size.PanelButtons">62</controls:GridLength>
     <controls:GridLength x:Key="Size.OneSmallButton">48</controls:GridLength>
     <controls:GridLength x:Key="Size.TwoSmallButtons">96</controls:GridLength>
@@ -45,6 +42,11 @@
     <controls:GridLength x:Key="Size.WideButtons">52</controls:GridLength>
     <controls:GridLength x:Key="Size.ComboBox">54</controls:GridLength>
     <controls:GridLength x:Key="Size.DropBox">260</controls:GridLength>
+
+    <controls:GridLength x:Key="Size.OneSlider">60</controls:GridLength>
+    <controls:GridLength x:Key="Size.TwoSliders">120</controls:GridLength>
+    <controls:GridLength x:Key="Size.ThreeSliders">180</controls:GridLength>
+    <controls:GridLength x:Key="Size.FourSliders">240</controls:GridLength>
 
     <system:Double x:Key="SliderTrackThemeHeight">8</system:Double>
 

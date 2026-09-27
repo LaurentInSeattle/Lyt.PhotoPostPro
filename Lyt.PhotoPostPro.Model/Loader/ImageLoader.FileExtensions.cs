@@ -58,6 +58,9 @@ public static partial class ImageLoader
     // These files may deviate from the TIFF standard in a number of ways, including the use of a
     // non-standard file header, the inclusion of additional image tags and the encryption of some
     // of the tag data. 
+    //
+    // ALL extensions MUST include the leading dot, ex: ".srf" and NOT "srf"
+    //
     public static List<string> RawExtensions =
         [
             // Manufacturers 
@@ -73,7 +76,7 @@ public static partial class ImageLoader
             ".erf", // Epson
             ".crw" ,".cr2" , ".cr3", // Canon 
             ".nef" , ".nrw", // Nikon 
-            ".arw" , "srf", "sr2", // Sony 
+            ".arw" , ".srf", ".sr2", // Sony 
             ".raf" , // Fuji 
             ".rw2" , // Leica / Panasonic 
             ".orf" , // Olympus 

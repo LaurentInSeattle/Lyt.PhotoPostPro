@@ -20,6 +20,7 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- 3 : Explain Amount  --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- 4Amount --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--  --> 
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Row="0" 
