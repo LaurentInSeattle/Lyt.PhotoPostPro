@@ -217,7 +217,7 @@ technically compromised but carry the story.
 
 # -B- Why you should edit your photos ? 
 
-Editing Will Take Your Photos to The Next Level! 
+Because You Want to Take Your Photos to The Next Level! 
 
 - Your images always need to be processed, it’s simply a question as to whether you - human - want to control this process, 
 or let a machine do it. 
@@ -226,9 +226,9 @@ or let a machine do it.
 
 - You will be able to create a specific mood and enhance or transform a captured atmosphere.
 
-- It will certainly help you develop your very own style.
+- It will empower you to develop your very own style.
 
-- Add business and professional value to your photos.
+- It will add business and professional value to your photos.
 
 # -B- First Steps 
 
@@ -239,26 +239,28 @@ or let a machine do it.
 - Regularly empty your camera or iPhone of stored pictures. For DSLR, clearing entirely is best. 
 For iPhones, keep only the very best ones you want to share.
 
-- Don't buy just yet an expensive subscription to some famous pro software.
+- Don't buy just yet an expensive subscription to some famous 'pro' software. You will not need it yet.
 
 - Don't rush to try out complex image processing software. Most are very good, but also sometimes very hard to set up 
 and their learning curve is often very steep.
 
+- Computer monitor 
+
 # -B- Before Editing, Remember...
 
-- You should edit your best pictures, only the best.
+- You should edit your best pictures, and only the best.
 
 - Keep it looking natural.
 
 - Avoid Cartoonification: Use saturation and vibrance 'responsibly'.
 
-- Vignette: Enough is Enough! 
+- Mort a la Vignette: Enough is Enough! 
 
 - Be nice with the sliders: they do not like to be pushed to the extreme!
 
-- Chances to recover what looks like a bad picture are very low.
+- Chances to recover what looks like a 'bad' picture are very low.
 
-- Make sure that your edits are actually improving the original. 
+- Make sure that your edits are actually improving on the original. 
 
 # The Editing Workflow 
 
