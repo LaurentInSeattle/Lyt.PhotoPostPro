@@ -93,7 +93,6 @@ public sealed partial class DocumentViewModel :
         {
             new PdfPageInViewMessage(1 + this.currentPageIndex, this.Pages.Count).Publish();
         }
-
     }
 
     public void Receive(PdfPageInViewMessage message)
@@ -142,7 +141,8 @@ public sealed partial class DocumentViewModel :
 
             default:
             case DocPageNavigateMessage.NavigateTo.PageNumber:
-                break;
+            case DocPageNavigateMessage.NavigateTo.Close:
+                return;
         }
 
         if (newPageIndex >= 0 && newPageIndex < pageCount)

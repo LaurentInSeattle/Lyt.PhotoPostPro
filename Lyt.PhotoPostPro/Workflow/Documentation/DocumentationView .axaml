@@ -41,17 +41,31 @@
 				/>
 		</Grid>
 
-		<Button
-			x:Name="OpenButton"
+		<ScrollViewer
+			x:Name="PagesScrollViewer"
 			Grid.Row="1" Grid.Column="1"
 			IsVisible="{Binding !DocumentIsOpened}"
-			Command="{Binding OnOpen}"
-			MaxHeight="800" MaxWidth="800"
+			Background="Transparent"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			>
-			<Image 
-				x:Name="OpenButtonImage"
-				Margin="8"
-				/>
-		</Button>
+			<ItemsControl
+				x:Name="TilesItemControl"
+				ItemsSource="{Binding Tiles}"
+				Margin="0 0 24 0"
+				>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<vm:DocumentTileView Margin="8 16 8 16" />
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
 	</Grid>
 </UserControl>

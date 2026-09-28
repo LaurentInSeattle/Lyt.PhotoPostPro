@@ -1,5 +1,20 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+<!--  arrow_left  -->
+<DrawingGroup x:Key = "arrow_leftDrawingGroup">
+<DrawingGroup>
+    <DrawingGroup.ClipGeometry>
+      <RectangleGeometry Rect="0,0,24,24" />
+    </DrawingGroup.ClipGeometry>
+    <GeometryDrawing Brush="#FF212121" >
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="NonZero" Figures="M10.7327,19.7905C11.0326,20.0762 11.5074,20.0646 11.7931,19.7647 12.0788,19.4648 12.0672,18.99 11.7673,18.7043L5.5159,12.7497 20.25,12.7497C20.6642,12.7497 21,12.4139 21,11.9997 21,11.5855 20.6642,11.2497 20.25,11.2497L5.5158,11.2497 11.7673,5.295C12.0672,5.0093 12.0787,4.5346 11.7931,4.2347 11.5074,3.9348 11.0326,3.9232 10.7327,4.2089L3.3138,11.2756C3.1449,11.4365 3.0449,11.6417 3.0139,11.8551 3.0048,11.9019 3,11.9503 3,11.9997 3,12.0493 3.0048,12.0977 3.014,12.1446 3.045,12.3579 3.145,12.563 3.3138,12.7238L10.7327,19.7905z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>
+<DrawingImage x:Key="arrow_left" Drawing="{StaticResource arrow_leftDrawingGroup}" />
+
 <!--  play  -->
 <DrawingGroup x:Key = "playDrawingGroup">
 <DrawingGroup>

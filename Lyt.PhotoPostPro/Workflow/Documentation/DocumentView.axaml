@@ -39,7 +39,7 @@
 			Grid.Row="1" Grid.Column="1"
 			ItemsSource="{Binding PageThumbnails}"
 			SelectedIndex="{Binding SelectedThumbnailIndex}"
-			SelectionMode="Single"
+			SelectionMode="AlwaysSelected"			
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			>
 			<ListBox.ItemsPanel>

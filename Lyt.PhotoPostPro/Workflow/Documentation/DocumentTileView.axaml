@@ -1,0 +1,52 @@
+<UserControl
+	x:Class="Lyt.PhotoPostPro.Workflow.Documentation.DocumentTileView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Documentation"
+	x:DataType="vm:DocumentTileViewModel"
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	Background="Transparent"
+	>
+	<Grid
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="8" />
+			<RowDefinition Height="36" />
+			<RowDefinition Height="42" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="8" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="8" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock
+			Grid.Row="1" Grid.Column="1"			
+			Theme="{StaticResource H2}"
+			Text="{Binding Title}"
+			HorizontalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="2" Grid.Column="1"			
+			Text="{Binding Summary}"
+			Theme="{StaticResource VeryLarge}"
+			HorizontalAlignment="Left"
+			/>
+		<Button
+			Grid.Row="3" Grid.Column="1"
+			Command="{Binding OnOpen}"
+			MaxHeight="800" MaxWidth="800"
+			>
+			<Image 
+				Source="{Binding ImageSource}"
+				Margin="8"
+				/>
+		</Button>
+	</Grid>
+</UserControl>

@@ -1,6 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Documentation;
 
-public sealed partial class DocumentationViewModel : ViewModel<DocumentationView>
+public sealed partial class DocumentationViewModel : 
+    ViewModel<DocumentationView>, IRecipient<DocPageNavigateMessage>
 {
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
@@ -11,41 +12,66 @@ public sealed partial class DocumentationViewModel : ViewModel<DocumentationView
     [ObservableProperty]
     public partial DocumentViewModel DocumentViewModel { get; set; }
 
+    [ObservableProperty]
+    public partial ObservableCollection<DocumentTileViewModel> Tiles { get; set; } = [];
+
     public DocumentationViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
-        this.DocumentViewModel = new(); 
+        this.DocumentViewModel = new();
     }
 
     public override async void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
 
-        foreach ( var document in Documents.List)
+        this.Subscribe<DocPageNavigateMessage>(); 
+        foreach (var document in Documents.List)
         {
-            PdfLoader.LoadFirstPage(document);
+            if (document.FirstPage is null)
+            {
+                PdfLoader.LoadFirstPage(document);
+            }
+
+            if (document.FirstPage is not null)
+            {
+                var tile = new DocumentTileViewModel(this, document);
+                this.Tiles.Add(tile);
+            }
         }
 
         // Hide navigation toolbar
         new PdfLoadedStatusMessage(Complete: false).Publish();
-
-        this.View.OpenButtonImage.Source = Documents.List[0].FirstPage; 
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        this.DocumentViewModel.Close();
-        this.DocumentIsOpened = false;
+
+        this.Unregister<DocPageNavigateMessage>();
+        this.Tiles.Clear();
+        this.Close();
     }
 
-
     [RelayCommand]
-    public void OnOpen()
+    public void OnOpen(Document document)
     {
-        Document document = Documents.List[0]; 
         this.DocumentViewModel.Open(document);
         this.DocumentIsOpened = true;
+    }
+
+    public void Receive(DocPageNavigateMessage message)
+    {
+        if ( message.Navigate == DocPageNavigateMessage.NavigateTo.Close)
+        {
+            this.Close();
+        }
+    }
+
+    private void Close()
+    {
+        this.DocumentViewModel.Close();
+        this.DocumentIsOpened = false;
     }
 }

@@ -10,6 +10,7 @@ public sealed record class DocPageNavigateMessage(
         Next,
         Last,
         PageNumber,
+        Close,
     }
 }
 
@@ -29,6 +30,10 @@ public sealed partial class DocumentationToolbarViewModel :
 
 #pragma warning disable CA1822 // Mark members as static
     // RelayCommand's cannot be static 
+
+    [RelayCommand]
+    public void OnBack() =>
+        new DocPageNavigateMessage(DocPageNavigateMessage.NavigateTo.Close).Publish();
 
     [RelayCommand]
     public void OnFirst() =>
