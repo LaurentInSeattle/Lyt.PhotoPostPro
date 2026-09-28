@@ -89,6 +89,7 @@ public partial class App : ApplicationBase
 
                 _ = services.AddSingleton<DocumentationViewModel>();
                 _ = services.AddSingleton<DocumentationToolbarViewModel>();
+                _ = services.AddSingleton<DocumentViewModel>();
 
                 _ = services.AddSingleton<LanguageViewModel>();
                 _ = services.AddSingleton<LanguageToolbarViewModel>();

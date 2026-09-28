@@ -1,7 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Documentation;
 
-
-public sealed record class DocPageNavigateMessage(DocPageNavigateMessage.NavigateTo Navigate, int PageNumber = 1)
+public sealed record class DocPageNavigateMessage(
+    DocPageNavigateMessage.NavigateTo Navigate, int PageNumber = 1)
 {
     public enum NavigateTo
     {
@@ -15,12 +15,17 @@ public sealed record class DocPageNavigateMessage(DocPageNavigateMessage.Navigat
 
 public sealed partial class DocumentationToolbarViewModel :
     ViewModel<DocumentationToolbarView>,
-    IRecipient<PdfPageInViewMessage>
+    IRecipient<PdfPageInViewMessage>,
+    IRecipient<PdfLoadedStatusMessage>
 {
     [ObservableProperty]
     public partial string CurrentPage { get; set; } = string.Empty;
 
-    public DocumentationToolbarViewModel() => this.Subscribe<PdfPageInViewMessage>();
+    public DocumentationToolbarViewModel()
+    {
+        this.Subscribe<PdfPageInViewMessage>();
+        this.Subscribe<PdfLoadedStatusMessage>();
+    }
 
 #pragma warning disable CA1822 // Mark members as static
     // RelayCommand's cannot be static 
@@ -50,5 +55,10 @@ public sealed partial class DocumentationToolbarViewModel :
     public void Receive(PdfPageInViewMessage message)
         => this.CurrentPage = string.Format("{0} / {1}", message.PageNumber, message.PageCount);
 
-
+    public void Receive(PdfLoadedStatusMessage message)
+        // Need to wait because the activation system will make the toolbar visible 
+        => Schedule.OnUiThread(60, () =>
+            {
+                this.View.IsVisible = message.Complete; 
+            }, DispatcherPriority.Background); 
 }

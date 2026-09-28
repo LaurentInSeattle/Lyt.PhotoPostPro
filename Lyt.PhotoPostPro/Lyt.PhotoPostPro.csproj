@@ -92,8 +92,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Workflow\Documentation\DocumentationView.axaml.cs">
-      <DependentUpon>DocumentationView.axaml</DependentUpon>
+    <Compile Update="Workflow\Documentation\DocumentationView .axaml.cs">
+      <DependentUpon>DocumentationView .axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Documentation\DocumentView.axaml.cs">
+      <DependentUpon>DocumentView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Workflow\Documentation\DocPageView.axaml.cs">
       <DependentUpon>DocPageView.axaml</DependentUpon>

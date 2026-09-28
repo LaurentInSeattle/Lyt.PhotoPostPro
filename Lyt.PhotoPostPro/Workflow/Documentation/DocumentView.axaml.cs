@@ -2,14 +2,12 @@ namespace Lyt.PhotoPostPro.Workflow.Documentation;
 
 using global::Avalonia.Controls.Presenters;
 
-public partial class DocumentationView : View
+public partial class DocumentView : View
 {
     private int pdfPageInView = -1;
 
-    public DocumentationView() : base()
+    public DocumentView() : base()
         => this.PagesScrollViewer.ScrollChanged += this.OnScrollViewerScrollChanged;
-
-    protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 
     private void OnScrollViewerScrollChanged(object? sender, ScrollChangedEventArgs e)
     {

@@ -16,11 +16,17 @@ public sealed record class PdfPage(int PageNumber, Bitmap Page, Bitmap Thumbnail
 public static class PdfLoader
 {
     public static void Unload()
-    {
+        => new PdfLoadedStatusMessage(Complete: false).Publish();
 
+    public static bool LoadFirstPage(Document document, string language = "", string? pdfPassword = null)
+    {
+        MemoryStream memoryStream = LoadDocumentFile(document, language);
+        var bitmap = LoadFirstPage(memoryStream, pdfPassword);
+        document.FirstPage = bitmap; 
+        return bitmap is not null;
     }
 
-    public static void BeginLoadDocumentation(string language = "", string? pdfPassword = null)
+    public static void BeginLoadDocument(Document document, string language = "", string? pdfPassword = null)
     {
         if (string.IsNullOrWhiteSpace(language))
         {
@@ -29,23 +35,45 @@ public static class PdfLoader
 
         Task.Run(() =>
         {
-            MemoryStream memoryStream = LoadDocumentationFile(language);
+            MemoryStream memoryStream = LoadDocumentFile(document, language);
             LoadPages(memoryStream, pdfPassword);
         });
     }
 
-    private static MemoryStream LoadDocumentationFile(string language)
+    private static MemoryStream LoadDocumentFile(Document document, string language)
     {
         ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
         ResourcesUtilities.SetResourcesPath("Lyt.PhotoPostPro");
-        string docPath = string.Format("Doc_{0}.pdf", language);
+        string docPath = document.ResourcePath; //  string.Format("Doc_{0}.pdf", language);
         byte[] pdfBytes = ResourcesUtilities.LoadEmbeddedBinaryResource(docPath, out string? resourceName);
         return new MemoryStream(pdfBytes);
     }
 
 #pragma warning disable CA1416 
     // Validate platform compatibility
-    // For : Conversion.ToImagesAsync  
+    // For : Conversion.ToImagesAsync  , Conversion.ToImage 
+
+    private static Bitmap? LoadFirstPage(Stream pdfStream, string? pdfPassword = null)
+    {
+        try
+        {
+            // Single image load is synchronous 
+            PDFtoImage.RenderOptions renderOptions = new();
+            var skiaBitmap =
+                Conversion.ToImage(pdfStream, page: 0, leaveOpen: false, password: pdfPassword, renderOptions);
+            
+            // Create an Avalonia bitmap usable as a source for an image control and scale it down
+            var bitmapPage = ToAvaloniaBitmap(skiaBitmap);
+            var bitmapThumbnail = CreateThumbnail(bitmapPage, targetWidth: 1200, targetHeight: 1200);
+            Debug.WriteLine(" Loaded document first page ");
+            return bitmapThumbnail;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return null;
+        }
+    }
 
     private static async void LoadPages(Stream pdfStream, string? pdfPassword = null)
     {
@@ -97,9 +125,9 @@ public static class PdfLoader
         var dpi = new Vector(96, 96);
 
         // Ensure the color type and alpha aligns with Avalonia expectations
-        PixelFormat pixelFormat = 
+        PixelFormat pixelFormat =
             skBitmap.ColorType == SKColorType.Bgra8888 ? PixelFormat.Bgra8888 : PixelFormat.Rgba8888;
-        AlphaFormat alphaFormat = 
+        AlphaFormat alphaFormat =
             skBitmap.AlphaType == SKAlphaType.Premul ? AlphaFormat.Premul : AlphaFormat.Opaque;
 
         return new Bitmap(
