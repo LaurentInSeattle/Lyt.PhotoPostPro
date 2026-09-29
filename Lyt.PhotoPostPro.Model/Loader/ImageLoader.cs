@@ -3,8 +3,6 @@
 // Dont move to Global Usings : Conflicting with ImageSharp 
 using Openize.Heic.Decoder;
 
-using System.Reflection.Metadata;
-
 public static partial class ImageLoader
 {
     public const int ThumbnailQuality = 80;
@@ -235,9 +233,28 @@ public static partial class ImageLoader
 
             libRaw.Unpack();
             libRaw.DcrawProcess();
+            LibRawImageParams imageParams = libRaw.ImageParams;
+            LibRawImageOtherParams imageOtherParams = libRaw.ImageOtherParams;
+            
             using ProcessedImage rawImage = libRaw.MakeDcrawMemoryImage();
+
             int width = rawImage.Width;
             int height = rawImage.Height;
+
+            LibRawImageSizes imageSizes = libRaw.RawData.ImageSizes;
+            var crops =  imageSizes.RawInsetCrops;
+            var standardCrop = crops[0];
+            int cropWidth = standardCrop.CWidth + standardCrop.CLeft;
+            int cropHeight = standardCrop.CHeight + standardCrop.CTop;
+            bool cropRequired = false; 
+            bool maybeCropRequired =
+                standardCrop.CWidth != 0 && standardCrop.CHeight != 0 &&
+                standardCrop.CLeft != 65535 && standardCrop.CTop!= 65535 &&
+                (cropWidth < width || cropHeight < height); 
+            if ( maybeCropRequired)
+            {
+                cropRequired = cropWidth <= width && cropHeight <= height;
+            }
 
             Image<RgbaHalf>? imageFp = null;
             if (rawImage.Bits == 8 && rawImage.Channels == 3)
@@ -280,6 +297,12 @@ public static partial class ImageLoader
             {
                 // errorMessage = "Unsupported image format.";
                 return LoadedImage.Fail("Model.Loader.LibRawUnsupportedFormat");
+            }
+
+            if ( cropRequired)
+            {
+                SixLabors.ImageSharp.Rectangle cropArea = new (0, 0, cropWidth, cropHeight);
+                imageFp.Mutate(x => x.Crop(cropArea)); 
             }
 
             var directories = MetadataExtractor.ImageMetadataReader.ReadMetadata(imagePath);

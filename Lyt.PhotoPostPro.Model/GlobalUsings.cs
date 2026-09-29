@@ -47,6 +47,8 @@ global using SixLabors.ImageSharp.Processing;
 //
 global using Sdcb;
 global using Sdcb.LibRaw;
+global using Sdcb.LibRaw.Natives;
+
 
 
 // MTP (MediaDevices on Windows) 

@@ -50,6 +50,11 @@
       <Platform Project="x64" />
     </Project>
   </Folder>
+  <Folder Name="/LibRaw/">
+    <Project Path="../Lyt.LibRaw/Lyt.LibRaw/Lyt.LibRaw.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
   <Folder Name="/Screenshots/">
     <File Path="Screenshots/Screenshot_Composition_IT - Small.png" />
     <File Path="Screenshots/Screenshot_Export_EN - Small.png" />

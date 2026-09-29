@@ -12,7 +12,7 @@ public sealed partial class DocumentTileViewModel : ViewModel<DocumentTileView>
     public partial string Summary { get; set; }
 
     [ObservableProperty]
-    public partial Bitmap ImageSource { get; set; }
+    public partial Bitmap? ImageSource { get; set; } = null;
 
     public DocumentTileViewModel(DocumentationViewModel parent, Document document)
     {
@@ -21,7 +21,11 @@ public sealed partial class DocumentTileViewModel : ViewModel<DocumentTileView>
 
         this.Title = this.document.Title;
         this.Summary = this.document.Summary; 
-        this.ImageSource = this.document.FirstPage!;
+
+        if (this.document.FirstPage is not null)
+        {
+            this.ImageSource = this.document.FirstPage;
+        }
     }
 
     [RelayCommand]

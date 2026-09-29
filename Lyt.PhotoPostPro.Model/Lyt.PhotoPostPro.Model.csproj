@@ -29,16 +29,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Openize.HEIC" Version="26.9.0" />
-    <PackageReference Include="Sdcb.LibRaw" Version="0.21.1.7" />
     <PackageReference Include="SixLabors.ImageSharp" Version="4.1.2" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="3.1.1" />
   </ItemGroup>
+
+  <!--  
+    <PackageReference Include="Sdcb.LibRaw" Version="0.21.1.7" />
+  -->
   
   <PropertyGroup>
     <SixLaborsLicenseFile>..\..\Licences\sixlabors.lic</SixLaborsLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Lyt.LibRaw\Lyt.LibRaw\Lyt.LibRaw.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Collections\Lyt.Collections.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Persistence\Lyt.Persistence.csproj" />
     <ProjectReference Include="..\..\Lyt.Framework\Lyt.Resources\Lyt.Resources.csproj" />
