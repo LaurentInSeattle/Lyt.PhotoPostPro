@@ -11,6 +11,32 @@
 
 	Background="Transparent"
 	>
+	<UserControl.Styles>
+		<!-- Base class for the custom button -->
+		<Style Selector="Button">
+			<Setter Property="Background" Value="{StaticResource LightAqua_3_080}" />
+			<Setter Property="Foreground" Value="{StaticResource LightAqua_3_080}" />
+			<Setter Property="BorderBrush" Value="{StaticResource LightAqua_0_120}" />
+			<Setter Property="BorderThickness" Value="2" />
+		</Style>
+	
+		<!-- Hover state color (:pointerover) -->
+		<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{StaticResource OrangePeel_0_100}" />
+			<Setter Property="Foreground" Value="{StaticResource OrangePeel_0_100}" />
+			<Setter Property="BorderBrush" Value="{StaticResource OrangePeel_0_080}" />
+			<Setter Property="BorderThickness" Value="2" />
+		</Style>
+	
+		<!-- Pressed state color (:pressed) -->
+		<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{StaticResource OrangePeel_0_100}" />
+			<Setter Property="Foreground" Value="{StaticResource OrangePeel_0_100}" />
+			<Setter Property="BorderBrush" Value="{StaticResource OrangePeel_1_100}" />
+			<Setter Property="BorderThickness" Value="4" />
+		</Style>
+	</UserControl.Styles>
+
 	<Grid
 		>
 		<Grid.RowDefinitions>
@@ -41,11 +67,11 @@
 		<Button
 			Grid.Row="3" Grid.Column="1"
 			Command="{Binding OnOpen}"
-			MaxHeight="800" MaxWidth="800"
+			MaxHeight="840" MaxWidth="860"
 			>
 			<Image 
 				Source="{Binding ImageSource}"
-				Margin="8"
+				Margin="0"
 				/>
 		</Button>
 	</Grid>

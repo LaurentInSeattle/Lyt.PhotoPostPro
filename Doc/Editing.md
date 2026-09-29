@@ -16,7 +16,7 @@ or let a machine do it.
 
 - It will add business and professional value to your photos.
 
-# First Steps 
+# Preliminary Steps 
 
 - On a DSLR, make sure you are 'shooting' RAW. In such case, selecting both JPG and RAW is rarely useful.
 If using an iPhone 12 Pro or newer in the Pro series, use ProRAW to shoot to get DNG image files.
@@ -25,14 +25,14 @@ If using a Non-Pro iPhone use the High EFficiency format. (HEIC)
 - Always prefer the largest image pixel dimensions that your camera can handle.
 
 - Regularly empty your camera or iPhone of stored pictures. For DSLR, clearing entirely is best. 
-For iPhones, keep only the very best ones you want to share.
+For iPhones, keep only the very best ones you want to share via mail, messages, etc.
 
 - Don't buy just yet an expensive subscription to some famous 'pro' software. You will not need it yet.
 
 - Don't rush to try out complex image processing software. Most are very good, but also sometimes very hard to set up 
-and their learning curve is often very steep.
+and their learning curve is always very steep.
 
-- Computer monitor: Make sure that your computer monitor is properly setup and displays colours. 
+- Computer monitor: Make sure that your computer monitor is properly setup and displays accurate and faithful colours. 
 Ideally, you should 'color calibrate' your monitor regularly.
 
 - Backup: Setup a backup solution for the pictures on your computer.
@@ -42,7 +42,7 @@ Ideally, you should 'color calibrate' your monitor regularly.
 Culling is the very important process of reviewing a large batch of raw photos and selecting only the strongest 
 images while discarding duplicates, blurry shots, and technical mistakes **before** you start editing.
 
-## Why Culling is Important? 
+## Why Culling is SO Important? 
 
 - It saves time: Editing and tagging every single photo from a photoshoot wastes hours. 
 Culling cuts down the number of files so you only spend time on the best shots.
@@ -53,8 +53,10 @@ meets a high quality standard.
 - It prevents fatigue: Looking at hundreds of near-identical pictures might wears out your creative energy. 
 Culling early keeps your mind fresh for actual editing choices.
 
--- It saves storage space: High-resolution digital files take up massive amounts of hard drive and cloud capacity. Deleting unused raw files frees up valuable storage.
-It is often more satisfying: We often prefer a tight, curated gallery of amazing moments over a bloated collection filled 
+- It saves storage space: High-resolution digital files take up massive amounts of hard drive and cloud capacity. 
+Deleting unused raw files frees up valuable storage.
+
+- It is often more satisfying: We often prefer a tight, curated gallery of amazing moments over a bloated collection filled 
 with repetitive frames.
 
 # Tagging 
@@ -64,10 +66,12 @@ unorganized digital pile into a searchable library.
 
 You will:
 - Find images quickly: Typing a word like "dog" or a specific place name lets you locate one photo out of thousands in seconds.
-- Save time: You avoid scrolling endlessly through years of random pictures to find a single memory.
+
+- Save time: You definitely want to avoid scrolling endlessly through years of random pictures to find a single memory.
 
 Benefits:
 - Tags let you sort images by people, places, events, or objects.
+
 - Years later, a location or name tag reminds you exactly where a picture was taken or who was in it.
 
 Tagging is optional with Photo Rebel... But is strongly recommended.
@@ -100,6 +104,8 @@ ensuring you edit your best work first.
 - Simplifies Portfolio Building: Consistent ratings create a permanent, searchable record of 
 your top-tier images for sharing, printing, or publishing.
 
+- Again, Find images quickly: Filter using a star level your image library search results.
+
 Ideally, all images in your library should be at least rated 'Two Stars'.
 
 # Culling common mistakes
@@ -111,7 +117,7 @@ The time spent on the first frame is wasted. Cull the entire set before beginnin
 you're unfamiliar with, a type of subject — you'll want to keep images because of what they represent to you. 
 Assess the image, not the experience of taking it.
 
-- Delivering too many similar images. Keeping twenty nearly identical frames of the same moment doesn't 
+- Delivering too many similar images: Keeping twenty nearly identical frames of the same moment doesn't 
 show talent — it shows you didn't edit with any rigour. Select the best ones.
 
 - Over-trusting Artificial (so called) Intelligence on emotionally complex material. 
@@ -134,7 +140,7 @@ show talent — it shows you didn't edit with any rigour. Select the best ones.
 
 - Make sure that your edits are actually improving on the original. 
 
-# Step One - Geometry 
+# Editing - Step One - Geometry 
 
 It is very important to proceed in the correct order when editing. 
 Here is what most 'Pro' photographers consistently do recommend.
@@ -184,7 +190,7 @@ You would follow the classic "Rule of Thirds" or try more elaborate compositions
 
 This step is essential and should not be skipped.
 
-# Step Two - Exposure 
+# Editing - Step Two - Exposure 
 
 Once we are done with this 'Geometry' work, comes the 'image processing' sequence of steps.
 If your software has this functionalitiy available, you may wish proceed with these adjustments 
@@ -235,7 +241,7 @@ Multiplying spotlights is definitely not recommended, only one is best.
 
 Using 'Selective Exposure' tools to recover or rescue a poorly exposed image does not work so well.
 
-# Step Three - Colours
+# Editing - Step Three - Colours
 
 We can now turn colours back on our display. 
 
@@ -300,19 +306,21 @@ Always sharpen at the very end.
 Zoom in deeep into the image to 200% or more to evaluate judge sharpening: Just a bit of noise is usually fine. 
 “Crunchy” sharpening is not. There should be no color dots regularly spaced.
 
-# Step Four - Evaluation  
+# Editing - Step Four - Review and Export  
 
-Nobody watching you, you will be your very own judge: Compare side by side your final result and your edit. 
+Nobody watching you, you will be your very own judge: Compare side by side your editing final result and your original. 
 There MUST be improvements, it MUST be better.
 
 Export the raw image to the desired format and rate again the image.
 
 Post on the web, social media...
 
-Photo Rebel had saved all your editing steps and has left the original unchanged.
+Like all serious photo editing software, Photo Rebel had saved all your editing steps and has left the original unchanged.
 
 
-# Why Do My Edited Photos Look Bad?
+# Editing - Step Five - Post-Mostem 
+
+Why Do My Edited Photos Look Bad? Or Not so Good? 
 
 If your edits look “off” even though you’re trying all the sliders, you’re not alone. 
 
@@ -322,7 +330,7 @@ or edits that fight the original light.
 This section breaks down the most common mistakes so your photos look clean, natural, and 
 intentionally edited without the overprocessed vibe.
 
-## The Edit Is Too Strong: The #1 Problem
+## The Edit Is Too Strong: The Number ONE Problem
 
 When an edit looks bad, it’s usually not the idea; it’s the intensity. 
 Phones and social apps make it easy to push sliders too far.
@@ -330,11 +338,38 @@ Phones and social apps make it easy to push sliders too far.
 Try to reduce your adjustments by 30–50% and compare.
 Toggle “before/after.” If the edit shocks you, it’s too much.
 
+# Composition 
+
+Common mistakes for composition, rotation and cropping usually mitigate or even resolve most of them. 
+
+- Placing the subject dead-centre every time. 
+
+- Cropping someone at the wrist, ankle, or knee looks awkward and unintentional. 
+
+- Horizons are always horizontal. Period.
+
+- No subject, no foreground. Crop to zoom in, if needed.
+
+- No leading lines:  Roads, fences, rivers, staircases, etc. 
+
+- Declutter: Bring empty space, remove distracting elements.
+
+- Simplify: One thing to say, stronger. 
+
+This is where you should spend most of the time you want to dedicate to editing.
+
 ## Highlights Are Blown Out - Or Shadows Are Crushed
 
-Bright skies, windows, and white clothing get ruined fast. On the other side, deep shadows can turn into muddy black patches with no detail.
+Bright skies, windows, and white clothing get ruined fast. 
+On the other side, deep shadows can turn into muddy black patches with no detail.
 
 Keep detail in the brightest and darkest areas when possible.
+
+Do not try to illuminate entirely the image: you should not light a scene so 
+perfectly that every single detail is visible. When a scene is completely and evenly lit, 
+it looks flat, two-dimensional, and artificial. 
+Total illumination feels sterile, like a hospital room or a supermarket. 
+Allowing shadows into the image creates contrast, which instantly introduces mood, mystery, romance, or tension.
 
 ## White Balance Is Off: Everything Looks “Weird”
 

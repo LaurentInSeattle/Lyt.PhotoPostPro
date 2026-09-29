@@ -151,20 +151,37 @@ You can also modify the set of tags automatically added during the culling proce
 
 # The Editing Workflow 
 
+All edits are non destructive. Each time you start editing your chenges are memorized by Photo Rebel. If interupted, 
+you can continue later exactly at the same point in the process.
+
 ## Fixed Workflow
 
-## Orientation 
+Photo Rebel offers a fixed editing workflow of successive steps, a bit like a Computer 'Wizard' process. 
+You can navigate back and next at will. Some steps can be skipped, just click 'Next'.
 
-## Mirroring 
+## Orientation and Mirroring 
+
+Some photo misbehave and fail to present images correctly rotated. This step fixes that.
+
+Additionally you have the option here to mirror the image as you see fit.
 
 ## Straightening 
 
+You can rotate the image by very small angles to perfectly adjust the fine rotation of the image.
+Drag over the image the vertical and horizontal guides to align with image features, such as 
+buildings, the horizon, etc. and then rotate accordingly.
+
 ## Composition / Framing / Cropping
 
-    Remove distractions at the edges.
-    Use a consistent crop ratio across a series if it’s for a portfolio or Instagram.
+
 
 ## Denoising
+
+The denoising filter is designed to reduce the image 'grain' and digital noise in low light scenes or high ISO shots.
+
+Use only when truly needed, as this filter introduces some blur and may degrade a well-lit photo. 
+
+Avoid using this filter for portraits.
 
 ## Global Exposure
 
