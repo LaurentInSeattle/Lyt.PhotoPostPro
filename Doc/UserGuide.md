@@ -157,59 +157,145 @@ you can continue later exactly at the same point in the process.
 ## Fixed Workflow
 
 Photo Rebel offers a fixed editing workflow of successive steps, a bit like a Computer 'Wizard' process. 
-You can navigate back and next at will. Some steps can be skipped, just click 'Next'.
+You can navigate Back and Next at will. Some steps can be skipped, just click 'Next'. If think your current choices in a 
+given step are not so good, just click 'Reset' to start over.
 
 ## Orientation and Mirroring 
 
-Some photo misbehave and fail to present images correctly rotated. This step fixes that.
+Some photos previously processed with other photo software sometimes are not presented correctly rotated. This step fixes that, if needed.
 
 Additionally you have the option here to mirror the image as you see fit.
 
 ## Straightening 
 
-You can rotate the image by very small angles to perfectly adjust the fine rotation of the image.
+You can rotate the image by very small angles to perfectly adjust the rotation of the image.
 Drag over the image the vertical and horizontal guides to align with image features, such as 
 buildings, the horizon, etc. and then rotate accordingly.
 
 ## Composition / Framing / Cropping
 
-
+Drag over the image the external lines on the sides of the image to define a crop. Select in the combo-box 
+the composition guide lines that should help you figure out the most harmonious composition. It defaults to the 'classic' 
+rule of thirds. 
 
 ## Denoising
 
 The denoising filter is designed to reduce the image 'grain' and digital noise in low light scenes or high ISO shots.
 
-Use only when truly needed, as this filter introduces some blur and may degrade a well-lit photo. 
+You should use only when truly needed, as this filter introduces some blur and may degrade a well-lit photo. 
 
 Avoid using this filter for portraits.
 
 ## Global Exposure
 
-- Gamma 
-- Gain
-- Shift 
+- Shift: Add some absolute additive 'brightness' to all pixels of the image. 
+
+- Gain: Multiply 'brightness' to all pixels of the image. 
+
+- Gamma: Adjust exposure following a 'gamma' power curve, and more effective in the shadows and mid-tone areas. 
+
+This three settings 'work' together and are applied to the entire image.
 
 ## Hightlights and Shadows 
 
+Selectively adjust exposure for highlights and shadows areas of the image.
+
 ## Selective Exposure 
+
+Selectively adjust exposure on the sides of the image.
+
+## Spotlight 
+
+This effect will be available in the next version of Photo Rebel.
 
 ## White Balance
 
-## Contrast
+Photo Rebel offers three different ways to adjust White Balance. They work independantly.
+
+- Direct Color 'Temperature' adjustment.
+
+- 'Gray World': Works well for very colorful images. You can adjust the saturation parameter of the algorithm.
+
+- White Patch: Click on the source image on an area that should be white or gray. If the area is bright enough, 
+run the algorithm.
+
+
+## Global Contrast
+
+- Contrast: Increase contrast for all the image. 
+
+- Blur: Soften a bit the application of the contrast. 
+
+- Brightness: Can compensate for some loss of brightness when applying contrast. 
+
+This three settings 'work' together and are applied to the entire image.
+
+For more precise adjustments, you can instead adjust contrast on each color channel independantly 
+using the 'S-Curve' sliders.
 
 ## Color Grading with Lookup Tables 
 
+Choose a LUT to apply to the entire image, either by dropping one cube file in the drop zone or by 
+picking one in the combo-box.
+
+You can also run the 'LUT Explorer': Photo Rebel will apply all LUTs in your collection and let you choose 
+one, or not.
 
 ## Manual Color Grading
 
+You can also adjust colours by either: 
+
+- Increase or decrease global colour saturation.
+
+- Use vibrance: Colour vibrancy can be ajusted selectively on each colour.
 
 ## Sharpening 
 
-## Special Effects (Blenders) 
+The sharpen effect is applied globally to the entire image. Excessive sharpening can be detriment to image quality.
+You should zoom in deep into the image to check for any 'dammage' done.
 
-## Exports 
+## Selective Desaturation
+
+This effect will be available in the next version of Photo Rebel.
+
+## Special Effects
+
+In this final step of the editing 'wizard' you can pick a special filter in the combox and select an 
+amount, the strength of the effect.
+
+For example, the Grayscale filter will blend the original color image with a grayscale version of 
+it. A similar effect can be obtained with the 'Sepia' filter.
+
+## Review and Exports 
+
+Editing is complete and you can review the result of your edits: You compare side by side the final image and the original.
+
+At this point you can also change the rating of image. Five Stars will add the image to your Gallery during the export process.
+
+You can go back to make changes or decide to export: Photo Rebel will then create new images according to your 
+selection of 'export formats'. 
+
+Photo Rebel ships with a few default export formats that you can edit in the 'Tools' area.
+
+# Borders, Signatures and Watermarks 
+
+In the 'Tools' area you can define and edit: 
+
+- Signatures: A short text that can be drawn on top of the exported image.
+
+- Watermarks: A usually large text that will be drawn with transparency on top of the exported image.
+
+- Export Formats: An export format combines: 
+- The size of the exported image.
+- Its file format (Jpg, WebP, etc.) and when applicable the compression quality.
+- Optionally, the border style you may wish to add around the image.
+- Optionally, the signature to add on the image.
+- Optionally, the watermark to add on top of the image.
+
+A file format finally includes a file name postfix: This usually small but importantly unique sequence of characters 
+will be appended to the image original file so that many image files can be created without overwrites.
 
 # Your Gallery
 
-# Tools: Borders,  Signatures and Watermarks 
-
+You gallery holds your best photos: You can browse through then, launch a slide show and choose one 
+that will become your desktop 'wallpaper'.
