@@ -16,6 +16,8 @@ or let a machine do it.
 
 - It will add business and professional value to your photos.
 
+Image: Cover 
+
 # Preliminary Steps 
 
 - On a DSLR, make sure you are 'shooting' RAW. In such case, selecting both JPG and RAW is rarely useful.
@@ -168,7 +170,7 @@ Why Straightening Matters ?
 - Fixes visual balance: Human eyes naturally expect level lines. 
 A crooked horizon or leaning building creates subconscious tension or discomfort for the viewer.
 
-- Removes distractions: When lines are straight, the viewer focuses on your main subject instead of wondering 
+- Increases Focus: When lines are straight, the viewer focuses on your main subject instead of wondering 
 why the image feels "off".
 
 - Adds professionalism: Leveling turns a casual snapshot into a polished, deliberate piece of work.
@@ -285,12 +287,11 @@ Photo Rebel supports CUBE and 3DL lut files. It ships with a few sample LUT's an
 you may have downloaded from the web or created your self. The Photo Rebel 'LUT Explorer' helps you to easily pick one 
 in your library.  
 
-On the downside, LUT are often destructive, sometimes creating additional digital noise. 
-
+On the downside, LUT are often destructive, sometimes even creating additional digital noise. 
 
 ## Manual Color Grading
 
-Warning ! Over-saturation screams “Beginner”. Use wisely
+Warning ! Over-saturation screams “Beginner”. Use wisely...
 
 Portraits: 
 
@@ -338,7 +339,7 @@ Phones and social apps make it easy to push sliders too far.
 Try to reduce your adjustments by 30–50% and compare.
 Toggle “before/after.” If the edit shocks you, it’s too much.
 
-# Composition 
+## Composition 
 
 Common mistakes for composition, rotation and cropping usually mitigate or even resolve most of them. 
 
@@ -401,7 +402,7 @@ For portraits, if your model's skin looks sunburnt, saturation is almost always 
 Editing can enhance a good photo, but it can’t fully rescue harsh overhead sun, mixed indoor lighting, or super dark 
 blurry shots. If the light is fighting you, your edit will look worse the harder you push it.
 
-## Edits are fighting each other
+## Your Edits are Fighting against each other
 
 Many people apply a filter, then also crank another one (exposure, contrast or saturation) on top. 
 That stacking is a common reason edits look muddy or unnatural.

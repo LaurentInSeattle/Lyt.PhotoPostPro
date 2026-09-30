@@ -20,15 +20,16 @@ public sealed class Documents
     [
         new Document()
         {
+            Title = "Photo Editing",
+            Summary = "A comprehensive guide to Photo Editing",
+            ResourcePath = "Doc_en-US_Rotated.pdf",
+        },
+
+        new Document()
+        {
             Title = "User Guide",
             Summary = "This is the User Guide",
             ResourcePath = "Doc_en-US.pdf",
-        },
-        new Document()
-        {
-            Title = "How to Edit",
-            Summary = "This is the Newbie guide",
-            ResourcePath = "Doc_en-US_Rotated.pdf",
         },
     ];
 #pragma warning restore CA2211 

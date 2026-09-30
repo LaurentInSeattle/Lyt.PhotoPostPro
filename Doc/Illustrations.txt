@@ -1,0 +1,19 @@
+- Cover: Before / After Editing 
+
+- Tags : Show meta, tags and filters
+
+- Stars: Show and filter
+
+- Straightening: 
+
+- Framing
+
+- Exposure 
+
+- WB
+
+- LutExplorer
+
+- Oversaturated
+
+- Oversharpened
