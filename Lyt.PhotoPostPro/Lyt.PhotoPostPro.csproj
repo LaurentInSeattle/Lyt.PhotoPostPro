@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Documentation\Editing.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Languages\Lang_bg-BG.lang" />
     <EmbeddedResource Include="Languages\Lang_bn-BD.lang" />
     <EmbeddedResource Include="Languages\Lang_de-DE.lang" />
@@ -69,8 +73,8 @@
     <EmbeddedResource Include="Languages\Lang_pt-PT.lang" />
     <EmbeddedResource Include="Languages\Lang_th-TH.lang" />
     <EmbeddedResource Include="Languages\Lang_zh-TW.lang" />
-    <EmbeddedResource Include="Resources\Documentation\Doc_en-US_Rotated.pdf" />
     <EmbeddedResource Include="Resources\Documentation\Doc_en-US.pdf" />
+    <EmbeddedResource Include="Resources\Documentation\Editing.pdf" />
   </ItemGroup>
 
   <ItemGroup>

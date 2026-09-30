@@ -22,7 +22,7 @@ public sealed class Documents
         {
             Title = "Photo Editing",
             Summary = "A comprehensive guide to Photo Editing",
-            ResourcePath = "Doc_en-US_Rotated.pdf",
+            ResourcePath = "Editing.pdf",
         },
 
         new Document()
