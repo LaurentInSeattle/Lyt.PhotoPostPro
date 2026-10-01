@@ -42,27 +42,27 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="8" />
 			<RowDefinition Height="36" />
-			<RowDefinition Height="42" />
+			<RowDefinition Height="48" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="8" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="16" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="16" />
 		</Grid.ColumnDefinitions>
 
 		<TextBlock
 			Grid.Row="1" Grid.Column="1"			
-			Theme="{StaticResource H2}"
+			Theme="{StaticResource H1}"
 			Text="{Binding Title}"
 			HorizontalAlignment="Center"
 			/>
 		<TextBlock
 			Grid.Row="2" Grid.Column="1"			
 			Text="{Binding Summary}"
-			Theme="{StaticResource VeryLarge}"
-			HorizontalAlignment="Left"
+			Theme="{StaticResource H2}"
+			HorizontalAlignment="Center"
 			/>
 		<Button
 			Grid.Row="3" Grid.Column="1"

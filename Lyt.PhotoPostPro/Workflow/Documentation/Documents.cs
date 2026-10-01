@@ -21,15 +21,15 @@ public sealed class Documents
         new Document()
         {
             Title = "Photo Editing",
-            Summary = "A comprehensive guide to Photo Editing",
+            Summary = "A comprehensive guide to get started with Photo Editing.",
             ResourcePath = "Editing.pdf",
         },
 
         new Document()
         {
-            Title = "User Guide",
-            Summary = "This is the User Guide",
-            ResourcePath = "Doc_en-US.pdf",
+            Title = "Photo Rebel User Guide",
+            Summary = "How to make the most of your Photo Rebel software.",
+            ResourcePath = "UserGuide.pdf",
         },
     ];
 #pragma warning restore CA2211 

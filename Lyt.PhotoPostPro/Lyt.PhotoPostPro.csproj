@@ -50,10 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Documentation\Editing.pdf" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Languages\Lang_bg-BG.lang" />
     <EmbeddedResource Include="Languages\Lang_bn-BD.lang" />
     <EmbeddedResource Include="Languages\Lang_de-DE.lang" />
@@ -73,8 +69,8 @@
     <EmbeddedResource Include="Languages\Lang_pt-PT.lang" />
     <EmbeddedResource Include="Languages\Lang_th-TH.lang" />
     <EmbeddedResource Include="Languages\Lang_zh-TW.lang" />
-    <EmbeddedResource Include="Resources\Documentation\Doc_en-US.pdf" />
     <EmbeddedResource Include="Resources\Documentation\Editing.pdf" />
+    <EmbeddedResource Include="Resources\Documentation\UserGuide.pdf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,23 +90,4 @@
   <ItemGroup>
     <Folder Include="Controls\Panels\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Workflow\Documentation\DocumentTileView.axaml.cs">
-      <DependentUpon>DocumentTileView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Documentation\DocumentationView .axaml.cs">
-      <DependentUpon>DocumentationView .axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Documentation\DocumentView.axaml.cs">
-      <DependentUpon>DocumentView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Documentation\DocPageView.axaml.cs">
-      <DependentUpon>DocPageView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Workflow\Documentation\DocumentationToolbarView.axaml.cs">
-      <DependentUpon>DocumentationToolbarView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>
