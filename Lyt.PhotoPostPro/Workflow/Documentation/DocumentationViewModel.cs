@@ -1,26 +1,19 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Documentation;
 
-public sealed partial class DocumentationViewModel : 
+public sealed partial class DocumentationViewModel(PhotoPostProModel model, IToaster toaster) : 
     ViewModel<DocumentationView>, IRecipient<DocPageNavigateMessage>
 {
-    private readonly PhotoPostProModel model;
-    private readonly IToaster toaster;
+    private readonly PhotoPostProModel model = model;
+    private readonly IToaster toaster = toaster;
 
     [ObservableProperty]
     public partial bool DocumentIsOpened { get; set; }
 
     [ObservableProperty]
-    public partial DocumentViewModel DocumentViewModel { get; set; }
+    public partial DocumentViewModel DocumentViewModel { get; set; } = new();
 
     [ObservableProperty]
     public partial ObservableCollection<DocumentTileViewModel> Tiles { get; set; } = [];
-
-    public DocumentationViewModel(PhotoPostProModel model, IToaster toaster)
-    {
-        this.model = model;
-        this.toaster = toaster;
-        this.DocumentViewModel = new();
-    }
 
     public override async void Activate(object? activationParameters)
     {

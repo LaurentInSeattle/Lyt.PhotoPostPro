@@ -1,10 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Settings;
 
-// Do not add those ImageSharp namespaces to global using as some class definitions conflict
-// with the ones from Avalonia. (Point, Rectangle, etc.) 
-//using SixLabors.ImageSharp;
-//using SixLabors.ImageSharp.PixelFormats;
-
 public sealed partial class SettingsViewModel : ViewModel<SettingsView>
 {
     private readonly PhotoPostProModel model;

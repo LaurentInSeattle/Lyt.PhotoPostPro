@@ -1090,14 +1090,12 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
 
             if (this.AllowDifferentSizedItems && this.ItemSizeProvider is not null)
             {
-                double x = 0;
                 double rowHeight = 0;
-                double y = 0;
 
                 // Find start of row for _scrollToIndex
                 var start = this.FindItemOffset(this._scrollToIndex, wrappingWidth);
-                x = this.GetX(start);
-                y = this.GetY(start);
+                double x = this.GetX(start);
+                double y = this.GetY(start);
 
                 for (int i = this._scrollToIndex; i < itemCount; i++)
                 {
@@ -1115,6 +1113,7 @@ public class VirtualizingWrapPanel : VirtualizingPanel, IScrollSnapPointsInfo, I
                     x += this.GetWidth(itemSize);
                     rowHeight = Math.Max(rowHeight, this.GetHeight(itemSize));
                 }
+
                 sizeU = y + rowHeight;
             }
             else

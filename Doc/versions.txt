@@ -1,13 +1,13 @@
 Version Names / Git Tags / Dates 
  
 A: Alessandra - Private Beta - No Setup - No Store - Ava 12.1.2 - Released: September 16th
-
 B: Bianca - Open Beta - No Setup - No Store - Ava 12.1.2 - Released: September 21st
-
 C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12.1.2 - Released: October 1st
 
-D: Donna
-E: Emilia
+D: Donatella - Open Beta - First Run - Bug fixes - No Setup - No Store - Ava 12.1.4 ?  - Planned: Early/Mid October
+
+E: Emilia - Open Beta - Bug fixes - Store Setup - No Store - Ava 12.1.2? - Planned: Late October
+
 F: Federica 
 G: Giulia
 H: Helena 

@@ -1,8 +1,11 @@
 WIP
 ---
 
-Doc 
+- Evaluate QuestPDF for album generation. 
 
+- Spotlight effect, aka "Ray of Light" effect. ( https://en.wikipedia.org/wiki/Ellipse ) 
+
+- Selective Desaturation effect.
 
 Missing Features 
 ----------------
@@ -27,8 +30,6 @@ Code Quality Issues
 
 - Cleanup public vs internal about everywhere in UI ( mostly done for Model classes )
 
-- Launch the logging window minimized in both release and debug mode
-
 
 Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 -----------------------------------------------------------------------------
@@ -44,15 +45,12 @@ Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 V.Next 
 ------
 
-- Spotlight effect, aka "Ray of Light" effect.
 
 - Touch up / Blemish (after geometry) 
 
 - Save color grading as a LUT : Option to Generate LUT in the Export step 
 
 - Controls to show both before / after (for comparison) or just the current image in the viewer  
-
-- Add keywords to images and then Ability to search the library by Keywords.
 
 - Figure out if we need to implement exporting to scale and export to file size.  
  ( If yes, implement it.  If not, remove the enum values and code references. ) 

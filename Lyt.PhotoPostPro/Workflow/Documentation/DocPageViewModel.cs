@@ -1,18 +1,12 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Documentation;
 
-public sealed partial class DocPageViewModel : ViewModel<DocPageView>
+public sealed partial class DocPageViewModel(int pageNumber, Bitmap pageBitmap) : ViewModel<DocPageView>
 {
-    public readonly int PageNumber; 
+    public readonly int PageNumber = pageNumber; 
 
     [ObservableProperty]
-    public partial string PageNumberString { get; set; } = string.Empty; 
+    public partial string PageNumberString { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial Bitmap PageBitmap { get; set; }
-
-    public DocPageViewModel(int pageNumber, Bitmap pageBitmap)
-    {
-        this.PageNumber = pageNumber;
-        this.PageBitmap = pageBitmap; 
-    }
+    public partial Bitmap PageBitmap { get; set; } = pageBitmap;
 }

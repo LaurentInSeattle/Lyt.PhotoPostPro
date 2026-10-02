@@ -8,7 +8,7 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
-    public const string Version = "Chiara"; 
+    public const string Version = "Donatella"; 
 
     public App(
         IMtpService mtpService,

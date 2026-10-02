@@ -1,37 +1,25 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.Export;
 
-public sealed partial class ImageExportViewModel : ViewModel<ImageExportView>
+public sealed partial class ImageExportViewModel(
+    ExportViewModel parent, ImageExport imageExport) : ViewModel<ImageExportView>
 {
-    private readonly ExportViewModel parent;
-    private readonly ImageExport imageExport;
+    private readonly ExportViewModel parent = parent;
+    private readonly ImageExport imageExport = imageExport;
 
     [ObservableProperty]
-    public partial string Name { get; set; } = string.Empty;
+    public partial string Name { get; set; } =
+            string.Format("{0}  -  {1}", imageExport.FriendlyName, imageExport.OutputFormat.ToString());
 
     [ObservableProperty]
-    public partial string Description { get; set; } = string.Empty;
+    public partial string Description { get; set; } = imageExport.Description;
 
     [ObservableProperty]
-    public partial bool IsExportIncluded { get; set; } = false;
+    public partial bool IsExportIncluded { get; set; } = imageExport.IsGalleryFormat;
 
     [ObservableProperty]
-    public partial bool IsExportIncludedEnabled { get; set; } = false;
+    public partial bool IsExportIncludedEnabled { get; set; } = !imageExport.IsGalleryFormat;
 
     public ImageExport ImageExport => this.imageExport;
-
-    public ImageExportViewModel(
-        ExportViewModel parent, ImageExport imageExport)
-    {
-        this.parent = parent;
-        this.imageExport = imageExport;
-
-        // Special format is always exported 
-        this.IsExportIncluded = imageExport.IsGalleryFormat;
-        this.IsExportIncludedEnabled = ! imageExport.IsGalleryFormat;
-        this.Name = 
-            string.Format( "{0}  -  {1}" , imageExport.FriendlyName, imageExport.OutputFormat.ToString());
-        this.Description = imageExport.Description; 
-    }
 
     partial void OnIsExportIncludedChanged(bool value) => this.parent.OnExportSelectionChanged();
 }

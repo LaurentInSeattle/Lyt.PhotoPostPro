@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <IsAotCompatible>true</IsAotCompatible>
     <Platforms>x64</Platforms>
   </PropertyGroup>

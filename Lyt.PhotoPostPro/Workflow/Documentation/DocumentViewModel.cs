@@ -110,7 +110,7 @@ public sealed partial class DocumentViewModel :
     public void Receive(DocPageNavigateMessage message)
     {
         int pageCount = this.Pages.Count;
-        int newPageIndex = -1;
+        int newPageIndex;
         switch (message.Navigate)
         {
             case DocPageNavigateMessage.NavigateTo.First:

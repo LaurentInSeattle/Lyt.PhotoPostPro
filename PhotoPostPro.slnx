@@ -18,11 +18,8 @@
   </Folder>
   <Folder Name="/Doc/">
     <File Path="Doc/BetaTest.md" />
-    <File Path="Doc/Editing.md" />
-    <File Path="Doc/Illustrations.txt" />
     <File Path="Doc/PhotoSizesAndRatios.txt" />
     <File Path="Doc/privacy.txt" />
-    <File Path="Doc/UserGuide.md" />
     <File Path="Doc/versions.txt" />
   </Folder>
   <Folder Name="/Framework/">
