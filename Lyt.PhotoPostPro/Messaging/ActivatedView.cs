@@ -12,12 +12,18 @@ public enum ActivatedView : int
     Gallery,
     Import,
     Settings,
+    Documentation,
     Tools,
     Language,
 
     // Hidden views, not directly accessible from the main selector
     Process,
     Culling,
+
+    // Secondary views (activated from Tools) 
+    Signatures,
+    Watermarks,
+    Statistics,
 
     // Secondary views (activated from ProcessView) 
     // In alphabetical order, not the workflow order, which is determined elsewhere.
@@ -26,7 +32,8 @@ public enum ActivatedView : int
     Compose,
     Contrast,
     Denoise,
-    Export,
+    Desaturation,
+    Exports,
     Exposure,
     Filters,
     Lut,
@@ -37,9 +44,4 @@ public enum ActivatedView : int
     TouchUp,
     Vignette,
     WhiteBalance,
-    Exports,
-    Signatures,
-    Watermarks,
-    Statistics,
-    Documentation,
 }

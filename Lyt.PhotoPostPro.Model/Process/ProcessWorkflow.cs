@@ -31,6 +31,7 @@ public sealed class ProcessWorkflow
         var contrastStep = new ContrastStep(this);
         var lutStep = new LutStep(this);
         var colorStep = new ColorStep(this);
+        var desaturationStep = new DesaturationStep(this);
         var sharpenStep = new SharpenStep(this);
         var filtersStep = new FiltersStep(this);
         var exportStep = new ExportStep(this);
@@ -47,7 +48,7 @@ public sealed class ProcessWorkflow
             exposureStep, recoveryStep, vignetteStep, 
 
             // Constrast and Color 
-            whiteBalanceStep, contrastStep, lutStep, colorStep, sharpenStep, 
+            whiteBalanceStep, contrastStep, lutStep, colorStep, desaturationStep, sharpenStep, 
 
             // Final Filters
             filtersStep,

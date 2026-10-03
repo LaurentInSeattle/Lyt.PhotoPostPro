@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.ProcessSteps;
 
-using static Lyt.PhotoPostPro.Model.ProcessSteps.ColorStep;
-
 public sealed class DesaturationStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.DesaturationStepName)
 {
@@ -51,6 +49,7 @@ public sealed class DesaturationStep(ProcessWorkflow processWorkflow) :
         this.Feather = feather;
         this.SaturationBase = saturationBase;
         this.SaturationBoost = saturationBoost;
+        this.Identity = false; 
         this.SetIdentity();
         return this.Transform(withFrame);
     }
@@ -60,8 +59,9 @@ public sealed class DesaturationStep(ProcessWorkflow processWorkflow) :
         this.Identity = true;
 
         // Clear all properties so that the UI sliders are also reset to zero on Reset 
+        this.TargetHue = 0.0f;
         this.Tolerance = 20.0f;
-        this.Feather = 1.0f;
+        this.Feather = 5.0f;
         this.SaturationBase = 0.0f;
         this.SaturationBoost = 1.0f;
         this.SetIdentity();

@@ -139,6 +139,9 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<ColorViewModel>();
                 _ = services.AddSingleton<ColorToolboxViewModel>();
 
+                _ = services.AddSingleton<DesaturationViewModel>();
+                _ = services.AddSingleton<DesaturationToolboxViewModel>();
+
                 _ = services.AddSingleton<SharpenViewModel>();
                 _ = services.AddSingleton<SharpenToolboxViewModel>();
 

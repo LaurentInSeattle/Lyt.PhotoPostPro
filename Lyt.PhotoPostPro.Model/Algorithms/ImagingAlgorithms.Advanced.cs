@@ -703,6 +703,7 @@ internal static partial class ImagingAlgorithms
                 ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float lightness);
 
                 // Calculate the shortest distance on the 360-degree color wheel
+                hue *= 360.0f; // Normalize hue to [0, 360)
                 float diff = Math.Abs(hue - targetHue);
                 if (diff > 180.0f)
                 {
@@ -713,7 +714,7 @@ internal static partial class ImagingAlgorithms
                 if (diff > tolerance + feather)
                 {
                     // Completely outside target and feather zone -> Grayscale
-                    saturation = saturationBase;
+                    saturation *= saturationBase;
                 }
                 else if (diff > tolerance)
                 {
@@ -728,10 +729,11 @@ internal static partial class ImagingAlgorithms
                 }
 
                 // Convert back to RGB and update the pixel
+                hue /= 360.0f; // Normalize hue back to [0, 1]
                 ColorUtilities.HslToRgb(hue, saturation, lightness, out float tr, out float tg, out float tb);
-                pixelRow[x].R = (Half)tr;
-                pixelRow[x].G = (Half)tg;
-                pixelRow[x].B = (Half)tb;
+                pixelRow[x].R = ClipH((Half)tr);
+                pixelRow[x].G = ClipH((Half)tg);
+                pixelRow[x].B = ClipH((Half)tb);
             }
         });
     }

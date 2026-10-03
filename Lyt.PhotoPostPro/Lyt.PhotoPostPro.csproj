@@ -91,4 +91,13 @@
   <ItemGroup>
     <Folder Include="Controls\Panels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Workflow\Process\Desaturation\DesaturationToolboxView.axaml.cs">
+      <DependentUpon>DesaturationToolboxView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Process\Desaturation\DesaturationView.axaml.cs">
+      <DependentUpon>DesaturationView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

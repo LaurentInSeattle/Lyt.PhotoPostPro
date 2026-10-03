@@ -1,0 +1,157 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Desaturation.DesaturationToolboxView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Desaturation"
+	x:DataType="vm:DesaturationToolboxViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+	>	
+	<Grid
+		>
+		<Grid.ColumnDefinitions> 
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="70" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt Desaturation --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Tolerance slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Feather slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Base slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Boost slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt White Patch  --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Color sample and Button --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+			Text="{DynamicResource Workflow.Desaturation.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+
+		<!-- Tolerance slider --> 
+		<TextBlock
+			Grid.Column="0" Grid.Row="1"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="Tolerance"
+			/>
+		<Slider 
+			Grid.Column="1" Grid.Row="1"
+			TickFrequency="10" TickPlacement="BottomRight"
+			SmallChange="0.5" LargeChange="5"
+			Minimum="10.0" Maximum="60.0"
+			Value="{Binding ToleranceSliderValue}"
+			/>
+		<TextBlock
+			Grid.Column="2" Grid.Row="1"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="{Binding ToleranceString}"
+			/>
+
+		<!-- Feather slider --> 
+		<TextBlock
+			Grid.Column="0" Grid.Row="3"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="Feather"
+			/>
+		<Slider 
+			Grid.Column="1" Grid.Row="3"
+			TickFrequency="10" TickPlacement="BottomRight"
+			SmallChange="0.5" LargeChange="5"
+			Minimum="5.0" Maximum="20.0"
+			Value="{Binding FeatherSliderValue}"
+			/>
+		<TextBlock
+			Grid.Column="2" Grid.Row="3"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="{Binding FeatherString}"
+			/>
+
+		<!-- Saturation Base --> 
+		<TextBlock
+			Grid.Column="0" Grid.Row="5"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="Base"
+			/>
+		<Slider 
+			Grid.Column="1" Grid.Row="5"
+			TickFrequency="10" TickPlacement="BottomRight"
+			SmallChange="0.5" LargeChange="5"
+			Minimum="5.0" Maximum="20.0"
+			Value="{Binding SaturationBaseSliderValue}"
+			/>
+		<TextBlock
+			Grid.Column="2" Grid.Row="5"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="{Binding SaturationBaseString}"
+			/>
+
+		<!-- Saturation Boost --> 
+		<TextBlock
+			Grid.Column="0" Grid.Row="7"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="Boost"
+			/>
+		<Slider 
+			Grid.Column="1" Grid.Row="7"
+			TickFrequency="10" TickPlacement="BottomRight"
+			SmallChange="0.5" LargeChange="5"
+			Minimum="5.0" Maximum="20.0"
+			Value="{Binding SaturationBoostSliderValue}"
+			/>
+		<TextBlock
+			Grid.Column="2" Grid.Row="7"
+			Theme="{StaticResource Large}"
+			HorizontalAlignment="Left"
+			Text="{Binding SaturationBoostString}"
+			/>
+
+		<TextBlock
+			Grid.Row="9" 
+			Text="{DynamicResource Workflow.WhiteBalance.WhitePatch}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="10" Grid.ColumnSpan="3"
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="80" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Rectangle
+				Margin="8"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				Fill="{Binding PatchColor}"
+				Stroke="{Binding PatchColorState}"
+				StrokeThickness="2.5"
+				/>
+			<glyphs:GlyphButton
+				Grid.Column="1" 
+				Style="{StaticResource ControlIconButton}"
+				Layout="IconTextLeftSide"
+				GlyphSource="arrow_export"
+				Text="{DynamicResource Workflow.Desaturation.RunDesaturation}"
+				Command="{Binding OnWhitePatch}"
+				IsDisabled="{Binding RunDesaturationIsDisabled}"
+				Width="280"
+	    		/>
+		</Grid>
+	</Grid>
+</UserControl>

@@ -17,10 +17,11 @@ public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel
         { ProcessStep.ContrastStepName, ActivatedView.Contrast },
         { ProcessStep.LutStepName, ActivatedView.Lut },
         { ProcessStep.ColorStepName, ActivatedView.Color },
+        { ProcessStep.DesaturationStepName, ActivatedView.Desaturation },
         { ProcessStep.SharpenStepName, ActivatedView.Sharpen },
         { ProcessStep.VignetteStepName, ActivatedView.Vignette },
         { ProcessStep.FiltersStepName, ActivatedView.Filters },
-        { ProcessStep.ExportStepName, ActivatedView.Export },
+        { ProcessStep.ExportStepName, ActivatedView.Exports },
     };
 
     private readonly PhotoPostProModel model = photoPostProModel;
@@ -203,16 +204,15 @@ public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel
         // Avalonia has a ColorView, so we need to specify part of the namespace here to avoid ambiguity.
         Setup<ColorViewModel, Color.ColorView, ColorToolboxViewModel, ColorStep, ColorToolboxView>(ActivatedView.Color);
 
+        Setup<DesaturationViewModel, DesaturationView, DesaturationToolboxViewModel, DesaturationStep, DesaturationToolboxView>(ActivatedView.Desaturation);
         Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenStep, SharpenToolboxView>(ActivatedView.Sharpen);
         Setup<VignetteViewModel, VignetteView, VignetteToolboxViewModel, VignetteStep, VignetteToolboxView>(ActivatedView.Vignette);
         Setup<FiltersViewModel, FiltersView, FiltersToolboxViewModel, FiltersStep, FiltersToolboxView>(ActivatedView.Filters);
 
-        Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Export);
+        Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Exports);
 
         // Maybe later...
         //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
-        //Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseToolboxView>(ActivatedView.Denoise);
-        //Setup<CleanupViewModel, CleanupView, CleanupToolboxViewModel, CleanupToolboxView>(ActivatedView.Cleanup);
 
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
         var animationService = App.GetRequiredService<IAnimationService>();
