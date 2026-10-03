@@ -12,12 +12,13 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string ContrastStepName = "Contrast";
     public const string LutStepName = "Lut";
     public const string ColorStepName = "Color";
+    public const string DesaturationStepName = "Desaturation";
     public const string SharpenStepName = "Sharpen";
     public const string VignetteStepName = "Vignette";
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
-    public Dictionary<string, string> LocalizationStrings = new()
+    public static readonly Dictionary<string, string> LocalizationStrings = new()
     {
         {   OrientationStepName  ,  "Workflow.Orient.Title"          },
         {   StraightenStepName   ,  "Workflow.Straighten.Title"      },
@@ -30,6 +31,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   ContrastStepName     ,  "Workflow.Contrast.Title"        },
         {   LutStepName          ,  "Workflow.Lut.Title"             },
         {   ColorStepName        ,  "Workflow.Color.Title"           },
+        {   DesaturationStepName ,  "Workflow.Desaturation.Title"    },
         {   SharpenStepName      ,  "Workflow.Sharpen.Title"         },
         {   FiltersStepName      ,  "Workflow.Filters.Title"         },
         {   ExportStepName       ,  "Workflow.Export.Title"          },
@@ -37,12 +39,11 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 
     public string Name { get; set; } = name;
 
-    public string LocalizationName => this.LocalizationStrings[this.Name];
+    public string LocalizationName => LocalizationStrings[this.Name];
 
     public Image<RgbaHalf>? SourceImage { get; set; }
 
     public Image<RgbaHalf>? ResultImage { get; set; }
-
 
     internal ProcessStep? PreviousStep { get; set; }
 

@@ -2,6 +2,8 @@
 
 using static ImagingUtilities;
 
+using SixLabors.ImageSharp.PixelFormats;
+
 internal static partial class ImagingAlgorithms
 {
     #region Denoise 
@@ -671,6 +673,65 @@ internal static partial class ImagingAlgorithms
                 pixelRow[x].R = transformed.B;
                 pixelRow[x].G = transformed.G;
                 pixelRow[x].B = transformed.R;
+            }
+        });
+    }
+
+    #endregion LUT 
+
+    #region Selective Color Desaturation 
+
+    internal static void SelectiveDesaturation(
+        this Image<RgbaHalf> image,
+        float targetHue,
+        float tolerance = 20.0f,
+        float feather = 10.0f,
+        float saturationBase = 0.0f,
+        float saturationBoost = 1.0f)
+    {
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < pixelRow.Length; x++)
+            {
+                var pixel = pixelRow[x];
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
+                ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float lightness);
+
+                // Calculate the shortest distance on the 360-degree color wheel
+                float diff = Math.Abs(hue - targetHue);
+                if (diff > 180.0f)
+                {
+                    diff = 360.0f - diff;
+                }
+
+                // Determine desaturation amount
+                if (diff > tolerance + feather)
+                {
+                    // Completely outside target and feather zone -> Grayscale
+                    saturation = saturationBase;
+                }
+                else if (diff > tolerance)
+                {
+                    // Smoothly fade out saturation in the feather zone
+                    float ratio = 1.0f - ((diff - tolerance) / feather);
+                    saturation *= ratio;
+                }
+                else
+                {
+                    // If diff <= tolerance, we give the original saturation a little boost
+                    saturation *= saturationBoost;
+                }
+
+                // Convert back to RGB and update the pixel
+                ColorUtilities.HslToRgb(hue, saturation, lightness, out float tr, out float tg, out float tb);
+                pixelRow[x].R = (Half)tr;
+                pixelRow[x].G = (Half)tg;
+                pixelRow[x].B = (Half)tb;
             }
         });
     }

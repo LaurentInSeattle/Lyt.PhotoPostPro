@@ -70,7 +70,6 @@
   </Folder>
   <Folder Name="/TechNotes/">
     <File Path="TechNotes/Code.txt" />
-    <File Path="TechNotes/Desat.txt" />
     <File Path="TechNotes/TechnicalNotes.txt" />
   </Folder>
   <Folder Name="/Tools/">

@@ -306,6 +306,44 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void SelectiveDesaturation(
+        float targetHue, float tolerance, float feather, float saturationBase, float saturationBoost) =>
+        this.ApiAction(() =>
+        {
+            if ((targetHue < 0) || (targetHue > 360.0f))
+            {
+                return false;
+            }
+
+            if ((tolerance < 1.0f) || (tolerance > 60.0f))
+            {
+                return false;
+            }
+
+            if ((feather < 1.0f) || (feather > tolerance))
+            {
+                return false;
+            }
+
+            if ((saturationBase < 0.0f) || (saturationBase > 0.3f))
+            {
+                return false;
+            }
+
+            if ((saturationBoost < 1.0f) || (saturationBoost > 1.3f))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is DesaturationStep colorStep)
+            {
+                this.LastResultFrame = colorStep.SelectiveDesaturation(targetHue, tolerance, feather, saturationBase, saturationBoost);
+                return true;
+            }
+
+            return false;
+        });
+
     public void GlobalSharpen(float sharpenAmount) =>
         this.ApiAction(() =>
         {
