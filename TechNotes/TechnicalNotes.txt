@@ -39,22 +39,6 @@ Load the black-and-white edge mask you created as an alpha channel/mask to apply
 
 ------------
 
-Image Watermark
-
-
-To overlay one image on top of another with specific transparency:
-
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-
-using var baseImage = Image.Load("base.jpg");
-using var watermark = Image.Load("watermark.png");
-
-// Apply watermark at X: 50, Y: 50 with 30% opacity (0.3f)
-baseImage.Mutate(x => x.DrawImage(watermark, new Point(50, 50), 0.3f));
-
-baseImage.Save("output.jpg");
-
 
 
 	1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables

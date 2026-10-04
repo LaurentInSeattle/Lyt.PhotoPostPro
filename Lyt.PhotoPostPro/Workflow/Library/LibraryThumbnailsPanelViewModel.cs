@@ -11,7 +11,8 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     private readonly LibraryViewModel libraryViewModel;
 
     private HashSet<string>? metadataPaths;
-    private bool isFilterActive; 
+    private bool isFilterActive;
+    private bool isProgrammaticUpdate   ;
 
     public LibraryThumbnailsPanelViewModel(
         PhotoPostProModel model, LibraryViewModel libraryViewModel)
@@ -63,9 +64,21 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     public void SetViewingMode(Viewing viewing)
     {
-        this.ShowRatingFilter = viewing == Viewing.Captured;
-        this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll;
-        this.ShowSearchWidgets = viewing == Viewing.Captured;
+        With.Flag(ref isProgrammaticUpdate, () =>
+        {
+            if (viewing == Viewing.Unrated)
+            {
+                this.ShowAll = true;
+                this.ShowRatingFilter = false;
+                this.ShowSearchWidgets = false;
+            }
+            else
+            {
+                this.ShowSearchWidgets = true;
+                this.ShowRatingFilter = true;
+                this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll;
+            }
+        });
     }
 
     public IEnumerable<string> GetUnratedThumbnailsPaths()
@@ -142,14 +155,17 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         return false;
     }
 
-    partial void OnSortOrderChanged(bool value) => this.FilterAndSort();
-
     partial void OnShowAllChanged(bool value)
     {
-        // If we moved this setting, we can only be viewing in Captured Mode 
-        this.SetViewingMode(Viewing.Captured);
+        if (this.isProgrammaticUpdate)
+        {
+            return;
+        }
+
         this.FilterAndSort();
     }
+
+    partial void OnSortOrderChanged(bool value) => this.FilterAndSort();
 
     partial void OnRatingChanged(int value) => this.FilterAndSort();
 
