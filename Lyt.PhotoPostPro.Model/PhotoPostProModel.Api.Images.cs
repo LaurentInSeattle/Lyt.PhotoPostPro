@@ -315,12 +315,12 @@ public sealed partial class PhotoPostProModel : ModelBase
                 return false;
             }
 
-            if ((tolerance < 10.0f) || (tolerance > 60.0f))
+            if ((tolerance < 2.0f) || (tolerance > 50.0f))
             {
                 return false;
             }
 
-            if ((feather < 5.0f) || (feather > tolerance))
+            if ((feather < 2.0f) || (feather > 20.0f))
             {
                 return false;
             }

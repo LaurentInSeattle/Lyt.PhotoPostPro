@@ -49,7 +49,7 @@
 			Grid.Column="1" Grid.Row="1"
 			TickFrequency="10" TickPlacement="BottomRight"
 			SmallChange="0.5" LargeChange="5"
-			Minimum="10.0" Maximum="60.0"
+			Minimum="2.0" Maximum="50.0"
 			Value="{Binding ToleranceSliderValue}"
 			/>
 		<TextBlock
@@ -70,7 +70,7 @@
 			Grid.Column="1" Grid.Row="3"
 			TickFrequency="10" TickPlacement="BottomRight"
 			SmallChange="0.5" LargeChange="5"
-			Minimum="5.0" Maximum="20.0"
+			Minimum="2.0" Maximum="20.0"
 			Value="{Binding FeatherSliderValue}"
 			/>
 		<TextBlock
@@ -91,7 +91,7 @@
 			Grid.Column="1" Grid.Row="5"
 			TickFrequency="10" TickPlacement="BottomRight"
 			SmallChange="0.5" LargeChange="5"
-			Minimum="5.0" Maximum="20.0"
+			Minimum="0.0" Maximum="0.5"
 			Value="{Binding SaturationBaseSliderValue}"
 			/>
 		<TextBlock
@@ -112,7 +112,7 @@
 			Grid.Column="1" Grid.Row="7"
 			TickFrequency="10" TickPlacement="BottomRight"
 			SmallChange="0.5" LargeChange="5"
-			Minimum="5.0" Maximum="20.0"
+			Minimum="1.0" Maximum="1.5"
 			Value="{Binding SaturationBoostSliderValue}"
 			/>
 		<TextBlock

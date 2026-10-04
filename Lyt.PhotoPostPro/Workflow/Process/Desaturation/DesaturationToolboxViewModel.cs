@@ -74,9 +74,10 @@ public sealed partial class DesaturationToolboxViewModel :
             this.saturationBoost = 1.2f;
 
             // Sliders initial positions and string values
-            //this.TemperatureSliderValue = 0.01; // Force property changed 
-            //this.TemperatureSliderValue = this.temperature;
-            //this.SaturationSliderValue = this.saturationThreshold;
+            this.ToleranceSliderValue = this.tolerance; 
+            this.FeatherSliderValue = this.feather;
+            this.SaturationBaseSliderValue = this.saturationBase;
+            this.SaturationBoostSliderValue = this.saturationBoost;
 
             this.RunDesaturationIsDisabled = true;
             this.PatchColorState = new SolidColorBrush(Colors.Firebrick);
@@ -119,34 +120,50 @@ public sealed partial class DesaturationToolboxViewModel :
         {
 
             // Here we need to undo the operations done reading the sliders 
-            // No transform for the saturation threshold 
-            //this.SaturationSliderValue = step.SaturationThreshold;
-            //this.TemperatureSliderValue = step.Temperature;
+            this.ToleranceSliderValue = step.Tolerance;
+            this.FeatherSliderValue = step.Feather;
+            this.SaturationBaseSliderValue = step.SaturationBase;
+            this.SaturationBoostSliderValue = step.SaturationBoost;
 
-            //byte r = (byte)MathF.Floor(255.0f * step.Red);
-            //byte g = (byte)MathF.Floor(255.0f * step.Green);
-            //byte b = (byte)MathF.Floor(255.0f * step.Blue);
-            //var color = new global::Avalonia.Media.Color(255, r, g, b);
-            //this.SetTargetHue(color);
+            float hue = step.TargetHue;
+            ColorUtilities.HslToRgb(hue / 360.0f, 0.7f, 0.6f, out float r, out float g, out float b);
+            var color = new global::Avalonia.Media.Color(255, (byte)(r * 255.0f), (byte)(g * 255.0f), (byte )(b * 255.0f));
+            this.SetTargetHue(color);
         });
     }
 
 
-    //partial void OnTemperatureSliderValueChanged(double value)
-    //{
-    //    // Slider sends -100.0 to +100.0, fine for the model  
-    //    this.temperature = (float)value;
-    //    this.TemperatureString = value.ToString("+0.0;-0.0;0.0");
-    //    this.UpdateModel();
-    //}
+    partial void OnToleranceSliderValueChanged(double value)
+    {
+        // Slider sends value fine for the model  
+        this.tolerance = (float)value;
+        this.ToleranceString = value.ToString("+0.0;-0.0;0.0");
+        this.UpdateModel();
+    }
 
-    //partial void OnSaturationSliderValueChanged(double value)
-    //{
-    //    // Slider sends 0.0 to +1.0, fine for the model  
-    //    this.saturationThreshold = (float)value;
-    //    this.SaturationString = value.ToString("+0.00;-0.00;0.00");
-    //    this.UpdateModel();
-    //}
+    partial void OnFeatherSliderValueChanged(double value)
+    {
+        // Slider sends value fine for the model  
+        this.feather = (float)value;
+        this.FeatherString = value.ToString("+0.0;-0.0;0.0");
+        this.UpdateModel();
+    }
+
+    partial void OnSaturationBaseSliderValueChanged(double value)
+    {
+        // Slider sends value fine for the model  
+        this.saturationBase = (float)value;
+        this.SaturationBaseString = value.ToString("+0.0;-0.0;0.0");
+        this.UpdateModel();
+    }
+
+    partial void OnSaturationBoostSliderValueChanged(double value)
+    {
+        // Slider sends value fine for the model  
+        this.saturationBoost = (float)value;
+        this.SaturationBoostString = value.ToString("+0.0;-0.0;0.0");
+        this.UpdateModel();
+    }
 
     private void UpdateModel(bool fromButton = false)
     {
