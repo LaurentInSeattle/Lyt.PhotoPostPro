@@ -30,7 +30,20 @@ public sealed class DesaturationStep(ProcessWorkflow processWorkflow) :
 
     internal override void PerformStep(ProcessParameters ppp)
     {
-        // this.Saturation(ppp.ColorSaturationAmount, withFrame: false);
+        if (ppp.DesaturationIdentity)
+        {
+            this.Clear();
+        }
+        else
+        {
+            this.SelectiveDesaturation(
+                ppp.DesaturationTargetHue, 
+                ppp.DesaturationTolerance, 
+                ppp.DesaturationFeather, 
+                ppp.DesaturationSaturationBase, 
+                ppp.DesaturationSaturationBoost,
+                withFrame: false);
+        }
     }
 
     internal override Frame? Transform(bool withFrame = true)

@@ -36,11 +36,10 @@ public sealed partial class ShellViewModel
         this.Subscribe<LanguageChangedMessage>();
     }
 
-    public Panel ModalHost => this.View.ToasterHost; 
+    public Panel ModalHost => this.View.ToasterHost;
 
     public void Receive(LanguageChangedMessage _)
-    {
-    }
+        => this.LocalizeAppTitle(); 
 
     public void Receive(ToolbarCommandMessage message)
     {
@@ -84,7 +83,7 @@ public sealed partial class ShellViewModel
             throw new Exception("Failed to startup...");
         }
 
-        this.AppName = string.Format("{0} - ( {1} )", this.Localize("Shell.AppName"), App.Version);
+        this.LocalizeAppTitle();
 
         // Create all statics views and bind them 
         this.SetupWorkflow();
@@ -104,6 +103,9 @@ public sealed partial class ShellViewModel
 
         this.Logger.Debug("OnViewLoaded complete");
     }
+
+    private void LocalizeAppTitle()
+        => this.AppName = string.Format("{0} - ( {1} )", this.Localize("Shell.AppName"), App.Version);
 
     private void SetupWorkflow()
     {

@@ -125,6 +125,21 @@ public sealed class ProcessParameters
 
     public float ColorBlueAmount { get; set; }
 
+
+    // Desaturation
+
+    public bool DesaturationIdentity { get; set; }
+
+    public float DesaturationTargetHue { get; set; }
+
+    public float DesaturationTolerance { get; set; }
+
+    public float DesaturationFeather { get; set; }
+
+    public float DesaturationSaturationBase { get; set; }
+
+    public float DesaturationSaturationBoost { get; set; }
+
     // Sharpen
 
     public SharpenAlgorithm SharpenAlgorithm { get; set; }
@@ -213,6 +228,14 @@ public sealed class ProcessParameters
         this.ColorBlueAmount = colorStep.BlueAmount;
         this.ColorSaturationAmount = colorStep.SaturationAmount;
 
+        var desaturationStep = workflow.Get<DesaturationStep>();
+        this.DesaturationIdentity = desaturationStep.Identity;
+        this.DesaturationTargetHue = desaturationStep.TargetHue;
+        this.DesaturationTolerance = desaturationStep.Tolerance;
+        this.DesaturationFeather = desaturationStep.Feather;
+        this.DesaturationSaturationBase = desaturationStep.SaturationBase;
+        this.DesaturationSaturationBoost = desaturationStep.SaturationBoost;
+
         var sharpenStep = workflow.Get<SharpenStep>();
         this.SharpenAlgorithm = sharpenStep.Algorithm;
         this.SharpenSharpenAmount = sharpenStep.SharpenAmount;
@@ -289,6 +312,14 @@ public sealed class ProcessParameters
         colorStep.GreenAmount = this.ColorGreenAmount;
         colorStep.BlueAmount = this.ColorBlueAmount;
         colorStep.SaturationAmount = this.ColorSaturationAmount;
+
+        var desaturationStep = workflow.Get<DesaturationStep>();
+        desaturationStep.Identity = this.DesaturationIdentity;
+        desaturationStep.TargetHue = this.DesaturationTargetHue;
+        desaturationStep.Tolerance = this.DesaturationTolerance;
+        desaturationStep.Feather = this.DesaturationFeather;
+        desaturationStep.SaturationBase = this.DesaturationSaturationBase;
+        desaturationStep.SaturationBoost = this.DesaturationSaturationBoost;
 
         var sharpenStep = workflow.Get<SharpenStep>();
         sharpenStep.Algorithm = this.SharpenAlgorithm;

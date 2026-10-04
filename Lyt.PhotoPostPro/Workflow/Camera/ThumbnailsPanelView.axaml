@@ -30,11 +30,6 @@
 				Fill="#70000020"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 				/>
-			<TextBlock
-				Grid.Row="1"
-				Text="{DynamicResource Workflow.Camera.Thumbs.Show}"
-				Theme="{StaticResource H3}"
-				/>
 			<toggle:ToggleSwitch
 				x:Name="ShowInProgressSwitch"
 				Margin="4 0 8 0"
@@ -95,33 +90,6 @@
 				Width="80" Height="36" 
 				Margin="20 0 0 0"
 				/>
-			<!-- Not Really useful - Consider deleting if temporary test removal is OK 
-			<TextBlock
-				Theme="{StaticResource H3}"
-				Margin="10 0 0 0"
-				Text="{DynamicResource Workflow.Camera.Thumbs.ToggleAll}"
-				/>
-			<glyphs:GlyphButton
-				Style="{StaticResource PanelIconButton}"
-				Layout="IconOnly"
-				GlyphSource="folder"
-				GlyphStrokeThickness="0.1"
-				Command="{Binding OnMarkAllToAddToLibrary}"
-				CommandParameter="Toggle"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
-				/>
-			<glyphs:GlyphButton
-				Style="{StaticResource PanelIconButton}"
-				Layout="IconOnly"
-				GlyphSource="camera"
-				GlyphStrokeThickness="0.1"
-				Command="{Binding OnMarkAllToRemoveFromCamera}"
-				CommandParameter="Toggle"
-				Width="36" Height="36" 
-				Margin="10 0 0 0"
-				/>
-			-->
 		</StackPanel>
 		<TextBlock
 			Grid.Row="1"

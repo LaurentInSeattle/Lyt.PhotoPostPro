@@ -10,7 +10,7 @@ public sealed partial class DesaturationToolboxViewModel :
     private float tolerance;
     private float feather;
     private float saturationBase;
-    private float saturationBoost; 
+    private float saturationBoost;
 
     private global::Avalonia.Media.Color huePatch;
 
@@ -74,7 +74,7 @@ public sealed partial class DesaturationToolboxViewModel :
             this.saturationBoost = 1.2f;
 
             // Sliders initial positions and string values
-            this.ToleranceSliderValue = this.tolerance; 
+            this.ToleranceSliderValue = this.tolerance;
             this.FeatherSliderValue = this.feather;
             this.SaturationBaseSliderValue = this.saturationBase;
             this.SaturationBoostSliderValue = this.saturationBoost;
@@ -101,9 +101,9 @@ public sealed partial class DesaturationToolboxViewModel :
         this.huePatch = patchColor;
         this.PatchColor = new SolidColorBrush(patchColor);
         ColorUtilities.RgbToHsl(
-            patchColor.R / 255.0f, patchColor.G / 255.0f, patchColor.B / 255.0f, 
+            patchColor.R / 255.0f, patchColor.G / 255.0f, patchColor.B / 255.0f,
             out float hue, out float sat, out float lit);
-        this.targetHue = hue * 360.0f; 
+        this.targetHue = hue * 360.0f;
         this.RunDesaturationIsDisabled = false;
         this.PatchColorState = new SolidColorBrush(Colors.LightGreen);
     }
@@ -127,7 +127,7 @@ public sealed partial class DesaturationToolboxViewModel :
 
             float hue = step.TargetHue;
             ColorUtilities.HslToRgb(hue / 360.0f, 0.7f, 0.6f, out float r, out float g, out float b);
-            var color = new global::Avalonia.Media.Color(255, (byte)(r * 255.0f), (byte)(g * 255.0f), (byte )(b * 255.0f));
+            var color = new global::Avalonia.Media.Color(255, (byte)(r * 255.0f), (byte)(g * 255.0f), (byte)(b * 255.0f));
             this.SetTargetHue(color);
         });
     }
@@ -153,7 +153,7 @@ public sealed partial class DesaturationToolboxViewModel :
     {
         // Slider sends value fine for the model  
         this.saturationBase = (float)value;
-        this.SaturationBaseString = value.ToString("+0.0;-0.0;0.0");
+        this.SaturationBaseString = value.ToString("+0.00;-0.00;0.00");
         this.UpdateModel();
     }
 
@@ -161,7 +161,7 @@ public sealed partial class DesaturationToolboxViewModel :
     {
         // Slider sends value fine for the model  
         this.saturationBoost = (float)value;
-        this.SaturationBoostString = value.ToString("+0.0;-0.0;0.0");
+        this.SaturationBoostString = value.ToString("+0.00;-0.00;0.00");
         this.UpdateModel();
     }
 
@@ -172,9 +172,9 @@ public sealed partial class DesaturationToolboxViewModel :
             return;
         }
 
-        if ( this.RunDesaturationIsDisabled)
+        if (this.RunDesaturationIsDisabled)
         {
-            return; 
+            return;
         }
 
         if (fromButton)
