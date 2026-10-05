@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Đóng</system:String>
 
+    <system:String x:Key="Toast.Error">Lỗi</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel  ~  Hậu kỳ Nhiếp ảnh</system:String>
 
     <system:String x:Key="Shell.About">Về...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Chào mừng tới PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Tập tin này không tồn tại.</system:String>
+
+    <system:String x:Key="File.TooSmall">Tập tin này quá nhỏ.</system:String>
+
+    <system:String x:Key="File.TooBig">Hồ sơ này quá lớn.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Tập tin này không phải là tập tin ảnh hay định dạng tập tin ảnh không được hỗ trợ.</system:String>
+
+    <system:String x:Key="File.CantRead">Tập tin này không thể đọc, có thể bị khoá.</system:String>
+
+    <system:String x:Key="File.FailRead">Lỗi mở và đọc tập tin này.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Tập tin ảnh này có thể bị hỏng hoặc định dạng tập tin ảnh không khớp với phần mở rộng tập tin.</system:String>
+
+    <system:String x:Key="File.Exception">Gặp lỗi khi xử lý tập tin ảnh này.</system:String>
+
     <system:String x:Key="Shell.Folder">Thư viện</system:String>
 
     <system:String x:Key="Shell.Camera">Máy ảnh</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Thiết lập</system:String>
 
     <system:String x:Key="Shell.Tools">Công cụ</system:String>
+
+    <system:String x:Key="Shell.Documentation">Tài liệu</system:String>
 
     <system:String x:Key="Shell.Language">Ngôn ngữ</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Không thủy ấn</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Không có chữ ký</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Lùi</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Đầu</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Lùi</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Kế</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Cuối</system:String>
 
     <system:String x:Key="Gallery.Empty">Phòng trưng bày tốt nhất của bạn năm ngôi sao là trống rỗng.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">Lục:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Xanh nước biển:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Giảm độ bão hòa chọn</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Điều chỉnh độ bão hoà của màu cụ thể trong ảnh. Chọn màu đích trong ảnh gốc.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Lòng khoan dung</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Lông vũ</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Cơ bản</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Khởi động</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Đắp màu đã chọn</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Chạy thuật toán</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Mài sắc</system:String>
 

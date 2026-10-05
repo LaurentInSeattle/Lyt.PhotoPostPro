@@ -17,10 +17,7 @@ public sealed class DesaturationStep(ProcessWorkflow processWorkflow) :
 
     internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
-    protected override void SetIdentity()
-    {
-        base.IsIdentity = this.Identity;
-    }
+    protected override void SetIdentity() => base.IsIdentity = this.Identity;
 
     internal override Frame? Reset()
     {

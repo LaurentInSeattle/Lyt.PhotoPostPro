@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">затвори</system:String>
 
+    <system:String x:Key="Toast.Error">Грешка</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - Постобработка на снимки</system:String>
 
     <system:String x:Key="Shell.About">Относно...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Добре дошли във PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Този файл не съществува.</system:String>
+
+    <system:String x:Key="File.TooSmall">Този файл е твърде малък.</system:String>
+
+    <system:String x:Key="File.TooBig">Този файл е твърде голям.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Файлът не е файл с изображения или форматът с изображения не се поддържа.</system:String>
+
+    <system:String x:Key="File.CantRead">Файлът не може да бъде прочетен, може би е заключен.</system:String>
+
+    <system:String x:Key="File.FailRead">Грешка при отваряне и четене на файла.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Файлът с изображенията вероятно е повреден или форматът с изображенията не съвпада с разширението на файла.</system:String>
+
+    <system:String x:Key="File.Exception">Грешка при обработка на файла с изображения.</system:String>
+
     <system:String x:Key="Shell.Folder">Библиотека</system:String>
 
     <system:String x:Key="Shell.Camera">Камера</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Настройки</system:String>
 
     <system:String x:Key="Shell.Tools">Инструменти</system:String>
+
+    <system:String x:Key="Shell.Documentation">Документация</system:String>
 
     <system:String x:Key="Shell.Language">език</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Няма воден знак</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Без подпис</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Назад</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Първо</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Предишен</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Следващият</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Последно</system:String>
 
     <system:String x:Key="Gallery.Empty">Вашата галерия с най-добрите пет звезди е празна.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">зелено:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">синьо:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Селективно отчаяние</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Настройте насищането на специфични цветове в изображението. Изберете цвят на целта в изображението на източника.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Допустимост</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Пера</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">База</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Буут</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Избор на цвят</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Стартирайте алгоритъма</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Изостряне</system:String>
 

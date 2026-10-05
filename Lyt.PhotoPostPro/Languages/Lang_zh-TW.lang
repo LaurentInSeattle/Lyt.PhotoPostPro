@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">關閉</system:String>
 
+    <system:String x:Key="Toast.Error">錯誤</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - 照片後製</system:String>
 
     <system:String x:Key="Shell.About">關於...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">歡迎來到照片反叛者！</system:String>
 
+    <system:String x:Key="File.NotExist">此檔案不存在 .</system:String>
+
+    <system:String x:Key="File.TooSmall">此檔案太小了 .</system:String>
+
+    <system:String x:Key="File.TooBig">這個檔案太大了.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">此檔案不是影像檔案, 或是不支援影像檔案格式 .</system:String>
+
+    <system:String x:Key="File.CantRead">此檔案無法被讀取, 可能已鎖入 .</system:String>
+
+    <system:String x:Key="File.FailRead">開啟并讀取此檔案失敗 .</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">此影像檔案可能已損壞或影像檔案格式不符合檔案延伸名 .</system:String>
+
+    <system:String x:Key="File.Exception">在處理此影像檔出錯 .</system:String>
+
     <system:String x:Key="Shell.Folder">圖書館</system:String>
 
     <system:String x:Key="Shell.Camera">相機</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">設定</system:String>
 
     <system:String x:Key="Shell.Tools">工具</system:String>
+
+    <system:String x:Key="Shell.Documentation">文件</system:String>
 
     <system:String x:Key="Shell.Language">語言</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">沒有水印</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">沒有簽名</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">后退</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">第 一 批</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">前一個</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">下一頁</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">最後</system:String>
 
     <system:String x:Key="Gallery.Empty">有"五星"好相片被取出.</system:String>
 
@@ -512,6 +542,22 @@
     <system:String x:Key="Workflow.Color.Green">綠色的：</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">藍色的：</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">有選擇地去饱和度</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">調整影像中特定顏色的饱和度 。 在來源影像中選擇目標顏色 .</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">二. 容忍</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">有花</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">基底</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">跳出</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">所選取的顏色补丁</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">執行算法</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">銳化</system:String>
 

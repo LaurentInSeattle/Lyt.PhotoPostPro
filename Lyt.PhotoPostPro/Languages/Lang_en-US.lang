@@ -161,6 +161,13 @@
 	<system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
 	<system:String x:Key="Tools.Editor.Signature.None">No Signature</system:String>
 
+	<!-- Documentation -->
+	<system:String x:Key="Workflow.Documentation.Back">Back</system:String>
+	<system:String x:Key="Workflow.Documentation.First">First</system:String>
+	<system:String x:Key="Workflow.Documentation.Previous">Previous</system:String>
+	<system:String x:Key="Workflow.Documentation.Next">Next</system:String>
+	<system:String x:Key="Workflow.Documentation.Last">Last</system:String>
+
 	<!-- Gallery -->
 	<system:String x:Key="Gallery.Empty">Your gallery of 'five stars' best pictures is empty.</system:String>
 	<system:String x:Key="Library.Empty">Your library of pictures is empty. Use 'Import' to add images.</system:String>
@@ -370,7 +377,17 @@
 	<system:String x:Key="Workflow.Color.Red">Red:</system:String>
 	<system:String x:Key="Workflow.Color.Green">Green:</system:String>
 	<system:String x:Key="Workflow.Color.Blue">Blue:</system:String>
-	
+
+	<!-- Workflow Desaturation -->
+	<system:String x:Key="Workflow.Desaturation.Title">Selective Desaturation</system:String>
+	<system:String x:Key="Workflow.Desaturation.Correction">Adjust the saturation of specific colors in the image. Select a target color in the source image. </system:String>
+	<system:String x:Key="Workflow.Desaturation.Tolerance">Tolerance</system:String>
+	<system:String x:Key="Workflow.Desaturation.Feather">Feather</system:String>
+	<system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
+	<system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
+	<system:String x:Key="Workflow.Desaturation.Patch">Selected Color Patch</system:String>
+	<system:String x:Key="Workflow.Desaturation.RunDesaturation">Run Algorithm</system:String>
+
 	<!-- Workflow Sharpen -->
 	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
 	<system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>

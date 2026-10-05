@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Fechar</system:String>
 
+    <system:String x:Key="Toast.Error">Erro</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - Processamento de Postagem de Fotos</system:String>
 
     <system:String x:Key="Shell.About">Sobre...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Bem-vindo ao PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Este ficheiro não existe.</system:String>
+
+    <system:String x:Key="File.TooSmall">Este ficheiro é muito pequeno.</system:String>
+
+    <system:String x:Key="File.TooBig">Este arquivo é muito grande.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Este arquivo não é um arquivo de imagem ou o formato do arquivo de imagem não é suportado.</system:String>
+
+    <system:String x:Key="File.CantRead">Este ficheiro não pode ser lido, está talvez bloqueado.</system:String>
+
+    <system:String x:Key="File.FailRead">Não foi possível abrir e ler este ficheiro.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Este arquivo de imagem está possivelmente corrompido ou o formato de arquivo de imagem não corresponde à extensão do arquivo.</system:String>
+
+    <system:String x:Key="File.Exception">Ocorreu um erro ao processar este ficheiro de imagem.</system:String>
+
     <system:String x:Key="Shell.Folder">Biblioteca</system:String>
 
     <system:String x:Key="Shell.Camera">Câmera</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Configurações</system:String>
 
     <system:String x:Key="Shell.Tools">Ferramentas</system:String>
+
+    <system:String x:Key="Shell.Documentation">Documentação</system:String>
 
     <system:String x:Key="Shell.Language">Língua</system:String>
 
@@ -175,6 +195,16 @@
 
     <system:String x:Key="Tools.Editor.Signature.None">Nenhuma Assinatura</system:String>
 
+    <system:String x:Key="Workflow.Documentation.Back">Voltar</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Primeiro</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Anterior</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Próxima</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Último</system:String>
+
     <system:String x:Key="Gallery.Empty">Sua galeria de 'cinco estrelas' melhores fotos está vazia.</system:String>
 
     <system:String x:Key="Library.Empty">Sua biblioteca de imagens está vazia. Use "Importar" para adicionar imagens.</system:String>
@@ -216,6 +246,10 @@
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rejeitar a Esquerda - Adicionar uma Estrela à Direita</system:String>
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definir palavras-chave (também conhecido por Tags)</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando dada uma estrela ou mais, portanto, mantidas na biblioteca, as imagens serão automaticamente 'tagged' com essas palavras-chave. 
+
+ ;Você será capaz de mudá-los a qualquer momento durante o processo de abate e classificação.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Palavras-chave (também conhecido por Etiquetas)</system:String>
 
@@ -510,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">Verde:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Azul:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Desaturação seletiva</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Ajuste a saturação de cores específicas na imagem. Selecione uma cor de destino na imagem de origem.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Tolerância</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Pena</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Correcção de Cores Seleccionada</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Executar o Algoritmo</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
 

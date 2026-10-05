@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Fermer</system:String>
 
+    <system:String x:Key="Toast.Error">Erreur</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebelle - Post-Traitement Photo</system:String>
 
     <system:String x:Key="Shell.About">A propos...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Bienvenue dans Photo Rebellion !</system:String>
 
+    <system:String x:Key="File.NotExist">Ce fichier n'existe pas.</system:String>
+
+    <system:String x:Key="File.TooSmall">Ce fichier est trop petit.</system:String>
+
+    <system:String x:Key="File.TooBig">Ce fichier est trop gros.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Ce fichier n'est pas un fichier image ou le format de fichier image n'est pas pris en charge.</system:String>
+
+    <system:String x:Key="File.CantRead">Ce fichier ne peut pas être lu, est peut-être verrouillé.</system:String>
+
+    <system:String x:Key="File.FailRead">Impossible d'ouvrir et de lire ce fichier.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Ce fichier image est éventuellement corrompu ou le format de fichier image ne correspond pas à l'extension de fichier.</system:String>
+
+    <system:String x:Key="File.Exception">Une erreur s'est produite lors du traitement de ce fichier image.</system:String>
+
     <system:String x:Key="Shell.Folder">Bibliothèque</system:String>
 
     <system:String x:Key="Shell.Camera">Caméra</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Paramètres</system:String>
 
     <system:String x:Key="Shell.Tools">Outils</system:String>
+
+    <system:String x:Key="Shell.Documentation">Documentation</system:String>
 
     <system:String x:Key="Shell.Language">Langue</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Pas de filigrane</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Pas de signature</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Précédent</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Première</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Précédent</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Suivant</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Dernier</system:String>
 
     <system:String x:Key="Gallery.Empty">Votre galerie 'cinq étoiles' des meilleures images est vide.</system:String>
 
@@ -512,6 +542,22 @@
     <system:String x:Key="Workflow.Color.Green">Vert :</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Bleu :</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Désaturation sélective</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Réglez la saturation des couleurs spécifiques de l'image. Sélectionnez une couleur cible dans l'image source.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Tolérance</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Plume</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Lot de couleurs sélectionné</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Courez l'algorithme</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Augmenter la netteté</system:String>
 

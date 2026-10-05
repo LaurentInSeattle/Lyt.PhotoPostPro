@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">닫다</system:String>
 
+    <system:String x:Key="Toast.Error">계정 정보</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - 사진 후처리</system:String>
 
     <system:String x:Key="Shell.About">에 대한...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel에 오신 것을 환영합니다!</system:String>
 
+    <system:String x:Key="File.NotExist">이 파일은 존재하지 않습니다.</system:String>
+
+    <system:String x:Key="File.TooSmall">이 파일은 너무 작습니다.</system:String>
+
+    <system:String x:Key="File.TooBig">이 파일은 너무 크다.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">이 파일은 이미지 파일이나 이미지 파일 형식이 지원되지 않습니다.</system:String>
+
+    <system:String x:Key="File.CantRead">이 파일은 읽을 수 없습니다.</system:String>
+
+    <system:String x:Key="File.FailRead">이 파일을 열고 읽을 실패.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">이 이미지 파일은 아마도 손상되거나 이미지 파일 형식은 파일 확장과 일치하지 않습니다.</system:String>
+
+    <system:String x:Key="File.Exception">이 이미지 파일을 처리하는 동안 오류가 발생했습니다.</system:String>
+
     <system:String x:Key="Shell.Folder">도서관</system:String>
 
     <system:String x:Key="Shell.Camera">카메라</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">설정</system:String>
 
     <system:String x:Key="Shell.Tools">도구</system:String>
+
+    <system:String x:Key="Shell.Documentation">회사연혁</system:String>
 
     <system:String x:Key="Shell.Language">언어</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">워터 마크 없음</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">No 서명</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">이름 *</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">한국어</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">이름 *</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">이름 *</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">이름 *</system:String>
 
     <system:String x:Key="Gallery.Empty">'five stars' 최고의 사진 갤러리가 비어 있습니다.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">녹색:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">파란색:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">선택적 특성</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">이미지의 특정 색상의 포화를 조정합니다. 소스 이미지의 대상 색상을 선택합니다.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">제품 정보</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">뚱 베어</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">기본 정보</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">더 보기</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">선택 색상 패치</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Algorithm 실행</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">갈다</system:String>
 

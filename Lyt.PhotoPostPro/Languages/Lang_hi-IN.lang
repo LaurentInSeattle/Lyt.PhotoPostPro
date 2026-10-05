@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">बंद करना</system:String>
 
+    <system:String x:Key="Toast.Error">त्रुटि</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - फोटो पोस्ट प्रोसेसिंग</system:String>
 
     <system:String x:Key="Shell.About">के बारे में...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel में आपका स्वागत है!</system:String>
 
+    <system:String x:Key="File.NotExist">यह फ़ाइल मौजूद नहीं है।.</system:String>
+
+    <system:String x:Key="File.TooSmall">यह फ़ाइल बहुत छोटी है।.</system:String>
+
+    <system:String x:Key="File.TooBig">यह फ़ाइल बहुत बड़ी है।.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">यह फ़ाइल एक छवि फ़ाइल नहीं है या छवि फ़ाइल प्रारूप समर्थित नहीं है।.</system:String>
+
+    <system:String x:Key="File.CantRead">इस फ़ाइल को पढ़ा नहीं जा सकता है, शायद लॉक हो सकता है।.</system:String>
+
+    <system:String x:Key="File.FailRead">इस फाइल को खोलने और पढ़ने में विफल रहा।.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">यह छवि संभवतः भ्रष्ट है या छवि फ़ाइल प्रारूप फ़ाइल एक्सटेंशन से मेल नहीं खाता है।.</system:String>
+
+    <system:String x:Key="File.Exception">इस छवि फ़ाइल को संसाधित करते समय त्रुटि हुई।.</system:String>
+
     <system:String x:Key="Shell.Folder">पुस्तकालय</system:String>
 
     <system:String x:Key="Shell.Camera">कैमरा</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
 
     <system:String x:Key="Shell.Tools">औजार</system:String>
+
+    <system:String x:Key="Shell.Documentation">दस्तावेज़ीकरण</system:String>
 
     <system:String x:Key="Shell.Language">भाषा</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">कोई वॉटरमार्क नहीं</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">कोई हस्ताक्षर नहीं</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">वापस</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">पहला</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">पिछला</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">अगला</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">अंतिम</system:String>
 
     <system:String x:Key="Gallery.Empty">आपकी गैलरी 'पाँच सितारों' सबसे अच्छा चित्र खाली है।.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">हरा:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">नीला:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">चयनात्मक Desaturation</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">छवि में विशिष्ट रंगों के संतृप्ति को समायोजित करें। स्रोत छवि में एक लक्ष्य रंग का चयन करें।.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">सहनशीलता</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">पंख</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">बेस</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">बूस्ट</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">चयनित रंग पैच</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">रन एल्गोरिथ्म</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">पैना</system:String>
 

@@ -19,7 +19,7 @@
 			<ColumnDefinition Width="70" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt Desaturation --> 
+			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Desaturation --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Tolerance slider --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Feather slider --> 
@@ -28,7 +28,7 @@
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Boost slider --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
-			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt White Patch  --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Color Patch  --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Color sample and Button --> 
 		</Grid.RowDefinitions>
 		<TextBlock
@@ -42,8 +42,8 @@
 		<TextBlock
 			Grid.Column="0" Grid.Row="1"
 			Theme="{StaticResource Large}"
-			HorizontalAlignment="Left"
-			Text="Tolerance"
+			HorizontalAlignment="Right"
+			Text="{DynamicResource Workflow.Desaturation.Tolerance}"
 			/>
 		<Slider 
 			Grid.Column="1" Grid.Row="1"
@@ -63,8 +63,8 @@
 		<TextBlock
 			Grid.Column="0" Grid.Row="3"
 			Theme="{StaticResource Large}"
-			HorizontalAlignment="Left"
-			Text="Feather"
+			HorizontalAlignment="Right"
+			Text="{DynamicResource Workflow.Desaturation.Feather}"
 			/>
 		<Slider 
 			Grid.Column="1" Grid.Row="3"
@@ -84,8 +84,8 @@
 		<TextBlock
 			Grid.Column="0" Grid.Row="5"
 			Theme="{StaticResource Large}"
-			HorizontalAlignment="Left"
-			Text="Base"
+			HorizontalAlignment="Right"
+			Text="{DynamicResource Workflow.Desaturation.Base}"
 			/>
 		<Slider 
 			Grid.Column="1" Grid.Row="5"
@@ -105,8 +105,8 @@
 		<TextBlock
 			Grid.Column="0" Grid.Row="7"
 			Theme="{StaticResource Large}"
-			HorizontalAlignment="Left"
-			Text="Boost"
+			HorizontalAlignment="Right"
+			Text="{DynamicResource Workflow.Desaturation.Boost}"
 			/>
 		<Slider 
 			Grid.Column="1" Grid.Row="7"
@@ -124,7 +124,7 @@
 
 		<TextBlock
 			Grid.Row="9" 
-			Text="{DynamicResource Workflow.WhiteBalance.WhitePatch}"
+			Text="{DynamicResource Workflow.Desaturation.Patch}"
 			Theme="{StaticResource Large}"
 			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>

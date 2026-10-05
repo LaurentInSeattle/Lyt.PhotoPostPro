@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Κοντά</system:String>
 
+    <system:String x:Key="Toast.Error">Σφάλμα</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - Επεξεργασία ανάρτησης φωτογραφιών</system:String>
 
     <system:String x:Key="Shell.About">Για...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Αυτό το αρχείο δεν υπάρχει.</system:String>
+
+    <system:String x:Key="File.TooSmall">Αυτός ο φάκελος είναι πολύ μικρός.</system:String>
+
+    <system:String x:Key="File.TooBig">Αυτός ο φάκελος είναι πολύ μεγάλος.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Αυτό το αρχείο δεν είναι αρχείο εικόνας ή η μορφή αρχείου εικόνας δεν υποστηρίζεται.</system:String>
+
+    <system:String x:Key="File.CantRead">Αυτό το αρχείο δεν μπορεί να διαβαστεί, είναι ίσως κλειδωμένο.</system:String>
+
+    <system:String x:Key="File.FailRead">Αποτυχία ανοίγματος και ανάγνωσης αυτού του αρχείου.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Αυτό το αρχείο εικόνας είναι πιθανώς κατεστραμμένο ή η μορφή αρχείου εικόνας δεν ταιριάζει με την επέκταση αρχείου.</system:String>
+
+    <system:String x:Key="File.Exception">Συνέβη ένα σφάλμα κατά την επεξεργασία αυτού του αρχείου εικόνας.</system:String>
+
     <system:String x:Key="Shell.Folder">Βιβλιοθήκη</system:String>
 
     <system:String x:Key="Shell.Camera">Κάμερα</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
 
     <system:String x:Key="Shell.Tools">Εργαλεία</system:String>
+
+    <system:String x:Key="Shell.Documentation">Τεκμηρίωση</system:String>
 
     <system:String x:Key="Shell.Language">Γλώσσα</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Χωρίς υδατογράφημα</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Χωρίς υπογραφή</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Πίσω</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Πρώτη</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Προηγούμενο</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Επόμενο</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Τελευταίο</system:String>
 
     <system:String x:Key="Gallery.Empty">Η γκαλερί σου με τις καλύτερες φωτογραφίες των πέντε αστέρων είναι άδεια.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">Πράσινος:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Μπλε:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Επιλεκτική αποκορύφωση</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Ρυθμίστε τον κορεσμό συγκεκριμένων χρωμάτων στην εικόνα. Επιλέξτε ένα χρώμα προορισμού στην εικόνα πηγής.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Ανοχή</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Φτερό</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Βάση</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Ενδυνάμωση</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Επιλεγμένη διόρθωση χρώματος</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Εκτέλεση του Αλγόριθμου</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Ακονίζω</system:String>
 

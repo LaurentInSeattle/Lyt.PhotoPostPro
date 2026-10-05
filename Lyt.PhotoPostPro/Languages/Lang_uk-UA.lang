@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Закрити</system:String>
 
+    <system:String x:Key="Toast.Error">Помилка</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - Постобробка фотографій</system:String>
 
     <system:String x:Key="Shell.About">Про...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Ласкаво просимо до PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Цей файл не існує.</system:String>
+
+    <system:String x:Key="File.TooSmall">Цей файл занадто невеликий.</system:String>
+
+    <system:String x:Key="File.TooBig">Цей файл занадто великий.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Цей файл не є файлом зображення або форматом файлів зображень не підтримується.</system:String>
+
+    <system:String x:Key="File.CantRead">Цей файл не можна прочитати, можливо, заблоковано.</system:String>
+
+    <system:String x:Key="File.FailRead">Щоб відкрити і читати цей файл.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Цей файл зображень, можливо, пошкоджений або формат файлу зображення не відповідає розширенню файлів.</system:String>
+
+    <system:String x:Key="File.Exception">Похибка сталася при обробці цього файлу зображень.</system:String>
+
     <system:String x:Key="Shell.Folder">Бібліотека</system:String>
 
     <system:String x:Key="Shell.Camera">Камера</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Налаштування</system:String>
 
     <system:String x:Key="Shell.Tools">Інструменти</system:String>
+
+    <system:String x:Key="Shell.Documentation">Документація</system:String>
 
     <system:String x:Key="Shell.Language">Мова</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Немає водяних знаків</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Немає підпису</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Зареєструватися</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Перший</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Попереднє</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Про нас</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Зареєструватися</system:String>
 
     <system:String x:Key="Gallery.Empty">Галерея 'five stars' Кращі фотографії порожній.</system:String>
 
@@ -512,6 +542,22 @@
     <system:String x:Key="Workflow.Color.Green">Зелений:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Синій:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Вибіркова відчайдушність</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">Регулювання насиченості специфічних кольорів в образі. Виберіть цільовий колір у вихідному зображенні.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Толстячки</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Плеймейт</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Головна</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Борошно</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Виберіть кольоровий патч</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Альгоритм</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Гостріти</system:String>
 

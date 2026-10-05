@@ -9,9 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
 
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
 	<StackPanel
 		Orientation="Horizontal"
@@ -24,7 +22,7 @@
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="arrow_left"
 			GlyphStrokeThickness="0.1"
-			Text="Back"  
+			Text="{DynamicResource Workflow.Documentation.Back}"
 			Width="72" 
 			Margin="4 4 40 4" BackgroundMargin="8"
 			Command="{Binding OnBack}"
@@ -35,7 +33,7 @@
 			GlyphSource="next"
 			GlyphStrokeThickness="0.1"
 			GlyphAngle="180"
-			Text="First"  
+			Text="{DynamicResource Workflow.Documentation.First}"
 			Width="72" Margin="4" BackgroundMargin="8"
 			Command="{Binding OnFirst}"
 			/>
@@ -45,7 +43,7 @@
 			GlyphSource="play"
 			GlyphStrokeThickness="0.1"
 			GlyphAngle="180"
-			Text="Previous"  
+			Text="{DynamicResource Workflow.Documentation.Previous}"
 			Width="72" Margin="4" BackgroundMargin="8"
 			Command="{Binding OnPrevious}"
 			/>
@@ -62,7 +60,7 @@
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="play"
 			GlyphStrokeThickness="0.1"
-			Text="Next"  
+			Text="{DynamicResource Workflow.Documentation.Next}"
 			Width="72" Margin="4" BackgroundMargin="8"
 			Command="{Binding OnNext}"
 			/>
@@ -70,7 +68,7 @@
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="next"
 			GlyphStrokeThickness="0.1"
-			Text="Last"  
+			Text="{DynamicResource Workflow.Documentation.Last}"
 			Width="72" Margin="4" BackgroundMargin="8"
 			Command="{Binding OnLast}"
 			/>

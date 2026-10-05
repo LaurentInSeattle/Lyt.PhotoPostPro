@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">ปิด</system:String>
 
+    <system:String x:Key="Toast.Error">ผิดพลาด</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - การทําการพิมพ์ภาพถ่าย</system:String>
 
     <system:String x:Key="Shell.About">เกี่ยวกับ...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">ยินดีต้อนรับสู่โฟโต้รีเบล!</system:String>
 
+    <system:String x:Key="File.NotExist">แฟ้มนี้ยังไม่มีอยู่.</system:String>
+
+    <system:String x:Key="File.TooSmall">แฟ้มนี้เล็กเกินไป.</system:String>
+
+    <system:String x:Key="File.TooBig">ไฟล์นี้ใหญ่เกินไป.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">ไม่รองรับแฟ้มรูปภาพหรือรูปแบบของแฟ้มภาพ.</system:String>
+
+    <system:String x:Key="File.CantRead">ไม่สามารถอ่านแฟ้มนี้ได้ อาจจะถูกล็อคอยู่.</system:String>
+
+    <system:String x:Key="File.FailRead">ล้มเหลวในการอ่านแฟ้มนี้.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">แฟ้มรูปภาพนี้อาจจะเสียหาย หรือรูปแบบของแฟ้มภาพไม่ตรงกับนามสกุลของแฟ้ม.</system:String>
+
+    <system:String x:Key="File.Exception">เกิดข้อผิดพลาดระหว่างประมวลผลแฟ้มอิมเมจนี้.</system:String>
+
     <system:String x:Key="Shell.Folder">ไลบรารี</system:String>
 
     <system:String x:Key="Shell.Camera">กล้อง</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">ตั้งค่า</system:String>
 
     <system:String x:Key="Shell.Tools">เครื่องมือ</system:String>
+
+    <system:String x:Key="Shell.Documentation">เอกสาร</system:String>
 
     <system:String x:Key="Shell.Language">ภาษา</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">ไม่มีลายน้ํา</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">ไม่มีลายเซ็น</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">กลับ</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">อันดับแรก</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">ก่อนหน้า</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">ต่อไป</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Last</system:String>
 
     <system:String x:Key="Gallery.Empty">แกลเลอรี่ดวงที่ 5 ของคุณ.</system:String>
 
@@ -512,6 +542,22 @@
     <system:String x:Key="Workflow.Color.Green">สีเขียว:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">สีน้ําเงิน:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">การ ลด ค่า ใช้ จ่าย</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">ปรับความอิ่มตัวของสีของภาพ เลือกสีเป้าหมายในภาพต้นฉบับ.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">ความ ถ่อม ใจ</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">ขน</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">ฐาน</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">หมุน & 90</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">ถาดเลือกสีที่เลือก</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">ประมวลผล Algorith</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">ความแหลม:</system:String>
 

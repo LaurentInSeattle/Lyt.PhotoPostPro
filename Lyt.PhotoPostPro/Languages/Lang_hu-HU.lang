@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">Közeli</system:String>
 
+    <system:String x:Key="Toast.Error">Hiba</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - Photo Post Processing</system:String>
 
     <system:String x:Key="Shell.About">Körülbelül...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">Üdvözli a PhotoRebel!</system:String>
 
+    <system:String x:Key="File.NotExist">Ez a fájl nem létezik.</system:String>
+
+    <system:String x:Key="File.TooSmall">Ez az akta túl kicsi.</system:String>
+
+    <system:String x:Key="File.TooBig">Ez az akta túl nagy.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">Ez a fájl nem képfájl, vagy a képfájl formátuma nem támogatott.</system:String>
+
+    <system:String x:Key="File.CantRead">Ez a fájl nem olvasható, talán zárva van.</system:String>
+
+    <system:String x:Key="File.FailRead">Nem sikerült megnyitni és elolvasni ezt a fájlt.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">Ez a képfájl esetleg hibás, vagy a képfájl formátuma nem egyezik a fájl kiterjesztésével.</system:String>
+
+    <system:String x:Key="File.Exception">Hiba történt a képfájl feldolgozása közben.</system:String>
+
     <system:String x:Key="Shell.Folder">Könyvtár</system:String>
 
     <system:String x:Key="Shell.Camera">Kamera</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 
     <system:String x:Key="Shell.Tools">Eszközök</system:String>
+
+    <system:String x:Key="Shell.Documentation">Dokumentáció</system:String>
 
     <system:String x:Key="Shell.Language">Nyelv</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">Nincs vízjel</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">Nincs aláírás</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">Vissza</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">Első</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">Előző</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">Következő</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">Utolsó</system:String>
 
     <system:String x:Key="Gallery.Empty">Az öt csillag legjobb képeinek galériája üres.</system:String>
 
@@ -512,6 +542,22 @@
     <system:String x:Key="Workflow.Color.Green">Zöld:</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">Kék:</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">Szelektív desaturálás</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">A kép sajátos színeinek telítettsége. Válassza ki a célszínt a forrásképben.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">Tolerancia</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">Toll</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">Alap</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">Fokozat</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">Válogatott színes tapasz</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Algoritmus futtatása</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Élesítés</system:String>
 

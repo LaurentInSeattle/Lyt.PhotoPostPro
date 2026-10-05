@@ -7,6 +7,8 @@
 
     <system:String x:Key="Toast.Dismiss">消去</system:String>
 
+    <system:String x:Key="Toast.Error">エラー</system:String>
+
     <system:String x:Key="Shell.AppName">Photo Rebel - 写真の後処理</system:String>
 
     <system:String x:Key="Shell.About">について...</system:String>
@@ -23,6 +25,22 @@
 
     <system:String x:Key="Shell.Greetings">フォトレベルへようこそ！</system:String>
 
+    <system:String x:Key="File.NotExist">このファイルは存在しません.</system:String>
+
+    <system:String x:Key="File.TooSmall">このファイルは小さいです.</system:String>
+
+    <system:String x:Key="File.TooBig">このファイルは大きすぎます.</system:String>
+
+    <system:String x:Key="File.ImageNotSupported">このファイルはイメージファイルではなく、画像ファイル形式はサポートされていません.</system:String>
+
+    <system:String x:Key="File.CantRead">このファイルは読み込まれることができません.</system:String>
+
+    <system:String x:Key="File.FailRead">このファイルを開いたり読んだりすることができません.</system:String>
+
+    <system:String x:Key="File.ImageNotDecoded">このイメージファイルが破損しているか、イメージファイルフォーマットがファイル拡張子と一致しない可能性があります.</system:String>
+
+    <system:String x:Key="File.Exception">この画像ファイルを処理するときにエラーが発生しました.</system:String>
+
     <system:String x:Key="Shell.Folder">フォルダー</system:String>
 
     <system:String x:Key="Shell.Camera">カメラ</system:String>
@@ -34,6 +52,8 @@
     <system:String x:Key="Shell.Settings">設定</system:String>
 
     <system:String x:Key="Shell.Tools">ツール</system:String>
+
+    <system:String x:Key="Shell.Documentation">ドキュメント</system:String>
 
     <system:String x:Key="Shell.Language">言語</system:String>
 
@@ -174,6 +194,16 @@
     <system:String x:Key="Tools.Editor.Watermark.None">ウォーターマークなし</system:String>
 
     <system:String x:Key="Tools.Editor.Signature.None">署名なし</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Back">バックナンバー</system:String>
+
+    <system:String x:Key="Workflow.Documentation.First">ファースト</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Previous">新着情報</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Next">次へ</system:String>
+
+    <system:String x:Key="Workflow.Documentation.Last">最近の投稿</system:String>
 
     <system:String x:Key="Gallery.Empty">'five Star'の最高の写真のギャラリーは空です.</system:String>
 
@@ -514,6 +544,22 @@
     <system:String x:Key="Workflow.Color.Green">緑</system:String>
 
     <system:String x:Key="Workflow.Color.Blue">青</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Title">選択的な飽和</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Correction">特定の色の彩度を調整します。 ソース画像の対象色を選択します.</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Tolerance">許容差</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Feather">フェザー</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Base">ベース</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Boost">ブースト</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Patch">選択された色のパッチ</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">アルゴリズムを実行</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">明確にする</system:String>
 

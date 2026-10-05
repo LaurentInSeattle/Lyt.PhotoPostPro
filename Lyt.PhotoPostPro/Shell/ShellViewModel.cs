@@ -169,7 +169,6 @@ public sealed partial class ShellViewModel
         //}
         #endregion  Unused for now 
 
-        
         // Views present in the main selector on the left  
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
