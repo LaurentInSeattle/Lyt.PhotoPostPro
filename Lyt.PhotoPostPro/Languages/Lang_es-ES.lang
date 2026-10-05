@@ -245,17 +245,17 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rechazar a la izquierda: agregar una estrella a la derecha</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definir Palabras clave (a.k.a. Tags)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Tags</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Cuando se le da una estrella o más, por lo tanto se guarda en la biblioteca, las imágenes se etiquetarán automáticamente con estas palabras clave. >#xD; curva#xA; ; Usted será capaz de cambiarlos en cualquier momento durante el proceso de culling y calificación.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Cuando se le da una estrella o más, por lo tanto se guarda en la biblioteca, las imágenes se etiquetarán automáticamente con estas etiquetas. >#xD; curva#xA; ; Usted será capaz de cambiarlos en cualquier momento durante el proceso de culling y calificación.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Palabras clave (a.k.a. Tags)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Etiquetas</system:String>
 
     <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambio</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">No se asignarán Palabras Claves a esta imagen.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">No se asignarán etiquetas a esta imagen.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">Cuando se le dé una estrella o más, por lo tanto guardado en la biblioteca, estas palabras clave serán asignadas a esta imagen.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">Cuando se le dé una estrella o más, por lo tanto guardado en la biblioteca, estas etiquetas serán asignadas a esta imagen.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Arrastre y suelte un archivo de imagen aquí para comenzar.</system:String>
 
@@ -303,7 +303,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Espacio de disco insuficiente disponible.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Palabras clave</system:String>
+    <system:String x:Key="Metadata.Keywords">Etiquetas</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Editar imágenes</system:String>
 

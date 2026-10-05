@@ -245,19 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">왼쪽 거부 - 오른쪽에 별 추가</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">키워드 정의 (a.k.a. 태그)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">정의 태그</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이미지는 이 키워드로 자동으로 '태그'가 될 것입니다. 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이미지는 이 꼬리표에 자동적으로 '태그'일 것입니다. 
 
  ;당신은 교수법 및 평가 과정에서 언제든지 변경할 수 있습니다.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">키워드 (a.k.a. 태그)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">이름 *</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">키워드 변경</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">공지사항</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">키워드가 이 이미지에 할당되지 않습니다.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">이 이미지에 태그가 할당되지 않습니다.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이 키워드는 이 이미지에 할당될 것입니다.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이 태그는 이 이미지에 할당될 것입니다.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
 
@@ -305,7 +305,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">사용 가능한 충분한 디스크 공간.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">키워드:</system:String>
+    <system:String x:Key="Metadata.Keywords">이름 *</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">편집 이미지 태그</system:String>
 

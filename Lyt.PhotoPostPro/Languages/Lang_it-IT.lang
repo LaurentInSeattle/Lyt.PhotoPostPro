@@ -245,17 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: Aggiungi una stella a destra</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire le parole chiave (a.k.a. Tags)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire i tag</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con queste parole chiave.&#xD;&#xA;&#xD;&#xA;Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con questi tag. 
 
-    <system:String x:Key="Workflow.Culling.Keywords">Parole chiave (a.k.a. Tags)</system:String>
+ ; Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambiare le parole chiave</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">Nessuna Parola chiave sarà assegnata a questa immagine.</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambiare tag</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">Quando viene data una stella o più, quindi conservata nella libreria, queste parole chiave saranno assegnate a questa immagine.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">No Tag sarà assegnato a questa immagine.</system:String>
+
+    <system:String x:Key="Workflow.Culling.WithKeywords">Quando viene data una stella o più, quindi conservata nella libreria, questi tag saranno assegnati a questa immagine.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>
 
@@ -303,7 +305,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficiente spazio disponibile su disco.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Parole chiave</system:String>
+    <system:String x:Key="Metadata.Keywords">Tags</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Modifica delle immagini</system:String>
 

@@ -245,17 +245,17 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">বাম থেকে প্রত্যাখ্যান করুন - ডানে একটি তারকা যোগ করুন</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">অভিব্যক্তি নির্দেশক শব্দ (a.c)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">ট্যাগ নির্ধারণ করুন</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">যখন এক বা একাধিক তারকাকে লাইব্রেরিতে রাখা হয়, তখন এই শব্দগুলোর সঙ্গে স্বয়ংক্রিয়ভাবে সংযুক্ত করা হবে । #xD; এবং #xAA; এবং #xD#xD; এবং #x#x#xD আপনি যে কোন সময়ে তাদের পরিবর্তন করতে পারবেন এই রোগ এবং রেটিং প্রক্রিয়ার সময়।.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">যখন এক বা একাধিক তারকাকে লাইব্রেরিতে রাখা হয়, তখন এই ট্যাগ সহ স্বয়ংক্রিয়ভাবে ছবিগুলোকে সংযুক্ত করা হবে । #xD; এবং #xAA; এবং #xD#xD; এবং #x#x#xD আপনি যে কোন সময়ে তাদের পরিবর্তন করতে পারবেন এই রোগ এবং রেটিং প্রক্রিয়ার সময়।.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">কীওয়ার্ড (Aa.K) ট্যাগ</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">ট্যাগ</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">মূলশব্দ পরিবর্তন করুন</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">ট্যাগ পরিবর্তন করো</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">এই ছবিটির জন্য কোন নির্দেশক শব্দ বরাদ্দ করা হবে না।.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">এই ফোল্ডারের মধ্যে কোনো ট্যাগ উপস্থিত নেই।.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">এক বা একাধিক তারকাকে যখন লাইব্রেরিতে রাখা হয়, তখন এই শব্দগুলোকে এই চিত্রের জন্য নিযুক্ত করা হবে ।.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">এই ট্যাগগুলোকে এই ছবির জন্য বরাদ্দ করা হবে ।.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
 
@@ -303,7 +303,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">ডিস্কে পর্যাপ্ত স্থান উপলব্ধ নেই।.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">মূলশব্দ</system:String>
+    <system:String x:Key="Metadata.Keywords">ট্যাগ</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">ছবি সম্পাদনা</system:String>
 

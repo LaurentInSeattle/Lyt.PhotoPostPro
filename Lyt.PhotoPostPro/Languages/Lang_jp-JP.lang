@@ -245,19 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">左を拒否 - 右に星を追加</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">キーワードを定義する (a.k.a. タグ)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">タグの定義</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1つの星以上を与えられた場合、ライブラリに保管されると、これらのキーワードで画像は自動的に「タグ付け」されます。 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1つの星以上を与えられた場合、したがってライブラリに保管されると、これらのタグで画像は自動的に「タグ付け」されます。 
 
  ;あなたは、彫刻と評価プロセスの間にいつでもそれらを変更することができます.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">キーワード (a.k.a. タグ)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">ニュース</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">キーワードの変更</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">変更タグ</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">キーワードがこの画像に割り当てられません.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">この画像にタグは割り当てられません.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">1つの星以上を与えられた場合、したがってライブラリに保持されると、これらのキーワードはこのイメージに割り当てられます.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">1つの星以上を与えられた場合、したがってライブラリに保管されると、これらのタグはこの画像に割り当てられます.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">ここに画像ファイルをドラッグ アンド ドロップして開始します。</system:String>
 
@@ -305,7 +305,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">ディスク容量が不足しています.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">キーワード</system:String>
+    <system:String x:Key="Metadata.Keywords">ニュース</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">画像タグの編集</system:String>
 

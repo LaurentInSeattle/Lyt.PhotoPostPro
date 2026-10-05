@@ -245,19 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">बाईं ओर अस्वीकार करें - दाईं ओर एक सितारा जोड़ें</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define कीवर्ड (a.k.a. Tags)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">परिभाषित टैग</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">जब एक स्टार या अधिक दिया जाता है, इसलिए पुस्तकालय में रखा जाता है, तो चित्र स्वचालित रूप से इन कीवर्ड्स के साथ 'चिह्नित' होंगे। 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन टैगों के साथ छवियों को स्वचालित रूप से 'चिह्नित' किया जाएगा। 
 
  आप उन्हें किसी भी समय क्यूलिंग और रेटिंग प्रक्रिया के दौरान बदलने में सक्षम होंगे।.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">कीवर्ड (a.k.a. Tags)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">टैग</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">कीवर्ड बदलें</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">टैग बदलें</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">इस छवि को कोई कीवर्ड नहीं दिया जाएगा।.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">इस छवि को कोई टैग नहीं दिया जाएगा।.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन कीवर्ड को इस छवि को सौंप दिया जाएगा।.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन टैगों को इस छवि को सौंपा जाएगा।.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">आरंभ करने के लिए एक छवि फ़ाइल को यहां खींचें और छोड़ें।</system:String>
 
@@ -305,7 +305,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">अपर्याप्त डिस्क स्थान उपलब्ध है।.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">कीवर्ड</system:String>
+    <system:String x:Key="Metadata.Keywords">टैग</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">छवि टैग संपादित करें</system:String>
 

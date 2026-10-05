@@ -245,19 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Links ablehnen – Rechts einen Stern hinzufügen</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definieren von Keywords (a.k.a. Tags)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Tags definieren</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Wenn sie einen oder mehrere sterne erhalten und daher in der bibliothek aufbewahrt werden, werden bilder automatisch mit diesen schlüsselwörtern markiert. 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Wenn ein Stern oder mehrere in der Bibliothek aufbewahrt werden, werden Bilder automatisch mit diesen Tags "markiert". 
 
  Sie können sie jederzeit während des Aussortierungs- und Bewertungsprozesses ändern.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Keywords (auch bekannt als Tags)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Keywords ändern</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Change Tags</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">Keine Keywords werden diesem Bild zugewiesen.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">Keine Tags werden diesem Bild zugewiesen.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">Wenn sie einen oder mehrere sterne erhalten und daher in der bibliothek aufbewahrt werden, werden diese schlüsselwörter diesem bild zugewiesen.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">Wenn ein Stern oder mehrere in der Bibliothek aufbewahrt werden, werden diese Tags diesem Bild zugewiesen.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Ziehen Sie zunächst eine Bilddatei hierher und legen Sie sie dort ab.</system:String>
 

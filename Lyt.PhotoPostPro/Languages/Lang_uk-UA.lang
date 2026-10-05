@@ -245,17 +245,17 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Відхилити ліворуч – додати зірочку праворуч</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Дефін Ключові слова (наприклад, теги)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Дефін теги</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Коли надана одна зірка або більше, отже, зберігається в бібліотеці, зображення будуть автоматично позначені з цими словами. &#x&#&# ;Ви зможете змінити їх в будь-який час під час культового та рейтингового процесу.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Коли надана одна зірка або більше, отже, зберігається в бібліотеці, зображення будуть автоматично позначені з цими тегами. &#x&#&# ;Ви зможете змінити їх в будь-який час під час культового та рейтингового процесу.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Ключові слова:</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Панчохи</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Змінити ключові слова</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Зміна Теги</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">Не буде призначено для цього образу.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">Немає тегів буде призначено для цього зображення.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">При наданні однієї зірки або більше, отже, зберігаються в бібліотеці, ці ключові слова будуть призначені для цього зображення.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">Коли надана одна зірка або більше, отже, зберігається в бібліотеці, ці теги будуть призначені для цього образу.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 
@@ -303,7 +303,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Недостатній дисковий простір доступні.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Ключові слова</system:String>
+    <system:String x:Key="Metadata.Keywords">Панчохи</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Редагувати зображення</system:String>
 

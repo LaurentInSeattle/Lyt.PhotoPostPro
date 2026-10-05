@@ -245,17 +245,17 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Bal oldali elutasítás – Csillag hozzáadása a jobb oldalhoz</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Határozza meg a kulcsszavakat (más néven: Címkék)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Címkék meghatározása</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, a képeket automatikusan "megjelölik" ezekkel a kulcsszavakkal. & # xD; & # xA; & # xD; & # xA; A válogatási és minősítési folyamat során bármikor megváltoztathatja azokat.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, a képek automatikusan "címkével" lesznek ellátva. & # xD; & # xA; & # xD; & # xA; A válogatási és minősítési folyamat során bármikor megváltoztathatja azokat.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Kulcsszavak (más néven: Címkék)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Címkék</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Kulcsszavak módosítása</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Címkék módosítása</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">Ezen a képen nem lesznek kulcsszavak.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">Nem Címkék lesz hozzárendelve ezt a képet.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, ezeket a kulcsszavakat ehhez a képhez rendelik.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">Ha egy vagy több csillagot kap, ezért a könyvtárban tartja, ezeket a címkéket ehhez a képhez rendelik.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 
@@ -303,7 +303,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Nincs elegendő lemezterület.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Kulcsszavak</system:String>
+    <system:String x:Key="Metadata.Keywords">Címkék</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Képcímkék szerkesztése</system:String>
 

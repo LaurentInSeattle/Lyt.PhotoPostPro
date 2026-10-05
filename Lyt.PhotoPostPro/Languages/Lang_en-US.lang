@@ -192,13 +192,13 @@
 	<system:String x:Key="Workflow.Culling.SelectRight">Keep: Right Image</system:String>
 	<system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
 
-	<!-- Culling - Keywords -->
-	<system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Keywords (a.k.a. Tags) </system:String>
-	<system:String x:Key="LibraryAdd.Dialog.Keywords.Message">When given one star or more, therefore kept in the library, images will be automatically 'tagged' with these keywords. &#xD;&#xA;&#xD;&#xA;You will be able to change them at any time during the culling and rating process.</system:String>
-	<system:String x:Key="Workflow.Culling.Keywords">Keywords (a.k.a. Tags) </system:String>
-	<system:String x:Key="Workflow.Culling.ChangeKeywords">Change Keywords</system:String>
-	<system:String x:Key="Workflow.Culling.NoKeywords">No Keywords will be assigned to this image.</system:String>
-	<system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these keywords will be assigned to this image.</system:String>
+	<!-- Culling - Tags -->
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Tags </system:String>
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Message">When given one star or more, therefore kept in the library, images will be automatically 'tagged' with these tags.&#xD;&#xA;&#xD;&#xA;You will be able to change them at any time during the culling and rating process.</system:String>
+	<system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
+	<system:String x:Key="Workflow.Culling.ChangeKeywords">Change Tags</system:String>
+	<system:String x:Key="Workflow.Culling.NoKeywords">No Tags will be assigned to this image.</system:String>
+	<system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these tags will be assigned to this image.</system:String>
 
 	<!-- Import -->
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
@@ -229,7 +229,7 @@
 	<system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficient disk space available.</system:String>
 
 	<!-- Metadata -->
-	<system:String x:Key="Metadata.Keywords">Keywords</system:String>
+	<system:String x:Key="Metadata.Keywords">Tags</system:String>
 	<system:String x:Key="Metadata.Dialog.Keywords.Title">Edit Image Tags</system:String>
 	<system:String x:Key="Metadata.Dialog.Keywords.Message">Add new image tags or remove existing ones.</system:String>
 	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>

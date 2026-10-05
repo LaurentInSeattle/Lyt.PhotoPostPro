@@ -245,19 +245,19 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Απόρριψη αριστερά - Προσθέστε ένα αστέρι στα δεξιά</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Ορισμός λέξεων-κλειδιών (γνωστών και ως ετικέτες)</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Ορισμός ετικετών</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Όταν δοθεί ένα αστέρι ή περισσότερο, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, εικόνες θα είναι αυτόματα 'σφραγισμένα' με αυτές τις λέξεις-κλειδιά. 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Όταν δοθεί ένα ή περισσότερα αστέρια, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, εικόνες θα είναι αυτόματα 'tagged' με αυτές τις ετικέτες. 
 
  Θα είστε σε θέση να τα αλλάξετε ανά πάσα στιγμή κατά τη διάρκεια της διαδικασίας σφαγής και αξιολόγησης.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Λέξεις κλειδιά (άλλως Tags)</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Ετικέτες</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Αλλαγή λέξεων-κλειδιών</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Τροποποίηση ετικετών</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">Δεν Λέξεις κλειδιά θα ανατεθεί σε αυτή την εικόνα.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">Δεν θα ανατεθούν ετικέτες σε αυτή την εικόνα.</system:String>
 
-    <system:String x:Key="Workflow.Culling.WithKeywords">Όταν δοθεί ένα αστέρι ή περισσότερο, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, αυτές οι λέξεις-κλειδιά θα ανατεθεί σε αυτή την εικόνα.</system:String>
+    <system:String x:Key="Workflow.Culling.WithKeywords">Όταν δοθεί ένα αστέρι ή περισσότερο, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, αυτές οι ετικέτες θα ανατεθεί σε αυτή την εικόνα.</system:String>
 
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>
 
@@ -305,7 +305,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Ανεπαρκής διαθέσιμος χώρος στο δίσκο.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Λέξεις κλειδιά</system:String>
+    <system:String x:Key="Metadata.Keywords">Ετικέτες</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Επεξεργασία ετικετών εικόνας</system:String>
 
