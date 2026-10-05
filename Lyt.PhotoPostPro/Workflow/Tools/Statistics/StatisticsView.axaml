@@ -50,9 +50,9 @@
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="50" />
-					<ColumnDefinition Width="360" />
+					<ColumnDefinition Width="480" />
 					<ColumnDefinition Width="20" />
-					<ColumnDefinition Width="360" />
+					<ColumnDefinition Width="480" />
 					<ColumnDefinition Width="50" />
 				</Grid.ColumnDefinitions>
 				<Rectangle
