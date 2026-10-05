@@ -197,13 +197,13 @@
 
     <system:String x:Key="Workflow.Documentation.Back">Indietro</system:String>
 
-    <system:String x:Key="Workflow.Documentation.First">Primo</system:String>
+    <system:String x:Key="Workflow.Documentation.First">Prima</system:String>
 
     <system:String x:Key="Workflow.Documentation.Previous">Precedente</system:String>
 
-    <system:String x:Key="Workflow.Documentation.Next">Il prossimo</system:String>
+    <system:String x:Key="Workflow.Documentation.Next">Prossima</system:String>
 
-    <system:String x:Key="Workflow.Documentation.Last">Ultimo</system:String>
+    <system:String x:Key="Workflow.Documentation.Last">Ultima</system:String>
 
     <system:String x:Key="Gallery.Empty">La tua galleria di 'cinque stelle' migliori immagini è vuota.</system:String>
 
@@ -551,15 +551,15 @@
 
     <system:String x:Key="Workflow.Desaturation.Tolerance">Tolleranza</system:String>
 
-    <system:String x:Key="Workflow.Desaturation.Feather">Piuma</system:String>
+    <system:String x:Key="Workflow.Desaturation.Feather">Sfumatura</system:String>
 
     <system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
 
     <system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
 
-    <system:String x:Key="Workflow.Desaturation.Patch">Patch di colore selezionato</system:String>
+    <system:String x:Key="Workflow.Desaturation.Patch">Tinta selezionata</system:String>
 
-    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Correre l'Algoritmo</system:String>
+    <system:String x:Key="Workflow.Desaturation.RunDesaturation">Lanciare l'algoritmo</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Title">Nitidezza</system:String>
 
