@@ -30,7 +30,6 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
             // This cannot be done in the constructor
             this.SetupWorkflow();
             this.isFirstActivation = false;
-
         }
 
         // Rebuild the buttons in case we switch language
@@ -43,6 +42,7 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
             if (button.IsBound)
             {
                 button.Select();
+                this.OnSelectTool(ActivatedView.Statistics);
             }
         }, DispatcherPriority.Background);
     }

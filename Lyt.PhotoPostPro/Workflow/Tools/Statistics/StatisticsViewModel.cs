@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools.Statistics;
 
-public sealed partial class StatisticsViewModel : 
+public sealed partial class StatisticsViewModel :
     ViewModel<StatisticsView>, IRecipient<SystemStatisticsMessage>
 {
     private const float MegaByte = 1024.0f * 1024.0f;
@@ -31,7 +31,7 @@ public sealed partial class StatisticsViewModel :
     public StatisticsViewModel(PhotoPostProModel model)
     {
         this.model = model;
-        this.Subscribe<SystemStatisticsMessage>(); 
+        this.Subscribe<SystemStatisticsMessage>();
         this.LibraryStatistics = new FolderStatisticsViewModel(model);
         this.ExportsStatistics = new FolderStatisticsViewModel(model);
         this.GalleryStatistics = new FolderStatisticsViewModel(model);
@@ -41,18 +41,24 @@ public sealed partial class StatisticsViewModel :
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        ImageLoader.CollectStatistics(this.model); 
+        ImageLoader.CollectStatistics(this.model);
     }
 
     public void Receive(SystemStatisticsMessage message) =>
-        Dispatch.OnUiThread(() =>
-        {
-            this.ReceiveOnUiThread(message);
-        }, DispatcherPriority.Background);  
-    
+        Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
+
     public void ReceiveOnUiThread(SystemStatisticsMessage message)
     {
-        var driveInfo = message.DriveStatistics; 
+        // Interfering animations cause that view to be invisible when we navigate from another 
+        // area (such as library) so here we enforce visibility if needed
+        // We also need to schedule to wait for animations to complete so that there is no ugly blink.
+        // This is not needed when we are navigating inside the tools area 
+        if (this.ViewBase is not null && !this.ViewBase.IsVisible)
+        {
+            Schedule.OnUiThread(200, () => { this.ViewBase.IsVisible = true; }, DispatcherPriority.Background);
+        }
+
+        var driveInfo = message.DriveStatistics;
         long availableBytes = driveInfo.AvailableFreeSpace;
         this.availableMegabytes = (float)availableBytes / MegaByte;
         string name = driveInfo.Name;
