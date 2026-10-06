@@ -585,6 +585,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">एक प्रकार की मछली</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Hue रोटेशन</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">विनेट</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">काला और सफ़ेद</system:String>

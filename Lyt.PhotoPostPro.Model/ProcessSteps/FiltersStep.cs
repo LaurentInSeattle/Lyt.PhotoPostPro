@@ -9,6 +9,7 @@ public class FiltersStep(ProcessWorkflow processWorkflow) :
         None,
         Grayscale,
         Sepia,
+        HueRotation,
         Vignette,
         BlackWhite,
         Kodachrome,
@@ -32,6 +33,7 @@ public class FiltersStep(ProcessWorkflow processWorkflow) :
         else if (
             (this.SelectedFilter == Filter.Grayscale) ||
             (this.SelectedFilter == Filter.Sepia) ||
+            (this.SelectedFilter == Filter.HueRotation) ||
             (this.SelectedFilter == Filter.Vignette))
         {
             // Image is unchanged if the amount is 0.0, for Vignette, Grayscale and Sepia
@@ -67,6 +69,14 @@ public class FiltersStep(ProcessWorkflow processWorkflow) :
                 if (ppp.FilterAmount > 0.001)
                 {
                     this.Sepia(ppp.FilterAmount, withFrame: false);
+                }
+
+                break;
+
+            case Filter.HueRotation:
+                if (ppp.FilterAmount > 0.001)
+                {
+                    this.HueRotation(ppp.FilterAmount, withFrame: false);
                 }
 
                 break;
@@ -114,11 +124,15 @@ public class FiltersStep(ProcessWorkflow processWorkflow) :
                     clone.Sepia(this.Amount);
                     break;
 
-                // All other filters are always applied without parameter 
+                case Filter.HueRotation:
+                    clone.HueRotation(this.Amount);
+                    break;
+
                 case Filter.Vignette:
                     clone.Vignette(this.Amount);
                     break;
 
+                // All other filters are always applied without parameter 
                 case Filter.BlackWhite:
                     clone.BlackWhite();
                     break;
@@ -149,6 +163,14 @@ public class FiltersStep(ProcessWorkflow processWorkflow) :
     {
         this.SelectedFilter = Filter.Sepia;
         this.Amount = sepiaAmount;
+        this.SetIdentity();
+        return this.Transform(withFrame);
+    }
+
+    internal Frame? HueRotation(float rotation, bool withFrame = true)
+    {
+        this.SelectedFilter = Filter.HueRotation;
+        this.Amount = rotation;
         this.SetIdentity();
         return this.Transform(withFrame);
     }

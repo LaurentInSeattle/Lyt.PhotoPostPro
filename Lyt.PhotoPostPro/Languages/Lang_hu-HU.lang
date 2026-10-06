@@ -583,6 +583,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">Szépia</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">A hue forgása</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">Vignetta</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">Fekete-fehér</system:String>

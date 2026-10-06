@@ -585,6 +585,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">Seppia</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Hue Rotation</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">Vignetta</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">In bianco e Nero</system:String>

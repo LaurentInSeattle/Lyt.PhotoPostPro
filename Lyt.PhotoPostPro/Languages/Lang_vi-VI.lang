@@ -585,6 +585,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Quay sắc màu</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">Đen trắng</system:String>

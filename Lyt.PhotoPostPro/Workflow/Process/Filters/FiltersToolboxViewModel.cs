@@ -24,6 +24,7 @@ public sealed partial class FiltersToolboxViewModel :
             "Workflow.Filters.None" ,
             "Workflow.Filters.Grayscale" ,
             "Workflow.Filters.Sepia"  ,
+            "Workflow.Filters.HueRotation"  ,
             "Workflow.Filters.Vignette"  ,
             "Workflow.Filters.BlackWhite"  , 
 
@@ -42,6 +43,7 @@ public sealed partial class FiltersToolboxViewModel :
             "None" ,
             "Grayscale" ,
             "Sepia"  ,
+            "Hue Rotation" ,
             "Vignette"  ,
             "Black and White"  ,
             "Kodachrome"  ,
@@ -154,6 +156,7 @@ public sealed partial class FiltersToolboxViewModel :
 
         if ((this.selectedFilter == FiltersStep.Filter.Grayscale) ||
             (this.selectedFilter == FiltersStep.Filter.Sepia) ||
+            (this.selectedFilter == FiltersStep.Filter.HueRotation) ||
             (this.selectedFilter == FiltersStep.Filter.Vignette))
         {
             this.ThrottleModelUpdate(() =>
@@ -171,6 +174,10 @@ public sealed partial class FiltersToolboxViewModel :
 
                     case FiltersStep.Filter.Sepia:
                         this.model.Sepia(this.amount);
+                        break;
+
+                    case FiltersStep.Filter.HueRotation:
+                        this.model.HueRotation(this.amount);
                         break;
 
                     case FiltersStep.Filter.Vignette:

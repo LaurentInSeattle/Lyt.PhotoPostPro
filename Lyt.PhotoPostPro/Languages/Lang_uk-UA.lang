@@ -583,6 +583,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">сепія</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Повороти</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">Віньєтка</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">Чорно-біле</system:String>

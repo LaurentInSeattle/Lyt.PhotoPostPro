@@ -585,6 +585,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">セピア</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Hue の回転</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">ビネット</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">白黒</system:String>

@@ -247,6 +247,10 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definir as Marcas</system:String>
 
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando dada uma estrela ou mais, portanto, mantidas na biblioteca, as imagens serão automaticamente 'tagged' com essas tags. 
+
+ ;Você será capaz de mudá-los a qualquer momento durante o processo de abate e classificação.</system:String>
+
     <system:String x:Key="Workflow.Culling.Keywords">Etiquetas</system:String>
 
     <system:String x:Key="Workflow.Culling.ChangeKeywords">Mudar as Marcas</system:String>
@@ -580,6 +584,8 @@
     <system:String x:Key="Workflow.Filters.Grayscale">Escala de Cinzas</system:String>
 
     <system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
+
+    <system:String x:Key="Workflow.Filters.HueRotation">Rotação da Tom</system:String>
 
     <system:String x:Key="Workflow.Filters.Vignette">Vinheta</system:String>
 

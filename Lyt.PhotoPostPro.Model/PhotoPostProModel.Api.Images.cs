@@ -435,6 +435,25 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void HueRotation(float rotation) =>
+        this.ApiAction(() =>
+        {
+            // rotation == from 0.0 to 1.0 (=>360.0)  -- 0.0 -> No Change 
+            if ((rotation < 0.0) || (rotation > 1.0))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is FiltersStep filtersStep)
+            {
+                this.LastResultFrame = filtersStep.HueRotation(rotation);
+                return true;
+            }
+
+            return false;
+        });
+            
+
     public void Vignette(float vignetteAmount) =>
         this.ApiAction(() =>
         {

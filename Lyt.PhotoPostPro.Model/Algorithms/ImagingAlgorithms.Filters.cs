@@ -73,9 +73,9 @@ internal static partial class ImagingAlgorithms
         return true;
     }
 
-    internal static void HueRotation(this Image<RgbaHalf> image, float rotation)
+    internal static bool HueRotation(this Image<RgbaHalf> image, float rotation)
     {
-        rotation /= 360.0f; // Normalize hue rotation to [0, 1]
+        // hue rotation should be in [0, 1]
 
         int height = image.Height;
         Parallel.For(0, height, y =>
@@ -98,6 +98,7 @@ internal static partial class ImagingAlgorithms
                 pixelRow[x].B = ClipH((Half)tb);
             }
         });
-    }
 
+        return true;
+    }
 }

@@ -583,6 +583,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">Sépia</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">Rotation de l'humidité</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">Noir et Blanc</system:String>

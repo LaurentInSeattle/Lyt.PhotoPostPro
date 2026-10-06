@@ -583,6 +583,8 @@
 
     <system:String x:Key="Workflow.Filters.Sepia">棕褐色</system:String>
 
+    <system:String x:Key="Workflow.Filters.HueRotation">花相旋轉</system:String>
+
     <system:String x:Key="Workflow.Filters.Vignette">小插圖</system:String>
 
     <system:String x:Key="Workflow.Filters.BlackWhite">黑與白</system:String>
