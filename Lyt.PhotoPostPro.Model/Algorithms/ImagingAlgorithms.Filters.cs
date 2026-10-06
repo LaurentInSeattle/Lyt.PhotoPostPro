@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
+using static ImagingUtilities;
+
 internal static partial class ImagingAlgorithms
 {
     internal static bool Grayscale(this Image<RgbaHalf> image, float grayscaleAmount)
@@ -32,10 +34,10 @@ internal static partial class ImagingAlgorithms
 
     internal static bool Vignette(this Image<RgbaHalf> image, float vignetteAmount)
     {
-        vignetteAmount /= 2.0f; 
+        vignetteAmount /= 2.0f;
         var color = Color.ParseHex("#D8000000", ColorHexFormat.Argb);
-        float amount = (1.0f - vignetteAmount); 
-        float radiusX = image.Width *  amount / 1.8f;
+        float amount = (1.0f - vignetteAmount);
+        float radiusX = image.Width * amount / 1.8f;
         float radiusY = image.Height * amount / 1.8f;
         image.Mutate(x => x.Vignette(
             color, radiusX, radiusY, rectangle: new Rectangle(0, 0, image.Width, image.Height)));
@@ -70,4 +72,32 @@ internal static partial class ImagingAlgorithms
         image.Mutate(x => x.Polaroid());
         return true;
     }
+
+    internal static void HueRotation(this Image<RgbaHalf> image, float rotation)
+    {
+        rotation /= 360.0f; // Normalize hue rotation to [0, 1]
+
+        int height = image.Height;
+        Parallel.For(0, height, y =>
+        {
+            // Get a span for the current row for fast, safe access
+            Span<RgbaHalf> pixelRow = image.DangerousGetPixelRowMemory(y).Span;
+            for (int x = 0; x < pixelRow.Length; x++)
+            {
+                var pixel = pixelRow[x];
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
+                ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float lightness);
+
+                // Convert back to RGB and update the pixel
+                hue += rotation;
+                ColorUtilities.HslToRgb(hue, saturation, lightness, out float tr, out float tg, out float tb);
+                pixelRow[x].R = ClipH((Half)tr);
+                pixelRow[x].G = ClipH((Half)tg);
+                pixelRow[x].B = ClipH((Half)tb);
+            }
+        });
+    }
+
 }

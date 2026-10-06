@@ -1,11 +1,7 @@
 WIP
 ---
 
-- Evaluate QuestPDF for album generation. 
-
-- Spotlight effect, aka "Ray of Light" effect. ( https://en.wikipedia.org/wiki/Ellipse ) 
-
-- Selective Desaturation effect.
+- Hue Rotation effect.
 
 Missing Features 
 ----------------
@@ -41,10 +37,10 @@ Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 - No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
 
-
 V.Next 
 ------
 
+- Spotlight effect, aka "Ray of Light" effect. ( https://en.wikipedia.org/wiki/Ellipse ) 
 
 - Touch up / Blemish (after geometry) 
 
