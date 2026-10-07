@@ -514,6 +514,26 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void SpotRemove(int pixelX, int pixelY, int radius = 12) =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is WhiteBalanceStep whiteBalanceStep)
+            {
+                var source = whiteBalanceStep.SourceImage;
+                if (source is null)
+                {
+                    return false;
+                }
+
+                ImagingAlgorithms.SpotRemove(
+                    source, new Point(pixelX, pixelY), new Point(pixelX, pixelY-60), radius);
+                this.LastResultFrame = source.ToFrame();
+                return true;
+            }
+
+            return false;
+        });
+
     public void Export(List<ImageExport> imageExports) =>
         this.ApiAction(() =>
         {

@@ -9,6 +9,8 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     private float temperature;
     private float saturationThreshold;
     private global::Avalonia.Media.Color whitePatch;
+    private int clickedPixelX;
+    private int clickedPixelY;
 
     public WhiteBalanceToolboxViewModel()
     {
@@ -78,8 +80,11 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     public void Receive(ImageClickedMessage message)
     {
         // Calculate white patch color by averaging colors on a 3 by 3 area on the image
-        global::Avalonia.Media.Color patchColor =
-            message.WriteableBitmap.GetColorAroundPixel(message.PixelX, message.PixelY);
+        this.clickedPixelX = message.PixelX;
+        this.clickedPixelY = message.PixelY;
+
+    global::Avalonia.Media.Color patchColor =
+            message.WriteableBitmap.GetColorAroundPixel(this.clickedPixelX, this.clickedPixelY);
         this.SetWhitePatch(patchColor);
     }
 
@@ -97,6 +102,11 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     {
         this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch;
         this.UpdateModel();
+
+        //
+        // Experimental 
+        //
+        // this.model.SpotRemove(this.clickedPixelX, this.clickedPixelY, 30);
     }
 
     private void UpdateSliders(WhiteBalanceStep step)
@@ -117,16 +127,6 @@ public sealed partial class WhiteBalanceToolboxViewModel :
             this.SetWhitePatch(color);
         });
     }
-
-    //partial void OnKelvinSliderValueChanged(double value)
-    //{
-    //    // Slider sends 1000.0 to +40000.0, fine for the model  
-    //    this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland;
-    //    this.kelvin = (float)value;
-    //    int intValue = (int)value;
-    //    this.KelvinString = intValue.ToString("D");
-    //    this.UpdateModel();
-    //}
 
     partial void OnTemperatureSliderValueChanged(double value)
     {
@@ -177,10 +177,6 @@ public sealed partial class WhiteBalanceToolboxViewModel :
                     case WhiteBalanceStep.WhiteBalanceAlgorithm.ColorMatrix:
                         this.model.ColorMatrixWhiteBalance(this.temperature);
                         break;
-
-                    //case WhiteBalanceStep.WhiteBalanceAlgorithm.TannerHelland:
-                    //    this.model.TannerHellandWhiteBalance(this.kelvin);
-                    //    break;
 
                 }
             });
