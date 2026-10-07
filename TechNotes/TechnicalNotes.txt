@@ -387,74 +387,74 @@ using SixLabors.ImageSharp.PixelFormats;
 
 public static class ImageInpainter
 {
-    /// <summary>
-    /// Inpaints the masked areas of an image using the Heat Equation (Diffusion).
-    /// </summary>
-    /// <param name="source">The image to repair.</param>
-    /// <param name="mask">A binary image where black (or low intensity) pixels indicate areas to be repaired.</param>
-    /// <param name="iterations">Number of diffusion steps. Higher values blur deep inside larger masks.</param>
-    public static void InpaintWithHeat(Image<Rgb24> source, Image<L8> mask, int iterations = 150)
-    {
-        if (source.Width != mask.Width || source.Height != mask.Height)
-            throw new ArgumentException("Source image and mask must have identical dimensions.");
+	/// <summary>
+	/// Inpaints the masked areas of an image using the Heat Equation (Diffusion).
+	/// </summary>
+	/// <param name="source">The image to repair.</param>
+	/// <param name="mask">A binary image where black (or low intensity) pixels indicate areas to be repaired.</param>
+	/// <param name="iterations">Number of diffusion steps. Higher values blur deep inside larger masks.</param>
+	public static void InpaintWithHeat(Image<Rgb24> source, Image<L8> mask, int iterations = 150)
+	{
+		if (source.Width != mask.Width || source.Height != mask.Height)
+			throw new ArgumentException("Source image and mask must have identical dimensions.");
 
-        int width = source.Width;
-        int height = source.Height;
+		int width = source.Width;
+		int height = source.Height;
 
-        // Clone the source to use as a buffer for the iterative process
-        using Image<Rgb24> buffer = source.Clone();
+		// Clone the source to use as a buffer for the iterative process
+		using Image<Rgb24> buffer = source.Clone();
 
-        for (int iter = 0; iter < iterations; iter++)
-        {
-            // Alternate source and buffer roles to read stable data and write updates
-            Image<Rgb24> readImg = (iter % 2 == 0) ? source : buffer;
-            Image<Rgb24> writeImg = (iter % 2 == 0) ? buffer : source;
+		for (int iter = 0; iter < iterations; iter++)
+		{
+			// Alternate source and buffer roles to read stable data and write updates
+			Image<Rgb24> readImg = (iter % 2 == 0) ? source : buffer;
+			Image<Rgb24> writeImg = (iter % 2 == 0) ? buffer : source;
 
-            // Process row by row for fast memory access
-            for (int y = 1; y < height - 1; y++)
-            {
-                ReadOnlySpan<L8> maskRow = mask.DangerousGetPixelRowMemory(y).Span;
-                ReadOnlySpan<Rgb24> srcRowPrev = readImg.DangerousGetPixelRowMemory(y - 1).Span;
-                ReadOnlySpan<Rgb24> srcRowCurr = readImg.DangerousGetPixelRowMemory(y).Span;
-                ReadOnlySpan<Rgb24> srcRowNext = readImg.DangerousGetPixelRowMemory(y + 1).Span;
-                Span<Rgb24> destRow = writeImg.DangerousGetPixelRowMemory(y).Span;
+			// Process row by row for fast memory access
+			for (int y = 1; y < height - 1; y++)
+			{
+				ReadOnlySpan<L8> maskRow = mask.DangerousGetPixelRowMemory(y).Span;
+				ReadOnlySpan<Rgb24> srcRowPrev = readImg.DangerousGetPixelRowMemory(y - 1).Span;
+				ReadOnlySpan<Rgb24> srcRowCurr = readImg.DangerousGetPixelRowMemory(y).Span;
+				ReadOnlySpan<Rgb24> srcRowNext = readImg.DangerousGetPixelRowMemory(y + 1).Span;
+				Span<Rgb24> destRow = writeImg.DangerousGetPixelRowMemory(y).Span;
 
-                for (int x = 1; x < width - 1; x++)
-                {
-                    // Check if this pixel is inside the mask (PackedValue == 0 means black/masked)
-                    if (maskRow[x].PackedValue == 0)
-                    {
-                        // Retrieve the 4 orthogonal neighboring pixel values
-                        Rgb24 north = srcRowPrev[x];
-                        Rgb24 south = srcRowNext[x];
-                        Rgb24 west  = srcRowCurr[x - 1];
-                        Rgb24 east  = srcRowCurr[x + 1];
+				for (int x = 1; x < width - 1; x++)
+				{
+					// Check if this pixel is inside the mask (PackedValue == 0 means black/masked)
+					if (maskRow[x].PackedValue == 0)
+					{
+						// Retrieve the 4 orthogonal neighboring pixel values
+						Rgb24 north = srcRowPrev[x];
+						Rgb24 south = srcRowNext[x];
+						Rgb24 west  = srcRowCurr[x - 1];
+						Rgb24 east  = srcRowCurr[x + 1];
 
-                        // Compute the average (Heat equation discrete Laplacian approach)
-                        byte r = (byte)((north.R + south.R + west.R + east.R) / 4);
-                        byte g = (byte)((north.G + south.G + west.G + east.G) / 4);
-                        byte b = (byte)((north.B + south.B + west.B + east.B) / 4);
+						// Compute the average (Heat equation discrete Laplacian approach)
+						byte r = (byte)((north.R + south.R + west.R + east.R) / 4);
+						byte g = (byte)((north.G + south.G + west.G + east.G) / 4);
+						byte b = (byte)((north.B + south.B + west.B + east.B) / 4);
 
-                        destRow[x] = new Rgb24(r, g, b);
-                    }
-                    else if (iter % 2 == 0)
-                    {
-                        // Keep non-masked pixels perfectly identical across frames
-                        destRow[x] = srcRowCurr[x];
-                    }
-                }
-            }
-        }
+						destRow[x] = new Rgb24(r, g, b);
+					}
+					else if (iter % 2 == 0)
+					{
+						// Keep non-masked pixels perfectly identical across frames
+						destRow[x] = srcRowCurr[x];
+					}
+				}
+			}
+		}
 
-        // If the final iteration ended up writing into the buffer, copy it back to the source image
-        if (iterations % 2 != 0)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                buffer.DangerousGetPixelRowMemory(y).Span.CopyTo(source.DangerousGetPixelRowMemory(y).Span);
-            }
-        }
-    }
+		// If the final iteration ended up writing into the buffer, copy it back to the source image
+		if (iterations % 2 != 0)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				buffer.DangerousGetPixelRowMemory(y).Span.CopyTo(source.DangerousGetPixelRowMemory(y).Span);
+			}
+		}
+	}
 }
 
 
@@ -709,39 +709,39 @@ using SixLabors.ImageSharp.Processing;
 
 public static void RemoveBlemish(string inputPath, string outputPath)
 {
-    using Image<Rgba32> image = Image.Load<Rgba32>(inputPath);
+	using Image<Rgba32> image = Image.Load<Rgba32>(inputPath);
 
-    // 1. Define your points (X, Y)
-    Point blemishCenter = new Point(350, 420); // Where the pimple/spot is
-    Point cleanSkinCenter = new Point(380, 420); // Nearby clear skin to sample from
-    int radius = 15;
+	// 1. Define your points (X, Y)
+	Point blemishCenter = new Point(350, 420); // Where the pimple/spot is
+	Point cleanSkinCenter = new Point(380, 420); // Nearby clear skin to sample from
+	int radius = 15;
 
-    // 2. Crop out the clean skin sample area
-    Rectangle sampleArea = new Rectangle(cleanSkinCenter.X - radius, cleanSkinCenter.Y - radius, radius * 2, radius * 2);
-    using Image<Rgba32> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
+	// 2. Crop out the clean skin sample area
+	Rectangle sampleArea = new Rectangle(cleanSkinCenter.X - radius, cleanSkinCenter.Y - radius, radius * 2, radius * 2);
+	using Image<Rgba32> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
 
-    // 3. Create a circular feather mask so the patch edges blend seamlessly
-    using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
-    mask.Mutate(ctx =>
-    {
-        // Fill the background with black (transparent)
-        ctx.Clear(Color.Black);
-        
-        // Draw a soft, anti-aliased white circle to represent brush pressure
-        var options = new DrawingOptions { GraphicsOptions = new GraphicsOptions { Antialias = true } };
-        ctx.Fill(options, Color.White, new SixLabors.ImageSharp.Drawing.EllipsePolygon(radius, radius, radius));
-        
-        // Apply a slight BoxBlur to create a "feathered" edge transition
-        ctx.BoxBlur(3); 
-    });
+	// 3. Create a circular feather mask so the patch edges blend seamlessly
+	using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
+	mask.Mutate(ctx =>
+	{
+		// Fill the background with black (transparent)
+		ctx.Clear(Color.Black);
+		
+		// Draw a soft, anti-aliased white circle to represent brush pressure
+		var options = new DrawingOptions { GraphicsOptions = new GraphicsOptions { Antialias = true } };
+		ctx.Fill(options, Color.White, new SixLabors.ImageSharp.Drawing.EllipsePolygon(radius, radius, radius));
+		
+		// Apply a slight BoxBlur to create a "feathered" edge transition
+		ctx.BoxBlur(3); 
+	});
 
-    // 4. Apply the soft alpha mask directly onto our clean patch clone
-    cleanPatch.Mutate(ctx => ctx.SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn).DrawImage(mask, 1f));
+	// 4. Apply the soft alpha mask directly onto our clean patch clone
+	cleanPatch.Mutate(ctx => ctx.SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn).DrawImage(mask, 1f));
 
-    // 5. Stamp the feathered clean skin onto the blemish spot
-    image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(blemishCenter.X - radius, blemishCenter.Y - radius), 1f));
+	// 5. Stamp the feathered clean skin onto the blemish spot
+	image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(blemishCenter.X - radius, blemishCenter.Y - radius), 1f));
 
-    image.Save(outputPath);
+	image.Save(outputPath);
 }
 
 using System;
@@ -751,139 +751,139 @@ using SixLabors.ImageSharp.PixelFormats;
 
 public class TextureInpainter
 {
-    private const int PatchSize = 7; // Must be an odd number (e.g., 5x5, 7x7)
-    private const int HalfPatch = PatchSize / 2;
+	private const int PatchSize = 7; // Must be an odd number (e.g., 5x5, 7x7)
+	private const int HalfPatch = PatchSize / 2;
 
-    public static void Inpaint(string inputImagePath, string maskImagePath, string outputImagePath)
-    {
-        using Image<Rgb24> sourceImage = Image.Load<Rgb24>(inputImagePath);
-        using Image<L8> maskImage = Image.Load<L8>(maskImagePath);
+	public static void Inpaint(string inputImagePath, string maskImagePath, string outputImagePath)
+	{
+		using Image<Rgb24> sourceImage = Image.Load<Rgb24>(inputImagePath);
+		using Image<L8> maskImage = Image.Load<L8>(maskImagePath);
 
-        int width = sourceImage.Width;
-        int height = sourceImage.Height;
+		int width = sourceImage.Width;
+		int height = sourceImage.Height;
 
-        // Keep track of which pixels still need to be filled (255 = mask/missing, 0 = known)
-        byte[,] maskMatrix = new byte[width, height];
-        maskImage.ProcessPixelRows(accessor =>
-        {
-            for (int y = 0; y < height; y++)
-            {
-                var row = accessor.GetRowSpan(y);
-                for (int x = 0; x < width; x++)
-                {
-                    // If mask pixel is bright, mark it as missing
-                    maskMatrix[x, y] = (byte)(row[x].PackedValue > 128 ? 255 : 0);
-                }
-            }
-        });
+		// Keep track of which pixels still need to be filled (255 = mask/missing, 0 = known)
+		byte[,] maskMatrix = new byte[width, height];
+		maskImage.ProcessPixelRows(accessor =>
+		{
+			for (int y = 0; y < height; y++)
+			{
+				var row = accessor.GetRowSpan(y);
+				for (int x = 0; x < width; x++)
+				{
+					// If mask pixel is bright, mark it as missing
+					maskMatrix[x, y] = (byte)(row[x].PackedValue > 128 ? 255 : 0);
+				}
+			}
+		});
 
-        bool pixelsFilled;
-        do
-        {
-            pixelsFilled = false;
+		bool pixelsFilled;
+		do
+		{
+			pixelsFilled = false;
 
-            // Iterate through the image to find the "border" of the mask
-            for (int y = HalfPatch; y < height - HalfPatch; y++)
-            {
-                for (int x = HalfPatch; x < width - HalfPatch; x++)
-                {
-                    // We only want to fill pixels that are currently inside the mask
-                    // but adjacent to known pixels (the iterative boundary)
-                    if (maskMatrix[x, y] == 255 && IsOnMaskBorder(x, y, maskMatrix))
-                    {
-                        // Find the best source patch from known areas
-                        var (bestX, bestY) = FindBestMatch(x, y, sourceImage, maskMatrix, width, height);
+			// Iterate through the image to find the "border" of the mask
+			for (int y = HalfPatch; y < height - HalfPatch; y++)
+			{
+				for (int x = HalfPatch; x < width - HalfPatch; x++)
+				{
+					// We only want to fill pixels that are currently inside the mask
+					// but adjacent to known pixels (the iterative boundary)
+					if (maskMatrix[x, y] == 255 && IsOnMaskBorder(x, y, maskMatrix))
+					{
+						// Find the best source patch from known areas
+						var (bestX, bestY) = FindBestMatch(x, y, sourceImage, maskMatrix, width, height);
 
-                        if (bestX != -1 && bestY != -1)
-                        {
-                            // Fill the target pixel with the best match pixel
-                            sourceImage[x, y] = sourceImage[bestX, bestY];
-                            maskMatrix[x, y] = 0; // Mark as filled
-                            pixelsFilled = true;
-                        }
-                    }
-                }
-            }
-            // Repeat until no more border pixels can be filled or mask is clear
-        } while (pixelsFilled);
+						if (bestX != -1 && bestY != -1)
+						{
+							// Fill the target pixel with the best match pixel
+							sourceImage[x, y] = sourceImage[bestX, bestY];
+							maskMatrix[x, y] = 0; // Mark as filled
+							pixelsFilled = true;
+						}
+					}
+				}
+			}
+			// Repeat until no more border pixels can be filled or mask is clear
+		} while (pixelsFilled);
 
-        sourceImage.Save(outputImagePath);
-    }
+		sourceImage.Save(outputImagePath);
+	}
 
-    private static bool IsOnMaskBorder(int targetX, int targetY, byte[,] maskMatrix)
-    {
-        // Checks 4-connectivity neighbors to see if any neighbor is already a known pixel (0)
-        return maskMatrix[targetX + 1, targetY] == 0 ||
-               maskMatrix[targetX - 1, targetY] == 0 ||
-               maskMatrix[targetX, targetY + 1] == 0 ||
-               maskMatrix[targetX, targetY - 1] == 0;
-    }
+	private static bool IsOnMaskBorder(int targetX, int targetY, byte[,] maskMatrix)
+	{
+		// Checks 4-connectivity neighbors to see if any neighbor is already a known pixel (0)
+		return maskMatrix[targetX + 1, targetY] == 0 ||
+			   maskMatrix[targetX - 1, targetY] == 0 ||
+			   maskMatrix[targetX, targetY + 1] == 0 ||
+			   maskMatrix[targetX, targetY - 1] == 0;
+	}
 
-    private static (int x, int y) FindBestMatch(int targetX, int targetY, Image<Rgb24> img, byte[,] mask, int width, int height)
-    {
-        double minError = double.MaxValue;
-        int bestX = -1, bestY = -1;
+	private static (int x, int y) FindBestMatch(int targetX, int targetY, Image<Rgb24> img, byte[,] mask, int width, int height)
+	{
+		double minError = double.MaxValue;
+		int bestX = -1, bestY = -1;
 
-        // Step-size to speed up searching. Lower step = better quality, slower speed.
-        int searchStep = 4; 
+		// Step-size to speed up searching. Lower step = better quality, slower speed.
+		int searchStep = 4; 
 
-        // Scan the whole image looking for a valid template patch
-        for (int sy = HalfPatch; sy < height - HalfPatch; sy += searchStep)
-        {
-            for (int sx = HalfPatch; sx < width - HalfPatch; sx += searchStep)
-            {
-                // Source patch must be entirely in the KNOWN region
-                if (IsPatchEntirelyKnown(sx, sy, mask))
-                {
-                    double error = CalculatePatchError(targetX, targetY, sx, sy, img, mask);
+		// Scan the whole image looking for a valid template patch
+		for (int sy = HalfPatch; sy < height - HalfPatch; sy += searchStep)
+		{
+			for (int sx = HalfPatch; sx < width - HalfPatch; sx += searchStep)
+			{
+				// Source patch must be entirely in the KNOWN region
+				if (IsPatchEntirelyKnown(sx, sy, mask))
+				{
+					double error = CalculatePatchError(targetX, targetY, sx, sy, img, mask);
 
-                    if (error < minError)
-                    {
-                        minError = error;
-                        bestX = sx;
-                        bestY = sy;
-                    }
-                }
-            }
-        }
+					if (error < minError)
+					{
+						minError = error;
+						bestX = sx;
+						bestY = sy;
+					}
+				}
+			}
+		}
 
-        return (bestX, bestY);
-    }
+		return (bestX, bestY);
+	}
 
-    private static bool IsPatchEntirelyKnown(int cx, int cy, byte[,] mask)
-    {
-        for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
-        {
-            for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
-            {
-                if (mask[cx + dx, cy + dy] != 0) return false;
-            }
-        }
-        return true;
-    }
+	private static bool IsPatchEntirelyKnown(int cx, int cy, byte[,] mask)
+	{
+		for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
+		{
+			for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
+			{
+				if (mask[cx + dx, cy + dy] != 0) return false;
+			}
+		}
+		return true;
+	}
 
-    private static double CalculatePatchError(int tx, int ty, int sx, int sy, Image<Rgb24> img, byte[,] mask)
-    {
-        double ssd = 0; // Sum of Squared Differences
+	private static double CalculatePatchError(int tx, int ty, int sx, int sy, Image<Rgb24> img, byte[,] mask)
+	{
+		double ssd = 0; // Sum of Squared Differences
 
-        for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
-        {
-            for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
-            {
-                // Only compare pixels that are KNOWN in the target patch
-                if (mask[tx + dx, ty + dy] == 0)
-                {
-                    Rgb24 pTarget = img[tx + dx, ty + dy];
-                    Rgb24 pSource = img[sx + dx, sy + dy];
+		for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
+		{
+			for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
+			{
+				// Only compare pixels that are KNOWN in the target patch
+				if (mask[tx + dx, ty + dy] == 0)
+				{
+					Rgb24 pTarget = img[tx + dx, ty + dy];
+					Rgb24 pSource = img[sx + dx, sy + dy];
 
-                    double dr = pTarget.R - pSource.R;
-                    double dg = pTarget.G - pSource.G;
-                    double db = pTarget.B - pSource.B;
+					double dr = pTarget.R - pSource.R;
+					double dg = pTarget.G - pSource.G;
+					double db = pTarget.B - pSource.B;
 
-                    ssd += (dr * dr) + (dg * dg) + (db * db);
-                }
-            }
-        }
-        return ssd;
-    }
+					ssd += (dr * dr) + (dg * dg) + (db * db);
+				}
+			}
+		}
+		return ssd;
+	}
 }
