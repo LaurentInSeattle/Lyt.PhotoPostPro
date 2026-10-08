@@ -41,7 +41,8 @@ public sealed class ProcessParameters
 
     // TouchUp
 
-    public TouchUpAlgorithm TouchUpAlgorithm { get; set; }
+    // None : For compatibility 
+    public TouchUpAlgorithm TouchUpAlgorithm { get; set; } = TouchUpAlgorithm.None; 
 
     public int TouchUpSpotPixelX { get; set; }
 
@@ -143,7 +144,8 @@ public sealed class ProcessParameters
 
     // Desaturation
 
-    public bool DesaturationIdentity { get; set; }
+    // true : For compatibility 
+    public bool DesaturationIdentity { get; set; } = true; 
 
     public float DesaturationTargetHue { get; set; }
 

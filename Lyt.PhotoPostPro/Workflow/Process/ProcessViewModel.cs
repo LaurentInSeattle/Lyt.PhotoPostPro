@@ -10,6 +10,7 @@ public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel
         { ProcessStep.OrientationStepName, ActivatedView.Orient },
         { ProcessStep.StraightenStepName, ActivatedView.Straighten },
         { ProcessStep.CompositionStepName, ActivatedView.Compose },
+        { ProcessStep.TouchUpStepName, ActivatedView.TouchUp},
         { ProcessStep.DenoiseStepName, ActivatedView.Denoise },
         { ProcessStep.ExposureStepName, ActivatedView.Exposure },
         { ProcessStep.RecoveryStepName, ActivatedView.Recovery },
@@ -194,6 +195,9 @@ public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel
         Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientationStep, OrientToolboxView>(ActivatedView.Orient);
         Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenStep, StraightenToolboxView>(ActivatedView.Straighten);
         Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep, ComposeToolboxView>(ActivatedView.Compose);
+
+        Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpStep, TouchUpToolboxView>(ActivatedView.TouchUp);
+
         Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseStep, DenoiseToolboxView>(ActivatedView.Denoise);
         Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep, RecoveryToolboxView>(ActivatedView.Recovery);
