@@ -4,7 +4,7 @@ public sealed partial class LibraryThumbnailViewModel :
     ViewModel<LibraryThumbnailView>,
     IRecipient<LanguageChangedMessage>
 {
-    public const double LargeBorderHeight = 280;
+    public const double LargeBorderHeight = 292;
     public const double LargeImageHeight = 200;
 
     public readonly string Path;
@@ -25,6 +25,9 @@ public sealed partial class LibraryThumbnailViewModel :
     public partial string Title { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial string MetadataString { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial string Details { get; set; } = string.Empty; 
 
     [ObservableProperty]
@@ -42,7 +45,6 @@ public sealed partial class LibraryThumbnailViewModel :
         this.Subscribe<LanguageChangedMessage>();
 
         this.Update(metadata);
-
     }
 
     // We need to reload the thumbnail view title, so that it will be properly localized
@@ -76,10 +78,11 @@ public sealed partial class LibraryThumbnailViewModel :
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(currentLanguage);
         }
 
-        this.Title =
+        this.Title = this.Metadata.Filename.Shorten(34);
+        this.MetadataString =
             string.Format(
-                "{0} - {1} - {2}",
-                this.Metadata.Filename, this.Metadata.Extension, this.Metadata.Dimensions);
+                    "{0} - {1} - {2} ",
+                    this.Metadata.Extension, this.Metadata.Dimensions, this.Metadata.SizeMB);
 
         if (this.Metadata.HasExifMetadata)
         {
