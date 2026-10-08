@@ -23,6 +23,7 @@ public sealed class ProcessWorkflow
         var orientationStep = new OrientationStep(this);
         var straightenStep = new StraightenStep(this);
         var compositionStep = new CompositionStep(this);
+        var touchUpStep = new TouchUpStep(this);
         var denoiseStep = new DenoiseStep(this);
         var exposureStep = new ExposureStep(this);
         var recoveryStep = new RecoveryStep(this);
@@ -41,6 +42,9 @@ public sealed class ProcessWorkflow
             // Geometry 
             orientationStep, straightenStep, compositionStep, 
             
+            // TouchUp
+            touchUpStep, 
+
             // Denoise 
             denoiseStep, 
 

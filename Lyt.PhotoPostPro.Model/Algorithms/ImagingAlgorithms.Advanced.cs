@@ -738,12 +738,12 @@ internal static partial class ImagingAlgorithms
         });
     }
 
-    #endregion LUT 
+    #endregion Selective Color Desaturation  
 
 
-    #region Experimental 
+    #region Touch Up / Spot Removal 
 
-    internal static void SpotRemove(
+    internal static void SpotRemoval(
         this Image<RgbaHalf> image, Point spotCenter, Point cleanCenter, int radius)
     {
         // Crop out the clean sample area
@@ -774,5 +774,5 @@ internal static partial class ImagingAlgorithms
         image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(spotCenter.X - radius, spotCenter.Y - radius), 1.0f));
     }
 
-    #endregion Experimental 
+    #endregion Touch Up / Spot Removal  
 }

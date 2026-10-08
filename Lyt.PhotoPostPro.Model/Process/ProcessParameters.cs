@@ -5,6 +5,7 @@ using static Lyt.PhotoPostPro.Model.ProcessSteps.ContrastStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.DenoiseStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.FiltersStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.SharpenStep;
+using static Lyt.PhotoPostPro.Model.ProcessSteps.TouchUpStep;
 using static Lyt.PhotoPostPro.Model.ProcessSteps.WhiteBalanceStep;
 
 public sealed record class ExistingPostProcessParameters(
@@ -37,6 +38,20 @@ public sealed class ProcessParameters
     public int CompositionOriginalDx { get; set; }
 
     public int CompositionOriginalDy { get; set; }
+
+    // TouchUp
+
+    public TouchUpAlgorithm TouchUpAlgorithm { get; set; }
+
+    public int TouchUpSpotPixelX { get; set; }
+
+    public int TouchUpSpotPixelY { get; set; }
+
+    public int TouchUpCleanPixelX { get; set; }
+
+    public int TouchUpCleanPixelY { get; set; }
+
+    public int TouchUpRadius { get; set; }
 
     // Denoise 
 
@@ -176,6 +191,14 @@ public sealed class ProcessParameters
         this.CompositionOriginalDx = compositionStep.OriginalDx;
         this.CompositionOriginalDy = compositionStep.OriginalDy;
 
+        var touchUpStep = workflow.Get<TouchUpStep>();
+        this.TouchUpAlgorithm = touchUpStep.Algorithm;
+        this.TouchUpSpotPixelX = touchUpStep.SpotPixelX;
+        this.TouchUpSpotPixelY = touchUpStep.SpotPixelY;
+        this.TouchUpCleanPixelX = touchUpStep.CleanPixelX;
+        this.TouchUpCleanPixelY = touchUpStep.CleanPixelY;
+        this.TouchUpRadius = touchUpStep.Radius;
+
         var denoiseStep = workflow.Get<DenoiseStep>();
         this.DenoiseAlgorithm = denoiseStep.Algorithm;
         this.IsoGrainDenoiseGaussianSharpen = denoiseStep.GaussianSharpen;
@@ -261,6 +284,14 @@ public sealed class ProcessParameters
         compositionStep.Dy = this.CompositionDy;
         compositionStep.OriginalDx = this.CompositionOriginalDx;
         compositionStep.OriginalDy = this.CompositionOriginalDy;
+
+        var touchUpStep = workflow.Get<TouchUpStep>();
+        touchUpStep.Algorithm = this.TouchUpAlgorithm;
+        touchUpStep.SpotPixelX = this.TouchUpSpotPixelX;
+        touchUpStep.SpotPixelY = this.TouchUpSpotPixelY;
+        touchUpStep.CleanPixelX = this.TouchUpCleanPixelX;
+        touchUpStep.CleanPixelY = this.TouchUpCleanPixelY;
+        touchUpStep.Radius = this.TouchUpRadius;
 
         var denoiseStep = workflow.Get<DenoiseStep>();
         denoiseStep.Algorithm = this.DenoiseAlgorithm;

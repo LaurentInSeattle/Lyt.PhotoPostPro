@@ -137,7 +137,7 @@ global using Lyt.PhotoPostPro.Workflow.Process.Exposure;
 global using Lyt.PhotoPostPro.Workflow.Process.Contrast;
 global using Lyt.PhotoPostPro.Workflow.Process.Lut;
 global using Lyt.PhotoPostPro.Workflow.Process.Color;
-// global using Lyt.PhotoPostPro.Workflow.Process.TouchUp;
+global using Lyt.PhotoPostPro.Workflow.Process.TouchUp;
 global using Lyt.PhotoPostPro.Workflow.Process.Sharpen;
 global using Lyt.PhotoPostPro.Workflow.Process.Export;
 global using Lyt.PhotoPostPro.Workflow.Process.Recovery;

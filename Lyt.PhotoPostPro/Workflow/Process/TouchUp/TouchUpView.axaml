@@ -9,18 +9,10 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
 	Background="Transparent"
 	>
-	<Grid> 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="60" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
-	</Grid>
+	<shared:BeforeAfterView
+		DataContext="{Binding}"
+		/>
 </UserControl>
