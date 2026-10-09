@@ -12,7 +12,35 @@
 	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
 	Background="Transparent"
 	>
-	<shared:BeforeAfterView
-		DataContext="{Binding}"
-		/>
+	<Grid		
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="4" />
+		</Grid.ColumnDefinitions>
+		<Viewbox
+			Grid.Column="1" Grid.Row="1"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			>
+			<Canvas
+				x:Name="ImageCanvas"
+				Width="{Binding ImageWidth}"
+				Height="{Binding ImageHeight}"
+				> 
+				<Image
+					x:Name="Image"
+					IsVisible="{Binding ResultImageIsVisible}"
+					Source="{Binding ResultImage}"
+					/>
+			</Canvas>			
+		</Viewbox>
+	</Grid>
+	<!--
+	-->
 </UserControl>

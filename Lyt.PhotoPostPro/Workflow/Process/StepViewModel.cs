@@ -2,10 +2,11 @@
 
 using global::Avalonia.LogicalTree;
 
-public partial class StepViewModel<TView> :
-    StepViewModel
-    where TView : View, new()
+public partial class StepViewModel<TView> : StepViewModel where TView : View, new()
 {
+    public bool IsBound => this.ViewBase is not null;
+
+    public TView View => (TView)(this.ViewBase ?? throw new InvalidOperationException("View not initialized"));
 }
 
 public partial class StepViewModel :
@@ -145,7 +146,7 @@ public partial class StepViewModel :
                 {
                     var baBiew = view.GetLogicalDescendants().OfType<BeforeAfterView>().FirstOrDefault();
                     baBiew?.ZoomToFit();
-                } 
+                }
             }
         }, DispatcherPriority.Background);
     }

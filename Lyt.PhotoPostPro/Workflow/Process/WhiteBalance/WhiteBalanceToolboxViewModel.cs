@@ -79,6 +79,11 @@ public sealed partial class WhiteBalanceToolboxViewModel :
 
     public void Receive(ImageClickedMessage message)
     {
+        if (!this.IsActivated)
+        {
+            return;
+        }
+
         // Calculate white patch color by averaging colors on a 3 by 3 area on the image
         this.clickedPixelX = message.PixelX;
         this.clickedPixelY = message.PixelY;

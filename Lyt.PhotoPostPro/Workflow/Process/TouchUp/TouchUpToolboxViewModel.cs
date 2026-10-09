@@ -5,18 +5,37 @@ public sealed partial class TouchUpToolboxViewModel :
     IRecipient<ImageClickedMessage>
 {
     private bool doNotUpdateModel;
-    private int clickedPixelX;
-    private int clickedPixelY;
+    private int spotPixelX;
+    private int spotPixelY;
+    private int cleanPixelX;
+    private int cleanPixelY;
+    private double radius ;
+
+    public TouchUpToolboxViewModel()
+    {
+        this.Subscribe<ImageClickedMessage>();
+    }
 
     public void Receive(ImageClickedMessage message)
     {
-        // Calculate white patch color by averaging colors on a 3 by 3 area on the image
-        this.clickedPixelX = message.PixelX;
-        this.clickedPixelY = message.PixelY;
+        if ( !this.IsActivated)
+        {
+            return; 
+        }
 
-        //global::Avalonia.Media.Color patchColor =
-        //        message.WriteableBitmap.GetColorAroundPixel(this.clickedPixelX, this.clickedPixelY);
-        //this.SetWhitePatch(patchColor);
+        this.spotPixelX = message.PixelX;
+        this.spotPixelY = message.PixelY;
+
+        var vm = App.GetRequiredService<TouchUpViewModel>();
+        if ( vm is not null && vm.IsBound)
+        {
+            var bitmapSize = message.WriteableBitmap.PixelSize;
+            int largestDimension = Math.Max(bitmapSize.Height, bitmapSize.Width);
+            this.radius = largestDimension / 70.0;
+            double x = this.spotPixelX - this.radius / 2.0;
+            double y = this.spotPixelY - this.radius / 2.0;
+            vm.View.DrawTargetSpot("clickedPixel", x, y, this.radius);
+        }
     }
 
 #pragma warning disable CA1822 // Mark members as static
