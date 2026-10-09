@@ -80,10 +80,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 throw new Exception("No directory");
             }
 
-            fileName = System.IO.Path.GetFileNameWithoutExtension(fi.Name);
+            fileName = Path.GetFileNameWithoutExtension(fi.Name);
             string timestamp = FileManagerModel.BriefTimestampString();
             string subDirName = ExportTag + fileName + "_" + timestamp;
-            subDirectoryExport = System.IO.Path.Combine(exportFolderPath, subDirName);
+            subDirectoryExport = Path.Combine(exportFolderPath, subDirName);
             if (!Directory.Exists(subDirectoryExport))
             {
                 Directory.CreateDirectory(subDirectoryExport);
@@ -127,6 +127,20 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         int dimension = imageExport.Dimension;
                         int width = imageToResize.Width;
                         int height = imageToResize.Height;
+
+                        // TODO : Remove this hack when export formats editing is fixed
+                        float apspectRatio = width / (float)height;
+                        if (MathF.Abs(apspectRatio - 1.0f) < 0.4f)
+                        {
+                            // Reduce max dimension if aspect ratio is close to 1:1
+                            dimension = (int)(dimension * 0.8f);
+                        }
+                        else if ( MathF.Abs(apspectRatio - 1.0f) < 0.2f )
+                        {
+                            // Reduce max dimension if aspect ratio is close to 1:1
+                            dimension = (int)(dimension * 0.7f);
+                        }
+
                         if (width > height)
                         {
                             float scale = width / (float)dimension;
@@ -256,10 +270,11 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
                 // Saving export formatted image: pick encoder and file extension  
                 Image<RgbaHalf> finalImage = imageWithSignature;
-                var encoder = imageExport.ImageEncoder;
+
+                var encoder = imageExport.OutputFormat.ImageEncoder(imageExport.Quality);
                 string extension = imageExport.FileExtension;
                 string exportPath =
-                    System.IO.Path.Combine(folderPath, fileName + imageExport.PostFix + extension);
+                    Path.Combine(folderPath, fileName + imageExport.PostFix + extension);
                 finalImage.Save(exportPath, encoder);
                 return exportPath;
             }
