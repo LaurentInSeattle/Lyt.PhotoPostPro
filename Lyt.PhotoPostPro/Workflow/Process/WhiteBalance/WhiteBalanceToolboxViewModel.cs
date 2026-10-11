@@ -107,11 +107,6 @@ public sealed partial class WhiteBalanceToolboxViewModel :
     {
         this.algorithm = WhiteBalanceStep.WhiteBalanceAlgorithm.WhitePatch;
         this.UpdateModel();
-
-        //
-        // Experimental 
-        //
-        // this.model.SpotRemove(this.clickedPixelX, this.clickedPixelY, 30);
     }
 
     private void UpdateSliders(WhiteBalanceStep step)

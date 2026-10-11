@@ -12,5 +12,64 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
-
+	<Grid
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt WB --> 
+			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Manual --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Radius slider --> 
+			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Button --> 
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.Row="0" 
+			Text="{DynamicResource Workflow.WhiteBalance.Correction}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<TextBlock
+			Grid.Row="1" 
+			Text="{DynamicResource Workflow.WhiteBalance.ManualColorMatrix}"
+			Theme="{StaticResource Large}"
+			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Grid
+			Grid.Row="2" 
+			> 
+			<Grid.ColumnDefinitions> 
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Grid.Column="0" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Right"
+				Text="{DynamicResource Workflow.WhiteBalance.ManualOffset}"
+				/>
+			<Slider 
+				Grid.Column="1" 
+				TickFrequency="10" TickPlacement="BottomRight"
+				SmallChange="1" LargeChange="5"
+				Minimum="10.0" Maximum="150.0"
+				Value="{Binding RadiusSliderValue}"
+				/>
+			<TextBlock
+				Grid.Column="2" 
+				Theme="{StaticResource Large}"
+				HorizontalAlignment="Left"
+				Text="{Binding RadiusString}"
+				/>
+		</Grid>
+		<glyphs:GlyphButton
+			Grid.Row="4" 
+			Grid.Column="1" Grid.ColumnSpan="2"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="arrow_export"
+			Text="{DynamicResource Workflow.WhiteBalance.RunWhitePatch}"
+			Command="{Binding OnPatch}"
+			Width="280"
+	    	/>
+	</Grid>
 </UserControl>

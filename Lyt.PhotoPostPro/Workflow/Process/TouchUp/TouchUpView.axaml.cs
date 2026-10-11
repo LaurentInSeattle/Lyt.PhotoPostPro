@@ -9,7 +9,7 @@ public partial class TouchUpView : View
 
     protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 
-    public void DrawTargetSpot(string id, double x, double y, double radius)
+    public void ClearTargetSpot(string id)
     {
         List<Ellipse> toRemove = [];
         foreach (var child in this.ImageCanvas.Children)
@@ -24,6 +24,11 @@ public partial class TouchUpView : View
         {
             this.ImageCanvas.Children.Remove(remove);
         }
+    }
+
+    public void DrawTargetSpot(string id, double x, double y, double radius)
+    {
+        this.ClearTargetSpot(id);
 
         void AddEllipseAtXY(Ellipse ellipse)
         {
@@ -35,6 +40,7 @@ public partial class TouchUpView : View
             this.ImageCanvas.Children.Add(ellipse);
         }
 
+        // TODO: Stroke thickness should not depend on radius 
         double thickness = radius / 8.0;
         var outerEllipse = new Ellipse
         {
