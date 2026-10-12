@@ -72,6 +72,7 @@ public partial class App : ApplicationBase
                 // Singletons, they do not need an interface. 
                 //
                 // Shell 
+                _ = services.AddSingleton<Keyboard>();
                 _ = services.AddSingleton<ShellViewModel>();
 
                 // Views and ViewModels from the main view selector            

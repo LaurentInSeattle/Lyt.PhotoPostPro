@@ -8,7 +8,8 @@ public sealed partial class ShellViewModel
     private readonly PhotoPostProModel model;
     private readonly Fullscreen fullscreen;
     private readonly IToaster toaster;
-    private readonly IAnimationService animationService; 
+    private readonly IAnimationService animationService;
+    private readonly IDialogService dialogService;
 
     [ObservableProperty]
     public partial bool MainToolbarIsVisible { get; set; }
@@ -21,12 +22,15 @@ public sealed partial class ShellViewModel
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
 
-    public ShellViewModel(PhotoPostProModel photoPostProModel, IToaster toaster, IAnimationService animationService)
+    public ShellViewModel(
+        PhotoPostProModel photoPostProModel, 
+        IToaster toaster, IAnimationService animationService, IDialogService dialogService)
     {
         this.model = photoPostProModel;
         this.model.CameraManager.Initialize(App.MtpService); 
         this.toaster = toaster;
         this.animationService = animationService;
+        this.dialogService = dialogService;
 
         this.fullscreen = new Fullscreen(App.MainWindow);
         this.MouseMonitor = new Mouse();
@@ -227,6 +231,14 @@ public sealed partial class ShellViewModel
         this.isFirstActivation = false;
     }
 
+    internal void EnableAndSelect(ActivatedView view)
+    {
+        // ! viewSelector is Always there
+        this.viewSelector!.EnableView(view);
+        // ! viewSelector is Always there
+        this.viewSelector!.SelectView(view);
+    }
+
     [RelayCommand]
     public void OnLibrary() => this.viewSelector?.SelectView(ActivatedView.Library);
 
@@ -251,11 +263,55 @@ public sealed partial class ShellViewModel
     [RelayCommand]
     public void OnTools() => this.viewSelector?.SelectView(ActivatedView.Tools);
 
-#pragma warning disable IDE0079 
-#pragma warning disable CA1822 // Mark members as static
-
     [RelayCommand]
-    public void OnClose() => OnExit();
+    public void OnClose()
+    { 
+        if (this.CanClose())
+        {
+            OnExit();
+        }
+    }
+
+    internal bool CanClose()
+    {
+        var keyboard = App.GetRequiredService<Keyboard>();
+        if (keyboard.Modifiers.HasFlag(KeyModifiers.Shift))
+        {
+            // Do not ask when "shifting" 
+            return true;
+        }
+
+        if ((this.viewSelector?.CurrentPrimaryViewModel is LibraryViewModel) ||
+            (this.viewSelector?.CurrentPrimaryViewModel is GalleryViewModel) ||
+            (this.viewSelector?.CurrentPrimaryViewModel is ToolsViewModel) ||
+            (this.viewSelector?.CurrentPrimaryViewModel is SettingsViewModel) ||
+            (this.viewSelector?.CurrentPrimaryViewModel is DocumentationViewModel) ||
+            (this.viewSelector?.CurrentPrimaryViewModel is LanguageViewModel) )
+        {
+            // Do not ask when doing numdane 'things'  
+            return true;
+
+            // Will ask for confirmation when closing the app from :
+            // the camera view, import view, process view, or culling view.
+        }
+
+        if (this.dialogService is DialogService modalService)
+        {
+            var vm = new CanCloseDialogModel();
+            modalService.RunViewModelModal(this.ModalHost, vm, this.OnCloseCanClose);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void OnCloseCanClose(object ? _, bool result)
+    {
+        if (result)
+        {
+            OnExit(); 
+        }; 
+    }
 
     private static async void OnExit()
     {
@@ -263,14 +319,4 @@ public sealed partial class ShellViewModel
         await application.Shutdown();
     }
 
-#pragma warning restore CA1822
-#pragma warning restore IDE0079
-
-    internal void EnableAndSelect(ActivatedView view)
-    {
-        // ! viewSelector is Always there
-        this.viewSelector!.EnableView(view);
-        // ! viewSelector is Always there
-        this.viewSelector!.SelectView(view); 
-    }
 }

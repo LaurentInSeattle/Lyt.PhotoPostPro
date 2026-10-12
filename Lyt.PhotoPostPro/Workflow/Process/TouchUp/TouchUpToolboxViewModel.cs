@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process.TouchUp;
 
-using SixLabors.ImageSharp.ColorProfiles;
-
 public sealed partial class TouchUpToolboxViewModel :
     ToolboxViewModel<TouchUpToolboxView, TouchUpStep>,
     IRecipient<ImageClickedMessage>
@@ -33,6 +31,7 @@ public sealed partial class TouchUpToolboxViewModel :
         base.Activate(activationParameters);
         this.Subscribe<ImageClickedMessage>();
         this.Clear();
+        this.doNotUpdateModel = true;
     }
 
     public override void Deactivate()

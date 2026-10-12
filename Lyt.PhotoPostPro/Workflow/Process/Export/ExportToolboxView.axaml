@@ -80,7 +80,7 @@
 			Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
-			GlyphSource="dismiss"
+			GlyphSource="arrow_left"
 			Text="{DynamicResource Workflow.Export.Finish}"
 			Command="{Binding OnFinish}"
 			IsDisabled="{Binding IsExporting}"

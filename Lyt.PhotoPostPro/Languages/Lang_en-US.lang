@@ -47,7 +47,10 @@
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Rebel !</system:String>
 
-	<!-- File -->
+  <system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
+  <system:String x:Key="Shell.CanClose.Message">All your edits have been saved.</system:String>
+
+<!-- File -->
 	<system:String x:Key="File.NotExist">This file does not exist.</system:String>
 	<system:String x:Key="File.TooSmall">This file is too small.</system:String>
 	<system:String x:Key="File.TooBig">This file is too big.</system:String>
