@@ -15,9 +15,11 @@ public sealed partial class ShellViewModel
     public partial bool MainToolbarIsVisible { get; set; }
 
     [ObservableProperty]
-    public partial string AppName { get; set; } = string.Empty; 
+    public partial string AppName { get; set; } = string.Empty;
 
-    public Mouse MouseMonitor { get; private set;  }
+    public Mouse MouseMonitor { get; private set; }
+
+    public Keyboard KeyboardMonitor { get; private set; }
 
     private ViewSelector<ActivatedView>? viewSelector;
     public bool isFirstActivation;
@@ -35,6 +37,8 @@ public sealed partial class ShellViewModel
         this.fullscreen = new Fullscreen(App.MainWindow);
         this.MouseMonitor = new Mouse();
         this.MouseMonitor.Start(App.MainWindow);
+        this.KeyboardMonitor = new Keyboard();
+        this.KeyboardMonitor.Start(App.MainWindow);
         this.model.SetupLanguage(); 
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
@@ -274,19 +278,19 @@ public sealed partial class ShellViewModel
 
     internal bool CanClose()
     {
-        var keyboard = App.GetRequiredService<Keyboard>();
-        if (keyboard.Modifiers.HasFlag(KeyModifiers.Shift))
+        if (this.KeyboardMonitor.Modifiers.HasFlag(KeyModifiers.Shift))
         {
             // Do not ask when "shifting" 
             return true;
         }
 
-        if ((this.viewSelector?.CurrentPrimaryViewModel is LibraryViewModel) ||
-            (this.viewSelector?.CurrentPrimaryViewModel is GalleryViewModel) ||
-            (this.viewSelector?.CurrentPrimaryViewModel is ToolsViewModel) ||
-            (this.viewSelector?.CurrentPrimaryViewModel is SettingsViewModel) ||
-            (this.viewSelector?.CurrentPrimaryViewModel is DocumentationViewModel) ||
-            (this.viewSelector?.CurrentPrimaryViewModel is LanguageViewModel) )
+        var primaryViewModel = this.viewSelector?.CurrentPrimaryViewModel; 
+        if ((primaryViewModel is LibraryViewModel) ||
+            (primaryViewModel is GalleryViewModel) ||
+            (primaryViewModel is ToolsViewModel) ||
+            (primaryViewModel is SettingsViewModel) ||
+            (primaryViewModel is DocumentationViewModel) ||
+            (primaryViewModel is LanguageViewModel) )
         {
             // Do not ask when doing numdane 'things'  
             return true;

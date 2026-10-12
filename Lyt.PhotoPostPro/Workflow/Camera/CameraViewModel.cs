@@ -66,6 +66,9 @@ public sealed partial class CameraViewModel :
     [ObservableProperty]
     public partial ThumbnailsPanelViewModel ThumbnailsPanelViewModel { get; set; }
 
+    //[ObservableProperty]
+    //public partial DeviceSelectorViewModel ThumbnailsPanelViewModel { get; set; }
+
     [ObservableProperty]
     public partial string DeviceStatus { get; set; } = string.Empty;
 
@@ -101,6 +104,8 @@ public sealed partial class CameraViewModel :
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
         this.model.CameraManager.ClearDownloadFolder();
+
+        this.SelectedThumbnail = null; 
 
         this.DeviceStatus = string.Empty;
         this.FileDownloaded = string.Empty;
@@ -202,6 +207,10 @@ public sealed partial class CameraViewModel :
         {
             // Friendly name not available yet
             this.DeviceStatus = this.Localize(DetectedLocKey); // "Device or Camera detected.";
+            if (list.Count > 1)
+            {
+                // User needs to select which device to use, so that we will not connect to it 
+            }
         }
     }
 
