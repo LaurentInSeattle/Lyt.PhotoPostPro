@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel স্বাগতম!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">ছবিটি রিবেল থেকে প্রস্থান করা হবে?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">আপনার সকল সম্পাদনা সংরক্ষণ করা হয়েছে।.</system:String>
+
     <system:String x:Key="File.NotExist">এই নামে ফাইল অনুপস্থিত।.</system:String>
 
     <system:String x:Key="File.TooSmall">ফাইলটি অতিরিক্ত বড়।.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">সংযুক্ত</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">সাড়া দিচ্ছে না।</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">ক্যামেরা ফাইল বিশ্লেষন করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">ডিভাইসে কোনো ফাইল নেই।</system:String>
 

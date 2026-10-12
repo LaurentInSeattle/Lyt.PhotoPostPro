@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Καλώς ήρθατε στο PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Επαναστάτης φωτογραφίας εξόδου?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Όλες οι επεξεργασίες σας έχουν σωθεί.</system:String>
+
     <system:String x:Key="File.NotExist">Αυτό το αρχείο δεν υπάρχει.</system:String>
 
     <system:String x:Key="File.TooSmall">Αυτός ο φάκελος είναι πολύ μικρός.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Συνδεδεμένος</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Δεν ανταποκρίνεται.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Ανάλυση αρχείων κάμερας, παρακαλώ περιμένετε...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Δεν υπάρχουν αρχεία στη συσκευή.</system:String>
 

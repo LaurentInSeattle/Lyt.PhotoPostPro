@@ -241,6 +241,7 @@ public class CameraManager
         while (retries > 0)
         {
             allFiles.Clear();
+            new DeviceBeginFileListMessage().Publish();
             string[] files =
                 device.GetFiles(Path.DirectorySeparatorChar.ToString(), "*", SearchOption.AllDirectories);
             foreach (string file in files)

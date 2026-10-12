@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">PhotoRebel에 오신 것을 환영합니다!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Photo Rebel 출구?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">모든 편집이 저장되었습니다.</system:String>
+
     <system:String x:Key="File.NotExist">이 파일은 존재하지 않습니다.</system:String>
 
     <system:String x:Key="File.TooSmall">이 파일은 너무 작습니다.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">연결됨</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">응답하지 않습니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Analysing 카메라 파일, please wait ...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">장치에 파일이 없습니다.</system:String>
 

@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Chào mừng tới PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Name?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Tất cả bản chỉnh sửa của anh đã được lưu.</system:String>
+
     <system:String x:Key="File.NotExist">Tập tin này không tồn tại.</system:String>
 
     <system:String x:Key="File.TooSmall">Tập tin này quá nhỏ.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Đã kết nối</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Không trả lời.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Phân tích tập tin máy ảnh, hãy đợi...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Không có tập tin về thiết bị.</system:String>
 

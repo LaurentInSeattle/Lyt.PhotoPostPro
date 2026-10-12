@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Bem-vindo ao PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Sair da Rebelde Fotográfica?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Todas as suas edições foram salvas.</system:String>
+
     <system:String x:Key="File.NotExist">Este ficheiro não existe.</system:String>
 
     <system:String x:Key="File.TooSmall">Este ficheiro é muito pequeno.</system:String>
@@ -246,6 +250,10 @@
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rejeitar a Esquerda - Adicionar uma Estrela à Direita</system:String>
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definir as Marcas</system:String>
+
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando dada uma estrela ou mais, portanto, mantidas na biblioteca, as imagens serão automaticamente 'tagged' com essas tags. 
+
+ ;Você será capaz de mudá-los a qualquer momento durante o processo de abate e classificação.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Etiquetas</system:String>
 
@@ -618,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Ligado</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Não responde.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Analisando arquivos de câmera, por favor espere...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Não há ficheiros no dispositivo.</system:String>
 

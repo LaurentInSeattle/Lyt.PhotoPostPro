@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Üdvözli a PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Minden szerkentyűd megmenekült.</system:String>
+
     <system:String x:Key="File.NotExist">Ez a fájl nem létezik.</system:String>
 
     <system:String x:Key="File.TooSmall">Ez az akta túl kicsi.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Csatlakozva</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Nem válaszol.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Kamera fájlok elemzése, kérem várjon...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Nincsenek fájlok az eszközön.</system:String>
 

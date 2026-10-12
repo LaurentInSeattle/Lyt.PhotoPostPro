@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Ласкаво просимо до PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Фоторепортаж?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Всі ваші редагування зберігаються.</system:String>
+
     <system:String x:Key="File.NotExist">Цей файл не існує.</system:String>
 
     <system:String x:Key="File.TooSmall">Цей файл занадто невеликий.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Підключено</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Не відповідає.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Аналіз файлів камери, будь ласка, почекайте...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">На пристрої немає файлів.</system:String>
 

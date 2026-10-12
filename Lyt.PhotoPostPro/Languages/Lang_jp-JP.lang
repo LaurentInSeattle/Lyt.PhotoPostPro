@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">フォトレベルへようこそ！</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">写真の反逆を出して下さいか?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">すべての編集が保存されました.</system:String>
+
     <system:String x:Key="File.NotExist">このファイルは存在しません.</system:String>
 
     <system:String x:Key="File.TooSmall">このファイルは小さいです.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">接続済み</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">応答がありません。</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">カメラファイルを分析し、待ってください...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">デバイス上にファイルがありません。</system:String>
 

@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Benvenuti a Foto Ribello !</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Tutte le tue modifiche sono state salvate.</system:String>
+
     <system:String x:Key="File.NotExist">Questo file non esiste.</system:String>
 
     <system:String x:Key="File.TooSmall">Questo file è troppo piccolo.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Collegato</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Non rispondere.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Analizzando i file della telecamera, attendi...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Nessun file sul dispositivo.</system:String>
 

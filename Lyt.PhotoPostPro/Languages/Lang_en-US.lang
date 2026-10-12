@@ -47,8 +47,8 @@
 	<system:String x:Key="Shell.Ready">Ready.</system:String>
 	<system:String x:Key="Shell.Greetings">Welcome to Photo Rebel !</system:String>
 
-  <system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
-  <system:String x:Key="Shell.CanClose.Message">All your edits have been saved.</system:String>
+	<system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
+	<system:String x:Key="Shell.CanClose.Message">All your edits have been saved.</system:String>
 
 <!-- File -->
 	<system:String x:Key="File.NotExist">This file does not exist.</system:String>
@@ -430,6 +430,7 @@
 	<system:String x:Key="Workflow.Camera.Detected">Device or Camera detected.</system:String>
 	<system:String x:Key="Workflow.Camera.Connected">Connected</system:String>
 	<system:String x:Key="Workflow.Camera.NotResponding">Not responding.</system:String>
+	<system:String x:Key="Workflow.Camera.InProgress">Analysing camera files, please wait...</system:String>
 	<system:String x:Key="Workflow.Camera.NoFiles">No files on device.</system:String>
 	<system:String x:Key="Workflow.Camera.FilesReady">files ready to transfer.</system:String>
 	<system:String x:Key="Workflow.Camera.TransferedTo">Transfered To: </system:String>

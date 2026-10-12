@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">欢迎来到照片反叛者！</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">退出相片起义吗 ?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">您的所有编辑已保存 .</system:String>
+
     <system:String x:Key="File.NotExist">此文件不存在 .</system:String>
 
     <system:String x:Key="File.TooSmall">这个文件太小了.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">已连接</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">没有回应。</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">分析相机文件,请等待...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">设备上没有文件。</system:String>
 

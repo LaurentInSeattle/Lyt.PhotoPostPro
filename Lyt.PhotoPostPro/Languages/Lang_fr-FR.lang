@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Bienvenue dans Photo Rebellion !</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">Quitter Photo Rebel ?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Toutes vos modifications ont été enregistrées.</system:String>
+
     <system:String x:Key="File.NotExist">Ce fichier n'existe pas.</system:String>
 
     <system:String x:Key="File.TooSmall">Ce fichier est trop petit.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Connecté</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Ne répond pas.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Analyse des fichiers de la caméra, veuillez patienter...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Aucun fichier sur l'appareil.</system:String>
 

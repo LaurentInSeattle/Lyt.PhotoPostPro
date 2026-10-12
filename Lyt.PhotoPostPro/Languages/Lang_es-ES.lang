@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">¡Bienvenido a FotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">¿Exit Photo Rebel?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Todas tus ediciones han sido guardadas.</system:String>
+
     <system:String x:Key="File.NotExist">Este archivo no existe.</system:String>
 
     <system:String x:Key="File.TooSmall">Este archivo es demasiado pequeño.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Conectado</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Sin responder.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Analizando archivos de cámara, por favor espere...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">No hay archivos en el dispositivo.</system:String>
 

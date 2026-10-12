@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">ยินดีต้อนรับสู่โฟโต้รีเบล!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">รีเบลออกจากภาพถ่าย?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">การแก้ไขทั้งหมดของคุณได้รับการบันทึก.</system:String>
+
     <system:String x:Key="File.NotExist">แฟ้มนี้ยังไม่มีอยู่.</system:String>
 
     <system:String x:Key="File.TooSmall">แฟ้มนี้เล็กเกินไป.</system:String>
@@ -620,6 +624,8 @@
     <system:String x:Key="Workflow.Camera.Connected">เชื่อมต่อแล้ว</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">ไม่ตอบสนอง.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">กําลังวิเคราะห์แฟ้มกล้อง โปรดรอสักครู่...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">ไม่มีแฟ้มที่อยู่บนอุปกรณ์.</system:String>
 

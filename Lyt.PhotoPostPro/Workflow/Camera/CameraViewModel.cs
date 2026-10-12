@@ -5,12 +5,13 @@ public sealed partial class CameraViewModel :
     ISelectListener,
     IRecipient<DevicesFoundMessage>,
     IRecipient<DeviceStatusMessage>,
+    IRecipient<DeviceBeginFileListMessage>,
     IRecipient<DeviceFileListMessage>,
     IRecipient<DeviceFileDownloadedMessage>,
     IRecipient<DeviceDownloadCompleteMessage>,
     IRecipient<DeviceFileDeletedMessage>,
     IRecipient<DeviceDeleteCompleteMessage>
-{
+{    
     private const string BeginTransferLocKey = "Workflow.Camera.BeginTransfer";
     private const string CancelTransferLocKey = "Workflow.Camera.CancelTransfer";
     private const string TransferAbortedLocKey = "Workflow.Camera.TransferAborted";
@@ -18,6 +19,7 @@ public sealed partial class CameraViewModel :
     private const string DetectedLocKey = "Workflow.Camera.Detected"; // "Device or Camera detected.";
     private const string ConnectedLocKey = "Workflow.Camera.Connected"; // "Connected";
     private const string NotRespondingLocKey = "Workflow.Camera.NotResponding"; // "Not responding.";
+    private const string InProgressLocKey = "Workflow.Camera.InProgress"; //     
     private const string NoFilesLocKey = "Workflow.Camera.NoFiles"; // "No files on device.";
     private const string FilesReadyLocKey = "Workflow.Camera.FilesReady"; // " files ready to transfer.";
     private const string TransferedToLocKey = "Workflow.Camera.TransferedTo";
@@ -88,6 +90,7 @@ public sealed partial class CameraViewModel :
 
         this.Subscribe<DevicesFoundMessage>();
         this.Subscribe<DeviceStatusMessage>();
+        this.Subscribe<DeviceBeginFileListMessage>();
         this.Subscribe<DeviceFileListMessage>();
         this.Subscribe<DeviceFileDownloadedMessage>();
         this.Subscribe<DeviceDownloadCompleteMessage>();
@@ -125,6 +128,7 @@ public sealed partial class CameraViewModel :
 
         this.Unregister<DevicesFoundMessage>();
         this.Unregister<DeviceStatusMessage>();
+        this.Unregister<DeviceBeginFileListMessage>();
         this.Unregister<DeviceFileListMessage>();
         this.Unregister<DeviceFileDownloadedMessage>();
         this.Unregister<DeviceDownloadCompleteMessage>();
@@ -148,6 +152,9 @@ public sealed partial class CameraViewModel :
 
     public void Receive(DeviceStatusMessage message)
         => Dispatch.OnUiThread(() => { this.OnDeviceStatus(message); }, DispatcherPriority.Background);
+
+    public void Receive(DeviceBeginFileListMessage message)
+        => Dispatch.OnUiThread(() => { this.OnDeviceBeginFileList(message); }, DispatcherPriority.Background);
 
     public void Receive(DeviceFileListMessage message)
         => Dispatch.OnUiThread(() => { this.OnDeviceFileList(message); }, DispatcherPriority.Background);
@@ -214,6 +221,18 @@ public sealed partial class CameraViewModel :
         this.FileDownloaded = string.Empty;
     }
 
+    private void OnDeviceBeginFileList(DeviceBeginFileListMessage message)
+    {
+        if (!this.IsActivated)
+        {
+            // ignore messages if we just moved away 
+            return;
+        }
+
+        this.FileDownloaded = string.Empty;
+        this.DeviceStatus = this.Localize(InProgressLocKey); // files ready to transfer.";
+    }
+
     private void OnDeviceFileList(DeviceFileListMessage message)
     {
         if (!this.IsActivated)
@@ -222,7 +241,6 @@ public sealed partial class CameraViewModel :
             return;
         }
 
-        // TODO: localize
         this.FileDownloaded = string.Empty;
         var device = message.Device;
         if (message.Files.Count == 0)

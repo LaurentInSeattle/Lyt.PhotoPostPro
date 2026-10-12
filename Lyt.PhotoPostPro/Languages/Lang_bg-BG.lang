@@ -25,6 +25,10 @@
 
     <system:String x:Key="Shell.Greetings">Добре дошли във PhotoRebel!</system:String>
 
+    <system:String x:Key="Shell.CanClose.Title">"Излизане на фото бунтар"?</system:String>
+
+    <system:String x:Key="Shell.CanClose.Message">Всичките ти редактори са записани.</system:String>
+
     <system:String x:Key="File.NotExist">Този файл не съществува.</system:String>
 
     <system:String x:Key="File.TooSmall">Този файл е твърде малък.</system:String>
@@ -622,6 +626,8 @@
     <system:String x:Key="Workflow.Camera.Connected">Свързан</system:String>
 
     <system:String x:Key="Workflow.Camera.NotResponding">Не реагира.</system:String>
+
+    <system:String x:Key="Workflow.Camera.InProgress">Анализиране на камерите, моля изчакайте...</system:String>
 
     <system:String x:Key="Workflow.Camera.NoFiles">Няма файлове на устройството.</system:String>
 
