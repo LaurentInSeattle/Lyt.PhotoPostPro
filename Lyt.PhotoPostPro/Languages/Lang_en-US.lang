@@ -423,6 +423,8 @@
 	<system:String x:Key="Workflow.Export.Finish">All Done, Back to Library</system:String>
 
 	<!-- Camera -->
+	
+	<system:String x:Key="Workflow.Camera.SelectDevice">Connect to this device</system:String>
 	<system:String x:Key="Workflow.Camera.BeginTransfer">Begin Transfer</system:String>
 	<system:String x:Key="Workflow.Camera.CancelTransfer">Cancel Transfer</system:String>
 	<system:String x:Key="Workflow.Camera.TransferAborted">Transfer Aborted</system:String>

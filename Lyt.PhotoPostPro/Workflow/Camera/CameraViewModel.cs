@@ -35,6 +35,7 @@ public sealed partial class CameraViewModel :
     private readonly LibraryManager libraryMgr;
     private readonly List<string> selectedFiles;
     private readonly List<string> downloadedFiles;
+    private readonly List<FoundDevice> selectedDevices;
 
     private FoundDevice? foundDevice;
     // private bool nothingSaved;
@@ -47,12 +48,26 @@ public sealed partial class CameraViewModel :
         this.libraryMgr = this.model.LibraryManager;
         this.selectedFiles = [];
         this.downloadedFiles = [];
+        this.selectedDevices = [];
+        this.Devices = [];
         this.ThumbnailsPanelViewModel = new(this.model, this);
         this.OtherFilesPanelViewModel = new(this.model, this);
     }
 
     [ObservableProperty]
+    public partial bool ShowImagesOrOtherFiles { get; set; } = true;
+
+    [ObservableProperty]
     public partial bool ShowImages { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool ShowOtherFiles { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool ShowDeviceSelection { get; set; } = false;
+
+    [ObservableProperty]
+    public partial ObservableCollection<DeviceViewModel> Devices { get; set; }
 
     [ObservableProperty]
     public partial OtherFilesPanelViewModel OtherFilesPanelViewModel { get; set; }
@@ -65,9 +80,6 @@ public sealed partial class CameraViewModel :
 
     [ObservableProperty]
     public partial ThumbnailsPanelViewModel ThumbnailsPanelViewModel { get; set; }
-
-    //[ObservableProperty]
-    //public partial DeviceSelectorViewModel ThumbnailsPanelViewModel { get; set; }
 
     [ObservableProperty]
     public partial string DeviceStatus { get; set; } = string.Empty;
@@ -87,6 +99,9 @@ public sealed partial class CameraViewModel :
     [ObservableProperty]
     public partial bool RemoveFromCameraButtonIsDisabled { get; set; } = true;
 
+    [ObservableProperty]
+    public partial bool SelectDeviceIsDisabled { get; set; } = true;
+
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
@@ -103,6 +118,8 @@ public sealed partial class CameraViewModel :
         this.NullifyDevice();
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
+        this.selectedDevices.Clear();
+        this.Devices.Clear();
         this.model.CameraManager.ClearDownloadFolder();
 
         this.SelectedThumbnail = null; 
@@ -117,7 +134,9 @@ public sealed partial class CameraViewModel :
 
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
-        this.ShowImages = true;
+        this.ShowImages = false;
+        this.ShowOtherFiles = false;
+        this.ShowDeviceSelection = false;
         this.isDownloading = false;
         // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
@@ -146,7 +165,10 @@ public sealed partial class CameraViewModel :
 
         this.selectedFiles.Clear();
         this.downloadedFiles.Clear();
+        this.selectedDevices.Clear();
+        this.Devices.Clear();
         this.ThumbnailsPanelViewModel.Thumbnails.Clear();
+        this.SelectedThumbnail = null;
 
         // Do not clear the download folder in case we need or want to recover
         // any file left in there
@@ -210,6 +232,15 @@ public sealed partial class CameraViewModel :
             if (list.Count > 1)
             {
                 // User needs to select which device to use, so that we will not connect to it 
+                this.Devices.Clear();
+                foreach (var device in list)
+                {
+                    this.Devices.Add(new DeviceViewModel(this, device));
+                }
+
+                this.ShowImages = false;
+                this.ShowOtherFiles = false;
+                this.ShowDeviceSelection = true;
             }
         }
     }
@@ -238,8 +269,7 @@ public sealed partial class CameraViewModel :
             return;
         }
 
-        this.FileDownloaded = string.Empty;
-        this.DeviceStatus = this.Localize(InProgressLocKey); // files ready to transfer.";
+        this.FileDownloaded = this.Localize(InProgressLocKey); // Analysing....";
     }
 
     private void OnDeviceFileList(DeviceFileListMessage message)
@@ -268,6 +298,10 @@ public sealed partial class CameraViewModel :
             this.selectedFiles.Clear();
             this.selectedFiles.AddRange(message.Files);
             this.downloadedFiles.Clear();
+
+            this.ShowImages = true;
+            this.ShowOtherFiles = false;
+            this.ShowDeviceSelection = false;
         }
     }
 
@@ -553,5 +587,32 @@ public sealed partial class CameraViewModel :
 
         // Delete 
         this.cameraMgr.BeginDeletingFiles(this.foundDevice, [file]);
+    }
+
+    [RelayCommand]
+    public void OnSelectDevice()
+    {
+        if (this.selectedDevices.Count != 1)
+        {
+            return;
+        }
+
+        this.foundDevice = this.selectedDevices[0];
+        this.cameraMgr.TryConnectTo(this.foundDevice);
+    }
+
+    internal void OnDeviceSelectionChanged(DeviceViewModel deviceViewModel, bool selected)
+    {
+        var device = deviceViewModel.Device;
+        if (selected)
+        {
+            this.selectedDevices.Add(device);
+        }
+        else
+        {
+            this.selectedDevices.Remove(device);
+        }
+
+        this.SelectDeviceIsDisabled = this.selectedDevices.Count != 1;
     }
 }

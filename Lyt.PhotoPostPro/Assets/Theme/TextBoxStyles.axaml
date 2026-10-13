@@ -8,6 +8,17 @@
         </Border>
     </Design.PreviewWith>
 
+    <Style Selector="ToolTip">
+        <Setter Property="Background" Value="{StaticResource DeepBlue_0_100}" />
+        <Setter Property="Foreground" Value="{StaticResource LightAqua_0_120}" />
+        <Setter Property="BorderBrush" Value="{StaticResource OrangePeel_0_040}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Padding" Value="32 8 8 8" />
+        <Setter Property="MaxWidth" Value="420" />
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+    
     <!-- TextBox -->
     <Style Selector="TextBox">
         <Setter Property="Foreground" Value="{StaticResource LightAqua_0_120}"/>

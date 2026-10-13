@@ -111,6 +111,47 @@ public class CameraManager
         this.IsMonitoring = false;
     }
 
+    public void TryConnectTo(FoundDevice foundDevice)
+    {
+        try
+        {
+            var devices = this.MtpService.GetDevices();
+            int deviceCount = devices.Count;
+            if (deviceCount == 0)
+            {
+                // Publish an empty list 
+                new DevicesFoundMessage([]).Publish();
+                this.logger.Warning(" No devices found");
+            }
+            else
+            {
+                IMtpDevice? mtpDevice = null;
+                foreach (IMtpDevice device in devices)
+                {
+                    if (device.Id == foundDevice.Id)
+                    {
+                        mtpDevice = device;
+                        break;
+                    }
+                }
+
+                if (mtpDevice is not null)
+                {
+                    this.TryConnectTo(foundDevice, mtpDevice);
+                }
+                else
+                { 
+                    new DeviceStatusMessage(IsConnected: false, foundDevice).Publish();
+                    return;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            this.logger.Warning($" Exception while reading device data: {ex.Message}");
+        }
+    }
+
     private void TryConnectTo(FoundDevice foundDevice, IMtpDevice device)
     {
         try
@@ -164,7 +205,7 @@ public class CameraManager
         Debug.WriteLine(" Checking Camera Connection");
         try
         {
-            var devices = this.MtpService.GetDevices(); //  MediaDevice.GetDevices().ToList();
+            var devices = this.MtpService.GetDevices(); 
             int deviceCount = devices.Count;
             if (deviceCount == 0)
             {

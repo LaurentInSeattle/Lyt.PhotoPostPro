@@ -87,7 +87,7 @@
 				FalseText="{DynamicResource Workflow.Camera.MoviesOthers}"
 				Height="30" Width="460"
 				VerticalAlignment="Center"
-				Value="{Binding ShowImages}"
+				Value="{Binding ShowImagesOrOtherFiles}"
 				/>
 		</StackPanel>
 		<TextBlock
@@ -105,7 +105,58 @@
 		<!-- Creating grid so that we can use databinding without interfering with the panel VM --> 
 		<Grid 
 			Grid.Row="3" Grid.Column="1"
-			IsVisible="{Binding !ShowImages}"
+			IsVisible="{Binding ShowDeviceSelection}"
+			Margin="12 0 0 0"
+			> 
+			<Grid>
+				<Grid.ColumnDefinitions> 
+					<ColumnDefinition Width="540" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<ScrollViewer
+					Width="540"
+					Background="Transparent"
+					VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+					ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+					ScrollViewer.VerticalScrollBarVisibility="Auto"
+					>
+					<ItemsControl 
+						ItemsSource="{Binding Devices}"
+						Margin="0 0 24 0"
+						>
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel />
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<vm:DeviceView Margin="0 12 0 12" />
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</ScrollViewer>
+
+				<glyphs:GlyphButton
+					Margin="16 20 16 0"
+					Grid.Column="1"
+					Style="{StaticResource ViewIconButton}"
+					FontSize="24"
+					HorizontalAlignment="Left" VerticalAlignment="Top"
+					Width="500" Height="56"
+					GlyphSource="arrow_sync"
+					Text="{DynamicResource Workflow.Camera.SelectDevice}"
+					Command="{Binding OnSelectDevice}"
+					IsDisabled="{Binding SelectDeviceIsDisabled}"
+					/>
+				</Grid> 
+
+		</Grid>
+
+		<Grid 
+			Grid.Row="3" Grid.Column="1"
+			IsVisible="{Binding ShowOtherFiles}"
 			> 
 			<vm:OtherFilesPanelView DataContext="{Binding OtherFilesPanelViewModel}"/>
 		</Grid>

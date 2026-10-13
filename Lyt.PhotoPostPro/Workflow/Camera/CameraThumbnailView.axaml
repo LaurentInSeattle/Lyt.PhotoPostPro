@@ -69,6 +69,7 @@
 					IsThreeState="False"
 					IsChecked="{Binding IsToAddToLibrary, Mode=TwoWay}"
 					Command="{Binding OnIsToAddToLibraryChanged}"
+					ToolTip.Tip="Check to add to your library." 
 					/>
 				<CheckBox
 					Classes="noContent"
@@ -78,6 +79,7 @@
 					IsThreeState="False"
 					IsChecked="{Binding IsToRemoveFromCamera, Mode=TwoWay}"
 					Command="{Binding OnIsToRemoveFromCameraChanged}"
+					ToolTip.Tip="Check to remove from camera." 
 					/>
 			</Grid>
 		</Grid>

@@ -96,6 +96,9 @@
     <Compile Update="Shell\CanCloseDialog.axaml.cs">
       <DependentUpon>CanCloseDialog.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Camera\DeviceView.axaml.cs">
+      <DependentUpon>DeviceView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Desaturation\DesaturationToolboxView.axaml.cs">
       <DependentUpon>DesaturationToolboxView.axaml</DependentUpon>
     </Compile>
