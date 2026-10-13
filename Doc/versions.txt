@@ -4,13 +4,16 @@ A: Alessandra - Private Beta - No Setup - No Store - Ava 12.1.2 - Released: Sept
 B: Bianca - Open Beta - No Setup - No Store - Ava 12.1.2 - Released: September 21st
 C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12.1.2 - Released: October 1st
 
-D: Donatella - Open Beta - Bug fixes - No Setup - No Store - Ava 12.1.4 - Planned: Early/Mid October
+D: Donatella - Open Beta - Bug fixes (Camera) - No Setup - No Store - Ava 12.1.4 - Released: October 13th
 
-E: Emilia - Open Beta - First Run - Touch Up - Bug fixes - Store Setup - No Store - Ava 12.1.4 - Planned: Late October
+E: Emilia - Open Beta - Navigation - Bug fixes - Store Setup - No Store - Ava 12.1.4 - Planned: Late October
 
-F: Federica 
+F: Federica - Open Beta - First Run - Touch Up - Bug fixes - Store Setup - No Store - Ava 12.1.4 - Planned: Early November
+
 G: Giulia
+
 H: Helena 
+
 I: Illaria
 J: Jovana 
 K: Karina
