@@ -9,6 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:progress="clr-namespace:Lyt.Avalonia.Controls.Progress;assembly=Lyt.Avalonia.Controls"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
 	xmlns:metadatapane="using:Lyt.PhotoPostPro.Panes.MetadataPane"
@@ -25,7 +26,7 @@
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="12" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="4" />
 			<ColumnDefinition Width="480"/>
@@ -91,16 +92,22 @@
 				Value="{Binding ShowImagesOrOtherFiles}"
 				/>
 		</StackPanel>
-		<TextBlock
-			Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
-			Text="{Binding FileDownloaded}"
-			Theme="{StaticResource H3}"
-			TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
-			/>
 		<StackPanel
-			Grid.Row="2" Grid.Column="1"
-			HorizontalAlignment="Right" VerticalAlignment="Center"
+			Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+			Orientation="Horizontal"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
 			>
+			<progress:ProgressRing
+				Width="28" Height="28" Margin="16 0 16 0"
+				IsActive="{Binding SpinnerIsActive}"
+				Foreground="{StaticResource OrangePeel_1_100}"
+				VerticalAlignment="Center" 
+				/>
+			<TextBlock
+				Text="{Binding FileDownloaded}"
+				Theme="{StaticResource H3}"
+				TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
 		</StackPanel>
 
 		<!-- Creating grid so that we can use databinding without interfering with the panel VM --> 

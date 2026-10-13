@@ -113,6 +113,11 @@ public class CameraManager
 
     public void TryConnectTo(FoundDevice foundDevice)
     {
+        Task.Run(() => this.ThreadedTryConnectTo(foundDevice));
+    }
+
+    private void ThreadedTryConnectTo(FoundDevice foundDevice)
+    {
         try
         {
             var devices = this.MtpService.GetDevices();

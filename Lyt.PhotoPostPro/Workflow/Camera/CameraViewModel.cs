@@ -55,6 +55,9 @@ public sealed partial class CameraViewModel :
     }
 
     [ObservableProperty]
+    public partial bool SpinnerIsActive { get; set; } = false;
+
+    [ObservableProperty]
     public partial bool ShowImagesOrOtherFiles { get; set; } = true;
 
     [ObservableProperty]
@@ -281,7 +284,8 @@ public sealed partial class CameraViewModel :
             return;
         }
 
-        this.FileDownloaded = this.Localize(InProgressLocKey); // Analysing....";
+        this.FileDownloaded = this.Localize(InProgressLocKey); 
+        this.SpinnerIsActive = true;
     }
 
     private void OnDeviceFileList(DeviceFileListMessage message)
@@ -293,6 +297,8 @@ public sealed partial class CameraViewModel :
         }
 
         this.FileDownloaded = string.Empty;
+        this.SpinnerIsActive = false;
+
         var device = message.Device;
         if (message.Files.Count == 0)
         {
@@ -609,6 +615,8 @@ public sealed partial class CameraViewModel :
             return;
         }
 
+        this.SelectDeviceIsDisabled = true;
+        this.SpinnerIsActive = true;
         this.foundDevice = this.selectedDevices[0];
         this.cameraMgr.TryConnectTo(this.foundDevice);
     }
