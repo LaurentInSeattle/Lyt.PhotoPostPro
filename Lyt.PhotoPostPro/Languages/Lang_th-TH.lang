@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Last</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">คลิกเพื่อเปิดเอกสารนี้</system:String>
+
     <system:String x:Key="Gallery.Empty">แกลเลอรี่ดวงที่ 5 ของคุณ.</system:String>
 
     <system:String x:Key="Library.Empty">ไลบรารีของรูปภาพของคุณว่างเปล่า ใช้ 'นําเข้า' เพื่อเพิ่มภาพต่าง ๆ.</system:String>
@@ -610,6 +612,8 @@
     <system:String x:Key="Workflow.Export.Navigate">เปิด/ ปิด การส่งออกโฟลเดอร์</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">เสร็จแล้ว, กลับไปที่ไลบรารี</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">เชื่อมต่อไปยังอุปกรณ์นี้</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">เริ่มการส่งถ่ายข้อมูล</system:String>
 

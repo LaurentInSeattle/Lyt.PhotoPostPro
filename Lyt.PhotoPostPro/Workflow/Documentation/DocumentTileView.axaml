@@ -68,6 +68,8 @@
 			Grid.Row="3" Grid.Column="1"
 			Command="{Binding OnOpen}"
 			MaxHeight="840" MaxWidth="860"
+			ToolTip.Tip="{DynamicResource Workflow.Document.ClickOpen}"
+			ToolTip.ShowDelay="1000"
 			>
 			<Image 
 				Source="{Binding ImageSource}"

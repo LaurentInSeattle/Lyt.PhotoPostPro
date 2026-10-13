@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">最近の投稿</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">このドキュメントを開く</system:String>
+
     <system:String x:Key="Gallery.Empty">'five Star'の最高の写真のギャラリーは空です.</system:String>
 
     <system:String x:Key="Library.Empty">あなたの写真のライブラリは空です。 'Import' を使用して画像を追加します.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">エクスポートフォルダーに移動します</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">すべて完了、ライブラリに戻る</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">このデバイスに接続する</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">転送の開始</system:String>
 

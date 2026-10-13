@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">最後</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">點擊以開啟此文件</system:String>
+
     <system:String x:Key="Gallery.Empty">有"五星"好相片被取出.</system:String>
 
     <system:String x:Key="Library.Empty">您相片相簿已空出 。 使用 “ 匯入 ” 來新增影像 .</system:String>
@@ -610,6 +612,8 @@
     <system:String x:Key="Workflow.Export.Navigate">導航至匯出資料夾</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">一切完成，返回圖書館</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">連接到此裝置</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">開始傳輸</system:String>
 

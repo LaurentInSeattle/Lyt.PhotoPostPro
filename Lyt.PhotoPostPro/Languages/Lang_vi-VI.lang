@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Cuối</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Nhấn vào để mở tài liệu này</system:String>
+
     <system:String x:Key="Gallery.Empty">Phòng trưng bày tốt nhất của bạn năm ngôi sao là trống rỗng.</system:String>
 
     <system:String x:Key="Library.Empty">Thư viện ảnh của bạn rỗng. Dùng « Mở đích » để thêm ảnh.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Chuyển tới thư mục xuất</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Tất cả đã xong, trở lại thư viện</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Kết nối tới thiết bị này</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Bắt đầu truyền</system:String>
 

@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Ultima</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Clicca per aprire questo documento</system:String>
+
     <system:String x:Key="Gallery.Empty">La tua galleria di 'cinque stelle' migliori immagini è vuota.</system:String>
 
     <system:String x:Key="Library.Empty">La tua libreria di immagini è vuota. Utilizzare 'Import' per aggiungere immagini.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Navigare alla cartella di esportazione</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Tutto finito, tornare alla libreria</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Collegare a questo dispositivo</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Inizia il trasferimento</system:String>
 

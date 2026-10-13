@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Utolsó</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Kattintson ide a dokumentum megnyitásához</system:String>
+
     <system:String x:Key="Gallery.Empty">Az öt csillag legjobb képeinek galériája üres.</system:String>
 
     <system:String x:Key="Library.Empty">A képtár üres. A képek hozzáadásához használja az 'importálás' opciót.</system:String>
@@ -610,6 +612,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Lépjen a Mappa exportálása elemre</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Minden kész, vissza a könyvtárba</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Csatlakozás ehhez az eszközhöz</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Indítsa el az átvitelt</system:String>
 

@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Последно</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Натиснете, за да отворите този документ</system:String>
+
     <system:String x:Key="Gallery.Empty">Вашата галерия с най-добрите пет звезди е празна.</system:String>
 
     <system:String x:Key="Library.Empty">Библиотеката ти е празна. Използвайте 'Импорт', за да добавите изображения.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Отидете до папка за експортиране</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Готово, обратно към библиотеката</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Свързване към това устройство</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Започнете прехвърлянето</system:String>
 

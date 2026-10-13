@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">শেষ</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">ডকুমেন্টটি খোলার জন্য ক্লিক করুন</system:String>
+
     <system:String x:Key="Gallery.Empty">আপনার পাঁচটি তারার সেরা ছবির গ্যালারি খালি।.</system:String>
 
     <system:String x:Key="Library.Empty">আপনার লাইব্রেরির ফটো ফাঁকা। ছবি যোগ করতে ' আমদানী' ব্যবহার করুন।.</system:String>
@@ -610,6 +612,8 @@
     <system:String x:Key="Workflow.Export.Navigate">এক্সপোর্ট ফোল্ডারে নেভিগেট করুন</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">সব শেষ, লাইব্রেরিতে ফিরে যান</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">চিহ্নিত ডিভাইসের সাথে সংযোগ স্থাপন করুন</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">স্থানান্তর শুরু করুন</system:String>
 

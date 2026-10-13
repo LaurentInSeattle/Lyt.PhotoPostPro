@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">अंतिम</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">इस दस्तावेज़ को खोलने के लिए क्लिक करें</system:String>
+
     <system:String x:Key="Gallery.Empty">आपकी गैलरी 'पाँच सितारों' सबसे अच्छा चित्र खाली है।.</system:String>
 
     <system:String x:Key="Library.Empty">आपकी तस्वीरों की लाइब्रेरी खाली है। छवियों को जोड़ने के लिए 'आयात' का उपयोग करें।.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">निर्यात फ़ोल्डर पर नेविगेट करें</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">सब कुछ हो गया, लाइब्रेरी में वापस</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">इस उपकरण से कनेक्ट करें</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">स्थानांतरण प्रारंभ करें</system:String>
 

@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Зареєструватися</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Натисніть, щоб відкрити цей документ</system:String>
+
     <system:String x:Key="Gallery.Empty">Галерея 'five stars' Кращі фотографії порожній.</system:String>
 
     <system:String x:Key="Library.Empty">Бібліотека зображень порожній. Використовуйте "Імпорт" для додавання зображень.</system:String>
@@ -610,6 +612,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Перейдіть до папки експорту</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Готово, назад до бібліотеки</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Підключення до цього пристрою</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Почати передачу</system:String>
 

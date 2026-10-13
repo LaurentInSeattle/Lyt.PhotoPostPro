@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">最后一个</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">点击打开此文档</system:String>
+
     <system:String x:Key="Gallery.Empty">你的"五星最佳相片"画廊是空的.</system:String>
 
     <system:String x:Key="Library.Empty">您的图片库为空 。 使用“ 导入” 添加图像 .</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">导航至导出文件夹</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">一切完成，返回图书馆</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">连接到此设备</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">开始传输</system:String>
 

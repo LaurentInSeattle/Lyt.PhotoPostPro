@@ -170,7 +170,8 @@
 	<system:String x:Key="Workflow.Documentation.Previous">Previous</system:String>
 	<system:String x:Key="Workflow.Documentation.Next">Next</system:String>
 	<system:String x:Key="Workflow.Documentation.Last">Last</system:String>
-
+	<system:String x:Key="Workflow.Document.ClickOpen">Click to Open this Document</system:String>
+	
 	<!-- Gallery -->
 	<system:String x:Key="Gallery.Empty">Your gallery of 'five stars' best pictures is empty.</system:String>
 	<system:String x:Key="Library.Empty">Your library of pictures is empty. Use 'Import' to add images.</system:String>

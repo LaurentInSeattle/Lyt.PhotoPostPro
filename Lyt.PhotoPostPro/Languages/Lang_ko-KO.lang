@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">이름 *</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">이 문서 열기</system:String>
+
     <system:String x:Key="Gallery.Empty">'five stars' 최고의 사진 갤러리가 비어 있습니다.</system:String>
 
     <system:String x:Key="Library.Empty">사진의 도서관은 비어 있습니다. 이미지를 추가하려면 'Import'를 사용하십시오.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">내보내기 폴더로 이동</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">모두 완료되었습니다. 라이브러리로 돌아가기</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">이 장치에 연결</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">전송 시작</system:String>
 

@@ -209,6 +209,8 @@
 
     <system:String x:Key="Workflow.Documentation.Last">Τελευταίο</system:String>
 
+    <system:String x:Key="Workflow.Document.ClickOpen">Κλικ για άνοιγμα αυτού του εγγράφου</system:String>
+
     <system:String x:Key="Gallery.Empty">Η γκαλερί σου με τις καλύτερες φωτογραφίες των πέντε αστέρων είναι άδεια.</system:String>
 
     <system:String x:Key="Library.Empty">Η βιβλιοθήκη με τις φωτογραφίες σου είναι άδεια. Χρήση 'Εισαγωγή' για την προσθήκη εικόνων.</system:String>
@@ -612,6 +614,8 @@
     <system:String x:Key="Workflow.Export.Navigate">Μεταβείτε στον φάκελο Εξαγωγή</system:String>
 
     <system:String x:Key="Workflow.Export.Finish">Όλα έγιναν, Επιστροφή στη Βιβλιοθήκη</system:String>
+
+    <system:String x:Key="Workflow.Camera.SelectDevice">Σύνδεση σε αυτή τη συσκευή</system:String>
 
     <system:String x:Key="Workflow.Camera.BeginTransfer">Έναρξη Μεταφοράς</system:String>
 
