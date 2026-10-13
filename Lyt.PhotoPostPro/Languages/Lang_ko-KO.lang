@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">정의 태그</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이미지는 이 꼬리표에 자동적으로 '태그'일 것입니다. 
-
- ;당신은 교수법 및 평가 과정에서 언제든지 변경할 수 있습니다.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이미지는 이 꼬리표에 자동적으로 '태그'일 것입니다.&#xD;&#xA;&#xD;&#xA;당신은 교수법 및 평가 과정에서 언제든지 변경할 수 있습니다.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">이름 *</system:String>
 

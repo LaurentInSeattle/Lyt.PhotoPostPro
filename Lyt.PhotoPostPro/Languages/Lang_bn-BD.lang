@@ -253,7 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">ট্যাগ নির্ধারণ করুন</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">যখন এক বা একাধিক তারকাকে লাইব্রেরিতে রাখা হয়, তখন এই ট্যাগ সহ স্বয়ংক্রিয়ভাবে ছবিগুলোকে সংযুক্ত করা হবে । #xD; এবং #xAA; এবং #xD#xD; এবং #x#x#xD আপনি যে কোন সময়ে তাদের পরিবর্তন করতে পারবেন এই রোগ এবং রেটিং প্রক্রিয়ার সময়।.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">যখন এক বা একাধিক তারকাকে লাইব্রেরিতে রাখা হয়, তখন এই ট্যাগ সহ স্বয়ংক্রিয়ভাবে ছবিগুলোকে সংযুক্ত করা হবে । &#xD;&#xA;&#xD;&#xA; আপনি যে কোন সময়ে তাদের পরিবর্তন করতে পারবেন এই রোগ এবং রেটিং প্রক্রিয়ার সময়।.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">ট্যাগ</system:String>
 

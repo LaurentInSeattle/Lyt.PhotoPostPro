@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">定义标记</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">当给定一星或多星, 因此保存在库中时, 图像会自动被标记为“ 标记 ” 。 
-
- ;在收视和评分过程中,你可以随时修改.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">当给定一星或多星, 因此保存在库中时, 图像会自动被标记为“ 标记 ” 。&#xD;&#xA;&#xD;&#xA;在收视和评分过程中,你可以随时修改.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">标记</system:String>
 

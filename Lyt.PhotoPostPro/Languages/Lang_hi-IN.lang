@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">परिभाषित टैग</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन टैगों के साथ छवियों को स्वचालित रूप से 'चिह्नित' किया जाएगा। 
-
- आप उन्हें किसी भी समय क्यूलिंग और रेटिंग प्रक्रिया के दौरान बदलने में सक्षम होंगे।.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन टैगों के साथ छवियों को स्वचालित रूप से 'चिह्नित' किया जाएगा। &#xD;&#xA;&#xD;&#xA;आप उन्हें किसी भी समय क्यूलिंग और रेटिंग प्रक्रिया के दौरान बदलने में सक्षम होंगे।.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">टैग</system:String>
 

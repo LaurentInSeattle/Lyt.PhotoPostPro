@@ -253,7 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Tags</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Cuando se le da una estrella o más, por lo tanto se guarda en la biblioteca, las imágenes se etiquetarán automáticamente con estas etiquetas. >#xD; curva#xA; ; Usted será capaz de cambiarlos en cualquier momento durante el proceso de culling y calificación.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Cuando se le da una estrella o más, por lo tanto se guarda en la biblioteca, las imágenes se etiquetarán automáticamente con estas etiquetas.&#xD;&#xA;&#xD;&#xA; Usted será capaz de cambiarlos en cualquier momento durante el proceso de culling y calificación.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Etiquetas</system:String>
 

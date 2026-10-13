@@ -253,7 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Címkék meghatározása</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, a képek automatikusan "címkével" lesznek ellátva. & # xD; & # xA; & # xD; & # xA; A válogatási és minősítési folyamat során bármikor megváltoztathatja azokat.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Ha egy vagy több csillagot adnak, ezért a könyvtárban tartják, a képek automatikusan "címkével" lesznek ellátva. &#xD;&#xA;&#xD;&#xA; A válogatási és minősítési folyamat során bármikor megváltoztathatja azokat.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Címkék</system:String>
 

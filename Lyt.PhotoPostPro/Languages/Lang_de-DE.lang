@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Tags definieren</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Wenn ein Stern oder mehrere in der Bibliothek aufbewahrt werden, werden Bilder automatisch mit diesen Tags "markiert". 
-
- Sie können sie jederzeit während des Aussortierungs- und Bewertungsprozesses ändern.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Wenn ein Stern oder mehrere in der Bibliothek aufbewahrt werden, werden Bilder automatisch mit diesen Tags "markiert". &#xD;&#xA;&#xD;&#xA;Sie können sie jederzeit während des Aussortierungs- und Bewertungsprozesses ändern.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
 

@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">タグの定義</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1つの星以上を与えられた場合、したがってライブラリに保管されると、これらのタグで画像は自動的に「タグ付け」されます。 
-
- ;あなたは、彫刻と評価プロセスの間にいつでもそれらを変更することができます.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">1つの星以上を与えられた場合、したがってライブラリに保管されると、これらのタグで画像は自動的に「タグ付け」されます。&#xD;&#xA;&#xD;&#xA;あなたは、彫刻と評価プロセスの間にいつでもそれらを変更することができます.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">ニュース</system:String>
 

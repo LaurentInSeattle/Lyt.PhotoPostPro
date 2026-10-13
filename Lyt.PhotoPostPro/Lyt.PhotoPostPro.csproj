@@ -51,6 +51,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Languages\Lang_hy-AM.lang" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Languages\Lang_bg-BG.lang" />
     <EmbeddedResource Include="Languages\Lang_bn-BD.lang" />
     <EmbeddedResource Include="Languages\Lang_de-DE.lang" />
@@ -60,7 +64,6 @@
     <EmbeddedResource Include="Languages\Lang_fr-FR.lang" />
     <EmbeddedResource Include="Languages\Lang_hi-IN.lang" />
     <EmbeddedResource Include="Languages\Lang_hu-HU.lang" />
-    <EmbeddedResource Include="Languages\Lang_hy-AM.lang" />
     <EmbeddedResource Include="Languages\Lang_it-IT.lang" />
     <EmbeddedResource Include="Languages\Lang_jp-JP.lang" />
     <EmbeddedResource Include="Languages\Lang_ko-KO.lang" />

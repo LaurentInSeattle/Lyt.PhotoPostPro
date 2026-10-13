@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Ορισμός ετικετών</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Όταν δοθεί ένα ή περισσότερα αστέρια, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, εικόνες θα είναι αυτόματα 'tagged' με αυτές τις ετικέτες. 
-
- Θα είστε σε θέση να τα αλλάξετε ανά πάσα στιγμή κατά τη διάρκεια της διαδικασίας σφαγής και αξιολόγησης.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Όταν δοθεί ένα ή περισσότερα αστέρια, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, εικόνες θα είναι αυτόματα 'tagged' με αυτές τις ετικέτες.&#xD;&#xA;&#xD;&#xA;Θα είστε σε θέση να τα αλλάξετε ανά πάσα στιγμή κατά τη διάρκεια της διαδικασίας σφαγής και αξιολόγησης.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Ετικέτες</system:String>
 

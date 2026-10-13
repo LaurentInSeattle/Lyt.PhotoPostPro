@@ -253,7 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">定義標籤</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">如果給出一顆或多顆恒星, 因此會被保存在文庫中, 影像會被自動地用這些標籤" 标记" 。 XXD; XXA; XXD; XXA ; 在收視率和分等相關相關过程中, 您可以隨時變更 .</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">如果給出一顆或多顆恒星, 因此會被保存在文庫中, 影像會被自動地用這些標籤 "标记" 。&#xD;&#xA;&#xD;&#xA; 在收視率和分等相關相關过程中, 您可以隨時變更 .</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">標籤</system:String>
 

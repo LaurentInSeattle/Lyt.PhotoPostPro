@@ -1,28 +1,20 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Camera;
 
-public sealed partial class DeviceViewModel : ViewModel<DeviceView>
+public sealed partial class DeviceViewModel(CameraViewModel parent, FoundDevice device) : ViewModel<DeviceView>
 {
-    private readonly CameraViewModel parent;
-    private readonly FoundDevice device;
+    private readonly CameraViewModel parent = parent;
+    private readonly FoundDevice device = device;
 
     [ObservableProperty]
-    public partial string FriendlyName { get; set; }
+    public partial string FriendlyName { get; set; } = device.FriendlyName;
 
     [ObservableProperty]
-    public partial string Manufacturer { get; set; } 
+    public partial string Manufacturer { get; set; } = device.Manufacturer;
 
     [ObservableProperty]
     public partial bool IsDeviceSelected { get; set; } = false;
 
     public FoundDevice Device => this.device;
-
-    public DeviceViewModel(CameraViewModel parent, FoundDevice device)
-    {
-        this.parent = parent;
-        this.device = device;
-        this.FriendlyName = device.FriendlyName;
-        this.Manufacturer = device.Manufacturer;
-    }
 
     partial void OnIsDeviceSelectedChanged(bool value)
         => this.parent.OnDeviceSelectionChanged(this, selected: value);

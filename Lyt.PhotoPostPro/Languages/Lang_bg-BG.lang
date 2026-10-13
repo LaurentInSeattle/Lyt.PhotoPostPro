@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Дефинирай таговете</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Когато се даде една звезда или повече, следователно се съхранява в библиотеката, изображения ще бъдат автоматично "маркирани" с тези етикети. 
-
- ;Ще можете да ги промените по всяко време по време на процеса на унищожаване и оценка.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Когато се даде една звезда или повече, следователно се съхранява в библиотеката, изображения ще бъдат автоматично "маркирани" с тези етикети.&#xD;&#xA;&#xD;&#xA;Ще можете да ги промените по всяко време по време на процеса на унищожаване и оценка.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Етикети</system:String>
 

@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Định nghĩa thẻ</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Khi đưa ra một hoặc nhiều hơn, do đó giữ lại trong thư viện, ảnh sẽ được tự động « bịt mắt » với các thẻ này. 
-
- ; bạn sẽ có thể thay đổi chúng bất cứ lúc nào trong quá trình phân loại và đánh giá.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Khi đưa ra một hoặc nhiều hơn, do đó giữ lại trong thư viện, ảnh sẽ được tự động « bịt mắt » với các thẻ này.&#xD;&#xA;&#xD;&#xA; bạn sẽ có thể thay đổi chúng bất cứ lúc nào trong quá trình phân loại và đánh giá.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Thẻ</system:String>
 

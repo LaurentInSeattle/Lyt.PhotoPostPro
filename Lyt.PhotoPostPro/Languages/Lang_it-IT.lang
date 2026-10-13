@@ -253,9 +253,7 @@
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire i tag</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con questi tag. 
-
- ; Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con questi tag.&#xD;&#xA;&#xD;&#xA; Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
 
     <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
 
