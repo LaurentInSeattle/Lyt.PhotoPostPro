@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">ลบออกจากกล้องแล้ว</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">คลิกรูปภาพทั้งหมดเพื่อเพิ่มเข้าไปในไลบรารี.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">โบกธงให้ถ่ายรูปทั้งหมดออกจากกล้อง.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">ล้างธงทั้งหมดเพื่อเพิ่มภาพเข้าไปในไลบรารี.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">ล้างธงทั้งหมดสําหรับการลบภาพถ่ายออกจากกล้อง.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">แสดง:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">เก่าที่สุดก่อน</system:String>

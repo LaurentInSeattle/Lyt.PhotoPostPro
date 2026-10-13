@@ -87,6 +87,7 @@
 				FalseText="{DynamicResource Workflow.Camera.MoviesOthers}"
 				Height="30" Width="460"
 				VerticalAlignment="Center"
+				IsVisible="{Binding !ShowDeviceSelection}"
 				Value="{Binding ShowImagesOrOtherFiles}"
 				/>
 		</StackPanel>

@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Excluído da câmera</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Marca todas as fotos a serem adicionadas à biblioteca.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Marca todas as fotos a serem removidas da câmera.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Limpa todas as opções para adicionar fotos à biblioteca.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Limpa todas as bandeiras para remover fotos da câmera.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Mostrar:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Primeiro o mais velho</system:String>

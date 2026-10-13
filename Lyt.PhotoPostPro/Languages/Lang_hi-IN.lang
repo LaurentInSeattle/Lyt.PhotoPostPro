@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">कैमरे से हटा दिया गया</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">पुस्तकालय में जोड़े जाने वाले सभी तस्वीरों को ध्वजांकित करें।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">कैमरे से हटाने के लिए सभी तस्वीरों को ध्वजांकित करें।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">पुस्तकालय में फोटो जोड़ने के लिए सभी झंडे को साफ़ करता है।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">कैमरे से तस्वीरें हटाने के लिए सभी झंडे साफ़ करता है।.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">दिखाओ:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">सबसे पुराना पहले</system:String>

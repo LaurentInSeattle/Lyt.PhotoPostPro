@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Törölve a kamerából</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Jelzi az összes képet hozzá kell adni a könyvtárba.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Jelzi az összes képet, hogy távolítsa el a kamerából.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Minden zászlót kitisztít, ha fényképeket ad a könyvtárba.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Kiürít minden zászlót, hogy eltávolítsa a képeket a kamerából.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Megmutat:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">A legrégebbi első</system:String>

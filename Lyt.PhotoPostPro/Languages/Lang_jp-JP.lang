@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">カメラから削除されました</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">ライブラリに追加するすべての写真にフラグを付けます.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">カメラから削除されるすべての写真をフラグします.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">ライブラリに写真を追加するすべてのフラグをクリアします.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">カメラから写真を削除するためのすべてのフラグをクリアします.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">見せる：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">古い順</system:String>

@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Đã xoá khỏi máy ảnh</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Cờ.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Mọi ảnh chụp sẽ được gỡ bỏ khỏi máy ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Xoá mọi cờ để thêm ảnh vào thư viện.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Xoá mọi cờ để xóa ảnh khỏi máy ảnh.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Hiện:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Thứ nhất</system:String>

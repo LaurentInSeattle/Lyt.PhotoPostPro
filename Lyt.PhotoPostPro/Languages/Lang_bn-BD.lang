@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">ক্যামেরা থেকে মুছে ফেলা হয়েছে</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">সকল ছবিতে লাইব্রেরিতে যোগ করা হয়েছে।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">ক্যামেরা থেকে সকল ছবি সরিয়ে ফেলা হয়েছে।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">লাইব্রেরির মধ্যে ফটো যোগ করতে ব্যবহৃত সকল ফ্ল্যাগ।.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">ক্যামেরা থেকে ছবি সরিয়ে ফেলার জন্য সমস্ত ফ্ল্যাগ।.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">দেখান:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">প্রাচীনতম প্রথম</system:String>

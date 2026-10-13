@@ -134,10 +134,16 @@ public sealed partial class CameraViewModel :
 
         this.AddToLibraryButtonIsDisabled = true;
         this.RemoveFromCameraButtonIsDisabled = true;
+
+        // Enforce property changed 
+        this.ShowImagesOrOtherFiles = false;
+        this.ShowImagesOrOtherFiles = true;
+
         this.ShowImages = false;
         this.ShowOtherFiles = false;
         this.ShowDeviceSelection = false;
         this.isDownloading = false;
+
         // this.nothingSaved = true;
         this.cameraMgr.BeginMonitoringCameraConnexion();
 
@@ -205,6 +211,12 @@ public sealed partial class CameraViewModel :
             this.cameraMgr.DisposeDevice(this.foundDevice);
             this.foundDevice = null;
         }
+    }
+
+    partial void OnShowImagesOrOtherFilesChanged(bool value)
+    {
+        this.ShowImages = value;
+        this.ShowOtherFiles = !value;
     }
 
     private void OnDevicesConnected(DevicesFoundMessage message)

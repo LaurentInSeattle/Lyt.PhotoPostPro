@@ -444,7 +444,12 @@
 	<system:String x:Key="Workflow.Camera.DeleteError">Delete Error!</system:String>
 	<system:String x:Key="Workflow.Camera.DeleteFromCamera">Deleted from Camera</system:String>
 
-	<!-- These three are resused in Library -->
+  <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Flags all photos to be added to the library.</system:String>
+  <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Flags all photos to be removed from the camera.</system:String>
+  <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Clears all flags for adding photos to the library.</system:String>
+  <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Clears all flags for removing photos from the camera.</system:String>
+
+  <!-- These three are resused in Library -->
 	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>

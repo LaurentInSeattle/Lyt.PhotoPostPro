@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Supprimé de l'appareil photo.</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Affiche toutes les photos à ajouter à la bibliothèque.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Affiche toutes les photos à retirer de l'appareil photo.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Efface tous les drapeaux pour ajouter des photos à la bibliothèque.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Efface tous les drapeaux pour enlever des photos de l'appareil photo.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Trier :</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Anciens</system:String>

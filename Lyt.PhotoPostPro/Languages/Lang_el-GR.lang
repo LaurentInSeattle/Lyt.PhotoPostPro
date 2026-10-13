@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Διαγράφηκε από την κάμερα</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Σημαίες όλες τις φωτογραφίες που θα προστεθούν στη βιβλιοθήκη.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Σημαδεύει όλες τις φωτογραφίες που πρέπει να αφαιρεθούν από την κάμερα.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Καθαρίζει όλες τις σημαίες για την προσθήκη φωτογραφιών στη βιβλιοθήκη.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Καθαρίζει όλες τις σημαίες για την αφαίρεση φωτογραφιών από την κάμερα.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Επίδειξη:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Πρώτος παλαιότερος</system:String>

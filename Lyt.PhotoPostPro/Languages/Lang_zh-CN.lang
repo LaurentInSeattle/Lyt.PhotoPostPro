@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">已从相机中删除</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">标记所有要添加到库中的照片 .</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">标出相机中要删除的所有相片 .</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">清除所有旗以添加照片到库中 .</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">清除所有从相机中删除相片的旗帜 .</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">展示：</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">最旧的在前</system:String>

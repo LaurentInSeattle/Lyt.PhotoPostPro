@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Изтрито от камерата</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Знамена всички снимки да бъдат добавени към библиотеката.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Всички снимки трябва да се махнат от камерата.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Изчиства всички знамена за добавяне на снимки в библиотеката.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Изчиства всички знамена за премахване на снимки от камерата.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Покажи:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Първо най-старите</system:String>

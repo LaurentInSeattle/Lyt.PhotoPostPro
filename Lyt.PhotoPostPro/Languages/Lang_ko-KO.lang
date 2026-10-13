@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">카메라에서 삭제됨</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">모든 사진이 라이브러리에 추가됩니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">카메라에서 제거 할 모든 사진을 플래그.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">모든 플래그를 정리하여 사진을 라이브러리에 추가합니다.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">카메라에서 사진을 제거하기위한 모든 플래그를 정리합니다.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">보여주다:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">오래된 것부터</system:String>

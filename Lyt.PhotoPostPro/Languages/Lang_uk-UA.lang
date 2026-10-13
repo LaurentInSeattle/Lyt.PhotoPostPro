@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Видалено з камери</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">У бібліотеці додано усі фото.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Прапори всі фотографії, які будуть видалені з камери.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Очистити всі прапори для додавання фотографій до бібліотеки.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Очищає всі прапори для видалення фотографій з камери.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Показати:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Спочатку найстаріший</system:String>

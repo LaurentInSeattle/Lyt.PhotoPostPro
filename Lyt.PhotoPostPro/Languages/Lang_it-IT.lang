@@ -649,6 +649,14 @@
 
     <system:String x:Key="Workflow.Camera.DeleteFromCamera">Eliminato dalla fotocamera</system:String>
 
+    <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Bandiere tutte le foto da aggiungere alla biblioteca.</system:String>
+
+    <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Bandiere tutte le foto da rimuovere dalla fotocamera.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Cancella tutte le bandiere per aggiungere foto alla libreria.</system:String>
+
+    <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Cancella tutte le bandiere per rimuovere le foto dalla fotocamera.</system:String>
+
     <system:String x:Key="Workflow.Camera.Thumbs.Show">Mostra:</system:String>
 
     <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Prima il più vecchio</system:String>
