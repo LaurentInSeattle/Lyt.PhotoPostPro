@@ -120,6 +120,8 @@ public partial class CameraThumbnailView : View
                 this.isSelected ? selectedBrush : insideBrush;
         this.outerBorder.Background =
             this.isSelected ? new SolidColorBrush(0x80_000000) : Brushes.Transparent;
-    }
 
+        this.AddCircleIcon.IsVisible = this.isInside ;
+        this.DeleteIcon.IsVisible = this.isInside ;
+    }
 }

@@ -8,6 +8,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="280"
+
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	>
 	<UserControl.Styles>
 		<Style Selector="CheckBox.noContent /template/ ContentPresenter#ContentPresenter">
@@ -70,6 +72,28 @@
 					IsChecked="{Binding IsToAddToLibrary, Mode=TwoWay}"
 					Command="{Binding OnIsToAddToLibraryChanged}"
 					ToolTip.Tip="Check to add to your library." 
+					/>
+				<glyphs:SvgIcon
+					x:Name="AddCircleIcon"
+					Grid.Row="1" 
+					Width="18" Height="18"
+					Foreground="{StaticResource LightAqua_0_080}"
+					Padding="0"
+					VerticalAlignment="Center" HorizontalAlignment="Center"
+					Source="add_circle"
+					Opacity="0.6"
+					ToolTip.Tip="Check to add to your library." 
+					/>
+				<glyphs:SvgIcon
+					x:Name="DeleteIcon"
+					Grid.Row="3"
+					Width="18" Height="18"
+					Foreground="{StaticResource LightAqua_0_080}"
+					Padding="0"
+					VerticalAlignment="Center" HorizontalAlignment="Center"
+					Source="delete"
+					Opacity="0.6"
+					ToolTip.Tip="Check to remove from camera." 
 					/>
 				<CheckBox
 					Classes="noContent"
