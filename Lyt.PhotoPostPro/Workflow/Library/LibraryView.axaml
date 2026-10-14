@@ -20,15 +20,15 @@
 	<Grid		
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="72" />
-			<RowDefinition Height="72" />
-			<RowDefinition Height="72" />
+			<RowDefinition Height="56" />
+			<RowDefinition Height="56" />
+			<RowDefinition Height="56" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="8" />
-			<ColumnDefinition Width="168" />
+			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="8" />
 			<ColumnDefinition Width="520"/>
@@ -46,6 +46,7 @@
 
 		<controls:VSelectorControl
 			Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" 
+			Margin="0 4 0 0"
 			SelectorButtons="{Binding Options}"
 			/>
 		<controls:HSelectorControl

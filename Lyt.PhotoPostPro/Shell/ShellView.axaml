@@ -72,7 +72,6 @@
 					Fill="{StaticResource OrangePeel_1_100}"
 					Height="1"
 					Opacity="0.4"
-					Margin="0 0 0 0"
 					/>
 				<Rectangle
 					Grid.Column="0" Grid.Row="0" Grid.RowSpan="999"

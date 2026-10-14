@@ -1,6 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process;
 
-public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel) :
+public sealed partial class ProcessViewModel :
     ViewModel<ProcessView>,
     IRecipient<WorkflowUpdateMessage>,
     IRecipient<HotKeyMessage>
@@ -25,9 +25,19 @@ public sealed partial class ProcessViewModel(PhotoPostProModel photoPostProModel
         { ProcessStep.ExportStepName, ActivatedView.Exports },
     };
 
-    private readonly PhotoPostProModel model = photoPostProModel;
+    private readonly PhotoPostProModel model;
     private ViewSelector<ActivatedView>? viewSelector;
-    private bool isFirstActivation = true;
+    private bool isFirstActivation;
+
+    public ProcessViewModel(PhotoPostProModel photoPostProModel)
+    {
+        this.model = photoPostProModel;
+        this.isFirstActivation = true;
+        this.StepNavigatorViewModel = new(this);
+    }
+
+    [ObservableProperty]
+    public partial StepNavigatorViewModel StepNavigatorViewModel { get; set; }
 
     [ObservableProperty]
     public partial HistogramViewModel HistogramViewModel { get; set; } = new();

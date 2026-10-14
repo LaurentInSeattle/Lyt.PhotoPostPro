@@ -3,7 +3,8 @@
 public sealed partial class SelectorButtonViewModel(
     string buttonText, double buttonWidth, double buttonHeight,
     Action<object?> onSelect,
-    object? tag = null) :
+    object? tag = null, 
+    double fontSize = 18) :
     ViewModel<SelectorButtonView>
 {
     private readonly Action<object?> onSelect = onSelect;
@@ -30,6 +31,9 @@ public sealed partial class SelectorButtonViewModel(
 
     [ObservableProperty]
     public partial double ButtonHeight { get; set; } = buttonHeight;
+
+    [ObservableProperty]
+    public partial double ButtonFontSize { get; set; } = fontSize;
 
     [ObservableProperty]
     public partial GridLength RowHeight { get; set; } = new GridLength(buttonHeight - 4, GridUnitType.Pixel);

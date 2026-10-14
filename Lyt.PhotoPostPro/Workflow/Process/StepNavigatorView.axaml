@@ -1,0 +1,36 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.StepNavigatorView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process"
+	x:DataType="vm:StepNavigatorViewModel" 
+
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+	>
+	<Grid
+		Background="Transparent"
+		>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="54"/>
+			<RowDefinition Height="1"/>
+			<RowDefinition Height="3"/>
+		</Grid.RowDefinitions>
+
+		<controls:HSelectorControl
+			Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="999"
+			SelectorButtons="{Binding Steps}"
+			/> 
+
+		<Rectangle
+			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
+			VerticalAlignment="Center" HorizontalAlignment="Stretch"
+			Fill="{StaticResource OrangePeel_1_100}"
+			Height="1"
+			Opacity="0.4"
+			/>
+	</Grid>
+</UserControl>

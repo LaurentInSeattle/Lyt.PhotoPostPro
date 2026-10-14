@@ -108,5 +108,8 @@
     <Compile Update="Workflow\Process\Desaturation\DesaturationView.axaml.cs">
       <DependentUpon>DesaturationView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Process\StepNavigatorView.axaml.cs">
+      <DependentUpon>StepNavigatorView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

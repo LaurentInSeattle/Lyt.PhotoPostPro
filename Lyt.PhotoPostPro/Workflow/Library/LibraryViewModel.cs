@@ -22,10 +22,10 @@ public sealed partial class LibraryViewModel :
     // Make this an application setting 
     private const int CullingBatchSize = 20; // 48;
 
-    private const double ButtonHeight = 52.0;
-    private const double YearButtonWidth = 80.0;
-    private const double MonthButtonWidth = 140.0;
-    private const double DayButtonWidth = 180.0;
+    private const double ButtonHeight = 40.0;
+    private const double YearButtonWidth = 74.0;
+    private const double MonthButtonWidth = 130.0;
+    private const double DayButtonWidth = 170.0;
     private const double OptionButtonWidth = 180.0;
 
     private static readonly string[] MonthString =
