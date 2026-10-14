@@ -53,19 +53,25 @@ public sealed partial class ProcessViewModel :
         {
             // This cannot be done in the constructor
             this.SetupWorkflow();
-            this.isFirstActivation = false;
         }
 
         this.InitializeWorkflow();
         var workflow = this.model.CurrentWorkflow;
         if (workflow is not null)
         {
+            if (this.isFirstActivation)
+            {
+                this.StepNavigatorViewModel.Initialize(workflow);
+                this.isFirstActivation = false;
+            }
+
             if (!workflow.IsReplayMode)
             {
                 this.model.BeginProcessWorkflow();
             }
 
             this.ActivateCurrentStep();
+
         }
 
         this.Subscribe<WorkflowUpdateMessage>();

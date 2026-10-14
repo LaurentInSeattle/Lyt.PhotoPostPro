@@ -118,6 +118,14 @@ public sealed class ProcessWorkflow
         return step is null ? throw new Exception("Invalid step type") : step;
     }
 
+    public ProcessStep Get(string stepName)
+    {
+        var step =
+            (from stp in this.Steps where stp.Name == stepName select stp)
+            .FirstOrDefault();
+        return step is null ? throw new Exception("Invalid step type") : step;
+    }
+
     public void Begin()
     {
         // Auto gives a first star when beginning editing

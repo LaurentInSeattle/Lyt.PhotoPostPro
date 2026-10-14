@@ -1,41 +1,142 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Process;
 
-public sealed partial class StepNavigatorViewModel(ProcessViewModel parent) : ViewModel<StepNavigatorView>
+public sealed partial class StepNavigatorViewModel :
+    ViewModel<StepNavigatorView>,
+    IRecipient<WorkflowUpdateMessage>
+
 {
-    private readonly ProcessViewModel parent = parent;
+    private readonly ProcessViewModel parent;
+    private ProcessWorkflow? workflow;
+    private bool isProgrammatic;
+    private string selectedStepName;
+
+    public StepNavigatorViewModel(ProcessViewModel parent)
+    {
+        this.parent = parent;
+        this.selectedStepName = string.Empty;
+        this.Subscribe<WorkflowUpdateMessage>();
+    }
 
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Steps { get; set; } = [];
 
-    public override void OnViewLoaded()
+    public void Initialize(ProcessWorkflow workflow)
     {
-        int width = 90;
-        int height = 36; 
+        int width = 104;
+        int height = 36;
         double fontSize = 16;
         List<SelectorButtonViewModel> steps = [];
-        steps.Add(new SelectorButtonViewModel("Orient", width, height, this.OnStepsChanged, 1, fontSize));
-        steps.Add(new SelectorButtonViewModel("Straighten", width, height, this.OnStepsChanged, 2, fontSize));
-        steps.Add(new SelectorButtonViewModel("Crop", width, height, this.OnStepsChanged, 3, fontSize));
-        steps.Add(new SelectorButtonViewModel("Denoise", width, height, this.OnStepsChanged, 4, fontSize));
-        steps.Add(new SelectorButtonViewModel("Exposure", width, height, this.OnStepsChanged, 5, fontSize));
-        steps.Add(new SelectorButtonViewModel("Recovery", width, height, this.OnStepsChanged, 6, fontSize));
-        steps.Add(new SelectorButtonViewModel("Gradients", width, height, this.OnStepsChanged, 7, fontSize));
-        steps.Add(new SelectorButtonViewModel("Whites", width, height, this.OnStepsChanged, 8, fontSize));
-        steps.Add(new SelectorButtonViewModel("Contrast", width, height, this.OnStepsChanged, 9, fontSize));
-        steps.Add(new SelectorButtonViewModel("LUT's", width, height, this.OnStepsChanged, 10, fontSize));
-        steps.Add(new SelectorButtonViewModel("Colors", width, height, this.OnStepsChanged, 11, fontSize));
-        steps.Add(new SelectorButtonViewModel("Desaturate", width, height, this.OnStepsChanged, 12, fontSize));
-        steps.Add(new SelectorButtonViewModel("Sharpen", width, height, this.OnStepsChanged, 13, fontSize));
-        steps.Add(new SelectorButtonViewModel("Filters", width, height, this.OnStepsChanged, 14, fontSize));
-        steps.Add(new SelectorButtonViewModel("Exports", width, height, this.OnStepsChanged, 15, fontSize));
-        this.Steps = steps; 
+        foreach (var step in workflow.Steps)
+        {
+            string stepName = step.Name;
+            string stepShortName =
+                this.Localize(ProcessStep.StepShortNameLocalizationStrings[stepName]);
+            steps.Add(
+                new SelectorButtonViewModel(stepShortName, width, height, this.OnStepSelected, stepName, fontSize));
+        }
+
+        this.Steps = steps;
+        this.workflow = workflow;
     }
 
-    void OnStepsChanged(object? tag)
+    public void Receive(WorkflowUpdateMessage message)
+        => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
+
+    public void ReceiveOnUiThread(WorkflowUpdateMessage message)
     {
-        if ( tag is int index )
+        if (message.Kind == WorkflowUpdateKind.Abort)
         {
-            Debug.WriteLine(index);
+            return;
         }
+
+        With.Flag(ref this.isProgrammatic, () =>
+        {
+            if (message.Kind == WorkflowUpdateKind.Begin)
+            {
+                // When starting a new edit, we need to wait a bit so that the Navigator UI has time to load
+                Schedule.OnUiThread(
+                    50, // About one frame
+                    () => this.Steps[0].Select(), DispatcherPriority.Background);
+
+                // ! All steps have a tag
+                this.selectedStepName = (string)this.Steps[0].Tag!;
+            }
+            else
+            {
+                if (message.CurrentStep is not null)
+                {
+                    string stepName = message.CurrentStep.Name;
+                    Debug.WriteLine("Programmatic: " + stepName);
+                    var step = this.ViewModelFromStepName(stepName);
+                    step.Select();
+                    this.selectedStepName = stepName;
+                }
+            }
+        });
+    }
+
+    void OnStepSelected(object? tag)
+    {
+        string previouslySelectedStepName = this.selectedStepName;
+
+        // ! All steps have a tag
+        this.selectedStepName = (string)tag!;
+
+        if (this.isProgrammatic)
+        {
+            return;
+        }
+
+        if (tag is string stepName && this.workflow is not null)
+        {
+            Debug.WriteLine("User action: " + stepName);
+            ProcessStep step = this.workflow.Get(stepName);
+
+            // First check if this is a back or next selection 
+            int previousIndex = this.StepIndexFromStepName(previouslySelectedStepName);
+            int newIndex = this.StepIndexFromStepName(stepName);
+            ToolboxHostViewModel toolboxHost = this.parent.ToolboxHostViewModel;
+            if (newIndex == previousIndex + 1)
+            {
+                toolboxHost.OnNext();
+            }
+            else if (newIndex == previousIndex - 1)
+            {
+                toolboxHost.OnBack();
+            }
+            else
+            {
+                // this.workflow.JumpTo(step);
+            }
+        }
+    }
+
+    private SelectorButtonViewModel ViewModelFromStepName(string stepName)
+    {
+        foreach (var step in this.Steps)
+        {
+            if (step.Tag is string name && name == stepName)
+            {
+                return step;
+            }
+        }
+
+        throw new InvalidOperationException($"Step '{stepName}' not found.");
+    }
+
+    private int StepIndexFromStepName(string stepName)
+    {
+        int index = 0;
+        foreach (var step in this.Steps)
+        {
+            if (step.Tag is string name && name == stepName)
+            {
+                return index;
+            }
+
+            ++index;
+        }
+
+        throw new InvalidOperationException($"Step '{stepName}' not found.");
     }
 }

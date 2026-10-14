@@ -188,9 +188,9 @@
 					>
 					<glyphs:GlyphButton
 						Style="{StaticResource AppToolbarIconButton}"
-						GlyphSource="dismiss"
+						GlyphSource="power"
 						GlyphStrokeThickness="0"
-						Text="{DynamicResource Shell.Close}"
+						Text="{DynamicResource Shell.Exit}"
 						Command="{Binding OnClose}"
 						/>
 				</StackPanel>

@@ -257,6 +257,23 @@
 	<system:String x:Key="Workflow.Reset">Reset</system:String>
 	<system:String x:Key="Workflow.Next">Next</system:String>
 
+	<system:String x:Key="Workflow.Orient.Short">Orient</system:String>
+	<system:String x:Key="Workflow.Straighten.Short">Straighten</system:String>
+	<system:String x:Key="Workflow.Compose.Short">Crop</system:String>
+	<system:String x:Key="Workflow.TouchUp.Short">Touch Up</system:String>
+	<system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+	<system:String x:Key="Workflow.Exposure.Short">Exposure</system:String>
+	<system:String x:Key="Workflow.Recovery.Short">Recovery</system:String>
+	<system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Short">Whites</system:String>
+	<system:String x:Key="Workflow.Contrast.Short">Contrast</system:String>
+	<system:String x:Key="Workflow.Lut.Short">LUT's</system:String>
+	<system:String x:Key="Workflow.Color.Short">Color</system:String>
+	<system:String x:Key="Workflow.Desaturation.Short">Desaturation</system:String>
+	<system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
+	<system:String x:Key="Workflow.Filters.Short">Filters</system:String>
+	<system:String x:Key="Workflow.Export.Short">Export</system:String>
+
 	<!-- Workflow Orientation -->
 	<system:String x:Key="Workflow.Orient.Title">Orientation and Mirroring</system:String>
 	<system:String x:Key="Workflow.Orient.Format">Restore portrait or landscape format:</system:String>

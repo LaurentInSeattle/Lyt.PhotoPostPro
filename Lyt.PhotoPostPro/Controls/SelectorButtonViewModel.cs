@@ -10,6 +10,8 @@ public sealed partial class SelectorButtonViewModel(
     private readonly Action<object?> onSelect = onSelect;
     private readonly object? tag = tag;
 
+    public object? Tag => this.tag; 
+
     public bool IsSelected
     {
         get

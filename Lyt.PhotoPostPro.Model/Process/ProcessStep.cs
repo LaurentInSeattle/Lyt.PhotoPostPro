@@ -19,7 +19,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
-    public static readonly Dictionary<string, string> LocalizationStrings = new()
+    public static readonly Dictionary<string, string> StepTitleLocalizationStrings = new()
     {
         {   OrientationStepName  ,  "Workflow.Orient.Title"          },
         {   StraightenStepName   ,  "Workflow.Straighten.Title"      },
@@ -39,9 +39,29 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   ExportStepName       ,  "Workflow.Export.Title"          },
     };
 
+    public static readonly Dictionary<string, string> StepShortNameLocalizationStrings = new()
+    {
+        {   OrientationStepName  ,  "Workflow.Orient.Short"          },
+        {   StraightenStepName   ,  "Workflow.Straighten.Short"      },
+        {   CompositionStepName  ,  "Workflow.Compose.Short"         },
+        {   TouchUpStepName      ,  "Workflow.TouchUp.Short"         },
+        {   DenoiseStepName      ,  "Workflow.Denoise.Short"         },
+        {   ExposureStepName     ,  "Workflow.Exposure.Short"        },
+        {   RecoveryStepName     ,  "Workflow.Recovery.Short"        },
+        {   VignetteStepName     ,  "Workflow.Vignette.Short"        },
+        {   WhiteBalanceStepName ,  "Workflow.WhiteBalance.Short"    },
+        {   ContrastStepName     ,  "Workflow.Contrast.Short"        },
+        {   LutStepName          ,  "Workflow.Lut.Short"             },
+        {   ColorStepName        ,  "Workflow.Color.Short"           },
+        {   DesaturationStepName ,  "Workflow.Desaturation.Short"    },
+        {   SharpenStepName      ,  "Workflow.Sharpen.Short"         },
+        {   FiltersStepName      ,  "Workflow.Filters.Short"         },
+        {   ExportStepName       ,  "Workflow.Export.Short"          },
+    };
+
     public string Name { get; set; } = name;
 
-    public string LocalizationName => LocalizationStrings[this.Name];
+    public string LocalizationName => StepTitleLocalizationStrings[this.Name];
 
     public Image<RgbaHalf>? SourceImage { get; set; }
 
