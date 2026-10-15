@@ -161,12 +161,16 @@ public sealed class ProcessWorkflow
                         break;
                     }
 
-                    new WorkflowProgressMessage(step.LocalizationName).Publish();
+                    new WorkflowProgressMessage(step.LocalizationName, step.Name).Publish();
                     this.Next();
 
                     // Throttle 
                     Task.Delay(60).Wait();
                 }
+
+                // Notify last step, needed for for the step navigator.
+                ProcessStep lastStep = this.Steps[^1];
+                new WorkflowProgressMessage(lastStep.LocalizationName, lastStep.Name).Publish();
             }
             catch (Exception ex)
             {

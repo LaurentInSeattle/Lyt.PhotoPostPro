@@ -33,7 +33,7 @@ public sealed partial class ProcessViewModel :
     {
         this.model = photoPostProModel;
         this.isFirstActivation = true;
-        this.StepNavigatorViewModel = new(this);
+        this.StepNavigatorViewModel = new(this, this.model);
     }
 
     [ObservableProperty]

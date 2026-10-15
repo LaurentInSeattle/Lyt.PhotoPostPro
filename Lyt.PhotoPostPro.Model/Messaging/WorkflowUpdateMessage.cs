@@ -5,4 +5,4 @@ public sealed record class WorkflowUpdateMessage(
 
 public sealed record class WorkflowAbortMessage();
 
-public sealed record class WorkflowProgressMessage(string StepLocalizationName);
+public sealed record class WorkflowProgressMessage(string StepLocalizationName, string StepName);

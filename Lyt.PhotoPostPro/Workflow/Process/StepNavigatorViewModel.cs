@@ -2,19 +2,24 @@
 
 public sealed partial class StepNavigatorViewModel :
     ViewModel<StepNavigatorView>,
-    IRecipient<WorkflowUpdateMessage>
-
+    IRecipient<WorkflowUpdateMessage>,
+    IRecipient<WorkflowProgressMessage>    
 {
     private readonly ProcessViewModel parent;
+    private readonly PhotoPostProModel photoPostProModel; 
+
     private ProcessWorkflow? workflow;
     private bool isProgrammatic;
     private string selectedStepName;
 
-    public StepNavigatorViewModel(ProcessViewModel parent)
+    public StepNavigatorViewModel(ProcessViewModel parent, PhotoPostProModel photoPostProModel)
     {
         this.parent = parent;
+        this.photoPostProModel = photoPostProModel; 
+
         this.selectedStepName = string.Empty;
         this.Subscribe<WorkflowUpdateMessage>();
+        this.Subscribe<WorkflowProgressMessage>();
     }
 
     [ObservableProperty]
@@ -39,12 +44,53 @@ public sealed partial class StepNavigatorViewModel :
         this.workflow = workflow;
     }
 
+    public void Receive(WorkflowProgressMessage message)
+        => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
+
+    public void ReceiveOnUiThread(WorkflowProgressMessage message)
+    {
+        if (this.workflow is null)
+        {
+            this.workflow = this.photoPostProModel.CurrentWorkflow; 
+            return;
+        }
+
+        if ((this.workflow is null) || !this.workflow.IsReplayMode)
+        {
+            return;
+        }
+
+        string stepName = message.StepName;
+        Debug.WriteLine("Programmatic: " + stepName);
+        if (stepName != ProcessStep.ExportStepName)
+        {
+            return;
+        }
+
+        SelectorButtonViewModel step = this.ViewModelFromStepName(stepName);
+        Schedule.OnUiThread(
+            120, // About two frames
+            () =>
+            {
+                With.Flag(ref this.isProgrammatic, () =>
+                {
+                    step.Select();
+                    this.selectedStepName = stepName;
+                });
+            }, DispatcherPriority.Background);
+    }
+
     public void Receive(WorkflowUpdateMessage message)
         => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
 
     public void ReceiveOnUiThread(WorkflowUpdateMessage message)
     {
         if (message.Kind == WorkflowUpdateKind.Abort)
+        {
+            return;
+        }
+
+        if ((this.workflow is null) || this.workflow.IsReplayMode)
         {
             return;
         }
