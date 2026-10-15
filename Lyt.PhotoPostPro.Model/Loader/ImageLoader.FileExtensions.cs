@@ -31,7 +31,7 @@ public static partial class ImageLoader
         ];
 
     public static bool HasExcludedExtension(string path)
-        => ExcludedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => ExcludedExtensions.Contains(Path.GetExtension(path).ToLower());
 
     public static List<string> MovieExtensions = 
         [
@@ -42,12 +42,12 @@ public static partial class ImageLoader
 
 
     public static bool HasMovieExtension(string path)
-        => MovieExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => MovieExtensions.Contains(Path.GetExtension(path).ToLower());
 
     public static List<string> HeifExtensions = [".heic", ".heif", ".hif"];
 
     public static bool HasHiefExtension(string path)
-        => HeifExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => HeifExtensions.Contains(Path.GetExtension(path).ToLower());
 
     // https://en.wikipedia.org/wiki/Raw_image_format
     // Many raw file formats, including IIQ (Phase One), 3FR (Hasselblad), DCR, K25, KDC (Kodak),
@@ -99,7 +99,7 @@ public static partial class ImageLoader
         ];
 
     public static bool HasRawExtension(string path)
-        => RawExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => RawExtensions.Contains(Path.GetExtension(path).ToLower());
 
     public static List<string> ImageSharpExtensions =
         [
@@ -108,7 +108,7 @@ public static partial class ImageLoader
         ];
 
     public static bool HasImageSharpExtension(string path)
-        => ImageSharpExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => ImageSharpExtensions.Contains(Path.GetExtension(path).ToLower());
 
     public static List<string> JpgExtensions =
         [
@@ -116,7 +116,11 @@ public static partial class ImageLoader
         ];
 
     public static bool HasJpgExtension(string path)
-        => JpgExtensions.Contains(System.IO.Path.GetExtension(path).ToLower());
+        => JpgExtensions.Contains(Path.GetExtension(path).ToLower());
+
+    public static bool IsNotSupported(string path)
+        => HasExcludedExtension(path) || HasMovieExtension (path);
+
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 

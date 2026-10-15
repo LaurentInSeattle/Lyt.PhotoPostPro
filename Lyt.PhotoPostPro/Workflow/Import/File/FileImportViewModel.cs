@@ -7,6 +7,8 @@
 
 public sealed partial class FileImportViewModel : ViewModel<FileImportView>
 {
+    private const long ImageFileMaxLength = 140L * 1024L * 1024L;
+    
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
 
@@ -107,6 +109,48 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         string error = string.Empty;
         try
         {
+            void LogAndMessageUser(string logMessage, string userMessage)
+            {
+                Debug.WriteLine(logMessage);
+                this.Logger.Warning(logMessage);
+                Dispatch.OnUiThread(() =>
+                {
+                    // Localize and toast userMessage 
+                    string errorMessage = this.Localize("Toast.Error");
+                    string displayedMessage = this.Localize(userMessage);
+                    this.toaster.Show(errorMessage, displayedMessage, 3_500, InformationLevel.Warning);
+                }, DispatcherPriority.Background);
+
+                throw new Exception(logMessage); 
+            }
+
+            FileInfo fileInfo = new(path);
+            if (!fileInfo.Exists)
+            {
+                LogAndMessageUser($"File does not exist: {path}", "File.NotExist");
+            }
+
+            long length = fileInfo.Length;
+            if ((length == 0) || (length < 256L))
+            {
+                LogAndMessageUser($"File length is too small: {path}", "File.TooSmall");
+            }
+
+            if (length > ImageFileMaxLength)
+            {
+                LogAndMessageUser($"File length is too large: {path}", "File.TooBig");
+            }
+
+            if (ImageLoader.IsNotSupported(path))
+            {
+                LogAndMessageUser($"Image File format not supported: {path}", "File.ImageNotSupported");
+            }
+
+            if (!FileSystemExtensions.IsReadable(path))
+            {
+                LogAndMessageUser($"File cannot be read: {path}", "File.CantRead");
+            }
+
             this.loadedImage = ImageLoader.LoadImage(path);
             this.loadedImage.CreateThumbnail();
             if (this.loadedImage.IsSuccess && this.loadedImage.IsFullyLoadedWithThumbnail)
@@ -148,18 +192,22 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
                 }
                 else
                 {
-
                     error = "Failed to load image frame.";
+                    this.Logger.Error(error);
+                    LogAndMessageUser($"Image file cannot be decoded: {path}", "File.ImageNotDecoded");
                 }
             }
             else
             {
                 error = "Failed to load image file: " + this.loadedImage.ErrorMessage;
+                this.Logger.Error(error);
+                LogAndMessageUser($"Image file cannot be decoded: {path}", "File.ImageNotDecoded");
             }
         }
         catch (Exception ex)
         {
-            error = "Error loading image file, Exception thrown: " + ex.Message;
+            string exceptionMessage = "Error loading image file, Exception thrown: " + ex.Message;
+            this.Logger.Error(exceptionMessage);
         }
         finally
         {
@@ -168,7 +216,6 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
 
             if (!string.IsNullOrWhiteSpace(error))
             {
-                this.Logger.Error(error);
                 Dispatch.OnUiThread(() => { this.OnImageFailed(error); }, DispatcherPriority.Background);
             }
         }
@@ -179,16 +226,9 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
         this.SourceImage = null;
         this.loadedImage = null;
 
-        // Show error message to user
+        // Show error message to user on the main view 
         this.Message = this.Localize("Single.LoadImageFailMessage");
         this.IsNewAddition = false; 
-
-        //this.toaster.Host = this.View.ToasterHost;
-        //this.toaster.Show(
-        //    this.Localize("Single.LoadImageFailTitle"),
-        //    this.Localize("Single.LoadImageFailMessage"),
-        //    8_000,
-        //    InformationLevel.Error);
     }
 
     private void OnImageLoaded(Frame frame)
