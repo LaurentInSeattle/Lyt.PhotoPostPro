@@ -106,7 +106,19 @@ public sealed partial class StepNavigatorViewModel :
             }
             else
             {
-                // this.workflow.JumpTo(step);
+                int delta = newIndex - previousIndex; 
+                int count = Math.Abs(delta);
+                for (int i = 0; i < count; i++)
+                {
+                    if (delta > 0)
+                    {
+                        toolboxHost.OnNext();
+                    }
+                    else
+                    {
+                        toolboxHost.OnBack();
+                    }
+                }
             }
         }
     }

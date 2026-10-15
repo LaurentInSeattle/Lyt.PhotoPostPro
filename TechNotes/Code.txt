@@ -1,16 +1,3 @@
-WIP
----
-
-- Hue Rotation effect.
-
-Missing Features 
-----------------
-
-- App settings 
-Setup library root location : Danger ? 
-CullingBatchSize = 48;
-
-
 Code Quality Issues 
 -------------------
 
@@ -30,42 +17,19 @@ Code Quality Issues
 Third Party Related Problems : Avalonia / Media Devices / LibRaw / ImageSharp
 -----------------------------------------------------------------------------
 
-- App freeze when using combo box ??? Avalonia issue
-
 - No support (yet) for HEIC images in ImageSharp 
 
 - No Virtualizing Wrap Panel in Avalonia - using 3rd party for now 
 
 
-V.Next 
+V.Next
 ------
 
-- Spotlight effect, aka "Ray of Light" effect. ( https://en.wikipedia.org/wiki/Ellipse ) 
-
-- Touch up / Blemish (after geometry) 
-
-- Save color grading as a LUT : Option to Generate LUT in the Export step 
-
-- Controls to show both before / after (for comparison) or just the current image in the viewer  
-
-- Figure out if we need to implement exporting to scale and export to file size.  
- ( If yes, implement it.  If not, remove the enum values and code references. ) 
-
-
-
-V.Next.Next 
------------
-
 - Build PDF photo book: Ability to flag images to insert in the photobook.
-
-- Library backup / export - Might be unnecessary 
-
 
 
 Cool Stuff to Consider 
 ----------------------
-
-- Selective desaturation 
 
 - Combo-Borders: Black with thin white line, White with thin black line, etc...
 
