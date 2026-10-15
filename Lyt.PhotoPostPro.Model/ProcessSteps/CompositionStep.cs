@@ -15,6 +15,8 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
 
     public int OriginalDy { get; set; }
 
+    public override bool ShouldShowHistograms => false;
+
     internal override void Initialize(Image<RgbaHalf> originalImage)
     {
         this.X = 0;

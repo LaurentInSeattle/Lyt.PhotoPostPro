@@ -7,6 +7,8 @@ public class StraightenStep(ProcessWorkflow processWorkflow) :
 
     internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
+    public override bool ShouldShowHistograms => false;
+
     protected override void SetIdentity()
         => base.IsIdentity = MathF.Abs(this.RotationAngle) < 0.001f;
 

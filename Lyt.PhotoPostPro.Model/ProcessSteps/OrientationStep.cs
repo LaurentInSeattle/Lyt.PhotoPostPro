@@ -7,6 +7,8 @@ public class OrientationStep(ProcessWorkflow processWorkflow) :
 
     public bool IsMirrored { get; set; }
 
+    public override bool ShouldShowHistograms => false;
+
     internal override void Initialize(Image<RgbaHalf> _) => this.Clear();
 
     internal override Frame? Reset()

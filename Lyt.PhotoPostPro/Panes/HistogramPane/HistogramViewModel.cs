@@ -2,18 +2,22 @@
 
 using static Controls.HistogramImageControl;
 
-public sealed partial class HistogramViewModel : 
-    ViewModel<HistogramView>, 
+public sealed partial class HistogramViewModel :
+    ViewModel<HistogramView>,
     IRecipient<HistogramsGeneratedMessage>
 {
     [ObservableProperty]
     public partial bool HistogramIsVisible { get; set; }
 
+    [ObservableProperty]
+    public partial bool HistogramPanelIsVisible { get; set; }
+
     public HistogramViewModel()
     {
-        this.HistogramIsVisible = true; 
+        this.HistogramIsVisible = true;
+        this.HistogramPanelIsVisible = true;
         this.Subscribe<HistogramsGeneratedMessage>();
-    } 
+    }
 
     public void Receive(HistogramsGeneratedMessage message)
     {
@@ -27,5 +31,7 @@ public sealed partial class HistogramViewModel :
         }, DispatcherPriority.ApplicationIdle);
     }
 
-    internal void OnClick() => this.HistogramIsVisible = ! this.HistogramIsVisible; 
+    internal void OnClick() => this.HistogramIsVisible = !this.HistogramIsVisible;
+
+    internal void Show(bool shouldShowHistograms) => this.HistogramPanelIsVisible = shouldShowHistograms;
 }

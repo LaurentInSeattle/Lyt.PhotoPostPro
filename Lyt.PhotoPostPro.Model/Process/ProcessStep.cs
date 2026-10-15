@@ -63,6 +63,8 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 
     public string LocalizationName => StepTitleLocalizationStrings[this.Name];
 
+    public virtual bool ShouldShowHistograms => true;
+
     public Image<RgbaHalf>? SourceImage { get; set; }
 
     public Image<RgbaHalf>? ResultImage { get; set; }
@@ -128,7 +130,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {
             bool needForHistograms =
                 !this.ProcessWorkflow.IsReplayMode || this.NextStep is ExportStep;
-            if (needForHistograms)
+            if (needForHistograms && this.ShouldShowHistograms)
             {
                 ProcessStep.RecalculateHistograms(this.ResultImage);
             }

@@ -10,6 +10,8 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
+
+	IsVisible="{Binding HistogramPanelIsVisible}"
 	>
 	<StackPanel
 		Orientation="Vertical"

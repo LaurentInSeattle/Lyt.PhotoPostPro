@@ -9,6 +9,8 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
     private string currentDirectoryExport = string.Empty;
 
+    public override bool ShouldShowHistograms => false;
+
     internal override void Initialize(Image<RgbaHalf> originalImage) { }
 
     // DO NOT call the base class or else it will call Transform 

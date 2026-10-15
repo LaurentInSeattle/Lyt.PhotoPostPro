@@ -35,6 +35,8 @@ public partial class StepViewModel :
     [ObservableProperty]
     public partial bool ResultImageIsVisible { get; set; }
 
+    public virtual bool ShouldShowHistograms => true;
+
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);

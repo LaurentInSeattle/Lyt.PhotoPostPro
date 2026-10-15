@@ -7,10 +7,6 @@ public sealed partial class ExportViewModel : StepViewModel<ExportView>
 
     public List<ImageExportViewModel> SelectedImageExports { get; set; } = [];
 
-    public ExportViewModel() 
-    {
-    }
-
     internal void OnExportSelectionChanged()
     {
         this.SelectedImageExports.Clear();

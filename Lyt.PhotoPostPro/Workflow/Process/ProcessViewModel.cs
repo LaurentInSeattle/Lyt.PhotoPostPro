@@ -98,6 +98,7 @@ public sealed partial class ProcessViewModel :
                 string stepName = workflow.CurrentStep.Name;
                 ActivatedView view = FromWorkflowstepName(stepName);
                 this.viewSelector.SelectView(view);
+                this.HistogramViewModel.Show(workflow.CurrentStep.ShouldShowHistograms);
             }, DispatcherPriority.ApplicationIdle);
 
     public void Receive(WorkflowUpdateMessage message)
