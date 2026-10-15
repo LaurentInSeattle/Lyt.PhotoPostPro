@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using System;
 
+using Lyt.PhotoPostPro.Implementations.Windows.Architecture;
+
 #if DEBUG
 // No need for the Mutex
 #else
@@ -25,6 +27,14 @@ internal class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        if (OperatingSystem.IsWindows())
+        {
+            if ( !ArchitectureChecker.Check())
+            {
+                return; 
+            }                
+        }
+
 #if DEBUG
         // Dont bother for single instance when debugging 
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
