@@ -171,16 +171,26 @@ public sealed partial class LutToolboxViewModel :
 
         if (value >= 0 && value < this.AvailableLutNames.Count)
         {
+            Dispatch.OnUiThread(() =>
+            {
+                this.lutMetadata = this.AvailableLuts[value];
+                this.UpdateModel();
+            }, DispatcherPriority.Background);
+
+            #region Combo-Box Avalonia Bug ~ Issue #61
+            // Should that crap return: 
+            // 
             // Wait one frame before launching the image color lookup process
             // If we dont, the app randomly freezes, with no exceptions thrown.
             // Possible Avalonia Bug ? Need to test with latest 12.0.5
             // Debug Output shows:
             // [Control] PlatformImpl is null, couldn't handle input. (PresentationSource #<some number>>)
-            Schedule.OnUiThread(150, () =>
-                {
-                    this.lutMetadata = this.AvailableLuts[value];
-                    this.UpdateModel();
-                }, DispatcherPriority.Background);
+            //Schedule.OnUiThread(150, () =>
+            //    {
+            //        this.lutMetadata = this.AvailableLuts[value];
+            //        this.UpdateModel();
+            //    }, DispatcherPriority.Background);
+            #endregion Combo-Box Avalonia Bug ~ Issue #61
         }
     }
 
