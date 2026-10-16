@@ -13,6 +13,7 @@
 	>
 	<Grid		
 		Height="{Binding ButtonHeight}"
+		ClipToBounds="False"
 		>
 		<Grid.RowDefinitions> 
 			<RowDefinition Height="{Binding RowHeight}" />
@@ -30,12 +31,29 @@
 			/>
 		<Rectangle
 			x:Name="NavigationIndicator"
+			Grid.Column="1"
 			IsVisible="False"
 			Grid.Row="1"
 			Margin="2 0 2 0"
 			Height="3" 
 			HorizontalAlignment="Stretch" VerticalAlignment="Center"
 			Fill="{StaticResource FreshGreen_2_100}"
+			/>
+		<Rectangle
+			Grid.Row="0"
+			IsVisible="{Binding IsConnectedLeft}"
+			Fill="{StaticResource FreshGreen_2_100}"
+			Margin="-10 0 0 0"
+			Height="2" Width="10"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			/>
+		<Rectangle
+			Grid.Row="0"
+			IsVisible="{Binding IsConnectedRight}"
+			Fill="{StaticResource FreshGreen_2_100}"
+			Margin="0 0 -10 0"
+			Height="2" Width="10"
+			HorizontalAlignment="Right" VerticalAlignment="Center"
 			/>
 	</Grid>
 

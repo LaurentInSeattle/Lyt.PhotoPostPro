@@ -10,7 +10,9 @@
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:local="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>
-	<Grid> 
+	<Grid
+		ClipToBounds="False"
+		> 
 		<ScrollViewer
 			Margin="0"
 			Background="Transparent"

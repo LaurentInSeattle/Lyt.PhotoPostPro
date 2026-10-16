@@ -31,13 +31,22 @@ public sealed partial class StepNavigatorViewModel :
         int height = 36;
         double fontSize = 16;
         List<SelectorButtonViewModel> steps = [];
-        foreach (var step in workflow.Steps)
+        for (int i = 0; i < workflow.Steps.Count; ++i)
         {
+            var step = workflow.Steps[i];
             string stepName = step.Name;
             string stepShortName =
                 this.Localize(ProcessStep.StepShortNameLocalizationStrings[stepName]);
+            bool isFirst = i == 0;
+            bool isLast = i == workflow.Steps.Count - 1;
+            bool isConnectedLeft = !isFirst;
+            bool isConnectedRight = !isLast;
             steps.Add(
-                new SelectorButtonViewModel(stepShortName, width, height, this.OnStepSelected, stepName, fontSize));
+                new SelectorButtonViewModel(
+                    stepShortName, 
+                    width, height, 
+                    this.OnStepSelected, stepName, 
+                    fontSize, isConnectedLeft, isConnectedRight));
         }
 
         this.Steps = steps;

@@ -4,7 +4,9 @@ public sealed partial class SelectorButtonViewModel(
     string buttonText, double buttonWidth, double buttonHeight,
     Action<object?> onSelect,
     object? tag = null, 
-    double fontSize = 18) :
+    double fontSize = 18, 
+    bool isConnectedLeft = false,
+    bool isConnectedRight = false) :
     ViewModel<SelectorButtonView>
 {
     private readonly Action<object?> onSelect = onSelect;
@@ -39,6 +41,12 @@ public sealed partial class SelectorButtonViewModel(
 
     [ObservableProperty]
     public partial GridLength RowHeight { get; set; } = new GridLength(buttonHeight - 4, GridUnitType.Pixel);
+
+    [ObservableProperty]
+    public partial bool IsConnectedLeft { get; set; } = isConnectedLeft;
+
+    [ObservableProperty]
+    public partial bool IsConnectedRight { get; set; } = isConnectedRight;
 
     [RelayCommand]
     public void OnSelect()
