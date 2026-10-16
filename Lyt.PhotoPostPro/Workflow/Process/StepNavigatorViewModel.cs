@@ -3,10 +3,10 @@
 public sealed partial class StepNavigatorViewModel :
     ViewModel<StepNavigatorView>,
     IRecipient<WorkflowUpdateMessage>,
-    IRecipient<WorkflowProgressMessage>    
+    IRecipient<WorkflowProgressMessage>
 {
     private readonly ProcessViewModel parent;
-    private readonly PhotoPostProModel photoPostProModel; 
+    private readonly PhotoPostProModel photoPostProModel;
 
     private ProcessWorkflow? workflow;
     private bool isProgrammatic;
@@ -15,7 +15,7 @@ public sealed partial class StepNavigatorViewModel :
     public StepNavigatorViewModel(ProcessViewModel parent, PhotoPostProModel photoPostProModel)
     {
         this.parent = parent;
-        this.photoPostProModel = photoPostProModel; 
+        this.photoPostProModel = photoPostProModel;
 
         this.selectedStepName = string.Empty;
         this.Subscribe<WorkflowUpdateMessage>();
@@ -51,7 +51,7 @@ public sealed partial class StepNavigatorViewModel :
     {
         if (this.workflow is null)
         {
-            this.workflow = this.photoPostProModel.CurrentWorkflow; 
+            this.workflow = this.photoPostProModel.CurrentWorkflow;
             return;
         }
 
@@ -136,7 +136,12 @@ public sealed partial class StepNavigatorViewModel :
         if (tag is string stepName && this.workflow is not null)
         {
             Debug.WriteLine("User action: " + stepName);
-            ProcessStep step = this.workflow.Get(stepName);
+            ProcessStep? step = this.workflow.GetStepByName(stepName);
+            if (step is null)
+            {
+                Debug.WriteLine("Step not found: " + stepName);
+                return;
+            }
 
             // First check if this is a back or next selection 
             int previousIndex = this.StepIndexFromStepName(previouslySelectedStepName);
@@ -152,18 +157,19 @@ public sealed partial class StepNavigatorViewModel :
             }
             else
             {
-                int delta = newIndex - previousIndex; 
+                int delta = newIndex - previousIndex;
                 int count = Math.Abs(delta);
-                for (int i = 0; i < count; i++)
+
+                if (delta > 0)
                 {
-                    if (delta > 0)
+                    for (int i = 0; i < count; i++)
                     {
                         toolboxHost.OnNext();
                     }
-                    else
-                    {
-                        toolboxHost.OnBack();
-                    }
+                }
+                else
+                {
+                    toolboxHost.OnJumpBackTo(stepName);
                 }
             }
         }

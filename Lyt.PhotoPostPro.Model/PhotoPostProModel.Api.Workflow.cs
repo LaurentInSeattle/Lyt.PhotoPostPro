@@ -220,6 +220,13 @@ public sealed partial class PhotoPostProModel : ModelBase
             return !string.IsNullOrWhiteSpace(path);
         });
 
+    public bool JumpBackTo(string stepName) =>
+        this.ApiAction(() =>
+        {
+            this.Workflow.JumpBackTo(stepName);
+            return true;
+        });
+
     public void Finish() =>
         this.ApiAction(() =>
         {

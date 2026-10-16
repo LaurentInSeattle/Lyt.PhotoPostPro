@@ -118,12 +118,23 @@ public sealed class ProcessWorkflow
         return step is null ? throw new Exception("Invalid step type") : step;
     }
 
-    public ProcessStep Get(string stepName)
+    public ProcessStep? GetStepByName(string stepName, bool dontThrow = false)
     {
         var step =
             (from stp in this.Steps where stp.Name == stepName select stp)
             .FirstOrDefault();
-        return step is null ? throw new Exception("Invalid step type") : step;
+        if (dontThrow)
+        {
+            return step;
+        }
+
+        return step is null ? throw new Exception("Invalid step name") : step;
+    }
+
+    public int GetStepIndexByName(string stepName)
+    {
+        int index = this.Steps.FindIndex(step => step.Name == stepName);
+        return index;
     }
 
     public void Begin()
@@ -295,6 +306,64 @@ public sealed class ProcessWorkflow
         }
 
         return false;
+    }
+
+    public bool JumpBackTo(string stepName)
+    {
+        if (!this.CanGoBack)
+        {
+            return false;
+        }
+
+        // Make sure step does exist
+        var targetStep = this.GetStepByName(stepName, dontThrow: true);
+        if (targetStep is null)
+        {
+            return false;
+        }
+
+        // Make sure we are not already at that step
+        if (this.CurrentStep.Name == stepName)
+        {
+            // Done and no error
+            return true;
+        }
+
+        // Make sure this is not the back step 
+        var previousStep = this.CurrentStep.PreviousStep;
+        if (previousStep is null)
+        {
+            // Should never happen
+            if ( Debugger.IsAttached) { Debugger.Break(); }
+            return false;
+        }
+
+        if (previousStep.Name == stepName)
+        {
+            // Just Invoke Back() to go back one step
+            return this.Back();
+        }
+
+        // old step 
+        this.CurrentStep.Deactivate(WorkflowUpdateKind.Back);
+
+        // jump to target step
+        int targetIndex = this.GetStepIndexByName(stepName);
+        if (targetIndex < 0 || targetIndex >= this.Steps.Count)
+        {
+            // Should never happen
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return false;
+        }
+
+        this.CurrentStepIndex = targetIndex;
+
+        // new step
+        this.CurrentStep.Activate(WorkflowUpdateKind.Back);
+
+        // Notify to change view 
+        this.Notify(this.Steps[this.CurrentStepIndex + 1], WorkflowUpdateKind.Back);
+        return true;
     }
 
     public Frame? Reset()
