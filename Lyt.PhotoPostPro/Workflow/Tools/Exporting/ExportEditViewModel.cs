@@ -196,24 +196,25 @@ public sealed partial class ExportEditViewModel :
         this.ValidateAndMessage();
     }
 
-    private void ValidateAndMessage()
+    private bool ValidateAndMessage()
     {
         if (!this.Validate(out string message))
         {
             this.ValidationMessage = this.Localize(message);
             this.editorViewModel.EnableButtons(enabled: false);
-            return;
+            return false;
         }
 
         this.ValidationMessage = string.Empty;
         this.editorViewModel.EnableButtons(enabled: true);
+        return true;
     }
 
     private bool Validate(out string message)
     {
         message = string.Empty;
         string friendlyName = this.FriendlyName?.Trim() ?? string.Empty;
-        if (string.IsNullOrWhiteSpace(friendlyName) || friendlyName.Length < 3)
+        if (string.IsNullOrWhiteSpace(friendlyName) || friendlyName.Length < 1)
         {
             message = "Tools.Editor.Validation.FriendlyNameRequired";
             return false;
@@ -373,7 +374,8 @@ public sealed partial class ExportEditViewModel :
             }
         }
 
-        this.PostFix = imageExport.PostFix;
+        this.PostFix = this.isGalleryFormat ? string.Empty : imageExport.PostFix;
+        this.ValidateAndMessage();
     }
 
     // Clicked "Add" button - add new editable to model
@@ -399,6 +401,16 @@ public sealed partial class ExportEditViewModel :
     // Clicked "Save" button - Save edits to model 
     public bool Save()
     {
+        if (this.isGalleryFormat)
+        {
+            this.PostFix = string.Empty;
+        }
+
+        if (this.ValidateAndMessage())
+        {
+            return false;
+        }
+
         var editedImageExport = this.CollectData();
         if (!this.model.EditImageExport(editedImageExport, out string message))
         {

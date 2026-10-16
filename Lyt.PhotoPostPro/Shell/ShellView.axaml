@@ -153,7 +153,7 @@
 					<glyphs:GlyphButton
 						x:Name="ToolsButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="toolbox"
+						GlyphSource="design_ideas"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Tools}"
 						Command="{Binding OnTools}"
