@@ -69,7 +69,6 @@
     <File Path="Unused_FluentSvgResourceDictionaryCopy.axaml" />
   </Folder>
   <Folder Name="/TechNotes/">
-    <File Path="TechNotes/Code.txt" />
     <File Path="TechNotes/TechnicalNotes.txt" />
   </Folder>
   <Folder Name="/Tools/">
