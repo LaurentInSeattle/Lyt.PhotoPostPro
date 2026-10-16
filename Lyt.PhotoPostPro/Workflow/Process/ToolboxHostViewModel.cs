@@ -69,4 +69,10 @@ public sealed partial class ToolboxHostViewModel :
         this.ActiveToolboxViewModel?.OnBeforeBack();
         this.model.JumpBackTo(stepName);
     }
+
+    internal void OnJumpNextTo(string stepName)
+    {
+        this.ActiveToolboxViewModel?.OnBeforeNext();
+        this.model.JumpNextTo(stepName);
+    }
 }

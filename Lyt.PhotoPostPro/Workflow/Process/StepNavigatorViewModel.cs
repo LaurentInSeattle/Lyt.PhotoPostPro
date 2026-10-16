@@ -47,6 +47,7 @@ public sealed partial class StepNavigatorViewModel :
     public void Receive(WorkflowProgressMessage message)
         => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
 
+    // Process workflow progress messages on the UI thread, ONLY for Export step when performing a Replay 
     public void ReceiveOnUiThread(WorkflowProgressMessage message)
     {
         if (this.workflow is null)
@@ -67,13 +68,20 @@ public sealed partial class StepNavigatorViewModel :
             return;
         }
 
-        SelectorButtonViewModel step = this.ViewModelFromStepName(stepName);
         Schedule.OnUiThread(
-            120, // About two frames
+            60, // About one frame
             () =>
             {
+                int retries = 10; 
+                while(this.Steps.Count == 0 && retries > 0)
+                {
+                    Task.Delay(20).Wait();
+                    retries--;
+                }
+
                 With.Flag(ref this.isProgrammatic, () =>
                 {
+                    SelectorButtonViewModel step = this.ViewModelFromStepName(stepName);
                     step.Select();
                     this.selectedStepName = stepName;
                 });
@@ -159,13 +167,9 @@ public sealed partial class StepNavigatorViewModel :
             {
                 int delta = newIndex - previousIndex;
                 int count = Math.Abs(delta);
-
                 if (delta > 0)
                 {
-                    for (int i = 0; i < count; i++)
-                    {
-                        toolboxHost.OnNext();
-                    }
+                    toolboxHost.OnJumpNextTo(stepName);
                 }
                 else
                 {

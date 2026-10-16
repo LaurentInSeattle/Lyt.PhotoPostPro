@@ -246,7 +246,7 @@ public sealed class ProcessWorkflow
         return true;
     }
 
-    public Frame? Next()
+    public Frame? Next(bool notifyUI = true)
     {
         if (this.CanMoveNext)
         {
@@ -270,13 +270,22 @@ public sealed class ProcessWorkflow
                 hasPerformedStep = true;
             }
 
-            // Notify to change view 
-            this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
-
-            // Notify to tell the UI to update 
-            if (hasPerformedStep)
+            if (notifyUI)
             {
-                new ModelStepUpdatedMessage(Step: this.CurrentStep).Publish();
+                // Notify to tell the UI to update 
+                if (hasPerformedStep)
+                {
+                    new ModelStepUpdatedMessage(Step: this.CurrentStep).Publish();
+                }
+
+                // Notify to change view 
+                this.Notify(this.Steps[this.CurrentStepIndex - 1], WorkflowUpdateKind.Next);
+
+                // Notify to tell the UI to update 
+                if (hasPerformedStep)
+                {
+                    new ModelStepUpdatedMessage(Step: this.CurrentStep).Publish();
+                }
             }
 
             // Return current result image 
@@ -334,7 +343,7 @@ public sealed class ProcessWorkflow
         if (previousStep is null)
         {
             // Should never happen
-            if ( Debugger.IsAttached) { Debugger.Break(); }
+            if (Debugger.IsAttached) { Debugger.Break(); }
             return false;
         }
 
@@ -364,6 +373,61 @@ public sealed class ProcessWorkflow
         // Notify to change view 
         this.Notify(this.Steps[this.CurrentStepIndex + 1], WorkflowUpdateKind.Back);
         return true;
+    }
+
+    internal Frame? JumpNextTo(string stepName)
+    {
+        if (!this.CanMoveNext)
+        {
+            return null;
+        }
+
+        // Make sure step does exist
+        var targetStep = this.GetStepByName(stepName, dontThrow: true);
+        if (targetStep is null)
+        {
+            return null;
+        }
+
+        // Make sure we are not already at that step
+        if (this.CurrentStep.Name == stepName)
+        {
+            // Done and no error
+            return null;
+        }
+
+        // Make sure this is not the next step 
+        var nextStep = this.CurrentStep.NextStep;
+        if (nextStep is null)
+        {
+            // Should never happen
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return null;
+        }
+
+        if (nextStep.Name == stepName)
+        {
+            // Just Invoke Next() to go next one step
+            return this.Next();
+        }
+
+        int startIndex = this.CurrentStepIndex;
+        int targetIndex = this.GetStepIndexByName(stepName);
+        if (targetIndex < 0 || targetIndex >= this.Steps.Count)
+        {
+            // Should never happen
+            if (Debugger.IsAttached) { Debugger.Break(); }
+            return null;
+        }
+
+        int stepCount = targetIndex - startIndex;
+        for (int i = 0; i < stepCount - 1; ++i)
+        {
+            _ = this.Next(notifyUI: false);
+        }
+
+        Frame? lastFrame = this.Next(notifyUI: true);
+        return lastFrame;
     }
 
     public Frame? Reset()

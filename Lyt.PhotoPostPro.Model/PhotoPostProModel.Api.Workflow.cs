@@ -227,6 +227,18 @@ public sealed partial class PhotoPostProModel : ModelBase
             return true;
         });
 
+    public bool JumpNextTo(string stepName) =>
+        this.ApiAction(() =>
+        {
+            var frame = this.Workflow.JumpNextTo(stepName);
+            if (frame is not null)
+            {
+                this.LastResultFrame = frame;
+            }
+
+            return true;
+        });
+
     public void Finish() =>
         this.ApiAction(() =>
         {
