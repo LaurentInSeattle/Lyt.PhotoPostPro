@@ -162,6 +162,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
             return;
         }
 
+        this.ShowRatingControl = this.ShowRatingFilter && !this.ShowAll;
         this.FilterAndSort();
     }
 

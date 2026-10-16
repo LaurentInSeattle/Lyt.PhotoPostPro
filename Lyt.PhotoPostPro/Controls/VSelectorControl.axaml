@@ -11,28 +11,22 @@
 	xmlns:local="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>
 	<Grid> 
-		<ScrollViewer
-			Margin="0"
-			Background="Transparent"
+		<ItemsControl 
+			x:Name="SelectorItemsControl"
 			VerticalAlignment="Stretch" HorizontalAlignment="Center"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-			ScrollViewer.VerticalScrollBarVisibility="Auto"
-			> 
-			<ItemsControl 
-				x:Name="SelectorItemsControl"
-				VerticalAlignment="Stretch" HorizontalAlignment="Center"
-				>
-				<ItemsControl.ItemsPanel>
-					<ItemsPanelTemplate>
-						<StackPanel Orientation="Vertical"/>
-					</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<local:SelectorButtonView Margin="0 4 0 4"/>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</ScrollViewer>
+			>
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<local:SelectorButtonView 
+						Height="56"
+						Margin="0"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 </UserControl>
