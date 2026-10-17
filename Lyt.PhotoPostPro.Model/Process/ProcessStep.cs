@@ -19,6 +19,39 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
+    public static List<string> WorkflowOrderedStepNames =
+        [
+            // Geometry 
+            OrientationStepName  ,  
+            StraightenStepName   ,  
+            CompositionStepName  ,  
+
+            // Later
+            // TouchUpStepName      ,  
+
+            // Denoise        
+            DenoiseStepName      ,  
+
+            // Exposure 
+            ExposureStepName     ,  
+            RecoveryStepName     ,  
+            VignetteStepName     ,  
+
+            // Constrast and Color 
+            WhiteBalanceStepName ,
+            ContrastStepName     ,
+            LutStepName          ,  
+            ColorStepName        ,  
+            DesaturationStepName ,  
+            SharpenStepName      ,  
+
+            // Filters 
+            FiltersStepName      ,  
+
+            // Export
+            ExportStepName       ,  
+        ]; 
+
     public static readonly Dictionary<string, string> StepTitleLocalizationStrings = new()
     {
         {   OrientationStepName  ,  "Workflow.Orient.Title"          },

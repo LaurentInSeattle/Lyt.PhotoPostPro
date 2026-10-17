@@ -43,18 +43,17 @@
 			Grid.Row="0"
 			IsVisible="{Binding IsConnectedLeft}"
 			Fill="{StaticResource FreshGreen_2_100}"
-			Margin="-10 0 0 0"
-			Height="2" Width="10"
+			Margin="-3 0 0 0"
+			Height="3" Width="2"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
 			/>
 		<Rectangle
 			Grid.Row="0"
 			IsVisible="{Binding IsConnectedRight}"
 			Fill="{StaticResource FreshGreen_2_100}"
-			Margin="0 0 -10 0"
-			Height="2" Width="10"
+			Margin="0 0 -3 0"
+			Height="3" Width="2"
 			HorizontalAlignment="Right" VerticalAlignment="Center"
 			/>
 	</Grid>
-
 </UserControl>

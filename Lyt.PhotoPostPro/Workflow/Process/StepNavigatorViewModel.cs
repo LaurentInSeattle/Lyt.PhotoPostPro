@@ -17,6 +17,7 @@ public sealed partial class StepNavigatorViewModel :
         this.parent = parent;
         this.photoPostProModel = photoPostProModel;
 
+        this.BuildSteps();
         this.selectedStepName = string.Empty;
         this.Subscribe<WorkflowUpdateMessage>();
         this.Subscribe<WorkflowProgressMessage>();
@@ -25,38 +26,41 @@ public sealed partial class StepNavigatorViewModel :
     [ObservableProperty]
     public partial List<SelectorButtonViewModel> Steps { get; set; } = [];
 
-    public void Initialize(ProcessWorkflow workflow)
+    public void BuildSteps()
     {
         int width = 104;
         int height = 36;
         double fontSize = 16;
         List<SelectorButtonViewModel> steps = [];
-        for (int i = 0; i < workflow.Steps.Count; ++i)
+        int stepCount = ProcessStep.WorkflowOrderedStepNames.Count;
+        for (int i = 0; i < stepCount; ++i)
         {
-            var step = workflow.Steps[i];
-            string stepName = step.Name;
+            string stepName = ProcessStep.WorkflowOrderedStepNames[i];
             string stepShortName =
                 this.Localize(ProcessStep.StepShortNameLocalizationStrings[stepName]);
             bool isFirst = i == 0;
-            bool isLast = i == workflow.Steps.Count - 1;
+            bool isLast = i == stepCount - 1;
             bool isConnectedLeft = !isFirst;
             bool isConnectedRight = !isLast;
             steps.Add(
                 new SelectorButtonViewModel(
-                    stepShortName, 
-                    width, height, 
-                    this.OnStepSelected, stepName, 
+                    stepShortName,
+                    width, height,
+                    this.OnStepSelected, stepName,
                     fontSize, isConnectedLeft, isConnectedRight));
         }
 
         this.Steps = steps;
-        this.workflow = workflow;
     }
+
+    public void Initialize(ProcessWorkflow workflow)
+        => this.workflow = workflow;
 
     public void Receive(WorkflowProgressMessage message)
         => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
 
-    // Process workflow progress messages on the UI thread, ONLY for Export step when performing a Replay 
+    // Process workflow progress messages on the UI thread,
+    // ONLY for Export step when performing a Replay 
     public void ReceiveOnUiThread(WorkflowProgressMessage message)
     {
         if (this.workflow is null)
@@ -77,22 +81,19 @@ public sealed partial class StepNavigatorViewModel :
             return;
         }
 
+        // Waiting if needed
         Schedule.OnUiThread(
-            60, // About one frame
+            120, // About one frame
             () =>
             {
-                int retries = 10; 
-                while(this.Steps.Count == 0 && retries > 0)
-                {
-                    Task.Delay(20).Wait();
-                    retries--;
-                }
-
                 With.Flag(ref this.isProgrammatic, () =>
                 {
                     SelectorButtonViewModel step = this.ViewModelFromStepName(stepName);
                     step.Select();
                     this.selectedStepName = stepName;
+
+                    // Replay ends when we process the Export Notification 
+                    this.workflow.EndReplay();
                 });
             }, DispatcherPriority.Background);
     }
@@ -100,6 +101,9 @@ public sealed partial class StepNavigatorViewModel :
     public void Receive(WorkflowUpdateMessage message)
         => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);
 
+    // Process workflow progress messages on the UI thread,
+    // When clicking Previous or Next or using the Navigator 
+    // Excludes the Replay mode 
     public void ReceiveOnUiThread(WorkflowUpdateMessage message)
     {
         if (message.Kind == WorkflowUpdateKind.Abort)
@@ -112,30 +116,34 @@ public sealed partial class StepNavigatorViewModel :
             return;
         }
 
-        With.Flag(ref this.isProgrammatic, () =>
+        if (message.CurrentStep is null)
         {
-            if (message.Kind == WorkflowUpdateKind.Begin)
-            {
-                // When starting a new edit, we need to wait a bit so that the Navigator UI has time to load
-                Schedule.OnUiThread(
-                    50, // About one frame
-                    () => this.Steps[0].Select(), DispatcherPriority.Background);
+            return;
+        }
 
-                // ! All steps have a tag
-                this.selectedStepName = (string)this.Steps[0].Tag!;
-            }
-            else
+        string stepName = message.CurrentStep.Name;
+
+        void SelectStep()
+        {
+            With.Flag(ref this.isProgrammatic, () =>
             {
-                if (message.CurrentStep is not null)
-                {
-                    string stepName = message.CurrentStep.Name;
-                    Debug.WriteLine("Programmatic: " + stepName);
-                    var step = this.ViewModelFromStepName(stepName);
-                    step.Select();
-                    this.selectedStepName = stepName;
-                }
-            }
-        });
+                Debug.WriteLine("Programmatic: " + stepName);
+                var step = this.ViewModelFromStepName(stepName);
+                step.Select();
+                this.selectedStepName = stepName;
+            });
+        }
+
+        // Waiting is not necessary here except for the first one 
+        if (stepName == ProcessStep.OrientationStepName)
+        {
+            // About one frame
+            Schedule.OnUiThread(120, SelectStep, DispatcherPriority.Background);
+        }
+        else
+        {
+            SelectStep();
+        }
     }
 
     void OnStepSelected(object? tag)
