@@ -23,9 +23,22 @@ public sealed partial class ExportViewModel : StepViewModel<ExportView>
     {
         base.Activate(activationParameters);
 
+        // Deliberately making a copy: see Remove below 
+        var copy = this.model.ImageExports.AvailableImageExports.ToList();
+
         var list = new List<ImageExportViewModel>();
 
-        foreach (var imageExport in this.model.ImageExports.AvailableImageExports)
+        // galleryExport on top 
+        var galleryExport = (from export in copy where export.IsGalleryFormat select export).FirstOrDefault(); 
+        if ( galleryExport is not null)
+        {
+            list.Add(new ImageExportViewModel(this, galleryExport));
+            copy.Remove(galleryExport); 
+        }
+
+        // All other in alpha order ascending 
+        var sorted = from export in copy orderby export.FriendlyName ascending select export ; 
+        foreach (var imageExport in sorted)
         {
             list.Add(new ImageExportViewModel(this, imageExport)); 
         }
