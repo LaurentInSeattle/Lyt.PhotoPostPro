@@ -7,7 +7,6 @@ public enum ExportAction
     ToDimensions,
 
     // Not supported for now 
-    // ToScale,
     // ToFileSize,
 }
 
@@ -18,6 +17,10 @@ public enum OutputFormat
     WebP,
     Png,
     Bmp,
+
+    // Maybe Later 
+    // Jxl,
+    // Avif,
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<ImageBorderStyle>))]
@@ -28,6 +31,7 @@ public enum ImageBorderStyle
     WhiteBorder,
 
     // Not supported for now 
+    // ThinWhiteThickBlack
     // Custom,
 }
 
@@ -80,6 +84,9 @@ public static class OutputFomatExtensions
             OutputFormat.WebP => ".webp",
             OutputFormat.Png => ".png",
             OutputFormat.Bmp => ".bmp",
+            // Maybe Later 
+            // Jxl,
+            // Avif,
             _ => throw new NotImplementedException(),
         };
 
@@ -90,6 +97,9 @@ public static class OutputFomatExtensions
             OutputFormat.WebP => new WebpEncoder() { FileFormat = WebpFileFormatType.Lossy, Quality = quality },
             OutputFormat.Png => new PngEncoder() { ColorType = PngColorType.Rgb },
             OutputFormat.Bmp => new BmpEncoder() { BitsPerPixel = BmpBitsPerPixel.Bit24 },
+            // Maybe Later 
+            // Jxl,
+            // Avif,
             _ => throw new NotImplementedException(),
         };
 }

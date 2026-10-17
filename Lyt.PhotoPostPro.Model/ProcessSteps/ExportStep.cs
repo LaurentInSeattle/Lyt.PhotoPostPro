@@ -121,28 +121,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                     //    // TODO: Implement file size export logic here
                     //    throw new NotImplementedException("ExportAction.ToFileSize is not implemented yet.");
 
-                    //case ExportAction.ToScale:
-                    //    // TODO: Implement to scale export logic here
-                    //    throw new NotImplementedException("ExportAction.ToScale is not implemented yet.");
-
                     case ExportAction.ToDimensions:
                         int dimension = imageExport.Dimension;
                         int width = imageToResize.Width;
                         int height = imageToResize.Height;
-
-                        // TODO : Remove this hack when export formats editing is fixed
-                        float apspectRatio = width / (float)height;
-                        if (MathF.Abs(apspectRatio - 1.0f) < 0.4f)
-                        {
-                            // Reduce max dimension if aspect ratio is close to 1:1
-                            dimension = (int)(dimension * 0.8f);
-                        }
-                        else if ( MathF.Abs(apspectRatio - 1.0f) < 0.2f )
-                        {
-                            // Reduce max dimension if aspect ratio is close to 1:1
-                            dimension = (int)(dimension * 0.7f);
-                        }
-
                         if (width > height)
                         {
                             float scale = width / (float)dimension;

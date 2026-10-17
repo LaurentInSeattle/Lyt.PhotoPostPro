@@ -406,7 +406,7 @@ public sealed partial class ExportEditViewModel :
             this.PostFix = string.Empty;
         }
 
-        if (this.ValidateAndMessage())
+        if (!this.ValidateAndMessage())
         {
             return false;
         }
