@@ -10,7 +10,7 @@ public sealed partial class ConfirmRemoveDialogModel :  DialogViewModel<ConfirmR
 
     public ConfirmRemoveDialogModel()
     {
-        this.CanEnter = false;
+        this.CanEnter = true;
         this.CanEscape = true;
         this.Title = this.Localize("Dialog.ConfirmRemove.Title"); // "Remove from Library ?";
         this.Message = this.Localize("Dialog.ConfirmRemove.Message");
