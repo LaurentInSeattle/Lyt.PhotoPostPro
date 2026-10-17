@@ -70,6 +70,9 @@ public sealed partial class CameraViewModel :
     public partial bool ShowDeviceSelection { get; set; } = false;
 
     [ObservableProperty]
+    public partial bool ShowImagesSwitchIsVisible { get; set; } = false;
+
+    [ObservableProperty]
     public partial ObservableCollection<DeviceViewModel> Devices { get; set; }
 
     [ObservableProperty]
@@ -145,6 +148,7 @@ public sealed partial class CameraViewModel :
         this.ShowImages = false;
         this.ShowOtherFiles = false;
         this.ShowDeviceSelection = false;
+        this.ShowImagesSwitchIsVisible = false; 
         this.isDownloading = false;
 
         // this.nothingSaved = true;
@@ -354,6 +358,12 @@ public sealed partial class CameraViewModel :
         else
         {
             this.FileDownloaded = message.Device.FriendlyName + ":  " + message.File + "  " + transferError;
+        }
+
+        if ((this.ThumbnailsPanelViewModel.Thumbnails.Count > 0 ) && 
+            (this.OtherFilesPanelViewModel.Files.Count > 0))
+        {
+            this.ShowImagesSwitchIsVisible = true; 
         }
     }
 
