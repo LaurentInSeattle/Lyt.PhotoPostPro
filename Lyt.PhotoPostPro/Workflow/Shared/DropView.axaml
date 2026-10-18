@@ -19,7 +19,7 @@
 			Background="#20808080"
 			Width="{Binding Width}" Height="{Binding Height}"
 			BorderThickness="0"
-			VerticalAlignment="Center" HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			DragDrop.AllowDrop="True"
 			>
 			<Grid>

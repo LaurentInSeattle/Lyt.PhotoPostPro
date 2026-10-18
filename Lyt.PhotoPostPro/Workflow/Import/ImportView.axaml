@@ -30,8 +30,9 @@
 		</Grid.ColumnDefinitions>
 		<shared:DropView
 			Grid.Row="1" Grid.Column="1"
+			Margin="40"
 			DataContext="{Binding DropViewModel}"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 			/>
 		<file:FileImportView
 			Grid.Row="1" Grid.Column="1"
