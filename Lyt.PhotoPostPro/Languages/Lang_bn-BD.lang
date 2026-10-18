@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">এই ট্যাগগুলোকে এই ছবির জন্য বরাদ্দ করা হবে ।.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">আপনার লাইব্রেরিতে ইতিমধ্যে</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">আপনার লাইব্রেরীতে ইতিমধ্যেই এই ছবিটি রয়েছে ।.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">শুরু করতে এখানে একটি ইমেজ ফাইল টেনে আনুন।</system:String>
 
     <system:String x:Key="Single.AddImage">এই ছবিটি লাইব্রেরির মধ্যে যোগ করুন</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">রিসেট করুন</system:String>
 
     <system:String x:Key="Workflow.Next">পরবর্তী</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">নিষ্ক্রিয়</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">সোজা করুন</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">ছাঁটাই করুন</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">স্পর্শ</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">দিন</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">এক্সোপাজার</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">থেকে পুনরুদ্ধার</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">গ্রেডিয়েন্ট (গ)</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">সাদা</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">বৈপরিত্য</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">ইউ'স</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">রঙ</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">ডেলিমিটার</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">শেয়ার:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">ফিল্টার</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">এক্সপোর্ট করুন</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">ওরিয়েন্টেশন এবং মিররিং</system:String>
 

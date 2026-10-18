@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Quando viene data una stella o più, quindi conservata nella libreria, questi tag saranno assegnati a questa immagine.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Già nella tua Biblioteca</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Questa immagine è già presente nella vostra libreria.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">Trascina e rilascia qui un file immagine per iniziare.</system:String>
 
     <system:String x:Key="Single.AddImage">Aggiungi questa immagine alla libreria</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Resettare</system:String>
 
     <system:String x:Key="Workflow.Next">Avanti</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Orient</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Dritto</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Croci</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Toccare</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Esposizione</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Recupero</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Gradienti</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Bianchi</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Contrasto</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT è</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Colore</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Desaturazione</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Filtri</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Esportazione</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Orientamento e Rifletti</system:String>
 

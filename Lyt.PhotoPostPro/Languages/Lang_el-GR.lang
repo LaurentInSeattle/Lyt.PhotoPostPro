@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Όταν δοθεί ένα αστέρι ή περισσότερο, ως εκ τούτου διατηρούνται στη βιβλιοθήκη, αυτές οι ετικέτες θα ανατεθεί σε αυτή την εικόνα.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Ήδη στη Βιβλιοθήκη σας</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Αυτή η εικόνα είναι ήδη παρούσα στη βιβλιοθήκη σας.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">Σύρετε και αποθέστε ένα αρχείο εικόνας εδώ για να ξεκινήσετε.</system:String>
 
     <system:String x:Key="Single.AddImage">Προσθήκη αυτής της εικόνας στη βιβλιοθήκη</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Επαναφορά</system:String>
 
     <system:String x:Key="Workflow.Next">Επόμενος</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Προσανατολισμός</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Ίσιωμα</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Καλλιέργειες</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Άγγιγμα πάνω</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Δεινόρεξη</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Έκθεση</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Ανάκτηση</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Διαβαθμίσεις</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Λευκά</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Αντίθεση</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">ΜΥΔ</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Χρώμα</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Αποκορύφωση</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Σαρπέν</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Φίλτρα</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Εξαγωγή</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Προσανατολισμός και Κατοπτρισμός</system:String>
 

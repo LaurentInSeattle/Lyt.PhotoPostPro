@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Коли надана одна зірка або більше, отже, зберігається в бібліотеці, ці теги будуть призначені для цього образу.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Вже в бібліотеці</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Цей образ вже присутній у вашій бібліотеці.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">Щоб почати, перетягніть сюди файл зображення.</system:String>
 
     <system:String x:Key="Single.AddImage">Додати це зображення до бібліотеки</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Скинути</system:String>
 
     <system:String x:Key="Workflow.Next">Далі</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Орієнтовна</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Плеймейт</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Кріплення</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Смоктати</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Деноз</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Проксимус</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Відновлення</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Проксимус</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Білий</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Контраст</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">ЛЮТ</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Колір</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Відчуття</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Точилка</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Фільтри</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Експорт</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Орієнтація та дзеркальне відображення</system:String>
 

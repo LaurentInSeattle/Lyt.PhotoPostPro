@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">1개의 별 이상을 주면, 따라서 도서관에 보관할 때, 이 태그는 이 이미지에 할당될 것입니다.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">당신의 도서관에 이미</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">이 이미지는 이미 라이브러리에 있습니다.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">시작하려면 이미지 파일을 여기에 끌어다 놓으십시오.</system:String>
 
     <system:String x:Key="Single.AddImage">이 이미지를 Library에 추가</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">다시 놓기</system:String>
 
     <system:String x:Key="Workflow.Next">다음</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">회사 소개</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">스트레이트</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">뚱 베어</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">더 보기</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">인기 있는</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">공지사항</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">관련 기사</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">한국어</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">화이트스</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">한국어</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT의</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">색깔: 회색</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">이름 *</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">스낵 바</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">필터링</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">수출입</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">오리엔테이션 및 미러링</system:String>
 

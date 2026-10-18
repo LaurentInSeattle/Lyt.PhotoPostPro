@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Khi cho một hoặc nhiều hơn, do đó giữ trong thư viện, những thẻ này sẽ được gán cho ảnh này.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Đã có trong thư viện của bạn</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Ảnh này đã có trong thư viện của bạn.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">Kéo và thả tập tin ảnh vào đây để bắt đầu.</system:String>
 
     <system:String x:Key="Single.AddImage">Thêm ảnh này vào thư viện</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Đặt lại</system:String>
 
     <system:String x:Key="Workflow.Next">Kế</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Tìm hướng</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Thẳng</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Cắt</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Chạm vào</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Kích hoạt</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Lộ sáng</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Phục hồi</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Gradient</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Trắng</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Độ tương phản</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Màu</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Giảm bão hoà</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Mài sắc</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Lọc</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Xuất</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Định hướng và phản chiếu</system:String>
 

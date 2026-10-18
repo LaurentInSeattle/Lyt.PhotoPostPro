@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Когато се даде една звезда или повече, следователно се съхранява в библиотеката, тези етикети ще бъдат определени на този образ.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Вече сте в библиотеката</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Това изображение вече присъства в библиотеката ви.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">Плъзнете и пуснете файл с изображение тук, за да започнете.</system:String>
 
     <system:String x:Key="Single.AddImage">Добавяне на това изображение в библиотеката</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Нулиране</system:String>
 
     <system:String x:Key="Workflow.Next">Следваща</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Ориент</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Изправи се</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Житно стопанство</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Докосване</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Деноиз</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Експозиция</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Възстановяване</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Градиенти</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Бели</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Контраст</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT's</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Цвят</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Отчаяние</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Остри</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Филтри</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Експортиране</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Ориентация и огледало</system:String>
 

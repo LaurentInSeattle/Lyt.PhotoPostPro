@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">जब एक स्टार या अधिक दिया जाता है, तो पुस्तकालय में रखा जाता है, तो इन टैगों को इस छवि को सौंपा जाएगा।.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">अपनी लाइब्रेरी में पहले से ही</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">यह छवि पहले से ही आपकी लाइब्रेरी में मौजूद है।.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">आरंभ करने के लिए एक छवि फ़ाइल को यहां खींचें और छोड़ें।</system:String>
 
     <system:String x:Key="Single.AddImage">इस छवि को लाइब्रेरी में जोड़ें</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">रीसेट करें</system:String>
 
     <system:String x:Key="Workflow.Next">अगला</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">ओरिएंट</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">सीधे</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">फसल</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">टच अप</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">एक्सपोजर</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">वसूली</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">ग्रेडियेंट</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">सफेद</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">कंट्रास्ट</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">रंग</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">निराशा</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">फिल्टर</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">निर्यात</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">ओरिएंटेशन और मिररिंग</system:String>
 

@@ -205,6 +205,9 @@
 	<system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these tags will be assigned to this image.</system:String>
 
 	<!-- Import -->
+	<system:String x:Key="Import.File.AlreadyIn">Already in your Library</system:String>
+	<system:String x:Key="Import.File.AlreadyIn.Long">This image is already present in your library.</system:String>
+
 	<system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
 	<system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
 	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>

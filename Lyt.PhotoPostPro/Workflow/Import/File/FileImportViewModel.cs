@@ -171,6 +171,10 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
                         // Hide 'Add' button: Show message instead 
                         this.Message = this.Localize("Import.File.AlreadyIn");
                         this.IsNewAddition = false;
+
+                        // Toast with longer message
+                        this.toaster.Show(
+                            this.Message, this.Localize("Import.File.AlreadyIn.Long"), 3_000, InformationLevel.Warning);
                     }
                     else
                     {

@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">เมื่อมีดวงดาวดวงหนึ่งหรือมากกว่า เก็บไว้ในไลบรารี ป้ายกํากับเหล่านี้จะถูกกําหนดให้เป็นรูปภาพนี้.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">อยู่ในห้องสมุดของคุณแล้ว</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">มีรูปภาพนี้อยู่ในไลบรารีของคุณอยู่แล้ว.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">ลากและวางแฟ้มภาพไว้ที่นี่เพื่อเริ่ม.</system:String>
 
     <system:String x:Key="Single.AddImage">เพิ่มรูปภาพนี้ไปยังไลบรารี</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">ตั้งค่าใหม่</system:String>
 
     <system:String x:Key="Workflow.Next">ต่อไป</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">เอเชีย</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">ตรง</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">ตัดภาพ</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">สัมผัสขึ้น</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">ความไวชัตเตอร์</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">การ ฟื้น ตัว</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">ไล่ระดับสี</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">ขาว</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">ความเปรียบต่าง</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT ของ</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">สี</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">การสลายตัว</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">ความแหลม:</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">ตัวกรอง</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">ส่งออก</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">ทิศทางและกระจกเงา</system:String>
 

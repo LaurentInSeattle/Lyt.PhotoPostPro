@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">当给定一星或多星,因此保存在库中时,这些标记会被分配到这个图像上.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">已经在您的图书馆中</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">此图像已经存在于您的库中 .</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">将图像文件拖放到此处即可开始。</system:String>
 
     <system:String x:Key="Single.AddImage">将此图像添加到库</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">重置</system:String>
 
     <system:String x:Key="Workflow.Next">下一个</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">东方</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">直线</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">作物</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">触摸起来</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">德诺瓦斯</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">接触</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">恢复</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">渐变</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">白色</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">对比度</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">关特的</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">颜色</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">饱和度</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">锐化</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">过滤器</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">导出</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">方向和镜像</system:String>
 

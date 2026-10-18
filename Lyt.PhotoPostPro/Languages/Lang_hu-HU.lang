@@ -263,6 +263,10 @@
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Ha egy vagy több csillagot kap, ezért a könyvtárban tartja, ezeket a címkéket ehhez a képhez rendelik.</system:String>
 
+    <system:String x:Key="Import.File.AlreadyIn">Már a könyvtár</system:String>
+
+    <system:String x:Key="Import.File.AlreadyIn.Long">Ez a kép már jelen van a könyvtárban.</system:String>
+
     <system:String x:Key="Single.DropZoneHelp">A kezdéshez húzzon ide egy képfájlt.</system:String>
 
     <system:String x:Key="Single.AddImage">A kép felvétele a könyvtárba</system:String>
@@ -348,6 +352,38 @@
     <system:String x:Key="Workflow.Reset">Reset</system:String>
 
     <system:String x:Key="Workflow.Next">Következő</system:String>
+
+    <system:String x:Key="Workflow.Orient.Short">Kelet</system:String>
+
+    <system:String x:Key="Workflow.Straighten.Short">Egyenes</system:String>
+
+    <system:String x:Key="Workflow.Compose.Short">Gabonafélék</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Short">Érintés</system:String>
+
+    <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+
+    <system:String x:Key="Workflow.Exposure.Short">Expozíció</system:String>
+
+    <system:String x:Key="Workflow.Recovery.Short">Visszatérítés</system:String>
+
+    <system:String x:Key="Workflow.Vignette.Short">Fényszórók</system:String>
+
+    <system:String x:Key="Workflow.WhiteBalance.Short">Fehérek</system:String>
+
+    <system:String x:Key="Workflow.Contrast.Short">Kontraszt</system:String>
+
+    <system:String x:Key="Workflow.Lut.Short">LUT</system:String>
+
+    <system:String x:Key="Workflow.Color.Short">Szín</system:String>
+
+    <system:String x:Key="Workflow.Desaturation.Short">Dezertálás</system:String>
+
+    <system:String x:Key="Workflow.Sharpen.Short">Éles</system:String>
+
+    <system:String x:Key="Workflow.Filters.Short">Szűrők</system:String>
+
+    <system:String x:Key="Workflow.Export.Short">Exportálás</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Tájékozódás és tükrözés</system:String>
 
