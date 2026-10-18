@@ -32,7 +32,9 @@ public sealed partial class DropViewModel : ViewModel<DropView>, IRecipient<Lang
     // Dispatch so that the Drag and Drop thread completes
     internal void OnDrop(string path, bool isDirectory)
         => Dispatch.OnUiThread(() => 
-            { 
+            {
+                var mainWindow = App.MainWindow;
+                mainWindow.Topmost = true; 
                 this.OnDropOnUiThread(path, isDirectory); 
             }, DispatcherPriority.Background); 
 
@@ -40,6 +42,8 @@ public sealed partial class DropViewModel : ViewModel<DropView>, IRecipient<Lang
     {
         try
         {
+            var mainWindow = App.MainWindow;
+            mainWindow.Topmost = false;
             this.dropPathHandler.OnDropPath(path, isDirectory);
         }
         catch (Exception ex)

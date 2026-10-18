@@ -353,15 +353,15 @@
 
     <system:String x:Key="Workflow.Next">Avanti</system:String>
 
-    <system:String x:Key="Workflow.Orient.Short">Orient</system:String>
+    <system:String x:Key="Workflow.Orient.Short">Orientare</system:String>
 
-    <system:String x:Key="Workflow.Straighten.Short">Dritto</system:String>
+    <system:String x:Key="Workflow.Straighten.Short">Raddrizzare</system:String>
 
-    <system:String x:Key="Workflow.Compose.Short">Croci</system:String>
+    <system:String x:Key="Workflow.Compose.Short">Ritagliare</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Short">Toccare</system:String>
+    <system:String x:Key="Workflow.TouchUp.Short">Ritoccare</system:String>
 
-    <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+    <system:String x:Key="Workflow.Denoise.Short">Disturbo</system:String>
 
     <system:String x:Key="Workflow.Exposure.Short">Esposizione</system:String>
 
@@ -373,13 +373,13 @@
 
     <system:String x:Key="Workflow.Contrast.Short">Contrasto</system:String>
 
-    <system:String x:Key="Workflow.Lut.Short">LUT è</system:String>
+    <system:String x:Key="Workflow.Lut.Short">LUT</system:String>
 
-    <system:String x:Key="Workflow.Color.Short">Colore</system:String>
+    <system:String x:Key="Workflow.Color.Short">Colori</system:String>
 
     <system:String x:Key="Workflow.Desaturation.Short">Desaturazione</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
+    <system:String x:Key="Workflow.Sharpen.Short">Niditezza</system:String>
 
     <system:String x:Key="Workflow.Filters.Short">Filtri</system:String>
 

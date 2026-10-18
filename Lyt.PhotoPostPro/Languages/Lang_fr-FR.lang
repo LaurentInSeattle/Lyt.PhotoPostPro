@@ -353,19 +353,19 @@
 
     <system:String x:Key="Workflow.Next">Suivant</system:String>
 
-    <system:String x:Key="Workflow.Orient.Short">Pays</system:String>
+    <system:String x:Key="Workflow.Orient.Short">Orienter</system:String>
 
-    <system:String x:Key="Workflow.Straighten.Short">Redressez</system:String>
+    <system:String x:Key="Workflow.Straighten.Short">Redresser</system:String>
 
-    <system:String x:Key="Workflow.Compose.Short">Culture</system:String>
+    <system:String x:Key="Workflow.Compose.Short">Couper</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Short">Toucher vers le haut</system:String>
+    <system:String x:Key="Workflow.TouchUp.Short">Retoucher</system:String>
 
-    <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+    <system:String x:Key="Workflow.Denoise.Short">Bruit</system:String>
 
     <system:String x:Key="Workflow.Exposure.Short">Exposition</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Short">Récupération</system:String>
+    <system:String x:Key="Workflow.Recovery.Short">Récupérer</system:String>
 
     <system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
 
@@ -373,17 +373,17 @@
 
     <system:String x:Key="Workflow.Contrast.Short">Contraste</system:String>
 
-    <system:String x:Key="Workflow.Lut.Short">LUTTE</system:String>
+    <system:String x:Key="Workflow.Lut.Short">LUTs</system:String>
 
-    <system:String x:Key="Workflow.Color.Short">Couleur</system:String>
+    <system:String x:Key="Workflow.Color.Short">Couleurs</system:String>
 
     <system:String x:Key="Workflow.Desaturation.Short">Désaturation</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.Short">Aiguille</system:String>
+    <system:String x:Key="Workflow.Sharpen.Short">Netteté</system:String>
 
     <system:String x:Key="Workflow.Filters.Short">Filtres</system:String>
 
-    <system:String x:Key="Workflow.Export.Short">Exportation</system:String>
+    <system:String x:Key="Workflow.Export.Short">Exporter</system:String>
 
     <system:String x:Key="Workflow.Orient.Title">Orientation et mise en miroir</system:String>
 
