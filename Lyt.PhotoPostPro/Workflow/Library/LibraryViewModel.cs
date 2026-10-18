@@ -628,7 +628,11 @@ public sealed partial class LibraryViewModel :
             Dispatch.OnUiThread(
                 () =>
                 {
-                    this.libraryMgr.UpdateEditedFile(metadata);
+                    if (!isNew)
+                    {
+                        this.libraryMgr.UpdateEditedFile(metadata);
+                    } 
+
                     this.LaunchProcessing(isReplayMode);
                     this.SpinWait(start: false);
                 },
