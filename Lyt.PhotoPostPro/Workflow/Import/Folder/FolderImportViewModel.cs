@@ -249,7 +249,7 @@ public sealed partial class FolderImportViewModel :
                 }
 
                 var loadedImage = thumbnailVM.LoadedImage;
-                if (libraryManager.IsAlreadyInLibrary(thumbnailVM.Metadata))
+                if (libraryManager.IsAlreadyInLibrary(thumbnailVM.Metadata, out Metadata? _))
                 {
                     continue;
                 }

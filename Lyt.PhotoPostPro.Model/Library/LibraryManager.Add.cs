@@ -5,24 +5,41 @@ using System.IO;
 
 public sealed partial class LibraryManager
 {
-    public bool IsAlreadyInLibrary(Metadata metadata)
+    public bool IsAlreadyInLibrary(Metadata metadata, out Metadata? existingMetadata)
     {
-        // Check if the target library folder is existing 
-        MetadataFolders metadataFolders = new(metadata);
-        string targetFolder = metadataFolders.WouldBeDirectoryPath(this.libraryFolderPath);
-        if (!Directory.Exists(targetFolder))
+        existingMetadata = null; 
+
+        try
         {
+            // Check if the target library folder is existing 
+            MetadataFolders metadataFolders = new(metadata);
+            string targetFolder = metadataFolders.WouldBeDirectoryPath(this.libraryFolderPath);
+            if (!Directory.Exists(targetFolder))
+            {
+                return false;
+            }
+
+            string sourceFilename = Path.GetFileName(metadata.FullPath);
+            string targetPath = Path.Combine(targetFolder, sourceFilename);
+            if (!File.Exists(targetPath))
+            {
+                return false;
+            }
+
+            string filename = Path.GetFileNameWithoutExtension(targetPath);
+            string metaFilename = filename + "_META.json";
+            string metaPath = Path.Combine(targetFolder, metaFilename);
+            string read = File.ReadAllText(metaPath);
+            var jsonTypeInfo = AppJsonContext.Default.Metadata;
+            existingMetadata = this.fileManager.Deserialize(read, jsonTypeInfo);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
             return false;
         }
-
-        string sourceFilename = Path.GetFileName(metadata.FullPath);
-        string targetPath = Path.Combine(targetFolder, sourceFilename);
-        if (!File.Exists(targetPath))
-        {
-            return false;
-        }
-
-        return true;
     }
 
     // Returns true if we can add the file to the library, false if it is a duplicate
@@ -74,7 +91,7 @@ public sealed partial class LibraryManager
                     throw new Exception("No such file: " + fullPath);
                 }
 
-                if (this.IsAlreadyInLibrary(metadata))
+                if (this.IsAlreadyInLibrary(metadata, out Metadata? _))
                 {
                     throw new Exception("Already present in library: " + fullPath);
                 }
@@ -192,7 +209,7 @@ public sealed partial class LibraryManager
             Metadata metadata = loadedImage.Metadata!;
             string fullPath = metadata.FullPath;
 
-            if (this.IsAlreadyInLibrary(metadata))
+            if (this.IsAlreadyInLibrary(metadata, out Metadata? _))
             {
                 throw new Exception("Already present in library: " + fullPath);
             }

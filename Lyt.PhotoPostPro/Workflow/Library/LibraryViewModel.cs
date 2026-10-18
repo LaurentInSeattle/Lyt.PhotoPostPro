@@ -559,6 +559,11 @@ public sealed partial class LibraryViewModel :
         }
 
         var metadata = this.selectedLibraryThumbnailViewModel.Metadata;
+        this.ProcessLibraryImage(metadata); 
+    }
+
+    public void ProcessLibraryImage(Metadata metadata)
+    { 
         List<ExistingPostProcessParameters> parameters = this.model.LibraryManager.EnumerateExistingEditParameters(metadata);
 
         // Launch dialogs if needed 
@@ -569,7 +574,7 @@ public sealed partial class LibraryViewModel :
         }
         else
         {
-            // Launch dialog for new processing
+            // Launch dialog for re processing
             if (this.dialogService is DialogService modalService)
             {
                 modalService.RunViewModelModal(

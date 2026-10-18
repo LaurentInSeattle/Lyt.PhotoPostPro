@@ -158,7 +158,7 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
                 bool isAlreadyInLibray = false;
                 if (this.loadedImage.Metadata is Metadata metadata)
                 {
-                    if (this.model.LibraryManager.IsAlreadyInLibrary(metadata) )
+                    if (this.model.LibraryManager.IsAlreadyInLibrary(metadata, out Metadata? existingMetadata) )
                     {
                         isAlreadyInLibray = true;
                     }
@@ -253,29 +253,35 @@ public sealed partial class FileImportViewModel : ViewModel<FileImportView>
             return;
         }
 
-        this.AddImageToLibrary();
-
-        if (this.loadedImage.Metadata is Metadata metadata)
-        {
-            this.model.LibraryManager.UpdateEditedFile(metadata);
-        }
-        else
+        if (this.loadedImage.Metadata is not Metadata metadata)
         {
             this.Logger.Warning("Image has no metadata: " + this.loadedImage.LoadedFrom);
-            // No need to show error message to user
+            return; 
         }
 
-        this.model.ProcessLoadedImage(this.loadedImage);
-        var workflow = this.model.CurrentWorkflow;
-        if (workflow is not null)
+        if (this.model.LibraryManager.IsAlreadyInLibrary(metadata, out Metadata? existingMetadata))
         {
-            var shell = App.GetRequiredService<ShellViewModel>();
-            shell.EnableAndSelect(ActivatedView.Process);
+            if ( existingMetadata is not null)
+            {
+                var libraryViewModel = App.GetRequiredService<LibraryViewModel>();
+                libraryViewModel.ProcessLibraryImage(existingMetadata);
+            }
         }
         else
         {
-            this.Logger.Warning("Failed to create post process from dropped file: " + this.loadedImage.LoadedFrom);
-            // TODO : Show error message to user
+            this.AddImageToLibrary();
+            this.model.LibraryManager.UpdateEditedFile(metadata);
+            this.model.ProcessLoadedImage(this.loadedImage);
+            var workflow = this.model.CurrentWorkflow;
+            if (workflow is not null)
+            {
+                var shell = App.GetRequiredService<ShellViewModel>();
+                shell.EnableAndSelect(ActivatedView.Process);
+            }
+            else
+            {
+                this.Logger.Warning("Failed to create post process from dropped file: " + this.loadedImage.LoadedFrom);
+            }
         }
     }
 }
