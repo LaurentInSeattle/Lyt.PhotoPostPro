@@ -28,6 +28,9 @@ public class RecoveryStep(ProcessWorkflow processWorkflow) :
     internal override Frame? Transform(bool withFrame = true)
         => base.DoTransform((clone) =>
         {
+            // Does not work so well :( 
+            // clone.ReconstructClipHighlights(); 
+            //
             clone.HighlightsShadows(this.HighlightAmount, this.ShadowAmount);
         }, withFrame);
 

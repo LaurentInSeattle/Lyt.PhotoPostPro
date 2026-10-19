@@ -911,67 +911,6 @@ public class TextureInpainter
 using System;
 using System.Threading.Tasks;
 
-public class HighlightReconstructor
-{
-	/// <summary>
-	/// Reconstructs clipped highlights using the standard clamping algorithm.
-	/// Expects interleaved RGB data (e.g., [R, G, B, R, G, B...])
-	/// </summary>
-	/// <param name="rgbData">The raw interleaved RGB byte array.</param>
-	/// <param name="clippingThreshold">The threshold above which a channel is considered clipped (typically ~240-254 for 8-bit images).</param>
-	public static void ReconstructClipHighlights(byte[] rgbData, byte clippingThreshold = 250)
-	{
-		if (rgbData == null) throw new ArgumentNullException(nameof(rgbData));
-		if (rgbData.Length % 3 != 0) throw new ArgumentException("Data length must be a multiple of 3 for RGB format.");
-
-		int totalPixels = rgbData.Length / 3;
-
-		// Process pixels in parallel to maximize CPU core utilization
-		Parallel.For(0, totalPixels, i =>
-		{
-			int offset = i * 3;
-
-			byte r = rgbData[offset];
-			byte g = rgbData[offset + 1];
-			byte b = rgbData[offset + 2];
-
-			// Check if any of the channels have broken past our highlight threshold
-			if (r >= clippingThreshold || g >= clippingThreshold || b >= clippingThreshold)
-			{
-				// Find the minimum value among the clipped/high channels to use as the true white cap
-				byte whiteCap = Math.Min(r, Math.Min(g, b));
-
-				// If they are all totally blown out to 255, cap stays high.
-				// Otherwise, clamp all channels to the lowest common denominator to preserve a neutral white/gray tone.
-				rgbData[offset]     = whiteCap; // Red
-				rgbData[offset + 1] = whiteCap; // Green
-				rgbData[offset + 2] = whiteCap; // Blue
-			}
-		});
-	}
-}
-
-// Example byte array representing 3 pixels (Interleaved RGB)
-// Pixel 1: Normal color
-// Pixel 2: Blown out highlight with a severe pink cast (R, B are near max; G is lower)
-// Pixel 3: Fully clipped pure white
-byte[] pixelData = {
-	120, 150, 80,   
-	255, 230, 254,  
-	255, 255, 255   
-};
-
-// Execute the reconstruction algorithm
-HighlightReconstructor.ReconstructClipHighlights(pixelData, clippingThreshold: 250);
-
-// Result:
-// Pixel 1 remains completely untouched: [120, 150, 80]
-// Pixel 2 has its pink tint corrected to a neutral bright gray: [230, 230, 230]
-// Pixel 3 stays pure white: [255, 255, 255]
-
-using System;
-using System.Threading.Tasks;
-
 public class AdvancedHighlightRecovery
 {
 	/// <summary>

@@ -320,6 +320,36 @@ internal static partial class ImagingAlgorithms
 
     #region Highlights and Shadows
 
+    public static void ReconstructClipHighlights(this Image<RgbaHalf> image, float clippingThreshold = 0.98f)
+    {
+        int height = image.Height;
+        Parallel.For(0, height, rowIndex =>
+        {
+            // Get a span for the current row 
+            Span<RgbaHalf> row = image.DangerousGetPixelRowMemory(rowIndex).Span;
+            for (int x = 0; x < row.Length; x++)
+            {
+                var pixel = row[x];
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
+
+                // Check if any of the channels have broken past our highlight threshold
+                if (r >= clippingThreshold || g >= clippingThreshold || b >= clippingThreshold)
+                {
+                    // Find the minimum value among the clipped/high channels to use as the true white cap
+                    Half whiteCap = ClipH((Half)(MathF.Min(r, MathF.Min(g, b))));
+
+                    // If they are all totally blown out to 255, cap stays high.
+                    // Otherwise, clamp all channels to the lowest common denominator to preserve a neutral white/gray tone.
+                    row[x].R = whiteCap;
+                    row[x].G = whiteCap;
+                    row[x].B = whiteCap;
+                }
+            }
+        });
+    }
+
     internal static void HighlightsShadows(this Image<RgbaHalf> image, float highlight, float shadow)
     {
         const float compress = 0.5f;
@@ -747,12 +777,12 @@ internal static partial class ImagingAlgorithms
         this Image<RgbaHalf> image, Point spotCenter, Point cleanCenter, int radius)
     {
         // Crop out the clean sample area
-        Rectangle sampleArea = new (cleanCenter.X - radius, cleanCenter.Y - radius, radius * 2, radius * 2);
+        Rectangle sampleArea = new(cleanCenter.X - radius, cleanCenter.Y - radius, radius * 2, radius * 2);
         using Image<RgbaHalf> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
 
         // Create a circular feather mask so the patch edges blend seamlessly
         using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
-        mask.Mutate(ctx => ctx.Paint(canvas => 
+        mask.Mutate(ctx => ctx.Paint(canvas =>
         {
             // Fill the background with transparent black 
             canvas.Clear(Brushes.Solid(Color.Transparent));
