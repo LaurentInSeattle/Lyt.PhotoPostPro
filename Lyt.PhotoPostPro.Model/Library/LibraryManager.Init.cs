@@ -62,7 +62,7 @@ public sealed partial class LibraryManager
         this.GalleryImages = new(CachedGalleryImageCount);
         this.LoadedHdImages = new(CachedHdImageCount);
         this.LoadedThumbnails = [];
-        this.KeywordsIndex = []; 
+        this.KeywordsIndex = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase); ; 
     }
 
     public string LibraryFolderPath => this.libraryFolderPath;
