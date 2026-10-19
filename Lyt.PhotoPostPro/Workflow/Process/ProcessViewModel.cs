@@ -232,9 +232,6 @@ public sealed partial class ProcessViewModel :
 
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Exports);
 
-        // Maybe later...
-        //Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpToolboxView>(ActivatedView.TouchUp);
-
         // Needs to be kept alive as a class member, or else callbacks will die (and wont work) 
         var animationService = App.GetRequiredService<IAnimationService>();
         this.viewSelector =

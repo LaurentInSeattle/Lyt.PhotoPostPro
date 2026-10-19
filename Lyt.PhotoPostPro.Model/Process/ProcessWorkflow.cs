@@ -42,9 +42,8 @@ public sealed class ProcessWorkflow
             // Geometry 
             orientationStep, straightenStep, compositionStep, 
             
-            // TODO: Removed for now 
             // TouchUp
-            // touchUpStep, 
+            touchUpStep, 
 
             // Denoise 
             denoiseStep, 

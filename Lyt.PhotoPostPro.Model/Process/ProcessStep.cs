@@ -19,7 +19,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
-    public static List<string> WorkflowOrderedStepNames =
+    public static readonly List<string> WorkflowOrderedStepNames =
         [
             // Geometry 
             OrientationStepName  ,  
@@ -27,7 +27,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
             CompositionStepName  ,  
 
             // Later
-            // TouchUpStepName      ,  
+            TouchUpStepName      ,  
 
             // Denoise        
             DenoiseStepName      ,  
