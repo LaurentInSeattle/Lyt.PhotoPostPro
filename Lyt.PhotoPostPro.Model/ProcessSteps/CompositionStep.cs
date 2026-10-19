@@ -68,6 +68,16 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
         {
             this.ResultImage = this.SourceImage;
         }
+        else if (workflowUpdateKind == WorkflowUpdateKind.Next)
+        {
+            // Coming from previous step we need to show the non-cropped image
+            // Copy from previous step 
+            // ! We do have a previous step 
+            this.SourceImage = base.PreviousStep!.ResultImage;
+
+            // Copy to result so that we can actually see it 
+            this.ResultImage = this.SourceImage;
+        }
     }
 
     private void Clear()
