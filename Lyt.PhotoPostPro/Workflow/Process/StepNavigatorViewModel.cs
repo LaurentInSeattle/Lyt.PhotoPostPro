@@ -3,7 +3,8 @@
 public sealed partial class StepNavigatorViewModel :
     ViewModel<StepNavigatorView>,
     IRecipient<WorkflowUpdateMessage>,
-    IRecipient<WorkflowProgressMessage>
+    IRecipient<WorkflowProgressMessage>,
+    IRecipient<LanguageChangedMessage>
 {
     private readonly ProcessViewModel parent;
     private readonly PhotoPostProModel photoPostProModel;
@@ -21,6 +22,7 @@ public sealed partial class StepNavigatorViewModel :
         this.selectedStepName = string.Empty;
         this.Subscribe<WorkflowUpdateMessage>();
         this.Subscribe<WorkflowProgressMessage>();
+        this.Subscribe<LanguageChangedMessage>();
     }
 
     [ObservableProperty]
@@ -55,6 +57,9 @@ public sealed partial class StepNavigatorViewModel :
 
     public void Initialize(ProcessWorkflow workflow)
         => this.workflow = workflow;
+
+    public void Receive(LanguageChangedMessage message)
+        => this.BuildSteps();
 
     public void Receive(WorkflowProgressMessage message)
         => Dispatch.OnUiThread(() => this.ReceiveOnUiThread(message), DispatcherPriority.Background);

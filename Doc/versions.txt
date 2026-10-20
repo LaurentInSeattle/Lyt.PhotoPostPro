@@ -8,14 +8,12 @@ D: Donatella - Open Beta - Bug fixes (Camera) - No Setup - No Store - Ava 12.1.4
 
 E: Emilia - Open Beta - Navigation - Touch Up - Bug fixes - No Store - Ava 12.1.4 - Planned: Late October
 
-F: Federica - Open Beta - First Run - Bug fixes - Store Setup - No Store - Ava 12.1.4 - Planned: Early November
+F: Federica - Open Beta - First Run - Bug fixes - No Store - Ava 12.1.4 - Planned: Early November
 
 G: Giulia
 
-H: Helena 
-
 I: Illaria
-J: Jovana 
+
 K: Karina
 L: Lucia
 M: Martina
@@ -28,6 +26,20 @@ S: Sabrina
 T: Teresa
 U: Ursula
 V: Valentina
-X: Xenia 
-Y: Yolanda
 Z: Zita
+
+-------
+
+• Ayumi (歩美) – Walking beauty
+• Beniko (紅湖) – Red lake
+• Chiyo (千代) – Thousand generations
+• Emiko (恵美子) – Blessed beautiful child
+• Harumi (晴美) – Spring beauty / clear weather beauty
+• Izumi (泉) – Spring, fountain
+• Kazumi (和美) – Harmonious beauty
+• Mayumi (真由美) – True reason beauty
+• Natsuki (夏希) – Summer hope
+• Reiko (礼子) – Grateful, polite child
+• Saori (紗織) – Silk weaving
+• Tsumugi (紬) – Pongee silk
+• Yuna (優月) – Gentle moon
