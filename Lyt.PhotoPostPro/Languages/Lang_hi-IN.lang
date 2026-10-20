@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">वैली</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">टच अप</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">छवि को हटाने के लिए स्पॉट की सटीक स्थिति पर क्लिक करें।.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">एक पैच स्थान प्रदान करने के लिए छवि पर SHIFT क्लिक करें। सबसे छोटा आकार के लिए स्लाइडर को समायोजित करने के लिए स्पॉट को पैच में कवर करें।.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">स्थान आकार</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">पैच</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">फिर से कोशिश करने के लिए रीसेट बटन का उपयोग करें।.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">छवि में शोर को कम करने के लिए लागू करें।.</system:String>

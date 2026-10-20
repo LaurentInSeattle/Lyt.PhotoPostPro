@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">谷类</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">触摸起来</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">点击地点所在位置的图像删除 .</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click在图像上提供补丁位置. 调整最小大小的滑动器以覆盖位置以补丁 .</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">斑点大小</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">补丁</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">使用重置按钮再次尝试 .</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">德诺瓦斯</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">应用来减少图像中的噪音 .</system:String>

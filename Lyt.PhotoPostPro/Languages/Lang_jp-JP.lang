@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">バレー</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">タッチアップ</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">スポットの正確な位置にある画像をクリックして削除します.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-画像をクリックすると、パッチの場所が提供されます。 最小サイズのスライダを調整して、スポットをパッチにカバーします.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">スポットサイズ</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">パッチ</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">リセットボタンを使ってもう一度お試しください.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">デノワーズ</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">画像の騒音を抑える.</system:String>

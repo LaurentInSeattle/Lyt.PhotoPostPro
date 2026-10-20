@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Völgy</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Érintés</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Kattintson a képre a hely pontos helyén, hogy eltávolítsa.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">Kattintson a képre, hogy a tapasz helyét biztosítsa. Állítsuk be a csúszkát a legkisebb méretre, hogy fedezze a foltot.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Pontméret</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Próbálja meg újra a Reset gombot.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Alkalmazás a hang csökkentésére a képen.</system:String>

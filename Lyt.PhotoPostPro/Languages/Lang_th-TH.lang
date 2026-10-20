@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">หุบเขา</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">สัมผัสขึ้น</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">คลิกบนภาพในตําแหน่งที่ถูกต้องของตําแหน่งที่จะลบ.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click บนภาพเพื่อให้ตําแหน่งแพทช์ ปรับแถบเลื่อนสําหรับขนาดที่เล็กที่สุด เพื่อครอบคลุมจุดที่จะปะติด.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">ขนาดจุด</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">แพตช์</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">ใช้ปุ่มตั้งค่าเพื่อลองอีกครั้ง.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">ความแหลม:</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">ปรับใช้เพื่อลดเสียงรบกวนของภาพ.</system:String>

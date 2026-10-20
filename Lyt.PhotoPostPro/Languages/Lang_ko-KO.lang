@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">언어: 영어</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">더 보기</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">정확한 위치에 이미지를 클릭하여 제거하십시오.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">이미지의 SHIFT 클릭으로 패치 위치를 제공합니다. 헝겊 조각에 반점을 커버하는 가장 작은 크기를 위한 슬라이더를 조정하십시오.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">점 크기</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">팟캐스트</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">다시 시도하려면 재설정 버튼을 사용하십시오.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">인기 있는</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">이미지의 소음을 감소시키기 위하여 적용하십시오.</system:String>

@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">谷地</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">接觸上起</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">在要取出的位置點擊影像 .</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT- Click 在相片上提供补丁位置. 为最小的大小而調整滑子以遮蓋地點以补丁 .</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">點大小</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">补丁</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">使用重置按鈕再試一次 .</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">德諾瓦斯</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">應用以減少影像中的噪音 .</system:String>

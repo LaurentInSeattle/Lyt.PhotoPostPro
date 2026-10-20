@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Долина</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Смоктати</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Натисніть на зображення в точну позицію місця для видалення.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click на зображення, щоб забезпечити місце розташування патч. Налаштуйте слайдер для найменшого розміру, щоб покрити пляму на патч.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Розмір плями</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Патч</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Використовуйте кнопку "Замінити", щоб спробувати знову.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Деноз</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Застосовувати для зменшення шуму в образі.</system:String>

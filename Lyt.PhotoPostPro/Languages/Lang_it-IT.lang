@@ -57,7 +57,7 @@
 
     <system:String x:Key="Shell.Tools">Strumenti</system:String>
 
-    <system:String x:Key="Shell.Documentation">Documentazione</system:String>
+    <system:String x:Key="Shell.Documentation">Guida Utente</system:String>
 
     <system:String x:Key="Shell.Language">Lingua</system:String>
 
@@ -462,6 +462,18 @@
     <system:String x:Key="Workflow.Compose.CG.Pyramid">Piramide</system:String>
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Valle della Valle</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Title">Toccare</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Fare clic sull'immagine nella posizione esatta del punto per rimuovere.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Clicca sull'immagine per fornire una posizione patch. Regolare il cursore per le dimensioni più piccole per coprire il punto a patch.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Dimensione del punto</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Utilizzare il pulsante Reset per riprovare.</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Riduzione del Rumore</system:String>
 

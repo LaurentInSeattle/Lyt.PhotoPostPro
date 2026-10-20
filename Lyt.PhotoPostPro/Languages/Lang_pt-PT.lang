@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Vale</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Tocar para cima</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Clique na imagem na posição exata do local para remover.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">Clique em SHIFT na imagem para fornecer um local de patch. Ajuste a barra deslizante para o tamanho mais pequeno para cobrir o local para patch.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Tamanho do Ponto</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Correcção</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Use o botão Reiniciar para tentar novamente.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Aplicar para reduzir o ruído na imagem.</system:String>

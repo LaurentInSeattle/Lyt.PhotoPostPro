@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Долина</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Докосване</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Кликнете върху изображението на точното положение на мястото, за да премахнете.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">Щракнете върху изображението, за да се осигури място на пластира. Нагласете плъзгача за най-малкия размер, за да покриете мястото за пластир.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Спот размер</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Пач</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Използвайте бутона Reset, за да опитате отново.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Деноиз</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Нанесете за намаляване на шума в изображението.</system:String>

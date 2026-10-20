@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">ভ্যালি</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">স্পর্শ</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">ছবিটি সরিয়ে ফেলার জন্য সঠিক অবস্থানের উপর ক্লিক করুন ।.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">ছবি তোলার জন্য সিএইচআইএফটি-এর ক্লিক। পরিমাপের জন্য স্লাইডারটি পরিবর্তন করুন.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">কেন্দ্রবিন্দুর আকার</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">বিচ্ছিন্ন</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">পুনরায় লোড করার জন্য বাটন ব্যবহার করুন ।.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">দিন</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">ছবিতে শব্দ হ্রাসের জন্য প্রয়োগ করুন।.</system:String>

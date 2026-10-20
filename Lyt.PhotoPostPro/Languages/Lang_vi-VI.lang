@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Thu nhỏ</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Chạm vào</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Nhấn vào ảnh ở vị trí chính xác của điểm cần gỡ bỏ.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click trên ảnh để cung cấp vị trí bản vá. Điều chỉnh con trượt cho kích cỡ nhỏ nhất để che vết để vá.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Cỡ chấm</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Đắp vá</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Dùng nút đặt lại để thử lại.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Kích hoạt</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Áp dụng để giảm nhiễu trong ảnh.</system:String>

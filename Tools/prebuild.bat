@@ -2,7 +2,7 @@ rem this needs to be run using a start /wait command or else the web service wil
 rem
 exit 0
 rem To Run the translate server: 
-rem			py -m libretranslate.main --port 5000 
+rem			py -m libretranslate.main --port 5000
 rem
 cd
 cd %~p0

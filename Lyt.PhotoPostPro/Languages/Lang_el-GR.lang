@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Κοιλάδα</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Άγγιγμα πάνω</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Κάντε κλικ στην εικόνα στην ακριβή θέση του σημείου για να αφαιρέσετε.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Κάντε κλικ στην εικόνα για να δώσετε μια θέση patch. Ρυθμίστε την κύλιση για το μικρότερο μέγεθος ώστε να καλύψει το σημείο για να επικολλήσετε.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Μέγεθος σημείου</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Διόρθωση</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Χρησιμοποιήστε το κουμπί Επαναφορά για να δοκιμάσετε ξανά.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Δεινόρεξη</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Εφαρμογή για τη μείωση του θορύβου στην εικόνα.</system:String>

@@ -463,6 +463,18 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Valle</system:String>
 
+    <system:String x:Key="Workflow.TouchUp.Title">Toca arriba</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Click">Haga clic en la imagen en la posición exacta del punto para quitar.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Haga clic en la imagen para proporcionar una ubicación de parche. Ajuste el deslizador para el tamaño más pequeño para cubrir el punto a parche.</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.SpotSize">Tamaño del punto</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
+
+    <system:String x:Key="Workflow.TouchUp.Again">Utilice el botón Reset para probar de nuevo.</system:String>
+
     <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
 
     <system:String x:Key="Workflow.Denoise.Correction">Aplicar para reducir el ruido en la imagen.</system:String>
