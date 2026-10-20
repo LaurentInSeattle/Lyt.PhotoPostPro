@@ -16,7 +16,7 @@
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="54"/>
-			<RowDefinition Height="1"/>
+			<RowDefinition Height="3"/>
 			<RowDefinition Height="3"/>
 		</Grid.RowDefinitions>
 
@@ -27,7 +27,7 @@
 
 		<Rectangle
 			Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="999"
-			VerticalAlignment="Center" HorizontalAlignment="Stretch"
+			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
 			Fill="{StaticResource OrangePeel_1_100}"
 			Height="1"
 			Opacity="0.2"
