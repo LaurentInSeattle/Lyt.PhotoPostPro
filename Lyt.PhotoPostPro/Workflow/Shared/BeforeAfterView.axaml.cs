@@ -119,7 +119,8 @@ public partial class BeforeAfterView : UserControl
         }
 
         bool isSourceImage = name.StartsWith("Source");
-        new ImageClickedMessage(isSourceImage, pixelX, pixelY, wbm).Publish();
+        bool isShifted = e.KeyModifiers.HasFlag(KeyModifiers.Shift);
+        new ImageClickedMessage(isSourceImage, isShifted, pixelX, pixelY, wbm).Publish();
         e.Handled = true;
     }
 }

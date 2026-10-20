@@ -67,7 +67,7 @@
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_export"
-			Text="{DynamicResource Workflow.WhiteBalance.RunWhitePatch}"
+			Text="{DynamicResource Workflow.TouchUp.RunPatch}"
 			Command="{Binding OnPatch}"
 			Width="280"
 	    	/>
