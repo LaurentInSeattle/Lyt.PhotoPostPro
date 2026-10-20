@@ -781,14 +781,14 @@ internal static partial class ImagingAlgorithms
         using Image<RgbaHalf> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
 
         // Create a circular feather mask so the patch edges blend seamlessly
-        using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
+        using var mask = new Image<Rgba32>(cleanPatch.Width, cleanPatch.Height);
         mask.Mutate(ctx => ctx.Paint(canvas =>
         {
             // Fill the background with transparent black 
             canvas.Clear(Brushes.Solid(Color.Transparent));
 
             // Draw a soft, anti-aliased white circle to represent brush pressure
-            canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius));
+            canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius-3));
 
             // Apply a slight BoxBlur to create a "feathered" edge transition
             ctx.BoxBlur(3);
