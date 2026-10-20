@@ -12,14 +12,14 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     private HashSet<string>? metadataPaths;
     private bool isFilterActive;
-    private bool isProgrammaticUpdate   ;
+    private bool isProgrammaticUpdate;
 
     public LibraryThumbnailsPanelViewModel(
         PhotoPostProModel model, LibraryViewModel libraryViewModel)
     {
         this.model = model;
         this.libraryViewModel = libraryViewModel;
-        this.Subscribe<LibraryKeywordsUpdateMessage>(); 
+        this.Subscribe<LibraryKeywordsUpdateMessage>();
     }
 
     [ObservableProperty]
@@ -57,10 +57,10 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     public bool IsEmpty => this.Thumbnails.Count == 0;
 
     public void Receive(LibraryKeywordsUpdateMessage message)
-        => Dispatch.OnUiThread(()=> { this.ReceiveOnUiThread(); }, DispatcherPriority.Background);
+        => Dispatch.OnUiThread(() => { this.ReceiveOnUiThread(); }, DispatcherPriority.Background);
 
     // Invoke OnFilter because we need to rebuild the metadata paths if needed 
-    public void ReceiveOnUiThread() => this.OnFilter(); 
+    public void ReceiveOnUiThread() => this.OnFilter();
 
     public void SetViewingMode(Viewing viewing)
     {
@@ -175,7 +175,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
     private void FilterAndSort()
     {
         this.isFilterActive = false;
-        this.IsFiltered = false; 
+        this.IsFiltered = false;
         if (this.Thumbnails.Count == 0)
         {
             this.DisplayedThumbnails.Clear();
@@ -186,7 +186,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         IEnumerable<LibraryThumbnailViewModel> filtered;
         if (this.metadataPaths is not null && this.metadataPaths.Count > 0)
         {
-            this.isFilterActive = true; 
+            this.isFilterActive = true;
             filtered =
                 (from thumb in this.Thumbnails
                  where this.metadataPaths.Contains(thumb.Metadata.MetadataFullPath())
@@ -259,6 +259,12 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
         this.metadataPaths = this.model.LibraryManager.KeywordsLookup(this.KeywordsText);
         this.FilterAndSort();
+
+        // If keyword search returns results auto select first sorted image 
+        if (this.DisplayedThumbnails.Count > 0)
+        {
+            libraryViewModel.OnSelect(this.DisplayedThumbnails[0]);
+        }
     }
 
     [RelayCommand]
@@ -268,7 +274,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         if (!string.IsNullOrWhiteSpace(this.KeywordsText))
         {
             this.KeywordsText = string.Empty;
-        } 
+        }
 
         this.FilterAndSort();
     }

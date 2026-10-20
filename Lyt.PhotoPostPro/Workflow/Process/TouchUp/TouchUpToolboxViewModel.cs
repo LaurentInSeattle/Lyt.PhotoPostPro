@@ -4,7 +4,7 @@ public sealed partial class TouchUpToolboxViewModel :
     ToolboxViewModel<TouchUpToolboxView, TouchUpStep>,
     IRecipient<ImageClickedMessage>
 {
-    private bool doNotUpdateModel;
+    // private bool doNotUpdateModel;
     private int spotPixelX;
     private int spotPixelY;
     private int patchPixelX;
@@ -118,10 +118,10 @@ public sealed partial class TouchUpToolboxViewModel :
 
     private void UpdateModel()
     {
-        if (this.doNotUpdateModel)
-        {
-            return;
-        }
+        //if (this.doNotUpdateModel)
+        //{
+        //    return;
+        //}
 
         var vm = App.GetRequiredService<TouchUpViewModel>();
         if (vm is not null && vm.IsBound)
