@@ -29,9 +29,10 @@ public enum ImageBorderStyle
     None,
     BlackBorder,
     WhiteBorder,
+    BlackThinWhiteBorder,
+    WhiteThinBlackBorder,
 
     // Not supported for now 
-    // ThinWhiteThickBlack
     // Custom,
 }
 
@@ -41,6 +42,7 @@ public enum ImageBorderThickness
     Thick,
     Medium,
     Thin,
+    Hefty,
 
     // Not supported for now 
     // Custom,
@@ -70,6 +72,7 @@ public static class OutputFomatExtensions
     public static double ThicknessFactor(this ImageBorderThickness thickness)
         => thickness switch
         {
+            ImageBorderThickness.Hefty => 4.5,
             ImageBorderThickness.Thick => 3.5,
             ImageBorderThickness.Medium => 2.5,
             ImageBorderThickness.Thin => 1.5,

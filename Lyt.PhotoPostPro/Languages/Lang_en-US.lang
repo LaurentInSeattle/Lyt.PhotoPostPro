@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	>
-  <!--  Unused for now 
+	<!--  Unused for now 
 	 DatePicker 
 	<x:String x:Key="StringDatePickerDayText">day</x:String>
 	<x:String x:Key="StringDatePickerMonthText">month</x:String>
@@ -33,536 +33,539 @@
 	<x:String x:Key="StringManagedFileChooserOverwritePromptCancelText">No</x:String>
 -->
 
-  <!-- Toast-->
-  <system:String x:Key="Toast.Dismiss">Close</system:String>
-  <system:String x:Key="Toast.Error">Error</system:String>
+	<!-- Toast-->
+	<system:String x:Key="Toast.Dismiss">Close</system:String>
+	<system:String x:Key="Toast.Error">Error</system:String>
 
-  <!-- Shell -->
-  <system:String x:Key="Shell.AppName">Photo Rebel - Photo Post Processing</system:String>
-  <system:String x:Key="Shell.About">About...</system:String>
-  <system:String x:Key="Shell.Play">Play</system:String>
-  <system:String x:Key="Shell.Exit">Exit</system:String>
-  <system:String x:Key="Shell.Cancel">Cancel</system:String>
-  <system:String x:Key="Shell.Close">Close</system:String>
-  <system:String x:Key="Shell.Ready">Ready.</system:String>
-  <system:String x:Key="Shell.Greetings">Welcome to Photo Rebel !</system:String>
+	<!-- Shell -->
+	<system:String x:Key="Shell.AppName">Photo Rebel - Photo Post Processing</system:String>
+	<system:String x:Key="Shell.About">About...</system:String>
+	<system:String x:Key="Shell.Play">Play</system:String>
+	<system:String x:Key="Shell.Exit">Exit</system:String>
+	<system:String x:Key="Shell.Cancel">Cancel</system:String>
+	<system:String x:Key="Shell.Close">Close</system:String>
+	<system:String x:Key="Shell.Ready">Ready.</system:String>
+	<system:String x:Key="Shell.Greetings">Welcome to Photo Rebel !</system:String>
 
-  <system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
-  <system:String x:Key="Shell.CanClose.Message">All your edits have been saved.</system:String>
+	<system:String x:Key="Shell.CanClose.Title">Exit Photo Rebel?</system:String>
+	<system:String x:Key="Shell.CanClose.Message">All your edits have been saved.</system:String>
 
-  <!-- File -->
-  <system:String x:Key="File.NotExist">This file does not exist.</system:String>
-  <system:String x:Key="File.TooSmall">This file is too small.</system:String>
-  <system:String x:Key="File.TooBig">This file is too big.</system:String>
-  <system:String x:Key="File.ImageNotSupported">This file is not an image file or the image file format is not supported.</system:String>
-  <system:String x:Key="File.CantRead">This file cannot be read, is maybe locked.</system:String>
-  <system:String x:Key="File.FailRead">Failed to open and read this file.</system:String>
-  <system:String x:Key="File.ImageNotDecoded">This image file is possibly corrupted or the image file format is does not match the file extension.</system:String>
-  <system:String x:Key="File.Exception">An error occurred while processing this image file.</system:String>
+	<!-- File -->
+	<system:String x:Key="File.NotExist">This file does not exist.</system:String>
+	<system:String x:Key="File.TooSmall">This file is too small.</system:String>
+	<system:String x:Key="File.TooBig">This file is too big.</system:String>
+	<system:String x:Key="File.ImageNotSupported">This file is not an image file or the image file format is not supported.</system:String>
+	<system:String x:Key="File.CantRead">This file cannot be read, is maybe locked.</system:String>
+	<system:String x:Key="File.FailRead">Failed to open and read this file.</system:String>
+	<system:String x:Key="File.ImageNotDecoded">This image file is possibly corrupted or the image file format is does not match the file extension.</system:String>
+	<system:String x:Key="File.Exception">An error occurred while processing this image file.</system:String>
 
-  <!-- Shell - Nav' Bar -->
-  <system:String x:Key="Shell.Folder">Library</system:String>
-  <system:String x:Key="Shell.Camera">Camera</system:String>
-  <system:String x:Key="Shell.Gallery">Gallery</system:String>
-  <system:String x:Key="Shell.Import">Import</system:String>
-  <system:String x:Key="Shell.Settings">Settings</system:String>
-  <system:String x:Key="Shell.Tools">Tools</system:String>
-  <system:String x:Key="Shell.Documentation">Documentation</system:String>
-  <system:String x:Key="Shell.Language">Language</system:String>
+	<!-- Shell - Nav' Bar -->
+	<system:String x:Key="Shell.Folder">Library</system:String>
+	<system:String x:Key="Shell.Camera">Camera</system:String>
+	<system:String x:Key="Shell.Gallery">Gallery</system:String>
+	<system:String x:Key="Shell.Import">Import</system:String>
+	<system:String x:Key="Shell.Settings">Settings</system:String>
+	<system:String x:Key="Shell.Tools">Tools</system:String>
+	<system:String x:Key="Shell.Documentation">Documentation</system:String>
+	<system:String x:Key="Shell.Language">Language</system:String>
 
-  <!-- Spin wait  -->
-  <system:String x:Key="Imaging.InProgress">In Progress</system:String>
-  <system:String x:Key="Imaging.InProgressHelp">Please wait...</system:String>
-  <system:String x:Key="Imaging.NowProcessing">Now Processing: </system:String>
+	<!-- Spin wait  -->
+	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
+	<system:String x:Key="Imaging.InProgressHelp">Please wait...</system:String>
+	<system:String x:Key="Imaging.NowProcessing">Now Processing: </system:String>
 
-  <!-- Drag and Drop -->
-  <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
+	<!-- Drag and Drop -->
+	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
 
-  <!-- Tools -->
-  <!-- Editor -->
-  <system:String x:Key="Tools.Editor.AddNew">Create New...</system:String>
-  <system:String x:Key="Tools.Editor.Add">Add</system:String>
-  <system:String x:Key="Tools.Editor.Delete">Delete</system:String>
-  <system:String x:Key="Tools.Editor.Save">Save Changes</system:String>
+	<!-- Tools -->
+	<!-- Editor -->
+	<system:String x:Key="Tools.Editor.AddNew">Create New...</system:String>
+	<system:String x:Key="Tools.Editor.Add">Add</system:String>
+	<system:String x:Key="Tools.Editor.Delete">Delete</system:String>
+	<system:String x:Key="Tools.Editor.Save">Save Changes</system:String>
 
-  <!-- Statistics -->
-  <system:String x:Key="Tools.Select.Statistics">Statistics</system:String>
-  <system:String x:Key="Tools.Statistics.LowDisk">You are running out of disk space!</system:String>
-  <system:String x:Key="Tools.Statistics.SizeOnDisk">Size On Disk</system:String>
-  <system:String x:Key="Tools.Statistics.ImageFileCount">Image Files</system:String>
-  <system:String x:Key="Tools.Statistics.TotalFileCount">All Files</system:String>
+	<!-- Statistics -->
+	<system:String x:Key="Tools.Select.Statistics">Statistics</system:String>
+	<system:String x:Key="Tools.Statistics.LowDisk">You are running out of disk space!</system:String>
+	<system:String x:Key="Tools.Statistics.SizeOnDisk">Size On Disk</system:String>
+	<system:String x:Key="Tools.Statistics.ImageFileCount">Image Files</system:String>
+	<system:String x:Key="Tools.Statistics.TotalFileCount">All Files</system:String>
 
-  <system:String x:Key="Space.Key.Library">Library</system:String>
-  <system:String x:Key="Space.Key.Gallery">Gallery</system:String>
-  <system:String x:Key="Space.Key.Exports">Exports</system:String>
-  <system:String x:Key="Space.Key.Luts">Look up Colour Tables</system:String>
+	<system:String x:Key="Space.Key.Library">Library</system:String>
+	<system:String x:Key="Space.Key.Gallery">Gallery</system:String>
+	<system:String x:Key="Space.Key.Exports">Exports</system:String>
+	<system:String x:Key="Space.Key.Luts">Look up Colour Tables</system:String>
 
-  <!-- Used in multiple Editor VM's-->
-  <system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">A unique name is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">A description is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">A valid image dimension is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">The provided image dimension is out of range.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.QualityRequired">A valid image quality percentage is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">The provided image quality percentage is out of range.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.PostFixRequired">A unique file name postfix is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">This name is already in use.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">This export format specification cannot be deleted.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.TextRequired">Some text is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.FontSizeRequired">A valid font size is required.</system:String>
-  <system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">The provided font size value is out of range.</system:String>
+	<!-- Used in multiple Editor VM's-->
+	<system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">A unique name is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.DescriptionNameRequired">A description is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.ResizeDimensionRequired">A valid image dimension is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.ResizeDimensionOutOfRange">The provided image dimension is out of range.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.QualityRequired">A valid image quality percentage is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.QualityOutOfRange">The provided image quality percentage is out of range.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.PostFixRequired">A unique file name postfix is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FriendlyNameAlreadyExists">This name is already in use.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.CannotDeleteGalleryFormat">This export format specification cannot be deleted.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.TextRequired">Some text is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FontSizeRequired">A valid font size is required.</system:String>
+	<system:String x:Key="Tools.Editor.Validation.FontSizeOutOfRange">The provided font size value is out of range.</system:String>
 
-  <system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
-  <system:String x:Key="Tools.Editor.DescriptionPrompt">Description</system:String>
-  <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>
-  <system:String x:Key="Tools.Editor.ColorPrompt">Color</system:String>
-  <system:String x:Key="Tools.Editor.FontSizePrompt">Font Size</system:String>
-  <system:String x:Key="Tools.Editor.FontWeightPrompt">Font Weight</system:String>
-  <system:String x:Key="Tools.Editor.FontFamilyPrompt">Font Family</system:String>
-  <system:String x:Key="Tools.Editor.FontStylePrompt">Font Style</system:String>
+	<system:String x:Key="Tools.Editor.TextPrompt">Text</system:String>
+	<system:String x:Key="Tools.Editor.DescriptionPrompt">Description</system:String>
+	<system:String x:Key="Tools.Editor.FriendlyNamePrompt">Friendly Name</system:String>
+	<system:String x:Key="Tools.Editor.ColorPrompt">Color</system:String>
+	<system:String x:Key="Tools.Editor.FontSizePrompt">Font Size</system:String>
+	<system:String x:Key="Tools.Editor.FontWeightPrompt">Font Weight</system:String>
+	<system:String x:Key="Tools.Editor.FontFamilyPrompt">Font Family</system:String>
+	<system:String x:Key="Tools.Editor.FontStylePrompt">Font Style</system:String>
 
-  <system:String x:Key="Tools.Editor.Regular">Regular</system:String>
-  <system:String x:Key="Tools.Editor.Bold">Bold</system:String>
-  <system:String x:Key="Tools.Editor.Italic">Italic</system:String>
-  <system:String x:Key="Tools.Editor.BoldItalic">Bold Italic</system:String>
+	<system:String x:Key="Tools.Editor.Regular">Regular</system:String>
+	<system:String x:Key="Tools.Editor.Bold">Bold</system:String>
+	<system:String x:Key="Tools.Editor.Italic">Italic</system:String>
+	<system:String x:Key="Tools.Editor.BoldItalic">Bold Italic</system:String>
 
-  <system:String x:Key="Tools.Editor.PostfixPrompt">File Name Postfix</system:String>
+	<system:String x:Key="Tools.Editor.PostfixPrompt">File Name Postfix</system:String>
 
-  <!-- Signatures -->
-  <system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
-  <system:String x:Key="Tools.Editor.SignaturePlacement">Signature Placement</system:String>
-  <system:String x:Key="Tools.Editor.TopLeft">Top Left</system:String>
-  <system:String x:Key="Tools.Editor.TopRight">Top Right</system:String>
-  <system:String x:Key="Tools.Editor.BottomLeft">Bottom Left</system:String>
-  <system:String x:Key="Tools.Editor.BottomRight">Bottom Right</system:String>
+	<!-- Signatures -->
+	<system:String x:Key="Tools.Select.Signatures">Signatures</system:String>
+	<system:String x:Key="Tools.Editor.SignaturePlacement">Signature Placement</system:String>
+	<system:String x:Key="Tools.Editor.TopLeft">Top Left</system:String>
+	<system:String x:Key="Tools.Editor.TopRight">Top Right</system:String>
+	<system:String x:Key="Tools.Editor.BottomLeft">Bottom Left</system:String>
+	<system:String x:Key="Tools.Editor.BottomRight">Bottom Right</system:String>
 
-  <!-- Watermarks -->
-  <system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
+	<!-- Watermarks -->
+	<system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
 
-  <!-- Exports -->
-  <system:String x:Key="Tools.Select.Exports">Exports</system:String>
-  <system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Resize to specified dimension</system:String>
-  <system:String x:Key="Tools.Editor.OutputFormat">OutputFormat</system:String>
-  <system:String x:Key="Tools.Editor.Jpg">JPG - Lossy</system:String>
-  <system:String x:Key="Tools.Editor.Webp">WebP - Lossy</system:String>
-  <system:String x:Key="Tools.Editor.Png">PNG - Lossless</system:String>
-  <system:String x:Key="Tools.Editor.Bmp">BMP - Lossless</system:String>
+	<!-- Exports -->
+	<system:String x:Key="Tools.Select.Exports">Exports</system:String>
+	<system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Resize to specified dimension</system:String>
+	<system:String x:Key="Tools.Editor.OutputFormat">OutputFormat</system:String>
+	<system:String x:Key="Tools.Editor.Jpg">JPG - Lossy</system:String>
+	<system:String x:Key="Tools.Editor.Webp">WebP - Lossy</system:String>
+	<system:String x:Key="Tools.Editor.Png">PNG - Lossless</system:String>
+	<system:String x:Key="Tools.Editor.Bmp">BMP - Lossless</system:String>
 
-  <system:String x:Key="Tools.Editor.QualityPrompt">Compression Quality (%)</system:String>
+	<system:String x:Key="Tools.Editor.QualityPrompt">Compression Quality (%)</system:String>
 
-  <system:String x:Key="Tools.Editor.BorderStyle">Border Style</system:String>
-  <system:String x:Key="Tools.Editor.None">None</system:String>
-  <system:String x:Key="Tools.Editor.BlackBorder">Black Border</system:String>
-  <system:String x:Key="Tools.Editor.WhiteBorder">White Border</system:String>
+	<system:String x:Key="Tools.Editor.BorderStyle">Border Style</system:String>
+	<system:String x:Key="Tools.Editor.None">None</system:String>
+	<system:String x:Key="Tools.Editor.BlackBorder">Black</system:String>
+	<system:String x:Key="Tools.Editor.WhiteBorder">White</system:String>
+  <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Black and Thin White</system:String>
+  <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">White and Thin Black </system:String>
 
   <system:String x:Key="Tools.Editor.BorderThickness">Border Thickness</system:String>
-  <system:String x:Key="Tools.Editor.Thin">Thin</system:String>
-  <system:String x:Key="Tools.Editor.Medium">Medium</system:String>
+	<system:String x:Key="Tools.Editor.Thin">Thin</system:String>
+	<system:String x:Key="Tools.Editor.Medium">Medium</system:String>
   <system:String x:Key="Tools.Editor.Thick">Thick</system:String>
+  <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
 
   <system:String x:Key="Tools.Editor.Watermark">Watermark</system:String>
-  <system:String x:Key="Tools.Editor.Signature">Signature</system:String>
-  <system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
-  <system:String x:Key="Tools.Editor.Signature.None">No Signature</system:String>
+	<system:String x:Key="Tools.Editor.Signature">Signature</system:String>
+	<system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
+	<system:String x:Key="Tools.Editor.Signature.None">No Signature</system:String>
 
-  <!-- Documentation -->
-  <system:String x:Key="Workflow.Documentation.Back">Back</system:String>
-  <system:String x:Key="Workflow.Documentation.First">First</system:String>
-  <system:String x:Key="Workflow.Documentation.Previous">Previous</system:String>
-  <system:String x:Key="Workflow.Documentation.Next">Next</system:String>
-  <system:String x:Key="Workflow.Documentation.Last">Last</system:String>
-  <system:String x:Key="Workflow.Document.ClickOpen">Click to Open this Document</system:String>
+	<!-- Documentation -->
+	<system:String x:Key="Workflow.Documentation.Back">Back</system:String>
+	<system:String x:Key="Workflow.Documentation.First">First</system:String>
+	<system:String x:Key="Workflow.Documentation.Previous">Previous</system:String>
+	<system:String x:Key="Workflow.Documentation.Next">Next</system:String>
+	<system:String x:Key="Workflow.Documentation.Last">Last</system:String>
+	<system:String x:Key="Workflow.Document.ClickOpen">Click to Open this Document</system:String>
 
-  <!-- Gallery -->
-  <system:String x:Key="Gallery.Empty">Your gallery of 'five stars' best pictures is empty.</system:String>
-  <system:String x:Key="Library.Empty">Your library of pictures is empty. Use 'Import' to add images.</system:String>
-  <system:String x:Key="Gallery.Toolbar.SlideShow">Slide Show</system:String>
-  <system:String x:Key="Gallery.Toolbar.Wallpaper">Wallpaper</system:String>
-  <system:String x:Key="Gallery.Toolbar.Navigate">Navigate To...</system:String>
+	<!-- Gallery -->
+	<system:String x:Key="Gallery.Empty">Your gallery of 'five stars' best pictures is empty.</system:String>
+	<system:String x:Key="Library.Empty">Your library of pictures is empty. Use 'Import' to add images.</system:String>
+	<system:String x:Key="Gallery.Toolbar.SlideShow">Slide Show</system:String>
+	<system:String x:Key="Gallery.Toolbar.Wallpaper">Wallpaper</system:String>
+	<system:String x:Key="Gallery.Toolbar.Navigate">Navigate To...</system:String>
 
-  <!-- Culling -->
-  <system:String x:Key="Workflow.Culling.Loading">Loading...</system:String>
-  <system:String x:Key="Workflow.Culling.LoadingHD">Loading High Definition Images...</system:String>
-  <system:String x:Key="Workflow.Culling.DecodingHD">Decoding High Definition Images...</system:String>
-  <system:String x:Key="Workflow.Culling.Ready">Ready.</system:String>
-  <system:String x:Key="Workflow.Culling.AddStar">Add Star</system:String>
-  <system:String x:Key="Workflow.Culling.RemoveStar">Demote</system:String>
-  <system:String x:Key="Workflow.Culling.Reject">Reject</system:String>
-  <system:String x:Key="Workflow.Culling.SelectTop">Keep: Top Image</system:String>
-  <system:String x:Key="Workflow.Culling.SelectTopHint">Add a Star to Top - Reject Bottom</system:String>
-  <system:String x:Key="Workflow.Culling.SelectBottom">Keep: Bottom Image</system:String>
-  <system:String x:Key="Workflow.Culling.SelectBottomHint">Reject Top - Add a Star to Bottom</system:String>
-  <system:String x:Key="Workflow.Culling.SelectLeft">Keep: Left Image</system:String>
-  <system:String x:Key="Workflow.Culling.SelectLeftHint">Add a Star to Left - Reject Right</system:String>
-  <system:String x:Key="Workflow.Culling.SelectRight">Keep: Right Image</system:String>
-  <system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
+	<!-- Culling -->
+	<system:String x:Key="Workflow.Culling.Loading">Loading...</system:String>
+	<system:String x:Key="Workflow.Culling.LoadingHD">Loading High Definition Images...</system:String>
+	<system:String x:Key="Workflow.Culling.DecodingHD">Decoding High Definition Images...</system:String>
+	<system:String x:Key="Workflow.Culling.Ready">Ready.</system:String>
+	<system:String x:Key="Workflow.Culling.AddStar">Add Star</system:String>
+	<system:String x:Key="Workflow.Culling.RemoveStar">Demote</system:String>
+	<system:String x:Key="Workflow.Culling.Reject">Reject</system:String>
+	<system:String x:Key="Workflow.Culling.SelectTop">Keep: Top Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectTopHint">Add a Star to Top - Reject Bottom</system:String>
+	<system:String x:Key="Workflow.Culling.SelectBottom">Keep: Bottom Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectBottomHint">Reject Top - Add a Star to Bottom</system:String>
+	<system:String x:Key="Workflow.Culling.SelectLeft">Keep: Left Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectLeftHint">Add a Star to Left - Reject Right</system:String>
+	<system:String x:Key="Workflow.Culling.SelectRight">Keep: Right Image</system:String>
+	<system:String x:Key="Workflow.Culling.SelectRightHint">Reject Left - Add a Star to Right</system:String>
 
-  <!-- Culling - Tags -->
-  <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Tags </system:String>
-  <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">When given one star or more, therefore kept in the library, images will be automatically 'tagged' with these tags.&#xD;&#xA;&#xD;&#xA;You will be able to change them at any time during the culling and rating process.</system:String>
-  <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
-  <system:String x:Key="Workflow.Culling.ChangeKeywords">Change Tags</system:String>
-  <system:String x:Key="Workflow.Culling.NoKeywords">No Tags will be assigned to this image.</system:String>
-  <system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these tags will be assigned to this image.</system:String>
+	<!-- Culling - Tags -->
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Define Tags </system:String>
+	<system:String x:Key="LibraryAdd.Dialog.Keywords.Message">When given one star or more, therefore kept in the library, images will be automatically 'tagged' with these tags.&#xD;&#xA;&#xD;&#xA;You will be able to change them at any time during the culling and rating process.</system:String>
+	<system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
+	<system:String x:Key="Workflow.Culling.ChangeKeywords">Change Tags</system:String>
+	<system:String x:Key="Workflow.Culling.NoKeywords">No Tags will be assigned to this image.</system:String>
+	<system:String x:Key="Workflow.Culling.WithKeywords">When given one star or more, therefore kept in the library, these tags will be assigned to this image.</system:String>
 
-  <!-- Import -->
-  <system:String x:Key="Import.File.AlreadyIn">Already in your Library</system:String>
-  <system:String x:Key="Import.File.AlreadyIn.Long">This image is already present in your library.</system:String>
+	<!-- Import -->
+	<system:String x:Key="Import.File.AlreadyIn">Already in your Library</system:String>
+	<system:String x:Key="Import.File.AlreadyIn.Long">This image is already present in your library.</system:String>
 
-  <system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
-  <system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
-  <system:String x:Key="Single.ProcessImage">Process This Image</system:String>
-  <system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
-  <system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
-  <system:String x:Key="Workflow.Import.Folder.Empty">This folder is empty.</system:String>
-  <system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">This folder contains no image.</system:String>
-  <system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Error while collecting file information.</system:String>
+	<system:String x:Key="Single.DropZoneHelp">Drag and drop a folder containing image files (or just one image) here to begin.</system:String>
+	<system:String x:Key="Single.AddImage">Add This Image to Library</system:String>
+	<system:String x:Key="Single.ProcessImage">Process This Image</system:String>
+	<system:String x:Key="Single.LoadImageFailTitle">Load Failed</system:String>
+	<system:String x:Key="Single.LoadImageFailMessage">This image could not be loaded.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Empty">This folder is empty.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.WithFilesNoImages">This folder contains no image.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.ErrorWhileCollecting">Error while collecting file information.</system:String>
 
-  <system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} Files</system:String>
-  <system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Size required on disk: {0}</system:String>
+	<system:String x:Key="Workflow.Import.Folder.FileCountFormat">{0} Files</system:String>
+	<system:String x:Key="Workflow.Import.Folder.SizeOnDiskFormat">Size required on disk: {0}</system:String>
 
-  <system:String x:Key="Workflow.Import.Folder.ImportAll">Check All to Import</system:String>
-  <system:String x:Key="Workflow.Import.Folder.IgnoreAll">Uncheck All to Ignore</system:String>
-  <system:String x:Key="Workflow.Import.Folder.Import">Import</system:String>
-  <system:String x:Key="Workflow.Import.Folder.Cancel">Cancel Import</system:String>
-  <system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Required Space: {0}</system:String>
-  <system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Available Space on {0} ({1}): {2}</system:String>
-  <system:String x:Key="Workflow.Import.Folder.Preloading">Preloading images...</system:String>
-  <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Preloading complete: {0} images, {1} errors.</system:String>
-  <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Add Checked to Library</system:String>
+	<system:String x:Key="Workflow.Import.Folder.ImportAll">Check All to Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.IgnoreAll">Uncheck All to Ignore</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Import">Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Cancel">Cancel Import</system:String>
+	<system:String x:Key="Workflow.Import.Folder.ReqSpaceFormat">Required Space: {0}</system:String>
+	<system:String x:Key="Workflow.Import.Folder.DriveInfoFormat">Available Space on {0} ({1}): {2}</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Preloading">Preloading images...</system:String>
+	<system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Preloading complete: {0} images, {1} errors.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.AddToLibrary">Add Checked to Library</system:String>
 
-  <system:String x:Key="Workflow.Import.Folder.Adding">Adding selected images to Library...</system:String>
-  <system:String x:Key="Workflow.Import.Folder.Added">Complete: Selected images added to Library.</system:String>
-  <system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Preloading Cancelled...</system:String>
-  <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficient disk space available.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Adding">Adding selected images to Library...</system:String>
+	<system:String x:Key="Workflow.Import.Folder.Added">Complete: Selected images added to Library.</system:String>
+	<system:String x:Key="Workflow.Import.Folder.PreloadCancelled">Preloading Cancelled...</system:String>
+	<system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficient disk space available.</system:String>
 
-  <!-- Metadata -->
-  <system:String x:Key="Metadata.Keywords">Tags</system:String>
-  <system:String x:Key="Metadata.Dialog.Keywords.Title">Edit Image Tags</system:String>
-  <system:String x:Key="Metadata.Dialog.Keywords.Message">Add new image tags or remove existing ones.</system:String>
-  <system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
-  <system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
-  <system:String x:Key="Metadata.Aperture">Aperture:</system:String>
-  <system:String x:Key="Metadata.ISOSpeed">ISO Speed:</system:String>
-  <system:String x:Key="Metadata.Exposure">Exposure:</system:String>
-  <system:String x:Key="Metadata.ExposureBias">Exposure Bias:</system:String>
-  <system:String x:Key="Metadata.FocalLength">Focal Length:</system:String>
-  <system:String x:Key="Metadata.WithFlash">With Flash</system:String>
-  <system:String x:Key="Metadata.NoFlash">No Flash</system:String>
-  <system:String x:Key="Metadata.Location">Location</system:String>
-  <system:String x:Key="Metadata.Latitude">Latitude: </system:String>
-  <system:String x:Key="Metadata.Longitude">Longitude:</system:String>
+	<!-- Metadata -->
+	<system:String x:Key="Metadata.Keywords">Tags</system:String>
+	<system:String x:Key="Metadata.Dialog.Keywords.Title">Edit Image Tags</system:String>
+	<system:String x:Key="Metadata.Dialog.Keywords.Message">Add new image tags or remove existing ones.</system:String>
+	<system:String x:Key="Metadata.FileCreatedFmt">File created: {0} at {1}</system:String>
+	<system:String x:Key="Metadata.FileCapturedFmt">Captured: {0} at {1}</system:String>
+	<system:String x:Key="Metadata.Aperture">Aperture:</system:String>
+	<system:String x:Key="Metadata.ISOSpeed">ISO Speed:</system:String>
+	<system:String x:Key="Metadata.Exposure">Exposure:</system:String>
+	<system:String x:Key="Metadata.ExposureBias">Exposure Bias:</system:String>
+	<system:String x:Key="Metadata.FocalLength">Focal Length:</system:String>
+	<system:String x:Key="Metadata.WithFlash">With Flash</system:String>
+	<system:String x:Key="Metadata.NoFlash">No Flash</system:String>
+	<system:String x:Key="Metadata.Location">Location</system:String>
+	<system:String x:Key="Metadata.Latitude">Latitude: </system:String>
+	<system:String x:Key="Metadata.Longitude">Longitude:</system:String>
 
-  <!-- Workflow -->
-  <system:String x:Key="Process.Toolbar.FullScreen">Full Screen</system:String>
-  <system:String x:Key="Process.Toolbar.EscToReturn">Esc. to Return</system:String>
+	<!-- Workflow -->
+	<system:String x:Key="Process.Toolbar.FullScreen">Full Screen</system:String>
+	<system:String x:Key="Process.Toolbar.EscToReturn">Esc. to Return</system:String>
 
-  <system:String x:Key="Workflow.Back">Back</system:String>
-  <system:String x:Key="Workflow.Reset">Reset</system:String>
-  <system:String x:Key="Workflow.Next">Next</system:String>
+	<system:String x:Key="Workflow.Back">Back</system:String>
+	<system:String x:Key="Workflow.Reset">Reset</system:String>
+	<system:String x:Key="Workflow.Next">Next</system:String>
 
-  <system:String x:Key="Workflow.Orient.Short">Orient</system:String>
-  <system:String x:Key="Workflow.Straighten.Short">Straighten</system:String>
-  <system:String x:Key="Workflow.Compose.Short">Crop</system:String>
-  <system:String x:Key="Workflow.TouchUp.Short">Touch Up</system:String>
-  <system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
-  <system:String x:Key="Workflow.Exposure.Short">Exposure</system:String>
-  <system:String x:Key="Workflow.Recovery.Short">Recovery</system:String>
-  <system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.Short">Whites</system:String>
-  <system:String x:Key="Workflow.Contrast.Short">Contrast</system:String>
-  <system:String x:Key="Workflow.Lut.Short">LUT's</system:String>
-  <system:String x:Key="Workflow.Color.Short">Color</system:String>
-  <system:String x:Key="Workflow.Desaturation.Short">Desaturation</system:String>
-  <system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
-  <system:String x:Key="Workflow.Filters.Short">Filters</system:String>
-  <system:String x:Key="Workflow.Export.Short">Export</system:String>
+	<system:String x:Key="Workflow.Orient.Short">Orient</system:String>
+	<system:String x:Key="Workflow.Straighten.Short">Straighten</system:String>
+	<system:String x:Key="Workflow.Compose.Short">Crop</system:String>
+	<system:String x:Key="Workflow.TouchUp.Short">Touch Up</system:String>
+	<system:String x:Key="Workflow.Denoise.Short">Denoise</system:String>
+	<system:String x:Key="Workflow.Exposure.Short">Exposure</system:String>
+	<system:String x:Key="Workflow.Recovery.Short">Recovery</system:String>
+	<system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Short">Whites</system:String>
+	<system:String x:Key="Workflow.Contrast.Short">Contrast</system:String>
+	<system:String x:Key="Workflow.Lut.Short">LUT's</system:String>
+	<system:String x:Key="Workflow.Color.Short">Color</system:String>
+	<system:String x:Key="Workflow.Desaturation.Short">Desaturation</system:String>
+	<system:String x:Key="Workflow.Sharpen.Short">Sharpen</system:String>
+	<system:String x:Key="Workflow.Filters.Short">Filters</system:String>
+	<system:String x:Key="Workflow.Export.Short">Export</system:String>
 
-  <!-- Workflow Orientation -->
-  <system:String x:Key="Workflow.Orient.Title">Orientation and Mirroring</system:String>
-  <system:String x:Key="Workflow.Orient.Format">Restore portrait or landscape format:</system:String>
-  <system:String x:Key="Workflow.Orient.Flip">Flip the image as needed:</system:String>
-  <system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
-  <system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
-  <system:String x:Key="Workflow.Orient.Mirror">Mirror</system:String>
-  <system:String x:Key="Workflow.Orient.Reverse">Flip</system:String>
+	<!-- Workflow Orientation -->
+	<system:String x:Key="Workflow.Orient.Title">Orientation and Mirroring</system:String>
+	<system:String x:Key="Workflow.Orient.Format">Restore portrait or landscape format:</system:String>
+	<system:String x:Key="Workflow.Orient.Flip">Flip the image as needed:</system:String>
+	<system:String x:Key="Workflow.Orient.RotateMinus">- 90 °</system:String>
+	<system:String x:Key="Workflow.Orient.RotatePlus">+ 90 °</system:String>
+	<system:String x:Key="Workflow.Orient.Mirror">Mirror</system:String>
+	<system:String x:Key="Workflow.Orient.Reverse">Flip</system:String>
 
-  <!-- Workflow Straightening -->
-  <system:String x:Key="Workflow.Straighten.Title">Straightening the Image</system:String>
-  <system:String x:Key="Workflow.Straighten.Guidelines">Show or Hide the Alignment Guides:</system:String>
-  <system:String x:Key="Workflow.Straighten.VerticalGuideline">Vertical</system:String>
-  <system:String x:Key="Workflow.Straighten.HorizontalGuideline">Horizontal</system:String>
-  <system:String x:Key="Workflow.Straighten.Rotate">Rotate to Adjust Alignment: </system:String>
-  <system:String x:Key="Workflow.Straighten.ClearRotate">Zero Rotation</system:String>
-  <system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
-  <system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
-  <system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5 °</system:String>
-  <system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5 °</system:String>
-  <system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1 °</system:String>
-  <system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1 °</system:String>
+	<!-- Workflow Straightening -->
+	<system:String x:Key="Workflow.Straighten.Title">Straightening the Image</system:String>
+	<system:String x:Key="Workflow.Straighten.Guidelines">Show or Hide the Alignment Guides:</system:String>
+	<system:String x:Key="Workflow.Straighten.VerticalGuideline">Vertical</system:String>
+	<system:String x:Key="Workflow.Straighten.HorizontalGuideline">Horizontal</system:String>
+	<system:String x:Key="Workflow.Straighten.Rotate">Rotate to Adjust Alignment: </system:String>
+	<system:String x:Key="Workflow.Straighten.ClearRotate">Zero Rotation</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusLarge">- 1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusLarge">+ 1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusMedium">- 0.5 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusMedium">+ 0.5 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotateMinusSmall">- 0.1 °</system:String>
+	<system:String x:Key="Workflow.Straighten.RotatePlusSmall">+ 0.1 °</system:String>
 
-  <!-- Workflow Composition -->
-  <system:String x:Key="Workflow.Compose.Title">Refining the Composition</system:String>
-  <system:String x:Key="Workflow.Compose.Croplines">Crop lines: </system:String>
-  <system:String x:Key="Workflow.Compose.Preview">Preview</system:String>
-  <system:String x:Key="Workflow.Compose.Top">Top:</system:String>
-  <system:String x:Key="Workflow.Compose.Bottom">Bottom:</system:String>
-  <system:String x:Key="Workflow.Compose.Left">Left:</system:String>
-  <system:String x:Key="Workflow.Compose.Right">Right:</system:String>
-  <system:String x:Key="Workflow.Compose.Width">Width:</system:String>
-  <system:String x:Key="Workflow.Compose.Height">Height:</system:String>
-  <system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio:</system:String>
-  <system:String x:Key="Workflow.Compose.CompositionGuides">Select a composition guide:</system:String>
+	<!-- Workflow Composition -->
+	<system:String x:Key="Workflow.Compose.Title">Refining the Composition</system:String>
+	<system:String x:Key="Workflow.Compose.Croplines">Crop lines: </system:String>
+	<system:String x:Key="Workflow.Compose.Preview">Preview</system:String>
+	<system:String x:Key="Workflow.Compose.Top">Top:</system:String>
+	<system:String x:Key="Workflow.Compose.Bottom">Bottom:</system:String>
+	<system:String x:Key="Workflow.Compose.Left">Left:</system:String>
+	<system:String x:Key="Workflow.Compose.Right">Right:</system:String>
+	<system:String x:Key="Workflow.Compose.Width">Width:</system:String>
+	<system:String x:Key="Workflow.Compose.Height">Height:</system:String>
+	<system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio:</system:String>
+	<system:String x:Key="Workflow.Compose.CompositionGuides">Select a composition guide:</system:String>
 
-  <!-- Composition Guides Combobox -->
-  <system:String x:Key="Workflow.Compose.CG.None"> - - None - -</system:String>
-  <system:String x:Key="Workflow.Compose.CG.Thirds"> Rule of Thirds</system:String>
-  <system:String x:Key="Workflow.Compose.CG.Frame"> Frame </system:String>
-  <system:String x:Key="Workflow.Compose.CG.Halves"> Middle Lines</system:String>
-  <system:String x:Key="Workflow.Compose.CG.Diagonals"> Diagonals</system:String>
-  <system:String x:Key="Workflow.Compose.CG.GoldenUp"> Golden Triangles Up</system:String>
-  <system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
-  <system:String x:Key="Workflow.Compose.CG.Pyramid"> Pyramid</system:String>
-  <system:String x:Key="Workflow.Compose.CG.Valley"> Valley</system:String>
+	<!-- Composition Guides Combobox -->
+	<system:String x:Key="Workflow.Compose.CG.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Thirds"> Rule of Thirds</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Frame"> Frame </system:String>
+	<system:String x:Key="Workflow.Compose.CG.Halves"> Middle Lines</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Diagonals"> Diagonals</system:String>
+	<system:String x:Key="Workflow.Compose.CG.GoldenUp"> Golden Triangles Up</system:String>
+	<system:String x:Key="Workflow.Compose.CG.GoldenDown"> Golden Triangles Down</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Pyramid"> Pyramid</system:String>
+	<system:String x:Key="Workflow.Compose.CG.Valley"> Valley</system:String>
 
-  <!-- Workflow Touch Up -->
-  <system:String x:Key="Workflow.TouchUp.Title">Touch Up</system:String>
-  <system:String x:Key="Workflow.TouchUp.Click">Click on the image at the exact position of the spot to remove.</system:String>
-  <system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click on the image to provide a patch location. Adjust the slider for the smallest size to cover the spot to patch.</system:String>
-  <system:String x:Key="Workflow.TouchUp.SpotSize">Spot Size</system:String>
-  <system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
-  <system:String x:Key="Workflow.TouchUp.Again">Use the Reset button to try again.</system:String>
+	<!-- Workflow Touch Up -->
+	<system:String x:Key="Workflow.TouchUp.Title">Touch Up</system:String>
+	<system:String x:Key="Workflow.TouchUp.Click">Click on the image at the exact position of the spot to remove.</system:String>
+	<system:String x:Key="Workflow.TouchUp.ShiftClick">SHIFT-Click on the image to provide a patch location. Adjust the slider for the smallest size to cover the spot to patch.</system:String>
+	<system:String x:Key="Workflow.TouchUp.SpotSize">Spot Size</system:String>
+	<system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
+	<system:String x:Key="Workflow.TouchUp.Again">Use the Reset button to try again.</system:String>
 
-  <!-- Workflow Denoise -->
-  <system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
-  <system:String x:Key="Workflow.Denoise.Correction">Apply to reduce noise in the image.</system:String>
-  <!-- Algorithm Combobox -->
-  <system:String x:Key="Workflow.Denoise.None">- - None - -</system:String>
-  <system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
+	<!-- Workflow Denoise -->
+	<system:String x:Key="Workflow.Denoise.Title">Denoise</system:String>
+	<system:String x:Key="Workflow.Denoise.Correction">Apply to reduce noise in the image.</system:String>
+	<!-- Algorithm Combobox -->
+	<system:String x:Key="Workflow.Denoise.None">- - None - -</system:String>
+	<system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
 
-  <!-- Workflow Exposure -->
-  <system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
-  <system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
-  <system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
-  <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
-  <system:String x:Key="Workflow.Exposure.Gain">Gain:</system:String>
-  <system:String x:Key="Workflow.Exposure.Shift">Shift:</system:String>
+	<!-- Workflow Exposure -->
+	<system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
+	<system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
+	<system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
+	<system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
+	<system:String x:Key="Workflow.Exposure.Gain">Gain:</system:String>
+	<system:String x:Key="Workflow.Exposure.Shift">Shift:</system:String>
 
-  <!-- Workflow Recovery -->
-  <system:String x:Key="Workflow.Recovery.Title">Highlights and Shadows</system:String>
-  <system:String x:Key="Workflow.Recovery.Correction">A non linear luminance algorithm to reveal and recover details in the image.</system:String>
-  <system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
-  <system:String x:Key="Workflow.Recovery.Highlights">Highlights:</system:String>
-  <system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
+	<!-- Workflow Recovery -->
+	<system:String x:Key="Workflow.Recovery.Title">Highlights and Shadows</system:String>
+	<system:String x:Key="Workflow.Recovery.Correction">A non linear luminance algorithm to reveal and recover details in the image.</system:String>
+	<system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
+	<system:String x:Key="Workflow.Recovery.Highlights">Highlights:</system:String>
+	<system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
 
-  <!-- Workflow Vignette -->
-  <system:String x:Key="Workflow.Vignette.Title">Selective Exposure Correction</system:String>
-  <system:String x:Key="Workflow.Vignette.Correction">Apply an exposure correction to selected sides of the image.</system:String>
-  <system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
-  <system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
-  <system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
-  <system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
-  <system:String x:Key="Workflow.Vignette.Right">Right</system:String>
-  <system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction:</system:String>
-  <system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
+	<!-- Workflow Vignette -->
+	<system:String x:Key="Workflow.Vignette.Title">Selective Exposure Correction</system:String>
+	<system:String x:Key="Workflow.Vignette.Correction">Apply an exposure correction to selected sides of the image.</system:String>
+	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
+	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
+	<system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
+	<system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
+	<system:String x:Key="Workflow.Vignette.Right">Right</system:String>
+	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction:</system:String>
+	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
 
-  <!-- Workflow White Balance -->
-  <system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or adjust it manually.</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manual - Basic Color Matrix (fast)</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manual - Direct Color Temperature</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Note: The 'Gray World' algorithm works well ONLY on images that have a lot of various colors.</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semi-Automatic - 'White Patch' Algorithm</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Run White Patch</system:String>
-  <system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Click on an bright area on the Source image that should be white or colorless, then run the algorithm.</system:String>
+	<!-- Workflow White Balance -->
+	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or adjust it manually.</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manual - Basic Color Matrix (fast)</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualOffset">T. Offset:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manual - Direct Color Temperature</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatic - 'Gray World' Algorithm</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturation:</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Note: The 'Gray World' algorithm works well ONLY on images that have a lot of various colors.</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.WhitePatch">Semi-Automatic - 'White Patch' Algorithm</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.RunWhitePatch">Run White Patch</system:String>
+	<system:String x:Key="Workflow.WhiteBalance.NoteWhitePatch">Click on an bright area on the Source image that should be white or colorless, then run the algorithm.</system:String>
 
-  <!-- Workflow Contrast -->
-  <system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>
-  <system:String x:Key="Workflow.Contrast.Correction">Correct contrast globally or use S-Curves on each RGB channel.</system:String>
-  <system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
-  <system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
-  <system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
-  <system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness:</system:String>
-  <system:String x:Key="Workflow.Contrast.SCurves">S-Curves</system:String>
+	<!-- Workflow Contrast -->
+	<system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>
+	<system:String x:Key="Workflow.Contrast.Correction">Correct contrast globally or use S-Curves on each RGB channel.</system:String>
+	<system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
+	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
+	<system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness:</system:String>
+	<system:String x:Key="Workflow.Contrast.SCurves">S-Curves</system:String>
 
-  <!-- Workflow Lut -->
-  <system:String x:Key="Workflow.Lut.Title">Lookup Table Color Grading</system:String>
-  <system:String x:Key="Workflow.Lut.Correction">Use a Lookup Table to adjust colours and add some special 'vibe' to the image.</system:String>
-  <system:String x:Key="Workflow.Lut.UseLut">Choose a predefined lookup table:</system:String>
-  <system:String x:Key="Workflow.Lut.None"> - - None - -</system:String>
-  <system:String x:Key="Workflow.Lut.DropLut">Or... Use your .cube or 3DL file: </system:String>
-  <system:String x:Key="Workflow.Lut.DragDropHelp">Drag and drop here a .cube or 3dl file!</system:String>
-  <system:String x:Key="Workflow.Lut.LaunchExplorer">Launch 'LUT Explorer'</system:String>
-  <system:String x:Key="Workflow.Lut.Original">Original</system:String>
-  <system:String x:Key="Workflow.Lut.UseThisLut">Use This LUT</system:String>
-  <system:String x:Key="Workflow.Lut.NoLut">Dismiss, No LUT</system:String>
+	<!-- Workflow Lut -->
+	<system:String x:Key="Workflow.Lut.Title">Lookup Table Color Grading</system:String>
+	<system:String x:Key="Workflow.Lut.Correction">Use a Lookup Table to adjust colours and add some special 'vibe' to the image.</system:String>
+	<system:String x:Key="Workflow.Lut.UseLut">Choose a predefined lookup table:</system:String>
+	<system:String x:Key="Workflow.Lut.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Lut.DropLut">Or... Use your .cube or 3DL file: </system:String>
+	<system:String x:Key="Workflow.Lut.DragDropHelp">Drag and drop here a .cube or 3dl file!</system:String>
+	<system:String x:Key="Workflow.Lut.LaunchExplorer">Launch 'LUT Explorer'</system:String>
+	<system:String x:Key="Workflow.Lut.Original">Original</system:String>
+	<system:String x:Key="Workflow.Lut.UseThisLut">Use This LUT</system:String>
+	<system:String x:Key="Workflow.Lut.NoLut">Dismiss, No LUT</system:String>
 
-  <!-- Workflow Color -->
-  <system:String x:Key="Workflow.Color.Title">Manual Color Grading</system:String>
-  <system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally, or, use Vibrance on each RGB channel.</system:String>
-  <system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
-  <system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
-  <system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
-  <system:String x:Key="Workflow.Color.Red">Red:</system:String>
-  <system:String x:Key="Workflow.Color.Green">Green:</system:String>
-  <system:String x:Key="Workflow.Color.Blue">Blue:</system:String>
+	<!-- Workflow Color -->
+	<system:String x:Key="Workflow.Color.Title">Manual Color Grading</system:String>
+	<system:String x:Key="Workflow.Color.Correction">Regrade color intensity globally, or, use Vibrance on each RGB channel.</system:String>
+	<system:String x:Key="Workflow.Color.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Color.SaturationAmount">Saturation:</system:String>
+	<system:String x:Key="Workflow.Color.Vibrance">Vibrance</system:String>
+	<system:String x:Key="Workflow.Color.Red">Red:</system:String>
+	<system:String x:Key="Workflow.Color.Green">Green:</system:String>
+	<system:String x:Key="Workflow.Color.Blue">Blue:</system:String>
 
-  <!-- Workflow Desaturation -->
-  <system:String x:Key="Workflow.Desaturation.Title">Selective Desaturation</system:String>
-  <system:String x:Key="Workflow.Desaturation.Correction">Adjust the saturation of specific colors in the image. Select a target color in the source image. </system:String>
-  <system:String x:Key="Workflow.Desaturation.Tolerance">Tolerance</system:String>
-  <system:String x:Key="Workflow.Desaturation.Feather">Feather</system:String>
-  <system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
-  <system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
-  <system:String x:Key="Workflow.Desaturation.Patch">Selected Color Patch</system:String>
-  <system:String x:Key="Workflow.Desaturation.RunDesaturation">Run Algorithm</system:String>
+	<!-- Workflow Desaturation -->
+	<system:String x:Key="Workflow.Desaturation.Title">Selective Desaturation</system:String>
+	<system:String x:Key="Workflow.Desaturation.Correction">Adjust the saturation of specific colors in the image. Select a target color in the source image. </system:String>
+	<system:String x:Key="Workflow.Desaturation.Tolerance">Tolerance</system:String>
+	<system:String x:Key="Workflow.Desaturation.Feather">Feather</system:String>
+	<system:String x:Key="Workflow.Desaturation.Base">Base</system:String>
+	<system:String x:Key="Workflow.Desaturation.Boost">Boost</system:String>
+	<system:String x:Key="Workflow.Desaturation.Patch">Selected Color Patch</system:String>
+	<system:String x:Key="Workflow.Desaturation.RunDesaturation">Run Algorithm</system:String>
 
-  <!-- Workflow Sharpen -->
-  <system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
-  <system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>
-  <system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
-  <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
-  <system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
+	<!-- Workflow Sharpen -->
+	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
+	<system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>
+	<system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
+	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+	<system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
 
-  <!-- Workflow Filters -->
-  <system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>
-  <system:String x:Key="Workflow.Filters.Correction">Apply special effects to the image.</system:String>
-  <system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale or Sepia:</system:String>
-  <system:String x:Key="Workflow.Filters.Amount">Amount:</system:String>
-  <!-- Filters Combobox -->
-  <system:String x:Key="Workflow.Filters.None"> - - None - -</system:String>
-  <system:String x:Key="Workflow.Filters.Grayscale">Grayscale</system:String>
-  <system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
-  <system:String x:Key="Workflow.Filters.HueRotation">Hue Rotation</system:String>
-  <system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
-  <system:String x:Key="Workflow.Filters.BlackWhite">Black and White</system:String>
-  <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
-  <system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
-  <system:String x:Key="Workflow.Filters.Lomograph">Lomograph</system:String>
+	<!-- Workflow Filters -->
+	<system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>
+	<system:String x:Key="Workflow.Filters.Correction">Apply special effects to the image.</system:String>
+	<system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale or Sepia:</system:String>
+	<system:String x:Key="Workflow.Filters.Amount">Amount:</system:String>
+	<!-- Filters Combobox -->
+	<system:String x:Key="Workflow.Filters.None"> - - None - -</system:String>
+	<system:String x:Key="Workflow.Filters.Grayscale">Grayscale</system:String>
+	<system:String x:Key="Workflow.Filters.Sepia">Sepia</system:String>
+	<system:String x:Key="Workflow.Filters.HueRotation">Hue Rotation</system:String>
+	<system:String x:Key="Workflow.Filters.Vignette">Vignette</system:String>
+	<system:String x:Key="Workflow.Filters.BlackWhite">Black and White</system:String>
+	<system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
+	<system:String x:Key="Workflow.Filters.Polaroid">Polaroid</system:String>
+	<system:String x:Key="Workflow.Filters.Lomograph">Lomograph</system:String>
 
-  <!-- Workflow Export-->
-  <system:String x:Key="Workflow.Export.Title">Exports</system:String>
-  <system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>
-  <system:String x:Key="Workflow.Export.RateAgain">Good editing? You can adjust this image rating:</system:String>
-  <system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
-  <system:String x:Key="Workflow.Export.Navigate">Navigate to Export Folder</system:String>
-  <system:String x:Key="Workflow.Export.Finish">All Done, Back to Library</system:String>
+	<!-- Workflow Export-->
+	<system:String x:Key="Workflow.Export.Title">Exports</system:String>
+	<system:String x:Key="Workflow.Export.Correction">Setup the export process in the main view.</system:String>
+	<system:String x:Key="Workflow.Export.RateAgain">Good editing? You can adjust this image rating:</system:String>
+	<system:String x:Key="Workflow.Export.Export">Export Image(s)</system:String>
+	<system:String x:Key="Workflow.Export.Navigate">Navigate to Export Folder</system:String>
+	<system:String x:Key="Workflow.Export.Finish">All Done, Back to Library</system:String>
 
-  <!-- Camera -->
+	<!-- Camera -->
 
-  <system:String x:Key="Workflow.Camera.SelectDevice">Connect to this device</system:String>
-  <system:String x:Key="Workflow.Camera.BeginTransfer">Begin Transfer</system:String>
-  <system:String x:Key="Workflow.Camera.CancelTransfer">Cancel Transfer</system:String>
-  <system:String x:Key="Workflow.Camera.TransferAborted">Transfer Aborted</system:String>
-  <system:String x:Key="Workflow.Camera.NoDevice">No camera or device found...</system:String>
-  <system:String x:Key="Workflow.Camera.Detected">Device or Camera detected.</system:String>
-  <system:String x:Key="Workflow.Camera.Connected">Connected</system:String>
-  <system:String x:Key="Workflow.Camera.NotResponding">Not responding.</system:String>
-  <system:String x:Key="Workflow.Camera.InProgress">Analysing camera files, please wait...</system:String>
-  <system:String x:Key="Workflow.Camera.NoFiles">No files on device.</system:String>
-  <system:String x:Key="Workflow.Camera.FilesReady">files ready to transfer.</system:String>
-  <system:String x:Key="Workflow.Camera.TransferedTo">Transfered To: </system:String>
-  <system:String x:Key="Workflow.Camera.TransferError">Transfer Error!</system:String>
-  <system:String x:Key="Workflow.Camera.TransferComplete">Transfer complete: {0} images transfered, other files or errors: {1}</system:String>
-  <system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Deletion complete: {0} images deleted, errors: {1} </system:String>
-  <system:String x:Key="Workflow.Camera.DeleteAborted">Delete Aborted!</system:String>
-  <system:String x:Key="Workflow.Camera.DeleteError">Delete Error!</system:String>
-  <system:String x:Key="Workflow.Camera.DeleteFromCamera">Deleted from Camera</system:String>
+	<system:String x:Key="Workflow.Camera.SelectDevice">Connect to this device</system:String>
+	<system:String x:Key="Workflow.Camera.BeginTransfer">Begin Transfer</system:String>
+	<system:String x:Key="Workflow.Camera.CancelTransfer">Cancel Transfer</system:String>
+	<system:String x:Key="Workflow.Camera.TransferAborted">Transfer Aborted</system:String>
+	<system:String x:Key="Workflow.Camera.NoDevice">No camera or device found...</system:String>
+	<system:String x:Key="Workflow.Camera.Detected">Device or Camera detected.</system:String>
+	<system:String x:Key="Workflow.Camera.Connected">Connected</system:String>
+	<system:String x:Key="Workflow.Camera.NotResponding">Not responding.</system:String>
+	<system:String x:Key="Workflow.Camera.InProgress">Analysing camera files, please wait...</system:String>
+	<system:String x:Key="Workflow.Camera.NoFiles">No files on device.</system:String>
+	<system:String x:Key="Workflow.Camera.FilesReady">files ready to transfer.</system:String>
+	<system:String x:Key="Workflow.Camera.TransferedTo">Transfered To: </system:String>
+	<system:String x:Key="Workflow.Camera.TransferError">Transfer Error!</system:String>
+	<system:String x:Key="Workflow.Camera.TransferComplete">Transfer complete: {0} images transfered, other files or errors: {1}</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteCompleteFmt">Deletion complete: {0} images deleted, errors: {1} </system:String>
+	<system:String x:Key="Workflow.Camera.DeleteAborted">Delete Aborted!</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteError">Delete Error!</system:String>
+	<system:String x:Key="Workflow.Camera.DeleteFromCamera">Deleted from Camera</system:String>
 
-  <system:String x:Key="Workflow.Camera.CheckAllToLibrary">Flags all photos to be added to the library.</system:String>
-  <system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Flags all photos to be removed from the camera.</system:String>
-  <system:String x:Key="Workflow.Camera.ClearAllToLibrary">Clears all flags for adding photos to the library.</system:String>
-  <system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Clears all flags for removing photos from the camera.</system:String>
+	<system:String x:Key="Workflow.Camera.CheckAllToLibrary">Flags all photos to be added to the library.</system:String>
+	<system:String x:Key="Workflow.Camera.CheckAllRemoveFromCamera">Flags all photos to be removed from the camera.</system:String>
+	<system:String x:Key="Workflow.Camera.ClearAllToLibrary">Clears all flags for adding photos to the library.</system:String>
+	<system:String x:Key="Workflow.Camera.ClearAllRemoveFromCamera">Clears all flags for removing photos from the camera.</system:String>
 
-  <!-- These three are resused in Library -->
-  <system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
-  <system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
-  <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
+	<!-- These three are resused in Library -->
+	<system:String x:Key="Workflow.Camera.Thumbs.Show">Show:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
 
-  <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Check All:</system:String>
-  <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Clear All:</system:String>
-  <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Toggle All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Check All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Clear All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Toggle All:</system:String>
 
-  <system:String x:Key="Workflow.Camera.File.SaveDesktop">Save to Desktop</system:String>
-  <system:String x:Key="Workflow.Camera.File.RemoveCamera">Remove from Camera</system:String>
-  <system:String x:Key="Workflow.Camera.File.AddLibrary">Add to Library</system:String>
-  <system:String x:Key="Workflow.Camera.PhotosImages">Photos - Images</system:String>
-  <system:String x:Key="Workflow.Camera.MoviesOthers">Movies -  Others</system:String>
+	<system:String x:Key="Workflow.Camera.File.SaveDesktop">Save to Desktop</system:String>
+	<system:String x:Key="Workflow.Camera.File.RemoveCamera">Remove from Camera</system:String>
+	<system:String x:Key="Workflow.Camera.File.AddLibrary">Add to Library</system:String>
+	<system:String x:Key="Workflow.Camera.PhotosImages">Photos - Images</system:String>
+	<system:String x:Key="Workflow.Camera.MoviesOthers">Movies -  Others</system:String>
 
-  <!-- Library -->
-  <system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
+	<!-- Library -->
+	<system:String x:Key="Workflow.Library.Thumbs.Show">Show:</system:String>
 
-  <system:String x:Key="Workflow.Library.Thumbs.ShowAll">Show All</system:String>
-  <system:String x:Key="Workflow.Library.Thumbs.ShowStarred">With Stars</system:String>
+	<system:String x:Key="Workflow.Library.Thumbs.ShowAll">Show All</system:String>
+	<system:String x:Key="Workflow.Library.Thumbs.ShowStarred">With Stars</system:String>
 
-  <system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
-  <system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
-  <system:String x:Key="Library.RateAndCullNothing">Nothing to Cull, All Images have One Star or More</system:String>
-  <system:String x:Key="Library.ProcessImage">Process This Image</system:String>
-  <system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
-  <system:String x:Key="Library.Navigate">Navigate to Library Folder</system:String>
-  <system:String x:Key="Library.StartOver">Start Over</system:String>
-  <system:String x:Key="Library.ContinueEdit">Continue Editing</system:String>
+	<system:String x:Key="Workflow.Library.Thumbnail.File">File:</system:String>
+	<system:String x:Key="Library.RateAndCull">Rate and Cull this Set</system:String>
+	<system:String x:Key="Library.RateAndCullNothing">Nothing to Cull, All Images have One Star or More</system:String>
+	<system:String x:Key="Library.ProcessImage">Process This Image</system:String>
+	<system:String x:Key="Library.RemoveImage">Remove from Library</system:String>
+	<system:String x:Key="Library.Navigate">Navigate to Library Folder</system:String>
+	<system:String x:Key="Library.StartOver">Start Over</system:String>
+	<system:String x:Key="Library.ContinueEdit">Continue Editing</system:String>
 
-  <system:String x:Key="Library.Option.Captured">Captured</system:String>
-  <system:String x:Key="Library.Option.Added">Added</system:String>
-  <system:String x:Key="Library.Option.Edited">Edited</system:String>
+	<system:String x:Key="Library.Option.Captured">Captured</system:String>
+	<system:String x:Key="Library.Option.Added">Added</system:String>
+	<system:String x:Key="Library.Option.Edited">Edited</system:String>
 
-  <system:String x:Key="Library.Month.January">January</system:String>
-  <system:String x:Key="Library.Month.February">February</system:String>
-  <system:String x:Key="Library.Month.March">March</system:String>
-  <system:String x:Key="Library.Month.April">April</system:String>
-  <system:String x:Key="Library.Month.May">May</system:String>
-  <system:String x:Key="Library.Month.June">June</system:String>
-  <system:String x:Key="Library.Month.July">July</system:String>
-  <system:String x:Key="Library.Month.August">August</system:String>
-  <system:String x:Key="Library.Month.September">September</system:String>
-  <system:String x:Key="Library.Month.October">October</system:String>
-  <system:String x:Key="Library.Month.November">November</system:String>
-  <system:String x:Key="Library.Month.December">December</system:String>
+	<system:String x:Key="Library.Month.January">January</system:String>
+	<system:String x:Key="Library.Month.February">February</system:String>
+	<system:String x:Key="Library.Month.March">March</system:String>
+	<system:String x:Key="Library.Month.April">April</system:String>
+	<system:String x:Key="Library.Month.May">May</system:String>
+	<system:String x:Key="Library.Month.June">June</system:String>
+	<system:String x:Key="Library.Month.July">July</system:String>
+	<system:String x:Key="Library.Month.August">August</system:String>
+	<system:String x:Key="Library.Month.September">September</system:String>
+	<system:String x:Key="Library.Month.October">October</system:String>
+	<system:String x:Key="Library.Month.November">November</system:String>
+	<system:String x:Key="Library.Month.December">December</system:String>
 
-  <system:String x:Key="Library.Day.Sunday">Sunday</system:String>
-  <system:String x:Key="Library.Day.Monday">Monday</system:String>
-  <system:String x:Key="Library.Day.Tuesday">Tuesday</system:String>
-  <system:String x:Key="Library.Day.Wednesday">Wednesday</system:String>
-  <system:String x:Key="Library.Day.Thursday">Thursday</system:String>
-  <system:String x:Key="Library.Day.Friday">Friday</system:String>
-  <system:String x:Key="Library.Day.Saturday">Saturday</system:String>
+	<system:String x:Key="Library.Day.Sunday">Sunday</system:String>
+	<system:String x:Key="Library.Day.Monday">Monday</system:String>
+	<system:String x:Key="Library.Day.Tuesday">Tuesday</system:String>
+	<system:String x:Key="Library.Day.Wednesday">Wednesday</system:String>
+	<system:String x:Key="Library.Day.Thursday">Thursday</system:String>
+	<system:String x:Key="Library.Day.Friday">Friday</system:String>
+	<system:String x:Key="Library.Day.Saturday">Saturday</system:String>
 
-  <!-- Library Dialogs -->
-  <system:String x:Key="Dialog.ConfirmRemove.Title">Remove from Library ?</system:String>
-  <system:String x:Key="Dialog.ConfirmRemove.Message">This master image and all its attached data such as thumbnails and edit logs will be deleted. &#xD;&#xA;&#xD;&#xA;All files will be moved to the Recycle Bin.&#xD;&#xA;&#xD;&#xA;This operation cannot be undone.</system:String>
+	<!-- Library Dialogs -->
+	<system:String x:Key="Dialog.ConfirmRemove.Title">Remove from Library ?</system:String>
+	<system:String x:Key="Dialog.ConfirmRemove.Message">This master image and all its attached data such as thumbnails and edit logs will be deleted. &#xD;&#xA;&#xD;&#xA;All files will be moved to the Recycle Bin.&#xD;&#xA;&#xD;&#xA;This operation cannot be undone.</system:String>
 
-  <system:String x:Key="Dialog.SelectEdit.Title">Start Over or Continue ?</system:String>
-  <system:String x:Key="Dialog.SelectEdit.Message">This image has already been edited. Do you want to start over or use previous settings?&#xD;&#xA;&#xD;&#xA;If so, select previously updated settings in the 'combo-box below and click 'Continue'.&#xD;&#xA;&#xD;&#xA;If not, just click 'Start Over'.</system:String>
-  <system:String x:Key="Dialog.SelectEdit.ShouldReplay">Direct to Export: Will replay all edits automatically</system:String>
-  <system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Last Updated:  {0}  at:  {1}</system:String>
+	<system:String x:Key="Dialog.SelectEdit.Title">Start Over or Continue ?</system:String>
+	<system:String x:Key="Dialog.SelectEdit.Message">This image has already been edited. Do you want to start over or use previous settings?&#xD;&#xA;&#xD;&#xA;If so, select previously updated settings in the 'combo-box below and click 'Continue'.&#xD;&#xA;&#xD;&#xA;If not, just click 'Start Over'.</system:String>
+	<system:String x:Key="Dialog.SelectEdit.ShouldReplay">Direct to Export: Will replay all edits automatically</system:String>
+	<system:String x:Key="Dialog.SelectEdit.LastUpdatedFmt">Last Updated:  {0}  at:  {1}</system:String>
 
-  <!-- Intro  -->
-  <system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
-  <system:String x:Key="Intro.LicenseTitle">License Terms</system:String>
-  <system:String x:Key="Intro.LicenseSubtitle">This application is provided to you under the terms of the MIT License.</system:String>
-  <system:String x:Key="Intro.LicenseTerms">This application is provided to you under the terms of the MIT License and, together with other terms, implies no warranty of any kind. By using this software, you fully agree to the terms and conditions of the MIT License.</system:String>
-  <system:String x:Key="Intro.ReminderTitle">Important Reminder</system:String>
-  <system:String x:Key="Intro.ReminderSubtitle">Some important points to remember about downloaded images...</system:String>
-  <system:String x:Key="Intro.ReminderText">You are advised to use the downloaded images only as wallpaper. For any other use, commercial or otherwise, please contact the copyright holder.</system:String>
+	<!-- Intro  -->
+	<system:String x:Key="Intro.AgreeMIT">I accept the terms of the MIT License, Continue.</system:String>
+	<system:String x:Key="Intro.LicenseTitle">License Terms</system:String>
+	<system:String x:Key="Intro.LicenseSubtitle">This application is provided to you under the terms of the MIT License.</system:String>
+	<system:String x:Key="Intro.LicenseTerms">This application is provided to you under the terms of the MIT License and, together with other terms, implies no warranty of any kind. By using this software, you fully agree to the terms and conditions of the MIT License.</system:String>
+	<system:String x:Key="Intro.ReminderTitle">Important Reminder</system:String>
+	<system:String x:Key="Intro.ReminderSubtitle">Some important points to remember about downloaded images...</system:String>
+	<system:String x:Key="Intro.ReminderText">You are advised to use the downloaded images only as wallpaper. For any other use, commercial or otherwise, please contact the copyright holder.</system:String>
 
-  <!-- Language  -->
-  <system:String x:Key="Language.Continue">Continue</system:String>
+	<!-- Language  -->
+	<system:String x:Key="Language.Continue">Continue</system:String>
 
-  <!-- Settings  -->
-  <system:String x:Key="Settings.CleanupNow">Cleanup Now</system:String>
-  <system:String x:Key="Settings.ReminderTitle">Important Reminder</system:String>
-  <system:String x:Key="Settings.ReminderSubtitle">An important point to remember about downloaded images...</system:String>
-  <system:String x:Key="Settings.ReminderText">You are advised to use downloaded images only as puzzle images. For any other use, commercial or otherwise, please contact the copyright holder.</system:String>
+	<!-- Settings  -->
+	<system:String x:Key="Settings.CleanupNow">Cleanup Now</system:String>
+	<system:String x:Key="Settings.ReminderTitle">Important Reminder</system:String>
+	<system:String x:Key="Settings.ReminderSubtitle">An important point to remember about downloaded images...</system:String>
+	<system:String x:Key="Settings.ReminderText">You are advised to use downloaded images only as puzzle images. For any other use, commercial or otherwise, please contact the copyright holder.</system:String>
 
-  <!-- Shared  -->
-  <system:String x:Key="Shared.FileErrorTitle">File system error.</system:String>
-  <system:String x:Key="Shared.FileErrorText">Could not save the image file.</system:String>
+	<!-- Shared  -->
+	<system:String x:Key="Shared.FileErrorTitle">File system error.</system:String>
+	<system:String x:Key="Shared.FileErrorText">Could not save the image file.</system:String>
 
-  <!-- Model / Service -->
+	<!-- Model / Service -->
 
 </ResourceDictionary>

@@ -184,8 +184,28 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 Image<RgbaHalf> imageWithBorders = imageWithWatermark;
                 if (imageExport.BorderStyle != ImageBorderStyle.None)
                 {
+                    if ((imageExport.BorderStyle == ImageBorderStyle.BlackThinWhiteBorder) ||
+                        (imageExport.BorderStyle == ImageBorderStyle.WhiteThinBlackBorder))
+                    {
+                        Color padColor =
+                            imageExport.BorderStyle == ImageBorderStyle.BlackThinWhiteBorder ?
+                                Color.White:
+                                Color.Black; 
+                        imageWithBorders.Mutate(x => x.Resize(
+                        new ResizeOptions
+                        {
+                            // Add a thin one pixel white or black border 
+                            Size = new Size(imageWithBorders.Width + 2, imageWithBorders.Height + 2),
+                            Mode = ResizeMode.BoxPad,
+                            PadColor = padColor,
+                        }));
+                    }
+
                     Color borderColor =
-                        imageExport.BorderStyle == ImageBorderStyle.BlackBorder ? Color.Black : Color.White;
+                        ((imageExport.BorderStyle == ImageBorderStyle.BlackBorder) ||
+                        (imageExport.BorderStyle == ImageBorderStyle.BlackThinWhiteBorder)) ?
+                            Color.Black :
+                            Color.White;
                     double thicknessFactor = imageExport.BorderThickness.ThicknessFactor();
                     int borderWidth = (int)(thicknessFactor * imageWithBorders.Width / 100.0);
                     int borderHeight = (int)(thicknessFactor * imageWithBorders.Height / 100.0);

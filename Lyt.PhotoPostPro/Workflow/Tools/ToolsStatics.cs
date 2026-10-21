@@ -80,6 +80,8 @@ internal static class ToolsStatics
         ImageBorderStyle.None,
         ImageBorderStyle.BlackBorder,
         ImageBorderStyle.WhiteBorder,
+        ImageBorderStyle.BlackThinWhiteBorder,
+        ImageBorderStyle.WhiteThinBlackBorder,
     ];
 
     internal static readonly List<string> SupportedImageBorderStyleText =
@@ -87,6 +89,8 @@ internal static class ToolsStatics
         "Tools.Editor.None",
         "Tools.Editor.BlackBorder",
         "Tools.Editor.WhiteBorder",
+        "Tools.Editor.BlackThinWhiteBorder",
+        "Tools.Editor.WhiteThinBlackBorder",
     ];
 
     internal static readonly List<ImageBorderThickness> SupportedImageBorderThicknessValues =
@@ -94,6 +98,7 @@ internal static class ToolsStatics
         ImageBorderThickness.Thin,
         ImageBorderThickness.Medium,
         ImageBorderThickness.Thick,
+        ImageBorderThickness.Hefty,
     ];
 
     internal static readonly List<string> SupportedImageBorderThicknessText =
@@ -101,6 +106,7 @@ internal static class ToolsStatics
         "Tools.Editor.Thin",
         "Tools.Editor.Medium",
         "Tools.Editor.Thick",
+        "Tools.Editor.Hefty",
     ];
 
     internal static List<FontFamily> FontFamilies()
