@@ -6,7 +6,7 @@ C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12
 
 D: Donatella - Open Beta - Bug fixes (Camera) - No Setup - No Store - Ava 12.1.4 - Released: October 13th
 
-E: Emilia - Open Beta - Navigation - Touch Up - Bug fixes - No Store - Ava 12.1.4 - Planned: Late October
+E: Emilia - Open Beta - Navigation - Touch Up - Bug fixes - No Store - Ava 12.1.4 - Released: October 21st
 
 F: Federica - Open Beta - First Run - Bug fixes - No Store - Ava 12.1.4 - Planned: Early November
 
