@@ -1,4 +1,9 @@
-﻿namespace Lyt.PhotoPostPro.Model.Book;
+﻿
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
+namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
 // See:  https://github.com/GraphicMeat/PhotoBooks/blob/main/README.md 
 
@@ -42,6 +47,10 @@ public sealed class Book
 
     public void GeneratePdf()
     {
+        Document.Create(container =>
+        {
+
+        }).GeneratePdf(this.FileName); 
     }
 
 } 
@@ -98,7 +107,7 @@ public class Layout
     public int ImageCount { get; set; }
 }
 
-public class ImagePosition
+public class SlotPosition
 {
     public int X { get; set; }
 
@@ -109,7 +118,7 @@ public class ImagePosition
     public int Dy { get; set; }
 }
 
-public class Image
+public class Slot
 {
     public string Accessor { get; set; } = string.Empty;
 }
