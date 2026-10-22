@@ -32,7 +32,7 @@
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3" />
     <PackageReference Include="SkiaSharp" Version="4.153.1" />
     <PackageReference Include="PDFtoImage" Version="5.4.0" />
-    <PackageReference Include="Nullable.Extended.Analyzer" Version="1.17.0">
+    <PackageReference Include="Nullable.Extended.Analyzer" Version="1.17.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -93,6 +93,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\Panels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Workflow\FirstRun\FirstRunView.axaml.cs">
+      <DependentUpon>FirstRunView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

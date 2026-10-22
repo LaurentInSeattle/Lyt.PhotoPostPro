@@ -12,7 +12,7 @@ public sealed partial class ShellViewModel
     private readonly IDialogService dialogService;
 
     [ObservableProperty]
-    public partial bool MainToolbarIsVisible { get; set; }
+    public partial bool NavigationBarIsEnabled { get; set; }
 
     [ObservableProperty]
     public partial string AppName { get; set; } = string.Empty;
@@ -25,11 +25,11 @@ public sealed partial class ShellViewModel
     public bool isFirstActivation;
 
     public ShellViewModel(
-        PhotoPostProModel photoPostProModel, 
+        PhotoPostProModel photoPostProModel,
         IToaster toaster, IAnimationService animationService, IDialogService dialogService)
     {
         this.model = photoPostProModel;
-        this.model.CameraManager.Initialize(App.MtpService); 
+        this.model.CameraManager.Initialize(App.MtpService);
         this.toaster = toaster;
         this.animationService = animationService;
         this.dialogService = dialogService;
@@ -39,7 +39,7 @@ public sealed partial class ShellViewModel
         this.MouseMonitor.Start(App.MainWindow);
         this.KeyboardMonitor = new Keyboard();
         this.KeyboardMonitor.Start(App.MainWindow);
-        this.model.SetupLanguage(); 
+        this.model.SetupLanguage();
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
     }
@@ -47,7 +47,7 @@ public sealed partial class ShellViewModel
     public Panel ModalHost => this.View.ToasterHost;
 
     public void Receive(LanguageChangedMessage _)
-        => this.LocalizeAppTitle(); 
+        => this.LocalizeAppTitle();
 
     public void Receive(ToolbarCommandMessage message)
     {
@@ -58,7 +58,7 @@ public sealed partial class ShellViewModel
 
         if (message.Command == ToolbarCommandMessage.ToolbarCommand.GoFullscreen)
         {
-            ViewModel? viewModel = this.viewSelector.CurrentPrimaryViewModel; 
+            ViewModel? viewModel = this.viewSelector.CurrentPrimaryViewModel;
             if ((viewModel is null) || (viewModel.ViewBase is not View view))
             {
                 return;
@@ -70,7 +70,7 @@ public sealed partial class ShellViewModel
                 // Monitor mouse button states in the fullscreen window 
                 this.MouseMonitor = new Mouse();
                 this.MouseMonitor.Start(fullscreenWindow);
-            } 
+            }
         }
         else if (message.Command == ToolbarCommandMessage.ToolbarCommand.BackToWindowed)
         {
@@ -100,14 +100,15 @@ public sealed partial class ShellViewModel
         // Almost Ready 
         this.toaster.Host = this.View.ToasterHost;
         this.toaster.Show(
-            this.Localize("Shell.Greetings"), this.Localize("Imaging.InProgressHelp"), 
+            this.Localize("Shell.Greetings"), this.Localize("Imaging.InProgressHelp"),
             2_200, InformationLevel.Info);
 
         this.isFirstActivation = true;
-
+        bool isFirstRun = this.model.IsFirstRun;
+        this.NavigationBarIsEnabled = !isFirstRun;
         // ! viewSelector is Always there
-        this.viewSelector!.SelectView(this.model.IsFirstRun ? ActivatedView.Language : ActivatedView.Library);
-        HotKeys.Instance.Set(this.View); 
+        this.viewSelector!.SelectView(isFirstRun ? ActivatedView.Language : ActivatedView.Library);
+        HotKeys.Instance.Set(this.View);
 
         this.Logger.Debug("OnViewLoaded complete");
     }
@@ -140,7 +141,7 @@ public sealed partial class ShellViewModel
         }
 
         void SetupNoToolbar<TViewModel, TControl>(
-                ActivatedView activatedView, Control control)
+                ActivatedView activatedView, Control? control)
             where TViewModel : ViewModel<TControl>
             where TControl : UserControl, IView, new()
         {
@@ -177,6 +178,7 @@ public sealed partial class ShellViewModel
         //}
         #endregion  Unused for now 
 
+        // No button for First Run 
         // Views present in the main selector on the left  
         SetupNoToolbar<LibraryViewModel, LibraryView>(ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
@@ -190,6 +192,9 @@ public sealed partial class ShellViewModel
             ActivatedView.Documentation, view.DocumentationButton);
         Setup<LanguageViewModel, LanguageView, LanguageToolbarViewModel, LanguageToolbarView>(
             ActivatedView.Language, view.FlagButton);
+
+        // No button for First Run 
+        SetupNoToolbar<FirstRunViewModel, FirstRunView>(ActivatedView.FirstRun, null);
 
         // No button for process view, as it is only used as a secondary view (from single or folder)
         Setup<ProcessViewModel, ProcessView, ProcessToolbarViewModel, ProcessToolbarView>(ActivatedView.Process);
@@ -219,17 +224,10 @@ public sealed partial class ShellViewModel
             throw new Exception("No view selector");
         }
 
-        var newViewModel = this.viewSelector.CurrentPrimaryViewModel;
-        if (newViewModel is not null)
+        if (!this.isFirstActivation && this.model.IsFirstRun)
         {
-            bool mainToolbarIsHidden = false;
-            this.MainToolbarIsVisible = !mainToolbarIsHidden;
-
-            // SLOW ! 
-            // Figure out why this line below takes about 4 seconds !
-            //
-            //this.Profiler.MemorySnapshot(
-            //    newViewModel.ViewBase!.GetType().Name + ":  Activated", withGCCollect: false);
+            this.NavigationBarIsEnabled = true;
+            model.ClearFirstRun();
         }
 
         this.isFirstActivation = false;
@@ -239,6 +237,7 @@ public sealed partial class ShellViewModel
     {
         // ! viewSelector is Always there
         this.viewSelector!.EnableView(view);
+
         // ! viewSelector is Always there
         this.viewSelector!.SelectView(view);
     }
@@ -253,7 +252,7 @@ public sealed partial class ShellViewModel
     public void OnGallery() => this.viewSelector?.SelectView(ActivatedView.Gallery);
 
     [RelayCommand]
-    public void OnImport() =>this.viewSelector?.SelectView(ActivatedView.Import);
+    public void OnImport() => this.viewSelector?.SelectView(ActivatedView.Import);
 
     [RelayCommand]
     public void OnSettings() => this.viewSelector?.SelectView(ActivatedView.Settings);
@@ -269,7 +268,7 @@ public sealed partial class ShellViewModel
 
     [RelayCommand]
     public void OnClose()
-    { 
+    {
         if (this.CanClose())
         {
             OnExit();
@@ -284,13 +283,14 @@ public sealed partial class ShellViewModel
             return true;
         }
 
-        var primaryViewModel = this.viewSelector?.CurrentPrimaryViewModel; 
+        var primaryViewModel = this.viewSelector?.CurrentPrimaryViewModel;
         if ((primaryViewModel is LibraryViewModel) ||
             (primaryViewModel is GalleryViewModel) ||
             (primaryViewModel is ToolsViewModel) ||
             (primaryViewModel is SettingsViewModel) ||
             (primaryViewModel is DocumentationViewModel) ||
-            (primaryViewModel is LanguageViewModel) )
+            (primaryViewModel is FirstRunViewModel) ||
+            (primaryViewModel is LanguageViewModel))
         {
             // Do not ask when doing numdane 'things'  
             return true;
@@ -309,12 +309,13 @@ public sealed partial class ShellViewModel
         return true;
     }
 
-    private void OnCloseCanClose(object ? _, bool result)
+    private void OnCloseCanClose(object? _, bool result)
     {
         if (result)
         {
-            OnExit(); 
-        }; 
+            OnExit();
+        }
+        ;
     }
 
     private static async void OnExit()

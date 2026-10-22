@@ -1,6 +1,17 @@
 
 
+<Window.Resources>
+    <!-- Change the width/thickness of the ScrollBar -->
+    <x:Double x:Key="ScrollBarSize">16</x:Double>
+    
+    <!-- Change the background colors of the track and thumb -->
+    <SolidColorBrush x:Key="ScrollBarTrackFill">#202020</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarThumbFill">#505050</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarThumbFillPointerOver">#707070</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarThumbFillPressed">#A0A0A0</SolidColorBrush>
+</Window.Resources>
 
+-----------------
 
 You can migrate from DllImport to LibraryImport by changing your external method declarations to static partial methods and replacing the DllImport attribute with LibraryImport.
 The LibraryImport source generator creates marshalling code at compile time instead of generating dynamic IL stubs at runtime, improving performance and enabling Native AOT compatibility.

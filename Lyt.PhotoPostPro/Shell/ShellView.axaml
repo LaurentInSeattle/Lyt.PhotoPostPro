@@ -98,7 +98,7 @@
 					/>
 				<!-- View Selector - Main toolbar - Vertical left -->
 				<StackPanel
-					IsVisible="{Binding MainToolbarIsVisible}"
+					IsEnabled="{Binding NavigationBarIsEnabled}"
 					Orientation="Vertical"
 					Grid.Column="0" Grid.Row="0" Grid.RowSpan="999"
 					Margin="0 92 0 0"
@@ -178,6 +178,14 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 				</StackPanel>
+				<!-- Visual clue that the Nav' bar is diabled  -->
+				<Rectangle
+					IsVisible="{Binding !NavigationBarIsEnabled}"
+					Grid.Column="0" Grid.Row="0" Grid.RowSpan="999"
+					Margin="4 92 4 4"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					Fill="#60404040"
+					/>
 
 				<!-- Close tool bar - Aligned Right -->
 				<StackPanel

@@ -120,6 +120,7 @@ global using Lyt.PhotoPostPro.Utilities;
 global using Lyt.PhotoPostPro.Workflow.Camera;
 global using Lyt.PhotoPostPro.Workflow.Culling;
 global using Lyt.PhotoPostPro.Workflow.Documentation;
+global using Lyt.PhotoPostPro.Workflow.FirstRun;
 global using Lyt.PhotoPostPro.Workflow.Library;
 global using Lyt.PhotoPostPro.Workflow.Library.Dialogs;
 global using Lyt.PhotoPostPro.Workflow.Gallery;

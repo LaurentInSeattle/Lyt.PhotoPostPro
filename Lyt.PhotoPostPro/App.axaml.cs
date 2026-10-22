@@ -75,6 +75,9 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<Keyboard>();
                 _ = services.AddSingleton<ShellViewModel>();
 
+                // First Run 
+                _ = services.AddSingleton<FirstRunViewModel>();
+
                 // Views and ViewModels from the main view selector            
                 _ = services.AddSingleton<LibraryViewModel>();
                 _ = services.AddSingleton<CameraViewModel>();

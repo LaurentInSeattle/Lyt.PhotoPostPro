@@ -9,9 +9,15 @@ public sealed partial class LanguageToolbarViewModel : ViewModel<LanguageToolbar
     public void OnNext()
     {
         var model = App.GetRequiredService<PhotoPostProModel>();
-        model.ClearFirstRun();
         var shell = App.GetRequiredService<ShellViewModel>();
-        shell.EnableAndSelect(ActivatedView.Library);
+        if (model.IsFirstRun)
+        {
+            shell.EnableAndSelect(ActivatedView.FirstRun);
+        }
+        else
+        {
+            shell.EnableAndSelect(ActivatedView.Library);
+        }
     }
 
 #pragma warning restore CA1822
