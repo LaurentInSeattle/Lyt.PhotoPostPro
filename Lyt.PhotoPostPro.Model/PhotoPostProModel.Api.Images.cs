@@ -399,6 +399,24 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void Spotlight(float centerX, float centerY, float axisX, float axisY, float rotation, float lightness) =>
+        this.ApiAction(() =>
+        {
+            // TODO : Check other parameters 
+            if ((lightness < -0.8f) || (lightness > 0.8f))
+            {
+                return false;
+            }
+
+            if (this.Workflow.CurrentStep is SpotlightStep spotlightStep)
+            {
+                this.LastResultFrame = spotlightStep.Spotlight(centerX, centerY, axisX, axisY, rotation, lightness);
+                return true;
+            }
+
+            return false;
+        });
+
     public void Grayscale(float grayscaleAmount) =>
         this.ApiAction(() =>
         {

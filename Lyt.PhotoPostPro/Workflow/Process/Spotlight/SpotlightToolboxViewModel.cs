@@ -4,35 +4,31 @@ public sealed partial class SpotlightToolboxViewModel :
     ToolboxViewModel<SpotlightToolboxView, SpotlightStep>
 {
     private bool doNotUpdateModel;
-    private float top;
-    private float bottom;
-    private float left;
-    private float right;
-    private float lightness; 
+    private float centerX;
+    private float centerY;
+    private float axisX = 120.0f;
+    private float axisY = 60.0f;
+    private float rotation;
+    private float lightness;
 
     [ObservableProperty]
-    public partial string TopString { get; set; } = string.Empty;
+    public partial string AxisXString { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial double TopSliderValue { get; set; }
+    public partial double AxisXSliderValue { get; set; }
 
     [ObservableProperty]
-    public partial string BottomString { get; set; } = string.Empty;
+    public partial string AxisYString { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial double BottomSliderValue { get; set; }
+    public partial double AxisYSliderValue { get; set; }
 
     [ObservableProperty]
-    public partial string LeftString { get; set; } = string.Empty;
+    public partial string RotationString { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial double LeftSliderValue { get; set; }
+    public partial double RotationSliderValue { get; set; }
 
-    [ObservableProperty]
-    public partial string RightString { get; set; } = string.Empty;
-
-    [ObservableProperty]
-    public partial double RightSliderValue { get; set; }
 
     [ObservableProperty]
     public partial string LightnessString { get; set; } = string.Empty;
@@ -53,17 +49,15 @@ public sealed partial class SpotlightToolboxViewModel :
         {
             // Sliders initial positions and string values
             // Enforce property changed 
-            this.TopSliderValue = this.top + 0.01;
-            this.BottomSliderValue = this.bottom + 0.01;
-            this.LeftSliderValue = this.left + 0.01;
-            this.RightSliderValue = this.right + 0.01;
-            this.LightnessSliderValue = this.lightness + 0.01;
+            this.AxisXSliderValue = 0.0;
+            this.AxisYSliderValue = 0.0;
+            this.RotationSliderValue = 45.0;
+            this.LightnessSliderValue = 0.05;
 
             // proper values 
-            this.TopSliderValue = this.top;
-            this.BottomSliderValue = this.bottom;
-            this.LeftSliderValue = this.left;
-            this.RightSliderValue = this.right;
+            this.AxisXSliderValue = this.axisX;
+            this.AxisYSliderValue = this.axisY;
+            this.RotationSliderValue = this.rotation;
             this.LightnessSliderValue = this.lightness;
         });
 
@@ -77,7 +71,6 @@ public sealed partial class SpotlightToolboxViewModel :
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Here we need to undo the operations done reading the sliders 
-            // No transforms for highlights and shadows amounts 
             //this.TopSliderValue = step.Top;
             //this.BottomSliderValue = step.Bottom;
             //this.LeftSliderValue = step.Left;
@@ -86,39 +79,29 @@ public sealed partial class SpotlightToolboxViewModel :
         });
     }
 
-    partial void OnTopSliderValueChanged(double value)
+    partial void OnAxisXSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.45
-        this.top = (float)value;
-        int intValue = (int)(this.top * 100);
-        this.TopString = intValue.ToString("D") + " %";
+        // Slider sends 5 to 500
+        this.axisX = (float)value;
+        int intValue = (int)(this.axisX);
+        this.AxisXString = intValue.ToString("D");
         this.UpdateModel();
     }
 
-    partial void OnBottomSliderValueChanged(double value)
+    partial void OnAxisYSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.45
-        this.bottom = (float)value;
-        int intValue = (int)(this.bottom * 100);
-        this.BottomString = intValue.ToString("D") + " %";
+        // Slider sends 5 to 500
+        this.axisY = (float)value;
+        int intValue = (int)(this.axisY);
+        this.AxisYString = intValue.ToString("D");
         this.UpdateModel();
     }
 
-    partial void OnLeftSliderValueChanged(double value)
+    partial void OnRotationSliderValueChanged(double value)
     {
-        // Slider sends 0 to 0.45
-        this.left = (float)value;
-        int intValue = (int)(this.left * 100);
-        this.LeftString = intValue.ToString("D") + " %";
-        this.UpdateModel();
-    }
-
-    partial void OnRightSliderValueChanged(double value)
-    {
-        // Slider sends 0 to 0.5
-        this.right = (float)value;
-        int intValue = (int)(this.right * 100);
-        this.RightString = intValue.ToString("D") + " %";
+        // Slider sends -45 to 45
+        this.rotation = (float)value;
+        this.RotationString = this.rotation.ToString("F1") + " \u00B0";
         this.UpdateModel();
     }
 
@@ -137,9 +120,17 @@ public sealed partial class SpotlightToolboxViewModel :
             return;
         }
 
+        if (( this.centerX <= 0) || (this.centerY <= 0))
+        {
+            return; 
+        }
+
         this.ThrottleModelUpdate(() =>
         {
-            this.model.Vignette(this.top, this.bottom, this.left, this.right, this.lightness);
+            this.model.Spotlight(
+                this.centerX, this.centerY,
+                this.axisX, this.axisY, 
+                this.rotation, this.lightness);
         });
     }
 }
