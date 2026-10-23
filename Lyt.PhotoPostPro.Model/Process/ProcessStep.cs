@@ -16,6 +16,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
     public const string DesaturationStepName = "Desaturation";
     public const string SharpenStepName = "Sharpen";
     public const string VignetteStepName = "Vignette";
+    public const string SpotlightStepName = "Spotlight";
     public const string FiltersStepName = "Filters";
     public const string ExportStepName = "Export";
 
@@ -62,6 +63,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   ExposureStepName     ,  "Workflow.Exposure.Title"        },
         {   RecoveryStepName     ,  "Workflow.Recovery.Title"        },
         {   VignetteStepName     ,  "Workflow.Vignette.Title"        },
+        {   SpotlightStepName    ,  "Workflow.Spotlight.Title"       },
         {   WhiteBalanceStepName ,  "Workflow.WhiteBalance.Title"    },
         {   ContrastStepName     ,  "Workflow.Contrast.Title"        },
         {   LutStepName          ,  "Workflow.Lut.Title"             },
@@ -82,6 +84,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
         {   ExposureStepName     ,  "Workflow.Exposure.Short"        },
         {   RecoveryStepName     ,  "Workflow.Recovery.Short"        },
         {   VignetteStepName     ,  "Workflow.Vignette.Short"        },
+        {   SpotlightStepName    ,  "Workflow.Spotlight.Short"       },
         {   WhiteBalanceStepName ,  "Workflow.WhiteBalance.Short"    },
         {   ContrastStepName     ,  "Workflow.Contrast.Short"        },
         {   LutStepName          ,  "Workflow.Lut.Short"             },
