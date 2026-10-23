@@ -28,6 +28,7 @@ public sealed class ProcessWorkflow
         var exposureStep = new ExposureStep(this);
         var recoveryStep = new RecoveryStep(this);
         var vignetteStep = new VignetteStep(this);
+        var spotlightStep = new SpotlightStep(this);
         var whiteBalanceStep = new WhiteBalanceStep(this);
         var contrastStep = new ContrastStep(this);
         var lutStep = new LutStep(this);
@@ -49,7 +50,7 @@ public sealed class ProcessWorkflow
             denoiseStep, 
 
             // Exposure 
-            exposureStep, recoveryStep, vignetteStep, 
+            exposureStep, recoveryStep, vignetteStep, spotlightStep,
 
             // Constrast and Color 
             whiteBalanceStep, contrastStep, lutStep, colorStep, desaturationStep, sharpenStep, 

@@ -1,0 +1,46 @@
+<UserControl 
+	x:Class="Lyt.PhotoPostPro.Workflow.Process.Spotlight.SpotlightView"
+	xmlns:vm="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Spotlight"
+	x:DataType="vm:SpotlightViewModel" 
+	
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Process.Shared"
+	Background="Transparent"
+	>
+	<Grid		
+		> 
+		<Grid.RowDefinitions>
+			<RowDefinition Height="4" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="4" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="4" />
+		</Grid.ColumnDefinitions>
+		<Viewbox
+			Grid.Column="1" Grid.Row="1"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+			>
+			<Canvas
+				x:Name="ImageCanvas"
+				Width="{Binding ImageWidth}"
+				Height="{Binding ImageHeight}"
+				> 
+				<Image
+					x:Name="Image"
+					IsVisible="{Binding ResultImageIsVisible}"
+					Source="{Binding ResultImage}"
+					/>
+			</Canvas>			
+		</Viewbox>
+	</Grid>
+	<!--
+	-->
+</UserControl>

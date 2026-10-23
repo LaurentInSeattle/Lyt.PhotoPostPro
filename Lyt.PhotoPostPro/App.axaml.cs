@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro;
 
+using Lyt.PhotoPostPro.Workflow.Process.Spotlight;
+
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
@@ -132,6 +134,9 @@ public partial class App : ApplicationBase
 
                 _ = services.AddSingleton<VignetteViewModel>();
                 _ = services.AddSingleton<VignetteToolboxViewModel>();
+
+                _ = services.AddSingleton<SpotlightViewModel>();
+                _ = services.AddSingleton<SpotlightToolboxViewModel>();
 
                 _ = services.AddSingleton<WhiteBalanceViewModel>();
                 _ = services.AddSingleton<WhiteBalanceToolboxViewModel>();

@@ -42,7 +42,7 @@ public sealed class ProcessParameters
     // TouchUp
 
     // None : For compatibility 
-    public TouchUpAlgorithm TouchUpAlgorithm { get; set; } = TouchUpAlgorithm.None; 
+    public TouchUpAlgorithm TouchUpAlgorithm { get; set; } = TouchUpAlgorithm.None;
 
     public int TouchUpSpotPixelX { get; set; }
 
@@ -89,6 +89,18 @@ public sealed class ProcessParameters
 
     public float VignetteLightness { get; set; }
 
+    public float SpotlightCenterX { get; set; }
+
+    public float SpotlightCenterY { get; set; }
+
+    public float SpotlightAxisX { get; set; }
+
+    public float SpotlightAxisY { get; set; }
+
+    public float SpotlightRotationAngle { get; set; }
+
+    public float SpotlightLightness { get; set; }
+
     // White Balance
 
     public WhiteBalanceAlgorithm WhiteBalanceAlgorithm { get; set; }
@@ -126,7 +138,7 @@ public sealed class ProcessParameters
     public string LutFriendlyName { get; set; } = string.Empty;
 
     public string LutPath { get; set; } = string.Empty;
-        
+
     public bool LutIsEmbedded { get; set; }
 
     // Color 
@@ -145,7 +157,7 @@ public sealed class ProcessParameters
     // Desaturation
 
     // true : For compatibility 
-    public bool DesaturationIdentity { get; set; } = true; 
+    public bool DesaturationIdentity { get; set; } = true;
 
     public float DesaturationTargetHue { get; set; }
 
@@ -168,11 +180,11 @@ public sealed class ProcessParameters
     public float FilterAmount { get; set; }
 
 
-    public ProcessParameters (ProcessWorkflow workflow)
+    public ProcessParameters(ProcessWorkflow workflow)
     {
         this.Created = DateTime.Now;
         this.Updated = DateTime.Now;
-        this.Update(workflow); 
+        this.Update(workflow);
     }
 
     public void Update(ProcessWorkflow workflow)
@@ -225,6 +237,14 @@ public sealed class ProcessParameters
         this.VignetteLeft = vignetteStep.Left;
         this.VignetteRight = vignetteStep.Right;
         this.VignetteLightness = vignetteStep.Lightness;
+
+        var spotlightStep = workflow.Get<SpotlightStep>();
+        this.SpotlightCenterX = spotlightStep.CenterX;
+        this.SpotlightCenterY = spotlightStep.CenterY;
+        this.SpotlightAxisX = spotlightStep.AxisX;
+        this.SpotlightAxisY = spotlightStep.AxisY;
+        this.SpotlightRotationAngle = spotlightStep.RotationAngle;
+        this.SpotlightLightness = spotlightStep.Lightness;
 
         var whiteBalanceStep = workflow.Get<WhiteBalanceStep>();
         this.WhiteBalanceAlgorithm = whiteBalanceStep.Algorithm;
@@ -319,6 +339,14 @@ public sealed class ProcessParameters
         vignetteStep.Left = this.VignetteLeft;
         vignetteStep.Right = this.VignetteRight;
         vignetteStep.Lightness = this.VignetteLightness;
+
+        var spotlightStep = workflow.Get<SpotlightStep>();
+        spotlightStep.CenterX = this.SpotlightCenterX;
+        spotlightStep.CenterY = this.SpotlightCenterY;
+        spotlightStep.AxisX = this.SpotlightAxisX;
+        spotlightStep.AxisY = this.SpotlightAxisY;
+        spotlightStep.RotationAngle = this.SpotlightRotationAngle;
+        spotlightStep.Lightness = this.SpotlightLightness;
 
         var whiteBalanceStep = workflow.Get<WhiteBalanceStep>();
         whiteBalanceStep.Algorithm = this.WhiteBalanceAlgorithm;

@@ -26,17 +26,17 @@ public class SpotlightStep(ProcessWorkflow processWorkflow) :
         return base.Reset();
     }
 
-    internal override void PerformStep(ProcessParameters ppp) { } 
-    //    => this.Spotlight(
-    //            ppp.VignetteTop, ppp.VignetteBottom, 
-    //            ppp.VignetteLeft, ppp.VignetteRight, 
-    //            ppp.VignetteLightness, 
-    //            withFrame:false);
+    internal override void PerformStep(ProcessParameters ppp) 
+        => this.Spotlight(
+                ppp.SpotlightCenterX, ppp.SpotlightCenterY,
+                ppp.SpotlightAxisX, ppp.SpotlightAxisY,
+                ppp.SpotlightRotationAngle,  ppp.SpotlightLightness,
+                withFrame: false);
 
     internal override Frame? Transform(bool withFrame = true)
         => base.DoTransform((clone) =>
         {
-            // clone.Spotlight(this.CenterX, this.CenterY, this.AxisX, this.AxisY, this.RotationAngle, this.Lightness);
+            clone.Spotlight(this.CenterX, this.CenterY, this.AxisX, this.AxisY, this.RotationAngle, this.Lightness);
         }, withFrame);
 
     internal Frame? Spotlight(

@@ -17,6 +17,7 @@ public enum ActivatedView : int
     Language,
 
     // Hidden views, not directly accessible from the main selector
+    FirstRun,
     Process,
     Culling,
 
@@ -40,9 +41,9 @@ public enum ActivatedView : int
     Orient,
     Recovery,
     Sharpen,
+    Spotlight,
     Straighten,
     TouchUp,
     Vignette,
     WhiteBalance,
-    FirstRun,
 }

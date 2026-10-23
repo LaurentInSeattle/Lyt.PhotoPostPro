@@ -589,8 +589,37 @@ internal static partial class ImagingAlgorithms
 
     #endregion SCurves Contrast
 
-    #region Vignette
+    #region Spotlight and Vignette
 
+    internal static void Spotlight(
+        this Image<RgbaHalf> image, 
+        float centerX, float centerY, float axisX, float axisY, float rotationAngle, float lightness)
+    {
+        // Parallelize the loop over the rows
+        int height = image.Height;
+        Parallel.For(0, height, row =>
+        {
+            // Inside the spot area ? 
+
+            // Get a span for the current row 
+            Span<RgbaHalf> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
+            for (int col = 0; col < rowSpan.Length; col++)
+            {
+
+                var pixel = rowSpan[col];
+                float r = (float)pixel.R;
+                float g = (float)pixel.G;
+                float b = (float)pixel.B;
+
+                // TODO !! 
+
+                rowSpan[col].R = ClipH((Half)r);
+                rowSpan[col].G = ClipH((Half)g);
+                rowSpan[col].B = ClipH((Half)b);
+            }
+        }); // Parallel For 
+    }
+    
     internal static void Vignette(
         this Image<RgbaHalf> image, float top, float bottom, float left, float right, float lightness)
     {
@@ -685,7 +714,7 @@ internal static partial class ImagingAlgorithms
         }); // Parallel For 
     }
 
-    #endregion Vignette
+    #endregion Spotlight and Vignette
 
     #region LUT 
 
@@ -769,7 +798,6 @@ internal static partial class ImagingAlgorithms
     }
 
     #endregion Selective Color Desaturation  
-
 
     #region Touch Up / Spot Removal 
 

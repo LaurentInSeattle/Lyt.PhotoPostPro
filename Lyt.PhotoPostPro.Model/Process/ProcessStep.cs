@@ -36,7 +36,8 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
             // Exposure 
             ExposureStepName     ,  
             RecoveryStepName     ,  
-            VignetteStepName     ,  
+            VignetteStepName     ,
+            SpotlightStepName     ,  
 
             // Constrast and Color 
             WhiteBalanceStepName ,

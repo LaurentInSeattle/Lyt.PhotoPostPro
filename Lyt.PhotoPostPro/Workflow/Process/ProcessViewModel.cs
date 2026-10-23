@@ -20,6 +20,7 @@ public sealed partial class ProcessViewModel :
         { ProcessStep.ColorStepName, ActivatedView.Color },
         { ProcessStep.DesaturationStepName, ActivatedView.Desaturation },
         { ProcessStep.SharpenStepName, ActivatedView.Sharpen },
+        { ProcessStep.SpotlightStepName, ActivatedView.Spotlight },
         { ProcessStep.VignetteStepName, ActivatedView.Vignette },
         { ProcessStep.FiltersStepName, ActivatedView.Filters },
         { ProcessStep.ExportStepName, ActivatedView.Exports },
@@ -212,12 +213,12 @@ public sealed partial class ProcessViewModel :
         Setup<OrientViewModel, OrientView, OrientToolboxViewModel, OrientationStep, OrientToolboxView>(ActivatedView.Orient);
         Setup<StraightenViewModel, StraightenView, StraightenToolboxViewModel, StraightenStep, StraightenToolboxView>(ActivatedView.Straighten);
         Setup<ComposeViewModel, ComposeView, ComposeToolboxViewModel, CompositionStep, ComposeToolboxView>(ActivatedView.Compose);
-
         Setup<TouchUpViewModel, TouchUpView, TouchUpToolboxViewModel, TouchUpStep, TouchUpToolboxView>(ActivatedView.TouchUp);
-
         Setup<DenoiseViewModel, DenoiseView, DenoiseToolboxViewModel, DenoiseStep, DenoiseToolboxView>(ActivatedView.Denoise);
         Setup<ExposureViewModel, ExposureView, ExposureToolboxViewModel, ExposureStep, ExposureToolboxView>(ActivatedView.Exposure);
         Setup<RecoveryViewModel, RecoveryView, RecoveryToolboxViewModel, RecoveryStep, RecoveryToolboxView>(ActivatedView.Recovery);
+        Setup<VignetteViewModel, VignetteView, VignetteToolboxViewModel, VignetteStep, VignetteToolboxView>(ActivatedView.Vignette);
+        Setup<SpotlightViewModel, SpotlightView, SpotlightToolboxViewModel, SpotlightStep, SpotlightToolboxView>(ActivatedView.Spotlight);
         Setup<WhiteBalanceViewModel, WhiteBalanceView, WhiteBalanceToolboxViewModel, WhiteBalanceStep, WhiteBalanceToolboxView>(ActivatedView.WhiteBalance);
         Setup<ContrastViewModel, ContrastView, ContrastToolboxViewModel, ContrastStep, ContrastToolboxView>(ActivatedView.Contrast);
         Setup<LutViewModel, LutView, LutToolboxViewModel, LutStep, LutToolboxView>(ActivatedView.Lut);
@@ -227,7 +228,6 @@ public sealed partial class ProcessViewModel :
 
         Setup<DesaturationViewModel, DesaturationView, DesaturationToolboxViewModel, DesaturationStep, DesaturationToolboxView>(ActivatedView.Desaturation);
         Setup<SharpenViewModel, SharpenView, SharpenToolboxViewModel, SharpenStep, SharpenToolboxView>(ActivatedView.Sharpen);
-        Setup<VignetteViewModel, VignetteView, VignetteToolboxViewModel, VignetteStep, VignetteToolboxView>(ActivatedView.Vignette);
         Setup<FiltersViewModel, FiltersView, FiltersToolboxViewModel, FiltersStep, FiltersToolboxView>(ActivatedView.Filters);
 
         Setup<ExportViewModel, ExportView, ExportToolboxViewModel, ExportStep, ExportToolboxView>(ActivatedView.Exports);
