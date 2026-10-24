@@ -44,12 +44,17 @@ public partial class TouchUpView : View
         }
     }
 
-    public void DrawTarget(bool isSpot, double x, double y, double radius, double thickness)
+    public void DrawTarget(bool isSpot, double x, double y, double diameter, double thickness)
     {
         this.ClearTarget(isSpot);
 
         void AddEllipseAtXY(Ellipse ellipse)
         {
+            ellipse.Tag = isSpot ? SpotTag : PatchTag;
+            ellipse.Fill = Brushes.Transparent; 
+            ellipse.StrokeThickness = thickness;
+            ellipse.IsHitTestVisible = false;
+
             // Position the ellipse on the canvas using Canvas.Left and Canvas.Top
             Canvas.SetLeft(ellipse, x);
             Canvas.SetTop(ellipse, y);
@@ -58,30 +63,23 @@ public partial class TouchUpView : View
             this.ImageCanvas.Children.Add(ellipse);
         }
 
-        string tag = isSpot ? SpotTag : PatchTag;
         var outerEllipse = new Ellipse
         {
-            Tag = tag,
-            Width = radius,
-            Height = radius,
-            Fill = Brushes.Transparent,
+            Width = diameter,
+            Height = diameter,
             Stroke = isSpot ? Brushes.OrangeRed : Brushes.LawnGreen,
-            StrokeThickness = thickness,
         };
 
         AddEllipseAtXY(outerEllipse);
 
-        double diameter = radius - thickness * 2.0;
-        if (diameter > 0.01)
+        double innerDiameter = diameter - thickness * 2.0;
+        if (innerDiameter > 1.0)
         {
             var innerEllipse = new Ellipse
             {
-                Tag = tag,
-                Width = diameter,
-                Height = diameter,
-                Fill = Brushes.Transparent,
+                Width = innerDiameter,
+                Height = innerDiameter,
                 Stroke = isSpot ? Brushes.DarkRed : Brushes.DarkGreen,
-                StrokeThickness = thickness,
             };
 
             x += thickness;

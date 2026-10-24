@@ -16,7 +16,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Spot --> 
 			<RowDefinition Height="{StaticResource Size.PromptThreeLines}" /> <!-- Prompt Patch --> 
-			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Radius slider --> 
+			<RowDefinition Height="{StaticResource Size.OneSlider}" /> <!-- Diameter slider --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.WfNav}" /> <!-- Patch Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
@@ -54,13 +54,13 @@
 				TickFrequency="10" TickPlacement="BottomRight"
 				SmallChange="1" LargeChange="5"
 				Minimum="10.0" Maximum="150.0"
-				Value="{Binding RadiusSliderValue}"
+				Value="{Binding DiameterSliderValue}"
 				/>
 			<TextBlock
 				Grid.Column="2" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Left"
-				Text="{Binding RadiusString}"
+				Text="{Binding DiameterString}"
 				/>
 		</Grid>
 		<glyphs:GlyphButton
