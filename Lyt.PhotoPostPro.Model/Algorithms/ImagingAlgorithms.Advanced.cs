@@ -592,19 +592,46 @@ internal static partial class ImagingAlgorithms
     #region Spotlight and Vignette
 
     internal static void Spotlight(
-        this Image<RgbaHalf> image, 
-        float centerX, float centerY, float axisX, float axisY, float rotationAngle, float lightness)
+        this Image<RgbaHalf> image,
+        int centerX, int centerY, int axisX, int axisY, float rotationAngle, float lightness)
     {
-        // Parallelize the loop over the rows
         int height = image.Height;
-        Parallel.For(0, height, row =>
-        {
-            // Inside the spot area ? 
+        int width = image.Width;
 
+        // Find bounding box 
+        int maxAxis = Math.Max(axisX, axisY);
+        int maxAxisSquared = maxAxis * maxAxis;
+        int minX = Math.Max(0, centerX - maxAxis);
+        int maxX = Math.Min(width, centerX + maxAxis);
+        int minY = Math.Max(0, centerY - maxAxis);
+        int maxY = Math.Min(height, centerY + maxAxis);
+
+        // Parallelize the loop over the rows
+        Parallel.For(minY, maxY, row =>
+        {
             // Get a span for the current row 
             Span<RgbaHalf> rowSpan = image.DangerousGetPixelRowMemory(row).Span;
-            for (int col = 0; col < rowSpan.Length; col++)
+            for (int col = minX; col < maxX; ++col)
             {
+                // Inside the spot area ? 
+
+                // Fast check using integers
+                int dx = col - centerX;
+                int dy = row - centerY;
+                int dxSquared = dx * dx;
+                int dySquared = dy * dy;
+                bool isInsideCircle = dxSquared + dySquared <= maxAxisSquared;
+                if (!isInsideCircle)
+                {
+                    continue;
+                }
+
+                // Precise check using floating point 
+                bool isInsideEllipse = (float)dxSquared / (axisX * axisX) + (float) dySquared / (axisY * axisY) <= 1.0f;
+                if (!isInsideEllipse)
+                {
+                    continue;
+                }
 
                 var pixel = rowSpan[col];
                 float r = (float)pixel.R;
@@ -612,6 +639,9 @@ internal static partial class ImagingAlgorithms
                 float b = (float)pixel.B;
 
                 // TODO !! 
+                r *= 2.0f;
+                g *= 3.0f;
+                b *= 2.0f;
 
                 rowSpan[col].R = ClipH((Half)r);
                 rowSpan[col].G = ClipH((Half)g);
@@ -619,7 +649,7 @@ internal static partial class ImagingAlgorithms
             }
         }); // Parallel For 
     }
-    
+
     internal static void Vignette(
         this Image<RgbaHalf> image, float top, float bottom, float left, float right, float lightness)
     {
@@ -816,7 +846,7 @@ internal static partial class ImagingAlgorithms
             canvas.Clear(Brushes.Solid(Color.Transparent));
 
             // Draw a soft, anti-aliased white circle to represent brush pressure
-            canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius-3));
+            canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius - 3));
 
             // Apply a slight BoxBlur to create a "feathered" edge transition
             ctx.BoxBlur(3);

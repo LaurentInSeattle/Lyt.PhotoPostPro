@@ -89,13 +89,13 @@ public sealed class ProcessParameters
 
     public float VignetteLightness { get; set; }
 
-    public float SpotlightCenterX { get; set; }
+    public int SpotlightCenterX { get; set; }
 
-    public float SpotlightCenterY { get; set; }
+    public int SpotlightCenterY { get; set; }
 
-    public float SpotlightAxisX { get; set; }
+    public int SpotlightAxisX { get; set; }
 
-    public float SpotlightAxisY { get; set; }
+    public int SpotlightAxisY { get; set; }
 
     public float SpotlightRotationAngle { get; set; }
 

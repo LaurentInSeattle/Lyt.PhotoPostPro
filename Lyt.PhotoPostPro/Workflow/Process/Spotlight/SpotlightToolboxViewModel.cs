@@ -213,8 +213,8 @@ public sealed partial class SpotlightToolboxViewModel :
         this.ThrottleModelUpdate(() =>
         {
             this.model.Spotlight(
-                this.centerX, this.centerY,
-                this.axisX, this.axisY,
+                (int)Math.Round(this.centerX), (int)Math.Round(this.centerY),
+                (int)Math.Round(this.axisX / 2.0f), (int)Math.Round(this.axisY / 2.0f),
                 this.rotation, this.lightness);
         });
     }

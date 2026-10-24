@@ -3,13 +3,13 @@
 public class SpotlightStep(ProcessWorkflow processWorkflow) :
     ProcessStep(processWorkflow, ProcessStep.SpotlightStepName)
 {
-    public float CenterX { get; set; }
+    public int CenterX { get; set; }
 
-    public float CenterY { get; set; }
+    public int CenterY { get; set; }
 
-    public float AxisX { get; set; }
+    public int AxisX { get; set; }
 
-    public float AxisY { get; set; }
+    public int AxisY { get; set; }
 
     public float RotationAngle { get; set; }
 
@@ -40,7 +40,7 @@ public class SpotlightStep(ProcessWorkflow processWorkflow) :
         }, withFrame);
 
     internal Frame? Spotlight(
-        float centerX, float centerY, float axisX, float axisY, float rotationAngle, float lightness, bool withFrame = true)
+        int centerX, int centerY, int axisX, int axisY, float rotationAngle, float lightness, bool withFrame = true)
     {
         this.CenterX = centerX;
         this.CenterY = centerY;
@@ -54,10 +54,10 @@ public class SpotlightStep(ProcessWorkflow processWorkflow) :
 
     private void Clear()
     {
-        this.CenterX = 0.0f;
-        this.CenterY = 0.0f;
-        this.AxisX = 0.0f;
-        this.AxisY = 0.0f;
+        this.CenterX = 0;
+        this.CenterY = 0;
+        this.AxisX = 0;
+        this.AxisY = 0;
         this.RotationAngle = 0.0f;
         this.Lightness = 0.0f;
         this.SetIdentity();

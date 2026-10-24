@@ -399,7 +399,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
-    public void Spotlight(float centerX, float centerY, float axisX, float axisY, float rotation, float lightness) =>
+    public void Spotlight(int centerX, int centerY, int axisX, int axisY, float rotation, float lightness) =>
         this.ApiAction(() =>
         {
             // TODO : Check other parameters 
