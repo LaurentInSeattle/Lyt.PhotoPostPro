@@ -59,7 +59,7 @@
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="50" TickPlacement="BottomRight"
 				SmallChange="5.0" LargeChange="20.0"
-				Minimum="5.0" Maximum="500"
+				Minimum="20.0" Maximum="3000"
 				Value="{Binding AxisXSliderValue}"
 				/>
 			<TextBlock
@@ -79,7 +79,7 @@
 				Grid.Row="1" Grid.Column="1" 
 				TickFrequency="50" TickPlacement="BottomRight"
 				SmallChange="5.0" LargeChange="20.0"
-				Minimum="5.0" Maximum="500"
+				Minimum="20.0" Maximum="3000"
 				Value="{Binding AxisYSliderValue}"
 				/>
 			<TextBlock

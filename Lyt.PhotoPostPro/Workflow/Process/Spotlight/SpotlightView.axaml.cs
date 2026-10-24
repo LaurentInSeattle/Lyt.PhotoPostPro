@@ -1,17 +1,17 @@
 namespace Lyt.PhotoPostPro.Workflow.Process.Spotlight;
 
+using static System.Net.WebRequestMethods;
+
 public partial class SpotlightView : View
 {
     private const string SpotTag = "Spot";
 
     public SpotlightView()
-    {
-        this.Image.PointerPressed += this.OnImagePointerPressed;
-    }
+        => this.Image.PointerPressed += this.OnImagePointerPressed;
 
     protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 
-    public bool HasTarget(bool isSpot)
+    public bool HasTarget()
     {
         foreach (var child in this.ImageCanvas.Children)
         {
@@ -41,12 +41,20 @@ public partial class SpotlightView : View
         }
     }
 
-    public void DrawTarget(double x, double y, double radius, double thickness)
+    public void DrawTarget(double x, double y, double axisX, double axisY, double rotation, double thickness)
     {
         this.ClearTarget();
 
+        var renderTransform = new RotateTransform(rotation); 
+
         void AddEllipseAtXY(Ellipse ellipse)
         {
+            ellipse.Tag = SpotTag;
+            ellipse.StrokeThickness = thickness;
+            ellipse.Fill = Brushes.Transparent;
+            ellipse.IsHitTestVisible = false;
+            ellipse.RenderTransform = renderTransform;
+
             // Position the ellipse on the canvas using Canvas.Left and Canvas.Top
             Canvas.SetLeft(ellipse, x);
             Canvas.SetTop(ellipse, y);
@@ -57,27 +65,22 @@ public partial class SpotlightView : View
 
         var outerEllipse = new Ellipse
         {
-            Tag = SpotTag,
-            Width = radius,
-            Height = radius,
-            Fill = Brushes.Transparent,
+            Width = axisX,
+            Height = axisY,
             Stroke = Brushes.Goldenrod,
-            StrokeThickness = thickness,
         };
 
         AddEllipseAtXY(outerEllipse);
 
-        double diameter = radius - thickness * 2.0;
-        if (diameter > 0.01)
+        double width = axisX - thickness * 2.0;
+        double height = axisY - thickness * 2.0;
+        if ((width > 2.0) && (height > 2.0))
         {
             var innerEllipse = new Ellipse
             {
-                Tag = SpotTag,
-                Width = diameter,
-                Height = diameter,
-                Fill = Brushes.Transparent,
-                Stroke = Brushes.DarkGoldenrod,
-                StrokeThickness = thickness,
+                Width = width,
+                Height = height,
+                Stroke = Brushes.Black,
             };
 
             x += thickness;
