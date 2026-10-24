@@ -187,6 +187,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                     if ((imageExport.BorderStyle == ImageBorderStyle.BlackThinWhiteBorder) ||
                         (imageExport.BorderStyle == ImageBorderStyle.WhiteThinBlackBorder))
                     {
+                        int thinBorderWidth = (int)(imageWithBorders.Width / 800.0);
+                        int thinBorderHeight = (int)(imageWithBorders.Height / 800.0);
+                        int thinBorder = 2 * Math.Max(thinBorderWidth, thinBorderHeight);
+
                         Color padColor =
                             imageExport.BorderStyle == ImageBorderStyle.BlackThinWhiteBorder ?
                                 Color.White:
@@ -195,7 +199,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                         new ResizeOptions
                         {
                             // Add a thin one pixel white or black border 
-                            Size = new Size(imageWithBorders.Width + 2, imageWithBorders.Height + 2),
+                            Size = new Size(imageWithBorders.Width + thinBorder, imageWithBorders.Height + thinBorder),
                             Mode = ResizeMode.BoxPad,
                             PadColor = padColor,
                         }));
