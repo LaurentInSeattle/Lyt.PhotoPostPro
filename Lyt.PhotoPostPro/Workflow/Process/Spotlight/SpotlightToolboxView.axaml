@@ -134,7 +134,7 @@
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.8" Maximum="0.8"
+				Minimum="-0.9" Maximum="0.9"
 				Value="{Binding LightnessSliderValue}"
 				/>
 			<TextBlock

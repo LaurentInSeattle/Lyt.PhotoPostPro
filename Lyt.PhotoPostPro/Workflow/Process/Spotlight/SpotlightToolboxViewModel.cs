@@ -140,6 +140,15 @@ public sealed partial class SpotlightToolboxViewModel :
         vm.View.DrawTarget(x, y, this.axisX, this.axisY, this.rotation, this.thickness);
         this.AxisXSliderValue = this.axisX;
         this.AxisXSliderValue = this.axisX;
+
+        if (Math.Abs(this.LightnessSliderValue) <= 0.001)
+        {
+            this.LightnessSliderValue = 0.25;
+        }
+        else
+        {
+            this.UpdateModel();
+        }
     }
 
     partial void OnAxisXSliderValueChanged(double value)
@@ -180,6 +189,7 @@ public sealed partial class SpotlightToolboxViewModel :
                 double x = this.centerX - this.axisX / 2.0;
                 double y = this.centerY - this.axisY / 2.0;
                 view.DrawTarget(x, y, this.axisX, this.axisY, this.rotation, this.thickness);
+                this.UpdateModel();
             }
         }
     }

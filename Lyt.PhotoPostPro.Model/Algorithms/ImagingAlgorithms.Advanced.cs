@@ -1,8 +1,9 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-using static ImagingUtilities;
-
+using SixLabors.ImageSharp.ColorProfiles;
 using SixLabors.ImageSharp.PixelFormats;
+
+using static ImagingUtilities;
 
 internal static partial class ImagingAlgorithms
 {
@@ -601,9 +602,8 @@ internal static partial class ImagingAlgorithms
         int width = image.Width;
 
         // Rotation is in degrees clockwise and we will need rotate by minus this angle 
-        // Trig angles are counterclockwise so we use use the provided rotation angle to perform 
-        // rotation.
-        float angle = -rotationAngle * 180.0f / MathF.PI;
+        // Trig angles are counterclockwise so we use use the negated provided rotation angle to perform rotation.
+        float angle = (rotationAngle / 180.0f) * MathF.PI;
         float sin = MathF.Sin(angle);
         float cos = MathF.Cos(angle);
 
@@ -639,26 +639,28 @@ internal static partial class ImagingAlgorithms
                 }
 
                 // Then: Precise check using floating point 
-                int x;
-                int y;
+                // Adjust to coordinate system to vertical axis going up 
+                // Use a new temporary for CenterY so that other threads are not getting "polluted" 
+                int centerY_Copy = height - centerY;
+                int x = col;
+                int y = height - row;
                 if (MathF.Abs(rotationAngle) > 0.005f)
                 {
-                    // Rotate point at row / col around center
-                    x = col - centerX;
-                    y = row - centerY;
-                    int xRot = (int)(Math.Round(x * cos + y * sin));
-                    int yRot = (int)(Math.Round(-x * sin + y * cos));
+                    // Translate to center 
+                    x -= centerX;
+                    y -= centerY_Copy;
+
+                    // Rotate CCW point at row / col around center
+                    int xRot = (int)(Math.Round(x * cos - y * sin));
+                    int yRot = (int)(Math.Round(x * sin + y * cos));
+
+                    // Translate back 
                     x = xRot + centerX;
-                    y = yRot + centerY;
-                }
-                else
-                {
-                    x = col;
-                    y = row;
+                    y = yRot + centerY_Copy;
                 }
 
                 dx = x - centerX;
-                dy = y - centerY;
+                dy = y - centerY_Copy;
                 dxSquared = dx * dx;
                 dySquared = dy * dy;
                 float determinant = (float)dxSquared / (axisX * axisX) + (float)dySquared / (axisY * axisY);
@@ -701,16 +703,9 @@ internal static partial class ImagingAlgorithms
                     // Lighten the pixel based on the lightness factor and the determinant
                     // Do NOT convert to HSL, just scale the RGB values directly to avoid color shifts
                     float scale = 1.0f + corrected * lightnessFactor;
-
-                    //Debug.WriteLine(
-                    //    string.Format(" Row: {0}  Col: {1}  Det:  {2:F2}  Scale: {3:F2}", row, col, determinant, scale));
                     r *= scale;
                     g *= scale;
                     b *= scale;
-
-                    r = 1.0f;
-                    b = 1.0f;
-
                     rowSpan[col].R = ClipH((Half)r);
                     rowSpan[col].G = ClipH((Half)g);
                     rowSpan[col].B = ClipH((Half)b);

@@ -385,7 +385,7 @@ public sealed partial class PhotoPostProModel : ModelBase
                 return false;
             }
 
-            if ((lightness < -0.8f) || (lightness > 0.8f))
+            if ((lightness < -0.9f) || (lightness > 0.9f))
             {
                 return false;
             }
@@ -403,7 +403,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.ApiAction(() =>
         {
             // TODO : Check other parameters 
-            if ((lightness < -0.8f) || (lightness > 0.8f))
+            if ((lightness < -0.9f) || (lightness > 0.9f))
             {
                 return false;
             }
