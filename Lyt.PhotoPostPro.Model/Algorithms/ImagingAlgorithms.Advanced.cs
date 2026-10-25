@@ -595,6 +595,8 @@ internal static partial class ImagingAlgorithms
         this Image<RgbaHalf> image,
         int centerX, int centerY, int axisX, int axisY, float rotationAngle, float lightness)
     {
+        const float fudgeDarkFactor = 0.8f;
+
         int height = image.Height;
         int width = image.Width;
 
@@ -606,6 +608,9 @@ internal static partial class ImagingAlgorithms
         int minY = Math.Max(0, centerY - maxAxis);
         int maxY = Math.Min(height, centerY + maxAxis);
 
+        bool darkSpotlight = lightness < 0.0f;
+        float lightnessFactor = MathF.Abs(lightness);
+
         // Parallelize the loop over the rows
         Parallel.For(minY, maxY, row =>
         {
@@ -615,7 +620,7 @@ internal static partial class ImagingAlgorithms
             {
                 // Inside the spot area ? 
 
-                // Fast check using integers
+                // First: Fast check using integers
                 int dx = col - centerX;
                 int dy = row - centerY;
                 int dxSquared = dx * dx;
@@ -626,26 +631,57 @@ internal static partial class ImagingAlgorithms
                     continue;
                 }
 
-                // Precise check using floating point 
-                bool isInsideEllipse = (float)dxSquared / (axisX * axisX) + (float) dySquared / (axisY * axisY) <= 1.0f;
+                // Then: Precise check using floating point 
+                float determinant = (float)dxSquared / (axisX * axisX) + (float)dySquared / (axisY * axisY);
+                bool isInsideEllipse = determinant <= 1.0f;
                 if (!isInsideEllipse)
                 {
                     continue;
                 }
 
+                determinant = 1.0f - determinant; 
                 var pixel = rowSpan[col];
                 float r = (float)pixel.R;
                 float g = (float)pixel.G;
                 float b = (float)pixel.B;
 
-                // TODO !! 
-                r *= 2.0f;
-                g *= 3.0f;
-                b *= 2.0f;
+                if (darkSpotlight)
+                {
+                    lightness *= fudgeDarkFactor;
 
-                rowSpan[col].R = ClipH((Half)r);
-                rowSpan[col].G = ClipH((Half)g);
-                rowSpan[col].B = ClipH((Half)b);
+                    // Convert to HSL
+                    ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float pixelLightness);
+
+                    // Darken the pixel based on the lightness factor and the determinant
+                    pixelLightness -= determinant * lightnessFactor;
+                    pixelLightness = ClipF(pixelLightness);
+
+                    // Convert back to float RGB 
+                    ColorUtilities.HslToRgb(hue, saturation, pixelLightness, out float tr, out float tg, out float tb);
+                    rowSpan[col].R = ClipH((Half)tr);
+                    rowSpan[col].G = ClipH((Half)tg);
+                    rowSpan[col].B = ClipH((Half)tb);
+                }
+                else
+                {
+                    // Slightly correct the gradient curve
+                    const float gamma = 2.3f;
+                    const float inverseGamma = 1.0f / gamma;
+                    float corrected = MathF.Pow(determinant, inverseGamma);
+
+                    // Lighten the pixel based on the lightness factor and the determinant
+                    // Do NOT convert to HSL, just scale the RGB values directly to avoid color shifts
+                    float scale = 1.0f + corrected * lightnessFactor;
+
+                    //Debug.WriteLine(
+                    //    string.Format(" Row: {0}  Col: {1}  Det:  {2:F2}  Scale: {3:F2}", row, col, determinant, scale));
+                    r *= scale;
+                    g *= scale;
+                    b *= scale;
+                    rowSpan[col].R = ClipH((Half)r);
+                    rowSpan[col].G = ClipH((Half)g);
+                    rowSpan[col].B = ClipH((Half)b);
+                }
             }
         }); // Parallel For 
     }
