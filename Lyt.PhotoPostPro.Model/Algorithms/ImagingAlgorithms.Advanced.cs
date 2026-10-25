@@ -600,6 +600,13 @@ internal static partial class ImagingAlgorithms
         int height = image.Height;
         int width = image.Width;
 
+        // Rotation is in degrees clockwise and we will need rotate by minus this angle 
+        // Trig angles are counterclockwise so we use use the provided rotation angle to perform 
+        // rotation.
+        float angle = -rotationAngle * 180.0f / MathF.PI;
+        float sin = MathF.Sin(angle);
+        float cos = MathF.Cos(angle);
+
         // Find bounding box 
         int maxAxis = Math.Max(axisX, axisY);
         int maxAxisSquared = maxAxis * maxAxis;
@@ -632,6 +639,28 @@ internal static partial class ImagingAlgorithms
                 }
 
                 // Then: Precise check using floating point 
+                int x;
+                int y;
+                if (MathF.Abs(rotationAngle) > 0.005f)
+                {
+                    // Rotate point at row / col around center
+                    x = col - centerX;
+                    y = row - centerY;
+                    int xRot = (int)(Math.Round(x * cos + y * sin));
+                    int yRot = (int)(Math.Round(-x * sin + y * cos));
+                    x = xRot + centerX;
+                    y = yRot + centerY;
+                }
+                else
+                {
+                    x = col;
+                    y = row;
+                }
+
+                dx = x - centerX;
+                dy = y - centerY;
+                dxSquared = dx * dx;
+                dySquared = dy * dy;
                 float determinant = (float)dxSquared / (axisX * axisX) + (float)dySquared / (axisY * axisY);
                 bool isInsideEllipse = determinant <= 1.0f;
                 if (!isInsideEllipse)
@@ -639,7 +668,7 @@ internal static partial class ImagingAlgorithms
                     continue;
                 }
 
-                determinant = 1.0f - determinant; 
+                determinant = 1.0f - determinant;
                 var pixel = rowSpan[col];
                 float r = (float)pixel.R;
                 float g = (float)pixel.G;
@@ -678,6 +707,10 @@ internal static partial class ImagingAlgorithms
                     r *= scale;
                     g *= scale;
                     b *= scale;
+
+                    r = 1.0f;
+                    b = 1.0f;
+
                     rowSpan[col].R = ClipH((Half)r);
                     rowSpan[col].G = ClipH((Half)g);
                     rowSpan[col].B = ClipH((Half)b);
