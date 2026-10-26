@@ -1,0 +1,10 @@
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    
+    <SolidColorBrush x:Key="ScrollBarTrackBackground">#1E1E1E</SolidColorBrush>
+    
+    <SolidColorBrush x:Key="ScrollBarPanningThumbBackground">#A0A0A0FF</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarThumbFillPointerOver">#A0B0C0FF</SolidColorBrush>
+</ResourceDictionary>

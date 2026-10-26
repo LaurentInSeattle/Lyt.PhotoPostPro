@@ -44,6 +44,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Theme\ScrollStyles.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controls\Panels\SVirtualizingPanel.cs" />
     <Compile Remove="Controls\Panels\SVirtualizingStackPanel.cs" />
     <Compile Remove="Controls\Panels\SVirtualizingUniformGrid.cs" />
@@ -93,6 +97,12 @@
 
   <ItemGroup>
     <Folder Include="Controls\Panels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\Theme\ScrollStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
   </ItemGroup>
 
   <ItemGroup>
