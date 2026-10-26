@@ -3,6 +3,7 @@
 using SixLabors.ImageSharp.PixelFormats;
 
 using static ImagingUtilities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal static partial class ImagingAlgorithms
 {
@@ -596,10 +597,20 @@ internal static partial class ImagingAlgorithms
         int centerX, int centerY, int axisX, int axisY, float rotationAngle, float lightness)
     {
         static float Ease(float x)
-            =>  1.0f -
-                (x < 0.5f ? 
-                    8.0f * x * x * x * x : 
-                    1.0f - MathF.Pow(-2.0f * x + 2.0f, 4.0f) / 2.0f);
+            => 1.0f + (MathF.Cos(MathF.PI * x) - 1.0f) / 2.0f;
+
+        //static float Ease(float x)
+        //    => 1.0f - 
+        //       (x < 0.5f ?
+        //            2.0f * x * x : 
+        //            1.0f - MathF.Pow(-2.0f * x + 2.0f, 2.0f) / 2.0f);
+
+        // Fourth order a bit too abrupt
+        // static float Ease(float x)
+        //    =>  1.0f -
+        //        (x < 0.5f ? 
+        //            8.0f * x * x * x * x : 
+        //            1.0f - MathF.Pow(-2.0f * x + 2.0f, 4.0f) / 2.0f);
 
         const float fudgeDarkFactor = 0.8f;
 
