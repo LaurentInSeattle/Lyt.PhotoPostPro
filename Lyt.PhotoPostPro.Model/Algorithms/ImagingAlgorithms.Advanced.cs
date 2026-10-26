@@ -1,6 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Algorithms;
 
-using SixLabors.ImageSharp.ColorProfiles;
 using SixLabors.ImageSharp.PixelFormats;
 
 using static ImagingUtilities;
@@ -596,6 +595,12 @@ internal static partial class ImagingAlgorithms
         this Image<RgbaHalf> image,
         int centerX, int centerY, int axisX, int axisY, float rotationAngle, float lightness)
     {
+        static float Ease(float x)
+            =>  1.0f -
+                (x < 0.5f ? 
+                    8.0f * x * x * x * x : 
+                    1.0f - MathF.Pow(-2.0f * x + 2.0f, 4.0f) / 2.0f);
+
         const float fudgeDarkFactor = 0.8f;
 
         int height = image.Height;
@@ -670,11 +675,12 @@ internal static partial class ImagingAlgorithms
                     continue;
                 }
 
-                determinant = 1.0f - determinant;
                 var pixel = rowSpan[col];
                 float r = (float)pixel.R;
                 float g = (float)pixel.G;
                 float b = (float)pixel.B;
+
+                float corrected = Ease(determinant);
 
                 if (darkSpotlight)
                 {
@@ -684,7 +690,7 @@ internal static partial class ImagingAlgorithms
                     ColorUtilities.RgbToHsl(r, g, b, out float hue, out float saturation, out float pixelLightness);
 
                     // Darken the pixel based on the lightness factor and the determinant
-                    pixelLightness -= determinant * lightnessFactor;
+                    pixelLightness -= corrected * lightnessFactor;
                     pixelLightness = ClipF(pixelLightness);
 
                     // Convert back to float RGB 
@@ -695,11 +701,6 @@ internal static partial class ImagingAlgorithms
                 }
                 else
                 {
-                    // Slightly correct the gradient curve
-                    const float gamma = 2.3f;
-                    const float inverseGamma = 1.0f / gamma;
-                    float corrected = MathF.Pow(determinant, inverseGamma);
-
                     // Lighten the pixel based on the lightness factor and the determinant
                     // Do NOT convert to HSL, just scale the RGB values directly to avoid color shifts
                     float scale = 1.0f + corrected * lightnessFactor;
