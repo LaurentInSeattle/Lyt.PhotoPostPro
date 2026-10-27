@@ -3,7 +3,6 @@
 using SixLabors.ImageSharp.PixelFormats;
 
 using static ImagingUtilities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal static partial class ImagingAlgorithms
 {
