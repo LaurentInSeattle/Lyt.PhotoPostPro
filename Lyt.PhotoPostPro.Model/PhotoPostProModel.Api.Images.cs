@@ -77,7 +77,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         float gaussianSharpen = 0.8f,
         int medianBlur = 1,
         float gaussianBlur = 0.75f,
-        float blendFactor = 0.4f) => 
+        float blendFactor = 0.4f) =>
         this.ApiAction(() =>
         {
             if ((gaussianSharpen < 0.7f) || (gaussianSharpen > 0.9f))
@@ -425,7 +425,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             {
                 return false;
             }
-            
+
             if (this.Workflow.CurrentStep is FiltersStep filtersStep)
             {
                 this.LastResultFrame = filtersStep.Grayscale(grayscaleAmount);
@@ -470,7 +470,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             return false;
         });
-            
+
 
     public void Vignette(float vignetteAmount) =>
         this.ApiAction(() =>
@@ -537,6 +537,26 @@ public sealed partial class PhotoPostProModel : ModelBase
         {
             if (this.Workflow.CurrentStep is TouchUpStep touchUpStep)
             {
+                var image = touchUpStep.SourceImage;
+                if (image is null)
+                {
+                    return false;
+                }
+
+                int width = image.Width;
+                int height = image.Height;
+                if ((spotPixelX - radius <= 0) ||
+                    (spotPixelY - radius <= 0) ||
+                    (cleanPixelX - radius <= 0) ||
+                    (cleanPixelY - radius <= 0) ||
+                    (spotPixelX + radius >= width) ||
+                    (spotPixelY + radius >= height) ||
+                    (cleanPixelX + radius >= width) ||
+                    (cleanPixelY + radius >= height))
+                {
+                    return false;
+                }
+
                 this.LastResultFrame = touchUpStep.SpotRemoval(spotPixelX, spotPixelY, cleanPixelX, cleanPixelY, radius);
                 return true;
             }

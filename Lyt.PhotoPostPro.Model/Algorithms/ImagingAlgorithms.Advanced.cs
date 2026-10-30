@@ -909,32 +909,40 @@ internal static partial class ImagingAlgorithms
     internal static void SpotRemoval(
         this Image<RgbaHalf> image, Point spotCenter, Point cleanCenter, int radius)
     {
-        // Crop out the clean sample area
-        Rectangle sampleArea = new(cleanCenter.X - radius, cleanCenter.Y - radius, radius * 2, radius * 2);
-        using Image<RgbaHalf> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
-
-        // Create a circular feather mask so the patch edges blend seamlessly
-        using var mask = new Image<Rgba32>(cleanPatch.Width, cleanPatch.Height);
-        mask.Mutate(ctx => ctx.Paint(canvas =>
+        try
         {
-            // Fill the background with transparent black 
-            canvas.Clear(Brushes.Solid(Color.Transparent));
+            // Crop out the clean sample area
+            Rectangle sampleArea = new(cleanCenter.X - radius, cleanCenter.Y - radius, radius * 2, radius * 2);
+            using Image<RgbaHalf> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
 
-            // Draw a soft, anti-aliased white circle to represent brush pressure
-            canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius - 3));
+            // Create a circular feather mask so the patch edges blend seamlessly
+            using var mask = new Image<Rgba32>(cleanPatch.Width, cleanPatch.Height);
+            mask.Mutate(ctx => ctx.Paint(canvas =>
+            {
+                // Fill the background with transparent black 
+                canvas.Clear(Brushes.Solid(Color.Transparent));
 
-            // Apply a slight BoxBlur to create a "feathered" edge transition
-            ctx.BoxBlur(3);
-        }));
+                // Draw a soft, anti-aliased white circle to represent brush pressure
+                canvas.Fill(Brushes.Solid(Color.White), new EllipsePolygon(radius, radius, radius - 3));
 
-        // Apply the soft alpha mask directly onto our clean patch clone
-        cleanPatch.Mutate(
-            ctx => ctx
-                .SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn)
-                .DrawImage(mask, 1.0f));
+                // Apply a slight BoxBlur to create a "feathered" edge transition
+                ctx.BoxBlur(3);
+            }));
 
-        // Stamp the feathered clean patch onto the spot
-        image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(spotCenter.X - radius, spotCenter.Y - radius), 1.0f));
+            // Apply the soft alpha mask directly onto our clean patch clone
+            cleanPatch.Mutate(
+                ctx => ctx
+                    .SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn)
+                    .DrawImage(mask, 1.0f));
+
+            // Stamp the feathered clean patch onto the spot
+            image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(spotCenter.X - radius, spotCenter.Y - radius), 1.0f));
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     #endregion Touch Up / Spot Removal  
