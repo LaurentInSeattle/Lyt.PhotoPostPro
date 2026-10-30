@@ -147,7 +147,8 @@ public sealed class LutStep(ProcessWorkflow processWorkflow) :
 
         if (lutDone == luts.Count)
         {
-            Debug.WriteLine(" All LUT images generated.");
+            Debug.WriteLine(" All LUT images generated.");            
+            new ExploreLutImageCompleteMessage().Publish();
         }
         else
         {
