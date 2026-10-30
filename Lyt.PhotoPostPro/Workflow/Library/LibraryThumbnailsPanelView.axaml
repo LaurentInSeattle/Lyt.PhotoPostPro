@@ -125,7 +125,7 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<vm:LibraryThumbnailView Margin="12" />
+						<vm:LibraryThumbnailView Margin="8" />
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
