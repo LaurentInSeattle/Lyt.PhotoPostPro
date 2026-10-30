@@ -46,6 +46,9 @@ public sealed partial class ProcessViewModel :
     [ObservableProperty]
     public partial ToolboxHostViewModel ToolboxHostViewModel { get; set; } = new();
 
+    [ObservableProperty]
+    public partial MetadataViewModel MetadataViewModel { get; set; } = new();
+
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
@@ -71,8 +74,8 @@ public sealed partial class ProcessViewModel :
                 this.model.BeginProcessWorkflow();
             }
 
+            this.MetadataViewModel = new MetadataViewModel(workflow.Metadata); 
             this.ActivateCurrentStep();
-
         }
 
         this.Subscribe<WorkflowUpdateMessage>();
@@ -95,11 +98,11 @@ public sealed partial class ProcessViewModel :
                     return;
                 }
 
-                var workflow = this.model.Workflow;
-                string stepName = workflow.CurrentStep.Name;
-                ActivatedView view = FromWorkflowstepName(stepName);
+                var step = this.model.Workflow.CurrentStep;
+                ActivatedView view = FromWorkflowstepName(step.Name);
                 this.viewSelector.SelectView(view);
-                this.HistogramViewModel.Show(workflow.CurrentStep.ShouldShowHistograms);
+                this.HistogramViewModel.Show(step.ShouldShowHistograms);
+                this.MetadataViewModel.MetadataIsVisible = step is ExportStep;
             }, DispatcherPriority.ApplicationIdle);
 
     public void Receive(WorkflowUpdateMessage message)
@@ -113,7 +116,7 @@ public sealed partial class ProcessViewModel :
         if (message.Kind == WorkflowUpdateKind.Reset)
         {
             // Stay on same page, nothing to do
-            return; 
+            return;
         }
 
         if (message.Kind == WorkflowUpdateKind.Finish)
@@ -129,10 +132,10 @@ public sealed partial class ProcessViewModel :
 
     public void Receive(HotKeyMessage message)
     {
-        if( !this.IsActivated)
+        if (!this.IsActivated)
         {
             // Ignore all hot keys when not active 
-            return; 
+            return;
         }
 
         switch (message.Key)
@@ -140,15 +143,15 @@ public sealed partial class ProcessViewModel :
             case Key.PageUp:
                 this.model.Workflow.Back();
                 break;
-            
+
             case Key.PageDown:
                 this.model.Workflow.Next();
                 break;
-            
+
             case Key.Home:
                 this.model.Workflow.Back();
                 break;
-            
+
             case Key.End:
                 this.model.Workflow.Next();
                 break;
@@ -161,9 +164,9 @@ public sealed partial class ProcessViewModel :
 
     public void InitializeWorkflow()
     {
-        if ( this.viewSelector is null)
+        if (this.viewSelector is null)
         {
-            return; 
+            return;
         }
 
         foreach (var selectableView in this.viewSelector.SelectableViews)

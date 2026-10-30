@@ -11,7 +11,7 @@
 
 	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	xmlns:hist="clr-namespace:Lyt.PhotoPostPro.Panes.HistogramPane"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Process"
+	xmlns:meta="using:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -51,17 +51,32 @@
 			Fill="#60000020"
 			Grid.Column="1" Grid.Row="0" Grid.RowSpan="999"
 			/>
-		<hist:HistogramView
-			x:Name="Histograms"
-			DataContext="{Binding HistogramViewModel}"
-			Grid.Column="1" Grid.Row="0" Grid.RowSpan="999"
-			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
-			/>
-		<vm:ToolboxHostView
-			x:Name="ToolboxHostView"
+		<StackPanel
+			Orientation="Vertical"
 			Grid.Column="1" Grid.Row="0" Grid.RowSpan="999"
 			VerticalAlignment="Top" HorizontalAlignment="Stretch"
-			DataContext="{Binding ToolboxHostViewModel}"
-			/>
+			> 
+			<vm:ToolboxHostView
+				x:Name="ToolboxHostView"
+				DataContext="{Binding ToolboxHostViewModel}"
+				/>
+			<meta:MetadataView
+				x:Name="Metadata"
+				IsVisible="True"
+				DataContext="{Binding MetadataViewModel}"
+				Margin="4 12 4 0"
+				/>
+		</StackPanel>
+		<StackPanel
+			Orientation="Vertical"
+			Grid.Column="1" Grid.Row="0" Grid.RowSpan="999"
+			VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+			>
+			<hist:HistogramView
+				x:Name="Histograms"
+				DataContext="{Binding HistogramViewModel}"
+				Margin="0 0 0 4"
+				/>
+		</StackPanel>
 	</Grid>
 </UserControl>

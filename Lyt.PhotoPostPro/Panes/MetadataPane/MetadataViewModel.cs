@@ -9,6 +9,9 @@ public sealed partial class MetadataViewModel :
     IRecipient<LibraryMetadataUpdateMessage>
 {
     [ObservableProperty]
+    public partial bool MetadataIsVisible { get; set; }
+
+    [ObservableProperty]
     public partial string FullPath { get; private set; } = string.Empty;
 
     [ObservableProperty]
@@ -81,7 +84,7 @@ public sealed partial class MetadataViewModel :
         // and enforce property changed 
         this.HasLocation = true;
         this.HasLocation = false;
-
+        this.MetadataIsVisible = true; 
         this.Subscribe<MetadataGeneratedMessage>();
         this.Subscribe<LibraryMetadataUpdateMessage>();
         this.Subscribe<LanguageChangedMessage>();
