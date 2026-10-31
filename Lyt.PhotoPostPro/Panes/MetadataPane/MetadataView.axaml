@@ -90,8 +90,6 @@
 			<glyphs:GlyphButton
 				Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
 				Style="{StaticResource SmallPanelIconButton}"
-				IsVisible="{Binding AreKeywordsVisible, FallbackValue=False}"
-				IsShown="{Binding AreKeywordsVisible, FallbackValue=False}"
 				GlyphSource="tag"
 				HorizontalAlignment="Right" VerticalAlignment="Center"
 				Width="80"
