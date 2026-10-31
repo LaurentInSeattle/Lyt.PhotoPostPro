@@ -76,7 +76,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
     private void SetDefaults()
     {
         this.ForegroundColor = Color.FromUInt32(0xFF_FF_F8_F0);
-        this.FriendlyName = Signature.DefaultName;
+        this.FriendlyName = "New Signature";
         this.Text = "Edited with Photo Rebel";
         this.fontSize = 26;
         this.FontSizeString = this.fontSize.ToString("D");

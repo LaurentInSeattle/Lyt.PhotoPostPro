@@ -87,6 +87,7 @@ public sealed partial class ExportEditViewModel :
     private void SetDefaults()
     {
         this.FriendlyName = "New Export Specification";
+        this.Description = "Enter a short description here...";
         this.ShouldResize = true;
         this.resizeDimension = 1920;
         this.ResizeDimensionString = this.resizeDimension.ToString("D");
@@ -180,7 +181,16 @@ public sealed partial class ExportEditViewModel :
 
     partial void OnQualityStringChanged(string value) => this.ValidateAndMessage();
 
-    partial void OnSelectedBorderStyleIndexChanged(int value) => this.ValidateAndMessage();
+    partial void OnSelectedBorderStyleIndexChanged(int value)
+    {
+        if (value >= 0 && value < SupportedImageBorderStyleValues.Count)
+        {
+            ImageBorderStyle borderStyle = SupportedImageBorderStyleValues[value];
+            this.IsBorderThicknessEnabled = borderStyle != ImageBorderStyle.None;
+        } 
+
+        this.ValidateAndMessage();
+    } 
 
     partial void OnSelectedBorderThicknessIndexChanged(int value) => this.ValidateAndMessage();
 
@@ -296,6 +306,7 @@ public sealed partial class ExportEditViewModel :
         this.FriendlyNameIsEnabled = true;
         this.PopulateLocalizedComboBoxes();
         this.SetDefaults();
+        this.IsCompressionEnabled = true;
     }
 
     // Populate the form with provided editable 

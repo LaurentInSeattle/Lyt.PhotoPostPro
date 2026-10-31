@@ -56,7 +56,7 @@ public sealed partial class WatermarkEditViewModel :
     private void SetDefaults()
     {
         this.ForegroundColor = Color.FromUInt32(0xFF_FF_F8_F0);
-        this.FriendlyName = Watermark.DefaultName;
+        this.FriendlyName = "New Watermark";
         this.Text = "Coyrighted Work";
         this.fontSize = 140;
         this.FontSizeString = this.fontSize.ToString("D");
