@@ -69,6 +69,7 @@
 	<system:String x:Key="Shell.Tools">Tools</system:String>
 	<system:String x:Key="Shell.Documentation">Documentation</system:String>
 	<system:String x:Key="Shell.Language">Language</system:String>
+	<system:String x:Key="Shell.Help">Help</system:String>
 
 	<!-- Spin wait  -->
 	<system:String x:Key="Imaging.InProgress">In Progress</system:String>
@@ -153,16 +154,16 @@
 	<system:String x:Key="Tools.Editor.None">None</system:String>
 	<system:String x:Key="Tools.Editor.BlackBorder">Black</system:String>
 	<system:String x:Key="Tools.Editor.WhiteBorder">White</system:String>
-  <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Black and Thin White</system:String>
-  <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">White and Thin Black </system:String>
+	<system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Black and Thin White</system:String>
+	<system:String x:Key="Tools.Editor.WhiteThinBlackBorder">White and Thin Black </system:String>
 
-  <system:String x:Key="Tools.Editor.BorderThickness">Border Thickness</system:String>
+	<system:String x:Key="Tools.Editor.BorderThickness">Border Thickness</system:String>
 	<system:String x:Key="Tools.Editor.Thin">Thin</system:String>
 	<system:String x:Key="Tools.Editor.Medium">Medium</system:String>
-  <system:String x:Key="Tools.Editor.Thick">Thick</system:String>
-  <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
+	<system:String x:Key="Tools.Editor.Thick">Thick</system:String>
+	<system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
 
-  <system:String x:Key="Tools.Editor.Watermark">Watermark</system:String>
+	<system:String x:Key="Tools.Editor.Watermark">Watermark</system:String>
 	<system:String x:Key="Tools.Editor.Signature">Signature</system:String>
 	<system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
 	<system:String x:Key="Tools.Editor.Signature.None">No Signature</system:String>

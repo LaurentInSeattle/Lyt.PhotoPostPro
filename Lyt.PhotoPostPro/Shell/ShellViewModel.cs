@@ -267,6 +267,9 @@ public sealed partial class ShellViewModel
     public void OnTools() => this.viewSelector?.SelectView(ActivatedView.Tools);
 
     [RelayCommand]
+    public void OnHelp() => this.viewSelector?.SelectView(ActivatedView.FirstRun);
+
+    [RelayCommand]
     public void OnClose()
     {
         if (this.CanClose())

@@ -177,6 +177,15 @@
 						Command="{Binding OnLanguage}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
+					<glyphs:GlyphButton
+						x:Name="HeartButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="heart"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.Help}"
+						Command="{Binding OnHelp}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
 				</StackPanel>
 				<!-- Visual clue that the Nav' bar is diabled  -->
 				<Rectangle
