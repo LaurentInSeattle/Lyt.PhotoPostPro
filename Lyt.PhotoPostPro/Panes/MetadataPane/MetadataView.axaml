@@ -65,7 +65,6 @@
 		<!-- Keywords -->
 		<Grid
 			Background="Transparent"
-			IsVisible="{Binding AreKeywordsVisible}"
 			> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="4" />
