@@ -36,7 +36,7 @@ public class SpotlightStep(ProcessWorkflow processWorkflow) :
     internal override Frame? Transform(bool withFrame = true)
         => base.DoTransform((clone) =>
         {
-            clone.Spotlight(this.CenterX, this.CenterY, this.AxisX, this.AxisY, this.RotationAngle, this.Lightness);
+            clone.Spotlight(this.CenterX, this.CenterY, this.AxisX / 2, this.AxisY / 2, this.RotationAngle, this.Lightness);
         }, withFrame);
 
     internal Frame? Spotlight(

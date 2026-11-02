@@ -402,7 +402,11 @@ public sealed partial class PhotoPostProModel : ModelBase
     public void Spotlight(int centerX, int centerY, int axisX, int axisY, float rotation, float lightness) =>
         this.ApiAction(() =>
         {
-            // TODO : Check other parameters 
+            if ((centerX < 0) || (centerY < 0) || (axisX <= 0) || (axisY <= 0))
+            {
+                return false;
+            }
+
             if ((lightness < -0.9f) || (lightness > 0.9f))
             {
                 return false;
@@ -410,6 +414,16 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             if (this.Workflow.CurrentStep is SpotlightStep spotlightStep)
             {
+                if (spotlightStep.SourceImage is not Image image)
+                {
+                    return false;
+                }
+
+                if (centerX > image.Width || centerY > image.Height)
+                {
+                    return false;
+                }
+
                 this.LastResultFrame = spotlightStep.Spotlight(centerX, centerY, axisX, axisY, rotation, lightness);
                 return true;
             }

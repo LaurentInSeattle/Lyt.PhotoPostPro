@@ -8,9 +8,6 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
-
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:controls="clr-namespace:Lyt.PhotoPostPro.Controls"
 	>	
 	<Grid
 		>
@@ -59,7 +56,7 @@
 				Grid.Row="0" Grid.Column="1" 
 				TickFrequency="50" TickPlacement="BottomRight"
 				SmallChange="5.0" LargeChange="20.0"
-				Minimum="20.0" Maximum="3000"
+				Minimum="25.0" Maximum="{Binding MaxAxisXSliderValue}"
 				Value="{Binding AxisXSliderValue}"
 				/>
 			<TextBlock
@@ -79,7 +76,7 @@
 				Grid.Row="1" Grid.Column="1" 
 				TickFrequency="50" TickPlacement="BottomRight"
 				SmallChange="5.0" LargeChange="20.0"
-				Minimum="20.0" Maximum="3000"
+				Minimum="25.0" Maximum="{Binding MaxAxisYSliderValue}"
 				Value="{Binding AxisYSliderValue}"
 				/>
 			<TextBlock
@@ -99,7 +96,7 @@
 				Grid.Row="2" Grid.Column="1" 
 				TickFrequency="5.0" TickPlacement="BottomRight"
 				SmallChange="1.0" LargeChange="5.0"
-				Minimum="-45.0" Maximum="45.0"
+				Minimum="-90.0" Maximum="90.0"
 				Value="{Binding RotationSliderValue}"
 				/>
 			<TextBlock

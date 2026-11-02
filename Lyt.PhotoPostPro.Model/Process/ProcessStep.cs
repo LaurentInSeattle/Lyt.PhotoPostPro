@@ -116,7 +116,7 @@ public abstract class ProcessStep(ProcessWorkflow processWorkflow, string name)
 
     internal bool IsFirstRun { get; set; } = true;
 
-    protected internal bool IsIdentity { get; set; }
+    public bool IsIdentity { get; set; }
 
     internal bool IsFirstStep => this.PreviousStep is null;
 

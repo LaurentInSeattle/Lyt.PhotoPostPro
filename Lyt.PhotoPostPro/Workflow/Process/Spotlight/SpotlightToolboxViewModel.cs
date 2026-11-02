@@ -23,10 +23,16 @@ public sealed partial class SpotlightToolboxViewModel :
     public partial double AxisXSliderValue { get; set; }
 
     [ObservableProperty]
+    public partial double MaxAxisXSliderValue { get; set; }
+
+    [ObservableProperty]
     public partial string AxisYString { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial double AxisYSliderValue { get; set; }
+
+    [ObservableProperty]
+    public partial double MaxAxisYSliderValue { get; set; }
 
     [ObservableProperty]
     public partial string RotationString { get; set; } = string.Empty;
@@ -44,7 +50,6 @@ public sealed partial class SpotlightToolboxViewModel :
     {
         base.Activate(activationParameters);
         this.Subscribe<ImageClickedMessage>();
-        this.Clear();
     }
 
     public override void Deactivate()
@@ -70,14 +75,52 @@ public sealed partial class SpotlightToolboxViewModel :
 
     private void UpdateSliders(SpotlightStep step)
     {
+        if (!this.IsActivated)
+        {
+            return; 
+        }
+
+        var image = step.SourceImage;
+        if (image is null)
+        {
+            this.MaxAxisXSliderValue = 3000.0;
+            this.MaxAxisYSliderValue = 3000.0;
+            return;
+        }
+
+        this.MaxAxisXSliderValue = image.Width * 1.5;
+        this.MaxAxisYSliderValue = image.Height * 1.5;
+
+        if (step.IsIdentity)
+        {
+            this.Clear();
+            return;
+        }
+
+        Debug.WriteLine("UpdateSliders : " + step.CenterX + "  " + step.CenterY + "  " + step.AxisX + "  " + step.AxisY + "  " + step.RotationAngle);
+
         With.Flag(ref this.doNotUpdateModel, () =>
         {
             // Here we need to undo the operations done reading the sliders 
-            //this.TopSliderValue = step.Top;
-            //this.BottomSliderValue = step.Bottom;
-            //this.LeftSliderValue = step.Left;
-            //this.RightSliderValue = step.Right;
-            this.LightnessSliderValue = step.Lightness;
+            this.centerX = step.CenterX;
+            this.centerY = step.CenterY;
+            this.axisX = step.AxisX;
+            this.axisY = step.AxisY;
+            this.rotation = step.RotationAngle;
+            this.lightness = step.Lightness;
+
+            this.AxisXSliderValue = this.axisX;
+            this.AxisYSliderValue = this.axisY;
+            this.RotationSliderValue = this.rotation;
+            this.LightnessSliderValue = this.lightness;
+
+            this.bitmapWidth = image.Width;
+            this.bitmapHeight = image.Height;
+            Schedule.OnUiThread(
+                120, 
+                () => { this.DrawTarget(new PixelSize(this.bitmapWidth, this.bitmapHeight)); },
+                DispatcherPriority.Background);
+            
         });
     }
 
@@ -121,10 +164,22 @@ public sealed partial class SpotlightToolboxViewModel :
             return;
         }
 
-        // Regular click: Select spot 
+        // Regular click or not : Select spot 
         this.centerX = message.PixelX;
         this.centerY = message.PixelY;
         var bitmapSize = message.WriteableBitmap.PixelSize;
+        this.DrawTarget(bitmapSize);
+        this.UpdateModel();
+    }
+
+    private void DrawTarget(PixelSize bitmapSize)
+    {
+        var vm = App.GetRequiredService<SpotlightViewModel>();
+        if (vm is null || !vm.IsBound || vm.View is null)
+        {
+            return;
+        }
+
         this.bitmapWidth = bitmapSize.Width;
         this.bitmapHeight = bitmapSize.Height;
         int largestDimension = Math.Max(bitmapHeight, bitmapWidth);
@@ -144,10 +199,6 @@ public sealed partial class SpotlightToolboxViewModel :
         if (Math.Abs(this.LightnessSliderValue) <= 0.001)
         {
             this.LightnessSliderValue = 0.25;
-        }
-        else
-        {
-            this.UpdateModel();
         }
     }
 
@@ -172,7 +223,7 @@ public sealed partial class SpotlightToolboxViewModel :
 
     partial void OnRotationSliderValueChanged(double value)
     {
-        // Slider sends -45 to 45
+        // Slider sends -90 to 90
         this.rotation = (float)value;
         this.RotationString = this.rotation.ToString("F1") + " \u00B0";
         this.UpdateEllipse();
@@ -180,6 +231,11 @@ public sealed partial class SpotlightToolboxViewModel :
 
     private void UpdateEllipse()
     {
+        if (this.doNotUpdateModel)
+        {
+            return;
+        }
+
         var vm = App.GetRequiredService<SpotlightViewModel>();
         if (vm is not null && vm.IsBound)
         {
@@ -224,7 +280,7 @@ public sealed partial class SpotlightToolboxViewModel :
         {
             this.model.Spotlight(
                 (int)Math.Round(this.centerX), (int)Math.Round(this.centerY),
-                (int)Math.Round(this.axisX / 2.0f), (int)Math.Round(this.axisY / 2.0f),
+                (int)Math.Round(this.axisX), (int)Math.Round(this.axisY),
                 this.rotation, this.lightness);
         });
     }

@@ -10,10 +10,11 @@ public sealed partial class ToolboxHostViewModel :
     {
         this.model = App.GetRequiredService<PhotoPostProModel>();
         this.Subscribe<WorkflowUpdateMessage>(); 
+        this.Title = this.Localize("Imaging.InProgressHelp");
     } 
 
     [ObservableProperty]
-    public partial string Title { get; set; } = " - ? ? ? -";
+    public partial string Title { get; set; }
 
     [ObservableProperty]
     public partial bool BackIsDisabled { get; set; }
