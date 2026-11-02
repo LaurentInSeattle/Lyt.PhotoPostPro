@@ -19,7 +19,7 @@
 		Background="Transparent"
 		>
 		<Rectangle
-			Fill="#C0000020"
+			Fill="#D0000020"
 			Grid.ColumnSpan="999" Grid.RowSpan="999"
 			RadiusX="4" RadiusY="4"
 			Margin="1"
