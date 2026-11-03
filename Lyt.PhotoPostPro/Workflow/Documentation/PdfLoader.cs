@@ -40,12 +40,12 @@ public static class PdfLoader
         });
     }
 
-    private static MemoryStream LoadDocumentFile(Document document, string language)
+    private static MemoryStream LoadDocumentFile(Document document, string _ /* TODO: language */ )
     {
         ResourcesUtilities.SetExecutingAssembly(Assembly.GetExecutingAssembly());
         ResourcesUtilities.SetResourcesPath("Lyt.PhotoPostPro");
         string docPath = document.ResourcePath; //  string.Format("Doc_{0}.pdf", language);
-        byte[] pdfBytes = ResourcesUtilities.LoadEmbeddedBinaryResource(docPath, out string? resourceName);
+        byte[] pdfBytes = ResourcesUtilities.LoadEmbeddedBinaryResource(docPath, out string? _);
         return new MemoryStream(pdfBytes);
     }
 

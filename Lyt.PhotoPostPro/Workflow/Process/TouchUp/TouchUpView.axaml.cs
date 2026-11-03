@@ -5,10 +5,7 @@ public partial class TouchUpView : View
     private const string SpotTag = "Spot";
     private const string PatchTag = "Patch";
 
-    public TouchUpView()
-    {
-        this.Image.PointerPressed += this.OnImagePointerPressed;
-    }
+    public TouchUpView() => this.Image.PointerPressed += this.OnImagePointerPressed;
 
     protected override void OnDataContextChanged(object? sender, EventArgs e) { }
 

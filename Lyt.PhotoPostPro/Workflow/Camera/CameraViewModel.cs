@@ -280,7 +280,7 @@ public sealed partial class CameraViewModel :
         this.FileDownloaded = string.Empty;
     }
 
-    private void OnDeviceBeginFileList(DeviceBeginFileListMessage message)
+    private void OnDeviceBeginFileList(DeviceBeginFileListMessage _)
     {
         if (!this.IsActivated)
         {

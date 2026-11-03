@@ -188,7 +188,6 @@ public sealed partial class StepNavigatorViewModel :
             else
             {
                 int delta = newIndex - previousIndex;
-                int count = Math.Abs(delta);
                 if (delta > 0)
                 {
                     toolboxHost.OnJumpNextTo(stepName);

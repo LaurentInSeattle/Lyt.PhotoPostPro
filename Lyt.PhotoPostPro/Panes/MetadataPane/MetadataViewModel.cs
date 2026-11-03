@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Panes.MetadataPane;
 
-using System.Text;
-
 public sealed partial class MetadataViewModel :
     ViewModel<MetadataView>,
     IRecipient<LanguageChangedMessage>,
@@ -100,10 +98,7 @@ public sealed partial class MetadataViewModel :
 
     public MetadataViewModel(Metadata metadata) : this() => this.DispatchUpdate(metadata);
 
-    public void Receive(LibraryMetadataUpdateMessage message)
-    {
-        this.DispatchUpdate(message.Metadata);
-    } 
+    public void Receive(LibraryMetadataUpdateMessage message) => this.DispatchUpdate(message.Metadata);
 
     public void Receive(MetadataGeneratedMessage message) => this.DispatchUpdate(message.Metadata);
 
@@ -239,7 +234,6 @@ public sealed partial class MetadataViewModel :
             modalService.RunViewModelModal(shellViewModel.ModalHost, new EditKeywordsDialogModel(this.metadata));
         }
     }
-
 
     [RelayCommand]
     public void OnWebNavigate()

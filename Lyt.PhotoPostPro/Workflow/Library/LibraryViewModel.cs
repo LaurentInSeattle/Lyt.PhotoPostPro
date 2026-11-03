@@ -3,7 +3,6 @@
 public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LanguageChangedMessage>,
-    IRecipient<LibraryLoadingMessage>,
     IRecipient<LibraryLoadedMessage>,
     IRecipient<LibraryRemovedMessage>,
     IRecipient<LibraryMetadataUpdateMessage>,
@@ -131,7 +130,6 @@ public sealed partial class LibraryViewModel :
         this.selectedViewing = Viewing.Captured;
 
         this.Subscribe<LanguageChangedMessage>();
-        this.Subscribe<LibraryLoadingMessage>();
         this.Subscribe<LibraryLoadedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
         this.Subscribe<FolderTreeUpdatedMessage>();
@@ -194,19 +192,6 @@ public sealed partial class LibraryViewModel :
         }
 
         this.BuildCalendarButtons(folderTree);
-    }
-
-    public void Receive(LibraryLoadingMessage message) 
-        => Dispatch.OnUiThread( () => { this.ReceiveOnUiThread(message); }, DispatcherPriority.Background);
-
-    public void ReceiveOnUiThread(LibraryLoadingMessage message)
-    {
-        //// Launch dialog 
-        //if (this.dialogService is DialogService modalService)
-        //{
-        //    // Do nothing on close or dismiss
-        //    modalService.RunViewModelModal(this.shellViewModel.ModalHost, new LoadingDialogModel());
-        //}
     }
 
     public void Receive(FolderTreeUpdatedMessage message)

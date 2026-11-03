@@ -5,18 +5,13 @@ public interface ICanDeleteKeyword
     void DeleteKeyword(string keyword);
 }
 
-public sealed partial class KeywordViewModel : ViewModel<KeywordView>
+public sealed partial class KeywordViewModel(ICanDeleteKeyword canDeleteKeyword, string keyword) 
+    : ViewModel<KeywordView>
 {
-    private readonly ICanDeleteKeyword canDeleteKeyword; 
-
-    public KeywordViewModel(ICanDeleteKeyword canDeleteKeyword, string keyword)
-    {
-        this.canDeleteKeyword = canDeleteKeyword;
-        this.Keyword = keyword;
-    }
+    private readonly ICanDeleteKeyword canDeleteKeyword = canDeleteKeyword;
 
     [ObservableProperty]
-    public partial string Keyword { get; set; } = string.Empty;
+    public partial string Keyword { get; set; } = keyword;
 
     [RelayCommand]
     public void OnDelete() => this.canDeleteKeyword.DeleteKeyword(this.Keyword);

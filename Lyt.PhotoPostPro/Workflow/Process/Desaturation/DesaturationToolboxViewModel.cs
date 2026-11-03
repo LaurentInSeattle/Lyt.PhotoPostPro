@@ -102,17 +102,14 @@ public sealed partial class DesaturationToolboxViewModel :
         this.PatchColor = new SolidColorBrush(patchColor);
         ColorUtilities.RgbToHsl(
             patchColor.R / 255.0f, patchColor.G / 255.0f, patchColor.B / 255.0f,
-            out float hue, out float sat, out float lit);
+            out float hue, out float _, out float _);
         this.targetHue = hue * 360.0f;
         this.RunDesaturationIsDisabled = false;
         this.PatchColorState = new SolidColorBrush(Colors.LightGreen);
     }
 
     [RelayCommand]
-    public void OnWhitePatch()
-    {
-        this.UpdateModel(fromButton: true);
-    }
+    public void OnWhitePatch() => this.UpdateModel(fromButton: true);
 
     private void UpdateSliders(DesaturationStep step)
     {

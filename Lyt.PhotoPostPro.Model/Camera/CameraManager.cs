@@ -111,10 +111,8 @@ public class CameraManager
         this.IsMonitoring = false;
     }
 
-    public void TryConnectTo(FoundDevice foundDevice)
-    {
-        Task.Run(() => this.ThreadedTryConnectTo(foundDevice));
-    }
+    public void TryConnectTo(FoundDevice foundDevice) 
+        => Task.Run(() => this.ThreadedTryConnectTo(foundDevice));
 
     private void ThreadedTryConnectTo(FoundDevice foundDevice)
     {
