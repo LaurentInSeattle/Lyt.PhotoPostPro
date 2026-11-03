@@ -291,7 +291,7 @@ public sealed class FolderTree
         string filePath = metadata.MetadataFullPath();
         this.Remove(filePath); 
 
-        var date = DateTime.UtcNow; 
+        var date = DateTime.UtcNow.ToLocalTime(); 
         int year = date.Year;
         int month = date.Month;
         int day = date.Day;
