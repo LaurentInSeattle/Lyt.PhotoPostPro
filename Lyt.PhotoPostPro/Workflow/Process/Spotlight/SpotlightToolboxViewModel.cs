@@ -119,8 +119,7 @@ public sealed partial class SpotlightToolboxViewModel :
             Schedule.OnUiThread(
                 120, 
                 () => { this.DrawTarget(new PixelSize(this.bitmapWidth, this.bitmapHeight)); },
-                DispatcherPriority.Background);
-            
+                DispatcherPriority.Background);            
         });
     }
 

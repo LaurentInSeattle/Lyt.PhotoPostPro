@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">言語</system:String>
 
+    <system:String x:Key="Shell.Help">お問い合わせ</system:String>
+
     <system:String x:Key="Imaging.InProgress">進行中</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">お待ちください...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">ホワイトボーダー</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">黒と薄い白</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">白と薄い黒</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">ボーダーの厚さ</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">ログイン</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">メディア</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">ステンレス</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">ヘフティ</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">ウォーターマーク</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">グラデーション</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">スポットライト</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">ホワイト</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">コントラスト</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">暗いまたは明るい補正:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">強さ：</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">スポットライト</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">画像上の楕円の形状に露出補正を適用します.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">幅:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">高さ:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">回転:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">暗いですか軽い訂正:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">強さ:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">ホワイトバランス</system:String>
 

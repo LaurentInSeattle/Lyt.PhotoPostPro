@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">език</system:String>
 
+    <system:String x:Key="Shell.Help">Помощ</system:String>
+
     <system:String x:Key="Imaging.InProgress">В ход</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">моля изчакайте...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Бяла граница</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Черен и тънък бял</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Бял и тънък черен</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Дебелина на границата</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Тънки</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Среден</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Дебел</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Хефти</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Воден знак</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Градиенти</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Прожектор</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Бели</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Контраст</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Тъмна или светла корекция:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Сила:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Прожектор</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">Нанесете корекция на експозицията във формата на елипса върху изображението.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Ширина:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Височина:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Завъртане:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Тъмна или лека корекция:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Писалка:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Баланс на бялото</system:String>
 

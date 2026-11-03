@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">Nyelv</system:String>
 
+    <system:String x:Key="Shell.Help">Segítség</system:String>
+
     <system:String x:Key="Imaging.InProgress">Folyamatban van</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">Kérem, várjon...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Fehér határ</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Fekete és vékony fehér</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Fehér és vékony fekete</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Határvastagság</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Vékony</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Közepes</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Vastag</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Vízjel</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Fényszórók</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Spotlight</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Fehérek</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Kontraszt</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Sötét vagy világos korrekció:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Erő:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Spotlight</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">A kép fölött ellipszis alakú expozíciós korrekciót kell alkalmazni.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Szélesség:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Magasság:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Forgatás:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Sötét vagy fénykorrekció:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Hatáserősség:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Fehéregyensúly</system:String>
 

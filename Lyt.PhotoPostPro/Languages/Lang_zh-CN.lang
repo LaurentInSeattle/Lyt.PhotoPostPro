@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">语言</system:String>
 
+    <system:String x:Key="Shell.Help">帮助</system:String>
+
     <system:String x:Key="Imaging.InProgress">进行中</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">请稍等...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">白边框</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">黑色和细白</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">白色和细黑色</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">边框厚度</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">细</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">中型</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">细</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">帅哥</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">水印</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">渐变</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">焦点</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">白色</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">对比度</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">深色或浅色校正：</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">力量：</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">焦点</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">在图像上应用椭圆形状的曝光校正.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">宽度 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">高度 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">旋转 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">黑暗或光校正 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">强度 :</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">白平衡</system:String>
 

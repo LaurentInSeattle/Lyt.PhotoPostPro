@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">Langue</system:String>
 
+    <system:String x:Key="Shell.Help">Aide</system:String>
+
     <system:String x:Key="Imaging.InProgress">En cours</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">Patientez, s'il vous plaît...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Bordure blanche</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Noir et blanc mince</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Blanc et noir fin</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Épaisseur de la bordure</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Fine</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Moyenne</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Épaisse</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Filigrane</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Projecteur </system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Blancs</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Contraste</system:String>
@@ -385,7 +395,7 @@
 
     <system:String x:Key="Workflow.Export.Short">Exporter</system:String>
 
-    <system:String x:Key="Workflow.Orient.Title">Orientation et mise en miroir</system:String>
+    <system:String x:Key="Workflow.Orient.Title">Orientation et Miroir</system:String>
 
     <system:String x:Key="Workflow.Orient.Format">Restaurer le format portrait ou paysage :</system:String>
 
@@ -463,11 +473,11 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Vallée</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Title">Toucher vers le haut</system:String>
+    <system:String x:Key="Workflow.TouchUp.Title">Retoucher</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Click">Cliquez sur l'image à la position exacte de l'endroit à supprimer.</system:String>
+    <system:String x:Key="Workflow.TouchUp.Click">Cliquez sur l'image à la position exacte de l'endroit à retoucher.</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.ShiftClick">Cliquez sur l'image pour fournir un emplacement correct. Réglez le curseur pour la plus petite taille afin de couvrir l'endroit pour patcher.</system:String>
+    <system:String x:Key="Workflow.TouchUp.ShiftClick">Cliquez sur l'image pour fournir un emplacement correct. Réglez le curseur pour la plus petite taille possible afin de couvrir l'endroit a patcher.</system:String>
 
     <system:String x:Key="Workflow.TouchUp.SpotSize">Taille de la tache</system:String>
 
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Correction sombre ou claire :</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Force:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Mettre en lumière</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">Appliquer une correction d'exposition en forme d'ellipse sur l'image.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Largeur:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Hauteur:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Rotation:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Correction de l'obscurité ou de la lumière:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Force:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Balance des blancs</system:String>
 

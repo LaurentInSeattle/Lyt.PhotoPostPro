@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">語言</system:String>
 
+    <system:String x:Key="Shell.Help">說明</system:String>
+
     <system:String x:Key="Imaging.InProgress">進行中</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">請稍等...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">白邊框</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">二相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">有白有黑</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">邊框厚度</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">微小</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">中</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">高</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">有花</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">水印</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">梯度</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">焦點</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">白色</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">對比</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">深色或淺色校正：</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">力量：</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">焦點</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">在影像上以椭圆外形套取曝光修正 .</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">寬度 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">高度:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">旋轉 :</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">黑暗或光校正:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">強度 :</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">白平衡</system:String>
 

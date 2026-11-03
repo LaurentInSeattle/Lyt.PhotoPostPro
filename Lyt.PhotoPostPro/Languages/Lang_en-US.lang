@@ -272,6 +272,7 @@
 	<system:String x:Key="Workflow.Exposure.Short">Exposure</system:String>
 	<system:String x:Key="Workflow.Recovery.Short">Recovery</system:String>
 	<system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
+	<system:String x:Key="Workflow.Spotlight.Short">Spotlight</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Short">Whites</system:String>
 	<system:String x:Key="Workflow.Contrast.Short">Contrast</system:String>
 	<system:String x:Key="Workflow.Lut.Short">LUT's</system:String>
@@ -369,6 +370,15 @@
 	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction:</system:String>
 	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
 
+	<!-- Workflow Spotlight -->
+	<system:String x:Key="Workflow.Spotlight.Title">Spotlight</system:String>
+	<system:String x:Key="Workflow.Spotlight.Correction">Apply an exposure correction in the shape of an ellipse over the image.</system:String>
+	<system:String x:Key="Workflow.Spotlight.Width">Width:</system:String>
+	<system:String x:Key="Workflow.Spotlight.Height">Height:</system:String>
+	<system:String x:Key="Workflow.Spotlight.Rotation">Rotation:</system:String>
+	<system:String x:Key="Workflow.Spotlight.Style">Dark or Light Correction:</system:String>
+	<system:String x:Key="Workflow.Spotlight.Strength">Strength: </system:String>
+	
 	<!-- Workflow White Balance -->
 	<system:String x:Key="Workflow.WhiteBalance.Title">White Balance</system:String>
 	<system:String x:Key="Workflow.WhiteBalance.Correction">Correct color temperature automatically or adjust it manually.</system:String>

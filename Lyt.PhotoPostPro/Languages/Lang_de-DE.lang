@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">Sprache</system:String>
 
+    <system:String x:Key="Shell.Help">Hilfe</system:String>
+
     <system:String x:Key="Imaging.InProgress">Im Gange</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">Bitte warten...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Weiße Grenze</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Schwarz und dünnes Weiß</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Weiß und dünnes Schwarz</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Grenzdicke</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Dünn</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Medium</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Dick</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Kräftig</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Wasserzeichen</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Gefälle</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Spotlight</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Weiß</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Kontrast</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Dunkle oder helle Korrektur:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Stärke:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Spotlight</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">Tragen Sie eine Belichtungskorrektur in Form einer Ellipse über das Bild.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Breite:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Höhe:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Rotation:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Dunkel- oder Lichtkorrektur:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Festigkeit:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Weißabgleich</system:String>
 

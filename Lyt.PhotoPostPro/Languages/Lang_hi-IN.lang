@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">भाषा</system:String>
 
+    <system:String x:Key="Shell.Help">सहायता</system:String>
+
     <system:String x:Key="Imaging.InProgress">प्रगति पर है</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">कृपया प्रतीक्षा करें...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">सफेद सीमा</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">ब्लैक एंड थिन व्हाइट</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">व्हाइट एंड थिन ब्लैक</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">सीमा मोटाई</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">पतला</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">मध्यम</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">मोटा</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">हेफ्टी</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">वॉटरमार्क</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">ग्रेडियेंट</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">स्पॉटलाइट</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">सफेद</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">कंट्रास्ट</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">अंधेरा या हल्का सुधार:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">ताकत:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">स्पॉटलाइट</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">छवि पर एक अंडाकार के आकार में एक जोखिम सुधार लागू करें।.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">चौड़ाई:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">ऊंचाई:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">रोटेशन:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">डार्क या लाइट सुधार:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">शक्ति:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">श्वेत संतुलन</system:String>
 

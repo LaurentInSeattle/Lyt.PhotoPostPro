@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">Мова</system:String>
 
+    <system:String x:Key="Shell.Help">Про нас</system:String>
+
     <system:String x:Key="Imaging.InProgress">В роботі</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">Будь ласка, зачекайте...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Білий кордон</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Чорний і тонкий білий</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Білий і тонкий чорний</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Товщина кордону</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Тінь</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Середній</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Товсті</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Хати</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Водомарка</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Проксимус</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Мапа</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Білий</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Контраст</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Темна або світла корекція:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Міцність:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Мапа</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">Застосувати корекцію впливу у вигляді ellipse над зображенням.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Ширина:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Висота:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Обертання:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Корекція темного або світла:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Міцність:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Баланс білого</system:String>
 

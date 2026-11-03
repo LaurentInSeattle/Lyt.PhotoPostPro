@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">Ngôn ngữ</system:String>
 
+    <system:String x:Key="Shell.Help">Trợ giúp</system:String>
+
     <system:String x:Key="Imaging.InProgress">Tiến hành</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">Xin chờ đã...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">Viền trắng</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">Đen và trắng</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">Đen trắng và mảnh</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">Viền</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">Mảnh</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">Vừa</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">Dầy</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Thủy ấn</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Gradient</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">Đèn sân khấu</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">Trắng</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">Độ tương phản</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">Sửa chữa đen tối hay nhẹ:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">Độ mạnh:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">Đèn sân khấu</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">Áp dụng sửa chữa phơi nắng theo hình dạng hình bầu dục trên ảnh.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">Bề rộng:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">Chiều cao:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">Xoay</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">Sửa chữa đen tối hay nhẹ:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">Độ mạnh:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Cán cân trắng</system:String>
 

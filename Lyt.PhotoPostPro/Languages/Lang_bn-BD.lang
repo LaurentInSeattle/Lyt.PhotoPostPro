@@ -61,6 +61,8 @@
 
     <system:String x:Key="Shell.Language">ভাষা</system:String>
 
+    <system:String x:Key="Shell.Help">সাহায্য</system:String>
+
     <system:String x:Key="Imaging.InProgress">চলছে</system:String>
 
     <system:String x:Key="Imaging.InProgressHelp">অনুগ্রহ করে অপেক্ষা করুন...</system:String>
@@ -183,6 +185,10 @@
 
     <system:String x:Key="Tools.Editor.WhiteBorder">সাদা প্রান্ত</system:String>
 
+    <system:String x:Key="Tools.Editor.BlackThinWhiteBorder">সাদা ঢেউ</system:String>
+
+    <system:String x:Key="Tools.Editor.WhiteThinBlackBorder">সাদা কালো</system:String>
+
     <system:String x:Key="Tools.Editor.BorderThickness">প্রান্তের প্রস্থ</system:String>
 
     <system:String x:Key="Tools.Editor.Thin">আপনার</system:String>
@@ -190,6 +196,8 @@
     <system:String x:Key="Tools.Editor.Medium">মাঝারি</system:String>
 
     <system:String x:Key="Tools.Editor.Thick">পুরু</system:String>
+
+    <system:String x:Key="Tools.Editor.Hefty">হেফ্ট</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">জলছবি</system:String>
 
@@ -369,6 +377,8 @@
 
     <system:String x:Key="Workflow.Vignette.Short">গ্রেডিয়েন্ট (গ)</system:String>
 
+    <system:String x:Key="Workflow.Spotlight.Short">কেন্দ্রবিন্দু</system:String>
+
     <system:String x:Key="Workflow.WhiteBalance.Short">সাদা</system:String>
 
     <system:String x:Key="Workflow.Contrast.Short">বৈপরিত্য</system:String>
@@ -522,6 +532,20 @@
     <system:String x:Key="Workflow.Vignette.Style">অন্ধকার বা হালকা সংশোধন:</system:String>
 
     <system:String x:Key="Workflow.Vignette.Strength">শক্তি:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Title">কেন্দ্রবিন্দু</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Correction">ছবির ওপর একটা উপবৃত্তের আকৃতিতে স্পষ্ট সংশোধন প্রয়োগ করুন ।.</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Width">প্রস্থ:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Height">উচ্চতা:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Rotation">আবর্তন:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Style">গাঢ় বা হালকা বৈশিষ্ট্য:</system:String>
+
+    <system:String x:Key="Workflow.Spotlight.Strength">ক্ষমতা:</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">সাদা ব্যালেন্স</system:String>
 
