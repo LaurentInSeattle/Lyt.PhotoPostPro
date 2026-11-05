@@ -19,9 +19,9 @@ Step-by-Step Migration
 1. Change Method Signature: Make the method static partial instead of static extern. Remove the method body (leave it empty with a semicolon).
 2. Swap the Attribute: Replace [DllImport("name.dll")] with [LibraryImport("name.dll")].
 3. Update Parameters and Settings:
-	• Calling Conventions: Replace CallingConvention = CallingConvention.Cdecl with the [UnmanagedCallConv] attribute.
-	• Character Sets: Replace CharSet = CharSet.Ansi/Unicode with StringMarshalling = StringMarshalling.Utf8 or Utf16.
-	• Exact Spelling / Suffixes: LibraryImport does not support ExactSpelling or automatic A/W Win32 suffix resolution. You must explicitly specify the correct EntryPoint (e.g., EntryPoint = "MessageBoxW") if you are calling Windows APIs without suffixes.
+    • Calling Conventions: Replace CallingConvention = CallingConvention.Cdecl with the [UnmanagedCallConv] attribute.
+    • Character Sets: Replace CharSet = CharSet.Ansi/Unicode with StringMarshalling = StringMarshalling.Utf8 or Utf16.
+    • Exact Spelling / Suffixes: LibraryImport does not support ExactSpelling or automatic A/W Win32 suffix resolution. You must explicitly specify the correct EntryPoint (e.g., EntryPoint = "MessageBoxW") if you are calling Windows APIs without suffixes.
 
 
 
@@ -68,19 +68,19 @@ Load the black-and-white edge mask you created as an alpha channel/mask to apply
 
 
 
-	1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables
-	(the Exposure Triangle):\(\text{Exposure} \propto \text{Aperture Area} \times \text{Shutter Speed} \times \text{ISO Sensitivity}\)
-	To change the exposure by a specific number of stops, you adjust any of these three values:
-	Aperture (f-stop): Controls the size of the lens opening. The area is proportional to 
-	\(\frac{1}{N^{2}}\) (where \(N\) is the f-number). 
-	To let in twice as much light (or add \(+1 \text{ stop}\)), you multiply the aperture denominator 
-	by \(\frac{1}{\sqrt{2}}\) (approx \(0.7\)). 
-	Common full stops include:\(f/1.4 \rightarrow f/2 \rightarrow f/2.8 \rightarrow f/4 \rightarrow f/5.6 \rightarrow f/8 \rightarrow f/11 \rightarrow f/16 \rightarrow f/22\)
-	Shutter Speed (\(t\)): Controls the duration of light exposure. 
-	Measured in fractions of a second, doubling the time (e.g., from \(\frac{1}{60}\) to \(\frac{1}{30}\)) adds \(+1 \text{ stop}\) of light.ISO (\(S\)): Controls sensor sensitivity. Doubling the ISO (e.g., \(100 \rightarrow 200\)) adds \(+1 \text{ stop}\) of exposure.2. Math for Post-Processing (Digital Editing)If you are adjusting a photo's exposure in editing software like Photoshop or Lightroom, the math scales linearly with pixel values.For an 8-bit image (where pixel values range from \(0\) to \(255\)), you apply the following formula:\(\text{New Pixel Value} = \text{Original Pixel Value} \times 2^{\Delta EV}\)Where \(\Delta EV\) is the change in Exposure Value (stops).Example: To increase the exposure by \(+1 \text{ stop}\) (\(\Delta EV = 1\)), multiply the original pixel brightness by \(2^{1}\) (\(2\)).Example: To decrease exposure by \(-1 \text{ stop}\) (\(\Delta EV = -1\)), multiply by \(2^{-1}\) (\(0.5\)).3. Exposure Value (EV) FormulaIf you want to calculate the exact mathematical Exposure Value (EV) of a scene, 
-	you use a logarithmic equation relating your settings to scene brightness:\(EV = \log_2 \left( \frac{N^2}{t} \right)\)
-	
-	Where:\(N\) is the aperture f-number\(t\) is the shutter speed in seconds
+    1. The Photographic Exposure EquationExposure is the mathematical product of three camera variables
+    (the Exposure Triangle):\(\text{Exposure} \propto \text{Aperture Area} \times \text{Shutter Speed} \times \text{ISO Sensitivity}\)
+    To change the exposure by a specific number of stops, you adjust any of these three values:
+    Aperture (f-stop): Controls the size of the lens opening. The area is proportional to 
+    \(\frac{1}{N^{2}}\) (where \(N\) is the f-number). 
+    To let in twice as much light (or add \(+1 \text{ stop}\)), you multiply the aperture denominator 
+    by \(\frac{1}{\sqrt{2}}\) (approx \(0.7\)). 
+    Common full stops include:\(f/1.4 \rightarrow f/2 \rightarrow f/2.8 \rightarrow f/4 \rightarrow f/5.6 \rightarrow f/8 \rightarrow f/11 \rightarrow f/16 \rightarrow f/22\)
+    Shutter Speed (\(t\)): Controls the duration of light exposure. 
+    Measured in fractions of a second, doubling the time (e.g., from \(\frac{1}{60}\) to \(\frac{1}{30}\)) adds \(+1 \text{ stop}\) of light.ISO (\(S\)): Controls sensor sensitivity. Doubling the ISO (e.g., \(100 \rightarrow 200\)) adds \(+1 \text{ stop}\) of exposure.2. Math for Post-Processing (Digital Editing)If you are adjusting a photo's exposure in editing software like Photoshop or Lightroom, the math scales linearly with pixel values.For an 8-bit image (where pixel values range from \(0\) to \(255\)), you apply the following formula:\(\text{New Pixel Value} = \text{Original Pixel Value} \times 2^{\Delta EV}\)Where \(\Delta EV\) is the change in Exposure Value (stops).Example: To increase the exposure by \(+1 \text{ stop}\) (\(\Delta EV = 1\)), multiply the original pixel brightness by \(2^{1}\) (\(2\)).Example: To decrease exposure by \(-1 \text{ stop}\) (\(\Delta EV = -1\)), multiply by \(2^{-1}\) (\(0.5\)).3. Exposure Value (EV) FormulaIf you want to calculate the exact mathematical Exposure Value (EV) of a scene, 
+    you use a logarithmic equation relating your settings to scene brightness:\(EV = \log_2 \left( \frac{N^2}{t} \right)\)
+    
+    Where:\(N\) is the aperture f-number\(t\) is the shutter speed in seconds
 
 
 --------- Sample XMP  ---------------
@@ -91,53 +91,53 @@ using System.Xml.Linq;
 
 class Program
 {
-	static void Main()
-	{
-		// 1. Define namespaces
-		XNamespace x = "adobe:ns:meta/";
-		XNamespace rdf = "http://w3.org";
-		XNamespace dc = "http://purl.org";
-		XNamespace xmp = "http://adobe.com";
+    static void Main()
+    {
+        // 1. Define namespaces
+        XNamespace x = "adobe:ns:meta/";
+        XNamespace rdf = "http://w3.org";
+        XNamespace dc = "http://purl.org";
+        XNamespace xmp = "http://adobe.com";
 
-		// 2. Build the XMP RDF structure
-		XDocument xmpDoc = new XDocument(
-			new XElement(x + "xmpmeta",
-				new XAttribute(XNamespace.Xmlns + "x", x),
-				new XElement(rdf + "RDF",
-					new XAttribute(XNamespace.Xmlns + "rdf", rdf),
-					new XElement(rdf + "Description",
-						new XAttribute(rdf + "about", ""),
-						new XAttribute(XNamespace.Xmlns + "dc", dc),
-						new XAttribute(XNamespace.Xmlns + "xmp", xmp),
-						
-						// Example 1: Simple string property (XMP Rating)
-						new XElement(xmp + "Rating", "5"),
+        // 2. Build the XMP RDF structure
+        XDocument xmpDoc = new XDocument(
+            new XElement(x + "xmpmeta",
+                new XAttribute(XNamespace.Xmlns + "x", x),
+                new XElement(rdf + "RDF",
+                    new XAttribute(XNamespace.Xmlns + "rdf", rdf),
+                    new XElement(rdf + "Description",
+                        new XAttribute(rdf + "about", ""),
+                        new XAttribute(XNamespace.Xmlns + "dc", dc),
+                        new XAttribute(XNamespace.Xmlns + "xmp", xmp),
+                        
+                        // Example 1: Simple string property (XMP Rating)
+                        new XElement(xmp + "Rating", "5"),
 
-						// Example 2: Array property (Dublin Core Creator list)
-						new XElement(dc + "creator",
-							new XElement(rdf + "Seq",
-								new XElement(rdf + "li", "John Doe")
-							)
-						),
+                        // Example 2: Array property (Dublin Core Creator list)
+                        new XElement(dc + "creator",
+                            new XElement(rdf + "Seq",
+                                new XElement(rdf + "li", "John Doe")
+                            )
+                        ),
 
-						// Example 3: Alternative array property (Dublin Core Title description)
-						new XElement(dc + "title",
-							new XElement(rdf + "Alt",
-								new XElement(rdf + "li", "Sunset Over Mountains", 
-									new XAttribute(XNamespace.Xml + "lang", "x-default"))
-							)
-						)
-					)
-				)
-			)
-		);
+                        // Example 3: Alternative array property (Dublin Core Title description)
+                        new XElement(dc + "title",
+                            new XElement(rdf + "Alt",
+                                new XElement(rdf + "li", "Sunset Over Mountains", 
+                                    new XAttribute(XNamespace.Xml + "lang", "x-default"))
+                            )
+                        )
+                    )
+                )
+            )
+        );
 
-		// 3. Save as a sidecar file
-		string filePath = "photo.xmp";
-		xmpDoc.Save(filePath);
-		
-		Console.WriteLine($"XMP file successfully created at: {Path.GetFullPath(filePath)}");
-	}
+        // 3. Save as a sidecar file
+        string filePath = "photo.xmp";
+        xmpDoc.Save(filePath);
+        
+        Console.WriteLine($"XMP file successfully created at: {Path.GetFullPath(filePath)}");
+    }
 }
 
 
@@ -145,258 +145,258 @@ class Program
 
 public class LutGenerator
 {
-	// Generates a 32x32x32 Identity LUT
-	public static Color[,,] CreateIdentityLut(int size = 32)
-	{
-		Color[,,] lut = new Color[size, size, size];
-		for (int b = 0; b < size; b++)
-		{
-			for (int g = 0; g < size; g++)
-			{
-				for (int r = 0; r < size; r++)
-				{
-					int rValue = (r * 255) / (size - 1);
-					int gValue = (g * 255) / (size - 1);
-					int bValue = (b * 255) / (size - 1);
-					lut[r, g, b] = Color.FromArgb(rValue, gValue, bValue);
-				}
-			}
-		}
-		return lut;
-	}
+    // Generates a 32x32x32 Identity LUT
+    public static Color[,,] CreateIdentityLut(int size = 32)
+    {
+        Color[,,] lut = new Color[size, size, size];
+        for (int b = 0; b < size; b++)
+        {
+            for (int g = 0; g < size; g++)
+            {
+                for (int r = 0; r < size; r++)
+                {
+                    int rValue = (r * 255) / (size - 1);
+                    int gValue = (g * 255) / (size - 1);
+                    int bValue = (b * 255) / (size - 1);
+                    lut[r, g, b] = Color.FromArgb(rValue, gValue, bValue);
+                }
+            }
+        }
+        return lut;
+    }
 
-	// Applies a basic color-matching algorithm (e.g., Simple Gain/Offset)
-	public static Color[,,] ApplyColorMatching(Color[,,] identityLut, Bitmap sourceImage, Bitmap targetImage)
-	{
-		int size = identityLut.GetLength(0);
-		Color[,,] transformedLut = new Color[size, size, size];
+    // Applies a basic color-matching algorithm (e.g., Simple Gain/Offset)
+    public static Color[,,] ApplyColorMatching(Color[,,] identityLut, Bitmap sourceImage, Bitmap targetImage)
+    {
+        int size = identityLut.GetLength(0);
+        Color[,,] transformedLut = new Color[size, size, size];
 
-		// 1. Calculate color statistics for source and target (mean/variance)
-		// (Insert your statistical color transfer algorithm here, e.g., Reinhard algorithm)
-		// 2. Map those transformations onto the colors of the identityLut.
+        // 1. Calculate color statistics for source and target (mean/variance)
+        // (Insert your statistical color transfer algorithm here, e.g., Reinhard algorithm)
+        // 2. Map those transformations onto the colors of the identityLut.
 
-		// Example mock transformation mapping
-		for (int b = 0; b < size; b++)
-		{
-			for (int g = 0; g < size; g++)
-			{
-				for (int r = 0; r < size; r++)
-				{
-					Color originalColor = identityLut[r, g, b];
-					
-					// Apply your mathematical color correction here
-					// e.g., shift hues, increase saturation based on two images
-					int newR = Math.Min(255, originalColor.R + 10); 
-					int newG = Math.Min(255, originalColor.G);
-					int newB = Math.Min(255, originalColor.B - 15);
+        // Example mock transformation mapping
+        for (int b = 0; b < size; b++)
+        {
+            for (int g = 0; g < size; g++)
+            {
+                for (int r = 0; r < size; r++)
+                {
+                    Color originalColor = identityLut[r, g, b];
+                    
+                    // Apply your mathematical color correction here
+                    // e.g., shift hues, increase saturation based on two images
+                    int newR = Math.Min(255, originalColor.R + 10); 
+                    int newG = Math.Min(255, originalColor.G);
+                    int newB = Math.Min(255, originalColor.B - 15);
 
-					transformedLut[r, g, b] = Color.FromArgb(newR, newG, newB);
-				}
-			}
-		}
-		return transformedLut;
-	}
+                    transformedLut[r, g, b] = Color.FromArgb(newR, newG, newB);
+                }
+            }
+        }
+        return transformedLut;
+    }
 
-	// Exports the 3D LUT to .cube format
-	public static void ExportToCube(Color[,,] lut, string filePath)
-	{
-		int size = lut.GetLength(0);
-		using (StreamWriter writer = new StreamWriter(filePath))
-		{
-			writer.WriteLine("LUT_3D_SIZE " + size);
-			writer.WriteLine("");
+    // Exports the 3D LUT to .cube format
+    public static void ExportToCube(Color[,,] lut, string filePath)
+    {
+        int size = lut.GetLength(0);
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            writer.WriteLine("LUT_3D_SIZE " + size);
+            writer.WriteLine("");
 
-			for (int b = 0; b < size; b++)
-			{
-				for (int g = 0; g < size; g++)
-				{
-					for (int r = 0; r < size; r++)
-					{
-						Color c = lut[r, g, b];
-						writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
-					}
-				}
-			}
-		}
-	}
+            for (int b = 0; b < size; b++)
+            {
+                for (int g = 0; g < size; g++)
+                {
+                    for (int r = 0; r < size; r++)
+                    {
+                        Color c = lut[r, g, b];
+                        writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
+                    }
+                }
+            }
+        }
+    }
 }
 
 public class ReinhardLutGenerator
 {
-	// High-performance struct to hold statistical data for the 3 channels
-	public struct ImageStats
-	{
-		public double MeanL, MeanA, MeanB;
-		public double StdL, StdA, StdB;
-	}
+    // High-performance struct to hold statistical data for the 3 channels
+    public struct ImageStats
+    {
+        public double MeanL, MeanA, MeanB;
+        public double StdL, StdA, StdB;
+    }
 
-	// Main entry method to generate and save the LUT
-	public static void GenerateReinhardLut(string sourcePath, string targetPath, string outputCubePath, int lutSize = 32)
-	{
-		using Image<Rgb24> source = Image.Load<Rgb24>(sourcePath);
-		using Image<Rgb24> target = Image.Load<Rgb24>(targetPath);
+    // Main entry method to generate and save the LUT
+    public static void GenerateReinhardLut(string sourcePath, string targetPath, string outputCubePath, int lutSize = 32)
+    {
+        using Image<Rgb24> source = Image.Load<Rgb24>(sourcePath);
+        using Image<Rgb24> target = Image.Load<Rgb24>(targetPath);
 
-		// 1. Calculate color statistics for both images in lab space
-		ImageStats sourceStats = CalculateImageStats(source);
-		ImageStats targetStats = CalculateImageStats(target);
+        // 1. Calculate color statistics for both images in lab space
+        ImageStats sourceStats = CalculateImageStats(source);
+        ImageStats targetStats = CalculateImageStats(target);
 
-		// 2. Generate the Identity LUT matrix
-		Rgb24[,,] identityLut = CreateIdentityLut(lutSize);
-		Rgb24[,,] transformedLut = new Rgb24[lutSize, lutSize, lutSize];
+        // 2. Generate the Identity LUT matrix
+        Rgb24[,,] identityLut = CreateIdentityLut(lutSize);
+        Rgb24[,,] transformedLut = new Rgb24[lutSize, lutSize, lutSize];
 
-		// 3. Map Reinhard color transfer onto the LUT grid points
-		for (int b = 0; b  img)
-	{
-		int count = img.Width * img.Height;
-		double sumL = 0, sumA = 0, sumB = 0;
-		double[,] labPixels = new double[count, 3];
+        // 3. Map Reinhard color transfer onto the LUT grid points
+        for (int b = 0; b  img)
+    {
+        int count = img.Width * img.Height;
+        double sumL = 0, sumA = 0, sumB = 0;
+        double[,] labPixels = new double[count, 3];
 
-		int idx = 0;
-		img.ProcessPixelRows(accessor =>
-		{
-			for (int y = 0; y < accessor.Height; y++)
-			{
-				var row = accessor.GetRowSpan(y);
-				for (int x = 0; x < accessor.Width; x++)
-				{
-					var lab = RgbToLab(row[x]);
-					labPixels[idx, 0] = lab.L;
-					labPixels[idx, 1] = lab.A;
-					labPixels[idx, 2] = lab.B;
+        int idx = 0;
+        img.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < accessor.Height; y++)
+            {
+                var row = accessor.GetRowSpan(y);
+                for (int x = 0; x < accessor.Width; x++)
+                {
+                    var lab = RgbToLab(row[x]);
+                    labPixels[idx, 0] = lab.L;
+                    labPixels[idx, 1] = lab.A;
+                    labPixels[idx, 2] = lab.B;
 
-					sumL += lab.L;
-					sumA += lab.A;
-					sumB += lab.B;
-					idx++;
-				}
-			}
-		});
+                    sumL += lab.L;
+                    sumA += lab.A;
+                    sumB += lab.B;
+                    idx++;
+                }
+            }
+        });
 
-		ImageStats stats = new ImageStats
-		{
-			MeanL = sumL / count,
-			MeanA = sumA / count,
-			MeanB = sumB / count
-		};
+        ImageStats stats = new ImageStats
+        {
+            MeanL = sumL / count,
+            MeanA = sumA / count,
+            MeanB = sumB / count
+        };
 
-		double varL = 0, varA = 0, varB = 0;
-		for (int i = 0; i < count; i++)
-		{
-			varL += Math.Pow(labPixels[i, 0] - stats.MeanL, 2);
-			varA += Math.Pow(labPixels[i, 1] - stats.MeanA, 2);
-			varB += Math.Pow(labPixels[i, 2] - stats.MeanB, 2);
-		}
+        double varL = 0, varA = 0, varB = 0;
+        for (int i = 0; i < count; i++)
+        {
+            varL += Math.Pow(labPixels[i, 0] - stats.MeanL, 2);
+            varA += Math.Pow(labPixels[i, 1] - stats.MeanA, 2);
+            varB += Math.Pow(labPixels[i, 2] - stats.MeanB, 2);
+        }
 
-		// Guard against division by zero on flat/solid color images
-		stats.StdL = Math.Max(0.0001, Math.Sqrt(varL / count));
-		stats.StdA = Math.Max(0.0001, Math.Sqrt(varA / count));
-		stats.StdB = Math.Max(0.0001, Math.Sqrt(varB / count));
+        // Guard against division by zero on flat/solid color images
+        stats.StdL = Math.Max(0.0001, Math.Sqrt(varL / count));
+        stats.StdA = Math.Max(0.0001, Math.Sqrt(varA / count));
+        stats.StdB = Math.Max(0.0001, Math.Sqrt(varB / count));
 
-		return stats;
-	}
+        return stats;
+    }
 
-	private static Rgb24 MatchColor(Rgb24 srcColor, ImageStats src, ImageStats tgt)
-	{
-		// Convert input grid point color to Lab
-		var (l, a, b) = RgbToLab(srcColor);
+    private static Rgb24 MatchColor(Rgb24 srcColor, ImageStats src, ImageStats tgt)
+    {
+        // Convert input grid point color to Lab
+        var (l, a, b) = RgbToLab(srcColor);
 
-		// Scale and shift based on standard deviation ratios and means
-		l = ((l - src.MeanL) * (tgt.StdL / src.StdL)) + tgt.MeanL;
-		a = ((a - src.MeanA) * (tgt.StdA / src.StdA)) + tgt.MeanA;
-		b = ((b - src.MeanB) * (tgt.StdB / src.StdB)) + tgt.MeanB;
+        // Scale and shift based on standard deviation ratios and means
+        l = ((l - src.MeanL) * (tgt.StdL / src.StdL)) + tgt.MeanL;
+        a = ((a - src.MeanA) * (tgt.StdA / src.StdA)) + tgt.MeanA;
+        b = ((b - src.MeanB) * (tgt.StdB / src.StdB)) + tgt.MeanB;
 
-		return LabToRgb(l, a, b);
-	}
+        return LabToRgb(l, a, b);
+    }
 
-	// Color conversion pipeline: RGB -> XYZ -> LMS -> log10(LMS) -> lab
-	private static (double L, double A, double B) RgbToLab(Rgb24 rgb)
-	{
-		double r = rgb.R / 255.0;
-		double g = rgb.G / 255.0;
-		double b = rgb.B / 255.0;
+    // Color conversion pipeline: RGB -> XYZ -> LMS -> log10(LMS) -> lab
+    private static (double L, double A, double B) RgbToLab(Rgb24 rgb)
+    {
+        double r = rgb.R / 255.0;
+        double g = rgb.G / 255.0;
+        double b = rgb.B / 255.0;
 
-		// RGB to LMS matrix multiplication
-		double L = (0.3811 * r) + (0.5783 * g) + (0.0402 * b);
-		double M = (0.1967 * r) + (0.7244 * g) + (0.0789 * b);
-		double S = (0.0241 * r) + (0.1288 * g) + (0.8444 * b);
+        // RGB to LMS matrix multiplication
+        double L = (0.3811 * r) + (0.5783 * g) + (0.0402 * b);
+        double M = (0.1967 * r) + (0.7244 * g) + (0.0789 * b);
+        double S = (0.0241 * r) + (0.1288 * g) + (0.8444 * b);
 
-		// Log space transform (handle zeros gracefully)
-		L = L > 0 ? Math.Log10(L) : -5.0;
-		M = M > 0 ? Math.Log10(M) : -5.0;
-		S = S > 0 ? Math.Log10(S) : -5.0;
+        // Log space transform (handle zeros gracefully)
+        L = L > 0 ? Math.Log10(L) : -5.0;
+        M = M > 0 ? Math.Log10(M) : -5.0;
+        S = S > 0 ? Math.Log10(S) : -5.0;
 
-		// LMS to Ruderman lab space matrix multiplication
-		double labL = (L + M + S) / Math.Sqrt(3);
-		double labA = (L + M - (2 * S)) / Math.Sqrt(6);
-		double labB = (L - (2 * M)) / Math.Sqrt(2);
+        // LMS to Ruderman lab space matrix multiplication
+        double labL = (L + M + S) / Math.Sqrt(3);
+        double labA = (L + M - (2 * S)) / Math.Sqrt(6);
+        double labB = (L - (2 * M)) / Math.Sqrt(2);
 
-		return (labL, labA, labB);
-	}
+        return (labL, labA, labB);
+    }
 
-	// Color conversion pipeline: lab -> log10(LMS) -> LMS -> XYZ -> RGB
-	private static Rgb24 LabToRgb(double labL, double labA, double labB)
-	{
-		// Inverse Ruderman matrix multiplication
-		double L = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) + (labB / Math.Sqrt(2));
-		double M = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) - (labB / Math.Sqrt(2));
-		double S = (labL / Math.Sqrt(3)) - (2 * labA / Math.Sqrt(6));
+    // Color conversion pipeline: lab -> log10(LMS) -> LMS -> XYZ -> RGB
+    private static Rgb24 LabToRgb(double labL, double labA, double labB)
+    {
+        // Inverse Ruderman matrix multiplication
+        double L = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) + (labB / Math.Sqrt(2));
+        double M = (labL / Math.Sqrt(3)) + (labA / Math.Sqrt(6)) - (labB / Math.Sqrt(2));
+        double S = (labL / Math.Sqrt(3)) - (2 * labA / Math.Sqrt(6));
 
-		// Inverse Log transform
-		L = Math.Pow(10, L);
-		M = Math.Pow(10, M);
-		S = Math.Pow(10, S);
+        // Inverse Log transform
+        L = Math.Pow(10, L);
+        M = Math.Pow(10, M);
+        S = Math.Pow(10, S);
 
-		// LMS to RGB matrix multiplication
-		double r = (4.4679 * L) - (3.5873 * M) + (0.1193 * S);
-		double g = (-1.2186 * L) + (2.3809 * M) - (0.1624 * S);
-		double b = (0.0497 * L) - (0.2439 * M) + (1.2045 * S);
+        // LMS to RGB matrix multiplication
+        double r = (4.4679 * L) - (3.5873 * M) + (0.1193 * S);
+        double g = (-1.2186 * L) + (2.3809 * M) - (0.1624 * S);
+        double b = (0.0497 * L) - (0.2439 * M) + (1.2045 * S);
 
-		// Clamp values safely into valid byte boundaries
-		byte resR = (byte)Math.Clamp(r * 255.0, 0, 255);
-		byte resG = (byte)Math.Clamp(g * 255.0, 0, 255);
-		byte resB = (byte)Math.Clamp(b * 255.0, 0, 255);
+        // Clamp values safely into valid byte boundaries
+        byte resR = (byte)Math.Clamp(r * 255.0, 0, 255);
+        byte resG = (byte)Math.Clamp(g * 255.0, 0, 255);
+        byte resB = (byte)Math.Clamp(b * 255.0, 0, 255);
 
-		return new Rgb24(resR, resG, resB);
-	}
+        return new Rgb24(resR, resG, resB);
+    }
 
-	private static Rgb24[,,] CreateIdentityLut(int size)
-	{
-		Rgb24[,,] lut = new Rgb24[size, size, size];
-		for (int b = 0; b < size; b++)
-		{
-			for (int g = 0; g < size; g++)
-			{
-				for (int r = 0; r < size; r++)
-				{
-					byte rVal = (byte)((r * 255) / (size - 1));
-					byte gVal = (byte)((g * 255) / (size - 1));
-					byte bVal = (byte)((b * 255) / (size - 1));
-					lut[r, g, b] = new Rgb24(rVal, gVal, bVal);
-				}
-			}
-		}
-		return lut;
-	}
+    private static Rgb24[,,] CreateIdentityLut(int size)
+    {
+        Rgb24[,,] lut = new Rgb24[size, size, size];
+        for (int b = 0; b < size; b++)
+        {
+            for (int g = 0; g < size; g++)
+            {
+                for (int r = 0; r < size; r++)
+                {
+                    byte rVal = (byte)((r * 255) / (size - 1));
+                    byte gVal = (byte)((g * 255) / (size - 1));
+                    byte bVal = (byte)((b * 255) / (size - 1));
+                    lut[r, g, b] = new Rgb24(rVal, gVal, bVal);
+                }
+            }
+        }
+        return lut;
+    }
 
-	private static void ExportToCube(Rgb24[,,] lut, string filePath)
-	{
-		int size = lut.GetLength(0);
-		using StreamWriter writer = new StreamWriter(filePath);
-		writer.WriteLine("LUT_3D_SIZE " + size);
-		writer.WriteLine("");
+    private static void ExportToCube(Rgb24[,,] lut, string filePath)
+    {
+        int size = lut.GetLength(0);
+        using StreamWriter writer = new StreamWriter(filePath);
+        writer.WriteLine("LUT_3D_SIZE " + size);
+        writer.WriteLine("");
 
-		for (int b = 0; b < size; b++)
-		{
-			for (int g = 0; g < size; g++)
-			{
-				for (int r = 0; r < size; r++)
-				{
-					Rgb24 c = lut[r, g, b];
-					writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
-				}
-			}
-		}
-	}
+        for (int b = 0; b < size; b++)
+        {
+            for (int g = 0; g < size; g++)
+            {
+                for (int r = 0; r < size; r++)
+                {
+                    Rgb24 c = lut[r, g, b];
+                    writer.WriteLine($"{c.R / 255.0f:F6} {c.G / 255.0f:F6} {c.B / 255.0f:F6}");
+                }
+            }
+        }
+    }
 }
 
 
@@ -414,74 +414,74 @@ using SixLabors.ImageSharp.PixelFormats;
 
 public static class ImageInpainter
 {
-	/// <summary>
-	/// Inpaints the masked areas of an image using the Heat Equation (Diffusion).
-	/// </summary>
-	/// <param name="source">The image to repair.</param>
-	/// <param name="mask">A binary image where black (or low intensity) pixels indicate areas to be repaired.</param>
-	/// <param name="iterations">Number of diffusion steps. Higher values blur deep inside larger masks.</param>
-	public static void InpaintWithHeat(Image<Rgb24> source, Image<L8> mask, int iterations = 150)
-	{
-		if (source.Width != mask.Width || source.Height != mask.Height)
-			throw new ArgumentException("Source image and mask must have identical dimensions.");
+    /// <summary>
+    /// Inpaints the masked areas of an image using the Heat Equation (Diffusion).
+    /// </summary>
+    /// <param name="source">The image to repair.</param>
+    /// <param name="mask">A binary image where black (or low intensity) pixels indicate areas to be repaired.</param>
+    /// <param name="iterations">Number of diffusion steps. Higher values blur deep inside larger masks.</param>
+    public static void InpaintWithHeat(Image<Rgb24> source, Image<L8> mask, int iterations = 150)
+    {
+        if (source.Width != mask.Width || source.Height != mask.Height)
+            throw new ArgumentException("Source image and mask must have identical dimensions.");
 
-		int width = source.Width;
-		int height = source.Height;
+        int width = source.Width;
+        int height = source.Height;
 
-		// Clone the source to use as a buffer for the iterative process
-		using Image<Rgb24> buffer = source.Clone();
+        // Clone the source to use as a buffer for the iterative process
+        using Image<Rgb24> buffer = source.Clone();
 
-		for (int iter = 0; iter < iterations; iter++)
-		{
-			// Alternate source and buffer roles to read stable data and write updates
-			Image<Rgb24> readImg = (iter % 2 == 0) ? source : buffer;
-			Image<Rgb24> writeImg = (iter % 2 == 0) ? buffer : source;
+        for (int iter = 0; iter < iterations; iter++)
+        {
+            // Alternate source and buffer roles to read stable data and write updates
+            Image<Rgb24> readImg = (iter % 2 == 0) ? source : buffer;
+            Image<Rgb24> writeImg = (iter % 2 == 0) ? buffer : source;
 
-			// Process row by row for fast memory access
-			for (int y = 1; y < height - 1; y++)
-			{
-				ReadOnlySpan<L8> maskRow = mask.DangerousGetPixelRowMemory(y).Span;
-				ReadOnlySpan<Rgb24> srcRowPrev = readImg.DangerousGetPixelRowMemory(y - 1).Span;
-				ReadOnlySpan<Rgb24> srcRowCurr = readImg.DangerousGetPixelRowMemory(y).Span;
-				ReadOnlySpan<Rgb24> srcRowNext = readImg.DangerousGetPixelRowMemory(y + 1).Span;
-				Span<Rgb24> destRow = writeImg.DangerousGetPixelRowMemory(y).Span;
+            // Process row by row for fast memory access
+            for (int y = 1; y < height - 1; y++)
+            {
+                ReadOnlySpan<L8> maskRow = mask.DangerousGetPixelRowMemory(y).Span;
+                ReadOnlySpan<Rgb24> srcRowPrev = readImg.DangerousGetPixelRowMemory(y - 1).Span;
+                ReadOnlySpan<Rgb24> srcRowCurr = readImg.DangerousGetPixelRowMemory(y).Span;
+                ReadOnlySpan<Rgb24> srcRowNext = readImg.DangerousGetPixelRowMemory(y + 1).Span;
+                Span<Rgb24> destRow = writeImg.DangerousGetPixelRowMemory(y).Span;
 
-				for (int x = 1; x < width - 1; x++)
-				{
-					// Check if this pixel is inside the mask (PackedValue == 0 means black/masked)
-					if (maskRow[x].PackedValue == 0)
-					{
-						// Retrieve the 4 orthogonal neighboring pixel values
-						Rgb24 north = srcRowPrev[x];
-						Rgb24 south = srcRowNext[x];
-						Rgb24 west  = srcRowCurr[x - 1];
-						Rgb24 east  = srcRowCurr[x + 1];
+                for (int x = 1; x < width - 1; x++)
+                {
+                    // Check if this pixel is inside the mask (PackedValue == 0 means black/masked)
+                    if (maskRow[x].PackedValue == 0)
+                    {
+                        // Retrieve the 4 orthogonal neighboring pixel values
+                        Rgb24 north = srcRowPrev[x];
+                        Rgb24 south = srcRowNext[x];
+                        Rgb24 west  = srcRowCurr[x - 1];
+                        Rgb24 east  = srcRowCurr[x + 1];
 
-						// Compute the average (Heat equation discrete Laplacian approach)
-						byte r = (byte)((north.R + south.R + west.R + east.R) / 4);
-						byte g = (byte)((north.G + south.G + west.G + east.G) / 4);
-						byte b = (byte)((north.B + south.B + west.B + east.B) / 4);
+                        // Compute the average (Heat equation discrete Laplacian approach)
+                        byte r = (byte)((north.R + south.R + west.R + east.R) / 4);
+                        byte g = (byte)((north.G + south.G + west.G + east.G) / 4);
+                        byte b = (byte)((north.B + south.B + west.B + east.B) / 4);
 
-						destRow[x] = new Rgb24(r, g, b);
-					}
-					else if (iter % 2 == 0)
-					{
-						// Keep non-masked pixels perfectly identical across frames
-						destRow[x] = srcRowCurr[x];
-					}
-				}
-			}
-		}
+                        destRow[x] = new Rgb24(r, g, b);
+                    }
+                    else if (iter % 2 == 0)
+                    {
+                        // Keep non-masked pixels perfectly identical across frames
+                        destRow[x] = srcRowCurr[x];
+                    }
+                }
+            }
+        }
 
-		// If the final iteration ended up writing into the buffer, copy it back to the source image
-		if (iterations % 2 != 0)
-		{
-			for (int y = 0; y < height; y++)
-			{
-				buffer.DangerousGetPixelRowMemory(y).Span.CopyTo(source.DangerousGetPixelRowMemory(y).Span);
-			}
-		}
-	}
+        // If the final iteration ended up writing into the buffer, copy it back to the source image
+        if (iterations % 2 != 0)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                buffer.DangerousGetPixelRowMemory(y).Span.CopyTo(source.DangerousGetPixelRowMemory(y).Span);
+            }
+        }
+    }
 }
 
 
@@ -514,81 +514,81 @@ using System.Drawing.Imaging;
 
 public class PureCSharpBlemishRemover
 {
-	public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
-	{
-		using (Bitmap bmp = new Bitmap(imagePath))
-		{
-			BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-			int bytesPerPixel = 4;
-			byte* scan0 = (byte*)data.Scan0;
+    public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
+    {
+        using (Bitmap bmp = new Bitmap(imagePath))
+        {
+            BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            int bytesPerPixel = 4;
+            byte* scan0 = (byte*)data.Scan0;
 
-			// Define bounding box around the blemish
-			int startX = Math.Max(0, center.X - radius);
-			int endX = Math.Min(bmp.Width - 1, center.X + radius);
-			int startY = Math.Max(0, center.Y - radius);
-			int endY = Math.Min(bmp.Height - 1, center.Y + radius);
+            // Define bounding box around the blemish
+            int startX = Math.Max(0, center.X - radius);
+            int endX = Math.Min(bmp.Width - 1, center.X + radius);
+            int startY = Math.Max(0, center.Y - radius);
+            int endY = Math.Min(bmp.Height - 1, center.Y + radius);
 
-			int radiusSq = radius * radius;
+            int radiusSq = radius * radius;
 
-			// Pass 1: Inpaint pixels from outer boundary inward
-			for (int y = startY; y <= endY; y++)
-			{
-				for (int x = startX; x <= endX; x++)
-				{
-					int dx = x - center.X;
-					int dy = y - center.Y;
+            // Pass 1: Inpaint pixels from outer boundary inward
+            for (int y = startY; y <= endY; y++)
+            {
+                for (int x = startX; x <= endX; x++)
+                {
+                    int dx = x - center.X;
+                    int dy = y - center.Y;
 
-					// Check if pixel is inside the circular blemish area
-					if ((dx * dx) + (dy * dy) <= radiusSq)
-					{
-						double totalWeight = 0;
-						double rSum = 0, gSum = 0, bSum = 0;
+                    // Check if pixel is inside the circular blemish area
+                    if ((dx * dx) + (dy * dy) <= radiusSq)
+                    {
+                        double totalWeight = 0;
+                        double rSum = 0, gSum = 0, bSum = 0;
 
-						// Sample a 7x7 neighborhood for clean pixels
-						for (int ny = -3; ny <= 3; ny++)
-						{
-							int sampleY = y + ny;
-							if (sampleY < 0 || sampleY >= bmp.Height) continue;
+                        // Sample a 7x7 neighborhood for clean pixels
+                        for (int ny = -3; ny <= 3; ny++)
+                        {
+                            int sampleY = y + ny;
+                            if (sampleY < 0 || sampleY >= bmp.Height) continue;
 
-							for (int nx = -3; nx <= 3; nx++)
-							{
-								int sampleX = x + nx;
-								if (sampleX < 0 || sampleX >= bmp.Width) continue;
+                            for (int nx = -3; nx <= 3; nx++)
+                            {
+                                int sampleX = x + nx;
+                                if (sampleX < 0 || sampleX >= bmp.Width) continue;
 
-								// Ignore sample if it falls inside the dirty blemish zone
-								int sdx = sampleX - center.X;
-								int sdy = sampleY - center.Y;
-								if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
+                                // Ignore sample if it falls inside the dirty blemish zone
+                                int sdx = sampleX - center.X;
+                                int sdy = sampleY - center.Y;
+                                if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
 
-								double distance = Math.Sqrt((nx * nx) + (ny * ny));
-								if (distance == 0) continue;
+                                double distance = Math.Sqrt((nx * nx) + (ny * ny));
+                                if (distance == 0) continue;
 
-								double weight = 1.0 / distance;
-								byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
+                                double weight = 1.0 / distance;
+                                byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
 
-								bSum += samplePtr[0] * weight;
-								gSum += samplePtr[1] * weight;
-								rSum += samplePtr[2] * weight;
-								totalWeight += weight;
-							}
-						}
+                                bSum += samplePtr[0] * weight;
+                                gSum += samplePtr[1] * weight;
+                                rSum += samplePtr[2] * weight;
+                                totalWeight += weight;
+                            }
+                        }
 
-						// Apply the weighted average color to the blemish pixel
-						if (totalWeight > 0)
-						{
-							byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
-							targetPtr[0] = (byte)(bSum / totalWeight); // Blue
-							targetPtr[1] = (byte)(gSum / totalWeight); // Green
-							targetPtr[2] = (byte)(rSum / totalWeight); // Red
-						}
-					}
-				}
-			}
+                        // Apply the weighted average color to the blemish pixel
+                        if (totalWeight > 0)
+                        {
+                            byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+                            targetPtr[0] = (byte)(bSum / totalWeight); // Blue
+                            targetPtr[1] = (byte)(gSum / totalWeight); // Green
+                            targetPtr[2] = (byte)(rSum / totalWeight); // Red
+                        }
+                    }
+                }
+            }
 
-			bmp.UnlockBits(data);
-			bmp.Save(outputPath, ImageFormat.Png);
-		}
-	}
+            bmp.UnlockBits(data);
+            bmp.Save(outputPath, ImageFormat.Png);
+        }
+    }
 }
 
 using System;
@@ -597,135 +597,135 @@ using System.Drawing.Imaging;
 
 public class PureCSharpBlemishRemover
 {
-	public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
-	{
-		using (Bitmap bmp = new Bitmap(imagePath))
-		{
-			BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-			int bytesPerPixel = 4;
-			byte* scan0 = (byte*)data.Scan0;
+    public static unsafe void RemoveSpot(string imagePath, string outputPath, Point center, int radius)
+    {
+        using (Bitmap bmp = new Bitmap(imagePath))
+        {
+            BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            int bytesPerPixel = 4;
+            byte* scan0 = (byte*)data.Scan0;
 
-			int startX = Math.Max(0, center.X - radius - 3);
-			int endX = Math.Min(bmp.Width - 1, center.X + radius + 3);
-			int startY = Math.Max(0, center.Y - radius - 3);
-			int endY = Math.Min(bmp.Height - 1, center.Y + radius + 3);
+            int startX = Math.Max(0, center.X - radius - 3);
+            int endX = Math.Min(bmp.Width - 1, center.X + radius + 3);
+            int startY = Math.Max(0, center.Y - radius - 3);
+            int endY = Math.Min(bmp.Height - 1, center.Y + radius + 3);
 
-			int radiusSq = radius * radius;
+            int radiusSq = radius * radius;
 
-			// Pass 1: Distance-weighted Inpainting
-			for (int y = startY; y <= endY; y++)
-			{
-				for (int x = startX; x <= endX; x++)
-				{
-					int dx = x - center.X;
-					int dy = y - center.Y;
+            // Pass 1: Distance-weighted Inpainting
+            for (int y = startY; y <= endY; y++)
+            {
+                for (int x = startX; x <= endX; x++)
+                {
+                    int dx = x - center.X;
+                    int dy = y - center.Y;
 
-					if ((dx * dx) + (dy * dy) <= radiusSq)
-					{
-						double totalWeight = 0;
-						double rSum = 0, gSum = 0, bSum = 0;
+                    if ((dx * dx) + (dy * dy) <= radiusSq)
+                    {
+                        double totalWeight = 0;
+                        double rSum = 0, gSum = 0, bSum = 0;
 
-						for (int ny = -3; ny <= 3; ny++)
-						{
-							int sampleY = y + ny;
-							if (sampleY < startY || sampleY > endY) continue;
+                        for (int ny = -3; ny <= 3; ny++)
+                        {
+                            int sampleY = y + ny;
+                            if (sampleY < startY || sampleY > endY) continue;
 
-							for (int nx = -3; nx <= 3; nx++)
-							{
-								int sampleX = x + nx;
-								if (sampleX < startX || sampleX > endX) continue;
+                            for (int nx = -3; nx <= 3; nx++)
+                            {
+                                int sampleX = x + nx;
+                                if (sampleX < startX || sampleX > endX) continue;
 
-								int sdx = sampleX - center.X;
-								int sdy = sampleY - center.Y;
-								if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
+                                int sdx = sampleX - center.X;
+                                int sdy = sampleY - center.Y;
+                                if ((sdx * sdx) + (sdy * sdy) <= radiusSq) continue;
 
-								double distance = Math.Sqrt((nx * nx) + (ny * ny));
-								if (distance == 0) continue;
+                                double distance = Math.Sqrt((nx * nx) + (ny * ny));
+                                if (distance == 0) continue;
 
-								double weight = 1.0 / distance;
-								byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
+                                double weight = 1.0 / distance;
+                                byte* samplePtr = scan0 + (sampleY * data.Stride) + (sampleX * bytesPerPixel);
 
-								bSum += samplePtr[0] * weight;
-								gSum += samplePtr[1] * weight;
-								rSum += samplePtr[2] * weight;
-								totalWeight += weight;
-							}
-						}
+                                bSum += samplePtr[0] * weight;
+                                gSum += samplePtr[1] * weight;
+                                rSum += samplePtr[2] * weight;
+                                totalWeight += weight;
+                            }
+                        }
 
-						if (totalWeight > 0)
-						{
-							byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
-							targetPtr[0] = (byte)(bSum / totalWeight);
-							targetPtr[1] = (byte)(gSum / totalWeight);
-							targetPtr[2] = (byte)(rSum / totalWeight);
-						}
-					}
-				}
-			}
+                        if (totalWeight > 0)
+                        {
+                            byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+                            targetPtr[0] = (byte)(bSum / totalWeight);
+                            targetPtr[1] = (byte)(gSum / totalWeight);
+                            targetPtr[2] = (byte)(rSum / totalWeight);
+                        }
+                    }
+                }
+            }
 
-			// Pass 2: Selective Gaussian Blur on the patch boundaries
-			// Create a local backup buffer for the patch area to pull clean source values
-			int bufferWidth = endX - startX + 1;
-			int bufferHeight = endY - startY + 1;
-			byte[] localBuffer = new byte[bufferWidth * bufferHeight * bytesPerPixel];
+            // Pass 2: Selective Gaussian Blur on the patch boundaries
+            // Create a local backup buffer for the patch area to pull clean source values
+            int bufferWidth = endX - startX + 1;
+            int bufferHeight = endY - startY + 1;
+            byte[] localBuffer = new byte[bufferWidth * bufferHeight * bytesPerPixel];
 
-			for (int y = startY; y <= endY; y++)
-			{
-				for (int x = startX; x <= endX; x++)
-				{
-					int localIdx = ((y - startY) * bufferWidth + (x - startX)) * bytesPerPixel;
-					byte* srcPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
-					localBuffer[localIdx] = srcPtr[0];
-					localBuffer[localIdx + 1] = srcPtr[1];
-					localBuffer[localIdx + 2] = srcPtr[2];
-				}
-			}
+            for (int y = startY; y <= endY; y++)
+            {
+                for (int x = startX; x <= endX; x++)
+                {
+                    int localIdx = ((y - startY) * bufferWidth + (x - startX)) * bytesPerPixel;
+                    byte* srcPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+                    localBuffer[localIdx] = srcPtr[0];
+                    localBuffer[localIdx + 1] = srcPtr[1];
+                    localBuffer[localIdx + 2] = srcPtr[2];
+                }
+            }
 
-			// 3x3 Gaussian Kernel configuration Matrix
-			double[] kernel = { 1/16d, 2/16d, 1/16d, 2/16d, 4/16d, 2/16d, 1/16d, 2/16d, 1/16d };
+            // 3x3 Gaussian Kernel configuration Matrix
+            double[] kernel = { 1/16d, 2/16d, 1/16d, 2/16d, 4/16d, 2/16d, 1/16d, 2/16d, 1/16d };
 
-			// Blur the perimeter to remove harsh patch seams
-			for (int y = startY; y <= endY; y++)
-			{
-				for (int x = startX; x <= endX; x++)
-				{
-					int dx = x - center.X;
-					int dy = y - center.Y;
-					double dist = Math.Sqrt((dx * dx) + (dy * dy));
+            // Blur the perimeter to remove harsh patch seams
+            for (int y = startY; y <= endY; y++)
+            {
+                for (int x = startX; x <= endX; x++)
+                {
+                    int dx = x - center.X;
+                    int dy = y - center.Y;
+                    double dist = Math.Sqrt((dx * dx) + (dy * dy));
 
-					// Target the edge border region of the blemish circle
-					if (dist >= radius - 2 && dist <= radius + 2)
-					{
-						double bSum = 0, gSum = 0, rSum = 0;
-						int kIdx = 0;
+                    // Target the edge border region of the blemish circle
+                    if (dist >= radius - 2 && dist <= radius + 2)
+                    {
+                        double bSum = 0, gSum = 0, rSum = 0;
+                        int kIdx = 0;
 
-						for (int ky = -1; ky <= 1; ky++)
-						{
-							int sampleY = Math.Clamp(y + ky, startY, endY);
-							for (int kx = -1; kx <= 1; kx++)
-							{
-								int sampleX = Math.Clamp(x + kx, startX, endX);
-								int bufIdx = ((sampleY - startY) * bufferWidth + (sampleX - startX)) * bytesPerPixel;
-								double weight = kernel[kIdx++];
+                        for (int ky = -1; ky <= 1; ky++)
+                        {
+                            int sampleY = Math.Clamp(y + ky, startY, endY);
+                            for (int kx = -1; kx <= 1; kx++)
+                            {
+                                int sampleX = Math.Clamp(x + kx, startX, endX);
+                                int bufIdx = ((sampleY - startY) * bufferWidth + (sampleX - startX)) * bytesPerPixel;
+                                double weight = kernel[kIdx++];
 
-								bSum += localBuffer[bufIdx] * weight;
-								gSum += localBuffer[bufIdx + 1] * weight;
-								rSum += localBuffer[bufIdx + 2] * weight;
-							}
-						}
+                                bSum += localBuffer[bufIdx] * weight;
+                                gSum += localBuffer[bufIdx + 1] * weight;
+                                rSum += localBuffer[bufIdx + 2] * weight;
+                            }
+                        }
 
-						byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
-						targetPtr[0] = (byte)bSum;
-						targetPtr[1] = (byte)gSum;
-						targetPtr[2] = (byte)rSum;
-					}
-				}
-			}
+                        byte* targetPtr = scan0 + (y * data.Stride) + (x * bytesPerPixel);
+                        targetPtr[0] = (byte)bSum;
+                        targetPtr[1] = (byte)gSum;
+                        targetPtr[2] = (byte)rSum;
+                    }
+                }
+            }
 
-			bmp.UnlockBits(data);
-			bmp.Save(outputPath, ImageFormat.Png);
-		}
-	}
+            bmp.UnlockBits(data);
+            bmp.Save(outputPath, ImageFormat.Png);
+        }
+    }
 }
 
 
@@ -736,39 +736,39 @@ using SixLabors.ImageSharp.Processing;
 
 public static void RemoveBlemish(string inputPath, string outputPath)
 {
-	using Image<Rgba32> image = Image.Load<Rgba32>(inputPath);
+    using Image<Rgba32> image = Image.Load<Rgba32>(inputPath);
 
-	// 1. Define your points (X, Y)
-	Point blemishCenter = new Point(350, 420); // Where the pimple/spot is
-	Point cleanSkinCenter = new Point(380, 420); // Nearby clear skin to sample from
-	int radius = 15;
+    // 1. Define your points (X, Y)
+    Point blemishCenter = new Point(350, 420); // Where the pimple/spot is
+    Point cleanSkinCenter = new Point(380, 420); // Nearby clear skin to sample from
+    int radius = 15;
 
-	// 2. Crop out the clean skin sample area
-	Rectangle sampleArea = new Rectangle(cleanSkinCenter.X - radius, cleanSkinCenter.Y - radius, radius * 2, radius * 2);
-	using Image<Rgba32> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
+    // 2. Crop out the clean skin sample area
+    Rectangle sampleArea = new Rectangle(cleanSkinCenter.X - radius, cleanSkinCenter.Y - radius, radius * 2, radius * 2);
+    using Image<Rgba32> cleanPatch = image.Clone(ctx => ctx.Crop(sampleArea));
 
-	// 3. Create a circular feather mask so the patch edges blend seamlessly
-	using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
-	mask.Mutate(ctx =>
-	{
-		// Fill the background with black (transparent)
-		ctx.Clear(Color.Black);
-		
-		// Draw a soft, anti-aliased white circle to represent brush pressure
-		var options = new DrawingOptions { GraphicsOptions = new GraphicsOptions { Antialias = true } };
-		ctx.Fill(options, Color.White, new SixLabors.ImageSharp.Drawing.EllipsePolygon(radius, radius, radius));
-		
-		// Apply a slight BoxBlur to create a "feathered" edge transition
-		ctx.BoxBlur(3); 
-	});
+    // 3. Create a circular feather mask so the patch edges blend seamlessly
+    using var mask = new Image<L8>(cleanPatch.Width, cleanPatch.Height);
+    mask.Mutate(ctx =>
+    {
+        // Fill the background with black (transparent)
+        ctx.Clear(Color.Black);
+        
+        // Draw a soft, anti-aliased white circle to represent brush pressure
+        var options = new DrawingOptions { GraphicsOptions = new GraphicsOptions { Antialias = true } };
+        ctx.Fill(options, Color.White, new SixLabors.ImageSharp.Drawing.EllipsePolygon(radius, radius, radius));
+        
+        // Apply a slight BoxBlur to create a "feathered" edge transition
+        ctx.BoxBlur(3); 
+    });
 
-	// 4. Apply the soft alpha mask directly onto our clean patch clone
-	cleanPatch.Mutate(ctx => ctx.SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn).DrawImage(mask, 1f));
+    // 4. Apply the soft alpha mask directly onto our clean patch clone
+    cleanPatch.Mutate(ctx => ctx.SetGraphicsOptions(o => o.AlphaCompositionMode = PixelAlphaCompositionMode.DestIn).DrawImage(mask, 1f));
 
-	// 5. Stamp the feathered clean skin onto the blemish spot
-	image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(blemishCenter.X - radius, blemishCenter.Y - radius), 1f));
+    // 5. Stamp the feathered clean skin onto the blemish spot
+    image.Mutate(ctx => ctx.DrawImage(cleanPatch, new Point(blemishCenter.X - radius, blemishCenter.Y - radius), 1f));
 
-	image.Save(outputPath);
+    image.Save(outputPath);
 }
 
 using System;
@@ -778,141 +778,141 @@ using SixLabors.ImageSharp.PixelFormats;
 
 public class TextureInpainter
 {
-	private const int PatchSize = 7; // Must be an odd number (e.g., 5x5, 7x7)
-	private const int HalfPatch = PatchSize / 2;
+    private const int PatchSize = 7; // Must be an odd number (e.g., 5x5, 7x7)
+    private const int HalfPatch = PatchSize / 2;
 
-	public static void Inpaint(string inputImagePath, string maskImagePath, string outputImagePath)
-	{
-		using Image<Rgb24> sourceImage = Image.Load<Rgb24>(inputImagePath);
-		using Image<L8> maskImage = Image.Load<L8>(maskImagePath);
+    public static void Inpaint(string inputImagePath, string maskImagePath, string outputImagePath)
+    {
+        using Image<Rgb24> sourceImage = Image.Load<Rgb24>(inputImagePath);
+        using Image<L8> maskImage = Image.Load<L8>(maskImagePath);
 
-		int width = sourceImage.Width;
-		int height = sourceImage.Height;
+        int width = sourceImage.Width;
+        int height = sourceImage.Height;
 
-		// Keep track of which pixels still need to be filled (255 = mask/missing, 0 = known)
-		byte[,] maskMatrix = new byte[width, height];
-		maskImage.ProcessPixelRows(accessor =>
-		{
-			for (int y = 0; y < height; y++)
-			{
-				var row = accessor.GetRowSpan(y);
-				for (int x = 0; x < width; x++)
-				{
-					// If mask pixel is bright, mark it as missing
-					maskMatrix[x, y] = (byte)(row[x].PackedValue > 128 ? 255 : 0);
-				}
-			}
-		});
+        // Keep track of which pixels still need to be filled (255 = mask/missing, 0 = known)
+        byte[,] maskMatrix = new byte[width, height];
+        maskImage.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < height; y++)
+            {
+                var row = accessor.GetRowSpan(y);
+                for (int x = 0; x < width; x++)
+                {
+                    // If mask pixel is bright, mark it as missing
+                    maskMatrix[x, y] = (byte)(row[x].PackedValue > 128 ? 255 : 0);
+                }
+            }
+        });
 
-		bool pixelsFilled;
-		do
-		{
-			pixelsFilled = false;
+        bool pixelsFilled;
+        do
+        {
+            pixelsFilled = false;
 
-			// Iterate through the image to find the "border" of the mask
-			for (int y = HalfPatch; y < height - HalfPatch; y++)
-			{
-				for (int x = HalfPatch; x < width - HalfPatch; x++)
-				{
-					// We only want to fill pixels that are currently inside the mask
-					// but adjacent to known pixels (the iterative boundary)
-					if (maskMatrix[x, y] == 255 && IsOnMaskBorder(x, y, maskMatrix))
-					{
-						// Find the best source patch from known areas
-						var (bestX, bestY) = FindBestMatch(x, y, sourceImage, maskMatrix, width, height);
+            // Iterate through the image to find the "border" of the mask
+            for (int y = HalfPatch; y < height - HalfPatch; y++)
+            {
+                for (int x = HalfPatch; x < width - HalfPatch; x++)
+                {
+                    // We only want to fill pixels that are currently inside the mask
+                    // but adjacent to known pixels (the iterative boundary)
+                    if (maskMatrix[x, y] == 255 && IsOnMaskBorder(x, y, maskMatrix))
+                    {
+                        // Find the best source patch from known areas
+                        var (bestX, bestY) = FindBestMatch(x, y, sourceImage, maskMatrix, width, height);
 
-						if (bestX != -1 && bestY != -1)
-						{
-							// Fill the target pixel with the best match pixel
-							sourceImage[x, y] = sourceImage[bestX, bestY];
-							maskMatrix[x, y] = 0; // Mark as filled
-							pixelsFilled = true;
-						}
-					}
-				}
-			}
-			// Repeat until no more border pixels can be filled or mask is clear
-		} while (pixelsFilled);
+                        if (bestX != -1 && bestY != -1)
+                        {
+                            // Fill the target pixel with the best match pixel
+                            sourceImage[x, y] = sourceImage[bestX, bestY];
+                            maskMatrix[x, y] = 0; // Mark as filled
+                            pixelsFilled = true;
+                        }
+                    }
+                }
+            }
+            // Repeat until no more border pixels can be filled or mask is clear
+        } while (pixelsFilled);
 
-		sourceImage.Save(outputImagePath);
-	}
+        sourceImage.Save(outputImagePath);
+    }
 
-	private static bool IsOnMaskBorder(int targetX, int targetY, byte[,] maskMatrix)
-	{
-		// Checks 4-connectivity neighbors to see if any neighbor is already a known pixel (0)
-		return maskMatrix[targetX + 1, targetY] == 0 ||
-			   maskMatrix[targetX - 1, targetY] == 0 ||
-			   maskMatrix[targetX, targetY + 1] == 0 ||
-			   maskMatrix[targetX, targetY - 1] == 0;
-	}
+    private static bool IsOnMaskBorder(int targetX, int targetY, byte[,] maskMatrix)
+    {
+        // Checks 4-connectivity neighbors to see if any neighbor is already a known pixel (0)
+        return maskMatrix[targetX + 1, targetY] == 0 ||
+               maskMatrix[targetX - 1, targetY] == 0 ||
+               maskMatrix[targetX, targetY + 1] == 0 ||
+               maskMatrix[targetX, targetY - 1] == 0;
+    }
 
-	private static (int x, int y) FindBestMatch(int targetX, int targetY, Image<Rgb24> img, byte[,] mask, int width, int height)
-	{
-		double minError = double.MaxValue;
-		int bestX = -1, bestY = -1;
+    private static (int x, int y) FindBestMatch(int targetX, int targetY, Image<Rgb24> img, byte[,] mask, int width, int height)
+    {
+        double minError = double.MaxValue;
+        int bestX = -1, bestY = -1;
 
-		// Step-size to speed up searching. Lower step = better quality, slower speed.
-		int searchStep = 4; 
+        // Step-size to speed up searching. Lower step = better quality, slower speed.
+        int searchStep = 4; 
 
-		// Scan the whole image looking for a valid template patch
-		for (int sy = HalfPatch; sy < height - HalfPatch; sy += searchStep)
-		{
-			for (int sx = HalfPatch; sx < width - HalfPatch; sx += searchStep)
-			{
-				// Source patch must be entirely in the KNOWN region
-				if (IsPatchEntirelyKnown(sx, sy, mask))
-				{
-					double error = CalculatePatchError(targetX, targetY, sx, sy, img, mask);
+        // Scan the whole image looking for a valid template patch
+        for (int sy = HalfPatch; sy < height - HalfPatch; sy += searchStep)
+        {
+            for (int sx = HalfPatch; sx < width - HalfPatch; sx += searchStep)
+            {
+                // Source patch must be entirely in the KNOWN region
+                if (IsPatchEntirelyKnown(sx, sy, mask))
+                {
+                    double error = CalculatePatchError(targetX, targetY, sx, sy, img, mask);
 
-					if (error < minError)
-					{
-						minError = error;
-						bestX = sx;
-						bestY = sy;
-					}
-				}
-			}
-		}
+                    if (error < minError)
+                    {
+                        minError = error;
+                        bestX = sx;
+                        bestY = sy;
+                    }
+                }
+            }
+        }
 
-		return (bestX, bestY);
-	}
+        return (bestX, bestY);
+    }
 
-	private static bool IsPatchEntirelyKnown(int cx, int cy, byte[,] mask)
-	{
-		for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
-		{
-			for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
-			{
-				if (mask[cx + dx, cy + dy] != 0) return false;
-			}
-		}
-		return true;
-	}
+    private static bool IsPatchEntirelyKnown(int cx, int cy, byte[,] mask)
+    {
+        for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
+        {
+            for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
+            {
+                if (mask[cx + dx, cy + dy] != 0) return false;
+            }
+        }
+        return true;
+    }
 
-	private static double CalculatePatchError(int tx, int ty, int sx, int sy, Image<Rgb24> img, byte[,] mask)
-	{
-		double ssd = 0; // Sum of Squared Differences
+    private static double CalculatePatchError(int tx, int ty, int sx, int sy, Image<Rgb24> img, byte[,] mask)
+    {
+        double ssd = 0; // Sum of Squared Differences
 
-		for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
-		{
-			for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
-			{
-				// Only compare pixels that are KNOWN in the target patch
-				if (mask[tx + dx, ty + dy] == 0)
-				{
-					Rgb24 pTarget = img[tx + dx, ty + dy];
-					Rgb24 pSource = img[sx + dx, sy + dy];
+        for (int dy = -HalfPatch; dy <= HalfPatch; dy++)
+        {
+            for (int dx = -HalfPatch; dx <= HalfPatch; dx++)
+            {
+                // Only compare pixels that are KNOWN in the target patch
+                if (mask[tx + dx, ty + dy] == 0)
+                {
+                    Rgb24 pTarget = img[tx + dx, ty + dy];
+                    Rgb24 pSource = img[sx + dx, sy + dy];
 
-					double dr = pTarget.R - pSource.R;
-					double dg = pTarget.G - pSource.G;
-					double db = pTarget.B - pSource.B;
+                    double dr = pTarget.R - pSource.R;
+                    double dg = pTarget.G - pSource.G;
+                    double db = pTarget.B - pSource.B;
 
-					ssd += (dr * dr) + (dg * dg) + (db * db);
-				}
-			}
-		}
-		return ssd;
-	}
+                    ssd += (dr * dr) + (dg * dg) + (db * db);
+                }
+            }
+        }
+        return ssd;
+    }
 }
 
 
@@ -924,101 +924,598 @@ using System.Threading.Tasks;
 
 public class AdvancedHighlightRecovery
 {
-	/// <summary>
-	/// Reconstructs highlights by propagating neighboring valid colors into clipped areas.
-	/// </summary>
-	/// <param name="width">Width of the image in pixels.</param>
-	/// <param name="height">Height of the image in pixels.</param>
-	/// <param name="rgbData">Interleaved RGB byte data [R,G,B, R,G,B...].</param>
-	/// <param name="clippingThreshold">Threshold above which data is considered missing/clipped.</param>
-	/// <param name="searchRadius">How far (in pixels) the algorithm looks for valid surrounding colors.</param>
-	public static void ColorPropagationReconstruction(int width, int height, byte[] rgbData, byte clippingThreshold = 250, int searchRadius = 5)
-	{
-		if (rgbData == null) throw new ArgumentNullException(nameof(rgbData));
-		if (rgbData.Length != width * height * 3) throw new ArgumentException("Data length does not match image dimensions.");
+    /// <summary>
+    /// Reconstructs highlights by propagating neighboring valid colors into clipped areas.
+    /// </summary>
+    /// <param name="width">Width of the image in pixels.</param>
+    /// <param name="height">Height of the image in pixels.</param>
+    /// <param name="rgbData">Interleaved RGB byte data [R,G,B, R,G,B...].</param>
+    /// <param name="clippingThreshold">Threshold above which data is considered missing/clipped.</param>
+    /// <param name="searchRadius">How far (in pixels) the algorithm looks for valid surrounding colors.</param>
+    public static void ColorPropagationReconstruction(int width, int height, byte[] rgbData, byte clippingThreshold = 250, int searchRadius = 5)
+    {
+        if (rgbData == null) throw new ArgumentNullException(nameof(rgbData));
+        if (rgbData.Length != width * height * 3) throw new ArgumentException("Data length does not match image dimensions.");
 
-		// Allocate a mirror array so calculations don't bleed into updating data destructively mid-pass
-		byte[] outputData = new byte[rgbData.Length];
-		Array.Copy(rgbData, outputData, rgbData.Length);
+        // Allocate a mirror array so calculations don't bleed into updating data destructively mid-pass
+        byte[] outputData = new byte[rgbData.Length];
+        Array.Copy(rgbData, outputData, rgbData.Length);
 
-		// Process rows in parallel
-		Parallel.For(0, height, y =>
-		{
-			for (int x = 0; x < width; x++)
-			{
-				int currentOffset = (y * width + x) * 3;
+        // Process rows in parallel
+        Parallel.For(0, height, y =>
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int currentOffset = (y * width + x) * 3;
 
-				byte r = rgbData[currentOffset];
-				byte g = rgbData[currentOffset + 1];
-				byte b = rgbData[currentOffset + 2];
+                byte r = rgbData[currentOffset];
+                byte g = rgbData[currentOffset + 1];
+                byte b = rgbData[currentOffset + 2];
 
-				// Check if this pixel is clipped in ANY channel
-				if (r >= clippingThreshold || g >= clippingThreshold || b >= clippingThreshold)
-				{
-					double totalWeight = 0;
-					double sumR = 0, sumG = 0, sumB = 0;
+                // Check if this pixel is clipped in ANY channel
+                if (r >= clippingThreshold || g >= clippingThreshold || b >= clippingThreshold)
+                {
+                    double totalWeight = 0;
+                    double sumR = 0, sumG = 0, sumB = 0;
 
-					// Kernel window search to find unclipped anchor pixels nearby
-					for (int ky = -searchRadius; ky <= searchRadius; ky++)
-					{
-						int ny = y + ky;
-						if (ny < 0 || ny >= height) continue;
+                    // Kernel window search to find unclipped anchor pixels nearby
+                    for (int ky = -searchRadius; ky <= searchRadius; ky++)
+                    {
+                        int ny = y + ky;
+                        if (ny < 0 || ny >= height) continue;
 
-						for (int kx = -searchRadius; kx <= searchRadius; kx++)
-						{
-							int nx = x + kx;
-							if (nx < 0 || nx >= width) continue;
+                        for (int kx = -searchRadius; kx <= searchRadius; kx++)
+                        {
+                            int nx = x + kx;
+                            if (nx < 0 || nx >= width) continue;
 
-							int neighborOffset = (ny * width + nx) * 3;
-							byte nr = rgbData[neighborOffset];
-							byte ng = rgbData[neighborOffset + 1];
-							byte nb = rgbData[neighborOffset + 2];
+                            int neighborOffset = (ny * width + nx) * 3;
+                            byte nr = rgbData[neighborOffset];
+                            byte ng = rgbData[neighborOffset + 1];
+                            byte nb = rgbData[neighborOffset + 2];
 
-							// Ensure the neighbor pixel is safe and completely unclipped
-							if (nr < clippingThreshold && ng < clippingThreshold && nb < clippingThreshold)
-							{
-								// Spatial distance weighting (Inverse Distance Weighting - IDW)
-								double distanceSq = (kx * kx) + (ky * ky);
-								if (distanceSq == 0) distanceSq = 0.01; // Avoid division by zero
-								
-								double weight = 1.0 / Math.Sqrt(distanceSq);
+                            // Ensure the neighbor pixel is safe and completely unclipped
+                            if (nr < clippingThreshold && ng < clippingThreshold && nb < clippingThreshold)
+                            {
+                                // Spatial distance weighting (Inverse Distance Weighting - IDW)
+                                double distanceSq = (kx * kx) + (ky * ky);
+                                if (distanceSq == 0) distanceSq = 0.01; // Avoid division by zero
+                                
+                                double weight = 1.0 / Math.Sqrt(distanceSq);
 
-								sumR += nr * weight;
-								sumG += ng * weight;
-								sumB += nb * weight;
-								totalWeight += weight;
-							}
-						}
-					}
+                                sumR += nr * weight;
+                                sumG += ng * weight;
+                                sumB += nb * weight;
+                                totalWeight += weight;
+                            }
+                        }
+                    }
 
-					if (totalWeight > 0)
-					{
-						// Successfully found nearby colors! Propagate them while maintaining the pixel's relative brightness.
-						byte propR = (byte)Math.Clamp(sumR / totalWeight, 0, 255);
-						byte propG = (byte)Math.Clamp(sumG / totalWeight, 0, 255);
-						byte propB = (byte)Math.Clamp(sumB / totalWeight, 0, 255);
+                    if (totalWeight > 0)
+                    {
+                        // Successfully found nearby colors! Propagate them while maintaining the pixel's relative brightness.
+                        byte propR = (byte)Math.Clamp(sumR / totalWeight, 0, 255);
+                        byte propG = (byte)Math.Clamp(sumG / totalWeight, 0, 255);
+                        byte propB = (byte)Math.Clamp(sumB / totalWeight, 0, 255);
 
-						// Fallback constraint: If a single channel wasn't completely blown out, 
-						// we can optionally blend the original structure. For flat inpainting, overwrite entirely:
-						outputData[currentOffset]     = propR;
-						outputData[currentOffset + 1] = propG;
-						outputData[currentOffset + 2] = propB;
-					}
-					else
-					{
-						// Deep clipping fallback: If we are deep inside a huge clipped block 
-						// and found no nearby colors, degrade smoothly to a standard clamp/neutral white.
-						byte whiteCap = Math.Min(r, Math.Min(g, b));
-						outputData[currentOffset]     = whiteCap;
-						outputData[currentOffset + 1] = whiteCap;
-						outputData[currentOffset + 2] = whiteCap;
-					}
-				}
-			}
-		});
+                        // Fallback constraint: If a single channel wasn't completely blown out, 
+                        // we can optionally blend the original structure. For flat inpainting, overwrite entirely:
+                        outputData[currentOffset]     = propR;
+                        outputData[currentOffset + 1] = propG;
+                        outputData[currentOffset + 2] = propB;
+                    }
+                    else
+                    {
+                        // Deep clipping fallback: If we are deep inside a huge clipped block 
+                        // and found no nearby colors, degrade smoothly to a standard clamp/neutral white.
+                        byte whiteCap = Math.Min(r, Math.Min(g, b));
+                        outputData[currentOffset]     = whiteCap;
+                        outputData[currentOffset + 1] = whiteCap;
+                        outputData[currentOffset + 2] = whiteCap;
+                    }
+                }
+            }
+        });
 
-		// Write the completed propagated results back to the original array buffer
-		Array.Copy(outputData, rgbData, rgbData.Length);
-	}
+        // Write the completed propagated results back to the original array buffer
+        Array.Copy(outputData, rgbData, rgbData.Length);
+    }
 }
 
+
+
+
+-----------
+
+
+To implement a simplified AgX tone mapping algorithm in ImageSharp, you can leverage a custom pixel processor.
+The essence of the AgX display transform (popularized by Blender) consists of four main phases:
+1. Source Conversion & Inset Matrix: Multiplying by an inset matrix to compress/attenuate color primaries, preparing highly saturated colors for a graceful transition to white.
+2. Log2 Encoding: Shifting linear values into a specific log space.
+3. Sigmoid Curve Processing: Applying a high-order polynomial or curve approximation to compress highlights smoothly.
+4. Outset Matrix & EOTF Conversion: Restoring or converting back via an outset matrix.
+Below is a complete, performance-optimized, single-pass implementation using a polynomial approximation (based on the standard IOLITE minimal AgX formulation) mapped to standard Rgba32 pixels.
+
+
+using System;
+using System.Numerics;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+
+public static class AgXExtensions
+{
+    public static IImageProcessingContext ApplyAgX(this IImageProcessingContext source, float exposure = 0.0f)
+    {
+        return source.ProcessPixelRowsAsVector4(vector =>
+        {
+            // Calculate exposure gain factor
+            float gain = MathF.Pow(2.0f, exposure);
+
+            // 1. AgX Inset Matrix (Converts linear sRGB to a safe compressed space)
+            Matrix4x4 insetMatrix = new Matrix4x4(
+                0.8424790622910705f, 0.0784335882672535f, 0.0792237452399238f, 0f,
+                0.0423282422610214f, 0.8784686367468172f, 0.0791616335198274f, 0f,
+                0.0423756549057283f, 0.0784336322695507f, 0.8794228784260021f, 0f,
+                0f,                  0f,                  0f,                  1f
+            );
+
+            // 4. AgX Outset Matrix (Converts back to standard display primaries)
+            Matrix4x4 outsetMatrix = new Matrix4x4(
+                 1.1968219054703977f, -0.0980863776228302f, -0.0990256157833118f, 0f,
+                -0.0588043922350720f,  1.1514112102194917f, -0.0989340054748197f, 0f,
+                -0.0588043922350720f, -0.0980863776228302f,  1.1510484557991953f, 0f,
+                 0f,                   0f,                   0f,                   1f
+            );
+
+            // Process every pixel linearly
+            for (int i = 0; i < vector.Length; i++)
+            {
+                Vector4 color = vector[i];
+
+                // Convert from display gamma (sRGB EOTF approximation) back into scene-referred Linear space
+                Vector3 linearColor = new Vector3(
+                    MathF.Pow(color.X, 2.2f),
+                    MathF.Pow(color.Y, 2.2f),
+                    MathF.Pow(color.Z, 2.2f)
+                ) * gain;
+
+                // Step 1: Apply Inset Matrix
+                Vector3 rgbSpace = Vector3.Transform(linearColor, insetMatrix);
+
+                // Step 2: Log2 Encoding (Avoid taking log of 0)
+                rgbSpace = Vector3.Max(rgbSpace, new Vector3(1e-10f));
+                Vector3 logColor = new Vector3(
+                    MathF.Log2(rgbSpace.X),
+                    MathF.Log2(rgbSpace.Y),
+                    MathF.Log2(rgbSpace.Z)
+                );
+                
+                // Map the targeted dynamic range [-12.47393, 4.026069] to [0.0, 1.0]
+                Vector3 logSpace = (logColor - new Vector3(-12.47393f)) / (4.026069f - (-12.47393f));
+                logSpace = Vector3.Clamp(logSpace, Vector3.Zero, Vector3.One);
+
+                // Step 3: Polynomial Sigmoid Approximation (6th-order curve fitting)
+                Vector3 sigmoidColor = ApplyAgXSigmoid(logSpace);
+
+                // Step 4: Apply Outset Matrix
+                Vector3 srgbLinear = Vector3.Transform(sigmoidColor, outsetMatrix);
+
+                // Apply EOTF gamma curve back to display-referred space 
+                vector[i] = new Vector4(
+                    MathF.Max(0f, MathF.Pow(MathF.Max(0f, srgbLinear.X), 1.0f / 2.2f)),
+                    MathF.Max(0f, MathF.Pow(MathF.Max(0f, srgbLinear.Y), 1.0f / 2.2f)),
+                    MathF.Max(0f, MathF.Pow(MathF.Max(0f, srgbLinear.Z), 1.0f / 2.2f)),
+                    color.W // Keep original alpha channel unchanged
+                );
+            }
+        });
+    }
+
+    private static Vector3 ApplyAgXSigmoid(Vector3 x)
+    {
+        // 6th-order polynomial terms modeling standard AgX lookup table behavior
+        Vector3 x2 = x * x;
+        Vector3 x3 = x2 * x;
+        Vector3 x4 = x3 * x;
+        Vector3 x5 = x4 * x;
+        Vector3 x6 = x5 * x;
+
+        return new Vector3(0.0f) +
+               new Vector3(0.15505485f) * x +
+               new Vector3(1.45070034f) * x2 +
+               new Vector3(-5.35245811f) * x3 +
+               new Vector3(10.13456721f) * x4 +
+               new Vector3(-9.24792617f) * x5 +
+               new Vector3(3.85966601f) * x6;
+    }
+}
+
+using (Image<Rgba32> image = Image.Load<Rgba32>("input.jpg"))
+{
+    image.Mutate(ctx => ctx.ApplyAgX(exposure: 1.5f)); // Boost exposure by 1.5 stops prior to mapping
+    image.Save("output_agx.jpg");
+}
+---
+
+https://iolite-engine.com/blog_posts/minimal_agx_implementation
+
+https://www.shadertoy.com/view/cd3XWr
+
+vec4 fromLinear(vec4 linearRGB) {
+  bvec4 cutoff = lessThan(linearRGB, vec4(0.0031308));
+  vec4 higher = vec4(1.055)*pow(linearRGB, vec4(1.0/2.4)) - vec4(0.055);
+  vec4 lower = linearRGB * vec4(12.92);
+
+  return mix(higher, lower, cutoff);
+}
+
+vec4 toLinear(vec4 sRGB) {
+  bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
+  vec4 higher = pow((sRGB + vec4(0.055))/vec4(1.055), vec4(2.4));
+  vec4 lower = sRGB/vec4(12.92);
+  
+  return mix(higher, lower, cutoff);
+}
+
+// https://www.shadertoy.com/view/dtSGD1
+vec3 colorGradients(vec2 fragCoord, vec3 iResolution) {
+  float h = floor(1.0+24.0*fragCoord.y/iResolution.y)/24.0 * 3.141592 * 2.;
+  float L = floor(fragCoord.x*24.0/iResolution.y)/(24.0/iResolution.y)/iResolution.x - 0.4;
+  vec3 color = cos(h + vec3(0.0,1.0,2.0)* 3.141592*2.0/3.0);
+  float maxRGB = max(color.r, max(color.g, color.b));
+  float minRGB = min(color.r, min(color.g, color.b));
+  
+  return exp(15.0*L)*(color-minRGB)/(maxRGB-minRGB);
+}// Minimal implementation of Troy Sobotka's AgX based on
+// 
+// https://github.com/sobotka/AgX
+//
+// using a 6th order polynomial approximation instead
+// of the more complex sigmoid function or lookup table.
+//
+// Some more details here: 
+// https://iolite-engine.com/blog_posts/minimal_agx_implementation
+//
+// Changelog
+// ---------
+// - Added "full round trip" based on Troy's feedback (https://www.shadertoy.com/view/mdcSDH)
+
+// Set to > 0 to show a video instead of the color gradients
+#define SHOW_VIDEO 0
+// 0: Default, 1: Golden, 2: Punchy
+#define AGX_LOOK 0
+
+// AgX
+// ->
+
+// Mean error^2: 3.6705141e-06
+vec3 agxDefaultContrastApprox(vec3 x) {
+  vec3 x2 = x * x;
+  vec3 x4 = x2 * x2;
+  
+  return + 15.5     * x4 * x2
+         - 40.14    * x4 * x
+         + 31.96    * x4
+         - 6.868    * x2 * x
+         + 0.4298   * x2
+         + 0.1191   * x
+         - 0.00232;
+}
+
+vec3 agx(vec3 val) {
+  const mat3 agx_mat = mat3(
+    0.842479062253094, 0.0423282422610123, 0.0423756549057051,
+    0.0784335999999992,  0.878468636469772,  0.0784336,
+    0.0792237451477643, 0.0791661274605434, 0.879142973793104);
+    
+  const float min_ev = -12.47393f;
+  const float max_ev = 4.026069f;
+
+  // Input transform
+  val = agx_mat * val;
+  
+  // Log2 space encoding
+  val = clamp(log2(val), min_ev, max_ev);
+  val = (val - min_ev) / (max_ev - min_ev);
+  
+  // Apply sigmoid function approximation
+  val = agxDefaultContrastApprox(val);
+
+  return val;
+}
+
+vec3 agxEotf(vec3 val) {
+  const mat3 agx_mat_inv = mat3(
+    1.19687900512017, -0.0528968517574562, -0.0529716355144438,
+    -0.0980208811401368, 1.15190312990417, -0.0980434501171241,
+    -0.0990297440797205, -0.0989611768448433, 1.15107367264116);
+    
+  // Undo input transform
+  val = agx_mat_inv * val;
+  
+  // sRGB IEC 61966-2-1 2.2 Exponent Reference EOTF Display
+  //val = pow(val, vec3(2.2));
+
+  return val;
+}
+
+vec3 agxLook(vec3 val) {  
+  // Default
+  vec3 offset = vec3(0.0);
+  vec3 slope = vec3(1.0);
+  vec3 power = vec3(1.0);
+  float sat = 1.0;
+ 
+#if AGX_LOOK == 1
+  // Golden
+  slope = vec3(1.0, 0.9, 0.5);
+  power = vec3(0.8);
+  sat = 0.8;
+#elif AGX_LOOK == 2
+  // Punchy
+  slope = vec3(1.0);
+  power = vec3(1.35, 1.35, 1.35);
+  sat = 1.4;
+#endif
+  
+  // ASC CDL
+  val = pow(val * slope + offset, power);
+  
+  const vec3 lw = vec3(0.2126, 0.7152, 0.0722);
+  float luma = dot(val, lw);
+  
+  return luma + sat * (val - luma);
+}
+
+// <-
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+  vec2 uv = fragCoord/iResolution.xy;
+  
+  vec3 col;
+#if SHOW_VIDEO > 0
+  col = textureLod(iChannel0, uv, 0.0).rgb;
+  col = toLinear(vec4(col, 1.0)).rgb;
+#else
+  col = colorGradients(fragCoord, iResolution);
+#endif
+  
+  // AgX
+  // ->
+  col = agx(col);
+  col = agxLook(col);
+  col = agxEotf(col);
+  // <-
+  
+  fragColor = vec4(col, 1.0);
+}
+
+
+-----------
+Step-by-Step Algorithm
+
+
+1. Input Mapping (Preset to Kelvin)
+
+Convert the selected lighting preset string or enumeration into a target color temperature in Kelvin (\(T_{target}\)) and, optionally, a green-magenta tint offset (\(Tint_{target}\)). Typical default lookup values mirror standard camera profiles:
+• Tungsten / Incandescent: ≈ 3,000K - 3,200K
+• Fluorescent: ≈ 4,000K - 4,200K
+• Daylight / Direct Sun: ≈ 5,000K - 5,200K
+• Flash: ≈ 5,400K - 5,600K
+• Cloudy: ≈ 6,000K - 6,500K
+• Shade: ≈ 7,500K - 8,000K
+
+
+
+2. Planckian Locus / Correlated Color Temperature (CCT) to xy Chromaticity
+
+Convert the target Kelvin temperature (T) to chromaticity coordinates (x, y) in the CIE 1931 or CIE 1960 space using approximation formulas (such as McCamy's approximation or empirical polynomial fits for the Planckian locus).
+
+3. Calculate Reference Sensor Gains \((R_{gain}, G_{gain}, B_{gain})\)
+
+To neutralize a light source of temperature T, the camera must scale the Red, Green, and Blue sensor channels inversely to the color of the ambient illumination:
+1. Determine the expected linear camera-native RGB response \((R_L, G_L, B_L)\) for a perfect diffuser under light source T.
+2. Normalize the green channel to 1.0 (or keep luminance neutral):
+    • \(G_{gain} = 1.0\)
+    • \(R_{gain} = f_R(T, Tint)\)
+    • \(B_{gain} = f_B(T, Tint)\)
+• Physical behavior of the math:
+    • As T is low (e.g., 3200K tungsten, which is warm/orange), the algorithm increases \(B_{gain}\) and decreases \(R_{gain}\) to neutralize the excess red/orange.
+    • As T is high (e.g., 8000K shade, which is cool/blue), the algorithm increases \(R_{gain}\) and decreases \(B_{gain}\) to warm up the blue shift.
+
+
+4. Apply the Gains to Raw Sensor Data
+
+For every pixel (r, g, b) in the linear raw image buffer, apply the diagonal Von Kries chromatic adaptation transform:
+\(r_{balanced}=r\times R_{gain}\)
+\(g_{balanced}=g\times G_{gain}\)
+\(b_{balanced}=b\times B_{gain}\)
+
+
+5. Apply Tint (Green-Magenta Axis) Adjustment
+
+Standard Kelvin adjustments only move along the blue-amber axis. To handle fluorescent or green/magenta spikes, apply a secondary multiplier scaling the green channel relative to red and blue:
+• If Tint > 0 (magenta shift), slightly boost green or scale R/B.
+• If Tint < 0 (green shift), attenuate the green channel gain (\(G_{gain} \times (1.0 - \text{offset})\)).
+
+using System;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
+public enum LightingPreset
+{
+    Tungsten,    // 3200K - Orange tint, needs high Blue gain
+    Fluorescent, // 4000K - Greenish/Yellow tint
+    Daylight,    // 5200K - Relatively neutral
+    Cloudy,      // 6500K - Slightly cool, needs minor Red boost
+    Shade        // 8000K - Blue tint, needs high Red gain
+}
+
+public class WhiteBalanceProcessor
+{
+    /// <summary>
+    /// Processes an image by applying multiplier gains based on a lighting preset.
+    /// </summary>
+    public static void ApplyPreset(Image<Rgb24> image, LightingPreset preset)
+    {
+        // 1. Map the preset to channel gains (R, G, B)
+        // These values represent inverse multipliers to neutralize the ambient light color.
+        var (rGain, gGain, bGain) = GetGainsForPreset(preset);
+
+        // 2. Process pixel rows efficiently in-place
+        image.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < accessor.Height; y++)
+            {
+                Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
+                
+                for (int x = 0; x < pixelRow.Length; x++)
+                {
+                    // Scale each channel and clamp between 0 and 255 to prevent overflow
+                    byte r = (byte)Math.Clamp(pixelRow[x].R * rGain, 0, 255);
+                    byte g = (byte)Math.Clamp(pixelRow[x].G * gGain, 0, 255);
+                    byte b = (byte)Math.Clamp(pixelRow[x].B * bGain, 0, 255);
+
+                    pixelRow[x] = new Rgb24(r, g, b);
+                }
+            }
+        });
+    }
+
+    /// <summary>
+    /// Looks up empirical Von Kries multipliers optimized for standard sensor responses.
+    /// </summary>
+    private static (float R, float G, float B) GetGainsForPreset(LightingPreset preset)
+    {
+        return preset switch
+        {
+            // Warm light source: Boost blue significantly, reduce red
+            LightingPreset.Tungsten    => (0.75f, 1.00f, 1.95f), 
+            
+            // Fluorescent: Compensate for green spike by boosting red and blue
+            LightingPreset.Fluorescent => (0.95f, 1.00f, 1.45f), 
+            
+            // Daylight: Baseline standard reference light
+            LightingPreset.Daylight    => (1.00f, 1.00f, 1.00f), 
+            
+            // Overcast: Slightly blue light, add minor red boost
+            LightingPreset.Cloudy      => (1.15f, 1.00f, 0.85f), 
+            
+            // Deep shade: Very blue light, add heavy red boost and suppress blue
+            LightingPreset.Shade       => (1.40f, 1.00f, 0.65f), 
+            
+            _ => (1.00f, 1.00f, 1.00f)
+        };
+    }
+}
+
+// Example Program Usage:
+// ====================
+// using var image = Image.Load<Rgb24>("input.jpg");
+// WhiteBalanceProcessor.ApplyPreset(image, LightingPreset.Tungsten);
+// image.Save("output.jpg");
+
+
+using System;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
+public enum LightingPreset
+{
+    Tungsten,
+    Fluorescent,
+    Daylight,
+    Cloudy,
+    Shade
+}
+
+public class ColorAccurateWhiteBalance
+{
+    public static void ApplyPreset(Image<Rgb24> image, LightingPreset preset)
+    {
+        // 1. Get the gain multipliers
+        var (rGain, gGain, bGain) = GetGainsForPreset(preset);
+
+        // 2. Process pixel rows using accurate gamma pipelines
+        image.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < accessor.Height; y++)
+            {
+                Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
+                
+                for (int x = 0; x < pixelRow.Length; x++)
+                {
+                    Rgb24 pixel = pixelRow[x];
+
+                    // Step A: Normalize [0-255] to [0.0-1.0] and convert to Linear RGB
+                    float rLinear = SrgbToLinear(pixel.R / 255f);
+                    float gLinear = SrgbToLinear(pixel.G / 255f);
+                    float bLinear = SrgbToLinear(pixel.B / 255f);
+
+                    // Step B: Apply White Balance Gains in linear space
+                    rLinear *= rGain;
+                    gLinear *= gGain;
+                    bLinear *= bGain;
+
+                    // Step C: Convert back to sRGB space and scale to [0-255]
+                    byte rOut = (byte)Math.Clamp(LinearToSrgb(rLinear) * 255f + 0.5f, 0, 255);
+                    byte gOut = (byte)Math.Clamp(LinearToSrgb(gLinear) * 255f + 0.5f, 0, 255);
+                    byte bOut = (byte)Math.Clamp(LinearToSrgb(bLinear) * 255f + 0.5f, 0, 255);
+
+                    pixelRow[x] = new Rgb24(rOut, gOut, bOut);
+                }
+            }
+        });
+    }
+
+    /// <summary>
+    /// Official IEC 61966-2-1 standard conversion from sRGB to Linear Space
+    /// </summary>
+    private static float SrgbToLinear(float srgb)
+    {
+        if (srgb <= 0.04045f)
+        {
+            return srgb / 12.92f;
+        }
+        return MathF.Pow((srgb + 0.055f) / 1.055f, 2.4f);
+    }
+
+    /// <summary>
+    /// Official IEC 61966-2-1 standard conversion from Linear Space to sRGB
+    /// </summary>
+    private static float LinearToSrgb(float linear)
+    {
+        if (linear <= 0.0031308f)
+        {
+            return linear * 12.92f;
+        }
+        return 1.055f * MathF.Pow(linear, 1.0f / 2.4f) - 0.055f;
+    }
+
+    private static (float R, float G, float B) GetGainsForPreset(LightingPreset preset)
+    {
+        // Note: Because linear space changes how colors blend, these coefficients 
+        // may require subtle tweaking compared to pure sRGB approximations.
+        return preset switch
+        {
+            LightingPreset.Tungsten    => (0.65f, 1.00f, 2.10f), 
+            LightingPreset.Fluorescent => (0.90f, 1.00f, 1.35f), 
+            LightingPreset.Daylight    => (1.00f, 1.00f, 1.00f), 
+            LightingPreset.Cloudy      => (1.12f, 1.00f, 0.88f), 
+            LightingPreset.Shade       => (1.35f, 1.00f, 0.70f), 
+            _ => (1.00f, 1.00f, 1.00f)
+        };
+    }
+}
+
+---  Sliders --- 
+
+Remove ticks for spotlight 
+
+Reduce range for Contrast 
+
+Remove sigma blur 
+
+Vibrance reduce range to -.75 to +0.75
