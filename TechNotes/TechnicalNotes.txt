@@ -1509,13 +1509,3 @@ public class ColorAccurateWhiteBalance
         };
     }
 }
-
----  Sliders --- 
-
-Remove ticks for spotlight 
-
-Reduce range for Contrast 
-
-Remove sigma blur 
-
-Vibrance reduce range to -.75 to +0.75

@@ -7,7 +7,7 @@ public sealed partial class ContrastToolboxViewModel :
 
     private ContrastStep.ContrastAlgorithm algorithm;
     private float contrast;
-    private float blur;
+    // private float blur;
     private float brightness;
     private float red;
     private float green;
@@ -19,11 +19,11 @@ public sealed partial class ContrastToolboxViewModel :
     [ObservableProperty]
     public partial double ContrastSliderValue { get; set; }
 
-    [ObservableProperty]
-    public partial string BlurString { get; set; } = string.Empty;
+    //[ObservableProperty]
+    //public partial string BlurString { get; set; } = string.Empty;
 
-    [ObservableProperty]
-    public partial double BlurSliderValue { get; set; }
+    //[ObservableProperty]
+    //public partial double BlurSliderValue { get; set; }
 
     [ObservableProperty]
     public partial string BrightnessString { get; set; } = string.Empty;
@@ -59,7 +59,7 @@ public sealed partial class ContrastToolboxViewModel :
         }
 
         this.contrast = 1.0f;
-        this.blur = 0.0f;
+        // this.blur = 0.0f;
         this.brightness = 0.0f;
 
         this.red = 3.0f;
@@ -70,8 +70,8 @@ public sealed partial class ContrastToolboxViewModel :
         {
             // Sliders initial positions and string values
             this.ContrastSliderValue = this.contrast;
-            this.BlurSliderValue = 0.5; // Force Property changed
-            this.BlurSliderValue = this.blur;
+            //this.BlurSliderValue = 0.5; // Force Property changed
+            //this.BlurSliderValue = this.blur;
             this.BrightnessSliderValue = 0.5; // Force Property changed
             this.BrightnessSliderValue = this.brightness;
 
@@ -97,7 +97,7 @@ public sealed partial class ContrastToolboxViewModel :
             // Here we need to undo the operations done reading the sliders 
             // No transform for the staturation threshold 
             this.ContrastSliderValue = step.ContrastAmount;
-            this.BlurSliderValue = step.BlurAmount;
+            // this.BlurSliderValue = step.BlurAmount;
             this.BrightnessSliderValue = step.BrightnessAmount;
 
             this.RedSliderValue = step.RedAmount;
@@ -115,14 +115,14 @@ public sealed partial class ContrastToolboxViewModel :
         this.UpdateModel();
     }
 
-    partial void OnBlurSliderValueChanged(double value)
-    {
-        // Slider sends 0.0 to +2.5, fine for the model  
-        this.algorithm = ContrastStep.ContrastAlgorithm.Global;
-        this.blur = (float)value;
-        this.BlurString = value.ToString("+0.00;-0.00;0.00");
-        this.UpdateModel();
-    }
+    //partial void OnBlurSliderValueChanged(double value)
+    //{
+    //    // Slider sends 0.0 to +2.5, fine for the model  
+    //    this.algorithm = ContrastStep.ContrastAlgorithm.Global;
+    //    this.blur = (float)value;
+    //    this.BlurString = value.ToString("+0.00;-0.00;0.00");
+    //    this.UpdateModel();
+    //}
 
     partial void OnBrightnessSliderValueChanged(double value)
     {
@@ -175,7 +175,7 @@ public sealed partial class ContrastToolboxViewModel :
             switch (this.algorithm)
             {
                 case ContrastStep.ContrastAlgorithm.Global:
-                    this.model.GlobalContrast(this.contrast, this.blur, this.brightness);
+                    this.model.GlobalContrast(this.contrast, 0.0f /*this.blur*/, this.brightness);
                     break;
 
                 case ContrastStep.ContrastAlgorithm.SCurves:

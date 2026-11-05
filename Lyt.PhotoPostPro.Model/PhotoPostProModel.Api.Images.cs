@@ -191,7 +191,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         });
 
 
-    public void GlobalContrast(float contrastAmount, float blurAmount, float brightnessAmount) =>
+    public void GlobalContrast(float contrastAmount, float _, float brightnessAmount) =>
         this.ApiAction(() =>
         {
             // contrastAmount == from 1.0 to 2.5  -- 1.0 -> No Change 
@@ -200,11 +200,11 @@ public sealed partial class PhotoPostProModel : ModelBase
                 return false;
             }
 
-            // blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
-            if ((blurAmount < 0.0) || (blurAmount > 1.5))
-            {
-                return false;
-            }
+            //// blurAmount == sigma from 0.0 to 1.5 - 0.0 -> No blur 
+            //if ((blurAmount < 0.0) || (blurAmount > 1.5))
+            //{
+            //    return false;
+            //}
 
             // brightnessAmount == from 0.0 to 0.5 - 0.0 -> No change 
             if ((brightnessAmount < 0.0) || (brightnessAmount > 0.5))
@@ -214,7 +214,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
             if (this.Workflow.CurrentStep is ContrastStep contrastStep)
             {
-                this.LastResultFrame = contrastStep.GlobalContrast(contrastAmount, blurAmount, brightnessAmount);
+                this.LastResultFrame = contrastStep.GlobalContrast(contrastAmount, 0.0f, brightnessAmount);
                 return true;
             }
 

@@ -9,8 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="72"
 
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:interactions="using:Lyt.Avalonia.Mvvm.Behaviors"
 	>	
 	<Grid
 		>
@@ -18,7 +16,7 @@
 			<RowDefinition Height="{StaticResource Size.PromptTwoLines}" /> <!-- Prompt Contrast--> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt Global --> 
-			<RowDefinition Height="{StaticResource Size.ThreeSliders}" /> <!-- Three sliders --> 
+			<RowDefinition Height="{StaticResource Size.TwoSliders}" /> <!-- Three sliders --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!--Spacer --> 
 			<RowDefinition Height="{StaticResource Size.PromptOneLine}" /> <!-- Prompt S-Curves --> 
 			<RowDefinition Height="{StaticResource Size.ThreeSliders}" /> <!-- Three sliders --> 
@@ -45,7 +43,6 @@
 			<Grid.RowDefinitions> 
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions> 
 				<ColumnDefinition Width="100" />
@@ -61,9 +58,9 @@
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
-				TickFrequency="0.5" TickPlacement="BottomRight"
+				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="1" Maximum="1.75"
+				Minimum="1" Maximum="1.5"
 				Value="{Binding ContrastSliderValue}"
 				/>
 			<TextBlock
@@ -72,7 +69,7 @@
 				HorizontalAlignment="Left"
 				Text="{Binding ContrastString}"
 				/>
-			<!-- Second Row Blur -->
+			<!-- Second Row Blur 
 			<TextBlock
 				Grid.Row="1" Grid.Column="0" 
 				Theme="{StaticResource Large}"
@@ -92,22 +89,23 @@
 				HorizontalAlignment="Left"
 				Text="{Binding BlurString}"
 				/>
-			<!-- Third Row Brightness -->
+			-->
+			<!-- SecondRow Brightness -->
 			<TextBlock
-				Grid.Row="2" Grid.Column="0" 
+				Grid.Row="1" Grid.Column="0" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Right"
 				Text="{DynamicResource Workflow.Contrast.BrightnessAmount}"
 				/>
 			<Slider 
-				Grid.Row="2" Grid.Column="1" 
+				Grid.Row="1" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
 				Minimum="0.0" Maximum="0.5"
 				Value="{Binding BrightnessSliderValue}"
 				/>
 			<TextBlock
-				Grid.Row="2" Grid.Column="2" 
+				Grid.Row="1" Grid.Column="2" 
 				Theme="{StaticResource Large}"
 				HorizontalAlignment="Left"
 				Text="{Binding BrightnessString}"

@@ -54,9 +54,9 @@
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
-				TickFrequency="0.5" TickPlacement="BottomRight"
+				TickFrequency="0.2" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.1"
-				Minimum="0.0" Maximum="2.5"
+				Minimum="0.0" Maximum="2.0"
 				Value="{Binding SaturationSliderValue}"
 				/>
 			<TextBlock
@@ -97,9 +97,9 @@
 				/>
 			<Slider 
 				Grid.Row="0" Grid.Column="1" 
-				TickFrequency="0.5" TickPlacement="BottomRight"
+				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.1"
-				Minimum="-1.0" Maximum="1.0"
+				Minimum="-0.5" Maximum="0.5"
 				Value="{Binding RedSliderValue}"
 				/>
 			<TextBlock
@@ -117,9 +117,9 @@
 				/>
 			<Slider 
 				Grid.Row="1" Grid.Column="1" 
-				TickFrequency="0.5" TickPlacement="BottomRight"
+				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.1"
-				Minimum="-1.0" Maximum="1.0"
+				Minimum="-0.5" Maximum="0.5"
 				Value="{Binding GreenSliderValue}"
 				/>
 			<TextBlock
@@ -137,9 +137,9 @@
 				/>
 			<Slider 
 				Grid.Row="2" Grid.Column="1" 
-				TickFrequency="0.5" TickPlacement="BottomRight"
+				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.1"
-				Minimum="-1.0" Maximum="1.0"
+				Minimum="-0.5" Maximum="0.5"
 				Value="{Binding BlueSliderValue}"
 				/>
 			<TextBlock
