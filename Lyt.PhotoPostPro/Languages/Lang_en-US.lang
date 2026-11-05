@@ -307,15 +307,15 @@
 
 	<!-- Workflow Composition -->
 	<system:String x:Key="Workflow.Compose.Title">Refining the Composition</system:String>
-	<system:String x:Key="Workflow.Compose.Croplines">Crop lines: </system:String>
+	<system:String x:Key="Workflow.Compose.Croplines">Crop lines</system:String>
 	<system:String x:Key="Workflow.Compose.Preview">Preview</system:String>
-	<system:String x:Key="Workflow.Compose.Top">Top:</system:String>
-	<system:String x:Key="Workflow.Compose.Bottom">Bottom:</system:String>
-	<system:String x:Key="Workflow.Compose.Left">Left:</system:String>
-	<system:String x:Key="Workflow.Compose.Right">Right:</system:String>
-	<system:String x:Key="Workflow.Compose.Width">Width:</system:String>
-	<system:String x:Key="Workflow.Compose.Height">Height:</system:String>
-	<system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio:</system:String>
+	<system:String x:Key="Workflow.Compose.Top">Top</system:String>
+	<system:String x:Key="Workflow.Compose.Bottom">Bottom</system:String>
+	<system:String x:Key="Workflow.Compose.Left">Left</system:String>
+	<system:String x:Key="Workflow.Compose.Right">Right</system:String>
+	<system:String x:Key="Workflow.Compose.Width">Width</system:String>
+	<system:String x:Key="Workflow.Compose.Height">Height</system:String>
+	<system:String x:Key="Workflow.Compose.AspectRatio">Aspect Ratio</system:String>
 	<system:String x:Key="Workflow.Compose.CompositionGuides">Select a composition guide:</system:String>
 
 	<!-- Composition Guides Combobox -->
@@ -348,35 +348,35 @@
 	<system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
 	<system:String x:Key="Workflow.Exposure.Correction">You can correct with any or all three methods combined: Gamma correction, Multiplicative gain or Additive Brightness Shift. </system:String>
 	<system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
-	<system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
-	<system:String x:Key="Workflow.Exposure.Gain">Gain:</system:String>
-	<system:String x:Key="Workflow.Exposure.Shift">Shift:</system:String>
+	<system:String x:Key="Workflow.Exposure.Gamma">Gamma</system:String>
+	<system:String x:Key="Workflow.Exposure.Gain">Gain</system:String>
+	<system:String x:Key="Workflow.Exposure.Shift">Shift</system:String>
 
 	<!-- Workflow Recovery -->
 	<system:String x:Key="Workflow.Recovery.Title">Highlights and Shadows</system:String>
 	<system:String x:Key="Workflow.Recovery.Correction">A non linear luminance algorithm to reveal and recover details in the image.</system:String>
 	<system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
-	<system:String x:Key="Workflow.Recovery.Highlights">Highlights:</system:String>
-	<system:String x:Key="Workflow.Recovery.Shadows">Shadows:</system:String>
+	<system:String x:Key="Workflow.Recovery.Highlights">Highlights</system:String>
+	<system:String x:Key="Workflow.Recovery.Shadows">Shadows</system:String>
 
 	<!-- Workflow Vignette -->
 	<system:String x:Key="Workflow.Vignette.Title">Selective Exposure Correction</system:String>
 	<system:String x:Key="Workflow.Vignette.Correction">Apply an exposure correction to selected sides of the image.</system:String>
-	<system:String x:Key="Workflow.Vignette.Sides">Sides:</system:String>
-	<system:String x:Key="Workflow.Vignette.Top">Top:</system:String>
-	<system:String x:Key="Workflow.Vignette.Bottom">Bottom:</system:String>
-	<system:String x:Key="Workflow.Vignette.Left">Left:</system:String>
+	<system:String x:Key="Workflow.Vignette.Sides">Sides</system:String>
+	<system:String x:Key="Workflow.Vignette.Top">Top</system:String>
+	<system:String x:Key="Workflow.Vignette.Bottom">Bottom</system:String>
+	<system:String x:Key="Workflow.Vignette.Left">Left</system:String>
 	<system:String x:Key="Workflow.Vignette.Right">Right</system:String>
-	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction:</system:String>
+	<system:String x:Key="Workflow.Vignette.Style">Dark or Light Correction</system:String>
 	<system:String x:Key="Workflow.Vignette.Strength">Strength: </system:String>
 
 	<!-- Workflow Spotlight -->
 	<system:String x:Key="Workflow.Spotlight.Title">Spotlight</system:String>
 	<system:String x:Key="Workflow.Spotlight.Correction">Apply an exposure correction in the shape of an ellipse over the image.</system:String>
-	<system:String x:Key="Workflow.Spotlight.Width">Width:</system:String>
-	<system:String x:Key="Workflow.Spotlight.Height">Height:</system:String>
-	<system:String x:Key="Workflow.Spotlight.Rotation">Rotation:</system:String>
-	<system:String x:Key="Workflow.Spotlight.Style">Dark or Light Correction:</system:String>
+	<system:String x:Key="Workflow.Spotlight.Width">Width</system:String>
+	<system:String x:Key="Workflow.Spotlight.Height">Height</system:String>
+	<system:String x:Key="Workflow.Spotlight.Rotation">Rotation</system:String>
+	<system:String x:Key="Workflow.Spotlight.Style">Dark or Light Correction</system:String>
 	<system:String x:Key="Workflow.Spotlight.Strength">Strength: </system:String>
 	
 	<!-- Workflow White Balance -->
@@ -397,9 +397,9 @@
 	<system:String x:Key="Workflow.Contrast.Title">Contrast Adjustment</system:String>
 	<system:String x:Key="Workflow.Contrast.Correction">Correct contrast globally or use S-Curves on each RGB channel.</system:String>
 	<system:String x:Key="Workflow.Contrast.Global">Global Adjustment</system:String>
-	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast:</system:String>
-	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma:</system:String>
-	<system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness:</system:String>
+	<system:String x:Key="Workflow.Contrast.ContrastAmount">Contrast</system:String>
+	<system:String x:Key="Workflow.Contrast.BlurAmount">Blur Sigma</system:String>
+	<system:String x:Key="Workflow.Contrast.BrightnessAmount">Brightness</system:String>
 	<system:String x:Key="Workflow.Contrast.SCurves">S-Curves</system:String>
 
 	<!-- Workflow Lut -->
@@ -438,14 +438,14 @@
 	<system:String x:Key="Workflow.Sharpen.Title">Sharpen</system:String>
 	<system:String x:Key="Workflow.Sharpen.Correction">Boosts local contrast along the edges of objects in the image.</system:String>
 	<system:String x:Key="Workflow.Sharpen.Global">Global Adjustment</system:String>
-	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+	<system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma</system:String>
 	<system:String x:Key="Workflow.Sharpen.Note">Note: Over-sharpening can be detrimental. It can introduce visible "halos" along edges and amplify digital noise.</system:String>
 
 	<!-- Workflow Filters -->
 	<system:String x:Key="Workflow.Filters.Title">Special Filters</system:String>
 	<system:String x:Key="Workflow.Filters.Correction">Apply special effects to the image.</system:String>
-	<system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale or Sepia:</system:String>
-	<system:String x:Key="Workflow.Filters.Amount">Amount:</system:String>
+	<system:String x:Key="Workflow.Filters.ExplainAmount">For Grayscale, Sepia, Vignette, Hue Rotation:</system:String>
+	<system:String x:Key="Workflow.Filters.Amount">Amount</system:String>
 	<!-- Filters Combobox -->
 	<system:String x:Key="Workflow.Filters.None"> - - None - -</system:String>
 	<system:String x:Key="Workflow.Filters.Grayscale">Grayscale</system:String>
@@ -496,9 +496,9 @@
 	<system:String x:Key="Workflow.Camera.Thumbs.OldestFirst">Oldest First</system:String>
 	<system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recent On Top</system:String>
 
-	<system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Check All:</system:String>
-	<system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Clear All:</system:String>
-	<system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Toggle All:</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Check All</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Clear All</system:String>
+	<system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Toggle All</system:String>
 
 	<system:String x:Key="Workflow.Camera.File.SaveDesktop">Save to Desktop</system:String>
 	<system:String x:Key="Workflow.Camera.File.RemoveCamera">Remove from Camera</system:String>

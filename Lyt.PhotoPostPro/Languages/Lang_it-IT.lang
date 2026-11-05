@@ -125,7 +125,7 @@
 
     <system:String x:Key="Tools.Editor.DescriptionPrompt">Designazione</system:String>
 
-    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Nome amichevole</system:String>
+    <system:String x:Key="Tools.Editor.FriendlyNamePrompt">Nome descrittivo</system:String>
 
     <system:String x:Key="Tools.Editor.ColorPrompt">Colore</system:String>
 
@@ -197,7 +197,7 @@
 
     <system:String x:Key="Tools.Editor.Thick">Spessa</system:String>
 
-    <system:String x:Key="Tools.Editor.Hefty">Hefty</system:String>
+    <system:String x:Key="Tools.Editor.Hefty">Molto spessa</system:String>
 
     <system:String x:Key="Tools.Editor.Watermark">Filigrana</system:String>
 
@@ -259,15 +259,15 @@
 
     <system:String x:Key="Workflow.Culling.SelectRightHint">Rifiuta a sinistra: Aggiungi una stella a destra</system:String>
 
-    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire i tag</system:String>
+    <system:String x:Key="LibraryAdd.Dialog.Keywords.Title">Definire le Etichette</system:String>
 
     <system:String x:Key="LibraryAdd.Dialog.Keywords.Message">Quando viene data una stella o più, quindi conservata nella libreria, le immagini verranno automaticamente 'tagged' con questi tag.&#xD;&#xA;&#xD;&#xA; Sarete in grado di cambiarli in qualsiasi momento durante il processo di culling e valutazione.</system:String>
 
-    <system:String x:Key="Workflow.Culling.Keywords">Tags</system:String>
+    <system:String x:Key="Workflow.Culling.Keywords">Etichette</system:String>
 
-    <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambiare tag</system:String>
+    <system:String x:Key="Workflow.Culling.ChangeKeywords">Cambiare etichette</system:String>
 
-    <system:String x:Key="Workflow.Culling.NoKeywords">No Tag sarà assegnato a questa immagine.</system:String>
+    <system:String x:Key="Workflow.Culling.NoKeywords">Nessuna etichetta sarà assegnata a questa immagine.</system:String>
 
     <system:String x:Key="Workflow.Culling.WithKeywords">Quando viene data una stella o più, quindi conservata nella libreria, questi tag saranno assegnati a questa immagine.</system:String>
 
@@ -311,7 +311,7 @@
 
     <system:String x:Key="Workflow.Import.Folder.PreloadCompleteFormat">Precarico completo: {0} immagini, {1} errori.</system:String>
 
-    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Aggiungi 'Checked' to Library</system:String>
+    <system:String x:Key="Workflow.Import.Folder.AddToLibrary">Aggiungi selezionate alla Libreria</system:String>
 
     <system:String x:Key="Workflow.Import.Folder.Adding">Aggiungere immagini selezionate alla Libreria...</system:String>
 
@@ -321,11 +321,11 @@
 
     <system:String x:Key="Workflow.Import.Folder.DiskSpaceAlert">Insufficiente spazio disponibile su disco.</system:String>
 
-    <system:String x:Key="Metadata.Keywords">Tags</system:String>
+    <system:String x:Key="Metadata.Keywords">Etichette</system:String>
 
     <system:String x:Key="Metadata.Dialog.Keywords.Title">Modifica delle immagini</system:String>
 
-    <system:String x:Key="Metadata.Dialog.Keywords.Message">Aggiungere nuovi tag immagine o rimuovere quelli esistenti.</system:String>
+    <system:String x:Key="Metadata.Dialog.Keywords.Message">Aggiungere nuove etichette immagine o rimuovere quelle esistenti.</system:String>
 
     <system:String x:Key="Metadata.FileCreatedFmt">File creato: {0} alle {1}</system:String>
 
@@ -353,7 +353,7 @@
 
     <system:String x:Key="Process.Toolbar.FullScreen">A schermo intero</system:String>
 
-    <system:String x:Key="Process.Toolbar.EscToReturn">Esc. ritornare</system:String>
+    <system:String x:Key="Process.Toolbar.EscToReturn">Esc. Ritornare</system:String>
 
     <system:String x:Key="Workflow.Back">Indietro</system:String>
 
@@ -439,17 +439,17 @@
 
     <system:String x:Key="Workflow.Compose.Preview">Anteprima</system:String>
 
-    <system:String x:Key="Workflow.Compose.Top">Superiore:</system:String>
+    <system:String x:Key="Workflow.Compose.Top">Superiore</system:String>
 
-    <system:String x:Key="Workflow.Compose.Bottom">Inferiore:</system:String>
+    <system:String x:Key="Workflow.Compose.Bottom">Inferiore</system:String>
 
-    <system:String x:Key="Workflow.Compose.Left">Sinistra:</system:String>
+    <system:String x:Key="Workflow.Compose.Left">Sinistra</system:String>
 
-    <system:String x:Key="Workflow.Compose.Right">Destra:</system:String>
+    <system:String x:Key="Workflow.Compose.Right">Destra</system:String>
 
-    <system:String x:Key="Workflow.Compose.Width">Larghezza:</system:String>
+    <system:String x:Key="Workflow.Compose.Width">Larghezza</system:String>
 
-    <system:String x:Key="Workflow.Compose.Height">Altezza:</system:String>
+    <system:String x:Key="Workflow.Compose.Height">Altezza</system:String>
 
     <system:String x:Key="Workflow.Compose.AspectRatio">Proporzioni:</system:String>
 
@@ -473,7 +473,7 @@
 
     <system:String x:Key="Workflow.Compose.CG.Valley">Valle della Valle</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Title">Toccare</system:String>
+    <system:String x:Key="Workflow.TouchUp.Title">Ritoccare</system:String>
 
     <system:String x:Key="Workflow.TouchUp.Click">Fare clic sull'immagine nella posizione esatta del punto per rimuovere.</system:String>
 
@@ -481,9 +481,9 @@
 
     <system:String x:Key="Workflow.TouchUp.SpotSize">Dimensione del punto</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.RunPatch">Patch</system:String>
+    <system:String x:Key="Workflow.TouchUp.RunPatch">Ritoccare</system:String>
 
-    <system:String x:Key="Workflow.TouchUp.Again">Utilizzare il pulsante Reset per riprovare.</system:String>
+    <system:String x:Key="Workflow.TouchUp.Again">Utilizzare il pulsante 'Reset' per riprovare.</system:String>
 
     <system:String x:Key="Workflow.Denoise.Title">Riduzione del Rumore</system:String>
 
@@ -499,11 +499,11 @@
 
     <system:String x:Key="Workflow.Exposure.Clear">Reset</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Gamma">Gamma:</system:String>
+    <system:String x:Key="Workflow.Exposure.Gamma">Gamma</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Gain">Guadagno:</system:String>
+    <system:String x:Key="Workflow.Exposure.Gain">Guadagno</system:String>
 
-    <system:String x:Key="Workflow.Exposure.Shift">Spostare:</system:String>
+    <system:String x:Key="Workflow.Exposure.Shift">Spostare</system:String>
 
     <system:String x:Key="Workflow.Recovery.Title">Ombre e Luci</system:String>
 
@@ -511,9 +511,9 @@
 
     <system:String x:Key="Workflow.Recovery.Clear">Reset</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Highlights">Luci:</system:String>
+    <system:String x:Key="Workflow.Recovery.Highlights">Luci</system:String>
 
-    <system:String x:Key="Workflow.Recovery.Shadows">Ombre:</system:String>
+    <system:String x:Key="Workflow.Recovery.Shadows">Ombre</system:String>
 
     <system:String x:Key="Workflow.Vignette.Title">Correzione selettiva</system:String>
 
@@ -521,31 +521,31 @@
 
     <system:String x:Key="Workflow.Vignette.Sides">Lati:</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Top">Superiore:</system:String>
+    <system:String x:Key="Workflow.Vignette.Top">Superiore</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Bottom">Inferiore:</system:String>
+    <system:String x:Key="Workflow.Vignette.Bottom">Inferiore</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Left">Sinistra:</system:String>
+    <system:String x:Key="Workflow.Vignette.Left">Sinistra</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Right">Destra:</system:String>
+    <system:String x:Key="Workflow.Vignette.Right">Destra</system:String>
 
     <system:String x:Key="Workflow.Vignette.Style">Correzione del buio o della luce:</system:String>
 
-    <system:String x:Key="Workflow.Vignette.Strength">Forza:</system:String>
+    <system:String x:Key="Workflow.Vignette.Strength">Forza</system:String>
 
     <system:String x:Key="Workflow.Spotlight.Title">Faretto</system:String>
 
     <system:String x:Key="Workflow.Spotlight.Correction">Applicare una correzione di esposizione a forma di ellisse sull'immagine.</system:String>
 
-    <system:String x:Key="Workflow.Spotlight.Width">Width:</system:String>
+    <system:String x:Key="Workflow.Spotlight.Width">Width</system:String>
 
-    <system:String x:Key="Workflow.Spotlight.Height">Altezza:</system:String>
+    <system:String x:Key="Workflow.Spotlight.Height">Altezza</system:String>
 
-    <system:String x:Key="Workflow.Spotlight.Rotation">Rotazione:</system:String>
+    <system:String x:Key="Workflow.Spotlight.Rotation">Rotazione</system:String>
 
     <system:String x:Key="Workflow.Spotlight.Style">Correzione Oscura o Luce:</system:String>
 
-    <system:String x:Key="Workflow.Spotlight.Strength">Forza:</system:String>
+    <system:String x:Key="Workflow.Spotlight.Strength">Forza</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Title">Bilanciamento del Bianco</system:String>
 
@@ -553,15 +553,15 @@
 
     <system:String x:Key="Workflow.WhiteBalance.ManualColorMatrix">Manuale - Matrice colori di base</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">Scostamento T.:</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.ManualOffset">Scostamento</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.ManualTannerHelland">Manuale - Temperatura colore diretta</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin:</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.Kelvin">T. Kelvin</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorld">Automatico: Algoritmo "Mondo Grigio".</system:String>
 
-    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturazione:</system:String>
+    <system:String x:Key="Workflow.WhiteBalance.AutoGrayWorldSaturation">Saturazione</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.NoteGrayWorld">Nota: l'algoritmo 'Mondo Grigio' funziona bene SOLO su immagini che contengono molti colori diversi.</system:String>
 
@@ -577,11 +577,11 @@
 
     <system:String x:Key="Workflow.Contrast.Global">Aggiustamento Globale</system:String>
 
-    <system:String x:Key="Workflow.Contrast.ContrastAmount">Contrasto:</system:String>
+    <system:String x:Key="Workflow.Contrast.ContrastAmount">Contrasto</system:String>
 
-    <system:String x:Key="Workflow.Contrast.BlurAmount">Sfocatura Sigma:</system:String>
+    <system:String x:Key="Workflow.Contrast.BlurAmount">Sfocatura</system:String>
 
-    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Luminosità:</system:String>
+    <system:String x:Key="Workflow.Contrast.BrightnessAmount">Luminosità</system:String>
 
     <system:String x:Key="Workflow.Contrast.SCurves">Curve a S</system:String>
 
@@ -611,15 +611,15 @@
 
     <system:String x:Key="Workflow.Color.Global">Aggiustamento Globale</system:String>
 
-    <system:String x:Key="Workflow.Color.SaturationAmount">Saturazione:</system:String>
+    <system:String x:Key="Workflow.Color.SaturationAmount">Saturazione</system:String>
 
     <system:String x:Key="Workflow.Color.Vibrance">Vividezza</system:String>
 
-    <system:String x:Key="Workflow.Color.Red">Rosso:</system:String>
+    <system:String x:Key="Workflow.Color.Red">Rosso</system:String>
 
-    <system:String x:Key="Workflow.Color.Green">Verde:</system:String>
+    <system:String x:Key="Workflow.Color.Green">Verde</system:String>
 
-    <system:String x:Key="Workflow.Color.Blue">Blu:</system:String>
+    <system:String x:Key="Workflow.Color.Blue">Blu</system:String>
 
     <system:String x:Key="Workflow.Desaturation.Title">Desaturazione selettiva</system:String>
 
@@ -643,7 +643,7 @@
 
     <system:String x:Key="Workflow.Sharpen.Global">Aggiustamento Globale</system:String>
 
-    <system:String x:Key="Workflow.Sharpen.BlurAmount">Sigma:</system:String>
+    <system:String x:Key="Workflow.Sharpen.BlurAmount">Nitidezza</system:String>
 
     <system:String x:Key="Workflow.Sharpen.Note">Nota: una nitidezza eccessiva può essere dannosa. Può introdurre "aloni" visibili lungo i bordi e amplificare il rumore digitale.</system:String>
 
@@ -651,9 +651,9 @@
 
     <system:String x:Key="Workflow.Filters.Correction">Applicare effetti speciali all'immagine.</system:String>
 
-    <system:String x:Key="Workflow.Filters.ExplainAmount">Solo per 'Scala di grigi' o 'Seppia':</system:String>
+    <system:String x:Key="Workflow.Filters.ExplainAmount">Solo per 'Scala di grigi' o 'Seppia', Vignetta o Tonalita:</system:String>
 
-    <system:String x:Key="Workflow.Filters.Amount">Quantità:</system:String>
+    <system:String x:Key="Workflow.Filters.Amount">Quantità</system:String>
 
     <system:String x:Key="Workflow.Filters.None">- - Nessuno - -</system:String>
 
@@ -665,7 +665,7 @@
 
     <system:String x:Key="Workflow.Filters.Vignette">Vignetta</system:String>
 
-    <system:String x:Key="Workflow.Filters.BlackWhite">In bianco e Nero</system:String>
+    <system:String x:Key="Workflow.Filters.BlackWhite">Bianco e Nero</system:String>
 
     <system:String x:Key="Workflow.Filters.Kodachrome">Kodachrome</system:String>
 
@@ -735,11 +735,11 @@
 
     <system:String x:Key="Workflow.Camera.Thumbs.RecentOnTop">Recenti in alto</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Controlla tutto:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.CheckAll">Controlla tutto</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Cancella tutto:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.ClearAll">Cancella tutto</system:String>
 
-    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Attiva/disattiva tutto:</system:String>
+    <system:String x:Key="Workflow.Camera.Thumbs.ToggleAll">Attiva/disattiva tutto</system:String>
 
     <system:String x:Key="Workflow.Camera.File.SaveDesktop">Salva sul desktop</system:String>
 
@@ -853,7 +853,7 @@
 
     <system:String x:Key="Settings.ReminderText">Si consiglia di utilizzare le immagini scaricate solo come sfondo del computer. Per qualsiasi altro utilizzo, commerciale o meno, è necessario contattare il titolare del copyright.</system:String>
 
-    <system:String x:Key="Shared.FileErrorTitle">Errore del file system.</system:String>
+    <system:String x:Key="Shared.FileErrorTitle">Errore del sistema di file.</system:String>
 
     <system:String x:Key="Shared.FileErrorText">Impossibile salvare il file immagine.</system:String>
 
