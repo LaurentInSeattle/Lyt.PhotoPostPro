@@ -11,18 +11,8 @@ public sealed partial class ShellViewModel
     private readonly IAnimationService animationService;
     private readonly IDialogService dialogService;
 
-    [ObservableProperty]
-    public partial bool NavigationBarIsEnabled { get; set; }
-
-    [ObservableProperty]
-    public partial string AppName { get; set; } = string.Empty;
-
-    public Mouse MouseMonitor { get; private set; }
-
-    public Keyboard KeyboardMonitor { get; private set; }
-
     private ViewSelector<ActivatedView>? viewSelector;
-    public bool isFirstActivation;
+    private bool isFirstActivation;
 
     public ShellViewModel(
         PhotoPostProModel photoPostProModel,
@@ -43,6 +33,19 @@ public sealed partial class ShellViewModel
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
     }
+
+    [ObservableProperty]
+    public partial bool NavigationBarIsEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial string AppName { get; set; } = string.Empty;
+
+    public Mouse MouseMonitor { get; private set; }
+
+    public Keyboard KeyboardMonitor { get; private set; }
+
+    public ViewSelector<ActivatedView> ViewSelector
+        => this.viewSelector ?? throw new Exception("No view selector");
 
     public Panel ModalHost => this.View.ToasterHost;
 
@@ -106,6 +109,7 @@ public sealed partial class ShellViewModel
         this.isFirstActivation = true;
         bool isFirstRun = this.model.IsFirstRun;
         this.NavigationBarIsEnabled = !isFirstRun;
+
         // ! viewSelector is Always there
         this.viewSelector!.SelectView(isFirstRun ? ActivatedView.Language : ActivatedView.Library);
         HotKeys.Instance.Set(this.View);

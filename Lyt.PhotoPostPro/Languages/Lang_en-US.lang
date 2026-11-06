@@ -61,10 +61,11 @@
 	<system:String x:Key="File.Exception">An error occurred while processing this image file.</system:String>
 
 	<!-- Shell - Nav' Bar -->
-	<system:String x:Key="Shell.Folder">Library</system:String>
-	<system:String x:Key="Shell.Camera">Camera</system:String>
+  <system:String x:Key="Shell.Folder">Library</system:String>
+  <system:String x:Key="Shell.Camera">Camera</system:String>
 	<system:String x:Key="Shell.Gallery">Gallery</system:String>
 	<system:String x:Key="Shell.Import">Import</system:String>
+	<system:String x:Key="Shell.PhotoBook">Photo Book</system:String>
 	<system:String x:Key="Shell.Settings">Settings</system:String>
 	<system:String x:Key="Shell.Tools">Tools</system:String>
 	<system:String x:Key="Shell.Documentation">Documentation</system:String>

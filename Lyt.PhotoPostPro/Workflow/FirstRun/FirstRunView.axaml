@@ -9,32 +9,494 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
 	<Grid	
+		ShowGridLines="False"
 		> 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="4" />
+			<RowDefinition Height="12" />
+			<RowDefinition Height="64" />
+			<RowDefinition Height="44" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="4" />
+			<RowDefinition Height="32" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="32" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="12" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="18" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="32" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="32" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="18" />
 		</Grid.ColumnDefinitions>
 
 		<TextBlock
-			Grid.Row="1" Grid.Column="1" 
-			Margin="0 -100 0 0"
+			Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" 
+			Margin="0 0 0 0"
 			Text="{DynamicResource Shell.Greetings}"
-			Theme="{StaticResource H2}"
+			Theme="{StaticResource Title}"
+			Foreground="{StaticResource LightAqua_0_100}"
+			FontWeight="SemiLight"
 			HorizontalAlignment="Center" VerticalAlignment="Center"
 			/>
+		<TextBlock
+			Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" 
+			Text="Get started with Photo Rebel... DynamicResource Shell.Greetings}"
+			Theme="{StaticResource H3}"
+			FontWeight="Normal"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			/>
+
+		<!-- Documentation -->
+		<Grid
+			Grid.Row="3" Grid.Column="1" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Documentation}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Documentation Always a good idea to take a look at the documentation go get a quick start! Photo Rebel comes with its embedded documentation}"
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="DocumentationButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="book"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Documentation}"
+				Command="{Binding OnDocumentation}"
+				/>
+		</Grid>
+
+		<!-- Camera -->
+		<Grid
+			Grid.Row="3" Grid.Column="3" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Camera}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Camera Download photos and images from your DSLR camera, your iPhone or Android smartphone, any portable media devices. You will be able to sort and select the files you want.}"
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="CameraButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="camera"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Camera}"
+				Command="{Binding OnCamera}"
+				/>
+		</Grid>
+
+		<!-- Import -->
+		<Grid
+			Grid.Row="3" Grid.Column="5" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Import}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Import oad photos and images from your DSLR camera, your iPhone or Android smartphone, any portable media devices. You will be able to sort and select the files you want.}"
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="ImportButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="collections"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Import}"
+				Command="{Binding OnImport}"
+				/>
+		</Grid>
+
+		<!-- Library -->
+		<Grid
+			Grid.Row="5" Grid.Column="1" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Folder}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Library Once you have imported your photos, you can start to organize them and edit them in the library."
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="LibraryButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="image_multiple"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Folder}"
+				Command="{Binding OnLibrary}"
+				/>
+		</Grid>
+
+		<!-- Photo Book -->
+		<Grid
+			Grid.Row="5" Grid.Column="3" 
+			ShowGridLines="False"
+			Opacity="0.4"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.PhotoBook}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.PhotoBook This feature is not yet implemented."
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="PhotoBookButton"
+				IsEnabled="False"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="dismiss"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.PhotoBook}"
+				/>
+		</Grid>
+
+		<!-- Gallery -->
+		<Grid
+			Grid.Row="5" Grid.Column="5" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Gallery}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Gallery View your photos and images in a gallery. You will be able to browse and use your images as wallpapers and create slide shows.}"
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="GalleryButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="star_emphasis"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Gallery}"
+				Command="{Binding OnGallery}"
+				/>
+		</Grid>
+
+		<!-- Settings -->
+		<Grid
+			Grid.Row="7" Grid.Column="1" 
+			Opacity="0.4"
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Settings}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Settings Customize your experience with various settings. This feature is not yet implemented."
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="SettingsButton"
+				IsEnabled="False"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="settings"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Settings}"
+				Command="{Binding OnSettings}"
+				/>
+		</Grid>
+
+		<!-- Tools -->
+		<Grid
+			Grid.Row="7" Grid.Column="3" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Tools}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Tools Statistics and analytics for your photo projects. Define and configure your photo export formats, watermarks, signatures, etc.."
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="ToolsButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="design_ideas"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Tools}"
+				Command="{Binding OnTools}"
+				/>
+		</Grid>
+
+		<!-- Language -->
+		<Grid
+			Grid.Row="7" Grid.Column="5" 
+			ShowGridLines="False"
+			>
+			<Grid.ColumnDefinitions >
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="84"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions> 
+				<RowDefinition Height="56" />
+				<RowDefinition Height="44" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<TextBlock
+				Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+				Text="{DynamicResource Shell.Language}"
+				Theme="{StaticResource H3}"
+				Foreground="{StaticResource LightAqua_0_100}"
+				FontSize="20"
+				FontWeight="Bold"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				/>
+			<Rectangle 
+				Grid.Column="0" Grid.Row="1" Grid.RowSpan="999"
+				HorizontalAlignment="Center" VerticalAlignment="Stretch"
+				Fill="{StaticResource FreshGreen_1_100}"
+				Width="1.5"
+				/>
+			<TextBlock
+				Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				Margin="12 0 12 0"
+				Text="DynamicResource Help.Language Change the language of the application, any time you want."
+				Theme="{StaticResource VeryLarge}"
+				TextWrapping="Wrap"
+				HorizontalAlignment="Left" VerticalAlignment="Top"
+				/>
+			<glyphs:GlyphButton
+				x:Name="FlagButton"
+				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+				Style="{StaticResource NavigationIconButton}"
+				GlyphSource="flag"
+				GlyphStrokeThickness="0"
+				Text="{DynamicResource Shell.Language}"
+				Command="{Binding OnLanguage}"
+				/>
+		</Grid>
+
 	</Grid>
 </UserControl>
