@@ -3,16 +3,13 @@ Version Names / Git Tags / Dates
 A: Alessandra - Private Beta - No Setup - No Store - Ava 12.1.2 - Released: September 16th
 B: Bianca - Open Beta - No Setup - No Store - Ava 12.1.2 - Released: September 21st
 C: Chiara - Open Beta - Documentation - Bug fixes - No Setup - No Store - Ava 12.1.2 - Released: October 1st
-
 D: Donatella - Open Beta - Bug fixes (Camera) - No Setup - No Store - Ava 12.1.4 - Released: October 13th
-
 E: Emilia - Open Beta - Navigation - Touch Up - Bug fixes - No Store - Ava 12.1.4 - Released: October 21st
+F: Federica - Open Beta - Spotlight - First Run - Bug fixes - No Store - Ava 12.1.5 - Released: November 6th
 
-F: Federica - Open Beta - Spotlight - First Run - Bug fixes - No Store - Ava 12.1.5 - Planned: Early November
+G: Giulia - Open Beta - Bug fixes - No Store - Ava 12.1.5 ? - .Net 11 - Planned: Late November
 
-G: Giulia - Open Beta - Bug fixes - No Store - Ava 12.1.5 - .Net 11 - Planned: Early November
-
-I: Illaria
+I: Illaria - Open Beta - Photo Book - Bug fixes - No Store - Ava 12.1.5 ? - .Net 11 - Planned: Late November
 
 K: Karina
 L: Lucia
@@ -20,13 +17,11 @@ M: Martina
 N: Nina
 O: Ornella
 P: Paola
-Q: Quirina
 R: Rosa
 S: Sabrina
 T: Teresa
 U: Ursula
 V: Valentina
-Z: Zita
 
 -------
 
