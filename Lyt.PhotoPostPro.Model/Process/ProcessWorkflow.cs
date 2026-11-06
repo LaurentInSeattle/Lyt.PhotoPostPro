@@ -270,13 +270,18 @@ public sealed class ProcessWorkflow
             bool hasPerformedStep = false;
             if (this.CurrentStep.InitialRunNeeded)
             {
-                if (this.CurrentStep is CompositionStep)
+                if (this.CurrentStep is CompositionStep compositionStep)
                 {
                     if (this.IsReplayMode)
                     {
-                        this.CurrentStep.PerformStep(this.PostProcessParameters);
+                        compositionStep.PerformStep(this.PostProcessParameters);
                     }
-                    // else : Crop will be done when executing Next
+                    else
+                    {
+                        // Do not perform the step, just pass the parameters
+                        // Crop will be done when executing Next
+                        compositionStep.PrepareStep(this.PostProcessParameters);
+                    }
                 }
                 else
                 {

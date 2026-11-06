@@ -34,8 +34,16 @@ public class CompositionStep(ProcessWorkflow processWorkflow) :
             this.Dx == this.OriginalDx &&
             this.Dy == this.OriginalDy;
 
-    internal override void PerformStep(ProcessParameters ppp)
-        => this.Crop(ppp.CompositionX, ppp.CompositionY, ppp.CompositionDx, ppp.CompositionDy, withFrame: false);
+    internal override void PerformStep(ProcessParameters pp)
+        => this.Crop(pp.CompositionX, pp.CompositionY, pp.CompositionDx, pp.CompositionDy, withFrame: false);
+
+    internal void PrepareStep(ProcessParameters pp)
+    {
+        this.X = pp.CompositionX;
+        this.Y = pp.CompositionY;
+        this.Dx = pp.CompositionDx;
+        this.Dy = pp.CompositionDy;
+    }
 
     internal override Frame? Reset()
     {
