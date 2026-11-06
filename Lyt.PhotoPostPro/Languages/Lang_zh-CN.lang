@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">进口</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">相册</system:String>
+
     <system:String x:Key="Shell.Settings">设置</system:String>
 
     <system:String x:Key="Shell.Tools">工具</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">正在处理：</system:String>
 
     <system:String x:Key="DragDrop.DropZone">拖放区</system:String>
+
+    <system:String x:Key="Help.GetStarted">从相片反叛开始...</system:String>
+
+    <system:String x:Key="Help.Documentation">总是一个好主意,看看文件 得到一个快速的开始! 照片叛逆者随其嵌入式文件而来.&#xD;&#xA;&#xD;&#xA; 查看“ 编辑” 文档, 如果您是新来编辑照片的 .</system:String>
+
+    <system:String x:Key="Help.Camera">从您的DSLR相机,您的iPhone或Android智能手机上下载相片和相片,或者任何便携式媒体设备,如内存卡或zip驱动器. &#xD;&#xA;&#xD;&#xA;您可以排序和选择您想要保存的图像文件 .</system:String>
+
+    <system:String x:Key="Help.Import">从硬盘或外部或网络驱动器中装入相片和图像。&#xD;&#xA;&#xD;&#xA; 您可以排序和选择要保存的文件</system:String>
+
+    <system:String x:Key="Help.Library">一旦您导入了相片,您就可以开始整理相片并在库中编辑相片.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">轻松地创建和编辑相册. &#xD;&#xA;&#xD;&#xA;此功能尚未执行.</system:String>
+
+    <system:String x:Key="Help.Gallery">在画廊里查看你最好的照片。&#xD;&#xA;&#xD;&#xA; 您可以浏览并使用您的图像作为壁纸, 甚至创建幻灯片放映 .</system:String>
+
+    <system:String x:Key="Help.Settings">自定义各种设置的经验 。&#xD;&#xA;&#xD;&#xA; 此功能尚未执行.</system:String>
+
+    <system:String x:Key="Help.Tools">有关您照片项目的统计数据。 &#xD;&#xA;&#xD;&#xA; 设置和配置您的相片导出格式、 水印、 签名等 .</system:String>
+
+    <system:String x:Key="Help.Language">随时改变应用程序的语言。 &#xD;&#xA;&#xD;&#xA; 无需重新启动即可这样做.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">创建新...</system:String>
 

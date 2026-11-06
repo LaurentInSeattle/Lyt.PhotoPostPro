@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">আমদানি</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">ছবি</system:String>
+
     <system:String x:Key="Shell.Settings">সেটিংস</system:String>
 
     <system:String x:Key="Shell.Tools">টুলস</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">এখন প্রক্রিয়াকরণ:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">ড্র্যাগ অ্যান্ড ড্রপ জোন</system:String>
+
+    <system:String x:Key="Help.GetStarted">ফটো রিবেলের মাধ্যমে শুরু করা হবে...</system:String>
+
+    <system:String x:Key="Help.Documentation">নথিপত্রটা একটু দেখার জন্য সবসময় একটা ভালো আইডিয়া ছিল! ছবি রেবেল তার নিজস্ব ডকুমেন্টারি নিয়ে এসেছে। &#xD;&#xA;&#xD;&#xA; যদি আপনি ফটো সম্পাদনা করতে নতুন একটি ডকুমেন্ট তৈরি করেন, তবে "Edit সম্পাদনা" ডকুমেন্ট দেখুন।.</system:String>
+
+    <system:String x:Key="Help.Camera">আপনার DSLR ক্যামেরা থেকে ছবি এবং ছবি ডাউনলোড করুন, আপনার আইফোন বা অ্যান্ড্রয়েড ফোনের, অথবা কোন বহনযোগ্য মিডিয়া ডিভাইস যেমন মেমরি কার্ড অথবা জিপ ড্রাইভ। &#xD;&#xA;&#xD;&#xA; তবে আপনি নির্বাচিত ছবি এবং নির্বাচন করতে পারবেন।.</system:String>
+
+    <system:String x:Key="Help.Import">হার্ড ড্রাইভ অথবা নেটওয়ার্ক ড্রাইভ থেকে ছবি লোড এবং লোড করুন &#xD;&#xA;&#xD;&#xA; আপনি নির্বাচন করতে পারেন এবং আপনি যে ফাইল চান তা নির্বাচন করতে পারেন</system:String>
+
+    <system:String x:Key="Help.Library">একবার আপনার ছবি ইম্পোর্ট করলে, আপনি তাদেরকে লাইব্রেরির মধ্যে সম্পাদনা ও সম্পাদনা করতে পারবেন।.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">সহজ করে ছবির বই তৈরি এবং সম্পাদনা করুন। &#xD;&#xA;&#xD;&#xA; এই বৈশিষ্ট্য এখনো বাস্তবায়িত হয়নি।.</system:String>
+
+    <system:String x:Key="Help.Gallery">গ্যালারির মধ্যে আপনার সেরা ফটোগুলো প্রদর্শন করুন। &#xD;&#xA;&#xD;&#xA; আপনি আপনার ছবি ওয়াল পেপার হিসেবে ব্রাউজ করতে এবং এমনকি স্লাইড শোও তৈরি করতে পারবেন।.</system:String>
+
+    <system:String x:Key="Help.Settings">বিভিন্ন বৈশিষ্ট্যের মাধ্যমে আপনার অভিজ্ঞতা মূল্যায়ন করুন। &#xD;&#xA;&#xD;&#xA; এই বৈশিষ্ট্য এখনো বাস্তবায়িত হয়নি।.</system:String>
+
+    <system:String x:Key="Help.Tools">আপনার ফটো প্রকল্পের ব্যাপারে। &#xD;&#xA;&#xD;&#xA; আপনার ছবি এক্সপোর্ট, জলছবি, স্বাক্ষর, ইত্যাদি কনফিগার করুন।.</system:String>
+
+    <system:String x:Key="Help.Language">অ্যাপ্লিকেশনের ভাষা পরিবর্তন করুন &#xD;&#xA;&#xD;&#xA;আপনি এটি করতে পারেন কারন পুনরায় আরম্ভ করার প্রয়োজন নেই ।.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">নতুন নির্মাণ করুন...</system:String>
 

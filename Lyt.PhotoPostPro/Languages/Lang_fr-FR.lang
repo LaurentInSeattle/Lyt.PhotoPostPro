@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Importer</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Album Photo</system:String>
+
     <system:String x:Key="Shell.Settings">Paramètres</system:String>
 
     <system:String x:Key="Shell.Tools">Outils</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Traitement en cours :</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Zone de glisser-déposer</system:String>
+
+    <system:String x:Key="Help.GetStarted">Pour bien commencer avec Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">C'est toujours une bonne idée d'aller jeter un oeil à la documentation pour se familiariser rapidement a une application! Photo Rebel est livré avec sa documentation intégrée. &#xD;&#xA;&#xD;&#xA;Jetez un coup d'oeil au document "Edition" si vous êtes nouveau pour éditer des photos.</system:String>
+
+    <system:String x:Key="Help.Camera">Télécharger des photos et des images depuis votre appareil photo DSLR, votre iPhone ou votre smartphone Android, ou tout appareil multimédia portable comme une carte mémoire ou un lecteur zip. &#xD;&#xA;&#xD;&#xA;Vous pourrez trier et sélectionner les fichiers d'image que vous souhaitez conserver.</system:String>
+
+    <system:String x:Key="Help.Import">Chargez des photos et des images depuis votre disque dur ou des disques externes ou réseau.  &#xD;&#xA;&#xD;&#xA;Vous pourrez trier et sélectionner les fichiers que vous souhaitez conserver.</system:String>
+
+    <system:String x:Key="Help.Library">Une fois que vous avez importé vos photos, vous pouvez commencer à les organiser et à les éditer dans la bibliothèque.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Créez et modifiez facilement des albums photo. &#xD;&#xA;&#xD;&#xA;Cette fonctionnalité n'est pas encore implémentée.</system:String>
+
+    <system:String x:Key="Help.Gallery">Visualisez vos meilleures photos dans la galerie. &#xD;&#xA;&#xD;&#xA;Vous pourrez parcourir et utiliser vos images comme fonds d'écran et même créer des diaporamas.</system:String>
+
+    <system:String x:Key="Help.Settings">Personnalisez votre expérience avec différents paramètres. &#xD;&#xA;&#xD;&#xA;Cette fonctionnalité n'est pas encore implémentée.</system:String>
+
+    <system:String x:Key="Help.Tools">Statistiques sur vos projets photo. &#xD;&#xA;&#xD;&#xA;Définir et configurer vos formats d'exportation de photos, filigranes, signatures, etc.</system:String>
+
+    <system:String x:Key="Help.Language">Changez la langue de l'application, à tout moment. &#xD;&#xA;&#xD;&#xA;Vous pouvez meme le faire sans avoir à redémarrer.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Créer...</system:String>
 
@@ -377,7 +399,7 @@
 
     <system:String x:Key="Workflow.Vignette.Short">Gradients</system:String>
 
-    <system:String x:Key="Workflow.Spotlight.Short">Projecteur </system:String>
+    <system:String x:Key="Workflow.Spotlight.Short">Projecteur</system:String>
 
     <system:String x:Key="Workflow.WhiteBalance.Short">Blancs</system:String>
 

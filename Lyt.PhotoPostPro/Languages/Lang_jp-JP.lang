@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">輸入</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">フォトブック</system:String>
+
     <system:String x:Key="Shell.Settings">設定</system:String>
 
     <system:String x:Key="Shell.Tools">ツール</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">現在処理中:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">ドラッグ アンド ドロップ ゾーン</system:String>
+
+    <system:String x:Key="Help.GetStarted">Photo Rebelを始めよう.</system:String>
+
+    <system:String x:Key="Help.Documentation">ドキュメントを調べるには、常に良いアイデアが始まります! Photo Rebelは、埋め込まれた文書が付属しています。 &#xD;&#xA;&#xD;&#xA;写真を編集するために新しい場合は、「編集」ドキュメントを見てください.</system:String>
+
+    <system:String x:Key="Help.Camera">あなたのDSLRカメラ、あなたのiPhoneまたはAndroidスマートフォン、またはメモリカードやzipドライブなどのポータブルメディアデバイスから写真や画像をダウンロードしてください。 &#xD;&#xA;&#xD;&#xA;保存したい画像ファイルをソートして選択することができます.</system:String>
+
+    <system:String x:Key="Help.Import">ハードドライブまたは外部またはネットワークドライブから写真や画像をロードします。 &#xD;&#xA;&#xD;&#xA;保存したいファイルをソートして選択することができます</system:String>
+
+    <system:String x:Key="Help.Library">あなたの写真をインポートしたら、それらを整理し、ライブラリでそれらを編集し始めることができます.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">簡単にフォトブックを作成および編集できます。&#xD;&#xA;&#xD;&#xA; この機能はまだ実装されていません.</system:String>
+
+    <system:String x:Key="Help.Gallery">ギャラリーで最高の写真を見る &#xD;&#xA;&#xD;&#xA;あなたのイメージを壁紙として見、使用し、スライドショーを作成できます.</system:String>
+
+    <system:String x:Key="Help.Settings">様々な設定で体験をカスタマイズできます。&#xD;&#xA;&#xD;&#xA;この機能はまだ実装されていません.</system:String>
+
+    <system:String x:Key="Help.Tools">あなたの写真プロジェクトに関する統計。&#xD;&#xA;&#xD;&#xA; 写真のエクスポート形式、透かし、署名などを定義し、構成します.</system:String>
+
+    <system:String x:Key="Help.Language">希望する言語をいつでも変更できます。&#xD;&#xA;&#xD;&#xA; 再起動する必要はありません.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">新規作成.</system:String>
 

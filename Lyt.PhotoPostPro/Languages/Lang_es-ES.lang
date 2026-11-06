@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Importar</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Libro de fotos</system:String>
+
     <system:String x:Key="Shell.Settings">Ajustes</system:String>
 
     <system:String x:Key="Shell.Tools">Herramientas</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Ahora procesando:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Zona de arrastrar y soltar</system:String>
+
+    <system:String x:Key="Help.GetStarted">Empieza con Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">Siempre una buena idea para echar un vistazo a la documentación vaya a empezar rápido! Photo Rebel viene con su documentación incrustada. &#xD;&#xA;&#xD;&#xA; Echa un vistazo al documento "Editar" si eres nuevo para editar fotos.</system:String>
+
+    <system:String x:Key="Help.Camera">Descargue fotos e imágenes de su cámara DSLR, su teléfono inteligente iPhone o Android, o cualquier dispositivo multimedia portátil como una tarjeta de memoria o una unidad zip. &#xD;&#xA;&#xD;&#xA; Usted será capaz de ordenar y seleccionar los archivos de imagen que desea guardar.</system:String>
+
+    <system:String x:Key="Help.Import">Cargue fotos e imágenes de su disco duro o unidades externas o de red. &#xD;&#xA;&#xD;&#xA; Usted será capaz de ordenar y seleccionar los archivos que desea mantener</system:String>
+
+    <system:String x:Key="Help.Library">Una vez que haya importado sus fotos, puede empezar a organizarlas y editarlas en la biblioteca.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Crear y editar libros de fotos con facilidad. &#xD;&#xA;&#xD;&#xA; Esta característica todavía no se implementa.</system:String>
+
+    <system:String x:Key="Help.Gallery">Ver tus mejores fotos en la galería. &#xD;&#xA;&#xD;&#xA; Usted será capaz de navegar y utilizar sus imágenes como fondos de pantalla e incluso crear presentaciones de diapositivas.</system:String>
+
+    <system:String x:Key="Help.Settings">Personaliza tu experiencia con varios ajustes. &#xD;&#xA;&#xD;&#xA; Esta característica todavía no se implementa.</system:String>
+
+    <system:String x:Key="Help.Tools">Estadísticas sobre sus proyectos fotográficos. &#xD;&#xA;&#xD;&#xA;Definir y configurar sus formatos de exportación de fotos, marcas de agua, firmas, etc.</system:String>
+
+    <system:String x:Key="Help.Language">Cambiar el idioma de la aplicación, en cualquier momento que desee.&#xD;&#xA;&#xD;&#xA;Puedes hacerlo sin necesidad de reiniciar.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Crear nuevo...</system:String>
 

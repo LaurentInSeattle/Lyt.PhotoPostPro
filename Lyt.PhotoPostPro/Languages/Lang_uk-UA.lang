@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Імпорт</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Фотокниги</system:String>
+
     <system:String x:Key="Shell.Settings">Налаштування</system:String>
 
     <system:String x:Key="Shell.Tools">Інструменти</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Зараз обробляється:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Зона перетягування</system:String>
+
+    <system:String x:Key="Help.GetStarted">Почати з Photo Rebel ...</system:String>
+
+    <system:String x:Key="Help.Documentation">Ми можемо самі зателефонувати одержувачу і узгодити зручний час. Фоторепортаж з вбудованою документацією. &#xD;&#xA;&#xD;&#xA; Зробити погляд на "Редагування" документ, якщо ви новаєте для редагування фотографій.</system:String>
+
+    <system:String x:Key="Help.Camera">Завантажте фотографії та зображення з вашої камери DSLR, смартфона iPhone або Android або будь-якого портативного медіа, такого як карта пам'яті або zip-накопичувач. &#xD;&#xA;&#xD;&#xA;Ви зможете сортувати та вибрати файли зображень, які ви хочете зберегти.</system:String>
+
+    <system:String x:Key="Help.Import">Завантаження фотографій та зображень з жорсткого диска або зовнішніх або мережевих дисків. &#xD;&#xA;&#xD;&#xA;Ви зможете сортувати і вибрати файли, які ви хочете зберегти</system:String>
+
+    <system:String x:Key="Help.Library">Після того, як ви імпортували свої фотографії, ви можете почати їх організувати і редагувати їх в бібліотеці.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Створення та редагування фото книг з легкістю. &#xD;&#xA;&#xD;&#xA;Ця функція ще не реалізована.</system:String>
+
+    <system:String x:Key="Help.Gallery">Переглянути найкращі фотографії в галереї. &#xD;&#xA;&#xD;&#xA;Ви зможете переглядати та використовувати свої зображення як шпалери, так і навіть створювати слайд-шоу.</system:String>
+
+    <system:String x:Key="Help.Settings">Налаштування вашого досвіду з різними налаштуваннями. &#xD;&#xA;&#xD;&#xA; Ця функція ще не реалізована.</system:String>
+
+    <system:String x:Key="Help.Tools">Статистика ваших фотопроектів. &#xD;&#xA;&#xD;&#xA; Define і налаштування ваших фото форматів експорту, водяних знаків, підписів тощо.</system:String>
+
+    <system:String x:Key="Help.Language">Зміна мови програми, будь-який час, який ви хочете.&#xD;&#xA;&#xD;&#xA;Ви можете зробити це без необхідності перезапустити.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Створити новий ...</system:String>
 

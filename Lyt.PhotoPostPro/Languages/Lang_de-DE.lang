@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Import</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Fotobuch</system:String>
+
     <system:String x:Key="Shell.Settings">Einstellungen</system:String>
 
     <system:String x:Key="Shell.Tools">Werkzeuge</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Derzeit in Bearbeitung:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Drag-and-Drop-Zone</system:String>
+
+    <system:String x:Key="Help.GetStarted">Beginnen Sie mit Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">Immer eine gute Idee, einen Blick auf die Dokumentation zu werfen, um einen schnellen Start zu bekommen! Photo Rebel kommt mit seiner eingebetteten Dokumentation. &#xD;&#xA;&#xD;&#xA;Schauen Sie sich das Dokument "Bearbeiten" an, wenn Sie neu bei der Bearbeitung von Fotos sind.</system:String>
+
+    <system:String x:Key="Help.Camera">Laden Sie Fotos und Bilder von Ihrer DSLR-Kamera, Ihrem iPhone oder Android-Smartphone oder einem tragbaren Mediengerät wie einer Speicherkarte oder einem Zip-Laufwerk herunter.&#xD;&#xA;&#xD;&#xA;Sie können die Bilddateien sortieren und auswählen, die Sie behalten möchten.</system:String>
+
+    <system:String x:Key="Help.Import">Laden Sie Fotos und Bilder von Ihrer Festplatte oder externen oder Netzwerklaufwerken.&#xD;&#xA;&#xD;&#xA;Sie können die Dateien sortieren und auswählen, die Sie behalten möchten</system:String>
+
+    <system:String x:Key="Help.Library">Sobald Sie Ihre Fotos importiert haben, können Sie damit beginnen, sie zu organisieren und in der Bibliothek zu bearbeiten.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Erstellen und bearbeiten Sie Fotobücher mit Leichtigkeit. &#xD;&#xA;&#xD;&#xA;Diese Funktion ist noch nicht implementiert.</system:String>
+
+    <system:String x:Key="Help.Gallery">Sehen Sie sich Ihre besten Fotos in der Galerie an. &#xD;&#xA;&#xD;&#xA;Sie können Ihre Bilder als Hintergrundbilder durchsuchen und verwenden und sogar Diashows erstellen.</system:String>
+
+    <system:String x:Key="Help.Settings">Passen Sie Ihre Erfahrung mit verschiedenen Einstellungen an. &#xD;&#xA;&#xD;&#xA;Diese Funktion ist noch nicht implementiert.</system:String>
+
+    <system:String x:Key="Help.Tools">Statistiken über Ihre Fotoprojekte. &#xD;&#xA;&#xD;&#xA; Definieren und konfigurieren Sie Ihre Fotoexportformate, Wasserzeichen, Unterschriften usw.</system:String>
+
+    <system:String x:Key="Help.Language">Ändern Sie die Sprache der Anwendung, wann immer Sie möchten. &#xD;&#xA;&#xD;&#xA;Sie können dies ohne Neustart tun.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Erstellen Sie neue...</system:String>
 

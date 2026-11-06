@@ -42,5 +42,4 @@ public sealed partial class FirstRunViewModel : ViewModel<FirstRunView>
 
     [RelayCommand]
     public void OnTools() => this.viewSelector?.SelectView(ActivatedView.Tools);
-
 }

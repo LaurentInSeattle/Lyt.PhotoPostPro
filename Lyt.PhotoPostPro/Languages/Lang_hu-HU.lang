@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Importálás</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Fotókönyv</system:String>
+
     <system:String x:Key="Shell.Settings">Beállítások elemre</system:String>
 
     <system:String x:Key="Shell.Tools">Eszközök</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Feldolgozás alatt:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
+
+    <system:String x:Key="Help.GetStarted">Kezdjük a Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">Mindig jó ötlet, hogy vessen egy pillantást a dokumentáció menj egy gyors kezdéshez! Photo Rebel jön a beágyazott dokumentációt. &#xD;&#xA;&#xD;&#xA; Vess egy pillantást a "Szerkesztés" dokumentumra, ha új vagy a képek szerkesztésében.</system:String>
+
+    <system:String x:Key="Help.Camera">Töltse le a képeket és képeket a DSLR kamera, az iPhone vagy Android okostelefon, vagy bármilyen hordozható média eszköz, mint például a memóriakártya vagy zip meghajtó. &#xD;&#xA;&#xD;&#xA; Ön képes lesz rendezni és kiválasztani a kép fájlokat szeretne tartani.</system:String>
+
+    <system:String x:Key="Help.Import">Képek és képek betöltése a merevlemezről vagy külső vagy hálózati meghajtókról. &#xD;&#xA;&#xD;&#xA; Ön képes lesz arra, hogy rendezze és válassza ki a fájlokat szeretne tartani</system:String>
+
+    <system:String x:Key="Help.Library">Miután importálta a képeket, elkezdheti megszervezni, és szerkeszteni őket a könyvtárban.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Fényképkönyveket könnyű létrehozni és szerkeszteni. &#xD;&#xA;&#xD;&#xA; Ez a funkció még nem valósult meg.</system:String>
+
+    <system:String x:Key="Help.Gallery">Tekintse meg a legjobb képeket a galériában. &#xD;&#xA;&#xD;&#xA; Ön képes lesz arra, hogy böngészni, és használja a képeket, mint háttérképek, és még hozzon létre diavetítéseket.</system:String>
+
+    <system:String x:Key="Help.Settings">Testreszabhatja tapasztalatait a különböző beállítások. &#xD;&#xA;&#xD;&#xA; Ez a funkció még nem valósult meg.</system:String>
+
+    <system:String x:Key="Help.Tools">Statisztikák a fotós projektekhez. &#xD;&#xA;&#xD;&#xA; Definiálja és konfigurálja a fotó export formátumok, vízjelek, aláírások, stb..</system:String>
+
+    <system:String x:Key="Help.Language">Változtassa meg az alkalmazás nyelvét, amikor csak akarja.&#xD;&#xA;&#xD;&#xA;Megteheti anélkül, hogy újra kellene kezdenie.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Új...</system:String>
 

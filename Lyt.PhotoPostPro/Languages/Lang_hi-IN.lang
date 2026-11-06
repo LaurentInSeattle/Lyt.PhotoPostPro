@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">आयात</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">फोटो बुक</system:String>
+
     <system:String x:Key="Shell.Settings">सेटिंग्स</system:String>
 
     <system:String x:Key="Shell.Tools">औजार</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">अब प्रसंस्करण:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">खींचें और छोड़ें क्षेत्र</system:String>
+
+    <system:String x:Key="Help.GetStarted">फोटो विद्रोह के साथ शुरू हो जाओ ...</system:String>
+
+    <system:String x:Key="Help.Documentation">हमेशा प्रलेखन पर नजर रखने के लिए एक अच्छा विचार जल्दी शुरू हो जाओ! Photo Rebel अपने एम्बेडेड प्रलेखन के साथ आता है। &#xD;&#xA;&#xD;&#xA; यदि आप फ़ोटो संपादित करने के लिए नए हैं तो "Editing" दस्तावेज़ पर एक नज़र डालें।.</system:String>
+
+    <system:String x:Key="Help.Camera">अपने DSLR कैमरा, अपने iPhone या एंड्रॉयड स्मार्टफोन, या किसी भी पोर्टेबल मीडिया डिवाइस जैसे मेमोरी कार्ड या ज़िप ड्राइव से तस्वीरें और छवियों को डाउनलोड करें। &#xD;&#xA;&#xD;&#xA; आप उन फ़ाइलों को सॉर्ट करने और चुनने में सक्षम होंगे जिन्हें आप रखना चाहते हैं।.</system:String>
+
+    <system:String x:Key="Help.Import">अपनी हार्ड ड्राइव या बाहरी या नेटवर्क ड्राइव से फ़ोटो और छवियों को लोड करें। &#xD;&#xA;&#xD;&#xA; आप उन फ़ाइलों को सॉर्ट करने और चुनने में सक्षम होंगे जिन्हें आप रखना चाहते हैं</system:String>
+
+    <system:String x:Key="Help.Library">एक बार जब आपने अपनी तस्वीरों को आयात किया है, तो आप उन्हें व्यवस्थित करना शुरू कर सकते हैं और उन्हें पुस्तकालय में संपादित कर सकते हैं।.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">आसानी से फोटो किताबें बनाएं और संपादित करें। &#xD;&#xA;&#xD;&#xA; यह सुविधा अभी तक लागू नहीं है।.</system:String>
+
+    <system:String x:Key="Help.Gallery">गैलरी में अपनी सर्वश्रेष्ठ तस्वीरें देखें। &#xD;&#xA;&#xD;&#xA; आप अपनी छवियों को वॉलपेपर के रूप में ब्राउज़ करने और उपयोग करने में सक्षम होंगे और यहां तक कि स्लाइड शो भी बना सकते हैं।.</system:String>
+
+    <system:String x:Key="Help.Settings">विभिन्न सेटिंग्स के साथ अपने अनुभव को अनुकूलित करें। &#xD;&#xA;&#xD;&#xA; यह सुविधा अभी तक लागू नहीं है।.</system:String>
+
+    <system:String x:Key="Help.Tools">आपकी फोटो परियोजनाओं के बारे में सांख्यिकी। &#xD;&#xA;&#xD;&#xA; अपने फोटो निर्यात प्रारूपों, वॉटरमार्क, हस्ताक्षर आदि को परिभाषित और कॉन्फ़िगर करें।.</system:String>
+
+    <system:String x:Key="Help.Language">आवेदन की भाषा बदलें, किसी भी समय आप चाहते हैं। &#xD;&#xA;&#xD;&#xA; आप ऐसा कर सकते हैं कि आपको पुनः आरंभ करने की आवश्यकता नहीं है।.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">नया.</system:String>
 

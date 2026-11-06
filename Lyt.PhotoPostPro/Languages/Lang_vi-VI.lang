@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Nhập</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Name</system:String>
+
     <system:String x:Key="Shell.Settings">Thiết lập</system:String>
 
     <system:String x:Key="Shell.Tools">Công cụ</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Đang xử lý:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Vùng kéo và thả</system:String>
+
+    <system:String x:Key="Help.GetStarted">Bắt đầu với chương trình Rebel ảnh chụp...</system:String>
+
+    <system:String x:Key="Help.Documentation">Luôn luôn là một ý hay để xem qua các tài liệu hướng dẫn đi một khởi đầu nhanh chóng! Bức ảnh Phiến loạn đi kèm với những tài liệu được nhúng.  &#xD;&#xA;&#xD;&#xA;Hãy nhìn vào tài liệu "Chỉnh sửa" nếu bạn mới biên tập ảnh.</system:String>
+
+    <system:String x:Key="Help.Camera">Tải ảnh và hình ảnh từ máy ảnh DSLR, điện thoại di động iPhone hay A-rô-bốt, hoặc bất kỳ thiết bị truyền thông xách tay nào như thẻ nhớ hay ổ cắm zip. &#xD;&#xA;&#xD;&#xA; bạn sẽ có khả năng sắp xếp và chọn các tập tin ảnh bạn muốn giữ.</system:String>
+
+    <system:String x:Key="Help.Import">Tải ảnh và ảnh từ ổ cứng hoặc ổ cắm bên ngoài hoặc mạng. &#xD;&#xA;&#xD;&#xA;bạn sẽ có khả năng sắp xếp và chọn những tập tin bạn muốn giữ</system:String>
+
+    <system:String x:Key="Help.Library">Một khi đã nhập vào ảnh, bạn có thể bắt đầu sắp xếp và chỉnh sửa chúng trong thư viện.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Tạo và chỉnh sửa sách ảnh một cách dễ dàng. &#xD;&#xA;&#xD;&#xA;tính năng này chưa được thực hiện.</system:String>
+
+    <system:String x:Key="Help.Gallery">Hãy xem những bức ảnh đẹp nhất trong phòng tranh. &#xD;&#xA;&#xD;&#xA;bạn sẽ có khả năng duyệt và sử dụng hình ảnh của bạn như giấy dán tường và thậm chí tạo trình chiếu.</system:String>
+
+    <system:String x:Key="Help.Settings">Tuỳ biến trải nghiệm của bạn với nhiều bối cảnh khác nhau. &#xD;&#xA;&#xD;&#xA;tính năng này chưa được thực hiện.</system:String>
+
+    <system:String x:Key="Help.Tools">Thống kê về các dự án ảnh của anh. &#xD;&#xA;&#xD;&#xA;Thiết lập và cấu hình định dạng xuất ảnh, dấu mực, chữ ký v. v.</system:String>
+
+    <system:String x:Key="Help.Language">Thay đổi ngôn ngữ của ứng dụng bất cứ lúc nào bạn muốn. &#xD;&#xA;&#xD;&#xA;bạn có thể làm như vậy mà không cần khởi chạy lại.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Tạo mới...</system:String>
 

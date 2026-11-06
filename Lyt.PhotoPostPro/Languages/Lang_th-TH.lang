@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">นําเข้า</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">สมุดพิมพ์ภาพถ่าย</system:String>
+
     <system:String x:Key="Shell.Settings">ตั้งค่า</system:String>
 
     <system:String x:Key="Shell.Tools">เครื่องมือ</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">การประมวลผล:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">ลากและวางเขตเวลา</system:String>
+
+    <system:String x:Key="Help.GetStarted">เริ่มด้วยภาพเรเบล.</system:String>
+
+    <system:String x:Key="Help.Documentation">เป็นความคิดที่ดีเสมอ ที่จะดูเอกสาร ดูให้เร็วหน่อย ภาพถ่ายเรเบลมาพร้อมกับเอกสาร &#xD;&#xA;&#xD;&#xA; สืบค้นเมื่อทําการแก้ไขภาพถ่ายใหม่.</system:String>
+
+    <system:String x:Key="Help.Camera">ดาวน์โหลดรูปภาพและภาพต่าง ๆ จากกล้อง DSLR ของคุณ ไอโฟนของคุณ หรือ แอนดรอยด์ สมาร์ทโฟน หรืออุปกรณ์สื่อแบบพกพา เช่น เมมโมรี่การ์ด &#xD;&#xA;&#xD;&#xA; คุณจะสามารถเรียงลําดับและเลือกแฟ้มภาพที่คุณต้องการได้.</system:String>
+
+    <system:String x:Key="Help.Import">โหลดภาพถ่ายและภาพต่าง ๆ จากฮาร์ดไดรฟ์ของคุณ หรือไดรฟ์ภายนอก หรือเครือข่าย &#xD;&#xA;&#xD;&#xA; คุณจะสามารถเรียงลําดับและเลือกแฟ้มที่ต้องการได้</system:String>
+
+    <system:String x:Key="Help.Library">เมื่อคุณได้นําเข้าภาพถ่ายของคุณ คุณสามารถเริ่มจัดการและแก้ไขมันในห้องสมุด.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">สร้างและแก้ไขสมุดภาพอย่างง่าย &#xD;&#xA;&#xD;&#xA; สืบค้นเมื่อ:.</system:String>
+
+    <system:String x:Key="Help.Gallery">ดูรูปที่ดีที่สุดในแกลอรี่สิ &#xD;&#xA;&#xD;&#xA; คุณจะสามารถเรียกดูภาพและใช้ภาพของคุณเป็นวอลเปเปอร์ และสร้างการนําเสนอสไลด์ได้.</system:String>
+
+    <system:String x:Key="Help.Settings">ปรับ ปรุง ประสบการณ์ ของ คุณ ให้ ดี ขึ้น ด้วย การ ปรับ เปลี่ยน หลาย อย่าง. สืบค้นเมื่อ:.</system:String>
+
+    <system:String x:Key="Help.Tools">สถิติเกี่ยวกับโครงการถ่ายภาพของคุณ &#xD;&#xA;&#xD;&#xA; ตั้งค่ารูปแบบการส่งออกภาพถ่าย, เครื่องหมายน้ํา, ลายเซ็น เป็นต้น.</system:String>
+
+    <system:String x:Key="Help.Language">เปลี่ยนภาษาของโปรแกรม เวลาที่คุณต้องการ &#xD;&#xA;&#xD;&#xA; คุณ ทํา ได้ โดย ไม่ ต้อง ทํา ซ้ํา อีก.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">สร้างใหม่...</system:String>
 

@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Εισαγωγή</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Βιβλίο φωτογραφιών</system:String>
+
     <system:String x:Key="Shell.Settings">Ρυθμίσεις</system:String>
 
     <system:String x:Key="Shell.Tools">Εργαλεία</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Τώρα σε επεξεργασία:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Ζώνη μεταφοράς και απόθεσης</system:String>
+
+    <system:String x:Key="Help.GetStarted">Ξεκινήστε με το Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">Πάντα μια καλή ιδέα για να takeτε μια ματιά στα έγγραφα πηγαίνετε να ξεκινήσετε γρήγορα! Το Photo Rebel συνοδεύεται από ενσωματωμένη τεκμηρίωση. &#xD;&#xA;&#xD;&#xA;Ρίξτε μια ματιά στο "Επεξεργασία" έγγραφο αν είστε νέοι στην επεξεργασία φωτογραφιών.</system:String>
+
+    <system:String x:Key="Help.Camera">Κατεβάστε φωτογραφίες και εικόνες από την κάμερα DSLR σας, το iPhone ή Android smartphone σας, ή οποιαδήποτε φορητή συσκευή πολυμέσων, όπως μια κάρτα μνήμης ή ένα zip drive. &#xD;&#xA;&#xD;&#xA;Θα είστε σε θέση να ταξινομήσετε και να επιλέξετε τα αρχεία εικόνας που θέλετε να κρατήσετε.</system:String>
+
+    <system:String x:Key="Help.Import">Φόρτωση φωτογραφιών και εικόνων από τον σκληρό σας δίσκο ή εξωτερικούς ή δικτυακούς δίσκους. &#xD;&#xA;&#xD;&#xA;Θα είστε σε θέση να ταξινομήσετε και να επιλέξετε τα αρχεία που θέλετε να κρατήσετε</system:String>
+
+    <system:String x:Key="Help.Library">Μόλις έχετε εισάγει τις φωτογραφίες σας, μπορείτε να αρχίσετε να τις οργανώνετε και να τις επεξεργαστείτε στη βιβλιοθήκη.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Δημιουργία και επεξεργασία φωτογραφικών βιβλίων με ευκολία. &#xD;&#xA;&#xD;&#xA;Αυτό το χαρακτηριστικό δεν έχει ακόμη εφαρμοστεί.</system:String>
+
+    <system:String x:Key="Help.Gallery">Δείτε τις καλύτερες φωτογραφίες σας στην γκαλερί. &#xD;&#xA;&#xD;&#xA;Θα είστε σε θέση να περιηγηθείτε και να χρησιμοποιήσετε τις εικόνες σας ως ταπετσαρίες και ακόμη και να δημιουργήσετε διαφάνειες δείχνει.</system:String>
+
+    <system:String x:Key="Help.Settings">Προσαρμόστε την εμπειρία σας με διάφορες ρυθμίσεις. &#xD;&#xA;&#xD;&#xA;Αυτό το χαρακτηριστικό δεν έχει ακόμη εφαρμοστεί.</system:String>
+
+    <system:String x:Key="Help.Tools">Στατιστικά για τις φωτογραφίες σας. &#xD;&#xA;&#xD;&#xA;Καθορίστε και ρυθμίστε τις μορφές εξαγωγής φωτογραφιών, υδατογραφήματα, υπογραφές, κλπ..</system:String>
+
+    <system:String x:Key="Help.Language">Αλλάξτε τη γλώσσα της εφαρμογής, όποτε θέλετε. &#xD;&#xA;&#xD;&#xA;Μπορείτε να το κάνετε χωρίς να χρειάζεται να επανεκκινήσετε.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Δημιουργία νέου...</system:String>
 

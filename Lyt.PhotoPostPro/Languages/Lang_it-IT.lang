@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">Importare</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">Foto del libro</system:String>
+
     <system:String x:Key="Shell.Settings">Impostazioni</system:String>
 
     <system:String x:Key="Shell.Tools">Strumenti</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">Ora in elaborazione:</system:String>
 
     <system:String x:Key="DragDrop.DropZone">Zona trascina e Rilascia</system:String>
+
+    <system:String x:Key="Help.GetStarted">Inizia con Photo Rebel...</system:String>
+
+    <system:String x:Key="Help.Documentation">Sempre una buona idea di dare un'occhiata alla documentazione andare ottenere un rapido inizio! Photo Rebel viene fornito con la sua documentazione incorporata. &#xD;&#xA;&#xD;&#xA;Date un'occhiata al documento "Editing" se siete nuovi per modificare le foto.</system:String>
+
+    <system:String x:Key="Help.Camera">Scarica foto e immagini dalla fotocamera DSLR, dal tuo smartphone iPhone o Android, o da qualsiasi dispositivo multimediale portatile come una scheda di memoria o un'unità zip. &#xD;&#xA;&#xD;&#xA;Sarete in grado di ordinare e selezionare i file di immagine che si desidera mantenere.</system:String>
+
+    <system:String x:Key="Help.Import">Carica foto e immagini dal disco rigido o da unità esterne o di rete. &#xD;&#xA;&#xD;&#xA; Sarete in grado di ordinare e selezionare i file che si desidera mantenere</system:String>
+
+    <system:String x:Key="Help.Library">Una volta che hai importato le tue foto, puoi iniziare a organizzarle e modificarle nella libreria.</system:String>
+
+    <system:String x:Key="Help.PhotoBook">Creare e modificare libri fotografici con facilità. &#xD;&#xA;&#xD;&#xA;Questa funzionalità non è ancora implementata.</system:String>
+
+    <system:String x:Key="Help.Gallery">Visualizza le tue migliori foto nella galleria. &#xD;&#xA;&#xD;&#xA;Sarete in grado di navigare e utilizzare le immagini come sfondi e anche creare spettacoli diapositiva.</system:String>
+
+    <system:String x:Key="Help.Settings">Personalizza la tua esperienza con varie impostazioni.&#xD;&#xA;&#xD;&#xA;Questa funzionalità non è ancora implementata.</system:String>
+
+    <system:String x:Key="Help.Tools">Statistiche per i vostri progetti fotografici. &#xD;&#xA;&#xD;&#xA;Definire e configurare i formati di esportazione di foto, filigrane, firme, ecc.</system:String>
+
+    <system:String x:Key="Help.Language">Modifica la lingua dell'applicazione, in qualsiasi momento.&#xD;&#xA;&#xD;&#xA;È possibile farlo senza bisogno di riavviare.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">Crea nuovo...</system:String>
 

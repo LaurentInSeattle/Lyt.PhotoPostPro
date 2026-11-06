@@ -61,8 +61,8 @@
 	<system:String x:Key="File.Exception">An error occurred while processing this image file.</system:String>
 
 	<!-- Shell - Nav' Bar -->
-  <system:String x:Key="Shell.Folder">Library</system:String>
-  <system:String x:Key="Shell.Camera">Camera</system:String>
+	<system:String x:Key="Shell.Folder">Library</system:String>
+	<system:String x:Key="Shell.Camera">Camera</system:String>
 	<system:String x:Key="Shell.Gallery">Gallery</system:String>
 	<system:String x:Key="Shell.Import">Import</system:String>
 	<system:String x:Key="Shell.PhotoBook">Photo Book</system:String>
@@ -79,6 +79,18 @@
 
 	<!-- Drag and Drop -->
 	<system:String x:Key="DragDrop.DropZone">Drag and Drop Zone</system:String>
+
+	<!-- First Run ~ Help -->
+	<system:String x:Key="Help.GetStarted">Get started with Photo Rebel...</system:String>
+	<system:String x:Key="Help.Documentation">Always a good idea to take a look at the documentation go get a quick start! Photo Rebel comes with its embedded documentation. &#xD;&#xA;&#xD;&#xA;Take a look at "Editing" document if you are new to editing photos.</system:String>
+	<system:String x:Key="Help.Camera">Download photos and images from your DSLR camera, your iPhone or Android smartphone, or any portable media device such as a memory card or zip drive. &#xD;&#xA;&#xD;&#xA;You will be able to sort and select the image files you want to keep.</system:String>
+	<system:String x:Key="Help.Import">Load photos and images from your hard drive or external or network drives. &#xD;&#xA;&#xD;&#xA;You will be able to sort and select the files you want to keep</system:String>
+	<system:String x:Key="Help.Library">Once you have imported your photos, you can start to organize them and edit them in the library.</system:String>
+	<system:String x:Key="Help.PhotoBook">Create and edit photo books with ease. &#xD;&#xA;&#xD;&#xA;This feature is not yet implemented.</system:String>
+	<system:String x:Key="Help.Gallery">View your best photos in the gallery. &#xD;&#xA;&#xD;&#xA;You will be able to browse and use your images as wallpapers and even create slide shows.</system:String>
+	<system:String x:Key="Help.Settings">Customize your experience with various settings. &#xD;&#xA;&#xD;&#xA;This feature is not yet implemented.</system:String>
+	<system:String x:Key="Help.Tools">Statistics about for your photo projects. &#xD;&#xA;&#xD;&#xA;Define and configure your photo export formats, watermarks, signatures, etc..</system:String>
+	<system:String x:Key="Help.Language">Change the language of the application, any time you want. &#xD;&#xA;&#xD;&#xA;You can do so with no need to restart.</system:String>
 
 	<!-- Tools -->
 	<!-- Editor -->

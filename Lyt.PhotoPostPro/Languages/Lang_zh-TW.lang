@@ -53,6 +53,8 @@
 
     <system:String x:Key="Shell.Import">進口</system:String>
 
+    <system:String x:Key="Shell.PhotoBook">相片相簿</system:String>
+
     <system:String x:Key="Shell.Settings">設定</system:String>
 
     <system:String x:Key="Shell.Tools">工具</system:String>
@@ -70,6 +72,26 @@
     <system:String x:Key="Imaging.NowProcessing">正在處理：</system:String>
 
     <system:String x:Key="DragDrop.DropZone">拖放區</system:String>
+
+    <system:String x:Key="Help.GetStarted">從相片叛逆起步...</system:String>
+
+    <system:String x:Key="Help.Documentation">有好點子去取取取文件 就快去取出! 有相片"叛逆" 有被嵌入的文件 &#xD;&#xA;&#xD;&#xA; 如果您是新編輯相片的, 就看一看" Editing" 文件 .</system:String>
+
+    <system:String x:Key="Help.Camera">从您的 DSLR相機上下載相片和相片, 您的iPhone或Android 智能手機, 或是任何可移植的媒體裝置, 如記憶卡或拉鏈相機等 。&#xD;&#xA;&#xD;&#xA; 您可以排序并選擇您要保存的影像檔案 .</system:String>
+
+    <system:String x:Key="Help.Import">从您硬碟或外接或網路上載入相片和相片 。&#xD;&#xA;&#xD;&#xA;您可以排序并選擇您要保存的檔案</system:String>
+
+    <system:String x:Key="Help.Library">在您已匯入相片后, 您可以開始整理相片并編輯相片到相簿中 .</system:String>
+
+    <system:String x:Key="Help.PhotoBook">建立并輕鬆地編輯相片相簿 。 &#xD;&#xA;&#xD;&#xA; 此功能尚未被實作 .</system:String>
+
+    <system:String x:Key="Help.Gallery">在畫廊取出你最好的相片 &#xD;&#xA;&#xD;&#xA;您可以瀏覽并使用您的相片做壁纸, 甚至可以建立相片顯示 .</system:String>
+
+    <system:String x:Key="Help.Settings">在相關設定下自訂相關經驗 。&#xD;&#xA;&#xD;&#xA; 此功能尚未被實作 .</system:String>
+
+    <system:String x:Key="Help.Tools">有你相片專案的數據 &#xD;&#xA;&#xD;&#xA; 为相片匯出格式、 水印、 簽名等配置并设置 .</system:String>
+
+    <system:String x:Key="Help.Language">隨時改變應用程式的語言 。 &#xD;&#xA;&#xD;&#xA;您可以不需再起起起動就做得到.</system:String>
 
     <system:String x:Key="Tools.Editor.AddNew">建立新的...</system:String>
 
