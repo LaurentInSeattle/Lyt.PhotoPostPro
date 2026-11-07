@@ -24,9 +24,9 @@ public sealed partial class LibraryManager
 
     private readonly string libraryFolderPath;
     private readonly string galleryFolderPath;
-    private readonly string exportsFolderPath;
     private readonly Lock lockObjectFiles = new();
 
+    private string exportsFolderPath;
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
 
@@ -52,10 +52,36 @@ public sealed partial class LibraryManager
             Directory.CreateDirectory(this.galleryFolderPath);
         }
 
-        this.exportsFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, ExportsFolderName);
-        if (!Directory.Exists(this.exportsFolderPath))
+        this.exportsFolderPath = string.Empty;
+        void SetDefaultExportPath()
         {
-            Directory.CreateDirectory(this.exportsFolderPath);
+            this.exportsFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, ExportsFolderName);
+            if (!Directory.Exists(this.exportsFolderPath))
+            {
+                Directory.CreateDirectory(this.exportsFolderPath);
+            }
+        }
+
+        if (this.model.ExportPath.Equals(PhotoPostProModel.ExportPathDefault, StringComparison.InvariantCultureIgnoreCase))
+        {
+            SetDefaultExportPath(); 
+        }
+        else
+        {
+            try
+            {
+                this.exportsFolderPath = this.model.ExportPath;
+                if (!Directory.Exists(this.exportsFolderPath))
+                {
+                    Directory.CreateDirectory(this.exportsFolderPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(
+                    string.Format("Error creating exports folder path: {0}\n {1}", this.model.ExportPath, ex.ToString()));
+                SetDefaultExportPath();
+            }
         }
 
         // Adjust capacity as needed

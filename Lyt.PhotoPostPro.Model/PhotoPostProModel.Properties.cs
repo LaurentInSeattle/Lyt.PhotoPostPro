@@ -8,7 +8,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     #region Serialized -  No model changed event
 
     [JsonRequired]
-    public string RootPath { get; set; } = RootPathDefault; 
+    public string RootPath { get; set; } = RootPathDefault;
+
+    public string ExportPath { get; set; } = ExportPathDefault;
 
     [JsonRequired]
     public string Language

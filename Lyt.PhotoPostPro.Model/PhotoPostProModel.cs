@@ -5,6 +5,7 @@ using static Lyt.Persistence.FileManagerModel;
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public const string RootPathDefault = "Default";
+    public const string ExportPathDefault = "Default";
     public const string DefaultLanguage = "en-US";
     public const string PhotoPostProAppName = "PhotoRebel";
     public const string PhotoPostProFilename = "PhotoRebelData";
@@ -12,7 +13,8 @@ public sealed partial class PhotoPostProModel : ModelBase
     private static readonly PhotoPostProModel DefaultData =
         new()
         {
-            RootPath = "Default",
+            RootPath = RootPathDefault,
+            ExportPath = ExportPathDefault,
             Language = DefaultLanguage,
             FileUid = 0,
             IsFirstRun = true,

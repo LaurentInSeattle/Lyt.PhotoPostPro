@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro;
 
-using Lyt.PhotoPostPro.Workflow.Process.Spotlight;
-
 public partial class App : ApplicationBase
 {
     public const string Organization = "Lyt";
@@ -10,7 +8,7 @@ public partial class App : ApplicationBase
     public const string AssemblyName = "Lyt.PhotoPostPro";
     public const string AssetsFolder = "Assets";
 
-    public const string Version = "Federica"; 
+    public const string Version = "Giulia"; 
 
     public App(
         IMtpService mtpService,
