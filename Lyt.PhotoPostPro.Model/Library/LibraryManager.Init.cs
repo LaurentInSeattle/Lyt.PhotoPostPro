@@ -22,11 +22,12 @@ public sealed partial class LibraryManager
     private readonly IDispatch dispatcher;
     private readonly ILogger logger;
 
-    private readonly string libraryFolderPath;
     private readonly string galleryFolderPath;
     private readonly Lock lockObjectFiles = new();
 
+    private string libraryFolderPath;
     private string exportsFolderPath;
+
     private int imageLoadedCount = 0;
     private int errorLoadingCount = 0;
 
@@ -40,18 +41,53 @@ public sealed partial class LibraryManager
 
         this.lockObject = new Lock();
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LibraryFolderName);
-        if (!Directory.Exists(this.libraryFolderPath))
-        {
-            Directory.CreateDirectory(this.libraryFolderPath);
-        }
 
+        // Setup the gallery folder path based on the Pictures folder and the application name.
         this.galleryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, GalleryFolderName);
         if (!Directory.Exists(this.galleryFolderPath))
         {
             Directory.CreateDirectory(this.galleryFolderPath);
         }
 
+        // Setup the library folder path based on the model's RootPath.
+        // If it's set to default or matches the Pictures folder, use the default library path.
+        // Otherwise, attempt to create the specified directory.
+        this.libraryFolderPath = string.Empty;
+        void SetDefaultLibraryPath()
+        {
+            this.libraryFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LibraryFolderName);
+            if (!Directory.Exists(this.libraryFolderPath))
+            {
+                Directory.CreateDirectory(this.libraryFolderPath);
+            }
+        }
+
+        if (this.model.RootPath.Equals(PhotoPostProModel.RootPathDefault, StringComparison.InvariantCultureIgnoreCase)||
+            this.model.RootPath.Equals(pictures, StringComparison.InvariantCultureIgnoreCase))
+        {
+            SetDefaultLibraryPath();
+        }
+        else
+        {
+            try
+            {
+                this.libraryFolderPath = this.model.RootPath;
+                if (!Directory.Exists(this.libraryFolderPath))
+                {
+                    Directory.CreateDirectory(this.libraryFolderPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(
+                    string.Format("Error creating library folder path: {0}\n {1}", this.model.RootPath, ex.ToString()));
+                SetDefaultLibraryPath();
+            }
+        }
+
+        // Setup the library folder path based on the model's ExportPath.
+        // If it's set to default , use the default library path.
+        // Otherwise, attempt to create the specified directory.
         this.exportsFolderPath = string.Empty;
         void SetDefaultExportPath()
         {

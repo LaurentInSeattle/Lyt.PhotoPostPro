@@ -69,11 +69,6 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.IsInitializing = true;
         await this.Load();
 
-        if (this.RootPath.Equals(RootPathDefault, StringComparison.InvariantCultureIgnoreCase))
-        {
-            this.RootPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        }
-
         this.CameraManager = new CameraManager(this, base.Logger);
         this.LutsManager = new LutsManager(this, base.Logger);
         this.LibraryManager = new(this, fileManager, dispatcher, base.Logger);
