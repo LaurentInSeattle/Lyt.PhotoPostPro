@@ -11,10 +11,12 @@
 [JsonSerializable(typeof(Metadata))]
 [JsonSerializable(typeof(ProcessParameters))]
 
+[JsonSerializable(typeof(LibraryFolder))]
 [JsonSerializable(typeof(Signature))]
 [JsonSerializable(typeof(Watermark))]
 [JsonSerializable(typeof(ImageExport))]
 
+[JsonSerializable(typeof(LibraryFolderCollection))]
 [JsonSerializable(typeof(SignaturesCollection))]
 [JsonSerializable(typeof(WatermarksCollection))]
 [JsonSerializable(typeof(ImageExportsCollection))]
@@ -27,6 +29,4 @@
 
 [JsonSerializable(typeof(PppFontStyle))]
 
-public partial class AppJsonContext : JsonSerializerContext
-{
-}
+public partial class AppJsonContext : JsonSerializerContext { }

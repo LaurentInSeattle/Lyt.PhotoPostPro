@@ -138,13 +138,13 @@ public static partial class ImageLoader
         Task.Run(() =>
         {
             var driveStatistics = new DriveStatistics(0L);
-            if (FileSystemExtensions.DriveInfo(model.RootPath) is DriveInfo driveInfo)
+            var libraryManager = model.LibraryManager;
+            if (FileSystemExtensions.DriveInfo(libraryManager.LibraryFolderPath) is DriveInfo driveInfo)
             {
                 driveStatistics =
                     new DriveStatistics(driveInfo.AvailableFreeSpace, driveInfo.Name, driveInfo.VolumeLabel);
             }
 
-            var libraryManager = model.LibraryManager;
             var libraryStatistics = InspectFolder(libraryManager.LibraryFolderPath, LibraryLocalizationKey);
             var galleryStatistics = InspectFolder(libraryManager.GalleryFolderPath, GalleryLocalizationKey);
             var exportStatistics = InspectFolder(libraryManager.ExportsFolderPath, ExportsLocalizationKey);

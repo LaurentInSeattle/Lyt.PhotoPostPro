@@ -88,9 +88,10 @@ public sealed partial class FolderImportViewModel :
         this.toaster = toaster;
         this.statistics = new FolderStatistics(string.Empty, string.Empty);
 
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.downloadFolderPath =
             System.IO.Path.Combine(
-                this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, LibraryManager.CameraDownloadsFolderName);
+                pictures, PhotoPostProModel.PhotoPostProAppName, LibraryManager.CameraDownloadsFolderName);
         this.IsFolderMode = false;
         this.IsMessageVisible = false;
         this.AreStatisticsVisible = false;
@@ -127,7 +128,8 @@ public sealed partial class FolderImportViewModel :
         }
         else if (this.statistics.Success)
         {
-            if (FileSystemExtensions.DriveInfo(this.model.RootPath) is DriveInfo driveInfo)
+            string libraryFolderPath = this.model.LibraryManager.LibraryFolderPath;
+            if (FileSystemExtensions.DriveInfo(libraryFolderPath) is DriveInfo driveInfo)
             {
                 this.totalSpaceRequiredMB = 0.0f;
                 this.TotalSpaceRequiredString = string.Empty;

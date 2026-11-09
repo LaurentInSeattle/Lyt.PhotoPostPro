@@ -24,8 +24,9 @@ public sealed class LutsManager
         this.model = model;
         this.logger = logger;
 
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.LutsFolderPath =
-            Path.Combine(this.model.RootPath, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
+            Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, LutsFolderName);
         if (!Directory.Exists(this.LutsFolderPath))
         {
             Directory.CreateDirectory(this.LutsFolderPath);

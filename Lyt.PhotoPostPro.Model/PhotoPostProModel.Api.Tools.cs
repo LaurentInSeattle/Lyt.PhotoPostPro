@@ -179,6 +179,19 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
+    internal bool CreateDefaultLibraryFolder()
+    {
+        bool needModelSave = false;
+        if (this.LibraryFolders.AvailableLibraryFolders.Count == 0)
+        {
+            this.LibraryFolders.SelectedLibraryFolderName = LibraryFolder.DefaultLibraryFolderName;
+            this.LibraryFolders.AvailableLibraryFolders.Add(LibraryFolder.Default);
+            needModelSave = true;
+        }
+
+        return needModelSave;
+    }
+
     internal bool CreateDefaultExports()
     {
         bool needModelSave = false;

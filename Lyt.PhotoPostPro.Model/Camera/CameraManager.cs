@@ -23,9 +23,10 @@ public class CameraManager
         this.model = model;
         this.logger = logger;
 
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         this.downloadFolderPath = 
             Path.Combine(
-                this.model.RootPath, 
+                pictures, 
                 PhotoPostProModel.PhotoPostProAppName, 
                 LibraryManager.CameraDownloadsFolderName);
         this.ClearDownloadFolder();

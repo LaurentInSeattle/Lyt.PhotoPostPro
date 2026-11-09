@@ -13,7 +13,7 @@ public sealed partial class PhotoPostProModel : ModelBase
     private static readonly PhotoPostProModel DefaultData =
         new()
         {
-            RootPath = RootPathDefault,
+            // RootPath = RootPathDefault,
             ExportPath = ExportPathDefault,
             Language = DefaultLanguage,
             FileUid = 0,
@@ -112,7 +112,11 @@ public sealed partial class PhotoPostProModel : ModelBase
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
             this.SelectLanguage(this.Language);
-            if (this.CreateDefaultExports())
+
+            bool saveNeeded = false;
+            saveNeeded |= this.CreateDefaultLibraryFolder();
+            saveNeeded |= this.CreateDefaultExports();
+            if (saveNeeded)
             {
                 // We just added stuff: Save the newly added data 
                 this.Save();

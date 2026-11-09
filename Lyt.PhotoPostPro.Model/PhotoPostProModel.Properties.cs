@@ -7,9 +7,10 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     #region Serialized -  No model changed event
 
-    [JsonRequired]
-    public string RootPath { get; set; } = RootPathDefault;
+    //[JsonRequired]
+    //public string RootPath { get; set; } = RootPathDefault;
 
+    [JsonRequired]
     public string ExportPath { get; set; } = ExportPathDefault;
 
     [JsonRequired]
@@ -37,6 +38,9 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     [JsonRequired]
     public bool IsFirstRun { get; set; }
+
+    [JsonRequired]
+    public LibraryFolderCollection LibraryFolders { get; set; } = new();
 
     [JsonRequired]
     public SignaturesCollection Signatures { get; set; } = new();
