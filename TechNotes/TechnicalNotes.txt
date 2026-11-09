@@ -1,4 +1,38 @@
 
+---------
+
+Picking a folder 
+
+
+using System;
+using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
+
+public async Task<string?> OpenFolderPickerAsync(Visual visual)
+{
+    // Get the TopLevel container from the current control/visual
+    var topLevel = TopLevel.GetTopLevel(visual);
+    if (topLevel == null) return null;
+
+    // Open the folder picker dialog
+    var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+    {
+        Title = "Select a Folder",
+        AllowMultiple = false
+    });
+
+    // Return the local path if a folder was selected
+    if (folders.Count > 0)
+    {
+        // Path can be extracted via the item's Path property
+        return folders[0].Path.LocalPath;
+    }
+
+    return null; // User canceled the selection
+}
+
+---------
 
 <Window.Resources>
     <!-- Change the width/thickness of the ScrollBar -->

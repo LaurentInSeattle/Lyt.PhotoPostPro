@@ -24,12 +24,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.1.5" />
-    <PackageReference Include="Avalonia.Skia" Version="12.1.5" />
-    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="12.1.5" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.5" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.5" />
+    <PackageReference Include="Avalonia" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Skia" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.6" />
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3" />
+
+    <!-- Direct SkiaSharp Reference -->
+    <PackageReference Include="SkiaSharp" Version="4.154.0" />
+
     <PackageReference Include="PDFtoImage" Version="5.4.0" />
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.19.0">
       <PrivateAssets>all</PrivateAssets>
