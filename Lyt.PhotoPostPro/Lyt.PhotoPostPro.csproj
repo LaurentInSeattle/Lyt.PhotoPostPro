@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
@@ -32,7 +32,7 @@
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3" />
 
     <!-- Direct SkiaSharp Reference -->
-    <PackageReference Include="SkiaSharp" Version="4.154.0" />
+    <PackageReference Include="SkiaSharp" Version="4.155.0" />
 
     <PackageReference Include="PDFtoImage" Version="5.4.0" />
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.19.0">

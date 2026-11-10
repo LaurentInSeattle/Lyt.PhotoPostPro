@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net11.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -25,7 +25,7 @@
     </PackageReference>
 
     <!-- Direct SkiaSharp Reference -->
-    <PackageReference Include="SkiaSharp" Version="4.154.0" />
+    <PackageReference Include="SkiaSharp" Version="4.155.0" />
 
     <PackageReference Include="Nullable.Extended.Analyzer" Version="1.19.0">
       <PrivateAssets>all</PrivateAssets>
