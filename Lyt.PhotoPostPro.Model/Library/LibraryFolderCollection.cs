@@ -42,13 +42,44 @@ public sealed class LibraryFolderCollection
             return false;
         }
 
+        // Has been deleted ? or invalid path ?
         if (!Directory.Exists(libraryFolder.FullPath))
         {
             return false;
         }
 
+        // Has been renamed ? 
+        // Make sure the library folder contains our application specific subfolders
+        if ((!libraryFolder.FullPath.Contains(PhotoPostProModel.PhotoPostProAppName)) || 
+            (!libraryFolder.FullPath.Contains(LibraryManager.LibraryFolderName)))
+        {
+            return false;
+        }
 
-        return true;
+        // Has been 'protected' ? 
+        // Make sure the library folder is still writeable and readable, and that we can create
+        // and delete a file in it. (Full Control)
+        try
+        {
+
+            const string testReadWrite = "testReadWrite"; 
+            string testFilePath = Path.Combine(libraryFolder.FullPath, testReadWrite + ".txt");
+            File.WriteAllText(testFilePath, testReadWrite);
+            string content = File.ReadAllText(testFilePath);
+            bool fail = false;
+            if (content != testReadWrite)
+            {
+                fail = true;
+            }
+
+            File.Delete(testFilePath);
+            return !fail;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Exception in IsValid: " + ex.ToString());
+            return false;
+        }
     }
 
     // Create a new library folder entry with the specified friendly name and path.
