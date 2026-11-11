@@ -152,7 +152,10 @@
 	<!-- Watermarks -->
 	<system:String x:Key="Tools.Select.Watermarks">Watermarks</system:String>
 
-	<!-- Exports -->
+	<!-- Libraries -->
+	<system:String x:Key="Tools.Select.Libraries">Libraries</system:String>
+
+	<!-- Export Formats -->
 	<system:String x:Key="Tools.Select.Exports">Exports</system:String>
 	<system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Resize to specified dimension</system:String>
 	<system:String x:Key="Tools.Editor.OutputFormat">OutputFormat</system:String>

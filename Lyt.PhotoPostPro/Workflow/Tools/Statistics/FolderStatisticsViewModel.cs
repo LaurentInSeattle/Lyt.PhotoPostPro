@@ -21,7 +21,17 @@ public sealed partial class FolderStatisticsViewModel(PhotoPostProModel model) :
     public void Update(FolderStatistics folderStatistics)
     {
         this.navigationPath = folderStatistics.Path;
-        this.FolderName = this.Localize(folderStatistics.LocalizationKey);
+        if ( folderStatistics.LocalizationKey.Contains("Library") )
+        {
+            string folderName = this.Localize(folderStatistics.LocalizationKey);
+            string libraryName = this.model.LibraryFolders.SelectedLibraryFolderName; 
+            this.FolderName = $"{folderName} ({libraryName})";
+        }
+        else
+        {
+            this.FolderName = this.Localize(folderStatistics.LocalizationKey);
+        }
+
         string sizeOnDisk = Metadata.DiskSpaceString(folderStatistics.TotalSizeOnDiskMB);
         this.SizeOnDisk = sizeOnDisk;
         this.ImageFileCount = folderStatistics.ImageFileCount.ToString("D");

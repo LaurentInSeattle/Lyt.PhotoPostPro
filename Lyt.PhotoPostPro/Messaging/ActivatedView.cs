@@ -22,9 +22,11 @@ public enum ActivatedView : int
     Culling,
 
     // Secondary views (activated from Tools) 
+    Statistics,
     Signatures,
     Watermarks,
-    Statistics,
+    ExportFormats,
+    Libraries,
 
     // Secondary views (activated from ProcessView) 
     // In alphabetical order, not the workflow order, which is determined elsewhere.

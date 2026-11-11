@@ -9,7 +9,8 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
         { "Tools.Select.Statistics", ActivatedView.Statistics },
         { "Tools.Select.Signatures", ActivatedView.Signatures },
         { "Tools.Select.Watermarks", ActivatedView.Watermarks },
-        { "Tools.Select.Exports", ActivatedView.Exports },
+        { "Tools.Select.Exports", ActivatedView.ExportFormats },
+        { "Tools.Select.Libraries", ActivatedView.Libraries },
     };
 
     private readonly PhotoPostProModel model = model;
@@ -91,9 +92,10 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
 
         // No buttons, toolbox or toolbars for all tool views: 
         Setup<StatisticsViewModel, StatisticsView>(ActivatedView.Statistics);
-        Setup<ExportsViewModel, ExportsView>(ActivatedView.Exports);
+        Setup<ExportsViewModel, ExportsView>(ActivatedView.ExportFormats);
         Setup<SignaturesViewModel, SignaturesView>(ActivatedView.Signatures);
         Setup<WatermarksViewModel, WatermarksView>(ActivatedView.Watermarks);
+        Setup<LibrariesViewModel, LibrariesView>(ActivatedView.Libraries);
 
         var animationService = App.GetRequiredService<IAnimationService>();
         this.viewSelector =

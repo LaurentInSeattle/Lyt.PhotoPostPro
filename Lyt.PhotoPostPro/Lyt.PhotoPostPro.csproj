@@ -118,6 +118,12 @@
     <Compile Update="Workflow\Process\Spotlight\SpotlightToolboxView.axaml.cs">
       <DependentUpon>SpotlightToolboxView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Tools\Libraries\LibrariesEditView.axaml.cs">
+      <DependentUpon>LibrariesEditView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\Libraries\LibrariesView.axaml.cs">
+      <DependentUpon>LibrariesView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -163,10 +163,11 @@ public partial class App : ApplicationBase
 
                 // Tools and its sub ViewModels 
                 _ = services.AddSingleton<ToolsViewModel>();
-                _ = services.AddSingleton<ExportsViewModel>();
+                _ = services.AddSingleton<StatisticsViewModel>();
                 _ = services.AddSingleton<SignaturesViewModel>();
                 _ = services.AddSingleton<WatermarksViewModel>();
-                _ = services.AddSingleton<StatisticsViewModel>();
+                _ = services.AddSingleton<ExportsViewModel>();
+                _ = services.AddSingleton<LibrariesViewModel>();
 
                 // Logging Services, pick one 
 #if DEBUG
