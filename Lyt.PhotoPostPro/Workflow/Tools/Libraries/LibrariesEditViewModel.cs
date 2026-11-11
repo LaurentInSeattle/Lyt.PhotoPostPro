@@ -20,9 +20,14 @@ public sealed partial class LibrariesEditViewModel :
     [ObservableProperty]
     public partial string FolderPath { get; set; } = string.Empty;
 
-
     [ObservableProperty]
     public partial string ValidationMessage { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsEditMode { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool CannotDelete { get; set; } = false;
 
     public LibrariesEditViewModel(PhotoPostProModel model, EditorViewModel editorViewModel)
     {
@@ -35,8 +40,46 @@ public sealed partial class LibrariesEditViewModel :
 
     private void SetDefaults()
     {
-        this.FriendlyName = "New Export Specification";
+        this.FriendlyName = "New Library";
         this.Description = "Enter a short description here...";
+        this.FolderPath = string.Empty; 
+    }
+
+    [RelayCommand]
+    public void OnFolderBrowse() => this.OnFolderBrowseAsync();
+
+    private async void OnFolderBrowseAsync()
+    {
+        var visual = this.View;
+        if (visual != null)
+        {
+            string? selectedFolderPath = await OpenFolderPickerAsync(visual);
+            this.FolderPath = string.IsNullOrEmpty(selectedFolderPath) ? string.Empty : selectedFolderPath;
+            this.ValidateAndMessage(); 
+        }
+    }
+
+    public async Task<string?> OpenFolderPickerAsync(Visual visual)
+    {
+        // Get the TopLevel container from the current control/visual
+        var topLevel = TopLevel.GetTopLevel(visual);
+        if (topLevel == null) return null;
+
+        // Open the folder picker dialog
+        var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+        {
+            Title = "Select a Folder",
+            AllowMultiple = false
+        });
+
+        // Return the local path if a folder was selected
+        if (folders.Count > 0)
+        {
+            // Path can be extracted via the item's Path property
+            return folders[0].Path.LocalPath;
+        }
+
+        return null; // User canceled the selection
     }
 
     partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
@@ -74,12 +117,16 @@ public sealed partial class LibrariesEditViewModel :
             return false;
         }
 
+        // TODO :
+        // Validate folder path 
+
         return true;
     }
 
     // Populate the form with defaults 
     public void BeginAdd()
     {
+        this.IsEditMode = false;
         this.FriendlyNameIsEnabled = true;
         this.SetDefaults();
     }
@@ -87,15 +134,17 @@ public sealed partial class LibrariesEditViewModel :
     // Populate the form with provided editable 
     public void BeginEdit(IEditable editable)
     {
-        if (editable is not ImageExport imageExport)
+        if (editable is not LibraryFolder libraryFolder)
         {
             return;
         }
 
+        this.IsEditMode = true;
         this.FriendlyNameIsEnabled = false;
-
-        this.FriendlyName = imageExport.FriendlyName;
-        this.Description = imageExport.Description;
+        this.FriendlyName = libraryFolder.FriendlyName;
+        this.Description = libraryFolder.Description;
+        this.FolderPath = libraryFolder.FolderPath;
+        this.CannotDelete = libraryFolder.IsDefault;
         this.ValidateAndMessage();
     }
 

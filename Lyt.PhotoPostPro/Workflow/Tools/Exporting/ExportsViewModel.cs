@@ -25,5 +25,7 @@ public sealed partial class ExportsViewModel : ViewModel<ExportsView>, IEditorDa
         this.editorViewModel.Populate(this.model.ImageExports.AvailableImageExports, editingForm);
     }
 
+    public bool CanEdit => true;
+
     public void Refresh() => this.editorViewModel.Refresh(this.model.ImageExports.AvailableImageExports);
 }

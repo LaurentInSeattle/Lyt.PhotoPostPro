@@ -25,5 +25,7 @@ public sealed partial class LibrariesViewModel : ViewModel<LibrariesView>, IEdit
         this.editorViewModel.Populate(this.model.LibraryFolders.AvailableLibraryFolders, editingForm);
     }
 
+    public bool CanEdit => false;
+
     public void Refresh() => this.editorViewModel.Refresh(this.model.LibraryFolders.AvailableLibraryFolders);
 }

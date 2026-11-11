@@ -6,6 +6,8 @@ public sealed partial class EditorViewModel(
     public sealed class AddNewEditable(string friendlyName) : IEditable
     {
         public string FriendlyName { get; set; } = friendlyName;
+
+        public bool CanDelete => true;
     }
 
     private readonly PhotoPostProModel model = model;
@@ -64,9 +66,18 @@ public sealed partial class EditorViewModel(
     public void EnableButtons(bool enabled)
     {
         this.IsAddButtonDisabled = !enabled;
-        this.IsSaveButtonDisabled = !enabled;
         this.IsDeleteButtonDisabled = !enabled;
+
+        if ( this.editorDataProvider.CanEdit )
+        {
+            this.IsSaveButtonDisabled = !enabled;
+        }
+        else
+        {
+            this.IsSaveButtonDisabled = true;
+        }
     }
+
     partial void OnSelectedObjectIndexChanged(int value)
     {
         if (value < 0 || value >= this.EditableObjects.Count)
@@ -92,6 +103,7 @@ public sealed partial class EditorViewModel(
             this.IsAddMode = false;
             this.IsEditMode = true;
             this.editor?.BeginEdit(selected);
+            this.IsDeleteButtonDisabled = !selected.CanDelete;
         }
     }
 

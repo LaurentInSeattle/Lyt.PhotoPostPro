@@ -4,6 +4,8 @@ public sealed class ImageExport : IEditable
 {
     public string FriendlyName { get; set; } = string.Empty;
 
+    public bool CanDelete => ! this.IsGalleryFormat;
+
     public string Description { get; set; } = string.Empty;
 
     public ExportAction Action { get; set; } = ExportAction.None;

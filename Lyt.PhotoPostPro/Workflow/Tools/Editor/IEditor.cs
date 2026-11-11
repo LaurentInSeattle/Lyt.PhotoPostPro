@@ -9,11 +9,13 @@ public interface IEditor
     bool Add();
     
     bool Save();
-    
+
     bool Delete();
 }
 
 public interface IEditorDataProvider
 {
     void Refresh();
+
+    bool CanEdit { get; }
 }

@@ -12,6 +12,8 @@ public sealed class Signature : IEditable
 
     public string FriendlyName { get; set; } = string.Empty;
 
+    public bool CanDelete => ! this.FriendlyName.Equals(DefaultName);
+
     public string FontFamily { get; set; } = "Segoe Script";
 
     public int FontSize { get; set; } = 26;

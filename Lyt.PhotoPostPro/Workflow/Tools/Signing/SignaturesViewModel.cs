@@ -25,5 +25,7 @@ public sealed partial class SignaturesViewModel : ViewModel<SignaturesView>, IEd
         this.editorViewModel.Populate(this.model.Signatures.AvailableSignatures, editingForm); 
     }
 
+    public bool CanEdit => true;
+
     public void Refresh() => this.editorViewModel.Refresh(this.model.Signatures.AvailableSignatures);
 }

@@ -10,6 +10,7 @@ public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>, IEd
         this.model = model;
         this.editorViewModel = new EditorViewModel(this, this.model);
     }
+
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
@@ -23,6 +24,8 @@ public sealed partial class WatermarksViewModel : ViewModel<WatermarksView>, IEd
         var editingForm = vm.CreateViewAndBind();
         this.editorViewModel.Populate(this.model.Watermarks.AvailableWatermarks, editingForm);
     }
+
+    public bool CanEdit => true;
 
     public void Refresh() => this.editorViewModel.Refresh(this.model.Watermarks.AvailableWatermarks);
 }

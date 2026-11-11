@@ -9,6 +9,8 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
+	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
+
 	Background="Transparent"
 	>
 	<Grid	
@@ -18,8 +20,8 @@
 			<RowDefinition Height="4" />
 			<RowDefinition Height="54" /> <!-- Friendly Name -->
 			<RowDefinition Height="90" /> <!-- Description -->
-			<RowDefinition Height="54" /> <!-- Button for Path -->
-			<RowDefinition Height="54" /> <!-- Path -->
+			<RowDefinition Height="100" /> <!-- Button for Path -->
+			<RowDefinition Height="90" /> <!-- Path -->
 			<RowDefinition Height="60" /> <!-- Validation -->
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -66,10 +68,25 @@
 			AcceptsReturn="True"
 			/>
 
+		<glyphs:GlyphButton
+			x:Name="SaveButton"
+			Grid.Column="2" Grid.Row="3" 
+			Style="{StaticResource ViewIconButton}"
+			IsDisabled="{Binding IsEditMode}"
+			FontSize="24"
+			HorizontalAlignment="Center" VerticalAlignment="Center"
+			Width="360"  Height="56"
+			Margin="4"
+			GlyphSource="folder_open"
+			ButtonBackground="BorderlessRectangle"
+			GlyphStrokeThickness="0"
+			Text="Browse for Folder"
+			Command="{Binding OnFolderBrowse}"
+	    	/>
 		<TextBlock
 			Grid.Column="1" Grid.Row="4" 
 			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.DescriptionPrompt}"
+			Text="{DynamicResource Tools.Editor.PathPrompt}"
 			TextAlignment="Right"
 			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
@@ -83,9 +100,7 @@
 			MaxLength="60"
 			Text="{Binding FolderPath}"
 			Margin="0"
-			AcceptsReturn="True"
 			/>
-
 		<TextBlock
 			Grid.Row="12"  Grid.Column="1" Grid.ColumnSpan="2" 
 			Text="{Binding ValidationMessage}"
