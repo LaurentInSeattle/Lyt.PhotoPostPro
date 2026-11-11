@@ -186,7 +186,6 @@ public sealed partial class CullingViewModel :
 
         // ! 'holes' have been filtered out, so we can safely cast to non-nullable type
         this.ImageThumbnails = new(list!);
-
         this.Status = this.Localize("Workflow.Culling.LoadingHD");
         this.StatusIsVisible = true;
 

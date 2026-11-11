@@ -38,7 +38,7 @@ public sealed class LutHalf
 
         // All tokens should parse as ints and be in increasing order
         int cubeSize = tokens.GetLength(0);
-        lut.Slices = new List<int>(cubeSize);
+        lut.Slices = [with(cubeSize)];
         for (int k = 0; k < cubeSize; ++k)
         {
             if (int.TryParse(tokens[k], out int value))

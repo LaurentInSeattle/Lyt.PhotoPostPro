@@ -30,7 +30,7 @@ public sealed partial class LibraryAddKeywordsDialogModel :
             keywords.Add(new KeywordViewModel(this, keyword.Capitalize()));
         }
 
-        this.Keywords = new(keywords);
+        this.Keywords = [with(keywords)];
     }
 
     [RelayCommand]

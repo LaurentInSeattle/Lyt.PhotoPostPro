@@ -21,14 +21,17 @@ public sealed partial class FolderStatisticsViewModel(PhotoPostProModel model) :
     public void Update(FolderStatistics folderStatistics)
     {
         this.navigationPath = folderStatistics.Path;
-        if ( folderStatistics.LocalizationKey.Contains("Library") )
+        string folderName = this.Localize(folderStatistics.LocalizationKey);
+        var libraryFolders = this.model.LibraryFolders;
+        if (folderStatistics.LocalizationKey.Contains("Library") && (libraryFolders.AvailableLibraryFolders.Count > 1))
         {
-            string folderName = this.Localize(folderStatistics.LocalizationKey);
-            string libraryName = this.model.LibraryFolders.SelectedLibraryFolderName; 
+            // More than one library folder, so we need to show which library this is
+            string libraryName = libraryFolders.SelectedLibraryFolderName;
             this.FolderName = $"{folderName} ({libraryName})";
         }
         else
         {
+            // Not the library statistics, or only one library folder, so we don't need to show extra info
             this.FolderName = this.Localize(folderStatistics.LocalizationKey);
         }
 

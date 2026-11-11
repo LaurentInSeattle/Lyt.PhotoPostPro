@@ -9,8 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:edit="clr-namespace:Lyt.PhotoPostPro.Workflow.Tools.Editor"
-
 	Background="Transparent"
 	>
 	<Grid	
@@ -20,15 +18,8 @@
 			<RowDefinition Height="4" />
 			<RowDefinition Height="54" /> <!-- Friendly Name -->
 			<RowDefinition Height="90" /> <!-- Description -->
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
-			<RowDefinition Height="54" />
+			<RowDefinition Height="54" /> <!-- Button for Path -->
+			<RowDefinition Height="54" /> <!-- Path -->
 			<RowDefinition Height="60" /> <!-- Validation -->
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
@@ -74,216 +65,25 @@
 			Margin="0"
 			AcceptsReturn="True"
 			/>
-		<LayoutTransformControl
-			Grid.Column="2" Grid.Row="3" 
-			VerticalAlignment="Center" HorizontalAlignment="Left"
-			Margin="30 0 0 0"
-			>
-			<LayoutTransformControl.LayoutTransform>
-				<ScaleTransform ScaleX="1.4" ScaleY="1.4" />
-			</LayoutTransformControl.LayoutTransform>
-			<CheckBox
-				IsChecked="{Binding ShouldResize, Mode=TwoWay}"
-				IsThreeState="False"
-				>
-				<CheckBox.Content>
-					<TextBlock 
-						Text="{DynamicResource Tools.Editor.ResizeDimensionPrompt}"
-						Foreground="{StaticResource LightAqua_0_100}" 
-						FontSize="13"
-						TextWrapping="Wrap"
-						/>
-				</CheckBox.Content>
-			</CheckBox>
-		</LayoutTransformControl>
 
 		<TextBlock
 			Grid.Column="1" Grid.Row="4" 
-			Text="{DynamicResource Tools.Editor.ResizeDimensionPrompt}"
 			Theme="{StaticResource Medium}"
+			Text="{DynamicResource Tools.Editor.DescriptionPrompt}"
 			TextAlignment="Right"
 			VerticalAlignment="Center" HorizontalAlignment="Right"
 			/>
 		<TextBox
-			Grid.Column="2" Grid.Row="4"
-			IsEnabled="{Binding IsResizeDimensionEnabled}"
+			x:Name="PathTextBox"
+			Grid.Column="2" Grid.Row="4" 
+			IsReadOnly="True"
 			VerticalContentAlignment="Center" 
 			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			Width="360" Height="40"
-			MaxLength="4"
-			Text="{Binding ResizeDimensionString}"
-			/>
-
-		<TextBlock
-			Grid.Column="1" Grid.Row="5" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.OutputFormat}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<ComboBox
-			Grid.Column="2" Grid.Row="5" 
-			IsEditable="False"
-			Width="360" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			ItemsSource="{Binding SupportedOutputFormats}"
-			SelectedIndex="{Binding SelectedOutputFormatIndex}"
-			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-
-		<TextBlock
-			Grid.Column="1" Grid.Row="6" 
-			Text="{DynamicResource Tools.Editor.QualityPrompt}"
-			Theme="{StaticResource Medium}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<TextBox
-			Grid.Column="2" Grid.Row="6"
-			IsEnabled="{Binding IsCompressionEnabled}"
-			VerticalContentAlignment="Center" 
-			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			Width="360" Height="40"
-			MaxLength="4"
-			Text="{Binding QualityString}"
-			/>
-
-		<TextBlock
-			Grid.Column="1" Grid.Row="7" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.BorderStyle}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<ComboBox
-			Grid.Column="2" Grid.Row="7" 
-			IsEditable="False"
-			Width="360" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			ItemsSource="{Binding SupportedBorderStyles}"
-			SelectedIndex="{Binding SelectedBorderStyleIndex}"
-			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-
-		<TextBlock
-			Grid.Column="1" Grid.Row="8" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.BorderThickness}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<ComboBox
-			Grid.Column="2" Grid.Row="8" 
-			IsEditable="False"
-			Width="360" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			IsEnabled="{Binding IsBorderThicknessEnabled}"
-			ItemsSource="{Binding SupportedBorderThicknesses}"
-			SelectedIndex="{Binding SelectedBorderThicknessIndex}"
-			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-
-		<!-- Signature -->
-		<TextBlock
-			Grid.Column="1" Grid.Row="9" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.Signature}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<ComboBox
-			Grid.Column="2" Grid.Row="9" 
-			IsEditable="False"
-			Width="360" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			ItemsSource="{Binding AvailableSignatures}"
-			SelectedIndex="{Binding SelectedSignatureIndex}"
-			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-
-		<!-- Watermark -->
-		<TextBlock
-			Grid.Column="1" Grid.Row="10" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.Watermark}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<ComboBox
-			Grid.Column="2" Grid.Row="10" 
-			IsEditable="False"
-			Width="360" Height="40"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			ItemsSource="{Binding AvailableWatermarks}"
-			SelectedIndex="{Binding SelectedWatermarkIndex}"
-			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding}" Foreground="{StaticResource LightAqua_0_100}"/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-
-		<TextBlock
-			Grid.Column="1" Grid.Row="11" 
-			Theme="{StaticResource Medium}"
-			Text="{DynamicResource Tools.Editor.PostfixPrompt}"
-			TextAlignment="Right"
-			VerticalAlignment="Center" HorizontalAlignment="Right"
-			/>
-		<TextBox
-			x:Name="PostfixTextBox"
-			Grid.Column="2" Grid.Row="11" 
-			VerticalContentAlignment="Center" 
-			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-			Width="360" Height="40"
-			MaxLength="40"
-			Text="{Binding PostFix}"
+			Width="360" Height="80"
+			MaxLength="60"
+			Text="{Binding FolderPath}"
+			Margin="0"
+			AcceptsReturn="True"
 			/>
 
 		<TextBlock

@@ -1,17 +1,11 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.FirstRun;
 
-public sealed partial class FirstRunViewModel : ViewModel<FirstRunView>
+public sealed partial class FirstRunViewModel(PhotoPostProModel model, IToaster toaster) : ViewModel<FirstRunView>
 {
-    private readonly PhotoPostProModel model;
-    private readonly IToaster toaster;
+    private readonly PhotoPostProModel model = model;
+    private readonly IToaster toaster = toaster;
 
     private ViewSelector<ActivatedView>? viewSelector;
-
-    public FirstRunViewModel(PhotoPostProModel model, IToaster toaster)
-    {
-        this.model = model;
-        this.toaster = toaster;
-    }
 
     public override void OnViewLoaded()
     {

@@ -151,10 +151,7 @@ public sealed class ProcessWorkflow
         this.Begin(this.OriginalImage);
     }
 
-    public void EndReplay()
-    {
-        this.IsReplayMode = false;
-    }
+    public void EndReplay() => this.IsReplayMode = false;
 
     public void Replay()
     {

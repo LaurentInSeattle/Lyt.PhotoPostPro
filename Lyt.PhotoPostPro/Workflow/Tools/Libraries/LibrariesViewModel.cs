@@ -19,11 +19,11 @@ public sealed partial class LibrariesViewModel : ViewModel<LibrariesView>, IEdit
     public override void Activate(object? activationParameters)
     {
         base.Activate(activationParameters);
-        var vm = new ExportEditViewModel(this.model, this.editorViewModel);
+        var vm = new LibrariesEditViewModel(this.model, this.editorViewModel);
         var editingForm = vm.CreateViewAndBind();
 
-        this.editorViewModel.Populate(this.model.ImageExports.AvailableImageExports, editingForm);
+        this.editorViewModel.Populate(this.model.LibraryFolders.AvailableLibraryFolders, editingForm);
     }
 
-    public void Refresh() => this.editorViewModel.Refresh(this.model.ImageExports.AvailableImageExports);
+    public void Refresh() => this.editorViewModel.Refresh(this.model.LibraryFolders.AvailableLibraryFolders);
 }

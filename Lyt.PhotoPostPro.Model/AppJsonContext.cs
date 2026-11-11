@@ -26,7 +26,6 @@
 [JsonSerializable(typeof(ImageBorderStyle))]
 [JsonSerializable(typeof(ImageBorderThickness))]
 [JsonSerializable(typeof(SignatureLocation))]
-
 [JsonSerializable(typeof(PppFontStyle))]
 
 public partial class AppJsonContext : JsonSerializerContext { }
