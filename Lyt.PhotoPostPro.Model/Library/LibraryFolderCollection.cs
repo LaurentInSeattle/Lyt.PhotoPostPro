@@ -1,6 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Model.Library;
 
-using System.IO; 
+using System.IO;
+
+using Lyt.FileSystem; 
 
 public sealed class LibraryFolderCollection
 {
@@ -50,36 +52,19 @@ public sealed class LibraryFolderCollection
 
         // Has been renamed ? 
         // Make sure the library folder contains our application specific subfolders
-        if ((!libraryFolder.FullPath.Contains(PhotoPostProModel.PhotoPostProAppName)) || 
+        if ((!libraryFolder.FullPath.Contains(PhotoPostProModel.PhotoPostProAppName)) ||
             (!libraryFolder.FullPath.Contains(LibraryManager.LibraryFolderName)))
         {
             return false;
         }
 
         // Has been 'protected' ? 
-        // Make sure the library folder is still writeable and readable, and that we can create
-        // and delete a file in it. (Full Control)
-        try
+        if (!libraryFolder.FullPath.IsFolderFullControl())
         {
-
-            const string testReadWrite = "testReadWrite"; 
-            string testFilePath = Path.Combine(libraryFolder.FullPath, testReadWrite + ".txt");
-            File.WriteAllText(testFilePath, testReadWrite);
-            string content = File.ReadAllText(testFilePath);
-            bool fail = false;
-            if (content != testReadWrite)
-            {
-                fail = true;
-            }
-
-            File.Delete(testFilePath);
-            return !fail;
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Exception in IsValid: " + ex.ToString());
             return false;
         }
+
+        return true;
     }
 
     // Create a new library folder entry with the specified friendly name and path.
@@ -101,11 +86,25 @@ public sealed class LibraryFolderCollection
 
             // We can create a new library folder entry from an existing folder 
             // but if not we also need to ensure that the actual directory structure exists.
+            bool wasCreated = false;
             string libraryFolderPath =
                 Path.Combine(path, PhotoPostProModel.PhotoPostProAppName, LibraryManager.LibraryFolderName);
             if (!Directory.Exists(libraryFolderPath))
             {
                 Directory.CreateDirectory(libraryFolderPath);
+                wasCreated = true;
+            }
+
+            // Has been 'protected' ? 
+            if (!libraryFolderPath.IsFolderFullControl())
+            {
+                if (wasCreated)
+                {
+                    // If we created the directory, delete it since we cannot write to it.
+                    Directory.Delete(libraryFolderPath);
+                }
+
+                return false;
             }
 
             this.AvailableLibraryFolders.Add(
@@ -116,6 +115,18 @@ public sealed class LibraryFolderCollection
                 });
 
             return true;
+        }
+        catch (IOException ioex)
+        {
+            // Thrown if the file is locked by another process or a disk error occurs
+            Debug.WriteLine(ioex.ToString());
+            return false;
+        }
+        catch (UnauthorizedAccessException uaex)
+        {
+            // Thrown if the application lacks OS permissions to read or write a file
+            Debug.WriteLine(uaex.ToString());
+            return false;
         }
         catch (Exception ex)
         {
@@ -156,6 +167,18 @@ public sealed class LibraryFolderCollection
 
             this.AvailableLibraryFolders.Remove(libraryFolder);
             return true;
+        }
+        catch (IOException ioex)
+        {
+            // Thrown if the file is locked by another process or a disk error occurs
+            Debug.WriteLine(ioex.ToString());
+            return false;
+        }
+        catch (UnauthorizedAccessException uaex)
+        {
+            // Thrown if the application lacks OS permissions to read or write a file
+            Debug.WriteLine(uaex.ToString());
+            return false;
         }
         catch (Exception ex)
         {
