@@ -71,7 +71,7 @@
 				Grid.Row="1" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.5" Maximum="0.5"
+				Minimum="-0.20" Maximum="0.20"
 				Value="{Binding GainSliderValue}"
 				/>
 			<TextBlock
@@ -91,7 +91,7 @@
 				Grid.Row="2" Grid.Column="1" 
 				TickFrequency="0.1" TickPlacement="BottomRight"
 				SmallChange="0.01" LargeChange="0.05"
-				Minimum="-0.5" Maximum="0.5"
+				Minimum="-0.20" Maximum="0.20"
 				Value="{Binding ShiftSliderValue}"
 				/>
 			<TextBlock
