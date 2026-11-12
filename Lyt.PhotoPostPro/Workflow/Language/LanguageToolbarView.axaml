@@ -15,7 +15,6 @@
 	<!-- View Selector - Main toolbar - Aligned left -->
 	<StackPanel
 		Orientation="Horizontal"
-		Margin="0 0 0 0"
 		HorizontalAlignment="Left"
 		Height="72"
 		>

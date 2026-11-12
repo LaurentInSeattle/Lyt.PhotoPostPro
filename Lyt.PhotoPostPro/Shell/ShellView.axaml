@@ -100,14 +100,6 @@
 						Margin="12 0 0 0"
 						Foreground="{StaticResource PastelOrchid_0_080}"
 						/>
-					<TextBlock
-						Theme="{StaticResource H3}"
-						Text="{Binding LibraryInUse}"
-						HorizontalAlignment="Left" VerticalAlignment="Center"
-						Margin="160 0 0 0"
-						FontWeight="Normal"
-						Foreground="{StaticResource PastelOrchid_0_080}"
-						/>
 				</StackPanel>
 
 				<!-- View Selector - Main toolbar - Vertical left -->

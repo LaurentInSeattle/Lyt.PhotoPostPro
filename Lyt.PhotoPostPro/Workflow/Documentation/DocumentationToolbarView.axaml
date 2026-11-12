@@ -13,11 +13,8 @@
 	>	
 	<StackPanel
 		Orientation="Horizontal"
-		Margin="0 0 0 0"
 		HorizontalAlignment="Right"
-		Background="#30000080"
 		>
-
 		<glyphs:GlyphButton
 			Style="{StaticResource AppToolbarIconButton}"
 			GlyphSource="arrow_left"

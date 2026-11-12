@@ -4,6 +4,7 @@ public sealed partial class LibraryViewModel :
     ViewModel<LibraryView>,
     IRecipient<LanguageChangedMessage>,
     IRecipient<LibraryLoadedMessage>,
+    IRecipient<LibraryClearedMessage>,
     IRecipient<LibraryRemovedMessage>,
     IRecipient<LibraryMetadataUpdateMessage>,
     IRecipient<ThumbnailUpdatedMessage>,
@@ -131,6 +132,7 @@ public sealed partial class LibraryViewModel :
 
         this.Subscribe<LanguageChangedMessage>();
         this.Subscribe<LibraryLoadedMessage>();
+        this.Subscribe<LibraryClearedMessage>();
         this.Subscribe<ThumbnailUpdatedMessage>();
         this.Subscribe<FolderTreeUpdatedMessage>();
         this.Subscribe<LibraryRemovedMessage>();
@@ -178,6 +180,8 @@ public sealed partial class LibraryViewModel :
         // We have about at least one second for something to happen 
         this.Dispatcher.OnIdle(() => GC.Collect());
     }
+
+    public void Receive(LibraryClearedMessage _) => this.Clear();
 
     public void Receive(LanguageChangedMessage message)
     {

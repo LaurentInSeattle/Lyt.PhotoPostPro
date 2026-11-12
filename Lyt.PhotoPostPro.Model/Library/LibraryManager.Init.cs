@@ -25,11 +25,11 @@ public sealed partial class LibraryManager
     private readonly string galleryFolderPath;
     private readonly Lock lockObjectFiles = new();
 
-    private string libraryFolderPath;
-    private string exportsFolderPath;
+    private string libraryFolderPath = string.Empty;
+    private string exportsFolderPath = string.Empty;
 
-    private int imageLoadedCount = 0;
-    private int errorLoadingCount = 0;
+    private int imageLoadedCount;
+    private int errorLoadingCount;
 
     public LibraryManager(
         PhotoPostProModel model, FileManagerModel fileManager, IDispatch dispatcher, ILogger logger)
@@ -42,14 +42,7 @@ public sealed partial class LibraryManager
         this.lockObject = new Lock();
 
         // Setup the library folder path based on the selection in the model's LibraryFolders collection.
-        var libraryFolders = this.model.LibraryFolders;
-        if (!libraryFolders.IsValid(libraryFolders.SelectedLibraryFolderPath))
-        {
-            // Invalid : fallback to default 
-            libraryFolders.SelectedLibraryFolderName = LibraryFolder.DefaultLibraryFolderName;
-        }
-
-        this.libraryFolderPath = libraryFolders.SelectedLibraryFolderPath;
+        this.SetupLibraryFolderPath();
 
         // Setup the gallery folder path based on the Pictures folder and the application name.
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -62,7 +55,6 @@ public sealed partial class LibraryManager
         // Setup the export folder path based on the model's ExportPath.
         // If it's set to default , use the default library path.
         // Otherwise, attempt to create the specified directory.
-        this.exportsFolderPath = string.Empty;
         void SetDefaultExportPath()
         {
             this.exportsFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, ExportsFolderName);
@@ -98,7 +90,7 @@ public sealed partial class LibraryManager
         this.GalleryImages = new(CachedGalleryImageCount);
         this.LoadedHdImages = new(CachedHdImageCount);
         this.LoadedThumbnails = [];
-        this.KeywordsIndex = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase); ;
+        this.KeywordsIndex = [with(StringComparer.OrdinalIgnoreCase)]; ;
     }
 
     public string LibraryFolderPath => this.libraryFolderPath;
@@ -130,10 +122,55 @@ public sealed partial class LibraryManager
 
     public void Initialize() => this.LoadLibrary(isInitialLoad: true);
 
+    public void ClearLibrary()
+    {
+        // Clear all data structures and reset the state before loading the new library.
+        this.LoadedThumbnails.Clear();
+        this.KeywordsIndex.Clear();
+        this.LoadedHdImages.Clear();
+        this.CapturedFolderTree = null;
+        this.UnratedFolderTree = null;
+        this.EditedFolderTree = null;
+        new LibraryClearedMessage().Publish();
+
+        // May delay a bit to allow the UI to update and show loading status
+        GC.Collect();
+    }
+
     public void ReloadLibrary(string newLibraryFolderName)
     {
-        //this.libraryFolderPath = newLibraryFolderPath;
-        //this.model.LibraryFolders.SelectedLibraryFolderName = this.model.LibraryFolders.FromFriendlyName(newLibraryFolderPath)?.FriendlyName ?? LibraryFolder.DefaultLibraryFolderName;
+        if (string.IsNullOrWhiteSpace(newLibraryFolderName))
+        {
+            throw new ArgumentException("Library folder name cannot be null or whitespace.", nameof(newLibraryFolderName));
+        }
+
+        var folders = this.model.LibraryFolders;
+        if (!folders.IsValid(newLibraryFolderName))
+        {
+            throw new ArgumentException($"Library folder name '{newLibraryFolderName}' is not valid.", nameof(newLibraryFolderName));
+        }
+
+        // Change library folder and saves for subsequent runs
+        folders.SelectedLibraryFolderName = newLibraryFolderName;
+        this.SetupLibraryFolderPath();
+        this.model.Save(); 
+
+        // And finally reload here 
+        this.IsLoading = true;
+        this.LoadLibrary(isInitialLoad: false);
+    }
+
+    private void SetupLibraryFolderPath()
+    {
+        // Setup the library folder path based on the selection in the model's LibraryFolders collection.
+        var libraryFolders = this.model.LibraryFolders;
+        if (!libraryFolders.IsValid(libraryFolders.SelectedLibraryFolderName))
+        {
+            // Invalid : fallback to default 
+            libraryFolders.SelectedLibraryFolderName = LibraryFolder.DefaultLibraryFolderName;
+        }
+
+        this.libraryFolderPath = libraryFolders.SelectedLibraryFolderPath;
     }
 
     private void LoadLibrary(bool isInitialLoad = true)

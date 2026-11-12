@@ -112,6 +112,9 @@
     <Compile Update="Workflow\FirstRun\FirstRunView.axaml.cs">
       <DependentUpon>FirstRunView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Library\LibraryToolbarView.axaml.cs">
+      <DependentUpon>LibraryToolbarView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Process\Spotlight\SpotlightView.axaml.cs">
       <DependentUpon>SpotlightView.axaml</DependentUpon>
     </Compile>
