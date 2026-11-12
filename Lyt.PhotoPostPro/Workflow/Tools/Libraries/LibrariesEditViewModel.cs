@@ -68,7 +68,7 @@ public sealed partial class LibrariesEditViewModel :
         // Open the folder picker dialog
         var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
-            Title = "Select a Folder",
+            Title = this.Localize("Tools.Editor.FolderPicker.Title"),
             AllowMultiple = false
         });
 
@@ -117,8 +117,14 @@ public sealed partial class LibrariesEditViewModel :
             return false;
         }
 
-        // TODO :
         // Validate folder path 
+        if (string.IsNullOrWhiteSpace(this.FolderPath)||
+            !Directory.Exists(this.FolderPath)|| 
+            !this.FolderPath.IsFolderFullControl())
+        {
+            message = "Tools.Editor.Validation.FolderPathInvalid";
+            return false;
+        }
 
         return true;
     }
@@ -151,15 +157,15 @@ public sealed partial class LibrariesEditViewModel :
     // Clicked "Add" button - add new editable to model
     public bool Add()
     {
-        ImageExport? existing = this.model.ImageExports.FromFriendlyName(this.FriendlyName.Trim());
+        LibraryFolder? existing = this.model.LibraryFolders.FromFriendlyName(this.FriendlyName.Trim());
         if (existing is not null)
         {
             this.ValidationMessage = this.Localize("Tools.Editor.Validation.FriendlyNameAlreadyExists");
             return false;
         }
 
-        var newImageExport = this.CollectData();
-        if (!this.model.AddImageExport(newImageExport, out string message))
+        var newLibraryFolder = this.CollectData();
+        if (!this.model.AddLibraryFolder(newLibraryFolder, out string message))
         {
             this.ValidationMessage = this.Localize(message);
             return false;
@@ -169,27 +175,12 @@ public sealed partial class LibrariesEditViewModel :
     }
 
     // Clicked "Save" button - Save edits to model 
-    public bool Save()
-    {
-        if (!this.ValidateAndMessage())
-        {
-            return false;
-        }
-
-        var editedImageExport = this.CollectData();
-        if (!this.model.EditImageExport(editedImageExport, out string message))
-        {
-            this.ValidationMessage = this.Localize(message);
-            return false;
-        }
-
-        return true;
-    }
+    public bool Save() => false; 
 
     // Clicked "Delete" button - Remove from model, 
     public bool Delete()
     {
-        if (!this.model.DeleteImageExport(this.FriendlyName.Trim(), out string message))
+        if (!this.model.DeleteLibraryFolder(this.FriendlyName.Trim(), out string message))
         {
             this.ValidationMessage = this.Localize(message);
             return false;
@@ -198,12 +189,11 @@ public sealed partial class LibrariesEditViewModel :
         return true;
     }
 
-    private ImageExport CollectData()
-    {
-        return new ImageExport()
-        {
-            FriendlyName = this.FriendlyName.Trim(),
-            Description = this.Description.Trim(),
-        };
-    }
+    private LibraryFolder CollectData()
+        =>  new()
+            {
+                FriendlyName = this.FriendlyName.Trim(),
+                Description = this.Description.Trim(),
+                FolderPath = this.FolderPath.Trim(),
+            };
 }

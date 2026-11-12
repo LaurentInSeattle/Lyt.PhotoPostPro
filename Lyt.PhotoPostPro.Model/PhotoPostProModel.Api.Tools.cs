@@ -2,6 +2,55 @@
 
 public sealed partial class PhotoPostProModel : ModelBase
 {
+    public bool AddLibraryFolder(LibraryFolder newLibraryFolder, out string message)
+    {
+        message = string.Empty;
+        LibraryFolder? existing = this.LibraryFolders.FromFriendlyName(newLibraryFolder.FriendlyName.Trim());
+        if (existing is not null)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameAlreadyExists";
+            return false;
+        }
+
+        try
+        {
+            this.LibraryFolders.AddLibraryFolder(newLibraryFolder);
+            this.Save();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            this.Logger.Error(" Failed to add new library folder: " + newLibraryFolder.FriendlyName + "  " + ex);
+            message = "Tools.Editor.Validation.AddLibraryFolderFailed";
+            return false;
+        }
+    }
+
+    public bool DeleteLibraryFolder(string friendlyName, out string message)
+    {
+        message = string.Empty;
+        LibraryFolder? existing = this.LibraryFolders.FromFriendlyName(friendlyName.Trim());
+        if (existing is null)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameNotFound";
+            return false;
+        }
+
+        try
+        {
+            this.LibraryFolders.AvailableLibraryFolders.Remove(existing);
+            this.Save();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            this.Logger.Error(" Failed to delete library folder: " + friendlyName + "  " + ex);
+            message = "Tools.Editor.Validation.DeleteLibraryFolderFailed";
+            return false;
+        }
+    }
+
+
     public bool EditSignature(Signature newSignature, out string message)
     {
         if (this.DeleteSignature(newSignature.FriendlyName, out message))

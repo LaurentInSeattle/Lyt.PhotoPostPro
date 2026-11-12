@@ -3,7 +3,8 @@
 public sealed partial class ShellViewModel
     : ViewModel<ShellView>,
     IRecipient<ToolbarCommandMessage>,
-    IRecipient<LanguageChangedMessage>
+    IRecipient<LanguageChangedMessage>,
+    IRecipient<LibraryLoadedMessage>
 {
     private readonly PhotoPostProModel model;
     private readonly Fullscreen fullscreen;
@@ -32,6 +33,7 @@ public sealed partial class ShellViewModel
         this.model.SetupLanguage();
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
+        this.Subscribe<LibraryLoadedMessage>();
     }
 
     [ObservableProperty]
@@ -39,6 +41,9 @@ public sealed partial class ShellViewModel
 
     [ObservableProperty]
     public partial string AppName { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string LibraryInUse { get; set; } = string.Empty;
 
     public Mouse MouseMonitor { get; private set; }
 
@@ -83,6 +88,23 @@ public sealed partial class ShellViewModel
             this.MouseMonitor = new Mouse();
             this.MouseMonitor.Start(App.MainWindow);
         }
+    }
+
+    public void Receive(LibraryLoadedMessage _)
+    {
+        Dispatch.OnUiThread(() =>
+        {
+            var libraryFolders = this.model.LibraryFolders; 
+            if (libraryFolders.AvailableLibraryFolders.Count < 1)
+            {
+                this.LibraryInUse = string.Empty;
+            }
+            else
+            {
+                this.LibraryInUse = 
+                    string.Format ( "Library in use: {0}", libraryFolders.SelectedLibraryFolderName) ;
+            }
+        }, DispatcherPriority.Background);
     }
 
     public override void OnViewLoaded()
@@ -330,5 +352,4 @@ public sealed partial class ShellViewModel
         var application = App.GetRequiredService<IApplicationBase>();
         await application.Shutdown();
     }
-
 }

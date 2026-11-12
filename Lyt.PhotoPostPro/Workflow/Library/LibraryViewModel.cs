@@ -165,6 +165,20 @@ public sealed partial class LibraryViewModel :
         this.Dispatcher.OnIdle(() => GC.Collect());
     }
 
+    public void Clear()
+    {
+        this.selectedViewing = Viewing.Captured;
+        this.SelectedThumbnail = null;
+        this.SelectedThumnailMetadataViewModel = null;
+        this.HasSelection = false;
+        this.LibraryThumbnailsPanelViewModel.Clear();
+        this.ClearSelection();
+
+        // We are potentially about to launch heavy stuff, so clean up while we still can
+        // We have about at least one second for something to happen 
+        this.Dispatcher.OnIdle(() => GC.Collect());
+    }
+
     public void Receive(LanguageChangedMessage message)
     {
         this.BuildLibraryOptions();

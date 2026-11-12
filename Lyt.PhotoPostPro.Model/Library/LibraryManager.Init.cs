@@ -42,7 +42,14 @@ public sealed partial class LibraryManager
         this.lockObject = new Lock();
 
         // Setup the library folder path based on the selection in the model's LibraryFolders collection.
-        this.libraryFolderPath = this.model.LibraryFolders.SelectedLibraryFolderPath;
+        var libraryFolders = this.model.LibraryFolders;
+        if (!libraryFolders.IsValid(libraryFolders.SelectedLibraryFolderPath))
+        {
+            // Invalid : fallback to default 
+            libraryFolders.SelectedLibraryFolderName = LibraryFolder.DefaultLibraryFolderName;
+        }
+
+        this.libraryFolderPath = libraryFolders.SelectedLibraryFolderPath;
 
         // Setup the gallery folder path based on the Pictures folder and the application name.
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -67,7 +74,7 @@ public sealed partial class LibraryManager
 
         if (this.model.ExportPath.Equals(PhotoPostProModel.ExportPathDefault, StringComparison.InvariantCultureIgnoreCase))
         {
-            SetDefaultExportPath(); 
+            SetDefaultExportPath();
         }
         else
         {
@@ -91,7 +98,7 @@ public sealed partial class LibraryManager
         this.GalleryImages = new(CachedGalleryImageCount);
         this.LoadedHdImages = new(CachedHdImageCount);
         this.LoadedThumbnails = [];
-        this.KeywordsIndex = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase); ; 
+        this.KeywordsIndex = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase); ;
     }
 
     public string LibraryFolderPath => this.libraryFolderPath;
@@ -111,7 +118,7 @@ public sealed partial class LibraryManager
 
     // This dictionary is indexed by a keyword and values are a hash set for the paths of the metadata
     // files for the images 
-    public Dictionary<string, HashSet<string>> KeywordsIndex { get; private set;  }
+    public Dictionary<string, HashSet<string>> KeywordsIndex { get; private set; }
 
     public FolderTree? CapturedFolderTree { get; private set; }
 
@@ -121,7 +128,15 @@ public sealed partial class LibraryManager
 
     public bool IsLoading { get; private set; }
 
-    public void Initialize()
+    public void Initialize() => this.LoadLibrary(isInitialLoad: true);
+
+    public void ReloadLibrary(string newLibraryFolderName)
+    {
+        //this.libraryFolderPath = newLibraryFolderPath;
+        //this.model.LibraryFolders.SelectedLibraryFolderName = this.model.LibraryFolders.FromFriendlyName(newLibraryFolderPath)?.FriendlyName ?? LibraryFolder.DefaultLibraryFolderName;
+    }
+
+    private void LoadLibrary(bool isInitialLoad = true)
     {
         this.IsLoading = true;
 
@@ -129,13 +144,17 @@ public sealed partial class LibraryManager
         {
 #if DEBUG 
             const int fileCountTrigger = 1000;
-            const int initialDelay  = 700;
+            const int initialDelay = 700;
 #else
             const int fileCountTrigger = 1500; 
             const int initialDelay  = 500;
 #endif
-            // wait a bit so that we dont delay the app starting up 
-            Task.Delay(initialDelay).Wait();
+            if (isInitialLoad)
+            {
+                // wait a bit so that we dont delay the app starting up 
+                Task.Delay(initialDelay).Wait();
+            }
+
             this.GenerateFolderTree();
             if (this.CapturedFolderTree is not null)
             {
@@ -153,8 +172,13 @@ public sealed partial class LibraryManager
 #endif
 
             this.GenerateThumbnailCache();
-            Task.Delay(200).Wait();
-            this.InitializeGallery();
+
+            if (isInitialLoad)
+            {
+                Task.Delay(200).Wait();
+                this.InitializeGallery();
+            }
         });
     }
+
 }

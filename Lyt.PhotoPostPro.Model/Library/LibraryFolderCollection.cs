@@ -18,6 +18,7 @@ public sealed class LibraryFolderCollection
         {
             if (!this.IsValid(this.SelectedLibraryFolderName))
             {
+                this.SelectedLibraryFolderName = LibraryFolder.DefaultLibraryFolderName; 
                 return LibraryFolder.Default.FullPath;
             }
 
@@ -70,16 +71,16 @@ public sealed class LibraryFolderCollection
     // Create a new library folder entry with the specified friendly name and path.
     // Returns true if the library folder was created successfully, false otherwise.
     // Actual final path will be: {path}\PhotoPostPro\Library
-    public bool AddLibraryFolder(string friendlyName, string path)
+    public bool AddLibraryFolder(LibraryFolder libraryFolder)
     {
         try
         {
-            if (this.IsAvailable(friendlyName))
+            if (this.IsAvailable(libraryFolder.FriendlyName))
             {
                 return false;
             }
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(libraryFolder.FolderPath))
             {
                 return false;
             }
@@ -87,33 +88,28 @@ public sealed class LibraryFolderCollection
             // We can create a new library folder entry from an existing folder 
             // but if not we also need to ensure that the actual directory structure exists.
             bool wasCreated = false;
-            string libraryFolderPath =
-                Path.Combine(path, PhotoPostProModel.PhotoPostProAppName, LibraryManager.LibraryFolderName);
-            if (!Directory.Exists(libraryFolderPath))
+            string libraryFullPath =
+                Path.Combine(libraryFolder.FolderPath, PhotoPostProModel.PhotoPostProAppName, LibraryManager.LibraryFolderName);
+            if (!Directory.Exists(libraryFullPath))
             {
-                Directory.CreateDirectory(libraryFolderPath);
+                Directory.CreateDirectory(libraryFullPath);
                 wasCreated = true;
             }
 
             // Has been 'protected' ? 
-            if (!libraryFolderPath.IsFolderFullControl())
+            if (!libraryFullPath.IsFolderFullControl())
             {
                 if (wasCreated)
                 {
                     // If we created the directory, delete it since we cannot write to it.
-                    Directory.Delete(libraryFolderPath);
+                    Directory.Delete(libraryFullPath);
                 }
 
                 return false;
             }
 
-            this.AvailableLibraryFolders.Add(
-                new LibraryFolder()
-                {
-                    FriendlyName = friendlyName,
-                    FullPath = libraryFolderPath,
-                });
-
+            libraryFolder.FullPath = libraryFullPath; 
+            this.AvailableLibraryFolders.Add(libraryFolder); 
             return true;
         }
         catch (IOException ioex)
