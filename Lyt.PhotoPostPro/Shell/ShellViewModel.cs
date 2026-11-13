@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Shell;
 
+using Lyt.PhotoPostPro.Model.PhotoBook;
+
 public sealed partial class ShellViewModel
     : ViewModel<ShellView>,
     IRecipient<ToolbarCommandMessage>,
@@ -115,6 +117,10 @@ public sealed partial class ShellViewModel
         HotKeys.Instance.Set(this.View);
 
         this.Logger.Debug("OnViewLoaded complete");
+
+#if DEBUG
+        Schedule.OnUiThread(1500, BookManager.Test, DispatcherPriority.ApplicationIdle);
+#endif
     }
 
     private void LocalizeAppTitle()

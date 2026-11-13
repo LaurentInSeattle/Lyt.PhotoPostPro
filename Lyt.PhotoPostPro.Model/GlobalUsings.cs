@@ -43,12 +43,19 @@ global using SixLabors.ImageSharp.PixelFormats;
 global using SixLabors.ImageSharp.Processing;
 
 
+// QuestPDF
+//
+// Conflicts with Image Sharp
+//  global using QuestPDF.Fluent;
+//  global using QuestPDF.Helpers;
+//  global using QuestPDF.Infrastructure;
+
+
 // LibRaw 
 //
 global using Sdcb;
 global using Sdcb.LibRaw;
 global using Sdcb.LibRaw.Natives;
-
 
 
 // MTP (MediaDevices on Windows) 
@@ -96,6 +103,8 @@ global using Lyt.PhotoPostPro.Model.LookUp;
 global using Lyt.PhotoPostPro.Model.Loader;
 global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.PhotoBook;
+global using Lyt.PhotoPostPro.Model.PhotoBook.Pages;
+global using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 global using Lyt.PhotoPostPro.Model.ProcessSteps;
 global using Lyt.PhotoPostPro.Model.Process;
 global using Lyt.PhotoPostPro.Model.Utilities;
