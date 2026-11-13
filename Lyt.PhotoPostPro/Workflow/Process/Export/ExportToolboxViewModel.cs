@@ -36,8 +36,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         this.IsNavigateButtonDisabled = true;
         With.Flag(ref this.isInitializing, () =>
         {
-            var postProcess = this.model.Workflow;
-            var metadata = postProcess.Metadata;
+            var metadata = this.model.Workflow.Metadata;
             this.Rating = metadata.Rating;
         });
     }
@@ -102,6 +101,8 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
         new ToolbarCommandMessage(ToolbarCommandMessage.ToolbarCommand.BackToWindowed).Publish();
         this.model.Finish();
     }
+
+    public void OnCleanup() => this.model.CleanupOldEdits(this.model.Workflow.Metadata);
 
     partial void OnRatingChanged(int value)
     {

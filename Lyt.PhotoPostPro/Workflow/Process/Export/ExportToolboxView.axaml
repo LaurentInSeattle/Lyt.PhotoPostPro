@@ -27,8 +27,9 @@
 			<RowDefinition Height="{StaticResource Size.TallSpacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 9 : Navigate Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 11 : Cleanup Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
-			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 10 : Finish Button --> 
+			<RowDefinition Height="{StaticResource Size.WideButtons}" /> <!-- 13 : Finish Button --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 			<RowDefinition Height="{StaticResource Size.Spacer}" /> <!-- Spacer --> 
 		</Grid.RowDefinitions>
@@ -77,7 +78,18 @@
 			HorizontalAlignment="Center" VerticalAlignment="Stretch"
 	    	/>
 		<glyphs:GlyphButton
-			Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"
+			Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="3"
+			Style="{StaticResource ControlIconButton}"
+			Layout="IconTextLeftSide"
+			GlyphSource="broom"
+			Text="{DynamicResource Workflow.Export.Cleanup}"
+			Command="{Binding OnCleanup}"
+			IsDisabled="{Binding IsExporting}"
+			Width="380" Height="44"
+			HorizontalAlignment="Center" VerticalAlignment="Stretch"
+	    	/>
+		<glyphs:GlyphButton
+			Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3"
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="arrow_left"

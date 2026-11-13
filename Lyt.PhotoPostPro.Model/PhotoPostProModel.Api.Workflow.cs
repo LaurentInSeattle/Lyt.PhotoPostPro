@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Model;
 
+using System.IO;
+
 public sealed partial class PhotoPostProModel : ModelBase
 {
     public void NavigateToGallery()
@@ -8,7 +10,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     public static void NavigateToImageFolder(Metadata metadata) =>
         // Navigate to subdirectory for specified image
-        NavigateTo(System.IO.Path.GetDirectoryName(metadata.FullPath));
+        NavigateTo(Path.GetDirectoryName(metadata.FullPath));
 
     public static void NavigateTo(string? directoryPath)
     {
@@ -18,6 +20,46 @@ public sealed partial class PhotoPostProModel : ModelBase
             {
                 directoryPath.OpenInExplorer();
             }
+        }
+    }
+
+    public void CleanupOldEdits(Metadata metadata)
+    {
+        try
+        {
+            string? folderPath = Path.GetDirectoryName(metadata.FullPath);
+            if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
+            {
+                return;
+            }
+
+            var options = new EnumerationOptions()
+            {
+                RecurseSubdirectories = false,
+                IgnoreInaccessible = true,
+                AttributesToSkip = FileAttributes.Hidden | FileAttributes.System,
+            };
+
+            List<string> editFiles = folderPath.EnumerateFiles(options, "*.json", "EDIT").ToList();
+            List<FileInfo> editFilesInfo = editFiles.Select(path => new FileInfo(path)).ToList();
+            var sortedEditFiles = editFilesInfo.OrderBy(fileInfo => fileInfo.LastWriteTime).ToList();
+            int count = sortedEditFiles.Count;
+            if (count <= 1)
+            {
+                return;
+            }
+
+            for (int i = 0; i < count - 1; ++i)
+            {
+                sortedEditFiles[i].Delete();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception but do not throw it, as this is a cleanup operation
+            this.Logger.Warning(
+                string.Format("Error during cleanup of old edits for metadata: {0}\n{1}", metadata.FullPath, ex));
+            Debug.WriteLine(ex);
         }
     }
 
@@ -101,7 +143,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             }
 
             this.CurrentWorkflow = processWorkflow;
-            this.UpdateEditedFolderTree(metadata); 
+            this.UpdateEditedFolderTree(metadata);
             return true;
         }
         catch (Exception ex)
@@ -111,15 +153,15 @@ public sealed partial class PhotoPostProModel : ModelBase
         }
     }
 
-    private void UpdateEditedFolderTree (Metadata metadata)
+    private void UpdateEditedFolderTree(Metadata metadata)
     {
-        var folderTree = this.LibraryManager.EditedFolderTree; 
-        if ( folderTree is null )
+        var folderTree = this.LibraryManager.EditedFolderTree;
+        if (folderTree is null)
         {
             return;
         }
 
-        folderTree.UpdateForEdits(metadata);  
+        folderTree.UpdateForEdits(metadata);
     }
 
     public void BeginProcessWorkflow()
