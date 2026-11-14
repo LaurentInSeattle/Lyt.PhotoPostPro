@@ -103,6 +103,7 @@ global using Lyt.PhotoPostPro.Model.LookUp;
 global using Lyt.PhotoPostPro.Model.Loader;
 global using Lyt.PhotoPostPro.Model.Messaging;
 global using Lyt.PhotoPostPro.Model.PhotoBook;
+global using Lyt.PhotoPostPro.Model.PhotoBook.Layouts;
 global using Lyt.PhotoPostPro.Model.PhotoBook.Pages;
 global using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 global using Lyt.PhotoPostPro.Model.ProcessSteps;

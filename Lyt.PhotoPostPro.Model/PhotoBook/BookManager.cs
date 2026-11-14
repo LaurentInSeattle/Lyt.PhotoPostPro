@@ -7,6 +7,8 @@ public sealed class BookManager
     static BookManager()
     {
         QuestPDF.Settings.License = LicenseType.Community;
+        QuestPDF.Settings.EnableCaching = true;
+        QuestPDF.Settings.UseSystemFonts = true; 
     }
 
     public BookManager()
@@ -15,29 +17,53 @@ public sealed class BookManager
 
     public List<Book> Books { get; } = [];
 
-    public bool IsEditing { get; set; } 
+    public bool IsEditing { get; set; }
 
     public Book? CurrentBook { get; set; }
 
     public static void Test()
     {
+        const string VeneziaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg";
+        const string ToscanaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg";
+        const string CapriImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg";
+        const string VeronaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Verona.jpg";
+
         var book = new Book
         {
             UniqueName = "TestBook",
             OutputPdfFileName = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBook.pdf",
             BookPage = BookPage.UsLetter,
             Format = BookFormat.Landscape,
+            WithFrontCover = true,
+            WithBackCover = false,
         };
 
         book.Initialize();
-        var page = book.Pages.FirstOrDefault(p => p.PageNumber == 1);
+
         // ! ok
-        page!.Slots.Add(
+        var front = book.FrontCover!.FrontPage;
+        new FullPageImageLayout().Create(front, VeneziaImagePath);
+        // ! ok
+        var back = book.FrontCover!.BackPage;
+        new EmptyLayout().Create(back);
+
+        var page1 = book.Pages.FirstOrDefault(p => p.PageNumber == 1);
+        // ! ok
+        page1!.Slots.Add(
             new ImageSlot()
             {
-                Position = new SlotPosition(){ X = 100, Y = 100, Dx = 200, Dy = 100 },
-                ImageFileName = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\venezia.jpg"
-            }); 
+                Position = new SlotPosition(x: 100, y: 100, dx: 400, dy: 300),
+                ImageFileName = ToscanaImagePath,
+            });
+
+        var page2 = book.Pages.FirstOrDefault(p => p.PageNumber == 2);
+        // ! ok
+        page2!.Slots.Add(
+            new ImageSlot()
+            {
+                Position = new SlotPosition(x: 100, y: 200, dx: 400, dy: 300),
+                ImageFileName = CapriImagePath,
+            });
 
         book.GeneratePdf();
     }
@@ -50,7 +76,7 @@ public sealed class BookManager
             OutputPdfFileName = outputPdfFileName,
             Format = format,
         };
-     
+
         this.Books.Add(book);
         return book;
     }
@@ -141,11 +167,14 @@ public sealed class BookManager
         {
             throw new InvalidOperationException("No current book to add a slot to.");
         }
-        var page = this.CurrentBook.Pages.FirstOrDefault(p => p.PageNumber == pageNumber);
-        if (page != null)
+
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
         {
-            page.Slots.Add(newSlot);
+            return;
         }
+
+        page.Slots.Add(newSlot);
     }
 
     public void RemoveSlotFromPage(int pageNumber, Slot slotToRemove)
@@ -155,11 +184,13 @@ public sealed class BookManager
             throw new InvalidOperationException("No current book to remove a slot from.");
         }
 
-        var page = this.CurrentBook.Pages.FirstOrDefault(p => p.PageNumber == pageNumber);
-        if (page != null)
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
         {
-            page.Slots.Remove(slotToRemove);
+            return;
         }
+
+        page.Slots.Remove(slotToRemove);
     }
 
     public void MoveSlot(int fromPageNumber, int toPageNumber, Slot slotToRemove)
@@ -169,11 +200,15 @@ public sealed class BookManager
             throw new InvalidOperationException("No current book to remove a slot from.");
         }
 
-        var page = this.CurrentBook.Pages.FirstOrDefault(p => p.PageNumber == fromPageNumber);
-        if (page != null)
+        var fromPage = this.CurrentBook.FromPageNumber(fromPageNumber);
+        var toPage = this.CurrentBook.FromPageNumber(toPageNumber);
+        if (fromPage is null || toPage is null)
         {
-            page.Slots.Remove(slotToRemove);
+            return;
         }
+
+        fromPage.Slots.Remove(slotToRemove);
+
     }
 
     public void RepositionSlot(int pageNumber, Slot slotToRemove, SlotPosition newPosition)
@@ -183,11 +218,13 @@ public sealed class BookManager
             throw new InvalidOperationException("No current book to remove a slot from.");
         }
 
-        var page = this.CurrentBook.Pages.FirstOrDefault(p => p.PageNumber == pageNumber);
-        if (page != null)
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
         {
-            page.Slots.Remove(slotToRemove);
+            return;
         }
+
+        page.Slots.Remove(slotToRemove);
     }
 
     public void UpdatePageBackground(int pageNumber, PageBackground newBackground)
@@ -196,10 +233,40 @@ public sealed class BookManager
         {
             throw new InvalidOperationException("No current book to update a page background in.");
         }
-        var page = this.CurrentBook.Pages.FirstOrDefault(p => p.PageNumber == pageNumber);
-        if (page != null)
+
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
         {
-            page.PageBackground = newBackground;
+            return;
+        }
+
+        page.PageBackground = newBackground;
+    }
+
+    public void PopulateImageSlot(int pageNumber, Guid slotId, string imagePath)
+    {
+        if (this.CurrentBook == null)
+        {
+            throw new InvalidOperationException("No current book to update a page layout in.");
+        }
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
+        {
+            return;
+        }
+    }
+
+    public void PopulateTextSlot(int pageNumber, Guid slotId, string text)
+    {
+        if (this.CurrentBook == null)
+        {
+            throw new InvalidOperationException("No current book to update a page layout in.");
+        }
+
+        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        if (page is null)
+        {
+            return;
         }
     }
 

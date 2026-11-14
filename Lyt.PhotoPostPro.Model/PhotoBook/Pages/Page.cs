@@ -20,11 +20,10 @@ public class PageBase
         this.PageNumber = pageNumber;
     }
 
-    protected Book Book { get; }
+    public Book Book { get; }
 
     public int PageNumber { get; }
 
     public bool IsFrontPage => this.PageNumber % 2 == 0;
-
 }
 
