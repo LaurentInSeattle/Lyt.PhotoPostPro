@@ -22,6 +22,7 @@ public enum BookFormat
     // Square,
 }
 
+// New enum required for serialization 
 [JsonConverter(typeof(JsonStringEnumConverter<PageBackground>))]
 public enum PageBackground
 {
@@ -39,3 +40,19 @@ public enum PageLayout
     Empty,
 }
 
+// New enum required for serialization 
+[JsonConverter(typeof(JsonStringEnumConverter<BookTextAlignment>))]
+public enum BookTextAlignment
+{
+    Left, 
+    Center, 
+    Right,
+}
+
+// New enum required for serialization 
+[JsonConverter(typeof(JsonStringEnumConverter<BookImageStretch>))]
+public enum BookImageStretch
+{
+    Fit,
+    Stretch,
+}

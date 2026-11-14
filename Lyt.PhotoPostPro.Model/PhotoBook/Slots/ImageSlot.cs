@@ -6,5 +6,7 @@ public sealed class ImageSlot : Slot
 
     public int ImageWidth { get; set; }
 
-    public int ImageHeight { get; set; } 
+    public int ImageHeight { get; set; }
+
+    public BookImageStretch ImageStretch { get; set; } = BookImageStretch.Fit; 
 }

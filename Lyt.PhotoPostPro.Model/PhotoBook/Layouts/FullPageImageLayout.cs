@@ -22,6 +22,7 @@ public sealed class FullPageImageLayout : Layout
             Id = Guid.NewGuid(),
             Position = new SlotPosition(0, 0, pageSize.Width, pageSize.Height),
             ImageFileName = string.Empty,
+            ImageStretch = BookImageStretch.Stretch,
         };
 
         page.Slots.Clear();

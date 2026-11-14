@@ -43,25 +43,53 @@ public sealed class BookManager
         // ! ok
         var front = book.FrontCover!.FrontPage;
         new FullPageImageLayout().Create(front, VeneziaImagePath);
+
         // ! ok
         var back = book.FrontCover!.BackPage;
         new EmptyLayout().Create(back);
+        var titleStyle = new SlotTextStyle() { FontSize = 40, TextAlignment = BookTextAlignment.Center }; 
+        back.Slots.Add(
+            new TextSlot()
+            {
+                Position = new SlotPosition(x: 0, y: 300, dx: 792, dy: 200),
+                Text = "Bellissima Italia, Amo Te!",
+                Style = titleStyle,
+            });
 
-        var page1 = book.Pages.FirstOrDefault(p => p.PageNumber == 1);
-        // ! ok
-        page1!.Slots.Add(
+        var page1 = book.FromPageNumber(1);
+        page1.Slots.Add(
             new ImageSlot()
             {
-                Position = new SlotPosition(x: 100, y: 100, dx: 400, dy: 300),
+                Position = new SlotPosition(x: 40, y: 40, dx: 400, dy: 300),
                 ImageFileName = ToscanaImagePath,
             });
 
-        var page2 = book.Pages.FirstOrDefault(p => p.PageNumber == 2);
-        // ! ok
-        page2!.Slots.Add(
+        page1.Slots.Add(
+            new TextSlot()
+            {
+                Position = new SlotPosition(x: 480, y: 40, dx: 200, dy: 100),
+                Text = "Paesaggio della Toscana",
+            });
+
+        page1.Slots.Add(
             new ImageSlot()
             {
-                Position = new SlotPosition(x: 100, y: 200, dx: 400, dy: 300),
+                Position = new SlotPosition(x: 300, y: 340, dx: 400, dy: 300),
+                ImageFileName = VeronaImagePath,
+            });
+
+        page1.Slots.Add(
+            new TextSlot()
+            {
+                Position = new SlotPosition(x: 40, y: 340, dx: 240, dy: 120),
+                Text = "Ponte Pietra a Verona",
+            });
+
+        var page2 = book.FromPageNumber(2);
+        page2.Slots.Add(
+            new ImageSlot()
+            {
+                Position = new SlotPosition(x: 60, y: 60, dx: 600, dy: 700),
                 ImageFileName = CapriImagePath,
             });
 
