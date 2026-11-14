@@ -56,3 +56,12 @@ public enum BookImageStretch
     Fit,
     Stretch,
 }
+
+[JsonConverter(typeof(JsonStringEnumConverter<BookFontStyle>))]
+public enum BookFontStyle
+{
+    Regular = 0,
+    Bold = 1,
+    Italic = 2,
+    BoldItalic = 3
+}

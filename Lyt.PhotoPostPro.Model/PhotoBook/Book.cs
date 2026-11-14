@@ -3,10 +3,6 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
-using SixLabors.ImageSharp.ColorProfiles;
-
-using System.Runtime.Intrinsics.X86;
-
 namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
 // See:  https://github.com/GraphicMeat/PhotoBooks/blob/main/README.md 
@@ -156,8 +152,23 @@ public sealed class Book
                         var style = textSlot.Style;
                         var textDescriptor = descriptor
                             .Text(textSlot.Text)
+                            .FontFamily(style.FontFamily)
                             .FontSize(style.FontSize)
                             .FontColor(style.Color);
+                        if (style.FontStyle == BookFontStyle.Bold)
+                        {
+                            textDescriptor.Bold(); 
+                        }
+                        else if (style.FontStyle == BookFontStyle.Italic)
+                        {
+                            textDescriptor.Italic();
+                        }
+                        else if (style.FontStyle == BookFontStyle.BoldItalic)
+                        {
+                            textDescriptor.Bold().Italic();
+                        }
+                        // else: Regular, default, nothing to do 
+
                         if (style.TextAlignment == BookTextAlignment.Center)
                         {
                             textDescriptor.AlignCenter();

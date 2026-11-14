@@ -46,6 +46,7 @@
 [JsonSerializable(typeof(PageBackground))]
 [JsonSerializable(typeof(BookTextAlignment))]
 [JsonSerializable(typeof(BookImageStretch))]
+[JsonSerializable(typeof(BookFontStyle))]
 
 
 public partial class AppJsonContext : JsonSerializerContext { }

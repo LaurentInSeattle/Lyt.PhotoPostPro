@@ -67,7 +67,7 @@ public sealed class BookManager
         page1.Slots.Add(
             new TextSlot()
             {
-                Position = new SlotPosition(x: 480, y: 40, dx: 200, dy: 100),
+                Position = new SlotPosition(x: 480, y: 40, dx: 300, dy: 100),
                 Text = "Paesaggio della Toscana",
             });
 
