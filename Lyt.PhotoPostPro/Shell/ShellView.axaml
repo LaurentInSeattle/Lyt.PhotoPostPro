@@ -144,6 +144,7 @@
 						GlyphSource="book_globe"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.PhotoBook}"
+						IsDisabled="{Binding PhotoBookIsDisabled}"
 						Command="{Binding OnPhotoBook}"
 						Group="{Binding ElementName=SelectionGroup}"
 						/>

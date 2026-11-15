@@ -34,10 +34,16 @@ public sealed partial class ShellViewModel
         this.model.SetupLanguage();
         this.Subscribe<ToolbarCommandMessage>();
         this.Subscribe<LanguageChangedMessage>();
+
+        // Disable photo book if not debugging
+        this.PhotoBookIsDisabled = !Debugger.IsAttached;
     }
 
     [ObservableProperty]
     public partial bool NavigationBarIsEnabled { get; set; }
+
+    [ObservableProperty]
+    public partial bool PhotoBookIsDisabled { get; set; }
 
     [ObservableProperty]
     public partial string AppName { get; set; } = string.Empty;
@@ -119,7 +125,7 @@ public sealed partial class ShellViewModel
         this.Logger.Debug("OnViewLoaded complete");
 
 #if DEBUG
-        Schedule.OnUiThread(1500, BookManager.Test, DispatcherPriority.ApplicationIdle);
+        // Schedule.OnUiThread(1500, BookManager.Test, DispatcherPriority.ApplicationIdle);
 #endif
     }
 

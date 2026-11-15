@@ -1,7 +1,20 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book;
 
-public class BookViewModel(PhotoPostProModel model, IToaster toaster) :
+public partial class BookViewModel :
     ViewModel<BookView>
     // , IRecipient<DocPageNavigateMessage>
 {
+    private readonly PhotoPostProModel model;
+    private readonly IToaster toaster;
+
+    public BookViewModel(PhotoPostProModel model, IToaster toaster)
+    {
+        this.model = model;
+        this.toaster = toaster;
+        this.BookEditViewModel = new BookEditViewModel(this.model, this.toaster); 
+    }
+
+    [ObservableProperty]
+    public partial BookEditViewModel BookEditViewModel { get; set; }
+
 }

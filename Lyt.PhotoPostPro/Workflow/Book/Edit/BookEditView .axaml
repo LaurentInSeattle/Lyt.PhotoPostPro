@@ -25,10 +25,60 @@
 			<RowDefinition Height="4" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="4" />
+			<ColumnDefinition Width="240" /> <!-- Film Strip --> 
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="8" />
+			<ColumnDefinition Width="240" /> <!-- Tools --> 
+			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 
+		<Rectangle
+			Fill="Teal"
+			Grid.Column="1" Grid.Row="1"
+			/>
+		<Rectangle
+			Fill="Teal"
+			Grid.Column="3" Grid.Row="1"
+			/>
+		<Grid
+			Grid.Column="2" Grid.Row="1"
+			>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="240" /> <!-- Doc Preview --> 
+				<RowDefinition Height="60" /> <!-- Nav --> 
+				<RowDefinition Height="*" /> <!-- Edit --> 
+				<RowDefinition Height="120" /> <!-- Templates --> 
+			</Grid.RowDefinitions>
+			<Rectangle
+				Fill="#80000060"
+				Grid.Row="0"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
+			<Rectangle
+				Fill="#80800060"
+				Grid.Row="1"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
+			<Rectangle
+				Fill="#8080A060"
+				Grid.Row="3"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
+			<Viewbox
+				Grid.Row="2"
+				>
+				<!-- 
+				PageSize Letter (612, 792);  
+					Width="1584" Height="612"
+				PageSize A4 (595f, 842f);
+					Width="1684" Height="595"
+				-->
+				<Canvas 
+					Width="1684" Height="595"
+					Background="#80A0B040"
+					>					
+				</Canvas>
+			</Viewbox>
+		</Grid>
 	</Grid>
 </UserControl>
