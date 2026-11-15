@@ -139,6 +139,15 @@
 						Group="{Binding ElementName=SelectionGroup}"
 						/>
 					<glyphs:GlyphButton
+						x:Name="PhotoBookButton"
+						Style="{StaticResource NavigationIconButton}"
+						GlyphSource="book_globe"
+						GlyphStrokeThickness="0"
+						Text="{DynamicResource Shell.PhotoBook}"
+						Command="{Binding OnPhotoBook}"
+						Group="{Binding ElementName=SelectionGroup}"
+						/>
+					<glyphs:GlyphButton
 						x:Name="GalleryButton"
 						Style="{StaticResource NavigationIconButton}"
 						GlyphSource="star_emphasis"
@@ -168,7 +177,7 @@
 					<glyphs:GlyphButton
 						x:Name="DocumentationButton"
 						Style="{StaticResource NavigationIconButton}"
-						GlyphSource="book"
+						GlyphSource="book_question_mark"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Documentation}"
 						Command="{Binding OnDocumentation}"

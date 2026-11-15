@@ -84,6 +84,8 @@ public partial class App : ApplicationBase
 
                 _ = services.AddSingleton<CameraViewModel>();
 
+                _ = services.AddSingleton<BookViewModel>();
+
                 _ = services.AddSingleton<ImportViewModel>();
                 _ = services.AddSingleton<FileImportViewModel>();
                 _ = services.AddSingleton<FolderImportViewModel>();

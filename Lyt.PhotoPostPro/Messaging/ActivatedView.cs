@@ -48,4 +48,5 @@ public enum ActivatedView : int
     TouchUp,
     Vignette,
     WhiteBalance,
+    PhotoBook,
 }

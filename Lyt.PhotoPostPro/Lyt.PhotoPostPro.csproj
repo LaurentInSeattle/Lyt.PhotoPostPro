@@ -109,6 +109,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Workflow\Book\BookView .axaml.cs">
+      <DependentUpon>BookView .axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\FirstRun\FirstRunView.axaml.cs">
       <DependentUpon>FirstRunView.axaml</DependentUpon>
     </Compile>

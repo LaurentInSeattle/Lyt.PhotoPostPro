@@ -9,7 +9,7 @@ namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
 using Color = QuestPDF.Infrastructure.Color;
 
-public sealed class Book
+public sealed partial class Book
 {
     public Book( /* Required for serialization */ ) { }
 

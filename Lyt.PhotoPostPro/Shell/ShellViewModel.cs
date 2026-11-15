@@ -192,6 +192,7 @@ public sealed partial class ShellViewModel
         Setup<LibraryViewModel, LibraryView, LibraryToolbarViewModel, LibraryToolbarView>(
             ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
+        SetupNoToolbar<BookViewModel, BookView>(ActivatedView.PhotoBook, view.PhotoBookButton);
         Setup<GalleryViewModel, GalleryView, GalleryToolbarViewModel, GalleryToolbarView>(
             ActivatedView.Gallery, view.GalleryButton);
         SetupNoToolbar<ImportViewModel, ImportView>(ActivatedView.Import, view.ImportButton);
@@ -256,6 +257,9 @@ public sealed partial class ShellViewModel
 
     [RelayCommand]
     public void OnCamera() => this.viewSelector?.SelectView(ActivatedView.Camera);
+
+    [RelayCommand]
+    public void OnPhotoBook() => this.viewSelector?.SelectView(ActivatedView.PhotoBook);
 
     [RelayCommand]
     public void OnGallery() => this.viewSelector?.SelectView(ActivatedView.Gallery);

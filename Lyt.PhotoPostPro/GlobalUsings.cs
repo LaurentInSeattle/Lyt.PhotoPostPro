@@ -127,6 +127,7 @@ global using Lyt.PhotoPostPro.Workflow.Gallery;
 global using Lyt.PhotoPostPro.Workflow.Import;
 global using Lyt.PhotoPostPro.Workflow.Import.File;
 global using Lyt.PhotoPostPro.Workflow.Import.Folder;
+global using Lyt.PhotoPostPro.Workflow.Book;
 global using Lyt.PhotoPostPro.Workflow.Language;
 global using Lyt.PhotoPostPro.Workflow.Process;
 global using Lyt.PhotoPostPro.Workflow.Process.Orient;
