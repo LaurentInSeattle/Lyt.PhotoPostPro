@@ -95,7 +95,7 @@
 				x:Name="DocumentationButton"
 				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
 				Style="{StaticResource NavigationIconButton}"
-				GlyphSource="book"
+				GlyphSource="book_question_mark"
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Shell.Documentation}"
 				Command="{Binding OnDocumentation}"
@@ -293,7 +293,7 @@
 				IsEnabled="False"
 				Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
 				Style="{StaticResource NavigationIconButton}"
-				GlyphSource="dismiss"
+				GlyphSource="book_globe"
 				GlyphStrokeThickness="0"
 				Text="{DynamicResource Shell.PhotoBook}"
 				/>
