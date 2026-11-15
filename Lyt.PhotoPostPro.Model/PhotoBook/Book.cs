@@ -110,7 +110,7 @@ public sealed class Book
             // By wrapping the images in an Unconstrained() element, we remove it from the normal flow of
             // the parent container. Then, using Offsets to shift it to specific coordinates.
             pageDescriptor.Content()
-           .Layers(layers =>
+            .Layers(layers =>
             {
                 // A PrimaryLayer is required to establish the base canvas
                 layers.PrimaryLayer();
@@ -128,6 +128,13 @@ public sealed class Book
                             .Height(position.Dy, Unit.Point); 
                     if (slot is ImageSlot imageSlot)
                     {
+                        if (string.IsNullOrWhiteSpace(imageSlot.ImageFileName))
+                        {
+                            // Skip this slot if the image file is not known yet 
+                            Debug.WriteLine($"No image file for slot: {imageSlot.Id}");
+                            continue;
+                        }
+
                         if (!File.Exists(imageSlot.ImageFileName))
                         {
                             // Skip this slot if the image file does not exist
@@ -149,6 +156,13 @@ public sealed class Book
                     }
                     else if (slot is TextSlot textSlot)
                     {
+                        if (string.IsNullOrWhiteSpace(textSlot.Text))
+                        {
+                            // Skip this slot if the text is not known yet 
+                            Debug.WriteLine($"No text for slot: {textSlot.Id}");
+                            continue;
+                        }
+
                         var style = textSlot.Style;
                         var textDescriptor = descriptor
                             .Text(textSlot.Text)

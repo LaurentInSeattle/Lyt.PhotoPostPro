@@ -2,30 +2,15 @@
 
 public sealed class FullPageImageLayout : Layout
 {
-    public FullPageImageLayout()
-    {
-        this.ImageCount = 1;
-        this.TextCount = 0;
-    }
+    public FullPageImageLayout() : base(PageLayout.FullPageImage) 
+        => base.ImageSlots.Add(new SlotPosition(0, 0, 1, 1));
 
-    public void Create(Page page, string imageFileName)
+    public static void Create(Page page, string imageFileName)
     {
-        this.Create(page);
-        ((ImageSlot )page.Slots[0]).ImageFileName = imageFileName;
-    } 
-
-    public override void Create(Page page)
-    {
-        var pageSize = page.Book.PageSize;
-        var slot = new ImageSlot()
-        {
-            Id = Guid.NewGuid(),
-            Position = new SlotPosition(0, 0, pageSize.Width, pageSize.Height),
-            ImageFileName = string.Empty,
-            ImageStretch = BookImageStretch.Stretch,
-        };
-
-        page.Slots.Clear();
-        page.Slots.Add(slot);
+        var layout = new FullPageImageLayout(); 
+        layout.Create(page);
+        var slot = (ImageSlot)page.Slots[0];
+        slot.ImageFileName = imageFileName;
+        slot.ImageStretch = BookImageStretch.Stretch;
     }
 }

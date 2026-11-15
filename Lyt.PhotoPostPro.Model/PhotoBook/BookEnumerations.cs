@@ -38,6 +38,9 @@ public enum PageBackground
 public enum PageLayout
 {
     Empty,
+    FullPageImage,
+    SingleImage,
+    SingleImageWithLegend,
 }
 
 // New enum required for serialization 

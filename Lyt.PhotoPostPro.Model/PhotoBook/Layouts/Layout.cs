@@ -2,11 +2,56 @@
 
 public abstract class Layout
 {
-    public PageLayout PageLayout { get; set; } = PageLayout.Empty;
+    protected Layout(PageLayout pageLayout) => this.PageLayout = pageLayout;
 
-    public int ImageCount { get; set; } = 0;
+    public PageLayout PageLayout { get; private set; } 
 
-    public int TextCount { get; set; } = 0;
+    public List<SlotPosition> ImageSlots = [];
 
-    public abstract void Create( Page page);
+    public List<SlotPosition> TextSlots = [];
+
+    public int ImageCount => this.ImageSlots.Count;
+
+    public int TextCount => this.TextSlots.Count;
+
+    public virtual void Create(Page page)
+    {
+        page.Slots.Clear();
+        var pageSize = page.Book.PageSize;
+        foreach(var position in this.ImageSlots)
+        {
+            var slot = new ImageSlot()
+            {
+                Id = Guid.NewGuid(),
+                Position = 
+                    new SlotPosition(
+                        position.X * pageSize.Width,
+                        position.Y * pageSize.Height,
+                        position.Dx * pageSize.Width,
+                        position.Dy * pageSize.Height),
+                ImageFileName = string.Empty,
+                ImageStretch = BookImageStretch.Fit,
+            };
+
+            page.Slots.Add(slot);
+        }
+
+        foreach (var position in this.TextSlots)
+        {
+            var slot = new TextSlot()
+            {
+                Id = Guid.NewGuid(),
+                Position =
+                    new SlotPosition(
+                        position.X * pageSize.Width,
+                        position.Y * pageSize.Height,
+                        position.Dx * pageSize.Width,
+                        position.Dy * pageSize.Height),
+                Text = string.Empty,
+                Style = new SlotTextStyle()
+            };
+
+            page.Slots.Add(slot);
+        }
+    }
 }

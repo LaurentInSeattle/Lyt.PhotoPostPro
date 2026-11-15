@@ -42,11 +42,11 @@ public sealed class BookManager
 
         // ! ok
         var front = book.FrontCover!.FrontPage;
-        new FullPageImageLayout().Create(front, VeneziaImagePath);
+        FullPageImageLayout.Create(front, VeneziaImagePath);
 
         // ! ok
         var back = book.FrontCover!.BackPage;
-        new EmptyLayout().Create(back);
+        EmptyLayout.Create(back);
         var titleStyle = new SlotTextStyle() { FontSize = 40, TextAlignment = BookTextAlignment.Center }; 
         back.Slots.Add(
             new TextSlot()
@@ -86,12 +86,7 @@ public sealed class BookManager
             });
 
         var page2 = book.FromPageNumber(2);
-        page2.Slots.Add(
-            new ImageSlot()
-            {
-                Position = new SlotPosition(x: 60, y: 60, dx: 600, dy: 700),
-                ImageFileName = CapriImagePath,
-            });
+        SingleImageLayoutWithLegend.Create(page2, CapriImagePath, "Giardini di Augusto - Isola di Capri"); 
 
         book.GeneratePdf();
     }

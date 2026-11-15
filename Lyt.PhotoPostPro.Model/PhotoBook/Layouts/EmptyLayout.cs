@@ -2,13 +2,9 @@
 
 public sealed class EmptyLayout : Layout
 {
-    public EmptyLayout()
-    {
-        this.ImageCount = 0;
-        this.TextCount = 0;
-    }
+    public EmptyLayout() : base(PageLayout.Empty) { }
 
     // Implementation for creating an empty layout does not require any slots or content,
     // so this method can remains empty.
-    public override void Create(Page page) { }
+    public static new void Create(Page _) { }
 }
