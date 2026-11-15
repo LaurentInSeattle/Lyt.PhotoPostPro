@@ -85,6 +85,7 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<CameraViewModel>();
 
                 _ = services.AddSingleton<BookViewModel>();
+                _ = services.AddSingleton<BookToolbarViewModel>();
                 _ = services.AddSingleton<BookEditViewModel>();
                 _ = services.AddSingleton<BookManageViewModel>();
 

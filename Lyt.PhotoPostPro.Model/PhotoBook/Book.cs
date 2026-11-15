@@ -23,6 +23,8 @@ public sealed partial class Book
 
     public BookFormat Format { get; set; } = BookFormat.Landscape;
 
+    public PageBackground DefaultPageBackground { get; set; } = PageBackground.Black;
+
     public bool WithFrontCover { get; set; } = true;
 
     public FrontCover? FrontCover { get; set; }
@@ -33,7 +35,9 @@ public sealed partial class Book
 
     public List<Page> Pages { get; } = [];
 
-    public PageBackground DefaultPageBackground { get; set; } = PageBackground.Black;
+    public List<BookImage> ImageCandidates { get; } = [];
+
+    public List<BookImage> IncludedImage{ get; } = [];
 
     public List<SlotTextStyle> TextStyles { get; } = [];
 

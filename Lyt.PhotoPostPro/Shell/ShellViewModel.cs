@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Shell;
 
-using Lyt.PhotoPostPro.Model.PhotoBook;
-
 public sealed partial class ShellViewModel
     : ViewModel<ShellView>,
     IRecipient<ToolbarCommandMessage>,
@@ -198,7 +196,7 @@ public sealed partial class ShellViewModel
         Setup<LibraryViewModel, LibraryView, LibraryToolbarViewModel, LibraryToolbarView>(
             ActivatedView.Library, view.LibraryButton);
         SetupNoToolbar<CameraViewModel, CameraView>(ActivatedView.Camera, view.CameraButton);
-        SetupNoToolbar<BookViewModel, BookView>(ActivatedView.PhotoBook, view.PhotoBookButton);
+        Setup<BookViewModel, BookView, BookToolbarViewModel, BookToolbarView>(ActivatedView.PhotoBook, view.PhotoBookButton);
         Setup<GalleryViewModel, GalleryView, GalleryToolbarViewModel, GalleryToolbarView>(
             ActivatedView.Gallery, view.GalleryButton);
         SetupNoToolbar<ImportViewModel, ImportView>(ActivatedView.Import, view.ImportButton);

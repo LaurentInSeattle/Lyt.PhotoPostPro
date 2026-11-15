@@ -11,10 +11,14 @@ public partial class BookViewModel :
     {
         this.model = model;
         this.toaster = toaster;
-        this.BookEditViewModel = new BookEditViewModel(this.model, this.toaster); 
+        this.BookEditViewModel = new BookEditViewModel(this.model, this.toaster);
+        this.BookManageViewModel = new BookManageViewModel(this.model, this.toaster);
     }
 
     [ObservableProperty]
     public partial BookEditViewModel BookEditViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial BookManageViewModel BookManageViewModel { get; set; }
 
 }

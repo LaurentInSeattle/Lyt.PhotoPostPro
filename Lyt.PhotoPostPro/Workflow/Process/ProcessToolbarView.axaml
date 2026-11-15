@@ -27,27 +27,6 @@
 			Text="{DynamicResource Process.Toolbar.FullScreen}"  
 			Command="{Binding OnFullscreen}"
 			/>
-		<!-- TODO 
-		<controls:ExtendedTextBlock
-			Grid.Column="13" Grid.ColumnSpan="2" Grid.Row="1"
-			Text="{DynamicResource Puzzle.Toolbar.EscToReturn}"  
-			Typography="{StaticResource Medium}"
-			Foreground="{StaticResource PastelOrchid_0_080}"
-			/>
-
-		<glyphs:GlyphButton
-			Style="{StaticResource ToolbarIconButton}"
-			Behaviour="Tap"
-			HorizontalAlignment="Center" VerticalAlignment="Center"
-			Width="220" Height="56"
-			Margin="0 4 0 4"
-			GlyphSource="next"
-			ButtonBackground="BorderlessRectangle"
-			GlyphStrokeThickness="0"
-			Text="{DynamicResource Language.Continue}"
-			Command="{Binding OnNext}"
-	    	/>
-		-->
 	</StackPanel>
 
 </UserControl>

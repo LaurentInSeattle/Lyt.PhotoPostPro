@@ -2,7 +2,7 @@
 
 public class Slot
 {
-    public Guid Id { get; set; } = Guid.CreateVersion7();
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public SlotPosition Position { get; set; } = new SlotPosition(0, 0, 0, 0);
 }

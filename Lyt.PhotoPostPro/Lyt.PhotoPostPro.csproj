@@ -118,6 +118,9 @@
     <Compile Update="Workflow\Book\Manage\BookManageView .axaml.cs">
       <DependentUpon>BookManageView .axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Book\BookToolbarView.axaml.cs">
+      <DependentUpon>BookToolbarView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\FirstRun\FirstRunView.axaml.cs">
       <DependentUpon>FirstRunView.axaml</DependentUpon>
     </Compile>
