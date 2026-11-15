@@ -85,6 +85,8 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<CameraViewModel>();
 
                 _ = services.AddSingleton<BookViewModel>();
+                _ = services.AddSingleton<BookEditViewModel>();
+                _ = services.AddSingleton<BookManageViewModel>();
 
                 _ = services.AddSingleton<ImportViewModel>();
                 _ = services.AddSingleton<FileImportViewModel>();
@@ -229,7 +231,7 @@ public partial class App : ApplicationBase
                 AssemblyName = App.AssemblyName,
                 Languages =
                 [
-                    // Not supported by Libre: "hy-AM", Replaced by Vietnamese
+                    // Not supported by Libre: "hy-AM", Replaced by Vietnamese ("vi-VI")
 
                     // Master, See PppLanguages.json in Tools folder 
                     "en-US", 
