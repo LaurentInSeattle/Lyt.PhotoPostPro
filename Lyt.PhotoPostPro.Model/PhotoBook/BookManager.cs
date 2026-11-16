@@ -2,20 +2,39 @@
 
 using QuestPDF.Infrastructure;
 
+using System.IO;
+
 public sealed partial class BookManager
 {
     static BookManager()
     {
         QuestPDF.Settings.License = LicenseType.Community;
         QuestPDF.Settings.EnableCaching = true;
-        QuestPDF.Settings.UseSystemFonts = true; 
+        QuestPDF.Settings.UseSystemFonts = true;
     }
 
-    private readonly FileManagerModel fileManager; 
+    public const string PhotoBooksFolderName = "PhotoBooks";
+    public const string PhotoBookJSonFileName = "Photobook.json";
+    public const string PhotoBookPdfFileName = "Photobook.pdf";
 
-    public BookManager(FileManagerModel fileManager)
+    private readonly PhotoPostProModel model;
+    private readonly FileManagerModel fileManager;
+    private readonly ILogger logger;
+    private readonly string photobooksFolderPath = string.Empty;
+
+    public BookManager(PhotoPostProModel model, FileManagerModel fileManager, ILogger logger)
     {
-        this.fileManager = fileManager; 
+        this.model = model;
+        this.fileManager = fileManager;
+        this.logger = logger;
+
+        // Setup the photobook folder path based on the Pictures folder and the application name.
+        string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        this.photobooksFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, PhotoBooksFolderName);
+        if (!Directory.Exists(this.photobooksFolderPath))
+        {
+            Directory.CreateDirectory(this.photobooksFolderPath);
+        }
     }
 
     public List<Book> Books { get; } = [];
@@ -24,28 +43,53 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
-    public Book CreateBook(
+    public Book? CreateBook(
         string uniqueName,
-        string folderName , 
-        string description, 
-        string outputPdfFileName,
-        BookPage bookPage, 
+        string description,
+        BookPage bookPage,
         BookFormat format,
-        PageBackground defaultPageBackground)
+        PageBackground defaultPageBackground,
+        bool withFrontCover,
+        bool withBackCover,
+        out string message)
     {
+        message = string.Empty;
+        const string FallbackFolderName = "_F_a_l_l_b_a_c_k_";
+        string folderName = FileSystemExtensions.SanitizeFolderName(uniqueName, FallbackFolderName);
+        if (folderName == FallbackFolderName)
+        {
+            message = "Book.Create.UniqueName";
+            return null;
+        }
+
         var book = new Book
         {
+            MaybeLogger = this.logger,
+
             UniqueName = uniqueName,
-            FolderName = folderName, 
+            FolderName = folderName,
             Description = description,
-            OutputPdfFileName = outputPdfFileName,
+            // Will be finalized on first save 
+            OutputPdfFileName = string.Empty,
             BookPage = bookPage,
             Format = format,
             DefaultPageBackground = defaultPageBackground,
+            WithFrontCover = withFrontCover,
+            WithBackCover = withBackCover,
         };
 
-        this.Books.Add(book);
-        return book;
+        book.Initialize();
+
+        if (this.SaveBook(book))
+        {
+            this.Books.Add(book);
+            return book;
+        }
+        else
+        {
+            message = "Book.Create.CantSave";
+            return null;
+        }
     }
 
     public void DeleteBook(Book book)
@@ -67,8 +111,92 @@ public sealed partial class BookManager
         this.CurrentBook = null;
     }
 
-    public void SaveBook()
+    public bool SaveCurrentBook()
     {
+        if (this.CurrentBook is null)
+        {
+            return false;
+        }
+
+        return this.SaveBook(this.CurrentBook);
+    }
+
+    public bool SaveBook(Book book)
+    {
+        try
+        {
+            string photobookFolderPath = Path.Combine(this.photobooksFolderPath, book.FolderName);
+            if (!Directory.Exists(photobookFolderPath))
+            {
+                Directory.CreateDirectory(photobookFolderPath);
+            }
+
+            string photoBookPdfPathName = Path.Combine(photobookFolderPath, PhotoBookPdfFileName);
+            book.OutputPdfFileName = photoBookPdfPathName;
+
+            string photobookPath = Path.Combine(photobookFolderPath, PhotoBookJSonFileName);
+            var jsonTypeInfo = AppJsonContext.Default.Book;
+            string serialized = fileManager.Serialize(book, jsonTypeInfo);
+            File.WriteAllText(photobookPath, serialized);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            string msg = "Exception thrown when saving book. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            this.logger.Error(msg);
+            return false;
+        }
+    }
+
+    public bool LoadBooks()
+    {
+        try
+        {
+            List<string> directories = FileSystemExtensions.EnumerateDirectories(this.photobooksFolderPath);
+            if (directories.Count == 0)
+            {
+                Debug.WriteLine("No books yet.");
+                return true;
+            }
+
+            foreach (string directory in directories)
+            {
+                string photobookPath = Path.Combine(directory, PhotoBookJSonFileName);
+                if (!File.Exists(photobookPath))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    string serialized = File.ReadAllText(photobookPath);
+                    var maybeBook = fileManager.Deserialize<Book>(serialized, AppJsonContext.Default.Book);
+                    if (maybeBook is Book book)
+                    {
+                        this.Books.Add(book);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string msg = "Exception thrown when loading book: " + photobookPath + " \n" + ex.ToString();
+                    Debug.WriteLine(msg);
+                    this.logger.Error(msg);
+
+                    // Try to load other books 
+                    continue;
+                }
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            string msg = "Exception thrown when loading books. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            this.logger.Error(msg);
+            return false;
+        }
     }
 
     #region Page Management

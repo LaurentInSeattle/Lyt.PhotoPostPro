@@ -126,7 +126,7 @@ public sealed partial class ShellViewModel
         var fileManager = App.GetRequiredService<FileManagerModel>();
         Schedule.OnUiThread(
             1500, 
-            () => { BookManager.Test(fileManager); },
+            () => { this.model.BookManager.Test(); },
             DispatcherPriority.ApplicationIdle);
 #endif
     }

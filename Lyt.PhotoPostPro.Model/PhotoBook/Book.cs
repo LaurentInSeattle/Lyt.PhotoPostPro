@@ -15,6 +15,10 @@ public sealed partial class Book
 
     public string UniqueName { get; set; } = string.Empty;
 
+    public DateTime Created = DateTime.UtcNow;
+
+    public DateTime Updated = DateTime.UtcNow;
+
     public string FolderName { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
@@ -37,11 +41,18 @@ public sealed partial class Book
 
     public List<Page> Pages { get; set; } = [];
 
-    public List<BookImage> ImageCandidates { get; set; } = [];
+    public Dictionary<Guid, BookImage> ImageCandidates { get; set; } = [];
 
-    public List<BookImage> IncludedImages{ get; set; } = [];
+    public Dictionary<Guid, BookImage> IncludedImages { get; set; } = [];
 
     public List<SlotTextStyle> TextStyles { get; set; } = [];
+
+    [JsonIgnore]
+    public ILogger? MaybeLogger { get; set; }
+
+    [JsonIgnore]
+    // ! Ok
+    public ILogger Logger => this.MaybeLogger!; 
 
     public Page FromPageNumber(int pageNumber)
     {
@@ -82,7 +93,7 @@ public sealed partial class Book
     {
         if (this.WithFrontCover)
         {
-            this.FrontCover = 
+            this.FrontCover =
                 new FrontCover()
                 {
                     FrontPage = new Page(this, 0),
@@ -95,7 +106,7 @@ public sealed partial class Book
 
         if (this.WithBackCover)
         {
-            this.BackCover = 
+            this.BackCover =
                 new BackCover()
                 {
                     FrontPage = new Page(this, 0),
@@ -104,8 +115,14 @@ public sealed partial class Book
         }
     }
 
+    internal void IncludeImage(BookImage bookImage)
+    {
+        Guid key = bookImage.Id;
+        this.ImageCandidates.Remove(key);
+        this.IncludedImages.TryAdd(key, bookImage);
+    }
 
-    public void GeneratePdf()
+    public void GeneratePdf(BookResolution bookResolution)
     {
         Color pageBackgroundColor =
             this.DefaultPageBackground switch
@@ -145,27 +162,18 @@ public sealed partial class Book
                             .OffsetX(position.X, Unit.Point)
                             .OffsetY(position.Y, Unit.Point)
                             .Width(position.Dx, Unit.Point)
-                            .Height(position.Dy, Unit.Point); 
+                            .Height(position.Dy, Unit.Point);
                     if (slot is ImageSlot imageSlot)
                     {
-                        if (string.IsNullOrWhiteSpace(imageSlot.ImageFileName))
-                        {
-                            // Skip this slot if the image file is not known yet 
-                            Debug.WriteLine($"No image file for slot: {imageSlot.Id}");
-                            continue;
-                        }
-
-                        if (!File.Exists(imageSlot.ImageFileName))
-                        {
-                            // Skip this slot if the image file does not exist
-                            Debug.WriteLine($"Image file not found: {imageSlot.ImageFileName}");
-                            continue;
-                        }
-
                         // Need to crop the source image to match the page aspect ratio
-                        byte[] imageBytes = File.ReadAllBytes(imageSlot.ImageFileName);
-                        var imageDescriptor = descriptor.Image(imageBytes); 
-                        if ( imageSlot.ImageStretch == BookImageStretch.Stretch)
+                        byte[]? imageBytes = imageSlot.Image(this, bookResolution);
+                        if (imageBytes is null)
+                        {
+                            continue;
+                        }
+
+                        var imageDescriptor = descriptor.Image(imageBytes);
+                        if (imageSlot.ImageStretch == BookImageStretch.Stretch)
                         {
                             imageDescriptor.FitUnproportionally();
                         }
@@ -191,7 +199,7 @@ public sealed partial class Book
                             .FontColor(style.Color);
                         if (style.FontStyle == BookFontStyle.Bold)
                         {
-                            textDescriptor.Bold(); 
+                            textDescriptor.Bold();
                         }
                         else if (style.FontStyle == BookFontStyle.Italic)
                         {

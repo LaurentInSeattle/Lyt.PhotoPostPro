@@ -68,3 +68,11 @@ public enum BookFontStyle
     Italic = 2,
     BoldItalic = 3
 }
+
+[JsonConverter(typeof(JsonStringEnumConverter<BookResolution>))]
+public enum BookResolution
+{
+    Print = 0,
+    Display = 1,
+    Thumbnails = 2,
+}

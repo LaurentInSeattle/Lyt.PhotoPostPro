@@ -29,7 +29,6 @@ public abstract class Layout
                         position.Y * pageSize.Height,
                         position.Dx * pageSize.Width,
                         position.Dy * pageSize.Height),
-                ImageFileName = string.Empty,
                 ImageStretch = BookImageStretch.Fit,
             };
 

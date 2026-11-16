@@ -2,6 +2,15 @@
 
 public class BookImage
 {
+    public BookImage() { }
+
+    public BookImage(string path) 
+    {
+        this.HighResPath = path;
+        this.MediumResPath = path;
+        this.LowResPath = path;
+    }
+
     public Guid Id { get; set; } = Guid.NewGuid();
 
     // For final PDF for print 

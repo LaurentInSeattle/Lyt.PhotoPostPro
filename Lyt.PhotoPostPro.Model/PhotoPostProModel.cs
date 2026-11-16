@@ -69,6 +69,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.IsInitializing = true;
         await this.Load();
 
+        this.BookManager = new BookManager(this, this.fileManager, base.Logger);
         this.CameraManager = new CameraManager(this, base.Logger);
         this.LutsManager = new LutsManager(this, base.Logger);
         this.LibraryManager = new(this, fileManager, dispatcher, base.Logger);

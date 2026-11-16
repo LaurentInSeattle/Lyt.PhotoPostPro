@@ -128,6 +128,9 @@ public sealed partial class PhotoPostProModel : ModelBase
     [JsonIgnore]
     public LutsManager LutsManager { get; private set; }
 
+    [JsonIgnore]
+    public BookManager BookManager { get; private set; }
+
     #endregion Not serialized - No model changed event
 
     #region NOT serialized - WITH model changed event

@@ -2,12 +2,12 @@
 
 public sealed class SingleImageLayout : Layout
 {
-    public static void Create(Book book, Page page, string imageFileName)
+    public static void Create(Book book, Page page, Guid bookImageId)
     {
         var layout = new SingleImageLayout(); 
         layout.Create(book, page);
         var slot = (ImageSlot)page.Slots[0];
-        slot.ImageFileName = imageFileName;
+        slot.BookImageId = bookImageId;
     }
 
     public SingleImageLayout() : base(PageLayout.SingleImage)
@@ -16,12 +16,12 @@ public sealed class SingleImageLayout : Layout
 
 public sealed class SingleImageLayoutWithLegend : Layout
 {
-    public static void Create(Book book, Page page, string imageFileName, string legend)
+    public static void Create(Book book, Page page, Guid bookImageId, string legend)
     {
         var layout = new SingleImageLayoutWithLegend();
         layout.Create(book, page);
         var imageSlot = (ImageSlot)page.Slots[0];
-        imageSlot.ImageFileName = imageFileName;
+        imageSlot.BookImageId = bookImageId;
         var textSlot = (TextSlot)page.Slots[1];
         textSlot.Text = legend;
         textSlot.Style.TextAlignment = BookTextAlignment.Center;

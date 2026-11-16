@@ -43,10 +43,10 @@
 [JsonSerializable(typeof(FrontCover))]
 [JsonSerializable(typeof(BackCover))]
 [JsonSerializable(typeof(BookFormat))]
+[JsonSerializable(typeof(BookResolution))]
 [JsonSerializable(typeof(PageBackground))]
 [JsonSerializable(typeof(BookTextAlignment))]
 [JsonSerializable(typeof(BookImageStretch))]
 [JsonSerializable(typeof(BookFontStyle))]
-
 
 public partial class AppJsonContext : JsonSerializerContext { }

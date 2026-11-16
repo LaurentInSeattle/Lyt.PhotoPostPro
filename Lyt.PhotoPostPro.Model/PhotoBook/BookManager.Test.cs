@@ -2,31 +2,40 @@
 
 public sealed partial class BookManager
 {
-    public static void Test(FileManagerModel fileManager)
+    public void Test()
     {
         const string VeneziaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg";
         const string ToscanaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg";
         const string CapriImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg";
         const string VeronaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Verona.jpg";
 
-        var book = new Book
-        {
-            UniqueName = "TestBook",
-            FolderName = "TestBook",
-            Description = "This is a test book!",
-            OutputPdfFileName = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBook.pdf",
-            BookPage = BookPage.UsLetter,
-            Format = BookFormat.Landscape,
-            DefaultPageBackground = PageBackground.Black,
-            WithFrontCover = true,
-            WithBackCover = false,
-        };
 
-        book.Initialize();
+        var book = this.CreateBook(
+            "TestBook",
+            "This is a test book!",
+            BookPage.UsLetter,
+            BookFormat.Landscape,
+            PageBackground.Black,
+            withFrontCover: true, 
+            withBackCover: false,
+            out string message); 
+        if ( book is null)
+        {
+            return; 
+        }
+
+        var venezia = new BookImage(VeneziaImagePath);
+        var toscana = new BookImage(ToscanaImagePath);
+        var capri = new BookImage(CapriImagePath);
+        var verona = new BookImage(VeronaImagePath);
+        book.IncludeImage(venezia);
+        book.IncludeImage(toscana);
+        book.IncludeImage(capri);
+        book.IncludeImage(verona);
 
         // ! ok
         var front = book.FrontCover!.FrontPage;
-        FullPageImageLayout.Create(book, front, VeneziaImagePath);
+        FullPageImageLayout.Create(book, front, venezia.Id);
 
         // ! ok
         var back = book.FrontCover!.BackPage;
@@ -45,7 +54,7 @@ public sealed partial class BookManager
             new ImageSlot()
             {
                 Position = new SlotPosition(x: 40, y: 40, dx: 400, dy: 300),
-                ImageFileName = ToscanaImagePath,
+                BookImageId = toscana.Id,
             });
 
         page1.Slots.Add(
@@ -59,7 +68,7 @@ public sealed partial class BookManager
             new ImageSlot()
             {
                 Position = new SlotPosition(x: 300, y: 340, dx: 400, dy: 300),
-                ImageFileName = VeronaImagePath,
+                BookImageId = verona.Id,
             });
 
         page1.Slots.Add(
@@ -70,22 +79,10 @@ public sealed partial class BookManager
             });
 
         var page2 = book.FromPageNumber(2);
-        SingleImageLayoutWithLegend.Create(book, page2, CapriImagePath, "Giardini di Augusto - Isola di Capri");
+        SingleImageLayoutWithLegend.Create(book, page2, capri.Id, "Giardini di Augusto - Isola di Capri");
 
+        this.SaveBook(book); 
 
-        book.GeneratePdf();
-
-        const string BookPath = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBook.json"; 
-        var jsonTypeInfo = AppJsonContext.Default.Book;
-        string serialized = fileManager.Serialize(book, jsonTypeInfo);
-        File.WriteAllText(BookPath, serialized);
-
-        string read = File.ReadAllText(BookPath);
-        var maybeBook = fileManager.Deserialize<Book>(read, jsonTypeInfo); 
-        if ( maybeBook is Book readBook )
-        {
-            readBook.OutputPdfFileName = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBookReturn.pdf";
-            readBook.GeneratePdf(); 
-        }
+        book.GeneratePdf(BookResolution.Print);
     }
 }
