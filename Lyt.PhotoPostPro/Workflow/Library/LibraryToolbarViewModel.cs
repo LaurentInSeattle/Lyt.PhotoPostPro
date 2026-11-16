@@ -60,7 +60,7 @@ public sealed partial class LibraryToolbarViewModel :
                 }
             });
 
-            this.LibraryInUse = this.Localize("Library in use: ");
+            this.LibraryInUse = this.Localize("Shell.Folder") + " :";
             this.ToolbarIsVisible = true;
         }
     }

@@ -23,7 +23,7 @@
 			/>
 		<ComboBox
 			IsEditable="False"
-			Width="260" Height="40"
+			Width="200" Height="40"
 			Margin="24 0 50 0"
 			VerticalAlignment="Center" HorizontalAlignment="Center"
 			ItemsSource="{Binding AvailableLibraries}"

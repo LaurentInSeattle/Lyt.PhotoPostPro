@@ -160,6 +160,7 @@
 					<glyphs:GlyphButton
 						x:Name="SettingsButton"
 						Style="{StaticResource NavigationIconButton}"
+						IsDisabled="True"
 						GlyphSource="settings"
 						GlyphStrokeThickness="0"
 						Text="{DynamicResource Shell.Settings}"

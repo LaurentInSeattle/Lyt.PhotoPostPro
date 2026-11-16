@@ -5,6 +5,8 @@ using QuestPDF.Infrastructure;
 
 namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
+using static System.Net.Mime.MediaTypeNames;
+
 // See:  https://github.com/GraphicMeat/PhotoBooks/blob/main/README.md 
 
 using Color = QuestPDF.Infrastructure.Color;
@@ -115,11 +117,117 @@ public sealed partial class Book
         }
     }
 
-    internal void IncludeImage(BookImage bookImage)
+    public Guid ImportImage(string booksPath, string imagePath, out string message)
     {
-        Guid key = bookImage.Id;
-        this.ImageCandidates.Remove(key);
-        this.IncludedImages.TryAdd(key, bookImage);
+        message = string.Empty; 
+
+        if ( !File.Exists(imagePath))
+        {
+            message = "Workflow.Book.NotExist"; 
+            return Guid.Empty; 
+        }
+
+        if ( !ImageLoader.HasJpgExtension(imagePath))
+        {
+            message = "Workflow.Book.NotJpg";
+            return Guid.Empty;
+        }
+
+        try
+        {
+            var bookImage = new BookImage();
+            string imageBaseFileName = bookImage.Id.ToShortString();
+            string highResImageFileName = string.Concat("High_", imageBaseFileName, ".jpg");
+            string mediumResImageFileName = string.Concat("Medium_", imageBaseFileName, ".jpg");
+            string lowResImageFileName = string.Concat("Low_", imageBaseFileName, ".jpg");
+            string folderPath = System.IO.Path.Combine(booksPath, this.FolderName);
+
+            string highResImageFilePath = System.IO.Path.Combine(folderPath, highResImageFileName);
+            string mediumResImageFilePath = System.IO.Path.Combine(folderPath, mediumResImageFileName);
+            string lowResImageFilePath = System.IO.Path.Combine(folderPath, lowResImageFileName);
+
+            // Step 1 - Load the image file into memory 
+            var imageFormat = SixLabors.ImageSharp.Image.DetectFormat(imagePath);
+            if (imageFormat is null)
+            {
+                // errorMessage = "Unsupported image format in ImageSharp.";
+                message = "Model.Loader.ImageSharpNotDetected";
+                return Guid.Empty;
+            }
+
+            Debug.WriteLine(imageFormat.Name);
+
+            var image = SixLabors.ImageSharp.Image.Load<Rgb24>(imagePath);
+            if (image is null)
+            {
+                // errorMessage = "Failed to load the source image with ImageSharp.";
+                message = "Model.Loader.ImageSharpFailedLoad";
+                return Guid.Empty;
+            }
+
+            Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
+
+            // Step 2 - Copy original 
+            System.IO.File.Copy(imagePath, highResImageFilePath);
+            bookImage.HighResPath = highResImageFilePath;
+
+            void Clone ( string targetPath , bool isHd)
+            {
+                // Create with cloning 
+                var clone = image.Clone();
+                clone.Mutate(x => x.Resize(
+                    new ResizeOptions
+                    {
+                        Size = ImageLoader.ThumbnailSize(image.Width, image.Height, isHd),
+                        Mode = ResizeMode.Max, // Constrains dimensions while keeping aspect ratio
+                        Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
+                    }));
+
+                var saveMemoryStream = new MemoryStream();
+                clone.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = ImageLoader.HdImageQuality });
+                byte[] jpgEncoded = saveMemoryStream.ToArray();
+                System.IO.File.WriteAllBytes(targetPath, jpgEncoded);
+            }
+
+            // Step 3 - create a medium size for UI purposes  
+            int maxDimension = Math.Max(image.Height, image.Width); 
+            if ( maxDimension > 2000)
+            {
+                Clone(mediumResImageFilePath, isHd: true); 
+                bookImage.MediumResPath = mediumResImageFilePath;
+            }
+            else
+            {
+                // already medium size 
+                bookImage.MediumResPath = highResImageFilePath;
+            }
+
+            // Step 4 - Create thumbnail 
+            Clone(lowResImageFilePath, isHd: false);
+            bookImage.MediumResPath = lowResImageFilePath;
+
+            // Step 5 - Now a candidate image 
+            this.ImageCandidates.Add(bookImage.Id, bookImage); 
+            return bookImage.Id;
+        }
+        catch (Exception ex )
+        {
+            string msg = "Exception thrown when importing image. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            this.Logger.Error(msg);
+            return Guid.Empty;
+        }
+    }
+
+    internal void IncludeImage(BookImage bookImage) => this.IncludeImage(bookImage.Id);
+
+    internal void IncludeImage(Guid key)
+    {
+        if (this.ImageCandidates.TryGetValue(key, out BookImage? bookImage ) && bookImage is not null)
+        {
+            this.ImageCandidates.Remove(key);
+            this.IncludedImages.TryAdd(key, bookImage);
+        }
     }
 
     public void GeneratePdf(BookResolution bookResolution)

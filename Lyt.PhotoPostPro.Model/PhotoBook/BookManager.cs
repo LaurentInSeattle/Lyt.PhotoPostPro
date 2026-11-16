@@ -35,6 +35,8 @@ public sealed partial class BookManager
         {
             Directory.CreateDirectory(this.photobooksFolderPath);
         }
+
+        this.LoadBooks();
     }
 
     public List<Book> Books { get; } = [];
@@ -54,6 +56,14 @@ public sealed partial class BookManager
         out string message)
     {
         message = string.Empty;
+
+        var book = this.GetBook(uniqueName);
+        if (book is not null)
+        {
+            message = "Book.Create.AlreadyExist";
+            return null;
+        }
+
         const string FallbackFolderName = "_F_a_l_l_b_a_c_k_";
         string folderName = FileSystemExtensions.SanitizeFolderName(uniqueName, FallbackFolderName);
         if (folderName == FallbackFolderName)
@@ -62,7 +72,7 @@ public sealed partial class BookManager
             return null;
         }
 
-        var book = new Book
+        book = new Book
         {
             MaybeLogger = this.logger,
 
@@ -92,9 +102,35 @@ public sealed partial class BookManager
         }
     }
 
-    public void DeleteBook(Book book)
+    public bool DeleteBook(Book book, out string message)
     {
-        this.Books.Remove(book);
+        message = string.Empty;
+        try
+        {
+            var stillBook = this.GetBook(book.UniqueName);
+            if (stillBook is null)
+            {
+                message = "Book.Delete.NotExist";
+                return false;
+            }
+
+            string photobookFolderPath = Path.Combine(this.photobooksFolderPath, book.FolderName);
+            if (Directory.Exists(photobookFolderPath))
+            {
+                // Consider moving stuff to Recycle bin
+                Directory.Delete(photobookFolderPath, recursive: true);
+            }
+
+            this.Books.Remove(book);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            string msg = "Exception thrown when saving book. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            this.logger.Error(msg);
+            return false;
+        }
     }
 
     public Book? GetBook(string uniqueName) => this.Books.FirstOrDefault(b => b.UniqueName == uniqueName);
