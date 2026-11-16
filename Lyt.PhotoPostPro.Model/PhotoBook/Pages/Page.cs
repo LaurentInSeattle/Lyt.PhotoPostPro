@@ -2,27 +2,28 @@
 
 public sealed class Page : PageBase
 {
-    public Page(Book book, int pageNumber) : base(book, pageNumber)
+    public Page() : base() { }
+
+    public Page(Book book, int pageNumber) : base(pageNumber)
     {
         this.PageBackground = book.DefaultPageBackground;
     }
 
     public PageBackground PageBackground { get; set; }
 
-    public List<Slot> Slots { get; } = [];
+    public List<Slot> Slots { get; set; } = [];
 }
 
 public class PageBase
 {
-    public PageBase(Book book, int pageNumber)
+    public PageBase() { } 
+
+    public PageBase(int pageNumber)
     {
-        this.Book = book;
         this.PageNumber = pageNumber;
     }
 
-    public Book Book { get; }
-
-    public int PageNumber { get; }
+    public int PageNumber { get; set; }
 
     public bool IsFrontPage => this.PageNumber % 2 == 0;
 }

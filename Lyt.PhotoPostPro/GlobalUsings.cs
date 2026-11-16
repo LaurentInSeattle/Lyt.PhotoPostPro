@@ -164,6 +164,7 @@ global using Lyt.PhotoPostPro.Workflow.Tools.Watermarking;
 // Model assembly namespaces
 //
 global using Lyt.PhotoPostPro.Model;
+global using Lyt.PhotoPostPro.Model.PhotoBook;
 global using Lyt.PhotoPostPro.Model.Camera;
 global using Lyt.PhotoPostPro.Model.Export;
 global using Lyt.PhotoPostPro.Model.Frames;

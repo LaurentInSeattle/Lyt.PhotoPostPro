@@ -11,8 +11,11 @@ public sealed partial class BookManager
         QuestPDF.Settings.UseSystemFonts = true; 
     }
 
-    public BookManager()
+    private readonly FileManagerModel fileManager; 
+
+    public BookManager(FileManagerModel fileManager)
     {
+        this.fileManager = fileManager; 
     }
 
     public List<Book> Books { get; } = [];
@@ -21,13 +24,24 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
-    public Book CreateBook(string uniqueName, string outputPdfFileName, BookFormat format)
+    public Book CreateBook(
+        string uniqueName,
+        string folderName , 
+        string description, 
+        string outputPdfFileName,
+        BookPage bookPage, 
+        BookFormat format,
+        PageBackground defaultPageBackground)
     {
         var book = new Book
         {
             UniqueName = uniqueName,
+            FolderName = folderName, 
+            Description = description,
             OutputPdfFileName = outputPdfFileName,
+            BookPage = bookPage,
             Format = format,
+            DefaultPageBackground = defaultPageBackground,
         };
 
         this.Books.Add(book);
@@ -39,10 +53,7 @@ public sealed partial class BookManager
         this.Books.Remove(book);
     }
 
-    public Book? GetBook(string uniqueName)
-    {
-        return this.Books.FirstOrDefault(b => b.UniqueName == uniqueName);
-    }
+    public Book? GetBook(string uniqueName) => this.Books.FirstOrDefault(b => b.UniqueName == uniqueName);
 
     public void BeginEditBook(Book book)
     {

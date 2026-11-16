@@ -4,7 +4,7 @@
 //      public static PageSize A4 { get; } = new PageSize(595f, 842f);
 //      public const int PointsPerInch = 72;
 
-[JsonConverter(typeof(JsonStringEnumConverter<BookFormat>))]
+[JsonConverter(typeof(JsonStringEnumConverter<BookPage>))]
 public enum BookPage
 {
     UsLetter,

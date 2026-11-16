@@ -2,7 +2,7 @@
 
 public sealed partial class BookManager
 {
-    public static void Test()
+    public static void Test(FileManagerModel fileManager)
     {
         const string VeneziaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg";
         const string ToscanaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg";
@@ -12,9 +12,12 @@ public sealed partial class BookManager
         var book = new Book
         {
             UniqueName = "TestBook",
+            FolderName = "TestBook",
+            Description = "This is a test book!",
             OutputPdfFileName = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBook.pdf",
             BookPage = BookPage.UsLetter,
             Format = BookFormat.Landscape,
+            DefaultPageBackground = PageBackground.Black,
             WithFrontCover = true,
             WithBackCover = false,
         };
@@ -23,11 +26,11 @@ public sealed partial class BookManager
 
         // ! ok
         var front = book.FrontCover!.FrontPage;
-        FullPageImageLayout.Create(front, VeneziaImagePath);
+        FullPageImageLayout.Create(book, front, VeneziaImagePath);
 
         // ! ok
         var back = book.FrontCover!.BackPage;
-        EmptyLayout.Create(back);
+        EmptyLayout.Create(book, back);
         var titleStyle = new SlotTextStyle() { FontSize = 40, TextAlignment = BookTextAlignment.Center };
         back.Slots.Add(
             new TextSlot()
@@ -67,9 +70,22 @@ public sealed partial class BookManager
             });
 
         var page2 = book.FromPageNumber(2);
-        SingleImageLayoutWithLegend.Create(page2, CapriImagePath, "Giardini di Augusto - Isola di Capri");
+        SingleImageLayoutWithLegend.Create(book, page2, CapriImagePath, "Giardini di Augusto - Isola di Capri");
+
 
         book.GeneratePdf();
-    }
 
+        const string BookPath = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBook.json"; 
+        var jsonTypeInfo = AppJsonContext.Default.Book;
+        string serialized = fileManager.Serialize(book, jsonTypeInfo);
+        File.WriteAllText(BookPath, serialized);
+
+        string read = File.ReadAllText(BookPath);
+        var maybeBook = fileManager.Deserialize<Book>(read, jsonTypeInfo); 
+        if ( maybeBook is Book readBook )
+        {
+            readBook.OutputPdfFileName = "C:\\Users\\Laurent\\Desktop\\PhotoRebel\\TestBookReturn.pdf";
+            readBook.GeneratePdf(); 
+        }
+    }
 }

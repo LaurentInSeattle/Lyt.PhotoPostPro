@@ -14,10 +14,10 @@ public abstract class Layout
 
     public int TextCount => this.TextSlots.Count;
 
-    public virtual void Create(Page page)
+    public virtual void Create(Book book, Page page)
     {
         page.Slots.Clear();
-        var pageSize = page.Book.PageSize;
+        var pageSize = book.PageSize;
         foreach(var position in this.ImageSlots)
         {
             var slot = new ImageSlot()

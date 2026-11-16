@@ -2,10 +2,10 @@
 
 public sealed class SingleImageLayout : Layout
 {
-    public static void Create(Page page, string imageFileName)
+    public static void Create(Book book, Page page, string imageFileName)
     {
         var layout = new SingleImageLayout(); 
-        layout.Create(page);
+        layout.Create(book, page);
         var slot = (ImageSlot)page.Slots[0];
         slot.ImageFileName = imageFileName;
     }
@@ -16,10 +16,10 @@ public sealed class SingleImageLayout : Layout
 
 public sealed class SingleImageLayoutWithLegend : Layout
 {
-    public static void Create(Page page, string imageFileName, string legend)
+    public static void Create(Book book, Page page, string imageFileName, string legend)
     {
         var layout = new SingleImageLayoutWithLegend();
-        layout.Create(page);
+        layout.Create(book, page);
         var imageSlot = (ImageSlot)page.Slots[0];
         imageSlot.ImageFileName = imageFileName;
         var textSlot = (TextSlot)page.Slots[1];

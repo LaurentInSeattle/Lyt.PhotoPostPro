@@ -15,6 +15,8 @@ public sealed partial class Book
 
     public string UniqueName { get; set; } = string.Empty;
 
+    public string FolderName { get; set; } = string.Empty;
+
     public string Description { get; set; } = string.Empty;
 
     public string OutputPdfFileName { get; set; } = string.Empty;
@@ -33,13 +35,13 @@ public sealed partial class Book
 
     public BackCover? BackCover { get; set; }
 
-    public List<Page> Pages { get; } = [];
+    public List<Page> Pages { get; set; } = [];
 
-    public List<BookImage> ImageCandidates { get; } = [];
+    public List<BookImage> ImageCandidates { get; set; } = [];
 
-    public List<BookImage> IncludedImage{ get; } = [];
+    public List<BookImage> IncludedImages{ get; set; } = [];
 
-    public List<SlotTextStyle> TextStyles { get; } = [];
+    public List<SlotTextStyle> TextStyles { get; set; } = [];
 
     public Page FromPageNumber(int pageNumber)
     {
@@ -72,11 +74,20 @@ public sealed partial class Book
                 _ => throw new NotImplementedException($"Book format {this.Format} is not implemented."),
             };
 
+    public float PageWidth => this.PageSize.Width;
+
+    public float PageHeight => this.PageSize.Height;
+
     public void Initialize()
     {
         if (this.WithFrontCover)
         {
-            this.FrontCover = new FrontCover(this);
+            this.FrontCover = 
+                new FrontCover()
+                {
+                    FrontPage = new Page(this, 0),
+                    BackPage = new Page(this, 1)
+                };
         }
 
         this.Pages.Add(new Page(this, 1));
@@ -84,7 +95,12 @@ public sealed partial class Book
 
         if (this.WithBackCover)
         {
-            this.BackCover = new BackCover(this);
+            this.BackCover = 
+                new BackCover()
+                {
+                    FrontPage = new Page(this, 0),
+                    BackPage = new Page(this, 1)
+                };
         }
     }
 
