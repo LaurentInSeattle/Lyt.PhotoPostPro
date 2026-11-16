@@ -264,7 +264,12 @@ public sealed partial class FolderImportViewModel :
             Schedule.OnUiThread(120, () =>
             {
                 this.ImportStatus = this.Localize("Workflow.Import.Folder.Added");
+                this.CancelButtonIsDisabled = true;
                 this.BackButtonIsDisabled = false;
+                this.toaster.Show(
+                    this.Localize("Shell.Ready"),
+                    this.Localize("Workflow.Import.Folder.Added"),
+                    3_500, InformationLevel.Success); 
             }, DispatcherPriority.Background);
         }, DispatcherPriority.Background);
     }

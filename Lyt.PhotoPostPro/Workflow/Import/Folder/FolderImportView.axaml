@@ -61,7 +61,6 @@
 					Command="{Binding OnCancelImport}"
 					IsDisabled="{Binding CancelButtonIsDisabled}"
 	    			/>
-
 				<!-- Add To Library  --> 
 				<glyphs:GlyphButton
 					Margin="16 0 16 0"
@@ -74,16 +73,14 @@
 					Command="{Binding OnAddToLibrary}"
 					IsDisabled="{Binding AddButtonIsDisabled}"
 	    			/>
-
 				<!-- Back  --> 
 				<glyphs:GlyphButton
 					Margin="16 0 16 0"
 					Style="{StaticResource ViewIconButton}"
 					FontSize="24"
-					HorizontalAlignment="Center" VerticalAlignment="Center"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
 					Width="360" Height="56"
 					GlyphSource="chevron_left"
-					ButtonBackground="BorderlessRectangle"
 					GlyphStrokeThickness="0"
 					Text="{DynamicResource Workflow.Back}"
 					Command="{Binding OnBack}"
