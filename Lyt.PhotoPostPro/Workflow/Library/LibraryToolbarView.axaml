@@ -12,38 +12,81 @@
 	<StackPanel
 		Orientation="Horizontal"
 		HorizontalAlignment="Right"
-		IsVisible="{Binding ToolbarIsVisible}"
 		>
-		<TextBlock
-			Theme="{StaticResource H3}"
-			Text="{Binding LibraryInUse}"
-			HorizontalAlignment="Left" VerticalAlignment="Center"
-			FontWeight="Normal"
-			Foreground="{StaticResource PastelOrchid_0_080}"
-			/>
-		<ComboBox
-			IsEditable="False"
-			Width="200" Height="40"
-			Margin="24 0 50 0"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
-			ItemsSource="{Binding AvailableLibraries}"
-			SelectedIndex="{Binding SelectedLibraryIndex}"
+		<StackPanel
+			Orientation="Horizontal"
+			HorizontalAlignment="Right"
+			IsVisible="{Binding PhotoBookIsVisible}"
 			>
-			<ComboBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Vertical"/>
-				</ItemsPanelTemplate>
-			</ComboBox.ItemsPanel>
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock 
-						Text="{Binding}" 
-						Foreground="{StaticResource LightAqua_0_100}"
-						FontSize="16"
-						Margin="8 0 0 0"
-						/>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Text="{Binding PhotoBookInUse}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				FontWeight="Normal"
+				Foreground="{StaticResource PastelOrchid_0_080}"
+				/>
+			<ComboBox
+				IsEditable="False"
+				Width="180" Height="40"
+				Margin="8 0 50 0"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				ItemsSource="{Binding AvailablePhotoBooks}"
+				SelectedIndex="{Binding SelectedPhotoBookIndex}"
+				>
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Vertical"/>
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock 
+							Text="{Binding}" 
+							Foreground="{StaticResource LightAqua_0_100}"
+							FontSize="16"
+							Margin="8 0 0 0"
+							/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</StackPanel>
+
+		<StackPanel
+			Orientation="Horizontal"
+			HorizontalAlignment="Right"
+			IsVisible="{Binding LibraryIsVisible}"
+			>
+			<TextBlock
+				Theme="{StaticResource H3}"
+				Text="{Binding LibraryInUse}"
+				HorizontalAlignment="Left" VerticalAlignment="Center"
+				FontWeight="Normal"
+				Foreground="{StaticResource PastelOrchid_0_080}"
+				/>
+			<ComboBox
+				IsEditable="False"
+				Width="180" Height="40"
+				Margin="8 0 50 0"
+				VerticalAlignment="Center" HorizontalAlignment="Center"
+				ItemsSource="{Binding AvailableLibraries}"
+				SelectedIndex="{Binding SelectedLibraryIndex}"
+				>
+				<ComboBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Vertical"/>
+					</ItemsPanelTemplate>
+				</ComboBox.ItemsPanel>
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock 
+							Text="{Binding}" 
+							Foreground="{StaticResource LightAqua_0_100}"
+							FontSize="16"
+							Margin="8 0 0 0"
+							/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</StackPanel>
 	</StackPanel>
 </UserControl>

@@ -37,6 +37,11 @@ public sealed partial class BookManager
         }
 
         this.LoadBooks();
+
+        if (string.IsNullOrWhiteSpace(this.model.PhotoBook) && this.Books.Count > 0)
+        {
+            this.model.PhotoBook = this.Books[0].FriendlyName;
+        }
     }
 
     public List<Book> Books { get; } = [];
@@ -45,9 +50,9 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
-    public Book? CreateBook( string friendlyName, string description, out string message)
+    public Book? CreateBook(string friendlyName, string description, out string message)
         => this.CreateBook(
-                friendlyName, 
+                friendlyName,
                 description,
                 BookPage.UsLetter,
                 BookFormat.Landscape,
@@ -104,6 +109,8 @@ public sealed partial class BookManager
         if (this.SaveBook(book))
         {
             this.Books.Add(book);
+            this.BeginEditBook(book);
+            new BookListChangedMessage().Publish();
             return book;
         }
         else
@@ -122,7 +129,7 @@ public sealed partial class BookManager
             return false;
         }
 
-        return this.DeleteBook(book, out message); 
+        return this.DeleteBook(book, out message);
     }
 
     public bool DeleteBook(Book book, out string message)
@@ -144,7 +151,9 @@ public sealed partial class BookManager
                 Directory.Delete(photobookFolderPath, recursive: true);
             }
 
+            this.EndEditBook(); 
             this.Books.Remove(book);
+            new BookListChangedMessage().Publish();
             return true;
         }
         catch (Exception ex)
@@ -156,18 +165,50 @@ public sealed partial class BookManager
         }
     }
 
-    public Book? GetBook(string uniqueName) => this.Books.FirstOrDefault(b => b.FriendlyName == uniqueName);
+    public Book? GetBook(string friendlyName) => this.Books.FirstOrDefault(b => b.FriendlyName == friendlyName);
+
+    public bool SelectBook(string friendlyName)
+    {
+        var maybeBook = this.GetBook(friendlyName);
+        if (maybeBook is not Book book)
+        {
+            return false;
+        }
+
+        this.BeginEditBook(book);
+        return true;
+    }
 
     public void BeginEditBook(Book book)
     {
         this.IsEditing = true;
         this.CurrentBook = book;
+        this.model.PhotoBook = book.FriendlyName; 
     }
 
     public void EndEditBook()
     {
-        this.IsEditing = false;
-        this.CurrentBook = null;
+        if (this.CurrentBook is not null )
+        {
+            if (this.model.PhotoBook == this.CurrentBook.FriendlyName)
+            {
+                if (this.Books.Count > 0)
+                {
+                    this.BeginEditBook(this.Books[0]); 
+                }
+                else
+                {
+                    this.IsEditing = false;
+                    this.CurrentBook = null;
+                    this.model.PhotoBook = string.Empty;
+                }
+            }
+        }
+        else
+        {
+            this.IsEditing = false;
+            this.model.PhotoBook = string.Empty;
+        }
     }
 
     public bool SaveCurrentBook()
