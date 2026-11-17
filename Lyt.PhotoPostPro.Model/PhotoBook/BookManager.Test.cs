@@ -2,6 +2,7 @@
 
 public sealed partial class BookManager
 {
+#if DEBUG
     public void Test()
     {
         const string VeneziaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg";
@@ -92,4 +93,6 @@ public sealed partial class BookManager
 
         book.GeneratePdf(BookResolution.Print);
     }
+
+#endif
 }

@@ -54,7 +54,7 @@ public sealed partial class Book
 
     [JsonIgnore]
     // ! Ok
-    public ILogger Logger => this.MaybeLogger!; 
+    public ILogger Logger => this.MaybeLogger!;
 
     public Page FromPageNumber(int pageNumber)
     {
@@ -119,15 +119,21 @@ public sealed partial class Book
 
     public Guid ImportImage(string booksPath, string imagePath, out string message)
     {
-        message = string.Empty; 
+        message = string.Empty;
 
-        if ( !File.Exists(imagePath))
+        if (!File.Exists(imagePath))
         {
-            message = "Workflow.Book.NotExist"; 
-            return Guid.Empty; 
+            message = "Workflow.Book.NotExist";
+            return Guid.Empty;
         }
 
-        if ( !ImageLoader.HasJpgExtension(imagePath))
+        if (!ImageLoader.HasImageSharpExtension(imagePath))
+        {
+            message = "Workflow.Book.NotSupported";
+            return Guid.Empty;
+        }
+
+        if (!ImageLoader.HasJpgExtension(imagePath))
         {
             message = "Workflow.Book.NotJpg";
             return Guid.Empty;
@@ -135,6 +141,7 @@ public sealed partial class Book
 
         try
         {
+            // Step 0 - Prepare file paths 
             var bookImage = new BookImage();
             string imageBaseFileName = bookImage.Id.ToShortString();
             string highResImageFileName = string.Concat("High_", imageBaseFileName, ".jpg");
@@ -167,11 +174,30 @@ public sealed partial class Book
 
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
 
+            void EncodeAndSave(SixLabors.ImageSharp.Image image, string targetPath, bool isHd)
+            {
+                var saveMemoryStream = new MemoryStream();
+                int quality = isHd ? ImageLoader.HdImageQuality : ImageLoader.ThumbnailQuality;
+                image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = quality });
+                byte[] jpgEncoded = saveMemoryStream.ToArray();
+                System.IO.File.WriteAllBytes(highResImageFilePath, jpgEncoded);
+            }
+
             // Step 2 - Copy original 
-            System.IO.File.Copy(imagePath, highResImageFilePath);
+            if (ImageLoader.HasJpgExtension(imagePath))
+            {
+                // Original is JPG : just copy
+                System.IO.File.Copy(imagePath, highResImageFilePath);
+            }
+            else
+            {
+                // Original is NOT JPG : Reencode and save 
+                EncodeAndSave(image, highResImageFilePath, isHd: true); 
+            }
+
             bookImage.HighResPath = highResImageFilePath;
 
-            void Clone ( string targetPath , bool isHd)
+            void Clone(string targetPath, bool isHd)
             {
                 // Create with cloning 
                 var clone = image.Clone();
@@ -183,22 +209,20 @@ public sealed partial class Book
                         Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
                     }));
 
-                var saveMemoryStream = new MemoryStream();
-                clone.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = ImageLoader.HdImageQuality });
-                byte[] jpgEncoded = saveMemoryStream.ToArray();
-                System.IO.File.WriteAllBytes(targetPath, jpgEncoded);
+                EncodeAndSave(clone, targetPath, isHd); 
             }
 
             // Step 3 - create a medium size for UI purposes  
-            int maxDimension = Math.Max(image.Height, image.Width); 
-            if ( maxDimension > 2000)
+            int maxDimension = Math.Max(image.Height, image.Width);
+            if (maxDimension > 2000)
             {
-                Clone(mediumResImageFilePath, isHd: true); 
+                Clone(mediumResImageFilePath, isHd: true);
                 bookImage.MediumResPath = mediumResImageFilePath;
             }
             else
             {
-                // already medium size 
+                // already medium size: will reuse the best high res image 
+                // no need to resize
                 bookImage.MediumResPath = highResImageFilePath;
             }
 
@@ -207,10 +231,10 @@ public sealed partial class Book
             bookImage.MediumResPath = lowResImageFilePath;
 
             // Step 5 - Now a candidate image 
-            this.ImageCandidates.Add(bookImage.Id, bookImage); 
+            this.ImageCandidates.Add(bookImage.Id, bookImage);
             return bookImage.Id;
         }
-        catch (Exception ex )
+        catch (Exception ex)
         {
             string msg = "Exception thrown when importing image. \n" + ex.ToString();
             Debug.WriteLine(msg);
@@ -223,7 +247,7 @@ public sealed partial class Book
 
     internal void IncludeImage(Guid key)
     {
-        if (this.ImageCandidates.TryGetValue(key, out BookImage? bookImage ) && bookImage is not null)
+        if (this.ImageCandidates.TryGetValue(key, out BookImage? bookImage) && bookImage is not null)
         {
             this.ImageCandidates.Remove(key);
             this.IncludedImages.TryAdd(key, bookImage);
