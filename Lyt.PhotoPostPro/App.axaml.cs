@@ -175,6 +175,7 @@ public partial class App : ApplicationBase
                 _ = services.AddSingleton<WatermarksViewModel>();
                 _ = services.AddSingleton<ExportsViewModel>();
                 _ = services.AddSingleton<LibrariesViewModel>();
+                _ = services.AddSingleton<PhotoBookViewModel>();
 
                 // Logging Services, pick one 
 #if DEBUG

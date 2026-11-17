@@ -155,6 +155,9 @@
 	<!-- Libraries -->
 	<system:String x:Key="Tools.Select.Libraries">Libraries</system:String>
 
+	<!-- Photo Books -->
+	<system:String x:Key="Tools.Select.PhotoBooks">Photo Books</system:String>
+
 	<!-- Export Formats -->
 	<system:String x:Key="Tools.Select.Exports">Exports</system:String>
 	<system:String x:Key="Tools.Editor.ResizeDimensionPrompt">Resize to specified dimension</system:String>

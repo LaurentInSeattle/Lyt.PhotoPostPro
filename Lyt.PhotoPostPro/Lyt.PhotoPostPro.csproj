@@ -139,6 +139,12 @@
     <Compile Update="Workflow\Tools\Libraries\LibrariesView.axaml.cs">
       <DependentUpon>LibrariesView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Tools\PhotoBooks\PhotoBookView.axaml.cs">
+      <DependentUpon>PhotoBookView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Tools\PhotoBooks\PhotoBookEditView.axaml.cs">
+      <DependentUpon>PhotoBookEditView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

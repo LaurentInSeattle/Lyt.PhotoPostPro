@@ -11,6 +11,7 @@ public enum ActivatedView : int
     Camera,
     Gallery,
     Import,
+    PhotoBook,
     Settings,
     Documentation,
     Tools,
@@ -27,6 +28,7 @@ public enum ActivatedView : int
     Watermarks,
     ExportFormats,
     Libraries,
+    PhotoBooks,
 
     // Secondary views (activated from ProcessView) 
     // In alphabetical order, not the workflow order, which is determined elsewhere.
@@ -48,5 +50,4 @@ public enum ActivatedView : int
     TouchUp,
     Vignette,
     WhiteBalance,
-    PhotoBook,
 }

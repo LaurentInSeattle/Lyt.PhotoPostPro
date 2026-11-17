@@ -45,8 +45,19 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
+    public Book? CreateBook( string friendlyName, string description, out string message)
+        => this.CreateBook(
+                friendlyName, 
+                description,
+                BookPage.UsLetter,
+                BookFormat.Landscape,
+                PageBackground.Black,
+                withFrontCover: true,
+                withBackCover: false,
+                out message);
+
     public Book? CreateBook(
-        string uniqueName,
+        string friendlyName,
         string description,
         BookPage bookPage,
         BookFormat format,
@@ -57,7 +68,7 @@ public sealed partial class BookManager
     {
         message = string.Empty;
 
-        var book = this.GetBook(uniqueName);
+        var book = this.GetBook(friendlyName);
         if (book is not null)
         {
             message = "Book.Create.AlreadyExist";
@@ -65,7 +76,7 @@ public sealed partial class BookManager
         }
 
         const string FallbackFolderName = "_F_a_l_l_b_a_c_k_";
-        string folderName = FileSystemExtensions.SanitizeFolderName(uniqueName, FallbackFolderName);
+        string folderName = FileSystemExtensions.SanitizeFolderName(friendlyName, FallbackFolderName);
         if (folderName == FallbackFolderName)
         {
             message = "Book.Create.UniqueName";
@@ -76,7 +87,7 @@ public sealed partial class BookManager
         {
             MaybeLogger = this.logger,
 
-            UniqueName = uniqueName,
+            FriendlyName = friendlyName,
             FolderName = folderName,
             Description = description,
             // Will be finalized on first save 
@@ -102,12 +113,24 @@ public sealed partial class BookManager
         }
     }
 
+    public bool DeleteBook(string friendlyName, out string message)
+    {
+        var maybeBook = this.GetBook(friendlyName);
+        if (maybeBook is not Book book)
+        {
+            message = "Book.Delete.NotExist";
+            return false;
+        }
+
+        return this.DeleteBook(book, out message); 
+    }
+
     public bool DeleteBook(Book book, out string message)
     {
         message = string.Empty;
         try
         {
-            var stillBook = this.GetBook(book.UniqueName);
+            var stillBook = this.GetBook(book.FriendlyName);
             if (stillBook is null)
             {
                 message = "Book.Delete.NotExist";
@@ -133,7 +156,7 @@ public sealed partial class BookManager
         }
     }
 
-    public Book? GetBook(string uniqueName) => this.Books.FirstOrDefault(b => b.UniqueName == uniqueName);
+    public Book? GetBook(string uniqueName) => this.Books.FirstOrDefault(b => b.FriendlyName == uniqueName);
 
     public void BeginEditBook(Book book)
     {

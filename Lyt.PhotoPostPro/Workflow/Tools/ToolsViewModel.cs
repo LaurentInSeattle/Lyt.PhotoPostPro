@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Tools;
 
+using Lyt.PhotoPostPro.Workflow.Tools.PhotoBooks;
 using Lyt.PhotoPostPro.Workflow.Tools.Statistics;
 
 public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toaster) : ViewModel<ToolsView>
@@ -11,6 +12,7 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
         { "Tools.Select.Watermarks", ActivatedView.Watermarks },
         { "Tools.Select.Exports", ActivatedView.ExportFormats },
         { "Tools.Select.Libraries", ActivatedView.Libraries },
+        { "Tools.Select.PhotoBooks", ActivatedView.PhotoBooks },
     };
 
     private readonly PhotoPostProModel model = model;
@@ -96,6 +98,7 @@ public sealed partial class ToolsViewModel(PhotoPostProModel model, IToaster toa
         Setup<SignaturesViewModel, SignaturesView>(ActivatedView.Signatures);
         Setup<WatermarksViewModel, WatermarksView>(ActivatedView.Watermarks);
         Setup<LibrariesViewModel, LibrariesView>(ActivatedView.Libraries);
+        Setup<PhotoBookViewModel, PhotoBookView>(ActivatedView.PhotoBooks);
 
         var animationService = App.GetRequiredService<IAnimationService>();
         this.viewSelector =

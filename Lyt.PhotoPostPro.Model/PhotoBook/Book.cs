@@ -5,17 +5,18 @@ using QuestPDF.Infrastructure;
 
 namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
-using static System.Net.Mime.MediaTypeNames;
-
 // See:  https://github.com/GraphicMeat/PhotoBooks/blob/main/README.md 
 
 using Color = QuestPDF.Infrastructure.Color;
 
-public sealed partial class Book
+public sealed partial class Book : IEditable
 {
     public Book( /* Required for serialization */ ) { }
 
-    public string UniqueName { get; set; } = string.Empty;
+    public string FriendlyName { get; set; } = string.Empty;
+
+    [JsonIgnore]
+    public bool CanDelete => true; 
 
     public DateTime Created = DateTime.UtcNow;
 
