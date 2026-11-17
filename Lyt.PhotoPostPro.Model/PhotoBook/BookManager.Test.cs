@@ -17,8 +17,7 @@ public sealed partial class BookManager
         }
 
         book = this.CreateBook(
-            "TestBook",
-            "This is a test book!",
+            "TestBook", "This is a test book!",
             BookPage.UsLetter,
             BookFormat.Landscape,
             PageBackground.Black,
@@ -31,10 +30,13 @@ public sealed partial class BookManager
             return;
         }
 
-        var venezia = book.ImportImage(this.photobooksFolderPath, VeneziaImagePath, out message);
-        var toscana = book.ImportImage(this.photobooksFolderPath, ToscanaImagePath, out message);
-        var capri = book.ImportImage(this.photobooksFolderPath, CapriImagePath, out message);
-        var verona = book.ImportImage(this.photobooksFolderPath, VeronaImagePath, out message);
+        Guid Import(string imagePath) 
+            => book.ImportImage(this.photobooksFolderPath, imagePath, string.Empty, out message);
+        
+        var venezia = Import(VeneziaImagePath);
+        var toscana = Import(ToscanaImagePath);
+        var capri = Import(CapriImagePath);
+        var verona = Import(VeronaImagePath);
 
         book.IncludeImage(venezia);
         book.IncludeImage(toscana);

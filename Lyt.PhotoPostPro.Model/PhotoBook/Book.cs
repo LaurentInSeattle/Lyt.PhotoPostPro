@@ -118,7 +118,7 @@ public sealed partial class Book : IEditable
         }
     }
 
-    public Guid ImportImage(string booksPath, string imagePath, out string message)
+    public Guid ImportImage(string booksPath, string imagePath, string thumbailPath, out string message)
     {
         message = string.Empty;
 
@@ -181,14 +181,14 @@ public sealed partial class Book : IEditable
                 int quality = isHd ? ImageLoader.HdImageQuality : ImageLoader.ThumbnailQuality;
                 image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = quality });
                 byte[] jpgEncoded = saveMemoryStream.ToArray();
-                System.IO.File.WriteAllBytes(highResImageFilePath, jpgEncoded);
+                System.IO.File.WriteAllBytes(targetPath, jpgEncoded);
             }
 
             // Step 2 - Copy original 
             if (ImageLoader.HasJpgExtension(imagePath))
             {
                 // Original is JPG : just copy
-                System.IO.File.Copy(imagePath, highResImageFilePath);
+                File.Copy(imagePath, highResImageFilePath);
             }
             else
             {
@@ -227,9 +227,18 @@ public sealed partial class Book : IEditable
                 bookImage.MediumResPath = highResImageFilePath;
             }
 
-            // Step 4 - Create thumbnail 
-            Clone(lowResImageFilePath, isHd: false);
-            bookImage.MediumResPath = lowResImageFilePath;
+            // Step 4 - Create thumbnail if needed, or just copy provided 
+            if (string.IsNullOrWhiteSpace(thumbailPath))
+            {
+                Clone(lowResImageFilePath, isHd: false);
+            } 
+            else
+            {
+                // Provided: just copy
+                File.Copy(thumbailPath, lowResImageFilePath);
+            }
+
+            bookImage.LowResPath = lowResImageFilePath;
 
             // Step 5 - Now a candidate image 
             this.ImageCandidates.Add(bookImage.Id, bookImage);

@@ -8,6 +8,8 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
     public const string ExportTag = "EXP_";
 
     private string currentDirectoryExport = string.Empty;
+    private string exportedThumbnailPath = string.Empty;
+    private string exportedImagePath = string.Empty;
 
     public override bool ShouldShowHistograms => false;
 
@@ -66,6 +68,10 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
         }
 
         PhotoPostProModel model = this.ProcessWorkflow.Model;
+
+        // Clear export paths used for photo book addition 
+        this.exportedThumbnailPath = string.Empty;
+        this.exportedImagePath = string.Empty;
 
         // Create new subdirectory for exported images
         string sourceImagePath;
@@ -312,6 +318,7 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
                 throw new Exception("No source folder for: " + metadata.FullPath);
             string thumbnailPath = ExportImage(ImageExport.ImageThumbnailAfterEdit, imageLibraryFolderPath);
             libraryManager.UpdateThumbnailCache(metadata, thumbnailPath);
+            this.exportedThumbnailPath = thumbnailPath;
 
             // Save Editing parameters and copy them to the current export folder
             // for convenience / inspection / debug / whatever
@@ -329,6 +336,12 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
             foreach (var imageExport in imageExports)
             {
                 string exportPath = ExportImage(imageExport, subDirectoryExport);
+
+                // Save the path for adding to photo book if this is the default best image
+                if (imageExport.IsGalleryFormat)
+                {
+                    this.exportedImagePath = exportPath;
+                }
 
                 // Add only once to gallery when applicable and if given five stars 
                 if (imageExport.IsGalleryFormat && isFiveStars && !hasBeenExportedToGallery)
@@ -364,5 +377,26 @@ public class ExportStep(ProcessWorkflow processWorkflow) :
 
         this.currentDirectoryExport.OpenInExplorer();
         return true;
+    }
+
+    internal bool AddToPhotoBook()
+    {
+        var bookManager = this.ProcessWorkflow.Model.BookManager;
+        if (string.IsNullOrWhiteSpace(this.exportedImagePath) || 
+            string.IsNullOrWhiteSpace(this.exportedThumbnailPath)||
+            bookManager.CurrentBook is null)
+        {
+            return false;
+        }
+
+        if( bookManager.ImportImage(this.exportedImagePath, this.exportedThumbnailPath))
+        {
+            // Clear export paths used for addition so that the images are not added twice or more
+            this.exportedThumbnailPath = string.Empty;
+            this.exportedImagePath = string.Empty;
+            return true; 
+        }
+
+        return false;
     }
 }

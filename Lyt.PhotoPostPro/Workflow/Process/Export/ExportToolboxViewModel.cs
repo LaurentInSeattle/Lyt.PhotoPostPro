@@ -26,6 +26,9 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public partial bool IsNavigateButtonDisabled { get; set; }
 
     [ObservableProperty]
+    public partial bool IsAddToPhotoBookButtonDisabled { get; set; }
+
+    [ObservableProperty]
     public partial SpinViewModel SpinViewModel { get; set; }
 
     public override void Activate(object? activationParameters)
@@ -34,6 +37,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
 
         this.hasExported = false;
         this.IsNavigateButtonDisabled = true;
+        this.IsAddToPhotoBookButtonDisabled = true; 
         With.Flag(ref this.isInitializing, () =>
         {
             var metadata = this.model.Workflow.Metadata;
@@ -81,6 +85,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
                     this.IsExporting = false;
                     this.hasExported = true;
                     this.IsNavigateButtonDisabled = false;
+                    this.IsAddToPhotoBookButtonDisabled = this.model.BookManager.CurrentBook is null; 
                 });
             }
         });
@@ -88,6 +93,17 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
 
     [RelayCommand]
     public void OnNavigate() => this.model.NavigateToExport();
+
+    [RelayCommand]
+    public void OnAddToPhotoBook()
+    {
+        if ( this.model.BookManager.CurrentBook is null)
+        {
+            return; 
+        }
+
+        this.model.AddToPhotoBook();
+    }
 
     [RelayCommand]
     public void OnFinish()

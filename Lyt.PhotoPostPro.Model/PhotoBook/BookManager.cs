@@ -183,7 +183,9 @@ public sealed partial class BookManager
     {
         this.IsEditing = true;
         this.CurrentBook = book;
-        this.model.PhotoBook = book.FriendlyName; 
+        this.model.PhotoBook = book.FriendlyName;
+        this.model.Save();
+        new BookListChangedMessage().Publish(); 
     }
 
     public void EndEditBook()
@@ -209,6 +211,9 @@ public sealed partial class BookManager
             this.IsEditing = false;
             this.model.PhotoBook = string.Empty;
         }
+
+        this.model.Save();
+        new BookListChangedMessage().Publish();
     }
 
     public bool SaveCurrentBook()
@@ -298,6 +303,21 @@ public sealed partial class BookManager
             return false;
         }
     }
+
+    public bool ImportImage(string exportedImagePath, string exportedThumbnailPath)
+    {
+        if ( this.CurrentBook is null)
+        {
+            return false; 
+        }
+
+        Guid guid = this.CurrentBook.ImportImage(
+            photobooksFolderPath,
+            exportedImagePath, exportedThumbnailPath, 
+            out string message);
+        return guid != Guid.Empty; 
+    }
+
 
     #region Page Management
 

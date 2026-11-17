@@ -602,4 +602,15 @@ public sealed partial class PhotoPostProModel : ModelBase
             return false;
         });
 
+    public void AddToPhotoBook() =>
+        this.ApiAction(() =>
+        {
+            if (this.Workflow.CurrentStep is ExportStep exportStep)
+            {
+                _ = exportStep.AddToPhotoBook();
+                return true;
+            }
+
+            return false;
+        });
 }
