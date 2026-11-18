@@ -10,10 +10,7 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Documentation"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
 
 	Background="Transparent"
 	>
@@ -25,11 +22,34 @@
 			Background="#A0000040"
 			>					
 		</Canvas>
-		<Canvas 
+		<ItemsControl 
 			IsVisible="{Binding !IsDummy}"
-			Width="792" Height="612"
-			Background="Black"
-			>					
-		</Canvas>
+			ItemsSource="{Binding Slots}">
+			<!-- Set the Canvas as the container panel -->
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Canvas 
+						x:Name="PageCanvas"
+						Width="792" Height="612"
+						Background="Black"
+						/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+
+			<!-- Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper -->
+			<ItemsControl.Styles>
+				<Style Selector="ItemsControl > ContentPresenter" x:DataType="vm:SlotViewModel">
+					<Setter Property="Canvas.Left" Value="{Binding SlotX}" />
+					<Setter Property="Canvas.Top" Value="{Binding SlotY}" />
+				</Style>
+			</ItemsControl.Styles>
+
+			<!-- Define how each item looks -->
+			<ItemsControl.ItemTemplate>
+				<DataTemplate x:DataType="vm:SlotViewModel">
+					<vm:SlotView />
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 </UserControl>

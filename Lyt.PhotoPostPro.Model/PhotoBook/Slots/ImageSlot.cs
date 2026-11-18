@@ -12,14 +12,14 @@ public sealed class ImageSlot : Slot
 
     public float AspectRatio => (float)this.ImageWidth / (float)this.ImageHeight;
 
-    public byte[]? Image(Book book, BookResolution bookResolution)
+    public string ImagePath(Book book, BookResolution bookResolution)
     {
         try
         {
             if (!book.IncludedImages.TryGetValue(this.BookImageId, out BookImage? bookImage) &&
                 bookImage is null)
             {
-                return null;
+                return string.Empty;
             }
 
             string imageFileName = bookResolution switch
@@ -33,17 +33,33 @@ public sealed class ImageSlot : Slot
             {
                 // Skip this slot if the image file is not known yet 
                 Debug.WriteLine($"No image file for slot: {this.Id}");
-                return null;
+                return string.Empty;
             }
 
             if (!File.Exists(imageFileName))
             {
                 // Skip this slot if the image file does not exist
                 Debug.WriteLine($"Image file not found: {imageFileName}");
-                return null;
+                return string.Empty;
             }
 
+            return imageFileName;
+        }
+        catch (Exception ex)
+        {
+            string msg = "Exception thrown when loading image. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            book.Logger.Error(msg);
+            return string.Empty;
+        }
+    }
+
+    public byte[]? Image(Book book, BookResolution bookResolution)
+    {
+        try
+        {
             // Need to crop the source image to match the page aspect ratio
+            string imageFileName = this.ImagePath(book, bookResolution);
             byte[] imageBytes = File.ReadAllBytes(imageFileName);
             return imageBytes; 
         }
