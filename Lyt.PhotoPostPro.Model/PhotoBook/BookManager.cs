@@ -310,7 +310,7 @@ public sealed partial class BookManager
         }
     }
 
-    public bool ImportImage(string exportedImagePath, string exportedThumbnailPath)
+    public bool ImportImage(string exportedImagePath, string exportedThumbnailPath = "")
     {
         if ( this.CurrentBook is null)
         {
@@ -321,7 +321,14 @@ public sealed partial class BookManager
             photobooksFolderPath,
             exportedImagePath, exportedThumbnailPath, 
             out string message);
-        return guid != Guid.Empty; 
+        if ( guid == Guid.Empty)
+        {
+            Debug.WriteLine(message);
+            this.logger.Error("Failed to import image: " + message);
+            return false; 
+        }
+
+        return this.SaveCurrentBook(); 
     }
 
 

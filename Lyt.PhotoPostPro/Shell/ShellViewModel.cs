@@ -123,10 +123,10 @@ public sealed partial class ShellViewModel
         this.Logger.Debug("OnViewLoaded complete");
 
 #if DEBUG
-        Schedule.OnUiThread(
-            1500, 
-            () => { this.model.BookManager.Test(); },
-            DispatcherPriority.ApplicationIdle);
+        //Schedule.OnUiThread(
+        //    1500, 
+        //    () => { this.model.BookManager.Test(); },
+        //    DispatcherPriority.ApplicationIdle);
 #endif
     }
 
