@@ -26,6 +26,9 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public partial bool IsNavigateButtonDisabled { get; set; }
 
     [ObservableProperty]
+    public partial string AddToPhotoBookButtonText { get; set; }
+
+    [ObservableProperty]
     public partial bool IsAddToPhotoBookButtonDisabled { get; set; }
 
     [ObservableProperty]
@@ -85,7 +88,18 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
                     this.IsExporting = false;
                     this.hasExported = true;
                     this.IsNavigateButtonDisabled = false;
-                    this.IsAddToPhotoBookButtonDisabled = this.model.BookManager.CurrentBook is null; 
+                    var photobook = this.model.BookManager.CurrentBook; 
+                    if ( photobook is null)
+                    {
+                        this.IsAddToPhotoBookButtonDisabled = true;
+                        this.AddToPhotoBookButtonText = string.Empty;
+                    }
+                    else
+                    {
+                        this.IsAddToPhotoBookButtonDisabled = false;
+                        this.AddToPhotoBookButtonText =
+                            this.Localize("Workflow.Export.AddToPhotoBook") + ": '" + photobook.FriendlyName +"'"; 
+                    }
                 });
             }
         });

@@ -110,7 +110,13 @@ public sealed partial class PhotoBookEditViewModel :
             return false;
         }
 
-        string friendlyName = this.FriendlyName.Trim(); 
+        string friendlyName = this.FriendlyName.Trim();
+        if (friendlyName.Length < 2)
+        {
+            this.ValidationMessage = this.Localize("Tools.Editor.Validation.FriendlyNameTooShort");
+            return false;
+        }
+
         string description = this.Description.Trim(); 
         if (this.model.BookManager.CreateBook(friendlyName, description, out string message) is null)
         {

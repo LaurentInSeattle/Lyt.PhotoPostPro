@@ -84,7 +84,7 @@
 			Style="{StaticResource ControlIconButton}"
 			Layout="IconTextLeftSide"
 			GlyphSource="add_circle"
-			Text="{DynamicResource Workflow.Export.AddToPhotoBook}"
+			Text="{Binding AddToPhotoBookButtonText}"
 			Command="{Binding OnAddToPhotoBook}"
 			IsDisabled="{Binding IsAddToPhotoBookButtonDisabled}"
 			Width="380" Height="44"

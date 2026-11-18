@@ -80,8 +80,14 @@ public sealed partial class BookManager
             return null;
         }
 
+        if (friendlyName.Length < 2)
+        {
+            message = "Book.Create.UniqueName";
+            return null;
+        }
+
         const string FallbackFolderName = "_F_a_l_l_b_a_c_k_";
-        string folderName = FileSystemExtensions.SanitizeFolderName(friendlyName, FallbackFolderName);
+        string folderName = FileSystemExtensions.SanitizeFolderName(friendlyName, FallbackFolderName, minLength:2);
         if (folderName == FallbackFolderName)
         {
             message = "Book.Create.UniqueName";
