@@ -26,7 +26,7 @@ public sealed partial class ExportToolboxViewModel : ToolboxViewModel<ExportTool
     public partial bool IsNavigateButtonDisabled { get; set; }
 
     [ObservableProperty]
-    public partial string AddToPhotoBookButtonText { get; set; }
+    public partial string AddToPhotoBookButtonText { get; set; } = string.Empty; 
 
     [ObservableProperty]
     public partial bool IsAddToPhotoBookButtonDisabled { get; set; }
