@@ -14,7 +14,7 @@
 	<Border
 		x:Name="outerBorder"
 		Height="{Binding BorderHeight}" 
-		Background="Transparent"
+		Background="#60000000"
 		BorderBrush="{StaticResource LightAqua_1_100}"
 		BorderThickness="1"
 		CornerRadius="4"

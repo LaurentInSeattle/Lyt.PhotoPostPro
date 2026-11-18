@@ -6,9 +6,7 @@ public partial class LibraryThumbnailView : View
 {
     private static readonly SolidColorBrush insideBrush;
     private static readonly SolidColorBrush pressedBrush;
-    private static readonly SolidColorBrush selectedBrush;
 
-    private bool isSelected;
     private bool isInside;
     private bool isPressed;
 
@@ -16,10 +14,6 @@ public partial class LibraryThumbnailView : View
     {
         insideBrush = FindResource<SolidColorBrush>("OrangePeel_0_100");
         pressedBrush = FindResource<SolidColorBrush>("OrangePeel_1_100");
-
-        // FOR NOW 
-        selectedBrush = new SolidColorBrush(Colors.Transparent);
-            // FindResource<SolidColorBrush>("FreshGreen_0_080");
     }
 
     public LibraryThumbnailView() : base () 
@@ -44,7 +38,6 @@ public partial class LibraryThumbnailView : View
     {
         this.isPressed = false;
         this.isInside = false;
-        this.isSelected = true;
         this.SetVisualState();
     }
 
@@ -52,7 +45,6 @@ public partial class LibraryThumbnailView : View
     {
         this.isPressed = false;
         this.isInside = false;
-        this.isSelected = false;
         this.SetVisualState();
     }
 
@@ -102,8 +94,7 @@ public partial class LibraryThumbnailView : View
         {
             if (wasInside && this.DataContext is LibraryThumbnailViewModel thumbnailViewModel)
             {
-                this.isInside = false;
-                this.isSelected = true;
+                //this.isInside = false;
                 this.SetVisualState();
                 thumbnailViewModel.OnSelect();
             }
@@ -112,14 +103,8 @@ public partial class LibraryThumbnailView : View
 
     private void SetVisualState()
     {
-        bool visible = this.isInside || this.isSelected;
+        bool visible = this.isInside;
         this.outerBorder.BorderThickness = new Thickness(visible ? 1.0 : 0.0);
-        this.outerBorder.BorderBrush =
-            this.isPressed ?
-                pressedBrush :
-                this.isSelected ? selectedBrush : insideBrush;
-        this.outerBorder.Background =
-            this.isSelected ? new SolidColorBrush(0x80_000000) : Brushes.Transparent;
+        this.outerBorder.BorderBrush = this.isPressed ? pressedBrush : insideBrush;
     }
-
 }
