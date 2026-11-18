@@ -47,6 +47,7 @@
 				<RowDefinition Height="180" /> <!-- Doc Preview --> 
 				<RowDefinition Height="90" /> <!-- Nav --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
+				<RowDefinition Height="32" /> <!-- Pips --> 
 				<RowDefinition Height="120" /> <!-- Templates --> 
 			</Grid.RowDefinitions>
 			<Rectangle
@@ -61,48 +62,40 @@
 				/>
 			<Rectangle
 				Fill="#8080A060"
-				Grid.Row="3"
+				Grid.Row="4"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>
 			<Viewbox
 				Grid.Row="2"
 				>
-				<!-- 
-				// TODO : Bind these numbers 
-				PageSize Letter (612, 792);  
-					Width="1584" Height="612"
-				PageSize A4 (595f, 842f);
-					Width="1684" Height="595"
-				-->
-				<Grid
-					Width="1596" Height="620"
-					>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="4" /> 
-						<RowDefinition Height="612" /> 
-						<RowDefinition Height="4" /> 
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="4" />
-						<ColumnDefinition Width="792" /> 
-						<ColumnDefinition Width="4" />
-						<ColumnDefinition Width="792" /> 
-						<ColumnDefinition Width="4" />
-					</Grid.ColumnDefinitions>
-					<Canvas 
-						Grid.Row="1" Grid.Column="1"
-						Width="792" Height="612"
-						Background="#80A0B040"
-						>					
-					</Canvas>
-					<Canvas 
-						Grid.Row="1" Grid.Column="3"
-						Width="792" Height="612"
-						Background="#80A0B040"
-						>					
-					</Canvas>
-				</Grid>
+				<Carousel 
+					Name="DoublePagesCarousel"
+					ItemsSource="{Binding DoublePages}"
+					SelectedIndex="{Binding DoublePagesIndex}">
+					
+					<Carousel.PageTransition>
+						<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
+					</Carousel.PageTransition>
+					<Carousel.ItemTemplate>
+						<DataTemplate>
+							<vm:BookDoublePageView Margin="0" />
+						</DataTemplate>
+					</Carousel.ItemTemplate>
+				</Carousel>		
 			</Viewbox>
+			<LayoutTransformControl
+				Grid.Row="3"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				>
+				<LayoutTransformControl.LayoutTransform>
+					<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
+				</LayoutTransformControl.LayoutTransform>
+				<PipsPager 
+					NumberOfPages="{Binding DoublePages.Count}"
+					SelectedPageIndex="{Binding #DoublePagesCarousel.SelectedIndex, Mode=TwoWay}"
+					Foreground="{StaticResource LightAqua_0_120}"
+				   />
+			</LayoutTransformControl>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -21,4 +21,21 @@ public partial class BookViewModel :
     [ObservableProperty]
     public partial BookManageViewModel BookManageViewModel { get; set; }
 
+    public override void Activate(object? activationParameters)
+    {
+        base.Activate(activationParameters);
+
+        this.BookEditViewModel.Activate(activationParameters);
+
+        // Subscribe to book updates 
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+        this.BookEditViewModel.Deactivate();
+
+        // UNsubscribe to book updates 
+    }
+
 }
