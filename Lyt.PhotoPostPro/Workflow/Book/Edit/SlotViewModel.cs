@@ -57,6 +57,9 @@ public partial class SlotViewModel : ViewModel<SlotView>
     [ObservableProperty]
     public partial Bitmap? SlotImage { get; set; }
 
+    [ObservableProperty]
+    public partial Stretch ImageStretch { get; set; }
+
     public SlotViewModel(PhotoPostProModel model, Pages.Page page, Slots.Slot slot)
     {
         this.model = model;
@@ -128,7 +131,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
 
     public void SetImage()
     {
-        if (!this.IsImageSlot)
+        if (this.imageSlot is null)
         {
             return;
         }
@@ -138,8 +141,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
             this.SlotImage.Dispose();
         }
 
-        // ! Verified by IsImageSlot
-        string imagePath = this.imageSlot!.ImagePath(this.Book, BookResolution.Display);
+        string imagePath = this.imageSlot.ImagePath(this.Book, BookResolution.Display);
         if (string.IsNullOrWhiteSpace(imagePath))
         {
             this.SlotImage = null;
@@ -148,6 +150,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
         {
             var bitmap = new Bitmap(imagePath);
             this.SlotImage = bitmap;
+            this.ImageStretch = StretchFromImageSlot(this.imageSlot);
         }
     }
 
@@ -178,4 +181,12 @@ public partial class SlotViewModel : ViewModel<SlotView>
 
         return (fontStyle, fontWeight);
     }
+
+    public static global::Avalonia.Media.Stretch StretchFromImageSlot (Slots.ImageSlot slot)
+        => slot.ImageStretch switch
+        {
+            BookImageStretch.Stretch=> Stretch.Fill,
+            _ => Stretch.Uniform,
+        };
+
 }

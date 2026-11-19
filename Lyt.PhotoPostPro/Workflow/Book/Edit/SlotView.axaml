@@ -9,12 +9,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Documentation"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
-
 	Background="Transparent"
 	>
 	<Border
@@ -23,13 +17,13 @@
 		Canvas.Top="{Binding SlotY}"
 		Canvas.Left="{Binding SlotX}"
 		BorderThickness="0"
-		BorderBrush="#404FDF8F"		
 		>
 		<Grid>
 			<Image
 				IsVisible="{Binding IsImageSlot}"
 				Source="{Binding SlotImage}"
 				VerticalAlignment="Top" HorizontalAlignment="Stretch"
+				Stretch="{Binding ImageStretch}"
 				>			
 			</Image>
 			<TextBlock

@@ -44,8 +44,8 @@
 			Grid.Column="2" Grid.Row="1"
 			>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="180" /> <!-- Doc Preview --> 
-				<RowDefinition Height="90" /> <!-- Nav --> 
+				<RowDefinition Height="128" /> <!-- Doc Preview --> 
+				<RowDefinition Height="64" /> <!-- Nav --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
 				<RowDefinition Height="32" /> <!-- Pips --> 
 				<RowDefinition Height="120" /> <!-- Templates --> 

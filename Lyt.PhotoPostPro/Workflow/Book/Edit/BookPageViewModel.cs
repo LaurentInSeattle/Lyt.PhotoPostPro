@@ -12,10 +12,16 @@ public partial class BookPageViewModel : ViewModel<BookPageView>
     private readonly Pages.Page? page;
 
     [ObservableProperty]
+    public partial double PageWidth { get; set; }
+
+    [ObservableProperty]
+    public partial double PageHeight { get; set; }
+
+    [ObservableProperty]
     public partial bool IsDummy { get; set; }
 
     [ObservableProperty]
-    public partial SolidColorBrush GridLinesStrokeBrush { get; set; } = new(Colors.Transparent);
+    public partial bool AreVisibleGridLines { get; set; } = true;
 
     [ObservableProperty]
     public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
@@ -25,12 +31,21 @@ public partial class BookPageViewModel : ViewModel<BookPageView>
         this.model = model;
         this.page = page;
         this.IsDummy = page is null;
+        if ( this.IsDummy)
+        {
+            return; 
+        }
+
+        // ! We do have a book 
+        var size = this.model.BookManager.CurrentBook!.PageSize; 
+        this.PageWidth = size.Width;
+        this.PageHeight = size.Height; 
+
         this.ShowGridLines(show: true);
         this.CreateSlots();
     }
 
-    public void ShowGridLines(bool show)
-        => this.GridLinesStrokeBrush = show ? new(Colors.DarkGray) : new(Colors.Transparent);
+    public void ShowGridLines(bool show) => this.AreVisibleGridLines = !this.IsDummy && show;
 
     public void CreateSlots()
     {

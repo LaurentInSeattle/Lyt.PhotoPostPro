@@ -19,38 +19,43 @@
 		>
 		<Canvas 
 			IsVisible="{Binding IsDummy}"
-			Width="780" Height="600"
-			Background="#FF000040"
+			Width="640" Height="480"
+			Background="#A0000040"
 			VerticalAlignment="Center" HorizontalAlignment="Center"
 			>					
+		</Canvas>
+		<Canvas  
+			Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
+			IsVisible="{Binding AreVisibleGridLines}"
+			>
+			<Canvas.Background
+				>
+				<VisualBrush 
+					TileMode="Tile"
+					SourceRect="0,0,50,50"
+					DestinationRect="0,0,50,50"
+					>
+					<VisualBrush.Visual>
+						<Path 
+							Data="M 50 0 L 0 0 0 50"
+							Stroke="DarkGray"
+							StrokeThickness="1.5"
+							StrokeDashArray="2,4"
+							Opacity="0.4"
+							/>
+					</VisualBrush.Visual>
+				</VisualBrush>
+			</Canvas.Background>					
 		</Canvas>
 		<ItemsControl 
 			IsVisible="{Binding !IsDummy}"
 			ItemsSource="{Binding Slots}">
-			<!-- Set the Canvas as the container panel 
-			Stroke="{Binding $parent[UserControl].((vm:BookPageViewModel)DataContext).GridLinesStrokeBrush}"
-			-->
+			<!-- Set the Canvas as the container panel -->
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<Canvas  Width="792" Height="612" >
-						<Canvas.Background
-							>
-							<VisualBrush 
-								TileMode="Tile"
-								SourceRect="0,0,50,50"
-								DestinationRect="0,0,50,50"
-								>
-								<VisualBrush.Visual>
-									<Path 
-										Data="M 50 0 L 0 0 0 50"
-										Stroke="DarkGray"
-										StrokeThickness="1.5"
-										StrokeDashArray="2,4"
-										Opacity="0.4"
-										/>
-								</VisualBrush.Visual>
-							</VisualBrush>
-						</Canvas.Background>					
+					<Canvas 
+						Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
+						>
 					</Canvas>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
