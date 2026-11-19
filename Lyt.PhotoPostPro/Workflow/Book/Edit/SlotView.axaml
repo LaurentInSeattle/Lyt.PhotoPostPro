@@ -22,21 +22,33 @@
 		Height="{Binding SlotHeight}"
 		Canvas.Top="{Binding SlotY}"
 		Canvas.Left="{Binding SlotX}"
-		BorderThickness="3"
-		BorderBrush="#804FDF8F"		
+		BorderThickness="0"
+		BorderBrush="#404FDF8F"		
 		>
 		<Grid>
 			<Image
 				IsVisible="{Binding IsImageSlot}"
 				Source="{Binding SlotImage}"
+				VerticalAlignment="Top" HorizontalAlignment="Stretch"
 				>			
 			</Image>
 			<TextBlock
 				IsVisible="{Binding !IsImageSlot}"
 				Text="{Binding SlotText}"
+				FontFamily="{Binding SlotFontFamily}"
+				FontSize="{Binding SlotFontSize}"
+				FontStyle="{Binding SlotFontStyle}"
+				Foreground="{Binding SlotForegroundColor}"
+				TextAlignment="{Binding SlotTextAlignment}"
 				>			
 			</TextBlock>
+			<Rectangle
+				Fill="Transparent"
+				Stroke="{StaticResource LightAqua_0_080}"
+				StrokeThickness="2"
+				StrokeDashArray="1.5, 3"
+				IsHitTestVisible="False"
+				/>
 		</Grid>
 	</Border>
-
 </UserControl>

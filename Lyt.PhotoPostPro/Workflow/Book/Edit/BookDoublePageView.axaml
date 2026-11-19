@@ -30,11 +30,11 @@
 				Width="1684" Height="595"
 			-->
 			<Grid
-				Width="1592" Height="612"
+				Width="1608" Height="612"
 				>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="792" /> 
-					<ColumnDefinition Width="8" />
+					<ColumnDefinition Width="24" />
 					<ColumnDefinition Width="792" /> 
 				</Grid.ColumnDefinitions>
 				<vm:BookPageView

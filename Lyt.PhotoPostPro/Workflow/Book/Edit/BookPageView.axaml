@@ -12,27 +12,46 @@
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 
-	Background="Transparent"
 	>
 	<Grid
+		x:Name="MainGrid"
+		Background="Black"
 		>
 		<Canvas 
 			IsVisible="{Binding IsDummy}"
-			Width="792" Height="612"
-			Background="#A0000040"
+			Width="780" Height="600"
+			Background="#FF000040"
+			VerticalAlignment="Center" HorizontalAlignment="Center"
 			>					
 		</Canvas>
 		<ItemsControl 
 			IsVisible="{Binding !IsDummy}"
 			ItemsSource="{Binding Slots}">
-			<!-- Set the Canvas as the container panel -->
+			<!-- Set the Canvas as the container panel 
+			Stroke="{Binding $parent[UserControl].((vm:BookPageViewModel)DataContext).GridLinesStrokeBrush}"
+			-->
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<Canvas 
-						x:Name="PageCanvas"
-						Width="792" Height="612"
-						Background="Black"
-						/>
+					<Canvas  Width="792" Height="612" >
+						<Canvas.Background
+							>
+							<VisualBrush 
+								TileMode="Tile"
+								SourceRect="0,0,50,50"
+								DestinationRect="0,0,50,50"
+								>
+								<VisualBrush.Visual>
+									<Path 
+										Data="M 50 0 L 0 0 0 50"
+										Stroke="DarkGray"
+										StrokeThickness="1.5"
+										StrokeDashArray="2,4"
+										Opacity="0.4"
+										/>
+								</VisualBrush.Visual>
+							</VisualBrush>
+						</Canvas.Background>					
+					</Canvas>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 

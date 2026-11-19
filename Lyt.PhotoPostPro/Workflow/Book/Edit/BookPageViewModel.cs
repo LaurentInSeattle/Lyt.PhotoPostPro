@@ -15,15 +15,22 @@ public partial class BookPageViewModel : ViewModel<BookPageView>
     public partial bool IsDummy { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<SlotViewModel> Slots { get; set; } = []; 
+    public partial SolidColorBrush GridLinesStrokeBrush { get; set; } = new(Colors.Transparent);
+
+    [ObservableProperty]
+    public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
 
     public BookPageViewModel(PhotoPostProModel model, Pages.Page? page)
     {
         this.model = model;
         this.page = page;
         this.IsDummy = page is null;
+        this.ShowGridLines(show: true);
         this.CreateSlots();
     }
+
+    public void ShowGridLines(bool show)
+        => this.GridLinesStrokeBrush = show ? new(Colors.DarkGray) : new(Colors.Transparent);
 
     public void CreateSlots()
     {
