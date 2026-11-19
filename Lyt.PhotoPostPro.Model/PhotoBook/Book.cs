@@ -46,7 +46,7 @@ public sealed partial class Book : IEditable
 
     public Dictionary<Guid, BookImage> ImageCandidates { get; set; } = [];
 
-    public Dictionary<Guid, BookImage> IncludedImages { get; set; } = [];
+    public HashSet<Guid> IncludedImages { get; set; } = [];
 
     public List<SlotTextStyle> TextStyles { get; set; } = [];
 
@@ -259,8 +259,7 @@ public sealed partial class Book : IEditable
     {
         if (this.ImageCandidates.TryGetValue(key, out BookImage? bookImage) && bookImage is not null)
         {
-            this.ImageCandidates.Remove(key);
-            this.IncludedImages.TryAdd(key, bookImage);
+            this.IncludedImages.Add(key);
         }
     }
 

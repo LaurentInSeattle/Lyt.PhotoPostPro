@@ -124,7 +124,7 @@ public sealed partial class ShellViewModel
 
 #if DEBUG
         //Schedule.OnUiThread(
-        //    1500, 
+        //    1500,
         //    () => { this.model.BookManager.Test(); },
         //    DispatcherPriority.ApplicationIdle);
 #endif

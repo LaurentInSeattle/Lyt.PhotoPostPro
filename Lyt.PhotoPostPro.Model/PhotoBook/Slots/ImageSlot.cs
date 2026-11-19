@@ -16,7 +16,12 @@ public sealed class ImageSlot : Slot
     {
         try
         {
-            if (!book.IncludedImages.TryGetValue(this.BookImageId, out BookImage? bookImage) &&
+            if (!book.IncludedImages.Contains(this.BookImageId))
+            {
+                return string.Empty;
+            }
+
+            if (!book.ImageCandidates.TryGetValue(this.BookImageId, out BookImage? bookImage) &&
                 bookImage is null)
             {
                 return string.Empty;
@@ -61,9 +66,9 @@ public sealed class ImageSlot : Slot
             // Need to crop the source image to match the page aspect ratio
             string imageFileName = this.ImagePath(book, bookResolution);
             byte[] imageBytes = File.ReadAllBytes(imageFileName);
-            return imageBytes; 
+            return imageBytes;
         }
-        catch  (Exception ex)
+        catch (Exception ex)
         {
             string msg = "Exception thrown when loading image. \n" + ex.ToString();
             Debug.WriteLine(msg);

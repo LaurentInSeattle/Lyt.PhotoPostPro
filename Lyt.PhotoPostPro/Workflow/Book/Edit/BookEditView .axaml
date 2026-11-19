@@ -32,14 +32,50 @@
 			<ColumnDefinition Width="4" />
 		</Grid.ColumnDefinitions>
 
-		<Rectangle
-			Fill="Teal"
-			Grid.Column="1" Grid.Row="1"
+		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
+		<Image
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.RowSpan="999"
+			Stretch="UniformToFill"
+			Source="\Assets\Images\sky.jpg"
+			Opacity="0.7"
 			/>
+
+		<!-- Film Strip --> 
+		<ListBox
+			x:Name="StripListBox"
+			Grid.Row="1" Grid.Column="1"
+			ItemsSource="{Binding ImageThumbnails}"
+			SelectedIndex="{Binding SelectedThumbnailIndex}"
+			SelectedItems="{Binding SelectedThumbnails, Mode=TwoWay}"
+			SelectionMode="Single"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			> 
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<VirtualizingStackPanel 
+						Background="Transparent"
+						Orientation="Vertical" 
+						/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Image 
+						Margin="4 0 24 0"
+						Source="{Binding Bitmap}" 
+						Width="190" MaxHeight="150"
+						/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<!-- Tools Hidden for now  --> 
 		<Rectangle
 			Fill="Teal"
 			Grid.Column="3" Grid.Row="1"
 			/>
+
+
 		<Grid
 			Grid.Column="2" Grid.Row="1"
 			>

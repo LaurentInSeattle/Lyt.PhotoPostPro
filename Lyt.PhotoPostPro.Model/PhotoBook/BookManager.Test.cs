@@ -94,6 +94,8 @@ public sealed partial class BookManager
         this.SaveBook(book);
 
         book.GeneratePdf(BookResolution.Print);
+
+        if (Debugger.IsAttached) { Debugger.Break(); }
     }
 
 #endif

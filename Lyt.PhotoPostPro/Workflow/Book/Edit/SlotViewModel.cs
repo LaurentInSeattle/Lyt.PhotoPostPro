@@ -9,7 +9,7 @@ using Slots = Model.PhotoBook.Slots;
 public partial class SlotViewModel : ViewModel<SlotView>
 // , IRecipient<DocPageNavigateMessage>
 {
-    public static FontFamily DefaultFontFamily = new("Arial"); 
+    public static FontFamily DefaultFontFamily = new("Arial");
 
     private readonly PhotoPostProModel model;
 
@@ -37,7 +37,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
     public partial string SlotText { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial FontFamily SlotFontFamily { get; set; } = DefaultFontFamily; 
+    public partial FontFamily SlotFontFamily { get; set; } = DefaultFontFamily;
 
     [ObservableProperty]
     public partial double SlotFontSize { get; set; }
@@ -110,13 +110,12 @@ public partial class SlotViewModel : ViewModel<SlotView>
 
     public void SetText()
     {
-        if (this.IsImageSlot)
+        if (this.textSlot is null)
         {
             return;
         }
 
-        // ! Verified by IsImageSlot
-        this.SlotText = this.textSlot!.Text;
+        this.SlotText = this.textSlot.Text;
 
         // Styling the text slot 
         var style = this.textSlot.Style;
@@ -126,7 +125,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
         var fontStyles = FromTextStyleFontStyle(style);
         this.SlotFontStyle = fontStyles.Item1;
         this.SlotFontWeight = fontStyles.Item2;
-        this.SlotTextAlignment = FromTextStyleTextAlignment(style); 
+        this.SlotTextAlignment = FromTextStyleTextAlignment(style);
     }
 
     public void SetImage()
@@ -182,10 +181,10 @@ public partial class SlotViewModel : ViewModel<SlotView>
         return (fontStyle, fontWeight);
     }
 
-    public static global::Avalonia.Media.Stretch StretchFromImageSlot (Slots.ImageSlot slot)
+    public static global::Avalonia.Media.Stretch StretchFromImageSlot(Slots.ImageSlot slot)
         => slot.ImageStretch switch
         {
-            BookImageStretch.Stretch=> Stretch.Fill,
+            BookImageStretch.Stretch => Stretch.Fill,
             _ => Stretch.Uniform,
         };
 
