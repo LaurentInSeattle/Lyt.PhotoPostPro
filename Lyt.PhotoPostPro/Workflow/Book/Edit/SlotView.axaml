@@ -37,6 +37,7 @@
 				>			
 			</TextBlock>
 			<Rectangle
+				IsVisible="{Binding IsSlotBorderVisible}"
 				Fill="Transparent"
 				Stroke="{StaticResource LightAqua_0_080}"
 				StrokeThickness="2"

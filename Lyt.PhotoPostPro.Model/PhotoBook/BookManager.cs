@@ -285,6 +285,7 @@ public sealed partial class BookManager
                     var maybeBook = fileManager.Deserialize<Book>(serialized, AppJsonContext.Default.Book);
                     if (maybeBook is Book book)
                     {
+                        book.MaybeLogger = this.logger; 
                         this.Books.Add(book);
                     }
                 }

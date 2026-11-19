@@ -1,5 +1,7 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
+using Lyt.PhotoPostPro.Workflow.Book.Messages;
+
 using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
@@ -12,6 +14,21 @@ public partial class BookEditViewModel :
 
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
+
+    [ObservableProperty]
+    public partial bool IsSingleImageMode { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool ShowGridLines { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool DoublePageMode { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<BookPageViewModel> SinglePages { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SinglePagesIndex { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<BookDoublePageViewModel> DoublePages { get; set; } = [];
@@ -41,7 +58,8 @@ public partial class BookEditViewModel :
     {
         base.Activate(activationParameters);
 
-        this.LoadDoublePages();
+        this.LoadPages();
+        // this.LoadSinglePages();
         this.LoadThumbnails();
 
         // We are potentially about to launch heavy stuff, so clean up while we still can
@@ -57,8 +75,71 @@ public partial class BookEditViewModel :
 
         // Cleanup 
         this.DoublePages.Clear();
+        this.SinglePages.Clear();
 
         // UNsubscribe to book updates 
+    }
+
+    partial void OnShowGridLinesChanged(bool value)
+        => new BookGridLinesMessage(value).Publish(); 
+
+    partial void OnIsSingleImageModeChanged(bool value) => this.LoadPages(); 
+
+    private void LoadPages ()
+    {
+        if ( this.IsSingleImageMode)
+        {
+            this.LoadSinglePages();
+        }
+        else
+        {
+            this.LoadDoublePages();
+        }
+
+        new BookGridLinesMessage(this.ShowGridLines).Publish();
+    }
+
+    private void LoadSinglePages()
+    {
+        var book = this.model.BookManager.CurrentBook;
+        if (book is null)
+        {
+            return;
+        }
+
+        this.DoublePageMode = false;
+        this.DoublePages.Clear();
+        this.SinglePages.Clear();
+        if (book.WithFrontCover)
+        {
+            // ! We have a front cover 
+            var frontCoverFront = new BookPageViewModel(this.model, book.FrontCover!.FrontPage);
+            this.SinglePages.Add(frontCoverFront);
+
+            // ! We have a front cover 
+            var frontCoverBack = new BookPageViewModel(this.model, book.FrontCover!.BackPage);
+            this.SinglePages.Add(frontCoverBack);
+        }
+
+        for (int pageIndex = 0; pageIndex < book.Pages.Count ; ++pageIndex )
+        {
+            var page = new BookPageViewModel(this.model, book.Pages[pageIndex]);
+            this.SinglePages.Add(page);
+        }
+
+        if (book.WithBackCover)
+        {
+            // ! We have a back cover 
+            var backCoverFront = new BookPageViewModel(this.model, book.BackCover!.FrontPage);
+            this.SinglePages.Add(backCoverFront);
+
+            // ! We have a back cover 
+            var backCoverBack = new BookPageViewModel(this.model, book.BackCover!.BackPage);
+            this.SinglePages.Add(backCoverBack);
+        }
+
+        this.SinglePagesIndex = -1;
+        this.SinglePagesIndex = 0;
     }
 
     private void LoadDoublePages()
@@ -69,7 +150,9 @@ public partial class BookEditViewModel :
             return;
         }
 
+        this.DoublePageMode = true;
         this.DoublePages.Clear();
+        this.SinglePages.Clear();
         if (book.WithFrontCover)
         {
             // ! We have a front cover 

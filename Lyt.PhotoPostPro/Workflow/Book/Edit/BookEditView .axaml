@@ -10,10 +10,8 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Documentation"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
+	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
 	>
@@ -75,40 +73,63 @@
 			Grid.Column="3" Grid.Row="1"
 			/>
 
-
+		<!-- Center Area  --> 
 		<Grid
 			Grid.Column="2" Grid.Row="1"
 			>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="128" /> <!-- Doc Preview --> 
-				<RowDefinition Height="64" /> <!-- Nav --> 
+				<RowDefinition Height="0" /> <!-- Doc Preview --> 
+				<RowDefinition Height="64" /> <!-- Toolbar --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
 				<RowDefinition Height="32" /> <!-- Pips --> 
 				<RowDefinition Height="120" /> <!-- Templates --> 
 			</Grid.RowDefinitions>
 			<Rectangle
-				Fill="#80000060"
+				Fill="#80000020"
 				Grid.Row="0"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>
-			<Rectangle
-				Fill="#80800060"
+			
+			<!-- Toolbar  --> 
+			<Grid
 				Grid.Row="1"
-				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-				/>
-			<Rectangle
-				Fill="#8080A060"
-				Grid.Row="4"
-				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-				/>
+				Background="#40000020"
+				>
+				<StackPanel
+					Orientation="Horizontal"
+					>					
+					<toggle:ToggleSwitch
+						x:Name="ModeSwitch"
+						Margin="8 0 8 0"
+						Style="{StaticResource StandardToggleSwitch}"
+						TrueText="{DynamicResource Workflow.Camera.Thumbs.OldestFirst}"
+						FalseText="{DynamicResource Workflow.Camera.Thumbs.RecentOnTop}"
+						Height="30" Width="340"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Value="{Binding IsSingleImageMode}"
+						/>
+					<toggle:ToggleSwitch
+						x:Name="ShowGridLinesSwitch"
+						Margin="8 0 8 0"
+						Style="{StaticResource StandardToggleSwitch}"
+						TrueText="{DynamicResource Workflow.Library.Thumbs.ShowAll}"
+						FalseText="{DynamicResource Workflow.Library.Thumbs.ShowStarred}"
+						Height="30" Width="340"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Value="{Binding ShowGridLines}"
+						/>
+				</StackPanel>
+			</Grid>
+
 			<Viewbox
 				Grid.Row="2"
+				IsVisible="{Binding DoublePageMode}"
 				>
 				<Carousel 
 					Name="DoublePagesCarousel"
 					ItemsSource="{Binding DoublePages}"
-					SelectedIndex="{Binding DoublePagesIndex}">
-					
+					SelectedIndex="{Binding DoublePagesIndex}"
+					>
 					<Carousel.PageTransition>
 						<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
 					</Carousel.PageTransition>
@@ -121,6 +142,7 @@
 			</Viewbox>
 			<LayoutTransformControl
 				Grid.Row="3"
+				IsVisible="{Binding DoublePageMode}"
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				>
 				<LayoutTransformControl.LayoutTransform>
@@ -132,6 +154,45 @@
 					Foreground="{StaticResource LightAqua_0_120}"
 				   />
 			</LayoutTransformControl>
+			<Viewbox
+				Grid.Row="2"
+				IsVisible="{Binding !DoublePageMode}"
+				>
+				<Carousel 
+					Name="SinglePagesCarousel"
+					ItemsSource="{Binding SinglePages}"
+					SelectedIndex="{Binding SinglePagesIndex}"
+					>					
+					<Carousel.PageTransition>
+						<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
+					</Carousel.PageTransition>
+					<Carousel.ItemTemplate>
+						<DataTemplate>
+							<vm:BookPageView Margin="0" />
+						</DataTemplate>
+					</Carousel.ItemTemplate>
+				</Carousel>		
+			</Viewbox>
+			<LayoutTransformControl
+				Grid.Row="3"
+				IsVisible="{Binding !DoublePageMode}"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				>
+				<LayoutTransformControl.LayoutTransform>
+					<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
+				</LayoutTransformControl.LayoutTransform>
+				<PipsPager 
+					NumberOfPages="{Binding SinglePages.Count}"
+					SelectedPageIndex="{Binding #SinglePagesCarousel.SelectedIndex, Mode=TwoWay}"
+					Foreground="{StaticResource LightAqua_0_120}"
+				   />
+			</LayoutTransformControl>
+
+			<Rectangle
+				Fill="#8080A060"
+				Grid.Row="4"
+				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+				/>
 		</Grid>
 	</Grid>
 </UserControl>

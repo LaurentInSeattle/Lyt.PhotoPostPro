@@ -17,6 +17,9 @@ public partial class SlotViewModel : ViewModel<SlotView>
     private readonly Slots.Slot slot;
     private readonly Slots.ImageSlot? imageSlot;
     private readonly Slots.TextSlot? textSlot;
+    
+    [ObservableProperty]
+    public partial bool IsSlotBorderVisible { get; set; }
 
     [ObservableProperty]
     public partial bool IsImageSlot { get; set; }
@@ -86,6 +89,7 @@ public partial class SlotViewModel : ViewModel<SlotView>
         }
 
         this.SetPosition();
+        // this.IsSlotBorderVisible = false; 
     }
 
     public Books.Book Book

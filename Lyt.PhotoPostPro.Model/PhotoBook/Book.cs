@@ -265,6 +265,8 @@ public sealed partial class Book : IEditable
 
     public void GeneratePdf(BookResolution bookResolution)
     {
+        var start = DateTime.Now; 
+
         Color pageBackgroundColor =
             this.DefaultPageBackground switch
             {
@@ -401,5 +403,11 @@ public sealed partial class Book : IEditable
                 });
             }
         }).GeneratePdf(this.OutputPdfFileName);
+
+        var done = DateTime.Now;
+        var delta = done - start;
+        string msg = " Document created: " + delta.TotalMilliseconds.ToString("F1") + " ms";
+        Debug.WriteLine(msg);
+        this.Logger.Info(msg); 
     }
 }

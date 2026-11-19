@@ -1,11 +1,14 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
+using Lyt.PhotoPostPro.Workflow.Book.Messages;
+
 using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
-public partial class BookPageViewModel : ViewModel<BookPageView>
-// , IRecipient<DocPageNavigateMessage>
+public partial class BookPageViewModel : 
+    ViewModel<BookPageView>, 
+    IRecipient<BookGridLinesMessage>
 {
     private readonly PhotoPostProModel model;
 
@@ -39,11 +42,14 @@ public partial class BookPageViewModel : ViewModel<BookPageView>
         // ! We do have a book 
         var size = this.model.BookManager.CurrentBook!.PageSize; 
         this.PageWidth = size.Width;
-        this.PageHeight = size.Height; 
+        this.PageHeight = size.Height;
 
-        this.ShowGridLines(show: true);
+        this.Subscribe<BookGridLinesMessage>(); 
+        this.ShowGridLines(show: false);
         this.CreateSlots();
     }
+
+    public void Receive(BookGridLinesMessage message) => this.ShowGridLines(message.ShowGridLines); 
 
     public void ShowGridLines(bool show) => this.AreVisibleGridLines = !this.IsDummy && show;
 
