@@ -376,7 +376,7 @@ public sealed partial class BookManager
         var page = new Page(this.CurrentBook);
 
         // Insert in collection 
-        if (pageNumber == pages.Count-1)
+        if (pageNumber == pages.Count)
         {
             pages.Add(page);
         }

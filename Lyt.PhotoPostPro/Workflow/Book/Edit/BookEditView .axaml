@@ -24,7 +24,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="4" />
-			<ColumnDefinition Width="232" /> <!-- Film Strip --> 
+			<ColumnDefinition Width="228" /> <!-- Film Strip --> 
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="0" /> <!-- Tools --> 
 			<ColumnDefinition Width="4" />
@@ -60,7 +60,7 @@
 					<Image 
 						Margin="4 0 24 0"
 						Source="{Binding Bitmap}" 
-						Width="190" MaxHeight="150"
+						Width="200" MaxHeight="180"
 						/>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
