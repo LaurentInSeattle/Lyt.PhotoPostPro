@@ -1,10 +1,10 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PhotoBook.Pages;
 
-public sealed class Page : PageBase
+public sealed class Page
 {
-    public Page() : base() { }
+    public Page() { }
 
-    public Page(Book book, int pageNumber) : base(pageNumber)
+    public Page(Book book)
     {
         this.PageBackground = book.DefaultPageBackground;
     }
@@ -13,18 +13,3 @@ public sealed class Page : PageBase
 
     public List<Slot> Slots { get; set; } = [];
 }
-
-public class PageBase
-{
-    public PageBase() { } 
-
-    public PageBase(int pageNumber)
-    {
-        this.PageNumber = pageNumber;
-    }
-
-    public int PageNumber { get; set; }
-
-    public bool IsFrontPage => this.PageNumber % 2 == 0;
-}
-

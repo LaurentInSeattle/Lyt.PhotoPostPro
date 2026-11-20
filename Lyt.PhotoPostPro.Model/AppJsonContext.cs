@@ -34,7 +34,6 @@
 [JsonSerializable(typeof(Book))]
 [JsonSerializable(typeof(Leaf))]
 [JsonSerializable(typeof(Page))]
-[JsonSerializable(typeof(PageBase))]
 [JsonSerializable(typeof(TextSlot))]
 [JsonSerializable(typeof(ImageSlot))]
 [JsonSerializable(typeof(Slot))]

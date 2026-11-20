@@ -50,6 +50,8 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
+    #region Entire Book Management
+
     public Book? CreateBook(string friendlyName, string description, out string message)
         => this.CreateBook(
                 friendlyName,
@@ -87,7 +89,7 @@ public sealed partial class BookManager
         }
 
         const string FallbackFolderName = "_F_a_l_l_b_a_c_k_";
-        string folderName = FileSystemExtensions.SanitizeFolderName(friendlyName, FallbackFolderName, minLength:2);
+        string folderName = FileSystemExtensions.SanitizeFolderName(friendlyName, FallbackFolderName, minLength: 2);
         if (folderName == FallbackFolderName)
         {
             message = "Book.Create.UniqueName";
@@ -157,7 +159,7 @@ public sealed partial class BookManager
                 Directory.Delete(photobookFolderPath, recursive: true);
             }
 
-            this.EndEditBook(); 
+            this.EndEditBook();
             this.Books.Remove(book);
             new BookListChangedMessage().Publish();
             return true;
@@ -191,18 +193,18 @@ public sealed partial class BookManager
         this.CurrentBook = book;
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
-        new BookListChangedMessage().Publish(); 
+        new BookListChangedMessage().Publish();
     }
 
     public void EndEditBook()
     {
-        if (this.CurrentBook is not null )
+        if (this.CurrentBook is not null)
         {
             if (this.model.PhotoBook == this.CurrentBook.FriendlyName)
             {
                 if (this.Books.Count > 0)
                 {
-                    this.BeginEditBook(this.Books[0]); 
+                    this.BeginEditBook(this.Books[0]);
                 }
                 else
                 {
@@ -285,7 +287,7 @@ public sealed partial class BookManager
                     var maybeBook = fileManager.Deserialize<Book>(serialized, AppJsonContext.Default.Book);
                     if (maybeBook is Book book)
                     {
-                        book.MaybeLogger = this.logger; 
+                        book.MaybeLogger = this.logger;
                         this.Books.Add(book);
                     }
                 }
@@ -311,77 +313,140 @@ public sealed partial class BookManager
         }
     }
 
+    #endregion Entire Book Management
+
+    #region Image Management
+
     public bool ImportImage(string exportedImagePath, string exportedThumbnailPath = "")
     {
-        if ( this.CurrentBook is null)
+        if (this.CurrentBook is null)
         {
-            return false; 
+            return false;
         }
 
         Guid guid = this.CurrentBook.ImportImage(
             photobooksFolderPath,
-            exportedImagePath, exportedThumbnailPath, 
+            exportedImagePath, exportedThumbnailPath,
             out string message);
-        if ( guid == Guid.Empty)
+        if (guid == Guid.Empty)
         {
             Debug.WriteLine(message);
             this.logger.Error("Failed to import image: " + message);
-            return false; 
+            return false;
         }
 
-        return this.SaveCurrentBook(); 
+        return this.SaveCurrentBook();
     }
 
+    #endregion Image Management
 
     #region Page Management
 
-    // Insert a single page at the provided page number in the current book, shifting existing pages
-    // and leaves forward.
-    // Leaves are always two pages, so if the page number is odd, the new page will be inserted as the
-    // front page of a new leaf, and the existing page will become the back page of that leaf.
-    // If the page number is even, the new page will be inserted as the back page of a new leaf,
-    // and the existing page will become the front page of that leaf.
-    public void InsertPage(int pageNumber)
+    // Insert a single page at the provided page number in the current book, shifting existing pages and leaves forward.
+    public bool InsertPage(int pageNumber, out string message)
     {
+        message = string.Empty;
         if (this.CurrentBook == null)
         {
             throw new InvalidOperationException("No current book to add a leaf to.");
         }
 
-        //var newLeaf = new Leaf(new Page(this.Current, pageNumber), new Page(this.Current, pageNumber + 1));
-        //this.Current.Leaves.Add(newLeaf);
+        if ((pageNumber <= 1) && this.CurrentBook.WithFrontCover)
+        {
+            message = "Workflow.Book.Edit.CantChangeCover"; 
+            return false;
+        }
+
+        var pages = this.CurrentBook.Pages;
+        if ((pageNumber > pages.Count - 2) && this.CurrentBook.WithBackCover)
+        {
+            message = "Workflow.Book.Edit.CantChangeCover";
+            return false;
+        }
+
+        // If we have a front cover, page number needs to be ajusted 
+        // because we pass in the page number in the PDF preview
+        if (this.CurrentBook.WithFrontCover)
+        {
+            pageNumber -= 2; 
+        }
+
+        // Create a page 
+        var page = new Page(this.CurrentBook);
+
+        // Insert in collection 
+        if (pageNumber == pages.Count-1)
+        {
+            pages.Add(page);
+        }
+        else
+        {
+            pages.Insert(pageNumber, page);
+        }
+
+        // Save and Post message 
+        this.SaveCurrentBook(); 
+        new BookPagesChangedMessage().Publish();
+        return true;
     }
 
-    public void RemovePage(int pageNumber)
+    public bool RemovePage(int pageNumber, out string message)
     {
+        message = string.Empty;
         if (this.CurrentBook == null)
         {
             throw new InvalidOperationException("No current book to remove a leaf from.");
         }
-        //// Find the leaf that contains the page number
-        //var leafToRemove = this.Current.Leaves.FirstOrDefault(leaf =>
-        //    leaf.FrontPage.PageNumber == pageNumber || leaf.BackPage.PageNumber == pageNumber);
-        //if (leafToRemove != null)
-        //{
-        //    this.Current.Leaves.Remove(leafToRemove);
-        //}
-    }
 
-    public void MovePage(int fromPageNumber, int toPageNumber)
-    {
+        message = string.Empty;
         if (this.CurrentBook == null)
         {
-            throw new InvalidOperationException("No current book to move a leaf in.");
+            throw new InvalidOperationException("No current book to add a leaf to.");
         }
-        //// Find the leaf that contains the fromPageNumber
-        //var leafToMove = this.Current.Leaves.FirstOrDefault(leaf =>
-        //    leaf.FrontPage.PageNumber == fromPageNumber || leaf.BackPage.PageNumber == fromPageNumber);
-        //if (leafToMove != null)
-        //{
-        //    this.Current.Leaves.Remove(leafToMove);
-        //    this.Current.Leaves.Insert(toPageNumber / 2, leafToMove);
-        //}
+
+        if ((pageNumber <= 1) && this.CurrentBook.WithFrontCover)
+        {
+            message = "Workflow.Book.Edit.CantChangeCover";
+            return false;
+        }
+
+        var pages = this.CurrentBook.Pages;
+        if ((pageNumber > pages.Count - 2) && this.CurrentBook.WithBackCover)
+        {
+            message = "Workflow.Book.Edit.CantChangeCover";
+            return false;
+        }
+
+        // If we have a front cover, page number needs to be ajusted 
+        // because we pass in the page number in the PDF preview
+        if (this.CurrentBook.WithFrontCover)
+        {
+            pageNumber -= 2;
+        }
+
+        pages.RemoveAt(pageNumber);
+
+        // Save and Post message 
+        this.SaveCurrentBook();
+        new BookPagesChangedMessage().Publish();
+        return true;
     }
+
+    //public void MovePage(int fromPageNumber, int toPageNumber)
+    //{
+    //    if (this.CurrentBook == null)
+    //    {
+    //        throw new InvalidOperationException("No current book to move a leaf in.");
+    //    }
+    //    //// Find the leaf that contains the fromPageNumber
+    //    //var leafToMove = this.Current.Leaves.FirstOrDefault(leaf =>
+    //    //    leaf.FrontPage.PageNumber == fromPageNumber || leaf.BackPage.PageNumber == fromPageNumber);
+    //    //if (leafToMove != null)
+    //    //{
+    //    //    this.Current.Leaves.Remove(leafToMove);
+    //    //    this.Current.Leaves.Insert(toPageNumber / 2, leafToMove);
+    //    //}
+    //}
 
     #endregion Page Management
 

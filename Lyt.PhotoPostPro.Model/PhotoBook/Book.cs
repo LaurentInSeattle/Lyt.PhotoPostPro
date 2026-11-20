@@ -18,7 +18,7 @@ public sealed partial class Book : IEditable
     public string FriendlyName { get; set; } = string.Empty;
 
     [JsonIgnore]
-    public bool CanDelete => true; 
+    public bool CanDelete => true;
 
     public DateTime Created = DateTime.UtcNow;
 
@@ -72,7 +72,19 @@ public sealed partial class Book : IEditable
     }
 
     public Page? MaybeFromPageNumber(int pageNumber)
-        => this.Pages.FirstOrDefault(p => p.PageNumber == pageNumber);
+    {
+        if (this.Pages is null || this.Pages.Count == 0)
+        {
+            return null;
+        }
+
+        if ((pageNumber < 0) || (pageNumber >= this.Pages.Count))
+        {
+            return null;
+        }
+
+        return this.Pages[pageNumber];
+    }
 
     public PageSize PageSizeBase =>
         this.BookPage switch
@@ -101,21 +113,21 @@ public sealed partial class Book : IEditable
             this.FrontCover =
                 new FrontCover()
                 {
-                    FrontPage = new Page(this, 0),
-                    BackPage = new Page(this, 1)
+                    FrontPage = new Page(this),
+                    BackPage = new Page(this)
                 };
         }
 
-        this.Pages.Add(new Page(this, 1));
-        this.Pages.Add(new Page(this, 2));
+        this.Pages.Add(new Page(this));
+        this.Pages.Add(new Page(this));
 
         if (this.WithBackCover)
         {
             this.BackCover =
                 new BackCover()
                 {
-                    FrontPage = new Page(this, 0),
-                    BackPage = new Page(this, 1)
+                    FrontPage = new Page(this),
+                    BackPage = new Page(this)
                 };
         }
     }
@@ -195,7 +207,7 @@ public sealed partial class Book : IEditable
             else
             {
                 // Original is NOT JPG : Reencode and save 
-                EncodeAndSave(image, highResImageFilePath, isHd: true); 
+                EncodeAndSave(image, highResImageFilePath, isHd: true);
             }
 
             bookImage.HighResPath = highResImageFilePath;
@@ -212,7 +224,7 @@ public sealed partial class Book : IEditable
                         Sampler = KnownResamplers.Lanczos3 // High quality downsampling filter
                     }));
 
-                EncodeAndSave(clone, targetPath, isHd); 
+                EncodeAndSave(clone, targetPath, isHd);
             }
 
             // Step 3 - create a medium size for UI purposes  
@@ -233,7 +245,7 @@ public sealed partial class Book : IEditable
             if (string.IsNullOrWhiteSpace(thumbailPath))
             {
                 Clone(lowResImageFilePath, isHd: false);
-            } 
+            }
             else
             {
                 // Provided: just copy
@@ -267,7 +279,7 @@ public sealed partial class Book : IEditable
 
     public string GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)
     {
-        var start = DateTime.Now; 
+        var start = DateTime.Now;
 
         Color pageBackgroundColor =
             this.DefaultPageBackground switch
@@ -406,7 +418,7 @@ public sealed partial class Book : IEditable
             }
         });
 
-        string toReturn; 
+        string toReturn;
         switch (bookResolution)
         {
             default:
@@ -429,7 +441,7 @@ public sealed partial class Book : IEditable
                 }
 
                 toReturn = string.Empty;
-                break; 
+                break;
         }
 
         DateTime done = DateTime.Now;
@@ -438,6 +450,6 @@ public sealed partial class Book : IEditable
         Debug.WriteLine(msg);
         this.Logger.Info(msg);
 
-        return toReturn; 
+        return toReturn;
     }
 }

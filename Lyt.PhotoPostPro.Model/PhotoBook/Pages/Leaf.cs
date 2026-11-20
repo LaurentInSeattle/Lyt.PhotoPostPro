@@ -19,7 +19,7 @@ public sealed class FrontCover : Leaf
 {
     public FrontCover() { } 
 
-    public FrontCover(Book book) : base(new Page(book, 0), new Page(book, 1))
+    public FrontCover(Book book) : base(new Page(book), new Page(book))
     {
     }
 }
@@ -28,7 +28,7 @@ public sealed class BackCover : Leaf
 {
     public BackCover() : base() { }
 
-    public BackCover(Book book) : base(new Page(book, 0), new Page(book, 1))
+    public BackCover(Book book) : base(new Page(book), new Page(book))
     {
     }
 }

@@ -44,7 +44,6 @@
 			Grid.Row="1" Grid.Column="1"
 			ItemsSource="{Binding ImageThumbnails}"
 			SelectedIndex="{Binding SelectedThumbnailIndex}"
-			SelectedItems="{Binding SelectedThumbnails, Mode=TwoWay}"
 			SelectionMode="Single"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			> 
@@ -94,7 +93,6 @@
 					x:Name="PdfPreviewListBox"
 					ItemsSource="{Binding PdfThumbnails}"
 					SelectedIndex="{Binding SelectedPdfThumbnailIndex}"
-					SelectedItems="{Binding SelectedPdfThumbnails, Mode=TwoWay}"
 					SelectionMode="Single"
 					ScrollViewer.VerticalScrollBarVisibility="Disabled"
 					ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -132,9 +130,9 @@
 						x:Name="ModeSwitch"
 						Margin="8 0 8 0"
 						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="Single"
-						FalseText="Dual"
-						Height="30" Width="180"
+						TrueText="1"
+						FalseText="2"
+						Height="30" Width="140"
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding IsSingleImageMode}"
 						/>
@@ -144,13 +142,45 @@
 						Style="{StaticResource StandardToggleSwitch}"
 						TrueText="Grid"
 						FalseText="Hide"
-						Height="30" Width="180"
+						Height="30" Width="160"
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding ShowGridLines}"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="add_circle"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnAddPageBefore}"
+						Width="64" Height="36" 
+						Margin="10 0 0 0"
+						ToolTip.Tip="Add Page BEFORE current"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="delete"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnDeletePage}"
+						CommandParameter="Check"
+						Width="64" Height="36" 
+						Margin="20 0 0 0"
+						ToolTip.Tip="Delete current page"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="add_circle"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnAddPageAfter}"
+						Width="64" Height="36" 
+						Margin="10 0 0 0"
+						ToolTip.Tip="Add Page AFTER current"
 						/>
 				</StackPanel>
 			</Grid>
 
+			<!-- Pages --> 
 			<Viewbox
 				Grid.Row="2"
 				IsVisible="{Binding DoublePageMode}"

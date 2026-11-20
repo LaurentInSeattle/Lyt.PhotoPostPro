@@ -7,8 +7,8 @@ using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
 public partial class BookEditViewModel :
-    ViewModel<BookEditView> // ,
-                            //IRecipient<>
+    ViewModel<BookEditView>,
+    IRecipient<BookPagesChangedMessage>
 {
     public sealed record class UiThumbnail(string Key, Bitmap Bitmap);
 
@@ -18,7 +18,7 @@ public partial class BookEditViewModel :
     private readonly IToaster toaster;
 
     [ObservableProperty]
-    public partial bool IsSingleImageMode { get; set; } = true;
+    public partial bool IsSingleImageMode { get; set; } = false;
 
     [ObservableProperty]
     public partial bool ShowGridLines { get; set; } = true;
@@ -43,20 +43,12 @@ public partial class BookEditViewModel :
     public partial ObservableCollection<UiThumbnail> ImageThumbnails { get; set; } = [];
 
     [ObservableProperty]
-    // the Selected Thumbnails in the film strip 
-    public partial ObservableCollection<UiThumbnail> SelectedThumbnails { get; set; } = [];
-
-    [ObservableProperty]
     // SelectedIndex in the film strip 
     public partial int SelectedThumbnailIndex { get; set; }
 
     [ObservableProperty]
     // The collection of PDF images at the top
     public partial ObservableCollection<PdfThumbnail> PdfThumbnails { get; set; } = [];
-
-    [ObservableProperty]
-    // the Selected PDF image at the top
-    public partial ObservableCollection<PdfThumbnail> SelectedPdfThumbnails { get; set; } = [];
 
     [ObservableProperty]
     // SelectedIndex of the selected PDF Image
@@ -72,15 +64,14 @@ public partial class BookEditViewModel :
     {
         base.Activate(activationParameters);
 
-        this.LoadPages();
-        this.LoadThumbnails();
-        this.LoadPdfThumbnails(); 
+        this.LoadBook();
 
         // We are potentially about to launch heavy stuff, so clean up while we still can
         // We have about at least one second for Drag and drop to happen 
         this.Dispatcher.OnIdle(() => GC.Collect());
 
         // Subscribe to book updates 
+        this.Subscribe<BookPagesChangedMessage>(); 
     }
 
     public override void Deactivate()
@@ -90,25 +81,57 @@ public partial class BookEditViewModel :
         // Cleanup 
         this.DoublePages.Clear();
         this.SinglePages.Clear();
-        this.PdfThumbnails.Clear(); 
+        this.PdfThumbnails.Clear();
 
         // UNsubscribe to book updates 
+        this.Unregister<BookPagesChangedMessage>();
     }
 
     partial void OnShowGridLinesChanged(bool value)
-        => new BookGridLinesMessage(value).Publish(); 
+        => new BookGridLinesMessage(value).Publish();
 
-    partial void OnIsSingleImageModeChanged(bool value) => this.LoadPages(); 
+    partial void OnIsSingleImageModeChanged(bool value) => this.LoadPages();
 
-    private void LoadPages ()
+    partial void OnSelectedPdfThumbnailIndexChanged(int value)
     {
-        if ( this.IsSingleImageMode)
+        if (this.IsSingleImageMode)
         {
-            this.LoadSinglePages();
+            this.SinglePagesIndex = value;
         }
         else
         {
+            this.DoublePagesIndex = (1 + value) / 2;
+        }
+    }
+
+    private void LoadBook ()
+    {
+        this.IsSingleImageMode = false;
+
+        this.LoadPages();
+        this.LoadThumbnails();
+        this.LoadPdfThumbnails();
+
+        // Enforce property changed 
+        this.SelectedPdfThumbnailIndex = -1;
+        this.SelectedPdfThumbnailIndex = 0;
+    }
+
+    private void LoadPages()
+    {
+        if (this.IsSingleImageMode)
+        {
+            // was in dual mode 
+            int index = this.DoublePagesIndex; 
+            this.LoadSinglePages();
+            this.SinglePagesIndex = 2 * index - 1; 
+        }
+        else
+        {
+            // was in single mode 
+            int index = this.SinglePagesIndex;
             this.LoadDoublePages();
+            this.DoublePagesIndex = (1 + index) / 2;
         }
 
         new BookGridLinesMessage(this.ShowGridLines).Publish();
@@ -136,7 +159,7 @@ public partial class BookEditViewModel :
             this.SinglePages.Add(frontCoverBack);
         }
 
-        for (int pageIndex = 0; pageIndex < book.Pages.Count ; ++pageIndex )
+        for (int pageIndex = 0; pageIndex < book.Pages.Count; ++pageIndex)
         {
             var page = new BookPageViewModel(this.model, book.Pages[pageIndex]);
             this.SinglePages.Add(page);
@@ -224,7 +247,7 @@ public partial class BookEditViewModel :
         this.DoublePagesIndex = 0;
     }
 
-    private void LoadThumbnails ()
+    private void LoadThumbnails()
     {
         // Book should cache the thumbnails 
 
@@ -232,7 +255,7 @@ public partial class BookEditViewModel :
         Books.Book book = this.model.BookManager.CurrentBook!;
         var images = book.ImageCandidates.Values.ToList();
 
-        var list = new List<UiThumbnail>(images.Count); 
+        var list = new List<UiThumbnail>(images.Count);
         Parallel.For(0, images.Count, index =>
         {
             string file = images[index].LowResPath;
@@ -242,7 +265,7 @@ public partial class BookEditViewModel :
                 lock (list)
                 {
                     list.Add(new UiThumbnail(file, bitmap));
-                } 
+                }
             }
         });
 
@@ -257,17 +280,43 @@ public partial class BookEditViewModel :
         float bookHeight = book.PageHeight;
         const int desiredHeight = 112;
         float ratio = bookHeight / desiredHeight;
-        int width = (int)MathF.Round(bookWidth / ratio); 
+        int width = (int)MathF.Round(bookWidth / ratio);
         using MemoryStream stream = new(4 * 1024 * 1024);
         book.GeneratePdf(BookResolution.Thumbnails, stream);
         stream.Seek(0, SeekOrigin.Begin);
         List<Bitmap> pdfBitmaps = PdfLoader.LoadThumnailImages(stream, width, desiredHeight);
-        List<PdfThumbnail> pdfThumbnails = new (pdfBitmaps.Count);
-        for (int page= 0; page < pdfBitmaps.Count; ++page)
+        List<PdfThumbnail> pdfThumbnails = new(pdfBitmaps.Count);
+        for (int page = 0; page < pdfBitmaps.Count; ++page)
         {
-            pdfThumbnails.Add(new PdfThumbnail(page, pdfBitmaps[page], width, desiredHeight)); 
+            pdfThumbnails.Add(new PdfThumbnail(page, pdfBitmaps[page], width, desiredHeight));
         }
 
-        this.PdfThumbnails = new(pdfThumbnails); 
+        this.PdfThumbnails = new(pdfThumbnails);
     }
+
+    [RelayCommand]
+    public void OnAddPageBefore()
+    {
+        var bookMgr = this.model.BookManager;
+        bookMgr.InsertPage(this.SelectedPdfThumbnailIndex, out string message); 
+    }
+
+    [RelayCommand]
+    public void OnAddPageAfter()
+    {
+        var bookMgr = this.model.BookManager;
+        bookMgr.InsertPage(1+this.SelectedPdfThumbnailIndex, out string message);
+    }
+
+    [RelayCommand]
+    public void OnDeletePage()
+    {
+        var bookMgr = this.model.BookManager;
+        bookMgr.RemovePage(this.SelectedPdfThumbnailIndex, out string message);
+    }
+
+    public void Receive(BookPagesChangedMessage message)
+    {
+        this.LoadBook(); 
+    } 
 }

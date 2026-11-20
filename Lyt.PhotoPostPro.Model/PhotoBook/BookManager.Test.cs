@@ -9,8 +9,8 @@ public sealed partial class BookManager
         {
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg", 
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg",
-            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg",
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Verona.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg",
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\PiazzaDiSpagna.jpg",
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\StelvioPass.jpg",
             "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Como.jpg",
@@ -67,7 +67,8 @@ public sealed partial class BookManager
                 Style = titleStyle,
             });
 
-        var page1 = book.FromPageNumber(1);
+        // Book Initialize creates covers and two pages 
+        var page1 = book.FromPageNumber(0);
         page1.Slots.Add(
             new ImageSlot()
             {
@@ -96,7 +97,7 @@ public sealed partial class BookManager
                 Text = "Ponte Pietra a Verona",
             });
 
-        var page2 = book.FromPageNumber(2);
+        var page2 = book.FromPageNumber(1);
         SingleImageLayoutWithLegend.Create(book, page2, guids[3], "Giardini di Augusto - Isola di Capri");
 
         this.SaveBook(book);
