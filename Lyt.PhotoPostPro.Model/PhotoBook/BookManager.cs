@@ -17,10 +17,11 @@ public sealed partial class BookManager
     public const string PhotoBookJSonFileName = "Photobook.json";
     public const string PhotoBookPdfFileName = "Photobook.pdf";
 
+    public readonly string PhotobooksFolderPath = string.Empty;
+
     private readonly PhotoPostProModel model;
     private readonly FileManagerModel fileManager;
     private readonly ILogger logger;
-    private readonly string photobooksFolderPath = string.Empty;
 
     public BookManager(PhotoPostProModel model, FileManagerModel fileManager, ILogger logger)
     {
@@ -30,10 +31,10 @@ public sealed partial class BookManager
 
         // Setup the photobook folder path based on the Pictures folder and the application name.
         string pictures = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-        this.photobooksFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, PhotoBooksFolderName);
-        if (!Directory.Exists(this.photobooksFolderPath))
+        this.PhotobooksFolderPath = Path.Combine(pictures, PhotoPostProModel.PhotoPostProAppName, PhotoBooksFolderName);
+        if (!Directory.Exists(this.PhotobooksFolderPath))
         {
-            Directory.CreateDirectory(this.photobooksFolderPath);
+            Directory.CreateDirectory(this.PhotobooksFolderPath);
         }
 
         this.LoadBooks();
@@ -152,7 +153,7 @@ public sealed partial class BookManager
                 return false;
             }
 
-            string photobookFolderPath = Path.Combine(this.photobooksFolderPath, book.FolderName);
+            string photobookFolderPath = Path.Combine(this.PhotobooksFolderPath, book.FolderName);
             if (Directory.Exists(photobookFolderPath))
             {
                 // Consider moving stuff to Recycle bin
@@ -238,7 +239,7 @@ public sealed partial class BookManager
     {
         try
         {
-            string photobookFolderPath = Path.Combine(this.photobooksFolderPath, book.FolderName);
+            string photobookFolderPath = Path.Combine(this.PhotobooksFolderPath, book.FolderName);
             if (!Directory.Exists(photobookFolderPath))
             {
                 Directory.CreateDirectory(photobookFolderPath);
@@ -266,7 +267,7 @@ public sealed partial class BookManager
     {
         try
         {
-            List<string> directories = FileSystemExtensions.EnumerateDirectories(this.photobooksFolderPath);
+            List<string> directories = FileSystemExtensions.EnumerateDirectories(this.PhotobooksFolderPath);
             if (directories.Count == 0)
             {
                 Debug.WriteLine("No books yet.");
@@ -325,7 +326,7 @@ public sealed partial class BookManager
         }
 
         Guid guid = this.CurrentBook.ImportImage(
-            photobooksFolderPath,
+            PhotobooksFolderPath,
             exportedImagePath, exportedThumbnailPath,
             out string message);
         if (guid == Guid.Empty)

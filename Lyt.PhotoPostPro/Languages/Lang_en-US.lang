@@ -109,8 +109,9 @@
 	<system:String x:Key="Space.Key.Library">Library</system:String>
 	<system:String x:Key="Space.Key.Gallery">Gallery</system:String>
 	<system:String x:Key="Space.Key.Exports">Exports</system:String>
+	<system:String x:Key="Space.Key.PhotoBooks">Photo Books</system:String>
 	<system:String x:Key="Space.Key.Luts">Look up Colour Tables</system:String>
-
+	
 	<!-- Used in multiple Editor VM's-->
 	<system:String x:Key="Tools.Editor.Validation.FriendlyNameRequired">A unique name is required.</system:String>
 	<system:String x:Key="Tools.Editor.Validation.FriendlyNameTooShort">The unique name is too short.</system:String>

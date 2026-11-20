@@ -8,6 +8,7 @@ public static partial class ImageLoader
     public const string GalleryLocalizationKey = "Space.Key.Gallery";
     public const string ExportsLocalizationKey = "Space.Key.Exports";
     public const string LutsLocalizationKey = "Space.Key.Luts";
+    public const string BooksLocalizationKey = "Space.Key.PhotoBooks";
 
     #region Extensions Definitions
 
@@ -149,8 +150,11 @@ public static partial class ImageLoader
             var galleryStatistics = InspectFolder(libraryManager.GalleryFolderPath, GalleryLocalizationKey);
             var exportStatistics = InspectFolder(libraryManager.ExportsFolderPath, ExportsLocalizationKey);
             var lutsStatistics = InspectFolder(model.LutsManager.LutsFolderPath, LutsLocalizationKey);
+            var booksStatistics = InspectFolder(model.BookManager.PhotobooksFolderPath, BooksLocalizationKey);
             new SystemStatisticsMessage(
-                driveStatistics, libraryStatistics, galleryStatistics, exportStatistics, lutsStatistics).Publish();
+                driveStatistics, libraryStatistics, 
+                galleryStatistics, exportStatistics, 
+                lutsStatistics, booksStatistics).Publish();
         });
     }
 

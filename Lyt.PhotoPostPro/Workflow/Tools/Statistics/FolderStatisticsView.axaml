@@ -25,10 +25,10 @@
 			<ColumnDefinition Width="80"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions> 
-			<RowDefinition Height="56" />
-			<RowDefinition Height="44" />
-			<RowDefinition Height="44" />
-			<RowDefinition Height="44" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
 		</Grid.RowDefinitions>
 		<TextBlock
 			Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"

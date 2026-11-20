@@ -6,4 +6,5 @@ public sealed record class SystemStatisticsMessage
     FolderStatistics LibraryStatistics,
     FolderStatistics GalleryStatistics,
     FolderStatistics ExportsStatistics,
-    FolderStatistics LutsStatistics); 
+    FolderStatistics LutsStatistics,
+    FolderStatistics BooksStatistics ); 

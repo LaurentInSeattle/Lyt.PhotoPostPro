@@ -28,6 +28,9 @@ public sealed partial class StatisticsViewModel :
     [ObservableProperty]
     public partial FolderStatisticsViewModel LutsStatistics { get; set; }
 
+    [ObservableProperty]
+    public partial FolderStatisticsViewModel BooksStatistics { get; set; }
+
     public StatisticsViewModel(PhotoPostProModel model)
     {
         this.model = model;
@@ -36,6 +39,7 @@ public sealed partial class StatisticsViewModel :
         this.ExportsStatistics = new FolderStatisticsViewModel(model);
         this.GalleryStatistics = new FolderStatisticsViewModel(model);
         this.LutsStatistics = new FolderStatisticsViewModel(model);
+        this.BooksStatistics = new FolderStatisticsViewModel(model);
     }
 
     public override void Activate(object? activationParameters)
@@ -74,5 +78,6 @@ public sealed partial class StatisticsViewModel :
         this.ExportsStatistics.Update(message.ExportsStatistics);
         this.GalleryStatistics.Update(message.GalleryStatistics);
         this.LutsStatistics.Update(message.LutsStatistics);
+        this.BooksStatistics.Update(message.BooksStatistics);
     }
 }

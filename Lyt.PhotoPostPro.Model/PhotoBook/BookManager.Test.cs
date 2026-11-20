@@ -41,7 +41,7 @@ public sealed partial class BookManager
         }
 
         Guid Import(string imagePath) 
-            => book.ImportImage(this.photobooksFolderPath, imagePath, string.Empty, out message);
+            => book.ImportImage(this.PhotobooksFolderPath, imagePath, string.Empty, out message);
 
         List<Guid> guids = new(); 
         foreach (string path in ImagePaths)

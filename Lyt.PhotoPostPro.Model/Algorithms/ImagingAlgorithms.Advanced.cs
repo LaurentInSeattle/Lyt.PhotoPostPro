@@ -8,7 +8,9 @@ internal static partial class ImagingAlgorithms
 {
     #region Denoise 
 
-    // TODO:
+    // TODO: Stronger option 
+    // Radius 2 on Median blur 
+
     // Validate the need of all parameters
     internal static void IsoGrainDenoise(
         this Image<RgbaHalf> image,

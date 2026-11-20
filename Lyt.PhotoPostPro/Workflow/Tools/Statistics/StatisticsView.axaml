@@ -43,10 +43,12 @@
 					<RowDefinition Height="8" />
 					<RowDefinition Height="70" />
 					<RowDefinition Height="0" />
-					<RowDefinition Height="250" />
-					<RowDefinition Height="16" />
-					<RowDefinition Height="250" />
-					<RowDefinition Height="4" />
+					<RowDefinition Height="200" />
+					<RowDefinition Height="10" />
+					<RowDefinition Height="200" />
+					<RowDefinition Height="10" />
+					<RowDefinition Height="200" />
+					<RowDefinition Height="8" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="50" />
@@ -93,9 +95,15 @@
 					DataContext="{Binding GalleryStatistics}"
 					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 					/>
-				<!-- Luts Stats --> 
+				<!-- Books Stats --> 
 				<vm:FolderStatisticsView
 					Grid.Row="5" Grid.Column="3" 
+					DataContext="{Binding BooksStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
+				<!-- Luts Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="7" Grid.Column="1" 
 					DataContext="{Binding LutsStatistics}"
 					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 					/>
