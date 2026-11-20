@@ -12,6 +12,8 @@ public partial class BookEditViewModel :
 {
     public sealed record class UiThumbnail(string Key, Bitmap Bitmap);
 
+    public sealed record class PdfThumbnail(int Page, Bitmap Bitmap, int Width, int Height);
+
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
 
@@ -48,6 +50,18 @@ public partial class BookEditViewModel :
     // SelectedIndex in the film strip 
     public partial int SelectedThumbnailIndex { get; set; }
 
+    [ObservableProperty]
+    // The collection of PDF images at the top
+    public partial ObservableCollection<PdfThumbnail> PdfThumbnails { get; set; } = [];
+
+    [ObservableProperty]
+    // the Selected PDF image at the top
+    public partial ObservableCollection<PdfThumbnail> SelectedPdfThumbnails { get; set; } = [];
+
+    [ObservableProperty]
+    // SelectedIndex of the selected PDF Image
+    public partial int SelectedPdfThumbnailIndex { get; set; }
+
     public BookEditViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
@@ -59,8 +73,8 @@ public partial class BookEditViewModel :
         base.Activate(activationParameters);
 
         this.LoadPages();
-        // this.LoadSinglePages();
         this.LoadThumbnails();
+        this.LoadPdfThumbnails(); 
 
         // We are potentially about to launch heavy stuff, so clean up while we still can
         // We have about at least one second for Drag and drop to happen 
@@ -76,6 +90,7 @@ public partial class BookEditViewModel :
         // Cleanup 
         this.DoublePages.Clear();
         this.SinglePages.Clear();
+        this.PdfThumbnails.Clear(); 
 
         // UNsubscribe to book updates 
     }
@@ -211,6 +226,8 @@ public partial class BookEditViewModel :
 
     private void LoadThumbnails ()
     {
+        // Book should cache the thumbnails 
+
         // ! We have a book
         Books.Book book = this.model.BookManager.CurrentBook!;
         var images = book.ImageCandidates.Values.ToList();
@@ -230,5 +247,27 @@ public partial class BookEditViewModel :
         });
 
         this.ImageThumbnails = [with(list)];
+    }
+
+    private void LoadPdfThumbnails()
+    {
+        // ! We have a book
+        Books.Book book = this.model.BookManager.CurrentBook!;
+        float bookWidth = book.PageWidth;
+        float bookHeight = book.PageHeight;
+        const int desiredHeight = 112;
+        float ratio = bookHeight / desiredHeight;
+        int width = (int)MathF.Round(bookWidth / ratio); 
+        using MemoryStream stream = new(4 * 1024 * 1024);
+        book.GeneratePdf(BookResolution.Thumbnails, stream);
+        stream.Seek(0, SeekOrigin.Begin);
+        List<Bitmap> pdfBitmaps = PdfLoader.LoadThumnailImages(stream, width, desiredHeight);
+        List<PdfThumbnail> pdfThumbnails = new (pdfBitmaps.Count);
+        for (int page= 0; page < pdfBitmaps.Count; ++page)
+        {
+            pdfThumbnails.Add(new PdfThumbnail(page, pdfBitmaps[page], width, desiredHeight)); 
+        }
+
+        this.PdfThumbnails = new(pdfThumbnails); 
     }
 }

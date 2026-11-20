@@ -12,9 +12,44 @@ public sealed record class PdfLoadedStatusMessage(bool Complete, Exception? Exce
 
 public sealed record class PdfPage(int PageNumber, Bitmap Page, Bitmap Thumbnail);
 
-//[SupportedOSPlatform("Windows")]
+#pragma warning disable CA1416 // Validate platform compatibility
+// For : Conversion.ToImage 
+
+// [SupportedOSPlatform("Windows")]
 public static class PdfLoader
 {
+    public static List<Bitmap> LoadThumnailImages(
+        Stream pdfStream, int width, int height, string? pdfPassword = null)
+    {
+        try
+        {
+            PDFtoImage.RenderOptions renderOptions = new()
+            {
+                Dpi = 96,
+                Width = width,
+                Height = height,
+            };
+
+            List<Bitmap> list = [];
+            var skiaBitmaps = Conversion.ToImages(pdfStream, leaveOpen: false, password: pdfPassword, renderOptions);
+            foreach (var skiaBitmap in skiaBitmaps)
+            {
+                // Create an Avalonia bitmap usable as a source for an image control and scale it down
+                var bitmapPage = ToAvaloniaBitmap(skiaBitmap);
+                list.Add(bitmapPage);
+            }
+
+            return list;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return [];
+        }
+    }
+
+#pragma warning restore CA1416
+
     public static void Unload()
         => new PdfLoadedStatusMessage(Complete: false).Publish();
 
@@ -22,7 +57,7 @@ public static class PdfLoader
     {
         MemoryStream memoryStream = LoadDocumentFile(document, language);
         var bitmap = LoadFirstPage(memoryStream, pdfPassword);
-        document.FirstPage = bitmap; 
+        document.FirstPage = bitmap;
         return bitmap is not null;
     }
 
@@ -61,7 +96,7 @@ public static class PdfLoader
             PDFtoImage.RenderOptions renderOptions = new();
             var skiaBitmap =
                 Conversion.ToImage(pdfStream, page: 0, leaveOpen: false, password: pdfPassword, renderOptions);
-            
+
             // Create an Avalonia bitmap usable as a source for an image control and scale it down
             var bitmapPage = ToAvaloniaBitmap(skiaBitmap);
             var bitmapThumbnail = CreateThumbnail(bitmapPage, targetWidth: 1200, targetHeight: 1200);

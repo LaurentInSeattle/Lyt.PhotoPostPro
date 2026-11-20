@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Extensions.Primitives;
+
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -263,7 +265,7 @@ public sealed partial class Book : IEditable
         }
     }
 
-    public void GeneratePdf(BookResolution bookResolution)
+    public string GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)
     {
         var start = DateTime.Now; 
 
@@ -368,7 +370,7 @@ public sealed partial class Book : IEditable
             });
         }
 
-        Document.Create(container =>
+        Document document = Document.Create(container =>
         {
             if (this.WithFrontCover && this.FrontCover is not null)
             {
@@ -402,12 +404,40 @@ public sealed partial class Book : IEditable
                     CreatePage(this.BackCover.BackPage, backCoverBack);
                 });
             }
-        }).GeneratePdf(this.OutputPdfFileName);
+        });
 
-        var done = DateTime.Now;
-        var delta = done - start;
-        string msg = " Document created: " + delta.TotalMilliseconds.ToString("F1") + " ms";
+        string toReturn; 
+        switch (bookResolution)
+        {
+            default:
+            case BookResolution.Print:
+                document.GeneratePdf(this.OutputPdfFileName);
+                toReturn = this.OutputPdfFileName;
+                break;
+
+            case BookResolution.Display:
+                // string file = string.Concat("LowRes_", this.OutputPdfFileName);
+                document.GeneratePdf(this.OutputPdfFileName);
+                // toReturn = file;
+                toReturn = this.OutputPdfFileName;
+                break;
+
+            case BookResolution.Thumbnails:
+                if (outputStream is not null)
+                {
+                    document.GeneratePdf(outputStream);
+                }
+
+                toReturn = string.Empty;
+                break; 
+        }
+
+        DateTime done = DateTime.Now;
+        TimeSpan span = done - start;
+        string msg = " Document created: " + span.TotalMilliseconds.ToString("F1") + " ms";
         Debug.WriteLine(msg);
-        this.Logger.Info(msg); 
+        this.Logger.Info(msg);
+
+        return toReturn; 
     }
 }

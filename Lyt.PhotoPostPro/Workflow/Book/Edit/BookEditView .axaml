@@ -24,7 +24,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="4" />
-			<ColumnDefinition Width="240" /> <!-- Film Strip --> 
+			<ColumnDefinition Width="232" /> <!-- Film Strip --> 
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="0" /> <!-- Tools --> 
 			<ColumnDefinition Width="4" />
@@ -78,17 +78,47 @@
 			Grid.Column="2" Grid.Row="1"
 			>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="0" /> <!-- Doc Preview --> 
+				<RowDefinition Height="120" /> <!-- Doc Preview --> 
 				<RowDefinition Height="64" /> <!-- Toolbar --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
 				<RowDefinition Height="32" /> <!-- Pips --> 
 				<RowDefinition Height="120" /> <!-- Templates --> 
 			</Grid.RowDefinitions>
-			<Rectangle
-				Fill="#80000020"
+			<Grid
+				Background="#80000020"
 				Grid.Row="0"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-				/>
+				>
+				<!-- Preview --> 
+				<ListBox
+					x:Name="PdfPreviewListBox"
+					ItemsSource="{Binding PdfThumbnails}"
+					SelectedIndex="{Binding SelectedPdfThumbnailIndex}"
+					SelectedItems="{Binding SelectedPdfThumbnails, Mode=TwoWay}"
+					SelectionMode="Single"
+					ScrollViewer.VerticalScrollBarVisibility="Disabled"
+					ScrollViewer.HorizontalScrollBarVisibility="Auto"
+					> 
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<VirtualizingStackPanel 
+								Background="Transparent"
+								Orientation="Horizontal" 
+								/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Image 
+								Source="{Binding Bitmap}" 
+								Height="{Binding Height}" Width="{Binding Width}"
+								Stretch="Uniform"
+								/>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+			</Grid>
 			
 			<!-- Toolbar  --> 
 			<Grid
@@ -102,9 +132,9 @@
 						x:Name="ModeSwitch"
 						Margin="8 0 8 0"
 						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="{DynamicResource Workflow.Camera.Thumbs.OldestFirst}"
-						FalseText="{DynamicResource Workflow.Camera.Thumbs.RecentOnTop}"
-						Height="30" Width="340"
+						TrueText="Single"
+						FalseText="Dual"
+						Height="30" Width="180"
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding IsSingleImageMode}"
 						/>
@@ -112,9 +142,9 @@
 						x:Name="ShowGridLinesSwitch"
 						Margin="8 0 8 0"
 						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="{DynamicResource Workflow.Library.Thumbs.ShowAll}"
-						FalseText="{DynamicResource Workflow.Library.Thumbs.ShowStarred}"
-						Height="30" Width="340"
+						TrueText="Grid"
+						FalseText="Hide"
+						Height="30" Width="180"
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding ShowGridLines}"
 						/>
@@ -189,7 +219,7 @@
 			</LayoutTransformControl>
 
 			<Rectangle
-				Fill="#8080A060"
+				Fill="#0180A060"
 				Grid.Row="4"
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>

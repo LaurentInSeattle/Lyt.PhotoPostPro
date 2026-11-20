@@ -5,10 +5,20 @@ public sealed partial class BookManager
 // #if LYT_DEBUG
     public void Test()
     {
-        const string VeneziaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg";
-        const string ToscanaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg";
-        const string CapriImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg";
-        const string VeronaImagePath = "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Verona.jpg";
+        string[] ImagePaths =
+        {
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Venezia.jpg", 
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Toscana.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Capri3.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Verona.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\PiazzaDiSpagna.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\StelvioPass.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Como.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Cortina.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Galleria.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\Bagnoregio.jpg",
+            "C:\\Users\\Laurent\\Desktop\\TestImages\\Saved Pictures\\SanMarino.jpg",            
+        }; 
 
         var book = this.GetBook("TestBook");
         if (book is not null)
@@ -32,20 +42,18 @@ public sealed partial class BookManager
 
         Guid Import(string imagePath) 
             => book.ImportImage(this.photobooksFolderPath, imagePath, string.Empty, out message);
-        
-        var venezia = Import(VeneziaImagePath);
-        var toscana = Import(ToscanaImagePath);
-        var capri = Import(CapriImagePath);
-        var verona = Import(VeronaImagePath);
 
-        book.IncludeImage(venezia);
-        book.IncludeImage(toscana);
-        book.IncludeImage(capri);
-        book.IncludeImage(verona);
+        List<Guid> guids = new(); 
+        foreach (string path in ImagePaths)
+        {
+            var guid = Import(path);
+            guids.Add(guid); 
+            book.IncludeImage(guid);
+        }
 
         // ! ok
         var front = book.FrontCover!.FrontPage;
-        FullPageImageLayout.Create(book, front, venezia);
+        FullPageImageLayout.Create(book, front, guids[0]);
 
         // ! ok
         var back = book.FrontCover!.BackPage;
@@ -64,7 +72,7 @@ public sealed partial class BookManager
             new ImageSlot()
             {
                 Position = new SlotPosition(x: 40, y: 40, dx: 400, dy: 300),
-                BookImageId = toscana,
+                BookImageId = guids[1],
             });
 
         page1.Slots.Add(
@@ -78,7 +86,7 @@ public sealed partial class BookManager
             new ImageSlot()
             {
                 Position = new SlotPosition(x: 300, y: 340, dx: 400, dy: 300),
-                BookImageId = verona,
+                BookImageId = guids[2],
             });
 
         page1.Slots.Add(
@@ -89,17 +97,17 @@ public sealed partial class BookManager
             });
 
         var page2 = book.FromPageNumber(2);
-        SingleImageLayoutWithLegend.Create(book, page2, capri, "Giardini di Augusto - Isola di Capri");
+        SingleImageLayoutWithLegend.Create(book, page2, guids[3], "Giardini di Augusto - Isola di Capri");
 
         this.SaveBook(book);
 
-        book.GeneratePdf(BookResolution.Print);
+        // book.GeneratePdf(BookResolution.Print);
 
         book.GeneratePdf(BookResolution.Display);
 
-        book.GeneratePdf(BookResolution.Thumbnails);
+        // book.GeneratePdf(BookResolution.Thumbnails);
 
-        if (Debugger.IsAttached) { Debugger.Break(); }
+        // if (Debugger.IsAttached) { Debugger.Break(); }
     }
 
 // #endif

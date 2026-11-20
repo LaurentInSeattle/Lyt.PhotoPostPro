@@ -122,12 +122,12 @@ public sealed partial class ShellViewModel
 
         this.Logger.Debug("OnViewLoaded complete");
 
-// #if LYT_DEBUG
-        Schedule.OnUiThread(
-            1500,
-            () => { this.model.BookManager.Test(); },
-            DispatcherPriority.ApplicationIdle);
-// #endif
+        // #if LYT_DEBUG
+        //Schedule.OnUiThread(
+        //    1500,
+        //    () => { this.model.BookManager.Test(); },
+        //    DispatcherPriority.ApplicationIdle);
+        // #endif
     }
 
     private void LocalizeAppTitle()
