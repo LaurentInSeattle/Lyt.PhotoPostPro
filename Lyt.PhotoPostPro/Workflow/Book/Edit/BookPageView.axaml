@@ -12,6 +12,7 @@
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 
+	DragDrop.AllowDrop="True"
 	>
 	<Grid
 		x:Name="MainGrid"
@@ -75,5 +76,13 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
+		<Rectangle
+			x:Name="DropRectangle"
+			Fill="Transparent"
+			Stroke="Transparent"
+			StrokeThickness="2"
+			StrokeDashArray="2,2"
+			/>
+
 	</Grid>
 </UserControl>

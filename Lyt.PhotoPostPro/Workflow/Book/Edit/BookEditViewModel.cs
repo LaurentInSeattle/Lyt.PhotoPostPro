@@ -10,8 +10,6 @@ public partial class BookEditViewModel :
     ViewModel<BookEditView>,
     IRecipient<BookPagesChangedMessage>
 {
-    public sealed record class UiThumbnail(string Key, Bitmap Bitmap);
-
     public sealed record class PdfThumbnail(int Page, Bitmap Bitmap, int Width, int Height);
 
     private readonly PhotoPostProModel model;
@@ -40,7 +38,7 @@ public partial class BookEditViewModel :
 
     [ObservableProperty]
     // The collection of images in the film strip 
-    public partial ObservableCollection<UiThumbnail> ImageThumbnails { get; set; } = [];
+    public partial ObservableCollection<BookImageViewModel> ImageThumbnails { get; set; } = [];
 
     [ObservableProperty]
     // SelectedIndex in the film strip 
@@ -85,6 +83,22 @@ public partial class BookEditViewModel :
 
         // UNsubscribe to book updates 
         this.Unregister<BookPagesChangedMessage>();
+    }
+
+    public override void OnViewLoaded() 
+    {
+        base.OnViewLoaded();
+
+        Schedule.OnUiThread(
+            90, () =>
+            {
+                var canvas = this.View.BookEditDragCanvas;
+                var listBox = this.View.StripListBox; 
+                foreach (var imageThumbnail in this.ImageThumbnails)
+                {
+                    imageThumbnail.AttachDraggable(listBox, canvas);
+                }
+            } , DispatcherPriority.ApplicationIdle); 
     }
 
     partial void OnShowGridLinesChanged(bool value)
@@ -255,7 +269,7 @@ public partial class BookEditViewModel :
         Books.Book book = this.model.BookManager.CurrentBook!;
         var images = book.ImageCandidates.Values.ToList();
 
-        var list = new List<UiThumbnail>(images.Count);
+        var list = new List<BookImageViewModel>(images.Count);
         Parallel.For(0, images.Count, index =>
         {
             string file = images[index].LowResPath;
@@ -264,7 +278,7 @@ public partial class BookEditViewModel :
                 var bitmap = new Bitmap(file);
                 lock (list)
                 {
-                    list.Add(new UiThumbnail(file, bitmap));
+                    list.Add(new BookImageViewModel(file, bitmap));
                 }
             }
         });

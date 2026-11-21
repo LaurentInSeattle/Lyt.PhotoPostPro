@@ -10,12 +10,14 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
+	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Book.Edit"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
 	>
 	<Grid
+		x:Name="BookEditMainGrid"
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
@@ -49,7 +51,7 @@
 			> 
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
-					<VirtualizingStackPanel 
+					<StackPanel 
 						Background="Transparent"
 						Orientation="Vertical" 
 						/>
@@ -57,9 +59,8 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Image 
+					<local:BookImageView 
 						Margin="4 0 24 0"
-						Source="{Binding Bitmap}" 
 						Width="200" MaxHeight="180"
 						/>
 				</DataTemplate>
@@ -254,5 +255,11 @@
 				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 				/>
 		</Grid>
+		<Canvas
+			x:Name="BookEditDragCanvas"
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999"
+			>
+			
+		</Canvas>
 	</Grid>
 </UserControl>

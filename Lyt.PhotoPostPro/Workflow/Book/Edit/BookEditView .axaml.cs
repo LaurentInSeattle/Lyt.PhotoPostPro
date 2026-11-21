@@ -1,3 +1,12 @@
 namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
-public partial class BookEditView : View; 
+using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
+
+public partial class BookEditView : View
+{
+    protected override void OnDataContextChanged(object? sender, EventArgs e)
+    {
+        base.OnDataContextChanged(sender, e);
+        new DragOverAble(/* StageView.HideDropTarget*/ ).Attach(this);
+    }
+}

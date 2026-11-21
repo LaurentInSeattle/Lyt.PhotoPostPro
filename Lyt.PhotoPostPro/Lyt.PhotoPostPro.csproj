@@ -115,6 +115,9 @@
     <Compile Update="Workflow\Book\Edit\BookDoublePageView.axaml.cs">
       <DependentUpon>BookDoublePageView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Book\Edit\BookImageView.axaml.cs">
+      <DependentUpon>BookImageView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Workflow\Book\Edit\SlotView.axaml.cs">
       <DependentUpon>SlotView.axaml</DependentUpon>
     </Compile>

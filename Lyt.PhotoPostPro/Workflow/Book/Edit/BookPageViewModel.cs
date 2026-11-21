@@ -1,5 +1,6 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
+using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
 using Lyt.PhotoPostPro.Workflow.Book.Messages;
 
 using Books = Model.PhotoBook;
@@ -7,7 +8,8 @@ using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
 public partial class BookPageViewModel : 
-    ViewModel<BookPageView>, 
+    ViewModel<BookPageView>,
+    IDropTarget, 
     IRecipient<BookGridLinesMessage>
 {
     private readonly PhotoPostProModel model;
@@ -65,5 +67,15 @@ public partial class BookPageViewModel :
             var slotViewModel = new SlotViewModel(this.model, this.page, slot);
             this.Slots.Add(slotViewModel);
         }
+    }
+
+    public bool CanDrop(Point point, object droppedObject)
+    {
+        return true; 
+    }
+
+    public void OnDrop(Point point, object droppedObject)
+    {
+
     }
 }

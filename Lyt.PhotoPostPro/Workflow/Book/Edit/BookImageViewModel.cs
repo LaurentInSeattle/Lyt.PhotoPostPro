@@ -1,0 +1,86 @@
+﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
+
+using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
+
+using QuestPDF.Infrastructure;
+
+using Books = Model.PhotoBook;
+using Pages = Model.PhotoBook.Pages;
+using Slots = Model.PhotoBook.Slots;
+
+public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleViewModel
+// , IRecipient<DocPageNavigateMessage>
+{
+    public const string CustomDragAndDropFormat = "BookImageViewModel";
+
+    private readonly string key;
+
+    [ObservableProperty]
+    public partial Bitmap Bitmap { get; set; }
+
+    public BookImageViewModel(string key, Bitmap bitmap, bool isGhost = false)
+    {
+        this.key = key;
+        this.Bitmap = bitmap;
+        this.IsGhost = isGhost;
+    }
+
+    public void AttachDraggable(ListBox listBox, Canvas canvas)
+    {
+        if (!this.IsGhost && this.DragAble is null)
+        {
+            if (listBox.ContainerFromItem(this) is ListBoxItem container)
+            {
+                if (container.Content is BookImageViewModel && container.Presenter is not null)
+                {
+                    if (container.Presenter.Child is BookImageView view)
+                    {
+                        this.DragAble = new DragAble(canvas);
+                        this.DragAble.Attach(view);
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary> True when this is a ghost view model. </summary>
+    public bool IsGhost { get; private set; }
+
+    public string DragDropFormat => BookImageViewModel.CustomDragAndDropFormat;
+
+    public DragAble? DragAble { get; protected set; }
+
+    public void OnEntered()
+    {
+
+    }
+
+    public void OnExited()
+    {
+
+    }
+
+
+    public void OnLongPress()
+    {
+        // Show bigger image ? 
+    }
+
+
+    public void OnClicked(bool isRightClick)
+    {
+    }
+
+    public bool OnBeginDrag() => true;
+
+    public View CreateGhostView()
+    {
+        var ghostViewModel = new BookImageViewModel(this.key, this.Bitmap, isGhost: true);
+        ghostViewModel.CreateViewAndBind();
+        var view = ghostViewModel.View;
+        view.ZIndex = 999_999;
+        view.Opacity = 0.8;
+        view.InvalidateVisual();
+        return view;
+    }
+}
