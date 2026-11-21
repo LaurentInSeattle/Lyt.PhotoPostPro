@@ -69,30 +69,36 @@ public sealed partial class Book : IEditable
         int toAdd = 0; 
         if (this.WithFrontCover)
         {
+            // ! We have a cover 
             if ( targetPage == this.FrontCover!.FrontPage)
             {
                 return 0; 
             }
-            else if (targetPage == this.FrontCover!.BackPage)
-            {
-                return 1;
-            }
             else
-            {
-                toAdd = 2; 
-            }
+                // ! We have a cover 
+                if (targetPage == this.FrontCover!.BackPage)
+                {
+                    return 1;
+                }
+                else
+                {
+                    toAdd = 2; 
+                }
         }
 
         if (this.WithBackCover)
         {
+            // ! We have a cover 
             if (targetPage == this.BackCover!.FrontPage)
             {
                 return toAdd + this.Pages.Count;
-            }
-            else if (targetPage == this.BackCover!.BackPage)
-            {
-                return 1 + toAdd + this.Pages.Count;
-            }
+            }            
+            else
+                // ! We have a cover
+                if (targetPage == this.BackCover!.BackPage)
+                {
+                    return 1 + toAdd + this.Pages.Count;
+                }
         }
 
         for (int i = 0; i < this.Pages.Count; ++i)
