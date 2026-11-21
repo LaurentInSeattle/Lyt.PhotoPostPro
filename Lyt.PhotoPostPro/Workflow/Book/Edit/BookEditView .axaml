@@ -78,7 +78,7 @@
 			Grid.Column="2" Grid.Row="1"
 			>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="120" /> <!-- Doc Preview --> 
+				<RowDefinition Height="132" /> <!-- Doc Preview --> 
 				<RowDefinition Height="64" /> <!-- Toolbar --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
 				<RowDefinition Height="32" /> <!-- Pips --> 
@@ -112,6 +112,7 @@
 								Source="{Binding Bitmap}" 
 								Height="{Binding Height}" Width="{Binding Width}"
 								Stretch="Uniform"
+								Margin="0 0 0 16"
 								/>
 						</DataTemplate>
 					</ListBox.ItemTemplate>

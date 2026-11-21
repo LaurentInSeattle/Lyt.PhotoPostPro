@@ -1,23 +1,68 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
+using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
+
 using QuestPDF.Infrastructure;
 
 using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
-public partial class SlotViewModel : ViewModel<SlotView>
-// , IRecipient<DocPageNavigateMessage>
+public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
+// , IRecipient<>
 {
+    #region Static Utilities 
+
     public static FontFamily DefaultFontFamily = new("Arial");
 
-    private readonly PhotoPostProModel model;
+    public static SolidColorBrush FromTextStyle(Slots.SlotTextStyle textStyle)
+        => new(global::Avalonia.Media.Color.FromRgb(textStyle.Red, textStyle.Green, textStyle.Blue));
 
+    public static TextAlignment FromTextStyleTextAlignment(Slots.SlotTextStyle textStyle)
+        => textStyle.TextAlignment switch
+        {
+            BookTextAlignment.Center => TextAlignment.Center,
+            BookTextAlignment.Right => TextAlignment.Right,
+            _ => TextAlignment.Left,
+        };
+
+    public static (FontStyle, FontWeight) FromTextStyleFontStyle(Slots.SlotTextStyle textStyle)
+    {
+        var fontStyle = textStyle.FontStyle switch
+        {
+            BookFontStyle.BoldItalic or BookFontStyle.Italic => FontStyle.Italic,
+            _ => FontStyle.Normal,
+        };
+
+        var fontWeight = textStyle.FontStyle switch
+        {
+            BookFontStyle.BoldItalic or BookFontStyle.Bold => FontWeight.Bold,
+            _ => FontWeight.Normal,
+        };
+
+        return (fontStyle, fontWeight);
+    }
+
+    public static global::Avalonia.Media.Stretch StretchFromImageSlot(Slots.ImageSlot slot)
+        => slot.ImageStretch switch
+        {
+            BookImageStretch.Stretch => Stretch.Fill,
+            _ => Stretch.Uniform,
+        };
+
+    #endregion Static Utilities 
+
+    public static SlotViewModel? SelectedSlot;
+
+    private readonly PhotoPostProModel model;
+    private readonly BookEditViewModel bookEditViewModel;
     private readonly Pages.Page page;
     private readonly Slots.Slot slot;
     private readonly Slots.ImageSlot? imageSlot;
     private readonly Slots.TextSlot? textSlot;
-    
+
+    private bool isSelected;
+
     [ObservableProperty]
     public partial bool IsSlotBorderVisible { get; set; }
 
@@ -69,6 +114,9 @@ public partial class SlotViewModel : ViewModel<SlotView>
         this.page = page;
         this.slot = slot;
 
+        this.bookEditViewModel = App.GetRequiredService<BookEditViewModel>();
+        this.isSelected = false;
+
         // To enforce property changed ?
         // this.ClearPosition();
         if (slot is Slots.ImageSlot imageSlot)
@@ -89,11 +137,14 @@ public partial class SlotViewModel : ViewModel<SlotView>
         }
 
         this.SetPosition();
-        // this.IsSlotBorderVisible = false; 
     }
 
     public Books.Book Book
-        => this.model.BookManager.CurrentBook ?? throw new Exception("No Bok ???");
+        => this.model.BookManager.CurrentBook ?? throw new Exception("No Book ???");
+
+    public string DragDropFormat => throw new NotImplementedException();
+
+    public DragAble? DragAble => throw new NotImplementedException();
 
     public void ClearPosition()
     {
@@ -157,39 +208,26 @@ public partial class SlotViewModel : ViewModel<SlotView>
         }
     }
 
-    public static SolidColorBrush FromTextStyle(Slots.SlotTextStyle textStyle)
-        => new(global::Avalonia.Media.Color.FromRgb(textStyle.Red, textStyle.Green, textStyle.Blue));
+    public void OnClicked(bool isRightClick) => this.Select(!this.isSelected);
 
-    public static TextAlignment FromTextStyleTextAlignment(Slots.SlotTextStyle textStyle)
-        => textStyle.TextAlignment switch
-        {
-            BookTextAlignment.Center => TextAlignment.Center,
-            BookTextAlignment.Right => TextAlignment.Right,
-            _ => TextAlignment.Left,
-        };
-
-    public static (FontStyle, FontWeight) FromTextStyleFontStyle(Slots.SlotTextStyle textStyle)
+    public void Select(bool select = true)
     {
-        var fontStyle = textStyle.FontStyle switch
+        this.isSelected = select;
+        this.IsSlotBorderVisible = select;
+        if (select)
         {
-            BookFontStyle.BoldItalic or BookFontStyle.Italic => FontStyle.Italic,
-            _ => FontStyle.Normal,
-        };
-
-        var fontWeight = textStyle.FontStyle switch
+            SlotViewModel.SelectedSlot?.Select(false);
+            SlotViewModel.SelectedSlot = this;
+        }
+        else
         {
-            BookFontStyle.BoldItalic or BookFontStyle.Bold => FontWeight.Bold,
-            _ => FontWeight.Normal,
-        };
-
-        return (fontStyle, fontWeight);
+            SlotViewModel.SelectedSlot = null;
+        }
     }
 
-    public static global::Avalonia.Media.Stretch StretchFromImageSlot(Slots.ImageSlot slot)
-        => slot.ImageStretch switch
-        {
-            BookImageStretch.Stretch => Stretch.Fill,
-            _ => Stretch.Uniform,
-        };
-
+    //public void OnEntered() => throw new NotImplementedException();
+    //public void OnExited() => throw new NotImplementedException();
+    //public void OnLongPress() => throw new NotImplementedException();
+    //public bool OnBeginDrag() => throw new NotImplementedException();
+    //public View CreateGhostView() => throw new NotImplementedException();
 }

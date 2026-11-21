@@ -18,12 +18,17 @@
 		Canvas.Left="{Binding SlotX}"
 		BorderThickness="0"
 		>
-		<Grid>
+		<Grid
+			x:Name="OuterGrid"
+			Background="Transparent"
+			IsHitTestVisible="True"
+			>
 			<Image
 				IsVisible="{Binding IsImageSlot}"
 				Source="{Binding SlotImage}"
 				VerticalAlignment="Top" HorizontalAlignment="Stretch"
 				Stretch="{Binding ImageStretch}"
+				IsHitTestVisible="False"
 				>			
 			</Image>
 			<TextBlock
@@ -34,6 +39,7 @@
 				FontStyle="{Binding SlotFontStyle}"
 				Foreground="{Binding SlotForegroundColor}"
 				TextAlignment="{Binding SlotTextAlignment}"
+				IsHitTestVisible="False"
 				>			
 			</TextBlock>
 			<Rectangle
@@ -41,7 +47,7 @@
 				Fill="Transparent"
 				Stroke="{StaticResource LightAqua_0_080}"
 				StrokeThickness="2"
-				StrokeDashArray="1.5, 3"
+				StrokeDashArray="2, 2"
 				IsHitTestVisible="False"
 				/>
 		</Grid>
