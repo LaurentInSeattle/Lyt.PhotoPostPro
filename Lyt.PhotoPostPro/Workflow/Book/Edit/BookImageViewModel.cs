@@ -13,14 +13,14 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
 {
     public const string CustomDragAndDropFormat = "BookImageViewModel";
 
-    private readonly string key;
+    public readonly string Key;
 
     [ObservableProperty]
     public partial Bitmap Bitmap { get; set; }
 
     public BookImageViewModel(string key, Bitmap bitmap, bool isGhost = false)
     {
-        this.key = key;
+        this.Key = key;
         this.Bitmap = bitmap;
         this.IsGhost = isGhost;
     }
@@ -75,7 +75,7 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
 
     public View CreateGhostView()
     {
-        var ghostViewModel = new BookImageViewModel(this.key, this.Bitmap, isGhost: true);
+        var ghostViewModel = new BookImageViewModel(this.Key, this.Bitmap, isGhost: true);
         ghostViewModel.CreateViewAndBind();
         var view = ghostViewModel.View;
         view.ZIndex = 999_999;

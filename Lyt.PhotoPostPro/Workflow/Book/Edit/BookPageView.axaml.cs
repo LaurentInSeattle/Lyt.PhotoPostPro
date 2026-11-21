@@ -21,34 +21,45 @@ public partial class BookPageView : View
     public BookPageView() : base()
     {
         DragDrop.SetAllowDrop(this, true);
+        this.AddHandler(DragDrop.DropEvent, this.OnDrop);
         this.AddHandler(DragDrop.DragEnterEvent, this.OnDragEnter);
         this.AddHandler(DragDrop.DragLeaveEvent, this.OnDragLeave);
+        this.AddHandler(PointerExitedEvent, this.OnLeave);
     }
 
     ~BookPageView()
     {
         this.RemoveHandler(DragDrop.DragEnterEvent, this.OnDragEnter);
         this.RemoveHandler(DragDrop.DragLeaveEvent, this.OnDragLeave);
+        this.RemoveHandler(PointerExitedEvent, this.OnLeave);
     }
 
     protected override void OnDataContextChanged(object? sender, EventArgs e)
     {
         base.OnDataContextChanged(sender, e);
-        new DragOverAble(/* StageView.HideDropTarget*/ ).Attach(this);
-        new DropAble(/* StageView.HideDropTarget*/ ).Attach(this);
+        if ( this.DataContext is BookPageViewModel bookPageViewModel &&
+            !bookPageViewModel.IsDummy )
+        {
+            new DragOverAble(/* StageView.HideDropTarget*/ ).Attach(this);
+            new DropAble(/* StageView.HideDropTarget*/ ).Attach(this);
+        }
     }
 
     private void OnDragEnter(object? _, DragEventArgs e)
     {
-        if (hotBrush is not null)
+        if (this.DataContext is BookPageViewModel bookPageViewModel &&
+            !bookPageViewModel.IsDummy)
         {
-            this.DropRectangle.Stroke = hotBrush;
+            if (hotBrush is not null)
+            {
+                this.DropRectangle.Stroke = hotBrush;
+            }
         }
     }
 
-    private void OnDragLeave(object? _, DragEventArgs e)
-    {
-        this.DropRectangle.Stroke = Brushes.Transparent;
-    }
+    private void OnDragLeave(object? _, DragEventArgs e) => this.DropRectangle.Stroke = Brushes.Transparent;
 
+    private void OnDrop(object? _, DragEventArgs e) => this.DropRectangle.Stroke = Brushes.Transparent;
+
+    private void OnLeave(object? _, EventArgs e) => this.DropRectangle.Stroke = Brushes.Transparent;
 }

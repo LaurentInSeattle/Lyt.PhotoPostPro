@@ -354,7 +354,7 @@ public sealed partial class BookManager
 
         if ((pageNumber <= 1) && this.CurrentBook.WithFrontCover)
         {
-            message = "Workflow.Book.Edit.CantChangeCover"; 
+            message = "Workflow.Book.Edit.CantChangeCover";
             return false;
         }
 
@@ -369,7 +369,7 @@ public sealed partial class BookManager
         // because we pass in the page number in the PDF preview
         if (this.CurrentBook.WithFrontCover)
         {
-            pageNumber -= 2; 
+            pageNumber -= 2;
         }
 
         // Create a page 
@@ -385,9 +385,15 @@ public sealed partial class BookManager
             pages.Insert(pageNumber, page);
         }
 
+        // If we have a front cover, page number needs to be ajusted back the page number in the PDF preview
+        if (this.CurrentBook.WithFrontCover)
+        {
+            pageNumber += 2;
+        }
+
         // Save and Post message 
-        this.SaveCurrentBook(); 
-        new BookPagesChangedMessage().Publish();
+        this.SaveCurrentBook();
+        new BookPagesChangedMessage(pageNumber).Publish();
         return true;
     }
 
@@ -427,31 +433,44 @@ public sealed partial class BookManager
 
         pages.RemoveAt(pageNumber);
 
+        // If we have a front cover, page number needs to be ajusted back the page number in the PDF preview
+        if (this.CurrentBook.WithFrontCover)
+        {
+            pageNumber += 2;
+        }
+
+        // Show the page before 
+        --pageNumber;
+
         // Save and Post message 
         this.SaveCurrentBook();
-        new BookPagesChangedMessage().Publish();
+        new BookPagesChangedMessage(pageNumber).Publish();
         return true;
     }
 
+    // MAYBE ??? 
+    // Most likely not needed 
     //public void MovePage(int fromPageNumber, int toPageNumber)
     //{
-    //    if (this.CurrentBook == null)
-    //    {
-    //        throw new InvalidOperationException("No current book to move a leaf in.");
-    //    }
-    //    //// Find the leaf that contains the fromPageNumber
-    //    //var leafToMove = this.Current.Leaves.FirstOrDefault(leaf =>
-    //    //    leaf.FrontPage.PageNumber == fromPageNumber || leaf.BackPage.PageNumber == fromPageNumber);
-    //    //if (leafToMove != null)
-    //    //{
-    //    //    this.Current.Leaves.Remove(leafToMove);
-    //    //    this.Current.Leaves.Insert(toPageNumber / 2, leafToMove);
-    //    //}
     //}
 
     #endregion Page Management
 
     #region Page Editing
+
+    public void AddDroppedImage(Page page, Guid imageId)
+    {
+        if (this.CurrentBook == null)
+        {
+            throw new InvalidOperationException("No current book to add a slot to.");
+        }
+
+        SingleImageLayoutWithLegend.Create(this.CurrentBook, page, imageId, "Lorem Ipsum - Dolor sit amet");
+        new BookPageEditedMessage(page).Publish();
+
+        // Save and Post message 
+        this.SaveCurrentBook();
+    }
 
     public void AddSlotToPage(int pageNumber, Slot newSlot)
     {

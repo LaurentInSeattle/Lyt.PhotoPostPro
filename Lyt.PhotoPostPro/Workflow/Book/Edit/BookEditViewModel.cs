@@ -8,7 +8,8 @@ using Slots = Model.PhotoBook.Slots;
 
 public partial class BookEditViewModel :
     ViewModel<BookEditView>,
-    IRecipient<BookPagesChangedMessage>
+    IRecipient<BookPagesChangedMessage>,
+    IRecipient<BookPageEditedMessage>
 {
     public sealed record class PdfThumbnail(int Page, Bitmap Bitmap, int Width, int Height);
 
@@ -63,13 +64,15 @@ public partial class BookEditViewModel :
         base.Activate(activationParameters);
 
         this.LoadBook();
+        this.LoadImageCandidates();
 
         // We are potentially about to launch heavy stuff, so clean up while we still can
         // We have about at least one second for Drag and drop to happen 
         this.Dispatcher.OnIdle(() => GC.Collect());
 
         // Subscribe to book updates 
-        this.Subscribe<BookPagesChangedMessage>(); 
+        this.Subscribe<BookPagesChangedMessage>();
+        this.Subscribe<BookPageEditedMessage>();
     }
 
     public override void Deactivate()
@@ -85,7 +88,7 @@ public partial class BookEditViewModel :
         this.Unregister<BookPagesChangedMessage>();
     }
 
-    public override void OnViewLoaded() 
+    public override void OnViewLoaded()
     {
         base.OnViewLoaded();
 
@@ -93,12 +96,12 @@ public partial class BookEditViewModel :
             90, () =>
             {
                 var canvas = this.View.BookEditDragCanvas;
-                var listBox = this.View.StripListBox; 
+                var listBox = this.View.StripListBox;
                 foreach (var imageThumbnail in this.ImageThumbnails)
                 {
                     imageThumbnail.AttachDraggable(listBox, canvas);
                 }
-            } , DispatcherPriority.ApplicationIdle); 
+            }, DispatcherPriority.ApplicationIdle);
     }
 
     partial void OnShowGridLinesChanged(bool value)
@@ -118,12 +121,11 @@ public partial class BookEditViewModel :
         }
     }
 
-    private void LoadBook ()
+    private void LoadBook()
     {
         this.IsSingleImageMode = false;
 
         this.LoadPages();
-        this.LoadThumbnails();
         this.LoadPdfThumbnails();
 
         // Enforce property changed 
@@ -136,9 +138,9 @@ public partial class BookEditViewModel :
         if (this.IsSingleImageMode)
         {
             // was in dual mode 
-            int index = this.DoublePagesIndex; 
+            int index = this.DoublePagesIndex;
             this.LoadSinglePages();
-            this.SinglePagesIndex = 2 * index - 1; 
+            this.SinglePagesIndex = 2 * index - 1;
         }
         else
         {
@@ -261,9 +263,9 @@ public partial class BookEditViewModel :
         this.DoublePagesIndex = 0;
     }
 
-    private void LoadThumbnails()
+    private void LoadImageCandidates()
     {
-        // Book should cache the thumbnails 
+        // Book should cache the thumbnails of image candidates 
 
         // ! We have a book
         Books.Book book = this.model.BookManager.CurrentBook!;
@@ -312,14 +314,14 @@ public partial class BookEditViewModel :
     public void OnAddPageBefore()
     {
         var bookMgr = this.model.BookManager;
-        bookMgr.InsertPage(this.SelectedPdfThumbnailIndex, out string message); 
+        bookMgr.InsertPage(this.SelectedPdfThumbnailIndex, out string message);
     }
 
     [RelayCommand]
     public void OnAddPageAfter()
     {
         var bookMgr = this.model.BookManager;
-        bookMgr.InsertPage(1+this.SelectedPdfThumbnailIndex, out string message);
+        bookMgr.InsertPage(1 + this.SelectedPdfThumbnailIndex, out string message);
     }
 
     [RelayCommand]
@@ -331,6 +333,33 @@ public partial class BookEditViewModel :
 
     public void Receive(BookPagesChangedMessage message)
     {
-        this.LoadBook(); 
-    } 
+        this.LoadBook();
+
+        // Enforce property changed 
+        this.SelectedPdfThumbnailIndex = -1;
+        int pageToShow = message.PageToShow;
+        if (pageToShow < 0)
+        {
+            pageToShow = 0;
+        }
+        else if (pageToShow >= this.PdfThumbnails.Count)
+        {
+            pageToShow = this.PdfThumbnails.Count - 1;
+        }
+
+        this.SelectedPdfThumbnailIndex = pageToShow;
+    }
+
+    public void Receive(BookPageEditedMessage message)
+        // We need to wait for the page itself to re-create its slots, then we can update the PDF 
+        => Schedule.OnUiThread(60,()=>
+            { 
+                // Relaod the thumbnails and then adjust position 
+                this.LoadPdfThumbnails() ;
+
+                // ! we have a book 
+                var book = this.model.BookManager.CurrentBook!;
+                int pdfPageIndex = book.PageIndexFromPage(message.Page);
+                this.SelectedPdfThumbnailIndex = pdfPageIndex;                 
+            }, DispatcherPriority.Background); 
 }

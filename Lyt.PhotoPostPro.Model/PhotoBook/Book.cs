@@ -1,6 +1,4 @@
 ﻿
-using Microsoft.Extensions.Primitives;
-
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -13,6 +11,12 @@ using Color = QuestPDF.Infrastructure.Color;
 
 public sealed partial class Book : IEditable
 {
+    public const string LowResPrefix = "Low_";
+    public const string MediumResPrefix = "Medium_";
+    public const string HighResPrefix = "High_";
+    public const string JpgExtension = ".jpg";
+
+
     public Book( /* Required for serialization */ ) { }
 
     public string FriendlyName { get; set; } = string.Empty;
@@ -58,6 +62,51 @@ public sealed partial class Book : IEditable
     [JsonIgnore]
     // ! Ok
     public ILogger Logger => this.MaybeLogger!;
+
+    public int PageIndexFromPage(Page targetPage)
+    {
+        int pageIndex = -1;
+        int toAdd = 0; 
+        if (this.WithFrontCover)
+        {
+            if ( targetPage == this.FrontCover!.FrontPage)
+            {
+                return 0; 
+            }
+            else if (targetPage == this.FrontCover!.BackPage)
+            {
+                return 1;
+            }
+            else
+            {
+                toAdd = 2; 
+            }
+        }
+
+        if (this.WithBackCover)
+        {
+            if (targetPage == this.BackCover!.FrontPage)
+            {
+                return toAdd + this.Pages.Count;
+            }
+            else if (targetPage == this.BackCover!.BackPage)
+            {
+                return 1 + toAdd + this.Pages.Count;
+            }
+        }
+
+        for (int i = 0; i < this.Pages.Count; ++i)
+        {
+            var page = this.Pages[i];
+            if (page == targetPage)
+            {
+                pageIndex = i;
+                break;
+            }
+        }
+
+        return pageIndex + toAdd;
+    }
 
     public Page FromPageNumber(int pageNumber)
     {
@@ -159,9 +208,9 @@ public sealed partial class Book : IEditable
             // Step 0 - Prepare file paths 
             var bookImage = new BookImage();
             string imageBaseFileName = bookImage.Id.ToShortString();
-            string highResImageFileName = string.Concat("High_", imageBaseFileName, ".jpg");
-            string mediumResImageFileName = string.Concat("Medium_", imageBaseFileName, ".jpg");
-            string lowResImageFileName = string.Concat("Low_", imageBaseFileName, ".jpg");
+            string highResImageFileName = string.Concat(HighResPrefix, imageBaseFileName, JpgExtension);
+            string mediumResImageFileName = string.Concat(MediumResPrefix, imageBaseFileName, JpgExtension);
+            string lowResImageFileName = string.Concat(LowResPrefix, imageBaseFileName, JpgExtension);
             string folderPath = System.IO.Path.Combine(booksPath, this.FolderName);
 
             string highResImageFilePath = System.IO.Path.Combine(folderPath, highResImageFileName);
@@ -195,7 +244,7 @@ public sealed partial class Book : IEditable
                 int quality = isHd ? ImageLoader.HdImageQuality : ImageLoader.ThumbnailQuality;
                 image.SaveAsJpeg(saveMemoryStream, new JpegEncoder() { Quality = quality });
                 byte[] jpgEncoded = saveMemoryStream.ToArray();
-                System.IO.File.WriteAllBytes(targetPath, jpgEncoded);
+                File.WriteAllBytes(targetPath, jpgEncoded);
             }
 
             // Step 2 - Copy original 
