@@ -27,7 +27,7 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
 
     public void AttachDraggable(ListBox listBox, Canvas canvas)
     {
-        if (!this.IsGhost && this.DragAble is null)
+        if (!this.IsGhost)
         {
             if (listBox.ContainerFromItem(this) is ListBoxItem container)
             {
@@ -35,8 +35,24 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
                 {
                     if (container.Presenter.Child is BookImageView view)
                     {
-                        this.DragAble = new DragAble(canvas);
-                        this.DragAble.Attach(view);
+                        if (this.DragAble is null)
+                        {
+                            this.DragAble = new DragAble(canvas);
+                        }
+
+                        if (this.DragAble.IsAttached)
+                        {
+                            // Resolves the case of going full screen: views have been re-created
+                            if (this.DragAble.AssociatedObject != view)
+                            {
+                                this.DragAble.Detach();
+                                this.DragAble.Attach(view);
+                            }
+                        }
+                        else
+                        {
+                            this.DragAble.Attach(view);
+                        }
                     }
                 }
             }

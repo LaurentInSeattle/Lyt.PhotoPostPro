@@ -51,7 +51,7 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
-    public Dictionary<Guid, byte[]> CurrentBookThumbnails { get; set; } = []; 
+    public Dictionary<Guid, byte[]> CurrentBookThumbnails { get; set; } = [];
 
     #region Entire Book Management
 
@@ -200,7 +200,7 @@ public sealed partial class BookManager
         this.CurrentBook = book;
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
-        this.LoadThumbnails(); 
+        this.LoadImageCandidates();
         new BookListChangedMessage().Publish();
     }
 
@@ -218,6 +218,7 @@ public sealed partial class BookManager
                 {
                     this.IsEditing = false;
                     this.CurrentBook = null;
+                    this.Clear(); 
                     this.model.PhotoBook = string.Empty;
                 }
             }
@@ -296,7 +297,7 @@ public sealed partial class BookManager
                     if (maybeBook is Book book)
                     {
                         book.MaybeLogger = this.logger;
-                        book.BookManager = this; 
+                        book.BookManager = this;
                         this.Books.Add(book);
                     }
                 }
@@ -347,7 +348,7 @@ public sealed partial class BookManager
         return this.SaveCurrentBook();
     }
 
-    private bool LoadThumbnails()
+    private bool LoadImageCandidates()
     {
         if (this.CurrentBook is null)
         {
@@ -361,17 +362,19 @@ public sealed partial class BookManager
         {
             var bookImage = images[imageId];
             string path = bookImage.LowResPath;
-            byte[]? imageBytes = null; 
+            byte[]? imageBytes = null;
             try
             {
                 imageBytes = File.ReadAllBytes(path);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Swallow
+                Debug.WriteLine(ex.Message);
+                this.logger.Error("Failed to load image: " + path + "\n" + ex.Message);
             }
 
-            if ( imageBytes is not null)
+            if (imageBytes is not null)
             {
                 lock (this.CurrentBookThumbnails)
                 {
@@ -380,7 +383,7 @@ public sealed partial class BookManager
             }
         });
 
-        return true; 
+        return true;
     }
 
     #endregion Image Management

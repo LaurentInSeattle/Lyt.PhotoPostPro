@@ -83,7 +83,7 @@ public partial class BookEditViewModel :
         this.DoublePages.Clear();
         this.SinglePages.Clear();
         this.PdfThumbnails.Clear();
-        this.model.BookManager.Clear();
+        // this.model.BookManager.Clear();
 
         // UNsubscribe to book updates 
         this.Unregister<BookPagesChangedMessage>();
