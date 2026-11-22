@@ -148,14 +148,22 @@
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding ShowGridLines}"
 						/>
+					<TextBlock
+						Margin="10 0 0 0"
+						Theme="{StaticResource H3}"
+						Text="Pages:"
+						HorizontalAlignment="Left" VerticalAlignment="Center"
+						FontWeight="Normal"
+						Foreground="{StaticResource PastelOrchid_0_080}"
+						/>
 					<glyphs:GlyphButton
 						Style="{StaticResource PanelIconButton}"
 						Layout="IconOnly"
 						GlyphSource="add_circle"
 						GlyphStrokeThickness="0.1"
 						Command="{Binding OnAddPageBefore}"
-						Width="64" Height="36" 
-						Margin="10 0 0 0"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
 						ToolTip.Tip="Add Page BEFORE current"
 						/>
 					<glyphs:GlyphButton
@@ -165,8 +173,8 @@
 						GlyphStrokeThickness="0.1"
 						Command="{Binding OnDeletePage}"
 						CommandParameter="Check"
-						Width="64" Height="36" 
-						Margin="20 0 0 0"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
 						ToolTip.Tip="Delete current page"
 						/>
 					<glyphs:GlyphButton
@@ -175,9 +183,28 @@
 						GlyphSource="add_circle"
 						GlyphStrokeThickness="0.1"
 						Command="{Binding OnAddPageAfter}"
-						Width="64" Height="36" 
-						Margin="10 0 0 0"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
 						ToolTip.Tip="Add Page AFTER current"
+						/>
+					<TextBlock
+						Margin="10 0 0 0"
+						Theme="{StaticResource H3}"
+						Text="Slots:"
+						HorizontalAlignment="Left" VerticalAlignment="Center"
+						FontWeight="Normal"
+						Foreground="{StaticResource PastelOrchid_0_080}"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="delete"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnDeleteSlot}"
+						CommandParameter="Check"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
+						ToolTip.Tip="Delete selected slot"
 						/>
 				</StackPanel>
 			</Grid>
@@ -259,8 +286,6 @@
 		<Canvas
 			x:Name="BookEditDragCanvas"
 			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999"
-			>
-			
-		</Canvas>
+			/>
 	</Grid>
 </UserControl>

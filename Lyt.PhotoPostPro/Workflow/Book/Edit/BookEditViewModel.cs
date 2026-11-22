@@ -331,6 +331,20 @@ public partial class BookEditViewModel :
         bookMgr.RemovePage(this.SelectedPdfThumbnailIndex, out string message);
     }
 
+    [RelayCommand]
+    public void OnDeleteSlot()
+    {
+        var slot = SlotViewModel.SelectedSlot; 
+        if ( slot is null)
+        {
+            // nothing to delete
+            return; 
+        }
+
+        var bookMgr = this.model.BookManager;
+        bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
+    }
+
     public void Receive(BookPagesChangedMessage message)
     {
         this.LoadBook();

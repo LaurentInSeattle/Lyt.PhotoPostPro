@@ -54,10 +54,11 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
 
     public static SlotViewModel? SelectedSlot;
 
+    public readonly Pages.Page Page;
+    public readonly Slots.Slot Slot;
+
     private readonly PhotoPostProModel model;
     private readonly BookEditViewModel bookEditViewModel;
-    private readonly Pages.Page page;
-    private readonly Slots.Slot slot;
     private readonly Slots.ImageSlot? imageSlot;
     private readonly Slots.TextSlot? textSlot;
 
@@ -111,8 +112,8 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
     public SlotViewModel(PhotoPostProModel model, Pages.Page page, Slots.Slot slot)
     {
         this.model = model;
-        this.page = page;
-        this.slot = slot;
+        this.Page = page;
+        this.Slot = slot;
 
         this.bookEditViewModel = App.GetRequiredService<BookEditViewModel>();
         this.isSelected = false;
@@ -156,7 +157,7 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
 
     public void SetPosition()
     {
-        var position = this.slot.Position;
+        var position = this.Slot.Position;
         this.SlotWidth = position.Dx;
         this.SlotHeight = position.Dy;
         this.SlotX = position.X;

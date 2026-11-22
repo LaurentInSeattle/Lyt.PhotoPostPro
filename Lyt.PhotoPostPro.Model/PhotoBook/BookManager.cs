@@ -466,9 +466,9 @@ public sealed partial class BookManager
         }
 
         SingleImageLayoutWithLegend.Create(this.CurrentBook, page, imageId, "Lorem Ipsum - Dolor sit amet");
-        new BookPageEditedMessage(page).Publish();
 
         // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
         this.SaveCurrentBook();
     }
 
@@ -488,20 +488,20 @@ public sealed partial class BookManager
         page.Slots.Add(newSlot);
     }
 
-    public void RemoveSlotFromPage(int pageNumber, Slot slotToRemove)
+    public bool DeleteSlot(Slot slotToRemove, Page page, out string message)
     {
+        message = string.Empty;
         if (this.CurrentBook == null)
         {
             throw new InvalidOperationException("No current book to remove a slot from.");
         }
 
-        var page = this.CurrentBook.FromPageNumber(pageNumber);
-        if (page is null)
-        {
-            return;
-        }
-
         page.Slots.Remove(slotToRemove);
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
+        return true;
     }
 
     public void MoveSlot(int fromPageNumber, int toPageNumber, Slot slotToRemove)

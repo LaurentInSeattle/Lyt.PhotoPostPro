@@ -2,7 +2,7 @@
 
 public sealed partial class BookManager
 {
-// #if LYT_DEBUG
+    // #if LYT_DEBUG
     public void Test()
     {
         string[] ImagePaths =
