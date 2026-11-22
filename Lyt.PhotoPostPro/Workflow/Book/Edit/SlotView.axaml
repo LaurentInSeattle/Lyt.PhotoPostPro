@@ -45,7 +45,7 @@
 			<Rectangle
 				IsVisible="{Binding IsSlotBorderVisible}"
 				Fill="Transparent"
-				Stroke="{StaticResource LightAqua_0_080}"
+				Stroke="{Binding SlotBorderBrush}"
 				StrokeThickness="2"
 				StrokeDashArray="2, 2"
 				IsHitTestVisible="False"

@@ -4,6 +4,8 @@ using QuestPDF.Infrastructure;
 
 using System.IO;
 
+using static System.Net.Mime.MediaTypeNames;
+
 public sealed partial class BookManager
 {
     static BookManager()
@@ -513,6 +515,15 @@ public sealed partial class BookManager
         }
 
         SingleImageLayoutWithLegend.Create(this.CurrentBook, page, imageId, "Lorem Ipsum - Dolor sit amet");
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
+    }
+
+    public void ReplaceImage(Page page, ImageSlot slot , Guid imageId)
+    {
+        slot.BookImageId = imageId;
 
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();

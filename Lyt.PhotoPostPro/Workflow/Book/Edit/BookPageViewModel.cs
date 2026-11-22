@@ -84,9 +84,27 @@ public partial class BookPageViewModel :
         }
     }
 
-    public bool CanDrop(Point _1, object _2) => !this.IsDummy;
+    public bool CanDrop(Point point, object dropped)
+    {
+        if (this.IsDummy)
+        {
+            return false; 
+        }
 
-    public void OnDrop(Point _, object droppedObject)
+        // We have a selected ImageSlot on the page we cannnot drop 
+        foreach (var slot in Slots)
+        {
+            if (slot.CanDrop(point, dropped))
+            {
+                slot.Highlight(highlight: true); 
+                return true; 
+            }
+        }
+
+        return true; 
+    } 
+
+    public void OnDrop(Point point, object droppedObject)
     {
         if (this.page is null)
         {
@@ -107,6 +125,18 @@ public partial class BookPageViewModel :
 
         // Ready for drop 
         Debug.WriteLine(" Dropped Guid : " + imageId.ToString());
+
+        // If we have a selected ImageSlot on the page, this is our actual drop target
+        foreach (var slot in this.Slots)
+        {
+            if (slot.CanDrop(point, droppedObject))
+            {
+                slot.OnDrop(point, droppedObject);
+                return; 
+            }
+        }
+
+        // No image slot selected we edit the entire page 
         this.model.BookManager.AddDroppedImage(this.page, imageId);
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
 using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
+using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
+using Lyt.Avalonia.Controls;
 
 using QuestPDF.Infrastructure;
 
@@ -8,12 +10,21 @@ using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
-public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
+public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 // , IRecipient<>
 {
     #region Static Utilities 
 
     public static FontFamily DefaultFontFamily = new("Arial");
+
+    private static SolidColorBrush? selectedBrush;
+    private static SolidColorBrush? highlightedBrush;
+
+    static SlotViewModel()
+    {
+        Utilities.TryFindResource<SolidColorBrush>("FreshGreen_1_100", out highlightedBrush);
+        Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
+    }
 
     public static SolidColorBrush FromTextStyle(Slots.SlotTextStyle textStyle)
         => new(global::Avalonia.Media.Color.FromRgb(textStyle.Red, textStyle.Green, textStyle.Blue));
@@ -63,9 +74,13 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
     private readonly Slots.TextSlot? textSlot;
 
     private bool isSelected;
+    private bool isHighlighted;
 
     [ObservableProperty]
     public partial bool IsSlotBorderVisible { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush? SlotBorderBrush { get; set; }
 
     [ObservableProperty]
     public partial bool IsImageSlot { get; set; }
@@ -116,7 +131,10 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
         this.Slot = slot;
 
         this.bookEditViewModel = App.GetRequiredService<BookEditViewModel>();
+
         this.isSelected = false;
+        this.isHighlighted = false;
+        this.UpdateBorderVisualState();
 
         // To enforce property changed ?
         // this.ClearPosition();
@@ -142,10 +160,6 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
 
     public Books.Book Book
         => this.model.BookManager.CurrentBook ?? throw new Exception("No Book ???");
-
-    public string DragDropFormat => throw new NotImplementedException();
-
-    public DragAble? DragAble => throw new NotImplementedException();
 
     public void ClearPosition()
     {
@@ -209,12 +223,15 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
         }
     }
 
-    public void OnClicked(bool isRightClick) => this.Select(!this.isSelected);
+    public void OnClicked(bool isRightClick)
+    {
+        this.Select(!this.isSelected);
+    } 
 
     public void Select(bool select = true)
     {
         this.isSelected = select;
-        this.IsSlotBorderVisible = select;
+        this.UpdateBorderVisualState();
         if (select)
         {
             SlotViewModel.SelectedSlot?.Select(false);
@@ -226,9 +243,59 @@ public partial class SlotViewModel : ViewModel<SlotView> // , IDragAbleViewModel
         }
     }
 
-    //public void OnEntered() => throw new NotImplementedException();
-    //public void OnExited() => throw new NotImplementedException();
-    //public void OnLongPress() => throw new NotImplementedException();
-    //public bool OnBeginDrag() => throw new NotImplementedException();
-    //public View CreateGhostView() => throw new NotImplementedException();
+    internal void Highlight(bool highlight = true)
+    {
+        this.isHighlighted = highlight;
+        this.UpdateBorderVisualState();
+    }
+
+    private void UpdateBorderVisualState()
+    {
+        this.IsSlotBorderVisible = this.isSelected || this.isHighlighted;
+        if (this.isHighlighted)
+        {
+            this.SlotBorderBrush = highlightedBrush;
+        }
+        else if (this.isSelected)
+        {
+            this.SlotBorderBrush = selectedBrush;
+        }
+    }
+
+    public bool CanDrop(Point point, object droppedObject)
+    {
+        if (this.IsImageSlot && this.isSelected)
+        {
+            this.Highlight();
+            Schedule.OnUiThread(500, () => { this.Highlight(false); }, DispatcherPriority.Background);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void OnDrop(Point point, object droppedObject)
+    {
+        if (this.Slot is not ImageSlot imageSlot)
+        {
+            return;
+        }
+
+        if (droppedObject is not BookImageViewModel bookImageViewModel)
+        {
+            return;
+        }
+
+        Guid imageId = bookImageViewModel.Key;
+        if (imageId == Guid.Empty)
+        {
+            return;
+        }
+
+        this.Highlight(false);
+
+        // Ready for drop 
+        Debug.WriteLine(" Dropped Guid : " + imageId.ToString());
+        this.model.BookManager.ReplaceImage(this.Page, imageSlot, imageId);
+    }
 }
