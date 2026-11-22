@@ -220,7 +220,7 @@ public sealed partial class BookManager
                 {
                     this.IsEditing = false;
                     this.CurrentBook = null;
-                    this.Clear(); 
+                    this.Clear();
                     this.model.PhotoBook = string.Empty;
                 }
             }
@@ -516,12 +516,16 @@ public sealed partial class BookManager
 
         SingleImageLayoutWithLegend.Create(this.CurrentBook, page, imageId, "Lorem Ipsum - Dolor sit amet");
 
+        // Later
+        // DualImageLayout.Create(this.CurrentBook, page, imageId, imageId); 
+        // DualImageLayoutWithLegend.Create(this.CurrentBook, page, imageId, "Lorem Ipsum", imageId, "Dolor sit amet");
+
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();
         this.SaveCurrentBook();
     }
 
-    public void ReplaceImage(Page page, ImageSlot slot , Guid imageId)
+    public void ReplaceImage(Page page, ImageSlot slot, Guid imageId)
     {
         slot.BookImageId = imageId;
 
