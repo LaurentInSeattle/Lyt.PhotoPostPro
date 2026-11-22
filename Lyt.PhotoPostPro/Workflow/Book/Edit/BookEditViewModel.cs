@@ -83,9 +83,11 @@ public partial class BookEditViewModel :
         this.DoublePages.Clear();
         this.SinglePages.Clear();
         this.PdfThumbnails.Clear();
+        this.model.BookManager.Clear();
 
         // UNsubscribe to book updates 
         this.Unregister<BookPagesChangedMessage>();
+        this.Unregister<BookPageEditedMessage>();
     }
 
     public override void OnViewLoaded()
@@ -265,23 +267,17 @@ public partial class BookEditViewModel :
 
     private void LoadImageCandidates()
     {
-        // Book should cache the thumbnails of image candidates 
-
-        // ! We have a book
-        Books.Book book = this.model.BookManager.CurrentBook!;
-        var images = book.ImageCandidates.Values.ToList();
-
+        // BookManager is caching the thumbnails of image candidates 
+        var images = this.model.BookManager.CurrentBookThumbnails;
         var list = new List<BookImageViewModel>(images.Count);
-        Parallel.For(0, images.Count, index =>
+        Parallel.ForEach(images.Keys, imageId =>
         {
-            string file = images[index].LowResPath;
-            if (File.Exists(file))
+            var imageBytes = images[imageId];
+            using var stream = new MemoryStream(imageBytes);
+            var bitmap = new Bitmap(stream);
+            lock (list)
             {
-                var bitmap = new Bitmap(file);
-                lock (list)
-                {
-                    list.Add(new BookImageViewModel(file, bitmap));
-                }
+                list.Add(new BookImageViewModel(imageId, bitmap));
             }
         });
 

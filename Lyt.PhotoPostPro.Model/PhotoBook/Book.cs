@@ -57,6 +57,9 @@ public sealed partial class Book : IEditable
     public List<SlotTextStyle> TextStyles { get; set; } = [];
 
     [JsonIgnore]
+    public BookManager? BookManager { get; set; }
+
+    [JsonIgnore]
     public ILogger? MaybeLogger { get; set; }
 
     [JsonIgnore]

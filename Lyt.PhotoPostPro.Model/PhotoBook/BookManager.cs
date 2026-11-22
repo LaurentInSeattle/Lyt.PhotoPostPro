@@ -51,7 +51,12 @@ public sealed partial class BookManager
 
     public Book? CurrentBook { get; set; }
 
+    public Dictionary<Guid, byte[]> CurrentBookThumbnails { get; set; } = []; 
+
     #region Entire Book Management
+
+    public void Clear()
+        => this.CurrentBookThumbnails.Clear();
 
     public Book? CreateBook(string friendlyName, string description, out string message)
         => this.CreateBook(
@@ -100,6 +105,7 @@ public sealed partial class BookManager
         book = new Book
         {
             MaybeLogger = this.logger,
+            BookManager = this,
 
             FriendlyName = friendlyName,
             FolderName = folderName,
@@ -194,6 +200,7 @@ public sealed partial class BookManager
         this.CurrentBook = book;
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
+        this.LoadThumbnails(); 
         new BookListChangedMessage().Publish();
     }
 
@@ -289,6 +296,7 @@ public sealed partial class BookManager
                     if (maybeBook is Book book)
                     {
                         book.MaybeLogger = this.logger;
+                        book.BookManager = this; 
                         this.Books.Add(book);
                     }
                 }
@@ -337,6 +345,42 @@ public sealed partial class BookManager
         }
 
         return this.SaveCurrentBook();
+    }
+
+    private bool LoadThumbnails()
+    {
+        if (this.CurrentBook is null)
+        {
+            return false;
+        }
+
+        this.CurrentBookThumbnails.Clear();
+
+        var images = this.CurrentBook.ImageCandidates;
+        Parallel.ForEach(images.Keys, imageId =>
+        {
+            var bookImage = images[imageId];
+            string path = bookImage.LowResPath;
+            byte[]? imageBytes = null; 
+            try
+            {
+                imageBytes = File.ReadAllBytes(path);
+            }
+            catch(Exception ex)
+            {
+                // Swallow
+            }
+
+            if ( imageBytes is not null)
+            {
+                lock (this.CurrentBookThumbnails)
+                {
+                    this.CurrentBookThumbnails.Add(imageId, imageBytes);
+                }
+            }
+        });
+
+        return true; 
     }
 
     #endregion Image Management

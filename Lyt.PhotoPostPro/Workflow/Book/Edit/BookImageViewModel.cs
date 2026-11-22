@@ -13,12 +13,12 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
 {
     public const string CustomDragAndDropFormat = "BookImageViewModel";
 
-    public readonly string Key;
+    public readonly Guid Key;
 
     [ObservableProperty]
     public partial Bitmap Bitmap { get; set; }
 
-    public BookImageViewModel(string key, Bitmap bitmap, bool isGhost = false)
+    public BookImageViewModel(Guid key, Bitmap bitmap, bool isGhost = false)
     {
         this.Key = key;
         this.Bitmap = bitmap;

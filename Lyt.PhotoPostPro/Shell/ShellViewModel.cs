@@ -34,7 +34,8 @@ public sealed partial class ShellViewModel
         this.Subscribe<LanguageChangedMessage>();
 
         // Disable photo book if not debugging
-        this.PhotoBookIsDisabled = !Debugger.IsAttached;
+        // this.PhotoBookIsDisabled = !Debugger.IsAttached;
+        this.PhotoBookIsDisabled = false; 
     }
 
     [ObservableProperty]

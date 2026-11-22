@@ -63,7 +63,19 @@ public sealed class ImageSlot : Slot
     {
         try
         {
-            // Need to crop the source image to match the page aspect ratio
+            if (bookResolution == BookResolution.Thumbnails)
+            {
+                // ! We have it 
+                if (book.BookManager!.CurrentBookThumbnails.TryGetValue(this.BookImageId, out byte[]? cachedImageBytes))
+                {
+                    if (cachedImageBytes is not null)
+                    {
+                        return cachedImageBytes;
+                    }
+                }
+            }
+
+            // May need to crop the source image to match the page aspect ratio
             string imageFileName = this.ImagePath(book, bookResolution);
             byte[] imageBytes = File.ReadAllBytes(imageFileName);
             return imageBytes;

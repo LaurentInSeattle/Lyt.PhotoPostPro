@@ -99,15 +99,7 @@ public partial class BookPageViewModel :
             return;
         }
 
-        string path = bookImageViewModel.Key;
-        string fileName = Path.GetFileNameWithoutExtension(path);
-        if (!fileName.StartsWith(Books.Book.LowResPrefix))
-        {
-            return;
-        }
-
-        string key = fileName.Replace(Books.Book.LowResPrefix, "");
-        Guid imageId = key.FromShortString();
+        Guid imageId = bookImageViewModel.Key;
         if (imageId == Guid.Empty)
         {
             return;
