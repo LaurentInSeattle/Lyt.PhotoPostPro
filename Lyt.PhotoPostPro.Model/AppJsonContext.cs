@@ -39,6 +39,7 @@
 [JsonSerializable(typeof(Slot))]
 [JsonSerializable(typeof(SlotPosition))]
 [JsonSerializable(typeof(SlotTextStyle))]
+[JsonSerializable(typeof(SlotTextStylesCollection))]
 [JsonSerializable(typeof(FrontCover))]
 [JsonSerializable(typeof(BackCover))]
 [JsonSerializable(typeof(BookFormat))]

@@ -52,7 +52,10 @@ public sealed partial class PhotoPostProModel : ModelBase
     public ImageExportsCollection ImageExports { get; set; } = new();
 
     [JsonRequired]
-    public string PhotoBook { get; set; } = string.Empty; 
+    public string PhotoBook { get; set; } = string.Empty;
+
+    [JsonRequired]
+    public SlotTextStylesCollection TextStyles { get; set; } = new();
 
     #endregion Serialized -  No model changed event
 

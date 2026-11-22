@@ -106,6 +106,7 @@ global using Lyt.PhotoPostPro.Model.PhotoBook;
 global using Lyt.PhotoPostPro.Model.PhotoBook.Layouts;
 global using Lyt.PhotoPostPro.Model.PhotoBook.Pages;
 global using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
+global using Lyt.PhotoPostPro.Model.PhotoBook.Typography;
 global using Lyt.PhotoPostPro.Model.ProcessSteps;
 global using Lyt.PhotoPostPro.Model.Process;
 global using Lyt.PhotoPostPro.Model.Utilities;

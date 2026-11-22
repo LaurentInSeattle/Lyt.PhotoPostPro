@@ -2,6 +2,7 @@
 
 using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
 using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
+using Lyt.PhotoPostPro.Model.PhotoBook.Typography;
 using Lyt.Avalonia.Controls;
 
 using QuestPDF.Infrastructure;
@@ -9,6 +10,7 @@ using QuestPDF.Infrastructure;
 using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
+using Typography = Model.PhotoBook.Typography;
 
 public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 // , IRecipient<>
@@ -26,10 +28,10 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
         Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
     }
 
-    public static SolidColorBrush FromTextStyle(Slots.SlotTextStyle textStyle)
+    public static SolidColorBrush FromTextStyle(Typography.SlotTextStyle textStyle)
         => new(global::Avalonia.Media.Color.FromRgb(textStyle.Red, textStyle.Green, textStyle.Blue));
 
-    public static TextAlignment FromTextStyleTextAlignment(Slots.SlotTextStyle textStyle)
+    public static TextAlignment FromTextStyleTextAlignment(Typography.SlotTextStyle textStyle)
         => textStyle.TextAlignment switch
         {
             BookTextAlignment.Center => TextAlignment.Center,
@@ -37,7 +39,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
             _ => TextAlignment.Left,
         };
 
-    public static (FontStyle, FontWeight) FromTextStyleFontStyle(Slots.SlotTextStyle textStyle)
+    public static (FontStyle, FontWeight) FromTextStyleFontStyle(Typography.SlotTextStyle textStyle)
     {
         var fontStyle = textStyle.FontStyle switch
         {

@@ -58,13 +58,12 @@ public sealed partial class BookManager
         // ! ok
         var back = book.FrontCover!.BackPage;
         EmptyLayout.Create(book, back);
-        var titleStyle = new SlotTextStyle() { FontSize = 40, TextAlignment = BookTextAlignment.Center };
         back.Slots.Add(
             new TextSlot()
             {
-                Position = new SlotPosition(x: 0, y: 300, dx: 792, dy: 200),
+                Position = new SlotPosition(x: 0, y: 260, dx: 792, dy: 200),
                 Text = "Bellissima Italia, Amo Te!",
-                Style = titleStyle,
+                Style = SlotTextStyle.Title,
             });
 
         // Book Initialize creates covers and two pages 

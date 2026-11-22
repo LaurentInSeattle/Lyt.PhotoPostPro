@@ -669,7 +669,7 @@ public sealed partial class BookManager
         {
             throw new InvalidOperationException("No current book to update a text style in.");
         }
-        var style = this.CurrentBook.TextStyles.FirstOrDefault(s => s.Key == styleKey);
+        var style = this.CurrentBook.TextStyles.FirstOrDefault(s => s.FriendlyName == styleKey);
         if (style != null)
         {
             this.CurrentBook.TextStyles[this.CurrentBook.TextStyles.IndexOf(style)] = newStyle;

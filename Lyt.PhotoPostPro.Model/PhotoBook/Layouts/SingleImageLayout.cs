@@ -24,6 +24,7 @@ public sealed class SingleImageLayoutWithLegend : Layout
         imageSlot.BookImageId = bookImageId;
         var textSlot = (TextSlot)page.Slots[1];
         textSlot.Text = legend;
+        textSlot.Style = SlotTextStyle.LargeBodyText; 
         textSlot.Style.TextAlignment = BookTextAlignment.Center;
     }
 

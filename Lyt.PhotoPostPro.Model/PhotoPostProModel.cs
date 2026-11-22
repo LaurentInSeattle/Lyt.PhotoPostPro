@@ -118,6 +118,7 @@ public sealed partial class PhotoPostProModel : ModelBase
             bool saveNeeded = false;
             saveNeeded |= this.CreateDefaultLibraryFolder();
             saveNeeded |= this.CreateDefaultExports();
+            saveNeeded |= this.CreateDefaultTypography();
             if (saveNeeded)
             {
                 // We just added stuff: Save the newly added data 

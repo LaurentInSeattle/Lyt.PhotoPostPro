@@ -82,7 +82,7 @@
 				<RowDefinition Height="64" /> <!-- Toolbar --> 
 				<RowDefinition Height="*" /> <!-- Edit --> 
 				<RowDefinition Height="32" /> <!-- Pips --> 
-				<RowDefinition Height="120" /> <!-- Templates --> 
+				<RowDefinition Height="0" /> <!-- Templates --> 
 			</Grid.RowDefinitions>
 			<Grid
 				Background="#80000020"

@@ -266,4 +266,49 @@ public sealed partial class PhotoPostProModel : ModelBase
 
         return needModelSave;
     }
+
+    internal bool CreateDefaultTypography()
+    {
+        bool needModelSave = false;
+        if (this.TextStyles.AvailableSlotTextStyles.Count == 0)
+        {
+            this.AddSlotTextStyle(SlotTextStyle.Title, withSave: false, out string _);
+            this.AddSlotTextStyle(SlotTextStyle.Header_1, withSave: false, out string _);
+            this.AddSlotTextStyle(SlotTextStyle.Header_2, withSave: false, out string _);
+            this.AddSlotTextStyle(SlotTextStyle.LargeBodyText, withSave: false, out string _);
+            this.AddSlotTextStyle(SlotTextStyle.SmallBodyText, withSave: false, out string _);
+            needModelSave = true;
+        }
+
+        return needModelSave;
+    }
+
+    public bool AddSlotTextStyle(SlotTextStyle newSlotTextStyle, bool withSave, out string message)
+    {
+        message = string.Empty;
+        SlotTextStyle? existing = this.TextStyles.FromFriendlyName(newSlotTextStyle.FriendlyName.Trim());
+        if (existing is not null)
+        {
+            message = "Tools.Editor.Validation.FriendlyNameAlreadyExists";
+            return false;
+        }
+
+        try
+        {
+            this.TextStyles.AvailableSlotTextStyles.Add(newSlotTextStyle);
+            if (withSave)
+            {
+                this.Save();
+            } 
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            this.Logger.Error(" Failed to add new image export: " + newSlotTextStyle.FriendlyName + "  " + ex);
+            message = "Tools.Editor.Validation.AddImageExportFailed";
+            return false;
+        }
+    }
+
 }
