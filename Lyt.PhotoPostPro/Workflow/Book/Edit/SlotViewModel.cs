@@ -83,25 +83,22 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
     public partial bool IsSlotBorderVisible { get; set; }
     
     [ObservableProperty]
-    public partial bool AreSlotHandlesVisible { get; set; }
-
-    [ObservableProperty]
     public partial SolidColorBrush? SlotBorderBrush { get; set; }
 
     [ObservableProperty]
     public partial bool IsImageSlot { get; set; }
 
     [ObservableProperty]
-    public partial double SlotWidth { get; set; }
+    public partial double Dx { get; set; }
 
     [ObservableProperty]
-    public partial double SlotHeight { get; set; }
+    public partial double Dy { get; set; }
 
     [ObservableProperty]
-    public partial double SlotX { get; set; }
+    public partial double X { get; set; }
 
     [ObservableProperty]
-    public partial double SlotY { get; set; }
+    public partial double Y { get; set; }
 
     [ObservableProperty]
     public partial string SlotText { get; set; } = string.Empty;
@@ -144,7 +141,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
         this.UpdateBorderVisualState();
 
         // To enforce property changed ?
-        // this.ClearPosition();
+        this.ClearPosition();
         if (slot is Slots.ImageSlot imageSlot)
         {
             this.IsImageSlot = true;
@@ -162,7 +159,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
             throw new NotSupportedException("Slot type not supported.");
         }
 
-        this.SetPosition();
+        // this.SetPosition();
     }
 
     public Books.Book Book
@@ -170,19 +167,25 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
     public void ClearPosition()
     {
-        this.SlotWidth = 0;
-        this.SlotHeight = 0;
-        this.SlotX = -1;
-        this.SlotY = -1;
+        //this.Dx = 0;
+        //this.Dy = 0;
+        //this.X = -1;
+        //this.Y = -1;
     }
 
     public void SetPosition()
     {
-        var position = this.Slot.Position;
-        this.SlotWidth = position.Dx;
-        this.SlotHeight = position.Dy;
-        this.SlotX = position.X;
-        this.SlotY = position.Y;
+        if ( ! this.IsBound)
+        {
+            return; 
+        }
+
+        this.View.SetPosition(this.Slot.Position);
+        //var position = this.Slot.Position;
+        //this.Dx = position.Dx;
+        //this.Dy = position.Dy;
+        //this.X = position.X;
+        //this.Y = position.Y;
     }
 
     public void SetText()
@@ -243,9 +246,11 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
         {
             SlotViewModel.SelectedSlot?.Select(false);
             SlotViewModel.SelectedSlot = this;
+            AdornerLayer.SetAdorner(this.View, new ResizeAdorner(this.View)); 
         }
         else
         {
+            AdornerLayer.SetAdorner(this.View, null);
             SlotViewModel.SelectedSlot = null;
         }
     }
@@ -267,8 +272,6 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
         {
             this.SlotBorderBrush = selectedBrush;
         }
-
-        this.AreSlotHandlesVisible = true; 
     }
 
     public bool CanDrop(Point point, object droppedObject)
@@ -317,114 +320,3 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
     }
 }
-
-/*
- * 
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
-using Avalonia.Media;
-
-public class ResizeAdorner : Control
-{
-    private readonly Thumb _topLeft;
-    private readonly Thumb _bottomRight;
-    private readonly Control _adornedElement;
-
-    public ResizeAdorner(Control adornedElement)
-    {
-        _adornedElement = adornedElement;
-
-        // Create corner handles
-        _topLeft = CreateThumb(StandardCursorType.TopLeftCorner);
-        _bottomRight = CreateThumb(StandardCursorType.BottomRightCorner);
-
-        // Wire up drag events
-        _bottomRight.DragDelta += OnBottomRightDrag;
-        _topLeft.DragDelta += OnTopLeftDrag;
-
-        // Add thumbs to the visual tree of the adorner
-        VisualChildren.Add(_topLeft);
-        VisualChildren.Add(_bottomRight);
-    }
-
-    private Thumb CreateThumb(StandardCursorType cursor)
-    {
-        return new Thumb
-        {
-            Width = 10,
-            Height = 10,
-            Background = Brushes.White,
-            BorderBrush = Brushes.DodgerBlue,
-            BorderThickness = new Thickness(1.5),
-            Cursor = new Cursor(cursor)
-        };
-    }
-
-    // Position the handles relative to the adorned rectangle
-    protected override Size ArrangeOverride(Size finalSize)
-    {
-        double halfThumb = 5; // Half of thumb width/height to center on corners
-
-        _topLeft.Arrange(new Rect(-halfThumb, -halfThumb, 10, 10));
-        _bottomRight.Arrange(new Rect(finalSize.Width - halfThumb, finalSize.Height - halfThumb, 10, 10));
-
-        return finalSize;
-    }
-
-    private void OnBottomRightDrag(object? sender, VectorEventArgs e)
-    {
-        // Prevent negative dimensions
-        double newWidth = Math.Max(10, _adornedElement.Width + e.Vector.X);
-        double newHeight = Math.Max(10, _adornedElement.Height + e.Vector.Y);
-
-        _adornedElement.Width = newWidth;
-        _adornedElement.Height = newHeight;
-    }
-
-    private void OnTopLeftDrag(object? sender, VectorEventArgs e)
-    {
-        double newWidth = Math.Max(10, _adornedElement.Width - e.Vector.X);
-        double newHeight = Math.Max(10, _adornedElement.Height - e.Vector.Y);
-
-        // Adjust Canvas position when dragging top/left edges
-        double currentLeft = Canvas.GetLeft(_adornedElement);
-        double currentTop = Canvas.GetTop(_adornedElement);
-
-        Canvas.SetLeft(_adornedElement, currentLeft + (_adornedElement.Width - newWidth));
-        Canvas.SetTop(_adornedElement, currentTop + (_adornedElement.Height - newHeight));
-
-        _adornedElement.Width = newWidth;
-        _adornedElement.Height = newHeight;
-    }
-}
- 
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
-
-private ResizeAdorner? _currentAdorner;
-
-private void OnRectanglePointerPressed(object? sender, PointerPressedEventArgs e)
-{
-    if (sender is Control targetShape)
-    {
-        var adornerLayer = AdornerLayer.GetAdornerLayer(targetShape);
-        if (adornerLayer == null) return;
-
-        // Remove existing adorner if switching selection
-        if (_currentAdorner != null)
-        {
-            adornerLayer.Children.Remove(_currentAdorner);
-        }
-
-        // Create and attach the new adorner
-        _currentAdorner = new ResizeAdorner(targetShape);
-        AdornerLayer.SetAdornedElement(_currentAdorner, targetShape);
-        adornerLayer.Children.Add(_currentAdorner);
-    }
-}
-
- * 
-*/

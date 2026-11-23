@@ -64,7 +64,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
 
     public void SetViewingMode(Viewing viewing)
     {
-        With.Flag(ref isProgrammaticUpdate, () =>
+        With.Flag(ref this.isProgrammaticUpdate, () =>
         {
             if (viewing == Viewing.Unrated)
             {
@@ -263,7 +263,7 @@ public sealed partial class LibraryThumbnailsPanelViewModel :
         // If keyword search returns results auto select first sorted image 
         if (this.DisplayedThumbnails.Count > 0)
         {
-            libraryViewModel.OnSelect(this.DisplayedThumbnails[0]);
+            this.libraryViewModel.OnSelect(this.DisplayedThumbnails[0]);
         }
     }
 

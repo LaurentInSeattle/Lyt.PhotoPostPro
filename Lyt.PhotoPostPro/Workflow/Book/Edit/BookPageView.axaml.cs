@@ -34,11 +34,22 @@ public partial class BookPageView : View
         this.RemoveHandler(PointerExitedEvent, this.OnLeave);
     }
 
+    public void AddSlots(List<SlotViewModel> slots)
+    {
+        var children = this.SlotsCanvas.Children;
+        children.Clear();
+        foreach (var slot in slots)
+        {
+            children.Add(slot.View);
+            slot.View.SetPosition(slot.Slot.Position);
+        }
+    }
+
     protected override void OnDataContextChanged(object? sender, EventArgs e)
     {
         base.OnDataContextChanged(sender, e);
-        if ( this.DataContext is BookPageViewModel bookPageViewModel &&
-            !bookPageViewModel.IsDummy )
+        if (this.DataContext is BookPageViewModel bookPageViewModel &&
+            !bookPageViewModel.IsDummy)
         {
             new DragOverAble(/* StageView.HideDropTarget*/ ).Attach(this);
             new DropAble(/* StageView.HideDropTarget*/ ).Attach(this);

@@ -181,7 +181,7 @@ public sealed partial class SpotlightToolboxViewModel :
 
         this.bitmapWidth = bitmapSize.Width;
         this.bitmapHeight = bitmapSize.Height;
-        int largestDimension = Math.Max(bitmapHeight, bitmapWidth);
+        int largestDimension = Math.Max(this.bitmapHeight, this.bitmapWidth);
         if ((this.axisX < 0.0f) || (this.axisY < 0.0f))
         {
             this.axisX = largestDimension / 20.0f;

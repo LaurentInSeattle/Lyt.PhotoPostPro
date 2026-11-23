@@ -16,8 +16,8 @@ public partial class BookPageViewModel :
     IRecipient<BookPageEditedMessage>
 {
     private readonly PhotoPostProModel model;
-
     private readonly Pages.Page? page;
+    private List<SlotViewModel> Slots = [];
 
     [ObservableProperty]
     public partial double PageWidth { get; set; }
@@ -31,8 +31,8 @@ public partial class BookPageViewModel :
     [ObservableProperty]
     public partial bool AreVisibleGridLines { get; set; } = true;
 
-    [ObservableProperty]
-    public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
+    //[ObservableProperty]
+    //public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
 
     public BookPageViewModel(PhotoPostProModel model, Pages.Page? page)
     {
@@ -55,6 +55,22 @@ public partial class BookPageViewModel :
         this.CreateSlots();
     }
 
+    public override void OnViewLoaded()
+    {
+        base.OnViewLoaded();
+        Schedule.OnUiThread(60, () => 
+        {
+            if (this.IsBound)
+            {
+                this.View.AddSlots(this.Slots);
+            } 
+            else
+            {
+                if ( Debugger.IsAttached) { Debugger.Break();  }
+            }
+        }, DispatcherPriority.Background);          
+    } 
+
     public void Receive(BookGridLinesMessage message) => this.ShowGridLines(message.ShowGridLines);
 
     public void Receive(BookPageEditedMessage message)
@@ -66,6 +82,7 @@ public partial class BookPageViewModel :
 
         this.Slots.Clear();
         this.CreateSlots();
+        this.View.AddSlots(this.Slots);
     }
 
     public void ShowGridLines(bool show) => this.AreVisibleGridLines = !this.IsDummy && show;
@@ -80,6 +97,7 @@ public partial class BookPageViewModel :
         foreach (var slot in this.page.Slots)
         {
             var slotViewModel = new SlotViewModel(this.model, this.page, slot);
+            slotViewModel.CreateViewAndBind(); 
             this.Slots.Add(slotViewModel);
         }
     }
@@ -88,21 +106,21 @@ public partial class BookPageViewModel :
     {
         if (this.IsDummy)
         {
-            return false; 
+            return false;
         }
 
         // We have a selected ImageSlot on the page we cannnot drop 
-        foreach (var slot in Slots)
+        foreach (var slot in this.Slots)
         {
             if (slot.CanDrop(point, dropped))
             {
-                slot.Highlight(highlight: true); 
-                return true; 
+                slot.Highlight(highlight: true);
+                return true;
             }
         }
 
-        return true; 
-    } 
+        return true;
+    }
 
     public void OnDrop(Point point, object droppedObject)
     {
@@ -132,7 +150,7 @@ public partial class BookPageViewModel :
             if (slot.CanDrop(point, droppedObject))
             {
                 slot.OnDrop(point, droppedObject);
-                return; 
+                return;
             }
         }
 

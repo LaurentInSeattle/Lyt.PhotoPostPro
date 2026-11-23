@@ -53,7 +53,7 @@ public sealed partial class LibrariesEditViewModel :
         var visual = this.View;
         if (visual != null)
         {
-            string? selectedFolderPath = await OpenFolderPickerAsync(visual);
+            string? selectedFolderPath = await this.OpenFolderPickerAsync(visual);
             this.FolderPath = string.IsNullOrEmpty(selectedFolderPath) ? string.Empty : selectedFolderPath;
             this.ValidateAndMessage(); 
         }

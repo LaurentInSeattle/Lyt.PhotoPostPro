@@ -17,11 +17,8 @@
 
 	Background="Transparent"
 	>
-	<Grid
-		>
-		<Viewbox
-			Margin="4"
-			>
+	<Grid >
+		<Viewbox Margin="4" >
 			<!-- 
 			// TODO : Bind these numbers 
 			PageSize Letter (612, 792);  

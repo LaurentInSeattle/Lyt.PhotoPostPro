@@ -235,6 +235,8 @@
 				IsVisible="{Binding DoublePageMode}"
 				>
 				<Carousel 
+				Grid.Row="2"
+				IsVisible="{Binding DoublePageMode}"
 					Name="DoublePagesCarousel"
 					ItemsSource="{Binding DoublePages}"
 					SelectedIndex="{Binding DoublePagesIndex}"
@@ -249,6 +251,8 @@
 					</Carousel.ItemTemplate>
 				</Carousel>		
 			</Viewbox>
+			
+			<!-- Pips Pager --> 
 			<LayoutTransformControl
 				Grid.Row="3"
 				IsVisible="{Binding DoublePageMode}"
@@ -263,6 +267,7 @@
 					Foreground="{StaticResource LightAqua_0_120}"
 				   />
 			</LayoutTransformControl>
+
 			<Viewbox
 				Grid.Row="2"
 				IsVisible="{Binding !DoublePageMode}"

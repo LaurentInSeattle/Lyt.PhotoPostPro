@@ -48,10 +48,17 @@
 				</VisualBrush>
 			</Canvas.Background>					
 		</Canvas>
+
+		<Canvas 
+			x:Name="SlotsCanvas"
+			Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
+			>
+		</Canvas>
+
+		<!-- Set the Canvas as the container panel
 		<ItemsControl 
 			IsVisible="{Binding !IsDummy}"
 			ItemsSource="{Binding Slots}">
-			<!-- Set the Canvas as the container panel -->
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<Canvas 
@@ -61,21 +68,20 @@
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 
-			<!-- Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper -->
+			 Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper 
 			<ItemsControl.Styles>
 				<Style Selector="ItemsControl > ContentPresenter" x:DataType="vm:SlotViewModel">
-					<Setter Property="Canvas.Left" Value="{Binding SlotX}" />
-					<Setter Property="Canvas.Top" Value="{Binding SlotY}" />
+					<Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}" />
+					<Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}" />
 				</Style>
 			</ItemsControl.Styles>
 
-			<!-- Define how each item looks -->
+			Define how each item looks 
 			<ItemsControl.ItemTemplate>
-				<DataTemplate x:DataType="vm:SlotViewModel">
-					<vm:SlotView />
-				</DataTemplate>
+				<DataTemplate> <vm:SlotView /> </DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
+		--> 
 
 		<!-- DropRectangle MUST be made  IsHitTestVisible="False" or else the slots do not gets the clicks --> 
 		<Rectangle

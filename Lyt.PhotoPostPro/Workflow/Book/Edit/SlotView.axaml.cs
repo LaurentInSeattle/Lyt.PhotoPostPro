@@ -1,6 +1,8 @@
 namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
-public partial class SlotView : View
+using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
+
+public partial class SlotView : View, IPositionable
 {
     public SlotView()
     {
@@ -13,6 +15,15 @@ public partial class SlotView : View
         if (this.DataContext is SlotViewModel slotViewModel)
         {
             slotViewModel.OnClicked(false);
+            e.Handled = true;
         }
+    }
+
+    public void SetPosition(SlotPosition slotPosition)
+    {
+        this.Width = slotPosition.Dx;
+        this.Height = slotPosition.Dy;
+        Canvas.SetLeft(this, slotPosition.X);
+        Canvas.SetTop(this, slotPosition.Y);
     }
 }

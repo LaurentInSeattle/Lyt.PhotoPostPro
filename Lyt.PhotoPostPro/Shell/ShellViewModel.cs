@@ -245,7 +245,7 @@ public sealed partial class ShellViewModel
         if (!this.isFirstActivation && this.model.IsFirstRun)
         {
             this.NavigationBarIsEnabled = true;
-            model.ClearFirstRun();
+            this.model.ClearFirstRun();
         }
 
         this.isFirstActivation = false;
