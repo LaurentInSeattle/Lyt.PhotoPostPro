@@ -17,10 +17,12 @@
 		Canvas.Top="{Binding SlotY}"
 		Canvas.Left="{Binding SlotX}"
 		BorderThickness="0"
+		ClipToBounds="False"
 		>
 		<Grid
 			x:Name="OuterGrid"
 			Background="#24CCAAFF"
+			ClipToBounds="False"
 			IsHitTestVisible="True"
 			>
 			<Image
@@ -50,6 +52,36 @@
 				StrokeDashArray="2, 2"
 				IsHitTestVisible="False"
 				/>
+			<!-- 
+			<Rectangle
+				IsVisible="{Binding AreSlotHandlesVisible}"
+				Width="16" Height="16" Margin="-8 -8 0 0"
+				VerticalAlignment="Top" HorizontalAlignment="Left"
+				Fill="Transparent" Stroke="AntiqueWhite" StrokeThickness="1"
+				IsHitTestVisible="True"
+				/>
+			<Rectangle
+				IsVisible="{Binding AreSlotHandlesVisible}"
+				Width="16" Height="16" Margin="8 -8 0 0"
+				VerticalAlignment="Top" HorizontalAlignment="Right"
+				Fill="Transparent" Stroke="AntiqueWhite" StrokeThickness="1"
+				IsHitTestVisible="True"
+				/>
+			<Rectangle
+				IsVisible="{Binding AreSlotHandlesVisible}"
+				VerticalAlignment="Bottom" HorizontalAlignment="Left"
+				Width="16" Height="16" Margin="-8 8 0 0"
+				Fill="Transparent" Stroke="AntiqueWhite" StrokeThickness="1"
+				IsHitTestVisible="True"
+				/>
+			<Rectangle
+				IsVisible="{Binding AreSlotHandlesVisible}"
+				VerticalAlignment="Bottom" HorizontalAlignment="Right"
+				Width="16" Height="16" Margin="8 8 0 0"
+				Fill="Transparent" Stroke="AntiqueWhite" StrokeThickness="1"
+				IsHitTestVisible="True"
+				/>
+			--> 
 		</Grid>
 	</Border>
 </UserControl>
