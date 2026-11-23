@@ -24,7 +24,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
     static SlotViewModel()
     {
-        Utilities.TryFindResource<SolidColorBrush>("FreshGreen_1_100", out highlightedBrush);
+        Utilities.TryFindResource<SolidColorBrush>("OrangePeel_1_100", out highlightedBrush);
         Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
     }
 
@@ -77,6 +77,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
     private bool isSelected;
     private bool isHighlighted;
+    private bool isEdited;
 
     [ObservableProperty]
     public partial bool IsSlotBorderVisible { get; set; }
@@ -136,6 +137,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
         this.isSelected = false;
         this.isHighlighted = false;
+        this.isEdited = false;
         this.UpdateBorderVisualState();
 
         // To enforce property changed ?
@@ -268,8 +270,12 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
     {
         if (this.IsImageSlot && this.isSelected)
         {
-            this.Highlight();
-            Schedule.OnUiThread(500, () => { this.Highlight(false); }, DispatcherPriority.Background);
+            if (!this.isHighlighted)
+            {
+                this.Highlight();
+                Schedule.OnUiThread(1_500, () => { this.Highlight(false); }, DispatcherPriority.Background);
+            } 
+
             return true;
         }
 
@@ -299,5 +305,10 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
         // Ready for drop 
         Debug.WriteLine(" Dropped Guid : " + imageId.ToString());
         this.model.BookManager.ReplaceImage(this.Page, imageSlot, imageId);
+    }
+
+    internal void BeginEdit()
+    {
+
     }
 }

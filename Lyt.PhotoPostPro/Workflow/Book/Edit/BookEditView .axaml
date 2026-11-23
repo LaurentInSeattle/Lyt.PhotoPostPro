@@ -138,6 +138,14 @@
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding IsSingleImageMode}"
 						/>
+					<TextBlock
+						Margin="10 0 0 0"
+						Theme="{StaticResource H3}"
+						Text="Pages:"
+						HorizontalAlignment="Left" VerticalAlignment="Center"
+						FontWeight="Normal"
+						Foreground="{StaticResource PastelOrchid_0_080}"
+						/>
 					<toggle:ToggleSwitch
 						x:Name="ShowGridLinesSwitch"
 						Margin="8 0 8 0"
@@ -147,14 +155,6 @@
 						Height="30" Width="160"
 						HorizontalAlignment="Center" VerticalAlignment="Center"
 						Value="{Binding ShowGridLines}"
-						/>
-					<TextBlock
-						Margin="10 0 0 0"
-						Theme="{StaticResource H3}"
-						Text="Pages:"
-						HorizontalAlignment="Left" VerticalAlignment="Center"
-						FontWeight="Normal"
-						Foreground="{StaticResource PastelOrchid_0_080}"
 						/>
 					<glyphs:GlyphButton
 						Style="{StaticResource PanelIconButton}"
@@ -198,6 +198,16 @@
 					<glyphs:GlyphButton
 						Style="{StaticResource PanelIconButton}"
 						Layout="IconOnly"
+						GlyphSource="add_circle"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnAddSlot}"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
+						ToolTip.Tip="Add Slot to current page"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
 						GlyphSource="delete"
 						GlyphStrokeThickness="0.1"
 						Command="{Binding OnDeleteSlot}"
@@ -205,6 +215,16 @@
 						Width="60" Height="36" 
 						Margin="8 0 0 0"
 						ToolTip.Tip="Delete selected slot"
+						/>
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="edit"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnEditSlot}"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
+						ToolTip.Tip="Edit selected Slot"
 						/>
 				</StackPanel>
 			</Grid>

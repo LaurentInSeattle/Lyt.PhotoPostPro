@@ -69,13 +69,13 @@ public sealed partial class Book : IEditable
     public int PageIndexFromPage(Page targetPage)
     {
         int pageIndex = -1;
-        int toAdd = 0; 
+        int toAdd = 0;
         if (this.WithFrontCover)
         {
             // ! We have a cover 
-            if ( targetPage == this.FrontCover!.FrontPage)
+            if (targetPage == this.FrontCover!.FrontPage)
             {
-                return 0; 
+                return 0;
             }
             else
                 // ! We have a cover 
@@ -85,7 +85,7 @@ public sealed partial class Book : IEditable
                 }
                 else
                 {
-                    toAdd = 2; 
+                    toAdd = 2;
                 }
         }
 
@@ -95,7 +95,7 @@ public sealed partial class Book : IEditable
             if (targetPage == this.BackCover!.FrontPage)
             {
                 return toAdd + this.Pages.Count;
-            }            
+            }
             else
                 // ! We have a cover
                 if (targetPage == this.BackCover!.BackPage)
@@ -117,6 +117,50 @@ public sealed partial class Book : IEditable
         return pageIndex + toAdd;
     }
 
+    // Page INDEX does include the front and back covers, if any or both present
+    public Page FromPageIndex(int pageIndex)
+    {
+        if (this.WithFrontCover)
+        {
+            if (pageIndex == 0)
+            {
+                // ! We have a cover
+                return this.FrontCover!.FrontPage;
+            }
+            else if (pageIndex == 1)
+            {
+                // ! We have a cover
+                return this.FrontCover!.BackPage;
+            }
+        }
+
+        // For front and back, now we can index into Pages 
+        pageIndex -= 2;
+        if (pageIndex >= 0 && pageIndex < this.Pages.Count)
+        {
+            return this.Pages[pageIndex];
+        }
+        else if (this.WithBackCover)
+        {
+            pageIndex -= this.Pages.Count;
+            if (pageIndex == 0)
+            {
+                // ! We have a cover
+                return this.BackCover!.FrontPage;
+            }
+            else if (pageIndex == 1)
+            {
+                // ! We have a cover
+                return this.BackCover!.BackPage;
+            }
+        }
+
+        // Error 
+        if (Debugger.IsAttached) { Debugger.Break(); }
+        throw new Exception("Page indexing failed ");
+    }
+
+    // Page NUMBER does NOT include the front and back covers, just the Pages List
     public Page FromPageNumber(int pageNumber)
     {
         var page = this.MaybeFromPageNumber(pageNumber);

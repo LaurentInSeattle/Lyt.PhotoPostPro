@@ -20,7 +20,7 @@
 		>
 		<Grid
 			x:Name="OuterGrid"
-			Background="Transparent"
+			Background="#24CCAAFF"
 			IsHitTestVisible="True"
 			>
 			<Image

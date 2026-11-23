@@ -333,12 +333,32 @@ public partial class BookEditViewModel :
         var slot = SlotViewModel.SelectedSlot; 
         if ( slot is null)
         {
-            // nothing to delete
+            // nothing to process
             return; 
         }
 
         var bookMgr = this.model.BookManager;
         bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
+    }
+
+    [RelayCommand]
+    public void OnEditSlot()
+    {
+        var slot = SlotViewModel.SelectedSlot;
+        if (slot is null)
+        {
+            // nothing to process
+            return;
+        }
+
+        slot.BeginEdit(); 
+    }
+
+    [RelayCommand]
+    public void OnAddSlot()
+    {
+        var bookMgr = this.model.BookManager;
+        bookMgr.AddImageSlot(this.SelectedPdfThumbnailIndex);
     }
 
     public void Receive(BookPagesChangedMessage message)

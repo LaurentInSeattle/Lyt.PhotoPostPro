@@ -534,20 +534,27 @@ public sealed partial class BookManager
         this.SaveCurrentBook();
     }
 
-    public void AddSlotToPage(int pageNumber, Slot newSlot)
+    public void AddImageSlot(int pageIndex)
     {
         if (this.CurrentBook == null)
         {
             throw new InvalidOperationException("No current book to add a slot to.");
         }
 
-        var page = this.CurrentBook.FromPageNumber(pageNumber);
+        var page = this.CurrentBook.FromPageIndex(pageIndex);
         if (page is null)
         {
             return;
         }
 
+        // Slot added with no image 
+        var newSlot = new ImageSlot();
+        newSlot.AdjustToPage(this.CurrentBook); 
         page.Slots.Add(newSlot);
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
     }
 
     public bool DeleteSlot(Slot slotToRemove, Page page, out string message)

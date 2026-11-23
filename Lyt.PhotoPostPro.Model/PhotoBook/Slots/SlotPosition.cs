@@ -1,12 +1,22 @@
 ﻿namespace Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 
-public sealed class SlotPosition(float x, float y, float dx, float dy)
+public sealed class SlotPosition
 {
-    public float X { get; set; } = x;
+    public SlotPosition() { /* for serialization */ } 
 
-    public float Y { get; set; } = y;
+    public float X { get; set; }
 
-    public float Dx { get; set; } = dx;
+    public float Y { get; set; }
 
-    public float Dy { get; set; } = dy;
+    public float Dx { get; set; }
+
+    public float Dy { get; set; }
+
+    public SlotPosition(float x, float y, float dx, float dy)
+    {
+        this.X = x;
+        this.Y = y;
+        this.Dx = dx;
+        this.Dy = dy;
+    }
 }

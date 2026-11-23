@@ -77,6 +77,12 @@ public sealed class ImageSlot : Slot
 
             // May need to crop the source image to match the page aspect ratio
             string imageFileName = this.ImagePath(book, bookResolution);
+            if ( string.IsNullOrWhiteSpace(imageFileName))
+            {
+                // Slot not populated yet just ignore
+                return null; 
+            }
+
             byte[] imageBytes = File.ReadAllBytes(imageFileName);
             return imageBytes;
         }
