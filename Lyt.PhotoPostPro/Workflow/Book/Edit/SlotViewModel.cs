@@ -252,7 +252,11 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         {
             SlotViewModel.SelectedSlot?.Select(false);
             SlotViewModel.SelectedSlot = this;
-            AdornerLayer.SetAdorner(this.View, new ResizeAdorner(this.View)); 
+
+            // ! we have a book  
+            var pageSize = this.model.BookManager.CurrentBook!.PageSize;
+            var adorner = new ResizeAdorner(this.View, pageSize.Width, pageSize.Height, snaps: 10); 
+            AdornerLayer.SetAdorner(this.View, adorner); 
         }
         else
         {

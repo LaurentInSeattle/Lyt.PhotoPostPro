@@ -16,6 +16,9 @@ public class ResizeAdorner : Grid
     private readonly Control target;
     private readonly Thumb topLeft;
     private readonly Thumb bottomRight;
+    private readonly double pageWidth;
+    private readonly double pageHeight;
+    private readonly int snaps;
 
     private double top;
     private double left;
@@ -28,9 +31,12 @@ public class ResizeAdorner : Grid
     private double dx;
     private double dy;
 
-    public ResizeAdorner(Control target)
+    public ResizeAdorner(Control target, double pageWidth, double pageHeight, int snaps = 5)
     {
         this.target = target;
+        this.pageWidth = pageWidth;
+        this.pageHeight = pageHeight;
+        this.snaps = snaps;
 
         // Prevent the AdornerLayer from clipping handles that extend past the target's bounds
         AdornerLayer.SetIsClipEnabled(this, false);
@@ -106,6 +112,7 @@ public class ResizeAdorner : Grid
         this.vector += delta;
         this.x = this.left + vector.X;
         this.y = this.top + vector.Y;
+        this.Constrain();
         this.UpdatePositionable();
     }
 
@@ -114,22 +121,59 @@ public class ResizeAdorner : Grid
         this.vector += delta;
         this.dx = Math.Max(MinSize, this.width + vector.X);
         this.dy = Math.Max(MinSize, this.height + vector.Y);
+        this.Constrain();
         this.UpdatePositionable();
     }
 
     private void UpdatePositionable(bool isFinal = false)
     {
+        int RoundToSnaps(double dbl) => this.snaps * (int)Math.Round(dbl / this.snaps);
+
         if (this.target.DataContext is IPositionable positionable)
         {
-            var position = new SlotPosition((float)this.x, (float)this.y, (float)this.dx, (float)this.dy);
             if (isFinal)
             {
+                // Snap only on the final move to avoid the slot border to jerk
+                int ix = RoundToSnaps(this.x);
+                int iy = RoundToSnaps(this.y);
+                int idx = RoundToSnaps(this.dx);
+                int idy = RoundToSnaps(this.dy);
+                var position = new SlotPosition(ix, iy, idx, idy);
+                // Debug.WriteLine(position.ToString());
                 positionable.SetFinalPosition(position);
             }
             else
             {
+                var position = new SlotPosition((float)this.x, (float)this.y, (float)this.dx, (float)this.dy);
                 positionable.SetPosition(position);
             }
+        }
+    }
+
+    private void Constrain()
+    {
+        if (this.x < 0.0)
+        {
+            this.x = 0.0;
+            this.vector = new Vector(0.0, this.vector.Y); 
+        }
+
+        if (this.y < 0.0)
+        {
+            this.y = 0.0;
+            this.vector = new Vector(this.vector.X, 0.0);
+        }
+
+        if (this.x + this.dx > this.pageWidth)
+        {
+            double excess = Math.Ceiling(this.x + this.dx - this.pageWidth); 
+            this.dx = this.dx - excess; 
+        }
+
+        if (this.y + this.dy > this.pageHeight)
+        {
+            double excess = Math.Ceiling(this.y + this.dy - this.pageHeight);
+            this.dy = this.dy - excess;
         }
     }
 }
