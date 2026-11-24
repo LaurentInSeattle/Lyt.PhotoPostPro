@@ -562,6 +562,35 @@ public sealed partial class BookManager
         this.SaveCurrentBook();
     }
 
+    public void AddTextSlot(int pageIndex)
+    {
+        if (this.CurrentBook == null)
+        {
+            throw new InvalidOperationException("No current book to add a slot to.");
+        }
+
+        var page = this.CurrentBook.FromPageIndex(pageIndex);
+        if (page is null)
+        {
+            return;
+        }
+
+        // Slot added with dummy text 
+        var newSlot = 
+            new TextSlot() 
+            { 
+                Text = "Lorem Ipsum ~ Dolor sit amet.", 
+                Style = SlotTextStyle.LargeBodyText 
+            }; 
+        newSlot.AdjustToPage(this.CurrentBook);
+        page.Slots.Add(newSlot);
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
+    }
+
+
     public bool DeleteSlot(Slot slotToRemove, Page page, out string message)
     {
         message = string.Empty;
@@ -640,18 +669,18 @@ public sealed partial class BookManager
         }
     }
 
-    public void PopulateTextSlot(int pageNumber, Guid slotId, string text)
+    public void UpdateTextSlot(Page page, TextSlot textSlot, string slotText)
     {
         if (this.CurrentBook == null)
         {
-            throw new InvalidOperationException("No current book to update a page layout in.");
+            throw new InvalidOperationException("No current book to move a slot from.");
         }
 
-        var page = this.CurrentBook.FromPageNumber(pageNumber);
-        if (page is null)
-        {
-            return;
-        }
+        textSlot.Text= slotText;
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
     }
 
     #endregion Page Editing

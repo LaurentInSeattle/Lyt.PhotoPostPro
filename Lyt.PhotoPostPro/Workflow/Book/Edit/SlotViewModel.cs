@@ -77,7 +77,6 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
     private bool isSelected;
     private bool isHighlighted;
-    private bool isEdited;
 
     [ObservableProperty]
     public partial bool IsSlotBorderVisible { get; set; }
@@ -99,6 +98,12 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
     [ObservableProperty]
     public partial double Y { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsTextBoxVisible { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsTextBlockVisible { get; set; }
 
     [ObservableProperty]
     public partial string SlotText { get; set; } = string.Empty;
@@ -137,19 +142,22 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
         this.isSelected = false;
         this.isHighlighted = false;
-        this.isEdited = false;
         this.UpdateBorderVisualState();
 
         // To enforce property changed ?
         this.ClearPosition();
         if (slot is Slots.ImageSlot imageSlot)
         {
+            this.IsTextBlockVisible = false;
+            this.IsTextBoxVisible = false;
             this.IsImageSlot = true;
             this.imageSlot = imageSlot;
             this.SetImage();
         }
         else if (slot is Slots.TextSlot textSlot)
         {
+            this.IsTextBlockVisible = true;
+            this.IsTextBoxVisible = false;
             this.IsImageSlot = false;
             this.textSlot = textSlot;
             this.SetText();
@@ -175,13 +183,6 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
     public void SetPosition(SlotPosition slotPosition)
     {
-        //if ( ! this.IsBound)
-        //{
-        //    return; 
-        //}
-
-        //Debug.WriteLine(" Initial: " + this.Slot.Position.ToString()); 
-        //this.View.SetPosition(this.Slot.Position);
         this.X = slotPosition.X;
         this.Y = slotPosition.Y;
         this.Dx = slotPosition.Dx;
@@ -327,6 +328,39 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
     internal void BeginEdit()
     {
+        if (this.Slot is ImageSlot)
+        {
+            return;
+        }
 
+        if (this.IsTextBoxVisible)
+        {
+            // We are editing: do not edit again 
+            this.EndEdit();
+            return; 
+        }
+
+        this.IsTextBoxVisible = true;
+        this.IsTextBlockVisible = false;
+        AdornerLayer.SetAdorner(this.View, null);
+
+        // Focus and move caret to the very end
+        TextBox textBox = this.View.SlotTextBox;
+        textBox.Focus();
+        textBox.CaretIndex = textBox.Text?.Length ?? 0;
+    }
+
+    internal void OnTextBoxLostFocus() =>  this.EndEdit(); 
+
+    internal void EndEdit()
+    {
+        if (this.Slot is not TextSlot textSlot)
+        {
+            return;
+        }
+
+        this.IsTextBoxVisible = false;
+        this.IsTextBlockVisible = true;
+        this.model.BookManager.UpdateTextSlot(this.Page, textSlot, this.SlotText);
     }
 }

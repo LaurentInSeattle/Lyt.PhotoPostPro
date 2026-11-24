@@ -19,13 +19,12 @@ public partial class SlotView : View
         }
     }
 
-    //public void SetPosition(SlotPosition slotPosition)
-    //{
-    //    Debug.WriteLine(" SetPosition: " + slotPosition.ToString());
-
-    //    Canvas.SetLeft(this, slotPosition.X);
-    //    Canvas.SetTop(this, slotPosition.Y);
-    //    this.Width = slotPosition.Dx;
-    //    this.Height = slotPosition.Dy;
-    //}
+    private void OnSlotTextBoxLostFocus(object? sender, global::Avalonia.Input.FocusChangedEventArgs e)
+    {
+        if (this.DataContext is SlotViewModel slotViewModel)
+        {
+            slotViewModel.OnTextBoxLostFocus();
+            e.Handled = true;
+        }
+    }
 }

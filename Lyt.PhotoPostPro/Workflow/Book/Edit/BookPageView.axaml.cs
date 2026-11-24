@@ -34,17 +34,6 @@ public partial class BookPageView : View
         this.RemoveHandler(PointerExitedEvent, this.OnLeave);
     }
 
-    //public void AddSlots(List<SlotViewModel> slots)
-    //{
-    //    var children = this.SlotsCanvas.Children;
-    //    children.Clear();
-    //    foreach (var slot in slots)
-    //    {
-    //        children.Add(slot.View);
-    //        slot.View.SetPosition(slot.Slot.Position);
-    //    }
-    //}
-
     protected override void OnDataContextChanged(object? sender, EventArgs e)
     {
         base.OnDataContextChanged(sender, e);
@@ -73,4 +62,10 @@ public partial class BookPageView : View
     private void OnDrop(object? _, DragEventArgs e) => this.DropRectangle.Stroke = Brushes.Transparent;
 
     private void OnLeave(object? _, EventArgs e) => this.DropRectangle.Stroke = Brushes.Transparent;
+
+    private void OnCanvasPointerPressed(object? sender, global::Avalonia.Input.PointerPressedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        topLevel?.FocusManager?.Focus(null);
+    }
 }

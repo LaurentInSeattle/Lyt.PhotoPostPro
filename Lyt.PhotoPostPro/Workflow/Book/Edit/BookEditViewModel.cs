@@ -341,11 +341,11 @@ public partial class BookEditViewModel :
     [RelayCommand]
     public void OnDeleteSlot()
     {
-        var slot = SlotViewModel.SelectedSlot; 
-        if ( slot is null)
+        var slot = SlotViewModel.SelectedSlot;
+        if (slot is null)
         {
             // nothing to process
-            return; 
+            return;
         }
 
         var bookMgr = this.model.BookManager;
@@ -355,14 +355,21 @@ public partial class BookEditViewModel :
     [RelayCommand]
     public void OnEditSlot()
     {
-        var slot = SlotViewModel.SelectedSlot;
-        if (slot is null)
+        var slotViewModel = SlotViewModel.SelectedSlot;
+        if (slotViewModel is null)
         {
-            // nothing to process
+            // create a text slot and begin editing it 
+            var bookMgr = this.model.BookManager;
+            bookMgr.AddTextSlot(this.SelectedPdfThumbnailIndex);
             return;
         }
 
-        slot.BeginEdit(); 
+        if (slotViewModel.Slot is Slots.ImageSlot)
+        {
+            return;
+        }
+
+        slotViewModel.BeginEdit();
     }
 
     [RelayCommand]
@@ -378,8 +385,8 @@ public partial class BookEditViewModel :
         var bookMgr = this.model.BookManager;
         // ! we have a book 
         string documentPath = bookMgr.CurrentBook!.GeneratePdf(BookResolution.Display);
-        this.IsEditing = false; 
-        this.DocumentViewModel.Open(documentPath); 
+        this.IsEditing = false;
+        this.DocumentViewModel.Open(documentPath);
     }
 
     public void Receive(DocPageNavigateMessage message)
@@ -412,14 +419,14 @@ public partial class BookEditViewModel :
 
     public void Receive(BookPageEditedMessage message)
         // We need to wait for the page itself to re-create its slots, then we can update the PDF 
-        => Schedule.OnUiThread(60,()=>
-            { 
+        => Schedule.OnUiThread(60, () =>
+            {
                 // Relaod the thumbnails and then adjust position 
-                this.LoadPdfThumbnails() ;
+                this.LoadPdfThumbnails();
 
                 // ! we have a book 
                 var book = this.model.BookManager.CurrentBook!;
                 int pdfPageIndex = book.PageIndexFromPage(message.Page);
-                this.SelectedPdfThumbnailIndex = pdfPageIndex;                 
-            }, DispatcherPriority.Background); 
+                this.SelectedPdfThumbnailIndex = pdfPageIndex;
+            }, DispatcherPriority.Background);
 }

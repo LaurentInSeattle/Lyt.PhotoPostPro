@@ -16,7 +16,6 @@
 	Canvas.Top="{Binding Y, Mode=OneWay}"
 	Canvas.Left="{Binding X, Mode=OneWay}"
 	>
-
 	<Border
 		BorderThickness="0"
 		ClipToBounds="False"
@@ -36,7 +35,7 @@
 				>			
 			</Image>
 			<TextBlock
-				IsVisible="{Binding !IsImageSlot}"
+				IsVisible="{Binding IsTextBlockVisible}"
 				Text="{Binding SlotText}"
 				FontFamily="{Binding SlotFontFamily}"
 				FontSize="{Binding SlotFontSize}"
@@ -47,6 +46,22 @@
 				IsHitTestVisible="False"
 				>			
 			</TextBlock>
+			<TextBox
+				x:Name="SlotTextBox"
+				LostFocus="OnSlotTextBoxLostFocus"
+				IsVisible="{Binding IsTextBoxVisible}"
+				IsHitTestVisible="{Binding IsTextBoxVisible}"
+				Text="{Binding SlotText}"
+				FontFamily="{Binding SlotFontFamily}"
+				FontSize="{Binding SlotFontSize}"
+				FontStyle="{Binding SlotFontStyle}"
+				Foreground="{Binding SlotForegroundColor}"
+				TextAlignment="{Binding SlotTextAlignment}"
+				AcceptsReturn="True"
+				AcceptsTab="True"
+				TextWrapping="Wrap"
+				>			
+			</TextBox>
 			<Rectangle
 				IsVisible="{Binding IsSlotBorderVisible}"
 				Fill="Transparent"

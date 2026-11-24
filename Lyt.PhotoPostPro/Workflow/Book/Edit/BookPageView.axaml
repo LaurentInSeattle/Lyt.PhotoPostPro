@@ -28,6 +28,7 @@
 		<Canvas  
 			Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
 			IsVisible="{Binding AreVisibleGridLines}"
+			PointerPressed="OnCanvasPointerPressed"
 			>
 			<Canvas.Background
 				>
@@ -48,14 +49,6 @@
 				</VisualBrush>
 			</Canvas.Background>					
 		</Canvas>
-
-		<!--
-		<Canvas 
-			x:Name="SlotsCanvas"
-			Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
-			>
-		</Canvas>
-		--> 
 
 		<!-- Set the Canvas as the container panel 
 			 Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper 
