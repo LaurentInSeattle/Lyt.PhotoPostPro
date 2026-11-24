@@ -2,5 +2,7 @@
 
 public interface IPositionable
 {
-    void SetPosition(SlotPosition slotPosition); 
+    void SetPosition(SlotPosition slotPosition);
+
+    void SetFinalPosition(SlotPosition slotPosition);    
 }

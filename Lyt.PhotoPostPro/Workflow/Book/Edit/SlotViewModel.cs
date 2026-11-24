@@ -12,7 +12,7 @@ using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 using Typography = Model.PhotoBook.Typography;
 
-public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
+public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPositionable
 // , IRecipient<>
 {
     #region Static Utilities 
@@ -159,7 +159,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
             throw new NotSupportedException("Slot type not supported.");
         }
 
-        // this.SetPosition();
+        this.SetPosition(this.Slot.Position);
     }
 
     public Books.Book Book
@@ -167,26 +167,31 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
 
     public void ClearPosition()
     {
-        //this.Dx = 0;
-        //this.Dy = 0;
-        //this.X = -1;
-        //this.Y = -1;
+        this.Dx = 0;
+        this.Dy = 0;
+        this.X = 0;
+        this.Y = 0;
     }
 
-    public void SetPosition()
+    public void SetPosition(SlotPosition slotPosition)
     {
-        if ( ! this.IsBound)
-        {
-            return; 
-        }
+        //if ( ! this.IsBound)
+        //{
+        //    return; 
+        //}
 
-        Debug.WriteLine(" Initial: " + this.Slot.Position.ToString()); 
-        this.View.SetPosition(this.Slot.Position);
-        //var position = this.Slot.Position;
-        //this.Dx = position.Dx;
-        //this.Dy = position.Dy;
-        //this.X = position.X;
-        //this.Y = position.Y;
+        //Debug.WriteLine(" Initial: " + this.Slot.Position.ToString()); 
+        //this.View.SetPosition(this.Slot.Position);
+        this.X = slotPosition.X;
+        this.Y = slotPosition.Y;
+        this.Dx = slotPosition.Dx;
+        this.Dy = slotPosition.Dy;
+    }
+
+    public void SetFinalPosition(SlotPosition slotPosition)
+    {
+        this.SetPosition(slotPosition);
+        this.model.BookManager.RepositionSlot(this.Slot, this.Page, slotPosition); 
     }
 
     public void SetText()

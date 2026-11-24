@@ -73,28 +73,28 @@ public class ResizeAdorner : Grid
             })
         };
 
-        thumb.DragStarted += (_, e) =>
+        thumb.DragStarted += (_, _) =>
         {
             Debug.WriteLine(" DragStarted");
             this.left = this.target.GetValue(Canvas.LeftProperty);
             this.top = this.target.GetValue(Canvas.TopProperty);
             this.width = this.target.Bounds.Width;
             this.height = this.target.Bounds.Height;
-            this.vector = new(); 
+            this.vector = new();
             this.x = this.left;
             this.y = this.top;
             this.dx = this.width;
             this.dy = this.height;
             var sp = new SlotPosition((float)x, (float)y, (float)dx, (float)dy);
-            Debug.WriteLine(sp.ToString()); 
+            Debug.WriteLine(sp.ToString());
             this.UpdatePositionable();
         };
 
         thumb.DragDelta += (_, e) => onDrag(e.Vector);
 
-        thumb.DragCompleted += (_, e) =>
+        thumb.DragCompleted += (_, _) =>
         {
-            this.UpdatePositionable();
+            this.UpdatePositionable(isFinal: true);
         };
 
         this.Children.Add(thumb);
@@ -117,11 +117,19 @@ public class ResizeAdorner : Grid
         this.UpdatePositionable();
     }
 
-    private void UpdatePositionable()
+    private void UpdatePositionable(bool isFinal = false)
     {
-        if (this.target is IPositionable positionable)
+        if (this.target.DataContext is IPositionable positionable)
         {
-            positionable.SetPosition ( new SlotPosition( (float)x, (float)y, (float)dx, (float)dy) ) ;
+            var position = new SlotPosition((float)this.x, (float)this.y, (float)this.dx, (float)this.dy);
+            if (isFinal)
+            {
+                positionable.SetFinalPosition(position);
+            }
+            else
+            {
+                positionable.SetPosition(position);
+            }
         }
     }
 }

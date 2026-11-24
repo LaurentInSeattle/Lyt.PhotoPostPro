@@ -17,7 +17,6 @@ public partial class BookPageViewModel :
 {
     private readonly PhotoPostProModel model;
     private readonly Pages.Page? page;
-    private List<SlotViewModel> Slots = [];
 
     [ObservableProperty]
     public partial double PageWidth { get; set; }
@@ -31,8 +30,8 @@ public partial class BookPageViewModel :
     [ObservableProperty]
     public partial bool AreVisibleGridLines { get; set; } = true;
 
-    //[ObservableProperty]
-    //public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
 
     public BookPageViewModel(PhotoPostProModel model, Pages.Page? page)
     {
@@ -55,21 +54,21 @@ public partial class BookPageViewModel :
         this.CreateSlots();
     }
 
-    public override void OnViewLoaded()
-    {
-        base.OnViewLoaded();
-        Schedule.OnUiThread(60, () => 
-        {
-            if (this.IsBound)
-            {
-                this.View.AddSlots(this.Slots);
-            } 
-            else
-            {
-                if ( Debugger.IsAttached) { Debugger.Break();  }
-            }
-        }, DispatcherPriority.Background);          
-    } 
+    //public override void OnViewLoaded()
+    //{
+    //    base.OnViewLoaded();
+    //    Schedule.OnUiThread(60, () => 
+    //    {
+    //        if (this.IsBound)
+    //        {
+    //            this.View.AddSlots(this.Slots);
+    //        } 
+    //        else
+    //        {
+    //            if ( Debugger.IsAttached) { Debugger.Break();  }
+    //        }
+    //    }, DispatcherPriority.Background);          
+    //} 
 
     public void Receive(BookGridLinesMessage message) => this.ShowGridLines(message.ShowGridLines);
 
@@ -82,7 +81,7 @@ public partial class BookPageViewModel :
 
         this.Slots.Clear();
         this.CreateSlots();
-        this.View.AddSlots(this.Slots);
+        //this.View.AddSlots(this.Slots);
     }
 
     public void ShowGridLines(bool show) => this.AreVisibleGridLines = !this.IsDummy && show;

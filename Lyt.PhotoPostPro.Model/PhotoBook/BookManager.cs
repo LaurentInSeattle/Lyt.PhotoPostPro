@@ -591,20 +591,19 @@ public sealed partial class BookManager
 
     }
 
-    public void RepositionSlot(int pageNumber, Slot slotToRemove, SlotPosition newPosition)
+    public bool RepositionSlot(Slot slotToMove, Page page, SlotPosition newPosition)
     {
         if (this.CurrentBook == null)
         {
-            throw new InvalidOperationException("No current book to remove a slot from.");
+            throw new InvalidOperationException("No current book to move a slot from.");
         }
 
-        var page = this.CurrentBook.FromPageNumber(pageNumber);
-        if (page is null)
-        {
-            return;
-        }
+        slotToMove.Position = newPosition; 
 
-        page.Slots.Remove(slotToRemove);
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
+        return true;
     }
 
     public void UpdatePageBackground(int pageNumber, PageBackground newBackground)

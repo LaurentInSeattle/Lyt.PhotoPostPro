@@ -49,13 +49,17 @@
 			</Canvas.Background>					
 		</Canvas>
 
+		<!--
 		<Canvas 
 			x:Name="SlotsCanvas"
 			Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
 			>
 		</Canvas>
+		--> 
 
-		<!-- Set the Canvas as the container panel
+		<!-- Set the Canvas as the container panel 
+			 Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper 
+		-->
 		<ItemsControl 
 			IsVisible="{Binding !IsDummy}"
 			ItemsSource="{Binding Slots}">
@@ -68,7 +72,6 @@
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 
-			 Bind Canvas.Top and Canvas.Left on the ContentPresenter wrapper 
 			<ItemsControl.Styles>
 				<Style Selector="ItemsControl > ContentPresenter" x:DataType="vm:SlotViewModel">
 					<Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}" />
@@ -76,12 +79,10 @@
 				</Style>
 			</ItemsControl.Styles>
 
-			Define how each item looks 
 			<ItemsControl.ItemTemplate>
 				<DataTemplate> <vm:SlotView /> </DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
-		--> 
 
 		<!-- DropRectangle MUST be made  IsHitTestVisible="False" or else the slots do not gets the clicks --> 
 		<Rectangle

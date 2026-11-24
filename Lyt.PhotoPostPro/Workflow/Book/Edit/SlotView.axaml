@@ -10,14 +10,12 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	Background="Transparent"
-	>
 
-	<!--
 	Width="{Binding Dx, Mode=OneWay}"
 	Height="{Binding Dy, Mode=OneWay}"
 	Canvas.Top="{Binding Y, Mode=OneWay}"
 	Canvas.Left="{Binding X, Mode=OneWay}"
-	--> 
+	>
 
 	<Border
 		BorderThickness="0"
@@ -32,7 +30,7 @@
 			<Image
 				IsVisible="{Binding IsImageSlot}"
 				Source="{Binding SlotImage}"
-				VerticalAlignment="Top" HorizontalAlignment="Stretch"
+				VerticalAlignment="Top" HorizontalAlignment="Left"
 				Stretch="{Binding ImageStretch}"
 				IsHitTestVisible="False"
 				>			
@@ -45,6 +43,7 @@
 				FontStyle="{Binding SlotFontStyle}"
 				Foreground="{Binding SlotForegroundColor}"
 				TextAlignment="{Binding SlotTextAlignment}"
+				TextWrapping="Wrap"
 				IsHitTestVisible="False"
 				>			
 			</TextBlock>

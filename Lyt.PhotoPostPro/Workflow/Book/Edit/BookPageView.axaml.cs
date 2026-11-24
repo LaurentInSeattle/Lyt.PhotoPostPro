@@ -34,16 +34,16 @@ public partial class BookPageView : View
         this.RemoveHandler(PointerExitedEvent, this.OnLeave);
     }
 
-    public void AddSlots(List<SlotViewModel> slots)
-    {
-        var children = this.SlotsCanvas.Children;
-        children.Clear();
-        foreach (var slot in slots)
-        {
-            children.Add(slot.View);
-            slot.View.SetPosition(slot.Slot.Position);
-        }
-    }
+    //public void AddSlots(List<SlotViewModel> slots)
+    //{
+    //    var children = this.SlotsCanvas.Children;
+    //    children.Clear();
+    //    foreach (var slot in slots)
+    //    {
+    //        children.Add(slot.View);
+    //        slot.View.SetPosition(slot.Slot.Position);
+    //    }
+    //}
 
     protected override void OnDataContextChanged(object? sender, EventArgs e)
     {
