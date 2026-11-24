@@ -21,9 +21,11 @@ public partial class SlotView : View, IPositionable
 
     public void SetPosition(SlotPosition slotPosition)
     {
-        this.Width = slotPosition.Dx;
-        this.Height = slotPosition.Dy;
+        Debug.WriteLine(" SetPosition: " + slotPosition.ToString());
+
         Canvas.SetLeft(this, slotPosition.X);
         Canvas.SetTop(this, slotPosition.Y);
+        this.Width = slotPosition.Dx;
+        this.Height = slotPosition.Dy;
     }
 }

@@ -19,4 +19,12 @@ public sealed class SlotPosition
         this.Dx = dx;
         this.Dy = dy;
     }
+
+    public override string ToString()
+        => string.Format(
+            " X: {0:D3}  Y: {1:D3}  DX: {2:D3}  DY: {3:D3}  ",
+            (int)MathF.Round(this.X),
+            (int)MathF.Round(this.Y),
+            (int)MathF.Round(this.Dx),
+            (int)MathF.Round(this.Dy)); 
 }

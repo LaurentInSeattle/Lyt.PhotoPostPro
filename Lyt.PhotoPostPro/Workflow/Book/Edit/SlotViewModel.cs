@@ -180,6 +180,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget
             return; 
         }
 
+        Debug.WriteLine(" Initial: " + this.Slot.Position.ToString()); 
         this.View.SetPosition(this.Slot.Position);
         //var position = this.Slot.Position;
         //this.Dx = position.Dx;

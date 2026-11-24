@@ -11,7 +11,7 @@ using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 public class ResizeAdorner : Grid
 {
     private const double HandleSize = 24;
-    private const double MinSize = 40;
+    private const double MinSize = 50;
 
     private readonly Control target;
     private readonly Thumb topLeft;
@@ -22,6 +22,7 @@ public class ResizeAdorner : Grid
     private double width;
     private double height;
 
+    private Vector vector;
     private double x;
     private double y;
     private double dx;
@@ -79,10 +80,14 @@ public class ResizeAdorner : Grid
             this.top = this.target.GetValue(Canvas.TopProperty);
             this.width = this.target.Bounds.Width;
             this.height = this.target.Bounds.Height;
+            this.vector = new(); 
             this.x = this.left;
             this.y = this.top;
             this.dx = this.width;
             this.dy = this.height;
+            var sp = new SlotPosition((float)x, (float)y, (float)dx, (float)dy);
+            Debug.WriteLine(sp.ToString()); 
+            this.UpdatePositionable();
         };
 
         thumb.DragDelta += (_, e) => onDrag(e.Vector);
@@ -98,15 +103,17 @@ public class ResizeAdorner : Grid
 
     private void ResizeTopLeft(Vector delta)
     {
-        this.x = this.left + delta.X;
-        this.y = this.top + delta.Y;
+        this.vector += delta;
+        this.x = this.left + vector.X;
+        this.y = this.top + vector.Y;
         this.UpdatePositionable();
     }
 
     private void ResizeBottomRight(Vector delta)
     {
-        this.dx = Math.Max(MinSize, this.width + delta.X);
-        this.dy = Math.Max(MinSize, this.height + delta.Y);
+        this.vector += delta;
+        this.dx = Math.Max(MinSize, this.width + vector.X);
+        this.dy = Math.Max(MinSize, this.height + vector.Y);
         this.UpdatePositionable();
     }
 
