@@ -265,6 +265,7 @@ public sealed partial class Book : IEditable
             string mediumResImageFileName = string.Concat(MediumResPrefix, imageBaseFileName, JpgExtension);
             string lowResImageFileName = string.Concat(LowResPrefix, imageBaseFileName, JpgExtension);
             string folderPath = System.IO.Path.Combine(booksPath, this.FolderName);
+            folderPath = System.IO.Path.Combine(folderPath, BookManager.PhotoBooksFolderImagesName);
 
             string highResImageFilePath = System.IO.Path.Combine(folderPath, highResImageFileName);
             string mediumResImageFilePath = System.IO.Path.Combine(folderPath, mediumResImageFileName);

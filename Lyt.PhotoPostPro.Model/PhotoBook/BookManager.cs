@@ -4,8 +4,6 @@ using QuestPDF.Infrastructure;
 
 using System.IO;
 
-using static System.Net.Mime.MediaTypeNames;
-
 public sealed partial class BookManager
 {
     static BookManager()
@@ -16,6 +14,7 @@ public sealed partial class BookManager
     }
 
     public const string PhotoBooksFolderName = "PhotoBooks";
+    public const string PhotoBooksFolderImagesName = "Images";
     public const string PhotoBookJSonFileName = "Photobook.json";
     public const string PhotoBookPdfFileName = "Photobook.pdf";
 
@@ -253,6 +252,12 @@ public sealed partial class BookManager
             if (!Directory.Exists(photobookFolderPath))
             {
                 Directory.CreateDirectory(photobookFolderPath);
+            }
+
+            string imagesFolder = Path.Combine(photobookFolderPath, PhotoBooksFolderImagesName);
+            if (!Directory.Exists(imagesFolder))
+            {
+                Directory.CreateDirectory(imagesFolder);
             }
 
             string photoBookPdfPathName = Path.Combine(photobookFolderPath, PhotoBookPdfFileName);

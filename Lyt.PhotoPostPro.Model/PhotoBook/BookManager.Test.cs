@@ -2,7 +2,6 @@
 
 public sealed partial class BookManager
 {
-    // #if LYT_DEBUG
     public void Test()
     {
         string[] ImagePaths =
@@ -101,14 +100,6 @@ public sealed partial class BookManager
 
         this.SaveBook(book);
 
-        // book.GeneratePdf(BookResolution.Print);
-
         book.GeneratePdf(BookResolution.Display);
-
-        // book.GeneratePdf(BookResolution.Thumbnails);
-
-        // if (Debugger.IsAttached) { Debugger.Break(); }
     }
-
-// #endif
 }
