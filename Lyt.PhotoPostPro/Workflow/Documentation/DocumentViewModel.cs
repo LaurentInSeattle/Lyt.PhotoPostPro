@@ -30,14 +30,25 @@ public sealed partial class DocumentViewModel :
 
     internal void Open(Document document)
     {
+        this.SubscribeToAllEvents();
+        PdfLoader.BeginLoadDocument(document);
+        this.currentPageIndex = -1;
+    }
+
+    internal void Open(string filePath)
+    {
+        this.SubscribeToAllEvents();
+        PdfLoader.BeginLoadDocument(filePath);
+        this.currentPageIndex = -1;
+    }
+
+    private void SubscribeToAllEvents()
+    {
         this.Subscribe<PdfPageLoadedMessage>();
         this.Subscribe<PdfLoadedStatusMessage>();
         this.Subscribe<PdfPageInViewMessage>();
         this.Subscribe<DocPageNavigateMessage>();
         this.Subscribe<HotKeyMessage>();
-
-        PdfLoader.BeginLoadDocument(document);
-        this.currentPageIndex = -1;
     }
 
     internal void Close()

@@ -61,6 +61,34 @@ public static class PdfLoader
         return bitmap is not null;
     }
 
+    public static void BeginLoadDocument(string filePath , string? pdfPassword = null)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                return;
+            }
+
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
+
+            byte[] pdfBytes = File.ReadAllBytes(filePath);
+
+            Task.Run(() =>
+            {
+                MemoryStream memoryStream = new(pdfBytes);
+                LoadPages(memoryStream, pdfPassword);
+            });
+        }
+        catch(Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
+    }
+
     public static void BeginLoadDocument(Document document, string language = "", string? pdfPassword = null)
     {
         if (string.IsNullOrWhiteSpace(language))

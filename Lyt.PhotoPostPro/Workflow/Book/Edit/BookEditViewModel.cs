@@ -9,12 +9,22 @@ using Slots = Model.PhotoBook.Slots;
 public partial class BookEditViewModel :
     ViewModel<BookEditView>,
     IRecipient<BookPagesChangedMessage>,
-    IRecipient<BookPageEditedMessage>
+    IRecipient<BookPageEditedMessage>,
+    IRecipient<DocPageNavigateMessage>
 {
     public sealed record class PdfThumbnail(int Page, Bitmap Bitmap, int Width, int Height);
 
     private readonly PhotoPostProModel model;
     private readonly IToaster toaster;
+
+    [ObservableProperty]
+    public partial bool DocumentIsOpened { get; set; }
+
+    [ObservableProperty]
+    public partial DocumentViewModel DocumentViewModel { get; set; } = new();
+
+    [ObservableProperty]
+    public partial bool IsEditing { get; set; } = true;
 
     [ObservableProperty]
     public partial bool IsSingleImageMode { get; set; } = false;
@@ -73,6 +83,7 @@ public partial class BookEditViewModel :
         // Subscribe to book updates 
         this.Subscribe<BookPagesChangedMessage>();
         this.Subscribe<BookPageEditedMessage>();
+        this.Subscribe<DocPageNavigateMessage>();
     }
 
     public override void Deactivate()
@@ -359,6 +370,25 @@ public partial class BookEditViewModel :
     {
         var bookMgr = this.model.BookManager;
         bookMgr.AddImageSlot(this.SelectedPdfThumbnailIndex);
+    }
+
+    [RelayCommand]
+    public void OnPreview()
+    {
+        var bookMgr = this.model.BookManager;
+        // ! we have a book 
+        string documentPath = bookMgr.CurrentBook!.GeneratePdf(BookResolution.Display);
+        this.IsEditing = false; 
+        this.DocumentViewModel.Open(documentPath); 
+    }
+
+    public void Receive(DocPageNavigateMessage message)
+    {
+        if (message.Navigate == DocPageNavigateMessage.NavigateTo.Close)
+        {
+            this.DocumentViewModel.Close();
+            this.IsEditing = true;
+        }
     }
 
     public void Receive(BookPagesChangedMessage message)

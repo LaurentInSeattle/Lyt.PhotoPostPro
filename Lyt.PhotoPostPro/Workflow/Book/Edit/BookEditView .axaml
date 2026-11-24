@@ -10,14 +10,25 @@
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
 	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Book.Edit"
+	xmlns:doc="using:Lyt.PhotoPostPro.Workflow.Documentation"
 	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
 	xmlns:toggle="clr-namespace:Lyt.Avalonia.Controls.Toggle;assembly=Lyt.Avalonia.Controls"
 
 	Background="Transparent"
 	>
+	<Grid>
+		
+		<Grid
+			x:Name="BookPreviewMainGrid"
+			IsVisible="{Binding !IsEditing}"
+			>		
+			<doc:DocumentView
+				DataContext="{Binding DocumentViewModel}"
+				/>
+		</Grid>
 	<Grid
 		x:Name="BookEditMainGrid"
+		IsVisible="{Binding IsEditing}"
 		>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="4" />
@@ -59,7 +70,7 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<local:BookImageView 
+					<vm:BookImageView 
 						Margin="4 0 24 0"
 						Width="200" MaxHeight="180"
 						/>
@@ -226,6 +237,17 @@
 						Margin="8 0 0 0"
 						ToolTip.Tip="Edit selected Slot"
 						/>
+
+					<glyphs:GlyphButton
+						Style="{StaticResource PanelIconButton}"
+						Layout="IconOnly"
+						GlyphSource="eye"
+						GlyphStrokeThickness="0.1"
+						Command="{Binding OnPreview}"
+						Width="60" Height="36" 
+						Margin="8 0 0 0"
+						ToolTip.Tip="Preview phot book document"
+						/>
 				</StackPanel>
 			</Grid>
 
@@ -312,5 +334,6 @@
 			x:Name="BookEditDragCanvas"
 			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999"
 			/>
+	</Grid>
 	</Grid>
 </UserControl>
