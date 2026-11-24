@@ -5,3 +5,5 @@ public sealed record class BookListChangedMessage;
 public sealed record class BookPagesChangedMessage(int PageToShow);
 
 public sealed record class BookPageEditedMessage(Page Page);
+
+public sealed record class BookEditTextSlotMessage(Page Page, Slot Slot);

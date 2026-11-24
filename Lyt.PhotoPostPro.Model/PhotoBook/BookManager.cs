@@ -588,6 +588,7 @@ public sealed partial class BookManager
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();
         this.SaveCurrentBook();
+        new BookEditTextSlotMessage(page, newSlot).Publish();
     }
 
 

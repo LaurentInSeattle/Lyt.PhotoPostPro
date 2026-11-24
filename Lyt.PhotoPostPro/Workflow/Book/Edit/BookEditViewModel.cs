@@ -10,7 +10,8 @@ public partial class BookEditViewModel :
     ViewModel<BookEditView>,
     IRecipient<BookPagesChangedMessage>,
     IRecipient<BookPageEditedMessage>,
-    IRecipient<DocPageNavigateMessage>
+    IRecipient<DocPageNavigateMessage>,
+    IRecipient<BookEditTextSlotMessage>
 {
     public sealed record class PdfThumbnail(int Page, Bitmap Bitmap, int Width, int Height);
 
@@ -84,6 +85,7 @@ public partial class BookEditViewModel :
         this.Subscribe<BookPagesChangedMessage>();
         this.Subscribe<BookPageEditedMessage>();
         this.Subscribe<DocPageNavigateMessage>();
+        this.Subscribe<BookEditTextSlotMessage>();
     }
 
     public override void Deactivate()
@@ -99,6 +101,8 @@ public partial class BookEditViewModel :
         // UNsubscribe to book updates 
         this.Unregister<BookPagesChangedMessage>();
         this.Unregister<BookPageEditedMessage>();
+        this.Unregister<DocPageNavigateMessage>();
+        this.Unregister<BookEditTextSlotMessage>();
     }
 
     public override void OnViewLoaded()
@@ -350,6 +354,67 @@ public partial class BookEditViewModel :
 
         var bookMgr = this.model.BookManager;
         bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
+        SlotViewModel.SelectedSlot = null;
+    }
+
+    public void Receive(BookEditTextSlotMessage message)
+        => Schedule.OnUiThread(
+            60,
+            () => { this.BegitEditCreatedTextSlot(message); },
+            DispatcherPriority.ApplicationIdle);
+
+    private void BegitEditCreatedTextSlot(BookEditTextSlotMessage message)
+    {
+        var page = message.Page;
+        var slot = message.Slot;
+
+        bool FindSlot (BookPageViewModel pageViewModel)
+        {
+            if (pageViewModel.Page != page )
+            {
+                return false; 
+            }
+
+            foreach (var slotVm in pageViewModel.Slots)
+            {
+                if (slotVm.Slot == slot)
+                {
+                    // Found : Begin edit 
+                    slotVm.BeginEdit();
+                    return true;
+                }
+            }
+
+            return false; 
+        } 
+
+        if (this.IsSingleImageMode)
+        {
+            foreach (var singlePage in this.SinglePages)
+            {
+                if (FindSlot(singlePage))
+                {
+                    return; 
+                }
+            }
+        }
+        else
+        {
+            foreach (var doublePage in this.DoublePages)
+            {
+                var left = doublePage.LeftPage;
+                if (FindSlot(left))
+                {
+                    return;
+                }
+
+                var right = doublePage.RightPage;
+                if (FindSlot(right))
+                {
+                    return;
+                }
+            }
+        }
     }
 
     [RelayCommand]

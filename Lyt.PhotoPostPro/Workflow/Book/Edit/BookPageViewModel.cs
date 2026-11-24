@@ -15,8 +15,9 @@ public partial class BookPageViewModel :
     IRecipient<BookGridLinesMessage>,
     IRecipient<BookPageEditedMessage>
 {
+    public readonly Pages.Page? Page;
+
     private readonly PhotoPostProModel model;
-    private readonly Pages.Page? page;
 
     [ObservableProperty]
     public partial double PageWidth { get; set; }
@@ -36,7 +37,7 @@ public partial class BookPageViewModel :
     public BookPageViewModel(PhotoPostProModel model, Pages.Page? page)
     {
         this.model = model;
-        this.page = page;
+        this.Page = page;
         this.IsDummy = page is null;
         if (this.IsDummy)
         {
@@ -74,7 +75,7 @@ public partial class BookPageViewModel :
 
     public void Receive(BookPageEditedMessage message)
     {
-        if (this.page != message.Page)
+        if (this.Page != message.Page)
         {
             return;
         }
@@ -88,14 +89,14 @@ public partial class BookPageViewModel :
 
     public void CreateSlots()
     {
-        if (this.page is null)
+        if (this.Page is null)
         {
             return;
         }
 
-        foreach (var slot in this.page.Slots)
+        foreach (var slot in this.Page.Slots)
         {
-            var slotViewModel = new SlotViewModel(this.model, this.page, slot);
+            var slotViewModel = new SlotViewModel(this.model, this.Page, slot);
             slotViewModel.CreateViewAndBind(); 
             this.Slots.Add(slotViewModel);
         }
@@ -123,7 +124,7 @@ public partial class BookPageViewModel :
 
     public void OnDrop(Point point, object droppedObject)
     {
-        if (this.page is null)
+        if (this.Page is null)
         {
             return;
         }
@@ -154,6 +155,6 @@ public partial class BookPageViewModel :
         }
 
         // No image slot selected we edit the entire page 
-        this.model.BookManager.AddDroppedImage(this.page, imageId);
+        this.model.BookManager.AddDroppedImage(this.Page, imageId);
     }
 }
