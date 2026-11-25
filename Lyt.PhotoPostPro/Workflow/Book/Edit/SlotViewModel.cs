@@ -5,18 +5,15 @@ using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 using Lyt.PhotoPostPro.Model.PhotoBook.Typography;
 using Lyt.Avalonia.Controls;
 
-using QuestPDF.Infrastructure;
-
 using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
-using Typography = Model.PhotoBook.Typography;
+
+using static TextStyleUtilities; 
 
 public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPositionable
 // , IRecipient<>
 {
-    #region Static Utilities 
-
     public static FontFamily DefaultFontFamily = new("Arial");
 
     private static SolidColorBrush? selectedBrush;
@@ -27,43 +24,6 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         Utilities.TryFindResource<SolidColorBrush>("OrangePeel_1_100", out highlightedBrush);
         Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
     }
-
-    public static SolidColorBrush FromTextStyle(Typography.SlotTextStyle textStyle)
-        => new(global::Avalonia.Media.Color.FromRgb(textStyle.Red, textStyle.Green, textStyle.Blue));
-
-    public static TextAlignment FromTextStyleTextAlignment(Typography.SlotTextStyle textStyle)
-        => textStyle.TextAlignment switch
-        {
-            BookTextAlignment.Center => TextAlignment.Center,
-            BookTextAlignment.Right => TextAlignment.Right,
-            _ => TextAlignment.Left,
-        };
-
-    public static (FontStyle, FontWeight) FromTextStyleFontStyle(Typography.SlotTextStyle textStyle)
-    {
-        var fontStyle = textStyle.FontStyle switch
-        {
-            BookFontStyle.BoldItalic or BookFontStyle.Italic => FontStyle.Italic,
-            _ => FontStyle.Normal,
-        };
-
-        var fontWeight = textStyle.FontStyle switch
-        {
-            BookFontStyle.BoldItalic or BookFontStyle.Bold => FontWeight.Bold,
-            _ => FontWeight.Normal,
-        };
-
-        return (fontStyle, fontWeight);
-    }
-
-    public static global::Avalonia.Media.Stretch StretchFromImageSlot(Slots.ImageSlot slot)
-        => slot.ImageStretch switch
-        {
-            BookImageStretch.Stretch => Stretch.Fill,
-            _ => Stretch.Uniform,
-        };
-
-    #endregion Static Utilities 
 
     public static SlotViewModel? SelectedSlot;
 

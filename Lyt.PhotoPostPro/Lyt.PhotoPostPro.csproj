@@ -106,6 +106,12 @@
     <Compile Update="Workflow\Book\Edit\BookEditView.axaml.cs">
       <DependentUpon>BookEditView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Workflow\Book\Edit\StylingPanelView.axaml.cs">
+      <DependentUpon>StylingPanelView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Workflow\Book\Edit\TextStyleView .axaml.cs">
+      <DependentUpon>TextStyleView .axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

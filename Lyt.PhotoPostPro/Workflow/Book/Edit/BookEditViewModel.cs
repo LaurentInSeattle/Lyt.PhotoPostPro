@@ -73,12 +73,18 @@ public partial class BookEditViewModel :
     [ObservableProperty]
     public partial bool IsSplitViewRightOpen { get; set; }
 
+    [ObservableProperty]
+    public partial StylingPanelViewModel StylingPanelViewModel { get; set; }
+
+  
+
     public BookEditViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
         this.IsSplitViewLeftOpen = true;
         this.IsSplitViewRightOpen = true;
+        this.StylingPanelViewModel = new (); 
     }
 
     public override void Activate(object? activationParameters)

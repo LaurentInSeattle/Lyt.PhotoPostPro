@@ -141,15 +141,13 @@
 					PanePlacement="Right"
 					DisplayMode="CompactInline"
 					IsPaneOpen="{Binding IsSplitViewRightOpen}"
-					OpenPaneLength="250"
+					OpenPaneLength="300"
 					CompactPaneLength="0"
 					>
 					<SplitView.Pane>
-						<!-- Tools Hidden for now  --> 
-						<Rectangle
-							Fill="Teal"
+						<vm:StylingPanelView
+							DataContext="{Binding StylingPanelViewModel}"
 							/>
-
 					</SplitView.Pane>
 
 					<Grid
