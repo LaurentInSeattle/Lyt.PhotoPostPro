@@ -52,9 +52,10 @@ public sealed partial class Book : IEditable
 
     public Dictionary<Guid, BookImage> ImageCandidates { get; set; } = [];
 
-    public HashSet<Guid> IncludedImages { get; set; } = [];
-
     public List<SlotTextStyle> TextStyles { get; set; } = [];
+
+    [JsonIgnore]
+    public HashSet<Guid> IncludedImages { get; set; } = [];
 
     [JsonIgnore]
     public BookManager? BookManager { get; set; }
@@ -378,6 +379,43 @@ public sealed partial class Book : IEditable
         {
             this.IncludedImages.Add(key);
         }
+    }
+
+    public void UpdateIncludedImages()
+    {
+        this.IncludedImages.Clear();
+        foreach (var page in this.AllPages())
+        {
+            foreach (var slot in page.Slots)
+            {
+                if (slot is ImageSlot imageSlot)
+                {
+                    this.IncludedImages.Add(imageSlot.BookImageId);
+                }
+            }
+        }
+    }
+
+    public List<Page> AllPages()
+    {
+        List<Page> pages = [with(this.Pages.Count+4)];
+        if (this.WithFrontCover)
+        {
+            // ! we have the front cover
+            pages.Add(this.FrontCover!.FrontPage);
+            pages.Add(this.FrontCover.BackPage);
+        }
+
+        pages.AddRange(this.Pages);
+
+        if (this.WithBackCover)
+        {
+            // ! we have the front cover
+            pages.Add(this.BackCover!.FrontPage);
+            pages.Add(this.BackCover.BackPage);
+        }
+
+        return pages;
     }
 
     public string GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)

@@ -54,6 +54,28 @@ public sealed partial class BookManager
 
     public Dictionary<Guid, byte[]> CurrentBookThumbnails { get; set; } = [];
 
+    public Dictionary<Guid, byte[]> CurrentBookUnusedThumbnails()
+    {
+        if (this.CurrentBook is not Book book)
+        {
+            throw new InvalidOperationException("No current book.");
+        }
+
+        book.UpdateIncludedImages(); 
+        Dictionary<Guid, byte[]> unused = [with(this.CurrentBookThumbnails.Count)];
+        foreach (Guid guid in this.CurrentBookThumbnails.Keys)
+        {
+            if (book.IncludedImages.Contains(guid))
+            {
+                continue;
+            }
+
+            unused.Add(guid, this.CurrentBookThumbnails[guid]);
+        }
+
+        return unused;
+    }
+
     #region Entire Book Management
 
     public void Clear()
@@ -202,6 +224,7 @@ public sealed partial class BookManager
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
         this.LoadImageCandidates();
+        book.UpdateIncludedImages();
         new BookListChangedMessage().Publish();
     }
 
@@ -554,7 +577,7 @@ public sealed partial class BookManager
 
         // Slot added with no image 
         var newSlot = new ImageSlot();
-        newSlot.AdjustToPage(this.CurrentBook); 
+        newSlot.AdjustToPage(this.CurrentBook);
         page.Slots.Add(newSlot);
 
         // Save and Post message 
@@ -576,12 +599,12 @@ public sealed partial class BookManager
         }
 
         // Slot added with dummy text 
-        var newSlot = 
-            new TextSlot() 
-            { 
-                Text = "Lorem Ipsum ~ Dolor sit amet.", 
-                Style = SlotTextStyle.LargeBodyText 
-            }; 
+        var newSlot =
+            new TextSlot()
+            {
+                Text = "Lorem Ipsum ~ Dolor sit amet.",
+                Style = SlotTextStyle.LargeBodyText
+            };
         newSlot.AdjustToPage(this.CurrentBook);
         page.Slots.Add(newSlot);
 
@@ -633,7 +656,7 @@ public sealed partial class BookManager
             throw new InvalidOperationException("No current book to move a slot from.");
         }
 
-        slotToMove.Position = newPosition; 
+        slotToMove.Position = newPosition;
 
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();
@@ -677,7 +700,7 @@ public sealed partial class BookManager
             throw new InvalidOperationException("No current book to move a slot from.");
         }
 
-        textSlot.Text= slotText;
+        textSlot.Text = slotText;
 
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();

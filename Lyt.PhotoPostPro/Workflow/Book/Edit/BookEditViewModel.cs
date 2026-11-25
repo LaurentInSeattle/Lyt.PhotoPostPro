@@ -49,6 +49,9 @@ public partial class BookEditViewModel :
     public partial int DoublePagesIndex { get; set; }
 
     [ObservableProperty]
+    public partial bool ShowAllImages { get; set; } = true;
+
+    [ObservableProperty]
     // The collection of images in the film strip 
     public partial ObservableCollection<BookImageViewModel> ImageThumbnails { get; set; } = [];
 
@@ -113,17 +116,7 @@ public partial class BookEditViewModel :
     public override void OnViewLoaded()
     {
         base.OnViewLoaded();
-
-        Schedule.OnUiThread(
-            90, () =>
-            {
-                var canvas = this.View.BookEditDragCanvas;
-                var listBox = this.View.StripListBox;
-                foreach (var imageThumbnail in this.ImageThumbnails)
-                {
-                    imageThumbnail.AttachDraggable(listBox, canvas);
-                }
-            }, DispatcherPriority.ApplicationIdle);
+        this.AttachDragableToImages();
     }
 
     partial void OnShowGridLinesChanged(bool value)
@@ -285,14 +278,24 @@ public partial class BookEditViewModel :
         this.DoublePagesIndex = 0;
     }
 
+    partial void OnShowAllImagesChanged(bool value)
+    {
+        this.LoadImageCandidates();
+        this.AttachDragableToImages();
+    }
+
     private void LoadImageCandidates()
     {
         // BookManager is caching the thumbnails of image candidates 
-        var images = this.model.BookManager.CurrentBookThumbnails;
+        var bookManager = this.model.BookManager;
+        var images =
+            this.ShowAllImages ?
+                bookManager.CurrentBookThumbnails :
+                bookManager.CurrentBookUnusedThumbnails();
         var list = new List<BookImageViewModel>(images.Count);
         Parallel.ForEach(images.Keys, imageId =>
         {
-            var imageBytes = images[imageId];
+            byte[] imageBytes = images[imageId];
             using var stream = new MemoryStream(imageBytes);
             var bitmap = new Bitmap(stream);
             lock (list)
@@ -302,6 +305,19 @@ public partial class BookEditViewModel :
         });
 
         this.ImageThumbnails = [with(list)];
+    }
+
+    private void AttachDragableToImages()
+    {
+        Schedule.OnUiThread(90, () =>
+        {
+            var canvas = this.View.BookEditDragCanvas;
+            var listBox = this.View.StripListBox;
+            foreach (var imageThumbnail in this.ImageThumbnails)
+            {
+                imageThumbnail.AttachDraggable(listBox, canvas);
+            }
+        }, DispatcherPriority.ApplicationIdle);
     }
 
     private void LoadPdfThumbnails()
@@ -327,7 +343,7 @@ public partial class BookEditViewModel :
     }
 
     [RelayCommand]
-    public void OnToggleOpenSplitView() => this.IsSplitViewOpen = !this.IsSplitViewOpen; 
+    public void OnToggleOpenSplitView() => this.IsSplitViewOpen = !this.IsSplitViewOpen;
 
     [RelayCommand]
     public void OnAddPageBefore()
@@ -376,11 +392,11 @@ public partial class BookEditViewModel :
         var page = message.Page;
         var slot = message.Slot;
 
-        bool FindSlot (BookPageViewModel pageViewModel)
+        bool FindSlot(BookPageViewModel pageViewModel)
         {
-            if (pageViewModel.Page != page )
+            if (pageViewModel.Page != page)
             {
-                return false; 
+                return false;
             }
 
             foreach (var slotVm in pageViewModel.Slots)
@@ -393,8 +409,8 @@ public partial class BookEditViewModel :
                 }
             }
 
-            return false; 
-        } 
+            return false;
+        }
 
         if (this.IsSingleImageMode)
         {
@@ -402,7 +418,7 @@ public partial class BookEditViewModel :
             {
                 if (FindSlot(singlePage))
                 {
-                    return; 
+                    return;
                 }
             }
         }

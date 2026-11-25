@@ -18,7 +18,7 @@ public sealed class ImageSlot : Slot
         {
             if (!book.IncludedImages.Contains(this.BookImageId))
             {
-                return string.Empty;
+                book.IncludedImages.Add(this.BookImageId);
             }
 
             if (!book.ImageCandidates.TryGetValue(this.BookImageId, out BookImage? bookImage) &&
