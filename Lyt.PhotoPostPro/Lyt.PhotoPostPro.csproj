@@ -102,4 +102,10 @@
     <Folder Include="Controls\Panels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Workflow\Book\Edit\BookEditView.axaml.cs">
+      <DependentUpon>BookEditView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

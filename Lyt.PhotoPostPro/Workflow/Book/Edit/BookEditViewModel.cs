@@ -64,10 +64,15 @@ public partial class BookEditViewModel :
     // SelectedIndex of the selected PDF Image
     public partial int SelectedPdfThumbnailIndex { get; set; }
 
+
+    [ObservableProperty]
+    public partial bool IsSplitViewOpen { get; set; }
+
     public BookEditViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
+        this.IsSplitViewOpen = true;
     }
 
     public override void Activate(object? activationParameters)
@@ -320,6 +325,9 @@ public partial class BookEditViewModel :
 
         this.PdfThumbnails = new(pdfThumbnails);
     }
+
+    [RelayCommand]
+    public void OnToggleOpenSplitView() => this.IsSplitViewOpen = !this.IsSplitViewOpen; 
 
     [RelayCommand]
     public void OnAddPageBefore()
