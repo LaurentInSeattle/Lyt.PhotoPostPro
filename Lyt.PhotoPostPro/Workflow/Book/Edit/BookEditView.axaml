@@ -16,8 +16,15 @@
 
 	Background="Transparent"
 	>
-	<Grid>
-		
+	<Grid>		
+		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 			
+		<Image
+			Grid.Column="0" Grid.ColumnSpan="999" Grid.RowSpan="999"
+			Stretch="UniformToFill"
+			Source="\Assets\Images\sky.jpg"
+			Opacity="0.7"
+			/>
+
 		<Grid
 			x:Name="BookPreviewMainGrid"
 			IsVisible="{Binding !IsEditing}"
@@ -26,372 +33,377 @@
 				DataContext="{Binding DocumentViewModel}"
 				/>
 		</Grid>
-	<Grid
-		x:Name="BookEditMainGrid"
-		IsVisible="{Binding IsEditing}"
-		>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="4" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="4" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="4" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="0" /> <!-- Tools --> 
-			<ColumnDefinition Width="4" />
-		</Grid.ColumnDefinitions>
 
-		<!-- Tools Hidden for now  --> 
-		<Rectangle
-			Fill="Teal"
-			Grid.Column="2" Grid.Row="1"
-			/>
-
-		<!-- Same background as ShellView, here again so that we have it when in full screen mode --> 
-			
-		<Image
-			Grid.Column="0" Grid.ColumnSpan="999" Grid.RowSpan="999"
-			Stretch="UniformToFill"
-			Source="\Assets\Images\sky.jpg"
-			Opacity="0.7"
-			/>
-
-		<SplitView
-			x:Name="SplitView"
-			Grid.Row="1" Grid.Column="1"
-			PaneBackground="Transparent"
-			PanePlacement="Left"
-			DisplayMode="CompactInline"
-			IsPaneOpen="{Binding IsSplitViewOpen}"
-			OpenPaneLength="250"
-			CompactPaneLength="48"
-			>
-			<SplitView.Pane>
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="44" />
-						<RowDefinition Height="44" />
-						<RowDefinition Height="*" />
-					</Grid.RowDefinitions>
-
-					<!-- Expander toggle--> 
-					<glyphs:GlyphButton
-						Grid.Row="0"
-						IsVisible="{Binding !IsPaneOpen, ElementName=SplitView}"
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="chevron_right"
-						GlyphStrokeThickness="0.1"
-						Width="40" Height="36" 
-						HorizontalAlignment="Center" VerticalAlignment="Top"
-						Command="{Binding OnToggleOpenSplitView}"
-						/>
-					<!-- Expander toggle--> 
-					<glyphs:GlyphButton
-						Grid.Row="0"
-						IsVisible="{Binding IsPaneOpen, ElementName=SplitView}"
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="chevron_left"
-						GlyphStrokeThickness="0.1"
-						Width="200" Height="36" 
-						HorizontalAlignment="Center" VerticalAlignment="Top"
-						Command="{Binding OnToggleOpenSplitView}"
-						/>
-					<!-- Toogle Show All --> 
-					<toggle:ToggleSwitch
-						x:Name="ShowSwitch"
-						Grid.Row="1"
-						IsVisible="{Binding IsPaneOpen, ElementName=SplitView}"
-						Margin="0"
-						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="All"
-						FalseText="Spare"
-						Height="30" Width="200"
-						HorizontalAlignment="Center" VerticalAlignment="Center"
-						Value="{Binding ShowAllImages}"
-						/>
-					<!-- Film Strip --> 
-					<ListBox
-						Grid.Row="2"
-						x:Name="StripListBox"
-						IsVisible="{Binding IsPaneOpen, ElementName=SplitView}"
-						ItemsSource="{Binding ImageThumbnails}"
-						SelectedIndex="{Binding SelectedThumbnailIndex}"
-						SelectionMode="Single"
-						ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-						> 
-						<ListBox.ItemsPanel>
-							<ItemsPanelTemplate>
-								<StackPanel 
-									Background="Transparent"
-									Orientation="Vertical" 
-									/>
-							</ItemsPanelTemplate>
-						</ListBox.ItemsPanel>
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<vm:BookImageView 
-									Margin="4 0 12 0"
-									Width="220" MaxHeight="180"
-									/>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</Grid>
-			</SplitView.Pane>
-
-		<!-- Center Area  --> 
 		<Grid
+			x:Name="BookEditMainGrid"
+			IsVisible="{Binding IsEditing}"
 			>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="152" /> <!-- Doc Preview --> 
-				<RowDefinition Height="64" /> <!-- Toolbar --> 
-				<RowDefinition Height="*" /> <!-- Edit --> 
-				<RowDefinition Height="32" /> <!-- Pips --> 
-				<RowDefinition Height="0" /> <!-- Templates --> 
+				<RowDefinition Height="4" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="4" />
 			</Grid.RowDefinitions>
-			<Grid
-				Background="#80000020"
-				Grid.Row="0"
-				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-				>
-				<!-- Preview --> 
-				<ListBox
-					x:Name="PdfPreviewListBox"
-					ItemsSource="{Binding PdfThumbnails}"
-					SelectedIndex="{Binding SelectedPdfThumbnailIndex}"
-					SelectionMode="Single"
-					ScrollViewer.VerticalScrollBarVisibility="Disabled"
-					ScrollViewer.HorizontalScrollBarVisibility="Auto"
-					> 
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<VirtualizingStackPanel 
-								Background="Transparent"
-								Orientation="Horizontal" 
-								/>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<Image 
-								Source="{Binding Bitmap}" 
-								Height="{Binding Height}" 
-								Stretch="UniformToFill"
-								Margin="4 0 0 16"
-								/>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="4" />
+			</Grid.ColumnDefinitions>
 
-			</Grid>
-			
-			<!-- Toolbar  --> 
-			<Grid
-				Grid.Row="1"
-				Background="#40000020"
+			<SplitView
+				x:Name="SplitViewLeft"
+				Grid.Row="1" Grid.Column="1"
+				PaneBackground="Transparent"
+				PanePlacement="Left"
+				DisplayMode="CompactInline"
+				IsPaneOpen="{Binding IsSplitViewLeftOpen}"
+				OpenPaneLength="250"
+				CompactPaneLength="40"
 				>
-				<StackPanel
-					Orientation="Horizontal"
-					>	
-					<toggle:ToggleSwitch
-						x:Name="ModeSwitch"
-						Margin="8 0 8 0"
-						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="1"
-						FalseText="2"
-						Height="30" Width="140"
-						HorizontalAlignment="Center" VerticalAlignment="Center"
-						Value="{Binding IsSingleImageMode}"
-						/>
-					<TextBlock
-						Margin="10 0 0 0"
-						Theme="{StaticResource H3}"
-						Text="Pages:"
-						HorizontalAlignment="Left" VerticalAlignment="Center"
-						FontWeight="Normal"
-						Foreground="{StaticResource PastelOrchid_0_080}"
-						/>
-					<toggle:ToggleSwitch
-						x:Name="ShowGridLinesSwitch"
-						Margin="8 0 8 0"
-						Style="{StaticResource StandardToggleSwitch}"
-						TrueText="Grid"
-						FalseText="Hide"
-						Height="30" Width="160"
-						HorizontalAlignment="Center" VerticalAlignment="Center"
-						Value="{Binding ShowGridLines}"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="add_circle"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnAddPageBefore}"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Add Page BEFORE current"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="delete"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnDeletePage}"
-						CommandParameter="Check"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Delete current page"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="add_circle"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnAddPageAfter}"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Add Page AFTER current"
-						/>
-					<TextBlock
-						Margin="10 0 0 0"
-						Theme="{StaticResource H3}"
-						Text="Slots:"
-						HorizontalAlignment="Left" VerticalAlignment="Center"
-						FontWeight="Normal"
-						Foreground="{StaticResource PastelOrchid_0_080}"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="add_circle"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnAddSlot}"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Add Slot to current page"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="delete"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnDeleteSlot}"
-						CommandParameter="Check"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Delete selected slot"
-						/>
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="edit"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnEditSlot}"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Edit selected Slot"
-						/>
+				<SplitView.Pane>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="44" />
+							<RowDefinition Height="44" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
 
-					<glyphs:GlyphButton
-						Style="{StaticResource PanelIconButton}"
-						Layout="IconOnly"
-						GlyphSource="eye"
-						GlyphStrokeThickness="0.1"
-						Command="{Binding OnPreview}"
-						Width="60" Height="36" 
-						Margin="8 0 0 0"
-						ToolTip.Tip="Preview phot book document"
-						/>
-				</StackPanel>
-			</Grid>
+						<!-- Expander toggle--> 
+						<glyphs:GlyphButton
+							Grid.Row="0"
+							IsVisible="{Binding !IsPaneOpen, ElementName=SplitViewLeft}"
+							Style="{StaticResource PanelIconButton}"
+							Layout="IconOnly"
+							GlyphSource="chevron_right"
+							GlyphStrokeThickness="0.1"
+							Width="36" Height="36" 
+							HorizontalAlignment="Center" VerticalAlignment="Top"
+							Command="{Binding OnToggleOpenSplitView}"
+							/>
+						<!-- Expander toggle--> 
+						<glyphs:GlyphButton
+							Grid.Row="0"
+							IsVisible="{Binding IsPaneOpen, ElementName=SplitViewLeft}"
+							Style="{StaticResource PanelIconButton}"
+							Layout="IconOnly"
+							GlyphSource="chevron_left"
+							GlyphStrokeThickness="0.1"
+							Width="246" Height="36" 
+							HorizontalAlignment="Center" VerticalAlignment="Top"
+							Command="{Binding OnToggleOpenSplitView}"
+							/>
+						<!-- Toogle Show All --> 
+						<toggle:ToggleSwitch
+							x:Name="ShowSwitch"
+							Grid.Row="1"
+							IsVisible="{Binding IsPaneOpen, ElementName=SplitViewLeft}"
+							Margin="0"
+							Style="{StaticResource StandardToggleSwitch}"
+							TrueText="All"
+							FalseText="Spare"
+							Height="30" Width="200"
+							HorizontalAlignment="Center" VerticalAlignment="Center"
+							Value="{Binding ShowAllImages}"
+							/>
+						<!-- Film Strip --> 
+						<ListBox
+							Grid.Row="2"
+							x:Name="StripListBox"
+							IsVisible="{Binding IsPaneOpen, ElementName=SplitViewLeft}"
+							ItemsSource="{Binding ImageThumbnails}"
+							SelectedIndex="{Binding SelectedThumbnailIndex}"
+							SelectionMode="Single"
+							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+							> 
+							<ListBox.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel 
+										Background="Transparent"
+										Orientation="Vertical" 
+										/>
+								</ItemsPanelTemplate>
+							</ListBox.ItemsPanel>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<vm:BookImageView 
+										Margin="4 0 12 0"
+										Width="220" MaxHeight="180"
+										/>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Grid>
+				</SplitView.Pane>
 
-			<!-- Pages --> 
-			<Viewbox
-				Grid.Row="2"
-				IsVisible="{Binding DoublePageMode}"
-				>
-				<Carousel 
-				Grid.Row="2"
-				IsVisible="{Binding DoublePageMode}"
-					Name="DoublePagesCarousel"
-					ItemsSource="{Binding DoublePages}"
-					SelectedIndex="{Binding DoublePagesIndex}"
+				<!-- Center Area  is also a split view -->
+				<SplitView
+					x:Name="SplitViewRight"
+					PaneBackground="Transparent"
+					PanePlacement="Right"
+					DisplayMode="CompactInline"
+					IsPaneOpen="{Binding IsSplitViewRightOpen}"
+					OpenPaneLength="250"
+					CompactPaneLength="0"
 					>
-					<Carousel.PageTransition>
-						<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
-					</Carousel.PageTransition>
-					<Carousel.ItemTemplate>
-						<DataTemplate>
-							<vm:BookDoublePageView Margin="0" />
-						</DataTemplate>
-					</Carousel.ItemTemplate>
-				</Carousel>		
-			</Viewbox>
+					<SplitView.Pane>
+						<!-- Tools Hidden for now  --> 
+						<Rectangle
+							Fill="Teal"
+							/>
+
+					</SplitView.Pane>
+
+					<Grid
+						>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="152" /> <!-- Doc Preview --> 
+							<RowDefinition Height="64" /> <!-- Toolbar --> 
+							<RowDefinition Height="*" /> <!-- Edit --> 
+							<RowDefinition Height="32" /> <!-- Pips --> 
+							<RowDefinition Height="0" /> <!-- Templates --> 
+						</Grid.RowDefinitions>
+						<Grid
+							Background="#80000020"
+							Grid.Row="0"
+							VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							>
+							<!-- Preview --> 
+							<ListBox
+								x:Name="PdfPreviewListBox"
+								ItemsSource="{Binding PdfThumbnails}"
+								SelectedIndex="{Binding SelectedPdfThumbnailIndex}"
+								SelectionMode="Single"
+								ScrollViewer.VerticalScrollBarVisibility="Disabled"
+								ScrollViewer.HorizontalScrollBarVisibility="Auto"
+								> 
+								<ListBox.ItemsPanel>
+									<ItemsPanelTemplate>
+										<VirtualizingStackPanel 
+											Background="Transparent"
+											Orientation="Horizontal" 
+											/>
+									</ItemsPanelTemplate>
+								</ListBox.ItemsPanel>
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<Image 
+											Source="{Binding Bitmap}" 
+											Height="{Binding Height}" 
+											Stretch="UniformToFill"
+											Margin="4 0 0 16"
+											/>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+
+						</Grid>
 			
-			<!-- Pips Pager --> 
-			<LayoutTransformControl
-				Grid.Row="3"
-				IsVisible="{Binding DoublePageMode}"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				>
-				<LayoutTransformControl.LayoutTransform>
-					<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
-				</LayoutTransformControl.LayoutTransform>
-				<PipsPager 
-					NumberOfPages="{Binding DoublePages.Count}"
-					SelectedPageIndex="{Binding #DoublePagesCarousel.SelectedIndex, Mode=TwoWay}"
-					Foreground="{StaticResource LightAqua_0_120}"
-				   />
-			</LayoutTransformControl>
+						<!-- Toolbar  --> 
+						<Grid
+							Grid.Row="1"
+							Background="#40000020"
+							>
+							<StackPanel
+								Orientation="Horizontal"
+								>	
+								<toggle:ToggleSwitch
+									x:Name="ModeSwitch"
+									Margin="8 0 8 0"
+									Style="{StaticResource StandardToggleSwitch}"
+									TrueText="1"
+									FalseText="2"
+									Height="30" Width="140"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Value="{Binding IsSingleImageMode}"
+									/>
+								<TextBlock
+									Margin="10 0 0 0"
+									Theme="{StaticResource H3}"
+									Text="Pages:"
+									HorizontalAlignment="Left" VerticalAlignment="Center"
+									FontWeight="Normal"
+									Foreground="{StaticResource PastelOrchid_0_080}"
+									/>
+								<toggle:ToggleSwitch
+									x:Name="ShowGridLinesSwitch"
+									Margin="8 0 8 0"
+									Style="{StaticResource StandardToggleSwitch}"
+									TrueText="Grid"
+									FalseText="Hide"
+									Height="30" Width="160"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Value="{Binding ShowGridLines}"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="add_circle"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnAddPageBefore}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Add Page BEFORE current"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="delete"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnDeletePage}"
+									CommandParameter="Check"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Delete current page"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="add_circle"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnAddPageAfter}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Add Page AFTER current"
+									/>
+								<TextBlock
+									Margin="10 0 0 0"
+									Theme="{StaticResource H3}"
+									Text="Slots:"
+									HorizontalAlignment="Left" VerticalAlignment="Center"
+									FontWeight="Normal"
+									Foreground="{StaticResource PastelOrchid_0_080}"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="add_circle"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnAddSlot}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Add Slot to current page"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="delete"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnDeleteSlot}"
+									CommandParameter="Check"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Delete selected slot"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="edit"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnEditSlot}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Edit selected Slot"
+									/>
 
-			<Viewbox
-				Grid.Row="2"
-				IsVisible="{Binding !DoublePageMode}"
-				>
-				<Carousel 
-					Name="SinglePagesCarousel"
-					ItemsSource="{Binding SinglePages}"
-					SelectedIndex="{Binding SinglePagesIndex}"
-					>					
-					<Carousel.PageTransition>
-						<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
-					</Carousel.PageTransition>
-					<Carousel.ItemTemplate>
-						<DataTemplate>
-							<vm:BookPageView Margin="0" />
-						</DataTemplate>
-					</Carousel.ItemTemplate>
-				</Carousel>		
-			</Viewbox>
-			<LayoutTransformControl
-				Grid.Row="3"
-				IsVisible="{Binding !DoublePageMode}"
-				HorizontalAlignment="Center" VerticalAlignment="Center"
-				>
-				<LayoutTransformControl.LayoutTransform>
-					<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
-				</LayoutTransformControl.LayoutTransform>
-				<PipsPager 
-					NumberOfPages="{Binding SinglePages.Count}"
-					SelectedPageIndex="{Binding #SinglePagesCarousel.SelectedIndex, Mode=TwoWay}"
-					Foreground="{StaticResource LightAqua_0_120}"
-				   />
-			</LayoutTransformControl>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="eye"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnPreview}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Preview phot book document"
+									/>
+							</StackPanel>
+						</Grid>
 
-			<Rectangle
-				Fill="#0180A060"
-				Grid.Row="4"
-				VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+						<!-- Pages --> 
+						<Viewbox
+							Grid.Row="2"
+							IsVisible="{Binding DoublePageMode}"
+							>
+							<Carousel 
+							Grid.Row="2"
+							IsVisible="{Binding DoublePageMode}"
+								Name="DoublePagesCarousel"
+								ItemsSource="{Binding DoublePages}"
+								SelectedIndex="{Binding DoublePagesIndex}"
+								>
+								<Carousel.PageTransition>
+									<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
+								</Carousel.PageTransition>
+								<Carousel.ItemTemplate>
+									<DataTemplate>
+										<vm:BookDoublePageView Margin="0" />
+									</DataTemplate>
+								</Carousel.ItemTemplate>
+							</Carousel>		
+						</Viewbox>
+			
+						<!-- Pips Pager --> 
+						<LayoutTransformControl
+							Grid.Row="3"
+							IsVisible="{Binding DoublePageMode}"
+							HorizontalAlignment="Center" VerticalAlignment="Center"
+							>
+							<LayoutTransformControl.LayoutTransform>
+								<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
+							</LayoutTransformControl.LayoutTransform>
+							<PipsPager 
+								NumberOfPages="{Binding DoublePages.Count}"
+								SelectedPageIndex="{Binding #DoublePagesCarousel.SelectedIndex, Mode=TwoWay}"
+								Foreground="{StaticResource LightAqua_0_120}"
+							   />
+						</LayoutTransformControl>
+
+						<Viewbox
+							Grid.Row="2"
+							IsVisible="{Binding !DoublePageMode}"
+							>
+							<Carousel 
+								Name="SinglePagesCarousel"
+								ItemsSource="{Binding SinglePages}"
+								SelectedIndex="{Binding SinglePagesIndex}"
+								>					
+								<Carousel.PageTransition>
+									<PageSlide Duration="0:00:00.250" Orientation="Horizontal" />
+								</Carousel.PageTransition>
+								<Carousel.ItemTemplate>
+									<DataTemplate>
+										<vm:BookPageView Margin="0" />
+									</DataTemplate>
+								</Carousel.ItemTemplate>
+							</Carousel>		
+						</Viewbox>
+						<LayoutTransformControl
+							Grid.Row="3"
+							IsVisible="{Binding !DoublePageMode}"
+							HorizontalAlignment="Center" VerticalAlignment="Center"
+							>
+							<LayoutTransformControl.LayoutTransform>
+								<ScaleTransform ScaleX="1.7" ScaleY="1.7" />
+							</LayoutTransformControl.LayoutTransform>
+							<PipsPager 
+								NumberOfPages="{Binding SinglePages.Count}"
+								SelectedPageIndex="{Binding #SinglePagesCarousel.SelectedIndex, Mode=TwoWay}"
+								Foreground="{StaticResource LightAqua_0_120}"
+							   />
+						</LayoutTransformControl>
+
+						<Rectangle
+							Fill="#0180A060"
+							Grid.Row="4"
+							VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+							/>
+					</Grid>
+		
+				</SplitView>
+			</SplitView>
+
+			<Canvas
+				x:Name="BookEditDragCanvas"
+				Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999"
 				/>
 		</Grid>
-		</SplitView>
-		<Canvas
-			x:Name="BookEditDragCanvas"
-			Grid.Column="0" Grid.ColumnSpan="999" Grid.Row="0" Grid.RowSpan="999"
-			/>
-	</Grid>
 	</Grid>
 </UserControl>
