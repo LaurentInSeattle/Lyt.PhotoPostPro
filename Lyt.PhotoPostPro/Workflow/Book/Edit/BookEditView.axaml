@@ -77,7 +77,7 @@
 							GlyphStrokeThickness="0.1"
 							Width="36" Height="36" 
 							HorizontalAlignment="Center" VerticalAlignment="Top"
-							Command="{Binding OnToggleOpenSplitView}"
+							Command="{Binding OnToggleOpenSplitViewLeft}"
 							/>
 						<!-- Expander toggle--> 
 						<glyphs:GlyphButton
@@ -89,7 +89,7 @@
 							GlyphStrokeThickness="0.1"
 							Width="246" Height="36" 
 							HorizontalAlignment="Center" VerticalAlignment="Top"
-							Command="{Binding OnToggleOpenSplitView}"
+							Command="{Binding OnToggleOpenSplitViewLeft}"
 							/>
 						<!-- Toogle Show All --> 
 						<toggle:ToggleSwitch
@@ -142,12 +142,37 @@
 					DisplayMode="CompactInline"
 					IsPaneOpen="{Binding IsSplitViewRightOpen}"
 					OpenPaneLength="300"
-					CompactPaneLength="0"
+					CompactPaneLength="40"
 					>
 					<SplitView.Pane>
-						<vm:StylingPanelView
-							DataContext="{Binding StylingPanelViewModel}"
-							/>
+						<StackPanel>							
+							<!-- Expander toggle--> 
+							<glyphs:GlyphButton
+								IsVisible="{Binding !IsPaneOpen, ElementName=SplitViewRight}"
+								Style="{StaticResource PanelIconButton}"
+								Layout="IconOnly"
+								GlyphSource="chevron_left"
+								GlyphStrokeThickness="0.1"
+								Width="36" Height="36" 
+								HorizontalAlignment="Center" VerticalAlignment="Top"
+								Command="{Binding OnToggleOpenSplitViewRight}"
+								/>
+							<!-- Expander toggle--> 
+							<glyphs:GlyphButton
+								IsVisible="{Binding IsPaneOpen, ElementName=SplitViewRight}"
+								Style="{StaticResource PanelIconButton}"
+								Layout="IconOnly"
+								GlyphSource="chevron_right"
+								GlyphStrokeThickness="0.1"
+								Width="296" Height="36" 
+								HorizontalAlignment="Center" VerticalAlignment="Top"
+								Command="{Binding OnToggleOpenSplitViewRight}"
+								/>
+							<vm:StylingPanelView
+								DataContext="{Binding StylingPanelViewModel}"
+								IsVisible="{Binding IsPaneOpen, ElementName=SplitViewRight}"
+								/>
+						</StackPanel>
 					</SplitView.Pane>
 
 					<Grid

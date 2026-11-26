@@ -65,7 +65,13 @@ public partial class BookPageView : View
 
     private void OnCanvasPointerPressed(object? sender, global::Avalonia.Input.PointerPressedEventArgs e)
     {
+        // No Slot selected 
+        SlotViewModel.SelectedSlot?.Select(false); 
+
+        // No focus ends editing 
         var topLevel = TopLevel.GetTopLevel(this);
         topLevel?.FocusManager?.Focus(null);
+
+        e.Handled = true; 
     }
 }

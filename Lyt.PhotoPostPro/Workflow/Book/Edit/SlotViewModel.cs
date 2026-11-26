@@ -9,15 +9,18 @@ using Books = Model.PhotoBook;
 using Pages = Model.PhotoBook.Pages;
 using Slots = Model.PhotoBook.Slots;
 
-using static TextStyleUtilities; 
+using static TextStyleUtilities;
 
-public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPositionable
-// , IRecipient<>
+public partial class SlotViewModel :
+    ViewModel<SlotView>,
+    IDropTarget,
+    IPositionable,
+    IRecipient<BookApplyStyleMessage>
 {
-    public static FontFamily DefaultFontFamily = new("Arial");
+    public readonly static FontFamily DefaultFontFamily = new("Arial");
 
-    private static SolidColorBrush? selectedBrush;
-    private static SolidColorBrush? highlightedBrush;
+    private readonly static SolidColorBrush? selectedBrush;
+    private readonly static SolidColorBrush? highlightedBrush;
 
     static SlotViewModel()
     {
@@ -25,7 +28,23 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
     }
 
-    public static SlotViewModel? SelectedSlot;
+    public static SlotViewModel? SelectedSlot
+    {
+        get;
+        private set
+        {
+            field = value;
+
+            if (value is null)
+            {
+                new BookTextSlotSelectedMessage(null).Publish();
+            }
+            else if (value.Slot is TextSlot)
+            {
+                new BookTextSlotSelectedMessage(value).Publish();
+            }
+        }
+    }
 
     public readonly Pages.Page Page;
     public readonly Slots.Slot Slot;
@@ -40,7 +59,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
     [ObservableProperty]
     public partial bool IsSlotBorderVisible { get; set; }
-    
+
     [ObservableProperty]
     public partial SolidColorBrush? SlotBorderBrush { get; set; }
 
@@ -121,6 +140,9 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
             this.IsImageSlot = false;
             this.textSlot = textSlot;
             this.SetText();
+
+            // Styles are only for Text Slots
+            this.Subscribe<BookApplyStyleMessage>();
         }
         else
         {
@@ -152,7 +174,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
     public void SetFinalPosition(SlotPosition slotPosition)
     {
         this.SetPosition(slotPosition);
-        this.model.BookManager.RepositionSlot(this.Slot, this.Page, slotPosition); 
+        this.model.BookManager.RepositionSlot(this.Slot, this.Page, slotPosition);
     }
 
     public void SetText()
@@ -200,10 +222,30 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         }
     }
 
+    public void Receive(BookApplyStyleMessage message)
+    {
+        if (this != message.TextSlotViewModel)
+        {
+            return;
+        }
+
+        if (this.textSlot is null)
+        {
+            return;
+        }
+
+        var style = message.TextStyle;
+
+        // This needs to be done in model 
+
+        this.textSlot.Style = style;
+        this.SetText();
+    }
+
     public void OnClicked(bool isRightClick)
     {
         this.Select(!this.isSelected);
-    } 
+    }
 
     public void Select(bool select = true)
     {
@@ -216,8 +258,8 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
 
             // ! we have a book  
             var pageSize = this.model.BookManager.CurrentBook!.PageSize;
-            var adorner = new ResizeAdorner(this.View, pageSize.Width, pageSize.Height, snaps: 10); 
-            AdornerLayer.SetAdorner(this.View, adorner); 
+            var adorner = new ResizeAdorner(this.View, pageSize.Width, pageSize.Height, snaps: 10);
+            AdornerLayer.SetAdorner(this.View, adorner);
         }
         else
         {
@@ -253,7 +295,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
             {
                 this.Highlight();
                 Schedule.OnUiThread(1_500, () => { this.Highlight(false); }, DispatcherPriority.Background);
-            } 
+            }
 
             return true;
         }
@@ -297,7 +339,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         {
             // We are editing: do not edit again 
             this.EndEdit();
-            return; 
+            return;
         }
 
         this.IsTextBoxVisible = true;
@@ -310,7 +352,7 @@ public partial class SlotViewModel : ViewModel<SlotView>, IDropTarget, IPosition
         textBox.CaretIndex = textBox.Text?.Length ?? 0;
     }
 
-    internal void OnTextBoxLostFocus() =>  this.EndEdit(); 
+    internal void OnTextBoxLostFocus() => this.EndEdit();
 
     internal void EndEdit()
     {

@@ -76,15 +76,13 @@ public partial class BookEditViewModel :
     [ObservableProperty]
     public partial StylingPanelViewModel StylingPanelViewModel { get; set; }
 
-  
-
     public BookEditViewModel(PhotoPostProModel model, IToaster toaster)
     {
         this.model = model;
         this.toaster = toaster;
         this.IsSplitViewLeftOpen = true;
         this.IsSplitViewRightOpen = true;
-        this.StylingPanelViewModel = new (); 
+        this.StylingPanelViewModel = new (this.model); 
     }
 
     public override void Activate(object? activationParameters)
@@ -352,7 +350,10 @@ public partial class BookEditViewModel :
     }
 
     [RelayCommand]
-    public void OnToggleOpenSplitView() => this.IsSplitViewLeftOpen = !this.IsSplitViewLeftOpen;
+    public void OnToggleOpenSplitViewLeft() => this.IsSplitViewLeftOpen = !this.IsSplitViewLeftOpen;
+
+    [RelayCommand]
+    public void OnToggleOpenSplitViewRight() => this.IsSplitViewRightOpen = !this.IsSplitViewRightOpen;
 
     [RelayCommand]
     public void OnAddPageBefore()
@@ -387,7 +388,7 @@ public partial class BookEditViewModel :
 
         var bookMgr = this.model.BookManager;
         bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
-        SlotViewModel.SelectedSlot = null;
+        SlotViewModel.SelectedSlot?.Select(false);
     }
 
     public void Receive(BookEditTextSlotMessage message)

@@ -1,7 +1,5 @@
 ﻿namespace Lyt.PhotoPostPro.Workflow.Book.Edit;
 
-using Lyt.PhotoPostPro.Model.PhotoBook.Pages;
-using Lyt.PhotoPostPro.Model.PhotoBook.Slots;
 using Lyt.PhotoPostPro.Model.PhotoBook.Typography;
 
 using static TextStyleUtilities; 
@@ -10,7 +8,7 @@ public partial class TextStyleViewModel :
     ViewModel<TextStyleView>
     // , IRecipient<DocPageNavigateMessage>
 {
-    private readonly SlotTextStyle slotTextStyle;
+    public readonly SlotTextStyle SlotTextStyle;
 
     [ObservableProperty]
     public partial SolidColorBrush PageColor { get; set; } = new(Colors.Black);
@@ -36,19 +34,19 @@ public partial class TextStyleViewModel :
     [ObservableProperty]
     public partial TextAlignment TextAlignment { get; set; }
 
-    public TextStyleViewModel(Page page, SlotTextStyle slotTextStyle)
+    public TextStyleViewModel(SlotTextStyle slotTextStyle)
     {
-        this.slotTextStyle = slotTextStyle;
+        this.SlotTextStyle = slotTextStyle;
 
         // Styling the text block 
         // this.PageColor = Page.
-        this.Text = this.slotTextStyle.FriendlyName;
-        this.FontFamily = new FontFamily(this.slotTextStyle.FontFamily);
-        this.FontSize = this.slotTextStyle.FontSize;
-        this.ForegroundColor = FromTextStyle(this.slotTextStyle);
-        var fontStyles = FromTextStyleFontStyle(this.slotTextStyle);
+        this.Text = this.SlotTextStyle.FriendlyName;
+        this.FontFamily = new FontFamily(this.SlotTextStyle.FontFamily);
+        this.FontSize = this.SlotTextStyle.FontSize;
+        this.ForegroundColor = FromTextStyle(this.SlotTextStyle);
+        var fontStyles = FromTextStyleFontStyle(this.SlotTextStyle);
         this.FontStyle = fontStyles.Item1;
         this.FontWeight = fontStyles.Item2;
-        this.TextAlignment = FromTextStyleTextAlignment(this.slotTextStyle);
+        this.TextAlignment = FromTextStyleTextAlignment(this.SlotTextStyle);
     }
 }

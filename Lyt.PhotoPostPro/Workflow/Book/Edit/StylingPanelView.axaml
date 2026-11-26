@@ -20,5 +20,31 @@
 	<Grid
 		Background="#40008080"
 		>
+		<!-- Styles --> 
+		<ListBox
+			Grid.Row="2"
+			x:Name="StripListBox"
+			ItemsSource="{Binding Styles}"
+			SelectedIndex="{Binding SelectedStyleIndex}"
+			SelectionMode="Single"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			> 
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel 
+						Background="Transparent"
+						Orientation="Vertical" 
+						/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<vm:TextStyleView 
+						Margin="4 0 4 0"
+						Width="292" MaxHeight="180"
+						/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 	</Grid>
 </UserControl>
