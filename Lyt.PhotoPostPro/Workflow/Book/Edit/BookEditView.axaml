@@ -326,7 +326,6 @@
 									Margin="8 0 0 0"
 									ToolTip.Tip="Edit selected Slot"
 									/>
-
 								<glyphs:GlyphButton
 									Style="{StaticResource PanelIconButton}"
 									Layout="IconOnly"
@@ -335,7 +334,27 @@
 									Command="{Binding OnPreview}"
 									Width="60" Height="36" 
 									Margin="8 0 0 0"
-									ToolTip.Tip="Preview phot book document"
+									ToolTip.Tip="Preview photo book PDF document"
+									/>
+								<toggle:ToggleSwitch
+									x:Name="PdfQuality"
+									Margin="8 0 8 0"
+									Style="{StaticResource StandardToggleSwitch}"
+									TrueText="Display"
+									FalseText="Print"
+									Height="30" Width="220"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Value="{Binding PdfQualityIsDisplay}"
+									/>
+								<glyphs:GlyphButton
+									Style="{StaticResource PanelIconButton}"
+									Layout="IconOnly"
+									GlyphSource="folder_open"
+									GlyphStrokeThickness="0.1"
+									Command="{Binding OnNavigateToPdf}"
+									Width="60" Height="36" 
+									Margin="8 0 0 0"
+									ToolTip.Tip="Navigate to PDF document"
 									/>
 							</StackPanel>
 						</Grid>

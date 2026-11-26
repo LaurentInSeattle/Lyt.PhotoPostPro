@@ -135,8 +135,6 @@ public sealed partial class BookManager
             FriendlyName = friendlyName,
             FolderName = folderName,
             Description = description,
-            // Will be finalized on first save 
-            OutputPdfFileName = string.Empty,
             BookPage = bookPage,
             Format = format,
             DefaultPageBackground = defaultPageBackground,
@@ -286,7 +284,7 @@ public sealed partial class BookManager
             }
 
             string photoBookPdfPathName = Path.Combine(photobookFolderPath, PhotoBookPdfFileName);
-            book.OutputPdfFileName = photoBookPdfPathName;
+            book.OutputPdfPathName = photoBookPdfPathName;
 
             string photobookPath = Path.Combine(photobookFolderPath, PhotoBookJSonFileName);
             var jsonTypeInfo = AppJsonContext.Default.Book;

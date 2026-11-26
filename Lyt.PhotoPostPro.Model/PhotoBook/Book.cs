@@ -3,6 +3,8 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
+using System.Linq.Expressions;
+
 namespace Lyt.PhotoPostPro.Model.PhotoBook;
 
 // See:  https://github.com/GraphicMeat/PhotoBooks/blob/main/README.md 
@@ -32,7 +34,7 @@ public sealed partial class Book : IEditable
 
     public string Description { get; set; } = string.Empty;
 
-    public string OutputPdfFileName { get; set; } = string.Empty;
+    public string OutputPdfPathName { get; set; } = string.Empty;
 
     public BookPage BookPage { get; set; } = BookPage.UsLetter;
 
@@ -398,7 +400,7 @@ public sealed partial class Book : IEditable
 
     public List<Page> AllPages()
     {
-        List<Page> pages = [with(this.Pages.Count+4)];
+        List<Page> pages = [with(this.Pages.Count + 4)];
         if (this.WithFrontCover)
         {
             // ! we have the front cover
@@ -418,179 +420,189 @@ public sealed partial class Book : IEditable
         return pages;
     }
 
-    public string GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)
+    public string? GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)
     {
-        var start = DateTime.Now;
-
-        Color pageBackgroundColor =
-            this.DefaultPageBackground switch
-            {
-                PageBackground.Black => Colors.Black,
-                PageBackground.White => Colors.White,
-                _ => throw new NotImplementedException($"Page background {this.DefaultPageBackground} is not implemented."),
-            };
-
-        void SetupPageDefaults(PageDescriptor page)
+        try
         {
-            page.PageColor(pageBackgroundColor);
-            page.Size(this.PageSize);
-            page.Margin(0, Unit.Point);
-            page.DefaultTextStyle(x => x.FontSize(20));
-        }
+            var start = DateTime.Now;
 
-        void CreatePage(Page page, PageDescriptor pageDescriptor)
-        {
-            SetupPageDefaults(pageDescriptor);
-
-            // By wrapping the images in an Unconstrained() element, we remove it from the normal flow of
-            // the parent container. Then, using Offsets to shift it to specific coordinates.
-            pageDescriptor.Content()
-            .Layers(layers =>
-            {
-                // A PrimaryLayer is required to establish the base canvas
-                layers.PrimaryLayer();
-
-                // Add content as layers based on the slots in the page
-                foreach (var slot in page.Slots)
+            Color pageBackgroundColor =
+                this.DefaultPageBackground switch
                 {
-                    var position = slot.Position;
-                    var descriptor =
-                        layers.Layer()
-                            .Unconstrained()
-                            .OffsetX(position.X, Unit.Point)
-                            .OffsetY(position.Y, Unit.Point)
-                            .Width(position.Dx, Unit.Point)
-                            .Height(position.Dy, Unit.Point);
-                    if (slot is ImageSlot imageSlot)
-                    {
-                        // Need to crop the source image to match the page aspect ratio
-                        byte[]? imageBytes = imageSlot.Image(this, bookResolution);
-                        if (imageBytes is null)
-                        {
-                            continue;
-                        }
+                    PageBackground.Black => Colors.Black,
+                    PageBackground.White => Colors.White,
+                    _ => throw new NotImplementedException($"Page background {this.DefaultPageBackground} is not implemented."),
+                };
 
-                        var imageDescriptor = descriptor.Image(imageBytes);
-                        if (imageSlot.ImageStretch == BookImageStretch.Stretch)
+            void SetupPageDefaults(PageDescriptor page)
+            {
+                page.PageColor(pageBackgroundColor);
+                page.Size(this.PageSize);
+                page.Margin(0, Unit.Point);
+                page.DefaultTextStyle(x => x.FontSize(20));
+            }
+
+            void CreatePage(Page page, PageDescriptor pageDescriptor)
+            {
+                SetupPageDefaults(pageDescriptor);
+
+                // By wrapping the images in an Unconstrained() element, we remove it from the normal flow of
+                // the parent container. Then, using Offsets to shift it to specific coordinates.
+                pageDescriptor.Content()
+                .Layers(layers =>
+                {
+                    // A PrimaryLayer is required to establish the base canvas
+                    layers.PrimaryLayer();
+
+                    // Add content as layers based on the slots in the page
+                    foreach (var slot in page.Slots)
+                    {
+                        var position = slot.Position;
+                        var descriptor =
+                            layers.Layer()
+                                .Unconstrained()
+                                .OffsetX(position.X, Unit.Point)
+                                .OffsetY(position.Y, Unit.Point)
+                                .Width(position.Dx, Unit.Point)
+                                .Height(position.Dy, Unit.Point);
+                        if (slot is ImageSlot imageSlot)
                         {
-                            imageDescriptor.FitUnproportionally();
+                            // Need to crop the source image to match the page aspect ratio
+                            byte[]? imageBytes = imageSlot.Image(this, bookResolution);
+                            if (imageBytes is null)
+                            {
+                                continue;
+                            }
+
+                            var imageDescriptor = descriptor.Image(imageBytes);
+                            if (imageSlot.ImageStretch == BookImageStretch.Stretch)
+                            {
+                                imageDescriptor.FitUnproportionally();
+                            }
+                            else
+                            {
+                                imageDescriptor.FitArea();
+                            }
                         }
-                        else
+                        else if (slot is TextSlot textSlot)
                         {
-                            imageDescriptor.FitArea();
+                            if (string.IsNullOrWhiteSpace(textSlot.Text))
+                            {
+                                // Skip this slot if the text is not known yet 
+                                Debug.WriteLine($"No text for slot: {textSlot.Id}");
+                                continue;
+                            }
+
+                            var style = textSlot.Style;
+                            var textDescriptor = descriptor
+                                .Text(textSlot.Text)
+                                .FontFamily(style.FontFamily)
+                                .FontSize(style.FontSize)
+                                .FontColor(style.Color);
+                            if (style.FontStyle == BookFontStyle.Bold)
+                            {
+                                textDescriptor.Bold();
+                            }
+                            else if (style.FontStyle == BookFontStyle.Italic)
+                            {
+                                textDescriptor.Italic();
+                            }
+                            else if (style.FontStyle == BookFontStyle.BoldItalic)
+                            {
+                                textDescriptor.Bold().Italic();
+                            }
+                            // else: Regular, default, nothing to do 
+
+                            if (style.TextAlignment == BookTextAlignment.Center)
+                            {
+                                textDescriptor.AlignCenter();
+                            }
+                            else if (style.TextAlignment == BookTextAlignment.Right)
+                            {
+                                textDescriptor.AlignRight();
+                            }
+                            // else : defaults to align left 
                         }
                     }
-                    else if (slot is TextSlot textSlot)
+                });
+            }
+
+            Document document = Document.Create(container =>
+            {
+                if (this.WithFrontCover && this.FrontCover is not null)
+                {
+                    container.Page(frontCoverFront =>
                     {
-                        if (string.IsNullOrWhiteSpace(textSlot.Text))
-                        {
-                            // Skip this slot if the text is not known yet 
-                            Debug.WriteLine($"No text for slot: {textSlot.Id}");
-                            continue;
-                        }
+                        CreatePage(this.FrontCover.FrontPage, frontCoverFront);
+                    });
 
-                        var style = textSlot.Style;
-                        var textDescriptor = descriptor
-                            .Text(textSlot.Text)
-                            .FontFamily(style.FontFamily)
-                            .FontSize(style.FontSize)
-                            .FontColor(style.Color);
-                        if (style.FontStyle == BookFontStyle.Bold)
-                        {
-                            textDescriptor.Bold();
-                        }
-                        else if (style.FontStyle == BookFontStyle.Italic)
-                        {
-                            textDescriptor.Italic();
-                        }
-                        else if (style.FontStyle == BookFontStyle.BoldItalic)
-                        {
-                            textDescriptor.Bold().Italic();
-                        }
-                        // else: Regular, default, nothing to do 
+                    container.Page(frontCoverBack =>
+                    {
+                        CreatePage(this.FrontCover.BackPage, frontCoverBack);
+                    });
+                }
 
-                        if (style.TextAlignment == BookTextAlignment.Center)
-                        {
-                            textDescriptor.AlignCenter();
-                        }
-                        else if (style.TextAlignment == BookTextAlignment.Right)
-                        {
-                            textDescriptor.AlignRight();
-                        }
-                        // else : defaults to align left 
-                    }
+                foreach (var page in this.Pages)
+                {
+                    container.Page(pageContainer =>
+                    {
+                        CreatePage(page, pageContainer);
+                    });
+                }
+
+                if (this.WithBackCover && this.BackCover is not null)
+                {
+                    container.Page(backCoverFront =>
+                    {
+                        CreatePage(this.BackCover.FrontPage, backCoverFront);
+                    });
+                    container.Page(backCoverBack =>
+                    {
+                        CreatePage(this.BackCover.BackPage, backCoverBack);
+                    });
                 }
             });
+
+            string toReturn;
+            switch (bookResolution)
+            {
+                default:
+                case BookResolution.Print:
+                    document.GeneratePdf(this.OutputPdfPathName);
+                    toReturn = this.OutputPdfPathName;
+                    break;
+
+                case BookResolution.Display:
+                    // string file = string.Concat("LowRes_", this.OutputPdfFileName);
+                    document.GeneratePdf(this.OutputPdfPathName);
+                    // toReturn = file;
+                    toReturn = this.OutputPdfPathName;
+                    break;
+
+                case BookResolution.Thumbnails:
+                    if (outputStream is not null)
+                    {
+                        document.GeneratePdf(outputStream);
+                    }
+
+                    toReturn = string.Empty;
+                    break;
+            }
+
+            DateTime done = DateTime.Now;
+            TimeSpan span = done - start;
+            string msg = " Document created: " + span.TotalMilliseconds.ToString("F1") + " ms";
+            Debug.WriteLine(msg);
+            this.Logger.Info(msg);
+
+            return toReturn;
         }
-
-        Document document = Document.Create(container =>
+        catch (Exception ex)
         {
-            if (this.WithFrontCover && this.FrontCover is not null)
-            {
-                container.Page(frontCoverFront =>
-                {
-                    CreatePage(this.FrontCover.FrontPage, frontCoverFront);
-                });
-
-                container.Page(frontCoverBack =>
-                {
-                    CreatePage(this.FrontCover.BackPage, frontCoverBack);
-                });
-            }
-
-            foreach (var page in this.Pages)
-            {
-                container.Page(pageContainer =>
-                {
-                    CreatePage(page, pageContainer);
-                });
-            }
-
-            if (this.WithBackCover && this.BackCover is not null)
-            {
-                container.Page(backCoverFront =>
-                {
-                    CreatePage(this.BackCover.FrontPage, backCoverFront);
-                });
-                container.Page(backCoverBack =>
-                {
-                    CreatePage(this.BackCover.BackPage, backCoverBack);
-                });
-            }
-        });
-
-        string toReturn;
-        switch (bookResolution)
-        {
-            default:
-            case BookResolution.Print:
-                document.GeneratePdf(this.OutputPdfFileName);
-                toReturn = this.OutputPdfFileName;
-                break;
-
-            case BookResolution.Display:
-                // string file = string.Concat("LowRes_", this.OutputPdfFileName);
-                document.GeneratePdf(this.OutputPdfFileName);
-                // toReturn = file;
-                toReturn = this.OutputPdfFileName;
-                break;
-
-            case BookResolution.Thumbnails:
-                if (outputStream is not null)
-                {
-                    document.GeneratePdf(outputStream);
-                }
-
-                toReturn = string.Empty;
-                break;
+            string msg = "Exception thrown when generating PDF document. \n" + ex.ToString();
+            Debug.WriteLine(msg);
+            this.Logger.Error(msg);
+            return string.Empty;
         }
-
-        DateTime done = DateTime.Now;
-        TimeSpan span = done - start;
-        string msg = " Document created: " + span.TotalMilliseconds.ToString("F1") + " ms";
-        Debug.WriteLine(msg);
-        this.Logger.Info(msg);
-
-        return toReturn;
     }
 }

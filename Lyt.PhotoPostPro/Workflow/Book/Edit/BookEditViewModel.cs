@@ -34,6 +34,9 @@ public partial class BookEditViewModel :
     public partial bool ShowGridLines { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool PdfQualityIsDisplay { get; set; } = true;
+
+    [ObservableProperty]
     public partial bool DoublePageMode { get; set; }
 
     [ObservableProperty]
@@ -82,7 +85,7 @@ public partial class BookEditViewModel :
         this.toaster = toaster;
         this.IsSplitViewLeftOpen = true;
         this.IsSplitViewRightOpen = true;
-        this.StylingPanelViewModel = new (this.model); 
+        this.StylingPanelViewModel = new(this.model);
     }
 
     public override void Activate(object? activationParameters)
@@ -388,7 +391,7 @@ public partial class BookEditViewModel :
 
         var bookMgr = this.model.BookManager;
         bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
-        SlotViewModel.ClearSelection(); 
+        SlotViewModel.ClearSelection();
     }
 
     public void Receive(BookEditTextSlotMessage message)
@@ -481,13 +484,53 @@ public partial class BookEditViewModel :
     [RelayCommand]
     public void OnPreview()
     {
+        // Clear selection so that the Adorner layer will not pollute the PDF display 
         SlotViewModel.ClearSelection();
+
+        // Generate PDF document and launch the viewer 
         var bookMgr = this.model.BookManager;
+        var bookResolution =
+            this.PdfQualityIsDisplay ? BookResolution.Display : BookResolution.Print;
         // ! we have a book 
-        string documentPath = bookMgr.CurrentBook!.GeneratePdf(BookResolution.Display);
+        string? documentPath = bookMgr.CurrentBook!.GeneratePdf(bookResolution);
+        if (string.IsNullOrWhiteSpace(documentPath))
+        {
+            // failed :( 
+            return;
+        }
+
+        if (!File.Exists(documentPath))
+        {
+            // failed :( 
+            return;
+        }
+
         this.IsEditing = false;
         this.DocumentViewModel.Open(documentPath);
     }
+
+    [RelayCommand]
+    public void OnNavigateToPdf()
+    {
+        // ! we have a book 
+        var book = this.model.BookManager.CurrentBook!;
+        string pdfPath = book.OutputPdfPathName;
+        if ( string.IsNullOrWhiteSpace(pdfPath) || !File.Exists(pdfPath))
+        {
+            // No PDF book 
+            return;
+        }
+
+        string? folderPath = System.IO.Path.GetDirectoryName(pdfPath);
+        if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
+        {
+            // No book 
+            return; 
+        }
+
+        PhotoPostProModel.NavigateTo(folderPath);
+    }
+
 
     public void Receive(DocPageNavigateMessage message)
     {
