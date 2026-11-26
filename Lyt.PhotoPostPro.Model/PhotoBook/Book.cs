@@ -275,7 +275,7 @@ public sealed partial class Book : IEditable
             string lowResImageFilePath = System.IO.Path.Combine(folderPath, lowResImageFileName);
 
             // Step 1 - Load the image file into memory 
-            var imageFormat = SixLabors.ImageSharp.Image.DetectFormat(imagePath);
+            IImageFormat imageFormat = SixLabors.ImageSharp.Image.DetectFormat(imagePath);
             if (imageFormat is null)
             {
                 // errorMessage = "Unsupported image format in ImageSharp.";
@@ -292,6 +292,9 @@ public sealed partial class Book : IEditable
                 message = "Model.Loader.ImageSharpFailedLoad";
                 return null;
             }
+
+            bookImage.HighResWidth = image.Width;
+            bookImage.HighResHeight = image.Height;
 
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
 

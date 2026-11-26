@@ -4,8 +4,6 @@ using QuestPDF.Infrastructure;
 
 using System.IO;
 
-using static System.Net.Mime.MediaTypeNames;
-
 public sealed partial class BookManager
 {
     static BookManager()
@@ -224,6 +222,7 @@ public sealed partial class BookManager
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
         this.LoadAllImageCandidates();
+        this.FixImageCandidatesDimensions();
         book.UpdateIncludedImages();
         new BookListChangedMessage().Publish();
     }
@@ -377,6 +376,42 @@ public sealed partial class BookManager
 
         this.LoadOneImageCandidate(bookImage); 
         return this.SaveCurrentBook();
+    }
+
+    private bool FixImageCandidatesDimensions()
+    {
+        if (this.CurrentBook is null)
+        {
+            return false;
+        }
+
+        var images = this.CurrentBook.ImageCandidates;
+        Parallel.ForEach(images.Keys, imageId =>
+        {
+            var bookImage = images[imageId];
+            if (( bookImage.HighResWidth == 0) || ( bookImage.HighResHeight == 0 ))
+            {
+                string imagePath = string.Empty; 
+                try
+                {
+                    imagePath = bookImage.HighResPath;
+                    var image = SixLabors.ImageSharp.Image.Load<Rgb24>(imagePath);
+                    if (image is not null)
+                    {
+                        bookImage.HighResWidth = image.Width;
+                        bookImage.HighResHeight = image.Height;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Swallow
+                    Debug.WriteLine(ex.Message);
+                    this.logger.Error("Failed to load image: " + imagePath + "\n" + ex.Message);
+                }
+            }
+        });
+
+        return true;
     }
 
     private bool LoadAllImageCandidates()

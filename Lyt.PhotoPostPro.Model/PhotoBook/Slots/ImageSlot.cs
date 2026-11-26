@@ -94,4 +94,15 @@ public sealed class ImageSlot : Slot
             return null;
         }
     }
+
+    public BookImage.SuitableForPrint PrintSuitability(Book book, float slotWidth, float slotHeight)
+    {
+        if (!book.ImageCandidates.TryGetValue(this.BookImageId, out BookImage? bookImage) &&
+            bookImage is null)
+        {
+            return BookImage.SuitableForPrint.Unknown;
+        }
+
+        return bookImage.PrintableLevel(slotWidth, slotHeight); 
+    }
 }

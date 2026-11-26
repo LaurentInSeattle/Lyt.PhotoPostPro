@@ -34,6 +34,16 @@
 				IsHitTestVisible="False"
 				>			
 			</Image>
+			<PathIcon
+				IsVisible="{Binding IsNotSuitableForPrint}"
+				VerticalAlignment="Top" HorizontalAlignment="Right"
+				Width="40" Height="40"
+				Margin="0 30 30 0"
+				Foreground="{Binding WarningBrush}"
+				Data="{StaticResource path_warning}"
+				>				
+			</PathIcon>
+
 			<TextBlock
 				IsVisible="{Binding IsTextBlockVisible}"
 				Text="{Binding SlotText}"

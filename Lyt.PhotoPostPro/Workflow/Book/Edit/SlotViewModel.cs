@@ -69,6 +69,12 @@ public partial class SlotViewModel :
     public partial bool IsImageSlot { get; set; }
 
     [ObservableProperty]
+    public partial bool IsNotSuitableForPrint { get; set; } = false;
+
+    [ObservableProperty]
+    public partial IImmutableSolidColorBrush WarningBrush { get; set; } = Brushes.DarkOrange;
+
+    [ObservableProperty]
     public partial double Dx { get; set; }
 
     [ObservableProperty]
@@ -127,6 +133,7 @@ public partial class SlotViewModel :
 
         // To enforce property changed ?
         this.ClearPosition();
+        this.SetPosition(this.Slot.Position);
         if (slot is Slots.ImageSlot imageSlot)
         {
             this.IsTextBlockVisible = false;
@@ -150,8 +157,6 @@ public partial class SlotViewModel :
         {
             throw new NotSupportedException("Slot type not supported.");
         }
-
-        this.SetPosition(this.Slot.Position);
     }
 
     public Books.Book Book
@@ -187,6 +192,7 @@ public partial class SlotViewModel :
         }
 
         this.SlotText = this.textSlot.Text;
+        this.IsNotSuitableForPrint = false; 
 
         // Styling the text slot 
         var style = this.textSlot.Style;
@@ -209,6 +215,27 @@ public partial class SlotViewModel :
         if (this.SlotImage is not null)
         {
             this.SlotImage.Dispose();
+        }
+
+        BookImage.SuitableForPrint suitableForPrint = 
+            this.imageSlot.PrintSuitability(this.Book, (float) this.Dx, (float)this.Dy);
+        switch (suitableForPrint)
+        {
+            default:
+            case BookImage.SuitableForPrint.Unknown:
+            case BookImage.SuitableForPrint.Optimal:
+                this.IsNotSuitableForPrint = false; 
+                break;
+
+            case BookImage.SuitableForPrint.Minimal:
+                this.IsNotSuitableForPrint = true;
+                this.WarningBrush = Brushes.DarkOrange; 
+                break;
+
+            case BookImage.SuitableForPrint.Unsuitable:
+                this.IsNotSuitableForPrint = true;
+                this.WarningBrush = Brushes.Firebrick;
+                break;
         }
 
         string imagePath = this.imageSlot.ImagePath(this.Book, BookResolution.Display);
