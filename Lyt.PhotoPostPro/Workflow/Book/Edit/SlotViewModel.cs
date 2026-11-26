@@ -239,6 +239,7 @@ public partial class SlotViewModel :
         var style = message.TextStyle;
 
         // This needs to be done in model 
+        this.model.BookManager.UpdateTextSlotStyle(this.Page, textSlot, style);
 
         this.textSlot.Style = style;
         this.SetText();
@@ -362,6 +363,6 @@ public partial class SlotViewModel :
 
         this.IsTextBoxVisible = false;
         this.IsTextBlockVisible = true;
-        this.model.BookManager.UpdateTextSlot(this.Page, textSlot, this.SlotText);
+        this.model.BookManager.UpdateTextSlotText(this.Page, textSlot, this.SlotText);
     }
 }

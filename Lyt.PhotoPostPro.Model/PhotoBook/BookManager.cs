@@ -644,7 +644,6 @@ public sealed partial class BookManager
         new BookEditTextSlotMessage(page, newSlot).Publish();
     }
 
-
     public bool DeleteSlot(Slot slotToRemove, Page page, out string message)
     {
         message = string.Empty;
@@ -661,23 +660,25 @@ public sealed partial class BookManager
         return true;
     }
 
-    public void MoveSlot(int fromPageNumber, int toPageNumber, Slot slotToRemove)
-    {
-        if (this.CurrentBook == null)
-        {
-            throw new InvalidOperationException("No current book to remove a slot from.");
-        }
-
-        var fromPage = this.CurrentBook.FromPageNumber(fromPageNumber);
-        var toPage = this.CurrentBook.FromPageNumber(toPageNumber);
-        if (fromPage is null || toPage is null)
-        {
-            return;
-        }
-
-        fromPage.Slots.Remove(slotToRemove);
-
-    }
+    // Most likely not needed 
+    //
+    //public void MoveSlot(int fromPageNumber, int toPageNumber, Slot slotToRemove)
+    //{
+    //    if (this.CurrentBook == null)
+    //    {
+    //        throw new InvalidOperationException("No current book to remove a slot from.");
+    //    }
+    //
+    //    var fromPage = this.CurrentBook.FromPageNumber(fromPageNumber);
+    //    var toPage = this.CurrentBook.FromPageNumber(toPageNumber);
+    //    if (fromPage is null || toPage is null)
+    //    {
+    //        return;
+    //    }
+    //
+    //    fromPage.Slots.Remove(slotToRemove);
+    //
+    //}
 
     public bool RepositionSlot(Slot slotToMove, Page page, SlotPosition newPosition)
     {
@@ -710,20 +711,7 @@ public sealed partial class BookManager
         page.PageBackground = newBackground;
     }
 
-    public void PopulateImageSlot(int pageNumber, Guid slotId, string imagePath)
-    {
-        if (this.CurrentBook == null)
-        {
-            throw new InvalidOperationException("No current book to update a page layout in.");
-        }
-        var page = this.CurrentBook.FromPageNumber(pageNumber);
-        if (page is null)
-        {
-            return;
-        }
-    }
-
-    public void UpdateTextSlot(Page page, TextSlot textSlot, string slotText)
+    public void UpdateTextSlotText(Page page, TextSlot textSlot, string slotText)
     {
         if (this.CurrentBook == null)
         {
@@ -731,6 +719,20 @@ public sealed partial class BookManager
         }
 
         textSlot.Text = slotText;
+
+        // Save and Post message 
+        new BookPageEditedMessage(page).Publish();
+        this.SaveCurrentBook();
+    }
+
+    public void UpdateTextSlotStyle(Page page, TextSlot textSlot, SlotTextStyle slotTextStyle)
+    {
+        if (this.CurrentBook == null)
+        {
+            throw new InvalidOperationException("No current book to move a slot from.");
+        }
+
+        textSlot.Style = slotTextStyle;
 
         // Save and Post message 
         new BookPageEditedMessage(page).Publish();
