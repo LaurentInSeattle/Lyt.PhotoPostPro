@@ -235,26 +235,26 @@ public sealed partial class Book : IEditable
         }
     }
 
-    public Guid ImportImage(string booksPath, string imagePath, string thumbailPath, out string message)
+    public BookImage? ImportImage(string booksPath, string imagePath, string thumbailPath, out string message)
     {
         message = string.Empty;
 
         if (!File.Exists(imagePath))
         {
             message = "Workflow.Book.NotExist";
-            return Guid.Empty;
+            return null;
         }
 
         if (!ImageLoader.HasImageSharpExtension(imagePath))
         {
             message = "Workflow.Book.NotSupported";
-            return Guid.Empty;
+            return null;
         }
 
         if (!ImageLoader.HasJpgExtension(imagePath))
         {
             message = "Workflow.Book.NotJpg";
-            return Guid.Empty;
+            return null;
         }
 
         try
@@ -278,7 +278,7 @@ public sealed partial class Book : IEditable
             {
                 // errorMessage = "Unsupported image format in ImageSharp.";
                 message = "Model.Loader.ImageSharpNotDetected";
-                return Guid.Empty;
+                return null;
             }
 
             Debug.WriteLine(imageFormat.Name);
@@ -288,7 +288,7 @@ public sealed partial class Book : IEditable
             {
                 // errorMessage = "Failed to load the source image with ImageSharp.";
                 message = "Model.Loader.ImageSharpFailedLoad";
-                return Guid.Empty;
+                return null;
             }
 
             Debug.WriteLine("Image loaded with ImageSharp: " + imagePath);
@@ -360,14 +360,14 @@ public sealed partial class Book : IEditable
 
             // Step 5 - Now a candidate image 
             this.ImageCandidates.Add(bookImage.Id, bookImage);
-            return bookImage.Id;
+            return bookImage;
         }
         catch (Exception ex)
         {
             string msg = "Exception thrown when importing image. \n" + ex.ToString();
             Debug.WriteLine(msg);
             this.Logger.Error(msg);
-            return Guid.Empty;
+            return null;
         }
     }
 

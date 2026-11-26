@@ -388,7 +388,7 @@ public partial class BookEditViewModel :
 
         var bookMgr = this.model.BookManager;
         bookMgr.DeleteSlot(slot.Slot, slot.Page, out string message);
-        SlotViewModel.SelectedSlot?.Select(false);
+        SlotViewModel.ClearSelection(); 
     }
 
     public void Receive(BookEditTextSlotMessage message)
@@ -481,6 +481,7 @@ public partial class BookEditViewModel :
     [RelayCommand]
     public void OnPreview()
     {
+        SlotViewModel.ClearSelection();
         var bookMgr = this.model.BookManager;
         // ! we have a book 
         string documentPath = bookMgr.CurrentBook!.GeneratePdf(BookResolution.Display);

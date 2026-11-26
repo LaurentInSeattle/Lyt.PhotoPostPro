@@ -28,6 +28,8 @@ public partial class SlotViewModel :
         Utilities.TryFindResource<SolidColorBrush>("LightAqua_0_080", out selectedBrush);
     }
 
+    public static void ClearSelection() => SlotViewModel.SelectedSlot?.Select(false); 
+
     public static SlotViewModel? SelectedSlot
     {
         get;
@@ -242,10 +244,7 @@ public partial class SlotViewModel :
         this.SetText();
     }
 
-    public void OnClicked(bool isRightClick)
-    {
-        this.Select(!this.isSelected);
-    }
+    public void OnClicked(bool isRightClick) => this.Select(!this.isSelected);
 
     public void Select(bool select = true)
     {
@@ -253,7 +252,7 @@ public partial class SlotViewModel :
         this.UpdateBorderVisualState();
         if (select)
         {
-            SlotViewModel.SelectedSlot?.Select(false);
+            SlotViewModel.ClearSelection();
             SlotViewModel.SelectedSlot = this;
 
             // ! we have a book  

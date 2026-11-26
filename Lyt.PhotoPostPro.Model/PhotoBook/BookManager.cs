@@ -4,6 +4,8 @@ using QuestPDF.Infrastructure;
 
 using System.IO;
 
+using static System.Net.Mime.MediaTypeNames;
+
 public sealed partial class BookManager
 {
     static BookManager()
@@ -223,7 +225,7 @@ public sealed partial class BookManager
         this.CurrentBook = book;
         this.model.PhotoBook = book.FriendlyName;
         this.model.Save();
-        this.LoadImageCandidates();
+        this.LoadAllImageCandidates();
         book.UpdateIncludedImages();
         new BookListChangedMessage().Publish();
     }
@@ -364,21 +366,22 @@ public sealed partial class BookManager
             return false;
         }
 
-        Guid guid = this.CurrentBook.ImportImage(
+        var bookImage = this.CurrentBook.ImportImage(
             PhotobooksFolderPath,
             exportedImagePath, exportedThumbnailPath,
             out string message);
-        if (guid == Guid.Empty)
+        if (bookImage is null)
         {
             Debug.WriteLine(message);
             this.logger.Error("Failed to import image: " + message);
             return false;
         }
 
+        this.LoadOneImageCandidate(bookImage); 
         return this.SaveCurrentBook();
     }
 
-    private bool LoadImageCandidates()
+    private bool LoadAllImageCandidates()
     {
         if (this.CurrentBook is null)
         {
@@ -412,6 +415,35 @@ public sealed partial class BookManager
                 }
             }
         });
+
+        return true;
+    }
+
+    private bool LoadOneImageCandidate(BookImage bookImage)
+    {
+        if (this.CurrentBook is null)
+        {
+            return false;
+        }
+
+        var images = this.CurrentBook.ImageCandidates;
+        string path = bookImage.LowResPath;
+        byte[]? imageBytes = null;
+        try
+        {
+            imageBytes = File.ReadAllBytes(path);
+        }
+        catch (Exception ex)
+        {
+            // Swallow
+            Debug.WriteLine(ex.Message);
+            this.logger.Error("Failed to load image: " + path + "\n" + ex.Message);
+        }
+
+        if (imageBytes is not null)
+        {
+            this.CurrentBookThumbnails.Add(bookImage.Id, imageBytes);
+        }
 
         return true;
     }
