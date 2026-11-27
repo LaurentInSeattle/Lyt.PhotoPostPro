@@ -34,6 +34,9 @@ public partial class BookEditViewModel :
     public partial bool ShowGridLines { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool ShowBindingArea { get; set; } = true;
+    
+    [ObservableProperty]
     public partial bool PdfQualityIsDisplay { get; set; } = true;
 
     [ObservableProperty]
@@ -138,6 +141,9 @@ public partial class BookEditViewModel :
     partial void OnShowGridLinesChanged(bool value)
         => new BookGridLinesMessage(value).Publish();
 
+    partial void OnShowBindingAreaChanged(bool value)
+        => new BookBindingAreaMessage(value).Publish();
+
     partial void OnIsSingleImageModeChanged(bool value) => this.LoadPages();
 
     partial void OnSelectedPdfThumbnailIndexChanged(int value)
@@ -182,6 +188,7 @@ public partial class BookEditViewModel :
         }
 
         new BookGridLinesMessage(this.ShowGridLines).Publish();
+        new BookBindingAreaMessage(this.ShowBindingArea).Publish();
     }
 
     private void LoadSinglePages()

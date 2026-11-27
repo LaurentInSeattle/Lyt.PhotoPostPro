@@ -13,6 +13,7 @@ public partial class BookPageViewModel :
     ViewModel<BookPageView>,
     IDropTarget,
     IRecipient<BookGridLinesMessage>,
+    IRecipient<BookBindingAreaMessage>,
     IRecipient<BookPageEditedMessage>
 {
     public readonly Pages.Page? Page;
@@ -32,6 +33,12 @@ public partial class BookPageViewModel :
     public partial bool AreVisibleGridLines { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool IsVisibleBindingArea { get; set; } = true;
+
+    [ObservableProperty]
+    public partial HorizontalAlignment BindingAreaAlignmentSide { get; set; }
+
+    [ObservableProperty]
     public partial ObservableCollection<SlotViewModel> Slots { get; set; } = [];
 
     public BookPageViewModel(PhotoPostProModel model, Pages.Page? page)
@@ -48,17 +55,22 @@ public partial class BookPageViewModel :
         if (this.IsDummy)
         {
             // Even dummy page needs to be sized 
-            this.AreVisibleGridLines = false; 
+            this.AreVisibleGridLines = false;
+            this.IsVisibleBindingArea = false;
             return;
         }
 
         this.Subscribe<BookGridLinesMessage>();
+        this.Subscribe<BookBindingAreaMessage>();
         this.Subscribe<BookPageEditedMessage>();
         this.ShowGridLines(show: false);
+        this.ShowBindingArea(show: false);
         this.CreateSlots();
     }
 
     public void Receive(BookGridLinesMessage message) => this.ShowGridLines(message.ShowGridLines);
+
+    public void Receive(BookBindingAreaMessage message) => this.ShowBindingArea(message.ShowBindingArea);
 
     public void Receive(BookPageEditedMessage message)
     {
@@ -69,10 +81,17 @@ public partial class BookPageViewModel :
 
         this.Slots.Clear();
         this.CreateSlots();
-        //this.View.AddSlots(this.Slots);
     }
 
     public void ShowGridLines(bool show) => this.AreVisibleGridLines = !this.IsDummy && show;
+
+    public void ShowBindingArea(bool show)
+    {
+        this.IsVisibleBindingArea = !this.IsDummy && show;
+
+        // ! we are a page 
+        this.BindingAreaAlignmentSide = this.Page!.IsFront ? HorizontalAlignment.Left: HorizontalAlignment.Right;
+    }
 
     public void CreateSlots()
     {
@@ -84,7 +103,7 @@ public partial class BookPageViewModel :
         foreach (var slot in this.Page.Slots)
         {
             var slotViewModel = new SlotViewModel(this.model, this.Page, slot);
-            slotViewModel.CreateViewAndBind(); 
+            slotViewModel.CreateViewAndBind();
             this.Slots.Add(slotViewModel);
         }
     }

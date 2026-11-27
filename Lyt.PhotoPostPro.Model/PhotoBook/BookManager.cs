@@ -327,6 +327,7 @@ public sealed partial class BookManager
                     {
                         book.MaybeLogger = this.logger;
                         book.BookManager = this;
+                        book.UpdateAllPageSides();
                         this.Books.Add(book);
                     }
                 }
@@ -549,6 +550,8 @@ public sealed partial class BookManager
             pageNumber += 2;
         }
 
+        this.CurrentBook.UpdateAllPageSides();
+
         // Save and Post message 
         this.SaveCurrentBook();
         new BookPagesChangedMessage(pageNumber).Publish();
@@ -600,17 +603,13 @@ public sealed partial class BookManager
         // Show the page before 
         --pageNumber;
 
+        this.CurrentBook.UpdateAllPageSides();
+
         // Save and Post message 
         this.SaveCurrentBook();
         new BookPagesChangedMessage(pageNumber).Publish();
         return true;
     }
-
-    // MAYBE ??? 
-    // Most likely not needed 
-    //public void MovePage(int fromPageNumber, int toPageNumber)
-    //{
-    //}
 
     #endregion Page Management
 

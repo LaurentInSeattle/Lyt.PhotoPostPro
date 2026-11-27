@@ -219,12 +219,12 @@ public sealed partial class Book : IEditable
                 new FrontCover()
                 {
                     FrontPage = new Page(this),
-                    BackPage = new Page(this)
+                    BackPage = new Page(this, isFront: false)
                 };
         }
 
         this.Pages.Add(new Page(this));
-        this.Pages.Add(new Page(this));
+        this.Pages.Add(new Page(this, isFront: false));
 
         if (this.WithBackCover)
         {
@@ -232,7 +232,7 @@ public sealed partial class Book : IEditable
                 new BackCover()
                 {
                     FrontPage = new Page(this),
-                    BackPage = new Page(this)
+                    BackPage = new Page(this, isFront: false)
                 };
         }
     }
@@ -415,12 +415,36 @@ public sealed partial class Book : IEditable
 
         if (this.WithBackCover)
         {
-            // ! we have the front cover
+            // ! we have the back cover
             pages.Add(this.BackCover!.FrontPage);
             pages.Add(this.BackCover.BackPage);
         }
 
         return pages;
+    }
+
+    public void UpdateAllPageSides()
+    {
+        if (this.WithFrontCover)
+        {
+            // ! we have the front cover
+            this.FrontCover!.FrontPage.IsFront = true;
+            this.FrontCover.BackPage.IsFront = false;
+        }
+
+        for ( int index = 0; index <  this.Pages.Count; ++ index )
+        {
+            var page = this.Pages[index];
+            bool isEvenPage = index % 2 == 0;
+            page.IsFront = isEvenPage; 
+        }
+
+        if (this.WithBackCover)
+        {
+            // ! we have the back cover
+            this.BackCover!.FrontPage.IsFront = true;
+            this.BackCover.BackPage.IsFront = false;
+        }
     }
 
     public string? GeneratePdf(BookResolution bookResolution, Stream? outputStream = null)

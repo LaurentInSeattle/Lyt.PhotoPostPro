@@ -269,6 +269,16 @@
 									HorizontalAlignment="Center" VerticalAlignment="Center"
 									Value="{Binding ShowGridLines}"
 									/>
+								<toggle:ToggleSwitch
+									x:Name="ShowBindingSwitch"
+									Margin="8 0 8 0"
+									Style="{StaticResource StandardToggleSwitch}"
+									TrueText="Binding"
+									FalseText="Hide"
+									Height="30" Width="200"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Value="{Binding ShowBindingArea}"
+									/>
 								<glyphs:GlyphButton
 									Style="{StaticResource PanelIconButton}"
 									Layout="IconOnly"

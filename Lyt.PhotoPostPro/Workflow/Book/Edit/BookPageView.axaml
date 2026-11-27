@@ -78,13 +78,21 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 
+		<Rectangle
+			x:Name="BindingArea"
+			IsVisible="{Binding IsVisibleBindingArea}"
+			Width="40"
+			VerticalAlignment="Stretch" 
+			HorizontalAlignment="{Binding BindingAreaAlignmentSide}"
+			Fill="#808080"
+			Opacity="0.3"
+			IsHitTestVisible="False"
+			/>
 		<!-- DropRectangle MUST be made  IsHitTestVisible="False" or else the slots do not gets the clicks --> 
 		<Rectangle
 			x:Name="DropRectangle"
 			Fill="Transparent"
 			Stroke="Transparent"
-			StrokeThickness="2"
-			StrokeDashArray="2,2"
 			IsHitTestVisible="False"
 			/>
 	</Grid>
