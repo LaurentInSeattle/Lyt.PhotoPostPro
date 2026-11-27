@@ -481,6 +481,22 @@ public sealed partial class BookManager
         return true;
     }
 
+    public bool RemoveImageCandidate(Guid key)
+    {
+        if (this.CurrentBook is null)
+        {
+            return false;
+        }
+
+        var imageCandidates = this.CurrentBook.ImageCandidates;
+        imageCandidates.Remove(key);
+
+        var includedImages = this.CurrentBook.IncludedImages;
+        includedImages.Remove(key); 
+        this.model.Save();
+        return true;
+    }
+
     #endregion Image Management
 
     #region Page Management

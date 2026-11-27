@@ -338,6 +338,31 @@ public partial class BookEditViewModel :
         }, DispatcherPriority.ApplicationIdle);
     }
 
+    [RelayCommand]
+    public void OnDeleteCandidateImage()
+    {
+        if (this.SelectedThumbnailIndex < 0 || this.SelectedThumbnailIndex >= this.ImageThumbnails.Count)
+        {
+            return;
+        }
+
+        BookImageViewModel selected = this.ImageThumbnails[this.SelectedThumbnailIndex];
+        Guid key = selected.Key; 
+        var bookManager = this.model.BookManager;
+
+        // ! We have a book 
+        var includedImages = bookManager.CurrentBook!.IncludedImages;
+        if ( includedImages.Contains(key))
+        {
+            // TODO : Message
+            return; 
+        }
+
+        selected.Detach();
+        this.ImageThumbnails.Remove(selected);
+        bookManager.RemoveImageCandidate(key); 
+    }
+
     private void LoadPdfThumbnails()
     {
         // ! We have a book

@@ -65,6 +65,7 @@
 							<RowDefinition Height="44" />
 							<RowDefinition Height="44" />
 							<RowDefinition Height="*" />
+							<RowDefinition Height="44" />
 						</Grid.RowDefinitions>
 
 						<!-- Expander toggle--> 
@@ -131,6 +132,18 @@
 								</DataTemplate>
 							</ListBox.ItemTemplate>
 						</ListBox>
+						<glyphs:GlyphButton
+							Grid.Row="3"
+							IsVisible="{Binding IsPaneOpen, ElementName=SplitViewLeft}"
+							Style="{StaticResource PanelIconButton}"
+							Layout="IconTextRightSide"
+							Text="Remove From List"
+							GlyphSource="delete"
+							GlyphStrokeThickness="0.1"
+							Width="246" Height="36" 
+							HorizontalAlignment="Center" VerticalAlignment="Top"
+							Command="{Binding OnDeleteCandidateImage}"
+							/>
 					</Grid>
 				</SplitView.Pane>
 

@@ -2,12 +2,6 @@
 
 using Lyt.Avalonia.Mvvm.Behaviors.DragDrop;
 
-using QuestPDF.Infrastructure;
-
-using Books = Model.PhotoBook;
-using Pages = Model.PhotoBook.Pages;
-using Slots = Model.PhotoBook.Slots;
-
 public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleViewModel
 // , IRecipient<DocPageNavigateMessage>
 {
@@ -23,6 +17,16 @@ public partial class BookImageViewModel : ViewModel<BookImageView>, IDragAbleVie
         this.Key = key;
         this.Bitmap = bitmap;
         this.IsGhost = isGhost;
+    }
+
+    public void Detach ()
+    {
+        if (this.DragAble is null)
+        {
+            return; 
+        }
+
+        this.DragAble.Detach();
     }
 
     public void AttachDraggable(ListBox listBox, Canvas canvas)
