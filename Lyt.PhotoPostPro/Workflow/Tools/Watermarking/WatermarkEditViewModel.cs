@@ -190,7 +190,7 @@ public sealed partial class WatermarkEditViewModel :
         }
 
         var newWatermark = this.CollectData();
-        if (!this.model.AddWatermark(newWatermark, out string message))
+        if (!this.model.AddWatermark(newWatermark, withSave: true, out string message))
         {
             this.ValidationMessage = this.Localize(message);
             return false;

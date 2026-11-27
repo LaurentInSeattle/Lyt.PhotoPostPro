@@ -55,14 +55,13 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         if (this.DeleteSignature(newSignature.FriendlyName, out message))
         {
-            return this.AddSignature(newSignature, out message);
-
+            return this.AddSignature(newSignature, withSave: true, out message);
         }
 
         return false;
     }
 
-    public bool AddSignature(Signature newSignature, out string message)
+    public bool AddSignature(Signature newSignature, bool withSave, out string message)
     {
         message = string.Empty;
         Signature? existing = this.Signatures.FromFriendlyName(newSignature.FriendlyName.Trim());
@@ -75,7 +74,11 @@ public sealed partial class PhotoPostProModel : ModelBase
         try
         {
             this.Signatures.AvailableSignatures.Add(newSignature);
-            this.Save();
+            if ( withSave)
+            {
+                this.Save();
+            }
+
             return true;
         }
         catch (Exception ex)
@@ -114,14 +117,13 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         if (this.DeleteWatermark(newWatermark.FriendlyName, out message))
         {
-            return this.AddWatermark(newWatermark, out message);
-
+            return this.AddWatermark(newWatermark, withSave: true, out message);
         }
 
         return false;
     }
 
-    public bool AddWatermark(Watermark newWatermark, out string message)
+    public bool AddWatermark(Watermark newWatermark, bool withSave, out string message)
     {
         message = string.Empty;
         Watermark? existing = this.Watermarks.FromFriendlyName(newWatermark.FriendlyName.Trim());
@@ -134,7 +136,11 @@ public sealed partial class PhotoPostProModel : ModelBase
         try
         {
             this.Watermarks.AvailableWatermarks.Add(newWatermark);
-            this.Save();
+            if (withSave)
+            {
+                this.Save();
+            }
+
             return true;
         }
         catch (Exception ex)
@@ -173,14 +179,14 @@ public sealed partial class PhotoPostProModel : ModelBase
     {
         if (this.DeleteImageExport(newImageExport.FriendlyName, out message))
         {
-            return this.AddImageExport(newImageExport, out message);
+            return this.AddImageExport(newImageExport, withSave: true, out message);
 
         }
 
         return false;
     }
 
-    public bool AddImageExport(ImageExport newImageExport, out string message)
+    public bool AddImageExport(ImageExport newImageExport, bool withSave, out string message)
     {
         message = string.Empty;
         ImageExport? existing = this.ImageExports.FromFriendlyName(newImageExport.FriendlyName.Trim());
@@ -193,7 +199,11 @@ public sealed partial class PhotoPostProModel : ModelBase
         try
         {
             this.ImageExports.AvailableImageExports.Add(newImageExport);
-            this.Save();
+            if (withSave)
+            {
+                this.Save();
+            }
+
             return true;
         }
         catch (Exception ex)
@@ -246,21 +256,21 @@ public sealed partial class PhotoPostProModel : ModelBase
         bool needModelSave = false;
         if (this.Signatures.AvailableSignatures.Count == 0)
         {
-            this.AddSignature(Signature.Default, out string _);
+            this.AddSignature(Signature.Default, withSave: false, out string _);
             needModelSave = true;
         }
 
         if (this.Watermarks.AvailableWatermarks.Count == 0)
         {
-            this.AddWatermark(Watermark.Default, out string _);
+            this.AddWatermark(Watermark.Default, withSave: false, out string _);
             needModelSave = true;
         }
 
         if (this.ImageExports.AvailableImageExports.Count == 0)
         {
-            this.AddImageExport(ImageExport.Default, out string _);
-            this.AddImageExport(ImageExport.HiDef, out string _);
-            this.AddImageExport(ImageExport.Web, out string _);
+            this.AddImageExport(ImageExport.Default, withSave: false, out string _);
+            this.AddImageExport(ImageExport.HiDef, withSave: false, out string _);
+            this.AddImageExport(ImageExport.Web, withSave: false, out string _);
             needModelSave = true;
         }
 

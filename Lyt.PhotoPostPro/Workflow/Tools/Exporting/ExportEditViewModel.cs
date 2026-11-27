@@ -400,7 +400,7 @@ public sealed partial class ExportEditViewModel :
         }
 
         var newImageExport = this.CollectData();
-        if (!this.model.AddImageExport(newImageExport, out string message))
+        if (!this.model.AddImageExport(newImageExport, withSave: true, out string message))
         {
             this.ValidationMessage = this.Localize(message);
             return false;

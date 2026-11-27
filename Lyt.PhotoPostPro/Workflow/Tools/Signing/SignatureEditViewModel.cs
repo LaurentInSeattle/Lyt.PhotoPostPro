@@ -245,7 +245,7 @@ public sealed partial class SignatureEditViewModel : ViewModel<SignatureEditView
         }
 
         var newSignature = this.CollectData();
-        if (!this.model.AddSignature(newSignature, out string message))
+        if (!this.model.AddSignature(newSignature, withSave: true, out string message))
         {
             this.ValidationMessage = this.Localize(message);
             return false;
