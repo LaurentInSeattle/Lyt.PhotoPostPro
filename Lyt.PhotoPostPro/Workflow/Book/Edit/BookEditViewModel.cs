@@ -110,11 +110,17 @@ public partial class BookEditViewModel :
     {
         base.Deactivate();
 
+        // Close doc preview if active 
+        if (!this.IsEditing)
+        {
+            this.DocumentViewModel.Close();
+            this.IsEditing = true;
+        }
+
         // Cleanup 
         this.DoublePages.Clear();
         this.SinglePages.Clear();
         this.PdfThumbnails.Clear();
-        // this.model.BookManager.Clear();
 
         // UNsubscribe to book updates 
         this.Unregister<BookPagesChangedMessage>();
@@ -515,7 +521,7 @@ public partial class BookEditViewModel :
         // ! we have a book 
         var book = this.model.BookManager.CurrentBook!;
         string pdfPath = book.OutputPdfPathName;
-        if ( string.IsNullOrWhiteSpace(pdfPath) || !File.Exists(pdfPath))
+        if (string.IsNullOrWhiteSpace(pdfPath) || !File.Exists(pdfPath))
         {
             // No PDF book 
             return;
@@ -525,7 +531,7 @@ public partial class BookEditViewModel :
         if (string.IsNullOrWhiteSpace(folderPath) || !Directory.Exists(folderPath))
         {
             // No book 
-            return; 
+            return;
         }
 
         PhotoPostProModel.NavigateTo(folderPath);
