@@ -19,6 +19,18 @@ public sealed partial class PhotoBookEditViewModel :
     public partial string Description { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial ObservableCollection<string> SupportedPages { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedPageIndex { get; set; }
+
+    [ObservableProperty]
+    public partial ObservableCollection<string> SupportedOrientations { get; set; } = [];
+
+    [ObservableProperty]
+    public partial int SelectedOrientationIndex { get; set; }
+
+    [ObservableProperty]
     public partial string ValidationMessage { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -30,6 +42,7 @@ public sealed partial class PhotoBookEditViewModel :
         this.editorViewModel = editorViewModel;
 
         this.SetDefaults();
+        this.PopulateLocalizedComboBoxes(); 
         this.ValidationMessage = string.Empty;
     }
 
@@ -37,6 +50,34 @@ public sealed partial class PhotoBookEditViewModel :
     {
         this.FriendlyName = "New Photo Book";
         this.Description = "Enter a short description here...";
+    }
+
+    private void PopulateLocalizedComboBoxes()
+    {
+        // We may need to localize 
+        var list = new List<string>();
+        foreach (string item in SupportedPagesText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedPages = new(list);
+
+        // Enforce property changed
+        this.SelectedPageIndex = 1;
+        this.SelectedPageIndex = 0;
+
+        list = new List<string>();
+        foreach (string item in SupportedOrientationsText)
+        {
+            list.Add(this.Localize(item));
+        }
+
+        this.SupportedOrientations = new(list);
+
+        // Enforce property changed
+        this.SelectedOrientationIndex = 1;
+        this.SelectedOrientationIndex = 0;
     }
 
     partial void OnFriendlyNameChanged(string value) => this.ValidateAndMessage();
@@ -74,6 +115,15 @@ public sealed partial class PhotoBookEditViewModel :
             return false;
         }
 
+        if (this.SelectedPageIndex >= 0 && this.SelectedPageIndex < SupportedPagesValues.Count)
+        {
+            var page = SupportedPagesValues[this.SelectedPageIndex];
+        }
+        else
+        {
+            return false; 
+        }
+        
         return true;
     }
 
@@ -117,12 +167,22 @@ public sealed partial class PhotoBookEditViewModel :
             return false;
         }
 
-        string description = this.Description.Trim(); 
-        if (this.model.BookManager.CreateBook(friendlyName, description, out string message) is null)
+        string description = this.Description.Trim();
+        BookPage page = SupportedPagesValues[this.SelectedPageIndex];
+        BookFormat bookFormat = SupportedOrientationsValues[this.SelectedOrientationIndex]; 
+
+        if (this.model.BookManager.CreateBook(
+            friendlyName, description, 
+            page, bookFormat,
+            PageBackground.Black,
+            withFrontCover: true,
+            withBackCover: false,
+            out string message) is null)
         {
             this.ValidationMessage = this.Localize(message);
             return false;
         }
+
 
         return true;
     }

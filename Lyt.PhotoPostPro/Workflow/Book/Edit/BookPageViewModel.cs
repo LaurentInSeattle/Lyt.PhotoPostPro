@@ -39,37 +39,24 @@ public partial class BookPageViewModel :
         this.model = model;
         this.Page = page;
         this.IsDummy = page is null;
-        if (this.IsDummy)
-        {
-            return;
-        }
 
         // ! We do have a book 
         var size = this.model.BookManager.CurrentBook!.PageSize;
         this.PageWidth = size.Width;
         this.PageHeight = size.Height;
 
+        if (this.IsDummy)
+        {
+            // Even dummy page needs to be sized 
+            this.AreVisibleGridLines = false; 
+            return;
+        }
+
         this.Subscribe<BookGridLinesMessage>();
         this.Subscribe<BookPageEditedMessage>();
         this.ShowGridLines(show: false);
         this.CreateSlots();
     }
-
-    //public override void OnViewLoaded()
-    //{
-    //    base.OnViewLoaded();
-    //    Schedule.OnUiThread(60, () => 
-    //    {
-    //        if (this.IsBound)
-    //        {
-    //            this.View.AddSlots(this.Slots);
-    //        } 
-    //        else
-    //        {
-    //            if ( Debugger.IsAttached) { Debugger.Break();  }
-    //        }
-    //    }, DispatcherPriority.Background);          
-    //} 
 
     public void Receive(BookGridLinesMessage message) => this.ShowGridLines(message.ShowGridLines);
 

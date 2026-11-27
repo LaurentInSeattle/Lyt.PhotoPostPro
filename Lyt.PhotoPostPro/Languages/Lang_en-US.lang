@@ -190,6 +190,13 @@
 	<system:String x:Key="Tools.Editor.Watermark.None">No Watermark</system:String>
 	<system:String x:Key="Tools.Editor.Signature.None">No Signature</system:String>
 
+	<system:String x:Key="Tools.Editor.Page">Page Size</system:String>
+	<system:String x:Key="Tools.Editor.BookPage.UsLetter">US Letter</system:String>
+	<system:String x:Key="Tools.Editor.BookPage.EuroA4">Euro A4</system:String>
+	<system:String x:Key="Tools.Editor.Orientation">Page Orientation</system:String>
+	<system:String x:Key="Tools.Editor.BookFormat.Landscape">Landscape</system:String>
+	<system:String x:Key="Tools.Editor.BookFormat.Portrait">Portrait</system:String>
+
 	<!-- Documentation -->
 	<system:String x:Key="Workflow.Documentation.Back">Back</system:String>
 	<system:String x:Key="Workflow.Documentation.First">First</system:String>

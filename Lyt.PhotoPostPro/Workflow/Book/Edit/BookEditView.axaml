@@ -365,8 +365,8 @@
 							IsVisible="{Binding DoublePageMode}"
 							>
 							<Carousel 
-							Grid.Row="2"
-							IsVisible="{Binding DoublePageMode}"
+								Grid.Row="2"
+								IsVisible="{Binding DoublePageMode}"
 								Name="DoublePagesCarousel"
 								ItemsSource="{Binding DoublePages}"
 								SelectedIndex="{Binding DoublePagesIndex}"

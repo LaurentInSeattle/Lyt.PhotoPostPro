@@ -235,6 +235,8 @@ public partial class BookEditViewModel :
             return;
         }
 
+        double pageWidth = book.PageWidth;
+        double pageHeight = book.PageHeight;
         this.DoublePageMode = true;
         this.DoublePages.Clear();
         this.SinglePages.Clear();
@@ -243,20 +245,20 @@ public partial class BookEditViewModel :
             // ! We have a front cover 
             var frontCoverFront = new BookPageViewModel(this.model, book.FrontCover!.FrontPage);
             var dummy = new BookPageViewModel(this.model, null);
-            var firstDoublePage = new BookDoublePageViewModel(this.model, dummy, frontCoverFront);
+            var firstDoublePage = new BookDoublePageViewModel(dummy, frontCoverFront, pageWidth, pageHeight);
             this.DoublePages.Add(firstDoublePage);
 
             // ! We have a front cover 
             var frontCoverBack = new BookPageViewModel(this.model, book.FrontCover!.BackPage);
             var firstPage = new BookPageViewModel(this.model, book.Pages[0]);
-            var secondDoublePage = new BookDoublePageViewModel(this.model, frontCoverBack, firstPage);
+            var secondDoublePage = new BookDoublePageViewModel(frontCoverBack, firstPage, pageWidth, pageHeight);
             this.DoublePages.Add(secondDoublePage);
         }
         else
         {
             var dummy = new BookPageViewModel(this.model, null);
             var firstPage = new BookPageViewModel(this.model, book.Pages[0]);
-            var firstDoublePage = new BookDoublePageViewModel(this.model, dummy, firstPage);
+            var firstDoublePage = new BookDoublePageViewModel(dummy, firstPage, pageWidth, pageHeight);
             this.DoublePages.Add(firstDoublePage);
         }
 
@@ -264,7 +266,7 @@ public partial class BookEditViewModel :
         {
             var leftPage = new BookPageViewModel(this.model, book.Pages[pageIndex]);
             var rightPage = new BookPageViewModel(this.model, book.Pages[pageIndex + 1]);
-            var doublePage = new BookDoublePageViewModel(this.model, leftPage, rightPage);
+            var doublePage = new BookDoublePageViewModel(leftPage, rightPage, pageWidth, pageHeight);
             this.DoublePages.Add(doublePage);
         }
 
@@ -273,20 +275,20 @@ public partial class BookEditViewModel :
             // ! We have a back cover 
             var backCoverFront = new BookPageViewModel(this.model, book.BackCover!.FrontPage);
             var lastPage = new BookPageViewModel(this.model, book.Pages[^1]);
-            var beforeLastDoublePage = new BookDoublePageViewModel(this.model, lastPage, backCoverFront);
+            var beforeLastDoublePage = new BookDoublePageViewModel(lastPage, backCoverFront, pageWidth, pageHeight);
             this.DoublePages.Add(beforeLastDoublePage);
 
             // ! We have a back cover 
             var backCoverBack = new BookPageViewModel(this.model, book.BackCover!.BackPage);
             var dummy = new BookPageViewModel(this.model, null);
-            var lastDoublePage = new BookDoublePageViewModel(this.model, backCoverBack, dummy);
+            var lastDoublePage = new BookDoublePageViewModel(backCoverBack, dummy, pageWidth, pageHeight);
             this.DoublePages.Add(lastDoublePage);
         }
         else
         {
             var lastPage = new BookPageViewModel(this.model, book.Pages[^1]);
             var dummy = new BookPageViewModel(this.model, null);
-            var lastDoublePage = new BookDoublePageViewModel(this.model, lastPage, dummy);
+            var lastDoublePage = new BookDoublePageViewModel(lastPage, dummy, pageWidth, pageHeight);
             this.DoublePages.Add(lastDoublePage);
         }
 

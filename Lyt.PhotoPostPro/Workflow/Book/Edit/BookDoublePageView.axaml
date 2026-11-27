@@ -9,30 +9,17 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 
-	xmlns:images="clr-namespace:Lyt.Avalonia.Controls.Images;assembly=Lyt.Avalonia.Controls"
-	xmlns:local="using:Lyt.PhotoPostPro.Workflow.Documentation"
-	xmlns:shared="clr-namespace:Lyt.PhotoPostPro.Workflow.Shared"
-	xmlns:glyphs="clr-namespace:Lyt.Avalonia.Controls.Glyphs;assembly=Lyt.Avalonia.Controls"
-	xmlns:meta="clr-namespace:Lyt.PhotoPostPro.Panes.MetadataPane"
-
 	Background="Transparent"
 	>
 	<Grid >
-		<Viewbox Margin="4" >
-			<!-- 
-			// TODO : Bind these numbers 
-			PageSize Letter (612, 792);  
-				Width="1584" Height="612"
-			PageSize A4 (595f, 842f);
-				Width="1684" Height="595"
-			-->
+		<Viewbox Margin="2" >
 			<Grid
-				Width="1608" Height="612"
+				Width="{Binding DoublePageWidth}" Height="{Binding PageHeight}"
 				>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="792" /> 
-					<ColumnDefinition Width="24" />
-					<ColumnDefinition Width="792" /> 
+					<ColumnDefinition Width="{Binding PageWidth}" /> 
+					<ColumnDefinition Width="{Binding SeparatorWidth}" />
+					<ColumnDefinition Width="{Binding PageWidth}" /> 
 				</Grid.ColumnDefinitions>
 				<vm:BookPageView
 					Grid.Row="0" Grid.Column="0"

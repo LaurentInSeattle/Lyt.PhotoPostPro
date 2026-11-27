@@ -132,4 +132,28 @@ internal static class ToolsStatics
 
         return fontFamilies;
     }
+
+    internal static readonly List<BookPage> SupportedPagesValues =
+    [
+        BookPage.UsLetter,
+        BookPage.EuroA4,
+    ];
+
+    internal static readonly List<string> SupportedPagesText =
+    [
+        "Tools.Editor.BookPage.UsLetter",
+        "Tools.Editor.BookPage.EuroA4",
+    ];
+
+    internal static readonly List<BookFormat> SupportedOrientationsValues =
+    [
+        BookFormat.Landscape,
+        BookFormat.Portrait,
+    ];
+
+    internal static readonly List<string> SupportedOrientationsText =
+    [
+        "Tools.Editor.BookFormat.Landscape",
+        "Tools.Editor.BookFormat.Portrait",
+    ];
 }

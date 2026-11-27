@@ -17,12 +17,13 @@
 	<Grid
 		x:Name="MainGrid"
 		Background="Black"
+		Width="{Binding PageWidth}" Height="{Binding PageHeight}" 
 		>
 		<Canvas 
 			IsVisible="{Binding IsDummy}"
-			Width="640" Height="480"
+			Margin="80"
 			Background="#A0000040"
-			VerticalAlignment="Center" HorizontalAlignment="Center"
+			VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 			>					
 		</Canvas>
 		<Canvas  

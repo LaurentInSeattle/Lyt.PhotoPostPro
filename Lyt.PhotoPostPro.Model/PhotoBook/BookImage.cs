@@ -2,6 +2,8 @@
 
 public class BookImage
 {
+    public const float PointsPerInch = 72.0f;
+
     public enum SuitableForPrint
     {
         Unknown,
@@ -43,8 +45,8 @@ public class BookImage
             return BookImage.SuitableForPrint.Unknown;
         }
 
-        float widthInches = slotWidth / 72.0f;
-        float heightInches = slotHeight / 72.0f;
+        float widthInches = slotWidth / BookImage.PointsPerInch;
+        float heightInches = slotHeight / BookImage.PointsPerInch;
         if ((this.HighResWidth / widthInches > OptimalTargetDpiForPrint) &&
             (this.HighResHeight / heightInches > OptimalTargetDpiForPrint))
         {
