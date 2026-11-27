@@ -10,6 +10,8 @@ public sealed partial class PhotoPostProModel : ModelBase
     public const string PhotoPostProAppName = "PhotoRebel";
     public const string PhotoPostProFilename = "PhotoRebelData";
 
+    public readonly FileManagerModel FileManager;
+
     private static readonly PhotoPostProModel DefaultData =
         new()
         {
@@ -25,7 +27,6 @@ public sealed partial class PhotoPostProModel : ModelBase
 
     private readonly Lock lockObject = new();
 
-    private readonly FileManagerModel fileManager;
     private readonly ILocalizer localizer;
     private readonly IProfiler profiler;
     private readonly IDispatch dispatcher;
@@ -50,7 +51,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         IDispatch dispatcher,
         ILogger logger) : base(logger)
     {
-        this.fileManager = fileManager;
+        this.FileManager = fileManager;
         this.localizer = localizer;
         this.profiler = profiler;
         this.dispatcher = dispatcher;
@@ -69,11 +70,11 @@ public sealed partial class PhotoPostProModel : ModelBase
         this.IsInitializing = true;
         await this.Load();
 
-        this.BookManager = new BookManager(this, this.fileManager, base.Logger);
+        this.BookManager = new BookManager(this, this.FileManager, base.Logger);
         this.BookManager.SelectBook(this.PhotoBook); 
         this.CameraManager = new CameraManager(this, base.Logger);
         this.LutsManager = new LutsManager(this, base.Logger);
-        this.LibraryManager = new(this, fileManager, dispatcher, base.Logger);
+        this.LibraryManager = new(this, FileManager, dispatcher, base.Logger);
         this.ShouldAutoSave = true;
         this.LibraryManager.Initialize();
 
@@ -104,12 +105,12 @@ public sealed partial class PhotoPostProModel : ModelBase
         try
         {
             var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel;
-            if (!this.fileManager.Exists(this.modelFileId))
+            if (!this.FileManager.Exists(this.modelFileId))
             {
-                this.fileManager.Save(this.modelFileId, PhotoPostProModel.DefaultData, jsonTypeInfo);
+                this.FileManager.Save(this.modelFileId, PhotoPostProModel.DefaultData, jsonTypeInfo);
             }
 
-            PhotoPostProModel model = this.fileManager.Load<PhotoPostProModel>(this.modelFileId, jsonTypeInfo);
+            PhotoPostProModel model = this.FileManager.Load<PhotoPostProModel>(this.modelFileId, jsonTypeInfo);
 
             // Copy all properties with attribute [JsonRequired]
             base.CopyJSonRequiredProperties<PhotoPostProModel>(model);
@@ -140,7 +141,7 @@ public sealed partial class PhotoPostProModel : ModelBase
         // Null check is needed !
         // If the File Manager is null we are currently loading the model and activating properties on a second instance 
         // causing dirtyness, and in such case we must avoid the null crash and anyway there is no need to save anything.
-        if (this.fileManager is not null)
+        if (this.FileManager is not null)
         {
 #if DEBUG 
             //if (this.fileManager.Exists(this.modelFileId))
@@ -150,7 +151,7 @@ public sealed partial class PhotoPostProModel : ModelBase
 #endif // DEBUG 
 
             var jsonTypeInfo = AppJsonContext.Default.PhotoPostProModel;
-            this.fileManager.Save(this.modelFileId, this, jsonTypeInfo);
+            this.FileManager.Save(this.modelFileId, this, jsonTypeInfo);
 
 #if DEBUG 
             //try

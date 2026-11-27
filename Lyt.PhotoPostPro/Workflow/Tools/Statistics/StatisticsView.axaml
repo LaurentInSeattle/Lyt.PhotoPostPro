@@ -107,6 +107,12 @@
 					DataContext="{Binding LutsStatistics}"
 					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 					/>
+				<!-- Logs Stats --> 
+				<vm:FolderStatisticsView
+					Grid.Row="7" Grid.Column="3" 
+					DataContext="{Binding LogsStatistics}"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+					/>
 			</Grid>
 		</Border>
 	</Grid>
