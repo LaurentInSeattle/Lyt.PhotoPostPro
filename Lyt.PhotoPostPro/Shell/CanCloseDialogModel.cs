@@ -10,7 +10,7 @@ public sealed partial class CanCloseDialogModel : DialogViewModel<CanCloseDialog
 
     public CanCloseDialogModel()
     {
-        this.CanEnter = false;
+        this.CanEnter = true;
         this.CanEscape = true;
         this.Title = this.Localize("Shell.CanClose.Title"); // "Close Application ?";
         this.Message = this.Localize("Shell.CanClose.Message");
