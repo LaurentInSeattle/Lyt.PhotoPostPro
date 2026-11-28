@@ -8,12 +8,8 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
     {
         None,
         IsoGrain,
+        StrongIsoGrain,
     }
-
-    //float gaussianSharpen, // 0.8f
-    //    int medianBlur, // 1
-    //    float gaussianBlur, // 0.75f
-    //    float blendFactor) // 0.4f
 
     public float GaussianSharpen { get; set; }
 
@@ -43,6 +39,7 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
             case DenoiseAlgorithm.None:
                 break;
 
+            case DenoiseAlgorithm.StrongIsoGrain:
             case DenoiseAlgorithm.IsoGrain:
                 this.IsoGrainDenoise(
                     gaussianSharpen: ppp.IsoGrainDenoiseGaussianSharpen,
@@ -64,6 +61,7 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
                         break;
 
                     case DenoiseAlgorithm.IsoGrain:
+                    case DenoiseAlgorithm.StrongIsoGrain:
                         clone.IsoGrainDenoise(
                             this.GaussianSharpen, this.MedianBlur, this.GaussianBlur, this.BlendFactor );
                         break;
@@ -73,7 +71,6 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
                 }
             }, withFrame);
 
-
     internal Frame? IsoGrainDenoise(
         float gaussianSharpen, // 0.8f
         int medianBlur, // 1
@@ -82,6 +79,23 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
         bool withFrame = true)
     {
         this.Algorithm = DenoiseAlgorithm.IsoGrain;
+        return this.IsoDenoise(gaussianSharpen, medianBlur, gaussianBlur, blendFactor, withFrame);
+    }
+
+    internal Frame? StrongIsoGrainDenoise(
+        float gaussianSharpen, // 0.8f
+        int medianBlur, // 2   <==
+        float gaussianBlur, // 0.75f
+        float blendFactor, // 0.5f  <==
+        bool withFrame = true)
+    {
+        this.Algorithm = DenoiseAlgorithm.StrongIsoGrain;
+        return this.IsoDenoise(gaussianSharpen, medianBlur, gaussianBlur, blendFactor, withFrame); 
+    } 
+
+    private Frame? IsoDenoise(
+        float gaussianSharpen,  int medianBlur,  float gaussianBlur,  float blendFactor,  bool withFrame = true)
+    {
         this.GaussianSharpen = gaussianSharpen;
         this.MedianBlur = medianBlur;
         this.GaussianBlur = gaussianBlur;
@@ -94,7 +108,7 @@ public sealed class DenoiseStep(ProcessWorkflow processWorkflow) :
     {
         this.Algorithm = DenoiseAlgorithm.None;
 
-        // Use default values for all properties so that the UI sliders are also reset to zero on Reset 
+        // Unseen in the UI - Base ISO Grain settings 
         this.GaussianSharpen = 0.8f;
         this.MedianBlur = 1;
         this.GaussianBlur = 0.75f;

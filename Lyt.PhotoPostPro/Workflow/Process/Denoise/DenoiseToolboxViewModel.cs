@@ -20,6 +20,7 @@ public sealed partial class DenoiseToolboxViewModel :
             // Must match the order of the Filter enum defined in FilterStep
             "Workflow.Denoise.None" ,
             "Workflow.Denoise.IsoGrain" ,
+            "Workflow.Denoise.StrongerIsoGrain" ,
         ];
 
     [ObservableProperty]
@@ -29,6 +30,7 @@ public sealed partial class DenoiseToolboxViewModel :
         [
             "None" ,
             "IsoGrain" ,
+            "Stronger IsoGrain" ,
         ];
 
     [ObservableProperty]
@@ -89,7 +91,7 @@ public sealed partial class DenoiseToolboxViewModel :
         {
             if (Enum.IsDefined(typeof(DenoiseStep.DenoiseAlgorithm), value))
             {
-                Dispatch.OnUiThread(() =>
+                Schedule.OnUiThread(50, () =>
                 {
                     this.selectedFilter = (DenoiseStep.DenoiseAlgorithm)value;
                     this.UpdateModel();
@@ -123,7 +125,7 @@ public sealed partial class DenoiseToolboxViewModel :
             return;
         }
 
-        if ((this.selectedFilter == DenoiseStep.DenoiseAlgorithm.IsoGrain))
+        if ((this.selectedFilter != DenoiseStep.DenoiseAlgorithm.None))
         {
             this.ThrottleModelUpdate(() =>
             {
@@ -135,7 +137,12 @@ public sealed partial class DenoiseToolboxViewModel :
                         break;
 
                     case DenoiseStep.DenoiseAlgorithm.IsoGrain:
+                        // Use default parameters
                         this.model.IsoGrainDenoise ();
+                        break;
+
+                    case DenoiseStep.DenoiseAlgorithm.StrongIsoGrain:
+                        this.model.StrongIsoGrainDenoise();
                         break;
                 }
             });

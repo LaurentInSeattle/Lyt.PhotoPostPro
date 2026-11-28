@@ -372,6 +372,7 @@
 	<!-- Algorithm Combobox -->
 	<system:String x:Key="Workflow.Denoise.None">- - None - -</system:String>
 	<system:String x:Key="Workflow.Denoise.IsoGrain">ISO Grain</system:String>
+	<system:String x:Key="Workflow.Denoise.StrongerIsoGrain">Stronger - ISO Grain</system:String>
 
 	<!-- Workflow Exposure -->
 	<system:String x:Key="Workflow.Exposure.Title">Global Exposure</system:String>
